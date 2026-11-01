@@ -76,7 +76,7 @@ html[data-ui][data-color-mode] .v2-site :is(input,textarea,select):not(.space-ro
 html[data-ui][data-color-mode] .v2-site :is(a,button,summary):not(.space-root *):focus-visible{outline:2px solid #4683e8;outline-offset:4px}
 html[data-ui][data-color-mode] .v2-site :is(input[type=checkbox],input[type=radio]):not(.space-root *){accent-color:#285fd4}
 html[data-ui][data-color-mode] .v2-site :is(.organic-page-heading,.space-workspace-header,.platform-page-header) h1{font-size:clamp(28px,3vw,42px);line-height:1.22;letter-spacing:-.035em}
-html[data-ui][data-color-mode] .v2-site .community-auth-form{background:transparent;box-shadow:none;border:0}
+html[data-ui][data-color-mode] .v2-site.public-auth-site .community-auth .community-auth-form{background:transparent!important;box-shadow:none!important;border:0;backdrop-filter:none}
 .iavse-quantum-pointer{position:fixed;z-index:60;left:0;top:0;width:240px;height:240px;pointer-events:none;contain:strict}
 @media(max-width:1150px){html[data-ui][data-color-mode] .v2-site .organic-desktop-nav{gap:17px}html[data-ui][data-color-mode] .v2-site .organic-header-tools{gap:12px}}
 @media(max-width:1000px){
