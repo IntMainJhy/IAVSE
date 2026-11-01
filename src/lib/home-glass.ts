@@ -10,7 +10,7 @@ const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='re
 const specularSum='vec3 totalSpecular = reflectedLight.directSpecular + reflectedLight.indirectSpecular;';
 // Retain a white highlight core without lifting every clear face into a grey veil.
 // Only reflection energy receives this shoulder; the transmitted wall keeps its display mapping.
-const reflectionShoulder=specularSum+'\n totalSpecular /= vec3(1.0) + totalSpecular * 0.32;';
+const reflectionShoulder=specularSum+'\n totalSpecular /= vec3(1.0) + totalSpecular * 0.48;';
 const spectralSample='vec4 transmissionSample = getTransmissionSample( refractionCoords, roughness, iors[ i ] );';
 // Bounded studio-refraction approximation: the screen receiver cannot contain off-camera lights.
 // Across the bevel, each native RGB volume ray also sees the original HDR studio.
@@ -68,14 +68,14 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(power),map:power>1?lightTexture:null,toneMapped:false});studioMaterials.push(material);
    const card=new Mesh(studioGeometry,material);card.name=name;card.position.fromArray(position);card.scale.fromArray(scale);card.lookAt(0,0,0);studio.add(card);
   };
-  panel('large-left-softbox',[-4,4.6,5.8],[4.8,3.2,1],'#f8fbff',9.2);
-  panel('ceiling-diffusion',[0,6,-1],[9,5,1],'#fff4e8',7.5);
-  panel('right-bounce',[6,1,1],[3.8,7,1],'#d5edff',3.6);
+  panel('large-left-softbox',[-4.8,3.8,4.6],[5.5,3.2,1],'#f8fbff',5.8);
+  panel('ceiling-diffusion',[0,6,-1],[8.5,4,1],'#fff8ef',3.4);
+  panel('right-bounce',[6,1,1],[3.5,7,1],'#e0efff',2.2);
   panel('low-silver-bounce',[0,-5,2],[8,4,1],'#b8d7f0',.25);
   panel('left-negative-fill',[-5,-.5,-3],[4.5,10,1],'#0b1524',.45);
   panel('right-negative-fill',[5,2,-4],[5,11,1],'#101b2a',.45);
   panel('front-negative-fill',[0,0,6.8],[3.8,4.5,1],'#0c1624',.4);
-  panel('rear-window',[-3,2,-6],[4,5.5,1],'#f3f9ff',5.5);
+  panel('rear-window',[-3,2,-6],[4,5.5,1],'#f3f9ff',3.5);
   const pmrem=new PMREMGenerator(renderer);
   try{environment=pmrem.fromScene(studio,.012);scene.environment=environment.texture;}
   finally{studioGeometry.dispose();studioMaterials.forEach(material=>material.dispose());lightTexture.dispose();pmrem.dispose();}
@@ -93,11 +93,11 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     // Match the display-referred wall: an extra ACES pass through the glass would turn pale ice grey.
     // Keep the surface neutral; the physical volume supplies the restrained ice tint.
     material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.opacity=1;material.metalness=0;
-    material.ior=1.45;material.thickness=.46;material.roughness=.012;material.dispersion=4.8;
-    material.attenuationColor.set('#eff8ff');material.attenuationDistance=18;material.clearcoat=0;material.clearcoatRoughness=.045;
+    material.ior=1.50;material.thickness=.58;material.roughness=.008;material.dispersion=1.9;
+    material.attenuationColor.set('#f4faff');material.attenuationDistance=24;material.clearcoat=0;material.clearcoatRoughness=.045;
     // A restrained optical coating adds angle-dependent colour to reflected edges;
     // native dispersion above separately splits the three transmitted volume rays.
-    material.iridescence=.56;material.iridescenceIOR=2.05;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:300});
+    material.iridescence=.08;material.iridescenceIOR=1.6;Object.assign(material,{iridescenceThicknessMinimum:180,iridescenceThicknessMaximum:260});
     // Guard the pinned chunk exactly; unsupported Three versions keep their standard physical shader.
     if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2&&shader.fragmentShader.split(specularSum).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission).replace(specularSum,reflectionShoulder);};material.customProgramCacheKey=()=> 'spaceyew-prismatic-studio-r187';}
    }
@@ -117,7 +117,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // broad room illumination and soft contact shadow are art-directed, not a
   // simulated caustic pass. Specular highlights come only from the HDR rig.
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#7298c2')},uBlueMiddle:{value:new Color('#87accf')},uBlueBottom:{value:new Color('#c3d4e3')},uIce:{value:new Color('#e8e8e8')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#243964')},uBlueMiddle:{value:new Color('#3169a5')},uBlueBottom:{value:new Color('#b6c9de')},uIce:{value:new Color('#e8e8e8')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
@@ -129,17 +129,17 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.04*(1.-daylight);
     float edge=pow(abs(uv.x-.5)*2.,2.);color*=1.-edge*.10*(1.-daylight);
     float reading=softPool(vec2(uv.x,documentY),vec2(.5,.34),vec2(.90,.52))*smoothstep(.08,.18,documentY);
-    color=mix(color,vec3(.48,.63,.79),reading*.30*(1.-daylight));
+    color=mix(color,uBlueMiddle,reading*.14*(1.-daylight));
     float drift=sin(uTime*.22)*.025;
     float window=softPool(uv,vec2(.12+drift,.77),vec2(.42,.55));
     float bounce=softPool(uv,vec2(.91-drift,.28),vec2(.52,.58));
     float ambientRise=smoothstep(.18,.75,documentY);
-    color+=vec3(.035,.06,.085)*window*(1.-daylight*.85)*ambientRise;
-    color+=vec3(.025,.045,.065)*bounce*(1.-daylight*.85)*ambientRise;
+    color+=vec3(.012,.022,.04)*window*(1.-daylight*.85)*ambientRise;
+    color+=vec3(.008,.016,.03)*bounce*(1.-daylight*.85)*ambientRise;
     // A broad oblique window wash creates real contrast for the three refraction rays.
     float windowEdge=uv.y+uv.x*.32-.25-uLightSweep*.22;
     float windowWash=(1.-smoothstep(-.08,.16,windowEdge))*softPool(uv,vec2(.48,.12),vec2(.95,.48));
-    color=mix(color,vec3(.84,.93,1.),windowWash*.34*(1.-daylight));
+    color=mix(color,uBlueBottom,windowWash*.12*(1.-daylight));
     float groundY=uCenter.y-uContact.y;
     float contact=softPool(uv,vec2(.5-uContact.x,groundY),vec2(.23,.10))+softPool(uv,vec2(.5+uContact.x,groundY),vec2(.23,.10));
     color*=1.-contact*.17*(1.-smoothstep(.15,.95,uScroll))*(1.-daylight);
@@ -196,16 +196,16 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     const lightPhase=-.68+opticalSweep*1.75+(reduced?0:breath*.16+x*.10);
     scene.environmentRotation.set(.05+opticalSweep*.15,lightPhase,-opticalSweep*.12);
     // r187 uses the scene intensity when the material inherits scene.environment.
-    scene.environmentIntensity=(dark?.98:1.03)+Math.sin(opticalSweep*Math.PI)*.34;
-    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=3.3+Math.sin(opticalSweep*Math.PI)*1.2;
-    rim.intensity=1.3+opticalSweep*.6;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
+    scene.environmentIntensity=(dark?.82:.86)+Math.sin(opticalSweep*Math.PI)*.22;
+    key.position.set(-4+opticalSweep*6,6-opticalSweep*2,7);key.intensity=1.7+Math.sin(opticalSweep*Math.PI)*.6;
+    rim.intensity=.8+opticalSweep*.35;rim.position.set(5-opticalSweep*3,1+opticalSweep*3,4);
     wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uLightSweep.value=opticalSweep;wallMaterial.uniforms.uBrightness.value=dark?.96:1;wallMaterial.uniforms.uScroll.value=scroll;
     wallMaterial.uniforms.uCenter.value.set(.5,1-centerY);const projectedWidth=visibleHeight*combinedWidth/nativeSize.y*(8.2/camera.position.z);wallMaterial.uniforms.uContact.value.set((split+.718)/combinedWidth*(projectedWidth/width),visibleHeight/height*.43);
     const sheetDepth=.85,sheetViewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*(camera.position.z-sheetDepth);
     for(const curtain of curtains){const panel=curtain.panel;curtain.mesh.visible=!reduced&&!!panel;if(!panel)continue;const sheetHeight=panel.height/height*sheetViewHeight*1.18;curtain.mesh.position.set(((panel.left+panel.width*.5)/width-.5)*sheetViewHeight*camera.aspect,(.5-(panel.top+panel.height*.5)/height)*sheetViewHeight,sheetDepth);curtain.mesh.scale.set(panel.width/width*sheetViewHeight*camera.aspect*1.18,sheetHeight,sheetHeight);}
-    // Deliberately amplified for visible spectral separation at phone sizes.
-    const dispersion=4.8+Math.sin(opticalSweep*Math.PI)*1.5;
-    for(const material of nativeMaterials){material.ior=1.45+opticalSweep*.07;material.thickness=.46+opticalSweep*.10;material.dispersion=dispersion;material.iridescence=.56+Math.sin(opticalSweep*Math.PI)*.14;}
+    // Restrained dispersion keeps faces clear; the closed bevel carries the spectral edge.
+    const dispersion=1.9+Math.sin(opticalSweep*Math.PI)*.45;
+    for(const material of nativeMaterials){material.ior=1.50+opticalSweep*.035;material.thickness=.58+opticalSweep*.06;material.dispersion=dispersion;material.iridescence=.08+Math.sin(opticalSweep*Math.PI)*.025;}
     const tick=Math.floor(time*10);if(tick!==lastMotionTick){lastMotionTick=tick;canvas.dataset.glassTime=time.toFixed(1);}
     canvas.dataset.glassLightPhase=lightPhase.toFixed(3);canvas.dataset.glassReading=reading.toFixed(3);canvas.dataset.glassDispersion=dispersion.toFixed(2);
     canvas.dataset.glassHeroVisible=mark.visible?'true':'false';
