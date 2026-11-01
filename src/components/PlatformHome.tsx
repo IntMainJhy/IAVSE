@@ -37,24 +37,24 @@ export async function PlatformHome({req}:{req:Request}){
   <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}<div className="v2-hero-actions"><Link className="v2-primary" href="#creators">{t('发现博客空间')}<Icon name="arrow"/></Link><Link className="v2-hero-secondary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link></div></div></div>
    <HomeCinema locale={locale}/><div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
   </section>
-  <div className="home-stories">
+  <div className="home-stories"><div className="home-stories-stage">
    <section className="home-story" data-home-story="blog" data-home-side="left" id="creators" aria-labelledby="v2-creators-title">
-    <Link className="home-story-visual home-story-screenshot" href={creator?.url||'/blogs'} aria-label={t('查看博客空间')}><img src="/media/home/blog-space.webp" alt={copy.blogAlt} width={1200} height={900} loading="lazy"/></Link>
+    <Link className="home-story-visual home-story-screenshot" href={creator?.url||'/blogs'} aria-label={t('查看博客空间')}><img src="/media/home/blog-space-current.webp" alt={copy.blogAlt} width={1200} height={900} loading="lazy"/></Link>
     <div className="home-story-copy"><h2 id="v2-creators-title">{copy.blogTitle}</h2><p>{copy.blogText}</p>{creator&&<div className="home-story-person"><FeedAvatar name={creator.name} avatarId={creator.avatarId}/><span>{creator.name}<small>@{creator.handle}</small></span></div>}<Link className="home-story-link" href="/blogs">{t('发现更多主页')}<Icon name="arrow"/></Link></div>
    </section>
-   <section className="home-story is-reverse" data-home-story="editor" data-home-side="right" aria-labelledby="v2-editor-title">
+   <section className="home-story is-reverse" id="canvas-demo" data-home-story="editor" data-home-side="right" aria-labelledby="v2-editor-title">
     <div className="home-story-visual home-story-editor"><HomeBlogCanvasDemo locale={locale} creator={demoCreator}/></div>
     <div className="home-story-copy"><h2 id="v2-editor-title">{copy.editorTitle}</h2><p>{copy.editorText}</p><Link className="home-story-link" href="/workspace/blog">{copy.editorAction}<Icon name="arrow"/></Link></div>
    </section>
-   <section className="home-story" data-home-story="skills" data-home-side="left" aria-labelledby="v2-skills-title">
+   <section className="home-story" id="skills-demo" data-home-story="skills" data-home-side="left" aria-labelledby="v2-skills-title">
     <div className="home-story-visual"><HomeStoryVideo src="/media/home/skills-loop.mp4" poster="/media/home/skills-poster.webp" label={copy.skillAlt} pauseLabel={copy.pause} playLabel={copy.play}/></div>
     <div className="home-story-copy"><h2 id="v2-skills-title">{copy.skillTitle}</h2><p>{copy.skillText}</p><Link className="home-story-link" href="/resources?type=skills">{t('探索 Skill')}<Icon name="arrow"/></Link><Link className="home-story-secondary" href="/skills/gsap">GSAP Skills<Icon name="arrow"/></Link></div>
    </section>
-   <section className="home-story is-reverse" data-home-story="resources" data-home-side="right" aria-labelledby="v2-tools-title">
+   <section className="home-story is-reverse" id="resources-demo" data-home-story="resources" data-home-side="right" aria-labelledby="v2-tools-title">
     <div className="home-story-visual"><HomeResourceSculpture posterSrc="/media/home/resources.webp" label={copy.resourceAlt} pauseLabel={copy.pause} playLabel={copy.play}/></div>
     <div className="home-story-copy"><h2 id="v2-tools-title">{copy.resourceTitle}</h2><p>{copy.resourceText}</p><Link className="home-story-link" href="/resources">{t('资源')}<Icon name="arrow"/></Link><Link className="home-story-secondary" href="/community">{copy.community}<Icon name="arrow"/></Link></div>
    </section>
-  </div>
+  <nav className="home-scene-nav" aria-label={locale==='zh'?'探索章节':'Explore chapters'}>{[['creators',locale==='zh'?'博客空间':'Spaces'],['canvas-demo',locale==='zh'?'编辑画布':'Canvas'],['skills-demo','Skills'],['resources-demo',locale==='zh'?'资源':'Resources']].map(([id,label])=><a key={id} href={'#'+id}>{label}</a>)}</nav></div></div>
   <section className="v2-section v2-invitation" data-home-scene="invitation" aria-labelledby="v2-invitation-title"><h2 id="v2-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div><Link className="v2-primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link><Link className="v2-text-link" href={download.href}>{download.platform?t('{0} 下载',[download.name]):t('下载桌面端')}<Icon name="download"/></Link></div></section>
  </div>;
 }

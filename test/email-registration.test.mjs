@@ -9,28 +9,24 @@ const D=await import('../src/lib/db.mjs'),E=await import('../src/lib/email-auth.
 const base=process.env.PUBLIC_URL;
 const req=(url,body,origin=base,cookie='')=>new Request(base+url,{method:body===undefined?'GET':'POST',headers:{host:'127.0.0.1:3008',origin,'content-type':'application/json',cookie},body:body===undefined?undefined:JSON.stringify(body)});
 const call=(url,body,origin,cookie)=>H.handle(req(url,body,origin,cookie));
-const config=await(await call('/api/community/config')).json(),ack={adult:true,accepted:true,policyVersion:config.policyVersion,policyHash:config.policyHash};
+const config=await(await call('/api/community/config')).json(),ack={adult:true,accepted:true,policyRead:['community','disclaimer'],policyVersion:config.policyVersion,policyHash:config.policyHash};
 const codeFor=async email=>{for(const name of await readdir(path.join(temp,'mail-outbox'))){const mail=JSON.parse(await readFile(path.join(temp,'mail-outbox',name),'utf8'));if(mail.to===email)return mail.text.match(/\d{6}/)[0]}throw new Error('Missing captured email')};
 
-test('password platform supports verified email signup without an invitation and preserves account isolation',async()=>{
- const email='signup@example.com',password='new-member-password-2026';
+test('password platform registers without email delivery and records current consent without granting mailbox ownership',async()=>{
+ const email='signup@example.com',password='new-member-password-2026',input={...ack,email,password,nickname:'New member'};
  assert.equal((await(await call('/api/auth/me')).json()).access.registration,true);
- let response=await call('/api/auth/email/request',{purpose:'register',email},'https://foreign.example');assert.equal(response.status,403);
- response=await call('/api/auth/email/request',{purpose:'register',email});assert.equal(response.status,200);const sent=await response.json();assert.ok(sent.challenge);assert.equal(sent.code,undefined);
- assert.equal((await call('/api/auth/email/request',{purpose:'register',email})).status,429);
- const input={...ack,email,password,nickname:'New member',challenge:sent.challenge,code:await codeFor(email)};
- response=await call('/api/community/register',{...input,email:'other@example.com'});assert.equal(response.status,400);
- response=await call('/api/community/register',{...input,code:input.code==='000000'?'111111':'000000'});assert.equal(response.status,400);
- response=await call('/api/community/register',{...input,accepted:false});assert.equal(response.status,409);
- response=await call('/api/community/register',input);assert.equal(response.status,200);
- const row=D.db().prepare('SELECT * FROM community_users WHERE email=?').get(email);assert.equal(row.verification,'pending');assert.ok(row.email_verified_at);assert.notEqual(row.password,password);
- assert.equal((await call('/api/community/register',input)).status,400);
- response=await call('/api/auth/login',{email,password});assert.equal(response.status,200);const cookie=response.headers.get('set-cookie').split(';')[0];const me=await(await call('/api/auth/me',undefined,undefined,cookie)).json();assert.equal(me.user.id,row.id);assert.equal(me.user.authentication,'password');
+ assert.equal((await call('/api/community/register',input,'https://foreign.example')).status,403);
+ assert.equal((await call('/api/community/register',{...input,policyRead:[]})).status,409);
+ assert.equal((await call('/api/community/register',{...input,policyRead:['community']})).status,409);
+ assert.equal((await call('/api/community/register',{...input,policyHash:'stale'})).status,409);
+ assert.equal((await call('/api/community/register',{...input,accepted:false})).status,409);
+ const mode=process.env.MAIL_MODE;process.env.MAIL_MODE='disabled';let response=await call('/api/community/register',input);process.env.MAIL_MODE=mode;assert.equal(response.status,200);
+ const row=D.db().prepare('SELECT * FROM community_users WHERE email=?').get(email);assert.equal(row.verification,'accepted');assert.equal(row.email_verified_at,null);assert.notEqual(row.password,password);
+ assert.equal((await call('/api/community/register',input)).status,409);
+ response=await call('/api/auth/login',{email,password});assert.equal(response.status,200);const cookie=response.headers.get('set-cookie').split(';')[0];const me=await(await call('/api/auth/me',undefined,undefined,cookie)).json();assert.equal(me.user.id,row.id);assert.equal(me.user.authentication,'password');assert.equal(me.user.canPublish,true);
  const space=await(await call('/api/spaces/mine',undefined,undefined,cookie)).json();assert.equal(space.profile.name,'New member');assert.deepEqual(space.profile.resume?.sections||[],[]);
- assert.equal((await call('/api/catalog/mine',undefined,undefined,cookie)).status,403);
- // Known and unknown email requests have the same public shape; no second account or mail is created.
- D.db().prepare('UPDATE limits SET reset=0 WHERE key=?').run('email-cooldown:'+D.hash(email));
- const duplicate=await(await call('/api/auth/email/request',{purpose:'register',email})).json();assert.deepEqual(Object.keys(duplicate),Object.keys(sent));assert.equal(duplicate.message,sent.message);assert.equal(D.db().prepare('SELECT COUNT(*) n FROM community_users WHERE email=?').get(email).n,1);
+ assert.equal((await call('/api/catalog/mine',undefined,undefined,cookie)).status,200);
+ assert.equal(E.emailAccount(email),null);assert.equal(E.emailClaim(email).actor,row.id);assert.equal(D.db().prepare('SELECT COUNT(*) n FROM community_acceptances WHERE user_id=?').get(row.id).n,1);
 });
 
 test('disabled and admin surfaces block registration; obsolete preview flags cannot bypass password signup or remote gates',async()=>{

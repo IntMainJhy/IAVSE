@@ -1,0 +1,40 @@
+# IAVSE licensing notice
+
+Required Notice: Copyright (c) 2026 IntMainJhy (https://github.com/IntMainJhy)
+
+IAVSE website material authored by IntMainJhy and not separately licensed is
+provided under the unmodified PolyForm Noncommercial License 1.0.0 in LICENSE.
+The permission includes use, modification, noncommercial deployment and
+redistribution for the permitted purposes defined by that license. Commercial
+use is not granted by this license. Contact the copyright holder for separate
+permission if your intended purpose is outside its grants.
+
+Scope and third-party material
+
+- This notice applies to the website source, documentation and original assets
+  in this repository only where IntMainJhy holds the relevant rights.
+- Third-party code, dependencies, fonts and adapted material retain their own
+  licenses. See THIRD_PARTY_NOTICES.md and docs/licenses/. Those grants are not
+  restricted or replaced by the project's PolyForm license.
+- macOS and Windows client source, installers and proprietary assets are outside
+  this website repository and outside this license grant.
+- User content, personal information, brand names and trademarks do not acquire
+  additional permissions merely because they appear in the website or examples.
+
+This is source-available software, not OSI-defined open source: its license
+restricts commercial purposes. The complete English LICENSE controls; the
+Chinese explanation below summarizes scope and does not replace its terms.
+
+中文说明
+
+本仓库中由 IntMainJhy 享有相应权利、且未单独注明其他许可的网站原创部分，
+采用 PolyForm Noncommercial 1.0.0。可以在许可定义的非商业目的范围内使用、
+修改、部署和再分发；再分发时须保留许可和 Required Notice。商业用途不在
+该许可授权内，需另行取得著作权人许可。
+
+这比原来的「仅供阅读学习」许可开放：非商业自用、研究、实验及符合许可
+定义的组织使用不再要求单独书面授权。许可对非商业组织有专门的允许条款，
+具体范围以 LICENSE 英文原文为准。由于限制商业目的，不称为 OSI 意义的
+开源软件，而称为「源码公开，非商业许可」。
+
+第三方原许可、客户端排除范围、用户内容与品牌等权利边界按上述说明保留。

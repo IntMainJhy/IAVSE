@@ -1,4 +1,5 @@
 'use client';
+import {useHomeChapterActive} from './useHomeChapterActive';
 
 import {Component,Suspense,lazy,useEffect,useRef,useState} from 'react';
 import type {MutableRefObject,PointerEvent as ReactPointerEvent,ReactNode} from 'react';
@@ -130,6 +131,7 @@ class SculptureBoundary extends Component<{children:ReactNode;onError:()=>void},
 
 export function HomeResourceSculpture({posterSrc,label,pauseLabel,playLabel}:SculptureProps){
  const host=useRef<HTMLDivElement>(null),interaction=useRef<Interaction>({x:0,y:0,drag:0,pressed:false,lastX:0,replay:0,invalidate:()=>{}});
+ const chapterActive=useHomeChapterActive(host);
  const [enabled,setEnabled]=useState(false),[nearby,setNearby]=useState(false),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[printing,setPrinting]=useState(false),[paused,setPaused]=useState(false),[globalPaused,setGlobalPaused]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false);
  useEffect(()=>{
   const element=host.current;if(!element)return;
@@ -144,11 +146,12 @@ export function HomeResourceSculpture({posterSrc,label,pauseLabel,playLabel}:Scu
  },[]);
  // Keep an already loaded world demand-rendered during quiet mode, while a quiet
  // initial visit can use the poster without loading Fiber, GLB or the studio.
- useEffect(()=>{if(nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[nearby,reduced,hidden,printing,globalPaused]);
- const move=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced)return;const rect=event.currentTarget.getBoundingClientRect(),state=interaction.current;if(event.pointerType!=='touch'){state.x=(event.clientX-rect.left)/Math.max(1,rect.width)*2-1;state.y=(event.clientY-rect.top)/Math.max(1,rect.height)*2-1;}if(state.pressed){state.drag+=(event.clientX-state.lastX)*.005;state.lastX=event.clientX;}state.invalidate();};
- const down=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced||event.button>0)return;interaction.current.pressed=true;interaction.current.lastX=event.clientX;event.currentTarget.setPointerCapture(event.pointerId);};
+ useEffect(()=>{if(chapterActive&&nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[chapterActive,nearby,reduced,hidden,printing,globalPaused]);
+ useEffect(()=>{if(!chapterActive){interaction.current.pressed=false;interaction.current.x=interaction.current.y=0;}},[chapterActive]);
+ const move=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced||!chapterActive)return;const rect=event.currentTarget.getBoundingClientRect(),state=interaction.current;if(event.pointerType!=='touch'){state.x=(event.clientX-rect.left)/Math.max(1,rect.width)*2-1;state.y=(event.clientY-rect.top)/Math.max(1,rect.height)*2-1;}if(state.pressed){state.drag+=(event.clientX-state.lastX)*.005;state.lastX=event.clientX;}state.invalidate();};
+ const down=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced||!chapterActive||event.button>0)return;interaction.current.pressed=true;interaction.current.lastX=event.clientX;event.currentTarget.setPointerCapture(event.pointerId);};
  const leave=()=>{interaction.current.x=interaction.current.y=0;interaction.current.pressed=false;interaction.current.invalidate();};
- const interactive=visible&&!hidden&&!reduced&&!printing,running=interactive&&!paused&&!globalPaused;
+ const interactive=chapterActive&&visible&&!hidden&&!reduced&&!printing,running=interactive&&!paused&&!globalPaused;
  return <div ref={host} className="home-resource-sculpture" data-ready={ready&&!failed&&!reduced&&!printing?'true':'false'}>
   <div className="home-resource-art" role="img" aria-label={label} onPointerMove={move} onPointerDown={down} onPointerUp={()=>{interaction.current.pressed=false;}} onPointerCancel={leave} onPointerLeave={leave}>
    <img className="home-resource-poster" src={posterSrc} alt="" loading="lazy" decoding="async"/>

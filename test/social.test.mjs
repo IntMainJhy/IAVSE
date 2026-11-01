@@ -38,38 +38,40 @@ test('reactions are explicit and idempotent; bookmarks are private; repost/follo
  const notices=D.db().prepare("SELECT COUNT(*) n FROM community_notifications WHERE event_key=?").get('like:'+b.id+':'+p.id).n;assert.equal(notices,1);
  assert.throws(()=>react(a,p.id,'invalid',true),e=>e.status===400);
 });
-test('comments and replies stay private until review; edits re-enter review and stale moderation cannot publish',()=>{
+test('comments and replies publish immediately; edits, removal, appeals and rate limits remain enforced',()=>{
  D.db().prepare("INSERT INTO config(key,value) VALUES('moderation','{\"mode\":\"manual\"}') ON CONFLICT(key) DO UPDATE SET value=excluded.value").run();
- parent=call('community/comments',{...ack,post:p.id,body:'PRIVATE_PENDING_COMMENT 这是尚未审核的评论。'},a.token);
- assert.equal(comments().items.length,0);assert.equal(comments(a).items.length,1);assert.equal(comments(b).items.length,0);
+ parent=call('community/comments',{...ack,post:p.id,body:'PUBLIC_COMMENT 这是立即公开的评论。'},a.token);
+ assert.equal(parent.status,'approved');assert.equal(comments().items.length,1);assert.equal(comments(a).items.length,1);assert.equal(comments(b).items.length,1);
  assert.throws(()=>get('admin/community/comments',a.token),e=>e.status===403);
- assert.throws(()=>call('admin/community/comments/'+parent.id,{action:'approve',version:parent.version,checked:true,reason:'自己的评论不能自行审批'},a.token),e=>e.status===403);
- parent=call('admin/community/comments/'+parent.id,{action:'approve',version:parent.version,checked:true,reason:'已检查内容与回复上下文，符合规则'},owner);
+ assert.throws(()=>call('admin/community/comments/'+parent.id,{action:'approve',version:parent.version,checked:true,reason:'普通成员不能进入管理流程'},a.token),e=>e.status===403);
+ assert.throws(()=>call('admin/community/comments/'+parent.id,{action:'approve',version:parent.version,checked:true,reason:'已经发布的评论不再重复审批'},owner),e=>e.status===409);
  assert.equal(comments().approvedCount,1);assert.equal(get('community/posts/'+p.id).commentCount,1);
  reply=call('community/comments',{...ack,post:p.id,parent:parent.id,body:'这是回复一级评论的合成测试内容。'},b.token);
- assert.throws(()=>call('admin/community/comments/'+reply.id,{action:'approve',version:reply.version,checked:true,reason:'审核员不能批准自己的评论'},b.token),e=>e.status===403);
- reply=call('admin/community/comments/'+reply.id,{action:'approve',version:reply.version,checked:true,reason:'已检查评论与其回复上下文'},owner);
+ assert.equal(reply.status,'approved');assert.equal(comments().approvedCount,2);
  assert.throws(()=>call('community/comments',{...ack,post:p.id,parent:reply.id,body:'不能继续嵌套回复的测试。'},a.token),e=>e.status===400);
- const before=parent.version;parent=call('community/comments/'+parent.id,{...ack,action:'edit',version:parent.version,body:'PRIVATE_EDIT 评论修改后需要重新审核。'},a.token);
- assert.ok(!JSON.stringify(comments()).includes('PRIVATE_EDIT'));assert.equal(comments().approvedCount,1);
- assert.throws(()=>call('admin/community/comments/'+parent.id,{action:'approve',version:before,checked:true,reason:'旧版本不能继续批准'},owner),e=>e.status===409);
- parent=call('admin/community/comments/'+parent.id,{action:'approve',version:parent.version,checked:true,reason:'已检查修改后的文本及上下文'},b.token);
- assert.equal(comments().approvedCount,2);assert.equal(comments().items.find(x=>x.id===parent.id).reason,'');
+ assert.throws(()=>call('community/comments/'+parent.id,{...ack,action:'edit',version:parent.version,body:'不能编辑他人的评论。'},b.token),e=>e.status===404);
+ const before=parent.version;parent=call('community/comments/'+parent.id,{...ack,action:'edit',version:parent.version,body:'PUBLIC_EDIT 评论修改后立即公开。'},a.token);
+ assert.ok(JSON.stringify(comments()).includes('PUBLIC_EDIT'));assert.equal(comments().approvedCount,2);
+ assert.throws(()=>call('admin/community/comments/'+parent.id,{action:'remove',version:before,reason:'旧版本不能删除新版评论'},owner),e=>e.status===409);
+ assert.throws(()=>call('community/comments/'+parent.id,{...ack,action:'edit',version:before,body:'过期编辑不能覆盖新版本。'},a.token),e=>e.status===409);
+ assert.equal(comments().items.find(x=>x.id===parent.id).reason,'');
  call('community/comments/'+reply.id,{action:'withdraw',version:reply.version},b.token);assert.equal(comments().approvedCount,1);
  assert.throws(()=>call('community/comments',{...ack,post:p.id,body:'不应接收内网链接 https://127.0.0.1/a'},a.token),e=>e.status===400);
  let ownReply=call('community/comments',{...ack,post:p.id,body:'自己的评论处置可以独立申诉。'},c.token);
- ownReply=call('admin/community/comments/'+ownReply.id,{action:'reject',version:ownReply.version,reason:'合成测试，请补充具体的使用上下文'},owner);
- const appeal=call('community/cases',{post:p.id,comment:ownReply.id,kind:'appeal',category:'审核或账号申诉',description:'我是此评论作者，对评论拒绝理由申请本地流程复核。'},c.token);
+ ownReply=call('admin/community/comments/'+ownReply.id,{action:'remove',version:ownReply.version,reason:'合成测试，请补充具体的使用上下文'},owner);
+ assert.equal(ownReply.status,'removed');assert.ok(!comments().items.some(x=>x.id===ownReply.id));
+ const appeal=call('community/cases',{post:p.id,comment:ownReply.id,kind:'appeal',category:'审核或账号申诉',description:'我是此评论作者，对评论移除理由申请本地流程复核。'},c.token);
  const caseRow=D.db().prepare('SELECT version FROM community_cases WHERE id=?').get(appeal.id);
  call('admin/community/cases/'+appeal.id,{action:'reply',version:caseRow.version,reason:'已收到评论作者的申诉，正在核查上下文。'},owner);
  assert.equal(D.db().prepare("SELECT href FROM community_notifications WHERE user_id=? AND title='投稿相关工单有进展' ORDER BY created DESC").get(c.id).href,'/workspace/notifications');
  assert.ok(appeal.id);assert.throws(()=>call('community/cases',{post:p.id,comment:ownReply.id,kind:'appeal',category:'审核或账号申诉',description:'不能代他人评论提交作者申诉。'},a.token),e=>e.status===403);
- // Pending and daily caps must remain atomic with edits and rejections.
- const waiting=[];for(let i=0;i<5;i++)waiting.push(call('community/comments',{...ack,post:p.id,body:'待审配额合成测试内容 '+i},c.token));
- assert.throws(()=>call('community/comments',{...ack,post:p.id,body:'第六条待审应被限制。'},c.token),e=>e.status===429);
- assert.throws(()=>call('community/comments/'+ownReply.id,{...ack,action:'edit',version:ownReply.version,body:'被拒评论重提也应占待审配额。'},c.token),e=>e.status===429);
+ // Direct publication removes the pending queue, but keeps the atomic daily submission cap.
+ const waiting=[];for(let i=0;i<5;i++)waiting.push(call('community/comments',{...ack,post:p.id,body:'公开评论配额合成测试内容 '+i},c.token));
+ assert.ok(waiting.every(item=>item.status==='approved'));
+ assert.throws(()=>call('community/comments/'+ownReply.id,{...ack,action:'edit',version:ownReply.version,body:'已移除评论不能绕过管理处置重发。'},c.token),e=>e.status===409);
  for(let i=0;i<14;i++)waiting[0]=call('community/comments/'+waiting[0].id,{...ack,action:'edit',version:waiting[0].version,body:'滚动每日配额修订测试内容 '+i},c.token);
  assert.throws(()=>call('community/comments/'+waiting[0].id,{...ack,action:'edit',version:waiting[0].version,body:'第二十一回提交应该被限制。'},c.token),e=>e.status===429);
+ assert.throws(()=>call('community/comments',{...ack,post:p.id,body:'达到每日配额后不能新建评论。'},c.token),e=>e.status===429);
  for(const item of waiting)call('community/comments/'+item.id,{action:'withdraw',version:item.version},c.token);
  const report=call('community/cases',{post:p.id,comment:parent.id,kind:'report',category:'其他',description:'仅供测试的评论定位举报说明，不包含真实指控。'});
  const stored=D.db().prepare('SELECT description FROM community_cases WHERE id=?').get(report.id);assert.ok(stored.description.includes('#comment-'+parent.id));

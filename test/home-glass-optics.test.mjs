@@ -9,11 +9,11 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/home-glass.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const originalChunk=three.ShaderChunk.transmission_pars_fragment;
 const bytes=fs.readFileSync(new URL('../public/models/iavse-optical-surface.glb',import.meta.url));
-async function studio({overrides={},signal,fetcher,compile}={}){
+async function studio({overrides={},signal,fetcher,compile,window}={}){
  let scene,camera,environment,releases=0,environmentReleases=0,dpr,transmissionSize;
  class Renderer{constructor(){if(compile)this.compileAsync=compile;}setPixelRatio(value){dpr=value;}setSize(){}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
  class PMREM{fromScene(value){environment=value;return{texture:new three.Texture(),dispose(){environmentReleases++;}};}dispose(){}}
- const exports={};vm.runInNewContext(source,{exports,AbortController,DOMException,Math,Uint8Array,fetch:fetcher||(async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})),require:name=>{
+ const exports={};vm.runInNewContext(source,{exports,AbortController,DOMException,Math,Uint8Array,window,fetch:fetcher||(async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})),require:name=>{
   if(name==='three')return{...three,...overrides,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader};throw Error('Unexpected dependency '+name);
  }});
  const controller=new AbortController(),canvas={dataset:{}},progress=[];
@@ -124,38 +124,42 @@ test('resource progress reports actual completion and aborted model loads fail w
 
 const journey=[{id:'blog',start:1.25,end:2.63,side:-1},{id:'editor',start:2.63,end:4.01,side:1},{id:'skills',start:4.01,end:5.39,side:-1},{id:'resources',start:5.39,end:6.77,side:1},{id:'invitation',start:6.77,end:7.59,side:0}];
 
-test('the shared optical model stays in the film through every chapter and hands GPU motion to the resource card',async()=>{
+test('the intro lens retires while a single GPU point field carries every reading chapter',async()=>{
  const s=await studio(),model=s.surface.children[0],geometry=s.meshes[0].geometry,version=geometry.attributes.position.version,heroDpr=s.dpr;
- s.adapter.setJourney(journey);const poses=[];
+ s.adapter.setJourney(journey);const field=s.scene.getObjectByName('iavse-journey-depth'),positions=field.geometry.attributes.position,fieldVersion=positions.version,poses=[];
+ assert.ok(field.isPoints);assert.equal(positions.count,720,'desktop field has a fixed single-buffer budget');assert.equal(field.material.depthWrite,false);
  for(const chapter of journey){const center=(chapter.start+chapter.end)*.5-.5,scroll=chapter.id==='invitation'?Math.min(center,chapter.end-1-.15):center;s.adapter.render(0,0,false,scroll,false,8);
-  assert.equal(s.canvas.dataset.journeyChapter,chapter.id);assert.equal(s.surface.visible,true,'the actual lens is still visible in '+chapter.id);assert.equal(s.surface.children[0],model);assert.equal(geometry.attributes.position.version,version,'scrolling does not rebuild the model');
-  poses.push({position:s.surface.position.clone(),rotation:s.surface.quaternion.clone(),camera:s.camera.position.clone()});
-  if(chapter.id==='resources'){assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);assert.equal(s.canvas.dataset.journeyDocked,'true');assert.ok(s.transmissionSize<.3,'resource card receives the active rendering budget');}
-  else assert.equal(s.adapter.animated,true);
-  assert.ok(s.dpr<=heroDpr,'reading chapters never increase full-screen pixels');
+  assert.equal(s.canvas.dataset.journeyChapter,chapter.id);assert.equal(s.surface.visible,false,'the oversized lens never covers '+chapter.id);assert.equal(s.surface.children[0],model);assert.equal(geometry.attributes.position.version,version);
+  assert.equal(field.visible,true,'real point geometry stays visible through '+chapter.id);assert.equal(s.adapter.animated,true);assert.equal(s.adapter.interactive,true);assert.equal(positions.version,fieldVersion,'scroll does not rewrite vertex buffers');
+  assert.ok(s.transmissionSize<.2,'no expensive transmission pass is needed after the hero');assert.ok(s.dpr<=heroDpr);
+  poses.push({stage:field.material.uniforms.uStage.value,camera:s.camera.position.clone()});
  }
- assert.ok(poses[0].position.x*poses[1].position.x<0,'successive chapters move through opposite sides of real 3D space');assert.ok(poses[1].rotation.angleTo(poses[2].rotation)>.3);assert.ok(poses[0].camera.distanceTo(poses[2].camera)>.15);
- const depth=s.scene.getObjectByName('iavse-journey-depth');assert.ok(depth.isPoints&&depth.geometry.attributes.position.count<=80);
- s.adapter.render(0,0,false,journey.at(-1).end-1,false,8);assert.equal(s.surface.visible,false);assert.equal(s.adapter.animated,false);assert.equal(depth.visible,false);
- let disposed=0;depth.geometry.addEventListener('dispose',()=>disposed++);s.adapter.dispose();assert.equal(disposed,1);
+ assert.ok(poses.at(-1).stage>poses[0].stage+3,'chapters continuously reshape the GPU sheet');assert.ok(poses[0].camera.distanceTo(poses[2].camera)>.15);
+ for(let index=0;index<positions.count;index++)assert.ok([positions.getX(index),positions.getY(index),positions.getZ(index)].every(Number.isFinite));
+ s.adapter.render(.8,-.4,false,3,false,12);assert.deepEqual(field.material.uniforms.uPointer.value.toArray(),[.8,-.4]);assert.equal(field.material.uniforms.uTime.value,12,'the live clock reaches GPU waves');assert.equal(positions.version,fieldVersion);
+ let disposedGeometry=0,disposedMaterial=0;field.geometry.addEventListener('dispose',()=>disposedGeometry++);field.material.addEventListener('dispose',()=>disposedMaterial++);s.adapter.dispose();s.adapter.dispose();assert.equal(disposedGeometry,1);assert.equal(disposedMaterial,1);
 });
 
-test('closing glass fades continuously by the reachable section bottom and returns when scrolling back',async()=>{
- const s=await studio();s.adapter.setJourney(journey);
- const end=journey.at(-1).end-1,start=end-.55,opacity=scroll=>{s.adapter.render(0,0,false,scroll,false,8);return s.meshes[0].material.opacity;};
+test('mobile field retains perspective geometry within a smaller delivery budget',async()=>{
+ const s=await studio({window:{innerWidth:390,devicePixelRatio:2}});s.adapter.resize(390,844,1.5);s.adapter.setJourney(journey);s.adapter.render(0,0,false,3,false,5);
+ const field=s.scene.getObjectByName('iavse-journey-depth');assert.equal(field.geometry.attributes.position.count,240);assert.equal(field.visible,true);assert.ok(s.dpr<=1.5);assert.ok(Math.abs(field.material.uniforms.uAspect.value-390/844)<1e-8);s.adapter.dispose();
+});
+
+test('the point field fades continuously before the footer and restores when scrolling back',async()=>{
+ const s=await studio();s.adapter.setJourney(journey);const field=s.scene.getObjectByName('iavse-journey-depth');
+ const end=journey.at(-1).end-1,start=end-.55,opacity=scroll=>{s.adapter.render(0,0,false,scroll,false,8);return field.material.uniforms.uOpacity.value;};
  const open=opacity(start),middle=opacity((start+end)*.5),nearEnd=opacity(end-.005);
- assert.ok(open>middle&&middle>nearEnd&&nearEnd>0,'the final visible viewport contains a smooth fading volume');
- assert.ok(Math.abs(opacity((start+end)*.5-.0001)-opacity((start+end)*.5+.0001))<.001,'the closing fade has no opacity cut');
- assert.equal(opacity(end),0,'the volume is retired before any footer space is required');assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);
- assert.equal(s.scene.getObjectByName('iavse-journey-depth').visible,false);
- assert.equal(opacity((start+end)*.5),middle,'scrolling back restores the same fade state');assert.equal(s.surface.visible,true);assert.equal(s.adapter.animated,true);s.adapter.dispose();
+ assert.ok(open>middle&&middle>nearEnd&&nearEnd>0,'the final viewport contains a smooth fading field');
+ assert.ok(Math.abs(opacity((start+end)*.5-.0001)-opacity((start+end)*.5+.0001))<.001);
+ assert.equal(opacity(end),0);assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);assert.equal(field.visible,false);
+ assert.equal(opacity((start+end)*.5),middle,'scrolling back restores exactly the same optical fade');assert.equal(field.visible,true);assert.equal(s.surface.visible,false);assert.equal(s.adapter.animated,true);s.adapter.dispose();
 });
 
 test('chapter handoffs are continuous, reverse predictably, and reduced motion returns to the static reading mode',async()=>{
  const s=await studio();s.adapter.setJourney(journey);const center=chapter=>(chapter.start+chapter.end)*.5-.5,cut=(center(journey[0])+center(journey[1]))*.5;
- const capture=()=>({position:s.surface.position.clone(),rotation:s.surface.quaternion.clone(),camera:s.camera.position.clone()});
+ const capture=()=>({position:s.surface.position.clone(),rotation:s.surface.quaternion.clone(),camera:s.camera.position.clone(),stage:s.scene.getObjectByName('iavse-journey-depth').material.uniforms.uStage.value});
  s.adapter.render(0,0,false,cut-.0001,false,8);const before=capture();s.adapter.render(0,0,false,cut+.0001,false,8);const after=capture();
- assert.ok(before.position.distanceTo(after.position)<.01);assert.ok(before.rotation.angleTo(after.rotation)<.005);assert.ok(before.camera.distanceTo(after.camera)<.005);
+ assert.ok(before.position.distanceTo(after.position)<.01);assert.ok(before.rotation.angleTo(after.rotation)<.005);assert.ok(before.camera.distanceTo(after.camera)<.005);assert.ok(Math.abs(before.stage-after.stage)<.005);
  s.adapter.render(0,0,false,center(journey[0]),false,8);const first=capture();s.adapter.render(0,0,false,center(journey[3]),false,8);s.adapter.render(0,0,false,center(journey[0]),false,8);const back=capture();assert.ok(first.position.distanceTo(back.position)<1e-8);assert.ok(first.rotation.angleTo(back.rotation)<1e-7);
  s.adapter.render(1,-1,false,center(journey[1]),true,30);assert.equal(s.adapter.animated,false,'reduced motion avoids a persistent cinematic ticker');assert.equal(s.scene.getObjectByName('iavse-journey-depth').visible,false);s.adapter.dispose();
 });

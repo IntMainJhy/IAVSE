@@ -11,9 +11,9 @@ const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),
 const d=D.db(),req=(pathname='/api/auth/me',token='',body,headers={})=>new Request(base+pathname,{method:body===undefined?'GET':'POST',headers:{host:'space.example.com',origin:base,cookie:token?'site_platform='+token:'','content-type':'application/json',...headers},body:body===undefined?undefined:JSON.stringify(body)});
 for(const [id,verification,emailVerified] of [['pending','pending',true],['local','local_test',true],['verified','verified',true],['unverified','verified',false],['reviewer','verified',true]])d.prepare('INSERT INTO community_users(id,username,password,nickname,role,status,verification,created,updated,email,email_verified_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(id,id,D.passwordHash(password),id,id==='reviewer'?'reviewer':'member','active',verification,D.now(),D.now(),id+'@example.com',emailVerified?D.now():null);
 
-test('public password login preserves real identity, verified email, role and qualification boundaries',async()=>{
+test('public password login accepts an unverified mailbox while preserving identity, role and consent boundaries',async()=>{
  for(const id of ['pending','local','verified']){const token=A.login(req(),{email:id+'@example.com',password}),user=A.currentUser(req('/api/auth/me',token));assert.equal(user.id,id);assert.equal(user.canPublish,id==='verified');}
- assert.throws(()=>A.login(req(),{username:'unverified',password}),error=>error.status===403);
+ const unverified=A.currentUser(req('/api/auth/me',A.login(req(),{email:'unverified@example.com',password})));assert.equal(unverified.id,'unverified');assert.equal(unverified.emailVerifiedAt,null);
  assert.throws(()=>A.login(req(),{username:'verified',password:'wrong'}),error=>error.status===401);
  assert.throws(()=>A.login(req(),{username:'reviewer',password}),error=>error.status===403);
  assert.throws(()=>A.login(req(),{username:'admin',password:process.env.INITIAL_ADMIN_PASSWORD}),error=>error.status===403);
@@ -24,16 +24,25 @@ test('public password login preserves real identity, verified email, role and qu
  process.env.PUBLIC_FEATURES_ENABLED='false';assert.equal(A.currentUser(req('/api/auth/me',token)),null);assert.throws(()=>A.login(req(),{username:'verified',password}),error=>error.status===503);process.env.PUBLIC_FEATURES_ENABLED='true';
 });
 
-test('verified email registration on the public origin creates a private editable draft and never grants publishing',async()=>{
- const email='new-public-member@example.com',challenge=E.prepareEmailChallenge(email,'register','',D.hash(''));E.activateEmailChallenge(challenge.id);
- const input={email,password,nickname:'Public member',challenge:challenge.id,code:challenge.code,adult:true,accepted:true,policyVersion:P.policyBundle(req()).version,policyHash:P.policyBundle(req()).hash};
+test('public registration records policy acceptance and enables publishing without asserting mailbox ownership',async()=>{
+ const email='new-public-member@example.com';
+ const input={email,password,nickname:'Public member',adult:true,accepted:true,policyRead:['community','disclaimer'],policyVersion:P.policyBundle(req()).version,policyHash:P.policyBundle(req()).hash};
  const response=await API.handle(req('/api/community/register','',input));assert.equal(response.status,200,await response.text());
- const row=d.prepare('SELECT * FROM community_users WHERE email=?').get(email);assert.ok(row.email_verified_at);assert.equal(row.verification,'pending');
- const token=A.login(req(),{email,password}),user=A.currentUser(req('/api/auth/me',token));assert.equal(user.canPublish,false);
+ const row=d.prepare('SELECT * FROM community_users WHERE email=?').get(email);assert.equal(row.email_verified_at,null);assert.equal(row.verification,'accepted');
+ const token=A.login(req(),{email,password}),user=A.currentUser(req('/api/auth/me',token));assert.equal(user.canPublish,true);
  const space=S.mine(req('/api/spaces/mine',token));assert.equal(space.visibility,'private');assert.equal(space.profile.name,'Public member');
- assert.equal((await API.handle(req('/api/community/register','',input))).status,400);
+ assert.equal((await API.handle(req('/api/community/register','',input))).status,409);
  // Capture is never a production transport, even when public features are open.
  assert.equal(E.emailStatus(req()).available,false);
+});
+
+test('legacy accounts can accept current policies without impersonating mailbox verification or overriding suspension',()=>{
+ const token=A.login(req(),{username:'pending',password}),bundle=P.policyBundle(req()),input={accepted:true,policyRead:['community','disclaimer'],policyVersion:bundle.version,policyHash:bundle.hash};
+ const renew=value=>C.communityApi(req('/api/community/accept-policies',token,value),['community','accept-policies'],value,new URL(base));
+ assert.throws(()=>renew({...input,policyRead:['community']}),e=>e.status===409);
+ d.prepare("UPDATE community_users SET status='restricted' WHERE id='pending'").run();assert.throws(()=>renew(input),e=>e.status===403);
+ d.prepare("UPDATE community_users SET status='active' WHERE id='pending'").run();const result=renew(input);assert.equal(result.user.verification,'accepted');assert.equal(result.user.canPublish,true);
+ const release=S.spacesApi(req('/api/spaces/submit',token,input),['spaces','submit'],{revision:S.mine(req('/api/spaces/mine',token)).revision,...input},new URL(base));assert.equal(release.visibility,'public');assert.equal(release.reviews[0].status,'approved');assert.equal(S.publicSpace(req(),release.handle).handle,release.handle);
 });
 
 test('public password reset is single use and revokes all existing member sessions',()=>{

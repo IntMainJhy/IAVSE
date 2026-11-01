@@ -23,9 +23,16 @@ test('management overview uses real counts, excludes trash and stays owner-only'
   d.prepare("INSERT INTO spaces(id,owner,handle,profile,layout,created,updated) VALUES('space','test-member','fixture-space','{}','{}',?,?)").run(at,at);
   d.prepare("INSERT INTO space_reviews(id,space,kind,version,data,status,created) VALUES('space-review','space','board',1,'{}','pending',?)").run(at);
   for(const [id,status] of [['open-report','open'],['done-report','resolved']])d.prepare('INSERT INTO community_cases(id,token,kind,category,description,status,created,updated) VALUES(?,?,?,?,?,?,?,?)').run(id,'fixture-token','report','其他','Private evidence description',status,at,at);
+  d.prepare("INSERT INTO events(id,kind,path,visitor,source,device,browser,at) VALUES(?,?,?,?,?,?,?,?)").run('overview-event','view','/blogs','anonymous-browser','direct','desktop','test',at);
   const owner=A.delegatedRequest(request(),{id:'owner',role:'owner',status:'active'}),response=await API.handle(owner),data=await response.json();
   assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
   assert.equal(data.totals.content,1);assert.equal(data.totals.members,1);
+  assert.equal(data.audience.users,1);assert.equal(data.audience.active,1);assert.equal(data.audience.closed,1);
+  assert.equal(data.audience.joinedToday,1);assert.equal(data.audience.joinedWeek,1);assert.equal(data.audience.joinedMonth,1);
+  assert.equal(data.audience.trafficAll.pv,1);assert.equal(data.audience.trafficAll.uv,1);
+  assert.equal(data.audience.trafficToday.pv,1);assert.equal(data.audience.trafficToday.uv,1);
+  assert.equal(data.audience.publicSpaces,0);assert.equal(data.audience.publishedArticles,0);
+  assert.equal(data.audience.timezone,'Asia/Shanghai');
   assert.equal(data.pending.posts,1);assert.equal(data.pending.comments,1);
   assert.equal(data.pending.spaces,1);assert.equal(data.pending.reports,1);assert.equal(data.totals.spaces,1);
   assert.equal(data.recent.length,1);assert.equal(data.recent[0].title,'Private draft');

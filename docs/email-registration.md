@@ -1,16 +1,22 @@
-# Email registration / 邮箱验证码注册
+# Account registration / 账号注册
 
-The password-login platform supports `/join`: email, a six-digit code, nickname, password confirmation and explicit policy/adult acknowledgements. No invitation is required. After success, sign in with the verified email and password to edit your own private blog. Existing invitation-bound codes remain compatible with the API.
+`/join` asks for email, nickname, password and password confirmation. An email code is **not required** to register or sign in. Before submitting, open both the community rules and disclaimer, read to the end, mark each as read, and actively check the policy/adult acknowledgments. These controls are never preselected. The API requires the current policy version, document hash and both document acknowledgments; missing or stale consent is rejected.
 
-密码登录的平台端提供 `/join` 注册页：邮箱、六位验证码、昵称、密码及确认密码、协议与成年确认，无需邀请码。注册成功后使用已验证邮箱和密码登录，编辑自己的私有博客。旧的邀请绑定验证码仍与 API 兼容。
+`/join` 使用邮箱、昵称、密码及确认密码。注册和登录不要求邮箱验证码。注册前必须展开社区规则和免责声明，阅读至末尾后分别确认已阅读，再主动勾选协议与成年确认。接口检查当前规则版本、全文哈希及两个文件的阅读确认，缺少确认或使用过期规则不能注册。阅读界面与同意记录不能证明法律身份或保证用户实际理解文件。
+
+## Access / 权限
+
+New accounts have `verification=accepted` and `email_verified_at=NULL`: policy acceptance enables the product's publishing workflow but does not pretend that a mailbox or real identity was verified. Personal homepages, projects, resources, Skills, comments and replies publish directly. Community articles, documents and article revisions require manual review. Private drafts, account ownership, safe markup/URLs, rate limits, reports, restrictions and takedowns remain enforced. Legacy `pending` users can accept current policies in account settings; restricted accounts cannot use that action to restore permissions.
+
+新账号记录为 `accepted`，邮箱核验时间为空。规则确认不冒充邮箱或实名认证。个人主页、作品、资源、Skill、评论和回复直接发布；社区文章、文档及文章修订人工审核后公开。私有草稿、归属隔离、安全格式校验、频率限制、举报、账号限制与下架继续生效。历史待确认账号可在账号设置补充阅读并确认；受限账号不能借此恢复权限。
 
 ## Configuration / 配置
 
-For authorized local maintainers, set `REGISTRATION_ENABLED=true` on the combined or platform surface. `false` hides registration and blocks both registration and code requests. The admin surface never permits registration. All sign-ins require a real saved account password. Public HTTPS deployments additionally require `PUBLIC_FEATURES_ENABLED=true` and configured operating policies. Registration grants private drafts, not identity verification or public publishing eligibility; see [public launch requirements](public-launch.en.md).
+Set `REGISTRATION_ENABLED=true` on a combined or platform surface. `false` blocks registration; the admin surface never allows registration. Production HTTPS also requires the existing `PUBLIC_FEATURES_ENABLED=true` gate and configured operating notices (`LEGAL_OPERATOR`, `LEGAL_CONTACT_EMAIL`, `LEGAL_EFFECTIVE_DATE`). See [operating boundaries](public-launch.en.md) / [运营边界](public-launch.md). No environment settings are changed automatically.
 
-已授权维护者可在本地 combined 或 platform 入口设置 `REGISTRATION_ENABLED=true`。设置为 `false` 时同时关闭页面、注册接口与注册验证码请求；管理端不开放注册，所有登录均校验已有账号的真实密码。公网 HTTPS 部署另需显式设置 `PUBLIC_FEATURES_ENABLED=true` 并配置正式运营政策。注册允许编辑私有草稿，不等于完成身份核验或取得公开发布资格；参见[公开运营要求](public-launch.md)。
+Registration works without SMTP. Email delivery is only needed for optional verification of a recovery email and password recovery. An unverified registration address cannot recover a password, because anyone could type an address they do not control. Users can verify their address from account settings using the current password and a single-use email code.
 
-QQ SMTP example, with placeholders only:
+注册不依赖 SMTP。只有主动验证恢复邮箱和找回密码需要邮件服务。未验证的注册邮箱不能用于找回密码，避免通过他人填写的邮箱接管账号。账号设置中的验证仍须提供当前密码及单次邮箱验证码。
 
 ```dotenv
 MAIL_MODE=smtp
@@ -21,33 +27,15 @@ SMTP_PASSWORD=your-smtp-authorization-code
 SMTP_FROM=your-mailbox@qq.com
 ```
 
-QQ uses an SMTP authorization code rather than the QQ sign-in password; see [QQ Mail's official setup help](https://help.mail.qq.com/detail/106/985). Port 465 uses TLS; certificate verification remains enabled. Keep the real values in the ignored `.env.local` or the service's private environment and restart the process after changes. Do not commit credentials or captured mail.
+QQ SMTP uses an authorization code, not the account password; see [official setup help](https://help.mail.qq.com/detail/106/985). Keep actual credentials outside Git. `MAIL_MODE=capture` is restricted to isolated loopback tests; captured messages remain in the private data directory. Binding and recovery codes expire after ten minutes, permit five attempts, are purpose-bound and can only be consumed once. Resets revoke previous sessions and tool keys. Mail request responses do not reveal whether an address belongs to an account.
 
-QQ 邮箱使用 SMTP 授权码而不是 QQ 登录密码，参见 [QQ 邮箱官方说明](https://help.mail.qq.com/detail/106/985)。465 端口使用 TLS，并保留证书校验。真实配置存放在被 Git 忽略的 `.env.local` 或服务私有环境中，修改后重启进程。凭据和捕获的邮件均不提交。
-
-`MAIL_MODE=capture` is only for isolated local tests: no email is delivered; messages go into the private data directory's `mail-outbox`. The API and registration page never reveal the code. SMTP connection/authentication success does not prove inbox delivery; confirm delivery in the destination mailbox.
-
-`MAIL_MODE=capture` 仅用于隔离本地测试，不会发送邮件；邮件保存在私有数据目录的 `mail-outbox`。接口与注册页不会返回验证码。SMTP 连接和认证通过不等于收件箱投递成功，须在目标邮箱确认收信。
-
-## Verification and access / 验证与权限
-
-- Codes expire after 10 minutes, allow five attempts and can be consumed once. A successfully resent code invalidates the previous code for that email and purpose.
-- Requests are limited by email and IP, with a 60-second resend interval. Duplicate and unknown emails use the same public request response.
-- Email, purpose and optional invitation are bound to the challenge. Account creation, verified-email persistence and code consumption commit together.
-- New members retain `pending` publication qualification. Email ownership does not grant administrator/reviewer access or verify a legal identity. Operators still confirm publishing qualification and review content.
-
-验证码10分钟有效、最多尝试5次、单次使用；重发成功后旧码失效。发信按邮箱与 IP 限流、间隔60秒，重复邮箱与未知邮箱请求使用相同公开响应。验证绑定邮箱、用途及可选邀请，创建账号、保存已验证邮箱和消耗验证码在同一事务中完成。新成员的发布资格仍为待核查，邮箱认证不等于实名核验或管理权限。
-
-## Checks / 验证命令
+## Validation / 验证
 
 ```sh
 npm test
 npm run typecheck
 npm run build
 npm run test:registration:http
-node test/split-login-http.mjs
 ```
 
-The HTTP registration test uses disposable data and captured mail, never the maintainer's mailbox or existing accounts.
-
-HTTP 注册测试仅使用临时数据和捕获邮件，不访问维护者邮箱或改动已有账号。
+The HTTP test uses disposable data. It covers registration without email delivery, consent/version checks, account isolation and real password sign-in; it never edits production accounts.

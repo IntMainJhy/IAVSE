@@ -31,7 +31,7 @@ export function HomeCinema({locale}:{locale:string}){
   media.add('(prefers-reduced-motion: no-preference)',()=>{
    const heading=hero.querySelectorAll('h1>span'),copy=hero.querySelector('.v2-hero-copy'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
    const entrance=gsap.timeline({defaults:{ease:'power3.out'}});
-   if(window.scrollY<32)entrance.fromTo(heading,{y:16,opacity:.88},{y:0,opacity:1,duration:1,stagger:.075,clearProps:'transform,opacity',immediateRender:false});
+   if(window.scrollY<32)entrance.fromTo(heading,{y:6,opacity:.88},{y:0,opacity:1,duration:1,stagger:.075,clearProps:'transform,opacity',immediateRender:false});
    const journey=gsap.timeline({scrollTrigger:{id:'iavse-product-approach',trigger:hero,start:'top top',end:()=>'+='+window.innerHeight*1.05,scrub:true,invalidateOnRefresh:true},defaults:{ease:'none'}});
    journey.addLabel('insight',0);
    if(copy)journey.to(copy,{y:-28,opacity:.16,duration:1},0);

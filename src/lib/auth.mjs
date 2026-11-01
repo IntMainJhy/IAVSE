@@ -28,7 +28,6 @@ export function currentUser(req){
  }
  if(!serviceRequest(req))return null;
  const user=db().prepare("SELECT id,username,nickname,role,status,verification,avatar_id AS avatarId,email,email_verified_at AS emailVerifiedAt FROM community_users WHERE id=? AND status<>'closed'").get(row.user_id)||null;
- if(!localRequest(req)&&!user?.emailVerifiedAt)return null;
  const role=ownerAccountConfigured()?(user?.id===ownerAccountId()?'owner':'member'):user?.role;
  if(appSurface()==='admin'&&!(ownerAccountConfigured()?role==='owner':['owner','reviewer'].includes(role)))return null;
  if(appSurface()==='platform'&&role!=='member'&&!(ownerAccountConfigured()&&role==='owner'))return null;
@@ -45,7 +44,7 @@ export function login(req,{username,email,password,authentication}){
  const identifier=raw.trim().toLowerCase();requireValue(identifier.length>0&&identifier.length<=254,'账号或密码错误',401);
  const d=db(),owner=d.prepare('SELECT * FROM admins WHERE id=1').get();
  const configured=ownerAccountConfigured();
- const row=!configured&&(owner.username.toLowerCase()===identifier||(owner.email_verified_at&&owner.email===identifier))?owner:d.prepare("SELECT * FROM community_users WHERE (username=? COLLATE NOCASE OR (email=? AND email_verified_at IS NOT NULL)) AND status<>'closed'").get(identifier,identifier);
+ const row=!configured&&(owner.username.toLowerCase()===identifier||(owner.email_verified_at&&owner.email===identifier))?owner:d.prepare("SELECT * FROM community_users WHERE (username=? COLLATE NOCASE OR email=?) AND status<>'closed'").get(identifier,identifier);
  const key=hash(row?(row===owner?'owner':row.id):identifier),ip=hash(clientIp(req));
  const accountBlocked=limited('login-account:'+key,10,900000),ipBlocked=limited('login-ip:'+ip,50,900000);
  requireValue(!accountBlocked&&!ipBlocked,'尝试次数过多，请15分钟后重试',429);
@@ -54,7 +53,6 @@ export function login(req,{username,email,password,authentication}){
  requireValue(appSurface()!=='admin'||(configured?selected:row===owner||row.role==='reviewer'&&row.status==='active'),'此账号没有管理权限',403);
  requireValue(appSurface()!=='platform'||row!==owner&&(configured||row.role==='member'),'请使用独立管理网站登录',403);
  requireValue(row===owner||serviceRequest(req),'当前入口尚未开放账号服务',503);
- requireValue(row===owner||localRequest(req)||row.email_verified_at,'请先完成邮箱验证',403);
  return createSession(row===owner?null:row.id);
 }
 function createSession(userId){

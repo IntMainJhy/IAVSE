@@ -19,7 +19,8 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  const sections=[{id:'blog',top:1800,height:1260,side:'left'},{id:'editor',top:3300,height:1260,side:'right'}].map(item=>Object.assign(new Target(),{dataset:{homeStory:item.id,homeSide:item.side},documentTop:item.top,sectionHeight:item.height,getBoundingClientRect(){this.rectReads++;const top=this.documentTop-(window.scrollY||0);return{left:0,top,bottom:top+this.sectionHeight,width,height:this.sectionHeight};}}));
  if(journey)window.scrollY=0;
  host.querySelectorAll=selector=>selector.includes('data-home-story')?(journey?sections:[]):reveal?[panel]:[];
- host.querySelector=()=>{throw Error('header geometry must not be read')};
+ host.getAttribute=key=>key==='data-journey-motion'?host.dataset.journeyMotion:null;
+ host.querySelector=selector=>{assert.equal(selector,'.home-stories');return host.track||null;};
  const draws=[],sizes=[],reveals=[],journeys=[];let releases=0,resolve,reject,signal,opticalLive=animated;
  const adapter={get animated(){return opticalLive},get interactive(){return retireHero?opticalLive:undefined},resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),render:(...args)=>{draws.push(args);cpuClock+=cpuRenderMs;if(retireHero)opticalLive=args[3]<1.3||!!reveals.at(-1)?.length;},dispose:()=>releases++};
  if(journey)adapter.setJourney=value=>journeys.push(JSON.parse(JSON.stringify(value)));
@@ -221,4 +222,12 @@ test('cinematic chapter geometry is cached across scroll frames and refreshed on
  assert.equal(s.journeys.length,count+1,'layout events share one cache rebuild');assert.equal(s.journeys.at(-1)[1].start,3480/900);
  const refreshed=reads();s.host.dispatchEvent(new Event('load'));s.step();assert.ok(reads()>refreshed,'loaded images can invalidate cached geometry');
  s.cleanup();const after=reads();s.window.dispatchEvent(new Event('iavse-journey-layout'));s.host.dispatchEvent(new Event('load'));s.step();assert.equal(reads(),after,'late events cannot measure a disposed scene');
+});
+
+
+test('sticky film chapters have distinct virtual anchors even while their DOM panels overlap',async()=>{
+ const s=mount({journey:true});s.host.dataset.journeyMotion='cinema';s.host.track={getBoundingClientRect:()=>({top:1800,height:4500})};
+ s.sections[1].documentTop=1800;s.intersection.set(true);await flush();
+ assert.deepEqual(s.journeys.at(-1),[{id:'blog',start:2,end:5,side:-1},{id:'editor',start:4,end:7,side:1}]);
+ const initial=s.journeys.length;s.window.scrollY=2000;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.journeys.length,initial,'normal scroll keeps the cached virtual map');s.cleanup();
 });

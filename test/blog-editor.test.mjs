@@ -18,8 +18,8 @@ test('structured blog drafts, certificates and PDF ownership are isolated and pu
  const saved=await call('/api/spaces/save',{...row,profile:{...row.profile,resume},layout:{...row.layout,blog:{mode:'theme',theme:'anx',sections:[]}}});assert.equal(saved.status,200);row=saved.data;assert.equal(row.profile.resume.sections[0].items[0].description,'Built by Alice');assert.equal(row.profile.resume.certificates[0].imageId,own);
  assert.equal(S.canReadSpaceFile(req(),own),false);assert.equal(S.canReadSpaceFile(req(users[1].token),own),false);
  assert.equal((await call('/api/spaces/save',{...row,revision:row.revision-1})).status,409);
- const submitted=await call('/api/spaces/submit',{revision:row.revision,accepted:true}),review=submitted.data.reviews.find(x=>x.kind==='board'&&x.status==='pending');assert.ok(review);
- S.spacesApi(req(owner,'/api/admin/spaces','unused'),['admin','spaces'],{id:review.id,action:'approve',checked:true,reason:'Verified synthetic certificate and content'},null);
+ const submitted=await call('/api/spaces/submit',{revision:row.revision,accepted:true}),review=submitted.data.reviews.find(x=>x.kind==='board'&&x.status==='approved');assert.ok(review);assert.equal(submitted.status,200);
+ assert.equal(d.prepare('SELECT reviewer FROM space_reviews WHERE id=?').get(review.id).reviewer,'system:direct-publication');
  assert.equal(S.canReadSpaceFile(req(),own),true);assert.equal(S.publicSpace(req(),'alice').profile.resume.certificates.length,1);
  await call('/api/spaces/save',{...row,profile:{...row.profile,resume:{...row.profile.resume,certificates:[]}}});assert.equal(S.publicSpace(req(),'alice').profile.resume.certificates.length,1,'Private edits do not change approved certificates');
  const latest=S.mine(req(users[0].token));await call('/api/spaces/offline',{revision:latest.revision});assert.equal(S.canReadSpaceFile(req(),own),false);

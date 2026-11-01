@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {chapterFixture} from './home-chapter-fixture.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeStoryVideo.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-function fixture({reduced=false,savedReduced=false}={}){
- const hooks=[],observers=[],calls=[],exports={},host={},listeners=new Set(),changes=new Set(),windowListeners=new Map();
+function fixture({reduced=false,savedReduced=false,inactive=false}={}){
+ const hooks=[],observers=[],calls=[],exports={},listeners=new Set(),changes=new Set(),windowListeners=new Map();
  const preference={matches:reduced,addEventListener:(type,fn)=>{assert.equal(type,'change');changes.add(fn);},removeEventListener:(type,fn)=>{assert.equal(type,'change');changes.delete(fn);}};
  const document={hidden:false,addEventListener:(type,fn)=>{assert.equal(type,'visibilitychange');listeners.add(fn);},removeEventListener:(type,fn)=>{assert.equal(type,'visibilitychange');listeners.delete(fn);}};
  const window={localStorage:{getItem:()=>savedReduced?'reduce':null},addEventListener:(name,callback)=>{const set=windowListeners.get(name)||new Set();set.add(callback);windowListeners.set(name,set);},removeEventListener:(name,callback)=>windowListeners.get(name)?.delete(callback)};
@@ -18,6 +19,7 @@ function fixture({reduced=false,savedReduced=false}={}){
   useState:initial=>{const index=cursor++,state=hooks[index]||=( {kind:'state',value:initial});return[state.value,next=>{const value=typeof next==='function'?next(state.value):next;if(!Object.is(value,state.value)){state.value=value;dirty=true;}}];},
   useEffect:(callback,deps)=>{const index=cursor++,effect=hooks[index]||=( {kind:'effect'});if(!effect.deps||deps.some((value,index)=>!Object.is(value,effect.deps[index])))pending.push(()=>{effect.cleanup?.();effect.deps=deps;effect.cleanup=callback();});}
  };
+ const chapter=chapterFixture(React,{inactive}),host=chapter.host;
  class IntersectionObserver{
   constructor(callback,options){this.callback=callback;this.options=options;observers.push(this);}
   observe(element){this.element=element;}
@@ -25,6 +27,7 @@ function fixture({reduced=false,savedReduced=false}={}){
  }
  vm.runInNewContext(source,{exports,document,window,matchMedia:()=>preference,IntersectionObserver,require:name=>{
   if(name==='react')return React;
+  if(name==='./useHomeChapterActive')return chapter.module;
   if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};
   if(name==='./Icons')return{Icon:()=>null};
   throw Error('Unexpected dependency '+name);
@@ -43,7 +46,7 @@ function fixture({reduced=false,savedReduced=false}={}){
  }
  const intersect=(observer,visible)=>{observer.callback([{isIntersecting:visible}]);flush();};
  flush();
- return{nodes,calls,media,observers,listeners,changes,windowListeners,flush,get tree(){return tree;},
+ return{nodes,calls,media,observers,chapter,listeners,active:value=>{chapter.activate(value);flush();},changes,windowListeners,flush,get tree(){return tree;},
   nearby:()=>intersect(observers[0],true),visible:value=>intersect(observers[1],value),
   motion:value=>{preference.matches=value;for(const change of changes)change({matches:value});flush();},
   systemEvent:value=>{for(const change of changes)change({matches:value});flush();},
@@ -98,4 +101,14 @@ test('saved and manual reduction avoid loading, while global pause and print pre
  s.control('reduced',true);assert.equal(s.media.paused,true);assert.equal(s.nodes('video')[0].props.ref,video.props.ref,'loaded media is retained across quiet-mode toggles');s.control('reduced',false);
  s.toggle();s.control('paused',true);s.control('paused',false);s.printing(true);s.printing(false);s.control('replay');
  assert.equal(s.media.currentTime,0,'global replay rewinds the recording');assert.equal(s.media.paused,true,'replay and global resume do not erase the user’s local pause');s.unmount();
+});
+
+test('inactive sticky chapters do not fetch or play video even when both viewport observers intersect',()=>{
+ const s=fixture({inactive:true});s.nearby();s.visible(true);assert.equal(s.nodes('video').length,0);
+ s.active(true);assert.equal(s.nodes('video').length,1);assert.equal(s.media.paused,false);s.loaded();
+ const ref=s.nodes('video')[0].props.ref;s.active(false);assert.equal(s.media.paused,true);
+ s.control('paused',false);s.visible(true);assert.equal(s.media.paused,true,'offstage stays paused regardless of observer visibility');
+ s.active(true);assert.equal(s.media.paused,false);assert.equal(s.nodes('video')[0].props.ref,ref);
+ s.toggle();s.active(false);s.active(true);assert.equal(s.media.paused,true,'chapter changes preserve explicit local pause');
+ s.unmount();assert.ok(s.chapter.observers.every(observer=>observer.disconnected));
 });

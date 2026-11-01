@@ -17,6 +17,7 @@ import {Tracker, TrackedLink} from './Tracker';
 import {AuthNav} from './AuthNav';
 import {SiteTools} from './SiteTools';
 import {PlatformGlass} from './PlatformGlass';
+import {QuantumPointer} from './QuantumPointer';
 import {ResumePrint} from './ResumePrint';
 
 type Doc = Record<string, any>;
@@ -202,14 +203,14 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   const authPage=section==='login'||section==='join';
   return <div className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
     <PlatformGlass scene={!path.length?'home':section==='blogs'&&path.length===1?'blogs':'interior'}/>
-    <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
+    <QuantumPointer/><a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand"><BrandMark/><div className="site-brand-copy">IAVSE<span>{tr('社区与博客主页')}</span></div></Link>
-      <div className="organic-header-tools">
-      <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav/></nav>
+      <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}</nav>
+      <div className="organic-header-tools"><div className="iavse-account-slot"><AuthNav/></div>
       <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>
       <SiteTools/></div>
     </div></header>
     <main id="main" className="organic-container organic-main"><PageMotion>{children}</PageMotion></main>
-    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><Link href="/" className="organic-footer-signature">IAVSE</Link><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/report">{tr("举报投诉")}</Link><Link href="/workspace/account">{tr("我的账号")}</Link></nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
+    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><div className="iavse-footer-brand"><Link href="/" className="organic-footer-signature">IAVSE</Link><p>Insight through AI.<br/>Seize to Evolve.</p></div><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/legal/disclaimer">{tr("免责声明")}</Link><Link href="/report">{tr("举报投诉")}</Link><Link href="/workspace/account">{tr("我的账号")}</Link></nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
   </div>;
 }

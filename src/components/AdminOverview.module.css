@@ -1,0 +1,56 @@
+.overview {--dash-ink:#132d53;--dash-muted:#5d7391;--dash-line:#cddaea;color:var(--dash-ink)}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .overview {padding:32px;border:1px solid #fff9;border-radius:24px;background:linear-gradient(140deg,#fffefc,#edf4fc);box-shadow:0 22px 70px -40px #143b7166}
+:global(html[data-ui] .organic-site) .overview :global(.admin-overview-heading h1) {color:var(--dash-ink);font-size:30px;font-weight:600}
+:global(html[data-ui] .organic-site) .overview :global(.admin-overview-heading p) {color:var(--dash-muted);margin:8px 0 0}
+.actions {display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+:global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid) {gap:0;border-radius:18px;background:linear-gradient(115deg,#132b53,#214f87);padding:26px 0;margin-bottom:28px;color:#fff}
+:global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid>div) {padding:0 24px;border-right:1px solid #ffffff24}
+:global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid>div:last-child) {border:0}
+:global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid dt) {color:#c8dbf3;font-size:13px}
+:global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid dd) {color:#fff;font-size:38px;letter-spacing:-.035em;font-weight:550;margin:10px 0}
+.overview :global(.admin-summary-grid small) {display:block;color:#bed2ed;font-size:11px;line-height:1.7;max-width:28ch}
+.details {display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:0 0 32px;padding-bottom:28px;border-bottom:1px solid var(--dash-line)}
+.details h2 {font-size:17px;margin:0 0 20px;font-weight:600}
+.accountBar {display:flex;gap:3px;height:6px;background:#dae5f3;border-radius:6px;overflow:hidden;margin-bottom:14px}
+.active {background:#3569b6}.restricted {background:#c89a4b}.banned {background:#a54c59}
+.inlineCounts,.contentCounts,.growth {margin:0;display:grid;gap:16px;grid-template-columns:repeat(4,minmax(0,1fr))}
+.inlineCounts dt,.contentCounts dt,.growth dt {font-size:12px;color:var(--dash-muted);margin-bottom:6px}
+.inlineCounts dd,.contentCounts dd,.growth dd {font-size:20px;font-weight:550;margin:0;font-variant-numeric:tabular-nums}
+.growth {grid-template-columns:repeat(3,minmax(0,1fr));margin-top:22px;padding-top:18px;border-top:1px solid var(--dash-line)}
+.growth dd {color:#2e639f;font-size:20px}
+.contentCounts {grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px}
+.storage {display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--dash-line);margin-top:20px;padding-top:14px;font-size:13px}
+.storage span {color:var(--dash-muted)}
+.detailLink {font-size:13px;display:flex;justify-content:space-between;align-items:center;min-height:44px;color:#255ea7;margin-top:12px}
+:global(html[data-ui] .organic-site) .overview :global(.admin-management-grid) {gap:32px}
+:global(html[data-ui] .organic-site) .overview :global(.admin-management-grid h2) {font-size:17px;color:var(--dash-ink)}
+:global(html[data-ui] .organic-site) .overview :global(.admin-task-list a) {background:#e4edf8;border-radius:9px;padding:10px 14px;color:var(--dash-ink);transition:background .2s}
+:global(html[data-ui] .organic-site) .overview :global(.admin-task-list a:hover) {background:#d5e5f9}
+:global(html[data-ui] .organic-site) .overview :global(.admin-task-list .has-work) {background:#315f9b}
+:global(html[data-ui] .organic-site) .overview :global(.admin-recent-list a) {border-bottom:1px solid var(--dash-line)}
+.overview :global(.admin-recent-list strong) {color:var(--dash-ink)}
+.scope {font-size:11px;line-height:1.8;color:var(--dash-muted);margin:18px 0 0;max-width:100ch}
+@media(max-width:1100px){
+ :global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid) {grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 0}
+ :global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid>div:nth-child(2)) {border:0}
+}
+@media(max-width:700px){
+ :global(html[data-ui][data-color-mode] .organic-site.organic-admin) .overview {padding:20px 16px;border-radius:18px}
+ :global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid>div) {padding:0 16px}
+ :global(html[data-ui] .organic-site) .overview :global(.admin-summary-grid dd) {font-size:30px}
+ .details {grid-template-columns:1fr;gap:28px}
+ .inlineCounts {gap:10px}
+ .actions {justify-content:flex-start}
+ :global(html[data-ui] .organic-site) .overview :global(.admin-overview-heading) {flex-wrap:wrap}
+}
+.dashboard {--dash-ink:#132d53;--dash-muted:#5d7391;color:var(--dash-ink)}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.panel),
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.stat) {background:#f8fbffe8;border:1px solid #cddbed;border-radius:18px;box-shadow:0 10px 30px -25px #143b7166}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.stat strong) {color:#1d467c;font-size:32px;font-weight:550;letter-spacing:-.03em}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.stat small) {color:var(--dash-muted);line-height:1.65}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.bar-fill),
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.chart-column>i) {background:#386cb0}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.chart-column>i.light) {background:#9dbce5}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.dashboard-range) {align-items:flex-end;gap:12px;padding:18px 0 24px}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.dashboard-range input) {background:#f8fbff;border:1px solid #b5c9e0;border-radius:10px;min-height:42px;color:var(--dash-ink)}
+:global(html[data-ui][data-color-mode] .organic-site.organic-admin) .dashboard :global(.chart-bars) {border-bottom:1px solid #cad8ea;background:repeating-linear-gradient(to top,transparent 0,transparent calc(25% - 1px),#d7e3f1 25%)}

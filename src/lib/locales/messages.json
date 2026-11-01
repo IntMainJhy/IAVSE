@@ -1620,8 +1620,8 @@
     "はロックされ、担当者の審査待ちです。編集するには先に取り下げてください。"
   ],
   "已阅读": [
-    "I have read",
-    "確認しました："
+    "Read",
+    "閲覧済み"
   ],
   "已领取此审核任务。": [
     "Review task claimed.",
@@ -12930,5 +12930,117 @@
   "以洞察驱动智能，以敏锐发现机遇，以行动实现进化。": [
     "Insight through AI. Vigilance for Opportunity. Seize to Evolve.",
     "洞察で知性を導き、鋭敏さで機会を見出し、行動で進化する。"
+  ],
+  "免责声明": [
+    "Disclaimer",
+    "免責事項"
+  ],
+  "注册前请阅读": [
+    "Before you create an account",
+    "登録前にお読みください"
+  ],
+  "展开并阅读社区规则和免责声明后，再勾选同意。": [
+    "Open and read the community rules and disclaimer before accepting.",
+    "コミュニティルールと免責事項を開いて読み、同意してください。"
+  ],
+  "打开阅读": [
+    "Open to read",
+    "開いて読む"
+  ],
+  "我已阅读此文件": [
+    "I have read this document",
+    "この文書を読みました"
+  ],
+  "请阅读至末尾": [
+    "Read to the end to continue",
+    "最後までお読みください"
+  ],
+  "规则版本已更新，请刷新注册页面。": [
+    "The rules have changed. Refresh this page before continuing.",
+    "ルールが更新されました。このページを再読み込みしてください。"
+  ],
+  "确认规则并启用发布": [
+    "Accept the rules and enable publishing",
+    "ルールに同意して公開を有効にする"
+  ],
+  "已确认社区规则": [
+    "Community rules accepted",
+    "コミュニティルールに同意済み"
+  ],
+  "可保存私有草稿；请在账号设置阅读并确认社区规则后发布。": [
+    "You can save private drafts. Read and accept the community rules in account settings to publish.",
+    "非公開の下書きを保存できます。公開するにはアカウント設定でルールを確認してください。"
+  ],
+  "请先在账号设置阅读并确认社区规则，再提交文章。": [
+    "Read and accept the community rules in account settings before submitting an article.",
+    "記事を提出する前にアカウント設定でルールをご確認ください。"
+  ],
+  "请在账号设置阅读并确认社区规则，即可投稿并参与互动。": [
+    "Accept the community rules in account settings to publish and join conversations.",
+    "アカウント設定でルールに同意すると投稿や交流ができます。"
+  ],
+  "文章和文档审核后公开；Skill 与资源直接发布，保留举报和下架处理。": [
+    "Articles and documents are reviewed before publication. Skills and resources publish directly and remain subject to reports and removal.",
+    "記事とドキュメントは審査後に公開されます。Skill とリソースは直接公開され、通報や削除の対象となります。"
+  ],
+  "风险提示方式": [
+    "Risk signals",
+    "リスクの確認方法"
+  ],
+  "自动识别风险信号，辅助人工处置": [
+    "Detect risk signals to assist moderators",
+    "リスクを自動検出して管理者を支援"
+  ],
+  "所有内容标记为待人工检查": [
+    "Mark all content for manual inspection",
+    "すべてのコンテンツを手動確認対象として表示"
+  ],
+  "风险提示不改变发布规则：文章需人工审核，其他内容直接发布。管理员仍可检查并下架违规内容。": [
+    "Risk signals do not change publication rules: articles need review; other content publishes directly. Moderators can inspect and remove violations.",
+    "リスク表示によって公開ルールは変わりません。記事は審査が必要で、他の内容は直接公開されます。管理者は違反を確認して削除できます。"
+  ],
+  "草稿仅自己可见；点击发布后立即公开。": [
+    "Drafts are private. Publish makes this version public immediately.",
+    "下書きは非公開です。公開ボタンを押すと公開されます。"
+  ],
+  "社区已开放。新账号确认规则后可发布主页和评论；文章审核后公开。请持续处理文章审核、举报与申诉。": [
+    "The community is open. Members who accept the rules can publish profiles and comments directly; articles require review. Continue handling reviews, reports and appeals.",
+    "コミュニティは公開されています。ルールに同意したアカウントはプロフィールとコメントを直接公開でき、記事は審査が必要です。審査、通報、異議申し立てに対応してください。"
+  ],
+  "请展开并阅读社区规则和免责声明，再确认同意": [
+    "Open and read the community rules and disclaimer, then confirm your acceptance.",
+    "コミュニティルールと免責事項を開いて読み、同意してください。"
+  ],
+  "此邮箱可以登录；验证控制权后才能用于找回密码。": [
+    "You can sign in with this email. Verify it to enable password recovery.",
+    "このメールでログインできます。パスワードの復旧にはメール確認が必要です。"
+  ],
+  "验证恢复邮箱": [
+    "Verify recovery email",
+    "復旧用メールを確認"
+  ],
+  "使用网站账号或注册邮箱和密码登录，无需先验证邮箱。注册前请阅读并确认社区规则与免责声明。": [
+    "Sign in with your account or registration email and password; email verification is not required. Read and accept the community rules and disclaimer before registering.",
+    "アカウントまたは登録メールとパスワードでログインできます。メール確認は不要です。登録前にコミュニティルールと免責事項を確認してください。"
+  ],
+  "想介绍自己，从博客主页开始；想分享教程或工具，在对应栏目发布，文章审核后、工具资源直接发布后，也会同步出现在社区。": [
+    "Start with your blog to introduce yourself. Publish tutorials or tools in the relevant section: reviewed articles and directly published resources also appear in the community.",
+    "自己紹介はブログから始めましょう。記事は審査後、ツールやリソースは直接公開後にコミュニティにも表示されます。"
+  ],
+  "确认并发布主页": [
+    "Review and publish your homepage",
+    "確認してホームページを公開"
+  ],
+  "保存与公开是两个步骤。检查公开资料、隐私和素材使用权后点击发布，当前版本立即公开；继续编辑只更新私人草稿。": [
+    "Saving and publishing are separate. Check your public details, privacy and media rights, then publish this version immediately. Later edits remain private drafts.",
+    "保存と公開は別の操作です。公開情報、プライバシー、素材の権利を確認して公開すると、現在の版が公開されます。その後の編集は非公開の下書きです。"
+  ],
+  "文档和社区文章审核后公开；主页、作品、Skill、资源、评论和回复直接发布。共享栏目同步生成一份社区分享，草稿和待审文章不会提前公开。": [
+    "Documents and community articles require review. Homepages, projects, Skills, resources, comments and replies publish directly. Shared items create one linked community post; drafts and pending articles stay private.",
+    "ドキュメントと記事は審査後に公開されます。ホームページ、作品、Skill、リソース、コメントは直接公開されます。下書きと審査中の記事は非公開です。"
+  ],
+  "注册和登录无需邮箱验证码。注册前必须阅读并确认规则；这不代表邮箱或身份已核验。验证邮箱用于密码恢复，依法需要的身份核验仍须按实际运营要求办理。": [
+    "Registration and sign-in do not require an email code. Accept the rules before registering; this does not verify a mailbox or identity. Email verification enables password recovery. Applicable identity checks remain an operating responsibility.",
+    "登録とログインにメール認証コードは不要です。登録前にルールに同意してください。同意はメールや身元の確認ではありません。メール確認はパスワード復旧に使われます。法令上必要な本人確認は別途必要です。"
   ]
 }

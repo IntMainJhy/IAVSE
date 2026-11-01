@@ -9,16 +9,18 @@ const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),
 const req=(token='',ip='127.0.0.1')=>new Request(process.env.PUBLIC_URL+'/api/community',{method:'POST',headers:{host:new URL(process.env.PUBLIC_URL).host,origin:process.env.PUBLIC_URL,'x-real-ip':ip,cookie:token?'site_admin='+token:''}});
 const owner=A.login(req(),{username:'admin',password:process.env.INITIAL_ADMIN_PASSWORD});
 const call=(p,input={},token=owner,method='POST')=>C.communityApi(new Request(req(token),{method}),p.split('/'),input,new URL(process.env.PUBLIC_URL+'/api/'+p));
-const config=call('community/config',{},'','GET'),ack={accepted:true,adult:true,policyVersion:config.policyVersion,policyHash:config.policyHash};
+const config=call('community/config',{},'','GET'),ack={accepted:true,adult:true,policyRead:['community','disclaimer'],policyVersion:config.policyVersion,policyHash:config.policyHash};
 let memberToken,memberId;
 async function codeFor(email){for(const name of (await readdir(path.join(temp,'mail-outbox'))).sort().reverse()){const mail=JSON.parse(await readFile(path.join(temp,'mail-outbox',name),'utf8'));if(mail.to===email)return mail.text.match(/\d{6}/)[0]}throw new Error('Missing captured email')}
-test('email signup requires owned, unexpired, invite-bound code; failed attempts persist and successful code cannot replay',async()=>{
+test('registration needs current policy consent but not a mailbox challenge; recovery remains separately verified',async()=>{
  const invite=call('admin/community/invites',{label:'邮箱流程隔离邀请'}),email='member@example.com',input={...ack,email,password:'email-member-password-2026',nickname:'邮箱测试成员',invite:invite.token};
- assert.throws(()=>call('community/register',input,''),e=>e.status===400);
- const sent=await E.requestEmail(req(),{purpose:'register',email,invite:invite.token});assert.equal(sent.code,undefined);assert.ok(sent.challenge);const code=await codeFor(email),payload={...input,challenge:sent.challenge,code};
- assert.throws(()=>call('community/register',{...payload,code:code==='000000'?'111111':'000000'},''),e=>e.status===400);assert.equal(D.db().prepare('SELECT attempts FROM email_challenges WHERE id=?').get(sent.challenge).attempts,1);
- const other=call('admin/community/invites',{label:'不同邀请不能复用验证'});assert.throws(()=>call('community/register',{...payload,invite:other.token},''));call('community/register',payload,'');assert.throws(()=>call('community/register',payload,''));
- memberToken=A.login(req(),{email,password:input.password});const me=A.currentUser(req(memberToken));memberId=me.id;assert.equal(me.email,email);assert.ok(me.emailVerifiedAt);assert.match(me.username,/^member_/);call('admin/community/accounts',{id:memberId,action:'qualify',checked:true,reason:'确认邮箱测试昵称和本地资格'});assert.ok(!JSON.stringify(call('community/members/'+memberId,{},'','GET')).includes(email));
+ assert.throws(()=>call('community/register',{...input,policyRead:[]},''),e=>e.status===409);
+ assert.throws(()=>call('community/register',{...input,policyHash:'stale'},''),e=>e.status===409);
+ assert.throws(()=>call('community/register',{...input,accepted:false},''),e=>e.status===409);
+ call('community/register',input,'');assert.throws(()=>call('community/register',input,''));
+ memberToken=A.login(req(),{email,password:input.password});const me=A.currentUser(req(memberToken));memberId=me.id;assert.equal(me.email,email);assert.equal(me.emailVerifiedAt,null);assert.equal(me.verification,'accepted');assert.match(me.username,/^member_/);assert.ok(!JSON.stringify(call('community/members/'+memberId,{},'','GET')).includes(email));
+ const reset=await E.requestEmail(req(),{purpose:'reset',email});assert.ok(reset.challenge);assert.equal(D.db().prepare("SELECT COUNT(*) n FROM email_challenges WHERE email=? AND purpose='reset'").get(email).n,0);
+ assert.equal(E.emailAccount(email),null);assert.equal(E.emailClaim(email).actor,memberId);
 });
 test('codes have a five-attempt cap, expiry, replacement and purpose isolation',()=>{
  const scope=D.hash('isolated-invite'),first=E.prepareEmailChallenge('isolated@example.com','register','',scope);E.activateEmailChallenge(first.id);let input={email:'isolated@example.com',challenge:first.id,code:first.code};

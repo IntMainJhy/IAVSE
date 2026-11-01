@@ -42,15 +42,15 @@ try{
  const upload=await json('/api/spaces/uploads/'+task.id+'/complete',{},member),bundle=await json('/api/spaces/blog-bundles',{fileId:upload.file.id},member),preview=await json('/api/spaces/blog-bundles/'+bundle.id+'/preview',{},member);
  assert.equal((await fetch(base+preview.src)).status,200);assert.equal((await fetch(base+'/site-files/'+bundle.id+'/public/index.html')).status,404);
  let mine=await json('/api/spaces/mine',undefined,member);mine=await json('/api/spaces/save',{...mine,layout:{...mine.layout,blog:{mode:'static',theme:'journal',bundleId:bundle.id}},discoverable:true},member);
- const submitted=await json('/api/spaces/submit',{revision:mine.revision,accepted:true},member),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='pending');
- assert.equal((await gallery(member)).has('/blog/'+mine.handle),false,'Pending static sites cannot appear on flying panels or the directory');
+ const submitted=await json('/api/spaces/submit',{revision:mine.revision,accepted:true},member),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='approved');assert.ok(review);assert.equal(submitted.visibility,'public');
+ assert.equal((await gallery(member)).has('/blog/'+mine.handle),true,'Explicitly published static sites appear in discovery');assert.equal((await call('/api/spaces/submit',{revision:mine.revision,accepted:true},member)).status,409,'A stale request cannot repeat publication');
  assert.equal((await call('/api/admin/spaces/blog-preview/'+bundle.id,{},member)).status,403);
  const staffPreview=await json('/api/admin/spaces/blog-preview/'+bundle.id,{},owner);assert.equal((await fetch(base+staffPreview.src)).status,200);
  adminServer=await startServer(directory,3130,1048576,{APP_SURFACE:'admin',PLATFORM_URL:base,ADMIN_URL:'http://127.0.0.1:3130',PLATFORM_LOGIN_MODE:'password'});
  for(const asset of ['/icon.svg','/apple-icon.png','/favicon.ico','/brand/spaceyew-icon.png'])assert.equal((await fetch(adminServer.base+asset,{redirect:'manual'})).status,200,'Admin branding must stay on its own origin: '+asset);
  const adminOwner=await loginServer(adminServer.base),adminPreviewResponse=await fetch(adminServer.base+'/api/admin/spaces/blog-preview/'+bundle.id,{method:'POST',headers:{Origin:adminServer.base,Cookie:adminOwner,'Content-Type':'application/json'},body:'{}'});assert.equal(adminPreviewResponse.status,200);const adminPreview=await adminPreviewResponse.json();assert.equal((await fetch(adminServer.base+adminPreview.src)).status,200,'Admin surface serves isolated previews without redirecting to the platform');
  assert.equal((await call('/api/admin/spaces/reviews',{id:review.id,action:'approve',checked:true,reason:'Cannot approve my own upload'},member)).status,403);
- await json('/api/admin/spaces/reviews',{id:review.id,action:'approve',checked:true,reason:'Checked isolated HTTP hosting fixture'},owner);
+ assert.equal((await call('/api/admin/spaces/reviews',{id:review.id,action:'approve',checked:true,reason:'Already directly published fixture'},owner)).status,409);
  const raw=base+'/site-files/'+bundle.id+'/public/index.html',response=await fetch(raw);
  assert.equal(response.status,200);assert.equal(response.headers.get('x-frame-options'),'SAMEORIGIN');assert.equal(response.headers.get('cross-origin-resource-policy'),'cross-origin');assert.equal(response.headers.get('access-control-allow-origin'),'*');assert.equal(response.headers.get('referrer-policy'),'no-referrer');assert.equal(response.headers.get('cache-control'),'no-store');assert.match(response.headers.get('content-security-policy'),/sandbox allow-scripts/);assert.doesNotMatch(response.headers.get('content-security-policy'),/allow-same-origin/);
  const direct=await fetch(raw,{redirect:'manual',headers:{'sec-fetch-dest':'document'}});assert.equal(direct.status,307);assert.ok(direct.headers.get('location').includes('/blog/'+mine.handle));
@@ -63,14 +63,14 @@ try{
  const profile=await(await fetch(base+'/api/community/members/'+id)).json();assert.equal(profile.blog,'/blog/'+mine.handle);
  const latest=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:latest.revision},member);assert.equal((await fetch(raw)).status,404);
  assert.equal((await gallery()).has('/blog/'+mine.handle),false,'A taken-down static space is removed from discovery');
- // The actual upstream-derived template uses the member's reviewed snapshot, not source-author data.
+ // The actual upstream-derived template uses the member's published snapshot, not source-author data.
  let anx=await json('/api/spaces/mine',undefined,member);
  anx=await json('/api/spaces/save',{...anx,profile:{...anx.profile,name:'Taylor Quinn',intro:'Independent designer building useful tools.',github:'https://github.com/example',skills:['TypeScript','Interface design'],experiences:[{id:randomUUID(),title:'Independent developer',type:'Design & engineering',start:'2024-01',end:'',description:'Building small, thoughtful products.',visible:true,career:true}]},layout:{...anx.layout,blog:{mode:'theme',theme:'anx',bundleId:'',sections:['projects','articles']}}},member);
- let anxReview=await json('/api/spaces/submit',{revision:anx.revision,accepted:true},member);
- assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404,'An unapproved theme stays private');
- assert.equal((await gallery()).has('/blog/'+anx.handle),false,'An unapproved replacement cannot appear in the directory');
- const pendingAnx=anxReview.reviews.find(x=>x.kind==='board'&&x.status==='pending');
- await json('/api/admin/spaces/reviews',{id:pendingAnx.id,action:'approve',checked:true,reason:'Checked Anx template and member-owned data'},owner);
+ assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404,'A saved replacement remains private until the author publishes');
+ assert.equal((await gallery()).has('/blog/'+anx.handle),false,'A private replacement cannot appear in discovery');
+ const anxRelease=await json('/api/spaces/submit',{revision:anx.revision,accepted:true},member);
+ assert.equal(anxRelease.visibility,'public');assert.ok(anxRelease.reviews.some(x=>x.kind==='board'&&x.status==='approved'));assert.equal(anxRelease.reviews.some(x=>x.status==='pending'),false);
+ assert.equal((await fetch(base+'/blog/'+anx.handle)).status,200,'The selected theme publishes directly');
  const ownEntry=await(await fetch(base+'/blog/'+anx.handle,{headers:{Cookie:member}})).text();assert.match(ownEntry,/Taylor Quinn/);
  assert.ok(ownEntry.includes('<link rel="canonical" href="'+base+'/blog/'+anx.handle+'"'));
  assert.match((await gallery(member)).get('/blog/'+anx.handle)||'',/Taylor Quinn/);
@@ -82,8 +82,8 @@ try{
  assert.equal((await fetch(base+'/api/spaces/blog-qr/'+anx.handle)).status,200);
  const changed=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/save',{...changed,profile:{...changed.profile,name:'Unreviewed replacement'}},member);
  const stillReviewed=await(await fetch(base+'/blog/'+anx.handle)).text();assert.match(stillReviewed,/Taylor Quinn/);assert.doesNotMatch(stillReviewed,/Unreviewed replacement/);
- const directoryAfterDraft=await gallery();assert.match(directoryAfterDraft.get('/blog/'+anx.handle)||'',/Taylor Quinn/);assert.doesNotMatch(directoryAfterDraft.get('/blog/'+anx.handle)||'',/Unreviewed replacement/,'Gallery previews use the reviewed snapshot');
- // The directory is stable while the homepage preview follows a selected reviewed author.
+ const directoryAfterDraft=await gallery();assert.match(directoryAfterDraft.get('/blog/'+anx.handle)||'',/Taylor Quinn/);assert.doesNotMatch(directoryAfterDraft.get('/blog/'+anx.handle)||'',/Unreviewed replacement/,'Gallery previews use the published snapshot');
+ // The directory is stable while the homepage preview follows a selected published author.
  function featured(handle){const database=D.db();database.prepare("INSERT OR REPLACE INTO config VALUES('featuredBlog',?)").run(JSON.stringify({handle}));database.close();delete globalThis.__personalSiteDb;}
  featured(anx.handle);
  const selectedGallery=await gallery();assert.deepEqual([...selectedGallery.keys()].sort(),[...directoryAfterDraft.keys()].sort(),'Changing the featured author cannot change directory membership');
@@ -110,5 +110,5 @@ try{
  const ownerCanonical=await(await fetch(base+'/blog/'+ownerHandle)).text();assert.match(ownerCanonical,/data-home-theme="anx"/);assert.doesNotMatch(ownerCanonical,/blog-create-link|homepage-studio/);
  const finalAnx=await json('/api/spaces/mine',undefined,member);await json('/api/spaces/offline',{revision:finalAnx.revision},member);assert.equal((await fetch(base+'/blog/'+anx.handle)).status,404);assert.equal((await fetch(base+'/api/spaces/blog-qr/'+anx.handle)).status,404,'A hidden homepage cannot be shared via QR');assert.equal((await gallery()).has('/blog/'+anx.handle),false,'Taking down the selected author removes that card without taking down the directory');const noFeatured=await(await fetch(base+'/')).text(),emptyPreview=elements(parseDocument(noFeatured)).find(node=>hasClass(node,'v2-hero-showcase'));assert.ok(emptyPreview);assert.ok(elements(emptyPreview).some(node=>hasClass(node,'v2-hero-empty')),'A hidden featured author cannot silently fall back to a different homepage preview');featured('');assert.equal((await fetch(base+'/blogs')).status,200);
  const ownerMine=await json('/api/spaces/mine',undefined,owner);await json('/api/spaces/offline',{revision:ownerMine.revision},owner);assert.equal((await fetch(base+'/blog/'+ownerMine.handle)).status,404,'The owner permalink also respects takedown');assert.equal((await gallery()).size,0,'An empty directory remains usable without inventing a replacement profile');
- console.log('Homepage HTTP checks passed: static isolation, reviewed authored pages, bilingual sharing, full public directory, independent metadata, private/unlisted/restricted/taken-down exclusions and featured homepage selection.');
+ console.log('Homepage HTTP checks passed: static isolation, published authored pages, bilingual sharing, full public directory, independent metadata, private/unlisted/restricted/taken-down exclusions and featured homepage selection.');
 }finally{if(adminServer)await stopServer(adminServer);if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

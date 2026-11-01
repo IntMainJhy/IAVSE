@@ -26,7 +26,7 @@ test('static archives preserve assets and reject traversal, duplicates, symlinks
  assert.throws(()=>unpackBlog(Buffer.from('not html'),'site.html'));
 });
 let bundle;
-test('imports are owned, previews are session-bound, sandboxed, and invisible before approval',async()=>{
+test('imports are owned, previews are session-bound, sandboxed, and invisible before explicit publication',async()=>{
  const source=await upload('alice','site.zip',zip([['index.html',html],['style.css','body {color:navy}']]));
  await assert.rejects(()=>B.blogBundles(req('bob'),['spaces','blog-bundles'],{fileId:source}),error=>error.status===403);
  bundle=await B.blogBundles(req(),['spaces','blog-bundles'],{fileId:source});
@@ -40,14 +40,15 @@ test('imports are owned, previews are session-bound, sandboxed, and invisible be
  d.prepare('DELETE FROM sessions WHERE token=?').run(D.hash(tokens.alice));await assert.rejects(()=>B.blogFileResponse(req('','GET'),bundle.id,access,['index.html']),error=>error.status===404);
  d.prepare('INSERT INTO sessions(token,expires,user_id) VALUES(?,?,?)').run(D.hash(tokens.alice),Date.now()+600000,'alice');
 });
-test('blog settings use fixed reviews, reject foreign bundles, and publication honors takedown and account status',async()=>{
+test('blog settings publish fixed snapshots directly, reject foreign bundles, and publication honors takedown and account status',async()=>{
  const mine=S.mine(req()),layout={...mine.layout,blog:{mode:'static',theme:'journal',bundleId:bundle.id,title:'Authored site'}};
  const bob=S.mine(req('bob'));assert.throws(()=>S.spacesApi(req('bob'),['spaces','save'],{...bob,layout},new URL(req().url)),error=>error.status===403);
  const saved=S.spacesApi(req(),['spaces','save'],{...mine,layout},new URL(req().url));
  assert.deepEqual(saved.layout.nodes,[],'New homepages do not publish old canvas nodes');
  const pending=S.spacesApi(req(),['spaces','submit'],{revision:saved.revision,accepted:true},new URL(req().url));
  assert.throws(()=>S.spacesApi(req(),['admin','spaces','reviews'],{id:pending.reviews[0].id,action:'approve',checked:true,reason:'Checked isolated static site'},new URL(req().url)),error=>error.status===403);
- S.spacesApi(req('owner'),['admin','spaces','reviews'],{id:pending.reviews[0].id,action:'approve',checked:true,reason:'Checked isolated static site'},new URL(req().url));
+ assert.equal(pending.reviews[0].status,'approved');
+ assert.throws(()=>S.spacesApi(req('owner'),['admin','spaces','reviews'],{id:pending.reviews[0].id,action:'approve',checked:true,reason:'Duplicate approval is rejected'},new URL(req().url)),error=>error.status===409);
  assert.equal((await B.blogFileResponse(req('','GET'),bundle.id,'public',['index.html'])).status,200);
  assert.equal(S.canReadSpaceFile(req('','GET'),bundle.file),false,'An approved site must not expose its original source ZIP');
  const published=B.publicBlogBundle(req('','GET'),'alice');assert.equal(published.id,bundle.id);assert.equal(B.staticPage('index.html?color=dark',published),'index.html?color=dark');assert.throws(()=>B.staticPage('../index.html',published));assert.throws(()=>B.staticPage('style.css',published));
@@ -59,13 +60,13 @@ test('blog settings use fixed reviews, reject foreign bundles, and publication h
  d.prepare("UPDATE spaces SET visibility='private' WHERE id=?").run(saved.id);await assert.rejects(()=>B.blogFileResponse(req('','GET'),bundle.id,'public',['index.html']),error=>error.status===404);
  d.prepare("UPDATE spaces SET visibility='public' WHERE id=?").run(saved.id);d.prepare("UPDATE community_users SET status='banned' WHERE id='alice'").run();await assert.rejects(()=>B.blogFileResponse(req('','GET'),bundle.id,'public',['index.html']),error=>error.status===404);
 });
-test('new signature themes retain reviewed snapshots and cannot publish draft theme changes',()=>{
+test('new signature themes retain published snapshots and cannot publish draft theme changes',()=>{
  d.prepare("UPDATE community_users SET status='active' WHERE id='alice'").run();
  for(const theme of ['anx','folio','panorama']){
   const mine=S.mine(req()),saved=S.spacesApi(req(),['spaces','save'],{...mine,layout:{...mine.layout,blog:{mode:'theme',theme,bundleId:'',title:'My reviewed blog',sections:['articles']}}},new URL(req().url));
-  const pending=S.spacesApi(req(),['spaces','submit'],{revision:saved.revision,accepted:true},new URL(req().url)),review=pending.reviews.find(row=>row.kind==='board'&&row.status==='pending');
+  const pending=S.spacesApi(req(),['spaces','submit'],{revision:saved.revision,accepted:true},new URL(req().url)),review=pending.reviews.find(row=>row.kind==='board'&&row.version===saved.revision&&row.status==='approved');assert.ok(review);
   S.spacesApi(req(),['spaces','save'],{...pending,layout:{...pending.layout,blog:{...pending.layout.blog,theme:'minimal',title:'Private changed title'}}},new URL(req().url));
-  S.spacesApi(req('owner'),['admin','spaces','reviews'],{id:review.id,action:'approve',checked:true,reason:'Checked new theme snapshot'},new URL(req().url));
+  assert.equal(review.status,'approved','Theme publishes before any administrator action');
   const visible=S.publicSpace(req('','GET'),'alice');assert.equal(visible.layout.blog.theme,theme);assert.equal(visible.layout.blog.title,'My reviewed blog');assert.equal(S.mine(req()).layout.blog.title,'Private changed title');
  }
 });

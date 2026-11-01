@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {chapterFixture} from './home-chapter-fixture.mjs';
 import * as three from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
@@ -18,6 +19,7 @@ async function sculpture({revision=three.REVISION,running=true,interactive=true,
  const exports={};
  vm.runInNewContext(source,{exports,AbortController,queueMicrotask,fetch:async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}),require:name=>{
   if(name==='react')return React;
+  if(name==='./useHomeChapterActive')return {useHomeChapterActive:()=>true};
   if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};
   if(name==='@react-three/fiber')return{Canvas:()=>null,useFrame:fn=>frames.push(fn),useThree:()=>({gl,scene,camera:new three.PerspectiveCamera(),invalidate:()=>invalidations++})};
   if(name==='three')return{...three,REVISION:revision,PMREMGenerator:PMREM,TextureLoader};
@@ -64,8 +66,8 @@ test('paused and reduced resource scenes are demand-rendered and cleanup release
  }
 });
 
-function mediaControls({reduced=false,savedReduced=false}={}){
- const hooks=[],observers=[],events=new Map(),systemEvents=new Set(),exports={},host={},Canvas=()=>null;
+function mediaControls({reduced=false,savedReduced=false,inactive=false}={}){
+ const hooks=[],observers=[],events=new Map(),systemEvents=new Set(),exports={},Canvas=()=>null;
  const add=(type,fn)=>{const set=events.get(type)||new Set();set.add(fn);events.set(type,set);},remove=(type,fn)=>events.get(type)?.delete(fn);
  const preference={matches:reduced,addEventListener:(type,fn)=>systemEvents.add(fn),removeEventListener:(type,fn)=>systemEvents.delete(fn)};
  const window={localStorage:{getItem:()=>savedReduced?'reduce':null},addEventListener:add,removeEventListener:remove},document={hidden:false,addEventListener:add,removeEventListener:remove};
@@ -75,9 +77,10 @@ function mediaControls({reduced=false,savedReduced=false}={}){
   useState:initial=>{const index=cursor++,state=hooks[index]||={kind:'state',value:initial};return[state.value,next=>{const value=typeof next==='function'?next(state.value):next;if(!Object.is(value,state.value)){state.value=value;dirty=true;}}];},
   useEffect:(callback,deps)=>{const index=cursor++,effect=hooks[index]||={kind:'effect'};if(!effect.deps||deps.some((value,index)=>!Object.is(value,effect.deps[index])))pending.push(()=>{effect.cleanup?.();effect.deps=deps;effect.cleanup=callback();});}
  };
+ const chapter=chapterFixture(React,{inactive}),host=chapter.host;
  class IntersectionObserver{constructor(callback,options){this.callback=callback;this.options=options;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}}
  vm.runInNewContext(source,{exports,window,document,matchMedia:()=>preference,IntersectionObserver,require:name=>{
-  if(name==='react')return React;if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};if(name.endsWith('.css'))return{};throw Error('Unexpected eager dependency '+name);
+  if(name==='react')return React;if(name==='./useHomeChapterActive')return chapter.module;if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};if(name.endsWith('.css'))return{};throw Error('Unexpected eager dependency '+name);
  }});
  const nodes=(type,node=tree)=>!node||typeof node!=='object'?[]:[...(node.type===type?[node]:[]),...[node.props?.children].flat(Infinity).flatMap(child=>child?nodes(type,child):[])];
  function flush(){
@@ -88,7 +91,7 @@ function mediaControls({reduced=false,savedReduced=false}={}){
   assert.equal(dirty,false,'media controls settle without a render loop');
  }
  const emit=(name,event={})=>{for(const callback of events.get(name)||[])callback(event);flush();};flush();
- return{nodes,events,systemEvents,observers,get tree(){return tree;},get canvas(){return nodes(Canvas)[0];},
+ return{nodes,events,systemEvents,observers,chapter,active:value=>{chapter.activate(value);flush();},get tree(){return tree;},get canvas(){return nodes(Canvas)[0];},
   nearby:value=>{observers[0].callback([{isIntersecting:value}]);flush();},visible:value=>{observers[1].callback([{isIntersecting:value}]);flush();},
   control:(action,value)=>emit('iavse-scene-control',{detail:{action,value}}),printing:value=>emit(value?'beforeprint':'afterprint'),
   systemEvent:value=>{for(const callback of systemEvents)callback({matches:value});flush();},
@@ -118,4 +121,14 @@ test('resource replay restarts its optical clock on the existing scene',async()=
  const s=await sculpture();for(let index=0;index<60;index++)s.tick(1/60);assert.ok(s.wall.material.uniforms.uTime.value>.9);
  const geometryVersion=s.particles.geometry.getAttribute('position').version;s.interaction.current.replay++;s.tick(1/60);
  assert.ok(s.wall.material.uniforms.uTime.value<.02);assert.equal(s.particles.geometry.getAttribute('position').version,geometryVersion,'replay changes state, not the particle buffer or scene');s.cleanup();
+});
+
+test('inactive sticky resource chapters neither initialize Fiber nor keep a loaded renderer ticking',()=>{
+ const s=mediaControls({inactive:true});s.nearby(true);s.visible(true);assert.equal(s.canvas,undefined);
+ s.active(true);assert.equal(s.canvas.props.running,true);s.ready();const interaction=s.canvas.props.interaction;
+ s.active(false);assert.equal(s.canvas.props.running,false);assert.equal(s.canvas.props.interactive,false);
+ s.control('paused',false);s.visible(true);assert.equal(s.canvas.props.running,false);
+ s.active(true);assert.equal(s.canvas.props.running,true);assert.equal(s.canvas.props.interaction,interaction);
+ s.toggle();s.active(false);s.active(true);assert.equal(s.canvas.props.running,false);
+ s.unmount();assert.ok(s.chapter.observers.every(observer=>observer.disconnected));
 });

@@ -11,21 +11,21 @@ const d=D.db(),users=['alice','bravo'].map(name=>{const token=randomUUID();d.pre
 const req=(token='',method='GET',base=process.env.PUBLIC_URL)=>new Request(base+'/api/spaces/mine',{method,headers:{Cookie:'site_admin='+token,Origin:base}});
 const select=handle=>d.prepare("INSERT OR REPLACE INTO config VALUES('featuredBlog',?)").run(JSON.stringify({handle}));
 let alice;
-test('default blog selection preserves the owner fallback and publishes only the selected reviewed member snapshot',()=>{
+test('default blog selection preserves the owner fallback and publishes only the selected published member snapshot',()=>{
  const original=S.defaultBlogSpace(req());assert.equal(original.owner,'owner');
  alice=S.mine(req(users[0].token));
- alice=S.spacesApi(req(users[0].token,'POST'),['spaces','save'],{...alice,profile:{...alice.profile,name:'Reviewed member profile'},layout:{...alice.layout,blog:{mode:'theme',theme:'anx',sections:[]}}},null);
+ alice=S.spacesApi(req(users[0].token,'POST'),['spaces','save'],{...alice,profile:{...alice.profile,name:'Published member profile'},layout:{...alice.layout,blog:{mode:'theme',theme:'anx',sections:[]}}},null);
  select(alice.handle);assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404,'An unpublished selection cannot fall back to owner content');
- const submitted=S.spacesApi(req(users[0].token,'POST'),['spaces','submit'],{revision:alice.revision,accepted:true},null),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='pending');
- S.spacesApi(req(owner,'POST'),['admin','spaces'],{id:review.id,action:'approve',checked:true,reason:'Reviewed isolated homepage selection'},null);
- assert.equal(S.defaultBlogSpace(req()).owner,users[0].id);assert.equal(S.defaultBlogSpace(req()).profile.name,'Reviewed member profile');
+ const submitted=S.spacesApi(req(users[0].token,'POST'),['spaces','submit'],{revision:alice.revision,accepted:true},null);
+ assert.equal(submitted.visibility,'public');assert.ok(submitted.reviews.some(x=>x.kind==='board'&&x.status==='approved'));assert.equal(submitted.reviews.some(x=>x.kind==='board'&&x.status==='pending'),false);
+ assert.equal(S.defaultBlogSpace(req()).owner,users[0].id);assert.equal(S.defaultBlogSpace(req()).profile.name,'Published member profile');
  const latest=S.mine(req(users[0].token));S.spacesApi(req(users[0].token,'POST'),['spaces','save'],{...latest,profile:{...latest.profile,name:'Private revised profile'}},null);
- assert.equal(S.defaultBlogSpace(req(users[1].token)).profile.name,'Reviewed member profile','The visitor session and private edits cannot replace the selected public version');
+ assert.equal(S.defaultBlogSpace(req(users[1].token)).profile.name,'Published member profile','The visitor session and private edits cannot replace the selected public version');
  assert.throws(()=>S.defaultBlogSpace(req('','GET','https://public.example')),e=>e.status===404,'Selection must honor the existing public-host restriction');
  select('missing-homepage');assert.throws(()=>S.defaultBlogSpace(req()),e=>e.status===404);
  select('');assert.equal(S.defaultBlogSpace(req()).owner,'owner');
 });
-test('blog entry distinguishes the visitor’s reviewed homepage from the public example',()=>{
+test('blog entry distinguishes the visitor’s published homepage from the public example',()=>{
  select('');
  assert.equal(S.blogEntry(req()).example,true);
  assert.equal(S.blogEntry(req(owner)).example,false);
@@ -33,12 +33,12 @@ test('blog entry distinguishes the visitor’s reviewed homepage from the public
  assert.equal(S.blogEntry(req(users[1].token)).space.owner,'owner');
  assert.equal(S.blogEntry(req(users[1].token)).example,true);
  assert.equal(d.prepare('SELECT COUNT(*) n FROM spaces').get().n,count,'Viewing an example must not create a homepage');
- const own=S.blogEntry(req(users[0].token));assert.equal(own.example,false);assert.equal(own.space.owner,users[0].id);assert.equal(own.space.profile.name,'Reviewed member profile');
+ const own=S.blogEntry(req(users[0].token));assert.equal(own.example,false);assert.equal(own.space.owner,users[0].id);assert.equal(own.space.profile.name,'Published member profile');
  let bravo=S.mine(req(users[1].token));
  bravo=S.spacesApi(req(users[1].token,'POST'),['spaces','save'],{...bravo,profile:{...bravo.profile,name:'Private Bravo draft'}},null);
  const example=S.blogEntry(req(users[1].token));assert.equal(example.example,true);assert.equal(example.space.owner,'owner');assert.notEqual(example.space.profile.name,'Private Bravo draft');
- const submitted=S.spacesApi(req(users[1].token,'POST'),['spaces','submit'],{revision:bravo.revision,accepted:true},null),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='pending');
- S.spacesApi(req(owner,'POST'),['admin','spaces'],{id:review.id,action:'approve',checked:true,reason:'Reviewed second member entry'},null);
+ const submitted=S.spacesApi(req(users[1].token,'POST'),['spaces','submit'],{revision:bravo.revision,accepted:true},null);
+ assert.equal(submitted.visibility,'public');assert.equal(submitted.reviews.some(x=>x.kind==='board'&&x.status==='pending'),false);
  select(alice.handle);
  assert.equal(S.blogEntry(req(users[1].token)).space.owner,users[1].id,'A published member sees their own page instead of the featured author');
  assert.equal(S.blogEntry(req(users[1].token)).example,false);

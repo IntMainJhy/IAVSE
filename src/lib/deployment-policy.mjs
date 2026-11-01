@@ -17,6 +17,6 @@ export function serviceRequest(req){
  }catch{return false}
 }
 
-// An email address or the historical local-test flag is not identity verification.
-// A production verification is recorded separately by an authorized administrator.
-export function publishingQualified(user,req){return !!user&&user.status==='active'&&!!req&&serviceRequest(req)&&(user.role==='owner'||user.verification==='verified'||localRequest(req)&&user.verification==='local_test')}
+// Policy acceptance grants publishing access, not verified email or identity status.
+// Historical local-test privileges remain limited to a loopback deployment.
+export function publishingQualified(user,req){return !!user&&user.status==='active'&&!!req&&serviceRequest(req)&&(user.role==='owner'||user.verification==='verified'||user.verification==='accepted'||localRequest(req)&&user.verification==='local_test')}

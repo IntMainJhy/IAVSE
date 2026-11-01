@@ -1,4 +1,5 @@
 'use client';
+import {useHomeChapterActive} from './useHomeChapterActive';
 
 import {useEffect,useRef,useState} from 'react';
 import {Icon} from './Icons';
@@ -6,6 +7,7 @@ import {Icon} from './Icons';
 /** A recording of the actual public Skill directory, loaded only beside the viewport. */
 export function HomeStoryVideo({src,poster,label,pauseLabel,playLabel}:{src:string;poster:string;label:string;pauseLabel:string;playLabel:string}){
  const host=useRef<HTMLDivElement>(null),video=useRef<HTMLVideoElement>(null);
+ const chapterActive=useHomeChapterActive(host);
  const [enabled,setEnabled]=useState(false),[nearby,setNearby]=useState(false),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[paused,setPaused]=useState(false),[globalPaused,setGlobalPaused]=useState(false),[printing,setPrinting]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false);
  useEffect(()=>{
   const element=host.current;if(!element)return;
@@ -20,12 +22,12 @@ export function HomeStoryVideo({src,poster,label,pauseLabel,playLabel}:{src:stri
  },[]);
  // Once prepared, retain the same media element across motion toggles. A quiet
  // initial visit only needs the poster and never requests the recording.
- useEffect(()=>{if(nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[nearby,reduced,hidden,printing,globalPaused]);
+ useEffect(()=>{if(chapterActive&&nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[chapterActive,nearby,reduced,hidden,printing,globalPaused]);
  useEffect(()=>{
   const element=video.current;if(!element)return;
-  if(enabled&&visible&&!hidden&&!reduced&&!paused&&!globalPaused&&!printing&&!failed){void element.play().catch(()=>{});}else element.pause();
+  if(chapterActive&&enabled&&visible&&!hidden&&!reduced&&!paused&&!globalPaused&&!printing&&!failed){void element.play().catch(()=>{});}else element.pause();
   return()=>element.pause();
- },[enabled,visible,hidden,reduced,paused,globalPaused,printing,failed]);
+ },[chapterActive,enabled,visible,hidden,reduced,paused,globalPaused,printing,failed]);
  return <div ref={host} className="home-story-video" data-ready={ready&&!failed&&!reduced&&!printing?'true':'false'}>
   <img src={poster} alt={label} width={1200} height={900} loading="lazy" decoding="async"/>
   {enabled&&!failed&&<video ref={video} src={src} poster={poster} muted loop playsInline preload="metadata" aria-hidden="true" onLoadedData={()=>setReady(true)} onError={()=>setFailed(true)}/>}

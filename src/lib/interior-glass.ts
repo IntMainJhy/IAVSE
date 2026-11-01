@@ -5,7 +5,7 @@ import {interiorModels} from './interior-scene.mjs';
 import type {HomeGlassScene} from './home-glass';
 
 export type InteriorScene=keyof typeof interiorModels;
-const palette=['#7298c2','#87accf','#c3d4e3','#e8e8e8'];
+const palette=['#96b5df','#bed1ec','#e8eff9','#f4f7fb'];
 const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
 // Keep the native RGB volume rays and roughness LOD, using one hardware-filtered
 // sample per channel rather than r187's eight-fetch bicubic reconstruction.

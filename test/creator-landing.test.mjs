@@ -54,7 +54,7 @@ test('hidden résumé projects stay out of the landing and published documents p
 test('large feature rows alternate real media while keeping public navigation independent of renderers',async()=>{
  const html=await render(space,'en');
  assert.deepEqual(Array.from(html.matchAll(/data-home-story="([^"]+)" data-home-side="([^"]+)"/g),match=>[match[1],match[2]]),[['blog','left'],['editor','right'],['skills','left'],['resources','right']]);
- for(const src of ['/media/home/blog-space.webp','/media/home/skills-poster.webp','/media/home/resources.webp'])assert.ok(html.includes('src="'+src+'"'),src+' supplies real imagery');
+ for(const src of ['/media/home/blog-space-current.webp','/media/home/skills-poster.webp','/media/home/resources.webp'])assert.ok(html.includes('src="'+src+'"'),src+' supplies real imagery');
  assert.ok(html.includes('data-video-src="/media/home/skills-loop.mp4"'));
  const noMedia=await render(space,'en',false);
  assert.ok(html.includes('data-editor-demo="true" data-locale="en"'));

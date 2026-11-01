@@ -2,9 +2,9 @@
 
 [English project introduction](../README.md) · [中文项目介绍](../README.zh-CN.md)
 
-SpaceYew combines editable developer blog homepages with shared docs, independent AI Skills and useful resources. The code is source-available for reading and study; other use, including deployment, requires written permission under [LICENSE](../LICENSE).
+SpaceYew combines editable developer blog homepages with shared docs, independent AI Skills and useful resources. Original website code is source-available under [PolyForm Noncommercial 1.0.0](../LICENSE), permitting noncommercial use, modification, deployment and redistribution within its terms. See [NOTICE](../NOTICE) for attribution and scope.
 
-SpaceYew 将可编辑的开发者博客主页与共享文档、独立 AI Skill、实用资源连接起来。源码仅供阅读学习，包括部署在内的其他使用须按 [LICENSE](../LICENSE) 事先取得书面许可。
+SpaceYew 将可编辑的开发者博客主页与共享文档、独立 AI Skill、实用资源连接起来。网站原创源码按 [PolyForm Noncommercial 1.0.0](../LICENSE) 允许非商业使用、修改、部署和再分发，署名与范围见 [NOTICE](../NOTICE)。
 
 ## Read and create / 阅读与创作
 
@@ -39,7 +39,7 @@ Public registration and production publishing remain gated. Local rule screening
 
 Use this concise bilingual description for the repository About field:
 
-> Developer blog homepages, docs, AI Skills and shared resources. 开发者博客与知识共享社区。Next.js / React / SQLite. Website source for study only; use and deployment require written permission.
+> Developer blog homepages, docs, AI Skills and shared resources. 开发者博客与知识共享社区。Next.js / React / SQLite. Source available under PolyForm Noncommercial 1.0.0. 源码公开，限非商业用途。
 
 Suggested topics: `nextjs`, `react`, `typescript`, `sqlite`, `portfolio`, `developer-community`, `agent-skills`, `mcp`, `source-available`.
 
