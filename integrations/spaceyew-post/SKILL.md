@@ -1,6 +1,6 @@
 ---
 name: spaceyew-post
-description: Create documents, Skills and useful resources in Folivo, or save personal-library/community drafts. Submit when the user requests publishing; platform moderation decides whether publication is immediate or pending. Uses scoped credentials and automatically shares approved catalog entries to community.
+description: Create documents, Skills and useful resources in IAVSE, or save personal-library/community drafts. Submit when the user requests publishing; platform moderation decides whether publication is immediate or pending. Uses scoped credentials and automatically shares approved catalog entries to community.
 ---
 Use the user's configured `SPACEYEW_URL` and `SPACEYEW_TOKEN`. Credentials belong in the client's private environment, never in this skill, generated content, logs, query strings or screenshots. If credentials are missing, ask the account owner to configure a scoped local credential using the credential-setup section in the reference. The legacy Connect page currently redirects to the blog editor. Do not create credentials on the user's behalf or use an administrator password as a substitute for a token.
 

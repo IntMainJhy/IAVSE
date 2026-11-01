@@ -10,7 +10,7 @@ const categoryLabels={
 export function catalogCategoryLabel(category=''){
  return Object.hasOwn(categoryLabels,category)?categoryLabels[category]:category;
 }
-export function catalogCoverUrl(kind='docs',title='Folivo',category=''){
+export function catalogCoverUrl(kind='docs',title='IAVSE',category=''){
  return '/api/covers?'+new URLSearchParams({kind,title,category,v:'2'});
 }
 export function catalogEditorUrl(kind,id=''){

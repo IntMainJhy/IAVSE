@@ -56,7 +56,7 @@ function save(user,input){return transaction(d=>{unpaused();const row=input.id?o
 function share(row,value,reviewer,reason){
  const d=db(),id=row.community_post||randomUUID(),revision=randomUUID(),absolute=new URL(catalogUrl(row.kind,row.id),process.env.PLATFORM_URL||process.env.PUBLIC_URL||'http://localhost:3008').href;
  const category=row.kind==='docs'?'技术笔记':row.kind==='skills'?'开发资源':'实用网站';
- const payload={title:value.title,summary:value.summary,body:value.summary+'\n\n'+absolute,category,tags:[],sourceName:row.kind==='docs'?'Folivo · 文档':row.kind==='skills'?'Folivo · Skill':'Folivo · 其他资源',sourceUrl:absolute,url:absolute,license:value.license,basis:'original',coverId:value.coverId,coverAlt:value.coverAlt,note:'',catalogId:row.id,catalogKind:row.kind,catalogUrl:catalogUrl(row.kind,row.id)};
+ const payload={title:value.title,summary:value.summary,body:value.summary+'\n\n'+absolute,category,tags:[],sourceName:row.kind==='docs'?'IAVSE · 文档':row.kind==='skills'?'IAVSE · Skill':'IAVSE · 其他资源',sourceUrl:absolute,url:absolute,license:value.license,basis:'original',coverId:value.coverId,coverAlt:value.coverAlt,note:'',catalogId:row.id,catalogKind:row.kind,catalogUrl:catalogUrl(row.kind,row.id)};
  if(!row.community_post)d.prepare('INSERT INTO community_posts(id,author,created,updated) VALUES(?,?,?,?)').run(id,row.author,now(),now());
  const number=d.prepare('SELECT COALESCE(MAX(number),0)+1 n FROM community_revisions WHERE post=?').get(id).n;
  d.prepare("INSERT INTO community_revisions(id,post,number,data,status,reason,reviewer,created,decided) VALUES(?,?,?,?,'approved',?,?,?,?)").run(revision,id,number,JSON.stringify(payload),reason,reviewer,now(),now());

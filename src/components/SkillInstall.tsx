@@ -13,7 +13,7 @@ export function SkillInstall({baseUrl,animated=true}:{baseUrl:string;animated?:b
   if(stopped){typed.current.textContent=command;return;}
   return mountSkillTypewriter(root.current,typed.current,command);
  },[command,stopped]);
- return <div className="skill-install" ref={root} role="group" aria-label={t('安装 Folivo Skill')}>
+ return <div className="skill-install" ref={root} role="group" aria-label={t('安装 IAVSE Skill')}>
   <pre tabIndex={0} aria-label={t('Skill 安装代码')} onFocus={()=>setReading(true)} onBlur={()=>setReading(false)} onPointerDown={()=>setReading(true)}><code className="skill-install-code"><span className="skill-install-measure" aria-hidden="true">{command}<span className="skill-install-caret"/></span><span className="skill-install-typing" aria-hidden="true"><span ref={typed}>{command}</span><span className="skill-install-caret"/></span><span className="community-sr">{command}</span></code></pre>
   <button type="button" onClick={async()=>{
    try{await navigator.clipboard.writeText(command);setStatus('copied');}

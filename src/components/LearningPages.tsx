@@ -16,7 +16,7 @@ import {SkillCatalog} from './SkillCatalog';
 
 export async function DocsPage({path,query={}}:{path:string[];query?:Record<string,string|string[]|undefined>}){
  const {t,locale}=await serverI18n(),slug=path[1]||'',guide=guides.find(item=>item.slug===slug);
- const articles=publicContent('articles').map((item:any)=>({...localizeContent(item,locale),url:'/docs/articles/'+encodeURIComponent(item.slug),authorName:'Folivo',category:item.category||'开发教程'}));
+ const articles=publicContent('articles').map((item:any)=>({...localizeContent(item,locale),url:'/docs/articles/'+encodeURIComponent(item.slug),authorName:'IAVSE',category:item.category||'开发教程'}));
  const article=path[1]==='articles'?articles.find((item:any)=>item.slug===path[2]):null;
  if(path.length>2&&!article||slug&&!guide&&slug!=='connect'&&!article)notFound();
  if(!slug){const members=publicCatalog({kind:'docs'},new Request(process.env.PUBLIC_URL||'http://localhost:3008',{headers:await headers()})).items,category=String(query.category||''),q=String(query.q||'');
@@ -26,14 +26,14 @@ export async function DocsPage({path,query={}}:{path:string[];query?:Record<stri
  }
  if(guide)return <DocumentReader title={t(guide.title)} summary={t(guide.summary)} path={'/docs/'+guide.slug} headings={guide.sections.map((section,index)=>({id:'doc-section-'+index,text:t(section.title),level:2}))}>{guide.sections.map((section,index)=><section id={'doc-section-'+index} key={section.title}><h2>{t(section.title)}</h2><p>{t(section.text)}</p>{section.href&&<Link className="space-link" href={section.href}>{t(section.action)}<Icon name="link"/></Link>}</section>)}</DocumentReader>;
  if(article){const parsed=documentOutline(article.bodyHtml);return <DocumentReader title={article.title} summary={article.summary} path={article.url} headings={parsed.headings} coverId={article.coverId}><div dangerouslySetInnerHTML={{__html:parsed.body}}/></DocumentReader>}
- return <DocumentReader title="Folivo Connect" path="/docs/connect" headings={[{id:'connect-publish',text:t('用 AI 发布'),level:2},{id:'connect-mcp',text:'MCP',level:2}]}><ConnectDocs/></DocumentReader>;
+ return <DocumentReader title="IAVSE Connect" path="/docs/connect" headings={[{id:'connect-publish',text:t('用 AI 发布'),level:2},{id:'connect-mcp',text:'MCP',level:2}]}><ConnectDocs/></DocumentReader>;
 }
 
 export async function SkillsPage({baseUrl,query={}}:{baseUrl:string,query?:Record<string,string|string[]|undefined>}){
  const {t}=await serverI18n();
  return <div className="skills-page"><header className="catalog-page-heading"><div><h1>{t('第三方 Skill 精选')}</h1><p>{t('精选独立维护的 Skill，不重复列出 AI 工具自带的功能。')}</p></div><Link className="space-btn primary" href="/skills?compose=1">{t('分享 Skill')}</Link></header>
   <SkillCatalog query={query}><MemberCatalog kind="skills" query={query}/></SkillCatalog>
-  <div className="skill-platform-heading"><h2>{t('连接 Folivo')}</h2><p>{t('把重复的整理，交给熟悉你工作流的工具。')}</p></div>
+  <div className="skill-platform-heading"><h2>{t('连接 IAVSE')}</h2><p>{t('把重复的整理，交给熟悉你工作流的工具。')}</p></div>
   <article className="skill-feature"><div className="skill-feature-copy"><h2>spaceyew-post</h2><p>{t('让 AI 直接发布文档、Skill 和其他资源。')}</p><p className="learning-muted">{t('可保存草稿，或在你的明确授权下提交发布。审核通过后自动分享到社区。')}</p><div className="space-actions"><a className="space-btn primary" href="/skills/spaceyew-post.tar.gz" download>{t('下载 Skill')}</a><Link className="space-link" href="/docs/connect">{t('阅读接入文档')}</Link></div></div>
    <div className="skill-setup"><h3>{t('安装到本地工具')}</h3><SkillInstall baseUrl={baseUrl} animated={false}/><p>{t('安装后，在你的工具私密配置中设置网站地址和独立授权凭据。')}</p><Link className="space-link" href="/workspace/connect">{t('管理工具授权')}</Link></div>
   </article>

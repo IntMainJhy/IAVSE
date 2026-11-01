@@ -1,8 +1,12 @@
-# SpaceYew
+# IAVSE
 
 [English](README.md) | **简体中文**
 
-**让做过的事，成为被看见的你。**
+**以洞察驱动智能，以敏锐发现机遇，以行动实现进化。**
+
+INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE
+
+Insight through AI. Vigilance for Opportunity. Seize to Evolve.
 
 SpaceYew 是面向开发者的博客主页与知识共享平台。将简历整理成可编辑的个人主页，展示经历、作品与证书；通过社区分享教程、独立 AI Skill 和实用工具。每个成员独立管理自己的资料、草稿和上传文件。
 

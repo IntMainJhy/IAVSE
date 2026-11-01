@@ -1,8 +1,8 @@
 const xml = value => String(value).replace(/[<>&"']/g, char => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[char]));
-export function catalogCover({kind='docs',title='Folivo',category=''}={}) {
+export function catalogCover({kind='docs',title='IAVSE',category=''}={}) {
  const label=String(title).replace(/[\x00-\x1f]/g,'').slice(0,90), type=['docs','skills','resources'].includes(kind)?kind:'docs';
  const palettes={docs:['#f2f2f2','#171717','#aaa'],skills:['#eaeaea','#171717','#999'],resources:['#f6f6f6','#171717','#b3b3b3']},[bg,ink,accent]=palettes[type];
- const lines=label.match(/.{1,20}/gu)?.slice(0,3)||['Folivo'];
+ const lines=label.match(/.{1,20}/gu)?.slice(0,3)||['IAVSE'];
  const motif=type==='docs'?'<path d="M500 50h160v160H500zM530 90h100M530 115h100M530 140h70"/>':type==='skills'?'<path d="m535 60-50 60 50 60m80-120 50 60-50 60m-35-140-25 160"/>':'<circle cx="558" cy="120" r="65"/><circle cx="615" cy="120" r="65"/>';
  return `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450"><rect width="800" height="450" fill="${bg}"/><g fill="none" stroke="${accent}" stroke-width="3">${motif}</g><path d="M44 58h300M44 370h712" stroke="${ink}" stroke-opacity=".25"/><text x="44" y="98" fill="${ink}" font-family="Georgia,serif" font-size="15" letter-spacing="3">${type.toUpperCase()} / FOLIVO</text><g fill="${ink}" font-family="Baskerville,Songti SC,Noto Serif CJK SC,serif" font-size="38">${lines.map((line,i)=>`<text x="44" y="${208+i*49}">${xml(line)}</text>`).join('')}</g><text x="44" y="408" fill="${ink}" font-family="Georgia,Songti SC,serif" font-size="17">${xml(String(category).slice(0,42))}</text><circle cx="739" cy="404" r="9" fill="${ink}"/></svg>`;
 }

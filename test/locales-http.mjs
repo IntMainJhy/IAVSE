@@ -19,6 +19,6 @@ for(const locale of ['en','zh','ja']){
  const adminResponse=await fetch(base+'/admin',{headers:{Cookie:`site-locale=${locale}`}});assert.equal(adminResponse.status,200);
  const admin=await adminResponse.text(),destination=new URL(adminResponse.url),unified=destination.pathname==='/login';
  if(unified)assert.equal(destination.searchParams.get('next'),'/admin','unified sign-in retains the requested management destination');
- assert.ok(admin.includes(translate(locale,unified?'登录 Folivo':'登录管理后台')),'admin sign-in language');
+ assert.ok(admin.includes(translate(locale,unified?'登录 IAVSE':'登录管理后台')),'admin sign-in language');
 }
 console.log('PASS: three languages across public collection headings, resource hub labels/filters and admin sign-in, server html.lang and original category values.');

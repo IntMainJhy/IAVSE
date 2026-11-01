@@ -1,4 +1,4 @@
-# Folivo integration
+# IAVSE integration
 
 POST `/api/connect` with `Authorization: Bearer <configured token>` and JSON:
 

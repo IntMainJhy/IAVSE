@@ -7395,9 +7395,9 @@
     "Open web app",
     "Web版を開く"
   ],
-  "登录 Folivo": [
-    "Log in to Folivo",
-    "Folivo にログイン"
+  "登录 IAVSE": [
+    "Log in to IAVSE",
+    "IAVSE にログイン"
   ],
   "邮箱或账号": [
     "Email or username",
@@ -7455,17 +7455,17 @@
     "Résumé",
     "履歴書"
   ],
-  "欢迎来到 Folivo。一个分享发现、展示作品、记录成长的地方，让每一份积累，都成为你的表达。": [
-    "Welcome to Folivo. A place to share discoveries, showcase your work and capture your growth. Bring everything you create and learn into a space that feels like you.",
-    "Folivoへようこそ。発見を分かち合い、作品を紹介し、成長を記録する場所。積み重ねてきた一つひとつを、あなたらしい表現に。"
+  "欢迎来到 IAVSE。一个分享发现、展示作品、记录成长的地方，让每一份积累，都成为你的表达。": [
+    "Welcome to IAVSE. A place to share discoveries, showcase your work and capture your growth. Bring everything you create and learn into a space that feels like you.",
+    "IAVSEへようこそ。発見を分かち合い、作品を紹介し、成長を記録する場所。積み重ねてきた一つひとつを、あなたらしい表現に。"
   ],
   "探索社区": [
     "Explore the community",
     "コミュニティを見てみる"
   ],
-  "了解 Folivo": [
-    "Discover Folivo",
-    "Folivoについて"
+  "了解 IAVSE": [
+    "Discover IAVSE",
+    "IAVSEについて"
   ],
   "分享发现，": [
     "Share what you find.",
@@ -7543,9 +7543,9 @@
     "Browse the community",
     "まずはコミュニティを見てみる"
   ],
-  "探索 Folivo 的功能": [
-    "Explore Folivo’s features",
-    "Folivoでできること"
+  "探索 IAVSE 的功能": [
+    "Explore IAVSE’s features",
+    "IAVSEでできること"
   ],
   "在社区，": [
     "Find fresh inspiration",
@@ -7671,9 +7671,9 @@
     "Bring your skills, experience, and work together in a résumé you can share and print.",
     "スキル・経験・作品をまとめて、共有・印刷できる履歴書に。"
   ],
-  "安装 Folivo Skill": [
-    "Install Folivo Skill",
-    "Folivo Skill をインストール"
+  "安装 IAVSE Skill": [
+    "Install IAVSE Skill",
+    "IAVSE Skill をインストール"
   ],
   "复制安装代码": [
     "Copy install command",
@@ -8407,9 +8407,9 @@
     "Documentation overview",
     "ドキュメント一覧"
   ],
-  "开始使用 Folivo": [
-    "Get started with Folivo",
-    "Folivo を使い始める"
+  "开始使用 IAVSE": [
+    "Get started with IAVSE",
+    "IAVSE を使い始める"
   ],
   "从登录账号到找到自己的工作台。": [
     "Sign in and find your workspace.",
@@ -8631,9 +8631,9 @@
     "Give routine organizing to tools that understand your workflow.",
     "繰り返す整理作業を、ワークフローを理解するツールに。"
   ],
-  "让支持 Skill 的 AI 工具，把你的项目、文章和资源整理成 Folivo 草稿。": [
-    "Use a Skill-compatible AI tool to turn your projects, articles and resources into Folivo drafts.",
-    "Skill 対応の AI ツールで、プロジェクト、記事、リソースを Folivo の下書きに整理します。"
+  "让支持 Skill 的 AI 工具，把你的项目、文章和资源整理成 IAVSE 草稿。": [
+    "Use a Skill-compatible AI tool to turn your projects, articles and resources into IAVSE drafts.",
+    "Skill 対応の AI ツールで、プロジェクト、記事、リソースを IAVSE の下書きに整理します。"
   ],
   "默认保存草稿；只有明确确认后才提交审核，不会直接公开。": [
     "Saves drafts by default. Submission requires explicit confirmation and review before publication.",
@@ -9227,9 +9227,9 @@
     "Dark tones and monospace type for your skills and work.",
     "ダークカラーと等幅フォントで技術と作品を紹介。"
   ],
-  "独立设计 · 由 Folivo 托管": [
-    "Independently designed · Hosted by Folivo",
-    "独自のデザイン · Folivoがホスティング"
+  "独立设计 · 由 IAVSE 托管": [
+    "Independently designed · Hosted by IAVSE",
+    "独自のデザイン · IAVSEがホスティング"
   ],
   "现有站长资料已接入个人主页，继续在原内容后台维护即可同步更新。": [
     "Your existing owner profile is connected to your homepage. Keep editing it in the original dashhomepage to update both.",
@@ -9239,9 +9239,9 @@
     "Start with ready-made blocks or arrange things freely on a canvas. Bring your work, notes and resources together in a homepage that reflects your style.",
     "ブロックで手軽に組み立てても、自由なキャンバスに配置しても。作品、ノート、リソースをまとめて、あなたらしいホームページを作れます。"
   ],
-  "由 Folivo 托管": [
-    "Hosted by Folivo",
-    "Folivoがホスティング"
+  "由 IAVSE 托管": [
+    "Hosted by IAVSE",
+    "IAVSEがホスティング"
   ],
   "登录后整理作品、经历与资源，搭建可分享的个人主页。": [
     "Sign in to organize your work, experience and resources in a shareable homepage.",
@@ -9707,9 +9707,9 @@
     "The four Anthropic document skills have proprietary terms; their licenses define permitted use. Check each original project for setup and runtime requirements.",
     "Anthropic の文書系 4 件は独自の利用条件があり、許可範囲は各ライセンスに従います。導入方法や実行環境は原プロジェクトをご確認ください。"
   ],
-  "连接 Folivo": [
-    "Connect to Folivo",
-    "Folivo と連携"
+  "连接 IAVSE": [
+    "Connect to IAVSE",
+    "IAVSE と連携"
   ],
   "按类型探索 GitHub 上的 Agent Skill，查阅用途、原项目与许可。": [
     "Explore GitHub Agent Skills by category, with use cases, original sources and license links.",
@@ -12926,5 +12926,9 @@
   "人身伤害": [
     "Personal injury",
     "人身被害"
+  ],
+  "以洞察驱动智能，以敏锐发现机遇，以行动实现进化。": [
+    "Insight through AI. Vigilance for Opportunity. Seize to Evolve.",
+    "洞察で知性を導き、鋭敏さで機会を見出し、行動で進化する。"
   ]
 }

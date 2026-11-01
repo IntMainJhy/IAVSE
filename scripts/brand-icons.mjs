@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {createHash} from 'node:crypto';
 import {crc32} from 'node:zlib';
 function withOrigin(png){
- const text=Buffer.from('impeccable:prompt\0Folivo folded-page mark: two original page shapes form an open lowercase-f gesture on a 64px grid. A curved upright leaf and a detached diagonal-cut cross leaf share an 11px weight. White geometry on a deep blue rounded square for metadata icons; a transparent blue symbol is derived from the same source for navigation. Original path geometry, no font-derived outlines or third-party icon artwork. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
+ const text=Buffer.from('impeccable:prompt\0IAVSE folded-page mark: two original page shapes form an open lowercase-f gesture on a 64px grid. A curved upright leaf and a detached diagonal-cut cross leaf share an 11px weight. White geometry on a deep blue rounded square for metadata icons; a transparent blue symbol is derived from the same source for navigation. Original path geometry, no font-derived outlines or third-party icon artwork. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
  const chunk=Buffer.alloc(text.length+12);chunk.writeUInt32BE(text.length);chunk.write('tEXt',4);text.copy(chunk,8);chunk.writeUInt32BE(crc32(chunk.subarray(4,-4)),chunk.length-4);
  return Buffer.concat([png.subarray(0,-12),chunk,png.subarray(-12)]);
 }
@@ -21,4 +21,4 @@ const sizes=[16,32,48],images=await Promise.all(sizes.map(async size=>withOrigin
 const header=Buffer.alloc(6+16*sizes.length);header.writeUInt16LE(1,2);header.writeUInt16LE(sizes.length,4);let offset=header.length;
 for(let i=0;i<sizes.length;i++){const index=6+16*i;header[index]=sizes[i];header[index+1]=sizes[i];header.writeUInt16LE(1,index+4);header.writeUInt16LE(32,index+6);header.writeUInt32LE(images[i].length,index+8);header.writeUInt32LE(offset,index+12);offset+=images[i].length}
 await writeFile('src/app/favicon.ico',Buffer.concat([header,...images]));
-console.log('Generated Folivo transparent symbol, 16/32/48px ICO, 180px Apple icon and 512px PNG from the canonical SVG.');
+console.log('Generated IAVSE transparent symbol, 16/32/48px ICO, 180px Apple icon and 512px PNG from the canonical SVG.');

@@ -1,6 +1,6 @@
 // Guides describe existing workflows; authored tutorials remain in the published article library.
 export const guides=[
- {slug:'getting-started',title:'开始使用 Folivo',summary:'认识社区、博客主页和共享内容栏目。',sections:[
+ {slug:'getting-started',title:'开始使用 IAVSE',summary:'认识社区、博客主页和共享内容栏目。',sections:[
   {title:'登录你的账号',text:'使用已有的网站账号或已验证邮箱和密码登录。邮箱注册是否开放，以登录页面显示为准。',href:'/login',action:'前往登录'},
   {title:'选择你的内容栏目',text:'在文档、Skill 或其他资源页面直接发布内容，也可以在该栏目的发布页面查看草稿和审核状态。',href:'/docs',action:'浏览内容栏目'},
   {title:'选择下一步',text:'想介绍自己，从博客主页开始；想分享教程或工具，在对应栏目发布，审核通过后也会出现在社区。',href:'/docs/showcase',action:'学习搭建主页'}
