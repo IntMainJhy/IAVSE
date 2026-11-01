@@ -1,21 +1,21 @@
 /* THESIS: one optical space, from discovery to creation.
-   OWN-WORLD: the original folded glass, daylight-blue-to-silver light, sharp content and local sans.
+   OWN-WORLD: the original folded glass, layered blue-to-silver light, sharp content and local sans.
    STORY: open with glass, pass through real blog pages, then explore and create.
    FIRST VIEWPORT: a fixed transparent navigation floats above an uninterrupted glass scene.
    FORM: extension of the user-selected glass world; native scroll, real Three geometry, no theme switch. */
 html[data-ui][data-color-mode]:has(.v2-site,.blog-public-shell,.organic-site.organic-admin){
- --site-canvas:#f0f0f0;--site-surface:#fbfcfde6;--site-raised:#e8edf2;--site-text:#173957;--site-body:#294b69;--site-muted:#4c6480;--site-line:#c8d5e0;--site-control-line:#8ba7bf;--site-accent:#245f9a;--site-accent-soft:#dcecf8;--site-action:#356da8;--site-action-hover:#2e649e;--site-on-action:#fff;--site-focus:#245f9a;--site-selection:#245f9a;
- --site-blue-gradient:linear-gradient(180deg,#9bbde1 0,#9bbde1 12svh,#c0dcf1 88svh,#e5ebf0 155svh,#f0f0f0 240svh,#f0f0f0 100%);
+ --site-canvas:#e8e8e8;--site-surface:#fbfcfde6;--site-raised:#e8edf2;--site-text:#173957;--site-body:#294b69;--site-muted:#4c6480;--site-line:#c8d5e0;--site-control-line:#8ba7bf;--site-accent:#245f9a;--site-accent-soft:#dcecf8;--site-action:#356da8;--site-action-hover:#2e649e;--site-on-action:#fff;--site-focus:#173957;--site-selection:#245f9a;
+ --site-blue-gradient:radial-gradient(ellipse 90vw 52svh at 50% 34svh,#b7d0e654,transparent 85%),linear-gradient(110deg,#294f7c16,transparent 34%,transparent 72%,#23466f20),linear-gradient(180deg,#7298c2 0,#7298c2 12svh,#87accf 88svh,#c3d4e3 155svh,#e8e8e8 240svh,#e8e8e8 100%);
  --site-action-glass:radial-gradient(ellipse at 26% 0%,#bde1ff1a,transparent 63%),linear-gradient(145deg,#356da8,#2e649e 55%,#285990);
  --site-action-glass-hover:radial-gradient(ellipse at 66% 0%,#c6e4ff1a,transparent 65%),linear-gradient(145deg,#2e649e,#285990 55%,#234f83);
- --site-heading-surface:linear-gradient(140deg,#eff7fdf0,#dcecf8f5);--site-menu-surface:linear-gradient(145deg,#f5fafff7,#e1edf7f7);scrollbar-color:#5d83a6 #edf1f4;
+ --site-heading-surface:linear-gradient(140deg,#f0f7fdf0,#c9deeff5);--site-menu-surface:linear-gradient(145deg,#f5fafff7,#e1edf7f7);scrollbar-color:#5d83a6 #edf1f4;
 }
 html[data-ui][data-color-mode] .v2-site{position:relative;isolation:isolate;background:radial-gradient(ellipse 88vw 70svh at 56% 82svh,#4c8de222,transparent 72%),var(--site-blue-gradient);color:var(--site-text)}
 .site-glass-atmosphere{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--site-blue-gradient)}
 html[data-ui][data-color-mode] .v2-site>.organic-main,html[data-ui][data-color-mode] .v2-site>.organic-footer{position:relative;z-index:1;background:transparent!important}
 html[data-ui][data-color-mode] .v2-site:not(.v2-landing)>.organic-main{padding-top:112px;padding-bottom:80px}
 html[data-ui][data-color-mode] .v2-site:has(.blog-spaces-page)>.organic-main{padding:0;max-width:none;width:100%}
-html[data-ui][data-color-mode] .v2-site .organic-header{--glass-header-ink:#173957;--chrome-accent:#245f9a;position:fixed!important;inset:0 0 auto;z-index:80;background:transparent!important;border:0;box-shadow:none;backdrop-filter:none}
+html[data-ui][data-color-mode] .v2-site .organic-header{--glass-header-ink:#102c44;--chrome-accent:#173957;position:fixed!important;inset:0 0 auto;z-index:80;background:transparent!important;border:0;box-shadow:none;backdrop-filter:none}
 .v2-site .organic-header::before{content:'';position:absolute;inset:0 0 auto;height:108px;pointer-events:none;background:rgb(255 255 255 / .06);backdrop-filter:blur(9px) saturate(.98);-webkit-backdrop-filter:blur(9px) saturate(.98);mask-image:linear-gradient(#000 0 58%,transparent 100%);-webkit-mask-image:linear-gradient(#000 0 58%,transparent 100%)}
 html[data-ui][data-color-mode] .v2-site .organic-header-inner{position:relative;z-index:1;min-height:72px;max-width:1480px}
 html[data-ui][data-color-mode] .v2-site .organic-header :is(.organic-brand,.organic-desktop-nav>a,.organic-mobile-menu>summary,.language-control select){color:var(--glass-header-ink);background:transparent}
@@ -77,7 +77,7 @@ html[data-ui][data-color-mode] .blog-canvas-editor :is(.bd-layer-actions button,
 html[data-ui][data-color-mode] .blog-canvas-editor :is(.bd-layers button[aria-current=true],.bd-sidebar-tabs button[aria-pressed=true],.bl-filters button[aria-pressed=true]){background:#c2dff3;color:#174b83;border-color:#6699c1}
 html[data-ui][data-color-mode] .blog-canvas-editor .bc-save-action{background:#245f9a;color:white;border-color:#245f9a;border-radius:999px}
 html[data-ui][data-color-mode] .blog-canvas-editor :is(.bc-editor-heading h1,.bd-properties h2,.bd-properties h3){color:#173957}
-html[data-ui][data-color-mode] .blog-canvas-editor :is(button,a,select,input):focus-visible{outline-color:#245f9a}
+html[data-ui][data-color-mode] .blog-canvas-editor :is(button,a,select,input):focus-visible{outline-color:#173957}
 .blog-public-shell{position:relative;isolation:isolate;background:#deecf7}
 .blog-public-shell>.blog-platform-bar{position:sticky;top:0;z-index:80;background:#d5e8f5b8;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:0}
 .blog-public-shell>:not(.site-glass-atmosphere):not(.blog-platform-bar){position:relative}
@@ -95,7 +95,7 @@ html[data-ui][data-color-mode] .blog-canvas-editor :is(button,a,select,input):fo
 @media(prefers-reduced-motion:reduce){.v2-site [data-glass-reveal][data-glass-motion=active]{transform:none!important;opacity:1!important}}
 @media print{.site-glass-atmosphere,.v2-site .organic-header::before{display:none!important}html[data-ui][data-color-mode] .v2-site .organic-header{position:static!important}html[data-ui][data-color-mode] .v2-site:not(.v2-landing)>.organic-main{padding-top:0}.v2-site [data-glass-reveal][data-glass-motion=active]{transform:none!important;opacity:1!important}}
 
-html[data-ui][data-color-mode] .v2-site.v2-landing{background:#f0f0f0}
+html[data-ui][data-color-mode] .v2-site.v2-landing{background:#e8e8e8}
 html[data-ui][data-color-mode] .v2-site .feed-main>.feed-title{position:static;width:auto;height:auto;margin:0 0 24px;padding:0;clip:auto;clip-path:none;overflow:visible;font:550 clamp(30px,3.4vw,44px)/1.15 var(--site-font);letter-spacing:-.035em;color:#173957}
 
 /* Dark navigation ink stays readable across daylight blue and pale grey. */
@@ -112,11 +112,11 @@ html[data-ui][data-color-mode] .v2-site .feed-active-indicator{background:#c2dff
 
 /* Daylight chrome and optical controls stay consistent at every scroll position.
    Reading panes remain light so real documents and form fields keep their contrast. */
-html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin){--organic-paper:#f0f0f0;--organic-ink:#173957;--organic-text:#345773;--organic-muted:#426380;--organic-green:#143f83;--organic-line:#adc8de;--bg:#f0f0f0;--paper:#f0f7fc;--ink:#173957;--muted:#426380;--line:#adc8de;--blue:#143f83;--blue-soft:#d6e7f8}
+html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin){--organic-paper:#e8e8e8;--organic-ink:#173957;--organic-text:#345773;--organic-muted:#426380;--organic-green:#143f83;--organic-line:#adc8de;--bg:#e8e8e8;--paper:#f0f7fc;--ink:#173957;--muted:#426380;--line:#adc8de;--blue:#143f83;--blue-soft:#d6e7f8}
 html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin) :is(.v2-primary,.space-btn.primary,.organic-button.is-primary,.btn.primary,.btn.dark,.community-follow-button:not(.is-following),.feed-write,.bc-save-action):not(.space-root *){background:var(--site-action-glass);color:var(--site-on-action);border-color:transparent;box-shadow:inset 0 1px 0 #deeeff8c,inset 0 -1px 0 #17395725,0 8px 20px -10px #1c4e7a40;text-shadow:none}
 html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin) :is(.v2-primary,.space-btn.primary,.organic-button.is-primary,.btn.primary,.btn.dark,.community-follow-button:not(.is-following),.feed-write,.bc-save-action):not(:disabled,[aria-disabled=true],[aria-busy=true],.space-root *):hover{background:var(--site-action-glass-hover);color:#fff;filter:none}
 html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin) :is(a,button,input,textarea,select,summary):not(.space-root *):focus-visible{outline-color:var(--site-focus);outline-offset:4px}
-html[data-ui][data-color-mode] .v2-site .organic-header :is(a,summary,select):focus-visible{outline-color:#245f9a}
+html[data-ui][data-color-mode] .v2-site .organic-header :is(a,summary,select):focus-visible{outline-color:#173957}
 html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin) :is(input,textarea,select):not(.space-root *){caret-color:#164180;accent-color:#164180}
 html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin) :is(input,textarea):not(.space-root *)::placeholder{color:#426380}
 html[data-ui][data-color-mode] :is(.v2-site,.organic-site.organic-admin) :not(.space-root *)::selection{background:#143f83;color:#fff}
@@ -128,7 +128,7 @@ html[data-ui][data-color-mode] .v2-site :is(.resource-overview-group,.skill-dire
 html[data-ui][data-color-mode] .v2-site .community-auth .community-auth-form{background:#f3f3f3f0;color:#173957}
 html[data-ui][data-color-mode] .v2-site .community-account-page .community-account-grid>section{background:#e5e5e7c9;box-shadow:inset 0 1px 0 #f6fbffb3}
 html[data-ui][data-color-mode] .v2-site .feed-main>.feed-title{display:table;max-width:100%;padding:16px 22px;background:var(--site-heading-surface);border-radius:14px;color:#173957;box-shadow:inset 0 1px 0 #ffffffb3,0 12px 30px -20px #294a6b24}
-html[data-ui][data-color-mode] .v2-site .organic-footer{background:#f0f0f0e6!important;color:#345773}
+html[data-ui][data-color-mode] .v2-site .organic-footer{background:#e8e8e8e6!important;color:#345773}
 html[data-ui][data-color-mode] .v2-site .organic-footer :is(.organic-footer-signature,nav a){color:#173957}
 /* The author-owned canvas is untouched; only its platform navigation shares the blue chrome. */
 html[data-ui][data-color-mode] .blog-public-shell>.blog-platform-bar{background:var(--site-heading-surface);color:#173957;box-shadow:0 10px 30px -20px #294a6b24;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}

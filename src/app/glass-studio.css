@@ -1,8 +1,8 @@
 /* The native glass frames a continuous blue-to-silver studio, with no section cut. */
 html[data-ui][data-color-mode]:has(.v2-home){
- --site-canvas:#f0f0f0;--site-surface:#fbfcfd;--site-raised:#dedfe1;--site-text:#143959;--site-body:#365473;--site-muted:#4c6480;--site-line:#b6cede;--site-control-line:#83a6c7;--site-accent:#1c58a1;--site-accent-soft:#e0e1e5;--site-action:#356da8;--site-action-hover:#2e649e;--site-on-action:#fff;--site-focus:#174b87;--site-selection:#174b87;
+ --site-canvas:#e8e8e8;--site-surface:#fbfcfd;--site-raised:#dedfe1;--site-text:#143959;--site-body:#365473;--site-muted:#4c6480;--site-line:#b6cede;--site-control-line:#83a6c7;--site-accent:#1c58a1;--site-accent-soft:#e0e1e5;--site-action:#356da8;--site-action-hover:#2e649e;--site-on-action:#fff;--site-focus:#174b87;--site-selection:#174b87;
 }
-html[data-ui][data-color-mode=dark]:has(.v2-home){--site-canvas:#f0f0f0;--site-surface:#fbfcfd;--site-raised:#dcdde0}
+html[data-ui][data-color-mode=dark]:has(.v2-home){--site-canvas:#e8e8e8;--site-surface:#fbfcfd;--site-raised:#dcdde0}
 html[data-ui][data-color-mode] .v2-landing{position:relative}
 html[data-ui][data-color-mode] .v2-landing .organic-header{position:absolute;inset:0 0 auto;background:transparent!important;--chrome-surface:transparent;border:0;box-shadow:none;backdrop-filter:none}
 .v2-home{background:var(--site-blue-gradient)}
@@ -11,7 +11,7 @@ html[data-ui][data-color-mode] .v2-landing .organic-header{position:absolute;ins
 .v2-hero-intro{display:flex;align-items:center;justify-content:center;min-height:100svh;padding:96px 24px 104px}
 .v2-home .v2-hero-copy{max-width:800px;width:100%;margin:0 auto;text-align:center;z-index:1}
 html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(42px,4.7vw,64px);font-weight:550;line-height:1.16;letter-spacing:-.035em;margin-bottom:24px;color:#173957;text-shadow:none}
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>p{font-size:17px;color:#294b69;margin:0 0 30px}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>p{font-size:17px;color:#102c44;margin:0 0 30px}
 html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-secondary{color:#173957}
 .v2-home .v2-hero-actions{justify-content:center;gap:24px}
 .v2-home .v2-hero-showcase{max-width:1080px;margin:0 auto;padding:0 24px 92px}

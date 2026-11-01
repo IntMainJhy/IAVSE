@@ -117,7 +117,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // broad room illumination and soft contact shadow are art-directed, not a
   // simulated caustic pass. Specular highlights come only from the HDR rig.
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#9bbde1')},uBlueMiddle:{value:new Color('#c0dcf1')},uBlueBottom:{value:new Color('#e5ebf0')},uIce:{value:new Color('#f0f0f0')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,uniforms:{uTime:{value:0},uLightSweep:{value:0},uBrightness:{value:1},uScroll:{value:0},uCenter:{value:new Vector2(.5,.38)},uContact:{value:new Vector2(.31,.20)},uBlueTop:{value:new Color('#7298c2')},uBlueMiddle:{value:new Color('#87accf')},uBlueBottom:{value:new Color('#c3d4e3')},uIce:{value:new Color('#e8e8e8')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
@@ -126,7 +126,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    void main(){
     vec2 uv=vScreen;float documentY=max(0.,(1.-uv.y)+uScroll),daylight=smoothstep(.88,1.55,documentY);
     vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(.12,.88,documentY));color=mix(color,uBlueBottom,daylight);color=mix(color,uIce,smoothstep(1.55,2.4,documentY));
-    float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.06*(1.-daylight);
+    float quiet=softPool(uv,vec2(.5,.60),vec2(.52,.9));color*=1.-quiet*.04*(1.-daylight);
+    float edge=pow(abs(uv.x-.5)*2.,2.);color*=1.-edge*.10*(1.-daylight);
+    float reading=softPool(vec2(uv.x,documentY),vec2(.5,.34),vec2(.90,.52))*smoothstep(.08,.18,documentY);
+    color=mix(color,vec3(.48,.63,.79),reading*.30*(1.-daylight));
     float drift=sin(uTime*.22)*.025;
     float window=softPool(uv,vec2(.12+drift,.77),vec2(.42,.55));
     float bounce=softPool(uv,vec2(.91-drift,.28),vec2(.52,.58));
@@ -136,10 +139,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     // A broad oblique window wash creates real contrast for the three refraction rays.
     float windowEdge=uv.y+uv.x*.32-.25-uLightSweep*.22;
     float windowWash=(1.-smoothstep(-.08,.16,windowEdge))*softPool(uv,vec2(.48,.12),vec2(.95,.48));
-    color=mix(color,vec3(.84,.93,1.),windowWash*.52*(1.-daylight));
+    color=mix(color,vec3(.84,.93,1.),windowWash*.34*(1.-daylight));
     float groundY=uCenter.y-uContact.y;
     float contact=softPool(uv,vec2(.5-uContact.x,groundY),vec2(.23,.10))+softPool(uv,vec2(.5+uContact.x,groundY),vec2(.23,.10));
-    color*=1.-contact*.11*(1.-smoothstep(.15,.95,uScroll))*(1.-daylight);
+    color*=1.-contact*.17*(1.-smoothstep(.15,.95,uScroll))*(1.-daylight);
     color*=uBrightness;gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
    }
