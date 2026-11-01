@@ -71,7 +71,8 @@ test('the real transparent volume receives studio reflections on its curved face
  assert.ok(material.ior>=1.4&&material.ior<1.6);assert.ok(((material.ior-1)/(material.ior+1))**2>.025,'the main face has a useful physical Fresnel response');assert.ok(material.thickness>=.2&&material.thickness<=1);
  for(const mesh of s.meshes){const value=mesh.material;assert.ok(value.transmission>=.95&&value.envMap);assert.ok(value.envMapIntensity>.1&&value.envMapIntensity<8);assert.ok(value.roughness>0&&value.roughness<.25);assert.ok(value.dispersion>=0&&value.dispersion<1);assert.ok(value.attenuationDistance>1);}
  assert.equal(s.surface.children.length,1);assert.ok(s.scene.environmentIntensity>0&&s.scene.environmentIntensity<=3);assert.ok(s.environment.children.length>=2);
- for(const panel of s.environment.children){assert.equal(panel.geometry.type,'PlaneGeometry');assert.ok(!s.scene.children.includes(panel),'environment softboxes never become visible page objects');}
+ const sky=s.environment.getObjectByName('iavse-offscreen-daylight-sky');assert.ok(sky?.material instanceof three.ShaderMaterial);assert.equal(sky.material.side,three.BackSide);assert.ok(Math.abs(sky.material.uniforms.uSkySun.value.length()-1)<1e-6,'daylight has a normalized direction');
+ for(const fixture of s.environment.children)assert.ok(!s.scene.children.includes(fixture),'the sky and softboxes are captured offscreen, not drawn as floating page objects');
  const fixtures=[];s.scene.traverse(node=>{if(node.isMesh&&['TubeGeometry','TorusGeometry'].includes(node.geometry.type))fixtures.push(node);});assert.equal(fixtures.length,0,'the scene has no luminous ring or light tube');s.adapter.dispose();
 });
 
@@ -110,7 +111,10 @@ test('reduced motion freezes optical poses, frame animation does not rebuild geo
 test('shader optimization is local, guarded, and unsupported revisions retain native physical transmission',async()=>{
  const s=await studio(),shader={vertexShader:three.ShaderLib.physical.vertexShader,fragmentShader:three.ShaderLib.physical.fragmentShader,uniforms:{}};s.meshes[0].material.onBeforeCompile(shader,{});assert.ok(shader.fragmentShader.includes('return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'));assert.equal(three.ShaderChunk.transmission_pars_fragment,originalChunk);assert.equal(s.canvas.dataset.glassFilter,'linear-mip-r187');
  assert.ok(shader.vertexShader.includes('vOpticalPosition=position'),'coating follows real model geometry');assert.ok(shader.fragmentShader.includes('dot(normal,normalize(vViewPosition))'),'grazing reflection depends on the surface and view');
- s.adapter.render(0,0,false,0,false,8);assert.equal(shader.uniforms.uOpticalTime.value,8);s.adapter.render(0,0,false,0,true,80);assert.equal(shader.uniforms.uOpticalTime.value,0,'reduced motion also stops the surface coating');s.adapter.render(0,0,false,1.4,false,8);assert.equal(shader.uniforms.uOpticalFade.value,0,'coating fades with the volume');s.adapter.dispose();
+ s.adapter.render(0,0,false,0,false,8);assert.equal(shader.uniforms.uOpticalTime.value,8);
+ const sun=s.environment.getObjectByName('iavse-offscreen-daylight-sky').material.uniforms.uSkySun.value;assert.ok(shader.uniforms.uOpticalSunDirection.value.distanceTo(sun.clone().applyEuler(s.scene.environmentRotation))<1e-8,'the sharp sunlight follows the same direction as the reflected daylight sky');
+ assert.ok(shader.fragmentShader.includes('lensDistance-.010-prismSpread')&&shader.fragmentShader.includes('lensDistance-.010+prismSpread'),'local RGB peaks separate across the actual optical boundary');
+ s.adapter.render(0,0,false,0,true,80);assert.equal(shader.uniforms.uOpticalTime.value,0,'reduced motion also stops the surface coating');s.adapter.render(0,0,false,1.4,false,8);assert.equal(shader.uniforms.uOpticalFade.value,0,'coating fades with the volume');s.adapter.dispose();
  const fallback=await studio({overrides:{REVISION:'188'}}),native={fragmentShader:three.ShaderLib.physical.fragmentShader};fallback.meshes[0].material.onBeforeCompile(native,{});assert.equal(native.fragmentShader,three.ShaderLib.physical.fragmentShader);assert.equal(fallback.canvas.dataset.glassFilter,'three-default');fallback.adapter.dispose();
 });
 
