@@ -1,13 +1,27 @@
-# SpaceYew brand assets
+# IAVSE brand assets
 
-The SpaceYew symbol is a monochrome **SY** monogram: white uppercase letter outlines on a black rounded square. The outlines use the locally hosted Inter ExtraBold face; its SIL OFL notice is in `public/fonts/Inter-OFL.txt`. The source of truth is `src/app/icon.svg`; the SpaceYew wordmark keeps the website’s editorial serif type. Portfolio illustrations, résumé images, certificates and test screenshots are content, not reusable brand assets.
+IAVSE stands for **Insight · Artificial Intelligence · Vigilance · Seize · Evolve**. The approved mission is **“Insight through AI. Vigilance for Opportunity. Seize to Evolve.”** Its Chinese presentation is **“以洞察驱动智能，以敏锐发现机遇，以行动实现进化。”**
 
-Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` uses Sharp to deterministically generate `src/app/favicon.ico` (16, 32 and 48 px), `src/app/apple-icon.png` (180 px) and `public/brand/spaceyew-icon.png` (512 px). PNG exports include an origin note; no image generation model is involved.
+The mark is an **open aperture**: two solid, oblique facets form an open V silhouette, separated by a clear vertical negative-space slit. The upright slit references the I and the opening references the V in IAVSE. It replaces the retired Folivo lowercase-f mark. It uses original path geometry, with no font-derived outlines or third-party icon artwork.
 
-SVG, favicon and the 512px PNG retain transparent outer corners. The Apple icon is flattened onto white `#ffffff`. The mark is static and uses bold letter outlines for clarity at small sizes. No mascot or generated character artwork is part of this mark.
+The five ideas inform the whole visual system: the opening suggests insight, the related geometric facets suggest intelligence, the crisp boundaries suggest vigilance, their direction suggests action, and the unfolding spatial treatment suggests evolution. The favicon does not attempt to encode five tiny letters or pictograms.
 
-The command also regenerates `src/lib/brand-icon.ts` with `/icon.svg?v=<first 12 characters of the SVG SHA-256>`. `BrandMark` uses this versioned URL so a changed mark receives a new cache key. Regenerate and commit the SVG, exports and URL module together.
+## Source and deterministic exports
 
-The symbol appears at 32 px beside the visible SpaceYew wordmark, reducing to 30 px below 540 px, with a 10 px gap. In this combination, `BrandMark` uses empty `alt` and `aria-hidden="true"`; the surrounding link takes its accessible name from the visible wordmark. If the symbol is ever used alone as a control, that control needs an explicit accessible name.
+The source of truth is `src/app/icon.svg`, a 64px grid with white facets on deep indigo `#17234e`. Its central opening remains 8 source units wide, or 2px at 16px output. The final source was inspected at 16, 32, 48 and 64px. The static, solid silhouette retains its shape without glass, gradients, shadows or animation.
 
-The leaf-traveler character is reserved for future use. Its design and reusable animation implementation were archived outside the website repository at the user's request. The website no longer exposes `/ip` or serves the character assets; restore or place it only after the user asks.
+Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` deterministically generates:
+
+- `public/brand/spaceyew-symbol.svg`: transparent blue navigation mark;
+- `src/app/favicon.ico`: 16, 32 and 48px browser-tab icons;
+- `src/app/apple-icon.png`: 180px icon flattened onto white;
+- `public/brand/spaceyew-icon.png`: 512px metadata/share icon;
+- `src/lib/brand-icon.ts`: versioned navigation URL using the first 12 characters of the SVG SHA-256.
+
+The legacy filenames preserve existing links and integrations. SVG, ICO and 512px PNG retain transparent outer corners. PNG exports contain an origin note; no image-generation model is involved in these brand assets. Regenerate and commit the source, exports and URL module together so navigation and browser tabs agree.
+
+## Placement and accessibility
+
+The transparent symbol sits beside the complete IAVSE wordmark. It may be shown white on a dark background or blue on a light background through the site's existing treatment. `BrandMark` retains empty `alt` and `aria-hidden="true"`: the surrounding link takes its accessible name from the visible wordmark. A symbol used alone as a control must have its own accessible name.
+
+Authored portfolio illustrations, résumé images, certificates and screenshots remain content, not reusable brand assets. The archived leaf-traveler character is not part of this mark or the current website.

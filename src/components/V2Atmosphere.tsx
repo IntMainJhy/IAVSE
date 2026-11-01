@@ -3,14 +3,16 @@
 import {useEffect,useRef} from 'react';
 import type {GlassReveal,HomeGlassScene} from '@/lib/home-glass';
 
-const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal));
+const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal,{onProgress:value=>{canvas.dataset.loadingProgress=String(Math.round(value*100));}}));
 
 /** Load the homepage-only renderer without blocking the semantic content. */
 export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene,{mode='home'}:{mode?:'home'|'interior'}={}){
  const surface=canvas.parentElement||canvas,host=canvas.closest(mode==='home'?'.v2-home':'.v2-site')||surface,preference=window.matchMedia('(prefers-reduced-motion: reduce)'),controller=new AbortController();
  let pointerBounds=canvas.getBoundingClientRect();
  const revealElements=new Set<HTMLElement>();
- let reducedMotion=preference.matches;
+ let manualReduced=false,paused=false,systemReduced=preference.matches;
+ try{manualReduced=mode==='home'&&window.localStorage?.getItem('iavse-background-motion')==='reduce';}catch{}
+ let reducedMotion=manualReduced||systemReduced;
  let scene:HomeGlassScene|null=null,frame=0,lastDraw:number|null=null,activeTime=0,visible=false,printing=false,lost=false,disposed=false;
  let quality=1,slowFrames=0,drawCount=0,sizedWidth=0,sizedHeight=0,sizedDpr=0,displayDpr=0,refreshPeriod=1/60,renderCost=0;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false,revealsDirty=true,progressDirty=true;
@@ -31,7 +33,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   catch{fail();}
  };
  const canRender=()=>!disposed&&!lost&&!!scene&&visible&&!document.hidden&&!printing;
- const continuous=()=>!!scene?.animated&&!reducedMotion;
+ const continuous=()=>!!scene?.animated&&!reducedMotion&&!paused;
  const moving=()=>!reducedMotion&&scene?.interactive!==false&&Math.abs(targetX-pointerX)+Math.abs(targetY-pointerY)>.0001;
  const tick=(now:number)=>{
   frame=0;if(!canRender())return;
@@ -87,7 +89,8 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const resume=()=>{draw();sync();};
  const beforePrint=()=>{printing=true;sync();};
  const afterPrint=()=>{printing=false;resume();};
- const reduced=(event?:MediaQueryListEvent)=>{reducedMotion=typeof event?.matches==='boolean'?event.matches:preference.matches;if(reducedMotion){pointerX=pointerY=targetX=targetY=0;clearReveals();revealsDirty=false;draw();}else{revealsDirty=true;draw();}dirty=false;sync();};
+ const reduced=(event?:MediaQueryListEvent)=>{if(typeof event?.matches==='boolean')systemReduced=event.matches;else if(event)systemReduced=preference.matches;reducedMotion=manualReduced||(event?systemReduced:systemReduced||preference.matches);if(reducedMotion){pointerX=pointerY=targetX=targetY=0;clearReveals();revealsDirty=false;draw();}else{revealsDirty=true;draw();}dirty=false;sync();};
+ const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value?:boolean}>).detail;if(!detail)return;if(detail.action==='paused')paused=!!detail.value;else if(detail.action==='reduced'){manualReduced=!!detail.value;reduced();}else if(detail.action==='replay')activeTime=0;dirty=true;progressDirty=true;draw();sync();};
  const contextLost=(event:Event)=>{event.preventDefault();lost=true;fail();};
  const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(measure);
  const intersection=typeof IntersectionObserver==='undefined'?null:new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);resume();},{threshold:.01});
@@ -101,6 +104,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   document.removeEventListener('visibilitychange',resume);preference.removeEventListener('change',reduced);
   window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);
   window.removeEventListener('scroll',scroll);
+  window.removeEventListener('iavse-scene-control',control);
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
@@ -112,6 +116,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  document.addEventListener('visibilitychange',resume);preference.addEventListener('change',reduced);
  window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);
  window.addEventListener('scroll',scroll,{passive:true});
+ window.addEventListener('iavse-scene-control',control);
  void createScene(canvas,controller.signal).then(loaded=>{
   if(disposed){loaded.dispose();return;}
   scene=loaded;canvas.dataset.atmosphere=lost?'fallback':'paused';measure();sync();

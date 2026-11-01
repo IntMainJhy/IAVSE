@@ -9,6 +9,7 @@ import {Icon} from './Icons';
 import {V2Atmosphere} from './V2Atmosphere';
 import {CreatorStage,type CreatorStageData,type CreatorProject} from './CreatorStage';
 import {HomeMotion} from './HomeMotion';
+import {HomeCinema} from './HomeCinema';
 import {HomeBlogCanvasDemo,type HomeBlogDemoExample} from './HomeBlogCanvasDemo';
 import {HomeResourceSculpture} from './HomeResourceSculpture';
 import {HomeStoryVideo} from './HomeStoryVideo';
@@ -33,8 +34,8 @@ export async function PlatformHome({req}:{req:Request}){
  return <div className="v2-home">
   <HomeMotion/>
   <div className="v2-home-atmosphere" aria-hidden="true"><V2Atmosphere/></div>
-  <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title"><span>{t('让你的创造，')}</span><span>{t('有自己的空间。')}</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p><p className="iavse-brand-mission" lang="en">Insight through AI. Vigilance for Opportunity. Seize to Evolve.</p><p>{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p><div className="v2-hero-actions"><Link className="v2-primary" href="#creators">{t('发现博客空间')}<Icon name="arrow"/></Link><Link className="v2-hero-secondary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link></div></div></div>
-   <div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
+  <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}<div className="v2-hero-actions"><Link className="v2-primary" href="#creators">{t('发现博客空间')}<Icon name="arrow"/></Link><Link className="v2-hero-secondary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link></div></div></div>
+   <HomeCinema locale={locale}/><div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
   </section>
   <div className="home-stories">
    <section className="home-story" data-home-story="blog" data-home-side="left" id="creators" aria-labelledby="v2-creators-title">

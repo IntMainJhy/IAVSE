@@ -19,7 +19,7 @@ async function render(space,locale='zh',media=true){
   '@/lib/content-locales.mjs':locales,'@/lib/db.mjs':{getConfig:()=>({desktopDownloads:{}})},
   '@/lib/home-download.mjs':{homeDownload:()=>({href:'/downloads'})},
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
-  './HomeMotion':{HomeMotion:()=>null},
+  './HomeMotion':{HomeMotion:()=>null},'./HomeCinema':{HomeCinema:()=>null},
   './HomeResourceSculpture':{HomeResourceSculpture:({posterSrc,label})=>media?React.createElement('img',{src:posterSrc,alt:label,'data-resource-fallback':true}):null},
   './HomeStoryVideo':{HomeStoryVideo:({src,poster,label})=>media?React.createElement('img',{src:poster,alt:label,'data-video-src':src}):null},
   './HomeBlogCanvasDemo':{HomeBlogCanvasDemo:({locale,creator})=>React.createElement('div',{'data-editor-demo':true,'data-locale':locale},React.createElement('pre',{'data-demo-creator':true},JSON.stringify(creator??null)))},

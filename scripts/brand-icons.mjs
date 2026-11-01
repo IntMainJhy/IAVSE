@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import {createHash} from 'node:crypto';
 import {crc32} from 'node:zlib';
 function withOrigin(png){
- const text=Buffer.from('impeccable:prompt\0IAVSE folded-page mark: two original page shapes form an open lowercase-f gesture on a 64px grid. A curved upright leaf and a detached diagonal-cut cross leaf share an 11px weight. White geometry on a deep blue rounded square for metadata icons; a transparent blue symbol is derived from the same source for navigation. Original path geometry, no font-derived outlines or third-party icon artwork. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
+ const text=Buffer.from('impeccable:prompt\0IAVSE open-aperture mark: two original solid oblique facets form an open V silhouette. An 8-unit central negative-space slit on the 64px grid references the I and stays 2px wide at favicon size. White geometry on a deep-indigo rounded square for metadata icons; the transparent blue navigation symbol derives from the same source. INSIGHT / ARTIFICIAL INTELLIGENCE / VIGILANCE / SEIZE / EVOLVE. Original path geometry, no font-derived outlines or third-party icon artwork. Vector: src/app/icon.svg. Deterministic sharp export via scripts/brand-icons.mjs; no image-generation model used.');
  const chunk=Buffer.alloc(text.length+12);chunk.writeUInt32BE(text.length);chunk.write('tEXt',4);text.copy(chunk,8);chunk.writeUInt32BE(crc32(chunk.subarray(4,-4)),chunk.length-4);
  return Buffer.concat([png.subarray(0,-12),chunk,png.subarray(-12)]);
 }

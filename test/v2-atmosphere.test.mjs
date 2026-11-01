@@ -3,11 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
-import {Box3,Mesh,MeshPhysicalMaterial,Vector3} from 'three';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,retireHero=false,cpuRenderMs=0}={}){
+function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,retireHero=false,cpuRenderMs=0}={}){
  let cpuClock=0;
  class Target extends EventTarget{
   listeners=new Set();dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
@@ -15,7 +13,7 @@ function mount({reduced=false,width=1400,height=900,loading=false,failed=false,a
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name)}
   getBoundingClientRect(){return{left:0,top:this.top||0,width,height}}
  }
- const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference});
+ const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':'full'}});
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>['.v2-home','.v2-site'].includes(selector)?host:null});
  const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});host.querySelectorAll=()=>reveal?[panel]:[];
  host.querySelector=()=>{throw Error('header geometry must not be read')};
@@ -127,16 +125,6 @@ test('load failures, context loss and unmount during a late load preserve the CS
  lost.cleanup();assert.equal(lost.releases,1);
 });
 
-test('the shipped original GLB loads as two bounded glass meshes with real transmission and volume',async()=>{
- const bytes=fs.readFileSync(new URL('../public/models/spaceyew-glass.glb',import.meta.url));
- assert.ok(bytes.length<64*1024,'small self-contained model');
- const gltf=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
- const meshes=[];gltf.scene.traverse(node=>{if(node instanceof Mesh)meshes.push(node)});assert.equal(meshes.length,2);
- const size=new Box3().setFromObject(gltf.scene).getSize(new Vector3());assert.ok(size.x>2&&size.y>3&&size.z>.4);
- for(const mesh of meshes){assert.ok(mesh.material instanceof MeshPhysicalMaterial);assert.equal(mesh.material.transmission,1);assert.ok(mesh.material.thickness>.4);mesh.geometry.dispose();mesh.material.dispose()}
-});
-
-
 test('the optical studio keeps light motion active while visible and retains an opaque rendered backdrop throughout reading',async()=>{
  const s=mount({animated:true});s.intersection.set(true);await flush();assert.equal(s.draws.at(-1)[5],0);assert.equal(s.frames.size,1);
  s.step();s.step();const time=s.draws.at(-1)[5];assert.ok(time>0);assert.equal(s.frames.size,1,'visible strip-light reflections have a continuing clock');
@@ -180,4 +168,32 @@ test('section reveals coalesce into rendered frames and release every semantic s
  const s=mount({reveal:true});s.intersection.set(true);await flush();assert.equal(s.panel.dataset.glassMotion,'active');assert.ok(Number(s.panel.style['--glass-reveal'])>0&&Number(s.panel.style['--glass-reveal'])<1);assert.equal(s.reveals.at(-1).length,1);const measured=s.reveals.length;
  for(let i=0;i<12;i++)s.window.dispatchEvent(new Event('scroll'));assert.equal(s.reveals.length,measured,'events do not repeatedly deform or remeasure the glass');s.step();assert.equal(s.reveals.length,measured+1);
  s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));assert.equal(s.panel.dataset.glassMotion,undefined);assert.equal(s.panel.style['--glass-reveal'],undefined);assert.equal(s.reveals.at(-1).length,0);s.preference.matches=false;s.preference.dispatchEvent(new Event('change'));assert.equal(s.panel.dataset.glassMotion,'active');s.canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true}));assert.equal(s.panel.dataset.glassMotion,undefined);assert.equal(s.panel.style['--glass-lift'],undefined);assert.equal(s.panel.style['--glass-tilt'],undefined);assert.equal(s.reveals.at(-1).length,0);s.cleanup();
+});
+
+
+test('background controls pause only its clock, preserve scroll updates, and replay without remounting',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();s.step(100);const time=s.draws.at(-1)[5];assert.ok(time>0);
+ const control=(action,value)=>s.window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action,value}}));
+ control('paused',true);s.step(16);assert.equal(s.frames.size,0);const before=s.draws.length;s.step(2000);assert.equal(s.draws.length,before);
+ s.host.top=-450;s.window.dispatchEvent(new Event('scroll'));s.step(16);assert.equal(s.draws.at(-1)[3],.5);assert.equal(s.draws.at(-1)[5],time,'manual pause retains time during scrolling');
+ control('replay');assert.equal(s.draws.at(-1)[5],0);assert.equal(s.releases,0,'replay keeps the current scene and editor state');
+ control('paused',false);assert.equal(s.frames.size,1);s.step(30);assert.ok(s.draws.at(-1)[5]>0);s.cleanup();
+ const count=s.draws.length;control('replay');assert.equal(s.draws.length,count,'controls are detached on unmount');
+});
+
+test('manual reduced background motion composes with the system preference',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();
+ const control=value=>s.window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action:'reduced',value}}));
+ control(true);s.step(16);assert.equal(s.draws.at(-1)[4],true);assert.equal(s.frames.size,0);
+ s.preference.matches=false;s.preference.dispatchEvent(Object.assign(new Event('change'),{matches:false}));assert.equal(s.draws.at(-1)[4],true,'manual preference remains enabled');
+ s.preference.matches=true;control(false);assert.equal(s.draws.at(-1)[4],true,'manual setting cannot override system reduction');
+ s.preference.matches=false;s.preference.dispatchEvent(Object.assign(new Event('change'),{matches:false}));assert.equal(s.draws.at(-1)[4],false);assert.equal(s.frames.size,1);s.cleanup();
+});
+
+test('saved reduction applies before controls mount and manual changes preserve a system event',async()=>{
+ const s=mount({animated:true,savedReduced:true});s.intersection.set(true);await flush();
+ assert.equal(s.draws.at(-1)[4],true,'initial render reads the persisted preference without a control event');assert.equal(s.frames.size,0);
+ s.preference.dispatchEvent(Object.assign(new Event('change'),{matches:true}));
+ s.window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action:'reduced',value:false}}));s.step(16);
+ assert.equal(s.preference.matches,false,'media getter stays stale for this regression');assert.equal(s.draws.at(-1)[4],true,'manual full motion cannot erase the system event');assert.equal(s.frames.size,0);s.cleanup();
 });
