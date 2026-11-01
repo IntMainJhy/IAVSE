@@ -87,7 +87,7 @@ try{
  function featured(handle){const database=D.db();database.prepare("INSERT OR REPLACE INTO config VALUES('featuredBlog',?)").run(JSON.stringify({handle}));database.close();delete globalThis.__personalSiteDb;}
  featured(anx.handle);
  const selectedGallery=await gallery();assert.deepEqual([...selectedGallery.keys()].sort(),[...directoryAfterDraft.keys()].sort(),'Changing the featured author cannot change directory membership');
- const selectedHome=await(await fetch(base+'/blog/'+anx.handle)).text();assert.match(selectedHome,/Taylor Quinn/);assert.doesNotMatch(selectedHome,/Unreviewed replacement/);assert.ok(selectedHome.includes('<link rel="canonical" href="'+base+'/blog/'+anx.handle+'"'));assert.ok(selectedHome.includes('<title>Taylor Quinn · SpaceYew</title>'));
+ const selectedHome=await(await fetch(base+'/blog/'+anx.handle)).text();assert.match(selectedHome,/Taylor Quinn/);assert.doesNotMatch(selectedHome,/Unreviewed replacement/);assert.ok(selectedHome.includes('<link rel="canonical" href="'+base+'/blog/'+anx.handle+'"'));assert.ok(selectedHome.includes('<title>Taylor Quinn · Folivo</title>'));
  // Sharing an authored page always points at that author's permanent public URL.
  for(const [language,label] of [['en','Share homepage'],['zh','分享主页']]){
   const featuredPage=await(await fetch(base+'/blog/'+anx.handle,{headers:{Cookie:'site-locale='+language}})).text();

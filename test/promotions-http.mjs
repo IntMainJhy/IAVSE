@@ -35,7 +35,7 @@ try {
  assert.ok(!single.includes('macOS 桌面版即将推出'));assert.ok(!single.includes('Windows 桌面版即将推出'));
  assert.ok(!single.includes('macOS 与 Windows 桌面版即将推出。'));
  const pending=await downloads('zh');
- assert.ok(pending.includes('<title>下载桌面端 · SpaceYew</title>'));
+ assert.ok(pending.includes('<title>下载桌面端 · Folivo</title>'));
  assert.ok(pending.includes('id="downloads"'));
  assert.ok(pending.includes('macOS 桌面版即将推出'));assert.ok(pending.includes('Windows 桌面版即将推出'));
  assert.equal((pending.match(/type="button" class="space-btn" disabled=""/g)||[]).length,2);

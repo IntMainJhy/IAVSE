@@ -8,7 +8,7 @@ let pages=0;
 for(const locale of ['zh','en','ja'])for(const skill of curatedSkills){
  const response=await fetch(base+'/skills/'+skill.id,{headers:{cookie:'site-locale='+locale}}),html=await response.text();
  assert.equal(response.status,200,skill.id);
- assert.ok(html.includes('<title>'+skill.name+' · Skill · SpaceYew</title>'));
+ assert.ok(html.includes('<title>'+skill.name+' · Skill · Folivo</title>'));
  for(const id of ['features','scenarios','examples','prompts','tools','installation'])assert.ok(html.includes('id="'+id+'"'),skill.id+': '+id);
  assert.ok(html.includes(translate(locale,getSkillDetail(skill.id).features[0])),skill.id+': '+locale);
  assert.ok(html.includes('/skills/'+skill.id+'"'),skill.id+': canonical');

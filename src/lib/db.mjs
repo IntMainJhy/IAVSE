@@ -77,7 +77,7 @@ export function db(){
  }
  const defaults={
   profile:{name:'余江昊',alias:'IntMainJhy',intro:'在这里记录开发过程、分享项目与资源，也留下成长中的每一个重要节点。',avatarId:'',skills:['HarmonyOS','前端开发','AI 探索'],email:'',github:'',socials:[],experiences:[]},
-  site:{name:'SpaceYew',tagline:'开发、记录与分享',description:'余江昊的项目、经历与资源分享。',shareImageId:'',resumeId:''},
+  site:{name:'Folivo',tagline:'开发、记录与分享',description:'余江昊的项目、经历与资源分享。',shareImageId:'',resumeId:''},
   taxonomy:{categories:['开发资源','素材合集','实用网站','技术笔记'],tags:['HarmonyOS','前端','设计','工具','学习']},
   secret:randomBytes(32).toString('hex'),
   community:{paused:false}

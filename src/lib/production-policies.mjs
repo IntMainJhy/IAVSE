@@ -1,12 +1,12 @@
 // Operational notices, populated from private deployment configuration.
 // Publishing a notice does not certify regulatory or legal compliance.
 export function productionPolicies({operator,email,date,origin,address=''}){
- const contact=`运营者：${operator}  \n平台：SpaceYew（${origin}）  \n联系邮箱：${email}${address?'  \n联系地址：'+address:''}  \n生效日期：${date}`;
+ const contact=`运营者：${operator}  \n平台：Folivo（${origin}）  \n联系邮箱：${email}${address?'  \n联系地址：'+address:''}  \n生效日期：${date}`;
  return {
   terms:{title:'用户协议',text:`# 用户协议\n\n${contact}
 
 ## 1 服务与确认
-SpaceYew 提供公开博客展示、文档、第三方 Skill、资源介绍与开发者社区。本协议、[社区规则](/legal/community)及[隐私政策](/legal/privacy)在注册和提交发布前提供阅读。请主动确认；公开浏览一般不需要账号。当前账号服务仅向成年人开放，不提供交易、付费下载、私信、群聊或新闻采编服务。
+Folivo 提供公开博客展示、文档、第三方 Skill、资源介绍与开发者社区。本协议、[社区规则](/legal/community)及[隐私政策](/legal/privacy)在注册和提交发布前提供阅读。请主动确认；公开浏览一般不需要账号。当前账号服务仅向成年人开放，不提供交易、付费下载、私信、群聊或新闻采编服务。
 
 ## 2 账号与发布资格
 注册使用邮箱验证码和密码；邮箱验证只证明邮箱控制权，不是真实身份认证。注册后可编辑自己的私有草稿。公开发文、评论及博客发布须先完成适用的真实身份信息认证和资料核查；前台可使用合规昵称，不公开证件号码。身份核验的渠道、处理的信息和服务提供方，应在实际核验前另行告知。后台记录核验结果不能替代真实核验，不因邀请或站长标志自动取得发布资格。

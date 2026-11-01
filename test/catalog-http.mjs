@@ -43,7 +43,7 @@ try{
  const bridge=spawn(process.execPath,['integrations/spaceyew-mcp.mjs'],{env:{...process.env,SPACEYEW_URL:base,SPACEYEW_TOKEN:credential.token},stdio:['pipe','pipe','pipe']});const replies=new Map();let serial=0;const reader=createInterface({input:bridge.stdout});reader.on('line',line=>{const message=JSON.parse(line);replies.get(message.id)?.(message);replies.delete(message.id)});
  function rpc(method,params={}){const id=++serial;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('MCP response timeout')),10000);replies.set(id,result=>{clearTimeout(timer);resolve(result)});bridge.stdin.write(JSON.stringify({jsonrpc:'2.0',id,method,params})+'\n')})}
  try{
-  assert.equal((await rpc('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'Catalog integration',version:'1'}})).result.serverInfo.name,'SpaceYew');
+  assert.equal((await rpc('initialize',{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'Catalog integration',version:'1'}})).result.serverInfo.name,'Folivo');
   const tools=(await rpc('tools/list')).result.tools;assert.equal(tools.length,6);assert.ok(tools.some(tool=>tool.name==='spaceyew_submit_catalog'));assert.ok(!tools.some(tool=>tool.name==='spaceyew_save_library_draft'));
   const saved=await rpc('tools/call',{name:'spaceyew_save_catalog_draft',arguments:{...input,title:'MCP published tutorial',requestId:'catalog-mcp-save-001'}});assert.equal(saved.result.isError,false);const draft=saved.result.structuredContent;
   const args={id:draft.id,version:draft.version,confirmed:true,policyVersion:config.policyVersion,policyHash:config.policyHash,requestId:'catalog-mcp-submit-001'};

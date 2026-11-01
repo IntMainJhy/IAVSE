@@ -1,4 +1,4 @@
-# SpaceYew integration
+# Folivo integration
 
 POST `/api/connect` with `Authorization: Bearer <configured token>` and JSON:
 

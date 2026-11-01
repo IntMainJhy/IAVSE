@@ -14,7 +14,7 @@ try{
  for(const locale of ['zh','en','ja']){
   const page=await read(LEGAL_CONSULTATION_PATH,locale),resource=legalConsultationResource(locale);
   assert.equal(page.status,200);
-  assert.ok(page.html.includes('<title>'+resource.title+' · SpaceYew</title>'));
+  assert.ok(page.html.includes('<title>'+resource.title+' · Folivo</title>'));
   assert.ok(page.html.includes('href="'+server.base+LEGAL_CONSULTATION_PATH+'"'),'canonical URL');
   assert.ok(page.html.includes('id="consultation-contact"'));
   assert.ok(page.html.includes(legalConsultation.license)&&page.html.includes(legalConsultation.wechat));
