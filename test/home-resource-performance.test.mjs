@@ -26,7 +26,7 @@ async function sculpture({revision=three.REVISION,running=true,interactive=true,
   if(name.endsWith('.css'))return{};
   throw Error('Unexpected dependency '+name);
  }});
- const {default:ResourceScene}=await factory(),interaction={current:{x:.6,y:-.4,drag:.2,pressed:false,lastX:0,invalidate(){}}};
+ const {default:ResourceScene}=await factory(),interaction={current:{x:.6,y:-.4,drag:.2,pressed:false,lastX:0,replay:0,invalidate(){}}};
  const canvas=ResourceScene({running,interactive,reduced,posterSrc:'/poster.webp',interaction,onReady:()=>ready++,onError:()=>errors++}),body=canvas.props.children;
  body.type(body.props);const cleanup=effects[0]();await loaded;
  const glass=[],geometries=new Set(),materials=new Set();let wall,particles;
@@ -62,4 +62,60 @@ test('paused and reduced resource scenes are demand-rendered and cleanup release
   const event={preventDefault(){this.prevented=true;}};s.events.get('webglcontextlost')(event);assert.equal(event.prevented,true);assert.equal(s.errors,1);
   s.cleanup();s.cleanup();assert.equal(disposed,resources.length);assert.equal(s.environmentDisposals,1);assert.equal(s.events.size,0);assert.equal(s.scene.environment,null);
  }
+});
+
+function mediaControls({reduced=false,savedReduced=false}={}){
+ const hooks=[],observers=[],events=new Map(),systemEvents=new Set(),exports={},host={},Canvas=()=>null;
+ const add=(type,fn)=>{const set=events.get(type)||new Set();set.add(fn);events.set(type,set);},remove=(type,fn)=>events.get(type)?.delete(fn);
+ const preference={matches:reduced,addEventListener:(type,fn)=>systemEvents.add(fn),removeEventListener:(type,fn)=>systemEvents.delete(fn)};
+ const window={localStorage:{getItem:()=>savedReduced?'reduce':null},addEventListener:add,removeEventListener:remove},document={hidden:false,addEventListener:add,removeEventListener:remove};
+ let cursor=0,dirty=true,pending=[],tree;
+ const React={Component:class{},Suspense:()=>null,lazy:()=>Canvas,
+  useRef:initial=>{const index=cursor++;return(hooks[index]||={kind:'ref',value:{current:initial}}).value;},
+  useState:initial=>{const index=cursor++,state=hooks[index]||={kind:'state',value:initial};return[state.value,next=>{const value=typeof next==='function'?next(state.value):next;if(!Object.is(value,state.value)){state.value=value;dirty=true;}}];},
+  useEffect:(callback,deps)=>{const index=cursor++,effect=hooks[index]||={kind:'effect'};if(!effect.deps||deps.some((value,index)=>!Object.is(value,effect.deps[index])))pending.push(()=>{effect.cleanup?.();effect.deps=deps;effect.cleanup=callback();});}
+ };
+ class IntersectionObserver{constructor(callback,options){this.callback=callback;this.options=options;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}}
+ vm.runInNewContext(source,{exports,window,document,matchMedia:()=>preference,IntersectionObserver,require:name=>{
+  if(name==='react')return React;if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};if(name.endsWith('.css'))return{};throw Error('Unexpected eager dependency '+name);
+ }});
+ const nodes=(type,node=tree)=>!node||typeof node!=='object'?[]:[...(node.type===type?[node]:[]),...[node.props?.children].flat(Infinity).flatMap(child=>child?nodes(type,child):[])];
+ function flush(){
+  for(let count=0;dirty&&count<12;count++){
+   dirty=false;cursor=0;pending=[];tree=exports.HomeResourceSculpture({posterSrc:'/poster.webp',label:'Actual resource pages',pauseLabel:'Pause demo',playLabel:'Resume demo'});
+   for(const node of nodes('div'))if(node.props.ref)node.props.ref.current=host;for(const effect of pending)effect();
+  }
+  assert.equal(dirty,false,'media controls settle without a render loop');
+ }
+ const emit=(name,event={})=>{for(const callback of events.get(name)||[])callback(event);flush();};flush();
+ return{nodes,events,systemEvents,observers,get tree(){return tree;},get canvas(){return nodes(Canvas)[0];},
+  nearby:value=>{observers[0].callback([{isIntersecting:value}]);flush();},visible:value=>{observers[1].callback([{isIntersecting:value}]);flush();},
+  control:(action,value)=>emit('iavse-scene-control',{detail:{action,value}}),printing:value=>emit(value?'beforeprint':'afterprint'),
+  systemEvent:value=>{for(const callback of systemEvents)callback({matches:value});flush();},
+  ready:()=>{nodes(Canvas)[0].props.onReady();flush();},toggle:()=>{nodes('button')[0].props.onClick();flush();},
+  unmount:()=>{for(const hook of hooks)if(hook.kind==='effect')hook.cleanup?.();}
+ };
+}
+
+test('quiet initial visits keep the resource poster without constructing Fiber, then reuse an enabled scene',()=>{
+ for(const options of[{reduced:true},{savedReduced:true}]){
+  const s=mediaControls(options);s.nearby(true);s.visible(true);assert.equal(s.canvas,undefined,'reduced motion does not even instantiate the lazy renderer');assert.equal(s.tree.props['data-ready'],'false');
+  s.systemEvent(true);s.control('reduced',false);assert.equal(s.canvas,undefined,'manual full motion cannot override the system');s.systemEvent(false);assert.ok(s.canvas);s.ready();assert.equal(s.canvas.props.running,true);
+  const interaction=s.canvas.props.interaction;s.control('reduced',true);assert.equal(s.canvas.props.running,false);assert.equal(s.canvas.props.reduced,true);assert.equal(s.tree.props['data-ready'],'false');
+  s.control('reduced',false);assert.equal(s.canvas.props.interaction,interaction,'the initialized world stays mounted, avoiding GLB and studio reloads');assert.equal(s.tree.props['data-ready'],'true');s.unmount();
+  assert.ok(s.observers.every(observer=>observer.disconnected));assert.ok([...s.events.values()].every(set=>set.size===0));assert.equal(s.systemEvents.size,0);
+ }
+});
+
+test('global pause and printing combine with local resource pause, and replay resets interaction without remounting',()=>{
+ const s=mediaControls();s.control('paused',true);s.nearby(true);s.visible(true);assert.equal(s.canvas,undefined,'a paused page does not initialize a newly approached WebGL card');
+ s.control('paused',false);assert.equal(s.canvas.props.running,true);s.ready();s.printing(true);assert.equal(s.canvas.props.running,false);assert.equal(s.tree.props['data-ready'],'false');s.printing(false);assert.equal(s.canvas.props.running,true);
+ s.toggle();assert.equal(s.canvas.props.running,false);s.control('paused',true);s.control('paused',false);s.printing(true);s.printing(false);assert.equal(s.canvas.props.running,false,'global resume leaves a local pause intact');
+ const interaction=s.canvas.props.interaction;interaction.current.drag=3;const replay=interaction.current.replay;s.control('replay');assert.equal(s.canvas.props.interaction,interaction);assert.equal(interaction.current.drag,0);assert.equal(interaction.current.replay,replay+1);assert.equal(s.canvas.props.running,false);s.unmount();
+});
+
+test('resource replay restarts its optical clock on the existing scene',async()=>{
+ const s=await sculpture();for(let index=0;index<60;index++)s.tick(1/60);assert.ok(s.wall.material.uniforms.uTime.value>.9);
+ const geometryVersion=s.particles.geometry.getAttribute('position').version;s.interaction.current.replay++;s.tick(1/60);
+ assert.ok(s.wall.material.uniforms.uTime.value<.02);assert.equal(s.particles.geometry.getAttribute('position').version,geometryVersion,'replay changes state, not the particle buffer or scene');s.cleanup();
 });

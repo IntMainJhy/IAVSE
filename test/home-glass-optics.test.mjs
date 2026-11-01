@@ -9,9 +9,9 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/home-glass.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const originalChunk=three.ShaderChunk.transmission_pars_fragment;
 const bytes=fs.readFileSync(new URL('../public/models/iavse-optical-surface.glb',import.meta.url));
-async function studio({overrides={},signal,fetcher}={}){
+async function studio({overrides={},signal,fetcher,compile}={}){
  let scene,camera,environment,releases=0,environmentReleases=0,dpr,transmissionSize;
- class Renderer{setPixelRatio(value){dpr=value;}setSize(){}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
+ class Renderer{constructor(){if(compile)this.compileAsync=compile;}setPixelRatio(value){dpr=value;}setSize(){}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
  class PMREM{fromScene(value){environment=value;return{texture:new three.Texture(),dispose(){environmentReleases++;}};}dispose(){}}
  const exports={};vm.runInNewContext(source,{exports,AbortController,DOMException,Math,Uint8Array,fetch:fetcher||(async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})),require:name=>{
   if(name==='three')return{...three,...overrides,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader};throw Error('Unexpected dependency '+name);
@@ -120,4 +120,48 @@ test('shader optimization is local, guarded, and unsupported revisions retain na
 
 test('resource progress reports actual completion and aborted model loads fail without constructing a renderer',async()=>{
  const s=await studio();assert.deepEqual(Array.from(s.progress),[.9,1]);s.adapter.dispose();const controller=new AbortController();controller.abort();await assert.rejects(studio({signal:controller.signal}),error=>error.name==='AbortError');await assert.rejects(studio({fetcher:async()=>({ok:false})}),/unavailable/);
+});
+
+const journey=[{id:'blog',start:1.25,end:2.63,side:-1},{id:'editor',start:2.63,end:4.01,side:1},{id:'skills',start:4.01,end:5.39,side:-1},{id:'resources',start:5.39,end:6.77,side:1},{id:'invitation',start:6.77,end:7.59,side:0}];
+
+test('the shared optical model stays in the film through every chapter and hands GPU motion to the resource card',async()=>{
+ const s=await studio(),model=s.surface.children[0],geometry=s.meshes[0].geometry,version=geometry.attributes.position.version,heroDpr=s.dpr;
+ s.adapter.setJourney(journey);const poses=[];
+ for(const chapter of journey){const center=(chapter.start+chapter.end)*.5-.5,scroll=chapter.id==='invitation'?Math.min(center,chapter.end-1-.15):center;s.adapter.render(0,0,false,scroll,false,8);
+  assert.equal(s.canvas.dataset.journeyChapter,chapter.id);assert.equal(s.surface.visible,true,'the actual lens is still visible in '+chapter.id);assert.equal(s.surface.children[0],model);assert.equal(geometry.attributes.position.version,version,'scrolling does not rebuild the model');
+  poses.push({position:s.surface.position.clone(),rotation:s.surface.quaternion.clone(),camera:s.camera.position.clone()});
+  if(chapter.id==='resources'){assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);assert.equal(s.canvas.dataset.journeyDocked,'true');assert.ok(s.transmissionSize<.3,'resource card receives the active rendering budget');}
+  else assert.equal(s.adapter.animated,true);
+  assert.ok(s.dpr<=heroDpr,'reading chapters never increase full-screen pixels');
+ }
+ assert.ok(poses[0].position.x*poses[1].position.x<0,'successive chapters move through opposite sides of real 3D space');assert.ok(poses[1].rotation.angleTo(poses[2].rotation)>.3);assert.ok(poses[0].camera.distanceTo(poses[2].camera)>.15);
+ const depth=s.scene.getObjectByName('iavse-journey-depth');assert.ok(depth.isPoints&&depth.geometry.attributes.position.count<=80);
+ s.adapter.render(0,0,false,journey.at(-1).end-1,false,8);assert.equal(s.surface.visible,false);assert.equal(s.adapter.animated,false);assert.equal(depth.visible,false);
+ let disposed=0;depth.geometry.addEventListener('dispose',()=>disposed++);s.adapter.dispose();assert.equal(disposed,1);
+});
+
+test('closing glass fades continuously by the reachable section bottom and returns when scrolling back',async()=>{
+ const s=await studio();s.adapter.setJourney(journey);
+ const end=journey.at(-1).end-1,start=end-.55,opacity=scroll=>{s.adapter.render(0,0,false,scroll,false,8);return s.meshes[0].material.opacity;};
+ const open=opacity(start),middle=opacity((start+end)*.5),nearEnd=opacity(end-.005);
+ assert.ok(open>middle&&middle>nearEnd&&nearEnd>0,'the final visible viewport contains a smooth fading volume');
+ assert.ok(Math.abs(opacity((start+end)*.5-.0001)-opacity((start+end)*.5+.0001))<.001,'the closing fade has no opacity cut');
+ assert.equal(opacity(end),0,'the volume is retired before any footer space is required');assert.equal(s.adapter.animated,false);assert.equal(s.adapter.interactive,false);
+ assert.equal(s.scene.getObjectByName('iavse-journey-depth').visible,false);
+ assert.equal(opacity((start+end)*.5),middle,'scrolling back restores the same fade state');assert.equal(s.surface.visible,true);assert.equal(s.adapter.animated,true);s.adapter.dispose();
+});
+
+test('chapter handoffs are continuous, reverse predictably, and reduced motion returns to the static reading mode',async()=>{
+ const s=await studio();s.adapter.setJourney(journey);const center=chapter=>(chapter.start+chapter.end)*.5-.5,cut=(center(journey[0])+center(journey[1]))*.5;
+ const capture=()=>({position:s.surface.position.clone(),rotation:s.surface.quaternion.clone(),camera:s.camera.position.clone()});
+ s.adapter.render(0,0,false,cut-.0001,false,8);const before=capture();s.adapter.render(0,0,false,cut+.0001,false,8);const after=capture();
+ assert.ok(before.position.distanceTo(after.position)<.01);assert.ok(before.rotation.angleTo(after.rotation)<.005);assert.ok(before.camera.distanceTo(after.camera)<.005);
+ s.adapter.render(0,0,false,center(journey[0]),false,8);const first=capture();s.adapter.render(0,0,false,center(journey[3]),false,8);s.adapter.render(0,0,false,center(journey[0]),false,8);const back=capture();assert.ok(first.position.distanceTo(back.position)<1e-8);assert.ok(first.rotation.angleTo(back.rotation)<1e-7);
+ s.adapter.render(1,-1,false,center(journey[1]),true,30);assert.equal(s.adapter.animated,false,'reduced motion avoids a persistent cinematic ticker');assert.equal(s.scene.getObjectByName('iavse-journey-depth').visible,false);s.adapter.dispose();
+});
+
+test('opaque and fading programs are warmed before handoff and cancellation interrupts either warmup',async()=>{
+ const variants=[];const s=await studio({compile:async scene=>{const values=[];scene.traverse(node=>{if(node.isMesh&&node.material instanceof three.MeshPhysicalMaterial)values.push(node.material.transparent);});variants.push(values);}});
+ assert.ok(variants.some(values=>values.length&&values.every(value=>!value)));assert.ok(variants.some(values=>values.length&&values.every(Boolean)));assert.ok(s.meshes.every(mesh=>!mesh.material.transparent&&mesh.material.depthWrite&&mesh.material.opacity===1),'warmup preserves first-frame sorting');s.adapter.dispose();
+ for(const phase of[1,2]){const controller=new AbortController();let calls=0;await assert.rejects(studio({signal:controller.signal,compile:async()=>{if(++calls===phase)controller.abort();}}),error=>error.name==='AbortError');assert.equal(calls,phase);}
 });

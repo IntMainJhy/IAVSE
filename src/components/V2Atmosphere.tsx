@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect,useRef} from 'react';
-import type {GlassReveal,HomeGlassScene} from '@/lib/home-glass';
+import type {GlassReveal,HomeGlassScene,HomeJourneyChapter} from '@/lib/home-glass';
 
 const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal,{onProgress:value=>{canvas.dataset.loadingProgress=String(Math.round(value*100));}}));
 
@@ -14,13 +14,14 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  try{manualReduced=mode==='home'&&window.localStorage?.getItem('iavse-background-motion')==='reduce';}catch{}
  let reducedMotion=manualReduced||systemReduced;
  let scene:HomeGlassScene|null=null,frame=0,lastDraw:number|null=null,activeTime=0,visible=false,printing=false,lost=false,disposed=false;
- let quality=1,slowFrames=0,drawCount=0,sizedWidth=0,sizedHeight=0,sizedDpr=0,displayDpr=0,refreshPeriod=1/60,renderCost=0;
- let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false,revealsDirty=true,progressDirty=true;
+ let quality=1,slowFrames=0,healthyFrames=0,drawCount=0,sizedWidth=0,sizedHeight=0,sizedDpr=0,displayDpr=0,refreshPeriod=1/60,cadenceCandidate=1/60,cadenceSamples=0,renderCost=0;
+ let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false,revealsDirty=true,progressDirty=true,layoutDirty=true,hostDocumentTop=0;
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';
  const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastDraw=null;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
  const draw=()=>{
   if(!scene||disposed||lost||document.hidden||printing||!visible)return;
   try{
+   if(layoutDirty){readLayout();layoutDirty=false;}
    if(progressDirty){readProgress();progressDirty=false;}
    if(revealsDirty){readReveals();revealsDirty=false;}
    const dark=document.documentElement.dataset.colorMode==='dark';
@@ -38,15 +39,26 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const tick=(now:number)=>{
   frame=0;if(!canRender())return;
   const elapsed=lastDraw===null?1/120:Math.max(0,(now-lastDraw)/1000),amount=1-Math.exp(-7*Math.min(elapsed,.05));
-  if(lastDraw!==null&&elapsed>0)refreshPeriod=Math.min(refreshPeriod,Math.max(1/240,elapsed));
+  if(lastDraw!==null&&elapsed>=1/240&&elapsed<.05){
+   // A single unusually short callback is not evidence of a 240Hz display.
+   // Confirm faster cadence before using it to judge later frames as missed.
+   if(elapsed<refreshPeriod*.85){
+    if(Math.abs(elapsed-cadenceCandidate)<elapsed*.2)cadenceSamples++;else{cadenceCandidate=elapsed;cadenceSamples=1;}
+    if(cadenceSamples>=3){refreshPeriod=cadenceCandidate;cadenceSamples=0;}
+   }else{cadenceSamples=0;if(elapsed<refreshPeriod*1.15)refreshPeriod+=(elapsed-refreshPeriod)*.06;}
+  }
   if(continuous())activeTime+=Math.min(elapsed,.25);
   lastDraw=now;pointerX+=(targetX-pointerX)*amount;pointerY+=(targetY-pointerY)*amount;dirty=false;draw();
   // Follow every display callback, including 120/144Hz. Adapt pixels, not animation cadence.
   // CPU submission time and sustained missed display intervals are bounded signals, not a claim of GPU completion time.
-  if(scene?.animated&&++drawCount>24){
+  if(continuous()&&++drawCount>24){
    const missedFrameThreshold=refreshPeriod<=.010?refreshPeriod*1.8:Math.max(.025,refreshPeriod*1.8);
-   slowFrames=renderCost>refreshPeriod*.7||elapsed>missedFrameThreshold?slowFrames+1:Math.max(0,slowFrames-1);
-   if(slowFrames>=12&&quality>.72){quality=Math.max(.72,quality*.85);slowFrames=0;sizedDpr=displayDpr*quality;scene.resize(sizedWidth,sizedHeight,sizedDpr);}
+   const late=renderCost>refreshPeriod*.7||elapsed>missedFrameThreshold;
+   slowFrames=late?slowFrames+1:Math.max(0,slowFrames-1);healthyFrames=!late&&renderCost<refreshPeriod*.45?healthyFrames+1:0;
+   const previousQuality=quality;
+   if(slowFrames>=12&&quality>.72){quality=Math.max(.72,quality*.85);slowFrames=healthyFrames=0;}
+   else if(healthyFrames>=180&&quality<1){quality=Math.min(1,quality/.85);healthyFrames=0;}
+   if(quality!==previousQuality){sizedDpr=displayDpr*quality;scene?.resize(sizedWidth,sizedHeight,sizedDpr);canvas.dataset.glassQuality=quality.toFixed(2);canvas.dataset.glassCadence=String(Math.round(1/refreshPeriod));}
   }
   if(canRender()&&(dirty||moving()||continuous()))frame=requestAnimationFrame(tick);else stop();
  };
@@ -55,8 +67,20 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   else stop();
  };
  const clearReveals=()=>{for(const element of revealElements){delete element.dataset.glassMotion;for(const property of['--glass-reveal','--glass-lift','--glass-tilt'])element.style.removeProperty(property);}revealElements.clear();scene?.setReveals?.([]);};
+ const hasJourney=()=>mode==='home'&&typeof scene?.setJourney==='function';
+ const readLayout=()=>{
+  const hostRect=host.getBoundingClientRect(),height=Math.max(pointerBounds.height,1);hostDocumentTop=hostRect.top+(window.scrollY||0);
+  if(!hasJourney())return;
+  // Sections keep their document geometry while their children move. Cache these
+  // measurements after layout changes, never on each scroll or animation frame.
+  const chapters:HomeJourneyChapter[]=Array.from(host.querySelectorAll<HTMLElement>('[data-home-story],[data-home-scene="invitation"]')).map(element=>{
+   const rect=element.getBoundingClientRect();return{id:element.dataset.homeStory||element.dataset.homeScene||'',start:(rect.top-hostRect.top)/height,end:(rect.bottom-hostRect.top)/height,side:element.dataset.homeSide==='right'?1:element.dataset.homeStory?-1:0};
+  }).filter(chapter=>chapter.id&&Number.isFinite(chapter.start)&&Number.isFinite(chapter.end)&&chapter.end>chapter.start);
+  scene?.setJourney?.(chapters);
+ };
  const readReveals=()=>{
   if(!scene)return;if(reducedMotion){clearReveals();return;}
+  if(hasJourney()){if(revealElements.size)clearReveals();return;}
   const viewport=canvas.getBoundingClientRect(),panels:GlassReveal[]=[];
   // Complete layout reads before writing any reveal styles.
   const measurements=Array.from(host.querySelectorAll?.<HTMLElement>('[data-glass-reveal]')||[]).map(element=>({element,rect:element.getBoundingClientRect()}));
@@ -68,15 +92,16 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   }
   scene.setReveals?.(panels.slice(0,2));
  };
- const readProgress=()=>{pointerBounds=canvas.getBoundingClientRect();const height=Math.max(pointerBounds.height,1);progress=mode==='interior'?1.05+Math.max(0,window.scrollY||0)/height:Math.max(0,-host.getBoundingClientRect().top/height);revealsDirty=true;};
+ const readProgress=()=>{const height=Math.max(pointerBounds.height,1),scrollTop=window.scrollY;progress=mode==='interior'?1.05+Math.max(0,scrollTop||0)/height:typeof scrollTop==='number'?Math.max(0,(scrollTop-hostDocumentTop)/height):Math.max(0,-host.getBoundingClientRect().top/height);if(!hasJourney())revealsDirty=true;};
  const scroll=()=>{progressDirty=true;dirty=true;sync();};
+ const invalidateLayout=()=>{if(disposed)return;layoutDirty=true;progressDirty=true;dirty=true;sync();};
  const measure=()=>{
   if(!scene||disposed||lost)return;
   try{
    const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),mobile=width<768;pointerBounds=rect;
    displayDpr=Math.min(window.devicePixelRatio||1,2,Math.sqrt((mobile?3000000:8000000)/(width*height)));const dpr=displayDpr*quality;
    if(width!==sizedWidth||height!==sizedHeight||dpr!==sizedDpr){scene.resize(width,height,dpr);sizedWidth=width;sizedHeight=height;sizedDpr=dpr;}
-   progressDirty=true;draw();
+   layoutDirty=progressDirty=true;draw();
   }catch{fail();}
  };
  const move=(event:PointerEvent)=>{
@@ -100,11 +125,13 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   disposed=true;controller.abort();stop();clearReveals();resize?.disconnect();intersection?.disconnect();theme?.disconnect();
   if(!resize)window.removeEventListener('resize',measure);
   host.removeEventListener('pointermove',move as EventListener);host.removeEventListener('pointerleave',leave);
+  host.removeEventListener('load',invalidateLayout,true);
   canvas.removeEventListener('webglcontextlost',contextLost);
   document.removeEventListener('visibilitychange',resume);preference.removeEventListener('change',reduced);
   window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);
   window.removeEventListener('scroll',scroll);
   window.removeEventListener('iavse-scene-control',control);
+  window.removeEventListener('iavse-journey-layout',invalidateLayout);
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
@@ -112,14 +139,17 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  if(!resize)window.addEventListener('resize',measure);
  if(!intersection)visible=true;
  host.addEventListener('pointermove',move as EventListener,{passive:true});host.addEventListener('pointerleave',leave);
+ host.addEventListener('load',invalidateLayout,true);
  canvas.addEventListener('webglcontextlost',contextLost);
  document.addEventListener('visibilitychange',resume);preference.addEventListener('change',reduced);
  window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);
  window.addEventListener('scroll',scroll,{passive:true});
  window.addEventListener('iavse-scene-control',control);
+ window.addEventListener('iavse-journey-layout',invalidateLayout);
+ document.fonts?.ready.then(invalidateLayout);
  void createScene(canvas,controller.signal).then(loaded=>{
   if(disposed){loaded.dispose();return;}
-  scene=loaded;canvas.dataset.atmosphere=lost?'fallback':'paused';measure();sync();
+  scene=loaded;if(hasJourney())resize?.observe(host);canvas.dataset.atmosphere=lost?'fallback':'paused';measure();sync();
  }).catch(()=>{if(!disposed)fail();});
  return cleanup;
 }

@@ -2,78 +2,60 @@
 
 import {useEffect,useRef} from 'react';
 import {gsap} from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
-/** Reusable entrances stay dormant until a story crosses the viewport again. */
+/** A native-scroll edit: approach, a long readable hold, then a handoff. */
 export function HomeMotion(){
  const anchor=useRef<HTMLSpanElement>(null);
  useEffect(()=>{
-  const root=anchor.current?.closest<HTMLElement>('.v2-home');
-  if(!root)return;
-  const media=gsap.matchMedia();
-  media.add({desktop:'(min-width: 761px)',mobile:'(max-width: 760px)',reduce:'(prefers-reduced-motion: reduce)'},match=>{
-    const {desktop,reduce}=match.conditions!;
-    if(reduce)return;
-    const distance=desktop?32:14;
-    type Entrance={story:boolean;side:number;inside:boolean;timeline?:ReturnType<typeof gsap.timeline>};
-    const entrances=new Map<HTMLElement,Entrance>();
-    // Read restored positions together. Initially visible content keeps its server-rendered
-    // appearance, but is still observed so that a later visit can replay its entrance.
-    const scenes=Array.from(root.querySelectorAll<HTMLElement>('[data-home-scene],[data-home-story],.v2-work-collection > .v2-work')).map(scene=>({scene,top:scene.getBoundingClientRect().top}));
-    let storyIndex=0;
-    for(const {scene,top} of scenes){
-     const story=scene.matches('[data-home-story],.v2-work-collection > .v2-work');
-     const side=scene.dataset.homeSide?(scene.dataset.homeSide==='right'?1:-1):(scene.classList.contains('is-reverse')||storyIndex%2===1?1:-1);
-     if(story)storyIndex++;
-     entrances.set(scene,{story,side,inside:top<window.innerHeight});
-    }
-    if(!entrances.size)return;
-    const prepare=(scene:HTMLElement,entrance:Entrance)=>match.add(()=>{
-     const {story,side}=entrance;
-     if(story){
-      const art=scene.querySelector('.home-story-visual,.v2-work-art'),copy=scene.querySelector('.home-story-copy,.v2-work-copy');
-      if(!art&&!copy)return;
-      const timeline=entrance.timeline=gsap.timeline({paused:true,defaults:{duration:.85,ease:'expo.out'}});
-      if(art)timeline.fromTo(art,{x:desktop?side*distance:0,y:desktop?12:18,rotationY:desktop?-side*1.4:0,scale:.985,opacity:.92,transformPerspective:1200,transformOrigin:side<0?'right center':'left center'},{x:0,y:0,rotationY:0,scale:1,opacity:1,immediateRender:false,clearProps:'transform,transformOrigin,opacity'},0);
-      if(copy)timeline.fromTo(copy,{x:desktop?-side*distance*.55:0,y:desktop?0:10,opacity:.82},{x:0,y:0,opacity:1,duration:.65,immediateRender:false,clearProps:'transform,opacity'},.1);
-      return;
-     }
-     const heading=scene.querySelector('.v2-section-heading');
-     if(!heading&&scene.dataset.homeScene!=='invitation')return;
-     const timeline=entrance.timeline=gsap.timeline({paused:true,defaults:{duration:.6,ease:'expo.out'}});
-     if(heading)timeline.fromTo(heading,{opacity:.84},{opacity:1,immediateRender:false,clearProps:'opacity'},0);
-     if(scene.dataset.homeScene==='invitation'){
-      const title=scene.querySelector('h2'),actions=scene.querySelector(':scope > div');
-      if(title)timeline.fromTo(title,{y:distance*.4,opacity:.82},{y:0,opacity:1,immediateRender:false,clearProps:'transform,opacity'},0);
-      if(actions)timeline.fromTo(actions,{opacity:.85},{opacity:1,duration:.4,immediateRender:false,clearProps:'opacity'},.12);
-     }
-    });
-    let observer:IntersectionObserver|undefined,resizeFrame=0,live=true,generation=0;
-    const observe=()=>{
-     observer?.disconnect();
-     const current=++generation;
-     observer=new IntersectionObserver(entries=>{
-      if(!live||current!==generation)return;
-      for(const entry of entries){
-       const scene=entry.target as HTMLElement,entrance=entrances.get(scene);if(!entrance)continue;
-       if(!entry.isIntersecting){
-        entrance.inside=false;
-        // The full scene is outside the viewport: finish and release its ticker without
-        // visibly resetting it. The same timeline restarts on the next visit in either direction.
-        entrance.timeline?.progress(1).pause();
-       }else if(!entrance.inside){
-        entrance.inside=true;
-        if(!entrance.timeline)prepare(scene,entrance);
-        entrance.timeline?.restart();
-       }
+  const root=anchor.current?.closest<HTMLElement>('.v2-home');if(!root)return;
+  gsap.registerPlugin(ScrollTrigger);
+  let manualReduced=false,live=true,refreshFrame=0,media:ReturnType<typeof gsap.matchMedia>|null=null;
+  try{manualReduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
+  const notify=()=>{if(live)window.dispatchEvent(new Event('iavse-journey-layout'));};
+  const refresh=()=>{if(live&&!refreshFrame)refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;if(live)ScrollTrigger.refresh();});};
+  const setup=()=>{
+   media?.revert();media=null;delete root.dataset.journeyMotion;
+   if(!manualReduced){
+    media=gsap.matchMedia();
+    media.add({desktop:'(min-width:1001px) and (min-height:720px)',compact:'(max-width:1000px), (max-height:719px)',reduce:'(prefers-reduced-motion: reduce)'},match=>{
+     if(match.conditions!.reduce)return;
+     const desktop=!!match.conditions!.desktop;let active=true;
+     root.dataset.journeyMotion='full';
+     const stories=Array.from(root.querySelectorAll<HTMLElement>('[data-home-story]'));
+     for(const [index,scene] of stories.entries()){
+      const side=scene.dataset.homeSide==='right'?1:-1,id=scene.dataset.homeStory||String(index);
+      const art=scene.querySelector<HTMLElement>('.home-story-visual'),copy=scene.querySelector<HTMLElement>('.home-story-copy');
+      const interactive=id==='editor'||id==='resources';
+      const timeline=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'iavse-story-'+id,trigger:scene,start:desktop?'top 90%':'top 95%',end:desktop?'bottom 12%':'bottom 12%',scrub:.3,invalidateOnRefresh:true,onToggle:self=>{
+       if(!active)return;if(self.isActive)scene.dataset.journeyActive='true';else delete scene.dataset.journeyActive;
+      }}});
+      // Keep pointer coordinates exact in the real editor and Fiber canvas.
+      // The shared WebGL journey supplies their spatial motion behind the UI.
+      if(art){
+       if(interactive)timeline.fromTo(art,{opacity:.92,'--journey-focus':.2},{opacity:1,'--journey-focus':1,duration:.24,immediateRender:false},0).to(art,{opacity:.94,'--journey-focus':.35,duration:.20},.80);
+       else timeline.fromTo(art,{x:desktop?side*64:0,y:desktop?48:22,z:desktop?-120:0,rotationY:desktop?-side*6:0,rotationX:desktop?2.5:0,scale:desktop?.965:1,opacity:.84,transformPerspective:1600,transformOrigin:'center center'},{x:0,y:0,z:0,rotationY:0,rotationX:0,scale:1,opacity:1,duration:.24,immediateRender:false},0).to(art,{x:desktop?-side*18:0,y:desktop?-28:-12,z:desktop?-40:0,rotationY:desktop?side*2:0,scale:desktop?.99:1,opacity:.90,duration:.20},.80);
       }
-     },{threshold:0});
-     for(const scene of entrances.keys())observer.observe(scene);
-    };
-    const resize=()=>{if(!resizeFrame)resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;if(live)observe();});};
-    observe();window.addEventListener('resize',resize);
-    return()=>{live=false;generation++;observer?.disconnect();entrances.clear();cancelAnimationFrame(resizeFrame);window.removeEventListener('resize',resize);};
-   },root);
-  return()=>media.revert();
+      if(copy)timeline.fromTo(copy,{x:desktop?-side*26:0,y:desktop?32:16,opacity:.76},{x:0,y:0,opacity:1,duration:.25,immediateRender:false},.03).to(copy,{y:desktop?-30:-12,opacity:.68,duration:.20},.80);
+     }
+     const closing=root.querySelector<HTMLElement>('[data-home-scene="invitation"]');
+     if(closing){
+      const title=closing.querySelector('h2'),actions=closing.querySelector(':scope > div');
+      const end=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{id:'iavse-story-invitation',trigger:closing,start:'top 92%',end:'top 42%',scrub:.35,invalidateOnRefresh:true}});
+      if(title)end.fromTo(title,{y:desktop?40:20,opacity:.78},{y:0,opacity:1,duration:1,immediateRender:false},0);
+      if(actions)end.fromTo(actions,{y:12,opacity:.82},{y:0,opacity:1,duration:.7,immediateRender:false},.3);
+     }
+     refresh();
+     return()=>{active=false;delete root.dataset.journeyMotion;for(const scene of stories)delete scene.dataset.journeyActive;};
+    },root);
+   }
+   refresh();notify();
+  };
+  const control=(event:Event)=>{const detail=(event as CustomEvent<{action?:string;value?:boolean}>).detail;if(detail?.action!=='reduced')return;const next=!!detail.value;if(next!==manualReduced){manualReduced=next;setup();}};
+  ScrollTrigger.addEventListener('refresh',notify);window.addEventListener('iavse-scene-control',control);
+  const images=Array.from(root.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));document.fonts?.ready.then(refresh);
+  setup();
+  return()=>{live=false;cancelAnimationFrame(refreshFrame);ScrollTrigger.removeEventListener('refresh',notify);window.removeEventListener('iavse-scene-control',control);images.forEach(image=>image.removeEventListener('load',refresh));media?.revert();delete root.dataset.journeyMotion;};
  },[]);
  return <span ref={anchor} hidden aria-hidden="true"/>;
 }

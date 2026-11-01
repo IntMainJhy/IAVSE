@@ -5,7 +5,7 @@ import type {MutableRefObject,PointerEvent as ReactPointerEvent,ReactNode} from 
 import type * as Three from 'three';
 import '@/app/home-resource-sculpture.css';
 
-type Interaction={x:number;y:number;drag:number;pressed:boolean;lastX:number;invalidate:()=>void};
+type Interaction={x:number;y:number;drag:number;pressed:boolean;lastX:number;replay:number;invalidate:()=>void};
 type SceneProps={running:boolean;interactive:boolean;reduced:boolean;posterSrc:string;interaction:MutableRefObject<Interaction>;onReady:()=>void;onError:()=>void};
 type SculptureProps={posterSrc:string;label:string;pauseLabel:string;playLabel:string};
 
@@ -24,7 +24,7 @@ const ResourceCanvas=lazy(async()=>{
  };
  function SculptureScene({running,interactive,reduced,posterSrc,interaction,onReady,onError}:SceneProps){
   const {gl,scene,camera,invalidate}=useThree(),[world,setWorld]=useState<Three.Group|null>(null);
-  const runtime=useRef<{content:Three.Group;glyphs:Three.Group[];wall:Three.ShaderMaterial;time:number;rotationX:number;rotationY:number;ready:boolean}|null>(null);
+  const runtime=useRef<{content:Three.Group;glyphs:Three.Group[];wall:Three.ShaderMaterial;time:number;rotationX:number;rotationY:number;replay:number;ready:boolean}|null>(null);
   const callbacks=useRef({onReady,onError});callbacks.current={onReady,onError};
   useEffect(()=>{
    let alive=true,owned:Three.Group|null=null,parsed:Three.Group|null=null,poster:Three.Texture|null=null,environment:Three.WebGLRenderTarget|null=null;
@@ -96,7 +96,7 @@ const ResourceCanvas=lazy(async()=>{
      // Prepare programs while the nearby poster is still visible. Drivers with
      // parallel shader compilation need not block the first animated frame.
      await gl.compileAsync(root,camera,scene);if(!alive)return;
-     runtime.current={content,glyphs,wall:wallMaterial,time:0,rotationX:.02,rotationY:-.13,ready:false};setWorld(root);invalidate();
+     runtime.current={content,glyphs,wall:wallMaterial,time:0,rotationX:.02,rotationY:-.13,replay:interaction.current.replay||0,ready:false};setWorld(root);invalidate();
     }catch{if(alive)callbacks.current.onError();}
    };
    void load();
@@ -104,8 +104,10 @@ const ResourceCanvas=lazy(async()=>{
   },[gl,scene,camera,invalidate,posterSrc,interaction]);
   useFrame((_,delta)=>{
    const state=runtime.current;if(!state)return;
+   const input=interaction.current,replay=input.replay||0;
+   if(replay!==state.replay){state.replay=replay;state.time=0;state.rotationX=.02;state.rotationY=-.13;}
    if(running&&!reduced)state.time+=Math.min(delta,.05);
-   const input=interaction.current,time=reduced?0:state.time;
+   const time=reduced?0:state.time;
    const targetX=.02+(reduced?0:input.y*.09),targetY=-.13+(reduced?0:input.x*.13+input.drag);
    state.rotationX=reduced?targetX:THREE.MathUtils.damp(state.rotationX,targetX,7,Math.min(delta,.05));state.rotationY=reduced?targetY:THREE.MathUtils.damp(state.rotationY,targetY,7,Math.min(delta,.05));
    state.content.rotation.set(state.rotationX,state.rotationY,-.08+(reduced?0:Math.sin(time*.35)*.018));state.content.position.y=reduced?0:Math.sin(time*.5)*.035;
@@ -127,20 +129,27 @@ class SculptureBoundary extends Component<{children:ReactNode;onError:()=>void},
 }
 
 export function HomeResourceSculpture({posterSrc,label,pauseLabel,playLabel}:SculptureProps){
- const host=useRef<HTMLDivElement>(null),interaction=useRef<Interaction>({x:0,y:0,drag:0,pressed:false,lastX:0,invalidate:()=>{}});
- const [enabled,setEnabled]=useState(false),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[printing,setPrinting]=useState(false),[paused,setPaused]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false);
+ const host=useRef<HTMLDivElement>(null),interaction=useRef<Interaction>({x:0,y:0,drag:0,pressed:false,lastX:0,replay:0,invalidate:()=>{}});
+ const [enabled,setEnabled]=useState(false),[nearby,setNearby]=useState(false),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[printing,setPrinting]=useState(false),[paused,setPaused]=useState(false),[globalPaused,setGlobalPaused]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false);
  useEffect(()=>{
   const element=host.current;if(!element)return;
-  const preference=matchMedia('(prefers-reduced-motion: reduce)'),motion=()=>setReduced(preference.matches),visibility=()=>setHidden(document.hidden),beforePrint=()=>setPrinting(true),afterPrint=()=>setPrinting(false);motion();visibility();
-  const nearby=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){setEnabled(true);nearby.disconnect();}},{rootMargin:'220px'}),viewport=new IntersectionObserver(entries=>setVisible(entries.some(entry=>entry.isIntersecting)),{threshold:.01});nearby.observe(element);viewport.observe(element);
-  preference.addEventListener('change',motion);document.addEventListener('visibilitychange',visibility);window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);
-  return()=>{nearby.disconnect();viewport.disconnect();preference.removeEventListener('change',motion);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);};
+  const preference=matchMedia('(prefers-reduced-motion: reduce)');let systemReduced=preference.matches,manualReduced=false;
+  try{manualReduced=window.localStorage?.getItem('iavse-background-motion')==='reduce';}catch{}
+  const syncMotion=()=>setReduced(systemReduced||manualReduced),motion=(event?:MediaQueryListEvent)=>{systemReduced=typeof event?.matches==='boolean'?event.matches:preference.matches;syncMotion();},visibility=()=>setHidden(document.hidden),beforePrint=()=>setPrinting(true),afterPrint=()=>setPrinting(false);
+  const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value?:boolean}>).detail;if(!detail)return;if(detail.action==='reduced'){manualReduced=!!detail.value;syncMotion();}else if(detail.action==='paused')setGlobalPaused(!!detail.value);else if(detail.action==='replay'){const state=interaction.current;state.x=state.y=state.drag=0;state.pressed=false;state.replay++;state.invalidate();}};
+  syncMotion();visibility();
+  const proximity=new IntersectionObserver(entries=>setNearby(entries.some(entry=>entry.isIntersecting)),{rootMargin:'220px'}),viewport=new IntersectionObserver(entries=>setVisible(entries.some(entry=>entry.isIntersecting)),{threshold:.01});proximity.observe(element);viewport.observe(element);
+  preference.addEventListener('change',motion);document.addEventListener('visibilitychange',visibility);window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);window.addEventListener('iavse-scene-control',control);
+  return()=>{proximity.disconnect();viewport.disconnect();preference.removeEventListener('change',motion);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);window.removeEventListener('iavse-scene-control',control);};
  },[]);
+ // Keep an already loaded world demand-rendered during quiet mode, while a quiet
+ // initial visit can use the poster without loading Fiber, GLB or the studio.
+ useEffect(()=>{if(nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[nearby,reduced,hidden,printing,globalPaused]);
  const move=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced)return;const rect=event.currentTarget.getBoundingClientRect(),state=interaction.current;if(event.pointerType!=='touch'){state.x=(event.clientX-rect.left)/Math.max(1,rect.width)*2-1;state.y=(event.clientY-rect.top)/Math.max(1,rect.height)*2-1;}if(state.pressed){state.drag+=(event.clientX-state.lastX)*.005;state.lastX=event.clientX;}state.invalidate();};
  const down=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced||event.button>0)return;interaction.current.pressed=true;interaction.current.lastX=event.clientX;event.currentTarget.setPointerCapture(event.pointerId);};
  const leave=()=>{interaction.current.x=interaction.current.y=0;interaction.current.pressed=false;interaction.current.invalidate();};
- const interactive=visible&&!hidden&&!reduced&&!printing,running=interactive&&!paused;
- return <div ref={host} className="home-resource-sculpture" data-ready={ready&&!failed?'true':'false'}>
+ const interactive=visible&&!hidden&&!reduced&&!printing,running=interactive&&!paused&&!globalPaused;
+ return <div ref={host} className="home-resource-sculpture" data-ready={ready&&!failed&&!reduced&&!printing?'true':'false'}>
   <div className="home-resource-art" role="img" aria-label={label} onPointerMove={move} onPointerDown={down} onPointerUp={()=>{interaction.current.pressed=false;}} onPointerCancel={leave} onPointerLeave={leave}>
    <img className="home-resource-poster" src={posterSrc} alt="" loading="lazy" decoding="async"/>
    {enabled&&!failed&&<SculptureBoundary onError={()=>setFailed(true)}><Suspense fallback={null}><ResourceCanvas running={running} interactive={interactive} reduced={reduced} posterSrc={posterSrc} interaction={interaction} onReady={()=>setReady(true)} onError={()=>setFailed(true)}/></Suspense></SculptureBoundary>}

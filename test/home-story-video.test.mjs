@@ -5,11 +5,13 @@ import vm from 'node:vm';
 import ts from 'typescript';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeStoryVideo.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-function fixture({reduced=false}={}){
- const hooks=[],observers=[],calls=[],exports={},host={},listeners=new Set(),changes=new Set();
+function fixture({reduced=false,savedReduced=false}={}){
+ const hooks=[],observers=[],calls=[],exports={},host={},listeners=new Set(),changes=new Set(),windowListeners=new Map();
  const preference={matches:reduced,addEventListener:(type,fn)=>{assert.equal(type,'change');changes.add(fn);},removeEventListener:(type,fn)=>{assert.equal(type,'change');changes.delete(fn);}};
  const document={hidden:false,addEventListener:(type,fn)=>{assert.equal(type,'visibilitychange');listeners.add(fn);},removeEventListener:(type,fn)=>{assert.equal(type,'visibilitychange');listeners.delete(fn);}};
- const media={paused:true,play(){calls.push('play');this.paused=false;return Promise.resolve();},pause(){calls.push('pause');this.paused=true;}};
+ const window={localStorage:{getItem:()=>savedReduced?'reduce':null},addEventListener:(name,callback)=>{const set=windowListeners.get(name)||new Set();set.add(callback);windowListeners.set(name,set);},removeEventListener:(name,callback)=>windowListeners.get(name)?.delete(callback)};
+ const emit=(name,event={})=>{for(const callback of windowListeners.get(name)||[])callback(event);flush();};
+ const media={paused:true,currentTime:12,play(){calls.push('play');this.paused=false;return Promise.resolve();},pause(){calls.push('pause');this.paused=true;}};
  let cursor=0,dirty=true,pending=[],tree;
  const React={
   useRef:initial=>{const index=cursor++;return(hooks[index]||={kind:'ref',value:{current:initial}}).value;},
@@ -21,7 +23,7 @@ function fixture({reduced=false}={}){
   observe(element){this.element=element;}
   disconnect(){this.disconnected=true;}
  }
- vm.runInNewContext(source,{exports,document,matchMedia:()=>preference,IntersectionObserver,require:name=>{
+ vm.runInNewContext(source,{exports,document,window,matchMedia:()=>preference,IntersectionObserver,require:name=>{
   if(name==='react')return React;
   if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};
   if(name==='./Icons')return{Icon:()=>null};
@@ -41,9 +43,11 @@ function fixture({reduced=false}={}){
  }
  const intersect=(observer,visible)=>{observer.callback([{isIntersecting:visible}]);flush();};
  flush();
- return{nodes,calls,media,observers,listeners,changes,get tree(){return tree;},
+ return{nodes,calls,media,observers,listeners,changes,windowListeners,flush,get tree(){return tree;},
   nearby:()=>intersect(observers[0],true),visible:value=>intersect(observers[1],value),
-  motion:value=>{preference.matches=value;for(const change of changes)change();flush();},
+  motion:value=>{preference.matches=value;for(const change of changes)change({matches:value});flush();},
+  systemEvent:value=>{for(const change of changes)change({matches:value});flush();},
+  control:(action,value)=>emit('iavse-scene-control',{detail:{action,value}}),printing:value=>emit(value?'beforeprint':'afterprint'),
   hidden:value=>{document.hidden=value;for(const listener of listeners)listener();flush();},
   loaded:()=>{nodes('video')[0].props.onLoadedData();flush();},
   toggle:()=>{nodes('button')[0].props.onClick();flush();},
@@ -56,7 +60,7 @@ test('the real recording remains a static poster until nearby and only plays whi
  const s=fixture();
  assert.equal(s.nodes('img')[0].props.src,'/poster.webp');assert.equal(s.nodes('video').length,0);assert.equal(s.calls.length,0);
  assert.ok(parseInt(s.observers[0].options.rootMargin)>0,'a nearby element can prepare media before entering view');s.nearby();
- assert.equal(s.observers[0].disconnected,true);assert.equal(s.nodes('video').length,1);assert.equal(s.media.paused,true);
+ assert.equal(s.nodes('video').length,1);assert.equal(s.media.paused,true);
  const video=s.nodes('video')[0].props;assert.equal(video.src,'/clip.mp4');assert.equal(video.muted,true);assert.equal(video.loop,true);assert.equal(video.playsInline,true);assert.equal(video.preload,'metadata');
  s.visible(true);assert.equal(s.media.paused,false);assert.ok(s.calls.includes('play'));
  s.visible(false);assert.equal(s.media.paused,true);s.visible(true);assert.equal(s.media.paused,false);
@@ -64,9 +68,9 @@ test('the real recording remains a static poster until nearby and only plays whi
 });
 
 test('reduced motion, hidden documents and the user pause control each prevent autoplay',()=>{
- const s=fixture({reduced:true});s.nearby();s.visible(true);s.loaded();
+ const s=fixture({reduced:true});s.nearby();s.visible(true);assert.equal(s.nodes('video').length,0,'a reduced-motion visit never requests the video source');
  assert.equal(s.media.paused,true);assert.equal(s.tree.props['data-ready'],'false');assert.equal(s.nodes('button').length,0);
- s.motion(false);assert.equal(s.media.paused,false);assert.equal(s.tree.props['data-ready'],'true');
+ s.motion(false);s.loaded();assert.equal(s.media.paused,false);assert.equal(s.tree.props['data-ready'],'true');
  s.hidden(true);assert.equal(s.media.paused,true);s.hidden(false);assert.equal(s.media.paused,false);
  s.toggle();assert.equal(s.media.paused,true);assert.equal(s.nodes('button')[0].props['aria-label'],'Resume demo');assert.equal(s.nodes('button')[0].props['aria-pressed'],true);
  const plays=s.calls.filter(call=>call==='play').length;
@@ -82,4 +86,16 @@ test('loading errors retain the readable poster and unmount disconnects observer
  const active=fixture();active.nearby();active.visible(true);assert.equal(active.media.paused,false);active.unmount();
  assert.ok(active.observers.every(observer=>observer.disconnected));assert.equal(active.listeners.size,0);assert.equal(active.changes.size,0);
  assert.equal(active.media.paused,true,'cleanup explicitly stops the media element captured by its playback effect');
+ assert.ok([...active.windowListeners.values()].every(set=>set.size===0),'global controls and print listeners are released');
+});
+
+test('saved and manual reduction avoid loading, while global pause and print preserve the local pause',()=>{
+ const s=fixture({savedReduced:true});s.nearby();s.visible(true);assert.equal(s.nodes('video').length,0);
+ s.systemEvent(true);s.control('reduced',false);assert.equal(s.nodes('video').length,0,'manual full motion cannot erase the current system event');s.systemEvent(false);
+ assert.equal(s.nodes('video').length,1);s.loaded();const video=s.nodes('video')[0];assert.equal(s.media.paused,false);
+ s.control('paused',true);assert.equal(s.media.paused,true);s.control('paused',false);assert.equal(s.media.paused,false);
+ for(const callback of s.windowListeners.get('beforeprint'))callback();assert.equal(s.media.paused,true,'printing stops the native decoder before a React effect can run');s.flush();assert.equal(s.tree.props['data-ready'],'false');s.printing(false);assert.equal(s.media.paused,false);
+ s.control('reduced',true);assert.equal(s.media.paused,true);assert.equal(s.nodes('video')[0].props.ref,video.props.ref,'loaded media is retained across quiet-mode toggles');s.control('reduced',false);
+ s.toggle();s.control('paused',true);s.control('paused',false);s.printing(true);s.printing(false);s.control('replay');
+ assert.equal(s.media.currentTime,0,'global replay rewinds the recording');assert.equal(s.media.paused,true,'replay and global resume do not erase the user’s local pause');s.unmount();
 });

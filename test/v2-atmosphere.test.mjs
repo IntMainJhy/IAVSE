@@ -5,20 +5,24 @@ import vm from 'node:vm';
 import ts from 'typescript';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,retireHero=false,cpuRenderMs=0}={}){
+function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0}={}){
  let cpuClock=0;
  class Target extends EventTarget{
   listeners=new Set();dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name)}
-  getBoundingClientRect(){return{left:0,top:this.top||0,width,height}}
+  rectReads=0;getBoundingClientRect(){this.rectReads++;return{left:0,top:this.top||0,width,height}}
  }
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':'full'}});
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>['.v2-home','.v2-site'].includes(selector)?host:null});
- const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});host.querySelectorAll=()=>reveal?[panel]:[];
+ const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});
+ const sections=[{id:'blog',top:1800,height:1260,side:'left'},{id:'editor',top:3300,height:1260,side:'right'}].map(item=>Object.assign(new Target(),{dataset:{homeStory:item.id,homeSide:item.side},documentTop:item.top,sectionHeight:item.height,getBoundingClientRect(){this.rectReads++;const top=this.documentTop-(window.scrollY||0);return{left:0,top,bottom:top+this.sectionHeight,width,height:this.sectionHeight};}}));
+ if(journey)window.scrollY=0;
+ host.querySelectorAll=selector=>selector.includes('data-home-story')?(journey?sections:[]):reveal?[panel]:[];
  host.querySelector=()=>{throw Error('header geometry must not be read')};
- const draws=[],sizes=[],reveals=[];let releases=0,resolve,reject,signal,opticalLive=animated;
+ const draws=[],sizes=[],reveals=[],journeys=[];let releases=0,resolve,reject,signal,opticalLive=animated;
  const adapter={get animated(){return opticalLive},get interactive(){return retireHero?opticalLive:undefined},resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),render:(...args)=>{draws.push(args);cpuClock+=cpuRenderMs;if(retireHero)opticalLive=args[3]<1.3||!!reveals.at(-1)?.length;},dispose:()=>releases++};
+ if(journey)adapter.setJourney=value=>journeys.push(JSON.parse(JSON.stringify(value)));
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
  class Resize{constructor(fn){this.fn=fn;this.targets=new Set();resize=this}observe(target){this.targets.add(target)}disconnect(){this.disconnected=true;this.targets.clear()}}
  class Intersection{constructor(fn){this.fn=fn;intersection=this}observe(){}disconnect(){this.disconnected=true}set(value){this.fn([{isIntersecting:value}])}}
@@ -36,7 +40,7 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  },{mode});
  const step=(ms=35)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))};
  const move=(x=width,y=height,pointerType='mouse')=>host.dispatchEvent(Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType}));
- return{canvas,surface,host,panel,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,reveals,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
+ return{canvas,surface,host,panel,sections,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,reveals,journeys,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 
@@ -115,6 +119,14 @@ test('observed 120/144Hz displays adapt pixels when sustained callbacks miss eve
   assert.equal(s.draws.length-before,48,'every late callback still renders instead of imposing another frame cap');
   assert.ok(s.sizes.at(-1)[2]<initialDpr,'sustained missed high-refresh intervals reduce GPU pixels even below 25ms');s.cleanup();
  }
+});
+
+test('one short callback does not misclassify display cadence and sustained headroom restores clarity',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();const full=s.sizes.at(-1)[2];
+ for(let i=0;i<60;i++)s.step(1000/60);s.step(1);for(let i=0;i<90;i++)s.step(1000/60);
+ assert.equal(s.sizes.at(-1)[2],full,'a scheduling outlier cannot permanently lower resolution');
+ for(let i=0;i<36;i++)s.step(100);const reduced=s.sizes.at(-1)[2];assert.ok(reduced<full);
+ for(let i=0;i<600;i++)s.step(1000/60);assert.ok(s.sizes.at(-1)[2]>reduced,'healthy rendering recovers quality with hysteresis');assert.ok(s.sizes.at(-1)[2]<=full);s.cleanup();
 });
 
 test('load failures, context loss and unmount during a late load preserve the CSS fallback and release resources',async()=>{
@@ -196,4 +208,17 @@ test('saved reduction applies before controls mount and manual changes preserve 
  s.preference.dispatchEvent(Object.assign(new Event('change'),{matches:true}));
  s.window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action:'reduced',value:false}}));s.step(16);
  assert.equal(s.preference.matches,false,'media getter stays stale for this regression');assert.equal(s.draws.at(-1)[4],true,'manual full motion cannot erase the system event');assert.equal(s.frames.size,0);s.cleanup();
+});
+
+test('cinematic chapter geometry is cached across scroll frames and refreshed only after layout changes',async()=>{
+ const s=mount({animated:true,journey:true});s.intersection.set(true);await flush();
+ assert.deepEqual(s.journeys.at(-1),[{id:'blog',start:2,end:3.4,side:-1},{id:'editor',start:3300/900,end:4560/900,side:1}]);
+ assert.ok(s.resize.targets.has(s.host),'chapter layout changes are observed as well as viewport size');
+ const reads=()=>s.host.rectReads+s.canvas.rectReads+s.sections.reduce((sum,section)=>sum+section.rectReads,0),before=reads(),count=s.journeys.length;
+ for(let i=1;i<=30;i++){s.window.scrollY=i*60;s.host.top=-s.window.scrollY;s.window.dispatchEvent(new Event('scroll'));s.step(1000/60);}
+ assert.equal(reads(),before,'scroll frames use cached section geometry instead of reading layout');assert.equal(s.journeys.length,count);assert.equal(s.draws.at(-1)[3],2);
+ s.sections[1].documentTop+=180;for(let i=0;i<12;i++)s.window.dispatchEvent(new Event('iavse-journey-layout'));s.step();
+ assert.equal(s.journeys.length,count+1,'layout events share one cache rebuild');assert.equal(s.journeys.at(-1)[1].start,3480/900);
+ const refreshed=reads();s.host.dispatchEvent(new Event('load'));s.step();assert.ok(reads()>refreshed,'loaded images can invalidate cached geometry');
+ s.cleanup();const after=reads();s.window.dispatchEvent(new Event('iavse-journey-layout'));s.host.dispatchEvent(new Event('load'));s.step();assert.equal(reads(),after,'late events cannot measure a disposed scene');
 });
