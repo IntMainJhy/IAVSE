@@ -1,4 +1,4 @@
-import {ACESFilmicToneMapping,Color,DataTexture,DirectionalLight,FrontSide,Group,LinearFilter,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,WebGLRenderer} from 'three';
+import {ACESFilmicToneMapping,Color,DataTexture,FrontSide,Group,LinearFilter,MathUtils,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,WebGLRenderer} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 export type GlassReveal={left:number;top:number;width:number;height:number;progress:number;variant?:string};
@@ -37,14 +37,41 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
  try{
   renderer.outputColorSpace='srgb';renderer.toneMapping=ACESFilmicToneMapping;renderer.toneMappingExposure=1;
   const scene=new Scene(),camera=new PerspectiveCamera(40,1,.1,100),surface=new Group();surface.name='iavse-optical-field';camera.position.z=8.2;surface.add(model);scene.add(surface);
+  const opticalTime={value:0},opticalFade={value:1},opticalLeft={value:-.73};
   const nativeMaterials=new Set<MeshPhysicalMaterial>();
   model.traverse(node=>{if(!(node instanceof Mesh))return;for(const material of Array.isArray(node.material)?node.material:[node.material]){
    if(!(material instanceof MeshPhysicalMaterial))continue;
-   nativeMaterials.add(material);const edge=material.name.includes('PolishedRolledEdge');material.side=FrontSide;material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.ior=edge?1.46:1.18;material.thickness=.045;material.roughness=edge?.075:.025;material.dispersion=edge?.65:.22;material.metalness=0;material.opacity=1;material.attenuationColor.set('#f8fbff');material.attenuationDistance=40;material.iridescence=edge?.10:0;material.iridescenceIOR=1.35;material.clearcoat=0;
-   if(transmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,transmission);};material.customProgramCacheKey=()=> 'iavse-thin-optical-r187';}
+   nativeMaterials.add(material);const edge=material.name.includes('PolishedRolledEdge');material.side=FrontSide;material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.ior=edge?1.5:1.46;material.thickness=edge?.3:.5;material.roughness=.035;material.dispersion=edge?.4:.14;material.metalness=0;material.opacity=1;material.attenuationColor.set('#dceaff');material.attenuationDistance=16;material.iridescence=0;material.clearcoat=0;
+   if(transmission){material.onBeforeCompile=shader=>{
+    const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,transmission);
+    // A restrained optical coating is shaded on the actual lens surface. Its
+    // grazing highlight follows local geometry, view normals and the live clock.
+    shader.uniforms.uOpticalTime=opticalTime;shader.uniforms.uOpticalFade=opticalFade;shader.uniforms.uOpticalLeft=opticalLeft;
+    shader.vertexShader='varying vec3 vOpticalPosition;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvOpticalPosition=position;');
+    shader.fragmentShader='varying vec3 vOpticalPosition;uniform float uOpticalTime;uniform float uOpticalFade;uniform float uOpticalLeft;float iavseGaussian(float x){return exp(-x*x);}\n'+shader.fragmentShader;
+    shader.fragmentShader=shader.fragmentShader.replace('#include <tonemapping_fragment>',`
+     float lensX=vOpticalPosition.x;
+     float lensTop=.76-.405*(lensX-.66)*(lensX-.66);
+     float lensDistance=max(0.,(lensTop-vOpticalPosition.y)/sqrt(1.+.6561*(lensX-.66)*(lensX-.66)));
+     float lensAA=max(fwidth(lensDistance),.0005);
+     float lensEdge=iavseGaussian((lensDistance-.006)/max(.0045,lensAA*1.3));
+     float lensShoulder=iavseGaussian(lensDistance/.035);
+     float lensGlint=iavseGaussian((lensX-uOpticalLeft+sin(uOpticalTime*.26)*.18)/.24)+.7*iavseGaussian((lensX-1.03-sin(uOpticalTime*.23)*.20)/.32);
+     float lensFresnel=pow(1.-clamp(dot(normal,normalize(vViewPosition)),0.,1.),3.);
+     vec3 lensSpectrum=.55+.45*cos(vec3(0.,2.1,4.2)+lensDistance*210.+lensX*1.6);
+     vec3 lensSilver=mix(vec3(.29,.57,.94),vec3(.88,.94,1.),clamp(lensGlint,0.,1.));
+     vec3 lensCoating=lensSilver*lensEdge*(.10+lensGlint*.48)+lensSpectrum*lensShoulder*lensGlint*.14+vec3(.2,.42,.73)*lensFresnel*.06;
+     vec3 lensReflection=reflect(-normalize(vViewPosition),normal);
+     vec3 lensWindow=normalize(vec3(.28+sin(uOpticalTime*.22)*.10,.74,.61));
+     float lensSky=pow(max(dot(lensReflection,lensWindow),0.),20.);
+     lensCoating+=vec3(.45,.68,1.)*lensSky*.075*smoothstep(.008,.045,lensDistance);
+     gl_FragColor.rgb+=lensCoating*uOpticalFade;
+     #include <tonemapping_fragment>
+    `);
+   };material.customProgramCacheKey=()=> 'iavse-meniscus-coating-r187';}
   }});
   // Large feathered softboxes are captured once, never drawn in the visible scene.
-  const studio=new Scene();studio.background=new Color('#7997c0');studio.name='iavse-offscreen-studio';
+  const studio=new Scene();studio.background=new Color('#243f6b');studio.name='iavse-offscreen-studio';
   const panelGeometry=new PlaneGeometry(),panelMaterials:MeshBasicMaterial[]=[];
   const pixels=new Uint8Array(64*64*4);
   for(let row=0;row<64;row++)for(let column=0;column<64;column++){
@@ -52,33 +79,37 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   }
   const diffuser=new DataTexture(pixels,64,64,RGBAFormat);diffuser.minFilter=diffuser.magFilter=LinearFilter;diffuser.needsUpdate=true;
   const panel=(name:string,position:number[],scale:number[],color:string,power:number)=>{const material=new MeshBasicMaterial({color:new Color(color).multiplyScalar(power),map:diffuser,toneMapped:false});panelMaterials.push(material);const mesh=new Mesh(panelGeometry,material);mesh.name=name;mesh.position.fromArray(position);mesh.scale.fromArray(scale);mesh.lookAt(0,0,0);studio.add(mesh);};
-  panel('soft-silver-window',[4,5,4],[5,4,1],'#f2f7ff',12);
-  panel('blue-bounce',[-5,0,3],[6,5,1],'#85b5ed',.6);
-  panel('left-grazing-window',[-5,4,-4],[4,3,1],'#d3e6ff',12);
-  panel('upper-soft-fill',[-1,6,-3],[7,4,1],'#ffffff',.45);
+  panel('soft-silver-window',[2.5,3.5,6],[4,3,1],'#e8f3ff',5);
+  panel('front-sky-window',[.8,1.6,7],[5,3,1],'#dcecff',1.8);
+  panel('blue-bounce',[-4,-1,5],[7,6,1],'#6aacf4',1.6);
+  panel('left-grazing-window',[-6,2,-3],[5,4,1],'#d3e6ff',10);
+  panel('upper-soft-fill',[-1,7,-2],[10,6,1],'#ffffff',8);
   const pmrem=new PMREMGenerator(renderer);
-  try{environment=pmrem.fromScene(studio,.032);scene.environment=environment.texture;for(const material of nativeMaterials)if(material.name.includes('PolishedRolledEdge')){material.envMap=environment.texture;material.envMapIntensity=2.4;}}
+  try{environment=pmrem.fromScene(studio,.025);scene.environment=environment.texture;for(const material of nativeMaterials){material.envMap=environment.texture;material.envMapIntensity=material.name.includes('PolishedRolledEdge')?1.65:.65;}}
   finally{panelGeometry.dispose();panelMaterials.forEach(value=>value.dispose());diffuser.dispose();pmrem.dispose();}
-  const key=new DirectionalLight('#f3f7ff',.06);key.position.set(4,5,7);scene.add(key);
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uBrightness:{value:1},uBlueTop:{value:new Color('#17234e')},uBlueMiddle:{value:new Color('#376eb5')},uBlueBottom:{value:new Color('#a7c8e8')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uBlueTop:{value:new Color('#102651')},uBlueMiddle:{value:new Color('#2c68b7')},uBlueBottom:{value:new Color('#b7cfe7')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
    varying vec2 vScreen;
    void main(){vec4 p=projectionMatrix*modelViewMatrix*vec4(position,1.);vScreen=p.xy/p.w*.5+.5;gl_Position=p;}
   `,fragmentShader:`
-   varying vec2 vScreen;uniform float uScroll;uniform float uBrightness;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
+   varying vec2 vScreen;uniform float uScroll;uniform float uTime;uniform float uBrightness;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
+   float softField(vec2 p,vec2 center,vec2 radius){vec2 d=(p-center)/radius;return exp(-dot(d,d));}
    void main(){
     vec2 uv=vScreen;float documentY=max(0.,1.-uv.y+uScroll);
-    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.56,documentY));
-    color=mix(color,uBlueBottom,smoothstep(.45,.78,documentY));
-    color=mix(color,uIce,smoothstep(.70,1.04,documentY));
-    float edge=pow(abs(uv.x-.5)*2.,2.);
-    color*=1.-edge*.055*(1.-smoothstep(.45,1.1,documentY));
+    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.66,documentY));
+    color=mix(color,uBlueBottom,smoothstep(.50,.94,documentY));
+    color=mix(color,uIce,smoothstep(.66,1.03,documentY));
+    vec2 field=vec2(uv.x,documentY);float breathing=sin(uTime*.23)*.018;
+    float silver=softField(field,vec2(-.04,.81+breathing),vec2(.36,.26))+softField(field,vec2(1.07,.84-breathing),vec2(.40,.30));
+    color=mix(color,uIce,clamp(silver*.62,0.,.76)*(1.-smoothstep(1.,1.2,documentY)));
+    float blueDepth=softField(field,vec2(.58,.49),vec2(.56,.25));
+    color=mix(color,uBlueMiddle,blueDepth*.13*(1.-smoothstep(.8,1.1,documentY)));
     color*=uBrightness;gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
    }
   `});extraMaterials.push(wallMaterial);const wall=new Mesh(wallGeometry,wallMaterial);wall.name='iavse-refraction-receiver';wall.position.z=-7;wall.renderOrder=-10;scene.add(wall);
   let width=1,height=1;
-  canvas.dataset.glassFilter=transmission?'linear-mip-r187':'three-default';canvas.dataset.glassModel=mobile?'mobile':'desktop';
+  canvas.dataset.glassFilter=transmission?'linear-mip-r187':'three-default';canvas.dataset.glassModel=mobile?'mobile':'desktop';canvas.dataset.glassDesign='meniscus-2';
   signal.addEventListener('abort',dispose,{once:true});if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
   onProgress?.(1);
   return{
@@ -95,18 +126,19 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    },
    render(x,y,dark,scroll,reduced,activeSeconds=0){
     if(disposed)return;
-    const time=reduced?0:Math.max(0,Number.isFinite(activeSeconds)?activeSeconds:0),spatial=reduced?0:MathUtils.smootherstep(scroll,0,1.3),sweep=reduced?0:MathUtils.smootherstep(scroll,0,.95),intro=reduced?1:MathUtils.smootherstep(time,0,1.5),drift=reduced?0:Math.sin(time*.22)*.007;
+    const time=reduced?0:Math.max(0,Number.isFinite(activeSeconds)?activeSeconds:0),spatial=reduced?0:MathUtils.smootherstep(scroll,0,1.3),sweep=reduced?0:MathUtils.smootherstep(scroll,0,.95),intro=reduced?1:MathUtils.smootherstep(time,0,2.4),drift=reduced?0:Math.cos(time*.22)*.06;
     const opacity=1-MathUtils.smoothstep(scroll,.78,1.38);surface.visible=opacity>.001;
-    camera.position.set(0,0,8.2+(1-intro)*.18+spatial*.22);camera.rotation.set(0,0,0);
-    const viewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*camera.position.z;
-    surface.scale.set(viewHeight*camera.aspect*.5,viewHeight*.5,1);
-    surface.position.set(reduced?0:x*.014,(reduced?0:y*.008)+drift-spatial*.24,0);
-    surface.rotation.set(reduced?0:y*.008,reduced?0:-x*.012+sweep*.035,reduced?0:drift*.35+sweep*.018);
-    scene.environmentRotation.set(.12,.18+sweep*.34+(reduced?0:Math.sin(time*.22)*.045),0);scene.environmentIntensity=.78;
-    wallMaterial.uniforms.uScroll.value=scroll;wallMaterial.uniforms.uBrightness.value=dark?.99:1;
-    for(const material of nativeMaterials){material.opacity=opacity;const alpha=opacity<.999;if(material.transparent!==alpha){material.transparent=alpha;material.depthWrite=!alpha;material.needsUpdate=true;}}
+    camera.position.set(0,0,8.2+(1-intro)*.65+spatial*.35);camera.rotation.set(0,0,0);
+    const viewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*8.2;
+    surface.scale.set(viewHeight*(width<768?Math.max(camera.aspect,.9):camera.aspect)*.5,viewHeight*.5,viewHeight*.32);
+    surface.position.set(reduced?0:x*.04,(reduced?0:y*.022)+drift-spatial*.24,0);
+    surface.rotation.set(reduced?0:y*.025,reduced?0:-x*.045+Math.sin(time*.2+.9)*.075+sweep*.055,reduced?0:drift*.45+sweep*.018);
+    scene.environmentRotation.set(.08,.15+sweep*.34+(reduced?0:Math.sin(time*.23+.4)*.38),0);scene.environmentIntensity=1;
+    wallMaterial.uniforms.uScroll.value=scroll;wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uBrightness.value=dark?.99:1;
+    opticalTime.value=time;opticalFade.value=opacity;opticalLeft.value=width<768?-.35:-.73;
+    for(const material of nativeMaterials){material.envMapRotation.copy(scene.environmentRotation);material.opacity=opacity;const alpha=opacity<.999;if(material.transparent!==alpha){material.transparent=alpha;material.depthWrite=!alpha;material.needsUpdate=true;}}
     renderer.transmissionResolutionScale=surface.visible?(width<768?.45:.6):.12;
-    canvas.dataset.glassTime=time.toFixed(1);canvas.dataset.glassLightPhase=sweep.toFixed(3);canvas.dataset.glassReading=spatial.toFixed(3);canvas.dataset.glassDispersion='.22';canvas.dataset.glassHeroVisible=surface.visible?'true':'false';
+    canvas.dataset.glassTime=time.toFixed(1);canvas.dataset.glassLightPhase=sweep.toFixed(3);canvas.dataset.glassReading=spatial.toFixed(3);canvas.dataset.glassDispersion='.14';canvas.dataset.glassHeroVisible=surface.visible?'true':'false';
     renderer.render(scene,camera);
    },dispose
   };
