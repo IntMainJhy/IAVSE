@@ -17,16 +17,21 @@ test('only the explicit public homepage gallery preview permits same-origin fram
   if(name.includes('request-security'))return{clientIp:()=> 'gallery-test'};
   throw Error(name);
  }});
- for(const path of ['/blog/alice','/blog/alice?embed=other','/blog/alice/articles/one?embed=gallery','/workspace/blog?embed=gallery','/login?embed=gallery']){
+ for(const path of ['/blog/alice','/blog/alice?embed=other','/blog/alice/articles/one?embed=gallery','/workspace/blog?embed=gallery','/login?embed=gallery','/blogs/showcase/lin-studio','/blogs/showcase/lin-studio?embed=other','/blogs/showcase/lin-studio/private?embed=gallery']){
   const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
   assert.match(response.headers.get('Content-Security-Policy'),/frame-ancestors 'none'/,path);
  }
- const response=exports.middleware({nextUrl:new URL('https://example.test/blog/alice?embed=gallery'),url:'https://example.test/blog/alice?embed=gallery',headers:new Headers()});
+ for(const path of ['/blog/alice?embed=gallery','/blogs/showcase/lin-studio?embed=gallery']){
+ const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
  assert.match(response.headers.get('Content-Security-Policy'),/frame-ancestors 'self'/);
  assert.equal(response.headers.get('X-Frame-Options'),'SAMEORIGIN');
  assert.equal(response.headers.get('X-Robots-Tag'),'noindex, nofollow');
+ }
  const rules=await nextConfig.headers(),preview=rules.find(rule=>rule.source==='/blog/:handle');
  assert.deepEqual(preview.has,[{type:'query',key:'embed',value:'gallery'}]);
+ const samplePreview=rules.find(rule=>rule.source==='/blogs/showcase/:handle');
+ assert.deepEqual(samplePreview.has,[{type:'query',key:'embed',value:'gallery'}]);
+ assert.equal(samplePreview.headers.find(header=>header.key==='X-Frame-Options').value,'SAMEORIGIN');
  assert.equal(rules[0].headers.find(header=>header.key==='X-Frame-Options').value,'DENY');
 });
 

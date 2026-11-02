@@ -5,6 +5,7 @@ import {serverI18n} from '@/lib/server-i18n';
 import {FeedAvatar} from './FeedAvatar';
 import {Icon} from './Icons';
 import {BlogSpaceGallery,type GallerySpace} from './BlogSpaceGallery';
+import {blogShowcases,showcaseProfile} from '@/lib/blog-showcase.mjs';
 
 /** Discovery always lists published, discoverable spaces, independently of login. */
 export async function BlogSpacesPage({req}:{req:Request}){
@@ -19,7 +20,7 @@ export async function BlogSpacesPage({req}:{req:Request}){
    <div><h1>{t('博客空间')}</h1><p>{say('每一个主页，都是一个独立的世界。','Every homepage, a world of its own.','一つひとつのホームページに、その人の世界。')}</p></div>
    <Link className="space-btn primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link>
   </header>
-  {spaces.length>0&&<BlogSpaceGallery spaces={spaces} labels={{open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索创作者','Scroll to meet the creators','スクロールしてクリエイターを知る'),directory:t('发现博客空间')}}/>}
+  <BlogSpaceGallery spaces={[...spaces,...blogShowcases.map(item=>showcaseProfile(item.handle,locale)).filter(Boolean) as GallerySpace[]]} labels={{open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索创作者','Scroll to meet the creators','スクロールしてクリエイターを知る'),directory:t('发现博客空间'),previous:say('上一个空间','Previous space','前のスペース'),next:say('下一个空间','Next space','次のスペース'),select:say('走近这个空间','Explore this space','このスペースに近づく'),close:say('返回空间','Back to the spaces','スペースに戻る'),overview:say('点击一个主页，走近看看','Choose a homepage and take a closer look','ホームページを選んで、近づいてみる')}}/>
   <section className="creator-directory" id="blog-spaces-directory" data-blog-directory aria-label={t('走进一个新的空间。')}>
    {spaces.length>0?<>
     <header className="creator-directory-heading"><h2>{say('从主页，认识一个人。','Meet the person behind the page.','ホームページから、その人を知る。')}</h2><span>{say(`${spaces.length} 个公开空间`,`${spaces.length} public ${spaces.length===1?'space':'spaces'}`,`${spaces.length} 件の公開スペース`)}</span></header>

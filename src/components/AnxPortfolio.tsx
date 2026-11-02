@@ -15,6 +15,7 @@ import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {pixels} from './BlogSignatureThemes';
 import {Icon} from './Icons';
 import type {SpaceData} from './SpaceBoard';
+import {showcaseAvatarSrc} from '@/lib/blog-showcase.mjs';
 
 function PortfolioMark({handle}:{handle:string}){
  const id=useId().replace(/:/g,''),highlight=useRef<SVGRadialGradientElement>(null);
@@ -37,6 +38,7 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false,part}:
  const editing=useBlogEditing(),show=(key:string)=>!part||part===key;
  const {t,locale}=useLocale(),[failedAvatar,setFailedAvatar]=useState(''),settings=data.layout.blog||{},base='/blog/'+data.handle,Chapters=preview||embedded?'div':'main';
  const hero=useRef<HTMLElement>(null),sectionMenu=useRef<HTMLDetailsElement>(null);
+ const avatarSrc=p.avatarId?'/media/'+p.avatarId:showcaseAvatarSrc(p.avatarSrc);
  useEffect(()=>{
   const closeOutside=(event:PointerEvent)=>{if(sectionMenu.current?.open&&!sectionMenu.current.contains(event.target as Node))sectionMenu.current.open=false};
   document.addEventListener('pointerdown',closeOutside);
@@ -76,7 +78,7 @@ export function AnxPortfolio({data,p,content,preview=false,embedded=false,part}:
   <div className="anx-topbar" id="anx-top"><a className="anx-handle" href={navigation.length?'#anx-'+navigation[0].id:'#anx-top'}>@{data.handle}</a>{navigation.length>0&&<nav aria-label={t('博客栏目')}>{navigation.length>4||(settings.design?.appearance&&settings.design.appearance!=='original')?<><div className="anx-nav-shortcuts">{navigation.slice(0,3).map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</div><details className="anx-nav-menu" ref={sectionMenu} onKeyDown={event=>{if(event.key==='Escape'){event.currentTarget.open=false;event.currentTarget.querySelector('summary')?.focus()}}}><summary>{locale==='en'?'All sections':locale==='ja'?'すべての項目':'全部栏目'} <span aria-hidden="true">＋</span></summary><div>{navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id} onClick={e=>e.currentTarget.closest('details')?.removeAttribute('open')}>{item.label}</a>)}</div></details></>:navigation.map((item:SpaceData)=><a key={item.id} href={'#anx-'+item.id}>{item.label}</a>)}</nav>}</div>
   <header ref={hero} className="anx-profile-header">
    <figure className="anx-signature"><PortfolioMark handle={/[a-z]/i.test(p.alias||'')?p.alias:data.handle}/><figcaption>Fig. 1.</figcaption></figure>
-   <div className="anx-portrait" onClick={editing?()=>editing.image(['avatarId']):undefined}><span aria-hidden={!editing} role={editing?'button':undefined} tabIndex={editing?0:undefined} aria-label={editing?t('更换头像'):undefined} onKeyDown={editing?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();editing.image(['avatarId'])}}:undefined}>{[...(p.name||'?')][0]}{p.avatarId&&failedAvatar!==p.avatarId&&<img src={'/media/'+p.avatarId} alt="" onError={()=>setFailedAvatar(p.avatarId)}/>}</span></div>
+   <div className="anx-portrait" onClick={editing?()=>editing.image(['avatarId']):undefined}><span aria-hidden={!editing} role={editing?'button':undefined} tabIndex={editing?0:undefined} aria-label={editing?t('更换头像'):undefined} onKeyDown={editing?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();editing.image(['avatarId'])}}:undefined}>{[...(p.name||'?')][0]}{avatarSrc&&failedAvatar!==avatarSrc&&<img src={avatarSrc} alt="" onError={()=>setFailedAvatar(avatarSrc)}/>}</span></div>
    <div className="anx-name"><h1><DesignText path={[settings.title?'$title':'name']} label={t('姓名 / 公开昵称')} max={settings.title?120:80}>{settings.title||p.name}</DesignText><SiteOwnerBadge siteOwner={data.siteOwner}/></h1><p><DesignText path={[settings.description?'$description':'alias']} label={t('一句话介绍')} max={settings.description?500:80}>{settings.description||p.alias||(!editing?'@'+data.handle:'')}</DesignText></p></div>
   </header>
   <div className="anx-separator" aria-hidden="true"/></>}
