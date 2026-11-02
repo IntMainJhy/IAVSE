@@ -1,20 +1,21 @@
 // Screen composition is converted to a shared world. Size comes from perspective,
 // not per-card scale; moving the camera changes occlusion between fixed homepages.
+// Final three values are small pitch/yaw/roll offsets from the viewing ray.
 const desktop=[
- [-.31,.04,100,9,38,-4], [.32,-.15,-360,-8,-34,4],
- [-.10,-.28,-1100,12,28,-4], [.24,.25,30,-6,-40,5],
- [-.16,.33,-420,8,30,-5], [-.34,-.25,-440,-7,44,-5],
- [.23,-.31,-1300,14,-32,6], [-.43,.32,-920,-8,48,-4],
- [.08,.03,-780,10,-28,5], [.42,.39,-1080,8,-42,3],
- [.02,-.30,-660,-9,-32,-4], [.43,.07,-1050,12,-44,5],
+ [-.31,.04,100,1,-10,-1], [.32,-.15,-360,-1,9,.8],
+ [-.10,-.28,-1100,1.5,-7,-.6], [.24,.25,30,-1,11,1],
+ [-.16,.33,-420,.5,-8,-.8], [-.34,-.25,-440,-1,-9,-1],
+ [.23,-.31,-1300,1,8,.7], [-.43,.32,-920,-1,-10,-.6],
+ [.08,.03,-780,.5,7,.6], [.42,.39,-1080,1,10,.8],
+ [.02,-.30,-660,-1,-6,-.7], [.43,.07,-1050,.5,9,.7],
 ];
 const mobile=[
- [-.24,-.02,70,9,32,-5], [.25,-.21,-300,-7,-36,5],
- [-.05,-.31,-920,10,28,-4], [.23,.24,0,-6,-36,5],
- [-.23,.34,-330,8,32,-5], [-.30,-.29,-380,-6,38,-5],
- [.24,-.36,-1080,12,-32,5], [-.38,.18,-820,-7,40,-4],
- [.02,.10,-660,10,-26,4], [.35,.43,-900,8,-38,4],
- [.01,-.36,-560,-8,-30,-4], [.37,-.02,-880,11,-38,5],
+ [-.24,-.02,70,.5,-7,-.7], [.25,-.21,-300,-.5,7,.6],
+ [-.05,-.31,-920,1,-5,-.5], [.23,.24,0,-.5,8,.7],
+ [-.23,.34,-330,.5,-6,-.6], [-.30,-.29,-380,-.5,-7,-.7],
+ [.24,-.36,-1080,.5,6,.5], [-.38,.18,-820,-.5,-7,-.5],
+ [.02,.10,-660,.5,5,.5], [.35,.43,-900,.5,7,.6],
+ [.01,-.36,-560,-.5,-4,-.5], [.37,-.02,-880,.5,6,.5],
 ];
 export const galleryLimit=12;
 export function gallerySceneMetrics(width){
@@ -22,10 +23,15 @@ export function gallerySceneMetrics(width){
  return {compact,perspective,cardWidth,focusZ:perspective*(1-cardWidth/focusWidth)};
 }
 export function gallerySpacePose(index,count,width,height,focused=-1){
- const {compact,perspective}=gallerySceneMetrics(width),slots=compact?mobile:desktop;
- const [sx,sy,z,rx,ry,rz]=count===1?[0,0,-120,8,28,-3]:slots[index%slots.length];
- const projection=1-z/perspective;
- return {x:sx*width*projection,y:sy*height*projection,z,rx:index===focused?0:rx,ry:index===focused?0:-ry,rz:index===focused?0:rz};
+ const {compact,perspective,cardWidth}=gallerySceneMetrics(width),slots=compact?mobile:desktop;
+ const [sx,sy,z,pitch,yaw,roll]=count===1?[0,0,-120,1,-8,-.7]:slots[index%slots.length];
+ const projection=1-z/perspective,d=perspective-z,degrees=180/Math.PI;
+ // Facing the viewer reveals more of the page; preserve a small edge gutter.
+ const horizontalLimit=Math.max(0,width/2-cardWidth/projection*.56-12);
+ const x=Math.max(-horizontalLimit,Math.min(horizontalLimit,sx*width))*projection,y=sy*height*projection;
+ // CSS uses Rx · Ry · Rz: face the viewer before adding a restrained tilt.
+ const rx=Math.atan2(y,d)*degrees+pitch,ry=Math.atan2(-x,Math.hypot(y,d))*degrees+yaw;
+ return {x,y,z,rx:index===focused?0:rx,ry:index===focused?0:ry,rz:index===focused?0:roll};
 }
 export function galleryCameraPose(index,count,width,height,yaw=0,pitch=0){
  if(index<0)return {x:0,y:0,z:0,yaw,pitch};
