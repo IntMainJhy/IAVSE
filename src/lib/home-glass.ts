@@ -114,7 +114,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   try{environment=pmrem.fromScene(studio,.025);scene.environment=environment.texture;for(const material of nativeMaterials){material.envMap=environment.texture;material.envMapIntensity=material.name.includes('PolishedRolledEdge')?1.65:.65;}}
   finally{skyGeometry.dispose();skyMaterial.dispose();panelGeometry.dispose();panelMaterials.forEach(value=>value.dispose());diffuser.dispose();pmrem.dispose();}
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#102651')},uBlueMiddle:{value:new Color('#2c68b7')},uBlueBottom:{value:new Color('#b7cfe7')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#0b1936')},uBlueMiddle:{value:new Color('#204d91')},uBlueBottom:{value:new Color('#a0b8d5')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
    varying vec4 vReceiverClip;
    void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);vReceiverClip=gl_Position;}
   `,fragmentShader:`
@@ -122,14 +122,14 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    float softField(vec2 p,vec2 center,vec2 radius){vec2 d=(p-center)/radius;return exp(-dot(d,d));}
    void main(){
     vec2 uv=vReceiverClip.xy/vReceiverClip.w*.5+.5;float documentY=max(0.,1.-uv.y+uScroll);
-    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.66,documentY));
-    color=mix(color,uBlueBottom,smoothstep(.50,.94,documentY));
-    color=mix(color,uIce,smoothstep(.66,1.03,documentY));
+    vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.70,documentY));
+    color=mix(color,uBlueBottom,smoothstep(.62,1.06,documentY));
+    color=mix(color,uIce,smoothstep(.82,1.20,documentY));
     vec2 field=vec2(uv.x,documentY);float breathing=sin(uTime*.23)*.018;
-    float silver=softField(field,vec2(-.04,.81+breathing),vec2(.36,.26))+softField(field,vec2(1.07,.84-breathing),vec2(.40,.30));
-    color=mix(color,uIce,clamp(silver*.62,0.,.76)*(1.-smoothstep(1.,1.2,documentY)));
+    float silver=softField(field,vec2(-.04,.96+breathing),vec2(.34,.26))+softField(field,vec2(1.07,.98-breathing),vec2(.38,.28));
+    color=mix(color,uIce,clamp(silver*.38,0.,.54)*(1.-smoothstep(1.,1.2,documentY)));
     float blueDepth=softField(field,vec2(.58,.49),vec2(.56,.25));
-    color=mix(color,uBlueMiddle,blueDepth*.13*(1.-smoothstep(.8,1.1,documentY)));
+    color=mix(color,uBlueMiddle,blueDepth*.20*(1.-smoothstep(.8,1.1,documentY)));
     float galleryDepth=softField(uv,uLensPosition,vec2(.78,.60));
     float galleryEdge=softField(uv,vec2(.08+sin(uTime*.10)*.08,.14),vec2(.40,.52));
     vec3 gallery=mix(uIce,uBlueBottom,galleryDepth*.28+galleryEdge*.12);

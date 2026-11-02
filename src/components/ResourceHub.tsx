@@ -14,7 +14,7 @@ import {Icon} from './Icons';
 
 export async function ResourceTabs({active='all'}:{active?:string}){
  const {t}=await serverI18n();
- return <nav className="resource-hub-tabs" aria-label={t('资源类型')}>{[['all','全部'],['docs','文档'],['skills','Skill'],['resources','网站与工具'],['legal','法律咨询']].map(([id,label])=><Link key={id} href={id==='legal'?LEGAL_CONSULTATION_PATH:'/resources'+(id==='all'?'':'?type='+id)} aria-current={active===id?'page':undefined}>{t(label)}</Link>)}</nav>;
+ return <nav className="resource-hub-tabs" aria-label={t('资源类型')}>{[['all','全部'],['docs','文档'],['skills','Skill'],['resources','网站与工具'],['legal','法律咨询']].map(([id,label])=><Link key={id} href={id==='legal'?LEGAL_CONSULTATION_PATH:'/resources'+(id==='all'?'':'?type='+id)} prefetch={true} scroll={false} aria-current={active===id?'page':undefined}>{t(label)}</Link>)}</nav>;
 }
 
 async function ResourceOverview({query,baseUrl}:{query:CatalogQuery;baseUrl:string}){
@@ -33,5 +33,5 @@ async function ResourceOverview({query,baseUrl}:{query:CatalogQuery;baseUrl:stri
 
 export async function ResourceHub({query={},baseUrl}:{query?:CatalogQuery;baseUrl:string}){
  const requested=String(query.type||''),kind=['docs','skills','resources'].includes(requested)?requested:query.category?'resources':'all';
- return <div className="resource-hub" data-resource-kind={kind}><ResourceTabs active={kind}/><div data-glass-reveal="stage">{kind==='skills'?<SkillsPage baseUrl={baseUrl} query={query}/>:kind==='docs'?<DocsPage path={['docs']} query={query}/>:kind==='resources'?<ResourcesPage query={query}/>:<ResourceOverview query={query} baseUrl={baseUrl}/>}</div></div>;
+ return <div className="resource-hub" data-resource-kind={kind}><ResourceTabs active={kind}/><div data-resource-panel>{kind==='skills'?<SkillsPage baseUrl={baseUrl} query={query}/>:kind==='docs'?<DocsPage path={['docs']} query={query}/>:kind==='resources'?<ResourcesPage query={query}/>:<ResourceOverview query={query} baseUrl={baseUrl}/>}</div></div>;
 }

@@ -6,25 +6,47 @@ import '@/app/surface-clarity.css';
 import '@/app/interaction-motion.css';
 
 type Box={left:number;top:number;width:number;height:number};
-type Snapshot={from:string;to:string;regions:Record<string,Box>;active?:Box;scroll:number;key?:string;keyboard:boolean};
+type Snapshot={from:string;to:string;at:number;direction:number;resource:boolean;regions:Record<string,Box>;active?:Box;scroll:number;key?:string;keyboard:boolean};
 const regions={nav:'.feed-nav-links',identity:'.feed-identity',compose:'.feed-navigation>.feed-write',discover:'.community-navigation-shell>.feed-discover',content:'.community-route-content,.space-workspace-main'};
 // PublicFrame can remount between routes; one pending handoff also bridges its header links.
 let pending:Snapshot|null=null;
+const resourceRoute=(path:string)=>/^\/(resources|docs|skills|articles)(\/|$)/.test(path);
+const publicContentSelector='[data-resource-panel],.catalog-page,.skills-page,.product-download-page,.document-reader,.shared-reading-layout,.legal-consultation,.community-auth-form,.community-report,.community-policy-document,.community-receipt';
 const box=(element:Element):Box=>{const {left,top,width,height}=element.getBoundingClientRect();return{left,top,width,height};};
 
 export function PageMotion({children,className=''}:{children:React.ReactNode;className?:string}){
  const path=usePathname(),query=useSearchParams().toString(),route=path+(query?'?'+query:'');
- const root=useRef<HTMLDivElement>(null),lastRoute=useRef(route);
+ const root=useRef<HTMLDivElement>(null),lastRoute=useRef(route),resetDeparture=useRef<(()=>void)|null>(null);
  useEffect(()=>{
   document.querySelectorAll<HTMLDetailsElement>('.organic-mobile-menu[open],.feed-mobile-account[open]').forEach(menu=>{menu.open=false;});
  },[path,query]);
  useEffect(()=>{
+  const element=root.current;if(!element)return;
+  const preference=window.matchMedia('(prefers-reduced-motion: reduce)'),context=gsap.context(()=>{},element);
+  let recovery:ReturnType<typeof setTimeout>|undefined;
+  const reset=()=>{clearTimeout(recovery);element.removeAttribute('aria-busy');context.revert();};
+  resetDeparture.current=reset;
   const capture=(to:string,keyboard=false,key?:string)=>{
    const element=root.current,nav=element?.querySelector<HTMLElement>('.feed-nav-links');
-   if(!element||to===element.dataset.motionRoute)return;
+   if(!element)return;
+   if(to===element.dataset.motionRoute){reset();pending=null;return;}
    const active=nav?.querySelector('[data-nav-key][aria-current="page"]');
    const indicator=nav?.querySelector('.feed-active-indicator');
-   pending={from:element.dataset.motionRoute||'',to,keyboard,key,scroll:nav?.scrollTop||0,regions:Object.fromEntries(Object.entries(regions).flatMap(([name,selector])=>{const node=element.querySelector(selector);return node?[[name,box(node)]]:[]})),active:indicator&&nav?.dataset.motionReady?box(indicator):active?box(active):undefined};
+   const from=element.dataset.motionRoute||'',source=new URL(from,location.href),next=new URL(to,location.href);
+   const order=['all','docs','skills','resources'],sourceIndex=order.indexOf(source.searchParams.get('type')||'all'),targetIndex=order.indexOf(next.searchParams.get('type')||'all');
+   const direction=source.pathname===next.pathname&&targetIndex<sourceIndex?-1:1,resource=resourceRoute(source.pathname)||resourceRoute(next.pathname);
+   pending={from,to,at:Date.now(),direction,resource,keyboard,key,scroll:nav?.scrollTop||0,regions:Object.fromEntries(Object.entries(regions).flatMap(([name,selector])=>{const node=element.querySelector(selector);return node?[[name,box(node)]]:[]})),active:indicator&&nav?.dataset.motionReady?box(indicator):active?box(active):undefined};
+   if(resource&&!preference.matches){
+    const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.v2-hero-copy,.blog-spaces-heading');
+    if(content){
+     const queryOnly=source.pathname===next.pathname;
+     element.setAttribute('aria-busy','true');
+     context.add(()=>{gsap.to(content,{opacity:.52,x:queryOnly?-direction*10:0,y:queryOnly?0:-8,duration:.16,ease:'power2.out',overwrite:'auto'});});
+     clearTimeout(recovery);
+     // Navigation begins immediately. A failed or cancelled request must never leave content dimmed.
+     recovery=setTimeout(()=>{reset();if(pending?.to===to)pending=null;},8000);
+    }
+   }
   };
   const click=(event:MouseEvent)=>{
    if(event.defaultPrevented||event.button||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
@@ -32,7 +54,7 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    const element=root.current,shell=element?.closest('.organic-site,.blog-public-shell')||element;
    if(!link||!shell?.contains(link)||link.target||link.hasAttribute('download'))return;
    const next=new URL(link.href,location.href);
-   if(next.origin===location.origin)capture(next.pathname+next.search,event.detail===0,link.dataset.navKey);
+   if(next.origin===location.origin&&!/^\/(api|download|media|site-files)(\/|$)/.test(next.pathname))capture(next.pathname+next.search,event.detail===0,link.dataset.navKey);
   };
   const dismiss=(event:PointerEvent|KeyboardEvent)=>{
    const menu=document.querySelector<HTMLDetailsElement>('.organic-mobile-menu[open]');
@@ -43,23 +65,26 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    }else if(event.target instanceof Node&&!menu.contains(event.target))menu.open=false;
   };
   const back=()=>capture(location.pathname+location.search);
+  const reduce=()=>{if(preference.matches)reset();};
+  preference.addEventListener('change',reduce);
   document.addEventListener('click',click,true);window.addEventListener('popstate',back);
   document.addEventListener('pointerdown',dismiss);document.addEventListener('keydown',dismiss);
-  return()=>{document.removeEventListener('click',click,true);window.removeEventListener('popstate',back);document.removeEventListener('pointerdown',dismiss);document.removeEventListener('keydown',dismiss);};
+  return()=>{reset();resetDeparture.current=null;preference.removeEventListener('change',reduce);document.removeEventListener('click',click,true);window.removeEventListener('popstate',back);document.removeEventListener('pointerdown',dismiss);document.removeEventListener('keydown',dismiss);};
  },[]);
  useLayoutEffect(()=>{
-  const element=root.current,previous=pending?.to===route?pending:null;pending=null;
+  const element=root.current,previous=pending?.to===route&&Date.now()-pending.at<10000?pending:null;pending=null;
   const last=lastRoute.current,changed=last!==route||!!previous;lastRoute.current=route;
   if(!element)return;
+  resetDeparture.current?.();
   if(!element.querySelector('.community-navigation-shell')){
    if(!changed)return;
    const queryOnly=(previous?.from||last).split('?')[0]===path;
    const media=gsap.matchMedia();
    media.add('(prefers-reduced-motion: no-preference)',()=>{
     // Keep full-screen WebGL scenes in their coordinate system; animate their text receivers.
-    const content=element.querySelector<HTMLElement>('.resource-hub > [data-glass-reveal],.catalog-page,.skills-page,.product-download-page,.document-reader,.shared-reading-layout,.community-auth-form,.community-report,.community-policy-document,.community-receipt');
+    const content=element.querySelector<HTMLElement>(publicContentSelector);
     const heading=element.querySelector<HTMLElement>('.v2-hero-copy,.blog-spaces-heading,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
-    if(content)gsap.fromTo(content,{opacity:.88,y:queryOnly?0:10},{opacity:1,y:0,duration:queryOnly ? .24 : .36,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
+    if(content)gsap.fromTo(content,{opacity:previous?.resource ? .48 : .88,x:previous?.resource&&queryOnly?previous.direction*14:0,y:queryOnly?0:12},{opacity:1,x:0,y:0,duration:previous?.resource ? .34 : queryOnly ? .24 : .36,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
     if(heading&&!queryOnly&&!content?.contains(heading))gsap.fromTo(heading,{opacity:.86,y:12},{opacity:1,y:0,duration:.4,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
     if(!content&&!heading)gsap.fromTo(element,{opacity:.9},{opacity:1,duration:.22,ease:'power2.out',clearProps:'opacity',overwrite:'auto'});
    },element);

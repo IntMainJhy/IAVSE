@@ -9,16 +9,17 @@ import * as runtime from 'react/jsx-runtime';
 import * as locales from '../src/lib/content-locales.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PlatformHome.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-async function render(space,locale='zh',media=true){
+async function render(space,locale='zh',media=true,downloads={}){
  const exports={};
  const Link=({href,children,...props})=>React.createElement('a',{href,...props},children);
  const modules={
   'react/jsx-runtime':runtime,'next/link':{default:Link},
-  '@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},
+  '@/lib/server-i18n':{serverI18n:async()=>({t:(value,args=[])=>value.replace(/\{(\d+)\}/g,(_,i)=>String(args[i]??'{'+i+'}')),locale})},
   '@/lib/spaces.mjs':{defaultBlogSpace:()=>space},
-  '@/lib/content-locales.mjs':locales,'@/lib/db.mjs':{getConfig:()=>({desktopDownloads:{}})},
+  '@/lib/content-locales.mjs':locales,'@/lib/db.mjs':{getConfig:()=>({desktopDownloads:downloads})},
   '@/lib/home-download.mjs':{homeDownload:()=>({href:'/downloads'})},
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
+  './DesktopDownloadsPage':{PlatformMark:()=>React.createElement('svg',{'data-platform':'macos','aria-hidden':true})},
   './HomeMotion':{HomeMotion:()=>null},'./HomeCinema':{HomeCinema:()=>null},
   './CreatorVoices':{CreatorVoices:()=>React.createElement('section',{'data-creator-voices':true},'Illustrative creator comments')},
   './HomeResourceSculpture':{HomeResourceSculpture:({posterSrc,label})=>media?React.createElement('img',{src:posterSrc,alt:label,'data-resource-fallback':true}):null},
@@ -115,4 +116,16 @@ test('missing authored page titles use localized profile identity and alias or p
  const data=structuredClone(space);data.profile.alias='Base alias';data.profile.translations={en:{name:'Localized identity',alias:'Localized alias',intro:'Localized intro'}};
  const alias=demoSnapshot(await render(data,'en'));assert.equal(alias.name,'Localized identity');assert.equal(alias.description,'Localized alias');assert.equal(alias.intro,'Localized intro');
  data.profile.alias='';data.profile.translations.en.alias='';const handle=demoSnapshot(await render(data,'en'));assert.equal(handle.description,'@published-author');assert.equal(handle.name,'Localized identity');
+});
+
+
+test('the opening offers one macOS download and falls back to the macOS download section',async()=>{
+ for(const [downloads,expected] of [[{},'/downloads#download-macos'],[{macos:{url:'https://downloads.example.com/iavse.dmg'},windows:{url:'https://downloads.example.com/iavse.exe'}},'https://downloads.example.com/iavse.dmg']]){
+  const html=await render(space,'zh',true,downloads),actions=html.match(/<div class="v2-hero-actions">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(actions,'the opening retains a download action');
+  assert.equal([...actions.matchAll(/<a /g)].length,1,'only one action competes with the opening brand');
+  assert.ok(actions.includes('href="'+expected+'"'));
+  assert.ok(actions.includes('macOS'));
+  assert.ok(!actions.includes('/workspace/blog')&&!actions.includes('#creators'));
+ }
 });

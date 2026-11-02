@@ -6,15 +6,15 @@ import ts from 'typescript';
 
 function fixture({reduced=false}={}){
  const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PageMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
- const effects=[],layouts=[],calls=[],contexts=[],observers=[],media=[],events=new Map(),changes=new Set(),menus=[{open:true}],exports={};
- class Element{constructor(rect={left:100,top:100,width:160,height:44}){this.rect=rect;this.dataset={};this.scrollTop=0;this.nodes={};}getBoundingClientRect(){return this.rect;}querySelector(selector){return this.nodes[selector]||null;}querySelectorAll(){return this.links||[];}closest(){return this;}contains(){return true;}focus(){this.focused=true;}hasAttribute(){return false;}}
+ const effects=[],layouts=[],calls=[],contexts=[],observers=[],media=[],events=new Map(),changes=new Set(),timers=new Map(),menus=[{open:true}],exports={};
+ class Element{constructor(rect={left:100,top:100,width:160,height:44}){this.rect=rect;this.dataset={};this.scrollTop=0;this.nodes={};}getBoundingClientRect(){return this.rect;}querySelector(selector){return this.nodes[selector]||null;}querySelectorAll(){return this.links||[];}closest(){return this;}contains(){return true;}focus(){this.focused=true;}setAttribute(name,value){this[name]=value;}removeAttribute(name){delete this[name];}hasAttribute(){return false;}}
  let root=new Element(),path='/community',query='',refs=[],refIndex=0;
  const preference={matches:reduced,addEventListener:(_,fn)=>changes.add(fn),removeEventListener:(_,fn)=>changes.delete(fn)};
  const document={querySelectorAll:()=>menus,addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:(key)=>events.delete(key)};
  const window={matchMedia:q=>q.includes('reduced-motion')?preference:{matches:true},addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:key=>events.delete(key)};
- const gsap={fromTo:(node,from,to)=>calls.push({node,from,to}),set:(node,to)=>calls.push({node,to}),killTweensOf:node=>calls.push({node,kill:true}),context:fn=>{const cleanup=fn();const ctx={reverted:false,add:callback=>callback(),revert(){this.reverted=true;cleanup?.();}};contexts.push(ctx);return ctx;},matchMedia:()=>{const m={reverted:false,add:(_,fn)=>{if(!preference.matches)fn();},revert(){this.reverted=true;}};media.push(m);return m;}};
+ const gsap={to:(node,to)=>calls.push({node,to}),fromTo:(node,from,to)=>calls.push({node,from,to}),set:(node,to)=>calls.push({node,to}),killTweensOf:node=>calls.push({node,kill:true}),context:fn=>{const cleanup=fn();const ctx={reverted:false,add:callback=>callback(),revert(){this.reverted=true;cleanup?.();}};contexts.push(ctx);return ctx;},matchMedia:()=>{const m={reverted:false,add:(_,fn)=>{if(!preference.matches)fn();},revert(){this.reverted=true;}};media.push(m);return m;}};
  class ResizeObserver{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}}
- vm.runInNewContext(source,{exports,document,window,ResizeObserver,location:new URL('http://localhost:3010/community'),URL,Element,require:name=>{
+ vm.runInNewContext(source,{exports,document,window,ResizeObserver,setTimeout:fn=>{const id=timers.size+1;timers.set(id,fn);return id},clearTimeout:id=>timers.delete(id),location:new URL('http://localhost:3010/community'),URL,Element,require:name=>{
   if(name==='react')return{useEffect:fn=>effects.push(fn),useLayoutEffect:fn=>layouts.push(fn),useRef:initial=>{const i=refIndex++;if(i===0)return refs[0]={current:root};return refs[i]||=( {current:initial});}};
   if(name==='gsap')return{gsap};
   if(name==='next/navigation')return{usePathname:()=>path,useSearchParams:()=>new URLSearchParams(query)};
@@ -26,7 +26,7 @@ function fixture({reduced=false}={}){
   const url=new URL(to,'http://localhost:3010');path=url.pathname;query=url.search.slice(1);root=new Element();root.dataset.motionRoute=to;refIndex=0;if(remount)refs=[];
   const nav=new Element({left,top:100,width:160,height:476}),active=new Element({left,top:key==='feed'?248:296,width:120,height:44}),indicator=new Element(active.rect),content=new Element({left:left+192,top:100,width:768,height:700});
   active.dataset.navKey=key;nav.nodes['[data-nav-key][aria-current="page"]']=active;nav.nodes['.feed-active-indicator']=indicator;
-  root.nodes=publicPage?{'.resource-hub > [data-glass-reveal],.catalog-page,.skills-page,.product-download-page,.document-reader,.shared-reading-layout,.community-auth-form,.community-report,.community-policy-document,.community-receipt':content}:{'.community-navigation-shell':new Element(),'.feed-nav-links':nav,'.community-route-content,.space-workspace-main':content};root.links=[active];
+  root.nodes=publicPage?{'[data-resource-panel],.catalog-page,.skills-page,.product-download-page,.document-reader,.shared-reading-layout,.legal-consultation,.community-auth-form,.community-report,.community-policy-document,.community-receipt':content}:{'.community-navigation-shell':new Element(),'.feed-nav-links':nav,'.community-route-content,.space-workspace-main':content};root.links=[active];
   const children={title:'Visible server content'},output=exports.PageMotion({children});
   assert.equal(output.props.children,children);assert.equal(output.props.style,undefined);
   const close=effects.at(-2)();assert.equal(close,undefined);assert.ok(menus.every(menu=>!menu.open));
@@ -34,7 +34,7 @@ function fixture({reduced=false}={}){
   return{root,nav,content,active,indicator,cleanup:()=>{eventsCleanup?.();motionCleanup?.();}};
  }
  function click(to,key='members',keyboard=false,overrides={}){const link=new Element();link.href=new URL(to,'http://localhost:3010').href;link.target='';link.dataset.navKey=key;const target=new Element();target.closest=()=>link;const event={target,button:0,detail:keyboard?0:1,...overrides};events.get('click')(event);return event;}
- return{page,click,calls,contexts,observers,events,preference,changes,media};
+ return{page,click,calls,contexts,observers,events,preference,changes,media,timers};
 }
 
 test('first render preserves server attributes until streamed navigation children hydrate',()=>{
@@ -59,13 +59,13 @@ test('public header links bridge remounted frames without delaying or cancelling
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});assert.equal(f.calls.length,0);
  const event=f.click('/downloads');assert.equal(event.defaultPrevented,undefined);assert.equal(event.preventDefault,undefined);a.cleanup();
  const b=f.page('/downloads',100,'feed',{publicPage:true,remount:true});
- assert.ok(f.calls.some(call=>call.node===b.content&&call.from.y===10&&call.to.opacity===1&&call.to.clearProps==='transform,opacity'));
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===12&&call.to.opacity===1&&call.to.clearProps==='transform,opacity'));
  b.cleanup();assert.ok(f.media.every(media=>media.reverted));
 });
 
 test('query routes keep public content in place and modified or external clicks cannot create a handoff',()=>{
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});f.click('/resources?type=skills');a.cleanup();
- const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.ok(f.calls.some(call=>call.node===b.content&&call.from.y===0&&call.to.duration===.24));b.cleanup();
+ const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===0&&call.to.duration===.34));b.cleanup();
  for(const [to,overrides] of [['/downloads',{ctrlKey:true}],['https://example.com/downloads',{}],['/downloads',{defaultPrevented:true}],['/downloads',{button:1}]]){
   const p=f.page('/resources',100,'feed',{publicPage:true,remount:true});f.click(to,'members',false,overrides);p.cleanup();const start=f.calls.length,q=f.page('/downloads',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,start);q.cleanup();
  }
@@ -73,4 +73,32 @@ test('query routes keep public content in place and modified or external clicks 
 
 test('reduced motion public transitions retain the native content and query navigation',()=>{
  const f=fixture({reduced:true}),a=f.page('/resources',100,'feed',{publicPage:true});f.click('/resources?type=skills');a.cleanup();const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,0);b.cleanup();
+});
+
+
+test('resource navigation gives immediate departure feedback and a directional arrival across frame remounts',()=>{
+ const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});
+ const event=f.click('/resources?type=skills');assert.equal(event.defaultPrevented,undefined,'navigation never waits for animation');
+ assert.ok(f.calls.some(call=>call.node===a.content&&call.to.opacity===.52&&call.to.x===-10));
+ assert.equal(a.root['aria-busy'],'true');a.cleanup();
+ const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.opacity===.48&&call.from.x===14&&call.to.x===0));
+ b.cleanup();assert.equal(f.timers.size,0);
+});
+
+test('rapid resource clicks keep the latest destination and cancelled requests recover readable content',()=>{
+ const f=fixture(),a=f.page('/resources?type=skills',100,'feed',{publicPage:true});
+ f.click('/resources?type=resources');f.click('/resources?type=docs');assert.equal(f.timers.size,1,'one bounded recovery timer');
+ assert.ok(f.calls.some(call=>call.node===a.content&&call.to.x===10),'earlier tabs depart in the opposite direction');
+ a.cleanup();const b=f.page('/resources?type=docs',100,'feed',{publicPage:true,remount:true});
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.x===-14));
+ f.click('/resources?type=skills');for(const recover of [...f.timers.values()])recover();
+ assert.equal(b.root['aria-busy'],undefined);b.cleanup();
+});
+
+test('returning to the currently shown tab cancels outgoing feedback and pending handoffs',()=>{
+ const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});
+ f.click('/resources?type=skills');f.click('/resources');assert.equal(a.root['aria-busy'],undefined);assert.equal(f.timers.size,0);
+ a.cleanup();const start=f.calls.length,b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});
+ assert.equal(f.calls.length,start,'a cancelled destination cannot create a later arrival');b.cleanup();
 });

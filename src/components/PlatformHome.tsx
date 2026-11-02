@@ -14,11 +14,13 @@ import {HomeBlogCanvasDemo,type HomeBlogDemoExample} from './HomeBlogCanvasDemo'
 import {HomeResourceSculpture} from './HomeResourceSculpture';
 import {HomeStoryVideo} from './HomeStoryVideo';
 import {CreatorVoices} from './CreatorVoices';
+import {PlatformMark} from './DesktopDownloadsPage';
 import '@/app/home-showcase.css';
 export async function PlatformHome({req}:{req:Request}){
  const {t,locale}=await serverI18n();
  let featured:any=null;try{featured=defaultBlogSpace(req)}catch{}
  const download=homeDownload(req.headers,getConfig('site').desktopDownloads);
+ const macDownload=getConfig('site').desktopDownloads?.macos?.url||'/downloads#download-macos';
  let creator:CreatorStageData|null=null;
  let demoCreator:HomeBlogDemoExample|null=null;
  if(featured){
@@ -35,7 +37,7 @@ export async function PlatformHome({req}:{req:Request}){
  return <div className="v2-home">
   <HomeMotion/>
   <div className="v2-home-atmosphere" aria-hidden="true"><V2Atmosphere/></div>
-  <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}<div className="v2-hero-actions"><Link className="v2-primary" href="#creators">{t('发现博客空间')}<Icon name="arrow"/></Link><Link className="v2-hero-secondary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link></div></div><HomeCinema locale={locale}/></div>
+  <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}<div className="v2-hero-actions"><a className="iavse-mac-download" href={macDownload} rel="noopener noreferrer"><PlatformMark platform="macos"/><span>{t('下载 {0}',['macOS'])}</span></a></div></div><HomeCinema locale={locale}/></div>
    <div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
   </section>
   <div className="home-stories"><div className="home-stories-stage">
