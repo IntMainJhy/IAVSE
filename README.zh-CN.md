@@ -16,7 +16,7 @@ IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理�
 
 本仓库提供网站的完整前端、后端、测试及部署示例，方便阅读其界面、内容组织和权限治理的实现。网站基于 Next.js、React、TypeScript 和 Node.js 内置 SQLite 构建。
 
-> **源码公开，允许非商业使用。** 网站原创部分采用 [PolyForm Noncommercial 1.0.0](LICENSE)，允许在其定义的非商业目的范围内使用、修改、部署和再分发，不授予商业用途许可。由于限制商业目的，它不属于 OSI 定义的开源许可。署名和适用范围见 [NOTICE](NOTICE)。
+> **源码公开，允许非商业使用。** 网站原创部分采用 [PolyForm Noncommercial 1.0.0](LICENSE)，允许在其定义的非商业目的范围内使用、修改、部署和再分发，不授予商业用途许可。由于限制商业目的，它不属于 OSI 定义的开源许可。欢迎非商业学习与维护贡献；分发时须保留原作者及项目来源，不得将原项目冒称为自己原创。署名和适用范围见 [NOTICE](NOTICE)，参与维护见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 **本仓库只发布网站。macOS、Windows 客户端的源码、安装包和专有资源不在本仓库发布，本仓库的许可不授予客户端使用或分发权利。** GitHub 平台内的查看与 Fork 按适用的平台条款处理。
 
@@ -214,3 +214,5 @@ HTTP 集成脚本位于 `test/`，使用临时数据目录执行；运行前确�
 第三方材料继续适用各自许可，参见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 - [社区收尾与账号隔离记录](docs/community-finish-2026-10-22.md)
+
+欢迎按[维护指南](CONTRIBUTING.md)提交非商业维护贡献。再分发须保留两条 Required Notice，明确原作者 IntMainJhy 和原项目 IAVSE。贡献者可以署名自己的原创修改，但不能替换原作者署名或把既有项目冒称为自己原创。这里的授权包含非商业部署，并非严格限制为「只能阅读学习」。

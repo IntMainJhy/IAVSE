@@ -1,6 +1,7 @@
 # IAVSE licensing notice
 
 Required Notice: Copyright (c) 2026 IntMainJhy (https://github.com/IntMainJhy)
+Required Notice: Original project: IAVSE by IntMainJhy (https://github.com/IntMainJhy/IAVSE)
 
 IAVSE website material authored by IntMainJhy and not separately licensed is
 provided under the unmodified PolyForm Noncommercial License 1.0.0 in LICENSE.
@@ -8,6 +9,12 @@ The permission includes use, modification, noncommercial deployment and
 redistribution for the permitted purposes defined by that license. Commercial
 use is not granted by this license. Contact the copyright holder for separate
 permission if your intended purpose is outside its grants.
+
+Noncommercial study, deployment, modification and maintenance are welcome under
+LICENSE. Redistributed copies must retain the license and Required Notice lines.
+Do not present IntMainJhy's pre-existing material as your own original work.
+Contributors may credit their own original changes; this does not replace the
+original project's attribution or transfer ownership of pre-existing material.
 
 Scope and third-party material
 
@@ -32,9 +39,13 @@ Chinese explanation below summarizes scope and does not replace its terms.
 修改、部署和再分发；再分发时须保留许可和 Required Notice。商业用途不在
 该许可授权内，需另行取得著作权人许可。
 
-这比原来的「仅供阅读学习」许可开放：非商业自用、研究、实验及符合许可
-定义的组织使用不再要求单独书面授权。许可对非商业组织有专门的允许条款，
-具体范围以 LICENSE 英文原文为准。由于限制商业目的，不称为 OSI 意义的
-开源软件，而称为「源码公开，非商业许可」。
+许可覆盖其定义的个人用途与非商业组织使用，具体范围以 LICENSE 英文
+原文为准。非商业部署与维护在许可范围内，并非严格限制为只读学习。由于
+限制商业目的，不称为 OSI 意义的开源软件，而称为「源码公开，非商业许可」。
+
+欢迎按 LICENSE 进行非商业学习、部署、修改与维护。再分发时须保留许可及
+上述全部 Required Notice 行，包括原作者 IntMainJhy 与 IAVSE 项目来源。
+不得把原作者既有代码或整个原项目冒称为自己原创。维护者可以署名自己的
+原创修改，但维护贡献不会改变既有作品的作者归属。维护流程见 CONTRIBUTING.md。
 
 第三方原许可、客户端排除范围、用户内容与品牌等权利边界按上述说明保留。

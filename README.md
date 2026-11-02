@@ -14,7 +14,7 @@ The blog editor uses MIT-licensed React Flow to design the actual homepage, with
 
 This repository contains the website's frontend, backend, tests and deployment examples, making its interface, content model and permission system available to study. It is built with Next.js, React, TypeScript and Node.js's built-in SQLite.
 
-> **Source available for noncommercial use.** Original website material is licensed under [PolyForm Noncommercial 1.0.0](LICENSE), allowing use, modification, deployment and redistribution for its permitted purposes. Commercial use is not granted. This is a source-available license, not an OSI-approved open-source license. See [NOTICE](NOTICE) for attribution and scope.
+> **Source available for noncommercial use.** Original website material is licensed under [PolyForm Noncommercial 1.0.0](LICENSE), allowing use, modification, deployment and redistribution for its permitted purposes. Commercial use is not granted. This is a source-available license, not an OSI-approved open-source license. Noncommercial study and maintenance contributions are welcome. Retain the original author and project notices; do not claim the original project as your own work. See [NOTICE](NOTICE) for attribution and scope, and [CONTRIBUTING.md](CONTRIBUTING.md) to contribute.
 
 **This repository publishes only the website. macOS and Windows client source code, installers and proprietary assets remain private. This repository's license grants no rights to use or distribute those clients.** Viewing and forking on GitHub remain subject to GitHub's applicable terms.
 
@@ -212,3 +212,5 @@ Original website material is provided under the [PolyForm Noncommercial License 
 [LICENSE](LICENSE) contains the unmodified official English terms. Keep the copyright notice in [NOTICE](NOTICE) with redistributed copies. Third-party materials retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The private desktop clients and user content are not relicensed by this website license.
 
 - [Community completion review](docs/community-finish-2026-10-22.md)
+
+Noncommercial maintenance contributions are welcome through [CONTRIBUTING.md](CONTRIBUTING.md). Keep both Required Notice lines when redistributing, identifying IntMainJhy and the original IAVSE project. Contributors may credit their own original modifications; they must not replace the original attribution or claim authorship of the pre-existing project.

@@ -4,7 +4,7 @@
 
 IAVSE combines editable developer blog homepages with shared docs, independent AI Skills and useful resources. Original website code is source-available under [PolyForm Noncommercial 1.0.0](../LICENSE), permitting noncommercial use, modification, deployment and redistribution within its terms. See [NOTICE](../NOTICE) for attribution and scope.
 
-IAVSE 将可编辑的开发者博客主页与共享文档、独立 AI Skill、实用资源连接起来。网站原创源码按 [PolyForm Noncommercial 1.0.0](../LICENSE) 允许非商业使用、修改、部署和再分发，署名与范围见 [NOTICE](../NOTICE)。
+IAVSE 将可编辑的开发者博客主页与共享文档、独立 AI Skill、实用资源连接起来。网站原创源码按 [PolyForm Noncommercial 1.0.0](../LICENSE) 允许非商业使用、修改、部署和再分发，署名与范围见 [NOTICE](../NOTICE)。欢迎非商业学习与维护；保留原作者及项目来源，参与方式见[维护指南](../CONTRIBUTING.md)。
 
 ## Read and create / 阅读与创作
 
@@ -41,7 +41,7 @@ Production registration and publishing depend on explicit deployment settings. L
 
 Current repository description / 当前仓库简介：
 
-> IAVSE: Developer portfolios, spatial blogs, docs, Skills and shared resources. Next.js, React, TypeScript and SQLite. PolyForm Noncommercial 1.0.0.
+> IAVSE: Developer portfolios, spatial blogs, docs and Skills. Noncommercial use and maintenance welcome. Original author credit required. PolyForm Noncommercial 1.0.0.
 
 Suggested topics: `nextjs`, `react`, `typescript`, `sqlite`, `portfolio`, `developer-community`, `agent-skills`, `mcp`, `source-available`.
 
