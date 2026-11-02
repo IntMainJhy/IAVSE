@@ -1,0 +1,66 @@
+/* Shared optical chrome: edge-aligned navigation, clear contents, soft glass controls. */
+html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header>.organic-container.organic-header-inner{
+ width:100%;max-width:none!important;margin-inline:0;padding-inline:28px;min-height:80px;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header{
+ background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none;-webkit-backdrop-filter:none;isolation:isolate;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header::before{
+ content:"";display:block;position:absolute;inset:0 0 auto;height:138px;pointer-events:none;z-index:0;
+ background:linear-gradient(#f8fafcd9,#f5f8fb8a 40%,#f5f8fb00);
+ backdrop-filter:blur(22px) saturate(1.15);-webkit-backdrop-filter:blur(22px) saturate(1.15);
+ mask-image:linear-gradient(#000 0 27%,#000a 55%,transparent);-webkit-mask-image:linear-gradient(#000 0 27%,#000a 55%,transparent);
+ border:0;box-shadow:none;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header::after{content:none;display:none}
+html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header>.organic-header-inner{position:relative;z-index:1}
+html[data-ui][data-color-mode] .organic-site.v2-site.v2-landing:not([data-glass-scrolled])>.organic-header::before{opacity:0}
+html[data-ui][data-color-mode] .organic-site.v2-site .organic-header-tools{justify-self:end;gap:16px}
+.language-control{position:relative;flex:none;color:var(--glass-header-ink,#243b59)}
+html[data-ui][data-color-mode] .language-control>.language-trigger{
+ display:flex;align-items:center;justify-content:center;gap:10px;min-height:44px;min-width:88px;padding:9px 13px;
+ border:0;border-radius:99px;background:transparent;color:inherit;font:inherit;font-size:13px;line-height:20px;cursor:pointer;
+ box-shadow:inset 0 1px #ffffff00;transition:background .2s,box-shadow .2s,transform .18s;
+}
+.language-trigger>svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.4;transition:transform .25s}
+.language-control[data-open=true]>.language-trigger{background:#b2c9e529;box-shadow:inset 0 1px #ffffff68}
+.language-control[data-open=true]>.language-trigger>svg{transform:rotate(180deg)}
+html[data-ui][data-color-mode] .language-control>.language-menu{
+ position:absolute;right:0;top:calc(100% + 8px);z-index:120;width:170px;padding:6px;border-radius:20px;
+ background:linear-gradient(135deg,#fffffff2,#edf4fbe8);color:#203754;border:0;
+ box-shadow:inset 0 1px #fff,inset 0 -1px #96acc338,0 16px 38px -15px #152f5d48;
+ backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);
+ transform-origin:90% top;animation:iavse-language-open .2s cubic-bezier(.16,1,.3,1);
+}
+html[data-ui][data-color-mode] .language-menu>[role=option]{
+ display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 13px;gap:20px;
+ border:0;border-radius:14px;background:transparent;color:#203754;font:inherit;font-size:14px;text-align:left;cursor:pointer;
+}
+html[data-ui][data-color-mode] .language-menu>[role=option][aria-selected=true]{background:#c9d9ed73;box-shadow:inset 0 1px #ffffffb8;color:#214d85}
+.language-menu>[role=option]>svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7}
+html[data-ui][data-color-mode] .language-menu>[role=option]:hover{background:#dce7f6ad}
+html[data-ui][data-color-mode] .language-menu>[role=option]:focus-visible{outline:2px solid #5b85c4;outline-offset:-2px}
+@keyframes iavse-language-open{from{opacity:0;transform:translateY(-5px) scale(.96)}to{opacity:1;transform:none}}
+html[data-ui][data-color-mode] .organic-site.v2-site .organic-header .site-account-menu>summary{border-radius:99px;padding-inline:12px;transition:background .2s,transform .18s}
+html[data-ui][data-color-mode] .organic-site.v2-site .site-account-panel{
+ border:0;border-radius:22px;background:linear-gradient(135deg,#fffffff2,#eff4fbe8);color:#203754;
+ box-shadow:inset 0 1px #fff,0 16px 38px -15px #152f5d48;backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);
+}
+html[data-ui][data-color-mode] .organic-site.v2-site .site-account-panel :is(a,button){border-radius:12px;color:#203754}
+html[data-ui][data-color-mode] .organic-site.v2-site :is(.organic-button,.btn,.space-btn,.v2-primary,.home-story-link):not(.space-root *):not(:disabled){transition:background .2s,color .2s,box-shadow .2s,transform .18s cubic-bezier(.2,.75,.2,1)}
+html[data-ui][data-color-mode] .organic-site.v2-site :is(.organic-button,.btn,.space-btn,.v2-primary,.home-story-link):not(.space-root *):not(:disabled):active{transform:translateY(1px) scale(.98)}
+@media(hover:hover){
+ html[data-ui][data-color-mode] .language-control>.language-trigger:hover,html[data-ui][data-color-mode] .organic-site.v2-site .organic-header .site-account-menu>summary:hover{background:#b2c9e529;box-shadow:inset 0 1px #ffffff68}
+}
+@media(max-width:1000px){html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header>.organic-container.organic-header-inner{min-height:72px;padding-inline:22px}}
+@media(max-width:767px){
+ html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header>.organic-container.organic-header-inner{min-height:68px;padding-inline:16px}
+ html[data-ui][data-color-mode] .organic-site.v2-site .organic-header-tools{gap:6px}
+ html[data-ui][data-color-mode] .language-control>.language-trigger{min-width:78px;padding-inline:10px;font-size:13px}
+ html[data-ui][data-color-mode] .organic-site.v2-site>.organic-header::before{height:120px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .language-menu{animation:none!important}.language-trigger>svg{transition:none}
+ html[data-ui][data-color-mode] .organic-site.v2-site :is(.organic-button,.btn,.space-btn,.v2-primary,.home-story-link):active{transform:none!important}
+}
+@media(prefers-reduced-transparency:reduce){html[data-ui][data-color-mode] .language-control>.language-menu,html[data-ui][data-color-mode] .organic-site.v2-site .site-account-panel{background:#f8fafd;backdrop-filter:none}}

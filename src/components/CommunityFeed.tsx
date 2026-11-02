@@ -2,7 +2,7 @@
 import {localeDate} from '@/lib/i18n.mjs';
 import {useLocale} from './LocaleProvider';
 import {SiteOwnerBadge} from './SiteOwnerBadge';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState,type CSSProperties} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {Icon} from './Icons';
@@ -14,6 +14,7 @@ import {api} from '@/lib/client';
 import {communityProfileDestination} from '@/lib/navigation.mjs';
 import {usePageSeed} from './PageResources';
 import {useCommunityRail} from './useCommunityRail';
+import {useLiquidCommunityNav} from './useLiquidCommunityNav';
 
 function AccountIdentity({user}:{user:Doc|null}){const {t:tr}=useLocale();
  const menu=useRef<HTMLDetailsElement>(null);
@@ -52,7 +53,9 @@ function MobileAccountMenu({user,active}:{user:Doc|null;active:string}){const {t
  return <details className="feed-mobile-account" ref={menu}><summary aria-label={tr("我的账号与更多功能")} aria-current={['account','posts','profile','following'].includes(active)?'page':undefined}><FeedAvatar name={name} avatarId={user?.avatarId} guest={!user}/><span>{tr("我的")}</span></summary><div className="feed-mobile-panel" role="group" aria-label={tr("我的社区菜单")}><header><FeedAvatar name={name} avatarId={user?.avatarId} guest={!user}/><div><strong>{name}<SiteOwnerBadge siteOwner={user?.siteOwner} compact/></strong><small>{user?tr("管理分享与个人账号"):tr("登录后分享、收藏与关注")}</small></div><button type="button" onClick={()=>{close();menu.current?.querySelector('summary')?.focus();}} aria-label={tr("关闭我的菜单")}>{tr("关闭")}</button></header><div className="feed-mobile-menu-links"><Link href={user?communityProfileDestination(user):login('/workspace/account')} onClick={close}><Icon name="user"/>{tr(user&&communityProfileDestination(user).startsWith('/community/')?"社区名片":"个人账号")}</Link><Link href={login('/workspace')} onClick={close}><Icon name="file"/>{tr("我的投稿")}</Link><Link href={login('/community?feed=following')} onClick={close}><Icon name="heart"/>{tr("关注动态")}</Link><Link href={login('/workspace/account')} onClick={close}><Icon name="settings"/>{tr("个人账号")}</Link></div><footer>{user?<Logout/>:<Link href="/login?next=/community" onClick={close}>{tr("登录 / 注册")}</Link>}</footer></div></details>;
 }
 
-export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|null,active?:string,compose?:boolean}){const {t:tr}=useLocale();
+const liquidLensMap='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="128" height="64"><defs><linearGradient id="x"><stop stop-color="#ff0000"/><stop offset="1" stop-color="#000000"/></linearGradient><linearGradient id="y" x2="0" y2="1"><stop stop-color="#00ff00"/><stop offset="1" stop-color="#000000"/></linearGradient></defs><rect width="128" height="64" fill="url(#x)"/><rect width="128" height="64" fill="url(#y)" style="mix-blend-mode:screen"/></svg>');
+
+export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|null,active?:string,compose?:boolean}){const {t:tr}=useLocale(),opticsId='community-lens-'+useId().replace(/[^a-zA-Z0-9_-]/g,'');
  const seed=usePageSeed('/api/community/notification-count'),[unread,setUnread]=useState(seed?.data?.unread||0);
  useEffect(()=>{if(!user){setUnread(0);return;}let live=true;const refresh=()=>{if(!document.hidden)api('/api/community/notification-count').then(result=>{if(live)setUnread(result.unread);}).catch(()=>{});};refresh();const timer=window.setInterval(refresh,60000);window.addEventListener('community-social-change',refresh);return()=>{live=false;window.clearInterval(timer);window.removeEventListener('community-social-change',refresh);};},[user?.id]);
  const login=(next:string)=>user?next:'/login?next='+encodeURIComponent(next);
@@ -64,8 +67,8 @@ export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|
   else router.push(href,{scroll:true});
  }
  const items=[['feed','社区动态','home','/community'],['members','发现成员','search','/community/members'],['following','关注动态','user',login('/community?feed=following')],['bookmarks','我的收藏','bookmark',login('/workspace/bookmarks')],['posts','我的投稿','file',login('/workspace')],['notifications','消息通知','bell',login('/workspace/notifications')],['account','个人账号','user',login('/workspace/account')]];
- const rail=useCommunityRail();
- return <aside className="feed-navigation" ref={rail}><nav aria-label={tr("社区导航")} className="feed-nav-links"><span className="feed-active-indicator" aria-hidden="true"/>{items.map(([key,label,icon,href])=><Link key={key} href={href} scroll={false} onNavigate={event=>mobileNavigate(href,event)} data-nav-key={key} aria-label={tr(label)} aria-current={active===key?'page':undefined} title={tr(label)}><Icon name={icon}/><span>{tr(label)}</span><span className="feed-mobile-label">{tr(({feed:'社区',members:'发现',bookmarks:'收藏',notifications:'通知'} as Doc)[key])}</span>{key==='notifications'&&unread>0&&<span className="feed-unread" aria-label={tr('{0} 条未读消息',[unread])}>{unread>99?'99+':unread}</span>}</Link>)}<MobileAccountMenu user={user} active={active}/></nav>
+ const rail=useCommunityRail(),liquidNav=useLiquidCommunityNav(active);
+ return <aside className="feed-navigation" ref={rail}><nav ref={liquidNav} aria-label={tr("社区导航")} className="feed-nav-links"><svg className="feed-liquid-optics" width="0" height="0" aria-hidden="true"><defs><filter id={opticsId} x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href={liquidLensMap} preserveAspectRatio="none" width="100%" height="100%" result="lens-map"/><feDisplacementMap in="SourceGraphic" in2="lens-map" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg><span className="feed-active-indicator" aria-hidden="true"/><span className="feed-liquid-lens" style={{'--liquid-refraction':'url("#'+opticsId+'")'} as CSSProperties} aria-hidden="true"/>{items.map(([key,label,icon,href])=><Link key={key} href={href} scroll={false} onNavigate={event=>mobileNavigate(href,event)} data-nav-key={key} aria-label={tr(label)} aria-current={active===key?'page':undefined} title={tr(label)}><Icon name={icon}/><span>{tr(label)}</span><span className="feed-mobile-label">{tr(({feed:'社区',members:'发现',bookmarks:'收藏',notifications:'通知'} as Doc)[key])}</span>{key==='notifications'&&unread>0&&<span className="feed-unread" aria-label={tr('{0} 条未读消息',[unread])}>{unread>99?'99+':unread}</span>}</Link>)}<MobileAccountMenu user={user} active={active}/></nav>
  <Link className={primary+' feed-write'} href={login('/workspace/submissions/new')}><Icon name={'plus'}/>{tr("写一份分享")}</Link>
  {compose&&<Link className={primary+' feed-mobile-compose'} href={login('/workspace/submissions/new')} aria-label={tr("写一份分享")}><Icon name={'plus'}/><span>{tr("投稿")}</span></Link>}
  <AccountIdentity user={user}/>

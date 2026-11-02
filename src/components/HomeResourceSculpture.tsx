@@ -1,162 +1,76 @@
 'use client';
+
+import Link from 'next/link';
+import {useEffect,useRef,useState} from 'react';
+import type {CSSProperties,PointerEvent} from 'react';
+import {useLocale} from './LocaleProvider';
 import {useHomeChapterActive} from './useHomeChapterActive';
+import {Icon} from './Icons';
 
-import {Component,Suspense,lazy,useEffect,useRef,useState} from 'react';
-import type {MutableRefObject,PointerEvent as ReactPointerEvent,ReactNode} from 'react';
-import type * as Three from 'three';
-import '@/app/home-resource-sculpture.css';
-
-type Interaction={x:number;y:number;drag:number;pressed:boolean;lastX:number;replay:number;invalidate:()=>void};
-type SceneProps={running:boolean;interactive:boolean;reduced:boolean;posterSrc:string;interaction:MutableRefObject<Interaction>;onReady:()=>void;onError:()=>void};
 type SculptureProps={posterSrc:string;label:string;pauseLabel:string;playLabel:string};
+type Entry={title:string;description:string;href:string;icon:string};
+type ResourceGroup={id:string;title:string;word:string;icon:string;entries:Entry[]};
 
-/** Fiber and the optical renderer are fetched only when this card approaches the viewport. */
-const ResourceCanvas=lazy(async()=>{
- const [{Canvas,useFrame,useThree},THREE,{GLTFLoader},{RoomEnvironment}]=await Promise.all([import('@react-three/fiber'),import('three'),import('three/addons/loaders/GLTFLoader.js'),import('three/addons/environments/RoomEnvironment.js')]);
- const sample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );',chunk=THREE.ShaderChunk.transmission_pars_fragment;
- // Polished glass can use hardware mip filtering: three RGB fetches instead of
- // r187's 24 bicubic fetches. Keep native refraction and fail open on version drift.
- const linearTransmission=THREE.REVISION==='187'&&chunk.split(sample).length===2?chunk.replace(sample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'):null;
- const glyphPlaces=[[-1.86,1.15,.7],[1.87,.52,.85],[1.17,-1.57,.8]];
- const disposeObject=(object:Three.Object3D)=>{
-  const geometries=new Set<Three.BufferGeometry>(),materials=new Set<Three.Material>(),textures=new Set<Three.Texture>();
-  object.traverse(node=>{if(!(node instanceof THREE.Mesh)&&!(node instanceof THREE.Points))return;geometries.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material]){materials.add(material);for(const value of Object.values(material))if(value instanceof THREE.Texture)textures.add(value);}});
-  textures.forEach(texture=>texture.dispose());materials.forEach(material=>material.dispose());geometries.forEach(geometry=>geometry.dispose());return textures;
- };
- function SculptureScene({running,interactive,reduced,posterSrc,interaction,onReady,onError}:SceneProps){
-  const {gl,scene,camera,invalidate}=useThree(),[world,setWorld]=useState<Three.Group|null>(null);
-  const runtime=useRef<{content:Three.Group;glyphs:Three.Group[];wall:Three.ShaderMaterial;time:number;rotationX:number;rotationY:number;replay:number;ready:boolean}|null>(null);
-  const callbacks=useRef({onReady,onError});callbacks.current={onReady,onError};
-  useEffect(()=>{
-   let alive=true,owned:Three.Group|null=null,parsed:Three.Group|null=null,poster:Three.Texture|null=null,environment:Three.WebGLRenderTarget|null=null;
-   const abort=new AbortController(),previousEnvironment=scene.environment;
-   interaction.current.invalidate=invalidate;
-   const lost=(event:Event)=>{event.preventDefault();callbacks.current.onError();};gl.domElement.addEventListener('webglcontextlost',lost);
-   const load=async()=>{
-    try{
-     const response=await fetch('/models/spaceyew-resources.glb',{signal:abort.signal});if(!response.ok)throw Error('Resource sculpture unavailable');
-     parsed=(await new GLTFLoader().parseAsync(await response.arrayBuffer(),'')).scene;
-     if(!alive){disposeObject(parsed);parsed=null;return;}
-     try{poster=await new THREE.TextureLoader().loadAsync(posterSrc);}catch{poster=null;}
-     if(!alive){if(parsed){disposeObject(parsed);parsed=null;}poster?.dispose();poster=null;return;}
-     const model=parsed;
-     const source=new RoomEnvironment(),pmrem=new THREE.PMREMGenerator(gl);
-     try{environment=pmrem.fromScene(source,.04);scene.environment=environment.texture;}finally{source.dispose();pmrem.dispose();}
-     gl.transmissionResolutionScale=.5;
-     const content=new THREE.Group(),root=new THREE.Group();owned=root;root.add(content);
-     model.position.sub(new THREE.Box3().setFromObject(model,true).getCenter(new THREE.Vector3()));model.scale.setScalar(.86);content.add(model);parsed=null;
-     let foremost:Three.Mesh|null=null;
-     model.traverse(node=>{
-      if(!(node instanceof THREE.Mesh))return;
-      if(node.name==='Resource_crystal_page_3')foremost=node;
-      for(const material of Array.isArray(node.material)?node.material:[node.material])if(material instanceof THREE.MeshPhysicalMaterial){
-       material.color.set('#ffffff');material.toneMapped=false;material.transmission=1;material.ior=1.46;material.thickness=.24;material.roughness=.025;material.envMapIntensity=.72;material.dispersion=.35;material.attenuationColor.set('#c8e4f7');material.attenuationDistance=9;
-       if(linearTransmission){material.onBeforeCompile=shader=>{const include='#include <transmission_pars_fragment>';if(shader.fragmentShader.split(include).length===2)shader.fragmentShader=shader.fragmentShader.replace(include,linearTransmission);};material.customProgramCacheKey=()=> 'spaceyew-resource-linear-volume-r187';}
-      }
-     });
-     if(poster&&foremost){
-      poster.colorSpace=THREE.SRGBColorSpace;poster.anisotropy=Math.min(4,gl.capabilities.getMaxAnisotropy());
-      const image=poster.image as HTMLImageElement,ratio=Math.max(.8,(image.naturalWidth||image.width)/(image.naturalHeight||image.height));
-      const print=new THREE.Mesh(new THREE.PlaneGeometry(2.17,Math.min(2.7,2.17/ratio)),new THREE.MeshBasicMaterial({map:poster,toneMapped:false}));print.position.set(0,.108,0);print.rotation.x=-Math.PI/2;
-      (foremost as Three.Mesh).add(print);
-     }
-     const cobalt=new THREE.MeshPhysicalMaterial({color:'#3768a0',roughness:.24,metalness:.18}),porcelain=new THREE.MeshPhysicalMaterial({color:'#f3f7fb',roughness:.24,metalness:.08});
-     const shape=(points:number[][],depth=.075)=>{const path=new THREE.Shape();points.forEach(([x,y],index)=>{if(index)path.lineTo(x,y);else path.moveTo(x,y);});path.closePath();return new THREE.ExtrudeGeometry(path,{depth,bevelEnabled:true,bevelSegments:3,steps:1,bevelSize:.025,bevelThickness:.025});};
-     const glyphs=[new THREE.Group(),new THREE.Group(),new THREE.Group()];glyphs.forEach(glyph=>content.add(glyph));
-     const document=new THREE.Mesh(shape([[-.26,-.34],[.26,-.34],[.26,.19],[.11,.34],[-.26,.34]]),porcelain);glyphs[0].add(document);
-     for(let row=0;row<3;row++){const rule=new THREE.Mesh(new THREE.BoxGeometry(row===2?.22:.31,.025,.018),cobalt);rule.position.set(row===2?-.045:0,.12-row*.115,.13);glyphs[0].add(rule);}
-     const bracket=shape([[-.02,.25],[-.22,0],[-.02,-.25],[.06,-.18],[-.08,0],[.06,.18]]);
-     const left=new THREE.Mesh(bracket,cobalt),right=new THREE.Mesh(bracket,porcelain);left.position.x=-.10;right.rotation.z=Math.PI;right.position.x=.15;glyphs[1].add(left,right);
-     glyphs[2].add(new THREE.Mesh(shape([[-.21,.32],[.21,.32],[.21,-.32],[0,-.17],[-.21,-.32]]),cobalt));
-     const clock={value:0},wallMaterial=new THREE.ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uTime:clock},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:`
-      varying vec2 vUv;uniform float uTime;
-      void main(){
-       vec2 p=vUv*2.-1.;vec2 flow=vec2(sin(p.y*3.+uTime*.16),cos(p.x*2.5-uTime*.12))*.22;
-       float wash=smoothstep(-.9,.8,p.x*.48+p.y*.68+flow.x+flow.y);
-       vec3 color=mix(vec3(.69,.81,.92),vec3(.89,.94,.97),wash);
-       float lilac=smoothstep(.05,1.4,p.x-p.y*.55+flow.y);
-       color=mix(color,vec3(.79,.80,.91),lilac*.24);
-       gl_FragColor=vec4(color,1.);
-       #include <colorspace_fragment>
-      }
-     `});
-     const wall=new THREE.Mesh(new THREE.PlaneGeometry(24,18),wallMaterial);wall.position.z=-4;wall.renderOrder=-10;root.add(wall);
-     // A sparse, non-emissive current adds depth around the pages, behind every solid glyph.
-     const particleBase=new Float32Array(30*3),particlePhase=new Float32Array(30);
-     for(let index=0;index<30;index++){particleBase[index*3]=((index*.61803398875)%1-.5)*6.4;particleBase[index*3+1]=((index*.38196601125+.17)%1-.5)*4.5;particleBase[index*3+2]=-1.55+(index%5)*.08;particlePhase[index]=index*.65;}
-     const particleGeometry=new THREE.BufferGeometry();particleGeometry.setAttribute('position',new THREE.BufferAttribute(particleBase,3));particleGeometry.setAttribute('aPhase',new THREE.BufferAttribute(particlePhase,1));
-     const particleMaterial=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.NormalBlending,toneMapped:false,uniforms:{uTime:clock,uSize:{value:2.1*gl.getPixelRatio()},uColor:{value:new THREE.Color('#5b8db7')}},vertexShader:'uniform float uSize,uTime;attribute float aPhase;void main(){float phase=uTime*.12+aPhase;vec3 drift=vec3(sin(phase)*.12,cos(phase)*.18,sin(phase)*.04);vec4 p=modelViewMatrix*vec4(position+drift,1.);gl_Position=projectionMatrix*p;gl_PointSize=uSize*(8./max(1.,-p.z));}',fragmentShader:`
-      uniform vec3 uColor;
-      void main(){float coverage=1.-smoothstep(.08,.5,length(gl_PointCoord-.5));gl_FragColor=vec4(uColor,coverage*.26);
-       #include <colorspace_fragment>
-      }
-     `});
-     const particles=new THREE.Points(particleGeometry,particleMaterial);particles.frustumCulled=false;root.add(particles);
-     const key=new THREE.DirectionalLight('#f5faff',2.2);key.position.set(-4,5,7);root.add(key);
-     const rim=new THREE.DirectionalLight('#bddbfa',.8);rim.position.set(4,-1,3);root.add(rim);
-     // Prepare programs while the nearby poster is still visible. Drivers with
-     // parallel shader compilation need not block the first animated frame.
-     await gl.compileAsync(root,camera,scene);if(!alive)return;
-     runtime.current={content,glyphs,wall:wallMaterial,time:0,rotationX:.02,rotationY:-.13,replay:interaction.current.replay||0,ready:false};setWorld(root);invalidate();
-    }catch{if(alive)callbacks.current.onError();}
-   };
-   void load();
-   return()=>{if(!alive)return;alive=false;abort.abort();runtime.current=null;interaction.current.invalidate=()=>{};gl.domElement.removeEventListener('webglcontextlost',lost);const disposedTextures=owned?disposeObject(owned):new Set<Three.Texture>();owned=null;if(parsed){disposeObject(parsed);parsed=null;}if(poster&&!disposedTextures.has(poster))poster.dispose();poster=null;if(environment){if(scene.environment===environment.texture)scene.environment=previousEnvironment;environment.dispose();}};
-  },[gl,scene,camera,invalidate,posterSrc,interaction]);
-  useFrame((_,delta)=>{
-   const state=runtime.current;if(!state)return;
-   const input=interaction.current,replay=input.replay||0;
-   if(replay!==state.replay){state.replay=replay;state.time=0;state.rotationX=.02;state.rotationY=-.13;}
-   if(running&&!reduced)state.time+=Math.min(delta,.05);
-   const time=reduced?0:state.time;
-   const targetX=.02+(reduced?0:input.y*.09),targetY=-.13+(reduced?0:input.x*.13+input.drag);
-   state.rotationX=reduced?targetX:THREE.MathUtils.damp(state.rotationX,targetX,7,Math.min(delta,.05));state.rotationY=reduced?targetY:THREE.MathUtils.damp(state.rotationY,targetY,7,Math.min(delta,.05));
-   state.content.rotation.set(state.rotationX,state.rotationY,-.08+(reduced?0:Math.sin(time*.35)*.018));state.content.position.y=reduced?0:Math.sin(time*.5)*.035;
-   state.glyphs.forEach((glyph,index)=>{glyph.position.set(glyphPlaces[index][0],glyphPlaces[index][1]+(reduced?0:Math.sin(time*.7+index*2)*.075),glyphPlaces[index][2]);glyph.rotation.set(.08,.10+(reduced?0:Math.sin(time*.45+index)*.12),(index-1)*.15);});
-   state.wall.uniforms.uTime.value=time;scene.environmentRotation.y=reduced?0:Math.sin(time*.17)*.075;
-   if(!state.ready){state.ready=true;queueMicrotask(()=>{if(runtime.current===state)callbacks.current.onReady();});}
-   if(!running&&interactive&&(Math.abs(state.rotationX-targetX)+Math.abs(state.rotationY-targetY)>.001))invalidate();
-  });
-  return world?<primitive object={world} dispose={null}/>:null;
- }
- return{default:function ResourceScene(props:SceneProps){return <Canvas className="home-resource-canvas" aria-hidden="true" dpr={[1,1.5]} camera={{position:[0,.02,7.4],fov:38,near:.1,far:35}} gl={{alpha:true,antialias:true,powerPreference:'high-performance'}} frameloop={props.running?'always':'demand'} resize={{scroll:false,debounce:{scroll:0,resize:120}}} onCreated={({gl})=>{gl.outputColorSpace=THREE.SRGBColorSpace;gl.toneMapping=THREE.ACESFilmicToneMapping;gl.toneMappingExposure=1;}}><SculptureScene {...props}/></Canvas>;}};
-});
-
-class SculptureBoundary extends Component<{children:ReactNode;onError:()=>void},{failed:boolean}>{
- state={failed:false};
- static getDerivedStateFromError(){return{failed:true};}
- componentDidCatch(){this.props.onError();}
- render(){return this.state.failed?null:this.props.children;}
+/** These are existing public destinations, not simulated records or popularity data. */
+function resources(locale:string):ResourceGroup[]{
+ const zh=locale==='zh',ja=locale==='ja';
+ return [
+  {id:'docs',title:zh?'文档':ja?'ドキュメント':'Docs',word:zh?'从理解开始':ja?'理解から始める':'Start with understanding',icon:'file',entries:[
+   {title:zh?'开始使用 IAVSE':ja?'IAVSE を使い始める':'Get started with IAVSE',description:zh?'认识社区、博客主页和共享内容。':ja?'コミュニティ、ブログ、共有コンテンツを知る。':'Meet the community, blog homes and shared content.',href:'/docs/getting-started',icon:'cursor'},
+   {title:zh?'搭建博客主页':ja?'ブログホームを作る':'Build your blog home',description:zh?'整理资料，编排自己的页面。':ja?'プロフィールを整理し、自分のページを作る。':'Arrange your profile and shape your own page.',href:'/docs/showcase',icon:'layers'},
+   {title:'Connect API & MCP',description:zh?'让熟悉的 AI 工具接入发布流程。':ja?'いつもの AI ツールで公開の流れにつなぐ。':'Connect your AI tools to your publishing workflow.',href:'/docs/connect',icon:'link'}
+  ]},
+  {id:'skills',title:'Skills',word:zh?'把想法变成行动':ja?'アイデアを行動に':'Put an idea to work',icon:'cursor',entries:[
+   {title:'GSAP Skills',description:zh?'时间线、滚动交互与动效性能。':ja?'タイムライン、スクロール、動きの最適化。':'Timelines, scroll interaction and animation performance.',href:'/skills/gsap',icon:'layers'},
+   {title:'Impeccable',description:zh?'审查界面，打磨排版与交互。':ja?'画面を見直し、レイアウトと操作を磨く。':'Review an interface and refine its layout and interactions.',href:'/skills/impeccable',icon:'grid'},
+   {title:'React Best Practices',description:zh?'改进 React 与 Next.js 的渲染性能。':ja?'React と Next.js の描画を改善する。':'Improve rendering in React and Next.js.',href:'/skills/react-best-practices',icon:'chart'}
+  ]},
+  {id:'tools',title:zh?'网站与工具':ja?'サイトとツール':'Tools',word:zh?'让发现触手可及':ja?'発見を手元に':'Keep a discovery close',icon:'folder',entries:[
+   {title:zh?'资源目录':ja?'リソース一覧':'Resource directory',description:zh?'继续发现网站与实用工具。':ja?'サイトと便利なツールを探す。':'Explore websites and useful tools in one place.',href:'/resources?type=resources',icon:'search'},
+   {title:zh?'法律咨询':ja?'法律相談':'Legal consultation',description:zh?'了解律师背景、业务范围与咨询方式。':ja?'弁護士の経歴、相談分野、連絡方法。':'Read the lawyer’s background, practice and contact options.',href:'/resources/legal-consultation',icon:'shield'},
+   {title:zh?'桌面客户端':ja?'デスクトップアプリ':'Desktop apps',description:zh?'查看 macOS 与 Windows 客户端。':ja?'macOS と Windows のアプリを確認する。':'Find the macOS and Windows desktop apps.',href:'/downloads',icon:'monitor'}
+  ]}
+ ];
 }
 
-export function HomeResourceSculpture({posterSrc,label,pauseLabel,playLabel}:SculptureProps){
- const host=useRef<HTMLDivElement>(null),interaction=useRef<Interaction>({x:0,y:0,drag:0,pressed:false,lastX:0,replay:0,invalidate:()=>{}});
+/** A small spatial index made from real, selectable document surfaces. No extra WebGL context. */
+export function HomeResourceSculpture({label,pauseLabel,playLabel}:SculptureProps){
+ const {locale}=useLocale(),groups=resources(locale),host=useRef<HTMLDivElement>(null),plane=useRef<HTMLDivElement>(null);
  const chapterActive=useHomeChapterActive(host);
- const [enabled,setEnabled]=useState(false),[nearby,setNearby]=useState(false),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[printing,setPrinting]=useState(false),[paused,setPaused]=useState(false),[globalPaused,setGlobalPaused]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false);
+ const [category,setCategory]=useState(0),[selected,setSelected]=useState(0),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[printing,setPrinting]=useState(false),[paused,setPaused]=useState(false),[globalPaused,setGlobalPaused]=useState(false);
+ const pointer=useRef({x:0,y:0,targetX:0,targetY:0,frame:0});
+ const group=groups[category],entry=group.entries[selected],quiet=reduced||printing;
+ const running=chapterActive&&visible&&!hidden&&!quiet&&!paused&&!globalPaused;
+ const resetPointer=()=>{const state=pointer.current;cancelAnimationFrame(state.frame);state.frame=0;state.x=state.y=state.targetX=state.targetY=0;plane.current?.style.setProperty('--atlas-x','0');plane.current?.style.setProperty('--atlas-y','0');};
  useEffect(()=>{
   const element=host.current;if(!element)return;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');let systemReduced=preference.matches,manualReduced=false;
-  try{manualReduced=window.localStorage?.getItem('iavse-background-motion')==='reduce';}catch{}
-  const syncMotion=()=>setReduced(systemReduced||manualReduced),motion=(event?:MediaQueryListEvent)=>{systemReduced=typeof event?.matches==='boolean'?event.matches:preference.matches;syncMotion();},visibility=()=>setHidden(document.hidden),beforePrint=()=>setPrinting(true),afterPrint=()=>setPrinting(false);
-  const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value?:boolean}>).detail;if(!detail)return;if(detail.action==='reduced'){manualReduced=!!detail.value;syncMotion();}else if(detail.action==='paused')setGlobalPaused(!!detail.value);else if(detail.action==='replay'){const state=interaction.current;state.x=state.y=state.drag=0;state.pressed=false;state.replay++;state.invalidate();}};
-  syncMotion();visibility();
-  const proximity=new IntersectionObserver(entries=>setNearby(entries.some(entry=>entry.isIntersecting)),{rootMargin:'220px'}),viewport=new IntersectionObserver(entries=>setVisible(entries.some(entry=>entry.isIntersecting)),{threshold:.01});proximity.observe(element);viewport.observe(element);
-  preference.addEventListener('change',motion);document.addEventListener('visibilitychange',visibility);window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);window.addEventListener('iavse-scene-control',control);
-  return()=>{proximity.disconnect();viewport.disconnect();preference.removeEventListener('change',motion);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);window.removeEventListener('iavse-scene-control',control);};
+  try{manualReduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
+  const sync=()=>setReduced(systemReduced||manualReduced),motion=(event:MediaQueryListEvent)=>{systemReduced=event.matches;sync();},visibility=()=>setHidden(document.hidden),beforePrint=()=>setPrinting(true),afterPrint=()=>setPrinting(false);
+  const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value?:boolean}>).detail;if(detail?.action==='reduced'){manualReduced=!!detail.value;sync();}else if(detail?.action==='paused')setGlobalPaused(!!detail.value);else if(detail?.action==='replay'){setCategory(0);setSelected(0);resetPointer();}};
+  const viewport=new IntersectionObserver(entries=>setVisible(entries.some(entry=>entry.isIntersecting)),{threshold:.05});viewport.observe(element);
+  sync();visibility();preference.addEventListener('change',motion);document.addEventListener('visibilitychange',visibility);window.addEventListener('beforeprint',beforePrint);window.addEventListener('afterprint',afterPrint);window.addEventListener('iavse-scene-control',control);
+  return()=>{viewport.disconnect();preference.removeEventListener('change',motion);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('beforeprint',beforePrint);window.removeEventListener('afterprint',afterPrint);window.removeEventListener('iavse-scene-control',control);resetPointer();};
  },[]);
- // Keep an already loaded world demand-rendered during quiet mode, while a quiet
- // initial visit can use the poster without loading Fiber, GLB or the studio.
- useEffect(()=>{if(chapterActive&&nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[chapterActive,nearby,reduced,hidden,printing,globalPaused]);
- useEffect(()=>{if(!chapterActive){interaction.current.pressed=false;interaction.current.x=interaction.current.y=0;}},[chapterActive]);
- const move=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced||!chapterActive)return;const rect=event.currentTarget.getBoundingClientRect(),state=interaction.current;if(event.pointerType!=='touch'){state.x=(event.clientX-rect.left)/Math.max(1,rect.width)*2-1;state.y=(event.clientY-rect.top)/Math.max(1,rect.height)*2-1;}if(state.pressed){state.drag+=(event.clientX-state.lastX)*.005;state.lastX=event.clientX;}state.invalidate();};
- const down=(event:ReactPointerEvent<HTMLDivElement>)=>{if(reduced||!chapterActive||event.button>0)return;interaction.current.pressed=true;interaction.current.lastX=event.clientX;event.currentTarget.setPointerCapture(event.pointerId);};
- const leave=()=>{interaction.current.x=interaction.current.y=0;interaction.current.pressed=false;interaction.current.invalidate();};
- const interactive=chapterActive&&visible&&!hidden&&!reduced&&!printing,running=interactive&&!paused&&!globalPaused;
- return <div ref={host} className="home-resource-sculpture" data-ready={ready&&!failed&&!reduced&&!printing?'true':'false'}>
-  <div className="home-resource-art" role="img" aria-label={label} onPointerMove={move} onPointerDown={down} onPointerUp={()=>{interaction.current.pressed=false;}} onPointerCancel={leave} onPointerLeave={leave}>
-   <img className="home-resource-poster" src={posterSrc} alt="" loading="lazy" decoding="async"/>
-   {enabled&&!failed&&<SculptureBoundary onError={()=>setFailed(true)}><Suspense fallback={null}><ResourceCanvas running={running} interactive={interactive} reduced={reduced} posterSrc={posterSrc} interaction={interaction} onReady={()=>setReady(true)} onError={()=>setFailed(true)}/></Suspense></SculptureBoundary>}
+ useEffect(()=>{if(!running)resetPointer();},[running]);
+ const move=(event:PointerEvent<HTMLDivElement>)=>{
+  if(!running||event.pointerType==='touch')return;
+  const rect=event.currentTarget.getBoundingClientRect(),state=pointer.current;state.targetX=Math.max(-1,Math.min(1,(event.clientX-rect.left)/rect.width*2-1));state.targetY=Math.max(-1,Math.min(1,(event.clientY-rect.top)/rect.height*2-1));
+  if(state.frame)return;
+  const draw=()=>{state.frame=0;state.x+=(state.targetX-state.x)*.16;state.y+=(state.targetY-state.y)*.16;plane.current?.style.setProperty('--atlas-x',state.x.toFixed(3));plane.current?.style.setProperty('--atlas-y',state.y.toFixed(3));if(Math.abs(state.x-state.targetX)+Math.abs(state.y-state.targetY)>.002)state.frame=requestAnimationFrame(draw);};
+  state.frame=requestAnimationFrame(draw);
+ };
+ const groupLabel=locale==='zh'?'选择资源类型':locale==='ja'?'リソースの種類':'Choose a resource type',open=locale==='zh'?'打开资源':locale==='ja'?'リソースを開く':'Open resource';
+ return <div ref={host} className="home-resource-sculpture resource-atlas" data-running={running} data-quiet={quiet} data-category={group.id} role="group" aria-label={label}>
+  <div className="atlas-browser-bar"><span className="atlas-browser-dots" aria-hidden="true"><i/><i/><i/></span><span>iavse / resources</span><Icon name="grid"/></div>
+  <div className="atlas-toolbar"><div className="atlas-mode-switch" role="group" aria-label={groupLabel}>{groups.map((item,index)=><button type="button" key={item.id} aria-pressed={category===index} onClick={()=>{setCategory(index);setSelected(0);}}><Icon name={item.icon}/><span>{item.title}</span></button>)}</div><button className="atlas-pause" type="button" aria-label={paused?playLabel:pauseLabel} aria-pressed={paused} onClick={()=>setPaused(value=>!value)}><Icon name={paused?'play':'pause'}/></button></div>
+  <div className="atlas-workspace" onPointerMove={move} onPointerLeave={resetPointer}>
+   <div className="atlas-perspective" ref={plane} style={{'--atlas-selection':selected} as CSSProperties}>
+    <svg className="atlas-paths" viewBox="0 0 640 340" preserveAspectRatio="none" aria-hidden="true"><path d="M224 170H264Q284 170 284 150V70Q284 48 308 48H370"/><path d="M224 170H370"/><path d="M224 170H264Q284 170 284 190V270Q284 292 308 292H370"/>{[0,1,2].map(index=><path key={index} className={selected===index?'is-selected':''} d={index===0?'M224 170H264Q284 170 284 150V70Q284 48 308 48H370':index===1?'M224 170H370':'M224 170H264Q284 170 284 190V270Q284 292 308 292H370'}/>)}</svg>
+    <div className="atlas-book" aria-hidden="true"><div className="atlas-book-shadow"/><div className="atlas-sheet atlas-sheet-back"/><div className="atlas-sheet atlas-sheet-middle"/><div className="atlas-sheet atlas-sheet-front"><span className="atlas-book-mark">IAVSE</span><div className="atlas-book-symbol"><Icon name={group.icon}/></div><strong>{group.title}</strong><span className="atlas-book-word">{group.word}</span><span className="atlas-book-footer"><span>↗</span><i/><i/><i/></span></div></div>
+    <div className="atlas-nodes">{group.entries.map((item,index)=><button key={item.href} type="button" className={'atlas-node'+(selected===index?' is-selected':'')} aria-pressed={selected===index} onClick={()=>setSelected(index)}><span className="atlas-node-icon"><Icon name={item.icon}/></span><span>{item.title}</span><span className="atlas-node-dot" aria-hidden="true"/></button>)}</div>
+   </div>
   </div>
-  {ready&&!failed&&!reduced&&<button className="home-resource-pause" type="button" aria-label={paused?playLabel:pauseLabel} aria-pressed={paused} onClick={()=>setPaused(value=>!value)}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">{paused?<path d="m9 5 10 7-10 7Z"/>:<path d="M9 5v14M15 5v14"/>}</svg></button>}
+  <div className="atlas-detail" aria-live="polite"><div><strong>{entry.title}</strong><p>{entry.description}</p></div><Link href={entry.href} aria-label={open+' · '+entry.title}><Icon name="arrow"/></Link></div>
  </div>;
 }

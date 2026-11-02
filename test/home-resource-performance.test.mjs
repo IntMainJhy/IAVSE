@@ -4,131 +4,59 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 import {chapterFixture} from './home-chapter-fixture.mjs';
-import * as three from 'three';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeResourceSculpture.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-async function sculpture({revision=three.REVISION,running=true,interactive=true,reduced=false}={}){
- const bytes=fs.readFileSync(new URL('../public/models/spaceyew-resources.glb',import.meta.url)),effects=[],frames=[],events=new Map(),scene=new three.Scene();
- let factory,world,environmentDisposals=0,invalidations=0,ready=0,errors=0,resolveWorld;
- const phases=[],loaded=new Promise(resolve=>resolveWorld=resolve),gl={domElement:{addEventListener:(type,fn)=>events.set(type,fn),removeEventListener:type=>events.delete(type)},getPixelRatio:()=>1.5,capabilities:{getMaxAnisotropy:()=>4},async compileAsync(root,camera,target){assert.ok(root.isGroup&&camera.isCamera);assert.equal(target,scene);phases.push('compile');}};
- class PMREM{fromScene(){return{texture:new three.Texture(),dispose(){environmentDisposals++;}};}dispose(){}}
- class RoomEnvironment extends three.Scene{dispose(){}}
- class TextureLoader{async loadAsync(){const texture=new three.Texture();texture.image={width:1200,height:900};return texture;}}
- const React={Component:class{},Suspense:()=>null,lazy:fn=>{factory=fn;return()=>null;},useRef:initial=>({current:initial}),useState:initial=>[initial,value=>{phases.push('mount');world=value;resolveWorld();}],useEffect:fn=>effects.push(fn)};
- const exports={};
- vm.runInNewContext(source,{exports,AbortController,queueMicrotask,fetch:async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}),require:name=>{
-  if(name==='react')return React;
-  if(name==='./useHomeChapterActive')return {useHomeChapterActive:()=>true};
-  if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};
-  if(name==='@react-three/fiber')return{Canvas:()=>null,useFrame:fn=>frames.push(fn),useThree:()=>({gl,scene,camera:new three.PerspectiveCamera(),invalidate:()=>invalidations++})};
-  if(name==='three')return{...three,REVISION:revision,PMREMGenerator:PMREM,TextureLoader};
-  if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader};
-  if(name==='three/addons/environments/RoomEnvironment.js')return{RoomEnvironment};
-  if(name.endsWith('.css'))return{};
-  throw Error('Unexpected dependency '+name);
- }});
- const {default:ResourceScene}=await factory(),interaction={current:{x:.6,y:-.4,drag:.2,pressed:false,lastX:0,replay:0,invalidate(){}}};
- const canvas=ResourceScene({running,interactive,reduced,posterSrc:'/poster.webp',interaction,onReady:()=>ready++,onError:()=>errors++}),body=canvas.props.children;
- body.type(body.props);const cleanup=effects[0]();await loaded;
- const glass=[],geometries=new Set(),materials=new Set();let wall,particles;
- world.traverse(node=>{if(node.isPoints)particles=node;if(node.isMesh){if(node.material.isShaderMaterial)wall=node;for(const material of Array.isArray(node.material)?node.material:[node.material])if(material.transmission===1)glass.push(material);}if(node.geometry)geometries.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:node.material?[node.material]:[])materials.add(material);});
- return{canvas,world,scene,glass,wall,particles,interaction,events,cleanup,geometries,materials,phases,tick:delta=>frames[0]({},delta),get environmentDisposals(){return environmentDisposals;},get invalidations(){return invalidations;},get ready(){return ready;},get errors(){return errors;}};
-}
-
-test('resource glass reduces transmission fetches without replacing RGB volume rays or shared Three shaders',async()=>{
- const original=three.ShaderChunk.transmission_pars_fragment,s=await sculpture();assert.equal(s.glass.length,3);assert.deepEqual(s.phases,['compile','mount'],'programs are prepared before the card enters its animated render loop');
- for(const material of s.glass){const shader={fragmentShader:three.ShaderLib.physical.fragmentShader};material.onBeforeCompile(shader,{});assert.ok(shader.fragmentShader.includes('return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'));assert.ok(shader.fragmentShader.includes('getVolumeTransmissionRay( n, v, thickness, iors[ i ], modelMatrix )'));assert.equal(material.transmission,1);assert.ok(material.dispersion>0);const unknown={fragmentShader:'unknown template'};material.onBeforeCompile(unknown,{});assert.equal(unknown.fragmentShader,'unknown template');}
- assert.equal(three.ShaderChunk.transmission_pars_fragment,original);s.cleanup();
- const fallback=await sculpture({revision:'188'}),shader={fragmentShader:three.ShaderLib.physical.fragmentShader};fallback.glass[0].onBeforeCompile(shader,{});assert.equal(shader.fragmentShader,three.ShaderLib.physical.fragmentShader);fallback.cleanup();
-});
-
-test('resource motion follows elapsed seconds at 60, 120 and 144 Hz while particles remain on the GPU',async()=>{
- const rotations=[];
- for(const hz of [60,120,144]){
-  const s=await sculpture(),positions=s.particles.geometry.getAttribute('position'),phase=s.particles.geometry.getAttribute('aPhase'),version=positions.version,values=positions.array.slice();
-  assert.equal(phase.count,positions.count);assert.equal(s.particles.material.uniforms.uTime,s.wall.material.uniforms.uTime,'one clock drives particles and receiver');assert.ok(s.particles.material.vertexShader.includes('position+drift'));
-  for(let frame=0;frame<hz;frame++)s.tick(1/hz);
-  assert.ok(Math.abs(s.wall.material.uniforms.uTime.value-1)<1e-10);assert.equal(positions.version,version,'high-refresh animation does not upload the particle buffer');assert.deepEqual(positions.array,values);
-  rotations.push(s.world.children[0].rotation.clone());assert.equal(s.canvas.props.frameloop,'always');s.cleanup();
- }
- for(const rotation of rotations.slice(1)){assert.ok(Math.abs(rotation.x-rotations[0].x)<1e-10);assert.ok(Math.abs(rotation.y-rotations[0].y)<1e-10);}
-});
-
-test('paused and reduced resource scenes are demand-rendered and cleanup releases each owned resource once',async()=>{
- for(const options of [{running:false,interactive:false},{running:false,interactive:false,reduced:true}]){
-  const s=await sculpture(options);assert.equal(s.canvas.props.frameloop,'demand');const invalidations=s.invalidations;
-  for(let frame=0;frame<144;frame++)s.tick(1/144);
-  assert.equal(s.wall.material.uniforms.uTime.value,0);assert.equal(s.invalidations,invalidations,'a static scene does not ask Fiber to keep ticking');
-  let disposed=0;const resources=[...s.geometries,...s.materials];for(const resource of resources)resource.addEventListener('dispose',()=>disposed++);
-  const event={preventDefault(){this.prevented=true;}};s.events.get('webglcontextlost')(event);assert.equal(event.prevented,true);assert.equal(s.errors,1);
-  s.cleanup();s.cleanup();assert.equal(disposed,resources.length);assert.equal(s.environmentDisposals,1);assert.equal(s.events.size,0);assert.equal(s.scene.environment,null);
- }
-});
-
-function mediaControls({reduced=false,savedReduced=false,inactive=false}={}){
- const hooks=[],observers=[],events=new Map(),systemEvents=new Set(),exports={},Canvas=()=>null;
+function atlas({reduced=false,savedReduced=false,inactive=false,locale='en'}={}){
+ const hooks=[],observers=[],events=new Map(),systemEvents=new Set(),exports={},frames=new Map(),styles=new Map();let frameId=0;
  const add=(type,fn)=>{const set=events.get(type)||new Set();set.add(fn);events.set(type,set);},remove=(type,fn)=>events.get(type)?.delete(fn);
  const preference={matches:reduced,addEventListener:(type,fn)=>systemEvents.add(fn),removeEventListener:(type,fn)=>systemEvents.delete(fn)};
- const window={localStorage:{getItem:()=>savedReduced?'reduce':null},addEventListener:add,removeEventListener:remove},document={hidden:false,addEventListener:add,removeEventListener:remove};
+ const window={addEventListener:add,removeEventListener:remove},document={hidden:false,addEventListener:add,removeEventListener:remove};
  let cursor=0,dirty=true,pending=[],tree;
- const React={Component:class{},Suspense:()=>null,lazy:()=>Canvas,
+ const React={
   useRef:initial=>{const index=cursor++;return(hooks[index]||={kind:'ref',value:{current:initial}}).value;},
   useState:initial=>{const index=cursor++,state=hooks[index]||={kind:'state',value:initial};return[state.value,next=>{const value=typeof next==='function'?next(state.value):next;if(!Object.is(value,state.value)){state.value=value;dirty=true;}}];},
   useEffect:(callback,deps)=>{const index=cursor++,effect=hooks[index]||={kind:'effect'};if(!effect.deps||deps.some((value,index)=>!Object.is(value,effect.deps[index])))pending.push(()=>{effect.cleanup?.();effect.deps=deps;effect.cleanup=callback();});}
  };
- const chapter=chapterFixture(React,{inactive}),host=chapter.host;
+ const chapter=chapterFixture(React,{inactive}),host={...chapter.host,style:{setProperty:(key,value)=>styles.set(key,value)},getBoundingClientRect:()=>({left:0,top:0,width:640,height:340})};
  class IntersectionObserver{constructor(callback,options){this.callback=callback;this.options=options;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}}
- vm.runInNewContext(source,{exports,window,document,matchMedia:()=>preference,IntersectionObserver,require:name=>{
-  if(name==='react')return React;if(name==='./useHomeChapterActive')return chapter.module;if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};if(name.endsWith('.css'))return{};throw Error('Unexpected eager dependency '+name);
+ vm.runInNewContext(source,{exports,window,document,localStorage:{getItem:()=>savedReduced?'reduce':null},matchMedia:()=>preference,IntersectionObserver,requestAnimationFrame:callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame:id=>frames.delete(id),require:name=>{
+  if(name==='react')return React;if(name==='next/link')return {__esModule:true,default:'a'};if(name==='./Icons')return {Icon:()=>null};if(name==='./LocaleProvider')return {useLocale:()=>({locale})};if(name==='./useHomeChapterActive')return chapter.module;if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};throw Error('Unexpected eager dependency '+name);
  }});
  const nodes=(type,node=tree)=>!node||typeof node!=='object'?[]:[...(node.type===type?[node]:[]),...[node.props?.children].flat(Infinity).flatMap(child=>child?nodes(type,child):[])];
- function flush(){
-  for(let count=0;dirty&&count<12;count++){
-   dirty=false;cursor=0;pending=[];tree=exports.HomeResourceSculpture({posterSrc:'/poster.webp',label:'Actual resource pages',pauseLabel:'Pause demo',playLabel:'Resume demo'});
-   for(const node of nodes('div'))if(node.props.ref)node.props.ref.current=host;for(const effect of pending)effect();
-  }
-  assert.equal(dirty,false,'media controls settle without a render loop');
- }
+ function flush(){for(let count=0;dirty&&count<12;count++){dirty=false;cursor=0;pending=[];tree=exports.HomeResourceSculpture({posterSrc:'/poster.webp',label:'Interactive resource atlas',pauseLabel:'Pause demo',playLabel:'Resume demo'});for(const node of nodes('div'))if(node.props.ref)node.props.ref.current=host;for(const effect of pending)effect();}assert.equal(dirty,false);}
  const emit=(name,event={})=>{for(const callback of events.get(name)||[])callback(event);flush();};flush();
- return{nodes,events,systemEvents,observers,chapter,active:value=>{chapter.activate(value);flush();},get tree(){return tree;},get canvas(){return nodes(Canvas)[0];},
-  nearby:value=>{observers[0].callback([{isIntersecting:value}]);flush();},visible:value=>{observers[1].callback([{isIntersecting:value}]);flush();},
-  control:(action,value)=>emit('iavse-scene-control',{detail:{action,value}}),printing:value=>emit(value?'beforeprint':'afterprint'),
-  systemEvent:value=>{for(const callback of systemEvents)callback({matches:value});flush();},
-  ready:()=>{nodes(Canvas)[0].props.onReady();flush();},toggle:()=>{nodes('button')[0].props.onClick();flush();},
+ const buttons=()=>nodes('button');
+ return {nodes,buttons,frames,styles,observers,events,systemEvents,chapter,get tree(){return tree;},
+  category:index=>{buttons()[index].props.onClick();flush();},select:index=>{buttons()[4+index].props.onClick();flush();},toggle:()=>{buttons()[3].props.onClick();flush();},
+  active:value=>{chapter.activate(value);flush();},visible:value=>{observers[0].callback([{isIntersecting:value}]);flush();},hidden:value=>{document.hidden=value;emit('visibilitychange');},
+  system:value=>{preference.matches=value;for(const callback of systemEvents)callback({matches:value});flush();},control:(action,value)=>emit('iavse-scene-control',{detail:{action,value}}),printing:value=>emit(value?'beforeprint':'afterprint'),
+  move:()=>{nodes('div').find(node=>node.props.className==='atlas-workspace').props.onPointerMove({pointerType:'mouse',currentTarget:host,clientX:620,clientY:20});},
   unmount:()=>{for(const hook of hooks)if(hook.kind==='effect')hook.cleanup?.();}
  };
 }
 
-test('quiet initial visits keep the resource poster without constructing Fiber, then reuse an enabled scene',()=>{
- for(const options of[{reduced:true},{savedReduced:true}]){
-  const s=mediaControls(options);s.nearby(true);s.visible(true);assert.equal(s.canvas,undefined,'reduced motion does not even instantiate the lazy renderer');assert.equal(s.tree.props['data-ready'],'false');
-  s.systemEvent(true);s.control('reduced',false);assert.equal(s.canvas,undefined,'manual full motion cannot override the system');s.systemEvent(false);assert.ok(s.canvas);s.ready();assert.equal(s.canvas.props.running,true);
-  const interaction=s.canvas.props.interaction;s.control('reduced',true);assert.equal(s.canvas.props.running,false);assert.equal(s.canvas.props.reduced,true);assert.equal(s.tree.props['data-ready'],'false');
-  s.control('reduced',false);assert.equal(s.canvas.props.interaction,interaction,'the initialized world stays mounted, avoiding GLB and studio reloads');assert.equal(s.tree.props['data-ready'],'true');s.unmount();
-  assert.ok(s.observers.every(observer=>observer.disconnected));assert.ok([...s.events.values()].every(set=>set.size===0));assert.equal(s.systemEvents.size,0);
- }
+test('the resource atlas exposes existing destinations and switches its selected live link',()=>{
+ const s=atlas();assert.equal(s.nodes('a')[0].props.href,'/docs/getting-started');s.select(1);assert.equal(s.nodes('a')[0].props.href,'/docs/showcase');
+ s.category(1);assert.equal(s.nodes('a')[0].props.href,'/skills/gsap');assert.equal(s.buttons()[1].props['aria-pressed'],true);s.select(2);assert.equal(s.nodes('a')[0].props.href,'/skills/react-best-practices');
+ s.category(2);assert.equal(s.nodes('a')[0].props.href,'/resources?type=resources');s.select(1);assert.equal(s.nodes('a')[0].props.href,'/resources/legal-consultation');s.select(2);assert.equal(s.nodes('a')[0].props.href,'/downloads');
+ assert.equal(s.nodes('canvas').length,0,'the index needs no second WebGL canvas, model or texture download');s.unmount();
 });
 
-test('global pause and printing combine with local resource pause, and replay resets interaction without remounting',()=>{
- const s=mediaControls();s.control('paused',true);s.nearby(true);s.visible(true);assert.equal(s.canvas,undefined,'a paused page does not initialize a newly approached WebGL card');
- s.control('paused',false);assert.equal(s.canvas.props.running,true);s.ready();s.printing(true);assert.equal(s.canvas.props.running,false);assert.equal(s.tree.props['data-ready'],'false');s.printing(false);assert.equal(s.canvas.props.running,true);
- s.toggle();assert.equal(s.canvas.props.running,false);s.control('paused',true);s.control('paused',false);s.printing(true);s.printing(false);assert.equal(s.canvas.props.running,false,'global resume leaves a local pause intact');
- const interaction=s.canvas.props.interaction;interaction.current.drag=3;const replay=interaction.current.replay;s.control('replay');assert.equal(s.canvas.props.interaction,interaction);assert.equal(interaction.current.drag,0);assert.equal(interaction.current.replay,replay+1);assert.equal(s.canvas.props.running,false);s.unmount();
+test('chapter visibility, local pause, global pause, hidden tabs and print suspend the atlas',()=>{
+ const s=atlas({inactive:true});s.visible(true);assert.equal(s.tree.props['data-running'],false);s.active(true);assert.equal(s.tree.props['data-running'],true);
+ s.toggle();assert.equal(s.tree.props['data-running'],false);s.control('paused',true);s.control('paused',false);assert.equal(s.tree.props['data-running'],false,'global resume retains the local pause');
+ s.toggle();assert.equal(s.tree.props['data-running'],true);s.hidden(true);assert.equal(s.tree.props['data-running'],false);s.hidden(false);assert.equal(s.tree.props['data-running'],true);
+ s.printing(true);assert.equal(s.tree.props['data-running'],false);s.printing(false);s.active(false);assert.equal(s.tree.props['data-running'],false);s.active(true);assert.equal(s.tree.props['data-running'],true);
+ s.unmount();assert.ok(s.observers.every(observer=>observer.disconnected));assert.ok([...s.events.values()].every(set=>set.size===0));assert.equal(s.systemEvents.size,0);assert.ok(s.chapter.observers.every(observer=>observer.disconnected));
 });
 
-test('resource replay restarts its optical clock on the existing scene',async()=>{
- const s=await sculpture();for(let index=0;index<60;index++)s.tick(1/60);assert.ok(s.wall.material.uniforms.uTime.value>.9);
- const geometryVersion=s.particles.geometry.getAttribute('position').version;s.interaction.current.replay++;s.tick(1/60);
- assert.ok(s.wall.material.uniforms.uTime.value<.02);assert.equal(s.particles.geometry.getAttribute('position').version,geometryVersion,'replay changes state, not the particle buffer or scene');s.cleanup();
+test('reduced motion keeps the real index usable and replay resets selection without overriding pause',()=>{
+ const s=atlas({savedReduced:true});s.visible(true);assert.equal(s.tree.props['data-quiet'],true);assert.equal(s.tree.props['data-running'],false);s.category(1);s.select(1);assert.equal(s.nodes('a')[0].props.href,'/skills/impeccable');
+ s.control('reduced',false);assert.equal(s.tree.props['data-running'],true);s.system(true);s.control('reduced',false);assert.equal(s.tree.props['data-running'],false,'manual motion cannot erase the OS preference');s.system(false);
+ s.toggle();s.control('replay');assert.equal(s.tree.props['data-running'],false);assert.equal(s.nodes('a')[0].props.href,'/docs/getting-started');s.unmount();
 });
 
-test('inactive sticky resource chapters neither initialize Fiber nor keep a loaded renderer ticking',()=>{
- const s=mediaControls({inactive:true});s.nearby(true);s.visible(true);assert.equal(s.canvas,undefined);
- s.active(true);assert.equal(s.canvas.props.running,true);s.ready();const interaction=s.canvas.props.interaction;
- s.active(false);assert.equal(s.canvas.props.running,false);assert.equal(s.canvas.props.interactive,false);
- s.control('paused',false);s.visible(true);assert.equal(s.canvas.props.running,false);
- s.active(true);assert.equal(s.canvas.props.running,true);assert.equal(s.canvas.props.interaction,interaction);
- s.toggle();s.active(false);s.active(true);assert.equal(s.canvas.props.running,false);
- s.unmount();assert.ok(s.chapter.observers.every(observer=>observer.disconnected));
+test('pointer smoothing schedules only while moving and is cancelled on leaving the chapter',()=>{
+ const s=atlas();s.visible(true);assert.equal(s.frames.size,0,'an idle atlas has no continuous JavaScript frame loop');s.move();assert.equal(s.frames.size,1);s.move();assert.equal(s.frames.size,1,'pointer events coalesce');
+ s.active(false);assert.equal(s.frames.size,0);assert.equal(s.styles.get('--atlas-x'),'0');s.active(true);s.move();s.unmount();assert.equal(s.frames.size,0,'unmount releases the pending motion frame');
 });

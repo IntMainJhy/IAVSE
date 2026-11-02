@@ -20,6 +20,7 @@ async function render(space,locale='zh',media=true){
   '@/lib/home-download.mjs':{homeDownload:()=>({href:'/downloads'})},
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
   './HomeMotion':{HomeMotion:()=>null},'./HomeCinema':{HomeCinema:()=>null},
+  './CreatorVoices':{CreatorVoices:()=>React.createElement('section',{'data-creator-voices':true},'Illustrative creator comments')},
   './HomeResourceSculpture':{HomeResourceSculpture:({posterSrc,label})=>media?React.createElement('img',{src:posterSrc,alt:label,'data-resource-fallback':true}):null},
   './HomeStoryVideo':{HomeStoryVideo:({src,poster,label})=>media?React.createElement('img',{src:poster,alt:label,'data-video-src':src}):null},
   './HomeBlogCanvasDemo':{HomeBlogCanvasDemo:({locale,creator})=>React.createElement('div',{'data-editor-demo':true,'data-locale':locale},React.createElement('pre',{'data-demo-creator':true},JSON.stringify(creator??null)))},
@@ -75,13 +76,14 @@ test('the editor receives the real public snapshot without repeating a separate 
  assert.ok(!stories.includes('Text-only project'));
  assert.ok(!stories.includes('Another illustrated work'));
 });
-test('homepage ends with the creation invitation instead of a four-card gallery',async()=>{
+test('homepage retains the creation invitation and adds a separate creator-voices section',async()=>{
  const html=await render(space);
  assert.ok(html.includes('data-home-scene="invitation"'));
  assert.ok(!html.includes('data-card-gallery'));
  assert.ok(!html.includes('home-card'));
  const afterInvitation=html.slice(html.indexOf('data-home-scene="invitation"'));
- assert.equal(Array.from(afterInvitation.matchAll(/<section/g)).length,0,'no discovery section follows the final invitation');
+ assert.equal(Array.from(afterInvitation.matchAll(/<section/g)).length,1,'the creator-voices section follows the invitation');
+ assert.ok(afterInvitation.includes('data-creator-voices="true"'));
 });
 test('the editor story and real navigation remain available without a published creator',async()=>{
  const html=await render(null,'en');

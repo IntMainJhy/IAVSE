@@ -67,3 +67,15 @@ macOS and Windows client source code, installers and proprietary assets are not 
 `public/images/` 包含项目自制 SVG 与 AI 生成的示例图片。示例图片不表示真实成员、实拍经历或第三方背书。第三方用户内容、个人资料、品牌标识及链接目标的内容不因本仓库公开而获得额外使用授权。
 
 macOS、Windows 客户端源码、安装包与专有资源不在本仓库发布。
+
+### Notionists creator avatars / 手绘示例头像
+
+`public/avatars/creators/` uses locally hosted Notionists avatars, a remix of
+Notionists by Zoish, distributed by DiceBear under CC0 1.0.
+Source: https://www.dicebear.com/styles/notionists/
+License: https://creativecommons.org/publicdomain/zero/1.0/
+The six names and comments accompanying these avatars are illustrative demo
+content, not real users or endorsements. No DiceBear request occurs at runtime.
+
+`public/avatars/creators/` 的六个手绘头像来自 DiceBear 的 Notionists（原作者 Zoish，CC0 1.0），
+已本地托管。对应名字与评论为明确标注的示例，不代表真实用户或背书。
