@@ -8,8 +8,11 @@ import {blogTemplates} from '../src/lib/blog-templates.mjs';
 import {blogAppearances} from '../src/lib/blog-appearances.mjs';
 
 test('showcase data uses the existing blog layout and appearance system without member accounts',()=>{
- assert.equal(new Set(blogShowcases.map(item=>item.handle)).size,4);
- assert.deepEqual(new Set(blogShowcases.map(item=>item.appearance)),new Set(['sketch','mint-serif','night-player','glass-space']));
+ assert.equal(new Set(blogShowcases.map(item=>item.handle)).size,11);
+ assert.deepEqual(new Set(blogShowcases.map(item=>item.appearance)),new Set(blogAppearances.map(item=>item.id)));
+ assert.deepEqual(new Set(blogShowcases.map(item=>item.template)),new Set(blogTemplates.map(item=>item.id)));
+ assert.equal(new Set(blogShowcases.map(item=>item.avatarSrc)).size,11);
+ assert.equal(new Set(blogShowcases.map(item=>item.role)).size,11);
  for(const entry of blogShowcases){
   const preview=showcaseProfile(entry.handle,'zh'),data=showcasePageData(entry.handle,'zh'),english=showcasePageData(entry.handle,'en'),design=data.layout.blog.design;
   assert.ok(preview.href.startsWith('/blogs/showcase/'));assert.equal(preview.showcase,true);assert.equal(preview.avatarId,'');
@@ -27,8 +30,10 @@ test('showcase data uses the existing blog layout and appearance system without 
 });
 
 test('bundled avatar sources allow exact local art only and cannot become arbitrary image URLs',()=>{
- for(const entry of blogShowcases)assert.equal(showcaseAvatarSrc(entry.avatarSrc),entry.avatarSrc);
- for(const value of ['https://example.test/face.svg','//example.test/a.svg','/images/showcase/../private.svg','/images/showcase/lin.svg?key=private','/images/showcase/lin.svg#x','/images/showcase/%6cin.svg','/media/a','javascript:alert(1)',null,{},42])assert.equal(showcaseAvatarSrc(value),'');
+ const artwork=new Set();
+ for(const entry of blogShowcases){assert.equal(showcaseAvatarSrc(entry.avatarSrc),entry.avatarSrc);const svg=fs.readFileSync(new URL('../public'+entry.avatarSrc,import.meta.url),'utf8');assert.match(svg,/^<svg[\s>]/);assert.doesNotMatch(svg,/<script|javascript:|onload\s*=/i);assert.match(svg,/creativecommons.org\/publicdomain\/zero/);artwork.add(svg);}
+ assert.equal(artwork.size,11,'each display has its own bundled hand-drawn portrait');
+ for(const value of ['https://example.test/face.svg','//example.test/a.svg','/images/showcase/../private.svg','/images/showcase/lin.svg?key=private','/images/showcase/lin.svg#x','/images/showcase/%6cin.svg','/media/a','/images/showcase/unused.svg','javascript:alert(1)',null,{},42])assert.equal(showcaseAvatarSrc(value),'');
 });
 
 test('showcase embed renders the real BlogTheme without platform chrome or visit collection',async()=>{

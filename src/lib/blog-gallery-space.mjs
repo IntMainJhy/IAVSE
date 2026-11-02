@@ -1,30 +1,49 @@
-// Positions belong to each homepage, not to a moving carousel track.
+// Screen composition is converted to a shared world. Size comes from perspective,
+// not per-card scale; moving the camera changes occlusion between fixed homepages.
 const desktop=[
- [-.28,.00,100,.46,7,17,-5],
- [.29,-.18,-260,.43,-6,-16,5],
- [-.035,-.29,-520,.39,9,-9,-4],
- [.24,.23,20,.47,5,-16,6],
- [-.065,.30,-180,.40,-6,12,-4],
- [-.40,-.31,-420,.34,8,20,-7],
- [.43,.04,-480,.34,-5,-20,5],
- [-.35,.31,-410,.34,5,15,-3],
- [.15,-.40,-620,.32,7,-9,4],
+ [-.31,.04,100,9,38,-4], [.32,-.15,-360,-8,-34,4],
+ [-.10,-.28,-1100,12,28,-4], [.24,.25,30,-6,-40,5],
+ [-.16,.33,-420,8,30,-5], [-.34,-.25,-440,-7,44,-5],
+ [.23,-.31,-1300,14,-32,6], [-.43,.32,-920,-8,48,-4],
+ [.08,.03,-780,10,-28,5], [.42,.39,-1080,8,-42,3],
+ [.02,-.30,-660,-9,-32,-4], [.43,.07,-1050,12,-44,5],
 ];
 const mobile=[
- [-.22,-.06,60,.56,6,14,-5],
- [.29,-.19,-180,.53,-5,-14,6],
- [-.10,-.39,-320,.48,7,-8,-4],
- [.22,.25,15,.57,5,-15,5],
- [-.27,.33,-120,.52,-6,12,-5],
- [-.36,-.30,-270,.36,8,14,-4],
- [.40,.04,-300,.37,-4,-14,5],
- [-.36,.14,-300,.34,5,10,-4],
- [.21,-.43,-400,.34,6,-9,3],
+ [-.24,-.02,70,9,32,-5], [.25,-.21,-300,-7,-36,5],
+ [-.05,-.31,-920,10,28,-4], [.23,.24,0,-6,-36,5],
+ [-.23,.34,-330,8,32,-5], [-.30,-.29,-380,-6,38,-5],
+ [.24,-.36,-1080,12,-32,5], [-.38,.18,-820,-7,40,-4],
+ [.02,.10,-660,10,-26,4], [.35,.43,-900,8,-38,4],
+ [.01,-.36,-560,-8,-30,-4], [.37,-.02,-880,11,-38,5],
 ];
+export const galleryLimit=12;
+export function gallerySceneMetrics(width){
+ const compact=width<720,perspective=compact?760:1000,cardWidth=Math.min(width*(compact?.58:.31),compact?280:400),focusWidth=Math.min(width*(compact?.9:.68),800);
+ return {compact,perspective,cardWidth,focusZ:perspective*(1-cardWidth/focusWidth)};
+}
 export function gallerySpacePose(index,count,width,height,focused=-1){
- const compact=width<720,slots=compact?mobile:desktop;
- const [x,y,z,scale,rx,ry,rz]=count===1?[0,0,20,.55,6,-12,-3]:slots[index%slots.length];
- if(index===focused)return {x:0,y:compact?-10:-8,z:compact?25:70,scale:compact?.94:.94,rx:0,ry:0,rz:0,opacity:1};
- const retreat=focused>=0;
- return {x:x*width*(retreat?1.15:1),y:y*height*(retreat?1.1:1),z:z-(retreat?250:0),scale:scale*(retreat?.82:1),rx,ry,rz,opacity:retreat?.36:1};
+ const {compact,perspective}=gallerySceneMetrics(width),slots=compact?mobile:desktop;
+ const [sx,sy,z,rx,ry,rz]=count===1?[0,0,-120,8,28,-3]:slots[index%slots.length];
+ const projection=1-z/perspective;
+ return {x:sx*width*projection,y:sy*height*projection,z,rx:index===focused?0:rx,ry:index===focused?0:-ry,rz:index===focused?0:rz};
+}
+export function galleryCameraPose(index,count,width,height,yaw=0,pitch=0){
+ if(index<0)return {x:0,y:0,z:0,yaw,pitch};
+ const pose=gallerySpacePose(index,count,width,height),{focusZ}=gallerySceneMetrics(width);
+ return {x:-pose.x,y:-pose.y,z:focusZ-pose.z,yaw:0,pitch:0};
+}
+export function galleryViewDepth(pose,camera){
+ const yaw=camera.yaw*Math.PI/180,pitch=camera.pitch*Math.PI/180;
+ return pose.y*Math.sin(pitch)+(-pose.x*Math.sin(yaw)+pose.z*Math.cos(yaw))*Math.cos(pitch)+camera.z;
+}
+// Near pages arrive first; only two documents hydrate at once.
+export function galleryLoadOrder(count,selected=-1){
+ return [...new Set([selected,0,3,1,4,5,8,10,2,7,11,9,6])].filter(index=>index>=0&&index<count);
+}
+
+// Account for rotated corners before the near plane, not only a card's centre.
+export function galleryDepthExtent(pose,camera,width){
+ const rad=Math.PI/180,rx=pose.rx*rad,ry=pose.ry*rad,rz=pose.rz*rad,yaw=camera.yaw*rad,pitch=camera.pitch*rad;
+ const depth=(x,y)=>{const z=-Math.sin(ry)*x,xx=Math.cos(ry)*x,yy=Math.cos(rx)*y-Math.sin(rx)*z,zz=Math.sin(rx)*y+Math.cos(rx)*z;return Math.sin(pitch)*yy+Math.cos(pitch)*(-Math.sin(yaw)*xx+Math.cos(yaw)*zz);};
+ return Math.abs(depth(Math.cos(rz),Math.sin(rz)))*width/2+Math.abs(depth(-Math.sin(rz),Math.cos(rz)))*(width*820/1200+40)/2+18;
 }
