@@ -37,8 +37,8 @@ function fixture({reduced=false}={}){
  return{page,click,calls,contexts,observers,events,preference,changes,media};
 }
 
-test('first render keeps server content visible and only positions the active indicator',()=>{
- const f=fixture(),p=f.page('/community');assert.ok(!f.calls.some(call=>call.node===p.content));assert.equal(p.nav.dataset.motionReady,'true');p.cleanup();assert.equal(p.nav.dataset.motionReady,undefined);assert.ok(f.contexts.every(ctx=>ctx.reverted));assert.equal(f.events.size,0);
+test('first render preserves server attributes until streamed navigation children hydrate',()=>{
+ const f=fixture(),p=f.page('/community');assert.equal(f.calls.length,0);assert.equal(p.nav.dataset.motionReady,undefined);assert.equal(f.observers.length,0);p.cleanup();assert.equal(f.events.size,0);
 });
 test('equal-width routes move the active indicator without moving either rail or hiding text',()=>{
  const f=fixture(),a=f.page('/community');f.click('/community/members','members',true);a.cleanup();const start=f.calls.length,b=f.page('/community/members',100,'members'),calls=f.calls.slice(start);
@@ -52,7 +52,7 @@ test('reduced motion preserves navigation and content without creating any GSAP 
 });
 
 test('resizing or translating a navigation label remeasures the indicator and disconnects on cleanup',()=>{
- const f=fixture(),p=f.page('/community'),observer=f.observers[0];p.active.rect={...p.active.rect,width:148};observer.callback();assert.ok(f.calls.some(call=>call.node===p.indicator&&call.to?.width===148));p.cleanup();assert.equal(observer.disconnected,true);const count=f.calls.length;observer.callback();assert.equal(f.calls.length,count);
+ const f=fixture(),first=f.page('/community');f.click('/community/members');first.cleanup();const p=f.page('/community/members',100,'members'),observer=f.observers[0];p.active.rect={...p.active.rect,width:148};observer.callback();assert.ok(f.calls.some(call=>call.node===p.indicator&&call.to?.width===148));p.cleanup();assert.equal(observer.disconnected,true);const count=f.calls.length;observer.callback();assert.equal(f.calls.length,count);
 });
 
 test('public header links bridge remounted frames without delaying or cancelling native navigation',()=>{

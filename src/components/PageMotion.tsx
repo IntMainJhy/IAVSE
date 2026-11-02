@@ -65,6 +65,10 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    },element);
    return()=>media.revert();
   }
+  // A streamed community child can hydrate after this parent layout effect.
+  // Its CSS already marks the current route; only animate after navigation so
+  // the first render never writes attributes into still-hydrating server HTML.
+  if(!changed)return;
   const nav=element.querySelector<HTMLElement>('.feed-nav-links');
   if(previous&&nav)nav.scrollTop=previous.scroll;
   if(previous?.keyboard&&previous.key){const link=Array.from(element.querySelectorAll<HTMLElement>('[data-nav-key]')).find(link=>link.dataset.navKey===previous.key);link?.focus({preventScroll:true});}

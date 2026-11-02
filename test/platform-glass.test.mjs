@@ -11,12 +11,9 @@ function fixture({scene='home',path='/',width=1440,height=900,scrollY=0,journeyS
  const shell={querySelector:selector=>selector==='.blog-spaces-opening'?journey:null,toggleAttribute(name,force){changes.push({name,force});if(force)attributes.add(name);else attributes.delete(name);},removeAttribute:name=>attributes.delete(name)};
  const window={innerWidth:width,innerHeight:height,scrollY,addEventListener:(name,fn,options)=>listeners.set(name,{fn,options}),removeEventListener:(name,fn)=>{if(listeners.get(name)?.fn===fn)listeners.delete(name);}};
  class ResizeObserver{constructor(callback){this.callback=callback;this.targets=new Set();observers.push(this);}observe(target){this.targets.add(target);}disconnect(){this.disconnected=true;this.targets.clear();}}
- const InteriorAtmosphere=()=>{};
  vm.runInNewContext(source,{exports,window,ResizeObserver,require:name=>{
   if(name==='react')return{useEffect:fn=>effects.push(fn),useRef:()=>({current:{closest:()=>missingShell?null:shell}})};
   if(name==='next/navigation')return{usePathname:()=>path};
-  if(name==='./InteriorAtmosphere')return{InteriorAtmosphere};
-  if(name==='@/lib/interior-scene.mjs')return{interiorSceneForPath:value=>value==='/login'?'login':'community'};
   if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props}),Fragment:'fragment'};
   throw new Error('Unexpected dependency '+name);
  }});
@@ -24,7 +21,7 @@ function fixture({scene='home',path='/',width=1440,height=900,scrollY=0,journeyS
  const scroll=value=>{window.scrollY=value;listeners.get('scroll')?.fn();};
  const resize=(nextHeight,nextWidth=window.innerWidth)=>{window.innerHeight=nextHeight;window.innerWidth=nextWidth;listeners.get('resize')?.fn();};
  const journeyResize=(state,nextHeight)=>{journey.dataset.journey=state;journey.height=nextHeight;observers[0]?.callback();};
- return{output,cleanup,scroll,resize,journeyResize,journey,attributes,changes,listeners,observers,window,InteriorAtmosphere,get boundsReads(){return boundsReads;}};
+ return{output,cleanup,scroll,resize,journeyResize,journey,attributes,changes,listeners,observers,window,get boundsReads(){return boundsReads;}};
 }
 
 test('transparent home chrome begins with light ink and switches only after reaching daylight',()=>{
@@ -53,9 +50,9 @@ test('late blog-flight loading and later height changes refresh cached scene bou
  f.journeyResize('static',810);assert.ok(f.attributes.has('data-glass-bright'),'reduced-motion/fallback geometry returns to the normal page boundary');assert.equal(f.boundsReads,2);f.cleanup();
 });
 
-test('interior routes retain their distinct sculpture and already-scrolled state on mount',()=>{
+test('the authored-blog chrome retains scroll state without mounting a decorative sculpture',()=>{
  const f=fixture({scene:'interior',path:'/login',scrollY:1500});
- const interior=f.output.props.children[1];assert.equal(interior.type,f.InteriorAtmosphere);assert.equal(interior.props.scene,'login');
+ assert.equal(f.output.type,'span');assert.equal(f.output.props.hidden,true);assert.equal(f.output.props.children,undefined);
  assert.ok(f.attributes.has('data-glass-scrolled'));assert.ok(f.attributes.has('data-glass-bright'));assert.equal(f.observers.length,0);f.cleanup();
  const missing=fixture({missingShell:true});assert.equal(missing.listeners.size,0);assert.equal(missing.observers.length,0);assert.equal(missing.cleanup,undefined);
 });

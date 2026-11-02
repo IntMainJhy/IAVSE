@@ -1,0 +1,80 @@
+/* Community, creator discovery and resources share the landing page's glass
+   navigation. The optical layer is separate from the controls and popovers. */
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header{
+ --glass-header-ink:#1e3554;--chrome-accent:#284b7b;
+ background:transparent!important;border:0;box-shadow:none;backdrop-filter:none;
+ -webkit-backdrop-filter:none;isolation:isolate;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::before{
+ content:"";display:block;position:absolute;inset:0 0 auto;height:112px;z-index:0;pointer-events:none;
+ background:linear-gradient(180deg,#f9fcff99 0%,#eef5fd6b 52%,#f4f8fc1a 82%,#f4f8fc00 100%);
+ backdrop-filter:blur(20px) saturate(1.18);-webkit-backdrop-filter:blur(20px) saturate(1.18);
+ mask-image:linear-gradient(#000 0 64%,#0009 78%,transparent 100%);
+ -webkit-mask-image:linear-gradient(#000 0 64%,#0009 78%,transparent 100%);
+ box-shadow:inset 0 1px 0 #ffffffb8;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::after{
+ content:"";position:absolute;inset:auto 0 0;height:1px;z-index:0;pointer-events:none;
+ background:linear-gradient(90deg,transparent,#a9bdd339 20%,#ffffffbf 50%,#a9bdd339 80%,transparent);
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum][data-glass-scrolled]>.organic-header::before{
+ background:linear-gradient(180deg,#f9fcffc7 0%,#edf5fba3 54%,#f4f8fc35 82%,#f4f8fc00 100%);
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header-inner{
+ min-height:80px;position:relative;z-index:1;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-brand{
+ font-size:23px;font-weight:500;letter-spacing:.13em;gap:10px;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header .site-brand-mark{
+ width:36px;height:36px;filter:none;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-desktop-nav>a{
+ font-size:13px;font-weight:450;line-height:20px;min-height:44px;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header :is(.organic-brand,.organic-desktop-nav>a,.organic-mobile-menu>summary,.language-control select,.site-account-menu>summary){
+ color:var(--glass-header-ink);text-shadow:0 1px 0 #ffffff70;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header :is(.organic-desktop-nav>a,.site-account-menu>summary,.language-control select):hover{
+ color:#28558e;
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header :is(.organic-mobile-menu nav,.site-account-panel){
+ background:#fbfdfff7;border:1px solid #d8e3ef;border-radius:12px;
+ box-shadow:0 10px 28px -12px #203a5c2b;
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header :is(.organic-mobile-menu nav,.site-account-panel) :is(a,button){
+ color:#29435f;text-shadow:none;
+}
+@media(max-width:1000px){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header-inner{min-height:72px}
+}
+@media(max-width:767px){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header-inner{min-height:68px}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-brand{font-size:20px;letter-spacing:.1em}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header .site-brand-mark{width:32px;height:32px}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::before{height:96px;backdrop-filter:blur(16px) saturate(1.12);-webkit-backdrop-filter:blur(16px) saturate(1.12)}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::before{background:linear-gradient(#f5f9fdf5 0 64%,#f5f9fd00 100%)}
+}
+@media(prefers-reduced-transparency:reduce){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header{background:#f8fbff!important;border-bottom:1px solid #dbe5f0}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::before{display:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum] .organic-header :is(.organic-mobile-menu nav,.site-account-panel){background:#fbfdff;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media print{
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::before,
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum]>.organic-header::after{display:none}
+}
+
+/* A transparent, perspective point volume. Foreground cards retain opaque
+   reading surfaces; the field is visible in the surrounding page space. */
+.quantum-backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict;background:#f7f8fa}
+.quantum-backdrop>canvas{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity .5s ease}
+.quantum-backdrop>canvas:is([data-field=running],[data-field=paused]){opacity:1}
+.quantum-backdrop-fallback{position:absolute;inset:-15%;background-image:radial-gradient(#8198b4 1px,transparent 1.3px);background-size:30px 30px;opacity:.18;transform:perspective(900px) rotateX(18deg) rotateY(-8deg);mask-image:linear-gradient(90deg,#000,transparent 38%,transparent 62%,#000)}
+.quantum-backdrop:has(canvas:is([data-field=running],[data-field=paused])) .quantum-backdrop-fallback{opacity:0}
+@media(max-width:767px){.quantum-backdrop-fallback{background-size:26px 26px}}
+@media(prefers-reduced-motion:reduce){.quantum-backdrop>canvas{transition:none}}
+@media print{.quantum-backdrop{display:none}}
