@@ -6,10 +6,12 @@
 | --- | --- | --- |
 | public/media/home/blog-space-current.webp | /blog/jianghaoyu2006 | 2026-11-02 使用 Ego 浏览器重新录制的 IAVSE 博客主页（1200×900） |
 | public/media/home/resources.webp | /resources | 资源3D卡片纹理与WebGL降级图 |
-| public/media/home/skills-poster.webp | /resources?type=skills | 演示封面与低动态偏好静态图 |
-| public/media/home/skills-loop.mp4 | /resources?type=skills | 6秒真实目录滚动循环 |
+| public/media/home/skills-poster.webp | /resources?type=skills | 2026-11-02 重录的匹配首帧，作为演示封面与低动态偏好静态图 |
+| public/media/home/skills-loop.mp4 | /resources?type=skills | 2026-11-02 重录的 8 秒、60fps 真实目录滚动循环 |
 
-截图录自1200×900的实际公开页面。视频由72个真实浏览器帧组成，12fps采样后输出24fps H.264、无音轨；滚动位置使用余弦往返，首尾位置与速度连续。内容和数值没有伪造。
+截图录自1200×900的实际公开页面。视频按60fps时间轴逐帧捕获480个浏览器画面，使用当前IAVSE资源目录；录制时冻结背景动态，避免采集耗时影响视频中的背景时钟。滚动范围为350–1350px，使用8秒余弦往返，首尾位置与速度连续。H.264 High、yuv420p、无音轨、faststart，约1.14MB。旧版仅12fps采样后复制输出24fps，已替换，未对旧视频进行插帧或复制帧提速。内容和数值没有伪造。
+
+视频在当前章节挂载后使用`preload="auto"`缓冲，收到`canplay`才显示动态画面，避免仅有一个已解码帧时切换海报造成停顿。相关5项生命周期测试、TypeScript与生产构建通过。Ego浏览器检查播放、暂停、循环、离屏停播与390px手机布局；在背景3D同时运行、2048×978视口的稳定6秒采样中，`getVideoPlaybackQuality()`报告361帧、0掉帧。这是当前机器的采样结果，不代表所有设备的显示帧率。媒体检查确认全部PTS间隔1/60、相邻帧不再交替复制，`moov`位于`mdat`之前。
 
 视频在当前滚动章节激活并接近视口时加载，隐藏章节、离屏、页面隐藏、减少动态效果、用户暂停或卸载时停止播放。资源卡片延迟加载React Three Fiber，保留真实截图作为加载及错误降级。柔和渐变来自WebGL Shader，30个低透明度粒子缓慢流动；玻璃照明仅参与环境反射，不把光管或光环画入场景。
 

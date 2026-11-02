@@ -52,7 +52,7 @@ function fixture({reduced=false,savedReduced=false,inactive=false}={}){
   systemEvent:value=>{for(const change of changes)change({matches:value});flush();},
   control:(action,value)=>emit('iavse-scene-control',{detail:{action,value}}),printing:value=>emit(value?'beforeprint':'afterprint'),
   hidden:value=>{document.hidden=value;for(const listener of listeners)listener();flush();},
-  loaded:()=>{nodes('video')[0].props.onLoadedData();flush();},
+  loaded:()=>{nodes('video')[0].props.onCanPlay();flush();},
   toggle:()=>{nodes('button')[0].props.onClick();flush();},
   fail:()=>{nodes('video')[0].props.onError();flush();},
   unmount:()=>{for(const hook of hooks)if(hook.kind==='effect')hook.cleanup?.();for(const hook of hooks)if(hook.kind==='ref')hook.value.current=null;}
@@ -64,7 +64,10 @@ test('the real recording remains a static poster until nearby and only plays whi
  assert.equal(s.nodes('img')[0].props.src,'/poster.webp');assert.equal(s.nodes('video').length,0);assert.equal(s.calls.length,0);
  assert.ok(parseInt(s.observers[0].options.rootMargin)>0,'a nearby element can prepare media before entering view');s.nearby();
  assert.equal(s.nodes('video').length,1);assert.equal(s.media.paused,true);
- const video=s.nodes('video')[0].props;assert.equal(video.src,'/clip.mp4');assert.equal(video.muted,true);assert.equal(video.loop,true);assert.equal(video.playsInline,true);assert.equal(video.preload,'metadata');
+ const video=s.nodes('video')[0].props;assert.equal(video.src,'/clip.mp4');assert.equal(video.muted,true);assert.equal(video.loop,true);assert.equal(video.playsInline,true);assert.equal(video.preload,'auto');
+ assert.equal(s.tree.props['data-ready'],'false','the readable poster stays visible while future frames are not buffered');
+ assert.equal(video.onLoadedData,undefined,'one decoded frame alone must not reveal a possibly stalled recording');
+ s.loaded();assert.equal(s.tree.props['data-ready'],'true','canplay reveals the buffered recording');
  s.visible(true);assert.equal(s.media.paused,false);assert.ok(s.calls.includes('play'));
  s.visible(false);assert.equal(s.media.paused,true);s.visible(true);assert.equal(s.media.paused,false);
  s.unmount();

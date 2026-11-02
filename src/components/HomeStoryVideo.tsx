@@ -22,6 +22,8 @@ export function HomeStoryVideo({src,poster,label,pauseLabel,playLabel}:{src:stri
  },[]);
  // Once prepared, retain the same media element across motion toggles. A quiet
  // initial visit only needs the poster and never requests the recording.
+ // Once this chapter mounts the recording, buffer future frames before revealing
+ // it; loadeddata alone only guarantees one decoded frame and can flash then stall.
  useEffect(()=>{if(chapterActive&&nearby&&!reduced&&!hidden&&!printing&&!globalPaused)setEnabled(true);},[chapterActive,nearby,reduced,hidden,printing,globalPaused]);
  useEffect(()=>{
   const element=video.current;if(!element)return;
@@ -30,7 +32,7 @@ export function HomeStoryVideo({src,poster,label,pauseLabel,playLabel}:{src:stri
  },[chapterActive,enabled,visible,hidden,reduced,paused,globalPaused,printing,failed]);
  return <div ref={host} className="home-story-video" data-ready={ready&&!failed&&!reduced&&!printing?'true':'false'}>
   <img src={poster} alt={label} width={1200} height={900} loading="lazy" decoding="async"/>
-  {enabled&&!failed&&<video ref={video} src={src} poster={poster} muted loop playsInline preload="metadata" aria-hidden="true" onLoadedData={()=>setReady(true)} onError={()=>setFailed(true)}/>}
+  {enabled&&!failed&&<video ref={video} src={src} poster={poster} muted loop playsInline preload="auto" aria-hidden="true" onCanPlay={()=>setReady(true)} onError={()=>setFailed(true)}/>}
   {ready&&!failed&&!reduced&&<button type="button" className="home-media-pause" aria-label={paused?playLabel:pauseLabel} aria-pressed={paused} onClick={()=>setPaused(value=>!value)}><Icon name={paused?'play':'pause'}/></button>}
  </div>;
 }
