@@ -41,7 +41,7 @@ Production registration and publishing depend on explicit deployment settings. L
 
 Current repository description / 当前仓库简介：
 
-> IAVSE — AI-assisted developer portfolios, spatial blog discovery, docs, Skills and shared resources. Next.js / React / SQLite. Source available under PolyForm Noncommercial 1.0.0.
+> IAVSE: Developer portfolios, spatial blogs, docs, Skills and shared resources. Next.js, React, TypeScript and SQLite. PolyForm Noncommercial 1.0.0.
 
 Suggested topics: `nextjs`, `react`, `typescript`, `sqlite`, `portfolio`, `developer-community`, `agent-skills`, `mcp`, `source-available`.
 
