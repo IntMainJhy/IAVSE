@@ -29,7 +29,11 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  assert.equal(response.status,200);
  const entries=[...html.matchAll(/<li class="skill-entry">([\s\S]*?)<div class="skill-entry-links">/g)];
  assert.equal(entries.length,filterSkills({tool:tool.id}).length,locale+': '+tool.id);
- for(const [,entry] of entries)assert.ok(entry.includes('class="skill-entry-cover"')&&entry.includes('/api/covers?'), 'designed cover');
+ for(const [,entry] of entries){
+  assert.match(entry,/<h3><a [^>]*href="\/skills\//,'each result retains its real detail destination');
+  assert.ok(entry.includes('class="skill-upstream"'),'source attribution stays visible');
+  assert.ok(!entry.includes('/api/covers?'),'text-first directory does not request decorative cover images');
+ }
  for(const [,entry] of entries)assert.ok(entry.includes('data-selected="true">'+tool.label+'</li>'),tool.id+': selected badge');
  assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
  assert.ok(html.includes('name="tool"'));

@@ -29,9 +29,10 @@ try{
   assert.ok(nodes.some(node=>node.name==='a'&&node.attribs.href==='/workspace/blog'),'The entry keeps a real create/edit destination');
   assert.doesNotMatch(html,/data-blog-context="(?:featured|mine)"/,'The directory cannot render a personalized author page');
   assert.equal(elements(directory).filter(node=>node.name==='iframe').length,0,'The directory does not execute embedded member sites');
-  const cards=elements(directory).filter(node=>node.name==='a'&&hasClass(node,'blog-spaces-card'));
-  assert.equal(new Set(cards.map(node=>node.attribs.href)).size,cards.length,'Each published space is listed once');
-  return new Map(cards.map(node=>[node.attribs.href,text(node)]));
+  const cards=elements(directory).filter(node=>node.name==='article'&&(hasClass(node,'creator-feature')||hasClass(node,'creator-entry'))).map(node=>({node,link:elements(node).find(item=>item.name==='a'&&hasClass(item,'creator-enter'))}));
+  assert.ok(cards.every(card=>card.link),'Each creator retains an accessible entry link');
+  assert.equal(new Set(cards.map(card=>card.link.attribs.href)).size,cards.length,'Each published space is listed once');
+  return new Map(cards.map(card=>[card.link.attribs.href,text(card.node)]));
  }
  const login=await call('/api/auth/login',{username:'hosting_http',password:'hosting-http-password-2026'});assert.equal(login.status,200);const member=login.headers.get('set-cookie').split(';')[0];
  const guestEntry=await gallery(),eligible=await json('/api/spaces/public');assert.deepEqual([...guestEntry.keys()].sort(),eligible.map(space=>'/blog/'+encodeURIComponent(space.handle)).sort(),'Every discoverable public space appears in the semantic directory');

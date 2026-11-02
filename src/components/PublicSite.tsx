@@ -18,6 +18,7 @@ import {AuthNav} from './AuthNav';
 import {SiteTools} from './SiteTools';
 import {PlatformGlass} from './PlatformGlass';
 import {QuantumPointer} from './QuantumPointer';
+import {ReadingBackdrop} from './ReadingBackdrop';
 import {ResumePrint} from './ResumePrint';
 
 type Doc = Record<string, any>;
@@ -201,9 +202,9 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);
   const active = (href: string) => href==='/blogs'?homepageRoute:href==='/resources'?['resources','docs','skills','articles'].includes(section):href==='/'?!section:current===href||current.startsWith(href+'/');
   const authPage=section==='login'||section==='join';
-  return <div className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
-    <PlatformGlass scene={!path.length?'home':section==='blogs'&&path.length===1?'blogs':'interior'}/>
-    <QuantumPointer/><a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
+  return <div data-surface={path.length?'reading':'landing'} className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
+    {!path.length?<><PlatformGlass scene="home"/><QuantumPointer/></>:<ReadingBackdrop/>}
+    <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand"><BrandMark/><div className="site-brand-copy">IAVSE<span>{tr('社区与博客主页')}</span></div></Link>
       <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}</nav>
       <div className="organic-header-tools"><div className="iavse-account-slot"><AuthNav/></div>

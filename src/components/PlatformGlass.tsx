@@ -2,10 +2,9 @@
 
 import {useEffect,useRef} from 'react';
 import {usePathname} from 'next/navigation';
-import {InteriorAtmosphere} from './InteriorAtmosphere';
-import {interiorSceneForPath} from '@/lib/interior-scene.mjs';
 
-/** Interior routes have distinct sculptures; home and the blog flight own their renderers. */
+/** Navigation ink for the landing film and authored blog shell. Interior pages
+ * own their lightweight paper backdrop and never mount a WebGL sculpture. */
 export function PlatformGlass({scene='interior'}:{scene?:'home'|'interior'|'blogs'}){
  const anchor=useRef<HTMLSpanElement>(null),path=usePathname();
  useEffect(()=>{
@@ -29,5 +28,5 @@ export function PlatformGlass({scene='interior'}:{scene?:'home'|'interior'|'blog
   measure();window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',measure);
   return()=>{live=false;bounds?.disconnect();window.removeEventListener('scroll',update);window.removeEventListener('resize',measure);shell.removeAttribute('data-glass-scrolled');shell.removeAttribute('data-glass-bright');};
  },[path,scene]);
- return <><span ref={anchor} hidden aria-hidden="true"/>{scene==='interior'&&<InteriorAtmosphere scene={interiorSceneForPath(path)}/>}</>;
+ return <span ref={anchor} hidden aria-hidden="true"/>;
 }
