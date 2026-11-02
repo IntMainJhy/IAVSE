@@ -1,14 +1,16 @@
 'use client';
-import {createContext,useId,useCallback,useContext,useEffect,useRef,useState} from 'react';
+import {createContext,startTransition,use,useId,useCallback,useContext,useEffect,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {htmlLocale,translate} from '@/lib/i18n.mjs';
+import {htmlLocale} from '@/lib/locale-format.mjs';
+import {localeTranslator} from '@/lib/client-i18n.mjs';
 export type Locale='en'|'zh'|'ja';
 const Context=createContext<{locale:Locale;t:<T>(text:T,values?:unknown[])=>T;select:(locale:Locale)=>void;notice:string}|null>(null);
 export function LocaleProvider({initialLocale,children}:{initialLocale:Locale;children:React.ReactNode}){
  const[locale,setLocale]=useState(initialLocale),[notice,setNotice]=useState('');const router=useRouter();
- const t=useCallback(<T,>(text:T,values:unknown[]=[])=>translate(locale,text,values) as T,[locale]);
+ const translate=use(localeTranslator(locale));
+ const t=useCallback(<T,>(text:T,values:unknown[]=[])=>translate(locale,text,values) as T,[locale,translate]);
  useEffect(()=>{document.documentElement.lang=htmlLocale(locale)},[locale]);
- function select(next:Locale){if(next===locale)return;setLocale(next);document.documentElement.lang=htmlLocale(next);let saved=false;try{document.cookie=`site-locale=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;saved=document.cookie.split('; ').includes(`site-locale=${next}`)}catch{}setNotice(saved?'语言偏好已保存。':'语言已切换，但浏览器未允许保存偏好。');if(saved)router.refresh();}
+ function select(next:Locale){if(next===locale)return;document.documentElement.lang=htmlLocale(next);let saved=false;try{document.cookie=`site-locale=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;saved=document.cookie.split('; ').includes(`site-locale=${next}`)}catch{}setNotice(saved?'语言偏好已保存。':'语言已切换，但浏览器未允许保存偏好。');startTransition(()=>{setLocale(next);if(saved)router.refresh();});}
  return <Context.Provider value={{locale,t,select,notice}}>{children}</Context.Provider>;
 }
 export function useLocale(){const context=useContext(Context);if(!context)throw new Error('LocaleProvider is missing');return context;}

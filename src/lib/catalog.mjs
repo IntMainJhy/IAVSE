@@ -2,7 +2,7 @@ import {importDocument,IMPORT_HTML_MAX} from './document-import.mjs';
 import {catalogEditorUrl} from './catalog-presentation.mjs';
 import {randomUUID} from 'node:crypto';
 import sanitize from 'sanitize-html';
-import {db,now,hash,getConfig,transaction,limited,isSiteOwnerAccount} from './db.mjs';
+import {db,now,hash,getConfig,transaction,limited,siteOwnerAccountId} from './db.mjs';
 import {currentUser,localRequest,serviceRequest,publishingQualified} from './auth.mjs';
 import {requireValue,cleanText,HttpError} from './content.mjs';
 import {sourceUrl} from './community.mjs';
@@ -48,10 +48,19 @@ function content(input,author,kind,complete=false){
 }
 function view(row){const latest=db().prepare('SELECT status,reason,reviewer,created,decided FROM catalog_revisions WHERE entry=? ORDER BY rowid DESC LIMIT 1').get(row.id);return{reviewReason:latest?.reason||'',latestDecision:latest||null,id:row.id,kind:row.kind,authorId:row.author,version:row.version,status:row.status,visibility:row.visibility,draft:parse(row.draft),published:parse(row.published),pending:parse(row.pending),moderation:parse(row.moderation),communityPostId:row.community_post,url:catalogUrl(row.kind,row.id),created:row.created,updated:row.updated}}
 const visible=`e.visibility='public' AND e.published IS NOT NULL AND u.status='active' AND (u.verification ${publicVerification} OR u.role='owner') AND p.visibility='public' AND NOT EXISTS(SELECT 1 FROM community_cases c WHERE c.post=p.id AND c.frozen=1)`;
-function publicView(row){const author=db().prepare('SELECT nickname FROM community_users WHERE id=?').get(row.author);return{...parse(row.published),id:row.id,kind:row.kind,authorId:row.author,authorSiteOwner:isSiteOwnerAccount(row.author),authorName:row.author==='owner'?getConfig('profile').name:author?.nickname||'社区成员',url:catalogUrl(row.kind,row.id),updated:row.public_updated||row.created,communityPostId:row.community_post}}
+function publicView(row,ownerId=siteOwnerAccountId(),ownerName){return{...parse(row.published),id:row.id,kind:row.kind,authorId:row.author,authorSiteOwner:!!ownerId&&row.author===ownerId,authorName:row.author==='owner'?(ownerName??getConfig('profile').name):row.author_name||'社区成员',url:catalogUrl(row.kind,row.id),updated:row.public_updated||row.created,communityPostId:row.community_post}}
 function publicAccess(req){return !!req&&serviceRequest(req)}
-export function publicCatalog({kind='',q='',category='',tool=''}={},req){if(!publicAccess(req))return{items:[],total:0};requireValue(!kind||catalogKinds.includes(kind),'分类无效');const needle=String(q).slice(0,200).trim().toLowerCase();const items=db().prepare(`SELECT e.* FROM catalog_entries e JOIN community_users u ON u.id=e.author JOIN community_posts p ON p.id=e.community_post WHERE ${visible} ORDER BY COALESCE(e.public_updated,e.created) DESC,e.id DESC LIMIT 1000`).all().filter(row=>!kind||row.kind===kind).map(publicView).filter(item=>(!category||item.category===category)&&(!tool||item.supportedTools.includes(tool))&&(!needle||(item.title+' '+item.summary+' '+item.category).toLowerCase().includes(needle)));return{items,total:items.length}}
-export function publicCatalogItem(id,req){requireValue(publicAccess(req),'共享内容服务暂未开放',503);const row=db().prepare(`SELECT e.* FROM catalog_entries e JOIN community_users u ON u.id=e.author JOIN community_posts p ON p.id=e.community_post WHERE e.id=? AND ${visible}`).get(id);requireValue(row,'内容暂不可用',404);return publicView(row)}
+export function publicCatalog({kind='',q='',category='',tool='',summary=false}={},req){
+ if(!publicAccess(req))return{items:[],total:0};requireValue(!kind||catalogKinds.includes(kind),'分类无效');
+ const needle=String(q).slice(0,200).trim().toLowerCase();
+ // Lists opt into summaries; detail and existing API consumers retain the full published body.
+ const published=summary===true?"json_remove(e.published,'$.bodyHtml')":'e.published';
+ const rows=db().prepare(`SELECT e.id,e.kind,e.author,e.created,e.public_updated,e.community_post,${published} AS published,u.nickname AS author_name FROM catalog_entries e JOIN community_users u ON u.id=e.author JOIN community_posts p ON p.id=e.community_post WHERE ${visible}${kind?' AND e.kind=?':''} ORDER BY COALESCE(e.public_updated,e.created) DESC,e.id DESC LIMIT 1000`).all(...(kind?[kind]:[]));
+ const ownerId=rows.length?siteOwnerAccountId():'',ownerName=rows.some(row=>row.author==='owner')?getConfig('profile').name:undefined;
+ const items=rows.map(row=>publicView(row,ownerId,ownerName)).filter(item=>(!category||item.category===category)&&(!tool||item.supportedTools.includes(tool))&&(!needle||(item.title+' '+item.summary+' '+item.category).toLowerCase().includes(needle)));
+ return{items,total:items.length};
+}
+export function publicCatalogItem(id,req){requireValue(publicAccess(req),'共享内容服务暂未开放',503);const row=db().prepare(`SELECT e.*,u.nickname AS author_name FROM catalog_entries e JOIN community_users u ON u.id=e.author JOIN community_posts p ON p.id=e.community_post WHERE e.id=? AND ${visible}`).get(id);requireValue(row,'内容暂不可用',404);return publicView(row)}
 function save(user,input){return transaction(d=>{unpaused();const row=input.id?own(user,input.id):null;if(row){version(row,input);requireValue(!row.pending,'请先撤回待审版本再编辑',409)}const kind=row?.kind||input.kind,value=content(input,user.id,kind),id=row?.id||randomUUID();requireValue(value.title,'请填写标题');requireValue(!limited('catalog-save:'+user.id,120,60000,d),'保存过于频繁',429);if(row)d.prepare('UPDATE catalog_entries SET draft=?,status=?,version=version+1,updated=? WHERE id=?').run(JSON.stringify(value),'draft',now(),id);else{requireValue(d.prepare('SELECT COUNT(*) n FROM catalog_entries WHERE author=?').get(user.id).n<500,'每个账号最多保留 500 项共享内容');d.prepare('INSERT INTO catalog_entries(id,author,kind,draft,created,updated) VALUES(?,?,?,?,?,?)').run(id,user.id,kind,JSON.stringify(value),now(),now())}audit(user,'catalog_save',id,{kind});return view(get(id))})}
 function share(row,value,reviewer,reason){
  const d=db(),id=row.community_post||randomUUID(),revision=randomUUID(),absolute=new URL(catalogUrl(row.kind,row.id),process.env.PLATFORM_URL||process.env.PUBLIC_URL||'http://localhost:3008').href;

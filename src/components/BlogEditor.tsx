@@ -1,4 +1,8 @@
 'use client';
+import '@/app/blog-editor.css';
+import '@xyflow/react/dist/style.css';
+import '@/app/blog-canvas.css';
+import '@/app/blog-editor-controls.css';
 import Link from 'next/link';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {gsap} from 'gsap';

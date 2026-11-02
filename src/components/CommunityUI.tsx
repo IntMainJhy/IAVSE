@@ -2,7 +2,7 @@
 import {useLocale} from './LocaleProvider';
 import {useEffect,useState} from 'react';
 import Link from 'next/link';
-import {localeDate} from '@/lib/i18n.mjs';
+import {localeDate} from '@/lib/locale-format.mjs';
 import {post} from '@/lib/client';
 import {Icon} from './Icons';
 export type Doc=Record<string,any>;

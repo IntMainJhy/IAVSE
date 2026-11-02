@@ -134,4 +134,19 @@ test('document tables survive sanitization; inline images stay owner-scoped, rev
  row=submit(row);assert.equal(row.status,'pending');assert.ok(row.moderation.signals.some(x=>x.code==='media'));assert.equal(canReadCover(req(reviewer,'GET'),image),true);row=approve(row);assert.equal(canReadCover(req(bob,'GET'),image),true);
  row=call('catalog/'+row.id+'/action',{action:'offline',version:row.version});assert.equal(canReadCover(req(bob,'GET'),image),false);assert.throws(()=>C.publicCatalogItem(row.id,req(bob,'GET')),e=>e.status===404);assert.equal(canReadCover(req(alice,'GET'),image),true);
 });
+test('catalog summaries exclude full bodies and apply kind before the list limit',()=>{
+ const entry=approve(submit(save({...doc,title:'Older document under a busy resource feed'})));
+ const prefix='catalog-performance-',ids=Array.from({length:1001},(_,i)=>prefix+i);
+ try{
+  D.transaction(()=>{
+   d.prepare('UPDATE catalog_entries SET public_updated=? WHERE id=?').run('2000-01-01T00:00:00.000Z',entry.id);
+   const post=d.prepare("INSERT INTO community_posts(id,author,visibility,created,updated) VALUES(?,?,'public',?,?)"),item=d.prepare("INSERT INTO catalog_entries(id,author,kind,published,visibility,community_post,created,updated,public_updated) VALUES(?,?,'resources',?,'public',?,?,?,?)");
+   for(const id of ids){post.run(id,alice.id,D.now(),D.now());item.run(id,alice.id,JSON.stringify({...doc,title:id}),id,D.now(),D.now(),D.now())}
+  });
+  const request=req(alice,'GET'),full=C.publicCatalog({kind:'docs'},request).items.find(item=>item.id===entry.id),summary=C.publicCatalog({kind:'docs',summary:true},request).items.find(item=>item.id===entry.id);
+  assert.ok(full,'other kinds must not exhaust the document limit');assert.equal(full.bodyHtml,entry.published.bodyHtml);
+  assert.equal(summary.title,full.title);assert.equal(summary.authorName,'alice');assert.equal(Object.hasOwn(summary,'bodyHtml'),false);
+  assert.equal(C.publicCatalogItem(entry.id,request).bodyHtml,full.bodyHtml);assert.equal(C.publicCatalog({kind:'resources',summary:true},request).items.length,1000);
+ }finally{D.transaction(()=>{for(const id of ids){d.prepare('DELETE FROM catalog_entries WHERE id=?').run(id);d.prepare('DELETE FROM community_posts WHERE id=?').run(id)}})}
+});
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(dir,{recursive:true,force:true})});

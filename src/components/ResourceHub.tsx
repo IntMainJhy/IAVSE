@@ -19,7 +19,7 @@ export async function ResourceTabs({active='all'}:{active?:string}){
 
 async function ResourceOverview({query,baseUrl}:{query:CatalogQuery;baseUrl:string}){
  const {t,locale}=await serverI18n(),q=String(query.q||'').trim();
- const published=publicCatalog({kind:''},new Request(baseUrl,{headers:await headers()})).items;
+ const published=publicCatalog({summary:true,kind:''},new Request(baseUrl,{headers:await headers()})).items;
  const docs=[...guides.map(item=>({id:'guide-'+item.slug,title:t(item.title),summary:t(item.summary),category:t('使用指南'),url:'/docs/'+item.slug})),{id:'connect',title:'Connect API & MCP',summary:t('让 AI 直接发布文档、Skill 和其他资源。'),category:t('AI 工作流'),url:'/docs/connect'},...publicContent('articles').map((item:any)=>({...localizeContent(item,locale),url:'/docs/articles/'+encodeURIComponent(item.slug),authorName:'IAVSE'})),...published.filter((item:any)=>item.kind==='docs')];
  const skills=[...curatedSkills.map(item=>({id:'skill-'+item.id,title:item.name,summary:t(item.summary),category:'Skill',authorName:item.repo,url:'/skills/'+item.id})),...published.filter((item:any)=>item.kind==='skills')];
  const resources=[legalConsultationResource(locale),...published.filter((item:any)=>item.kind==='resources'),...publicContent('resources').map((item:any)=>({...localizeContent(item,locale),url:'/resources/'+encodeURIComponent(item.slug)}))];

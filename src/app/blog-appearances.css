@@ -1,6 +1,6 @@
-@font-face{font-family:Inter;src:url('/fonts/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-display:swap}
-@font-face{font-family:"Geist Mono";src:url('/fonts/GeistMono-Variable.ttf') format('truetype');font-weight:100 900;font-display:swap}
-@font-face{font-family:"Cormorant Garamond";src:url('/fonts/CormorantGaramond-Variable.ttf') format('truetype');font-weight:300 700;font-display:swap}
+@font-face{font-family:Inter;src:url('/fonts/Inter-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url('/fonts/GeistMono-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url('/fonts/CormorantGaramond-Variable.woff2') format('woff2');font-weight:300 700;font-display:swap}
 
 /* Theme and layout are separate decisions; editor chrome stays neutral. */
 .bt-mode{display:flex;gap:4px;margin:18px 0 12px;padding:4px;background:#f1f2f3;border-radius:6px}

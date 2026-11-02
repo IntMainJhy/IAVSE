@@ -143,6 +143,7 @@ main 已汇总深蓝光学玻璃首页、macOS 下载入口、资源页转场和
 | 连接 AI 工具 | [API 与 stdio MCP 参考](integrations/spaceyew-post/references/api.md) |
 | 管理及部署 | [管理中心](docs/管理中心说明.md) · [部署](deploy/README-split.md) |
 | 检查上线边界 | [审核与上线](docs/moderation-and-launch.md) · [审计记录](docs/audit-2026-10-22.md) |
+| 查看加载与渲染优化 | [性能优化记录](docs/performance-2026-11-03.md) |
 | 了解图标与授权 | [品牌素材](docs/brand.md) · [第三方许可](THIRD_PARTY_NOTICES.md) |
 
 ## 目录

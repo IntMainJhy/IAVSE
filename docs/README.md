@@ -37,6 +37,10 @@ Production registration and publishing depend on explicit deployment settings. L
 
 公网注册与生产发布由部署配置显式启用；本地规则仅作风险初筛，不代表合规认证。目前没有公开生产演示地址。应用数据、真实简历源文件及用户媒体保存在私有存储，macOS、Windows 客户端不属于此仓库。
 
+## Performance / 性能
+
+[2026-11-03 性能优化与测量记录](performance-2026-11-03.md) · covers shared loading, fonts, catalog reads and editor code splitting.
+
 ## Repository presentation / 仓库简介
 
 Current repository description / 当前仓库简介：

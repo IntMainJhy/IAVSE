@@ -1,4 +1,4 @@
-@font-face{font-family:"IAVSE Inter";src:url("/fonts/Inter-Variable.ttf") format("truetype");font-weight:100 900;font-display:swap}
+@font-face{font-family:"IAVSE Inter";src:url("/fonts/Inter-Variable.woff2") format("woff2");font-weight:100 900;font-display:swap}
 /* IAVSE: quiet optical depth yields to the real product as the page opens. */
 html[data-ui][data-color-mode]:has(.v2-site.v2-landing){--site-font:"IAVSE Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;--site-canvas:#f4f7fb;--site-blue-gradient:radial-gradient(ellipse 38% 26% at 0 96svh,#f4f7fb60,transparent),radial-gradient(ellipse 42% 28% at 100% 98svh,#f4f7fb60,transparent),linear-gradient(180deg,#0b1936 0,#17386b 30svh,#204d91 58svh,#a0b8d5 92svh,#f4f7fb 120svh,#f4f7fb 100%)}
 html[data-ui][data-color-mode] .v2-site.v2-landing{background:#f4f7fb}

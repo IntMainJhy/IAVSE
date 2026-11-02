@@ -141,6 +141,7 @@ The [2026-10-22 audit report](docs/audit-2026-10-22.md) records an earlier scope
 | Connect an AI tool | [API and stdio MCP reference](integrations/spaceyew-post/references/api.md) |
 | Operate the platform | [Administration](docs/administration.en.md) · [Deployment](deploy/README-split.en.md) |
 | Review launch boundaries | [Moderation and launch](docs/moderation-and-launch.md) · [Audit](docs/audit-2026-10-22.md) |
+| Review loading and rendering performance | [Performance audit](docs/performance-2026-11-03.md) |
 | Understand assets and permissions | [Brand assets](docs/brand.md) · [Third-party notices](THIRD_PARTY_NOTICES.md) |
 
 ## Repository layout

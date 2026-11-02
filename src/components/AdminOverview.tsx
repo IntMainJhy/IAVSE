@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {useLocale} from './LocaleProvider';
 import {useResource} from './PageResources';
 import {bytes} from '@/lib/client';
-import {localeDate} from '@/lib/i18n.mjs';
+import {localeDate} from '@/lib/locale-format.mjs';
 import styles from './AdminOverview.module.css';
 
 const copy:Record<string,[string,string]>={

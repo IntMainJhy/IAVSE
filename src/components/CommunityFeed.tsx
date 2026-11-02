@@ -1,5 +1,5 @@
 'use client';
-import {localeDate} from '@/lib/i18n.mjs';
+import {localeDate} from '@/lib/locale-format.mjs';
 import {useLocale} from './LocaleProvider';
 import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {useEffect,useId,useRef,useState,type CSSProperties} from 'react';

@@ -3,7 +3,7 @@ import {actionNames} from './CommunityAdmin';
 import {useState} from 'react';
 import {useLocale} from './LocaleProvider';
 import {useResource} from './PageResources';
-import {localeDate} from '@/lib/i18n.mjs';
+import {localeDate} from '@/lib/locale-format.mjs';
 
 const labels:Record<string,string>={site_content_save:'保存内容草稿',site_content_publish:'发布内容',site_content_offline:'下架内容',site_content_delete:'移入回收站',site_content_restore:'恢复内容草稿',site_config_update:'更新网站设置',site_file_upload:'上传站点文件',site_file_delete:'删除站点文件',site_upload_create:'创建上传任务',site_upload_cancel:'取消上传任务',space_file_upload:'上传空间文件',space_file_delete:'删除空间文件',site_case_link:'关联投诉内容',site_content_case_offline:'投诉处置下架',site_content_case_restore:'投诉复核恢复'};
 export function ManagementLog(){

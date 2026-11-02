@@ -13,3 +13,5 @@ New personalization faces are sourced from the [Google Fonts repository](https:/
 Downloaded 2026-10-25. WOFF2 files are lossless web-container conversions using fontTools and Brotli, without changing glyphs. Chinese families are scoped to CJK Unicode ranges in CSS so a selected Latin family can be paired independently. Font downloads happen only when a face is used; `font-display: swap` keeps text visible during loading. Missing glyphs fall back to device fonts.
 
 Previously bundled Inter, Geist Mono, and Cormorant Garamond retain their individual license files.
+
+Inter, Geist Mono, and Cormorant Garamond also ship lossless WOFF2 conversions (fontTools 4.63.0 / Brotli 1.2.1). Their original TTF files and license notices remain available. The web UI requests WOFF2; glyph coverage, variable axes, and font names are preserved.

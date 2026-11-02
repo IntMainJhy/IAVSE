@@ -1,4 +1,4 @@
-import {localeDate} from '@/lib/i18n.mjs';
+import {localeDate} from '@/lib/locale-format.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 /* Natural Organic — user-pinned public redesign, seed c1ce478a, code-led.
    Serif personal introduction and natural still life; content indexes below.
