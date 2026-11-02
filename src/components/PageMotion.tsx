@@ -16,6 +16,29 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
  const path=usePathname(),query=useSearchParams().toString(),route=path+(query?'?'+query:'');
  const root=useRef<HTMLDivElement>(null),lastRoute=useRef(route);
  useEffect(()=>{
+  const element=root.current;
+  // The landing film and authored canvases own their animation timelines.
+  if(!element||!element.closest('.public-content-site')||path.startsWith('/workspace/blog'))return;
+  const media=gsap.matchMedia();
+  media.add('(prefers-reduced-motion: no-preference)',()=>{
+   const selector='.shared-card,.skill-entry,.resource-overview-group>header,.product-download-option,.community-empty,.feed-post';
+   const seen=new WeakSet<Element>();let live=true;
+   const context=gsap.context(()=>{},element);
+   const observer=new IntersectionObserver(entries=>{
+    if(!live)return;
+    const entering=entries.filter(entry=>entry.isIntersecting).map(entry=>entry.target);
+    entering.forEach(node=>observer.unobserve(node));
+    if(entering.length)context.add(()=>gsap.fromTo(entering,{opacity:.25,y:18},{opacity:1,y:0,duration:.55,stagger:.055,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'}));
+   },{threshold:.08});
+   const discover=()=>element.querySelectorAll(selector).forEach(node=>{if(!seen.has(node)){seen.add(node);observer.observe(node);}});
+   discover();
+   // Community data may arrive after hydration. Observe additions, never animation styles.
+   const additions=new MutationObserver(discover);additions.observe(element,{childList:true,subtree:true});
+   return()=>{live=false;additions.disconnect();observer.disconnect();context.revert();};
+  },element);
+  return()=>media.revert();
+ },[route]);
+ useEffect(()=>{
   document.querySelectorAll<HTMLDetailsElement>('.organic-mobile-menu[open],.feed-mobile-account[open]').forEach(menu=>{menu.open=false;});
  },[path,query]);
  useEffect(()=>{

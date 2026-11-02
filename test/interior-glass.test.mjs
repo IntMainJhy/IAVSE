@@ -80,7 +80,7 @@ test('interior studio normalizes lifecycle progress while keeping the shared blu
  for(const kind of Object.keys(interiorModels)){
   const s=await studio(kind),uniforms=s.wall.material.uniforms;
   assert.equal(uniforms.uProgress.value,0);
-  assert.deepEqual(['uTop','uBlue','uBottom','uIce'].map(key=>uniforms[key].value.getHexString()),['96b5df','bed1ec','e8eff9','f4f7fb']);
+  assert.deepEqual(['uTop','uBlue','uBottom','uIce'].map(key=>uniforms[key].value.getHexString()),['b4cbe6','d9e6f5','edf3fa','f6f8fc']);
   s.adapter.render(0,0,false,2.55,false);assert.ok(Math.abs(uniforms.uProgress.value-1.5)<1e-9);
   s.adapter.render(0,0,false,3.45,true);assert.ok(Math.abs(uniforms.uProgress.value-2.4)<1e-9,'reduced motion retains the document background without moving the sculpture');
   s.adapter.render(0,0,false,.5,false);assert.equal(uniforms.uProgress.value,0);

@@ -5,7 +5,7 @@ import {interiorModels} from './interior-scene.mjs';
 import type {HomeGlassScene} from './home-glass';
 
 export type InteriorScene=keyof typeof interiorModels;
-const palette=['#96b5df','#bed1ec','#e8eff9','#f4f7fb'];
+const palette=['#b4cbe6','#d9e6f5','#edf3fa','#f6f8fc'];
 const transmissionChunk=ShaderChunk.transmission_pars_fragment,bicubicSample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
 // Keep the native RGB volume rays and roughness LOD, using one hardware-filtered
 // sample per channel rather than r187's eight-fetch bicubic reconstruction.
@@ -62,7 +62,7 @@ export async function createInteriorGlass(canvas:HTMLCanvasElement,signal:AbortS
     vec2 readingOffset=(vec2(uv.x,documentY)-vec2(.5,.34))/vec2(.90,.52);
     float reading=exp(-dot(readingOffset,readingOffset)*2.)*smoothstep(.08,.18,documentY);
     color*=1.-pow(abs(uv.x-.5)*2.,2.)*.08*(1.-smoothstep(.88,1.55,documentY));
-    color=mix(color,vec3(.48,.63,.79),reading*.26*(1.-smoothstep(.88,1.55,documentY)));
+    color=mix(color,uBottom,reading*.18*(1.-smoothstep(.88,1.55,documentY)));
     vec2 pool=(vec2(uv.x,documentY)-vec2(.56,.86))*vec2(1.5,1.1);
     float wash=exp(-dot(pool,pool)*3.)*.075;
     color=mix(color,uBottom,wash);
