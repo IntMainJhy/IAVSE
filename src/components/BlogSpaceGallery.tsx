@@ -17,7 +17,7 @@ function GalleryPanel({space,labels,selected,mounted,index,onSelect,onReady}:{sp
  const ready=useCallback(()=>{if(done.current)return;done.current=true;onReady(space.handle);},[onReady,space.handle]);
  useEffect(()=>{const plane=surface.current;if(!plane)return;const measure=()=>plane.style.setProperty('--gallery-scale',String(plane.clientWidth/1200));const resize=new ResizeObserver(measure);resize.observe(plane);measure();return()=>resize.disconnect();},[]);
  // A failed public document must not hold the rest of the loading queue hostage.
- useEffect(()=>{if(!mounted)return;const timeout=setTimeout(ready,12000);return()=>clearTimeout(timeout);},[mounted,ready]);
+ useEffect(()=>{if(!mounted||loaded)return;const timeout=setTimeout(ready,12000);return()=>clearTimeout(timeout);},[mounted,loaded,ready]);
  useEffect(()=>()=>{readiness.current?.();readiness.current=null;},[space.href]);
  return <article className="blog-gallery-exhibit" data-gallery-handle={space.handle} data-selected={selected} style={{'--float-delay':`${index*-1.7}s`,'--float-duration':`${8+index*.35}s`} as CSSProperties}>
   <div className="blog-gallery-float">
@@ -51,15 +51,20 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
   try{saved=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
   const reduced=()=>saved||preference.matches;
   type Pose=ReturnType<typeof gallerySpacePose>;type Camera=ReturnType<typeof galleryCameraPose>;
+  const rendered=panels.map(()=>({transform:'',visibility:'',opacity:'',haze:''}));
   let poses:Pose[]=[],camera:Camera={x:0,y:0,z:0,yaw:0,pitch:0};
   const paint=()=>{
    world.style.transform=`translate3d(${camera.x}px,${camera.y}px,${camera.z}px) rotateX(${camera.pitch}deg) rotateY(${camera.yaw}deg)`;
    for(let index=0;index<panels.length;index++){
     const panel=panels[index],pose=poses[index];if(!pose)continue;
-    panel.style.transform=`translate(-50%,-50%) translate3d(${pose.x}px,${pose.y}px,${pose.z}px) rotateX(${pose.rx}deg) rotateY(${pose.ry}deg) rotateZ(${pose.rz}deg)`;
+    const cached=rendered[index],transform=`translate(-50%,-50%) translate3d(${pose.x}px,${pose.y}px,${pose.z}px) rotateX(${pose.rx}deg) rotateY(${pose.ry}deg) rotateZ(${pose.rz}deg)`;
+    if(cached.transform!==transform){panel.style.transform=transform;cached.transform=transform;}
     const depth=galleryViewDepth(pose,camera),near=Math.max(0,Math.min(1,(perspective-90-galleryDepthExtent(pose,camera,cardWidth)-depth)/220));
     // Cull only pages the camera actually passes. Distant pages stay in their places.
-    panel.style.visibility=near===0?'hidden':'visible';panel.style.opacity=String(near);panel.style.setProperty('--gallery-haze',String(Math.max(0,Math.min(.22,-depth/7000))));
+    const visibility=near===0?'hidden':'visible',opacity=String(near),haze=String(Math.max(0,Math.min(.22,-depth/7000)));
+    if(cached.visibility!==visibility){panel.style.visibility=visibility;cached.visibility=visibility;}
+    if(cached.opacity!==opacity){panel.style.opacity=opacity;cached.opacity=opacity;}
+    if(cached.haze!==haze){panel.style.setProperty('--gallery-haze',haze);cached.haze=haze;}
    }
   };
   const stopPointer=()=>{cancelAnimationFrame(pointerFrame);pointerFrame=0;};
@@ -69,9 +74,9 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
    tween?.kill();stopPointer();
    const targets=panels.map((_,index)=>gallerySpacePose(index,panels.length,width,height,focus)),targetCamera=galleryCameraPose(focus,panels.length,width,height,orbitYaw,orbitPitch);
    if(!poses.length||!animate||reduced()){poses=targets;camera=targetCamera;paint();return;}
-   const starts=poses.map(pose=>({...pose})),startCamera={...camera},progress={value:0};
+   const starts=poses.map(pose=>({...pose})),startCamera={...camera},progress={value:0},poseKeys=['x','y','z','rx','ry','rz'] as const,cameraKeys=['x','y','z','yaw','pitch'] as const;
    // A single tween performs one O(n) paint per frame for the complete scene.
-   context.add(()=>{tween=gsap.to(progress,{value:1,duration:1.2,ease:'power3.inOut',onUpdate:()=>{const t=progress.value;poses=targets.map((target,index)=>Object.fromEntries(Object.entries(target).map(([key,value])=>[key,starts[index][key as keyof Pose]+(value-starts[index][key as keyof Pose])*t])) as Pose);camera=Object.fromEntries(Object.entries(targetCamera).map(([key,value])=>[key,startCamera[key as keyof Camera]+(value-startCamera[key as keyof Camera])*t])) as Camera;paint();},onComplete:wake});});
+   context.add(()=>{tween=gsap.to(progress,{value:1,duration:1.2,ease:'power3.inOut',onUpdate:()=>{const t=progress.value;for(let index=0;index<targets.length;index++)for(const key of poseKeys)poses[index][key]=starts[index][key]+(targets[index][key]-starts[index][key])*t;for(const key of cameraKeys)camera[key]=startCamera[key]+(targetCamera[key]-startCamera[key])*t;paint();},onComplete:wake});});
   };
   const measure=()=>{width=stage.clientWidth;height=stage.clientHeight;const metrics=gallerySceneMetrics(width);perspective=metrics.perspective;cardWidth=metrics.cardWidth;stage.style.setProperty('--gallery-perspective',perspective+'px');stage.style.setProperty('--gallery-card-width',metrics.cardWidth+'px');arrange(false);};
   const resize=new ResizeObserver(measure);resize.observe(stage);measure();element.setAttribute('data-gallery-ready','');
@@ -94,7 +99,7 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
  },[exhibits]);
  const current=exhibits[selected];
  const close=()=>{const handle=selectedHandle.current;select.current(-1);if(handle)host.current?.querySelector<HTMLButtonElement>(`[data-gallery-trigger="${CSS.escape(handle)}"]`)?.focus({preventScroll:true});};
- const key=(event:KeyboardEvent<HTMLElement>)=>{if(event.altKey||event.metaKey||event.ctrlKey)return;if(event.key==='Escape'&&selected>=0){event.preventDefault();close();return;}let index:number|undefined;if(event.key==='ArrowRight')index=(selected+1)%exhibits.length;else if(event.key==='ArrowLeft')index=selected<0?exhibits.length-1:(selected-1+exhibits.length)%exhibits.length;else if(event.key==='Home')index=0;else if(event.key==='End')index=exhibits.length-1;if(index!==undefined){event.preventDefault();select.current(index);host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')[index]?.focus({preventScroll:true});}};
+ const key=(event:KeyboardEvent<HTMLElement>)=>{if(event.altKey||event.metaKey||event.ctrlKey)return;if(event.key==='Escape'&&selected>=0){event.preventDefault();close();return;}const buttons=Array.from(host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')||[]),author=(event.target as Element).closest<HTMLButtonElement>('.gallery-authors>button'),origin=author?buttons.indexOf(author):selected;let index:number|undefined;if(event.key==='ArrowRight')index=(origin+1)%exhibits.length;else if(event.key==='ArrowLeft')index=origin<0?exhibits.length-1:(origin-1+exhibits.length)%exhibits.length;else if(event.key==='Home')index=0;else if(event.key==='End')index=exhibits.length-1;if(index!==undefined){event.preventDefault();select.current(index);host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')[index]?.focus({preventScroll:true});}};
  if(!exhibits.length)return null;
  return <section ref={host} className="blog-gallery" data-mode="spatial" data-focused={selected>=0} aria-label={labels.directory} data-count={exhibits.length} onKeyDown={key}>
   <div className="gallery-view-tools"><button type="button" onClick={()=>resetView.current()} disabled={selected>=0}>{labels.reset}</button></div>

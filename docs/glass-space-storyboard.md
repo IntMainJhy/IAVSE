@@ -68,7 +68,7 @@ blender -b -t 1 -P scripts/build-iavse-surface.py -- --blend-output /absolute/pa
 
 以下记录用于追溯旧方案，不作为 IAVSE 新空间的实现状态或验收要求。
 
-# SpaceYew 玻璃空间分镜与页面关系
+# IAVSE 玻璃空间分镜与页面关系
 
 2026-10-31，基于已有蓝色原生玻璃世界扩展公共平台。网站使用一个明亮的玻璃外观，移除平台深色/跟随系统开关；作者自己选择的博客主题、字体与页面几何仍独立保存。
 

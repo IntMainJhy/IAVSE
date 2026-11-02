@@ -10,7 +10,7 @@ IAVSE is a developer portfolio and knowledge-sharing platform. Turn a résumé i
 
 The blog editor uses MIT-licensed React Flow to design the actual homepage, with the existing Anx layout as its default template. Inline editing, movable/resizable sections, custom text, images and links share one design between preview and explicitly published pages. HTML/ZIP static hosting remains available through the backend APIs.
 
-[GitHub repository](https://github.com/IntMainJhy/SpaceYew) · [AtomGit mirror](https://atomgit.com/InMainJhy/SpaceYew) · [Documentation](docs/README.md)
+[GitHub repository](https://github.com/IntMainJhy/IAVSE) · [AtomGit mirror](https://atomgit.com/InMainJhy/IAVSE) · [Documentation](docs/README.md)
 
 This repository contains the website's frontend, backend, tests and deployment examples, making its interface, content model and permission system available to study. It is built with Next.js, React, TypeScript and Node.js's built-in SQLite.
 
@@ -27,15 +27,25 @@ This repository contains the website's frontend, backend, tests and deployment e
 
 IAVSE is being developed as a shared service with account-isolated data. Public accounts and community routes are explicitly enabled for HTTPS deployments; registration requires opening and acknowledging the current community rules and disclaimer. Members can then sign in with their email and password without an email code; that acknowledgment is recorded separately from mailbox verification. Account restrictions and deployment access controls still apply. See [public launch requirements](docs/public-launch.en.md).
 
+## Current release
+
+The current main branch brings together the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Real published authors appear first; bundled showcase content does not create accounts or alter member counts.
+
+See the [latest audit and release notes](docs/release-2026-11-02.md). Preview images are labelled below by scope.
+
 ## Preview
 
-Local previews of the English interface with English sample posts and fictional member profiles. These screenshots show the earlier homepage and community design; the current editor and catalog capabilities are described below. The website also supports Simplified Chinese and Japanese.
+Local previews of the current interface. The homepage and spatial gallery images show this release; the community and individual homepage images are archived references. The website also supports Simplified Chinese and Japanese.
 
 ### Homepage
 
-A scroll-driven introduction to IAVSE, its public spaces, editable canvas, Skills and resources. The archived screenshot below predates the current glass-and-particle scene.
+The current optical glass homepage, followed by spaces, the editable canvas, Skills and resources.
 
-![IAVSE homepage in English with editorial typography, pastel backgrounds and feature links](docs/screenshots/home-en.jpg)
+![Current IAVSE optical glass homepage](docs/screenshots/home-current.png)
+
+### Spatial blog discovery
+
+![IAVSE spatial blog gallery using existing themes](docs/screenshots/blog-spaces-current.png)
 
 ### Community
 
@@ -156,8 +166,8 @@ You may use these instructions for the noncommercial purposes permitted by LICEN
 Use Node.js **24.15 or a newer compatible version**, npm and the committed lockfile. Database access uses a single Node process; multiple instances must not write concurrently to the same upload directory.
 
 ```sh
-git clone https://github.com/IntMainJhy/SpaceYew.git
-cd SpaceYew
+git clone https://github.com/IntMainJhy/IAVSE.git
+cd IAVSE
 npm ci
 cp .env.local.example .env.local
 node --env-file=.env.local scripts/setup.mjs

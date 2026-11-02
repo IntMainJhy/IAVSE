@@ -25,3 +25,7 @@ The legacy filenames preserve existing links and integrations. SVG, ICO and 512p
 The transparent symbol sits beside the complete IAVSE wordmark. It may be shown white on a dark background or blue on a light background through the site's existing treatment. `BrandMark` retains empty `alt` and `aria-hidden="true"`: the surrounding link takes its accessible name from the visible wordmark. A symbol used alone as a control must have its own accessible name.
 
 Authored portfolio illustrations, résumé images, certificates and screenshots remain content, not reusable brand assets. The archived leaf-traveler character is not part of this mark or the current website.
+
+## Compatibility identifiers
+
+The public product and repository are named IAVSE. Existing `spaceyew-*` asset names, `/skills/spaceyew-post` integration paths, deployment service names and private data directories remain compatibility identifiers. Do not rename a running database or deployed service merely to update its display brand.

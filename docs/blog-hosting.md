@@ -22,6 +22,6 @@ Original upload archives are not publicly downloadable. Existing limits of 1 GB 
 
 ## Source and license
 
-The Anx adaptation is based on [anx-portfolio](https://github.com/AnxForever/anx-portfolio/tree/a7434847797658402d50fba29827eef246102bb7), retaining the profile-header grid, ruled panels and layered pixel-signature structure. The identity and signature use site-owned content, without the original author's portrait, personal facts or fabricated contributions. The full [MIT notice](licenses/anx-portfolio-MIT.txt) and [brand policy](licenses/anx-portfolio-BRAND.md) are retained; SpaceYew's restrictive license does not override those third-party rights.
+The Anx adaptation is based on [anx-portfolio](https://github.com/AnxForever/anx-portfolio/tree/a7434847797658402d50fba29827eef246102bb7), retaining the profile-header grid, ruled panels and layered pixel-signature structure. The identity and signature use site-owned content, without the original author's portrait, personal facts or fabricated contributions. The full [MIT notice](licenses/anx-portfolio-MIT.txt) and [brand policy](licenses/anx-portfolio-BRAND.md) are retained; IAVSE's restrictive license does not override those third-party rights.
 
 [简体中文](blog-hosting.zh-CN.md)

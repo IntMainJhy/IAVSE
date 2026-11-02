@@ -12,7 +12,7 @@ IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理�
 
 博客编辑器使用 MIT React Flow 直接设计主页，默认沿用现有 Anx 模板。支持行内编辑、栏目移动与宽度调整、自定义文字、图片及链接；预览和明确发布后的公开页使用同一份设计。HTML / ZIP 静态托管继续通过后端 API 提供。
 
-[GitHub 仓库](https://github.com/IntMainJhy/SpaceYew) · [AtomGit 镜像](https://atomgit.com/InMainJhy/SpaceYew) · [文档导航](docs/README.md)
+[GitHub 仓库](https://github.com/IntMainJhy/IAVSE) · [AtomGit 镜像](https://atomgit.com/InMainJhy/IAVSE) · [文档导航](docs/README.md)
 
 本仓库提供网站的完整前端、后端、测试及部署示例，方便阅读其界面、内容组织和权限治理的实现。网站基于 Next.js、React、TypeScript 和 Node.js 内置 SQLite 构建。
 
@@ -29,15 +29,25 @@ IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理�
 
 平台按多成员共享、账号数据隔离的方式开发。真实 HTTPS 部署可显式开放生产账号与社区；注册时必须打开并确认当前版本的社区规则和免责声明，之后可使用邮箱和密码登录，无需邮箱验证码。规则确认与邮箱所有权验证分别记录，账号限制及部署入口权限继续生效。参见[公开运营要求](docs/public-launch.md)。
 
+## 当前版本
+
+main 已汇总深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12 个主页的 3D 博客展廊。展廊复用既有主题，每次最多加载两个预览，支持拖动环顾、点击靠近与减少动态效果；真实公开作者优先，展示资料不创建账号、不计入成员数量。
+
+本轮检查与收尾见[最新审计及版本说明](docs/release-2026-11-02.md)。以下首页和空间展廊截图对应当前版本；社区与个人主页截图保留为历史参考。
+
 ## 界面预览
 
-以下为本地演示环境的网页端截图，展示此前的首页与社区设计；当前编辑器和栏目能力见下方功能说明。
+以下为本地网页端预览。首页与空间展廊使用本轮截图，其他存档画面仅供参考。
 
 ### 网站首页
 
-通过滚动依次介绍博客空间、可操作的编辑画布、Skill 与资源。下方存档截图早于当前玻璃与粒子场景。
+当前光学玻璃首页，通过滚动依次介绍博客空间、可操作的编辑画布、Skill 与资源。
 
 ![IAVSE 网站首页，展示杂志字体、柔彩背景和功能入口](docs/screenshots/home.jpg)
+
+### 空间展廊
+
+![IAVSE 空间展廊，复用现有主页主题](docs/screenshots/blog-spaces-current.png)
 
 ### 社区动态
 
@@ -158,8 +168,8 @@ IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理�
 要求 Node.js **24.15 或更新的兼容版本**，使用 npm 和随仓库提供的锁文件。数据库采用单 Node 进程访问，不应以多个实例共写同一上传目录。
 
 ```sh
-git clone https://github.com/IntMainJhy/SpaceYew.git
-cd SpaceYew
+git clone https://github.com/IntMainJhy/IAVSE.git
+cd IAVSE
 npm ci
 cp .env.local.example .env.local
 node --env-file=.env.local scripts/setup.mjs

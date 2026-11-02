@@ -12,9 +12,9 @@ The full notice is preserved in [docs/licenses/SocialKit-MIT.txt](docs/licenses/
 
 ### Anx portfolio
 
-`src/components/AnxPortfolio.tsx` and `src/app/anx-portfolio.css` adapt the profile-header / panel composition, handwritten arrow and layered SVG extrusion from [AnxForever/anx-portfolio](https://github.com/AnxForever/anx-portfolio) at commit `a7434847797658402d50fba29827eef246102bb7`, by Chánh Đại and Anx (MIT). The adapted portions remain under MIT; SpaceYew's restrictive license does not override those rights.
+`src/components/AnxPortfolio.tsx` and `src/app/anx-portfolio.css` adapt the profile-header / panel composition, handwritten arrow and layered SVG extrusion from [AnxForever/anx-portfolio](https://github.com/AnxForever/anx-portfolio) at commit `a7434847797658402d50fba29827eef246102bb7`, by Chánh Đại and Anx (MIT). The adapted portions remain under MIT; IAVSE's restrictive license does not override those rights.
 
-The complete [MIT notice](docs/licenses/anx-portfolio-MIT.txt) and [upstream brand policy](docs/licenses/anx-portfolio-BRAND.md) are retained. Original author names, portraits, wordmarks, personal facts and contribution data are replaced by the signed-in member's content and SpaceYew's original pixel alphabet. This is a SpaceYew template adaptation, not the complete upstream Next.js application or an endorsement.
+The complete [MIT notice](docs/licenses/anx-portfolio-MIT.txt) and [upstream brand policy](docs/licenses/anx-portfolio-BRAND.md) are retained. Original author names, portraits, wordmarks, personal facts and contribution data are replaced by the signed-in member's content and IAVSE's original pixel alphabet. This is an IAVSE template adaptation, not the complete upstream Next.js application or an endorsement.
 
 ### React Flow
 
@@ -22,7 +22,7 @@ The blog editor uses `@xyflow/react` (MIT) for viewport gestures, node selection
 
 ### Three.js
 
-The homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT). The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The glass GLB is an original extrusion of SpaceYew's existing folded-plane symbol; no Ego Lite model or environment image is included.
+The homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT). The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
 
 ### npm dependencies
 
@@ -48,7 +48,7 @@ macOS and Windows client source code, installers and proprietary assets are not 
 
 `src/components/AnxPortfolio.tsx` 与 `src/app/anx-portfolio.css` 改编自 [AnxForever/anx-portfolio](https://github.com/AnxForever/anx-portfolio) 的头像与标题布局、Panel 组合、手绘箭头及分层 SVG 立体效果，固定来源提交为 `a7434847797658402d50fba29827eef246102bb7`，原作者为 Chánh Đại、Anx，许可为 MIT。改编部分仍适用 MIT，本项目的限制性许可不覆盖其原有权利。
 
-完整保留 [MIT 声明](docs/licenses/anx-portfolio-MIT.txt) 与 [上游品牌政策](docs/licenses/anx-portfolio-BRAND.md)。原作者的头像、字标、个人事实与贡献记录没有引入；替换为当前成员自己的内容与 SpaceYew 原创像素字母。此处为适配后的平台模板，不代表完整上游 Next.js 应用或原作者背书。
+完整保留 [MIT 声明](docs/licenses/anx-portfolio-MIT.txt) 与 [上游品牌政策](docs/licenses/anx-portfolio-BRAND.md)。原作者的头像、字标、个人事实与贡献记录没有引入；替换为当前成员自己的内容与 IAVSE 原创像素字母。此处为适配后的平台模板，不代表完整上游 Next.js 应用或原作者背书。
 
 ### React Flow
 
@@ -56,7 +56,7 @@ macOS and Windows client source code, installers and proprietary assets are not 
 
 ### Three.js
 
-首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment，保留[完整许可](docs/licenses/Three.js-MIT.txt)。玻璃 GLB 基于 SpaceYew 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
+首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment，保留[完整许可](docs/licenses/Three.js-MIT.txt)。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
 
 ### npm 依赖
 

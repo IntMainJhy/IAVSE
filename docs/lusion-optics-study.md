@@ -1,6 +1,6 @@
-# Lusion 公开前端研究与 SpaceYew 光学场景
+# Lusion 公开前端研究与 IAVSE 光学场景
 
-2026-10-31，按用户要求使用 REA 学习 [Lusion About](https://lusion.co/about) 的公开前端，再改进 SpaceYew 的原生蓝色玻璃首页。未将对方模型、贴图或脚本复制到网站资源中。
+2026-10-31，按用户要求使用 REA 学习 [Lusion About](https://lusion.co/about) 的公开前端，再改进 IAVSE 的原生蓝色玻璃首页。未将对方模型、贴图或脚本复制到网站资源中。
 
 ## 研究方法与证据边界
 
@@ -10,7 +10,7 @@
 
 ## 确认的技术特点
 
-| 方面 | 公开代码确认的机制 | SpaceYew 的实现取舍 |
+| 方面 | 公开代码确认的机制 | IAVSE 的实现取舍 |
 | --- | --- | --- |
 | 场景组织 | Three.js r158、WebGLRenderer、Scene和PerspectiveCamera；About有独立光场、粒子、地形、人物、雾等层 | 继续使用项目现有Three.js与原创Blender玻璃模型，搭建一个蓝色光学摄影棚 |
 | 光影 | 自制灯影目标、切片光场、散射、烘焙shadow/light/height地形信息、地面累积阴影和深度雾 | 明暗灯卡形成可读的环境反射；WebGL背景提供真实可采样的明暗结构；受控背景暗部和焦散曲线补充层次 |
