@@ -19,9 +19,10 @@ html[data-ui][data-color-mode] .v2-site .organic-header .language-control select
 html[data-ui][data-color-mode] .v2-site .site-account-menu>summary{font-size:13px;gap:8px;min-height:44px}
 html[data-ui][data-color-mode] .v2-site .site-account-menu>summary .feed-avatar{width:25px;height:25px;flex-basis:25px}
 
-/* Half-size headline leaves the glass and its reflections room to breathe. */
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(28px,2.35vw,36px);line-height:1.28;letter-spacing:-.025em;font-weight:400;max-width:700px;margin-bottom:28px}
-.v2-home .v2-hero-intro{padding-top:clamp(178px,25svh,260px);padding-bottom:58px}
+/* A full opening shot keeps the brand centered and the product below the fold. */
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(26px,2.25vw,32px);line-height:1.34;letter-spacing:-.025em;font-weight:400;max-width:700px;margin-bottom:28px}
+.v2-home .v2-hero-intro{position:relative;min-height:100svh;padding:112px 28px;align-items:center;justify-content:center}
+.v2-home .v2-hero-showcase{padding-top:clamp(40px,6svh,72px)}
 html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>.iavse-brand-words{font-size:10px;letter-spacing:.16em;max-width:760px}
 .v2-home .v2-hero-actions{margin-top:30px;gap:16px}
 .v2-home .home-stories-stage{display:contents}
@@ -43,15 +44,15 @@ html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>.iavse-brand-word
  .home-scene-nav a{color:#45607d;padding:12px 20px;font-size:12px;line-height:20px;white-space:nowrap;border-radius:99px;text-decoration:none;transition:color .2s,background .2s}
  .home-scene-nav a[aria-current=step]{background:#183e81;color:#fff;box-shadow:inset 0 1px #ffffff36}
 }
-html[data-ui][data-color-mode] .v2-site .v2-home .home-story-copy h2{font-size:clamp(29px,3vw,42px);line-height:1.2;font-weight:450;letter-spacing:-.04em}
-html[data-ui][data-color-mode] .v2-site .v2-home .home-story-copy p{font-size:15px;line-height:1.8;color:#4a6480}
+html[data-ui][data-color-mode] .v2-site .v2-home .home-story-copy h2{font-size:clamp(26px,2.5vw,34px);line-height:1.25;font-weight:450;letter-spacing:-.04em}
+html[data-ui][data-color-mode] .v2-site .v2-home .home-story-copy p{font-size:14px;line-height:1.8;color:#4a6480}
 .v2-home .home-story-link{display:inline-flex;padding:12px 19px;border-radius:99px;border:1px solid #a9bedb;background:#ffffff8c;font-size:13px;gap:25px;transition:background .2s,box-shadow .2s}
 .v2-home .home-story-link:hover{background:#fff;box-shadow:0 6px 18px #285fd414;text-decoration:none}
 .v2-home .home-story-secondary{margin-top:14px}
 
 /* A composed final frame, with a clear primary and secondary action. */
 html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation{position:relative;max-width:1328px;width:calc(100% - 80px);margin:50px auto 64px;padding:84px 32px;min-height:0;border:1px solid #ffffffbb;border-radius:32px;background:linear-gradient(125deg,#ecf3ffdf,#ffffffcb 54%,#cfdef7de);box-shadow:0 30px 90px -55px #153a7066;overflow:hidden}
-html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation h2{position:relative;font-size:clamp(28px,3vw,42px);font-weight:450;line-height:1.25;letter-spacing:-.04em;margin-bottom:32px}
+html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation h2{position:relative;font-size:clamp(26px,2.5vw,34px);font-weight:450;line-height:1.3;letter-spacing:-.04em;margin-bottom:32px}
 html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation>div{position:relative;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
 html[data-ui][data-color-mode] .v2-site .v2-invitation .v2-primary{background:linear-gradient(145deg,#3777e5,#214dac);border:1px solid #3265be;color:white;box-shadow:inset 0 1px #ffffff50,0 8px 20px -9px #2457ad80;min-height:50px;padding:13px 25px;font-size:14px}
 html[data-ui][data-color-mode] .v2-site .v2-invitation .v2-text-link{background:#ffffffa6;border:1px solid #b9cbe3;border-radius:99px;min-height:50px;padding:13px 25px;font-size:14px;color:#234a80;display:inline-flex;align-items:center;gap:20px}
@@ -89,13 +90,14 @@ html[data-ui][data-color-mode] .v2-site.public-auth-site .community-auth .commun
  html[data-ui][data-color-mode] .v2-site .organic-header-inner{padding-inline:20px;min-height:68px}
  html[data-ui][data-color-mode] .v2-site .organic-brand{font-size:20px;letter-spacing:.1em;gap:8px}
  html[data-ui][data-color-mode] .v2-site .organic-header-tools{gap:8px}
- html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(23px,5vw,30px);max-width:100%;line-height:1.45}
+ html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy h1{font-size:clamp(21px,5.4vw,26px);max-width:100%;line-height:1.4}
  html[data-ui][data-color-mode] .v2-site .v2-home .v2-hero-copy>.iavse-brand-words{font-size:8px;letter-spacing:.12em;line-height:2;max-width:320px}
- .v2-home .v2-hero-intro{padding:150px 18px 48px}
+ .v2-home .v2-hero-intro{min-height:100svh;padding:104px 18px 144px;align-items:center}
+ .v2-home .v2-hero-showcase{padding-top:40px}
  .v2-home .home-stories-stage{gap:64px}
- html[data-ui][data-color-mode] .v2-site .v2-home .home-story-copy h2{font-size:28px}
+ html[data-ui][data-color-mode] .v2-site .v2-home .home-story-copy h2{font-size:25px}
  html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation{width:calc(100% - 36px);margin:72px 18px 40px;padding:48px 22px;border-radius:24px}
- html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation h2{font-size:28px}
+ html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation h2{font-size:25px}
  html[data-ui][data-color-mode] .v2-site>.organic-footer>.organic-container:first-child{grid-template-columns:1fr;gap:30px;padding-inline:24px}
  html[data-ui][data-color-mode] .v2-site>.organic-footer nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px}
  html[data-ui][data-color-mode] .v2-site>.organic-footer>.organic-footer-filing{width:calc(100% - 48px)}

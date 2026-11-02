@@ -127,7 +127,7 @@ const journey=[{id:'blog',start:1.25,end:2.63,side:-1},{id:'editor',start:2.63,e
 test('the intro lens retires while a single GPU point field carries every reading chapter',async()=>{
  const s=await studio(),model=s.surface.children[0],geometry=s.meshes[0].geometry,version=geometry.attributes.position.version,heroDpr=s.dpr;
  s.adapter.setJourney(journey);const field=s.scene.getObjectByName('iavse-journey-depth'),positions=field.geometry.attributes.position,fieldVersion=positions.version,poses=[];
- assert.ok(field.isPoints);assert.equal(positions.count,720,'desktop field has a fixed single-buffer budget');assert.equal(field.material.depthWrite,false);
+ assert.ok(field.isPoints);assert.equal(positions.count,6048,'two optical veils share one bounded desktop buffer');assert.equal(field.material.depthWrite,false);
  for(const chapter of journey){const center=(chapter.start+chapter.end)*.5-.5,scroll=chapter.id==='invitation'?Math.min(center,chapter.end-1-.15):center;s.adapter.render(0,0,false,scroll,false,8);
   assert.equal(s.canvas.dataset.journeyChapter,chapter.id);assert.equal(s.surface.visible,false,'the oversized lens never covers '+chapter.id);assert.equal(s.surface.children[0],model);assert.equal(geometry.attributes.position.version,version);
   assert.equal(field.visible,true,'real point geometry stays visible through '+chapter.id);assert.equal(s.adapter.animated,true);assert.equal(s.adapter.interactive,true);assert.equal(positions.version,fieldVersion,'scroll does not rewrite vertex buffers');
@@ -142,7 +142,7 @@ test('the intro lens retires while a single GPU point field carries every readin
 
 test('mobile field retains perspective geometry within a smaller delivery budget',async()=>{
  const s=await studio({window:{innerWidth:390,devicePixelRatio:2}});s.adapter.resize(390,844,1.5);s.adapter.setJourney(journey);s.adapter.render(0,0,false,3,false,5);
- const field=s.scene.getObjectByName('iavse-journey-depth');assert.equal(field.geometry.attributes.position.count,240);assert.equal(field.visible,true);assert.ok(s.dpr<=1.5);assert.ok(Math.abs(field.material.uniforms.uAspect.value-390/844)<1e-8);s.adapter.dispose();
+ const field=s.scene.getObjectByName('iavse-journey-depth');assert.equal(field.geometry.attributes.position.count,2016);assert.equal(field.visible,true);assert.ok(s.dpr<=1.5);assert.ok(Math.abs(field.material.uniforms.uAspect.value-390/844)<1e-8);s.adapter.dispose();
 });
 
 test('the point field fades continuously before the footer and restores when scrolling back',async()=>{

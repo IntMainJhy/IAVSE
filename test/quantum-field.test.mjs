@@ -21,14 +21,16 @@ function module(){
  return{...exports,sizes,get frame(){return frame;},get calls(){return calls;},get released(){return released;},get allocations(){return allocations;},get options(){return options;}};
 }
 
-test('both quantum quality levels preserve a complete lattice volume with bounded sampling',()=>{
+test('both quality levels cover the same three currents with continuous wire topology and bounded sampling',()=>{
  const m=module();
  for(const mobile of [false,true]){
-  const lattice=m.quantumLattice(mobile);
-  assert.equal(lattice.count,mobile?1232:3456);assert.equal(lattice.positions.length,lattice.count*3);
+  const lattice=m.quantumCurrents(mobile);
+  assert.equal(lattice.count,mobile?3600:10368);assert.equal(lattice.positions.length,lattice.count*3);
   assert.ok(lattice.positions.every(Number.isFinite)&&lattice.seeds.every(Number.isFinite));
-  for(const axis of [0,1]){const values=Array.from({length:lattice.count},(_,i)=>lattice.positions[i*3+axis]);assert.equal(Math.min(...values),-1);assert.equal(Math.max(...values),1);}
-  const depth=Array.from({length:lattice.count},(_,i)=>lattice.positions[i*3+2]);assert.ok(Math.max(...depth)-Math.min(...depth)>5,'the continuous sheet has visible spatial depth before animated displacement');
+  const bands=new Set(Array.from({length:lattice.count},(_,i)=>lattice.positions[i*3+2]));assert.deepEqual([...bands],[-1,0,1]);
+  assert.ok(lattice.seeds.every(value=>value>=0&&value<=1));
+  assert.equal(lattice.lines.length,lattice.lineCount*3);assert.equal(lattice.lineCount,mobile?1536:4032);
+  for(let i=0;i<lattice.lineCount;i+=2){assert.ok(lattice.lines[(i+1)*3]>lattice.lines[i*3]);assert.equal(lattice.lines[(i+1)*3+1],lattice.lines[i*3+1]);assert.equal(lattice.lines[(i+1)*3+2],lattice.lines[i*3+2]);}
  }
  for(const [w,h,dpr,budget] of [[1920,1080,3,1400000],[390,844,3,650000],[3840,2160,2,1400000]]){
   const q=m.quantumQuality(w,h,dpr);assert.ok(q.ratio<=1.5);assert.ok(w*h*q.ratio*q.ratio<=budget+1);
@@ -41,12 +43,14 @@ test('the point pass reuses geometry during motion and scales quality without re
  field.resize(1440,960,2);field.render(3,.4,-.3,2,false);
  const {points,camera}=m.frame,geometry=points.geometry,material=points.material;
  assert.ok(camera instanceof three.PerspectiveCamera&&points instanceof three.Points);
- assert.equal(geometry.attributes.position.count,3456);assert.equal(material.uniforms.uTime.value,3);
+ assert.equal(geometry.attributes.position.count,10368);
+ assert.ok(m.frame.scene.children[1] instanceof three.LineSegments);
+ assert.equal(m.frame.scene.children[1].geometry.attributes.position.count,4032);assert.equal(material.uniforms.uTime.value,3);
  assert.equal(material.transparent,true);assert.equal(material.depthWrite,false);
  const calls=m.sizes.length;field.resize(1440,960,2);assert.equal(m.sizes.length,calls);
  for(let i=0;i<10;i++)field.render(i/30,.2,.1,.5,false);
  assert.equal(m.frame.points.geometry,geometry);assert.equal(geometry.attributes.position.version,0,'motion changes uniforms rather than uploading position buffers');
- field.resize(390,844,2);field.render(4,0,0,0,false);assert.equal(m.frame.points.geometry.attributes.position.count,1232);
+ field.resize(390,844,2);field.render(4,0,0,0,false);assert.equal(m.frame.points.geometry.attributes.position.count,3600);
  field.render(8,5,-5,6,true);assert.equal(material.uniforms.uReduced.value,1);assert.equal(material.uniforms.uPointer.value.length(),0);assert.equal(camera.position.z,18);
  field.dispose();
 });
@@ -54,11 +58,12 @@ test('the point pass reuses geometry during motion and scales quality without re
 test('abort disposes both quality levels, shader and renderer once and ignores late work',async()=>{
  const m=module(),controller=new AbortController(),field=await m.createQuantumField({},controller.signal);
  field.resize(1440,960,1);field.render(0,0,0,0,false);
- const desktop=m.frame.points.geometry,material=m.frame.points.material;let geometryReleases=0,materialReleases=0;
- desktop.addEventListener('dispose',()=>geometryReleases++);material.addEventListener('dispose',()=>materialReleases++);
- field.resize(390,844,1);field.render(0,0,0,0,false);m.frame.points.geometry.addEventListener('dispose',()=>geometryReleases++);
+ let geometryReleases=0,materialReleases=0;
+ for(const object of m.frame.scene.children){object.geometry.addEventListener('dispose',()=>geometryReleases++);object.material.addEventListener('dispose',()=>materialReleases++);}
+ field.resize(390,844,1);field.render(0,0,0,0,false);
+ for(const object of m.frame.scene.children)object.geometry.addEventListener('dispose',()=>geometryReleases++);
  const draws=m.calls,resizes=m.sizes.length;controller.abort();field.dispose();
- assert.equal(geometryReleases,2);assert.equal(materialReleases,1);assert.equal(m.released,1);
+ assert.equal(geometryReleases,4);assert.equal(materialReleases,2);assert.equal(m.released,1);
  field.resize(300,500,1);field.render(50,0,0,0,false);assert.equal(m.calls,draws);assert.equal(m.sizes.length,resizes);
  const aborted=new AbortController();aborted.abort();await assert.rejects(m.createQuantumField({},aborted.signal),{name:'AbortError'});assert.equal(m.allocations,1);
 });

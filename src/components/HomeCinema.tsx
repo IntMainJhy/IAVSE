@@ -29,15 +29,13 @@ export function HomeCinema({locale}:{locale:string}){
   const refresh=()=>{if(live&&!refreshFrame)refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;if(live)ScrollTrigger.refresh();});};
   const media=gsap.matchMedia();
   media.add('(prefers-reduced-motion: no-preference)',()=>{
-   const heading=hero.querySelectorAll('h1>span'),copy=hero.querySelector('.v2-hero-copy'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
+   const heading=hero.querySelectorAll('h1>span'),copy=hero.querySelector('.v2-hero-copy'),intro=hero.querySelector('.v2-hero-intro'),showcase=hero.querySelector('.v2-hero-showcase'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
    const entrance=gsap.timeline({defaults:{ease:'power3.out'}});
-   if(window.scrollY<32)entrance.fromTo(heading,{y:6,opacity:.88},{y:0,opacity:1,duration:1,stagger:.075,clearProps:'transform,opacity',immediateRender:false});
-   const journey=gsap.timeline({scrollTrigger:{id:'iavse-product-approach',trigger:hero,start:'top top',end:()=>'+='+window.innerHeight*1.05,scrub:true,invalidateOnRefresh:true},defaults:{ease:'none'}});
-   journey.addLabel('insight',0);
-   if(copy)journey.to(copy,{y:-28,opacity:.16,duration:1},0);
-   journey.addLabel('explore',.28).addLabel('approach',.65);
-   if(stage)journey.fromTo(stage,{y:20,rotationX:2,scale:.985,transformPerspective:1600,transformOrigin:'center top'},{y:0,rotationX:0,scale:1,duration:1,immediateRender:false},0);
-   journey.addLabel('product',1);
+   if(window.scrollY<32)entrance.fromTo(heading,{y:10,opacity:.6},{y:0,opacity:1,duration:1,stagger:.075,clearProps:'transform,opacity',immediateRender:false});
+   // The opening frame belongs to the brand. The product approaches only once
+   // its own section crosses the viewport, and reverses with native scrolling.
+   if(copy&&intro)gsap.to(copy,{y:-36,opacity:.08,ease:'none',scrollTrigger:{id:'iavse-hero-departure',trigger:intro,start:'top top',end:'bottom 30%',scrub:.45,invalidateOnRefresh:true}});
+   if(stage&&showcase)gsap.fromTo(stage,{autoAlpha:0,y:88,rotationX:7,scale:.94,transformPerspective:1800,transformOrigin:'center top'},{autoAlpha:1,y:0,rotationX:0,scale:1,ease:'power2.out',scrollTrigger:{id:'iavse-product-approach',trigger:showcase,start:'top 96%',end:'top 24%',scrub:.55,invalidateOnRefresh:true}});
   },hero);
   const images=Array.from(hero.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));
   document.fonts?.ready.then(refresh);refresh();

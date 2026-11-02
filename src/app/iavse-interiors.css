@@ -77,7 +77,7 @@ html[data-ui][data-color-mode] .v2-site[data-surface=reading] .feed-mobile-panel
 html[data-ui][data-color-mode] .v2-site[data-surface=reading] :is(.feed-category,.feed-author time,.feed-account-copy small,.community-member-copy p){color:#687386}
 
 html[data-ui][data-color-mode] .v2-site[data-surface=reading] .feed-search>button>.icon{display:block;width:20px;height:20px;flex:0 0 20px}
-html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-search>.organic-button.is-secondary:not(.space-root *){width:44px;min-width:44px;padding:12px;gap:0}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .community-search.feed-search>.organic-button.is-secondary:not(.primary):not(.dark):not(.danger):not(.space-root *){width:44px;min-width:44px;padding:12px;gap:0}
 /* Long-form reading uses quiet white paper with bounded text measure. */
 html[data-ui][data-color-mode] .v2-site[data-surface=reading] :is(.document-reader,.shared-reading-layout>article,.learning-layout,.skill-detail,.community-policy-document,.community-report-form,.community-receipt){background:#fff;border:1px solid #e0e5ec;border-radius:12px;box-shadow:none;color:#202d42;padding:32px}
 html[data-ui][data-color-mode] .v2-site[data-surface=reading] .document-reader{grid-template-columns:192px minmax(0,1fr) 160px;gap:32px;padding:24px 24px 64px}
@@ -135,3 +135,24 @@ html[data-ui][data-color-mode] .v2-site[data-surface=reading]>.organic-footer>.o
 }
 @media(prefers-reduced-motion:reduce),(hover:none){.reading-backdrop>canvas{display:none}}
 @media print{.reading-backdrop{display:none}}
+
+/* The rail keeps its first destination visible even while the footer enters.
+   Only its navigation list scrolls; composing and account actions stay in reach. */
+@media(min-width:768px){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .community-navigation-shell>.feed-navigation{position:sticky;top:96px;align-self:start;min-height:0;height:auto;max-height:var(--community-rail-height,calc(100dvh - 112px));display:flex;flex-direction:column;overflow:visible}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-navigation>.feed-nav-links{flex:0 1 auto;min-height:44px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#bac7d8 transparent}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-navigation>:is(.feed-write,.feed-identity){flex:none}
+}
+@media(min-width:768px) and (max-height:620px){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-navigation>.feed-identity{display:none}
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-navigation>.feed-write{margin-top:12px}
+}
+/* A single search surface, with an integrated action instead of a nested box. */
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-search{align-items:center;border:1px solid #c8d2df;border-radius:12px;background:#ffffffed;padding:4px;gap:4px;transition:border-color .2s,box-shadow .2s}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-search:focus-within{border-color:#6688b7;box-shadow:0 0 0 3px #3864ac12}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-search input:not(.space-root *){outline:none;background:transparent;border:0;box-shadow:none;padding:8px 12px;min-height:44px;font-size:14px;line-height:20px}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .community-search.feed-search>.organic-button.is-secondary:not(.primary):not(.dark):not(.danger):not(.space-root *){background:transparent;border:0;box-shadow:none;border-radius:8px;color:#465e7c;width:44px;height:44px;min-width:44px;padding:12px;margin:0}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .community-search.feed-search>.organic-button.is-secondary:not(.primary):not(.dark):not(.danger):not(.space-root *):hover{background:#eaf0f8;color:#214c86;box-shadow:none}
+@media(max-width:767px){
+ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading] .feed-search input:not(.space-root *){font-size:16px}
+}
