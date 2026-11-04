@@ -35,6 +35,14 @@ test('expired chunk upload emits the same session event as normal API requests a
  await assert.rejects(sendFile(file,new AbortController().signal,()=>{},()=>{}),error=>error.status===401);assert.equal(expired,1);assert.equal(chunks,1);
 });
 
+test('a rejected session probe never broadcasts its own revalidation trigger',async()=>{
+ globalThis.window=new EventTarget();let expired=0;window.addEventListener('session-expired',()=>expired++);
+ globalThis.fetch=async()=>json({error:'Session unavailable'},401);
+ for(const path of ['/api/auth/me','/api/auth/me?check=1','/api/auth/login'])await assert.rejects(api(path),error=>error.status===401);
+ assert.equal(expired,0,'the auth/me listener cannot feed a 401 back into itself');
+ await assert.rejects(api('/api/spaces/mine'),error=>error.status===401);assert.equal(expired,1,'protected API failures still invalidate the session');
+});
+
 test('pause during retry backoff ends promptly without starting another chunk',async()=>{
  const control=new AbortController();let chunks=0;
  globalThis.fetch=async()=>json(task);

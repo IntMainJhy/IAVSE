@@ -48,7 +48,7 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
   let focus=exhibits.findIndex(space=>space.handle===selectedHandle.current);setSelected(focus);
   const preference=matchMedia('(prefers-reduced-motion:reduce)'),fine=matchMedia('(hover:hover) and (pointer:fine)'),panels=Array.from(element.querySelectorAll<HTMLElement>('[data-gallery-handle]')),context=gsap.context(()=>{},element);
   let saved=false,width=0,height=0,cardWidth=360,perspective=1000,visible=false,pointerFrame=0,orbitYaw=0,orbitPitch=0,pointerYaw=0,pointerPitch=0;
-  let drag:{id:number;x:number;y:number;yaw:number;pitch:number;active:boolean}|null=null,tween:gsap.core.Tween|undefined;
+  let drag:{id:number;x:number;y:number;yaw:number;pitch:number;active:boolean}|null=null,tween:gsap.core.Tween|undefined,pointerPosition:{x:number;y:number}|null=null;
   try{saved=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
   const reduced=()=>saved||preference.matches;
   type Pose=ReturnType<typeof gallerySpacePose>;type Camera=ReturnType<typeof galleryCameraPose>;
@@ -69,7 +69,7 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
    }
   };
   const stopPointer=()=>{cancelAnimationFrame(pointerFrame);pointerFrame=0;};
-  const pointerTick=()=>{pointerFrame=0;if(!visible||document.hidden||reduced()||focus>=0||tween?.isActive())return;const yaw=orbitYaw+pointerYaw,pitch=orbitPitch+pointerPitch;camera.yaw+=(yaw-camera.yaw)*.1;camera.pitch+=(pitch-camera.pitch)*.1;paint();if(Math.abs(yaw-camera.yaw)+Math.abs(pitch-camera.pitch)>.008)pointerFrame=requestAnimationFrame(pointerTick);};
+  const pointerTick=()=>{pointerFrame=0;if(!visible||document.hidden||reduced()||focus>=0||tween?.isActive())return;if(pointerPosition){const bounds=stage.getBoundingClientRect();pointerYaw=((pointerPosition.x-bounds.left)/bounds.width*2-1)*3.5;pointerPitch=-((pointerPosition.y-bounds.top)/bounds.height*2-1)*2.2;pointerPosition=null;}const yaw=orbitYaw+pointerYaw,pitch=orbitPitch+pointerPitch;camera.yaw+=(yaw-camera.yaw)*.1;camera.pitch+=(pitch-camera.pitch)*.1;paint();if(Math.abs(yaw-camera.yaw)+Math.abs(pitch-camera.pitch)>.008)pointerFrame=requestAnimationFrame(pointerTick);};
   const wake=()=>{if(!pointerFrame&&visible&&!document.hidden&&!reduced()&&focus<0)pointerFrame=requestAnimationFrame(pointerTick);};
   const arrange=(animate:boolean)=>{
    tween?.kill();stopPointer();
@@ -81,17 +81,17 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
   };
   const measure=()=>{width=stage.clientWidth;height=stage.clientHeight;const metrics=gallerySceneMetrics(width);perspective=metrics.perspective;cardWidth=metrics.cardWidth;stage.style.setProperty('--gallery-perspective',perspective+'px');stage.style.setProperty('--gallery-card-width',metrics.cardWidth+'px');arrange(false);};
   const resize=new ResizeObserver(measure);resize.observe(stage);measure();element.setAttribute('data-gallery-ready','');
-  select.current=(index:number)=>{focus=index<0?-1:Math.min(index,exhibits.length-1);selectedHandle.current=focus<0?null:exhibits[focus].handle;setSelected(focus);pointerYaw=pointerPitch=0;arrange(true);};
-  resetView.current=()=>{orbitYaw=orbitPitch=pointerYaw=pointerPitch=0;arrange(true);};
+  select.current=(index:number)=>{focus=index<0?-1:Math.min(index,exhibits.length-1);selectedHandle.current=focus<0?null:exhibits[focus].handle;setSelected(focus);pointerPosition=null;pointerYaw=pointerPitch=0;arrange(true);};
+  resetView.current=()=>{pointerPosition=null;orbitYaw=orbitPitch=pointerYaw=pointerPitch=0;arrange(true);};
   const down=(event:PointerEvent)=>{suppressClick.current=false;if(focus>=0||reduced()||!event.isPrimary||event.button!==0)return;drag={id:event.pointerId,x:event.clientX,y:event.clientY,yaw:orbitYaw,pitch:orbitPitch,active:false};};
   const move=(event:PointerEvent)=>{
    if(reduced()||focus>=0)return;
-   if(drag&&drag.id===event.pointerId){const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(!drag.active&&Math.hypot(dx,dy)>8&&(event.pointerType!=='touch'||Math.abs(dx)>Math.abs(dy)*1.2)){drag.active=true;stage.setPointerCapture(event.pointerId);element.setAttribute('data-gallery-dragging','');}if(drag.active){if(event.cancelable)event.preventDefault();orbitYaw=Math.max(-16,Math.min(16,drag.yaw+dx*.06));orbitPitch=Math.max(-9,Math.min(9,drag.pitch-dy*.04));pointerYaw=pointerPitch=0;wake();return;}}
-   if(event.pointerType==='touch'||!fine.matches)return;const bounds=stage.getBoundingClientRect();pointerYaw=((event.clientX-bounds.left)/bounds.width*2-1)*3.5;pointerPitch=-((event.clientY-bounds.top)/bounds.height*2-1)*2.2;wake();
+   if(drag&&drag.id===event.pointerId){const dx=event.clientX-drag.x,dy=event.clientY-drag.y;if(!drag.active&&Math.hypot(dx,dy)>8&&(event.pointerType!=='touch'||Math.abs(dx)>Math.abs(dy)*1.2)){drag.active=true;stage.setPointerCapture(event.pointerId);element.setAttribute('data-gallery-dragging','');}if(drag.active){if(event.cancelable)event.preventDefault();pointerPosition=null;orbitYaw=Math.max(-16,Math.min(16,drag.yaw+dx*.06));orbitPitch=Math.max(-9,Math.min(9,drag.pitch-dy*.04));pointerYaw=pointerPitch=0;wake();return;}}
+   if(event.pointerType==='touch'||!fine.matches)return;pointerPosition={x:event.clientX,y:event.clientY};wake();
   };
   const up=(event:PointerEvent)=>{if(!drag||drag.id!==event.pointerId)return;if(drag.active)suppressClick.current=true;drag=null;element.removeAttribute('data-gallery-dragging');if(stage.hasPointerCapture(event.pointerId))stage.releasePointerCapture(event.pointerId);};
-  const leave=()=>{if(drag?.active)return;pointerYaw=pointerPitch=0;wake();};
-  const updatePreference=()=>{element.toggleAttribute('data-gallery-reduced',reduced());if(reduced()){stopPointer();orbitYaw=orbitPitch=pointerYaw=pointerPitch=0;arrange(false);}};
+  const leave=()=>{if(drag?.active)return;pointerPosition=null;pointerYaw=pointerPitch=0;wake();};
+  const updatePreference=()=>{element.toggleAttribute('data-gallery-reduced',reduced());if(reduced()){stopPointer();pointerPosition=null;orbitYaw=orbitPitch=pointerYaw=pointerPitch=0;arrange(false);}};
   const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value:boolean}>).detail;if(detail?.action==='reduced'){saved=!!detail.value;updatePreference();}};
   const observer=new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);element.toggleAttribute('data-gallery-running',visible&&!document.hidden);if(visible){setActivated(true);wake();}else stopPointer();},{rootMargin:'100px 0px'});observer.observe(element);
   const visibility=()=>{element.toggleAttribute('data-gallery-running',visible&&!document.hidden);if(document.hidden)stopPointer();else wake();};

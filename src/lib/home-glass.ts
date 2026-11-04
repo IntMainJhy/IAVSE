@@ -1,5 +1,6 @@
-import {ACESFilmicToneMapping,BackSide,Box3,BufferGeometry,Color,DataTexture,Float32BufferAttribute,FrontSide,Frustum,Group,LinearFilter,MathUtils,Matrix4,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Points,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,SphereGeometry,Vector2,Vector3,WebGLRenderer} from 'three';
+import {ACESFilmicToneMapping,BackSide,Box3,BufferGeometry,Color,DataTexture,Float32BufferAttribute,FrontSide,Frustum,Group,LinearFilter,LinearSRGBColorSpace,MathUtils,Matrix4,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,NoToneMapping,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Points,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,SphereGeometry,Vector2,Vector3,WebGLRenderer,WebGLRenderTarget} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {homePixelBudget} from './home-render-budget';
 
 export type GlassReveal={left:number;top:number;width:number;height:number;progress:number;variant?:string};
 export type HomeJourneyChapter={id:string;start:number;end:number;side:number};
@@ -36,6 +37,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
  const extraGeometry:BufferGeometry[]=[],extraMaterials:(ShaderMaterial|MeshBasicMaterial)[]=[];
  const dispose=()=>{if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);disposeModel(model);environment?.dispose();extraGeometry.forEach(value=>value.dispose());extraMaterials.forEach(value=>value.dispose());renderer.dispose();};
  try{
+  // First-use debug queries can synchronously drain the GPU queue while scrolling.
+  // Production validates links after asynchronous warmup instead; development keeps diagnostics.
+  if(process.env.NODE_ENV==='production')renderer.debug.checkShaderErrors=false;
   renderer.outputColorSpace='srgb';renderer.toneMapping=ACESFilmicToneMapping;renderer.toneMappingExposure=1;
   const scene=new Scene(),camera=new PerspectiveCamera(40,1,.1,100),surface=new Group();surface.name='iavse-optical-field';camera.position.z=8.2;surface.add(model);scene.add(surface);
   const modelBounds=new Box3().setFromObject(model),visibleBounds=new Box3(),frustum=new Frustum(),viewProjection=new Matrix4();
@@ -192,7 +196,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   const applyDensity=(density:number,force=false)=>{
    const next=Math.min(density*qualityRatio,pixelBudget);
    if(!force&&Math.abs(appliedDensity-next)<.005)return;
-   appliedDensity=next;renderer.setPixelRatio(next);renderer.setSize(width,height,false);
+   appliedDensity=next;renderer.setDrawingBufferSize(width,height,next);
    fieldMaterial.uniforms.uDensity.value=Math.min(next,1.5);
    diagnostic('glassDensity',next.toFixed(2));
   };
@@ -203,15 +207,17 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // waits for this promise. Warm the fade variant as well, then restore the
   // accepted first-frame sorting before the scene is handed to the controller.
   if(typeof renderer.compileAsync==='function'){
-   const compile=async()=>{
+   const compile=async(input:Scene|Group=scene)=>{
     if(signal.aborted||disposed)throw new DOMException('Aborted','AbortError');
     let abort=()=>{};
     try{
-     await Promise.race([renderer.compileAsync(scene,camera),new Promise<never>((_,reject)=>{
+     await Promise.race([renderer.compileAsync(input,camera),new Promise<never>((_,reject)=>{
       abort=()=>reject(new DOMException('Aborted','AbortError'));signal.addEventListener('abort',abort,{once:true});if(signal.aborted)abort();
      })]);
     }finally{signal.removeEventListener('abort',abort);}
     if(signal.aborted||disposed)throw new DOMException('Aborted','AbortError');
+    const gl=renderer.getContext();
+    for(const program of renderer.info.programs||[])if(!gl.getProgramParameter(program.program as WebGLProgram,gl.LINK_STATUS))throw new Error('Optical shader unavailable');
    };
    field.visible=true;
    try{await compile();}finally{field.visible=false;}
@@ -222,6 +228,12 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    }finally{
     for(const {material,transparent,depthWrite,opacity} of initial){material.transparent=transparent;material.depthWrite=depthWrite;material.opacity=opacity;material.needsUpdate=true;}
    }
+   // Three's transmission capture uses a linear target. Its receiver is a
+   // distinct program from the sRGB screen receiver, even with the same material.
+   const receiver=new Group().add(wall.clone()),target=new WebGLRenderTarget(1,1),previousTarget=renderer.getRenderTarget(),previousTone=renderer.toneMapping;
+   target.texture.colorSpace=LinearSRGBColorSpace;
+   try{renderer.setRenderTarget(target);renderer.toneMapping=NoToneMapping;await compile(receiver);}
+   finally{renderer.setRenderTarget(previousTarget);renderer.toneMapping=previousTone;target.dispose();}
   }
   if(signal.aborted||disposed){dispose();throw new DOMException('Aborted','AbortError');}
   onProgress?.(1);
@@ -233,10 +245,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    setJourney,
    resize(nextWidth,nextHeight,dpr){
     if(disposed)return;width=Math.max(1,nextWidth);height=Math.max(1,nextHeight);const mobile=width<768;
-    pixelBudget=Math.sqrt((mobile?3000000:8000000)/(width*height));
+    pixelBudget=Math.sqrt(homePixelBudget(width)/(width*height));
     const displayDpr=typeof window!=='undefined'?Math.min(window.devicePixelRatio||1,2,pixelBudget):Math.max(1,dpr);qualityRatio=Math.min(1,dpr/Math.max(.1,displayDpr));
-    heroDensity=mobile?Math.min(displayDpr,1.5):Math.min(Math.max(displayDpr,1.5),2);readingDensity=Math.min(displayDpr,mobile?1:1.25);
-    applyDensity(readingMode?readingDensity:heroDensity,true);fieldMaterial.uniforms.uAspect.value=width/height;camera.aspect=width/height;camera.updateProjectionMatrix();renderer.transmissionResolutionScale=readingMode?(mobile?.35:.5):(mobile?.7:.9);
+    heroDensity=Math.min(displayDpr,mobile?1.5:2);readingDensity=Math.min(displayDpr,mobile?1:1.25);
+    applyDensity(readingMode?readingDensity:heroDensity,true);fieldMaterial.uniforms.uAspect.value=width/height;camera.aspect=width/height;camera.updateProjectionMatrix();renderer.transmissionResolutionScale=readingMode?(mobile?.35:.5):(mobile?.5:.55);
    },
    render(x,y,dark,scroll,reduced,activeSeconds=0){
     if(disposed)return;
@@ -288,7 +300,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     opticalTime.value=time;opticalFade.value=opacity;opticalLeft.value=width<768?-.35:-.73;
     opticalSunX.value=(width<768?.36:.78)+(scene.environmentRotation.y-.487)*(width<768?.30:.37);opticalSunDirection.value.copy(sunDirection).applyEuler(scene.environmentRotation).transformDirection(camera.matrixWorldInverse);
     for(const material of nativeMaterials){material.envMapRotation.copy(scene.environmentRotation);material.opacity=opacity;const alpha=opacity<.999;if(material.transparent!==alpha){material.transparent=alpha;material.depthWrite=!alpha;material.needsUpdate=true;}}
-    renderer.transmissionResolutionScale=surface.visible?(readingMode?(resourceDock?.28:width<768?.35:.5):(width<768?.7:.9)):.12;
+    renderer.transmissionResolutionScale=surface.visible?(readingMode?(resourceDock?.28:width<768?.35:.5):(width<768?.5:.55)):.12;
     diagnostic('glassHeroVisible',surface.visible?'true':'false');diagnostic('glassDispersion','.26');diagnostic('journeyDocked',resourceDock?'true':'false');
     if(reduced||time<lastDiagnosticTime||time-lastDiagnosticTime>=.099){lastDiagnosticTime=time;diagnostic('glassTime',time.toFixed(1));diagnostic('glassLightPhase',sweep.toFixed(3));diagnostic('glassReading',spatial.toFixed(3));}
     renderer.render(scene,camera);

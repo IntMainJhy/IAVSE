@@ -5,21 +5,23 @@ import vm from 'node:vm';
 import ts from 'typescript';
 import * as three from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {homePixelBudget} from '../src/lib/home-render-budget.ts';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/home-glass.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const originalChunk=three.ShaderChunk.transmission_pars_fragment;
 const bytes=fs.readFileSync(new URL('../public/models/iavse-optical-surface.glb',import.meta.url));
-async function studio({overrides={},signal,fetcher,compile,window}={}){
- let scene,camera,environment,releases=0,environmentReleases=0,dpr,transmissionSize;
- class Renderer{constructor(){if(compile)this.compileAsync=compile;}setPixelRatio(value){dpr=value;}setSize(){}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
+async function studio({overrides={},signal,fetcher,compile,window,invalidProgram=false}={}){
+ let scene,camera,environment,releases=0,environmentReleases=0,dpr,transmissionSize,renderer;
+ class Renderer{debug={checkShaderErrors:true};info={programs:invalidProgram?[{program:{}}]:[]};allocations=[];target=null;constructor(){renderer=this;if(compile)this.compileAsync=compile;}getContext(){return{LINK_STATUS:1,getProgramParameter:()=>!invalidProgram}}getRenderTarget(){return this.target}setRenderTarget(value){this.target=value}setDrawingBufferSize(width,height,value){dpr=value;this.allocations.push([width,height,value]);}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
  class PMREM{fromScene(value){environment=value;return{texture:new three.Texture(),dispose(){environmentReleases++;}};}dispose(){}}
- const exports={};vm.runInNewContext(source,{exports,AbortController,DOMException,Math,Uint8Array,window,fetch:fetcher||(async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})),require:name=>{
+ const exports={};vm.runInNewContext(source,{exports,AbortController,DOMException,Math,Uint8Array,window,process:{env:{NODE_ENV:'production'}},fetch:fetcher||(async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})),require:name=>{
+  if(name==='./home-render-budget')return{homePixelBudget};
   if(name==='three')return{...three,...overrides,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader};throw Error('Unexpected dependency '+name);
  }});
  const controller=new AbortController(),canvas={dataset:{}},progress=[];
  const adapter=await exports.createHomeGlass(canvas,signal||controller.signal,{onProgress:value=>progress.push(value)});adapter.resize(1440,900,2);adapter.render(0,0,false,0,false,2);
  const surface=scene.getObjectByName('iavse-optical-field'),wall=scene.getObjectByName('iavse-refraction-receiver'),meshes=[];surface.traverse(node=>{if(node.isMesh)meshes.push(node);});meshes.sort((a,b)=>Number(a.material.name.includes('PolishedRolledEdge'))-Number(b.material.name.includes('PolishedRolledEdge')));
- return{adapter,controller,canvas,surface,wall,meshes,progress,get scene(){return scene;},get camera(){return camera;},get environment(){return environment;},get releases(){return releases;},get environmentReleases(){return environmentReleases;},get dpr(){return dpr;},get transmissionSize(){return transmissionSize;}};
+ return{adapter,controller,canvas,surface,wall,meshes,progress,renderer,get scene(){return scene;},get camera(){return camera;},get environment(){return environment;},get releases(){return releases;},get environmentReleases(){return environmentReleases;},get dpr(){return dpr;},get transmissionSize(){return transmissionSize;}};
 }
 
 // Project the exported vertices through the real object/camera matrices. This
@@ -96,7 +98,7 @@ test('the opaque receiver retains a dark-to-silver field while device quality st
  const s=await studio(),colors=['uBlueTop','uBlueMiddle','uBlueBottom','uIce'].map(key=>s.wall.material.uniforms[key].value);
  const luminance=value=>value.r*.2126+value.g*.7152+value.b*.0722;assert.ok(luminance(colors[0])<.08&&luminance(colors[3])>.8);assert.ok(colors.every((value,index)=>index===0||luminance(value)>luminance(colors[index-1])),'the refractable receiver progresses from deep navy to silver');
  for(const dark of[false,true])for(const scroll of[0,.5,1.4,4]){s.adapter.render(0,0,dark,scroll,false,2);assert.equal(s.wall.material.uniforms.uScroll.value,scroll);assert.ok(s.wall.material.uniforms.uBrightness.value>=.99);assert.equal(s.wall.material.transparent,false);}
- for(const[width,height,budget]of[[1440,900,8000000],[3840,2160,8000000],[390,844,3000000]]){s.adapter.resize(width,height,3);assert.ok(s.dpr>0&&width*height*s.dpr*s.dpr<=budget+1,'GPU pixel count remains bounded');s.adapter.render(0,0,false,0,false,2);assert.ok(s.transmissionSize>=.3&&s.transmissionSize<=1,'the visible volume keeps usable refraction resolution');}
+ for(const[width,height,budget]of[[1440,900,4000000],[3840,2160,4000000],[390,844,1800000]]){s.adapter.resize(width,height,3);assert.ok(s.dpr>0&&width*height*s.dpr*s.dpr<=budget+1,'GPU pixel count remains bounded');s.adapter.render(0,0,false,0,false,2);assert.ok(s.transmissionSize>=.3&&s.transmissionSize<=.55,'the smooth receiver has its own bounded refraction resolution');}
  assert.ok(s.surface.scale.x<s.surface.scale.y,'responsive framing preserves the oblique curved edge on narrow screens');s.adapter.dispose();
 });
 
@@ -167,5 +169,14 @@ test('chapter handoffs are continuous, reverse predictably, and reduced motion r
 test('opaque and fading programs are warmed before handoff and cancellation interrupts either warmup',async()=>{
  const variants=[];const s=await studio({compile:async scene=>{const values=[];scene.traverse(node=>{if(node.isMesh&&node.material instanceof three.MeshPhysicalMaterial)values.push(node.material.transparent);});variants.push(values);}});
  assert.ok(variants.some(values=>values.length&&values.every(value=>!value)));assert.ok(variants.some(values=>values.length&&values.every(Boolean)));assert.ok(s.meshes.every(mesh=>!mesh.material.transparent&&mesh.material.depthWrite&&mesh.material.opacity===1),'warmup preserves first-frame sorting');s.adapter.dispose();
- for(const phase of[1,2]){const controller=new AbortController();let calls=0;await assert.rejects(studio({signal:controller.signal,compile:async()=>{if(++calls===phase)controller.abort();}}),error=>error.name==='AbortError');assert.equal(calls,phase);}
+ for(const phase of[1,2,3]){const controller=new AbortController();let calls=0;await assert.rejects(studio({signal:controller.signal,compile:async()=>{if(++calls===phase)controller.abort();}}),error=>error.name==='AbortError');assert.equal(calls,phase);}
+});
+
+test('production warms the linear capture receiver, validates links and restores screen rendering',async()=>{
+ const passes=[];const s=await studio({compile:async function(input){passes.push({target:this.getRenderTarget(),tone:this.toneMapping,names:input.children.map(child=>child.name)});}});
+ assert.equal(s.renderer.debug.checkShaderErrors,false);assert.equal(passes.length,3);
+ const capture=passes.at(-1);assert.equal(capture.target.texture.colorSpace,three.LinearSRGBColorSpace);assert.equal(capture.tone,three.NoToneMapping);assert.deepEqual(Array.from(capture.names),['iavse-refraction-receiver']);
+ assert.equal(s.renderer.getRenderTarget(),null);assert.equal(s.renderer.toneMapping,three.ACESFilmicToneMapping);s.adapter.dispose();
+ await assert.rejects(studio({compile:async()=>{},invalidProgram:true}),/Optical shader unavailable/,'invalid production programs fail before the scene is handed off');
+ const standard=await studio({window:{innerWidth:1440,devicePixelRatio:1}});assert.equal(standard.dpr,1,'a 1x display is not silently supersampled at 1.5x');assert.equal(standard.renderer.allocations.length,1,'one resize sets dimensions and density together');standard.adapter.render(0,0,false,.2,false,3);assert.equal(standard.renderer.allocations.length,1,'normal animation does not reallocate its drawing buffer');standard.adapter.dispose();
 });

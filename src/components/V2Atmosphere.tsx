@@ -2,6 +2,7 @@
 
 import {useEffect,useRef} from 'react';
 import type {GlassReveal,HomeGlassScene,HomeJourneyChapter} from '@/lib/home-glass';
+import {homePixelBudget} from '@/lib/home-render-budget';
 
 const loadScene=(canvas:HTMLCanvasElement,signal:AbortSignal)=>import('@/lib/home-glass').then(module=>module.createHomeGlass(canvas,signal,{onProgress:value=>{canvas.dataset.loadingProgress=String(Math.round(value*100));}}));
 
@@ -52,7 +53,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   lastDraw=now;pointerX+=(targetX-pointerX)*amount;pointerY+=(targetY-pointerY)*amount;dirty=false;draw();
   // Follow every display callback, including 120/144Hz. Adapt pixels, not animation cadence.
   // CPU submission time and sustained missed display intervals are bounded signals, not a claim of GPU completion time.
-  if(continuous()&&++drawCount>24){
+  if(continuous()&&elapsed<.25&&++drawCount>24){
    const missedFrameThreshold=refreshPeriod<=.010?refreshPeriod*1.8:Math.max(.025,refreshPeriod*1.8);
    const late=renderCost>refreshPeriod*.7||elapsed>missedFrameThreshold;
    slowFrames=late?slowFrames+1:Math.max(0,slowFrames-1);healthyFrames=!late&&renderCost<refreshPeriod*.45?healthyFrames+1:0;
@@ -101,8 +102,8 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   if(!scene||disposed||lost)return;
   if(navigationPending){sizeDirty=true;return;}
   try{
-   const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),mobile=width<768;pointerBounds=rect;
-   displayDpr=Math.min(window.devicePixelRatio||1,2,Math.sqrt((mobile?3000000:8000000)/(width*height)));const dpr=displayDpr*quality;
+   const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height);pointerBounds=rect;
+   displayDpr=Math.min(window.devicePixelRatio||1,2,Math.sqrt(homePixelBudget(width)/(width*height)));const dpr=displayDpr*quality;
    if(width!==sizedWidth||height!==sizedHeight||dpr!==sizedDpr){scene.resize(width,height,dpr);sizedWidth=width;sizedHeight=height;sizedDpr=dpr;}
    layoutDirty=progressDirty=true;draw();
   }catch{fail();}

@@ -16,7 +16,7 @@ export function QuantumPointer(){
   let frame=0,previous=0,x=0,y=0,dx=0,dy=0,alpha=0,lastMove=-Infinity,light=false,savedReduced=false,navigating=false;
   let waveFrame=0,pulseAt=-Infinity,quietPulse=false;
   // Reuse geometry and paths. The original ripple moves dots, rather than scaling a picture.
-  const points=new Float32Array(37*37*5),groups=Array.from({length:16},()=>[] as number[]),falloffs=new Float32Array(1024);
+  const points=new Float32Array(37*37*5),groups=Array.from({length:16},()=>[] as number[]),pointerGroups=Array.from({length:16},()=>[] as number[]),falloffs=new Float32Array(1024);
   for(let i=0;i<falloffs.length;i++)falloffs[i]=Math.exp(-Math.pow(i/(falloffs.length-1)*3,2));
   try{savedReduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
   const reduced=()=>savedReduced||preference.matches;
@@ -45,7 +45,6 @@ export function QuantumPointer(){
    }
    waveFrame=requestAnimationFrame(drawWave);
   };
-  const dot=(context:CanvasRenderingContext2D,cx:number,cy:number,radius:number,opacity:number,rgb:string)=>{context.fillStyle=`rgba(${rgb},${opacity})`;context.beginPath();context.arc(cx,cy,radius,0,Math.PI*2);context.fill();};
   const draw=(now:number)=>{
    frame=0;if(document.hidden){clear();return;}
    const dt=previous?Math.min((now-previous)/1000,.05):1/60;previous=now;
@@ -55,10 +54,19 @@ export function QuantumPointer(){
    if(alpha>.006){
     const originX=x-size/2,originY=y-size/2,ox=((-originX%18)+18)%18,oy=((-originY%18)+18)%18;
     canvas.style.transform=`translate3d(${originX}px,${originY}px,0)`;
+    for(const group of pointerGroups)group.length=0;
     for(let row=0;row<17;row++)for(let col=0;col<17;col++){
      const ax=col*18+ox,ay=row*18+oy,vx=ax-size/2,vy=ay-size/2,d=Math.hypot(vx,vy),falloff=Math.max(0,1-d/110);if(!falloff)continue;
      const force=falloff*falloff*14,safe=Math.max(d,1);
-     dot(ctx,ax+vx/safe*force-dx*falloff*.13,ay+vy/safe*force-dy*falloff*.13,.65+falloff*.8,alpha*falloff*.66,color(light));
+     const group=pointerGroups[Math.min(pointerGroups.length-1,Math.floor(falloff*pointerGroups.length))];
+     group.push(ax+vx/safe*force-dx*falloff*.13,ay+vy/safe*force-dy*falloff*.13);
+    }
+    ctx.fillStyle=`rgb(${color(light)})`;
+    for(let i=0;i<pointerGroups.length;i++){
+     const group=pointerGroups[i];if(!group.length)continue;
+     const strength=(i+.5)/pointerGroups.length,radius=.65+strength*.8;ctx.globalAlpha=alpha*strength*.66;ctx.beginPath();
+     for(let j=0;j<group.length;j+=2){ctx.moveTo(group[j]+radius,group[j+1]);ctx.arc(group[j],group[j+1],radius,0,Math.PI*2);}
+     ctx.fill();
     }
    }
    if(alpha>.006||target>0)frame=requestAnimationFrame(draw);else previous=0;

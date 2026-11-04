@@ -1,5 +1,5 @@
 export class ApiError extends Error{status:number;constructor(status:number,message:string){super(message);this.status=status}}
-function sessionStatus(path:string,status:number){if(status===401&&!path.startsWith('/api/auth/login')&&typeof window!=='undefined')window.dispatchEvent(new Event('session-expired'))}
+function sessionStatus(path:string,status:number){if(status===401&&path.split('?')[0]!=='/api/auth/me'&&!path.startsWith('/api/auth/login')&&typeof window!=='undefined')window.dispatchEvent(new Event('session-expired'))}
 export async function api(path:string,options:RequestInit={}){
  const headers=new Headers(options.headers);
  if(options.body&&typeof options.body==='string'&&!headers.has('Content-Type'))headers.set('Content-Type','application/json');

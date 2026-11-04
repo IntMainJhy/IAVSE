@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {homePixelBudget} from '../src/lib/home-render-budget.ts';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0}={}){
@@ -32,6 +33,7 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  vm.runInNewContext(source,{exports,window,document,AbortController,Math,performance:{now:()=>cpuClock},ResizeObserver:Resize,IntersectionObserver:Intersection,MutationObserver:Mutation,requestAnimationFrame:fn=>{frames.set(++id,fn);return id},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
   if(name==='react')return{useEffect(){},useRef(){}};
   if(name==='react/jsx-runtime')return{jsx(){}};
+  if(name==='@/lib/home-render-budget')return{homePixelBudget};
   throw Error('Unexpected dependency '+name);
  }});
  const cleanup=exports.mountV2Atmosphere(canvas,(_,abortSignal)=>{
@@ -45,6 +47,12 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 const navigation=(s,pending)=>s.window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));
+
+test('occlusion-length callback gaps are not mistaken for sustained GPU overload',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();s.step(16);const density=s.sizes.at(-1)[2];
+ for(let i=0;i<100;i++)s.step(1000);
+ assert.equal(s.sizes.at(-1)[2],density,'browser throttling must not permanently lower visible image quality');assert.equal(s.canvas.dataset.glassQuality,undefined);s.cleanup();
+});
 
 test('pending homepage navigation retains its last frame and suppresses every rendering wakeup until released',async()=>{
  const s=mount({animated:true});s.intersection.set(true);await flush();s.step(16);const before=s.draws.length,time=s.draws.at(-1)[5],sizes=s.sizes.length,bounds=s.canvas.rectReads;

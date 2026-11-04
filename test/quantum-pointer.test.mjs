@@ -82,3 +82,10 @@ test('batching reduces fill calls while preserving the original continuous 60Hz 
   t.diagnostic(JSON.stringify({fps,frames,maxFillsPerFrame:maxFills,waveFills:s.wave.context.fills,previousPerDotFills:previousFills[fps],drawnDots:s.wave.context.totalArcs}));s.cleanup();
  }
 });
+
+test('continuous pointer movement retains every point while batching fills on all pages',t=>{
+ const s=mount();let maxFills=0;
+ for(let i=0;i<120;i++){const before=s.canvas.context.fills;s.move(500+i*2,300+i%18);s.step(1000/120);maxFills=Math.max(maxFills,s.canvas.context.fills-before);assert.ok(s.canvas.context.arcs.length>80);}
+ assert.ok(maxFills<=16);assert.ok(s.canvas.context.fills<s.canvas.context.totalArcs*.15,'fewer fill submissions do not remove the moving point field');
+ assert.equal(s.wave.context.clears,0);t.diagnostic(JSON.stringify({pointerFrames:120,pointPaths:s.canvas.context.totalArcs,batchedFills:s.canvas.context.fills,maxFillsPerFrame:maxFills}));s.cleanup();
+});
