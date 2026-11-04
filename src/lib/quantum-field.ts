@@ -1,4 +1,7 @@
-import {BufferGeometry,Color,Float32BufferAttribute,LineSegments,MathUtils,PerspectiveCamera,Points,Scene,ShaderMaterial,SRGBColorSpace,Vector2,WebGLRenderer} from 'three';
+// Keep the reading backdrop independent of Three.js's full renderer and shader library.
+import {Color} from 'three/src/math/Color.js';
+import {Matrix4} from 'three/src/math/Matrix4.js';
+import {PerspectiveCamera} from 'three/src/cameras/PerspectiveCamera.js';
 
 export type QuantumField={resize:(width:number,height:number,dpr:number)=>void;render:(time:number,x:number,y:number,scroll:number,reduced:boolean)=>void;dispose:()=>void};
 export const quantumQuality=(width:number,height:number,dpr:number)=>({
@@ -64,54 +67,76 @@ const fragmentShader=`
   float coverage=1.;
   if(uLine<.5){float radius=length(gl_PointCoord-.5);coverage=1.-smoothstep(.2,.5,radius);if(coverage<.01)discard;}
   gl_FragColor=vec4(mix(uBlue,uSilver,vSilver*.65),vAlpha*coverage);
-  #include <colorspace_fragment>
+  // Same linear-to-sRGB transfer as the original Three.js shader.
+ gl_FragColor.rgb=mix(pow(gl_FragColor.rgb,vec3(.41666))*1.055-vec3(.055),gl_FragColor.rgb*12.92,vec3(lessThanEqual(gl_FragColor.rgb,vec3(.0031308))));
  }
 `;
 
-/** Two transparent passes: traveling points and continuous filaments. No textures or post stack. */
+/** The same two passes, buffers and camera, without a general-purpose scene renderer. */
 export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSignal):Promise<QuantumField>{
  if(signal.aborted)throw new DOMException('Aborted','AbortError');
- let renderer:WebGLRenderer|undefined,disposed=false;
- const geometries:BufferGeometry[]=[],materials:ShaderMaterial[]=[];
+ const gl=canvas.getContext('webgl',{alpha:true,antialias:false,powerPreference:'low-power',premultipliedAlpha:true});
+ if(!gl)throw new Error('WebGL is unavailable');
+ const buffers:WebGLBuffer[]=[],shaders:WebGLShader[]=[];
+ let program:WebGLProgram|null=null,disposed=false;
  const dispose=()=>{
   if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);
-  geometries.forEach(geometry=>geometry.dispose());materials.forEach(material=>material.dispose());renderer?.dispose();
+  buffers.forEach(buffer=>gl.deleteBuffer(buffer));shaders.forEach(shader=>gl.deleteShader(shader));if(program)gl.deleteProgram(program);
  };
+ signal.addEventListener('abort',dispose,{once:true});
  try{
-  renderer=new WebGLRenderer({canvas,alpha:true,antialias:false,powerPreference:'low-power',premultipliedAlpha:true});
-  renderer.outputColorSpace=SRGBColorSpace;renderer.setClearColor(0x000000,0);
-  const scene=new Scene(),camera=new PerspectiveCamera(46,1,.1,60);camera.position.z=18;
-  for(const mobile of [false,true]){
+  const compile=(type:number,source:string)=>{
+   const shader=gl.createShader(type);if(!shader)throw new Error('Cannot allocate background shader');shaders.push(shader);
+   gl.shaderSource(shader,'precision highp float;\n'+source);gl.compileShader(shader);
+   if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error('Cannot compile background shader');return shader;
+  };
+  program=gl.createProgram();if(!program)throw new Error('Cannot allocate background program');
+  gl.attachShader(program,compile(gl.VERTEX_SHADER,'attribute vec3 position;uniform mat4 modelViewMatrix,projectionMatrix;\n'+vertexShader));
+  gl.attachShader(program,compile(gl.FRAGMENT_SHADER,fragmentShader));gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('Cannot link background program');
+  gl.useProgram(program);gl.disable(gl.DEPTH_TEST);gl.enable(gl.BLEND);
+  gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);
+  const names=['uTime','uRatio','uReduced','uLine','uBounds','uPointer','uBlue','uSilver','modelViewMatrix','projectionMatrix'];
+  const uniform=Object.fromEntries(names.map(name=>[name,gl.getUniformLocation(program!,name)]));
+  const position=gl.getAttribLocation(program,'position'),seed=gl.getAttribLocation(program,'aSeed');
+  gl.enableVertexAttribArray(position);gl.enableVertexAttribArray(seed);
+  for(const [name,hex] of [['uBlue','#426997'],['uSilver','#a4b5c9']]){const color=new Color(hex);gl.uniform3f(uniform[name],color.r,color.g,color.b);}
+  type Pass={position:WebGLBuffer;seed:WebGLBuffer;count:number};
+  const qualityBuffers=new Map<boolean,Pass[]>();
+  const upload=(data:Float32Array)=>{const buffer=gl.createBuffer();if(!buffer)throw new Error('Cannot allocate background buffer');buffers.push(buffer);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);return buffer;};
+  const geometry=(mobile:boolean)=>{
+   let passes=qualityBuffers.get(mobile);if(passes)return passes;
    const current=quantumCurrents(mobile);
-   for(const [positions,seeds] of [[current.positions,current.seeds],[current.lines,current.lineSeeds]]){
-    const geometry=new BufferGeometry();geometry.setAttribute('position',new Float32BufferAttribute(positions,3));
-    geometry.setAttribute('aSeed',new Float32BufferAttribute(seeds,1));geometries.push(geometry);
-   }
-  }
-  for(const line of [0,1])materials.push(new ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,toneMapped:false,
-   uniforms:{uTime:{value:0},uRatio:{value:1},uReduced:{value:0},uLine:{value:line},uBounds:{value:new Vector2(12,9)},uPointer:{value:new Vector2()},uBlue:{value:new Color('#426997')},uSilver:{value:new Color('#a4b5c9')}},vertexShader,fragmentShader}));
-  const points=new Points(geometries[0],materials[0]),filaments=new LineSegments(geometries[1],materials[1]);
-  for(const object of[points,filaments]){object.frustumCulled=false;object.rotation.set(.16,-.13,-.04);scene.add(object);}
-  let width=0,height=0,ratio=0,mobile=false;
-  signal.addEventListener('abort',dispose,{once:true});
+   passes=[{position:upload(current.positions),seed:upload(current.seeds),count:current.count},{position:upload(current.lines),seed:upload(current.lineSeeds),count:current.lineCount}];
+   qualityBuffers.set(mobile,passes);return passes;
+  };
+  const camera=new PerspectiveCamera(46,1,.1,60),modelView=new Matrix4();
+  const rotation=new Matrix4().makeRotationX(.16).multiply(new Matrix4().makeRotationY(-.13)).multiply(new Matrix4().makeRotationZ(-.04));
+  let width=0,height=0,ratio=0,mobile=false,passes:Pass[]=[];
   return{
    resize(nextWidth,nextHeight,dpr){
-    if(disposed||!renderer)return;
+    if(disposed)return;
     const w=Math.max(1,nextWidth),h=Math.max(1,nextHeight),quality=quantumQuality(w,h,dpr);
     if(width===w&&height===h&&ratio===quality.ratio)return;
-    width=w;height=h;ratio=quality.ratio;mobile=quality.mobile;
-    points.geometry=geometries[mobile?2:0];filaments.geometry=geometries[mobile?3:1];
-    renderer.setPixelRatio(ratio);renderer.setSize(width,height,false);
+    width=w;height=h;ratio=quality.ratio;mobile=quality.mobile;passes=geometry(mobile);
+    canvas.width=Math.floor(width*ratio);canvas.height=Math.floor(height*ratio);gl.viewport(0,0,canvas.width,canvas.height);
     camera.aspect=width/height;camera.updateProjectionMatrix();
-    const viewHeight=2*Math.tan(MathUtils.degToRad(camera.fov/2))*18;
-    for(const material of materials){material.uniforms.uBounds.value.set(viewHeight*camera.aspect*.62,viewHeight*.68);material.uniforms.uRatio.value=ratio;}
+    const viewHeight=2*Math.tan(camera.fov*Math.PI/360)*18;
+    gl.uniformMatrix4fv(uniform.projectionMatrix,false,camera.projectionMatrix.elements);
+    gl.uniform2f(uniform.uBounds,viewHeight*camera.aspect*.62,viewHeight*.68);gl.uniform1f(uniform.uRatio,ratio);
    },
    render(time,x,y,scroll,reduced){
-    if(disposed||!renderer)return;
-    const px=reduced?0:MathUtils.clamp(x,-1,1),py=reduced?0:MathUtils.clamp(y,-1,1);
-    for(const material of materials){material.uniforms.uTime.value=Number.isFinite(time)?time:0;material.uniforms.uReduced.value=Number(reduced);material.uniforms.uPointer.value.set(px,py);}
+    if(disposed||!passes.length)return;
+    if(gl.isContextLost())throw new Error('Background context lost');
+    const px=reduced?0:Math.max(-1,Math.min(1,x)),py=reduced?0:Math.max(-1,Math.min(1,y));
+    gl.uniform1f(uniform.uTime,Number.isFinite(time)?time:0);gl.uniform1f(uniform.uReduced,Number(reduced));gl.uniform2f(uniform.uPointer,px,py);
     camera.position.set(px*(mobile?.18:.5),py*.3,18+(reduced?0:Math.min(Math.max(scroll,0),8)*.07));
-    camera.lookAt(0,0,0);renderer.render(scene,camera);
+    camera.lookAt(0,0,0);camera.updateMatrixWorld();modelView.multiplyMatrices(camera.matrixWorldInverse,rotation);
+    gl.uniformMatrix4fv(uniform.modelViewMatrix,false,modelView.elements);gl.clear(gl.COLOR_BUFFER_BIT);
+    passes.forEach((pass,line)=>{
+     gl.uniform1f(uniform.uLine,line);gl.bindBuffer(gl.ARRAY_BUFFER,pass.position);gl.vertexAttribPointer(position,3,gl.FLOAT,false,0,0);
+     gl.bindBuffer(gl.ARRAY_BUFFER,pass.seed);gl.vertexAttribPointer(seed,1,gl.FLOAT,false,0,0);gl.drawArrays(line?gl.LINES:gl.POINTS,0,pass.count);
+    });
    },dispose,
   };
  }catch(error){dispose();throw error;}

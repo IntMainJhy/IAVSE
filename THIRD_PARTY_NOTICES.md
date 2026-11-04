@@ -22,7 +22,7 @@ The blog editor uses `@xyflow/react` (MIT) for viewport gestures, node selection
 
 ### Three.js
 
-The homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT). The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
+The homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT). The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The reading-page point backdrop uses Three.js camera/math modules and its linear-to-sRGB transfer formula with two native WebGL draw passes. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
 
 ### npm dependencies
 
@@ -56,7 +56,7 @@ macOS and Windows client source code, installers and proprietary assets are not 
 
 ### Three.js
 
-首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment，保留[完整许可](docs/licenses/Three.js-MIT.txt)。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
+首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment，保留[完整许可](docs/licenses/Three.js-MIT.txt)。阅读页点阵背景使用 Three.js 相机、数学模块及线性颜色到 sRGB 的转换公式，通过原生 WebGL 绘制两个图层。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
 
 ### npm 依赖
 

@@ -89,3 +89,12 @@ test('display bounds reserve the whole rotated sticker above and beside the page
  const d={width:940,nodes:[{id:'top-star',kind:'sticker',sticker:'star',frame:{x:-80,y:-100,w:120,h:80},style:{rotation:30}}]},bounds=designBounds(d);assert.ok(bounds.top<-100);assert.ok(bounds.left<-80);assert.equal(bounds.right,940);assert.ok(bounds.bottom>=500);assert.ok(designHeight(d)-bounds.top>600);
  const hidden=designBounds({...d,nodes:[{...d.nodes[0],hidden:true}]});assert.equal(hidden.top,0);assert.equal(hidden.left,0);
 });
+
+test('editor seeds preserve saved layouts and normalize fresh drafts without mutating their source',async()=>{
+ const {editorDraftLayout,canvasDraftSignature}=await import('../src/lib/blog-design.mjs');
+ const row={profile:p,layout:{blog:{title:'Saved title',design:defaultBlogDesign(p)}},discoverable:true,public:true,visibility:'public',content:[],legacyContent:[]};
+ const original=JSON.stringify(row),first=editorDraftLayout(row),second=editorDraftLayout(row);
+ assert.equal(JSON.stringify(row),original);assert.equal(first.blog.title,'Saved title');assert.deepEqual(first,second);
+ assert.equal(canvasDraftSignature(row.profile,first,row.discoverable),canvasDraftSignature(row.profile,second,row.discoverable));
+ const fresh=editorDraftLayout({...row,layout:{},public:false,visibility:'private'});assert.equal(fresh.blog.design.appearance,'glass-space');
+});

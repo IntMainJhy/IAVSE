@@ -4,21 +4,32 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 import * as three from 'three';
+import * as color from 'three/src/math/Color.js';
+import * as matrix from 'three/src/math/Matrix4.js';
+import * as camera from 'three/src/cameras/PerspectiveCamera.js';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/quantum-field.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
-function module(){
- let frame,calls=0,released=0,allocations=0,options,ratio=1;
- const sizes=[];
- class Renderer{
-  constructor(config){options=config;allocations++;}
-  setClearColor(){}setPixelRatio(value){ratio=value;}setSize(w,h){sizes.push({w,h,ratio});}
-  render(scene,camera){calls++;frame={scene,camera,points:scene.children[0]};}
-  dispose(){released++;}
- }
+function module(failure=''){
+ const uploads=[],draws=[],sizes=[],released=[],uniforms={},shaders=[];let id=0,contexts=0,options;
+ const gl={ARRAY_BUFFER:1,STATIC_DRAW:2,POINTS:3,LINES:4,VERTEX_SHADER:5,FRAGMENT_SHADER:6,COMPILE_STATUS:7,LINK_STATUS:8,
+  DEPTH_TEST:9,BLEND:10,SRC_ALPHA:11,ONE_MINUS_SRC_ALPHA:12,ONE:13,COLOR_BUFFER_BIT:14,FLOAT:15,
+  createShader:()=>({id:++id}),createProgram:()=>({id:++id}),createBuffer:()=>failure==='buffer'?null:{id:++id},
+  shaderSource:(_,text)=>shaders.push(text),compileShader(){},getShaderParameter:()=>failure!=='shader',
+  attachShader(){},linkProgram(){},getProgramParameter:()=>failure!=='link',useProgram(){},disable(){},enable(){},blendFuncSeparate(){},clearColor(){},
+  getUniformLocation:(_,name)=>name,getAttribLocation:(_,name)=>name==='position'?0:1,enableVertexAttribArray(){},
+  bindBuffer(){},bufferData:(_,data)=>uploads.push([...data]),vertexAttribPointer(){},
+  uniform1f:(name,value)=>{uniforms[name]=value;},uniform2f:(name,...value)=>{uniforms[name]=value;},uniform3f:(name,...value)=>{uniforms[name]=value;},
+  uniformMatrix4fv:(name,_,value)=>{uniforms[name]=[...value];},clear(){},viewport:(...size)=>sizes.push(size),
+  drawArrays:(mode,_,count)=>draws.push({mode,count}),isContextLost:()=>failure==='lost',
+  deleteBuffer:value=>released.push(value.id),deleteProgram:value=>released.push(value.id),deleteShader:value=>released.push(value.id)};
+ const canvas={getContext:(kind,config)=>{contexts++;assert.equal(kind,'webgl');options=config;return failure==='context'?null:gl;}};
  const exports={};vm.runInNewContext(source,{exports,DOMException,require:name=>{
-  assert.equal(name,'three');return{...three,WebGLRenderer:Renderer};
+  if(name==='three/src/math/Color.js')return color;
+  if(name==='three/src/math/Matrix4.js')return matrix;
+  if(name==='three/src/cameras/PerspectiveCamera.js')return camera;
+  throw Error('Unexpected backdrop dependency: '+name);
  }});
- return{...exports,sizes,get frame(){return frame;},get calls(){return calls;},get released(){return released;},get allocations(){return allocations;},get options(){return options;}};
+ return{...exports,canvas,uploads,draws,sizes,released,uniforms,shaders,get allocations(){return id;},get contexts(){return contexts;},get options(){return options;}};
 }
 
 test('both quality levels cover the same three currents with continuous wire topology and bounded sampling',()=>{
@@ -37,33 +48,44 @@ test('both quality levels cover the same three currents with continuous wire top
  }
 });
 
-test('the point pass reuses geometry during motion and scales quality without reallocating on every frame',async()=>{
- const m=module(),controller=new AbortController(),field=await m.createQuantumField({},controller.signal);
+
+test('native passes preserve the original camera, colors and buffer reuse across quality changes',async()=>{
+ const m=module(),controller=new AbortController(),field=await m.createQuantumField(m.canvas,controller.signal);
  assert.equal(m.options.alpha,true);assert.equal(m.options.antialias,false);assert.equal(m.options.powerPreference,'low-power');
  field.resize(1440,960,2);field.render(3,.4,-.3,2,false);
- const {points,camera}=m.frame,geometry=points.geometry,material=points.material;
- assert.ok(camera instanceof three.PerspectiveCamera&&points instanceof three.Points);
- assert.equal(geometry.attributes.position.count,10368);
- assert.ok(m.frame.scene.children[1] instanceof three.LineSegments);
- assert.equal(m.frame.scene.children[1].geometry.attributes.position.count,4032);assert.equal(material.uniforms.uTime.value,3);
- assert.equal(material.transparent,true);assert.equal(material.depthWrite,false);
+ assert.deepEqual(m.draws,[{mode:3,count:10368},{mode:4,count:4032}]);assert.equal(m.uploads.length,4,'only the active quality allocates buffers');
+ const expectedCamera=new three.PerspectiveCamera(46,1440/960,.1,60);expectedCamera.position.set(.2,-.09,18.14);expectedCamera.lookAt(0,0,0);expectedCamera.updateMatrixWorld();
+ const object=new three.Object3D();object.rotation.set(.16,-.13,-.04);object.updateMatrixWorld();
+ const expected=new three.Matrix4().multiplyMatrices(expectedCamera.matrixWorldInverse,object.matrixWorld);
+ for(let i=0;i<16;i++){assert.ok(Math.abs(m.uniforms.modelViewMatrix[i]-expected.elements[i])<1e-10);assert.equal(m.uniforms.projectionMatrix[i],expectedCamera.projectionMatrix.elements[i]);}
+ const blue=new three.Color('#426997');assert.deepEqual(m.uniforms.uBlue,[blue.r,blue.g,blue.b]);
  const calls=m.sizes.length;field.resize(1440,960,2);assert.equal(m.sizes.length,calls);
  for(let i=0;i<10;i++)field.render(i/30,.2,.1,.5,false);
- assert.equal(m.frame.points.geometry,geometry);assert.equal(geometry.attributes.position.version,0,'motion changes uniforms rather than uploading position buffers');
- field.resize(390,844,2);field.render(4,0,0,0,false);assert.equal(m.frame.points.geometry.attributes.position.count,3600);
- field.render(8,5,-5,6,true);assert.equal(material.uniforms.uReduced.value,1);assert.equal(material.uniforms.uPointer.value.length(),0);assert.equal(camera.position.z,18);
+ assert.equal(m.uploads.length,4,'motion only changes uniforms');
+ field.resize(390,844,2);field.render(4,0,0,0,false);assert.equal(m.uploads.length,8);assert.deepEqual(m.draws.slice(-2),[{mode:3,count:3600},{mode:4,count:1536}]);
+ field.resize(1440,960,2);assert.equal(m.uploads.length,8,'previous quality is reused');
+ field.render(8,5,-5,6,true);assert.equal(m.uniforms.uReduced,1);assert.deepEqual(m.uniforms.uPointer,[0,0]);assert.equal(m.uniforms.uTime,8);
  field.dispose();
 });
 
-test('abort disposes both quality levels, shader and renderer once and ignores late work',async()=>{
- const m=module(),controller=new AbortController(),field=await m.createQuantumField({},controller.signal);
- field.resize(1440,960,1);field.render(0,0,0,0,false);
- let geometryReleases=0,materialReleases=0;
- for(const object of m.frame.scene.children){object.geometry.addEventListener('dispose',()=>geometryReleases++);object.material.addEventListener('dispose',()=>materialReleases++);}
- field.resize(390,844,1);field.render(0,0,0,0,false);
- for(const object of m.frame.scene.children)object.geometry.addEventListener('dispose',()=>geometryReleases++);
- const draws=m.calls,resizes=m.sizes.length;controller.abort();field.dispose();
- assert.equal(geometryReleases,4);assert.equal(materialReleases,2);assert.equal(m.released,1);
- field.resize(300,500,1);field.render(50,0,0,0,false);assert.equal(m.calls,draws);assert.equal(m.sizes.length,resizes);
- const aborted=new AbortController();aborted.abort();await assert.rejects(m.createQuantumField({},aborted.signal),{name:'AbortError'});assert.equal(m.allocations,1);
+test('abort releases buffers, shaders and program exactly once and ignores late work',async()=>{
+ const m=module(),controller=new AbortController(),field=await m.createQuantumField(m.canvas,controller.signal);
+ field.resize(1440,960,1);field.resize(390,844,1);field.render(0,0,0,0,false);
+ const draws=m.draws.length,resizes=m.sizes.length,allocations=m.allocations;controller.abort();field.dispose();
+ assert.equal(m.released.length,allocations);assert.equal(new Set(m.released).size,allocations);
+ field.resize(300,500,1);field.render(50,0,0,0,false);assert.equal(m.draws.length,draws);assert.equal(m.sizes.length,resizes);
+ const aborted=new AbortController();aborted.abort();await assert.rejects(m.createQuantumField(m.canvas,aborted.signal),{name:'AbortError'});assert.equal(m.contexts,1);
+});
+
+test('initialization failures clean up partial allocations and context loss fails visibly',async()=>{
+ for(const failure of ['context','shader','link']){
+  const m=module(failure);await assert.rejects(m.createQuantumField(m.canvas,new AbortController().signal));
+  assert.equal(m.released.length,m.allocations);assert.equal(new Set(m.released).size,m.allocations);
+ }
+ for(const failure of ['buffer','lost']){
+  const m=module(failure),field=await m.createQuantumField(m.canvas,new AbortController().signal);
+  if(failure==='buffer')assert.throws(()=>field.resize(1440,960,1));
+  else{field.resize(1440,960,1);assert.throws(()=>field.render(0,0,0,0,false));}
+  field.dispose();assert.equal(m.released.length,m.allocations);
+ }
 });

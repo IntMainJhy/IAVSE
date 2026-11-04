@@ -29,7 +29,7 @@ IAVSE is being developed as a shared service with account-isolated data. Public 
 
 The current main branch includes the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Published members appear first; bundled showcase profiles do not create accounts or alter member counts. The creator voices section uses illustrative comments, with two scrolling rows, hover feedback, keyboard reading and reduced-motion support.
 
-See the [current repository update](docs/release-2026-11-04.md) and [performance review](docs/performance-2026-11-03.md).
+See the [current repository update](docs/release-2026-11-04.md) and [performance review](docs/performance-2026-11-04.md).
 
 ## Preview
 
@@ -151,7 +151,7 @@ The [2026-10-22 audit report](docs/audit-2026-10-22.md) records an earlier scope
 | Connect an AI tool | [API and stdio MCP reference](integrations/spaceyew-post/references/api.md) |
 | Operate the platform | [Administration](docs/administration.en.md) · [Deployment](deploy/README-split.en.md) |
 | Review launch boundaries | [Moderation and launch](docs/moderation-and-launch.md) · [Audit](docs/audit-2026-10-22.md) |
-| Review loading and rendering performance | [Performance audit](docs/performance-2026-11-03.md) |
+| Review loading and rendering performance | [Performance audit](docs/performance-2026-11-04.md) |
 | Understand assets and permissions | [Brand assets](docs/brand.md) · [Third-party notices](THIRD_PARTY_NOTICES.md) |
 
 ## Repository layout

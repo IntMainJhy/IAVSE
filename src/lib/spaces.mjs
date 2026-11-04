@@ -1,6 +1,6 @@
 import {designAssetIds,publicBlogDesign} from './blog-design.mjs';
 import {randomUUID} from 'node:crypto';
-import {db,getConfig,publicContent,publicBySlug,transaction,now,hash,fileInfo,fileRefs,limited,isSiteOwnerAccount,ownerAccountId} from './db.mjs';
+import {db,getConfig,publicContent,publicBySlug,transaction,now,hash,fileInfo,fileRefs,limited,isSiteOwnerAccount,ownerAccountId,siteOwnerAccountId} from './db.mjs';
 import {currentUser,serviceRequest,publishingQualified,clientIp} from './auth.mjs';
 import {policyBundle} from './community-policies.mjs';
 import {localRequest} from './deployment-policy.mjs';
@@ -24,7 +24,7 @@ export function ownerSpace(){return ensureSpace({id:'owner',username:db().prepar
 function held(space,content){return !!db().prepare('SELECT 1 FROM space_case_targets t JOIN community_cases c ON c.id=t.case_id WHERE t.space=? AND c.frozen=1 AND (t.content IS NULL OR t.content=?) LIMIT 1').get(space,content||'')}
 function profileOf(row){return row.legacy?getConfig('profile'):parse(row.profile)}
 function approved(row){if(row.public_release)return parse(db().prepare("SELECT data FROM space_reviews WHERE id=? AND status='approved'").get(row.public_release)?.data);return row.legacy?{profile:getConfig('profile'),layout:parse(row.layout),discoverable:!!row.discoverable}:null}
-function isPublic(row,req){return row&&row.visibility==='public'&&actor(row.owner)?.status==='active'&&!held(row.id,null)&&(row.legacy||serviceRequest(req))&&!!approved(row)&&(row.legacy||qualified(actor(row.owner),req)||isSiteOwnerAccount(row.owner)&&!!row.public_release)}
+function isPublic(row,req,release){if(!row||row.visibility!=='public')return false;const author=actor(row.owner);return author?.status==='active'&&!held(row.id,null)&&(row.legacy||serviceRequest(req))&&!!(release===undefined?approved(row):release)&&(row.legacy||qualified(author,req)||isSiteOwnerAccount(row.owner)&&!!row.public_release)}
 function contentView(row,privateView=false){const value=parse(privateView?row.draft:row.published);return{...value,id:row.id,type:row.type,slug:row.slug,updated:row.updated,...(privateView?{revision:row.revision,visibility:row.visibility,pending:db().prepare("SELECT id FROM space_reviews WHERE target=? AND status='pending'").get(row.id)?.id||'',published:!!row.published}:{})}}
 function publicDocuments(row){const items=db().prepare("SELECT * FROM space_content sc WHERE sc.space=? AND sc.visibility='public' AND sc.published IS NOT NULL AND NOT EXISTS(SELECT 1 FROM space_case_targets t JOIN community_cases c ON c.id=t.case_id WHERE t.space=sc.space AND c.frozen=1 AND (t.content IS NULL OR t.content=sc.id)) ORDER BY sc.updated DESC").all(row.id).map(x=>contentView(x));return row.legacy?[...kinds.flatMap(type=>publicContent(type)),...items]:items}
 function publicProfile(profile){const visible=(profile.experiences||[]).filter(x=>x.visible!==false);return{...profile,experiences:visible,translations:Object.fromEntries(Object.entries(profile.translations||{}).map(([key,value])=>[key,{...value,experiences:Object.fromEntries(Object.entries(value.experiences||{}).filter(([id])=>visible.some(x=>x.id===id)))}]))}}
@@ -37,7 +37,23 @@ export function defaultBlogSpace(req){const selected=db().prepare("SELECT value 
 // Personalize only the entry page; never expose an unreviewed draft or create a space on a read.
 export function blogEntry(req){const user=currentUser(req),own=user?.status==='active'&&!user.experience?rowByOwner(user.id):null;if(isPublic(own,req))return{space:publicDto(own),example:false};const space=defaultBlogSpace(req);return{space,example:space.owner!==user?.id}}
 export function publicSpaceDocument(req,handle,type,slug){const row=rowByHandle(handle);requireValue(isPublic(row,req),'主页不存在或暂未公开',404);requireValue(kinds.includes(type),'内容不存在或暂未公开',404);const own=db().prepare("SELECT * FROM space_content WHERE space=? AND type=? AND slug=? AND visibility='public' AND published IS NOT NULL").get(row.id,type,slug);const item=own&&!held(row.id,own.id)?contentView(own):row.legacy?publicBySlug(type,slug):null;requireValue(item,'内容不存在或暂未公开',404);return item}
-export function publicSpaces(req){ownerSpace();return db().prepare("SELECT * FROM spaces WHERE visibility='public' ORDER BY updated DESC").all().filter(row=>!(row.owner==='owner'&&ownerAccountId()&&isPublic(rowByOwner(ownerAccountId()),req))&&isPublic(row,req)&&(!!row.discoverable&&approved(row).discoverable!==false)).slice(0,60).map(row=>{const dto=publicDto(row);return{handle:dto.handle,url:dto.url,siteOwner:dto.siteOwner,profile:{...Object.fromEntries(['name','alias','intro','avatarId'].map(key=>[key,dto.profile[key]])),translations:Object.fromEntries(Object.entries(dto.profile.translations||{}).map(([locale,value])=>[locale,{name:value.name,alias:value.alias,intro:value.intro}]))},coverId:dto.layout.coverId||dto.content.find(item=>item.coverId)?.coverId||'',theme:dto.layout.theme,count:dto.content.length}})}
+export function publicSpaces(req){
+ ownerSpace();
+ const owner=ownerAccountId(),replaceLegacy=owner&&isPublic(rowByOwner(owner),req),siteOwner=siteOwnerAccountId(),items=[];
+ // Stop after 60 eligible spaces, not 60 raw rows. Hidden or frozen spaces cannot fill the directory.
+ const rows=db().prepare("SELECT * FROM spaces WHERE visibility='public' AND discoverable<>0 ORDER BY updated DESC").iterate();
+ for(const row of rows){
+  if(row.owner==='owner'&&replaceLegacy)continue;
+  const release=approved(row);if(!isPublic(row,req,release)||release.discoverable===false)continue;
+  const profile=row.legacy?getConfig('profile'):release.profile,layout=release.layout;
+  // A directory needs covers and counts, never article bodies or private drafts.
+  const documents=db().prepare("SELECT json_extract(sc.published,'$.coverId') coverId FROM space_content sc WHERE sc.space=? AND sc.visibility='public' AND sc.published IS NOT NULL AND NOT EXISTS(SELECT 1 FROM space_case_targets t JOIN community_cases c ON c.id=t.case_id WHERE t.space=sc.space AND c.frozen=1 AND (t.content IS NULL OR t.content=sc.id)) ORDER BY sc.updated DESC").all(row.id);
+  const all=row.legacy?[...kinds.flatMap(type=>publicContent(type)),...documents]:documents;
+  items.push({handle:row.handle,url:pathFor(row),siteOwner:!!siteOwner&&siteOwner===row.owner,profile:{...Object.fromEntries(['name','alias','intro','avatarId'].map(key=>[key,profile[key]])),translations:Object.fromEntries(Object.entries(profile.translations||{}).map(([locale,value])=>[locale,{name:value.name,alias:value.alias,intro:value.intro}]))},coverId:layout.coverId||all.find(item=>item.coverId)?.coverId||'',theme:layout.theme,count:all.length});
+  if(items.length===60)break;
+ }
+ return items;
+}
 export function publicSpaceLink(req,id){const row=rowByOwner(id);return isPublic(row,req)?pathFor(row):null}
 function myRow(req){return ensureSpace(spaceActor(req))}
 function assertRevision(row,input){requireValue(Number(input.revision)===row.revision,'内容已在其他页面更新，请先刷新再继续',409)}

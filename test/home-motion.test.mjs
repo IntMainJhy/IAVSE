@@ -7,7 +7,7 @@ import ts from 'typescript';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
 function fixture({desktop=true,reduced=false,savedReduced=false}={}){
  const effects=[],timelines=[],mediaInstances=[],frames=new Map(),events=[],listeners=new Map(),refreshListeners=new Set();let frameId=0,refreshes=0,conditions={desktop,compact:!desktop,reduce:reduced},currentMedia,fontResolve;
- class Target extends EventTarget{dataset={};style={};attributes={};setAttribute(k,v){this.attributes[k]=v;}removeAttribute(k){delete this.attributes[k];}addEventListener(name,callback,options){super.addEventListener(name,callback,options);const set=listeners.get(this)||new Set();set.add(name);listeners.set(this,set);}removeEventListener(name,callback){super.removeEventListener(name,callback);listeners.get(this)?.delete(name);}}
+ class Target extends EventTarget{dataset={};style={};attributes={};setAttribute(k,v){this.writes=(this.writes||0)+1;this.attributes[k]=v;}removeAttribute(k){delete this.attributes[k];}addEventListener(name,callback,options){super.addEventListener(name,callback,options);const set=listeners.get(this)||new Set();set.add(name);listeners.set(this,set);}removeEventListener(name,callback){super.removeEventListener(name,callback);listeners.get(this)?.delete(name);}}
  const node=name=>Object.assign(new Target(),{name});
  const stories=['blog','editor','skills','resources'].map((id,index)=>{const art=node(id+' art'),copy=node(id+' copy');return Object.assign(node(id),{dataset:{homeStory:id,homeSide:index%2?'right':'left'},art,copy,querySelector:selector=>({'.home-story-visual':art,'.home-story-copy':copy}[selector]||null),querySelectorAll:()=>[art,copy]});});
  const closing=node('invitation'),images=[node('first image'),node('second image')],links=stories.map((s,i)=>Object.assign(node('link '+i),{hash:'#'+s.dataset.homeStory})),track=Object.assign(node('track'),{offsetHeight:5000,getBoundingClientRect:()=>({top:1000})});
@@ -74,3 +74,13 @@ test('unmount releases all animations, handlers, accessibility states and late f
  const f=fixture();f.cleanup();assert.ok(f.mediaInstances.every(m=>m.reverted));assert.ok(f.timelines.every(t=>t.killed));assert.equal(f.frames.size,0);assert.equal(f.refreshListeners.size,0);assert.equal(f.root.dataset.journeyMotion,undefined);assert.ok([...f.listeners.values()].every(set=>set.size===0));
  const count=f.timelines.length;f.control('reduced',false);f.resolveFont();await Promise.resolve();assert.equal(f.timelines.length,count);assert.equal(f.frames.size,0);assert.ok(f.stories.every(s=>!s.inert&&!s.attributes['aria-hidden']));
 });
+
+ test('scrolling inside one chapter leaves its accessibility and activation DOM untouched',()=>{
+ const f=fixture(),film=f.timelines.find(t=>t.options.scrollTrigger?.id==='iavse-story-film');
+ const writes=()=>[...f.stories,...f.links].reduce((sum,node)=>sum+(node.writes||0),0);
+ film.options.scrollTrigger.onUpdate({progress:.3});const count=writes();
+ for(const progress of [.31,.32,.34,.35,.4])film.options.scrollTrigger.onUpdate({progress});
+ assert.equal(writes(),count);assert.equal(f.stories[1].dataset.journeyActive,'true');
+ f.stories[1].dataset.journeyActive='false';film.options.scrollTrigger.onUpdate({progress:.4});assert.equal(f.stories[1].dataset.journeyActive,'true','layout restoration must reconcile the actual DOM state');
+ film.options.scrollTrigger.onUpdate({progress:.6});assert.ok(writes()>count);assert.equal(f.stories[2].dataset.journeyActive,'true');f.cleanup();
+ });

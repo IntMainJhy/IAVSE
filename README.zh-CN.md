@@ -31,7 +31,7 @@ IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理�
 
 main 包含深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12 个主页的 3D 博客展廊。展廊复用既有主题，每次最多加载两个预览，支持拖动环顾、点击靠近与减少动态效果；已公开的成员主页优先，展示资料不创建账号、不计入成员数量。「创作者的声音」使用示例评论，双排滚动支持悬停反馈、键盘阅读与减少动态效果。
 
-更新内容见[本轮仓库收尾记录](docs/release-2026-11-04.md)与[性能优化记录](docs/performance-2026-11-03.md)。
+更新内容见[本轮仓库收尾记录](docs/release-2026-11-04.md)与[性能优化记录](docs/performance-2026-11-04.md)。
 
 ## 界面预览
 
@@ -153,7 +153,7 @@ main 包含深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12
 | 连接 AI 工具 | [API 与 stdio MCP 参考](integrations/spaceyew-post/references/api.md) |
 | 管理及部署 | [管理中心](docs/管理中心说明.md) · [部署](deploy/README-split.md) |
 | 检查上线边界 | [审核与上线](docs/moderation-and-launch.md) · [审计记录](docs/audit-2026-10-22.md) |
-| 查看加载与渲染优化 | [性能优化记录](docs/performance-2026-11-03.md) |
+| 查看加载与渲染优化 | [性能优化记录](docs/performance-2026-11-04.md) |
 | 了解图标与授权 | [品牌素材](docs/brand.md) · [第三方许可](THIRD_PARTY_NOTICES.md) |
 
 ## 目录

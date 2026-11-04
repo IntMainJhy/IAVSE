@@ -43,6 +43,12 @@ export function moveDesignNode(design,id,position){const node=design.nodes.find(
 export function removeDesignNode(design,id){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked||node.part==='credit')return design;const next={...design,nodes:design.nodes.filter(n=>n.id!==id&&n.anchor!==id)};return next.autoLayout?arrangeBlogDesign(next):next}
 export function duplicateDesignNode(design,id,newId){const node=design.nodes.find(n=>n.id===id);if(!node||node.locked||node.kind==='template'||design.nodes.length>=60||design.nodes.some(n=>n.id===newId))return design;const next={...structuredClone(node),id:newId,frame:{...node.frame,x:Math.max(node.kind==='sticker'?-240:0,Math.min(design.width-node.frame.w,node.frame.x+20)),y:Math.min(40000,node.frame.y+20)}};return {...design,autoLayout:node.kind==='sticker'?design.autoLayout:false,nodes:[...design.nodes,next]}}
 export function resizeDesignPage(design,width){const previous=design.width,next={...design,width,nodes:design.nodes.map(n=>n.kind==='sticker'||n.locked?n:{...n,frame:{...n.frame,x:Math.round(n.frame.x*width/previous),w:Math.max(100,Math.round(n.frame.w*width/previous))}})};return design.autoLayout?arrangeBlogDesign(next):next}
+// Normalize a server seed and later save responses through the same editor path.
+export function editorDraftLayout(value){
+ const next={...value.layout,blog:{mode:'theme',theme:'anx',title:'',description:'',bundleId:'',sections:['projects','articles','resources'],...value.layout.blog,...(!value.profile.resume&&(value.profile.experiences?.length||value.content?.length||value.legacyContent?.length)?{showLegacyContent:true}:{})}};
+ next.blog.design=next.blog.design?withBlogDecorations(next.blog.design):{...defaultBlogDesign(value.profile,next,[...(value.content||[]),...(value.legacyContent||[])]),...(!value.public&&value.visibility!=='public'?{appearance:'glass-space'}:{})};
+ return next;
+}
 export function canvasDraftSignature(profile,layout,discoverable){const design=layout.blog?.design;return JSON.stringify({profile,layout:design?{...layout,blog:{...layout.blog,design:{...design,nodes:design.nodes.map(n=>({...n,frame:{...n.frame,h:0,...(design.autoLayout&&n.kind!=='sticker'?{y:0}:{})}}))}}}:layout,discoverable})}
 
 export const designContentBottom=design=>Math.max(0,...visibleDesignNodes(design.nodes).filter(n=>n.kind!=='sticker').map(n=>n.frame.y+n.frame.h));

@@ -41,7 +41,9 @@ Production registration and publishing depend on explicit deployment settings. L
 
 ## Performance / 性能
 
-[2026-11-03 性能优化与测量记录](performance-2026-11-03.md) · covers shared loading, fonts, catalog reads and editor code splitting.
+[2026-11-04 全站性能优化与测量记录](performance-2026-11-04.md) · covers lightweight WebGL, directory reads, editor SSR and stable route styles.
+
+Earlier: [2026-11-03](performance-2026-11-03.md) · shared loading, fonts, catalog reads and editor code splitting.
 
 ## Repository presentation / 仓库简介
 

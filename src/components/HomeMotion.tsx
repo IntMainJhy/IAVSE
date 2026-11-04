@@ -26,6 +26,7 @@ export function HomeMotion(){
      const timeline=gsap.timeline({defaults:{ease:'power2.inOut'},scrollTrigger:{id:'iavse-story-film',trigger:track,start:'top top',end:'bottom bottom',scrub:.65,invalidateOnRefresh:true,onUpdate:self=>{
       if(root.dataset.journeyMotion!=='cinema')return;
       const current=Math.min(last,Math.floor(self.progress*stories.length));
+      if(stories[current]?.dataset.journeyActive==='true')return;
       stories.forEach((s,i)=>{s.inert=i!==current;s.setAttribute('aria-hidden',String(i!==current));s.dataset.journeyActive=String(i===current);});
       links.forEach((a,i)=>{if(i===current)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
      }}});

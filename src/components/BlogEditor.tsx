@@ -4,11 +4,12 @@ import '@xyflow/react/dist/style.css';
 import '@/app/blog-canvas.css';
 import '@/app/blog-editor-controls.css';
 import Link from 'next/link';
-import {useEffect,useLayoutEffect,useRef,useState} from 'react';
+import {useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
 import {gsap} from 'gsap';
 import {api,post,sendFile} from '@/lib/client';
 import {useLocale} from './LocaleProvider';
 import {useUnsaved} from './useUnsaved';
+import {usePageSeed} from './PageResources';
 import {BlogTheme} from './BlogTheme';
 import {BlogShare} from './BlogShare';
 import {ResumeImport} from './ResumeImport';
@@ -17,7 +18,7 @@ import {Icon} from './Icons';
 import {BlogCanvas} from './BlogCanvas';
 import {BlogPreview} from './BlogPreview';
 import {canvasResume,previewCanvasProfile,previewCanvasLayout} from '@/lib/blog-canvas.mjs';
-import {defaultBlogDesign,withBlogDecorations,canvasDraftSignature} from '@/lib/blog-design.mjs';
+import {editorDraftLayout,canvasDraftSignature} from '@/lib/blog-design.mjs';
 type Data=Record<string,any>;
 function Field({label,value='',onChange,max=200}:{label:string;value?:string;onChange:(value:string)=>void;max?:number}){return <label className="be-field"><span>{label}</span><textarea value={value} maxLength={max} rows={2} onChange={e=>onChange(e.target.value)}/></label>}
 function Media({owner,value,onChange,label,pdf=false,onBusy}:{owner:boolean;value:string;onChange:(id:string)=>void;label:string;pdf?:boolean;onBusy:(busy:boolean)=>void}){
@@ -30,10 +31,12 @@ function Media({owner,value,onChange,label,pdf=false,onBusy}:{owner:boolean;valu
 
 export function BlogEditor({owner:adminEntry=false}:{owner?:boolean}){
  const{locale}=useLocale(),en=locale==='en',say=(zh:string,english:string)=>en?english:zh,base=adminEntry?'/api/admin/blog':'/api/spaces';
- const[row,setRow]=useState<Data|null>(null),[profile,setProfile]=useState<Data>({}),[layout,setLayout]=useState<Data>({}),[discoverable,setDiscoverable]=useState(true),[tab,setTab]=useState('canvas'),[language,setLanguage]=useState(''),[preview,setPreview]=useState(false),[previewDevice,setPreviewDevice]=useState('desktop'),[busy,setBusy]=useState(false),[uploads,setUploads]=useState<Record<string,boolean>>({}),[error,setError]=useState(''),[status,setStatus]=useState(''),[signedOut,setSignedOut]=useState(false),[accepted,setAccepted]=useState(false),[handle,setHandle]=useState(''),[publishMounted,setPublishMounted]=useState(false);
+ const seed=usePageSeed(base+'/mine');
+ const[initial]=useState(()=>{if(seed?.status!==200||!seed.data)return null;const layout=editorDraftLayout(seed.data);return{row:seed.data,layout,signature:canvasDraftSignature(seed.data.profile,layout,seed.data.discoverable)};});
+ const[row,setRow]=useState<Data|null>(initial?.row||null),[profile,setProfile]=useState<Data>(initial?.row.profile||{}),[layout,setLayout]=useState<Data>(initial?.layout||{}),[discoverable,setDiscoverable]=useState(initial?.row.discoverable??true),[tab,setTab]=useState('canvas'),[language,setLanguage]=useState(''),[preview,setPreview]=useState(false),[previewDevice,setPreviewDevice]=useState('desktop'),[busy,setBusy]=useState(false),[uploads,setUploads]=useState<Record<string,boolean>>({}),[error,setError]=useState(''),[status,setStatus]=useState(''),[signedOut,setSignedOut]=useState(false),[accepted,setAccepted]=useState(false),[handle,setHandle]=useState(initial?.row.handle||''),[publishMounted,setPublishMounted]=useState(false);
  const owner=adminEntry||row?.canManage===true;
  const editorRoot=useRef<HTMLDivElement>(null),publishPanel=useRef<HTMLElement>(null);
- const baseline=useRef(''),requestId=useRef(0),mounted=useRef(true),signature=canvasDraftSignature(profile,layout,discoverable),dirty=!!row&&baseline.current!==signature;
+ const baseline=useRef(initial?.signature||''),requestId=useRef(0),mounted=useRef(true),signature=useMemo(()=>canvasDraftSignature(profile,layout,discoverable),[profile,layout,discoverable]),dirty=!!row&&baseline.current!==signature;
  useUnsaved(dirty);
  // The canvas stays mounted between views, preserving selection, zoom and undo history.
  useLayoutEffect(()=>{
@@ -54,8 +57,12 @@ export function BlogEditor({owner:adminEntry=false}:{owner?:boolean}){
   },editorRoot);
   return()=>context.revert();
  },[tab,publishMounted,!!row]);
- function load(value:Data){setRow(value);setProfile(value.profile);const next={...value.layout,blog:{mode:'theme',theme:'anx',title:'',description:'',bundleId:'',sections:['projects','articles','resources'],...value.layout.blog,...(!value.profile.resume&&(value.profile.experiences?.length||value.content?.length||value.legacyContent?.length)?{showLegacyContent:true}:{})}};next.blog.design=next.blog.design?withBlogDecorations(next.blog.design):{...defaultBlogDesign(value.profile,next,[...(value.content||[]),...(value.legacyContent||[])]),...(!value.public&&value.visibility!=='public'?{appearance:'glass-space'}:{})};setLayout(next);setDiscoverable(value.discoverable);setHandle(value.handle);baseline.current=canvasDraftSignature(value.profile,next,value.discoverable)}
- useEffect(()=>{mounted.current=true;api(base+'/mine').then(value=>{if(mounted.current)load(value)}).catch(e=>{if(mounted.current){setSignedOut([401,403].includes(e.status));setError(e.message)}});return()=>{mounted.current=false}},[base]);
+ function load(value:Data){const next=editorDraftLayout(value);setRow(value);setProfile(value.profile);setLayout(next);setDiscoverable(value.discoverable);setHandle(value.handle);baseline.current=canvasDraftSignature(value.profile,next,value.discoverable)}
+ useEffect(()=>{mounted.current=true;
+  // SSR already performed the authenticated read. Do not replace edits with a duplicate request.
+  if(!initial)api(base+'/mine').then(value=>{if(mounted.current)load(value)}).catch(e=>{if(mounted.current){setSignedOut([401,403].includes(e.status));setError(e.message)}});
+  return()=>{mounted.current=false};
+ },[base]);
  const patch=(value:Data)=>setProfile(p=>({...p,...value})),resume=canvasResume(profile),setResume=(value:Data|null)=>patch({resume:value}),uploading=Object.values(uploads).some(Boolean),flag=(key:string)=>(value:boolean)=>setUploads(x=>({...x,[key]:value}));
  async function run(action:()=>Promise<void>){if(busy||uploading)return;setBusy(true);setError('');setStatus('');const id=++requestId.current;try{await action()}catch(e:any){if(mounted.current&&id===requestId.current)setError(e.message)}finally{if(mounted.current)setBusy(false)}}
  async function save(){const value=await post(base+'/save',{profile,layout,discoverable,revision:row!.revision,profileVersion:row!.profileVersion,...(owner?{publish:true}:{})});load(value);setStatus(say(owner?'公开主页已更新。':'草稿已保存，公开版本保持不变。',owner?'Public homepage updated.':'Draft saved. The published version is unchanged.'));return value}
