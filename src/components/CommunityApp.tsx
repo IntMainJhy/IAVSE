@@ -97,8 +97,9 @@ function Account({user,onSaved,config}:{user:Doc;onSaved:(user:Doc)=>void;config
  </section>;
 }
 function Workspace({path,config,user,onSaved}:{path:string[],config:Doc,user:Doc,onSaved:(user:Doc)=>void}){const {t:tr}=useLocale();
- const r=useResource('/api/community/workspace'),section=path[1]||'';
- return <div className="feed-workspace-layout"><section className="feed-workspace-main"><div className="community-workspace-top"><div><p>{user.nickname}{tr("，欢迎回来。")}</p></div><div className="organic-actions">{['owner','reviewer'].includes(user.role)&&<Link className={secondary} href="/admin/community">{tr("社区审核")}</Link>}<Link className={secondary} href="/community">{tr("回到展示页 ")}</Link><Logout/></div></div>{section==='submissions'&&path[2]?<CommunityEditor id={path[2]==='new'?'':path[2]} config={config} user={user}/>:section==='account'?<Account user={user} onSaved={onSaved} config={config}/>:section==='bookmarks'?<Bookmarks user={user}/>:r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:section==='notifications'?<Notifications/>:<SubmissionList user={user} data={r.data}/>}</section></div>;
+ const section=path[1]||'',listing=!['account','bookmarks','notifications'].includes(section)&&!(section==='submissions'&&path[2]);
+ const r=useResource(listing?'/api/community/workspace':null);
+ return <div className="feed-workspace-layout"><section className="feed-workspace-main"><div className="community-workspace-top"><div><p>{user.nickname}{tr("，欢迎回来。")}</p></div><div className="organic-actions">{['owner','reviewer'].includes(user.role)&&<Link className={secondary} href="/admin/community">{tr("社区审核")}</Link>}<Link className={secondary} href="/community">{tr("回到展示页 ")}</Link><Logout/></div></div>{section==='submissions'&&path[2]?<CommunityEditor id={path[2]==='new'?'':path[2]} config={config} user={user}/>:section==='account'?<Account user={user} onSaved={onSaved} config={config}/>:section==='bookmarks'?<Bookmarks user={user}/>:section==='notifications'?<Notifications/>:r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:<SubmissionList user={user} data={r.data}/>}</section></div>;
 }
 
 const categories=['涉嫌侵权','隐私泄露','诈骗或恶意链接','违法有害信息','垃圾广告','链接失效','其他','审核或账号申诉'];

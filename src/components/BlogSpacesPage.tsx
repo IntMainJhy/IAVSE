@@ -13,7 +13,7 @@ export async function BlogSpacesPage({req}:{req:Request}){
  const say=(zh:string,en:string,ja:string)=>locale==='en'?en:locale==='ja'?ja:zh;
  const spaces:GallerySpace[]=publicSpaces(req).map((space:any)=>{
   const profile=localizeProfile(space.profile,locale);
-  return {handle:space.handle,name:profile.name||space.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',href:'/blog/'+encodeURIComponent(space.handle)};
+  return {handle:space.handle,name:profile.name||space.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',href:'/blog/'+encodeURIComponent(space.handle),mode:space.mode};
  });
  return <div className="blog-spaces-page" data-blog-spaces>
   <header className="creator-directory-intro">

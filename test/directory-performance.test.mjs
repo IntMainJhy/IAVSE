@@ -29,6 +29,16 @@ test('directory skips ineligible rows before its cap and keeps public metadata w
  assert.ok(!JSON.stringify(list).includes('PRIVATE DRAFT'));assert.ok(!JSON.stringify(list).includes('bodyHtml'));
 });
 
+test('preview mode comes from the approved release, independently of private draft changes',()=>{
+ const fixture=fixtures[60],row=d.prepare('SELECT data FROM space_reviews WHERE id=?').get(fixture.release),release=JSON.parse(row.data);
+ d.prepare('UPDATE spaces SET layout=? WHERE id=?').run(JSON.stringify({...release.layout,blog:{mode:'static'}}),fixture.id);
+ assert.equal(S.publicSpaces(req)[0].mode,'theme');
+ d.prepare('UPDATE space_reviews SET data=? WHERE id=?').run(JSON.stringify({...release,layout:{...release.layout,blog:{mode:'static'}}}),fixture.release);
+ assert.equal(S.publicSpaces(req)[0].mode,'static');
+ d.prepare('UPDATE space_reviews SET data=? WHERE id=?').run(row.data,fixture.release);
+ assert.equal(S.publicSpaces(req)[0].mode,'theme');
+});
+
 test('freezes, takedowns and author restrictions take effect on the next directory read',()=>{
  const fixture=fixtures[60],caseId=randomUUID();
  d.prepare("INSERT INTO community_cases(id,token,kind,category,description,created,updated,frozen) VALUES(?,?,'report','test','directory permission test',?,?,1)").run(caseId,randomUUID(),fixture.date,fixture.date);

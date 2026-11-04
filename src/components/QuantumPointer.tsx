@@ -2,45 +2,72 @@
 
 import {useEffect,useRef} from 'react';
 
-/** A small canvas, awake only over actionable UI; never captures pointer input. */
+/** Two bounded canvases: a passing field and an independently anchored click wave. */
 export function QuantumPointer(){
- const ref=useRef<HTMLCanvasElement>(null);
+ const pointer=useRef<HTMLCanvasElement>(null),pulse=useRef<HTMLCanvasElement>(null);
  useEffect(()=>{
-  const canvas=ref.current,host=canvas?.closest('.v2-site');if(!canvas||!host)return;
-  const ctx=canvas.getContext('2d');if(!ctx)return;
-  const capability=matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)');
-  let frame=0,x=0,y=0,alpha=0,target=0,previous=0,clickAt=-1000,reduced=false;
-  try{reduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
-  const dpr=Math.min(devicePixelRatio||1,1.5),size=240;canvas.width=size*dpr;canvas.height=size*dpr;ctx.scale(dpr,dpr);
-  const allowed=()=>capability.matches&&!reduced&&!document.hidden;
-  const clear=()=>{cancelAnimationFrame(frame);frame=0;alpha=target=0;previous=0;ctx.clearRect(0,0,size,size);};
+  // Embedded blog previews share the document styles, but never need a second cursor.
+  if(window.top!==window.self)return;
+  const canvas=pointer.current,wave=pulse.current;if(!canvas||!wave)return;
+  const ctx=canvas.getContext('2d'),ink=wave.getContext('2d');if(!ctx||!ink)return;
+  const fine=matchMedia('(any-hover:hover) and (any-pointer:fine)'),preference=matchMedia('(prefers-reduced-motion:reduce)');
+  const size=240,waveSize=640,dpr=Math.min(devicePixelRatio||1,1.5);
+  for(const [surface,context,length] of [[canvas,ctx,size],[wave,ink,waveSize]] as const){surface.width=length*dpr;surface.height=length*dpr;context.scale(dpr,dpr);}
+  let frame=0,previous=0,x=0,y=0,dx=0,dy=0,alpha=0,lastMove=-Infinity,pulseAt=-Infinity,px=0,py=0,quietPulse=false,light=false,waveLight=false,savedReduced=false;
+  try{savedReduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
+  const reduced=()=>savedReduced||preference.matches;
+  const color=(bright:boolean)=>bright?'174,211,255':'62,124,210';
+  const bright=(element:Element|null)=>document.documentElement.dataset.colorMode==='dark'||!!element?.closest('.v2-landing:not([data-glass-scrolled])');
+  const clear=()=>{cancelAnimationFrame(frame);frame=0;previous=0;alpha=0;lastMove=pulseAt=-Infinity;ctx.clearRect(0,0,size,size);ink.clearRect(0,0,waveSize,waveSize);};
+  const dot=(context:CanvasRenderingContext2D,cx:number,cy:number,radius:number,opacity:number,rgb:string)=>{context.fillStyle=`rgba(${rgb},${opacity})`;context.beginPath();context.arc(cx,cy,radius,0,Math.PI*2);context.fill();};
   const draw=(now:number)=>{
-   frame=0;if(!allowed()){clear();return;}
-   const dt=previous?Math.min((now-previous)/1000,.05):1/60;previous=now;alpha+=(target-alpha)*(1-Math.exp(-12*dt));
-   ctx.clearRect(0,0,size,size);canvas.style.transform=`translate3d(${x-size/2}px,${y-size/2}px,0)`;
-   const ox=-(x-size/2)%18,oy=-(y-size/2)%18,pulse=Math.max(0,(now-clickAt)/700);
-   for(let row=0;row<15;row++)for(let col=0;col<15;col++){
-    const px=col*18+ox,py=row*18+oy,dx=px-120,dy=py-120,d=Math.hypot(dx,dy),falloff=Math.max(0,1-d/110);
-    if(!falloff)continue;
-    const wave=pulse<1?Math.exp(-Math.pow((d-pulse*115)/18,2))*(1-pulse)*10:0;
-    const repel=falloff*falloff*13+wave,safe=Math.max(d,1);
-    ctx.fillStyle=`rgba(78,145,245,${alpha*falloff*.65})`;ctx.beginPath();ctx.arc(px+dx/safe*repel,py+dy/safe*repel,.7+falloff*.8,0,Math.PI*2);ctx.fill();
+   frame=0;if(document.hidden){clear();return;}
+   const dt=previous?Math.min((now-previous)/1000,.05):1/60;previous=now;
+   const target=fine.matches&&!reduced()?Math.max(0,Math.min(1,1-(now-lastMove-140)/420)):0;
+   alpha+=(target-alpha)*(1-Math.exp(-16*dt));dx*=Math.exp(-7*dt);dy*=Math.exp(-7*dt);
+   ctx.clearRect(0,0,size,size);
+   if(alpha>.006){
+    const originX=x-size/2,originY=y-size/2,ox=((-originX%18)+18)%18,oy=((-originY%18)+18)%18;
+    canvas.style.transform=`translate3d(${originX}px,${originY}px,0)`;
+    for(let row=0;row<17;row++)for(let col=0;col<17;col++){
+     const ax=col*18+ox,ay=row*18+oy,vx=ax-size/2,vy=ay-size/2,d=Math.hypot(vx,vy),falloff=Math.max(0,1-d/110);if(!falloff)continue;
+     const force=falloff*falloff*14,safe=Math.max(d,1);
+     dot(ctx,ax+vx/safe*force-dx*falloff*.13,ay+vy/safe*force-dy*falloff*.13,.65+falloff*.8,alpha*falloff*.66,color(light));
+    }
    }
-   if(Math.abs(target-alpha)>.008||pulse<1)frame=requestAnimationFrame(draw);else if(!target)clear();
+   ink.clearRect(0,0,waveSize,waveSize);
+   const progress=(now-pulseAt)/(quietPulse?180:760);
+   if(progress>=0&&progress<1){
+    const center=waveSize/2,radius=quietPulse?18:14+260*(1-Math.pow(1-progress,2)),spread=quietPulse?18:22+progress*20;
+    const ox=((-(px-center)%18)+18)%18,oy=((-(py-center)%18)+18)%18;
+    for(let row=0;row<37;row++)for(let col=0;col<37;col++){
+     const ax=col*18+ox,ay=row*18+oy,vx=ax-center,vy=ay-center,d=Math.hypot(vx,vy),crest=Math.exp(-Math.pow((d-radius)/spread,2))*(1-progress);
+     if(crest<.018)continue;const force=quietPulse?0:crest*15,safe=Math.max(d,1);
+     dot(ink,ax+vx/safe*force,ay+vy/safe*force,.7+crest*1.4,crest*.84,color(waveLight));
+    }
+   }
+   if(alpha>.006||target>0||progress>=0&&progress<1)frame=requestAnimationFrame(draw);else previous=0;
   };
-  const wake=()=>{if(allowed()&&!frame)frame=requestAnimationFrame(draw);};
+  const wake=()=>{if(!document.hidden&&!frame)frame=requestAnimationFrame(draw);};
   const move=(event:PointerEvent)=>{
-   if(event.pointerType==='touch')return;
-   x=event.clientX;y=event.clientY;target=Number(!!(event.target as Element)?.closest('a,button,summary,.home-story-visual'));
-   if(target||alpha)wake();
+   if(event.pointerType==='touch'||!fine.matches||reduced()||document.hidden)return;
+   dx=Math.max(-36,Math.min(36,event.clientX-x));dy=Math.max(-36,Math.min(36,event.clientY-y));x=event.clientX;y=event.clientY;
+   lastMove=performance.now();light=bright(event.target instanceof Element?event.target:null);wake();
   };
-  const leave=()=>{target=0;wake();};
-  const press=()=>{if(target){clickAt=performance.now();wake();}};
-  const preference=()=>{if(!allowed())clear();};
-  const control=(event:Event)=>{const d=(event as CustomEvent<{action:string;value:boolean}>).detail;if(d?.action==='reduced'){reduced=!!d.value;preference();}};
-  host.addEventListener('pointermove',move as EventListener,{passive:true});host.addEventListener('pointerleave',leave);host.addEventListener('pointerdown',press);
-  capability.addEventListener('change',preference);document.addEventListener('visibilitychange',preference);window.addEventListener('iavse-scene-control',control);window.addEventListener('scroll',leave,{passive:true});
-  return()=>{clear();host.removeEventListener('pointermove',move as EventListener);host.removeEventListener('pointerleave',leave);host.removeEventListener('pointerdown',press);capability.removeEventListener('change',preference);document.removeEventListener('visibilitychange',preference);window.removeEventListener('iavse-scene-control',control);window.removeEventListener('scroll',leave);};
+  const click=(event:MouseEvent)=>{
+   if(event.button!==0||document.hidden)return;
+   const element=event.target instanceof Element?event.target.closest<HTMLElement>('a,button,summary,input[type=button],input[type=submit],[role=button],[role=tab],[role=option]'):null;
+   if(!element||element.matches(':disabled,[aria-disabled=true]'))return;
+   if(event.detail===0){const rect=element.getBoundingClientRect();px=rect.left+rect.width/2;py=rect.top+rect.height/2;}else{px=event.clientX;py=event.clientY;}
+   pulseAt=performance.now();quietPulse=reduced();waveLight=bright(element);wave.style.transform=`translate3d(${px-waveSize/2}px,${py-waveSize/2}px,0)`;wake();
+  };
+  const leave=()=>{lastMove=-Infinity;wake();};
+  const mode=()=>{lastMove=-Infinity;if(reduced()){alpha=0;ctx.clearRect(0,0,size,size);pulseAt=-Infinity;}wake();};
+  const visibility=()=>{if(document.hidden)clear();};
+  const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value:boolean}>).detail;if(detail?.action==='reduced'){savedReduced=!!detail.value;mode();}};
+  window.addEventListener('pointermove',move,{passive:true});document.addEventListener('click',click,true);document.documentElement.addEventListener('pointerleave',leave);window.addEventListener('blur',clear);
+  fine.addEventListener('change',mode);preference.addEventListener('change',mode);document.addEventListener('visibilitychange',visibility);window.addEventListener('iavse-scene-control',control);
+  return()=>{clear();window.removeEventListener('pointermove',move);document.removeEventListener('click',click,true);document.documentElement.removeEventListener('pointerleave',leave);window.removeEventListener('blur',clear);fine.removeEventListener('change',mode);preference.removeEventListener('change',mode);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('iavse-scene-control',control);canvas.width=canvas.height=wave.width=wave.height=0;};
  },[]);
- return <canvas ref={ref} className="iavse-quantum-pointer" aria-hidden="true"/>;
+ return <><canvas ref={pointer} className="iavse-quantum-pointer" aria-hidden="true"/><canvas ref={pulse} className="iavse-quantum-wave" aria-hidden="true"/></>;
 }

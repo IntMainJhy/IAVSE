@@ -20,3 +20,6 @@
 .hero-work>.tag{align-self:flex-start}
 
 .resume-import{margin-bottom:24px}.resume-import h2{font-size:21px;margin:0 0 14px}.resume-import details{margin-top:20px}.resume-import summary{cursor:pointer;padding:12px 0;min-height:44px}.resume-import textarea{width:100%;box-sizing:border-box;white-space:pre-wrap}.resume-file-label{position:relative;overflow:hidden;cursor:pointer}.resume-file-label input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.resume-file-label:focus-within{outline:2px solid currentColor;outline-offset:4px}.resume-file-label[aria-disabled=true]{opacity:.5}.resume-import fieldset{min-width:0;margin:20px 0;padding:16px;border:1px solid var(--border,#ddd)}.resume-import-review{padding:16px 0}.resume-import-review p{max-width:75ch;line-height:1.8}
+
+/* Shared navigation and form announcements remain available on every route. */
+.community-sr {position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;}

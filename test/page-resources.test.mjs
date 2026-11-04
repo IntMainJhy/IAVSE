@@ -32,6 +32,24 @@ test('SSR uses the same owner/reviewer permissions and local-community gate as H
  const publicHost=await pageResources(req(token,'https://public.example'),['community'],{});assert.equal(publicHost.resources['/api/community/config'].data.mode,'closed');assert.ok(!publicHost.resources['/api/community/posts']);
  assert.notEqual(admin.scope,guest.scope);
 });
+test('workspace subpages preload only their own data and keep unrelated private submissions out of the blog editor',async()=>{
+ const editor=await pageResources(req(token),['workspace','blog']);
+ assert.ok(editor.resources['/api/spaces/mine'].data.id);
+ assert.deepEqual(Object.keys(editor.resources).sort(),['/api/auth/me','/api/spaces/mine']);
+ assert.ok(!JSON.stringify(editor).includes('PRIVATE_DRAFT_IN_PAGE_SEED'));
+ for(const section of ['account','bookmarks','notifications']){
+  const seed=await pageResources(req(token),['workspace',section]);
+  assert.ok(!seed.resources['/api/community/workspace'],section+' does not preload the submission list');
+  assert.ok(!JSON.stringify(seed).includes('PRIVATE_DRAFT_IN_PAGE_SEED'));
+ }
+ const compose=await pageResources(req(token),['workspace','submissions','new']);
+ assert.ok(!compose.resources['/api/community/workspace']);
+ const edit=await pageResources(req(token),['workspace','submissions',draft.id]);
+ assert.ok(!edit.resources['/api/community/workspace']);
+ assert.equal(edit.resources['/api/community/submissions/'+draft.id].data.id,draft.id);
+ const list=await pageResources(req(token),['workspace','submissions']);
+ assert.equal(list.resources['/api/community/workspace'].data.posts.length,2);
+});
 test('preload keys match query ordering and empty controls without merging distinct duplicate parameters',()=>{
  assert.equal(resourceKey('/api/community/comments/id?focus=&page=1'),resourceKey('/api/community/comments/id?page=1'));
  assert.equal(resourceKey('/api/community/posts?page=1&category=开发资源'),resourceKey('/api/community/posts?category=开发资源&page=1'));

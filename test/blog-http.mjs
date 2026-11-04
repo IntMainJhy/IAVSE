@@ -35,7 +35,44 @@ try{
   return new Map(cards.map(card=>[card.link.attribs.href,text(card.node)]));
  }
  const login=await call('/api/auth/login',{username:'hosting_http',password:'hosting-http-password-2026'});assert.equal(login.status,200);const member=login.headers.get('set-cookie').split(';')[0];
+ // Route splitting must keep the final authored home geometry after older glass rules.
+ const homepage=await fetch(base+'/',{headers:{Cookie:'site-locale=zh'}}),homeNodes=elements(parseDocument(await homepage.text()));
+ const styles=homeNodes.filter(node=>node.name==='link'&&node.attribs.rel==='stylesheet').map(node=>node.attribs.href);
+ const homeCss=(await Promise.all(styles.map(async href=>{const response=await fetch(new URL(href,base));assert.equal(response.status,200);return response.text();}))).join('\n');
+ const finalTitle=homeCss.lastIndexOf('font-size:clamp(26px,2.25vw,32px)'),oldTitle=homeCss.lastIndexOf('font-size:clamp(46px,4.65vw,72px)');
+ assert.ok(finalTitle>=0&&finalTitle>oldTitle,'final 32px brand title must follow the old 72px rule in production CSS');
+ const finalOpening=homeCss.lastIndexOf('.v2-home .v2-hero-intro{position:relative;min-height:100svh;'),oldOpening=homeCss.lastIndexOf('.v2-home .v2-hero-intro{min-height:0;');
+ assert.ok(finalOpening>=0&&finalOpening>oldOpening,'full opening shot must follow the old condensed section geometry');
+ const initialScripts=homeNodes.filter(node=>node.name==='script'&&node.attribs.src).map(node=>node.attribs.src);
+ const initialCode=(await Promise.all(initialScripts.map(async src=>{const response=await fetch(new URL(src,base));assert.equal(response.status,200);return response.text();}))).join('\n');
+ assert.doesNotMatch(initialCode,/className:\s*["']bd-page-shell["']/,'the homepage must not preload the full public blog template implementation');
+
  const guestEntry=await gallery(),eligible=await json('/api/spaces/public');assert.deepEqual([...guestEntry.keys()].sort(),eligible.map(space=>'/blog/'+encodeURIComponent(space.handle)).sort(),'Every discoverable public space appears in the semantic directory');
+ // Gallery documents must contain their complete theme in the initial visible DOM:
+ // themed iframe sandboxes deliberately disallow scripts, including streaming reveal scripts.
+ const {blogShowcases}=await import('../src/lib/blog-showcase.mjs');
+ for(const locale of ['en','zh','ja'])for(const {handle} of blogShowcases){
+  if(locale!=='en'&&handle!=='lin-studio')continue;
+  const response=await fetch(base+'/blogs/showcase/'+handle+'?embed=gallery',{headers:{Cookie:'site-locale='+locale}});
+  assert.equal(response.status,200);const html=await response.text(),nodes=elements(parseDocument(html)),embed=nodes.find(node=>hasClass(node,'blog-gallery-embed'));
+  assert.ok(embed,'preview has its own minimal shell');
+  assert.ok(elements(embed).some(node=>hasClass(node,'bd-page-shell')),'real template is visible without a streaming reveal');
+  assert.ok(!elements(embed).some(node=>Object.hasOwn(node.attribs||{},'hidden')),'theme cannot sit in a hidden Suspense segment');
+  assert.ok(!elements(embed).some(node=>node.name==='p'&&node.attribs.role==='status'),'no Lazy loading placeholder in the static document');
+  assert.equal(response.headers.get('x-frame-options'),'SAMEORIGIN');
+  assert.equal(nodes.find(node=>node.name==='html').attribs.lang,locale==='zh'?'zh-CN':locale);
+ }
+ for(const space of eligible.filter(item=>item.mode==='theme').slice(0,2)){
+  const path='/blog/'+encodeURIComponent(space.handle),legacy=await fetch(base+path+'?embed=gallery',{redirect:'manual'});
+  assert.equal(legacy.status,307);assert.equal(legacy.headers.get('location'),path+'/preview');
+  const response=await fetch(base+path+'/preview',{headers:{Cookie:'site-locale=zh'}});assert.equal(response.status,200);
+  assert.equal(response.headers.get('x-frame-options'),'SAMEORIGIN');assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
+  const nodes=elements(parseDocument(await response.text())),embed=nodes.find(node=>hasClass(node,'blog-gallery-embed'));
+  assert.ok(embed);assert.ok(elements(embed).some(node=>hasClass(node,'bd-page-shell')||hasClass(node,'anx-portfolio')||hasClass(node,'personal-homepage')),'published theme is visible without a Lazy reveal');
+  assert.ok(!elements(embed).some(node=>Object.hasOwn(node.attribs||{},'hidden')));
+  assert.equal((await fetch(base+path+'/preview/extra?embed=gallery')).status,404);
+ }
+ assert.equal((await fetch(base+'/blog/missing-preview-owner/preview')).status,404);
  const newMemberEntry=await gallery(member);assert.deepEqual([...newMemberEntry.keys()].sort(),[...guestEntry.keys()].sort(),'Signing in cannot substitute a private or personal entry for the public directory');
  const html=Buffer.from('<!doctype html><html><head><meta charset="utf-8"><title>Independent homepage</title></head><body><h1>Independent homepage</h1><script>document.body.dataset.interactive="yes";</script></body></html>');
  const task=await json('/api/spaces/uploads',{name:'homepage.html',size:html.length,fingerprint:D.hash(html)},member);
@@ -44,6 +81,8 @@ try{
  assert.equal((await fetch(base+preview.src)).status,200);assert.equal((await fetch(base+'/site-files/'+bundle.id+'/public/index.html')).status,404);
  let mine=await json('/api/spaces/mine',undefined,member);mine=await json('/api/spaces/save',{...mine,layout:{...mine.layout,blog:{mode:'static',theme:'journal',bundleId:bundle.id}},discoverable:true},member);
  const submitted=await json('/api/spaces/submit',{revision:mine.revision,accepted:true},member),review=submitted.reviews.find(x=>x.kind==='board'&&x.status==='approved');assert.ok(review);assert.equal(submitted.visibility,'public');
+ assert.equal((await json('/api/spaces/public')).find(item=>item.handle===mine.handle).mode,'static','authored static sites retain their script-capable preview mode');
+ assert.equal((await fetch(base+'/blog/'+mine.handle+'/preview')).status,404,'the static theme-only route cannot replace authored static-site sandboxes');
  assert.equal((await gallery(member)).has('/blog/'+mine.handle),true,'Explicitly published static sites appear in discovery');assert.equal((await call('/api/spaces/submit',{revision:mine.revision,accepted:true},member)).status,409,'A stale request cannot repeat publication');
  assert.equal((await call('/api/admin/spaces/blog-preview/'+bundle.id,{},member)).status,403);
  const staffPreview=await json('/api/admin/spaces/blog-preview/'+bundle.id,{},owner);assert.equal((await fetch(base+staffPreview.src)).status,200);

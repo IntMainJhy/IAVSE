@@ -9,7 +9,7 @@ import {ownsCover} from './covers.mjs';
 import {clearAvatar} from './avatars.mjs';
 import {randomUUID,randomBytes} from 'node:crypto';
 import {isIP} from 'node:net';
-import {db,now,hash,limited,transaction,passwordHash,passwordMatches,getConfig,setConfig,siteOwnerAccountId,isSiteOwnerAccount} from './db.mjs';
+import {db,now,hash,limited,transaction,passwordHash,passwordMatches,passwordHashAsync,passwordMatchesAsync,getConfig,setConfig,siteOwnerAccountId,isSiteOwnerAccount} from './db.mjs';
 import {currentUser,localRequest,serviceRequest,publishingQualified,login,sessionCookie,COOKIE,cookie} from './auth.mjs';
 import {requireValue,cleanText,HttpError} from './content.mjs';
 import {POLICIES,POLICY_VERSION,policyBundle} from './community-policies.mjs';
@@ -83,16 +83,35 @@ function withActivity(items,actor=''){
  return items.map(item=>({ ...item,likeCount:a.get(item.id)?.likeCount||0,liked:!!a.get(item.id)?.liked,bookmarked:!!a.get(item.id)?.bookmarked,repostCount:b.get(item.id)?.repostCount||0,reposted:!!b.get(item.id)?.reposted,commentCount:c.get(item.id)?.commentCount||0}));
 }
 function publicPage(rows,page,actor){const total=rows.length,pages=Math.max(1,Math.ceil(total/12)),current=Math.max(1,Math.min(pages,Math.floor(Number(page))||1));return{items:withActivity(rows.slice((current-1)*12,current*12),actor),total,pages,page:current}}
+const searchDatabases=new WeakSet();
 export function publicPosts({q='',category='',page=1,feed='',member:profileId=''}={},actor=''){
  if(feed==='following')requireValue(actor,'请登录后查看关注动态',401);
  if(profileId)requireValue(actorInfo(profileId),'成员主页暂不可用',404);
- const following=feed==='following'?new Set(db().prepare('SELECT following FROM community_follows WHERE follower=?').all(actor).map(r=>r.following)):null;
- const reposts=db().prepare('SELECT actor,post,created FROM community_reposts ORDER BY created DESC,actor').all();
- const latest=new Map();for(const r of reposts){if(latest.has(r.post)||following&&!following.has(r.actor)||profileId&&r.actor!==profileId)continue;const person=actorInfo(r.actor);if(person)latest.set(r.post,{...r,person});}
- let rows=db().prepare(`SELECT p.* FROM community_posts p JOIN community_users u ON u.id=p.author WHERE ${publicSelection} ORDER BY (SELECT decided FROM community_revisions WHERE id=p.public_revision) DESC,p.id DESC`).all();
- rows=rows.filter(row=>(!following||following.has(row.author)||latest.has(row.id))&&(!profileId||row.author===profileId||latest.has(row.id))).map(row=>{const r=latest.get(row.id),published=publicRow(row);return{...published,activityAt:r&&r.created>published.updated?r.created:published.updated,repostedBy:r?.person||null};});
- q=String(q).trim().toLowerCase();rows=rows.filter(r=>(!category||r.category===category)&&(!q||(r.title+' '+r.summary).toLowerCase().includes(q))).sort((a,b)=>b.activityAt.localeCompare(a.activityAt)||a.id.localeCompare(b.id));
- return publicPage(rows,page,actor);
+ const d=db(),repostConditions=[],conditions=[publicSelection],args=[siteOwnerAccountId()||''];
+ if(feed==='following'){repostConditions.push('EXISTS(SELECT 1 FROM community_follows f WHERE f.follower=? AND f.following=r.actor)');args.push(actor);}
+ if(profileId){repostConditions.push('r.actor=?');args.push(profileId);}
+ if(feed==='following'){conditions.push('(EXISTS(SELECT 1 FROM community_follows f WHERE f.follower=? AND f.following=p.author) OR rp.actor IS NOT NULL)');args.push(actor);}
+ if(profileId){conditions.push('(p.author=? OR rp.actor IS NOT NULL)');args.push(profileId);}
+ if(category){conditions.push("json_extract(v.data,'$.category')=?");args.push(category);}
+ q=String(q).trim().toLowerCase();
+ if(q){
+  // SQLite's built-in lower() only folds ASCII; keep the existing Unicode search semantics.
+  if(!searchDatabases.has(d)){d.function('community_contains',{deterministic:true},(title,summary,needle)=>(title+' '+summary).toLowerCase().includes(needle)?1:0);searchDatabases.add(d);}
+  conditions.push("community_contains(json_extract(v.data,'$.title'),json_extract(v.data,'$.summary'),?)=1");args.push(q);
+ }
+ // Select the latest eligible repost before pagination. Draft bodies never enter the feed query.
+ const selection=`WITH ranked_reposts AS (
+  SELECT r.actor,r.post,r.created,ROW_NUMBER() OVER(PARTITION BY r.post ORDER BY r.created DESC,r.actor) position
+  FROM community_reposts r LEFT JOIN community_users ru ON ru.id=r.actor
+  WHERE (r.actor='owner' OR ru.status='active' AND (ru.role='owner' OR ru.verification ${publicVerification} OR ru.id=?))${repostConditions.map(value=>' AND '+value).join('')}
+ ), feed AS (
+  SELECT p.id,p.author,p.public_revision,rp.actor repost_actor,CASE WHEN rp.created>v.decided THEN rp.created ELSE v.decided END activity_at
+  FROM community_posts p JOIN community_users u ON u.id=p.author JOIN community_revisions v ON v.id=p.public_revision
+  LEFT JOIN ranked_reposts rp ON rp.post=p.id AND rp.position=1 WHERE ${conditions.join(' AND ')}
+ ) `;
+ const total=d.prepare(selection+'SELECT COUNT(*) n FROM feed').get(...args).n,pages=Math.max(1,Math.ceil(total/12)),current=Math.max(1,Math.min(pages,Math.floor(Number(page))||1));
+ const rows=d.prepare(selection+'SELECT * FROM feed ORDER BY activity_at DESC,id ASC LIMIT 12 OFFSET ?').all(...args,(current-1)*12);
+ return{items:withActivity(rows.map(row=>({...publicRow(row),activityAt:row.activity_at,repostedBy:row.repost_actor?actorInfo(row.repost_actor):null})),actor),total,pages,page:current};
 }
 export function publicPost(id,actor=''){const row=getPost(id);requireValue(row?.visibility==='public'&&row.public_revision,'内容暂不可用',404);noFreeze(id);const author=db().prepare('SELECT role,status,verification FROM community_users WHERE id=?').get(row.author);requireValue(publishingQualified(author&&{...author,role:row.author==='owner'?'owner':author.role},policyRequest()),'内容暂不可用',404);return withActivity([publicRow(row)],actor)[0]}
 function bookmarks(user,page){const rows=db().prepare(`SELECT p.* FROM community_posts p JOIN community_users u ON u.id=p.author JOIN community_reactions r ON r.post=p.id AND r.actor=? AND r.kind='bookmark' WHERE ${publicSelection} ORDER BY r.created DESC,p.id DESC`).all(user.id).map(publicRow).filter(Boolean);const saved=db().prepare("SELECT COUNT(*) n FROM community_reactions WHERE actor=? AND kind='bookmark'").get(user.id).n;return{...publicPage(rows,page,user.id),unavailable:saved-rows.length}}
@@ -165,12 +184,18 @@ function reviewComment(user,id,input){return transaction(d=>{
  audit(user,'comment_'+input.action,id,{post:row.post,reason});notify(row.author,input.action==='approve'?'评论审核通过':input.action==='reject'?'评论未通过审核':'评论已移除',reason+'。如有异议可从工作台申诉。',input.action==='approve'?'/community/'+row.post+'#comment-'+id:'/report?kind=appeal&post='+row.post+'&comment='+id);return commentView(d.prepare('SELECT * FROM community_comments WHERE id=?').get(id),true);
 })}
 
-function register(req,input){unpaused();confirmRegistrationPolicy(input);requireValue(input.adult===true,'当前仅向成年人开放注册');requireValue(!limited('join:'+hash(clientIp(req)),10,3600000),'注册操作过于频繁，请稍后重试',429);
+function registrationAttempt(req,input){unpaused();confirmRegistrationPolicy(input);requireValue(input.adult===true,'当前仅向成年人开放注册');requireValue(!limited('join:'+hash(clientIp(req)),10,3600000),'注册操作过于频繁，请稍后重试',429);
  const email=normalizeEmail(input.email),username=cleanText(input.username||('member_'+randomBytes(8).toString('hex')),32).toLowerCase(),nickname=cleanText(input.nickname,40),password=input.password;
  requireValue(/^[a-z][a-z0-9_-]{2,31}$/.test(username),'账号需为 3–32 位字母、数字、下划线或短横线，并以字母开头');requireValue(nickname.length>=2&&!/[<>\r\n]/.test(nickname),'昵称需为 2–40 字，不支持 HTML');requireValue(typeof password==='string'&&password.length>=12&&password.length<=256,'密码需为 12–256 位');
- requireValue(username!==db().prepare('SELECT username FROM admins WHERE id=1').get().username.toLowerCase()&&!db().prepare('SELECT 1 FROM community_users WHERE username=?').get(username),'此账号不可使用',409);const id=randomUUID(),stored=passwordHash(password);
- transaction(d=>{const invite=input.invite?d.prepare('SELECT * FROM community_invites WHERE token=?').get(hash(String(input.invite))):null;if(input.invite)requireValue(invite&&!invite.used_by&&!invite.revoked&&invite.expires>Date.now(),'邀请码无效、已使用或已过期');requireValue(!emailClaim(email),'此邮箱不可用于注册',409);d.prepare("INSERT INTO community_users(id,username,password,nickname,created,updated,email,verification) VALUES(?,?,?,?,?,?,?,'accepted')").run(id,username,stored,nickname,stamp(),stamp(),email);if(invite)d.prepare('UPDATE community_invites SET used_by=? WHERE id=?').run(id,invite.id);acceptance(id,'registration');audit({id},'register',id,{mode:localRequest(req)?'local':'production',policyRead:['community','disclaimer'],emailVerified:false})});return{ok:true,message:'账号已创建，可以登录。个人主页和评论直接发布，文章提交后审核。'};
+ registrationNameAvailable(username);return{id:randomUUID(),email,username,nickname,password};
 }
+function registrationNameAvailable(username){requireValue(username!==db().prepare('SELECT username FROM admins WHERE id=1').get().username.toLowerCase()&&!db().prepare('SELECT 1 FROM community_users WHERE username=?').get(username),'此账号不可使用',409);}
+function completeRegistration(req,input,{id,email,username,nickname},stored){
+ transaction(d=>{unpaused();confirmRegistrationPolicy(input);registrationNameAvailable(username);const invite=input.invite?d.prepare('SELECT * FROM community_invites WHERE token=?').get(hash(String(input.invite))):null;if(input.invite)requireValue(invite&&!invite.used_by&&!invite.revoked&&invite.expires>Date.now(),'邀请码无效、已使用或已过期');requireValue(!emailClaim(email),'此邮箱不可用于注册',409);d.prepare("INSERT INTO community_users(id,username,password,nickname,created,updated,email,verification) VALUES(?,?,?,?,?,?,?,'accepted')").run(id,username,stored,nickname,stamp(),stamp(),email);if(invite)d.prepare('UPDATE community_invites SET used_by=? WHERE id=?').run(id,invite.id);acceptance(id,'registration');audit({id},'register',id,{mode:localRequest(req)?'local':'production',policyRead:['community','disclaimer'],emailVerified:false})});return{ok:true,message:'账号已创建，可以登录。个人主页和评论直接发布，文章提交后审核。'};
+}
+function register(req,input){const attempt=registrationAttempt(req,input);return completeRegistration(req,input,attempt,passwordHash(attempt.password));}
+async function registerAsync(req,input){const attempt=registrationAttempt(req,input),stored=await passwordHashAsync(attempt.password);requireValue(registrationEnabled(),'注册暂未开放',403);requireValue(serviceRequest(req),'社区服务暂未开放，请稍后再试',503);return completeRegistration(req,input,attempt,stored);}
+
 function savePost(user,input){return transaction(d=>{requireValue(!input.id||!d.prepare('SELECT 1 FROM catalog_entries WHERE community_post=?').get(input.id),'请在共享内容发布页修改原文',409);let row=input.id?own(user,input.id):null;if(row){checkVersion(row,input);requireValue(!row.pending_revision,'请先撤回待审版本，再继续编辑',409)}const value=data(input.data,false,user.id),id=row?.id||randomUUID();
  if(row)d.prepare('UPDATE community_posts SET draft=?,updated=?,version=version+1 WHERE id=?').run(JSON.stringify(value),stamp(),id);else{const count=d.prepare('SELECT COUNT(*) n FROM community_posts WHERE author=?').get(user.id).n;requireValue(count<500,'每个账号最多保留 500 条投稿');d.prepare('INSERT INTO community_posts(id,author,draft,created,updated) VALUES(?,?,?,?,?)').run(id,user.id,JSON.stringify(value),stamp(),stamp())}return decorate(getPost(id),true)})}
 function postAction(user,id,input){return transaction(d=>{const row=own(user,id);checkVersion(row,input);const action=input.action;
@@ -214,7 +239,31 @@ function handleCase(user,id,input){return transaction(d=>{const row=d.prepare('S
  const status=action==='resolve'?'resolved':action==='supplement'?'needs_info':'processing';const delivery=action==='delivery'?cleanText(input.delivery,4000):row.delivery;const due=cleanText(input.due||row.due,80);requireValue(!due||!Number.isNaN(Date.parse(due)),'请填写有效的跟进日期');d.prepare('UPDATE community_cases SET status=?,response=?,decision=?,handler=?,delivery=?,due=?,version=version+1,updated=? WHERE id=?').run(status,reason,action,user.id,delivery,due,stamp(),id);
  audit(user,'case_'+action,id,{post:row.post,reason,rule:cleanText(input.rule,120),due});notify(row.author,'投稿相关工单有进展',reason+'。如有异议可提交申诉。',post?.author===row.author?'/workspace/submissions/'+row.post:'/workspace/notifications');if(row.reporter&&row.reporter!==row.author)notify(row.reporter,'举报或申诉处理进展',reason,'/workspace/notifications');return casePublic(d.prepare('SELECT * FROM community_cases WHERE id=?').get(id))})}
 
-export function communityApi(req,p,input,url){requireValue(['id','post','comment','revision'].every(key=>input[key]==null||typeof input[key]==='string'),'内容标识格式无效');const method=req.method,parts=p[0]==='admin'?p.slice(2):p.slice(1),adminPath=p[0]==='admin';
+function accountChangeAttempt(user,input){
+ requireValue(user.id!=='owner','站长密码请在原后台网站设置中修改');requireValue(user.role!=='owner'||input.action==='password','不能注销唯一站长账号',403);requireValue(typeof input.current==='string'&&input.current.length<=256,'请填写当前密码');requireValue(!limited('password-change:'+user.id,10,900000),'尝试次数过多，请15分钟后重试',429);
+ const row=db().prepare('SELECT * FROM community_users WHERE id=?').get(user.id);requireValue(row,'请先登录',401);return{user,row};
+}
+function replacementAccountPassword(input){if(input.action==='password'){requireValue(typeof input.password==='string'&&input.password.length>=12&&input.password.length<=256,'新密码需要 12–256 位');return input.password;}requireValue(input.action==='close'&&input.confirm===true,'请明确确认注销账号');return randomBytes(32).toString('hex');}
+function completeAccountChange(req,input,{user,row},stored){return transaction(d=>{
+ const principal=member(req);requireValue(principal.id===user.id,'请先登录',401);requireValue(principal.role!=='owner'||input.action==='password','不能注销唯一站长账号',403);
+ const latest=d.prepare("SELECT password FROM community_users WHERE id=? AND status<>'closed'").get(user.id);requireValue(latest?.password===row.password,'账号凭据已发生变化，请重新登录后再试',409);
+ if(input.action==='password'){d.prepare('UPDATE community_users SET password=?,updated=? WHERE id=?').run(stored,stamp(),user.id);d.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);d.prepare('UPDATE connect_keys SET revoked=1 WHERE actor=?').run(user.id);audit(user,'password_changed',user.id,{});}
+ else{clearAvatar(user.id);d.prepare('DELETE FROM community_reactions WHERE actor=?').run(user.id);d.prepare('DELETE FROM community_reposts WHERE actor=?').run(user.id);d.prepare('DELETE FROM community_follows WHERE follower=? OR following=?').run(user.id,user.id);d.prepare("UPDATE community_comments SET status='withdrawn',version=version+1 WHERE author=?").run(user.id);d.prepare("UPDATE community_users SET status='closed',username=?,nickname='已注销成员',email=NULL,email_verified_at=NULL,password=?,updated=? WHERE id=?").run('closed_'+randomUUID(),stored,stamp(),user.id);d.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);d.prepare('UPDATE connect_keys SET revoked=1 WHERE actor=?').run(user.id);d.prepare("UPDATE community_posts SET visibility='offline',pending_revision=NULL,version=version+1,updated=? WHERE author=?").run(stamp(),user.id);d.prepare("UPDATE community_revisions SET status='withdrawn',decided=? WHERE post IN (SELECT id FROM community_posts WHERE author=?) AND status IN ('pending','reviewing')").run(stamp(),user.id);d.prepare('UPDATE email_challenges SET consumed=1 WHERE actor=?').run(user.id);audit(user,'account_closed',user.id,{retention:'Account closure and required record retention; see privacy policy'});}
+ return{ok:true};
+});}
+function changeAccount(req,user,input){const attempt=accountChangeAttempt(user,input);requireValue(passwordMatches(input.current,attempt.row.password),'当前密码错误');return completeAccountChange(req,input,attempt,passwordHash(replacementAccountPassword(input)));}
+async function changeAccountAsync(req,user,input){const attempt=accountChangeAttempt(user,input);requireValue(await passwordMatchesAsync(input.current,attempt.row.password),'当前密码错误');const stored=await passwordHashAsync(replacementAccountPassword(input));return completeAccountChange(req,input,attempt,stored);}
+function communityInput(input){requireValue(['id','post','comment','revision'].every(key=>input[key]==null||typeof input[key]==='string'),'内容标识格式无效');}
+// HTTP adapters await password work; synchronous callers keep their existing API.
+export async function communityApiAsync(req,p,input,url){
+ if(p[0]==='community'&&req.method==='POST'&&['register','account'].includes(p[1])){
+  communityInput(input);requireValue(serviceRequest(req),'社区服务暂未开放，请稍后再试',503);
+  if(p[1]==='register'){requireValue(registrationEnabled(),'注册暂未开放',403);return registerAsync(req,input);}
+  return changeAccountAsync(req,member(req),input);
+ }
+ return communityApi(req,p,input,url);
+}
+export function communityApi(req,p,input,url){communityInput(input);const method=req.method,parts=p[0]==='admin'?p.slice(2):p.slice(1),adminPath=p[0]==='admin';
  if(!adminPath&&parts[0]==='config'&&method==='GET')return{mode:localRequest(req)?'local':serviceRequest(req)?'public':'closed',paused:getConfig('community').paused,moderation:moderationSettings(),taxonomy:getConfig('taxonomy'),policyVersion:policyBundle(req).version,policyHash:policyBundle(req).hash,policyStatus:policyBundle(req).status,policyReady:policyBundle(req).ready,registrationDocuments:Object.fromEntries(['community','disclaimer'].map(key=>[key,policyBundle(req).documents[key]]))};
  if(!adminPath&&parts[0]==='policies'&&method==='GET'){requireValue(POLICIES[parts[1]],'规则页面不存在',404);const bundle=policyBundle(req);return{...bundle.documents[parts[1]],status:bundle.status,version:bundle.version,hash:bundle.hash}}
  requireValue(serviceRequest(req),'社区服务暂未开放，请稍后再试',503);
@@ -246,7 +295,7 @@ export function communityApi(req,p,input,url){requireValue(['id','post','comment
    else d.prepare('UPDATE community_notifications SET read_at=? WHERE user_id=? AND read_at IS NULL').run(stamp(),user.id);
    return{ok:true};
   });
-  if(parts[0]==='account'&&method==='POST'){requireValue(user.id!=='owner','站长密码请在原后台网站设置中修改');requireValue(user.role!=='owner'||input.action==='password','不能注销唯一站长账号',403);requireValue(typeof input.current==='string'&&input.current.length<=256,'请填写当前密码');requireValue(!limited('password-change:'+user.id,10,900000),'尝试次数过多，请15分钟后重试',429);const row=db().prepare('SELECT * FROM community_users WHERE id=?').get(user.id);requireValue(passwordMatches(input.current,row.password),'当前密码错误');if(input.action==='password'){requireValue(typeof input.password==='string'&&input.password.length>=12&&input.password.length<=256,'新密码需要 12–256 位');transaction(d=>{d.prepare('UPDATE community_users SET password=?,updated=? WHERE id=?').run(passwordHash(input.password),stamp(),user.id);d.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);d.prepare('UPDATE connect_keys SET revoked=1 WHERE actor=?').run(user.id);audit(user,'password_changed',user.id,{})})}else{requireValue(input.action==='close'&&input.confirm===true,'请明确确认注销账号');transaction(d=>{clearAvatar(user.id);d.prepare('DELETE FROM community_reactions WHERE actor=?').run(user.id);d.prepare('DELETE FROM community_reposts WHERE actor=?').run(user.id);d.prepare('DELETE FROM community_follows WHERE follower=? OR following=?').run(user.id,user.id);d.prepare("UPDATE community_comments SET status='withdrawn',version=version+1 WHERE author=?").run(user.id);d.prepare("UPDATE community_users SET status='closed',username=?,nickname='已注销成员',email=NULL,email_verified_at=NULL,password=?,updated=? WHERE id=?").run('closed_'+randomUUID(),passwordHash(randomBytes(32).toString('hex')),stamp(),user.id);d.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);d.prepare('UPDATE connect_keys SET revoked=1 WHERE actor=?').run(user.id);d.prepare("UPDATE community_posts SET visibility='offline',pending_revision=NULL,version=version+1,updated=? WHERE author=?").run(stamp(),user.id);d.prepare("UPDATE community_revisions SET status='withdrawn',decided=? WHERE post IN (SELECT id FROM community_posts WHERE author=?) AND status IN ('pending','reviewing')").run(stamp(),user.id);d.prepare('UPDATE email_challenges SET consumed=1 WHERE actor=?').run(user.id);audit(user,'account_closed',user.id,{retention:'Account closure and required record retention; see privacy policy'})})}return{ok:true}}
+  if(parts[0]==='account'&&method==='POST')return changeAccount(req,user,input);
  }else{
   if(parts[0]==='comments'&&method==='GET'){
    const status=url.searchParams.get('status')||'pending';requireValue(['pending','approved','all'].includes(status),'评论范围无效');const where=status==='all'?'':'WHERE status=?',args=status==='all'?[]:[status],total=db().prepare('SELECT COUNT(*) n FROM community_comments '+where).get(...args).n,pages=Math.max(1,Math.ceil(total/50)),page=Math.max(1,Math.min(pages,Math.floor(Number(url.searchParams.get('page'))||1)));

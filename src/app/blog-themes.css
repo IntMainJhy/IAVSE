@@ -87,7 +87,7 @@ a.signature-entry:hover .signature-entry-arrow{transform:translateX(4px)}
 .homepage-theme-option[data-theme-option=folio] b{font-size:38px;line-height:1;color:#d9dade;letter-spacing:.04em}
 .homepage-theme-option[data-theme-option=folio] em{background:#d4d6db}
 .homepage-theme-option[data-theme-option=panorama] .homepage-theme-mini{background:#1a2835;color:#e2ebf3;position:relative;padding-top:36px}
-.homepage-theme-option[data-theme-option=panorama] .homepage-theme-mini:before{content:'';height:28px;position:absolute;inset:0 0 auto;background:url('/images/community/lake-walk.png') center 40%/cover}
+.homepage-theme-option[data-theme-option=panorama] .homepage-theme-mini:before{content:'';height:28px;position:absolute;inset:0 0 auto;background:url('/images/community/lake-walk-thumb.webp') center 40%/cover}
 .homepage-theme-option[data-theme-option=panorama] em{background:#6d8fa9}
 .homepage-hosting-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:24px 0;padding:0;list-style:none;counter-reset:hosting}
 .homepage-hosting-steps li{counter-increment:hosting;border-top:1px solid #ced5cf;padding-top:16px;min-width:0}

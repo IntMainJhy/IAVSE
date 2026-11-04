@@ -16,7 +16,6 @@
 .community-surface textarea:focus-visible {outline: 3px solid var(--organic-green); outline-offset: 4px;}
 .community-surface .field input:not([type=checkbox]),.community-surface .field select,.community-receipt input {width: 100%; min-height: 50px; border: 1px solid var(--organic-line); background: #fffdfa; color: #494237; padding: 12px 20px; border-radius: 999px 920px 980px 860px / 830px 960px 850px 970px;}
 .community-surface :where(input,textarea)::placeholder {color: #7c6c5f; opacity: 1;}
-.community-sr {position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;}
 .community-mode-note {color: #4e5c41; background: #e8ebdf; padding: 12px 20px; border-radius: 18px 24px 19px 23px; font-size: 13px; margin-bottom: 32px; width: fit-content; max-width: 100%;}
 .community-heading,.community-welcome {display: flex; align-items: center; justify-content: space-between; gap: 36px; margin: 22px 0 40px;}
 .community-heading h1 {margin: 12px 0 14px;}

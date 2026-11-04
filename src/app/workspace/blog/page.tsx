@@ -1,4 +1,5 @@
-import Page,{generateMetadata as metadataForPage} from '../../[[...path]]/page';
+import '@/app/route-styles/workspace.css';
+import Page,{generateMetadata as metadataForPage} from '@/components/AppPage';
 import '@/app/blog-editor.css';
 import '@xyflow/react/dist/style.css';
 import '@/app/blog-canvas.css';

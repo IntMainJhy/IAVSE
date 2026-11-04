@@ -1,4 +1,5 @@
-import Page,{generateMetadata as metadataForPage} from '../[[...path]]/page';
+import '@/app/route-styles/admin.css';
+import Page,{generateMetadata as metadataForPage} from '@/components/AppPage';
 import '@/app/admin-organic.css';
 import '@/app/iavse-admin.css';
 import '@/components/AdminOverview.module.css';

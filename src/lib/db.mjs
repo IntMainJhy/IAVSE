@@ -3,14 +3,20 @@ import {spacesSchema} from './spaces-schema.mjs';
 import {DatabaseSync} from 'node:sqlite';
 import {mkdirSync,chmodSync,existsSync,writeFileSync,readdirSync,renameSync,unlinkSync} from 'node:fs';
 import path from 'node:path';
-import {randomBytes,scryptSync,createHash,timingSafeEqual} from 'node:crypto';
+import {randomBytes,scrypt,scryptSync,createHash,timingSafeEqual} from 'node:crypto';
+import {promisify} from 'node:util';
 
 export const DATA=path.resolve(process.env.APP_DATA_DIR||path.join(process.cwd(),'..','.site-v1-data'));
 export const FILES=path.join(DATA,'files'),PARTIAL=path.join(DATA,'partial');
 export const now=()=>new Date().toISOString();
 export const hash=s=>createHash('sha256').update(s).digest('hex');
-export function passwordHash(password){const salt=randomBytes(16).toString('hex');return`v2:${salt}:${scryptSync(password,salt,64,{N:32768,r:8,p:3,maxmem:64*1024*1024}).toString('hex')}`}
-export function passwordMatches(password,stored){try{const parts=stored.split(':'),v2=parts[0]==='v2';const [salt,value]=v2?parts.slice(1):parts;if(!/^[a-f0-9]{32}$/.test(salt)||!/^[a-f0-9]{128}$/.test(value))return false;const expected=Buffer.from(value,'hex'),actual=scryptSync(password,salt,64,v2?{N:32768,r:8,p:3,maxmem:64*1024*1024}:{});return timingSafeEqual(expected,actual)}catch{return false}}
+const passwordOptions={N:32768,r:8,p:3,maxmem:64*1024*1024},derivePassword=promisify(scrypt);
+function passwordParts(stored){const parts=stored.split(':'),v2=parts[0]==='v2',[salt,value]=v2?parts.slice(1):parts;if(!/^[a-f0-9]{32}$/.test(salt)||!/^[a-f0-9]{128}$/.test(value))return null;return{salt,expected:Buffer.from(value,'hex'),options:v2?passwordOptions:{}};}
+// Synchronous helpers remain available to setup scripts and existing callers.
+export function passwordHash(password){const salt=randomBytes(16).toString('hex');return`v2:${salt}:${scryptSync(password,salt,64,passwordOptions).toString('hex')}`}
+export function passwordMatches(password,stored){try{const parts=passwordParts(stored);return!!parts&&timingSafeEqual(parts.expected,scryptSync(password,parts.salt,64,parts.options))}catch{return false}}
+export async function passwordHashAsync(password){const salt=randomBytes(16).toString('hex');return`v2:${salt}:${(await derivePassword(password,salt,64,passwordOptions)).toString('hex')}`}
+export async function passwordMatchesAsync(password,stored){try{const parts=passwordParts(stored);return!!parts&&timingSafeEqual(parts.expected,await derivePassword(password,parts.salt,64,parts.options))}catch{return false}}
 export function db(){
  if(globalThis.__personalSiteDb?.path===DATA)return globalThis.__personalSiteDb.db;
  for(const dir of [DATA,FILES,PARTIAL]){mkdirSync(dir,{recursive:true,mode:0o700});chmodSync(dir,0o700)}

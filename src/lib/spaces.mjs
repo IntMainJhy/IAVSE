@@ -49,7 +49,7 @@ export function publicSpaces(req){
   // A directory needs covers and counts, never article bodies or private drafts.
   const documents=db().prepare("SELECT json_extract(sc.published,'$.coverId') coverId FROM space_content sc WHERE sc.space=? AND sc.visibility='public' AND sc.published IS NOT NULL AND NOT EXISTS(SELECT 1 FROM space_case_targets t JOIN community_cases c ON c.id=t.case_id WHERE t.space=sc.space AND c.frozen=1 AND (t.content IS NULL OR t.content=sc.id)) ORDER BY sc.updated DESC").all(row.id);
   const all=row.legacy?[...kinds.flatMap(type=>publicContent(type)),...documents]:documents;
-  items.push({handle:row.handle,url:pathFor(row),siteOwner:!!siteOwner&&siteOwner===row.owner,profile:{...Object.fromEntries(['name','alias','intro','avatarId'].map(key=>[key,profile[key]])),translations:Object.fromEntries(Object.entries(profile.translations||{}).map(([locale,value])=>[locale,{name:value.name,alias:value.alias,intro:value.intro}]))},coverId:layout.coverId||all.find(item=>item.coverId)?.coverId||'',theme:layout.theme,count:all.length});
+  items.push({handle:row.handle,url:pathFor(row),siteOwner:!!siteOwner&&siteOwner===row.owner,profile:{...Object.fromEntries(['name','alias','intro','avatarId'].map(key=>[key,profile[key]])),translations:Object.fromEntries(Object.entries(profile.translations||{}).map(([locale,value])=>[locale,{name:value.name,alias:value.alias,intro:value.intro}]))},coverId:layout.coverId||all.find(item=>item.coverId)?.coverId||'',theme:layout.theme,mode:row.legacy?'theme':layout.blog?.mode==='static'?'static':'theme',count:all.length});
   if(items.length===60)break;
  }
  return items;

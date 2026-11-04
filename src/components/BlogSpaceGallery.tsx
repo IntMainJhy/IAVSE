@@ -8,7 +8,7 @@ import {FeedAvatar} from './FeedAvatar';
 import {observeGalleryFrame} from '@/lib/gallery-frame-ready';
 import {gallerySpacePose,gallerySceneMetrics,galleryCameraPose,galleryViewDepth,galleryDepthExtent,galleryLoadOrder,galleryLimit} from '@/lib/blog-gallery-space.mjs';
 
-export type GallerySpace={handle:string;name:string;intro:string;avatarId:string;href:string;avatarSrc?:string;showcase?:boolean;role?:string;template?:string};
+export type GallerySpace={handle:string;name:string;intro:string;avatarId:string;href:string;avatarSrc?:string;showcase?:boolean;role?:string;template?:string;mode?:'theme'|'static'};
 type Labels={open:string;preview:string;browse:string;directory:string;previous:string;next:string;select:string;close:string;overview:string;reset:string};
 function GalleryAvatar({space}:{space:GallerySpace}){return space.avatarSrc?<img className="gallery-avatar" src={space.avatarSrc} alt="" width={36} height={36}/>:<FeedAvatar name={space.name} avatarId={space.avatarId}/>;}
 
@@ -25,7 +25,8 @@ function GalleryPanel({space,labels,selected,mounted,index,onSelect,onReady}:{sp
     <span className="gallery-card-back" aria-hidden="true"/><span className="gallery-card-edge edge-left" aria-hidden="true"/><span className="gallery-card-edge edge-right" aria-hidden="true"/><span className="gallery-card-edge edge-top" aria-hidden="true"/><span className="gallery-card-edge edge-bottom" aria-hidden="true"/>
     <div className="blog-gallery-viewport" data-loaded={loaded}>
      <div className="blog-gallery-placeholder" aria-hidden="true"><span>@{space.handle}</span><GalleryAvatar space={space}/><strong>{space.name}</strong><p>{space.intro}</p></div>
-     {mounted&&<iframe src={space.href+'?embed=gallery'} title={labels.preview+' · '+space.name} tabIndex={-1} aria-hidden="true" loading="eager" referrerPolicy="same-origin" sandbox="allow-scripts allow-same-origin" onLoad={event=>{readiness.current?.();readiness.current=observeGalleryFrame(event.currentTarget,()=>{setLoaded(true);ready();});}}/>}
+     {/* The stage owns interaction; themed documents stay server-rendered and script-free. */}
+     {mounted&&<iframe src={space.showcase||space.mode==='static'?space.href+'?embed=gallery':space.href+'/preview'} title={labels.preview+' · '+space.name} tabIndex={-1} aria-hidden="true" loading="eager" referrerPolicy="same-origin" sandbox={space.mode==='static'?'allow-scripts allow-same-origin':'allow-same-origin'} onLoad={event=>{readiness.current?.();readiness.current=observeGalleryFrame(event.currentTarget,()=>{setLoaded(true);ready();});}}/>}
     </div>
     <button className="blog-gallery-select" type="button" onClick={onSelect} aria-label={labels.select+' · '+space.name} aria-pressed={selected} data-gallery-trigger={space.handle}/>
    </div>

@@ -8,7 +8,7 @@ export async function pageResources(req,path=[],query={}){
  const resources={};
  async function load(path){const key=resourceKey(path);if(resources[key])return resources[key];const response=await handle(new Request(new URL(path,req.url),{headers:req.headers})),data=await response.json();return resources[key]={data:response.ok?data:null,error:response.ok?'':data.error,status:response.status};}
  const auth=await load('/api/auth/me'),user=auth.data?.user;
- const section=path[0]||'',params=new URLSearchParams(Object.entries(query).map(([key,value])=>[key,String(value||'')]));
+ const section=path[0]||'',blogEditor=section==='workspace'&&path[1]==='blog'&&path.length===2,params=new URLSearchParams(Object.entries(query).map(([key,value])=>[key,String(value||'')]));
  if(user&&section==='workspace'&&['blog','studio','profile','library','files','insights','preview'].includes(path[1]))await load('/api/spaces/mine');
  const queue=[];
  if(user&&section==='workspace'&&path[1]==='files')queue.push(load('/api/spaces/files?page=1'));
@@ -27,7 +27,7 @@ export async function pageResources(req,path=[],query={}){
    if(current==='files'){add('/api/admin/files?page=1');add('/api/admin/uploads');}
    for(const id of (current==='profile'?[boot.data.profile.avatarId]:current==='settings'?[boot.data.site.shareImageId,boot.data.site.resumeId]:[]).filter(Boolean))add('/api/admin/files/'+id);
   }
- }else if(['community','workspace','login','join','report','legal'].includes(section)||section==='admin'){
+ }else if(!blogEditor&&(['community','workspace','login','join','report','legal'].includes(section)||section==='admin')){
   const config=await load('/api/community/config');
   if(section==='legal')add('/api/community/policies/'+encodeURIComponent(path[1]||'terms'));
   else if(['local','public'].includes(config.data?.mode)){
@@ -49,7 +49,7 @@ export async function pageResources(req,path=[],query={}){
     }else if(path[1]){const id=encodeURIComponent(path[1]);add('/api/community/posts/'+id);add('/api/community/comments/'+id+'?page=1');}
     else add('/api/community/posts?'+params);
    }else if(section==='workspace'&&user){
-    add('/api/community/workspace');
+    if(!['account','bookmarks','notifications'].includes(path[1])&&!(path[1]==='submissions'&&path[2]))add('/api/community/workspace');
     if(path[1]==='notifications')add('/api/community/notifications?status=all&page=1');
     else if(path[1]==='bookmarks')add('/api/community/bookmarks?page=1');
     else if(path[1]==='submissions'&&path[2]&&path[2]!=='new')add('/api/community/submissions/'+encodeURIComponent(path[2]));

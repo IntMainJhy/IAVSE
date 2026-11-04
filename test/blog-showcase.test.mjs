@@ -41,15 +41,17 @@ test('showcase embed renders the real BlogTheme without platform chrome or visit
  const jsx=(type,props)=>({type,props});
  vm.runInNewContext(compiled,{exports,require:name=>{
   if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};if(name==='next/link')return{default:'Link'};
+  if(name.endsWith('.css'))return{};
+  if(name.endsWith('/BlogTheme'))return{BlogTheme:'StaticBlogTheme'};
   if(name==='next/navigation')return{notFound:()=>{throw Error('Not found');}};
   if(name.includes('server-i18n'))return{serverI18n:async()=>({locale:'zh'})};
   if(name.includes('blog-showcase'))return{showcasePageData};
-  if(name.includes('RouteClients'))return{PublicBlogTheme:'PublicBlogTheme'};
+  if(name.includes('BlogThemeBoundary'))return{PublicBlogTheme:'PublicBlogTheme'};
   throw Error('Unexpected dependency '+name);
  }});
  const request=embed=>({params:Promise.resolve({handle:'lin-studio'}),searchParams:Promise.resolve(embed?{embed:'gallery'}:{})});
  const preview=await exports.default(request(true));assert.equal(preview.props.className,'blog-public-shell blog-gallery-embed');
- const theme=preview.props.children;assert.equal(theme.type,'PublicBlogTheme');assert.equal(theme.props.preview,true);assert.equal(theme.props.embedded,true);assert.equal(theme.props.data.layout.blog.design.appearance,'sketch');
+ const theme=preview.props.children;assert.equal(theme.type,'StaticBlogTheme');assert.equal(theme.props.staticPreview,true);assert.equal(theme.props.preview,true);assert.equal(theme.props.embedded,true);assert.equal(theme.props.data.layout.blog.design.appearance,'sketch');
  const full=await exports.default(request(false));assert.equal(full.props.className,'showcase-full-page');assert.equal(exports.metadata.robots.index,false);assert.equal(exports.metadata.robots.follow,false);
  await assert.rejects(()=>exports.default({params:Promise.resolve({handle:'missing'}),searchParams:Promise.resolve({embed:'gallery'})}),/Not found/);
 });

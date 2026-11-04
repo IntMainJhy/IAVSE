@@ -1,6 +1,6 @@
 import {appSurface} from './app-access.mjs';
 import {randomBytes} from 'node:crypto';
-import {db,hash,limited,passwordMatches,passwordHash,DATA,getConfig,transaction,isSiteOwnerAccount,ownerAccountConfigured,ownerAccountId} from './db.mjs';
+import {db,hash,limited,passwordMatches,passwordHash,passwordMatchesAsync,passwordHashAsync,DATA,getConfig,transaction,isSiteOwnerAccount,ownerAccountConfigured,ownerAccountId} from './db.mjs';
 import {requireValue} from './content.mjs';
 import {unlinkSync,existsSync} from 'node:fs';
 import path from 'node:path';
@@ -36,8 +36,10 @@ export function currentUser(req){
 export function session(req){return currentUser(req)?.role==='owner'}
 export function admin(req){requireValue(session(req),'请先登录管理后台',401)}
 export function origin(req){const allowed=new URL(process.env.PUBLIC_URL||req.url).origin;requireValue(req.headers.get('origin')===allowed,'请求来源无效',403)}
-const dummyPassword=passwordHash(randomBytes(32).toString('hex'));
-export function login(req,{username,email,password,authentication}){
+// A random, correctly formatted verifier keeps unknown-account checks at the
+// same scrypt cost without doing a blocking derivation when the module loads.
+const dummyPassword=`v2:${randomBytes(16).toString('hex')}:${randomBytes(64).toString('hex')}`;
+function loginAttempt(req,{username,email,password,authentication}){
  requireValue(authentication===undefined||authentication==='password','登录方式无效');
  const raw=email||username;
  requireValue(typeof raw==='string'&&typeof password==='string'&&password.length<=256,'账号或密码错误',401);
@@ -48,12 +50,28 @@ export function login(req,{username,email,password,authentication}){
  const key=hash(row?(row===owner?'owner':row.id):identifier),ip=hash(clientIp(req));
  const accountBlocked=limited('login-account:'+key,10,900000),ipBlocked=limited('login-ip:'+ip,50,900000);
  requireValue(!accountBlocked&&!ipBlocked,'尝试次数过多，请15分钟后重试',429);
- const valid=passwordMatches(password,row?.password||dummyPassword);requireValue(row&&valid,'账号或密码错误',401);
+ return{row,owner,password};
+}
+function completeLogin(req,row,isOwner){
+ const configured=ownerAccountConfigured();
  const selected=configured&&row.id===ownerAccountId();
- requireValue(appSurface()!=='admin'||(configured?selected:row===owner||row.role==='reviewer'&&row.status==='active'),'此账号没有管理权限',403);
- requireValue(appSurface()!=='platform'||row!==owner&&(configured||row.role==='member'),'请使用独立管理网站登录',403);
- requireValue(row===owner||serviceRequest(req),'当前入口尚未开放账号服务',503);
- return createSession(row===owner?null:row.id);
+ requireValue(appSurface()!=='admin'||(configured?selected:isOwner||row.role==='reviewer'&&row.status==='active'),'此账号没有管理权限',403);
+ requireValue(appSurface()!=='platform'||!isOwner&&(configured||row.role==='member'),'请使用独立管理网站登录',403);
+ requireValue(isOwner||serviceRequest(req),'当前入口尚未开放账号服务',503);
+ return createSession(isOwner?null:row.id);
+}
+export function login(req,input){
+ const {row,owner,password}=loginAttempt(req,input),valid=passwordMatches(password,row?.password||dummyPassword);
+ requireValue(row&&valid,'账号或密码错误',401);return completeLogin(req,row,row===owner);
+}
+export async function loginAsync(req,input){
+ const {row,owner,password}=loginAttempt(req,input),valid=await passwordMatchesAsync(password,row?.password||dummyPassword);
+ requireValue(row&&valid,'账号或密码错误',401);
+ const isOwner=row===owner,latest=db().prepare(isOwner?'SELECT * FROM admins WHERE id=1':"SELECT * FROM community_users WHERE id=? AND status<>'closed'").get(...(isOwner?[]:[row.id]));
+ // A concurrent reset/closure must not resurrect a session for old credentials.
+ requireValue(latest&&latest.password===row.password,'账号或密码错误',401);
+ requireValue(!isOwner||!ownerAccountConfigured(),'账号或密码错误',401);
+ return completeLogin(req,latest,isOwner);
 }
 function createSession(userId){
  const token=randomBytes(32).toString('base64url');
@@ -65,13 +83,24 @@ function createSession(userId){
  });return token;
 }
 export function sessionCookie(token,expires=false){const secure=process.env.PUBLIC_URL?.startsWith('https://')||process.env.COOKIE_SECURE==='true'||(process.env.COOKIE_SECURE!=='false'&&process.env.NODE_ENV==='production');return `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${expires?0:604800}${secure?'; Secure':''}`}
-export function changePassword(input,req){
+function passwordChangeAttempt(input,req){
  requireValue(typeof input.password==='string'&&input.password.length>=12&&input.password.length<=256,'新密码需要12–256位');requireValue(typeof input.current==='string'&&input.current.length<=256,'当前密码错误',400);
- const user=ownerAccountConfigured()?(req?currentUser(req):null):{id:'owner',role:'owner'};
+ const user=req?currentUser(req):ownerAccountConfigured()?null:{id:'owner',role:'owner'};
  requireValue(user?.role==='owner','没有此项管理权限',403);
  requireValue(!limited('password-change:'+user.id,10,900000),'尝试次数过多，请15分钟后重试',429);
  const personal=user.id!=='owner',row=db().prepare(personal?'SELECT * FROM community_users WHERE id=?':'SELECT * FROM admins WHERE id=1').get(...(personal?[user.id]:[]));
- requireValue(passwordMatches(input.current,row.password),'当前密码错误',400);const stored=passwordHash(input.password);
- transaction(d=>{if(personal)d.prepare('UPDATE community_users SET password=?,updated=? WHERE id=?').run(stored,new Date().toISOString(),user.id);else d.prepare('UPDATE admins SET password=? WHERE id=1').run(stored);d.prepare('DELETE FROM sessions WHERE user_id IS ?').run(personal?user.id:null);d.prepare('UPDATE connect_keys SET revoked=1 WHERE actor=?').run(user.id);d.prepare('UPDATE email_challenges SET consumed=1 WHERE actor=?').run(user.id)});
+ requireValue(row,'请先登录',401);return{user,personal,row};
+}
+function completePasswordChange({user,personal,row},stored,req){
+ transaction(d=>{
+  const principal=req?currentUser(req):ownerAccountConfigured()?null:{id:'owner',role:'owner'};
+  requireValue(principal?.id===user.id&&principal.role==='owner','没有此项管理权限',403);
+  const latest=d.prepare(personal?'SELECT password FROM community_users WHERE id=?':'SELECT password FROM admins WHERE id=1').get(...(personal?[user.id]:[]));
+  requireValue(latest?.password===row.password,'账号凭据已发生变化，请重新登录后再试',409);
+  if(personal)d.prepare('UPDATE community_users SET password=?,updated=? WHERE id=?').run(stored,new Date().toISOString(),user.id);else d.prepare('UPDATE admins SET password=? WHERE id=1').run(stored);
+  d.prepare('DELETE FROM sessions WHERE user_id IS ?').run(personal?user.id:null);d.prepare('UPDATE connect_keys SET revoked=1 WHERE actor=?').run(user.id);d.prepare('UPDATE email_challenges SET consumed=1 WHERE actor=?').run(user.id);
+ });
  const initial=path.join(DATA,'initial-admin.txt');if(!personal&&existsSync(initial))unlinkSync(initial);
 }
+export function changePassword(input,req){const attempt=passwordChangeAttempt(input,req);requireValue(passwordMatches(input.current,attempt.row.password),'当前密码错误',400);completePasswordChange(attempt,passwordHash(input.password),req);}
+export async function changePasswordAsync(input,req){const attempt=passwordChangeAttempt(input,req);requireValue(await passwordMatchesAsync(input.current,attempt.row.password),'当前密码错误',400);const stored=await passwordHashAsync(input.password);completePasswordChange(attempt,stored,req);}
