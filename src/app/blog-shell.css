@@ -1,0 +1,40 @@
+/* Authored pages own their canvas. This one full-width surface owns platform chrome. */
+html[data-ui][data-color-mode] .blog-public-shell:not(.blog-gallery-embed){
+ --blog-chrome-paper:#fff;--blog-chrome-ink:#27384b;--blog-chrome-muted:#617083;--blog-chrome-line:#e3e7ed;
+ position:relative;isolation:isolate;min-height:100vh;background:var(--blog-chrome-paper);
+}
+html[data-ui][data-color-mode=dark] .blog-public-shell:not(.blog-gallery-embed){--blog-chrome-paper:#171b1e;--blog-chrome-ink:#e5eaf0;--blog-chrome-muted:#a9b4c1;--blog-chrome-line:#343c46}
+.blog-public-shell>:not(.site-glass-atmosphere):not(.blog-platform-bar){position:relative}
+html[data-ui][data-color-mode] .blog-public-shell>.blog-platform-bar{
+ position:sticky;top:0;z-index:80;width:100%;max-width:none;margin:0;padding:0;overflow:visible;
+ background:var(--blog-chrome-paper);color:var(--blog-chrome-ink);border:0;border-bottom:1px solid var(--blog-chrome-line);
+}
+.blog-platform-bar-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:78px;max-width:1440px;margin:auto;padding:18px 4%;overflow:visible}
+.blog-platform-logo{display:flex;align-items:center;gap:12px;font-size:22px;white-space:nowrap;flex-shrink:0;min-width:max-content}
+html[data-ui][data-color-mode] .blog-platform-logo .site-brand-copy>span{display:inline;margin:0 0 0 20px;font-size:12px;line-height:1.4;font-weight:400;letter-spacing:0;color:var(--blog-chrome-muted)}
+.blog-platform-actions{display:flex;align-items:center;justify-content:flex-end;gap:24px;font-size:13px;flex-shrink:0}
+.blog-platform-actions>a{display:inline-flex;align-items:center;min-height:44px;color:var(--blog-chrome-ink)}
+html[data-ui][data-color-mode] .blog-platform-actions .blog-share-trigger{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid var(--blog-chrome-line);border-radius:10px;background:transparent;color:var(--blog-chrome-ink);font-size:13px;font-weight:500}
+html[data-ui][data-color-mode] .blog-platform-actions .blog-share-trigger:hover{background:color-mix(in srgb,var(--blog-chrome-ink) 4%,var(--blog-chrome-paper));border-color:var(--blog-chrome-muted)}
+html[data-ui][data-color-mode] .blog-platform-bar .space-share-popover{background:var(--blog-chrome-paper);color:var(--blog-chrome-ink);z-index:90}
+html[data-ui][data-color-mode] .blog-platform-bar :is(a,button,summary,input):focus-visible{outline:2px solid var(--site-focus,#245f9a);outline-offset:4px}
+html[data-ui][data-color-mode] .blog-public-shell>.blog-platform-footer{position:relative;max-width:1280px;margin:auto;padding:40px 32px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--blog-chrome-line);background:var(--blog-chrome-paper);color:var(--blog-chrome-muted);font-size:12px}
+@media(max-width:900px){html[data-ui][data-color-mode] .blog-platform-logo .site-brand-copy>span{display:none}.blog-platform-actions{gap:14px}}
+@media(max-width:640px){
+ .blog-platform-bar-inner{min-height:70px;padding:12px 20px;gap:12px}
+ .blog-platform-logo{font-size:18px;gap:8px}
+ .blog-platform-bar .site-brand-mark{width:28px;height:28px;flex-basis:28px}
+ .blog-platform-actions{flex:1 1 auto;min-width:0;gap:8px;font-size:12px}
+ .blog-platform-actions>a{flex:0 1 auto;min-width:0;white-space:normal;line-height:1.3;text-align:right}
+ .blog-platform-actions>.space-share-menu{flex-shrink:0}
+ html[data-ui][data-color-mode] .blog-platform-actions .blog-share-trigger{padding:6px 8px;gap:6px;font-size:12px}
+ html[data-ui][data-color-mode] .blog-platform-actions .blog-share-trigger>.icon{width:16px;height:16px}
+ html[data-ui][data-color-mode] .blog-public-shell>.blog-platform-footer{padding:28px 20px;gap:16px}
+}
+/* Narrow phones give both actions their own row rather than compressing the wordmark. */
+@media(max-width:380px){
+ .blog-platform-bar-inner{flex-wrap:wrap;padding-inline:16px;gap:4px 12px}
+ .blog-platform-actions{flex:0 0 100%;justify-content:space-between;gap:12px}
+ .blog-platform-actions>a{text-align:left}
+}
+@media print{.blog-public-shell>.blog-platform-bar{position:static}}

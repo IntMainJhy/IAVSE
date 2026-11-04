@@ -1,6 +1,6 @@
 /* Local fields sit above content without intercepting native pointers or clicks. */
 .iavse-quantum-pointer,.iavse-quantum-wave{position:fixed;z-index:1100;left:0;top:0;display:block;pointer-events:none;contain:strict}
 .iavse-quantum-pointer{width:240px;height:240px}
-.iavse-quantum-wave{width:640px;height:640px}
+.iavse-quantum-wave{width:640px;height:640px;opacity:0;transform-origin:center;background:radial-gradient(circle,currentColor 1.3px,transparent 1.7px) center/18px 18px;mask-image:radial-gradient(circle,transparent 210px,#000 250px,transparent 285px)}
 @media(prefers-reduced-motion:reduce){.iavse-quantum-pointer{display:none}}
 @media print{.iavse-quantum-pointer,.iavse-quantum-wave{display:none!important}}

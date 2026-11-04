@@ -44,6 +44,27 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  return{canvas,surface,host,panel,sections,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,reveals,journeys,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
+const navigation=(s,pending)=>s.window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));
+
+test('pending homepage navigation retains its last frame and suppresses every rendering wakeup until released',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();s.step(16);const before=s.draws.length,time=s.draws.at(-1)[5],sizes=s.sizes.length,bounds=s.canvas.rectReads;
+ navigation(s,true);assert.equal(s.frames.size,0);assert.equal(s.canvas.style.opacity,'1');
+ s.move();s.host.top=-1800;s.window.dispatchEvent(new Event('scroll'));s.resize.fn();s.root.dataset.colorMode='dark';s.theme.fn();s.window.dispatchEvent(new Event('afterprint'));s.intersection.set(true);s.document.dispatchEvent(new Event('visibilitychange'));s.step(10000);
+ assert.equal(s.draws.length,before);assert.equal(s.sizes.length,sizes);assert.equal(s.canvas.rectReads,bounds,'pending resize does not read or reallocate the old render target');assert.equal(s.frames.size,0);
+ navigation(s,false);assert.equal(s.draws.length,before,'release does not synchronously draw during the route commit');assert.equal(s.frames.size,1);s.step(16);
+ assert.equal(s.draws.length,before+1);assert.ok(s.canvas.rectReads>bounds);assert.equal(s.draws.at(-1)[2],true);assert.equal(s.draws.at(-1)[3],2);assert.ok(s.draws.at(-1)[5]-time<.02,'navigation wait time is not replayed');
+ navigation(s,true);s.cleanup();const count=s.draws.length;navigation(s,false);s.step();assert.equal(s.draws.length,count);assert.equal(s.releases,1);assert.equal(s.frames.size,0);assert.equal(s.window.listeners.size,0);
+});
+
+test('temporary navigation suspension preserves manual pause and reduced-motion preferences',async()=>{
+ const paused=mount({animated:true});paused.intersection.set(true);await flush();paused.step(16);paused.window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action:'paused',value:true}}));const time=paused.draws.at(-1)[5];navigation(paused,true);paused.step(5000);navigation(paused,false);paused.step(16);assert.equal(paused.draws.at(-1)[5],time);assert.equal(paused.frames.size,0,'navigation completion cannot override manual pause');paused.cleanup();
+ const reduced=mount({animated:true});reduced.intersection.set(true);await flush();navigation(reduced,true);const before=reduced.draws.length;reduced.window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action:'reduced',value:true}}));reduced.preference.dispatchEvent(Object.assign(new Event('change'),{matches:false}));assert.equal(reduced.draws.length,before);navigation(reduced,false);reduced.step(16);assert.equal(reduced.draws.at(-1)[4],true);assert.equal(reduced.frames.size,0);reduced.cleanup();
+});
+
+test('a scene prepared during navigation waits for a free frame and interior rendering remains independent',async()=>{
+ const s=mount({animated:true,loading:true});s.intersection.set(true);navigation(s,true);s.resolve();await flush();assert.equal(s.draws.length,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);navigation(s,false);s.step(16);assert.equal(s.draws.length,1);assert.equal(s.sizes.length,1);s.cleanup();
+ const interior=mount({animated:true,mode:'interior'});interior.intersection.set(true);await flush();navigation(interior,true);assert.equal(interior.frames.size,1);interior.step(16);assert.ok(interior.draws.length>1);interior.cleanup();
+});
 
 test('glass follows every display frame with damping, bounds resolution, and stops when idle or outside the viewport',async()=>{
  const s=mount();s.intersection.set(true);await flush();

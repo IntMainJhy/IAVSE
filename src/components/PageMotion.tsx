@@ -23,8 +23,9 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
  useEffect(()=>{
   const element=root.current;if(!element)return;
   const preference=window.matchMedia('(prefers-reduced-motion: reduce)'),context=gsap.context(()=>{},element);
-  let recovery:ReturnType<typeof setTimeout>|undefined;
-  const reset=()=>{clearTimeout(recovery);element.removeAttribute('aria-busy');context.revert();};
+  let recovery:ReturnType<typeof setTimeout>|undefined,navigationPending=false;
+  const setNavigationPending=(value:boolean)=>{if(value===navigationPending)return;navigationPending=value;window.dispatchEvent(new CustomEvent('iavse-navigation-pending',{detail:{pending:value}}));};
+  const reset=()=>{clearTimeout(recovery);setNavigationPending(false);element.removeAttribute('aria-busy');context.revert();};
   resetDeparture.current=reset;
   const capture=(to:string,keyboard=false,key?:string)=>{
    const element=root.current,nav=element?.querySelector<HTMLElement>('.feed-nav-links');
@@ -36,15 +37,16 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    const order=['all','docs','skills','resources'],sourceIndex=order.indexOf(source.searchParams.get('type')||'all'),targetIndex=order.indexOf(next.searchParams.get('type')||'all');
    const direction=source.pathname===next.pathname&&targetIndex<sourceIndex?-1:1,resource=resourceRoute(source.pathname)||resourceRoute(next.pathname);
    pending={from,to,at:Date.now(),direction,resource,keyboard,key,scroll:nav?.scrollTop||0,regions:Object.fromEntries(Object.entries(regions).flatMap(([name,selector])=>{const node=element.querySelector(selector);return node?[[name,box(node)]]:[]})),active:indicator&&nav?.dataset.motionReady?box(indicator):active?box(active):undefined};
+   setNavigationPending(true);
+   clearTimeout(recovery);
+   // Also bound suspended renderers when this page has no animated receiver.
+   recovery=setTimeout(()=>{reset();if(pending?.to===to)pending=null;},8000);
    if(!preference.matches){
     const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.v2-hero-copy,.creator-directory-intro');
     if(content){
      const queryOnly=source.pathname===next.pathname;
      element.setAttribute('aria-busy','true');
      context.add(()=>{gsap.to(content,{opacity:.9,x:queryOnly?-direction*6:0,y:queryOnly?0:-4,duration:.12,ease:'power2.out',overwrite:'auto'});});
-     clearTimeout(recovery);
-     // Navigation begins immediately. A failed or cancelled request must never leave content dimmed.
-     recovery=setTimeout(()=>{reset();if(pending?.to===to)pending=null;},8000);
     }
    }
   };
@@ -66,7 +68,7 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
   };
   const back=()=>capture(location.pathname+location.search);
   const cancel=()=>{pending=null;reset();};
-  const reduce=()=>{if(preference.matches)reset();};
+  const reduce=()=>{if(preference.matches){element.removeAttribute('aria-busy');context.revert();}};
   preference.addEventListener('change',reduce);
   document.addEventListener('click',click,true);window.addEventListener('popstate',back);window.addEventListener('iavse-navigation-cancel',cancel);
   document.addEventListener('pointerdown',dismiss);document.addEventListener('keydown',dismiss);

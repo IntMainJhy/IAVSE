@@ -47,3 +47,27 @@ test('modified clicks, other targets, downloads and same-document hashes do not 
   const f=mount(true);Object.assign(f.click.target,overrides);f.listeners.get('click')(f.click);assert.equal(f.prompts.length,0);assert.equal(f.dispatched.length,0);f.cleanup();
  }
 });
+
+
+test('editing a community submission uses the shared cancellation guard',()=>{
+ const editorSource=ts.transpileModule(fs.readFileSync(new URL('../src/components/CommunityEditor.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
+ const exports={},state=[],guards=[];let index=0;
+ const jsx=(type,props)=>({type,props});
+ vm.runInNewContext(editorSource,{exports,require:name=>{
+  if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};
+  if(name==='react')return{useEffect:()=>{},useState:initial=>{const slot=index++;if(!(slot in state))state[slot]=initial;return[state[slot],value=>{state[slot]=typeof value==='function'?value(state[slot]):value;}];}};
+  if(name==='./LocaleProvider')return{useLocale:()=>({t:value=>value,locale:'zh'})};
+  if(name==='next/navigation')return{useRouter:()=>({replace(){}})};
+  if(name==='./PageResources')return{usePageSeed:()=>null};
+  if(name==='./useUnsaved')return{useUnsaved:dirty=>guards.push(mount(dirty))};
+  return new Proxy({},{get:(_,key)=>key});
+ }});
+ const render=()=>{index=0;return exports.CommunityEditor({config:{taxonomy:{categories:['技术笔记'],tags:[]}},user:{status:'active',canPublish:true,nickname:'Writer'}});};
+ const walk=node=>node&&typeof node==='object'?[node,...[node.props?.children].flat().flatMap(walk)]:[];
+ const initial=render();assert.equal(guards.at(-1).listeners.size,0,'an untouched submission has no unsaved guard');
+ const body=walk(initial).find(node=>node.props?.name==='submission-body');body.props.onChange('An unsaved community draft');render();
+ const guard=guards.at(-1);assert.ok(guard.listeners.has('click'),'the real editor dirty state installs the shared guard');
+ guard.listeners.get('click')(guard.click);assert.equal(guard.click.prevented,true);
+ assert.equal(guard.dispatched[0]?.type,'iavse-navigation-cancel','declining submission navigation releases PageMotion suspension');
+ guard.cleanup();
+});

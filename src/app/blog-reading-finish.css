@@ -24,7 +24,6 @@ html[data-ui] :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colo
 :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-image-status{color:var(--anx-muted)}
 :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-image-heading button:hover{background:var(--site-raised,#f0efeb)}
 :is(.anx-portfolio[data-site-colors=true],.bd-block[data-site-colors=true] .anx-portfolio) .anx-image-heading button:focus-visible{outline-color:var(--site-accent,#30688f)}
-html[data-color-mode=dark] .blog-public-shell:has(.anx-portfolio[data-site-colors=true]){background:var(--site-canvas,#171b1e)}
 
 /* The short index makes every section reachable without a horizontal scrollbar. */
 .anx-portfolio .anx-topbar nav:has(.anx-nav-menu){overflow:visible;flex-wrap:wrap;justify-content:flex-end;gap:8px 24px}

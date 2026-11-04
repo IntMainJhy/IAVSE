@@ -60,6 +60,5 @@ html[data-ui][data-color-mode] .space-share-popover .space-share-feedback[role=a
  html[data-ui][data-color-mode] .blog-owner-edit .blog-share-trigger {width:auto;padding-inline:12px;font-size:14px;white-space:normal;text-align:center}
  html[data-ui][data-color-mode] .blog-owner-edit .blog-edit-action {padding-inline:10px;font-size:14px;white-space:normal;text-align:center}
  html[data-ui][data-color-mode] .blog-owner-edit .space-share-popover {left:0;right:auto;max-width:calc(100vw - 32px);padding:20px;transform-origin:top left}
- .blog-platform-bar>div {flex-wrap:wrap;justify-content:flex-end}
 }
 @media print {.blog-owner-edit,.space-share-menu,.appearance-switch{display:none!important}}

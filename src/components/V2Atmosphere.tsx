@@ -13,13 +13,14 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  let manualReduced=false,paused=false,systemReduced=preference.matches;
  try{manualReduced=mode==='home'&&window.localStorage?.getItem('iavse-background-motion')==='reduce';}catch{}
  let reducedMotion=manualReduced||systemReduced;
- let scene:HomeGlassScene|null=null,frame=0,lastDraw:number|null=null,activeTime=0,visible=false,printing=false,lost=false,disposed=false;
+ let scene:HomeGlassScene|null=null,frame=0,lastDraw:number|null=null,activeTime=0,visible=false,printing=false,lost=false,disposed=false,navigationPending=false,sizeDirty=false;
  let quality=1,slowFrames=0,healthyFrames=0,drawCount=0,sizedWidth=0,sizedHeight=0,sizedDpr=0,displayDpr=0,refreshPeriod=1/60,cadenceCandidate=1/60,cadenceSamples=0,renderCost=0;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false,revealsDirty=true,progressDirty=true,layoutDirty=true,hostDocumentTop=0;
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';
  const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastDraw=null;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
  const draw=()=>{
-  if(!scene||disposed||lost||document.hidden||printing||!visible)return;
+  if(!scene||disposed||lost||document.hidden||printing||!visible||navigationPending)return;
+  if(sizeDirty){sizeDirty=false;measure();return;}
   try{
    if(layoutDirty){readLayout();layoutDirty=false;}
    if(progressDirty){readProgress();progressDirty=false;}
@@ -33,7 +34,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   }
   catch{fail();}
  };
- const canRender=()=>!disposed&&!lost&&!!scene&&visible&&!document.hidden&&!printing;
+ const canRender=()=>!disposed&&!lost&&!!scene&&visible&&!document.hidden&&!printing&&!navigationPending;
  const continuous=()=>!!scene?.animated&&!reducedMotion&&!paused;
  const moving=()=>!reducedMotion&&scene?.interactive!==false&&Math.abs(targetX-pointerX)+Math.abs(targetY-pointerY)>.0001;
  const tick=(now:number)=>{
@@ -98,6 +99,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const invalidateLayout=()=>{if(disposed)return;layoutDirty=true;progressDirty=true;dirty=true;sync();};
  const measure=()=>{
   if(!scene||disposed||lost)return;
+  if(navigationPending){sizeDirty=true;return;}
   try{
    const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height),mobile=width<768;pointerBounds=rect;
    displayDpr=Math.min(window.devicePixelRatio||1,2,Math.sqrt((mobile?3000000:8000000)/(width*height)));const dpr=displayDpr*quality;
@@ -118,6 +120,15 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const reduced=(event?:MediaQueryListEvent)=>{if(typeof event?.matches==='boolean')systemReduced=event.matches;else if(event)systemReduced=preference.matches;reducedMotion=manualReduced||(event?systemReduced:systemReduced||preference.matches);if(reducedMotion){pointerX=pointerY=targetX=targetY=0;clearReveals();revealsDirty=false;draw();}else{revealsDirty=true;draw();}dirty=false;sync();};
  const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value?:boolean}>).detail;if(!detail)return;if(detail.action==='paused')paused=!!detail.value;else if(detail.action==='reduced'){manualReduced=!!detail.value;reduced();}else if(detail.action==='replay')activeTime=0;dirty=true;progressDirty=true;draw();sync();};
  const contextLost=(event:Event)=>{event.preventDefault();lost=true;fail();};
+ const navigation=(event:Event)=>{
+  if(mode!=='home')return;
+  const detail=(event as CustomEvent<{pending:boolean}>).detail;if(typeof detail?.pending!=='boolean'||detail.pending===navigationPending)return;
+  navigationPending=detail.pending;
+  if(navigationPending){stop();return;}
+  // Queue rather than render during a route commit: an unmount cancels this
+  // frame before the old scene can submit another expensive draw.
+  dirty=true;sync();
+ };
  const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(measure);
  const intersection=typeof IntersectionObserver==='undefined'?null:new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);resume();},{threshold:.01});
  const theme=typeof MutationObserver==='undefined'?null:new MutationObserver(draw);
@@ -133,6 +144,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   window.removeEventListener('scroll',scroll);
   window.removeEventListener('iavse-scene-control',control);
   window.removeEventListener('iavse-journey-layout',invalidateLayout);
+  window.removeEventListener('iavse-navigation-pending',navigation);
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
@@ -147,6 +159,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  window.addEventListener('scroll',scroll,{passive:true});
  window.addEventListener('iavse-scene-control',control);
  window.addEventListener('iavse-journey-layout',invalidateLayout);
+ window.addEventListener('iavse-navigation-pending',navigation);
  document.fonts?.ready.then(invalidateLayout);
  void createScene(canvas,controller.signal).then(loaded=>{
   if(disposed){loaded.dispose();return;}
