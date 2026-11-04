@@ -31,6 +31,7 @@ Scope and third-party material
 This is source-available software, not OSI-defined open source: its license
 restricts commercial purposes. The complete English LICENSE controls; the
 Chinese explanation below summarizes scope and does not replace its terms.
+See docs/licensing.md for the redistribution and attribution guide.
 
 中文说明
 
@@ -49,3 +50,4 @@ Chinese explanation below summarizes scope and does not replace its terms.
 原创修改，但维护贡献不会改变既有作品的作者归属。维护流程见 CONTRIBUTING.md。
 
 第三方原许可、客户端排除范围、用户内容与品牌等权利边界按上述说明保留。
+再分发与署名说明见 docs/licensing.md。

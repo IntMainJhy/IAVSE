@@ -6,9 +6,7 @@
 
 INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE
 
-IAVSE is a developer portfolio and knowledge-sharing platform. Turn a résumé into an editable blog homepage, present your work and certificates, and share tutorials, independent AI Skills and useful tools through a connected community. Each member owns their profile, drafts and uploaded files.
-
-The blog editor uses MIT-licensed React Flow to design the actual homepage, with the existing Anx layout as its default template. Inline editing, movable/resizable sections, custom text, images and links share one design between preview and explicitly published pages. HTML/ZIP static hosting remains available through the backend APIs.
+IAVSE is a developer blog and knowledge-sharing platform. Build a personal homepage from your résumé, arrange it in a visual editor, and share projects, articles, AI Skills and useful resources. Discover other homepages in a 3D spatial gallery. Each member manages their own profile, private drafts and uploaded files.
 
 [GitHub repository](https://github.com/IntMainJhy/IAVSE) · [AtomGit mirror](https://atomgit.com/InMainJhy/IAVSE) · [Documentation](docs/README.md)
 
@@ -29,35 +27,47 @@ IAVSE is being developed as a shared service with account-isolated data. Public 
 
 ## Current release
 
-The current main branch brings together the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Real published authors appear first; bundled showcase content does not create accounts or alter member counts.
+The current main branch includes the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Published members appear first; bundled showcase profiles do not create accounts or alter member counts. The creator voices section uses illustrative comments, with two scrolling rows, hover feedback, keyboard reading and reduced-motion support.
 
-See the [latest audit and release notes](docs/release-2026-11-02.md). Preview images are labelled below by scope.
+See the [current repository update](docs/release-2026-11-04.md) and [performance review](docs/performance-2026-11-03.md).
 
 ## Preview
 
-Local previews of the current interface. The homepage and spatial gallery images show this release; the community and individual homepage images are archived references. The website also supports Simplified Chinese and Japanese.
+Captured from the current website on **2026-11-04**, using its Simplified Chinese interface. English and Japanese are also supported. Showcase profiles and illustrative comments demonstrate the interface; they are not user-count or endorsement claims. [Capture details](docs/screenshots/README.md).
 
 ### Homepage
 
 The current optical glass homepage, followed by spaces, the editable canvas, Skills and resources.
 
-![Current IAVSE optical glass homepage](docs/screenshots/home-current.png)
+![IAVSE optical glass homepage and macOS download entry](docs/screenshots/home-current.webp)
 
 ### Spatial blog discovery
 
-![IAVSE spatial blog gallery using existing themes](docs/screenshots/blog-spaces-current.png)
+![IAVSE spatial blog gallery using existing themes](docs/screenshots/blog-spaces-current.webp)
 
 ### Community
 
-A feed of shared work, member recommendations and category navigation.
+Community navigation, search and categories. The current local site has no published community posts, so this capture shows the empty state.
 
-![IAVSE community feed in English with shared posts, interaction controls and sidebars](docs/screenshots/community-en.jpg)
+![Current IAVSE community and category navigation](docs/screenshots/community-current.webp)
 
 ### Blog homepage
 
 The Blog spaces directory lists discoverable published homepages; each opens its own public layout, introduction, skills, experience and work. Editing stays on a separate page: **Create / edit my blog** opens the signed-in member’s own content. The owner can use **Administration → Blog homes** at `/admin/blog`. See the [blog editing guide](docs/blog-editor.md).
 
-![IAVSE personal homepage in English](docs/screenshots/personal-homepage-en.png)
+![IAVSE blog homepage using the existing paper theme](docs/screenshots/blog-home-current.webp)
+
+### Skills and resources
+
+Independent AI Skills, shared documents and tools are available through resource navigation.
+
+![Current IAVSE resource directory](docs/screenshots/resources-current.webp)
+
+### Creator voices
+
+Illustrative comments introduce the kinds of work the platform supports. Both rows support keyboard reading and reduced motion.
+
+![IAVSE creator voices with refined cards and illustrative comments](docs/screenshots/creator-voices-current.webp)
 
 ## Features
 
@@ -210,8 +220,6 @@ Production requires a separate private data directory, correct HTTPS URLs, Secur
 
 Original website material is provided under the [PolyForm Noncommercial License 1.0.0](LICENSE). It permits use, modification and redistribution for noncommercial purposes, including the personal uses and organizations defined in its terms. Commercial use is not licensed; contact [IntMainJhy](https://github.com/IntMainJhy) for separate permission if your intended purpose is outside those grants.
 
-[LICENSE](LICENSE) contains the unmodified official English terms. Keep the copyright notice in [NOTICE](NOTICE) with redistributed copies. Third-party materials retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The private desktop clients and user content are not relicensed by this website license.
+[LICENSE](LICENSE) contains the unmodified official English terms. Redistribution must include the license text or its official URL, plus **both `Required Notice:` lines** in [NOTICE](NOTICE), naming **IntMainJhy** and the original **IAVSE** project. Contributors may credit their own changes without replacing that attribution or claiming the pre-existing project as their original work. See the [license and attribution guide](docs/licensing.md) for a copyable notice.
 
-- [Community completion review](docs/community-finish-2026-10-22.md)
-
-Noncommercial maintenance contributions are welcome through [CONTRIBUTING.md](CONTRIBUTING.md). Keep both Required Notice lines when redistributing, identifying IntMainJhy and the original IAVSE project. Contributors may credit their own original modifications; they must not replace the original attribution or claim authorship of the pre-existing project.
+This is **source-available software under a noncommercial license**. Its commercial-use restriction means it does not meet the [OSI Open Source Definition](https://opensource.org/osd). Third-party materials retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The private desktop clients and user content are not relicensed. Noncommercial maintenance contributions are welcome through [CONTRIBUTING.md](CONTRIBUTING.md).

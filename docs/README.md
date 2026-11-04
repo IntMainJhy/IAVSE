@@ -20,7 +20,7 @@ The current editor provides six page layouts and eight visual themes, inline can
 
 当前编辑器支持六种排版、八种视觉主题、画布内联编辑与响应式预览；公开博客发现页包含空间展廊。保存保持私有草稿，显式发布生成公开快照。文章与共享文档需审核，博客主页、项目、Skill 和资源按现有账号及下架规则直接发布。
 
-最新维护记录：[2026-11-02 审计与收尾](release-2026-11-02.md)。
+最新维护记录：[2026-11-04 仓库介绍、截图与许可收尾](release-2026-11-04.md)。此前的[运行时代码审计](release-2026-11-02.md)与[性能记录](performance-2026-11-03.md)保留各自的验证范围。
 
 ## Maintain and operate / 维护与运营
 
@@ -32,6 +32,8 @@ The current editor provides six page layouts and eight visual themes, inline can
 | Scoped audit and validation / 审计与验证 | [2026-10-22 audit](audit-2026-10-22.md) | 同页含中文说明 |
 | IAVSE identity and generated icons / 站点标识与图标生成 | [Brand assets](brand.md) | 英文技术说明 |
 | Third-party attribution / 第三方署名 | [Notices](../THIRD_PARTY_NOTICES.md) | 以原始许可条款为准 |
+| Noncommercial license and author credit / 非商业许可与原作者署名 | [License and attribution](licensing.md) | 同页含中文说明及可保留的声明 |
+| Current interface screenshots / 当前界面截图 | [Capture details](screenshots/README.md) | 同页含截图范围与拍摄日期 |
 
 Production registration and publishing depend on explicit deployment settings. Local rule screening is triage, not a compliance certificate. There is no public production demo URL at present. Application data, real résumé sources and user media belong in private storage; macOS and Windows clients are outside this repository.
 
@@ -45,7 +47,11 @@ Production registration and publishing depend on explicit deployment settings. L
 
 Current repository description / 当前仓库简介：
 
-> IAVSE: Developer portfolios, spatial blogs, docs and Skills. Noncommercial use and maintenance welcome. Original author credit required. PolyForm Noncommercial 1.0.0.
+> Developer blog homepages and knowledge sharing: 3D spaces, a visual editor, community, docs and AI Skills. PolyForm Noncommercial 1.0.0; retain IntMainJhy attribution when redistributing.
+
+AtomGit also includes this Chinese introduction / AtomGit 同时提供以下中文介绍：
+
+> IAVSE 是面向开发者的博客主页与知识共享平台，提供 3D 博客空间、可视化主页编辑器、社区、文档、AI Skill 与实用资源。网站原创部分允许协议定义的非商业使用、部署、修改和维护；商业使用须另行授权。再分发必须保留原作者 IntMainJhy 和 IAVSE 项目来源，不得冒称原项目为自己原创。
 
 Suggested topics: `nextjs`, `react`, `typescript`, `sqlite`, `portfolio`, `developer-community`, `agent-skills`, `mcp`, `source-available`.
 
@@ -54,4 +60,4 @@ Both repositories carry the same website commits and license:
 - [GitHub · IntMainJhy/IAVSE](https://github.com/IntMainJhy/IAVSE)
 - [AtomGit · InMainJhy/IAVSE](https://atomgit.com/InMainJhy/IAVSE)
 
-Do not use a loopback URL or an unlaunched domain as the repository's live Website URL. 更新简介时保持两处一致；未正式上线前，不将本机地址或尚未上线的域名填写为在线演示。
+GitHub's social preview uses [the current homepage capture](screenshots/social-preview.png) at 1280 × 640. Both READMEs use the same current screenshots. GitHub 与 AtomGit 的授权范围和项目说明保持一致；未正式上线前，不将本机地址或尚未上线的域名填写为在线演示。

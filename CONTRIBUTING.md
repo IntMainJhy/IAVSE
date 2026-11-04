@@ -24,3 +24,5 @@ Start from main, describe the problem and resulting behavior, and submit a focus
 从 main 开始修改，清楚说明修复了什么及如何验证，再提交范围明确的 PR。运行时代码通常执行单元测试、类型检查与构建，纯文档修改检查链接、表述及范围即可。测试使用临时数据，不修改真实站点数据库。
 
 [LICENSE](LICENSE) retains the unmodified official terms and controls the license grants. This guide explains the maintenance workflow and attribution; it does not replace or expand those grants.
+
+For a copyable original-author notice and redistribution scope, see the [license and attribution guide](docs/licensing.md). / 可保留的原作者声明与分发范围见[许可与署名指南](docs/licensing.md)。

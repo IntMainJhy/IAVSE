@@ -8,9 +8,7 @@ INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE
 
 Insight through AI. Vigilance for Opportunity. Seize to Evolve.
 
-IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理成可编辑的个人主页，展示经历、作品与证书；通过社区分享教程、独立 AI Skill 和实用工具。每个成员独立管理自己的资料、草稿和上传文件。
-
-博客编辑器使用 MIT React Flow 直接设计主页，默认沿用现有 Anx 模板。支持行内编辑、栏目移动与宽度调整、自定义文字、图片及链接；预览和明确发布后的公开页使用同一份设计。HTML / ZIP 静态托管继续通过后端 API 提供。
+IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理成个人主页，在可视化编辑器中调整排版，分享项目、文章、AI Skill 和实用资源；通过 3D 空间展廊发现其他人的主页。每个成员独立管理自己的资料、私人草稿和上传文件。
 
 [GitHub 仓库](https://github.com/IntMainJhy/IAVSE) · [AtomGit 镜像](https://atomgit.com/InMainJhy/IAVSE) · [文档导航](docs/README.md)
 
@@ -31,35 +29,47 @@ IAVSE 是面向开发者的博客主页与知识共享平台。将简历整理�
 
 ## 当前版本
 
-main 已汇总深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12 个主页的 3D 博客展廊。展廊复用既有主题，每次最多加载两个预览，支持拖动环顾、点击靠近与减少动态效果；真实公开作者优先，展示资料不创建账号、不计入成员数量。
+main 包含深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12 个主页的 3D 博客展廊。展廊复用既有主题，每次最多加载两个预览，支持拖动环顾、点击靠近与减少动态效果；已公开的成员主页优先，展示资料不创建账号、不计入成员数量。「创作者的声音」使用示例评论，双排滚动支持悬停反馈、键盘阅读与减少动态效果。
 
-本轮检查与收尾见[最新审计及版本说明](docs/release-2026-11-02.md)。以下首页和空间展廊截图对应当前版本；社区与个人主页截图保留为历史参考。
+更新内容见[本轮仓库收尾记录](docs/release-2026-11-04.md)与[性能优化记录](docs/performance-2026-11-03.md)。
 
 ## 界面预览
 
-以下为本地网页端预览。首页与空间展廊使用本轮截图，其他存档画面仅供参考。
+以下截图于 **2026-11-04** 从当前网站的中文界面拍摄，网站也支持英文和日文。展廊展示资料与示例评论用于呈现界面，不代表真实用户数量或用户背书。[截图说明](docs/screenshots/README.md)。
 
 ### 网站首页
 
 当前光学玻璃首页，通过滚动依次介绍博客空间、可操作的编辑画布、Skill 与资源。
 
-![IAVSE 网站首页，展示杂志字体、柔彩背景和功能入口](docs/screenshots/home.jpg)
+![IAVSE 光学玻璃首页与 macOS 下载入口](docs/screenshots/home-current.webp)
 
 ### 空间展廊
 
-![IAVSE 空间展廊，复用现有主页主题](docs/screenshots/blog-spaces-current.png)
+![IAVSE 空间展廊，复用现有主页主题](docs/screenshots/blog-spaces-current.webp)
 
 ### 社区动态
 
-分享信息流、成员推荐与分类导航。
+社区导航、搜索和分类。当前本地站点尚无公开社区投稿，截图如实展示空状态。
 
-![IAVSE 社区动态，展示分享内容、互动操作和左右侧栏](docs/screenshots/community.jpg)
+![IAVSE 当前社区与分类导航](docs/screenshots/community-current.webp)
 
 ### 博客主页
 
 “博客空间”目录展示允许发现的已公开主页，每个主页使用作者保存的布局，呈现个人介绍、技能、经历与作品。编辑放在独立页面：「创建 / 编辑我的博客」进入当前登录成员自己的内容。站长可通过「管理后台 → 博客主页」访问 `/admin/blog`。详见[博客编辑指南](docs/blog-editor.zh-CN.md)。
 
-![IAVSE 完整个人主页](docs/screenshots/personal-homepage.png)
+![IAVSE 使用现有纸张主题的博客主页](docs/screenshots/blog-home-current.webp)
+
+### Skill 与资源
+
+通过资源导航查找独立 AI Skill、共享文档和实用工具。
+
+![IAVSE 当前资源目录](docs/screenshots/resources-current.webp)
+
+### 创作者的声音
+
+示例评论展示平台适合承载的创作，两排卡片支持键盘阅读与减少动态效果。
+
+![IAVSE 创作者的声音，展示细边卡片与示例评论](docs/screenshots/creator-voices-current.webp)
 
 ## 网站功能
 
@@ -210,10 +220,8 @@ HTTP 集成脚本位于 `test/`，使用临时数据目录执行；运行前确�
 
 ## 许可与授权
 
-网站原创部分采用 [PolyForm Noncommercial 1.0.0](LICENSE)，允许非商业目的的使用、修改和再分发，包括许可中定义的个人用途和组织使用；商业用途不在授权内。超出许可范围时，可通过 [IntMainJhy](https://github.com/IntMainJhy) 的公开联系渠道另行申请授权。LICENSE 保留官方英文原文，中文说明不替代许可条款；再分发须保留 [NOTICE](NOTICE) 中的著作权声明。
+网站原创部分采用 [PolyForm Noncommercial 1.0.0](LICENSE)，允许协议定义的非商业使用、部署、修改、维护及再分发。商业用途不在授权内，需要另行取得 [IntMainJhy](https://github.com/IntMainJhy) 的许可。
 
-第三方材料继续适用各自许可，参见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+分发时必须附带协议全文或官方地址，并保留 [NOTICE](NOTICE) 中**两条 `Required Notice:` 声明**，明确原作者 **IntMainJhy** 和原项目 **IAVSE** 的来源。维护者可以署名自己的修改，但不能替换原作者署名，也不能把既有项目冒称为自己原创。[许可与署名指南](docs/licensing.md)提供可直接保留的声明。
 
-- [社区收尾与账号隔离记录](docs/community-finish-2026-10-22.md)
-
-欢迎按[维护指南](CONTRIBUTING.md)提交非商业维护贡献。再分发须保留两条 Required Notice，明确原作者 IntMainJhy 和原项目 IAVSE。贡献者可以署名自己的原创修改，但不能替换原作者署名或把既有项目冒称为自己原创。这里的授权包含非商业部署，并非严格限制为「只能阅读学习」。
+准确名称是**「源码公开、非商业许可」**。由于限制商业用途，它不属于 [OSI 定义的开源许可](https://opensource.org/osd)。LICENSE 保留官方英文原文；中文说明不替代条款。第三方材料继续适用[各自许可](THIRD_PARTY_NOTICES.md)，私有客户端及用户内容不因网站许可重新授权。欢迎按[维护指南](CONTRIBUTING.md)参与非商业维护。
