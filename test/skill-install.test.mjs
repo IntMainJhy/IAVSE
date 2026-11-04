@@ -55,6 +55,7 @@ test('copy button copies the complete command and exposes success or a manual-co
    if(name==='react')return{useState:()=>{const index=cursor++;return[state[index],value=>{state[index]=value;}]},useRef:()=>({current:null}),useEffect:()=>{}};
    if(name==='./LocaleProvider')return{useLocale:()=>({t:value=>value})};
    if(name==='@/lib/skill-install.mjs')return{skillInstallCommand};
+   if(name.endsWith('.css'))return{};
    if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};
    throw new Error(name);
   }});

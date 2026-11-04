@@ -18,7 +18,6 @@ import {AuthNav} from './AuthNav';
 import {SiteTools} from './SiteTools';
 import {PlatformGlass} from './PlatformGlass';
 import {ReadingBackdrop} from './ReadingBackdrop';
-import {QuantumBackdrop} from './QuantumBackdrop';
 import {ResumePrint} from './ResumePrint';
 
 type Doc = Record<string, any>;
@@ -204,7 +203,7 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   const authPage=section==='login'||section==='join';
   const quantumPage=['community','blogs','resources','docs','skills'].includes(section);
   return <div data-surface={path.length?'reading':'landing'} data-reading-scene={quantumPage?'quantum':undefined} className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
-    {!path.length?<PlatformGlass scene="home"/>:quantumPage?<QuantumBackdrop/>:<ReadingBackdrop/>}
+    {!path.length?<PlatformGlass scene="home"/>:!quantumPage?<ReadingBackdrop/>:null}
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header"><div className="organic-container organic-header-inner"><Link href="/" className="organic-brand"><BrandMark/><div className="site-brand-copy">IAVSE<span>{tr('社区与博客主页')}</span></div></Link>
       <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}</nav>

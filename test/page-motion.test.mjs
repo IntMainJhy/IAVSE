@@ -59,13 +59,13 @@ test('public header links bridge remounted frames without delaying or cancelling
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});assert.equal(f.calls.length,0);
  const event=f.click('/downloads');assert.equal(event.defaultPrevented,undefined);assert.equal(event.preventDefault,undefined);a.cleanup();
  const b=f.page('/downloads',100,'feed',{publicPage:true,remount:true});
- assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===12&&call.to.opacity===1&&call.to.clearProps==='transform,opacity'));
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===8&&call.to.opacity===1&&call.to.clearProps==='transform,opacity'));
  b.cleanup();assert.ok(f.media.every(media=>media.reverted));
 });
 
 test('query routes keep public content in place and modified or external clicks cannot create a handoff',()=>{
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});f.click('/resources?type=skills');a.cleanup();
- const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===0&&call.to.duration===.34));b.cleanup();
+ const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===0&&call.to.duration===.22));b.cleanup();
  for(const [to,overrides] of [['/downloads',{ctrlKey:true}],['https://example.com/downloads',{}],['/downloads',{defaultPrevented:true}],['/downloads',{button:1}]]){
   const p=f.page('/resources',100,'feed',{publicPage:true,remount:true});f.click(to,'members',false,overrides);p.cleanup();const start=f.calls.length,q=f.page('/downloads',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,start);q.cleanup();
  }
@@ -79,19 +79,19 @@ test('reduced motion public transitions retain the native content and query navi
 test('resource navigation gives immediate departure feedback and a directional arrival across frame remounts',()=>{
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});
  const event=f.click('/resources?type=skills');assert.equal(event.defaultPrevented,undefined,'navigation never waits for animation');
- assert.ok(f.calls.some(call=>call.node===a.content&&call.to.opacity===.52&&call.to.x===-10));
+ assert.ok(f.calls.some(call=>call.node===a.content&&call.to.opacity>=.85&&call.to.x===-6));
  assert.equal(a.root['aria-busy'],'true');a.cleanup();
  const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});
- assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.opacity===.48&&call.from.x===14&&call.to.x===0));
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.opacity>=.85&&call.from.x===8&&call.to.x===0));
  b.cleanup();assert.equal(f.timers.size,0);
 });
 
 test('rapid resource clicks keep the latest destination and cancelled requests recover readable content',()=>{
  const f=fixture(),a=f.page('/resources?type=skills',100,'feed',{publicPage:true});
  f.click('/resources?type=resources');f.click('/resources?type=docs');assert.equal(f.timers.size,1,'one bounded recovery timer');
- assert.ok(f.calls.some(call=>call.node===a.content&&call.to.x===10),'earlier tabs depart in the opposite direction');
+ assert.ok(f.calls.some(call=>call.node===a.content&&call.to.x===6),'earlier tabs depart in the opposite direction');
  a.cleanup();const b=f.page('/resources?type=docs',100,'feed',{publicPage:true,remount:true});
- assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.x===-14));
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.x===-8));
  f.click('/resources?type=skills');for(const recover of [...f.timers.values()])recover();
  assert.equal(b.root['aria-busy'],undefined);b.cleanup();
 });
@@ -101,4 +101,20 @@ test('returning to the currently shown tab cancels outgoing feedback and pending
  f.click('/resources?type=skills');f.click('/resources');assert.equal(a.root['aria-busy'],undefined);assert.equal(f.timers.size,0);
  a.cleanup();const start=f.calls.length,b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});
  assert.equal(f.calls.length,start,'a cancelled destination cannot create a later arrival');b.cleanup();
+});
+
+
+test('a declined unsaved navigation immediately restores content and clears the pending arrival',()=>{
+ const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});f.click('/resources?type=skills');
+ assert.equal(a.root['aria-busy'],'true');assert.equal(f.timers.size,1);
+ f.events.get('iavse-navigation-cancel')();assert.equal(a.root['aria-busy'],undefined);assert.equal(f.timers.size,0);
+ a.cleanup();const start=f.calls.length,b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});
+ assert.equal(f.calls.length,start,'a declined navigation must not replay a stale arrival later');b.cleanup();
+});
+
+test('the current blog heading receives feedback while the 3D gallery root stays in its own coordinates',()=>{
+ const f=fixture(),a=f.page('/blogs',100,'feed',{publicPage:true});
+ const heading=a.content;a.root.nodes={'.community-route-content,.v2-hero-copy,.creator-directory-intro':heading};
+ f.click('/community');assert.ok(f.calls.some(call=>call.node===heading&&call.to.opacity>=.85));assert.ok(f.calls.every(call=>call.node!==a.root),'the spatial stage does not inherit a page transform');
+ a.cleanup();const b=f.page('/blogs',100,'feed',{publicPage:true,remount:true});b.cleanup();
 });

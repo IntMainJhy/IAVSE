@@ -36,12 +36,12 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    const order=['all','docs','skills','resources'],sourceIndex=order.indexOf(source.searchParams.get('type')||'all'),targetIndex=order.indexOf(next.searchParams.get('type')||'all');
    const direction=source.pathname===next.pathname&&targetIndex<sourceIndex?-1:1,resource=resourceRoute(source.pathname)||resourceRoute(next.pathname);
    pending={from,to,at:Date.now(),direction,resource,keyboard,key,scroll:nav?.scrollTop||0,regions:Object.fromEntries(Object.entries(regions).flatMap(([name,selector])=>{const node=element.querySelector(selector);return node?[[name,box(node)]]:[]})),active:indicator&&nav?.dataset.motionReady?box(indicator):active?box(active):undefined};
-   if(resource&&!preference.matches){
-    const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.v2-hero-copy,.blog-spaces-heading');
+   if(!preference.matches){
+    const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.v2-hero-copy,.creator-directory-intro');
     if(content){
      const queryOnly=source.pathname===next.pathname;
      element.setAttribute('aria-busy','true');
-     context.add(()=>{gsap.to(content,{opacity:.52,x:queryOnly?-direction*10:0,y:queryOnly?0:-8,duration:.16,ease:'power2.out',overwrite:'auto'});});
+     context.add(()=>{gsap.to(content,{opacity:.9,x:queryOnly?-direction*6:0,y:queryOnly?0:-4,duration:.12,ease:'power2.out',overwrite:'auto'});});
      clearTimeout(recovery);
      // Navigation begins immediately. A failed or cancelled request must never leave content dimmed.
      recovery=setTimeout(()=>{reset();if(pending?.to===to)pending=null;},8000);
@@ -65,11 +65,12 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    }else if(event.target instanceof Node&&!menu.contains(event.target))menu.open=false;
   };
   const back=()=>capture(location.pathname+location.search);
+  const cancel=()=>{pending=null;reset();};
   const reduce=()=>{if(preference.matches)reset();};
   preference.addEventListener('change',reduce);
-  document.addEventListener('click',click,true);window.addEventListener('popstate',back);
+  document.addEventListener('click',click,true);window.addEventListener('popstate',back);window.addEventListener('iavse-navigation-cancel',cancel);
   document.addEventListener('pointerdown',dismiss);document.addEventListener('keydown',dismiss);
-  return()=>{reset();resetDeparture.current=null;preference.removeEventListener('change',reduce);document.removeEventListener('click',click,true);window.removeEventListener('popstate',back);document.removeEventListener('pointerdown',dismiss);document.removeEventListener('keydown',dismiss);};
+  return()=>{reset();resetDeparture.current=null;preference.removeEventListener('change',reduce);document.removeEventListener('click',click,true);window.removeEventListener('popstate',back);window.removeEventListener('iavse-navigation-cancel',cancel);document.removeEventListener('pointerdown',dismiss);document.removeEventListener('keydown',dismiss);};
  },[]);
  useLayoutEffect(()=>{
   const element=root.current,previous=pending?.to===route&&Date.now()-pending.at<10000?pending:null;pending=null;
@@ -83,9 +84,9 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    media.add('(prefers-reduced-motion: no-preference)',()=>{
     // Keep full-screen WebGL scenes in their coordinate system; animate their text receivers.
     const content=element.querySelector<HTMLElement>(publicContentSelector);
-    const heading=element.querySelector<HTMLElement>('.v2-hero-copy,.blog-spaces-heading,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
-    if(content)gsap.fromTo(content,{opacity:previous?.resource ? .48 : .88,x:previous?.resource&&queryOnly?previous.direction*14:0,y:queryOnly?0:12},{opacity:1,x:0,y:0,duration:previous?.resource ? .34 : queryOnly ? .24 : .36,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
-    if(heading&&!queryOnly&&!content?.contains(heading))gsap.fromTo(heading,{opacity:.86,y:12},{opacity:1,y:0,duration:.4,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
+    const heading=element.querySelector<HTMLElement>('.v2-hero-copy,.creator-directory-intro,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
+    if(content)gsap.fromTo(content,{opacity:.9,x:previous?.resource&&queryOnly?previous.direction*8:0,y:queryOnly?0:8},{opacity:1,x:0,y:0,duration:queryOnly ? .22 : .28,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
+    if(heading&&!queryOnly&&!content?.contains(heading))gsap.fromTo(heading,{opacity:.94,y:8},{opacity:1,y:0,duration:.28,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
     if(!content&&!heading)gsap.fromTo(element,{opacity:.9},{opacity:1,duration:.22,ease:'power2.out',clearProps:'opacity',overwrite:'auto'});
    },element);
    return()=>media.revert();

@@ -3,6 +3,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {useLocale} from './LocaleProvider';
 import {mountSkillTypewriter,skillInstallCommand} from '@/lib/skill-install.mjs';
+import '@/app/skill-install.css';
 
 export function SkillInstall({baseUrl,animated=true}:{baseUrl:string;animated?:boolean}){
  const {t}=useLocale(),[status,setStatus]=useState<'idle'|'copied'|'error'>('idle');

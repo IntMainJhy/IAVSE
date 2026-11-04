@@ -1,0 +1,19 @@
+/* Compact black terminal: two fixed lines with local horizontal scrolling. */
+.skill-install {display:grid;grid-template-columns:minmax(0,1fr) 88px;align-items:center;column-gap:20px;max-width:840px;margin:0 auto 24px;padding:14px 18px;background:#000;color:#ededed;border-radius:16px;text-align:left;}
+.skill-install>button {width:88px;min-height:44px;padding:4px 10px;border:0;border-radius:8px;background:#1c1c1c;color:#f3f3f3;font:inherit;font-size:12px;line-height:1.5;white-space:nowrap;cursor:pointer;}
+.skill-install>button:hover {background:#303030;color:#fff;}
+.skill-install pre {min-width:0;margin:0;padding:0;background:transparent;border:0;color:#ededed;font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre;overflow-x:auto;scrollbar-width:none;}
+.skill-install pre::-webkit-scrollbar {display:none;}
+.skill-install code {font:inherit;}
+.skill-install-code {display:grid;width:max-content;min-width:100%;}
+.skill-install-measure,.skill-install-typing {grid-area:1/1;}
+.skill-install-measure {visibility:hidden;}
+.skill-install-caret {display:inline-block;width:6px;height:1em;margin-left:2px;vertical-align:-.12em;background:#d6d6d6;}
+.skill-install[data-typing=true] .skill-install-typing .skill-install-caret {animation:skill-caret 1s steps(2,end) infinite!important;}
+html[data-ui] .organic-site .skill-install ::selection {background:#d6d6d6;color:#000;}
+@keyframes skill-caret {50%{opacity:0;}}
+@media(prefers-reduced-motion:reduce){.skill-install-caret{display:none!important;}}
+@media print{.skill-install-typing,.skill-install>button{display:none;}.skill-install-measure{visibility:visible;}.skill-install{display:block;}.skill-install pre{white-space:pre-wrap;overflow-wrap:anywhere;}.skill-install-code{width:auto;}}
+.skill-install-error {grid-column:1/-1;margin-top:8px;font-size:12px;color:#f4cc9e;}
+html[data-ui] .organic-site .skill-install :is(button,pre):focus-visible {outline:2px solid #d6d6d6;outline-offset:3px;}
+@media(max-width:760px){.skill-install{grid-template-columns:minmax(0,1fr) 76px;column-gap:12px;padding:12px 14px;margin-bottom:22px;border-radius:12px;}.skill-install>button{width:76px;}}

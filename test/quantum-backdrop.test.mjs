@@ -7,32 +7,40 @@ import ts from 'typescript';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/QuantumBackdrop.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 const flush=async()=>{for(let n=0;n<8;n++)await Promise.resolve();};
 
-function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,deferred=false}={}){
+function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,deferred=false,path='/resources',iframe=false,missingHost=false}={}){
  class Target extends EventTarget{
   listeners=new Set();
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name);}
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name);}
  }
- const attributes=new Set(),host={toggleAttribute:(name,value)=>value?attributes.add(name):attributes.delete(name),removeAttribute:name=>attributes.delete(name)};
- const canvas=Object.assign(new Target(),{dataset:{},width:300,height:150,closest:()=>host});
- const window=Object.assign(new Target(),{scrollY:0}),document=Object.assign(new Target(),{hidden,documentElement:new Target()}),preference=Object.assign(new Target(),{matches:systemReduced});
- const frames=new Map(),effects=[],renders=[],sizes=[],exports={};let id=0,now=1000,disposes=0,signal,createCalls=0,resizeError=false,renderError=false,resolveScene;
+ const makeHost=()=>{const attributes=new Set();return{attributes,isConnected:true,toggleAttribute:(name,value)=>value?attributes.add(name):attributes.delete(name),removeAttribute:name=>attributes.delete(name)};};
+ let currentHost=missingHost?null:makeHost(),currentPath=path,mutation,observerDisconnected=false;
+ const initialHost=currentHost,canvas=Object.assign(new Target(),{dataset:{},width:300,height:150}),layer={hidden:true};
+ const window=Object.assign(new Target(),{scrollY:0});window.self=window;window.top=iframe?{}:window;
+ const document=Object.assign(new Target(),{hidden,body:{},querySelector:()=>currentHost,documentElement:new Target()}),preference=Object.assign(new Target(),{matches:systemReduced});
+ const frames=new Map(),renders=[],sizes=[],exports={},refs=[],effects=[];let id=0,now=1000,disposes=0,signal,createCalls=0,resizeError=false,renderError=false,resolveScene,refIndex=0,effectIndex=0,scheduled=[];
  const scene={render:(...args)=>{if(renderError)throw Error('drawing failed');renders.push(args);},resize:(...args)=>{if(resizeError)throw Error('resize failed');sizes.push(args);},dispose:()=>{disposes++;}};
  const created=deferred?new Promise(resolve=>{resolveScene=resolve;}):Promise.resolve(scene);
- const sandbox={exports,window,document,innerWidth:width,innerHeight:900,devicePixelRatio:2,AbortController,matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':null},requestAnimationFrame:fn=>{frames.set(++id,fn);return id;},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
-  if(name==='react')return{useEffect:fn=>effects.push(fn),useRef:()=>({current:canvas})};
-  if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};
+ const jsx=(type,props)=>{if(props.ref)props.ref.current=type==='canvas'?canvas:layer;return{type,props};};
+ const sandbox={exports,window,document,innerWidth:width,innerHeight:900,devicePixelRatio:2,AbortController,MutationObserver:class{constructor(fn){mutation=fn;}observe(){}disconnect(){observerDisconnected=true;}},matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':null},requestAnimationFrame:fn=>{frames.set(++id,fn);return id;},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
+  if(name==='react')return{useEffect:(fn,deps)=>{const index=effectIndex++,previous=effects[index];if(!previous||deps.some((value,i)=>value!==previous.deps[i]))scheduled.push({index,fn,deps});},useRef:value=>refs[refIndex++]??(refs[refIndex-1]={current:value})};
+  if(name==='next/navigation')return{usePathname:()=>currentPath};
+  if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};
   if(name==='@/lib/quantum-field')return{createQuantumField:(_canvas,abort)=>{signal=abort;createCalls++;return created;}};
   throw Error('Unexpected dependency '+name);
  }};
- vm.runInNewContext(source,sandbox);const output=exports.QuantumBackdrop(),cleanup=effects[0]();
+ vm.runInNewContext(source,sandbox);
+ const render=()=>{refIndex=effectIndex=0;scheduled=[];const output=exports.QuantumBackdrop();for(const {index,fn,deps}of scheduled){effects[index]?.cleanup?.();effects[index]={deps,cleanup:fn()};}return output;};
+ const output=render(),cleanup=()=>{effects.forEach(effect=>effect?.cleanup?.());};
  const step=(ms=40)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now));};
  const control=(action,value)=>window.dispatchEvent(Object.assign(new Event('iavse-scene-control'),{detail:{action,value}}));
  const scroll=value=>{window.scrollY=value;window.dispatchEvent(new Event('scroll'));};
  const move=(pointerType='mouse')=>window.dispatchEvent(Object.assign(new Event('pointermove'),{pointerType,clientX:width,clientY:0}));
  const visibility=value=>{document.hidden=value;document.dispatchEvent(new Event('visibilitychange'));};
  const contextLost=()=>{const event=new Event('webglcontextlost',{cancelable:true});canvas.dispatchEvent(event);return event;};
- return{window,document,preference,canvas,attributes,frames,renders,sizes,output,cleanup,step,control,scroll,move,visibility,contextLost,resize:()=>window.dispatchEvent(new Event('resize')),resolve:()=>resolveScene(scene),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
+ const replaceHost=()=>{if(currentHost)currentHost.isConnected=false;currentHost=makeHost();return currentHost;};
+ const navigate=(next,{host=true}={})=>{currentPath=next;if(host)replaceHost();else{if(currentHost)currentHost.isConnected=false;currentHost=null;}render();};
+ return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:()=>resolveScene(scene),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
 }
 
 test('one field starts after loading, coalesces pointer input and respects desktop and mobile cadence',async()=>{
@@ -91,4 +99,51 @@ test('unmount unregisters listeners, cancels pending work and releases canvas me
  s.cleanup();assert.equal(s.signal.aborted,true);assert.equal(s.disposes,1);assert.equal(s.frames.size,0);assert.equal(s.canvas.width,0);assert.equal(s.canvas.height,0);assert.equal(s.attributes.size,0);
  assert.equal(s.window.listeners.size+s.document.listeners.size+s.document.documentElement.listeners.size+s.preference.listeners.size+s.canvas.listeners.size,0);
  s.move();s.scroll(300);s.resize();s.step();assert.equal(s.frames.size,0);
+});
+
+
+test('reading routes share one field across new shells and return without recompiling',async()=>{
+ const s=mount();await flush();s.step();const canvas=s.canvas,previous=s.host;
+ s.scroll(160);s.navigate('/community');await flush();s.step();
+ assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.canvas,canvas);assert.equal(s.layer.hidden,false);
+ assert.equal(previous.attributes.size,0);assert.ok(s.host.attributes.has('data-quantum-host'));assert.ok(s.host.attributes.has('data-glass-scrolled'));
+ const before=s.renders.at(-1)[0];s.navigate('/');assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);s.step(60000);
+ s.navigate('/blogs');await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.layer.hidden,false);
+ assert.ok(s.renders.at(-1)[0]-before<.1,'inactive route time cannot fast-forward the field');s.cleanup();
+});
+
+test('home, author pages, showcase previews and embedded frames never initialize a field',async()=>{
+ for(const path of ['/','/downloads','/workspace/blog','/blog/alice','/blog/alice/preview','/blogs/showcase/lin-studio','/blogs/showcase/lin-studio/preview']){
+  const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true,path);assert.equal(s.frames.size,0);s.move();s.scroll(200);s.resize();assert.equal(s.frames.size,0);s.cleanup();
+ }
+ const frame=mount({iframe:true});await flush();assert.equal(frame.createCalls,0);assert.equal(frame.layer.hidden,true);frame.cleanup();
+ const s=mount({path:'/'});await flush();s.navigate('/resources');await flush();assert.equal(s.createCalls,1);s.cleanup();
+});
+
+test('a shell arriving after pathname commit attaches without replacing the field',async()=>{
+ const s=mount({missingHost:true});await flush();assert.equal(s.createCalls,0);assert.equal(s.layer.hidden,true);
+ s.replaceHost();s.mutate();await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.layer.hidden,false);
+ const previous=s.host;s.replaceHost();s.mutate();await flush();s.step();assert.equal(s.createCalls,1);assert.equal(previous.attributes.size,0);assert.ok(s.host.attributes.has('data-quantum-host'));
+ s.cleanup();assert.equal(s.observerDisconnected,true);
+});
+
+test('a renderer resolving after leaving its route stays retained but paused until return',async()=>{
+ const s=mount({deferred:true});await flush();assert.equal(s.createCalls,1);s.navigate('/');s.resolve();await flush();
+ assert.equal(s.disposes,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
+ s.navigate('/docs/connect');await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
+});
+
+
+test('an initially hidden reading route defers GPU initialization until it is visible',async()=>{
+ const s=mount({hidden:true});await flush();assert.equal(s.createCalls,0);assert.equal(s.frames.size,0);
+ s.visibility(false);await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
+});
+
+
+test('temporary home pause controls cannot freeze a later reading route',async()=>{
+ const s=mount({path:'/'});s.control('paused',true);s.navigate('/resources');await flush();s.step();
+ assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);
+ s.control('paused',true);s.step();assert.equal(s.canvas.dataset.field,'paused');
+ s.navigate('/');s.control('paused',true);s.navigate('/community');await flush();s.step();
+ assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);s.cleanup();
 });

@@ -70,6 +70,10 @@ html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-
 /* Fine currents carry the motion through quiet silver space. Content panels
    remain solid and the field stays behind the reading surface. */
 .quantum-backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict;background:linear-gradient(155deg,#f4f6fa 0%,#f9fafc 42%,#eef2f7 100%)}
+/* The root plane precedes each page shell and retains the same paper behind it. */
+.quantum-backdrop[data-persistent]{background:#f7f8fa}
+.quantum-backdrop[hidden]{display:none}
+html[data-ui][data-color-mode] .organic-site.v2-site[data-surface=reading][data-reading-scene=quantum][data-quantum-host]{background:transparent!important}
 .quantum-backdrop>canvas{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity .5s ease}
 .quantum-backdrop>canvas:is([data-field=running],[data-field=paused]){opacity:1}
 .quantum-backdrop-fallback{position:absolute;inset:-20%;opacity:.28;background:repeating-radial-gradient(ellipse at 0 100%,transparent 0 28px,#91a7c04d 29px,transparent 30px 42px);transform:perspective(900px) rotateX(24deg) rotateZ(-14deg);mask-image:linear-gradient(90deg,#000,transparent 44%,transparent 65%,#000)}
