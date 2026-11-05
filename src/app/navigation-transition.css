@@ -1,0 +1,13 @@
+/* Only opacity is composited: the homepage glass and 3D gallery keep their coordinates. */
+html[data-iavse-transition]::view-transition-group(root){animation-duration:240ms}
+html[data-iavse-transition]::view-transition-old(root){animation:iavse-scene-out 240ms cubic-bezier(.22,1,.36,1) both;mix-blend-mode:normal}
+html[data-iavse-transition]::view-transition-new(root){animation:iavse-scene-in 240ms cubic-bezier(.22,1,.36,1) both;mix-blend-mode:normal}
+/* The new pseudo is live. Exclude the wave from the frozen outgoing page so it
+   continues propagating above both scenes rather than being faded out with home. */
+.iavse-quantum-wave{view-transition-name:iavse-wave}
+::view-transition-group(iavse-wave){z-index:1;animation:none}
+::view-transition-old(iavse-wave){display:none}
+::view-transition-new(iavse-wave){animation:none;mix-blend-mode:normal}
+@keyframes iavse-scene-out{to{opacity:0}}
+@keyframes iavse-scene-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}

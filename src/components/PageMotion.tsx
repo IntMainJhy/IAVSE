@@ -79,6 +79,8 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
   const last=lastRoute.current,changed=last!==route||!!previous;lastRoute.current=route;
   if(!element)return;
   resetDeparture.current?.();
+  // The native old/new scene crossfade owns this arrival; do not stack a GSAP fade.
+  if(document.documentElement.hasAttribute('data-iavse-transition'))return;
   if(!element.querySelector('.community-navigation-shell')){
    if(!changed)return;
    const queryOnly=(previous?.from||last).split('?')[0]===path;

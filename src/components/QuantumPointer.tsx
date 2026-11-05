@@ -14,7 +14,7 @@ export function QuantumPointer(){
   const size=240,waveSize=640,dpr=Math.min(devicePixelRatio||1,1.5);
   for(const [surface,context,length] of [[canvas,ctx,size],[wave,ink,waveSize]] as const){surface.width=surface.height=length*dpr;context.scale(dpr,dpr);}
   let frame=0,previous=0,x=0,y=0,dx=0,dy=0,alpha=0,lastMove=-Infinity,light=false,savedReduced=false,navigating=false;
-  let waveFrame=0,pulseAt=-Infinity,quietPulse=false;
+  let waveFrame=0,wavePrevious=0,waveElapsed=0,quietPulse=false,waveLight=false;
   // Reuse geometry and paths. The original ripple moves dots, rather than scaling a picture.
   const points=new Float32Array(37*37*5),groups=Array.from({length:16},()=>[] as number[]),pointerGroups=Array.from({length:16},()=>[] as number[]),falloffs=new Float32Array(1024);
   for(let i=0;i<falloffs.length;i++)falloffs[i]=Math.exp(-Math.pow(i/(falloffs.length-1)*3,2));
@@ -23,11 +23,12 @@ export function QuantumPointer(){
   const color=(bright:boolean)=>bright?'174,211,255':'62,124,210';
   const bright=(element:Element|null)=>document.documentElement.dataset.colorMode==='dark'||!!element?.closest('.v2-landing:not([data-glass-scrolled])');
   const clearPointer=()=>{cancelAnimationFrame(frame);frame=0;previous=0;alpha=0;dx=dy=0;lastMove=-Infinity;ctx.clearRect(0,0,size,size);};
-  const clearWave=()=>{cancelAnimationFrame(waveFrame);waveFrame=0;pulseAt=-Infinity;ink.clearRect(0,0,waveSize,waveSize);wave.style.opacity='0';};
+  const clearWave=()=>{cancelAnimationFrame(waveFrame);waveFrame=0;wavePrevious=waveElapsed=0;ink.clearRect(0,0,waveSize,waveSize);wave.style.opacity='0';};
   const clear=()=>{clearPointer();clearWave();};
-  const drawWave=(now:number)=>{
-   waveFrame=0;const progress=Math.max(0,(now-pulseAt)/(quietPulse?180:760));
-   if(document.hidden||progress>=1){clearWave();return;}
+  const paintWave=(progress:number)=>{
+   // Follow the current surface after a route remount, without measuring layout.
+   const host=document.querySelector('.organic-site,.blog-public-shell'),nextLight=host?bright(host):waveLight;
+   if(nextLight!==waveLight){waveLight=nextLight;ink.fillStyle=`rgb(${color(waveLight)})`;}
    const radius=quietPulse?18:14+260*(1-(1-progress)*(1-progress)),spread=quietPulse?18:22+progress*20;
    for(const group of groups)group.length=0;
    for(let i=0;i<points.length;i+=5){
@@ -43,7 +44,14 @@ export function QuantumPointer(){
     for(let j=0;j<group.length;j+=2){ink.moveTo(group[j]+radius,group[j+1]);ink.arc(group[j],group[j+1],radius,0,Math.PI*2);}
     ink.fill();
    }
-   waveFrame=requestAnimationFrame(drawWave);
+  };
+  const drawWave=(now:number)=>{
+   waveFrame=0;
+   // A busy route commit must not consume the entire effect before its first paint.
+   waveElapsed+=Math.max(0,Math.min(now-wavePrevious,48));wavePrevious=now;
+   const progress=waveElapsed/(quietPulse?180:760);
+   if(document.hidden||progress>=1){clearWave();return;}
+   paintWave(progress);waveFrame=requestAnimationFrame(drawWave);
   };
   const draw=(now:number)=>{
    frame=0;if(document.hidden){clear();return;}
@@ -73,7 +81,7 @@ export function QuantumPointer(){
   };
   const wake=()=>{if(!document.hidden&&!navigating&&!frame)frame=requestAnimationFrame(draw);};
   const move=(event:PointerEvent)=>{
-   if(event.pointerType==='touch'||!fine.matches||reduced()||document.hidden||navigating)return;
+   if(event.pointerType==='touch'||!fine.matches||reduced()||document.hidden||navigating||document.documentElement.hasAttribute('data-iavse-transition'))return;
    dx=Math.max(-36,Math.min(36,event.clientX-x));dy=Math.max(-36,Math.min(36,event.clientY-y));x=event.clientX;y=event.clientY;
    lastMove=performance.now();light=bright(event.target instanceof Element?event.target:null);wake();
   };
@@ -83,14 +91,16 @@ export function QuantumPointer(){
    if(!element||element.matches(':disabled,[aria-disabled=true]'))return;
    let px=event.clientX,py=event.clientY;
    if(event.detail===0){const rect=element.getBoundingClientRect();px=rect.left+rect.width/2;py=rect.top+rect.height/2;}
-   clearWave();pulseAt=performance.now();quietPulse=reduced();
+   clearWave();wavePrevious=performance.now();quietPulse=reduced();
    const center=waveSize/2,ox=((-(px-center)%18)+18)%18,oy=((-(py-center)%18)+18)%18;
    for(let row=0,i=0;row<37;row++)for(let col=0;col<37;col++,i+=5){
     const ax=col*18+ox,ay=row*18+oy,vx=ax-center,vy=ay-center,distance=Math.hypot(vx,vy),safe=Math.max(distance,1);
     points[i]=ax;points[i+1]=ay;points[i+2]=vx/safe;points[i+3]=vy/safe;points[i+4]=distance;
    }
-   ink.fillStyle=`rgb(${color(bright(element))})`;
+   waveLight=bright(element);ink.fillStyle=`rgb(${color(waveLight)})`;
    wave.style.transform=`translate3d(${px-center}px,${py-center}px,0)`;wave.style.opacity='1';
+   // Acknowledge immediately, before React/route work can delay the next RAF.
+   paintWave(0);
    // Keep the wave alive during navigation; only the background/pointer yield.
    waveFrame=requestAnimationFrame(drawWave);
   };

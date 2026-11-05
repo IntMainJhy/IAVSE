@@ -4,13 +4,13 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
-function fixture({reduced=false}={}){
+function fixture({reduced=false,native=false}={}){
  const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PageMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
  const effects=[],layouts=[],calls=[],contexts=[],observers=[],media=[],events=new Map(),changes=new Set(),timers=new Map(),menus=[{open:true}],dispatches=[],exports={};
  class Element{constructor(rect={left:100,top:100,width:160,height:44}){this.rect=rect;this.dataset={};this.scrollTop=0;this.nodes={};}getBoundingClientRect(){return this.rect;}querySelector(selector){return this.nodes[selector]||null;}querySelectorAll(){return this.links||[];}closest(){return this;}contains(){return true;}focus(){this.focused=true;}setAttribute(name,value){this[name]=value;}removeAttribute(name){delete this[name];}hasAttribute(){return false;}}
  let root=new Element(),path='/community',query='',refs=[],refIndex=0;
  const preference={matches:reduced,addEventListener:(_,fn)=>changes.add(fn),removeEventListener:(_,fn)=>changes.delete(fn)};
- const document={querySelectorAll:()=>menus,addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:(key)=>events.delete(key)};
+ const document={documentElement:{hasAttribute:()=>native},querySelectorAll:()=>menus,addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:(key)=>events.delete(key)};
  const window={matchMedia:q=>q.includes('reduced-motion')?preference:{matches:true},addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:key=>events.delete(key),dispatchEvent:event=>{dispatches.push(event);events.get(event.type)?.(event);return true;}};
  const gsap={to:(node,to)=>calls.push({node,to}),fromTo:(node,from,to)=>calls.push({node,from,to}),set:(node,to)=>calls.push({node,to}),killTweensOf:node=>calls.push({node,kill:true}),context:fn=>{const cleanup=fn();const ctx={reverted:false,add:callback=>callback(),revert(){this.reverted=true;cleanup?.();}};contexts.push(ctx);return ctx;},matchMedia:()=>{const m={reverted:false,add:(_,fn)=>{if(!preference.matches)fn();},revert(){this.reverted=true;}};media.push(m);return m;}};
  class ResizeObserver{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}}
@@ -39,6 +39,11 @@ function fixture({reduced=false}={}){
 
 test('first render preserves server attributes until streamed navigation children hydrate',()=>{
  const f=fixture(),p=f.page('/community');assert.equal(f.calls.length,0);assert.equal(p.nav.dataset.motionReady,undefined);assert.equal(f.observers.length,0);p.cleanup();assert.equal(f.events.size,0);
+});
+
+test('a native scene transition releases pending work without stacking another GSAP arrival',()=>{
+ const f=fixture({native:true}),a=f.page('/',100,'feed',{publicPage:true});f.click('/resources');a.cleanup();const count=f.calls.length;
+ const b=f.page('/resources',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,count);assert.equal(f.dispatches.at(-1).detail.pending,false);b.cleanup();
 });
 test('equal-width routes move the active indicator without moving either rail or hiding text',()=>{
  const f=fixture(),a=f.page('/community');f.click('/community/members','members',true);a.cleanup();const start=f.calls.length,b=f.page('/community/members',100,'members'),calls=f.calls.slice(start);
