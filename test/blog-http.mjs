@@ -32,7 +32,11 @@ try{
   const cards=elements(directory).filter(node=>node.name==='article'&&(hasClass(node,'creator-feature')||hasClass(node,'creator-entry'))).map(node=>({node,link:elements(node).find(item=>item.name==='a'&&hasClass(item,'creator-enter'))}));
   assert.ok(cards.every(card=>card.link),'Each creator retains an accessible entry link');
   assert.equal(new Set(cards.map(card=>card.link.attribs.href)).size,cards.length,'Each published space is listed once');
-  return new Map(cards.map(card=>[card.link.attribs.href,text(card.node)]));
+  const publicLinks=new Map(cards.map(card=>[card.link.attribs.href,text(card.node)]));
+  const preload=await fetch(base+'/api/blog-gallery',{headers:{Cookie:cookie}});assert.equal(preload.status,200);assert.match(preload.headers.get('cache-control'),/private.*no-store/);
+  const {previews}=await preload.json();assert.ok(previews.length<=12);
+  for(const preview of previews)if(preview!==null&&!preview.startsWith('/blogs/showcase/'))assert.ok(publicLinks.has(preview.replace(/\/preview$/,'')),'preloading shares the discoverable/public directory boundary');
+  return publicLinks;
  }
  const login=await call('/api/auth/login',{username:'hosting_http',password:'hosting-http-password-2026'});assert.equal(login.status,200);const member=login.headers.get('set-cookie').split(';')[0];
  // Route splitting must keep the final authored home geometry after older glass rules.

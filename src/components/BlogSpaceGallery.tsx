@@ -6,19 +6,24 @@ import {gsap} from 'gsap';
 import {Icon} from './Icons';
 import {FeedAvatar} from './FeedAvatar';
 import {observeGalleryFrame} from '@/lib/gallery-frame-ready';
+import {cachedGalleryPreview,loadGalleryPreview} from '@/lib/gallery-preview';
+import {useLocale} from './LocaleProvider';
 import {gallerySpacePose,gallerySceneMetrics,galleryCameraPose,galleryViewDepth,galleryDepthExtent,galleryLoadOrder,galleryLimit} from '@/lib/blog-gallery-space.mjs';
 
 export type GallerySpace={handle:string;name:string;intro:string;avatarId:string;href:string;avatarSrc?:string;showcase?:boolean;role?:string;template?:string;mode?:'theme'|'static'};
-type Labels={open:string;preview:string;browse:string;directory:string;previous:string;next:string;select:string;close:string;overview:string;reset:string};
+type Labels={open:string;preview:string;browse:string;directory:string;previous:string;next:string;select:string;close:string;overview:string;reset:string;loading:string};
 function GalleryAvatar({space}:{space:GallerySpace}){return space.avatarSrc?<img className="gallery-avatar" src={space.avatarSrc} alt="" width={36} height={36}/>:<FeedAvatar name={space.name} avatarId={space.avatarId}/>;}
 
 function GalleryPanel({space,labels,selected,mounted,index,onSelect,onReady}:{space:GallerySpace;labels:Labels;selected:boolean;mounted:boolean;index:number;onSelect:()=>void;onReady:(handle:string)=>void}){
+ const {locale}=useLocale(),src=space.showcase||space.mode==='static'?space.href+'?embed=gallery':space.href+'/preview';
+ const [html,setHtml]=useState<string|null|undefined>(()=>space.mode==='static'?null:cachedGalleryPreview(src,locale));
  const surface=useRef<HTMLDivElement>(null),readiness=useRef<(()=>void)|null>(null),done=useRef(false),[loaded,setLoaded]=useState(false);
  const ready=useCallback(()=>{if(done.current)return;done.current=true;onReady(space.handle);},[onReady,space.handle]);
  useEffect(()=>{const plane=surface.current;if(!plane)return;const measure=()=>plane.style.setProperty('--gallery-scale',String(plane.clientWidth/1200));const resize=new ResizeObserver(measure);resize.observe(plane);measure();return()=>resize.disconnect();},[]);
  // A failed public document must not hold the rest of the loading queue hostage.
  useEffect(()=>{if(!mounted||loaded)return;const timeout=setTimeout(ready,12000);return()=>clearTimeout(timeout);},[mounted,loaded,ready]);
  useEffect(()=>()=>{readiness.current?.();readiness.current=null;},[space.href]);
+ useEffect(()=>{if(!mounted||space.mode==='static')return;let live=true;void loadGalleryPreview(src,locale,true).then(value=>{if(live)setHtml(value);});return()=>{live=false;};},[mounted,src,locale,space.mode]);
  return <article className="blog-gallery-exhibit" data-gallery-handle={space.handle} data-selected={selected} style={{'--float-delay':`${index*-1.7}s`,'--float-duration':`${8+index*.35}s`} as CSSProperties}>
   <div className="blog-gallery-float">
    <div ref={surface} className="blog-gallery-plane">
@@ -26,7 +31,7 @@ function GalleryPanel({space,labels,selected,mounted,index,onSelect,onReady}:{sp
     <div className="blog-gallery-viewport" data-loaded={loaded}>
      <div className="blog-gallery-placeholder" aria-hidden="true"><span>@{space.handle}</span><GalleryAvatar space={space}/><strong>{space.name}</strong><p>{space.intro}</p></div>
      {/* The stage owns interaction; themed documents stay server-rendered and script-free. */}
-     {mounted&&<iframe src={space.showcase||space.mode==='static'?space.href+'?embed=gallery':space.href+'/preview'} title={labels.preview+' · '+space.name} tabIndex={-1} aria-hidden="true" loading="eager" referrerPolicy="same-origin" sandbox={space.mode==='static'?'allow-scripts allow-same-origin':'allow-same-origin'} onLoad={event=>{readiness.current?.();readiness.current=observeGalleryFrame(event.currentTarget,()=>{setLoaded(true);ready();});}}/>}
+     {mounted&&html!==undefined&&<iframe src={html===null?src:undefined} srcDoc={html??undefined} title={labels.preview+' · '+space.name} tabIndex={-1} aria-hidden="true" loading="eager" referrerPolicy="same-origin" sandbox={space.mode==='static'?'allow-scripts allow-same-origin':'allow-same-origin'} onLoad={event=>{readiness.current?.();readiness.current=observeGalleryFrame(event.currentTarget,()=>{setLoaded(true);ready();});}}/>}
     </div>
     <button className="blog-gallery-select" type="button" onClick={onSelect} aria-label={labels.select+' · '+space.name} aria-pressed={selected} data-gallery-trigger={space.handle}/>
    </div>
@@ -35,10 +40,17 @@ function GalleryPanel({space,labels,selected,mounted,index,onSelect,onReady}:{sp
  </article>;
 }
 
-export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:Labels}){
+export function BlogSpaceGallery(props:{spaces:GallerySpace[];labels:Labels}){
+ const {locale}=useLocale();return <GalleryScene key={locale} {...props}/>;
+}
+
+function GalleryScene({spaces,labels}:{spaces:GallerySpace[];labels:Labels}){
  const exhibits=useMemo(()=>spaces.slice(0,galleryLimit),[spaces]),host=useRef<HTMLElement>(null),select=useRef<(index:number)=>void>(()=>{}),resetView=useRef<()=>void>(()=>{}),selectedHandle=useRef<string|null>(null),suppressClick=useRef(false),settled=useRef(new Set<string>());
- const [selected,setSelected]=useState(-1),[activated,setActivated]=useState(false),[mounted,setMounted]=useState<string[]>([]),[settledVersion,setSettledVersion]=useState(0);
+ const [selected,setSelected]=useState(-1),[activated,setActivated]=useState(false),[mounted,setMounted]=useState<string[]>([]),[settledVersion,setSettledVersion]=useState(0),[revealed,setRevealed]=useState(false);
  const onReady=useCallback((handle:string)=>{if(!settled.current.has(handle)){settled.current.add(handle);setSettledVersion(value=>value+1);}},[]);
+ useEffect(()=>{if(exhibits.every(space=>settled.current.has(space.handle)))setRevealed(true);},[exhibits,settledVersion]);
+ // One unavailable author cannot hide the entire discoverable directory.
+ useEffect(()=>{if(!activated||revealed)return;const timer=setTimeout(()=>setRevealed(true),8000);return()=>clearTimeout(timer);},[activated,revealed]);
  useEffect(()=>{
   if(!activated)return;
   setMounted(current=>{const next=current.filter(handle=>exhibits.some(space=>space.handle===handle));let available=2-next.filter(handle=>!settled.current.has(handle)).length;for(const index of galleryLoadOrder(exhibits.length,selected)){const handle=exhibits[index].handle;if(available>0&&!next.includes(handle)){next.push(handle);available--;}}return next.length===current.length&&next.every((handle,index)=>handle===current[index])?current:next;});
@@ -102,10 +114,11 @@ export function BlogSpaceGallery({spaces,labels}:{spaces:GallerySpace[];labels:L
  const close=()=>{const handle=selectedHandle.current;select.current(-1);if(handle)host.current?.querySelector<HTMLButtonElement>(`[data-gallery-trigger="${CSS.escape(handle)}"]`)?.focus({preventScroll:true});};
  const key=(event:KeyboardEvent<HTMLElement>)=>{if(event.altKey||event.metaKey||event.ctrlKey)return;if(event.key==='Escape'&&selected>=0){event.preventDefault();close();return;}const buttons=Array.from(host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')||[]),author=(event.target as Element).closest<HTMLButtonElement>('.gallery-authors>button'),origin=author?buttons.indexOf(author):selected;let index:number|undefined;if(event.key==='ArrowRight')index=(origin+1)%exhibits.length;else if(event.key==='ArrowLeft')index=origin<0?exhibits.length-1:(origin-1+exhibits.length)%exhibits.length;else if(event.key==='Home')index=0;else if(event.key==='End')index=exhibits.length-1;if(index!==undefined){event.preventDefault();select.current(index);host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')[index]?.focus({preventScroll:true});}};
  if(!exhibits.length)return null;
- return <section ref={host} className="blog-gallery" data-mode="spatial" data-focused={selected>=0} aria-label={labels.directory} data-count={exhibits.length} onKeyDown={key}>
+ return <section ref={host} className="blog-gallery" data-mode="spatial" data-focused={selected>=0} data-gallery-prepared={revealed} aria-label={labels.directory} data-count={exhibits.length} onKeyDown={key}>
   <div className="gallery-view-tools"><button type="button" onClick={()=>resetView.current()} disabled={selected>=0}>{labels.reset}</button></div>
   <div className="blog-gallery-exhibits" onClickCapture={event=>{if(suppressClick.current){event.preventDefault();event.stopPropagation();suppressClick.current=false;}}} onClick={event=>{if(event.target===event.currentTarget)close();}}>
-   <div className="blog-gallery-world">{exhibits.map((space,index)=><GalleryPanel key={space.handle} space={space} labels={labels} index={index} selected={selected===index} mounted={mounted.includes(space.handle)} onSelect={()=>select.current(selected===index?-1:index)} onReady={onReady}/>)}</div>
+   {!revealed&&<div className="blog-gallery-loading" role="status"><span>{labels.loading}</span><span className="blog-gallery-progress" aria-hidden="true"><i style={{transform:`scaleX(${settled.current.size/Math.max(1,exhibits.length)})`}}/></span></div>}
+   <div className="blog-gallery-world" inert={!revealed} aria-hidden={!revealed}>{exhibits.map((space,index)=><GalleryPanel key={space.handle} space={space} labels={labels} index={index} selected={selected===index} mounted={mounted.includes(space.handle)} onSelect={()=>select.current(selected===index?-1:index)} onReady={onReady}/>)}</div>
   </div>
   <div className="gallery-current" aria-live="polite" aria-atomic="true">{current?<><button type="button" className="gallery-return" onClick={close}><Icon name="close"/>{labels.close}</button><div><span>{current.name}</span><small>{current.role||'@'+current.handle}</small></div><Link href={current.href}>{labels.open}<Icon name="arrow"/></Link></>:<p className="gallery-overview-hint">{labels.overview}</p>}</div>
   <div className="gallery-authors" aria-label={labels.select}>{exhibits.map((space,index)=><button type="button" key={space.handle} aria-label={space.name} aria-pressed={selected===index} onClick={()=>select.current(selected===index?-1:index)}><GalleryAvatar space={space}/><span className="gallery-author-name">{space.name}</span></button>)}</div>

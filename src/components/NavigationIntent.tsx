@@ -2,6 +2,8 @@
 
 import {useEffect} from 'react';
 import {useRouter} from 'next/navigation';
+import {useLocale} from './LocaleProvider';
+import {warmGalleryPreviews} from '@/lib/gallery-preview';
 
 const destinations=new Set(['/','/community','/blogs','/resources']);
 const mainNavigation='.organic-header .organic-desktop-nav>a,.organic-header .organic-mobile-menu>nav>a';
@@ -9,7 +11,7 @@ type Connection={saveData?:boolean;effectiveType?:string};
 
 /** Warm only a chosen public destination, leaving clicks and draft guards alone. */
 export function NavigationIntent(){
- const router=useRouter();
+ const router=useRouter(),{locale}=useLocale();
  useEffect(()=>{
   // Four possible keys bound this map; a later visit may refresh stale data.
   const warmed=new Map<string,number>();
@@ -21,6 +23,7 @@ export function NavigationIntent(){
    if(!link.matches(mainNavigation)||link.target&&link.target!=='_self'||link.hasAttribute('download'))return;
    let url:URL;try{url=new URL(link.href,location.href);}catch{return;}
    if(url.origin!==location.origin||!destinations.has(url.pathname)||url.search||url.hash||url.pathname===location.pathname+location.search)return;
+   if(url.pathname==='/blogs')void warmGalleryPreviews(locale);
    const time=Date.now(),previous=warmed.get(url.pathname);
    if(previous!==undefined&&time-previous<30000)return;
    try{router.prefetch(url.pathname);warmed.set(url.pathname,time);}catch{}
@@ -44,6 +47,6 @@ export function NavigationIntent(){
   document.addEventListener('touchstart',prepare,{passive:true});
   window.addEventListener('iavse-navigation-pending',navigation);
   return()=>{cancel();document.removeEventListener('pointerover',prepare);document.removeEventListener('pointerout',leave);document.removeEventListener('pointerdown',cancel);document.removeEventListener('focusin',prepare);document.removeEventListener('touchstart',prepare);window.removeEventListener('iavse-navigation-pending',navigation);};
- },[router]);
+ },[router,locale]);
  return null;
 }

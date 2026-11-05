@@ -12,12 +12,14 @@ vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../src/components
  if(name==='next/link')return{default:'Link'};
  if(name==='gsap')return{gsap:{}};
  if(name.includes('blog-gallery-space'))return geometry;
+ if(name.includes('gallery-preview'))return{cachedGalleryPreview:()=>null};
+ if(name.includes('LocaleProvider'))return{useLocale:()=>({locale:'en'})};
  return{};
 }});
 const walk=node=>node&&typeof node==='object'?[node,...[node.props?.children].flat().flatMap(walk)]:[];
 test('themed previews cannot execute scripts while authored static-site previews retain their sandbox',()=>{
  const spaces=[{handle:'theme',name:'Theme',href:'/blog/theme'},{handle:'static',name:'Static',href:'/blog/static',mode:'static'},{handle:'sample',name:'Sample',href:'/blogs/showcase/sample',showcase:true}];
- const gallery=exports.BlogSpaceGallery({spaces,labels:{}}),panels=walk(gallery).filter(node=>typeof node.type==='function'&&Object.hasOwn(node.props||{},'mounted'));
+ const wrapped=exports.BlogSpaceGallery({spaces,labels:{}}),gallery=wrapped.type(wrapped.props),panels=walk(gallery).filter(node=>typeof node.type==='function'&&Object.hasOwn(node.props||{},'mounted'));
  const frames=panels.map(panel=>walk(panel.type({...panel.props,mounted:true})).find(node=>node.type==='iframe'));
  assert.equal(frames.length,3);
  assert.equal(frames[0].props.sandbox,'allow-same-origin');

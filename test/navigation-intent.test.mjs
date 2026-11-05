@@ -6,7 +6,7 @@ import ts from 'typescript';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/NavigationIntent.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount(){
- const listeners=new Map(),windowListeners=new Map(),timers=new Map(),calls=[],connection={},exports={},location=new URL('https://site.example/workspace/blog');let effect,time=1000,fail=false,id=0;
+ const listeners=new Map(),windowListeners=new Map(),timers=new Map(),calls=[],previews=[],connection={},exports={},location=new URL('https://site.example/workspace/blog');let effect,time=1000,fail=false,id=0;
  class Element{
   constructor(href,options={}){this.href=new URL(href,location.href).href;this.target='';this.main=true;this.download=false;Object.assign(this,options);}
   closest(){return this;}
@@ -19,17 +19,20 @@ function mount(){
  vm.runInNewContext(source,{exports,document,window,location,navigator:{connection},Element,URL,Date:{now:()=>time},setTimeout:(fn,delay)=>{timers.set(++id,{at:time+delay,fn});return id;},clearTimeout:key=>timers.delete(key),require:name=>{
   if(name==='react')return{useEffect:callback=>{effect=callback;}};
   if(name==='next/navigation')return{useRouter:()=>({prefetch:href=>{if(fail)throw Error('Prefetch unavailable');calls.push(href);}})};
+  if(name.includes('LocaleProvider'))return{useLocale:()=>({locale:'en'})};
+  if(name.includes('gallery-preview'))return{warmGalleryPreviews:locale=>previews.push(locale)};
   throw new Error('Unexpected dependency: '+name);
  }});
  assert.equal(exports.NavigationIntent(),null);const cleanup=effect();
  function intent(name,href,options={},extra={}){const event={type:name,target:new Element(href,options),defaultPrevented:false,...extra};listeners.get(name)(event);return event;}
- return{listeners,windowListeners,timers,calls,connection,location,cleanup,intent,advance,failing:value=>{fail=value;}};
+ return{listeners,windowListeners,timers,calls,previews,connection,location,cleanup,intent,advance,failing:value=>{fail=value;}};
 }
 
 test('public main navigation warms on pointer, keyboard and touch intent without handling clicks',()=>{
  const f=mount();
  const pointer=f.intent('pointerover','/community');assert.deepEqual(f.calls,[]);f.advance(120);f.intent('focusin','/blogs');f.intent('touchstart','/resources');f.intent('focusin','/');
  assert.deepEqual(f.calls,['/community','/blogs','/resources','/']);assert.equal(f.listeners.has('click'),false);assert.equal(pointer.defaultPrevented,false);f.cleanup();assert.equal(f.listeners.size,0);
+ assert.deepEqual(f.previews,['en'],'blog intent also prepares actual preview documents');
 });
 
 test('repeated intent is deduplicated for thirty seconds and remains limited to four destinations',()=>{
@@ -48,7 +51,7 @@ test('footer, account, preview, modified, download and hash links never trigger 
 test('data-saving and slow-network preferences suppress optional loading and can change while mounted',()=>{
  const f=mount();f.connection.saveData=true;f.intent('pointerover','/community');f.connection.saveData=false;
  for(const effectiveType of ['slow-2g','2g','3g']){f.connection.effectiveType=effectiveType;f.intent('focusin','/blogs');}
- assert.deepEqual(f.calls,[]);f.connection.effectiveType='4g';f.intent('touchstart','/resources');assert.deepEqual(f.calls,['/resources']);f.cleanup();
+ assert.deepEqual(f.calls,[]);assert.deepEqual(f.previews,[],'optional document warming also respects the data preference');f.connection.effectiveType='4g';f.intent('touchstart','/resources');assert.deepEqual(f.calls,['/resources']);f.cleanup();
 });
 
 test('an unavailable prefetch never cancels navigation or prevents a later retry',()=>{
