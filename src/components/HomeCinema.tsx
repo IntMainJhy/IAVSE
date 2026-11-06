@@ -32,7 +32,7 @@ export function HomeCinema({locale}:{locale:string}){
    const showcase=hero.querySelector('.v2-hero-showcase'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
    // Headline, supporting copy and download action keep their server-rendered
    // position. No timed entrance or scroll tween may rearrange the hero text.
-   if(stage&&showcase)gsap.fromTo(stage,{autoAlpha:0,y:88,rotationX:7,scale:.94,transformPerspective:1800,transformOrigin:'center top'},{autoAlpha:1,y:0,rotationX:0,scale:1,ease:'power2.out',scrollTrigger:{id:'iavse-product-approach',trigger:showcase,start:'top 96%',end:'top 24%',scrub:.55,invalidateOnRefresh:true}});
+   if(stage&&showcase)gsap.fromTo(stage,{opacity:.78,y:14},{opacity:1,y:0,duration:.9,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{id:'iavse-product-approach',trigger:showcase,start:'top bottom',once:true,fastScrollEnd:true}});
   },hero);
   const images=Array.from(hero.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));
   document.fonts?.ready.then(refresh);refresh();

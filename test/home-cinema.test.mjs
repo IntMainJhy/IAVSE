@@ -9,7 +9,7 @@ const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeC
 function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
  const effects=[],calls=[],media=[],frames=new Map(),triggers=[],scrollEndListeners=new Set();let frameId=0,refreshes=0,resolveFont;
  const heading=[{}, {}, {}],copy={},intro={},showcase={},stage={},image=new EventTarget();
- const hero={isConnected:true,querySelector:selector=>({'.v2-hero-copy':copy,'.v2-hero-intro':intro,'.v2-hero-showcase':showcase,'.v2-stage,.v2-hero-empty':stage}[selector]||null),querySelectorAll:selector=>selector==='img'?[image]:heading};
+ const hero={isConnected:true,getBoundingClientRect:()=>({top:0,left:0,width:1200,height:2000}),querySelector:selector=>({'.v2-hero-copy':copy,'.v2-hero-intro':intro,'.v2-hero-showcase':showcase,'.v2-stage,.v2-hero-empty':stage}[selector]||null),querySelectorAll:selector=>selector==='img'?[image]:[]};
  const host={querySelector:selector=>selector==='.v2-hero-scene'?hero:null};
  let currentMedia;
  class ScrollTrigger{
@@ -41,8 +41,8 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
 test('the product enters on its own viewport crossing after the brand scene, not during initial load',()=>{
  const f=mount(),reveal=f.calls.find(call=>call.target===f.stage);
  assert.equal(reveal.to.scrollTrigger.trigger,f.showcase);
- assert.ok(reveal.from.autoAlpha===0&&reveal.to.autoAlpha===1);assert.ok(reveal.from.y>50&&reveal.to.y===0);assert.ok(reveal.from.rotationX>0&&reveal.to.rotationX===0);
- assert.ok(reveal.to.scrollTrigger.scrub>0);assert.equal(reveal.to.scrollTrigger.toggleActions,undefined,'a scrubbed reveal stays reversible without a conflicting play/reset trigger');
+ assert.equal(reveal.from.opacity,.78);assert.equal(reveal.to.opacity,1);assert.ok(reveal.from.y<=14&&reveal.to.y===0);assert.equal(reveal.from.rotationX,undefined);assert.equal(reveal.from.scale,undefined);
+ assert.equal(reveal.to.scrollTrigger.scrub,undefined);assert.equal(reveal.to.scrollTrigger.once,true);assert.equal(reveal.to.scrollTrigger.fastScrollEnd,true);assert.equal(reveal.to.scrollTrigger.invalidateOnRefresh,undefined);assert.equal(reveal.to.clearProps,'transform,opacity');
  assert.equal(f.calls.some(call=>call.target===f.copy),false);assert.equal(f.media[0].scope,f.hero);f.cleanup();
 });
 test('initial and restored views never animate the headline or its parent, and reduced motion stays readable',()=>{
@@ -66,4 +66,10 @@ test('detached cinema cleanup avoids reverting dormant hero animations and kills
 
 test('connected cinema cleanup keeps normal revert for dependency changes and StrictMode',()=>{
  const f=mount();f.cleanup();assert.ok(f.media.every(m=>m.reverted&&m.killMode===undefined));
+});
+
+
+test('the product stage has one entrance owner instead of a competing timed CSS animation',()=>{
+ const css=fs.readFileSync(new URL('../src/app/v2.css',import.meta.url),'utf8');assert.doesNotMatch(css,/v2-stage-arrive/);
+ const f=mount();assert.equal(f.calls.length,1);assert.equal(f.calls[0].target,f.stage);assert.equal(f.calls[0].to.scrollTrigger.once,true);f.cleanup();
 });

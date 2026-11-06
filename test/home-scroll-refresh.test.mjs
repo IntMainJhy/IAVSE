@@ -12,7 +12,7 @@ function fixture({marker=false,hidden=false,scrolling=false}={}){
  const module=loadHomeScrollRefresh({window,document,ScrollTrigger:{refresh(){refreshes++;},isScrolling:()=>scrolling,addEventListener(event,callback){assert.equal(event,'scrollEnd');scrollEndListeners.add(callback);},removeEventListener(event,callback){assert.equal(event,'scrollEnd');scrollEndListeners.delete(callback);}},requestAnimationFrame:callback=>{frames.set(++id,callback);return id;},cancelAnimationFrame:key=>frames.delete(key)});
  return{
   frames,listeners,document,scrollEndListeners,
-  owner(){const root={isConnected:true};return{root,...module.homeScrollRefresh(root)};},
+  owner(){const root={isConnected:true,top:0,height:1000,sections:[],getBoundingClientRect(){return{top:this.top,left:0,width:1200,height:this.height}},querySelectorAll(){return this.sections}};return{root,...module.homeScrollRefresh(root)};},
   navigate(pending){window.dispatchEvent(new CustomEvent('iavse-navigation-pending',{detail:{pending}}));},
   marker(value){marker=value;},
   visibility(value){document.hidden=value;document.dispatchEvent(new Event('visibilitychange'));},
@@ -121,4 +121,19 @@ test('detached owners cannot refresh after a cancelled route or leave a ticking 
 test('a root detached after scheduling is dropped at execution time',()=>{
  const f=fixture(),owner=f.owner();owner.request();owner.root.isConnected=false;f.flush();
  assert.equal(f.refreshes,0);assert.equal(f.frames.size,0);owner.dispose();
+});
+
+test('image and font notifications do not refresh when stable section geometry is unchanged',()=>{
+ const f=fixture(),owner=f.owner();owner.request();f.flush();assert.equal(f.refreshes,1);
+ for(let i=0;i<5;i++){owner.request();f.flush();}assert.equal(f.refreshes,1,'fixed-size media loads must not reset document scroll');
+ owner.root.top=-1600;owner.request();f.flush();assert.equal(f.refreshes,1,'scroll offsets alone do not affect document geometry');
+ owner.root.height+=24;owner.request();f.flush();assert.equal(f.refreshes,2,'real content height changes still refresh');owner.dispose();
+});
+
+test('a section can move inside an unchanged root and dirty work measures its final position',()=>{
+ const f=fixture(),owner=f.owner();let top=500,height=400;
+ owner.root.sections=[{getBoundingClientRect:()=>({top:owner.root.top+top,left:0,width:1200,height})}];
+ owner.request();f.flush();owner.root.top=-300;owner.request();f.flush();assert.equal(f.refreshes,1);
+ top+=30;owner.request();f.navigate(true);top+=20;f.navigate(false);f.flush();assert.equal(f.refreshes,2);
+ height+=50;owner.request();f.flush();assert.equal(f.refreshes,3);owner.request();f.flush();assert.equal(f.refreshes,3);owner.dispose();
 });

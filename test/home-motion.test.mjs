@@ -12,7 +12,7 @@ function fixture({reduced=false,savedReduced=false}={}){
  const node=name=>Object.assign(new Target(),{name});
  const stories=['blog','editor','skills','resources'].map(id=>{const art=node(id+' art'),copy=node(id+' copy');return Object.assign(node(id),{dataset:{homeStory:id},art,copy,querySelector:selector=>({'.home-story-visual':art,'.home-story-copy':copy}[selector]||null)});});
  const closing=node('invitation'),images=[node('first image'),node('second image')];
- const root=Object.assign(node('root'),{isConnected:true,querySelectorAll:selector=>selector==='img'?images:stories,querySelector:()=>closing});
+ const root=Object.assign(node('root'),{isConnected:true,getBoundingClientRect:()=>({top:0,left:0,width:1200,height:4000}),querySelectorAll:selector=>selector==='img'?images:selector==='[data-home-story]'?stories:[],querySelector:()=>closing});
  const window=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>fontResolve=resolve)}});
  class ScrollTrigger{
   constructor(animation,owner){this.animation=animation;this.calls=[];this.active=true;triggers.push(this);owner?.contexts[0].data.push(this);}

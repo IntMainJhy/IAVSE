@@ -1,6 +1,14 @@
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
-type Client={root:HTMLElement;dirty:boolean};
+type Client={root:HTMLElement;dirty:boolean;geometry:string|null};
+// Measure stable section boxes, never the translated art inside them. Scroll
+// offsets are subtracted through the root, so scrolling alone is not a change.
+const geometry=(root:HTMLElement)=>{
+ const origin=root.getBoundingClientRect();
+ return [origin.width,origin.height,...Array.from(root.querySelectorAll<HTMLElement>('[data-home-story],.v2-invitation,.v2-hero-intro,.v2-hero-showcase')).flatMap(element=>{
+  const rect=element.getBoundingClientRect();return[rect.top-origin.top,rect.left-origin.left,rect.width,rect.height];
+ })].map(value=>Math.round(value*2)/2).join(':');
+};
 const clients=new Set<Client>();
 let frame=0,navigating=false;
 const blocked=()=>document.hidden||navigating||document.documentElement.hasAttribute('data-iavse-transition')||ScrollTrigger.isScrolling();
@@ -13,7 +21,10 @@ const schedule=()=>{
   if(blocked())return;
   let refresh=false;
   for(const client of clients){
-   if(client.dirty&&client.root.isConnected)refresh=true;
+   if(client.dirty&&client.root.isConnected){
+    const next=geometry(client.root);
+    if(next!==client.geometry){client.geometry=next;refresh=true;}
+   }
    client.dirty=false;
   }
   if(refresh)ScrollTrigger.refresh();
@@ -30,7 +41,7 @@ const navigation=(event:Event)=>{
 /** Both home animation owners share one global refresh per frame. Requests stay
  * dirty during scrolling or route handoff, and disappear with their owner. */
 export function homeScrollRefresh(root:HTMLElement){
- const client:Client={root,dirty:false};let live=true;
+ const client:Client={root,dirty:false,geometry:null};let live=true;
  if(!clients.size){
   navigating=document.documentElement.hasAttribute('data-iavse-transition');
   window.addEventListener('iavse-navigation-pending',navigation);

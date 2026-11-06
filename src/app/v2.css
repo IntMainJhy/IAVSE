@@ -149,7 +149,6 @@ html[data-ui][data-color-mode] .v2-site .v2-invitation h2{font:550 clamp(30px,4.
 .v2-stage :is(a,button):focus-visible{outline-color:#2458df}
 .v2-stage [role=tabpanel]:focus-visible{outline:2px solid #2458df;outline-offset:4px}
 @media(hover:hover){.v2-work:hover .v2-work-info,.v2-creator:hover h3,.v2-text-link:hover{text-decoration:underline;text-underline-offset:5px}.v2-stage-project:hover h3{text-decoration:underline;text-underline-offset:4px}}
-@media(prefers-reduced-motion:no-preference){.v2-stage{animation:v2-stage-arrive 650ms cubic-bezier(.16,1,.3,1)}@keyframes v2-stage-arrive{from{transform:translateY(18px);opacity:.85}to{transform:translateY(0);opacity:1}}}
 @media(max-width:1000px){.v2-hero-scene{padding:84px 32px 64px;min-height:850px}.v2-hero-copy{text-align:center;margin-inline:auto}.v2-hero-actions{justify-content:center}.v2-hero-showcase{margin-inline:auto}.v2-work-grid{gap:20px}.v2-stage-address{font-size:10px}}
 @media(max-width:767px){
  html[data-ui][data-color-mode] .v2-site .organic-header-inner{min-height:64px}
