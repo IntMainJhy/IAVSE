@@ -1,5 +1,5 @@
 export function skillInstallCommand(baseUrl){
- const url=new URL('/skills/spaceyew-post.tar.gz',new URL(baseUrl).origin).href.replaceAll("'","'\\''");
+ const url=new URL('/skills/iavse-post.tar.gz',new URL(baseUrl).origin).href.replaceAll("'","'\\''");
  return `mkdir -p ~/.agents/skills\ncurl -fsSL '${url}' | tar -xz -C ~/.agents/skills`;
 }
 

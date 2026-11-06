@@ -14,13 +14,15 @@ IAVSE 将可编辑的开发者博客主页与共享文档、独立 AI Skill、�
 | Blog editing and publication / 博客编辑与发布 | [Blog editor](blog-editor.md) | [博客编辑](blog-editor.zh-CN.md) |
 | Résumé extraction and privacy / 简历提取与隐私 | [Résumé import](resume-import.md) | [简历导入](resume-import.zh-CN.md) |
 | Existing static-site hosting / 已有静态托管 | [Hosting](blog-hosting.md) | [托管说明](blog-hosting.zh-CN.md) |
-| AI publishing and scoped credentials / AI 发布与权限凭据 | [REST and stdio MCP reference](../integrations/spaceyew-post/references/api.md) | 同页含凭据配置中文说明 |
+| AI publishing and scoped credentials / AI 发布与权限凭据 | [REST and stdio MCP reference](../integrations/iavse-post/references/api.md) | 同页含凭据配置中文说明 |
 
 The current editor provides six page layouts and eight visual themes, inline canvas editing and responsive preview. Public blog discovery includes the spatial gallery. Saving keeps a private draft; publishing creates an explicit public snapshot. Articles and shared documents require review; blog homepages, projects, Skills and resources publish directly under the existing account and takedown controls.
 
 当前编辑器支持六种排版、八种视觉主题、画布内联编辑与响应式预览；公开博客发现页包含空间展廊。保存保持私有草稿，显式发布生成公开快照。文章与共享文档需审核，博客主页、项目、Skill 和资源按现有账号及下架规则直接发布。
 
 最新维护记录：[2026-11-04 仓库介绍、截图与许可收尾](release-2026-11-04.md)。此前的[运行时代码审计](release-2026-11-02.md)与[性能记录](performance-2026-11-03.md)保留各自的验证范围。
+
+[2026-11-06 名称统一与废弃文件清理](cleanup-2026-11-06.md)
 
 ## Maintain and operate / 维护与运营
 

@@ -53,4 +53,4 @@ These management requests use the existing session cookie and same-origin write 
 
 ## MCP connection
 
-Run the repository's `integrations/spaceyew-mcp.mjs` with Node.js 24+, `SPACEYEW_URL` set to the loopback site origin and `SPACEYEW_TOKEN` in the client's private environment. The stdio bridge discovers only tools allowed by the credential scopes, including `spaceyew_list_catalog`, `spaceyew_get_catalog_item`, `spaceyew_save_catalog_draft` and `spaceyew_submit_catalog`. No browser interaction or administrator password is needed.
+Run the repository's `integrations/iavse-mcp.mjs` with Node.js 24+, `IAVSE_URL` set to the loopback site origin and `IAVSE_TOKEN` in the client's private environment. The stdio bridge discovers only tools allowed by the credential scopes, including `iavse_list_catalog`, `iavse_get_catalog_item`, `iavse_save_catalog_draft` and `iavse_submit_catalog`. No browser interaction or administrator password is needed.

@@ -4,7 +4,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {startServer,stopServer,loginServer} from './server.mjs';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-resume-http-')),base='http://127.0.0.1:3138';let server;
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-resume-http-')),base='http://127.0.0.1:3138';let server;
 function pdf(){const stream='BT /F1 12 Tf 80 750 Td (Example) Tj ET BT /F1 12 Tf 50 750 Td (Alex ) Tj 0 -20 Td (Summary) Tj 0 -20 Td (Independent developer building useful applications.) Tj 0 -20 Td (Education) Tj 0 -20 Td (Example University) Tj ET',objects=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`];let text='%PDF-1.4\n',offsets=[0];objects.forEach((x,i)=>{offsets.push(text.length);text+=`${i+1} 0 obj\n${x}\nendobj\n`});const start=text.length;text+='xref\n0 6\n0000000000 65535 f \n'+offsets.slice(1).map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${start}\n%%EOF\n`;return Buffer.from(text)}
 try{
  server=await startServer(directory,3138,1048576,{APP_SURFACE:'combined',SITE_DEMO:'false',PLATFORM_LOGIN_MODE:'password'});const cookie=await loginServer(base);

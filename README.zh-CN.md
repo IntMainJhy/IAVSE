@@ -110,7 +110,7 @@ main 包含深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12
 
 简化前置审核不移除账号限制、危险链接校验、内容清理、文件归属检查、提交限流、举报和管理员下架。本地初筛提供治理线索，并非语义 AI 审核或合规认证。正式环境仍受部署入口权限控制，参见[公开运营要求](docs/public-launch.md)。
 
-需要 AI 发布时，已登录的账号可通过已登录的 `/api/spaces/keys` API 创建 **catalog** 范围凭据；只有允许 Agent 提交发布时才添加 **submit**。原 `/workspace/connect` 页面目前跳转到博客编辑器，不能作为可用的凭据管理界面。操作字段见[凭据配置](integrations/spaceyew-post/references/api.md#credential-setup-local-accounts)。已有内容库或社区凭据不会自动扩大权限。在私密配置中为 [stdio MCP](integrations/spaceyew-mcp.mjs) 或 [IAVSE Skill](integrations/spaceyew-post/SKILL.md) 配置网站地址与令牌。流程为先 `catalog.save`，读取当前规则并获得发布授权后再 `catalog.submit`。接口返回真实的已发布或待复核状态，Agent 不能自行审批；写入请求的幂等标识避免重试产生重复内容。字段与 MCP 配置见 [API 参考](integrations/spaceyew-post/references/api.md)。
+需要 AI 发布时，已登录的账号可通过已登录的 `/api/spaces/keys` API 创建 **catalog** 范围凭据；只有允许 Agent 提交发布时才添加 **submit**。原 `/workspace/connect` 页面目前跳转到博客编辑器，不能作为可用的凭据管理界面。操作字段见[凭据配置](integrations/iavse-post/references/api.md#credential-setup-local-accounts)。已有内容库或社区凭据不会自动扩大权限。在私密配置中为 [stdio MCP](integrations/iavse-mcp.mjs) 或 [IAVSE Skill](integrations/iavse-post/SKILL.md) 配置网站地址与令牌。流程为先 `catalog.save`，读取当前规则并获得发布授权后再 `catalog.submit`。接口返回真实的已发布或待复核状态，Agent 不能自行审批；写入请求的幂等标识避免重试产生重复内容。字段与 MCP 配置见 [API 参考](integrations/iavse-post/references/api.md)。
 
 精选目录仅索引第三方原仓库，不打包第三方源码，避免重复收录 AI 工具自带的 Skill，并已移除此前的 Anthropic 示例及文档 Skill。工具标签表示本站整理的安装路径，不代表通用兼容性保证。GSAP Skills 采用 MIT，GSAP 运行库另有自身许可。
 
@@ -128,7 +128,7 @@ main 包含深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12
 | --- | --- |
 | 页面与 API | Next.js 15 App Router，服务端页面与同站 API |
 | 界面 | React 19、TypeScript 5、CSS、GSAP、ScrollTrigger |
-| 3D 与媒体 | Three.js、React Three Fiber、GLB 模型、Shader 与延迟加载视频 |
+| 3D 与媒体 | Three.js、GLB 模型、Shader 与延迟加载视频 |
 | 富文本编辑 | Tiptap |
 | 运行与数据 | Node.js 24.15+、内置 SQLite、私有文件目录 |
 | 邮件与媒体 | Nodemailer、Sharp、QRCode |
@@ -150,7 +150,7 @@ main 包含深蓝光学玻璃首页、macOS 下载入口、资源页转场和 12
 | 编辑与发布博客 | [博客编辑](docs/blog-editor.zh-CN.md) |
 | 安全导入简历 | [简历导入](docs/resume-import.zh-CN.md) |
 | 了解静态托管 | [托管与沙箱限制](docs/blog-hosting.zh-CN.md) |
-| 连接 AI 工具 | [API 与 stdio MCP 参考](integrations/spaceyew-post/references/api.md) |
+| 连接 AI 工具 | [API 与 stdio MCP 参考](integrations/iavse-post/references/api.md) |
 | 管理及部署 | [管理中心](docs/管理中心说明.md) · [部署](deploy/README-split.md) |
 | 检查上线边界 | [审核与上线](docs/moderation-and-launch.md) · [审计记录](docs/audit-2026-10-22.md) |
 | 查看加载与渲染优化 | [性能优化记录](docs/performance-2026-11-04.md) |

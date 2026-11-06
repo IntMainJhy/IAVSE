@@ -44,7 +44,7 @@ test('promotion settings validate links and preserve choices during older settin
 
 test('desktop releases preserve omitted settings and reject unsafe installer addresses',()=>{
  const before=D.getConfig('site');
- const releases={macos:{url:'https://example.com/SpaceYew.dmg',version:'1.0 · Apple silicon'},windows:{url:'https://example.com/SpaceYew.exe',version:'1.0 · x64'}};
+ const releases={macos:{url:'https://example.com/IAVSE.dmg',version:'1.0 · Apple silicon'},windows:{url:'https://example.com/IAVSE.exe',version:'1.0 · x64'}};
  const saved=C.saveConfiguration('site',{...before,desktopDownloads:releases});
  assert.deepEqual(saved.desktopDownloads,releases);
  const {desktopDownloads:omitted,...legacy}=saved;

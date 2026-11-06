@@ -6,7 +6,7 @@
 
 | 控件 | 核查证据 | 处理 |
 | --- | --- | --- |
-| 网站名称、网站简介、默认分享摘要 | `saveConfiguration('site')` 保存这些值，但前台品牌固定为 SpaceYew；`page.tsx` 的 `generateMetadata` 从路由、翻译及公开内容生成标题与摘要，没有读取 `site.name`、`site.tagline`、`site.description` | 移除输入；保存设置仍保留既有值，不修改存储或兼容 API |
+| 网站名称、网站简介、默认分享摘要 | `saveConfiguration('site')` 保存这些值，但前台品牌固定为 IAVSE；`page.tsx` 的 `generateMetadata` 从路由、翻译及公开内容生成标题与摘要，没有读取 `site.name`、`site.tagline`、`site.description` | 移除输入；保存设置仍保留既有值，不修改存储或兼容 API |
 | 顶部推广条编辑器 | 公开推广条组件已退役，`promotionBar` 只有存储、校验与兼容读取，没有公开渲染消费者 | 移除启用开关、条目编辑及新增按钮；保留已有配置和 API 校验 |
 | 创建一次性邀请 | 当前注册为邮箱验证码注册，登录/注册组件不接收邀请码输入、状态或查询参数；后台生成后的 `/join` 链接也不携带 token | 移除创建表单；既有记录和撤销操作保留，兼容注册 API 不变 |
 | 唯一站长模式的「分配社区角色」 | 管理权来自绑定的唯一账号，其他 owner/reviewer 在该模式下均为普通成员；存储 reviewer 角色不能授予后台权限 | 仅在唯一站长模式隐藏该动作；未配置的兼容模式保留实际有效的授权 UI |

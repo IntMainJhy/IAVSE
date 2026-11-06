@@ -4,7 +4,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-public-owner-')),base='https://space.example.com',password='public-owner-fixture-password';
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-public-owner-')),base='https://space.example.com',password='public-owner-fixture-password';
 Object.assign(process.env,{APP_DATA_DIR:directory,APP_SURFACE:'combined',PUBLIC_URL:base,PUBLIC_FEATURES_ENABLED:'true',LEGAL_OPERATOR:'Test operator',LEGAL_CONTACT_EMAIL:'test@example.com',LEGAL_EFFECTIVE_DATE:'2026-10-22',INITIAL_ADMIN_PASSWORD:'legacy-production-fixture-password'});
 const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),S=await import('../src/lib/spaces.mjs'),C=await import('../src/lib/community.mjs'),Catalog=await import('../src/lib/catalog.mjs');
 const d=D.db(),id=randomUUID(),email='official@example.com',time=D.now();

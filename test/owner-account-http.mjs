@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {startServer,stopServer} from './server.mjs';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-owner-http-')),base='http://127.0.0.1:3198',password='owner-http-fixture-password';
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-owner-http-')),base='http://127.0.0.1:3198',password='owner-http-fixture-password';
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:base,APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'legacy-http-fixture-password'});
 const D=await import('../src/lib/db.mjs');const d=D.db(),official=randomUUID();
 for(const [id,name,role] of [[official,'official','member'],[randomUUID(),'member','member'],[randomUUID(),'reviewer','reviewer'],[randomUUID(),'other-owner','owner']])d.prepare("INSERT INTO community_users(id,username,password,nickname,role,status,verification,created,updated,email,email_verified_at) VALUES(?,?,?,?,?,'active','local_test',?,?,?,?)").run(id,name,D.passwordHash(password),name,role,D.now(),D.now(),name+'@example.com',D.now());

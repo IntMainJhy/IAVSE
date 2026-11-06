@@ -11,11 +11,11 @@
 | 平台 | https://app.example.com | 127.0.0.1:3008 | 真实账号密码登录，公网注册关闭 |
 | 管理端 | https://admin.example.com/admin/login | 127.0.0.1:3009 | 真实管理账号密码 |
 
-1. 将官方 Node.js **24.15+** Linux 运行时放在 `/opt/spaceyew/node`，不覆盖其他服务使用的运行时。网站源码放在 `/opt/spaceyew/releases/<commit>`，在服务器执行 `npm ci --include=optional`、`npm run build`，将 `/opt/spaceyew/current` 指向该版本。不要上传 macOS 的 `node_modules`、私有客户端或工作区根目录，不要用测试数据覆盖生产数据。
-2. 创建服务用户 `spaceyew`，使其可读取发布目录并拥有 `/var/lib/spaceyew`；数据目录权限700，环境文件600。
-3. 参照根目录 `.env.example` 创建 `/etc/spaceyew/common.env`，存放上传、统计、邮件等公共配置及已有初始管理员配置；不要把管理密码写入模板或源码。已有数据库继续使用原管理员账号，不重置密码。首次初始化未提供 `INITIAL_ADMIN_PASSWORD` 时，私有数据目录的 `initial-admin.txt` 保存随机初始凭据。
-4. 将 `platform.env.example` 和 `admin.env.example` 分别复制为 `/etc/spaceyew/platform.env`、`/etc/spaceyew/admin.env`，替换两个域名；两个文件的 `APP_DATA_DIR` 必须相同。每个服务的 `PUBLIC_URL` 则必须与自己的外部入口一致。
-5. 安装 `spaceyew@.service` 到 `/etc/systemd/system/`，执行 `systemctl daemon-reload`、`systemctl enable --now spaceyew@platform spaceyew@admin`。
+1. 将官方 Node.js **24.15+** Linux 运行时放在 `/opt/iavse/node`，不覆盖其他服务使用的运行时。网站源码放在 `/opt/iavse/releases/<commit>`，在服务器执行 `npm ci --include=optional`、`npm run build`，将 `/opt/iavse/current` 指向该版本。不要上传 macOS 的 `node_modules`、私有客户端或工作区根目录，不要用测试数据覆盖生产数据。
+2. 创建服务用户 `iavse`，使其可读取发布目录并拥有 `/var/lib/iavse`；数据目录权限700，环境文件600。
+3. 参照根目录 `.env.example` 创建 `/etc/iavse/common.env`，存放上传、统计、邮件等公共配置及已有初始管理员配置；不要把管理密码写入模板或源码。已有数据库继续使用原管理员账号，不重置密码。首次初始化未提供 `INITIAL_ADMIN_PASSWORD` 时，私有数据目录的 `initial-admin.txt` 保存随机初始凭据。
+4. 将 `platform.env.example` 和 `admin.env.example` 分别复制为 `/etc/iavse/platform.env`、`/etc/iavse/admin.env`，替换两个域名；两个文件的 `APP_DATA_DIR` 必须相同。每个服务的 `PUBLIC_URL` 则必须与自己的外部入口一致。
+5. 安装 `iavse@.service` 到 `/etc/systemd/system/`，执行 `systemctl daemon-reload`、`systemctl enable --now iavse@platform iavse@admin`。
 6. 参考 `nginx-split.conf.example` 配置两个域名的证书和反向代理，先运行 `nginx -t` 再重载。上游只监听回环地址，Nginx覆盖 `Host`/`X-Real-IP`/`X-Forwarded-For`。仅在这个可信代理配置下使用 `TRUST_PROXY=true`。
 
 平台Cookie为 `site_platform`，管理端为 `site_admin`，均为Host-only、HttpOnly、SameSite=Lax，HTTPS下带Secure；不配置父域名Cookie。Cookie与服务端会话还绑定平台/管理端范围，手动复制到另一端也不能换取身份。退出互不影响。

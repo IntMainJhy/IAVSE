@@ -8,7 +8,7 @@ import {defaultBlogDesign,applyBlogTemplate} from '../src/lib/blog-design.mjs';
 import {blogAppearances,applyBlogAppearance} from '../src/lib/blog-appearances.mjs';
 import {blogTemplates,resumePresentations} from '../src/lib/blog-templates.mjs';
 import {startServer,stopServer,loginServer} from './server.mjs';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-editor-http-')),base='http://127.0.0.1:3177';let server;
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-editor-http-')),base='http://127.0.0.1:3177';let server;
 try{
  Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:base,APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'integration-only-password-2026'});
  const D=await import('../src/lib/db.mjs'),d=D.db();for(const name of ['editor_alex','editor_blair'])d.prepare("INSERT INTO community_users(id,username,password,nickname,role,status,verification,created,updated) VALUES(?,?,?,?,'member','active','local_test',?,?)").run(name,name,D.passwordHash('editor-fixture-password-2026'),name,D.now(),D.now());d.close();delete globalThis.__personalSiteDb;

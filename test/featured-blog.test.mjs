@@ -4,7 +4,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-featured-blog-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-featured-blog-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3197',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'isolated-featured-password'});
 const D=await import('../src/lib/db.mjs'),S=await import('../src/lib/spaces.mjs');
 const d=D.db(),users=['alice','bravo'].map(name=>{const token=randomUUID();d.prepare('INSERT INTO community_users(id,username,password,nickname,verification,created,updated) VALUES(?,?,?,?,?,?,?)').run(name,name,'unused',name,'local_test',D.now(),D.now());d.prepare('INSERT INTO sessions VALUES(?,?,?)').run(D.hash(token),Date.now()+600000,name);return{id:name,token}}),owner=randomUUID();d.prepare('INSERT INTO sessions VALUES(?,?,NULL)').run(D.hash(owner),Date.now()+600000);

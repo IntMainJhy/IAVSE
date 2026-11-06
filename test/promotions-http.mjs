@@ -41,7 +41,7 @@ try {
  assert.equal((pending.match(/type="button" class="space-btn" disabled=""/g)||[]).length,2);
  const config=await(await fetch(server.base+'/api/admin/bootstrap',{headers})).json();
  const releaseSave=value=>fetch(server.base+'/api/admin/config',{method:'POST',headers,body:JSON.stringify({key:'site',value:{...config.site,desktopDownloads:value}})});
- const releases={macos:{url:'https://example.com/releases/SpaceYew.dmg',version:'1.0 · Apple silicon'},windows:{url:'',version:''}};
+ const releases={macos:{url:'https://example.com/releases/IAVSE.dmg',version:'1.0 · Apple silicon'},windows:{url:'',version:''}};
  assert.equal((await releaseSave(releases)).status,200);
  const available=await downloads('en');assert.ok(available.includes('href="'+releases.macos.url+'"'));assert.ok(available.includes('Download for macOS'));assert.ok(available.includes(releases.macos.version));assert.ok(available.includes('Windows desktop app is coming soon'));
  assert.ok(!(await home('en')).includes(releases.macos.url),'installer links stay off the introduction page');

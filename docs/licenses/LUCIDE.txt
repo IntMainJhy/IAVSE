@@ -1,4 +1,4 @@
-Lucide icon subset for SpaceYew
+Lucide icon subset for IAVSE
 
 Source package: lucide-static v1.65.0
 Upstream: https://github.com/lucide-icons/lucide

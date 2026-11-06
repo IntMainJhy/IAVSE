@@ -6,7 +6,7 @@ import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {randomUUID} from 'node:crypto';
 import {crc32} from 'node:zlib';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-blog-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-blog-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3189',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'isolated-blog-owner-password'});
 const {unpackBlog}=await import('../src/lib/blog-archive.mjs');
 const D=await import('../src/lib/db.mjs'),S=await import('../src/lib/spaces.mjs'),B=await import('../src/lib/blog-hosting.mjs');
@@ -31,9 +31,9 @@ test('imports are owned, previews are session-bound, sandboxed, and invisible be
  await assert.rejects(()=>B.blogBundles(req('bob'),['spaces','blog-bundles'],{fileId:source}),error=>error.status===403);
  bundle=await B.blogBundles(req(),['spaces','blog-bundles'],{fileId:source});
  const preview=await B.blogBundles(req(),['spaces','blog-bundles',bundle.id,'preview'],{}),access=preview.src.split('/')[3];
- const document=await B.blogFileResponse(req('', 'GET'),bundle.id,access,['index.html']);assert.equal(document.status,200);assert.match(document.headers.get('Content-Security-Policy'),/sandbox allow-scripts/);assert.doesNotMatch(document.headers.get('Content-Security-Policy'),/allow-same-origin/);assert.match(document.headers.get('Content-Security-Policy'),/connect-src 'none'/);assert.equal(document.headers.get('Referrer-Policy'),'no-referrer');assert.equal(document.headers.get('X-Frame-Options'),'SAMEORIGIN');const served=await document.text();assert.ok(served.includes('spaceyew:page'));assert.doesNotMatch(document.headers.get('Content-Security-Policy'),/allow-popups|allow-top-navigation/);
+ const document=await B.blogFileResponse(req('', 'GET'),bundle.id,access,['index.html']);assert.equal(document.status,200);assert.match(document.headers.get('Content-Security-Policy'),/sandbox allow-scripts/);assert.doesNotMatch(document.headers.get('Content-Security-Policy'),/allow-same-origin/);assert.match(document.headers.get('Content-Security-Policy'),/connect-src 'none'/);assert.equal(document.headers.get('Referrer-Policy'),'no-referrer');assert.equal(document.headers.get('X-Frame-Options'),'SAMEORIGIN');const served=await document.text();assert.ok(served.includes('iavse:page'));assert.doesNotMatch(document.headers.get('Content-Security-Policy'),/allow-popups|allow-top-navigation/);
  const listeners={},messages=[],prefix='/site-files/'+bundle.id+'/'+access+'/',location=new URL(process.env.PUBLIC_URL+prefix+'index.html');runInNewContext(served.match(/<script>([\s\S]*?)<\/script>/)[1],{URL,location,parent:{postMessage:value=>messages.push(value)},addEventListener:(name,callback)=>{listeners[name]=callback}});
- let prevented=false;const click=href=>listeners.click({target:{closest:()=>({getAttribute:()=>href})},preventDefault:()=>{prevented=true}});click('https://example.com/project');assert.equal(prevented,true);assert.equal(messages.at(-1).type,'spaceyew:external-link');assert.equal(messages.at(-1).url,'https://example.com/project');messages.length=0;prevented=false;click('#about');assert.equal(prevented,false);assert.equal(messages.length,0);click('javascript:alert(1)');assert.equal(messages.length,0);
+ let prevented=false;const click=href=>listeners.click({target:{closest:()=>({getAttribute:()=>href})},preventDefault:()=>{prevented=true}});click('https://example.com/project');assert.equal(prevented,true);assert.equal(messages.at(-1).type,'iavse:external-link');assert.equal(messages.at(-1).url,'https://example.com/project');messages.length=0;prevented=false;click('#about');assert.equal(prevented,false);assert.equal(messages.length,0);click('javascript:alert(1)');assert.equal(messages.length,0);
  assert.equal((await B.blogFileResponse(req('','GET'),bundle.id,access,['style.css'])).status,200);
  await assert.rejects(()=>B.blogFileResponse(req('','GET'),bundle.id,'public',['index.html']),error=>error.status===404);
  await assert.rejects(()=>B.blogBundles(req('bob'),['spaces','blog-bundles',bundle.id,'preview'],{}),error=>error.status===404);
@@ -68,14 +68,6 @@ test('new signature themes retain published snapshots and cannot publish draft t
   S.spacesApi(req(),['spaces','save'],{...pending,layout:{...pending.layout,blog:{...pending.layout.blog,theme:'minimal',title:'Private changed title'}}},new URL(req().url));
   assert.equal(review.status,'approved','Theme publishes before any administrator action');
   const visible=S.publicSpace(req('','GET'),'alice');assert.equal(visible.layout.blog.theme,theme);assert.equal(visible.layout.blog.title,'My reviewed blog');assert.equal(S.mine(req()).layout.blog.title,'Private changed title');
- }
-});
-test('downloadable blog starters are self-contained importable HTML in both languages',async()=>{
- for(const theme of ['folio','panorama'])for(const language of ['zh','en']){
-  const name=`blog-${theme}-${language}.html`,bytes=await readFile(new URL('../public/templates/'+name,import.meta.url));
-  assert.ok(bytes.length<5*1024*1024);const imported=unpackBlog(bytes,name);assert.ok(imported.has('index.html'));
-  assert.doesNotMatch(bytes.toString(),/<script[^>]*src=|<link[^>]*stylesheet|<img[^>]*src=|fetch\(/i);
-  assert.match(bytes.toString(),language==='zh'?/lang="zh-CN"/:/lang="en"/);
  }
 });
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true})});

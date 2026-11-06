@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import {useLocale} from './LocaleProvider';
-export function ConnectDocs(){const {t}=useLocale();return <article className="space-panel space-connect-docs"><Link className="space-btn primary" href="/workspace/connect">{t('管理工具授权')}</Link><h2 id="connect-publish">{t('1. 保存草稿')}</h2><p>{t('在客户端私密环境中设置SPACEYEW_URL和SPACEYEW_TOKEN，再调用同一套投稿API。')}</p><pre>{`POST /api/connect
-Authorization: Bearer <SPACEYEW_TOKEN>
+export function ConnectDocs(){const {t}=useLocale();return <article className="space-panel space-connect-docs"><Link className="space-btn primary" href="/workspace/connect">{t('管理工具授权')}</Link><h2 id="connect-publish">{t('1. 保存草稿')}</h2><p>{t('在客户端私密环境中设置IAVSE_URL和IAVSE_TOKEN，再调用同一套投稿API。')}</p><pre>{`POST /api/connect
+Authorization: Bearer <IAVSE_TOKEN>
 Content-Type: application/json
 
 {
@@ -16,14 +16,14 @@ Content-Type: application/json
     "category": "Development",
     "license": "Original work; shared with attribution."
   }
-}`}</pre><h2>{t('2. 投稿Skill')}</h2><p>{t('项目附带spaceyew-post Skill，包含字段说明、幂等重试和先存草稿再送审的步骤。')}</p><code>site-v1/integrations/spaceyew-post/SKILL.md</code><h2 id="connect-mcp">{t('3. 本地MCP桥接')}</h2><p>{t('将桥接程序作为stdio进程启动。支持MCP 2025-11-25，凭据从客户端环境传入，不提供公网HTTP MCP端点。')}</p><pre>{`{
+}`}</pre><h2>{t('2. 投稿Skill')}</h2><p>{t('项目附带iavse-post Skill，包含字段说明、幂等重试和先存草稿再送审的步骤。')}</p><code>site-v1/integrations/iavse-post/SKILL.md</code><h2 id="connect-mcp">{t('3. 本地MCP桥接')}</h2><p>{t('将桥接程序作为stdio进程启动。支持MCP 2025-11-25，凭据从客户端环境传入，不提供公网HTTP MCP端点。')}</p><pre>{`{
   "mcpServers": {
-    "spaceyew": {
+    "iavse": {
       "command": "node",
-      "args": ["/absolute/path/site-v1/integrations/spaceyew-mcp.mjs"],
+      "args": ["/absolute/path/site-v1/integrations/iavse-mcp.mjs"],
       "env": {
-        "SPACEYEW_URL": "http://localhost:3010",
-        "SPACEYEW_TOKEN": "<private scoped credential>"
+        "IAVSE_URL": "http://localhost:3010",
+        "IAVSE_TOKEN": "<private scoped credential>"
       }
     }
   }

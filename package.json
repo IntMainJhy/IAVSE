@@ -29,7 +29,6 @@
     "test:registration:http": "node test/email-registration-http.mjs"
   },
   "dependencies": {
-    "@react-three/fiber": "9.8.2",
     "@tiptap/core": "3.32.0",
     "@tiptap/extension-image": "3.32.0",
     "@tiptap/extension-placeholder": "3.32.0",
@@ -58,6 +57,7 @@
     "@types/sanitize-html": "2.16.2",
     "@types/three": "0.186.0",
     "@xyflow/system": "0.0.83",
+    "postcss": "8.5.30",
     "typescript": "5.9.3"
   },
   "overrides": {

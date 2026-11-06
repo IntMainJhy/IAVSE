@@ -4,7 +4,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID,randomBytes} from 'node:crypto';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-unified-owner-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-unified-owner-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3199',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'legacy-admin-fixture-password'});
 const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),S=await import('../src/lib/spaces.mjs'),API=await import('../src/lib/api.mjs'),E=await import('../src/lib/email-auth.mjs'),C=await import('../src/lib/community.mjs'),Connect=await import('../src/lib/connect.mjs'),Hosting=await import('../src/lib/blog-hosting.mjs');
 const d=D.db(),base=process.env.PUBLIC_URL,password='canonical-owner-fixture-password';

@@ -3,7 +3,7 @@ import {mkdtemp,readdir,readFile,rm} from 'node:fs/promises';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {startServer,stopServer} from './server.mjs';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-register-http-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-register-http-'));
 let server;
 try{
  server=await startServer(directory,3181,1048576,{APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'password',REGISTRATION_ENABLED:'true',SITE_DEMO:'false',DEMO_SKIP_LOGIN:'false'});

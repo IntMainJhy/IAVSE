@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,rm,readdir,readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
-const temp=await mkdtemp(path.join(tmpdir(),'spaceyew-email-register-'));
+const temp=await mkdtemp(path.join(tmpdir(),'iavse-email-register-'));
 Object.assign(process.env,{APP_DATA_DIR:temp,PUBLIC_URL:'http://127.0.0.1:3008',APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'password',REGISTRATION_ENABLED:'true',MAIL_MODE:'capture',INITIAL_ADMIN_PASSWORD:'isolated-owner-password-2026'});
 const D=await import('../src/lib/db.mjs'),E=await import('../src/lib/email-auth.mjs'),A=await import('../src/lib/auth.mjs'),H=await import('../src/lib/api.mjs'),Access=await import('../src/lib/app-access.mjs');
 const base=process.env.PUBLIC_URL;

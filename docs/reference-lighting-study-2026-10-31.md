@@ -2,9 +2,9 @@
 
 ## 方法与范围
 
-使用已有 REA CLI 6.8.0（无需下载），Ego browser TaskSpace 43 对两站进行公开页面观察、滚动和截图；只抓公开同源 JS/CSS，保存在本机临时研究目录，未登录第三方、未执行下载的 bundle、未把第三方资产加入 SpaceYew。浏览器空间已关闭。
+使用已有 REA CLI 6.8.0（无需下载），Ego browser TaskSpace 43 对两站进行公开页面观察、滚动和截图；只抓公开同源 JS/CSS，保存在本机临时研究目录，未登录第三方、未执行下载的 bundle、未把第三方资产加入 IAVSE。浏览器空间已关闭。
 
-REA 对捕获的发布代码做静态解析。这不是网站原始工程、完整源码恢复、像素级还原或物理仿真的证明。原始运行 JSON、来源 URL 与 SHA256 留存在本机研究目录 `/tmp/spaceyew-reference-research/` 中。
+REA 对捕获的发布代码做静态解析。这不是网站原始工程、完整源码恢复、像素级还原或物理仿真的证明。原始运行 JSON、来源 URL 与 SHA256 留存在本机研究目录 `/tmp/iavse-reference-research/` 中。
 
 ## Ego：已观察到的实际实现
 
@@ -15,7 +15,7 @@ REA 对捕获的发布代码做静态解析。这不是网站原始工程、完�
 - 显示与交互状态切换 always/demand frameloop；3D不可见或切换工作区时让出渲染。背景深蓝→饱和蓝→浅色，主反射沿曲面形成宽窄有变化的渐隐边缘。视觉中心是单一大型玻璃装置，文字短、居中、留白大。
 - 当前首屏截图中的 DOM 标题为 Mona Sans 600，28px；下文标题为64px。页面实际滚动发生在内部 div，不是 window.scrollY，已用真实 wheel 验证。
 
-证据代码为 Ego 当前公开发布包中的 0dkni3x5isykl.js 与 00iviq-99lfrh.js；运行记录、来源 URL 与 SHA256 留在本机研究目录 `/tmp/spaceyew-reference-research/`，不把官网发布代码与资产随本站分发。
+证据代码为 Ego 当前公开发布包中的 0dkni3x5isykl.js 与 00iviq-99lfrh.js；运行记录、来源 URL 与 SHA256 留在本机研究目录 `/tmp/iavse-reference-research/`，不把官网发布代码与资产随本站分发。
 
 ## Lusion About：已观察到的实际实现
 
@@ -32,7 +32,7 @@ REA 对捕获的发布代码做静态解析。这不是网站原始工程、完�
 - Ego参数：rea-ego-params-evidence.json，父Evidence ev_5edd5e3db89ef624ee2ecb244c16f18eb8d0284cc3c35f62a285d35360c1ace8。选中49690字节参数bundle，11546 AST节点，syntax完整，语义受限。其余32文件只盘点，不隐式解析。
 - Ego大型Three/R3F合包初次在45秒单文件provider deadline到期，未重复同一调用；保留原始错误/部分Evidence于 rea-ego-summary.json 与 rea-ego-partial-evidence.json，Evidence ev_7e6b4d09a05aabd709f4402fe221d4da95404f1bc7a2b607006dc4d384dcab36。此包的具体材质/环境/后期观察来自公开源码文本定位和真实网络/画面交叉验证，不冒称由完整REA语义图推导。
 
-## 给 SpaceYew 的可执行方向（推断/建议）
+## 给 IAVSE 的可执行方向（推断/建议）
 
 1. 让模型表面的反射表现灯光：把摄影棚大柔光面、暗反射卡放到环境贴图/PMREM中；主场景不摆两条可见的长直发光线。用曲面法线、厚度、倒角和环境层次塑造宽高光与暗部。
 2. 先把无后期的灯光/模型调好，再加入克制的高光溢出和微弱色差；Bloom只能扩散已有高光，不会补出正确形体和折射。避免同时过度曝光、强色差、大blur造成乳白塑料感。
@@ -56,7 +56,7 @@ REA 对捕获的发布代码做静态解析。这不是网站原始工程、完�
 
 本站软接触影属于艺术近似，不能称为完整实时光线追踪焦散；去掉直接可见的光导与背景线状公式，不等于为页面加入昂贵的完整路径追踪。
 
-## 本轮在 SpaceYew 的落地与验证
+## 本轮在 IAVSE 的落地与验证
 
 - 首屏删除直接可见的 Tube 光导、背景窄条/光柱与程序化焦散圆环；原创宽面柔光板与暗反射卡只进入独立摄影棚环境，通过 PMREM 参与真实模型的反射。
 - 保留原创 GLB、体积透射、折射与克制色散。仅对反射高动态范围作平滑压缩，避免高光被裁成白片或让已映射的透射背景再次变灰。

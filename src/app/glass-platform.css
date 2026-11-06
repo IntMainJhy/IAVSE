@@ -128,7 +128,7 @@ html[data-ui][data-color-mode] .v2-site .feed-main>.feed-title{display:table;max
 html[data-ui][data-color-mode] .v2-site .organic-footer{background:#e8e8e8e6!important;color:#345773}
 html[data-ui][data-color-mode] .v2-site .organic-footer :is(.organic-footer-signature,nav a){color:#173957}
 /* Administration has its own shell; its actual tools retain the same reading panes. */
-html[data-ui][data-color-mode] .organic-site.organic-admin{--site-font:"SpaceYew Sans",-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-family:var(--site-font);background:var(--site-blue-gradient);color:#173957;min-height:100svh}
+html[data-ui][data-color-mode] .organic-site.organic-admin{--site-font:"IAVSE Sans",-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;font-family:var(--site-font);background:var(--site-blue-gradient);color:#173957;min-height:100svh}
 html[data-ui][data-color-mode] .organic-site.organic-admin>.home-flow-background{display:none}
 html[data-ui][data-color-mode] .organic-site.organic-admin :is(.admin-side,.panel,.stat,.login-card,.admin-overview){background:#f3f3f3f0;box-shadow:inset 0 1px 0 #f6fbffb3,0 18px 38px -22px #061b4952;border-color:transparent;border-radius:16px}
 html[data-ui][data-color-mode] .organic-site.organic-admin :is(.admin-topline,.page-head){color:#173957}

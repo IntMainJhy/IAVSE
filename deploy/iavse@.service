@@ -1,0 +1,23 @@
+[Unit]
+Description=IAVSE %i website
+After=network.target
+
+[Service]
+Type=simple
+User=iavse
+Group=iavse
+WorkingDirectory=/opt/iavse/current
+Environment=NODE_ENV=production
+EnvironmentFile=/etc/iavse/common.env
+EnvironmentFile=/etc/iavse/%i.env
+ExecStart=/opt/iavse/node/bin/node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port ${PORT}
+Environment=PATH=/opt/iavse/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

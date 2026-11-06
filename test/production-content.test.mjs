@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-production-content-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-production-content-'));
 const base='https://space.example.com';
 Object.assign(process.env,{APP_DATA_DIR:directory,INITIAL_ADMIN_PASSWORD:'isolated-production-owner-password',APP_SURFACE:'combined',PUBLIC_URL:base,PLATFORM_URL:base,PUBLIC_FEATURES_ENABLED:'true',LEGAL_OPERATOR:'Test operator',LEGAL_CONTACT_EMAIL:'operator@example.com',LEGAL_EFFECTIVE_DATE:'2026-10-22'});
 const D=await import('../src/lib/db.mjs'),C=await import('../src/lib/community.mjs'),Catalog=await import('../src/lib/catalog.mjs'),S=await import('../src/lib/spaces.mjs'),P=await import('../src/lib/community-policies.mjs'),API=await import('../src/lib/api.mjs');

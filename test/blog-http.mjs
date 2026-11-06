@@ -7,7 +7,7 @@ import {parseDocument} from 'htmlparser2';
 import {startServer,stopServer,loginServer} from './server.mjs';
 
 // Separate from the unit suite: exercises the built Next server and real response headers.
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-homepage-http-')),base='http://127.0.0.1:3129';let server,adminServer;
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-homepage-http-')),base='http://127.0.0.1:3129';let server,adminServer;
 try{
  Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:base,APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'integration-only-password-2026'});
  const D=await import('../src/lib/db.mjs'),d=D.db(),id=randomUUID();
@@ -91,7 +91,7 @@ try{
  assert.equal((await call('/api/admin/spaces/blog-preview/'+bundle.id,{},member)).status,403);
  const staffPreview=await json('/api/admin/spaces/blog-preview/'+bundle.id,{},owner);assert.equal((await fetch(base+staffPreview.src)).status,200);
  adminServer=await startServer(directory,3130,1048576,{APP_SURFACE:'admin',PLATFORM_URL:base,ADMIN_URL:'http://127.0.0.1:3130',PLATFORM_LOGIN_MODE:'password'});
- for(const asset of ['/icon.svg','/apple-icon.png','/favicon.ico','/brand/spaceyew-icon.png'])assert.equal((await fetch(adminServer.base+asset,{redirect:'manual'})).status,200,'Admin branding must stay on its own origin: '+asset);
+ for(const asset of ['/icon.svg','/apple-icon.png','/favicon.ico','/brand/iavse-icon.png'])assert.equal((await fetch(adminServer.base+asset,{redirect:'manual'})).status,200,'Admin branding must stay on its own origin: '+asset);
  const adminOwner=await loginServer(adminServer.base),adminPreviewResponse=await fetch(adminServer.base+'/api/admin/spaces/blog-preview/'+bundle.id,{method:'POST',headers:{Origin:adminServer.base,Cookie:adminOwner,'Content-Type':'application/json'},body:'{}'});assert.equal(adminPreviewResponse.status,200);const adminPreview=await adminPreviewResponse.json();assert.equal((await fetch(adminServer.base+adminPreview.src)).status,200,'Admin surface serves isolated previews without redirecting to the platform');
  assert.equal((await call('/api/admin/spaces/reviews',{id:review.id,action:'approve',checked:true,reason:'Cannot approve my own upload'},member)).status,403);
  assert.equal((await call('/api/admin/spaces/reviews',{id:review.id,action:'approve',checked:true,reason:'Already directly published fixture'},owner)).status,409);

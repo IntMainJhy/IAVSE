@@ -70,11 +70,11 @@ npx --yes knip@6.44.1 --config scripts/knip.config.mjs --no-progress --productio
 
 | 脚本 | 本次结果及覆盖 | 本机日志（不入库） |
 | --- | --- | --- |
-| `test/content-locales-http.mjs` | 隔离端口 3122。三种内容类型的三语言、元数据、搜索、缺失翻译回退、私有修改与发布隔离、管理员编辑权限及图片访问；首页/关于/求职页原有资料翻译检查保留，增加真实公开博客检查。四种旧主题 Cookie 均应使用统一 `x-social` 外观。 | `/tmp/spaceyew-maint-content-locales-http.log` |
-| `test/promotions-http.mjs` | 隔离端口 3011。旧推广配置继续检查鉴权、持久化和危险 URL 拒绝；首页按当前行为不渲染已弃用的推广条。下载页待发布/可下载/清空状态、设置兼容保存、三语言、带账号密码的 URL 拒绝等断言保留。 | `/tmp/spaceyew-maint-promotions-http.log` |
-| `test/locales-http.mjs` | 三语言集合标题、当前资源 Hub 标题/导航/搜索标签、`html.lang`、原始分类参数和管理登录文案。资源页已改为 Hub，测试不再要求旧 `<em>` 标语；使用实际 `translate`/`htmlLocale` 核对文案及语言，处理 HTML 文本转义。 | `/tmp/spaceyew-maint-locales-http.log` |
-| `test/themes-http.mjs` | 30 个路由/旧偏好组合均使用统一外观，保留语言选择；旧主题 Cookie 不授予管理员访问权。 | `/tmp/spaceyew-maint-themes-http.log` |
-| `test/skills-http.mjs` | 三语言下 30 个详情页、15 个工具筛选列表、6 个目录页面，以及筛选状态保留、可见选项、站点地图和不存在条目处理。 | `/tmp/spaceyew-maint-skills-http.log` |
+| `test/content-locales-http.mjs` | 隔离端口 3122。三种内容类型的三语言、元数据、搜索、缺失翻译回退、私有修改与发布隔离、管理员编辑权限及图片访问；首页/关于/求职页原有资料翻译检查保留，增加真实公开博客检查。四种旧主题 Cookie 均应使用统一 `x-social` 外观。 | `/tmp/iavse-maint-content-locales-http.log` |
+| `test/promotions-http.mjs` | 隔离端口 3011。旧推广配置继续检查鉴权、持久化和危险 URL 拒绝；首页按当前行为不渲染已弃用的推广条。下载页待发布/可下载/清空状态、设置兼容保存、三语言、带账号密码的 URL 拒绝等断言保留。 | `/tmp/iavse-maint-promotions-http.log` |
+| `test/locales-http.mjs` | 三语言集合标题、当前资源 Hub 标题/导航/搜索标签、`html.lang`、原始分类参数和管理登录文案。资源页已改为 Hub，测试不再要求旧 `<em>` 标语；使用实际 `translate`/`htmlLocale` 核对文案及语言，处理 HTML 文本转义。 | `/tmp/iavse-maint-locales-http.log` |
+| `test/themes-http.mjs` | 30 个路由/旧偏好组合均使用统一外观，保留语言选择；旧主题 Cookie 不授予管理员访问权。 | `/tmp/iavse-maint-themes-http.log` |
+| `test/skills-http.mjs` | 三语言下 30 个详情页、15 个工具筛选列表、6 个目录页面，以及筛选状态保留、可见选项、站点地图和不存在条目处理。 | `/tmp/iavse-maint-skills-http.log` |
 
 只读复核命令显式使用本次服务地址：
 

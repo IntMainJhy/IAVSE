@@ -5,7 +5,7 @@ import path from 'node:path';
 import {randomUUID,createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {startServer,stopServer,loginServer} from './server.mjs';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-management-http-'));let server;
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-management-http-'));let server;
 try{
  server=await startServer(path.join(directory,'data'),3183);const base=server.base,owner=await loginServer(base);
  async function call(url,input,token=owner,method=input===undefined?'GET':'POST'){const response=await fetch(base+url,{method,headers:{Origin:base,Cookie:token,'Content-Type':'application/json'},...(input===undefined?{}:{body:JSON.stringify(input)})});return{status:response.status,data:await response.json()}}

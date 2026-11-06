@@ -12,10 +12,10 @@ The source of truth is `src/app/icon.svg`, a 64px grid with white facets on deep
 
 Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` deterministically generates:
 
-- `public/brand/spaceyew-symbol.svg`: transparent blue navigation mark;
+- `public/brand/iavse-symbol.svg`: transparent blue navigation mark;
 - `src/app/favicon.ico`: 16, 32 and 48px browser-tab icons;
 - `src/app/apple-icon.png`: 180px icon flattened onto white;
-- `public/brand/spaceyew-icon.png`: 512px metadata/share icon;
+- `public/brand/iavse-icon.png`: 512px metadata/share icon;
 - `src/lib/brand-icon.ts`: versioned navigation URL using the first 12 characters of the SVG SHA-256.
 
 The legacy filenames preserve existing links and integrations. SVG, ICO and 512px PNG retain transparent outer corners. PNG exports contain an origin note; no image-generation model is involved in these brand assets. Regenerate and commit the source, exports and URL module together so navigation and browser tabs agree.
@@ -28,4 +28,4 @@ Authored portfolio illustrations, résumé images, certificates and screenshots 
 
 ## Compatibility identifiers
 
-The public product and repository are named IAVSE. Existing `spaceyew-*` asset names, `/skills/spaceyew-post` integration paths, deployment service names and private data directories remain compatibility identifiers. Do not rename a running database or deployed service merely to update its display brand.
+The public product, authored asset filenames, font aliases, integration and deployment examples use IAVSE. New integrations use `IAVSE_URL`, `IAVSE_TOKEN`, `iavse_*` tools and `integrations/iavse-mcp.mjs`. Old MCP launch paths, tool names and environment variables remain compatibility inputs; old public brand/Skill URLs redirect to their IAVSE equivalents without duplicate assets. Persisted database ownership keys and token formats are unchanged. Existing deployments keep their own service user, paths and data directory; new deployment examples do not migrate a live installation.

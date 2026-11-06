@@ -14,5 +14,5 @@ export const legalConsultation={
 };
 
 export function legalConsultationResource(locale){
- return {id:'spaceyew-legal-consultation',title:translate(locale,'法律咨询 · 张越律师'),summary:translate(locale,'了解律师背景、民事纠纷业务范围与咨询方式。'),category:'法律咨询',authorName:translate(locale,legalConsultation.firm),url:LEGAL_CONSULTATION_PATH};
+ return {id:'iavse-legal-consultation',title:translate(locale,'法律咨询 · 张越律师'),summary:translate(locale,'了解律师背景、民事纠纷业务范围与咨询方式。'),category:'法律咨询',authorName:translate(locale,legalConsultation.firm),url:LEGAL_CONSULTATION_PATH};
 }

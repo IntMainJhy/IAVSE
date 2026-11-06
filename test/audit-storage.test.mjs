@@ -6,7 +6,7 @@ import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import sharp from 'sharp';
 
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-storage-audit-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-storage-audit-'));
 process.env.APP_DATA_DIR=directory;
 process.env.INITIAL_ADMIN_PASSWORD='storage-audit-password-2026';
 process.env.PUBLIC_URL='http://localhost:3188';

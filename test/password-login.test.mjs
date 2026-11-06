@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-password-login-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-password-login-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3108',APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'experience',INITIAL_ADMIN_PASSWORD:'isolated-owner-password-2026'});
 const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),API=await import('../src/lib/api.mjs');
 const d=D.db(),password='isolated-member-password-2026';

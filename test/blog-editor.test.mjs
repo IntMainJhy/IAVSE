@@ -4,7 +4,7 @@ import {mkdtemp,rm,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-editable-blog-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-editable-blog-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3197',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'isolated-editor-password'});
 const D=await import('../src/lib/db.mjs'),S=await import('../src/lib/spaces.mjs'),{handle}=await import('../src/lib/api.mjs'),{pageRedirect}=await import('../src/lib/app-access.mjs');
 const d=D.db(),users=['alice','bravo'].map(name=>{const token=randomUUID();d.prepare('INSERT INTO community_users(id,username,password,nickname,verification,created,updated) VALUES(?,?,?,?,?,?,?)').run(name,name,'unused',name,'local_test',D.now(),D.now());d.prepare('INSERT INTO sessions VALUES(?,?,?)').run(D.hash(token),Date.now()+600000,name);return {id:name,token}}),owner=randomUUID();d.prepare('INSERT INTO sessions VALUES(?,?,NULL)').run(D.hash(owner),Date.now()+600000);
@@ -33,6 +33,6 @@ test('owner editor is privileged, checks CSRF and synchronizes the default publi
 });
 test('admin branding stays on its own origin without opening arbitrary public routes',()=>{
  Object.assign(process.env,{APP_SURFACE:'admin',PLATFORM_URL:'http://localhost:3010',ADMIN_URL:'http://localhost:3011'});
- try{for(const asset of ['/icon.svg','/favicon.ico','/apple-icon.png','/brand/spaceyew-icon.png','/brand/spaceyew-symbol.svg'])assert.equal(pageRedirect(asset),null);assert.equal(pageRedirect('/blogs'),'http://localhost:3010/blogs');assert.equal(pageRedirect('/brand/private.svg'),'http://localhost:3010/brand/private.svg')}finally{process.env.APP_SURFACE='combined'}
+ try{for(const asset of ['/icon.svg','/favicon.ico','/apple-icon.png','/brand/iavse-icon.png','/brand/iavse-symbol.svg'])assert.equal(pageRedirect(asset),null);assert.equal(pageRedirect('/blogs'),'http://localhost:3010/blogs');assert.equal(pageRedirect('/brand/private.svg'),'http://localhost:3010/brand/private.svg')}finally{process.env.APP_SURFACE='combined'}
 });
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true})});

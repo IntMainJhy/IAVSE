@@ -6,7 +6,7 @@ import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 
-const root=await mkdtemp(path.join(tmpdir(),'spaceyew-demo-cleanup-'));
+const root=await mkdtemp(path.join(tmpdir(),'iavse-demo-cleanup-'));
 const data=path.join(root,'data');process.env.APP_DATA_DIR=data;process.env.INITIAL_ADMIN_PASSWORD='isolated-owner-password-2026';
 const D=await import('../src/lib/db.mjs');
 const {cleanupDemoData}=await import('../scripts/remove-demo-data.mjs');

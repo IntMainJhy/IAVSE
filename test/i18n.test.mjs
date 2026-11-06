@@ -6,7 +6,8 @@ import en from '../src/lib/locales/en.json' with {type:'json'};
 import ja from '../src/lib/locales/ja.json' with {type:'json'};
 import {localeTranslator} from '../src/lib/client-i18n.mjs';
 const messages=Object.fromEntries(Object.entries(en).map(([key,value])=>[key,[value,ja[key]]]));
-import {normalizeLocale,htmlLocale,translate,localeDate} from '../src/lib/i18n.mjs';
+import {normalizeLocale,htmlLocale,translate} from '../src/lib/i18n.mjs';
+import {localeDate} from '../src/lib/locale-format.mjs';
 
 test('language defaults, catalog completeness and interpolation preserve original content',()=>{
  assert.equal(normalizeLocale(undefined),'en');assert.equal(normalizeLocale('fr'),'en');assert.equal(htmlLocale('zh'),'zh-CN');assert.equal(htmlLocale('ja'),'ja');

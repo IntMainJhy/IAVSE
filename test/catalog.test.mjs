@@ -4,7 +4,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
-const dir=await mkdtemp(path.join(tmpdir(),'spaceyew-catalog-'));
+const dir=await mkdtemp(path.join(tmpdir(),'iavse-catalog-'));
 process.env.APP_DATA_DIR=dir;process.env.PUBLIC_URL='http://localhost:3129';process.env.INITIAL_ADMIN_PASSWORD='catalog-owner-test-password';
 const D=await import('../src/lib/db.mjs'),C=await import('../src/lib/catalog.mjs'),Community=await import('../src/lib/community.mjs'),M=await import('../src/lib/moderation.mjs'),Connect=await import('../src/lib/connect.mjs');
 const d=D.db();

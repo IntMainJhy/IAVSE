@@ -4,7 +4,7 @@ import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-production-auth-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-production-auth-'));
 const base='https://space.example.com',password='isolated-production-password-2026';
 Object.assign(process.env,{APP_DATA_DIR:directory,INITIAL_ADMIN_PASSWORD:'isolated-owner-password-2026',APP_SURFACE:'platform',PUBLIC_URL:base,PUBLIC_FEATURES_ENABLED:'true',REGISTRATION_ENABLED:'true',LEGAL_OPERATOR:'Test operator',LEGAL_CONTACT_EMAIL:'test@example.com',LEGAL_EFFECTIVE_DATE:'2026-10-22',MAIL_MODE:'capture',TRUST_PROXY:'false'});
 const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),E=await import('../src/lib/email-auth.mjs'),C=await import('../src/lib/community.mjs'),S=await import('../src/lib/spaces.mjs'),P=await import('../src/lib/community-policies.mjs'),API=await import('../src/lib/api.mjs');

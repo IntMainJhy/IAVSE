@@ -10,32 +10,34 @@ import {skillInstallCommand} from '../src/lib/skill-install.mjs';
 
 test('install URL follows the configured site without including credentials, paths or query strings',()=>{
  const command=skillInstallCommand('https://user:secret@example.com/docs?token=private');
- assert.equal(command,"mkdir -p ~/.agents/skills\ncurl -fsSL 'https://example.com/skills/spaceyew-post.tar.gz' | tar -xz -C ~/.agents/skills");
+ assert.equal(command,"mkdir -p ~/.agents/skills\ncurl -fsSL 'https://example.com/skills/iavse-post.tar.gz' | tar -xz -C ~/.agents/skills");
  assert.ok(skillInstallCommand('http://localhost:3010/').includes('http://localhost:3010/skills/'));
  execFileSync('sh',['-n'],{input:command});
 });
 
-test('packaged Skill contains every reference and fallback script with original content',()=>{
+test('packaged Skill contains every reference and fallback script with original content',async()=>{
  execFileSync(process.execPath,['scripts/package-skill.mjs']);
  const files=['SKILL.md','references/api.md','scripts/client.mjs','scripts/request.mjs'];
- const archive='public/skills/spaceyew-post.tar.gz',target=mkdtempSync(join(tmpdir(),'spaceyew-skill-'));
+ const archive='public/skills/iavse-post.tar.gz',target=mkdtempSync(join(tmpdir(),'iavse-skill-'));
  try{
   const entries=execFileSync('tar',['-tzf',archive],{encoding:'utf8'}).trim().split('\n');
-  assert.deepEqual(entries,files.map(file=>'spaceyew-post/'+file));
-  assert.deepEqual(readFileSync('public/skills/ergathia-post.tar.gz'),readFileSync(archive),'previous install URLs must deliver the renamed Skill');
+  assert.deepEqual(entries,files.map(file=>'iavse-post/'+file));
+  // Legacy URLs are redirects, not duplicate archives.
+  const {default:config}=await import('../next.config.mjs');
+  assert.ok((await config.redirects()).some(route=>route.destination==='/skills/iavse-post.tar.gz'));
   execFileSync('tar',['-xzf',archive,'-C',target]);
-  for(const file of files)assert.deepEqual(readFileSync(join(target,'spaceyew-post',file)),readFileSync(join('integrations/spaceyew-post',file)));
+  for(const file of files)assert.deepEqual(readFileSync(join(target,'iavse-post',file)),readFileSync(join('integrations/iavse-post',file)));
  }finally{rmSync(target,{recursive:true,force:true});}
 });
 
-test('SpaceYew client accepts both current and previous private environment configuration',async()=>{
- const {call}=await import('../integrations/spaceyew-post/scripts/client.mjs');
- const keys=['SPACEYEW_URL','SPACEYEW_TOKEN','ERGATHIA_URL','ERGATHIA_TOKEN'];
+test('IAVSE client accepts both current and previous private environment configuration',async()=>{
+ const {call}=await import('../integrations/iavse-post/scripts/client.mjs');
+ const keys=['IAVSE_URL','IAVSE_TOKEN','SPACEYEW_URL','SPACEYEW_TOKEN','ERGATHIA_URL','ERGATHIA_TOKEN'];
  const previous=Object.fromEntries(keys.map(key=>[key,process.env[key]])),originalFetch=globalThis.fetch;
  const token='erg_'+'A'.repeat(43);let requested;
  try{
   globalThis.fetch=async(url,options)=>{requested={url:String(url),authorization:options.headers.Authorization};return Response.json({id:'current-member'});};
-  for(const prefix of ['SPACEYEW','ERGATHIA']){
+  for(const prefix of ['IAVSE','SPACEYEW','ERGATHIA']){
    for(const key of keys)delete process.env[key];
    process.env[prefix+'_URL']='https://example.com';process.env[prefix+'_TOKEN']=token;
    assert.equal((await call('me')).id,'current-member');

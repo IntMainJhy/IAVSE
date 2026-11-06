@@ -108,7 +108,7 @@ Saving remains private. A published version is an immutable snapshot: later edit
 
 Removing pre-review does not remove account restrictions, unsafe-link validation, content sanitization, ownership checks, submission limits, reports or administrative takedowns. Local screening provides signals for moderation; it is not semantic AI review or a guarantee of legal compliance. Deployment-specific public access controls remain in place; see [public operating requirements](docs/public-launch.en.md).
 
-For AI publishing, an authenticated account can create a credential through the authenticated `/api/spaces/keys` API with **catalog** scope, adding **submit** only if the agent may submit content for publication. The former `/workspace/connect` page currently redirects to the blog editor; it is not a working credential-management screen. See [credential setup](integrations/spaceyew-post/references/api.md#credential-setup-local-accounts). Existing library/community credentials are not silently expanded. Configure the [stdio MCP bridge](integrations/spaceyew-mcp.mjs) or [IAVSE Skill](integrations/spaceyew-post/SKILL.md) with a private site URL and token. The workflow is `catalog.save`, then `catalog.submit` after authorization and reading the current policy. A submission returns its actual published or pending status; it cannot approve its own review. Writes use stable request IDs to prevent duplicate retries. See the [API reference](integrations/spaceyew-post/references/api.md) for fields and MCP setup.
+For AI publishing, an authenticated account can create a credential through the authenticated `/api/spaces/keys` API with **catalog** scope, adding **submit** only if the agent may submit content for publication. The former `/workspace/connect` page currently redirects to the blog editor; it is not a working credential-management screen. See [credential setup](integrations/iavse-post/references/api.md#credential-setup-local-accounts). Existing library/community credentials are not silently expanded. Configure the [stdio MCP bridge](integrations/iavse-mcp.mjs) or [IAVSE Skill](integrations/iavse-post/SKILL.md) with a private site URL and token. The workflow is `catalog.save`, then `catalog.submit` after authorization and reading the current policy. A submission returns its actual published or pending status; it cannot approve its own review. Writes use stable request IDs to prevent duplicate retries. See the [API reference](integrations/iavse-post/references/api.md) for fields and MCP setup.
 
 The curated Skill directory links to upstream repositories rather than bundling third-party code. It focuses on independent projects rather than duplicating skills bundled with AI tools; the previously listed Anthropic examples and document Skills have been removed. Tool badges describe the installation paths documented by this directory, not universal compatibility. GSAP Skills use MIT; the GSAP runtime has separate license terms.
 
@@ -126,7 +126,7 @@ The curated Skill directory links to upstream repositories rather than bundling 
 | --- | --- |
 | Pages and API | Next.js 15 App Router, server-rendered pages and same-site APIs |
 | Interface | React 19, TypeScript 5, CSS, GSAP and ScrollTrigger |
-| 3D and media | Three.js, React Three Fiber, GLB models, shaders and lazy-loaded video |
+| 3D and media | Three.js, GLB models, shaders and lazy-loaded video |
 | Rich text | Tiptap |
 | Runtime and storage | Node.js 24.15+, built-in SQLite and a private file directory |
 | Email and media | Nodemailer, Sharp and QRCode |
@@ -148,7 +148,7 @@ The [2026-10-22 audit report](docs/audit-2026-10-22.md) records an earlier scope
 | Edit and publish a blog | [Blog editor](docs/blog-editor.md) |
 | Import a résumé safely | [Résumé import](docs/resume-import.md) |
 | Understand static hosting | [Hosting and sandbox limits](docs/blog-hosting.md) |
-| Connect an AI tool | [API and stdio MCP reference](integrations/spaceyew-post/references/api.md) |
+| Connect an AI tool | [API and stdio MCP reference](integrations/iavse-post/references/api.md) |
 | Operate the platform | [Administration](docs/administration.en.md) · [Deployment](deploy/README-split.en.md) |
 | Review launch boundaries | [Moderation and launch](docs/moderation-and-launch.md) · [Audit](docs/audit-2026-10-22.md) |
 | Review loading and rendering performance | [Performance audit](docs/performance-2026-11-04.md) |

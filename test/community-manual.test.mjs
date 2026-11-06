@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import sharp from 'sharp';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-manual-post-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-manual-post-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://127.0.0.1:3008',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'manual-owner-fixture-password'});
 const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),C=await import('../src/lib/community.mjs'),V=await import('../src/lib/covers.mjs');
 const base=process.env.PUBLIC_URL;

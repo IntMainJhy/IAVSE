@@ -5,7 +5,7 @@ import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {passwordHash,hash} from '../src/lib/db.mjs';
 import {startServer,stopServer} from './server.mjs';
-const data=await mkdtemp(path.join(os.tmpdir(),'spaceyew-split-auth-'));
+const data=await mkdtemp(path.join(os.tmpdir(),'iavse-split-auth-'));
 const platformUrl='http://127.0.0.1:3192',adminUrl='http://127.0.0.1:3193';
 let platform,admin,d;
 const call=(base,url,{method='GET',body,cookie='',origin=base}={})=>fetch(base+url,{method,redirect:'manual',headers:{...(method!=='GET'?{Origin:origin,'Content-Type':'application/json'}:{}),...(cookie?{Cookie:cookie}:{})},body:body===undefined?undefined:JSON.stringify(body)});

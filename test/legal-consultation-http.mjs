@@ -6,7 +6,7 @@ import {startServer,stopServer} from './server.mjs';
 import {LEGAL_CONSULTATION_PATH,legalConsultation,legalConsultationResource} from '../src/lib/legal-consultation.mjs';
 import {translate} from '../src/lib/i18n.mjs';
 
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-legal-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-legal-'));
 let server;
 try{
  server=await startServer(directory,3197,1048576,{APP_SURFACE:'platform',PLATFORM_LOGIN_MODE:'password',REGISTRATION_ENABLED:'false'});

@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {crc32} from 'node:zlib';
-const directory=await mkdtemp(path.join(tmpdir(),'spaceyew-resume-'));
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-resume-'));
 Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:'http://localhost:3194',APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'isolated-resume-password'});
 const D=await import('../src/lib/db.mjs'),C=await import('../src/lib/content.mjs'),R=await import('../src/lib/resume-import.mjs'),{handle}=await import('../src/lib/api.mjs'),S=await import('../src/lib/spaces.mjs');
 const d=D.db(),owner=randomUUID(),member=randomUUID();

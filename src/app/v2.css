@@ -1,8 +1,8 @@
 /* UI v2: the user-pinned Ego Lite reference, translated into a creator showcase.
    Shared chrome changes; authored portfolios and editing data keep their own rules. */
-@font-face{font-family:"SpaceYew Sans";src:url('/fonts/DMSans-Variable.woff2') format('woff2');font-weight:100 1000;font-display:swap}
+@font-face{font-family:"IAVSE Sans";src:url('/fonts/DMSans-Variable.woff2') format('woff2');font-weight:100 1000;font-display:swap}
 html[data-ui][data-color-mode]:has(.v2-site){
- --site-font:"SpaceYew Sans",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+ --site-font:"IAVSE Sans",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
  --site-canvas:#eef3f9;--site-surface:#fff;--site-raised:#e5edf8;
  --site-text:#14274b;--site-body:#405675;--site-muted:#5b708c;
  --site-line:#d9e3f0;--site-control-line:#bfcee2;--site-accent:#2458df;--site-accent-soft:#e1eaff;
@@ -45,7 +45,7 @@ html[data-ui][data-color-mode] .v2-site .appearance-options>button{border-radius
 html[data-ui][data-color-mode] .v2-site .community-auth-form h1{font-family:var(--site-font);font-size:34px;font-weight:600;letter-spacing:-.04em}
 html[data-ui][data-color-mode] .v2-site .community-auth-form .field>input{border-radius:12px}
 html[data-ui][data-color-mode] .v2-site .community-auth-form>form>.organic-button{border-radius:999px}
-body:has(.v2-site) .promotion-bar{background:#10234f;min-height:28px;font-family:"SpaceYew Sans",sans-serif;font-size:11px}
+body:has(.v2-site) .promotion-bar{background:#10234f;min-height:28px;font-family:"IAVSE Sans",sans-serif;font-size:11px}
 body:has(.v2-site) .promotion-bar .promotion-item{padding-block:0}
 
 .v2-home{position:relative;isolation:isolate;min-width:0;overflow:clip;background:linear-gradient(180deg,#142a5d 0,#236fde 420px,var(--site-canvas) 1040px)}

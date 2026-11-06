@@ -3,7 +3,7 @@ import {documentOutline} from '@/lib/document-outline.mjs';
 import {SiteOwnerBadge} from './SiteOwnerBadge';
 import Link from 'next/link';
 import Form from 'next/form';
-import {catalogCategoryLabel,catalogCoverUrl as defaultCover} from '@/lib/catalog-presentation.mjs';
+import {catalogCategoryLabel} from '@/lib/catalog-presentation.mjs';
 import {headers} from 'next/headers';
 const catalogRequest=async()=>new Request(process.env.PUBLIC_URL||'http://localhost:3008',{headers:await headers()});
 import {skillAiTools,skillFilters} from '@/lib/skill-catalog.mjs';
@@ -17,7 +17,6 @@ import {SkillCopyBlock} from './SkillInstallation';
 import {Icon} from './Icons';
 export type CatalogQuery=Record<string,string|string[]|undefined>;
 export const catalogNames:Record<string,string>={docs:'文档',skills:'Skill',resources:'其他资源'};
-export {defaultCover};
 export async function CatalogFilter({kind,q,category,categories}:{kind:'docs'|'resources';q:string;category:string;categories:string[]}){
  const {t}=await serverI18n(),base='/'+kind;
  const href=(value:string)=>{const params=new URLSearchParams();if(kind==='resources')params.set('type','resources');if(q)params.set('q',q);if(value)params.set('category',value);return base+(params.size?'?'+params:'')};

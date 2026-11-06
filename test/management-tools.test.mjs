@@ -4,7 +4,7 @@ import {mkdtemp,rm,readFile,access,rename} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {randomUUID} from 'node:crypto';
-const dir=await mkdtemp(path.join(tmpdir(),'spaceyew-management-tools-'));
+const dir=await mkdtemp(path.join(tmpdir(),'iavse-management-tools-'));
 process.env.APP_DATA_DIR=dir;process.env.PUBLIC_URL='http://localhost:3182';process.env.INITIAL_ADMIN_PASSWORD='management-test-password-2026';
 const D=await import('../src/lib/db.mjs'),A=await import('../src/lib/auth.mjs'),C=await import('../src/lib/content.mjs'),S=await import('../src/lib/spaces.mjs'),U=await import('../src/lib/uploads.mjs'),SU=await import('../src/lib/spaces-uploads.mjs'),API=await import('../src/lib/api.mjs'),M=await import('../src/lib/media.mjs');
 let d=D.db();

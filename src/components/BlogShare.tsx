@@ -19,7 +19,7 @@ export function BlogShare({path,available=true}:{path:string;available?:boolean}
    <div className="space-share-qr">{qrFailed?<p role="status">{t('二维码暂时不可用，仍可复制链接分享。')}</p>:<img width="156" height="156" loading="lazy" src={qr} alt={t('个人主页二维码')} onError={()=>setQrFailed(true)}/>}</div>
    <label className="space-share-link" htmlFor={id}>{t('主页链接')}</label>
    <div className="space-share-copy" data-copied={copied}><input id={id} readOnly value={url} onFocus={e=>e.currentTarget.select()}/><button type="button" className="space-btn" onClick={()=>void copy()}><Icon name={copied?'check':'copy'}/>{copied?t('已复制'):t('复制')}</button></div>
-   <div className="space-share-secondary"><button type="button" disabled={sharing} onClick={()=>void share()}><Icon name="share"/>{sharing?t('正在分享…'):t('系统分享')}</button><a href={qr} download="spaceyew-homepage.svg"><Icon name="download"/>{t('下载二维码')}</a></div>
+   <div className="space-share-secondary"><button type="button" disabled={sharing} onClick={()=>void share()}><Icon name="share"/>{sharing?t('正在分享…'):t('系统分享')}</button><a href={qr} download="iavse-homepage.svg"><Icon name="download"/>{t('下载二维码')}</a></div>
    <p className="space-share-feedback" data-copied={copied} role={error?'alert':'status'} aria-live="polite">{error?t(error):copied?t('链接已复制'):t('公开链接始终指向已发布的主页。')}</p>
   </div>
  </details>;

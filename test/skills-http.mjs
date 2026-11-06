@@ -46,13 +46,13 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
 }
 let catalogPages=0;
 for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
- const response=await fetch(base+'/'+kind+'?'+(kind==='resources'?'type=resources&':'')+'q=SpaceYew',{headers:{cookie:'site-locale='+locale}}),html=await response.text();
+ const response=await fetch(base+'/'+kind+'?'+(kind==='resources'?'type=resources&':'')+'q=IAVSE',{headers:{cookie:'site-locale='+locale}}),html=await response.text();
  assert.equal(response.status,200);
  assert.ok(!/<select[^>]*name="category"/.test(html),'categories are not collapsed');
  const nav=html.split('<nav class="catalog-filter-options" aria-label="'+translate(locale,'分类')+'">')[1]?.split('</nav>')[0];
  assert.ok(nav&&nav.includes(translate(locale,'全部分类')),'visible catalog categories');
  const links=[...nav.matchAll(/href="([^"]+)"/g)].map(match=>new URL(match[1].replaceAll('&amp;','&'),base));
- assert.ok(links.every(url=>url.searchParams.get('q')==='SpaceYew'),'category changes preserve search');
+ assert.ok(links.every(url=>url.searchParams.get('q')==='IAVSE'),'category changes preserve search');
  const choice=links.find(url=>url.searchParams.has('category'));
  if(choice){
   const selected=await(await fetch(choice,{headers:{cookie:'site-locale='+locale}})).text();
