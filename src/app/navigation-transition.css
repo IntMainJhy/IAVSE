@@ -1,13 +1,7 @@
-/* Only opacity is composited: the homepage glass and 3D gallery keep their coordinates. */
-html[data-iavse-transition]::view-transition-group(root){animation-duration:240ms}
-html[data-iavse-transition]::view-transition-old(root){animation:iavse-scene-out 240ms cubic-bezier(.22,1,.36,1) both;mix-blend-mode:normal}
-html[data-iavse-transition]::view-transition-new(root){animation:iavse-scene-in 240ms cubic-bezier(.22,1,.36,1) both;mix-blend-mode:normal}
-/* The new pseudo is live. Exclude the wave from the frozen outgoing page so it
-   continues propagating above both scenes rather than being faded out with home. */
-.iavse-quantum-wave{view-transition-name:iavse-wave}
-::view-transition-group(iavse-wave){z-index:1;animation:none}
-::view-transition-old(iavse-wave){display:none}
-::view-transition-new(iavse-wave){animation:none;mix-blend-mode:normal}
-@keyframes iavse-scene-out{to{opacity:0}}
-@keyframes iavse-scene-in{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+/* One opacity layer below the independent click wave; never catches input. */
+.iavse-route-veil{position:fixed;inset:0;z-index:1000;pointer-events:none;contain:strict;opacity:0;background:#f7f8fa}
+.iavse-route-veil[data-surface=landing]{background:linear-gradient(180deg,#0d1c3b 0%,#244d87 62%,#8d9ebc 100%)}
+.iavse-route-veil:not([hidden]){will-change:opacity}
+.iavse-route-veil[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){.iavse-route-veil{display:none!important}}
+@media print{.iavse-route-veil{display:none!important}}

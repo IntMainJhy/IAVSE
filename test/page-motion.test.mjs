@@ -4,19 +4,20 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
-function fixture({reduced=false,native=false}={}){
+function fixture({reduced=false,owned=false}={}){
  const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PageMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
  const effects=[],layouts=[],calls=[],contexts=[],observers=[],media=[],events=new Map(),changes=new Set(),timers=new Map(),menus=[{open:true}],dispatches=[],exports={};
  class Element{constructor(rect={left:100,top:100,width:160,height:44}){this.rect=rect;this.dataset={};this.scrollTop=0;this.nodes={};}getBoundingClientRect(){return this.rect;}querySelector(selector){return this.nodes[selector]||null;}querySelectorAll(){return this.links||[];}closest(){return this;}contains(){return true;}focus(){this.focused=true;}setAttribute(name,value){this[name]=value;}removeAttribute(name){delete this[name];}hasAttribute(){return false;}}
  let root=new Element(),path='/community',query='',refs=[],refIndex=0;
  const preference={matches:reduced,addEventListener:(_,fn)=>changes.add(fn),removeEventListener:(_,fn)=>changes.delete(fn)};
- const document={documentElement:{hasAttribute:()=>native},querySelectorAll:()=>menus,addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:(key)=>events.delete(key)};
+ const document={documentElement:{hasAttribute:()=>owned},querySelectorAll:()=>menus,addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:(key)=>events.delete(key)};
  const window={matchMedia:q=>q.includes('reduced-motion')?preference:{matches:true},addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:key=>events.delete(key),dispatchEvent:event=>{dispatches.push(event);events.get(event.type)?.(event);return true;}};
  const gsap={to:(node,to)=>calls.push({node,to}),fromTo:(node,from,to)=>calls.push({node,from,to}),set:(node,to)=>calls.push({node,to}),killTweensOf:node=>calls.push({node,kill:true}),context:fn=>{const cleanup=fn();const ctx={reverted:false,add:callback=>callback(),revert(){this.reverted=true;cleanup?.();}};contexts.push(ctx);return ctx;},matchMedia:()=>{const m={reverted:false,add:(_,fn)=>{if(!preference.matches)fn();},revert(){this.reverted=true;}};media.push(m);return m;}};
  class ResizeObserver{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}}
  vm.runInNewContext(source,{exports,document,window,CustomEvent,ResizeObserver,setTimeout:fn=>{const id=timers.size+1;timers.set(id,fn);return id},clearTimeout:id=>timers.delete(id),location:new URL('http://localhost:3010/community'),URL,Element,require:name=>{
   if(name==='react')return{useEffect:fn=>effects.push(fn),useLayoutEffect:fn=>layouts.push(fn),useRef:initial=>{const i=refIndex++;if(i===0)return refs[0]={current:root};return refs[i]||=( {current:initial});}};
   if(name==='gsap')return{gsap};
+  if(name==='@/lib/navigation-motion')return{mainNavigationDestination:link=>link.mainNavigation?new URL(link.href).pathname:null};
   if(name==='next/navigation')return{usePathname:()=>path,useSearchParams:()=>new URLSearchParams(query)};
   if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props})};
   if(name.endsWith('.css'))return{};
@@ -41,9 +42,9 @@ test('first render preserves server attributes until streamed navigation childre
  const f=fixture(),p=f.page('/community');assert.equal(f.calls.length,0);assert.equal(p.nav.dataset.motionReady,undefined);assert.equal(f.observers.length,0);p.cleanup();assert.equal(f.events.size,0);
 });
 
-test('a native scene transition releases pending work without stacking another GSAP arrival',()=>{
- const f=fixture({native:true}),a=f.page('/',100,'feed',{publicPage:true});f.click('/resources');a.cleanup();const count=f.calls.length;
- const b=f.page('/resources',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,count);assert.equal(f.dispatches.at(-1).detail.pending,false);b.cleanup();
+test('the persistent GSAP handoff owns arrival without stacking a local animation',()=>{
+ const f=fixture({owned:true}),a=f.page('/',100,'feed',{publicPage:true});f.click('/resources');a.cleanup();const count=f.calls.length;
+ const b=f.page('/resources',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,count);assert.equal(f.dispatches.filter(event=>event.type==='iavse-navigation-pending').at(-1).detail.pending,false);b.cleanup();
 });
 test('equal-width routes move the active indicator without moving either rail or hiding text',()=>{
  const f=fixture(),a=f.page('/community');f.click('/community/members','members',true);a.cleanup();const start=f.calls.length,b=f.page('/community/members',100,'members'),calls=f.calls.slice(start);
@@ -139,7 +140,7 @@ test('same-document hashes, downloads, other targets and modified links never su
  for(const href of ['/#creators','/download/file','/api/auth/me','https://example.org/resources'])f.click(href);
  for(const options of [{ctrlKey:true},{metaKey:true},{shiftKey:true},{altKey:true},{button:1},{defaultPrevented:true}])f.click('/resources','members',false,options);
  f.click('/resources','members',false,{}, {target:'_blank'});f.click('/resources','members',false,{}, {hasAttribute:key=>key==='download'});
- assert.equal(f.dispatches.length,0);assert.equal(f.timers.size,0);a.cleanup();
+ assert.equal(f.dispatches.filter(event=>event.type==='iavse-navigation-pending').length,0);assert.equal(f.timers.size,0);a.cleanup();
 });
 
 test('suspension recovery also covers reduced-motion or temporarily missing content receivers',()=>{
@@ -149,4 +150,15 @@ test('suspension recovery also covers reduced-motion or temporarily missing cont
   f.preference.matches=true;for(const change of f.changes)change();assert.equal(f.dispatches.at(-1).detail.pending,true,'motion changes do not release an outstanding navigation');
   for(const recover of [...f.timers.values()])recover();assert.equal(f.dispatches.at(-1).detail.pending,false);a.cleanup();
  }
+});
+
+
+test('main-header navigation leaves departure and suspension to the persistent GSAP owner',()=>{
+ const f=fixture(),a=f.page('/',100,'feed',{publicPage:true});
+ f.click('/resources','members',false,{}, {mainNavigation:true});
+ assert.equal(f.calls.length,0);assert.equal(f.timers.size,0);
+ assert.equal(f.dispatches.filter(event=>event.type==='iavse-navigation-pending').length,0);
+ const commit=f.dispatches.find(event=>event.type==='iavse-route-commit');
+ assert.equal(commit.detail.route,'/');assert.equal(commit.detail.root,a.root);
+ a.cleanup();assert.equal(f.dispatches.filter(event=>event.type==='iavse-navigation-pending').length,0);
 });

@@ -41,6 +41,8 @@ Production registration and publishing depend on explicit deployment settings. L
 
 ## Performance / 性能
 
+[2026-11-06 GSAP 页面切换衔接](performance-2026-11-06.md) · immediate navigation, coordinated GSAP arrivals, background scheduling and preserved click waves.
+
 [2026-11-04 全站性能优化与测量记录](performance-2026-11-04.md) · covers lightweight WebGL, directory/feed pagination, lean editor data, route CSS, script-free theme previews and asynchronous password checks. Includes the shared pointer field and expanding click feedback.
 
 Earlier: [2026-11-03](performance-2026-11-03.md) · shared loading, fonts, catalog reads and editor code splitting.

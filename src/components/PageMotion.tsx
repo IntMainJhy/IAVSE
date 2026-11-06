@@ -2,6 +2,7 @@
 import {useEffect,useLayoutEffect,useRef} from 'react';
 import {usePathname,useSearchParams} from 'next/navigation';
 import {gsap} from 'gsap';
+import {mainNavigationDestination} from '@/lib/navigation-motion';
 import '@/app/surface-clarity.css';
 import '@/app/interaction-motion.css';
 
@@ -55,6 +56,8 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    const link=event.target instanceof Element?event.target.closest<HTMLAnchorElement>('a'):null;
    const element=root.current,shell=element?.closest('.organic-site,.blog-public-shell')||element;
    if(!link||!shell?.contains(link)||link.target||link.hasAttribute('download'))return;
+   // Main navigation has one persistent GSAP owner, including renderer suspension.
+   if(!preference.matches&&window.top===window.self&&mainNavigationDestination(link))return;
    const next=new URL(link.href,location.href);
    if(next.origin===location.origin&&!/^\/(api|download|media|site-files)(\/|$)/.test(next.pathname))capture(next.pathname+next.search,event.detail===0,link.dataset.navKey);
   };
@@ -78,8 +81,9 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
   const element=root.current,previous=pending?.to===route&&Date.now()-pending.at<10000?pending:null;pending=null;
   const last=lastRoute.current,changed=last!==route||!!previous;lastRoute.current=route;
   if(!element)return;
+  window.dispatchEvent(new CustomEvent('iavse-route-commit',{detail:{route,root:element}}));
   resetDeparture.current?.();
-  // The native old/new scene crossfade owns this arrival; do not stack a GSAP fade.
+  // The persistent GSAP timeline owns main-nav arrivals; retain local/query FLIP.
   if(document.documentElement.hasAttribute('data-iavse-transition'))return;
   if(!element.querySelector('.community-navigation-shell')){
    if(!changed)return;

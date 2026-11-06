@@ -7,7 +7,7 @@ import ts from 'typescript';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/QuantumBackdrop.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 const flush=async()=>{for(let n=0;n<8;n++)await Promise.resolve();};
 
-function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,deferred=false,path='/resources',iframe=false,missingHost=false}={}){
+function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,deferred=false,path='/resources',iframe=false,missingHost=false,navigationPending=false}={}){
  class Target extends EventTarget{
   listeners=new Set();
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name);}
@@ -17,7 +17,7 @@ function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,d
  let currentHost=missingHost?null:makeHost(),currentPath=path,mutation,observerDisconnected=false;
  const initialHost=currentHost,canvas=Object.assign(new Target(),{dataset:{},width:300,height:150}),layer={hidden:true};
  const window=Object.assign(new Target(),{scrollY:0});window.self=window;window.top=iframe?{}:window;
- const document=Object.assign(new Target(),{hidden,body:{},querySelector:()=>currentHost,documentElement:new Target()}),preference=Object.assign(new Target(),{matches:systemReduced});
+ const document=Object.assign(new Target(),{hidden,body:{},querySelector:()=>currentHost,documentElement:Object.assign(new Target(),{hasAttribute:name=>name==='data-iavse-transition'&&navigationPending})}),preference=Object.assign(new Target(),{matches:systemReduced});
  const frames=new Map(),renders=[],sizes=[],exports={},refs=[],effects=[];let id=0,now=1000,disposes=0,signal,createCalls=0,resizeError=false,renderError=false,resolveScene,refIndex=0,effectIndex=0,scheduled=[];
  const scene={render:(...args)=>{if(renderError)throw Error('drawing failed');renders.push(args);},resize:(...args)=>{if(resizeError)throw Error('resize failed');sizes.push(args);},dispose:()=>{disposes++;}};
  const created=deferred?new Promise(resolve=>{resolveScene=resolve;}):Promise.resolve(scene);
@@ -40,7 +40,8 @@ function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,d
  const contextLost=()=>{const event=new Event('webglcontextlost',{cancelable:true});canvas.dispatchEvent(event);return event;};
  const replaceHost=()=>{if(currentHost)currentHost.isConnected=false;currentHost=makeHost();return currentHost;};
  const navigate=(next,{host=true}={})=>{currentPath=next;if(host)replaceHost();else{if(currentHost)currentHost.isConnected=false;currentHost=null;}render();};
- return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:()=>resolveScene(scene),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
+ const navigation=(pending,{marker=pending}={})=>{navigationPending=marker;window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));};
+ return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,navigation,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:()=>resolveScene(scene),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
 }
 
 test('one field starts after loading, coalesces pointer input and respects desktop and mobile cadence',async()=>{
@@ -146,4 +147,39 @@ test('temporary home pause controls cannot freeze a later reading route',async()
  s.control('paused',true);s.step();assert.equal(s.canvas.dataset.field,'paused');
  s.navigate('/');s.control('paused',true);s.navigate('/community');await flush();s.step();
  assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);s.cleanup();
+});
+
+test('a handoff already active at mount defers shaders until the visible destination settles',async()=>{
+ const s=mount({navigationPending:true});await flush();assert.equal(s.createCalls,0);assert.equal(s.layer.hidden,false,'the lightweight paper remains visible');
+ s.move();s.scroll(180);s.resize();s.control('reduced',true);s.visibility(true);s.visibility(false);await flush();
+ assert.equal(s.createCalls,0);assert.equal(s.frames.size,0,'input and visibility cannot restart GPU work during arrival');
+ s.navigation(false);await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);assert.equal(s.renders[0][4],true);assert.equal(s.frames.size,0);
+ s.cleanup();
+});
+
+test('navigation suspends and retains the field across shell replacements and stale releases',async()=>{
+ const s=mount();await flush();s.step();const time=s.renders.at(-1)[0],sizes=s.sizes.length;
+ s.navigation(true);assert.equal(s.frames.size,0);s.navigate('/community');s.navigation(false,{marker:true});
+ s.scroll(300);s.resize();s.move();s.step(60000);await flush();
+ assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.sizes.length,sizes);assert.equal(s.renders.length,1);assert.equal(s.frames.size,0);
+ s.navigation(false);s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,2);assert.ok(s.renders.at(-1)[0]-time<.1,'handoff duration cannot advance the background clock');
+ s.cleanup();
+});
+
+test('rapid retargeting to home and hidden destinations never starts an unused renderer',async()=>{
+ const s=mount({path:'/'});s.navigation(true);s.navigate('/blogs');await flush();assert.equal(s.createCalls,0);
+ s.navigate('/');s.navigation(false);await flush();assert.equal(s.createCalls,0);assert.equal(s.layer.hidden,true);
+ s.navigation(true);s.navigate('/resources');s.visibility(true);s.navigation(false);await flush();assert.equal(s.createCalls,0);
+ s.visibility(false);await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
+});
+
+test('a chunk requested before navigation cannot compile during the handoff',async()=>{
+ const s=mount();s.navigation(true);await flush();assert.equal(s.createCalls,0,'recheck suspension after the chunk resolves');
+ s.navigation(false);await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
+});
+
+test('a scene already initializing when navigation begins is retained without drawing until release',async()=>{
+ const s=mount({deferred:true});await flush();assert.equal(s.createCalls,1);s.navigation(true);s.resolve();await flush();
+ assert.equal(s.disposes,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
+ s.navigation(false);s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
 });

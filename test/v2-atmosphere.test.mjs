@@ -6,15 +6,16 @@ import ts from 'typescript';
 import {homePixelBudget} from '../src/lib/home-render-budget.ts';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0}={}){
+function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0,navigationPending=false}={}){
  let cpuClock=0;
  class Target extends EventTarget{
-  listeners=new Set();dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
+  listeners=new Set();attributes=new Set();hasAttribute(name){return this.attributes.has(name)}setAttribute(name){this.attributes.add(name)}removeAttribute(name){this.attributes.delete(name)}dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name)}
   removeEventListener(name,fn){super.removeEventListener(name,fn);this.listeners.delete(name)}
   rectReads=0;getBoundingClientRect(){this.rectReads++;return{left:0,top:this.top||0,width,height}}
  }
  const preference=Object.assign(new Target(),{matches:reduced}),root=new Target(),host=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:root}),window=Object.assign(new Target(),{devicePixelRatio:3,matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':'full'}});
+ if(navigationPending)root.setAttribute('data-iavse-transition');
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>['.v2-home','.v2-site'].includes(selector)?host:null});
  const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});
  const sections=[{id:'blog',top:1800,height:1260,side:'left'},{id:'editor',top:3300,height:1260,side:'right'}].map(item=>Object.assign(new Target(),{dataset:{homeStory:item.id,homeSide:item.side},documentTop:item.top,sectionHeight:item.height,getBoundingClientRect(){this.rectReads++;const top=this.documentTop-(window.scrollY||0);return{left:0,top,bottom:top+this.sectionHeight,width,height:this.sectionHeight};}}));
@@ -22,7 +23,7 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  host.querySelectorAll=selector=>selector.includes('data-home-story')?(journey?sections:[]):reveal?[panel]:[];
  host.getAttribute=key=>key==='data-journey-motion'?host.dataset.journeyMotion:null;
  host.querySelector=selector=>{assert.equal(selector,'.home-stories');return host.track||null;};
- const draws=[],sizes=[],reveals=[],journeys=[];let releases=0,resolve,reject,signal,opticalLive=animated;
+ const draws=[],sizes=[],reveals=[],journeys=[];let releases=0,createCalls=0,resolve,reject,signal,opticalLive=animated;
  const adapter={get animated(){return opticalLive},get interactive(){return retireHero?opticalLive:undefined},resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),render:(...args)=>{draws.push(args);cpuClock+=cpuRenderMs;if(retireHero)opticalLive=args[3]<1.3||!!reveals.at(-1)?.length;},dispose:()=>releases++};
  if(journey)adapter.setJourney=value=>journeys.push(JSON.parse(JSON.stringify(value)));
  let resize,intersection,theme,now=0,id=0;const frames=new Map();
@@ -37,13 +38,13 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
   throw Error('Unexpected dependency '+name);
  }});
  const cleanup=exports.mountV2Atmosphere(canvas,(_,abortSignal)=>{
-  signal=abortSignal;
+  createCalls++;signal=abortSignal;
   if(failed)return Promise.reject(Error('Model or WebGL unavailable'));
   return loading?new Promise((a,b)=>{resolve=a;reject=b}):Promise.resolve(adapter);
  },{mode});
  const step=(ms=35)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now))};
  const move=(x=width,y=height,pointerType='mouse')=>host.dispatchEvent(Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType}));
- return{canvas,surface,host,panel,sections,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,reveals,journeys,cleanup,step,move,signal,adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
+ return{canvas,surface,host,panel,sections,window,document,root,preference,get resize(){return resize},intersection,theme,frames,draws,sizes,reveals,journeys,cleanup,step,move,get signal(){return signal},get createCalls(){return createCalls},adapter,get releases(){return releases},resolve:()=>resolve(adapter),reject:()=>reject(Error('Load failed'))};
 }
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 const navigation=(s,pending)=>s.window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));
@@ -72,6 +73,28 @@ test('temporary navigation suspension preserves manual pause and reduced-motion 
 test('a scene prepared during navigation waits for a free frame and interior rendering remains independent',async()=>{
  const s=mount({animated:true,loading:true});s.intersection.set(true);navigation(s,true);s.resolve();await flush();assert.equal(s.draws.length,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);navigation(s,false);s.step(16);assert.equal(s.draws.length,1);assert.equal(s.sizes.length,1);s.cleanup();
  const interior=mount({animated:true,mode:'interior'});interior.intersection.set(true);await flush();navigation(interior,true);assert.equal(interior.frames.size,1);interior.step(16);assert.ok(interior.draws.length>1);interior.cleanup();
+});
+
+test('homepage mounted mid-transition defers its scene until the root handoff releases',async()=>{
+ const s=mount({animated:true,navigationPending:true});s.intersection.set(true);await flush();
+ assert.equal(s.createCalls,0);assert.equal(s.frames.size,0);assert.equal(s.draws.length,0);
+ navigation(s,false);assert.equal(s.createCalls,0,'stale page cleanup cannot release the root transition');
+ s.root.removeAttribute('data-iavse-transition');navigation(s,false);await flush();
+ assert.equal(s.createCalls,1);assert.equal(s.draws.length,1);assert.equal(s.frames.size,1);
+ navigation(s,false);assert.equal(s.createCalls,1,'completion is idempotent');s.cleanup();assert.equal(s.signal.aborted,true);assert.equal(s.releases,1);
+});
+
+test('abandoning a deferred homepage never starts GPU work and leaves no event listeners',async()=>{
+ const s=mount({navigationPending:true});s.intersection.set(true);s.cleanup();s.root.removeAttribute('data-iavse-transition');navigation(s,false);await flush();
+ assert.equal(s.createCalls,0);assert.equal(s.draws.length,0);assert.equal(s.releases,0);assert.equal(s.frames.size,0);
+ assert.equal(s.host.listeners.size+s.canvas.listeners.size+s.document.listeners.size+s.window.listeners.size,0);
+});
+
+test('an in-flight scene remains paused through a newer transition and is disposed once if abandoned',async()=>{
+ const s=mount({loading:true,animated:true});s.intersection.set(true);navigation(s,true);s.root.setAttribute('data-iavse-transition');navigation(s,false);s.resolve();await flush();
+ assert.equal(s.createCalls,1);assert.equal(s.draws.length,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
+ s.cleanup();s.root.removeAttribute('data-iavse-transition');navigation(s,false);assert.equal(s.releases,1);assert.equal(s.signal.aborted,true);assert.equal(s.draws.length,0);
+ const interior=mount({navigationPending:true,mode:'interior'});interior.intersection.set(true);await flush();assert.equal(interior.createCalls,1);assert.equal(interior.draws.length,1);interior.cleanup();
 });
 
 test('glass follows every display frame with damping, bounds resolution, and stops when idle or outside the viewport',async()=>{

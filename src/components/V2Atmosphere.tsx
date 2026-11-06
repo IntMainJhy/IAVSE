@@ -14,7 +14,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  let manualReduced=false,paused=false,systemReduced=preference.matches;
  try{manualReduced=mode==='home'&&window.localStorage?.getItem('iavse-background-motion')==='reduce';}catch{}
  let reducedMotion=manualReduced||systemReduced;
- let scene:HomeGlassScene|null=null,frame=0,lastDraw:number|null=null,activeTime=0,visible=false,printing=false,lost=false,disposed=false,navigationPending=false,sizeDirty=false;
+ let scene:HomeGlassScene|null=null,frame=0,lastDraw:number|null=null,activeTime=0,visible=false,printing=false,lost=false,disposed=false,loading=false,navigationPending=mode==='home'&&document.documentElement.hasAttribute('data-iavse-transition'),sizeDirty=false;
  let quality=1,slowFrames=0,healthyFrames=0,drawCount=0,sizedWidth=0,sizedHeight=0,sizedDpr=0,displayDpr=0,refreshPeriod=1/60,cadenceCandidate=1/60,cadenceSamples=0,renderCost=0;
  let targetX=0,targetY=0,pointerX=0,pointerY=0,progress=0,dirty=false,revealsDirty=true,progressDirty=true,layoutDirty=true,hostDocumentTop=0;
  canvas.dataset.atmosphere='loading';canvas.style.opacity='0';
@@ -123,12 +123,14 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const contextLost=(event:Event)=>{event.preventDefault();lost=true;fail();};
  const navigation=(event:Event)=>{
   if(mode!=='home')return;
-  const detail=(event as CustomEvent<{pending:boolean}>).detail;if(typeof detail?.pending!=='boolean'||detail.pending===navigationPending)return;
-  navigationPending=detail.pending;
+  const detail=(event as CustomEvent<{pending:boolean}>).detail;if(typeof detail?.pending!=='boolean')return;
+  // An old page can finish unmounting while a newer root transition still owns the pause.
+  const pending=detail.pending||document.documentElement.hasAttribute('data-iavse-transition');
+  if(pending===navigationPending)return;navigationPending=pending;
   if(navigationPending){stop();return;}
   // Queue rather than render during a route commit: an unmount cancels this
   // frame before the old scene can submit another expensive draw.
-  dirty=true;sync();
+  startScene();dirty=true;sync();
  };
  const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(measure);
  const intersection=typeof IntersectionObserver==='undefined'?null:new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);resume();},{threshold:.01});
@@ -149,6 +151,15 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   scene?.dispose();scene=null;
  };
  const fail=()=>{cleanup();canvas.style.opacity='0';canvas.dataset.atmosphere='fallback';};
+ const startScene=()=>{
+  // A newly mounted homepage missed the click event. Keep model/GPU setup out
+  // of the arrival timeline, then create exactly one scene when it releases.
+  if(disposed||loading||scene||navigationPending)return;loading=true;
+  void createScene(canvas,controller.signal).then(loaded=>{
+   loading=false;if(disposed){loaded.dispose();return;}
+   scene=loaded;if(hasJourney())resize?.observe(host);canvas.dataset.atmosphere=lost?'fallback':'paused';measure();sync();
+  }).catch(()=>{loading=false;if(!disposed)fail();});
+ };
  resize?.observe(surface);intersection?.observe(canvas);theme?.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
  if(!resize)window.addEventListener('resize',measure);
  if(!intersection)visible=true;
@@ -162,10 +173,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  window.addEventListener('iavse-journey-layout',invalidateLayout);
  window.addEventListener('iavse-navigation-pending',navigation);
  document.fonts?.ready.then(invalidateLayout);
- void createScene(canvas,controller.signal).then(loaded=>{
-  if(disposed){loaded.dispose();return;}
-  scene=loaded;if(hasJourney())resize?.observe(host);canvas.dataset.atmosphere=lost?'fallback':'paused';measure();sync();
- }).catch(()=>{if(!disposed)fail();});
+ startScene();
  return cleanup;
 }
 

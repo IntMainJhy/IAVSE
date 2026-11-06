@@ -16,9 +16,10 @@ export function QuantumBackdrop(){
   const controller=new AbortController(),preference=matchMedia('(prefers-reduced-motion:reduce)');
   let field:QuantumField|null=null,host:HTMLElement|null=null,eligible=false,loading=false,frame=0,last=0,animationTime=0,disposed=false,failed=false,dirty=true;
   let width=innerWidth,height=innerHeight,scroll=window.scrollY/Math.max(1,height),x=0,y=0,targetX=0,targetY=0,savedReduced=false,paused=false;
+  let navigationPending=document.documentElement.hasAttribute('data-iavse-transition');
   try{savedReduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
   const reduced=()=>savedReduced||preference.matches;
-  const active=()=>!!host?.isConnected&&eligible&&!document.hidden;
+  const active=()=>!!host?.isConnected&&eligible&&!document.hidden&&!navigationPending;
   const stop=()=>{cancelAnimationFrame(frame);frame=0;last=0;};
   const syncHeader=()=>host?.toggleAttribute('data-glass-scrolled',window.scrollY>48);
   const tick=(now:number)=>{
@@ -40,9 +41,22 @@ export function QuantumBackdrop(){
   const mode=()=>{stop();dirty=true;wake();};
   const load=()=>{
    if(!active()||field||loading||failed||disposed)return;loading=true;
-   void import('@/lib/quantum-field').then(module=>module.createQuantumField(canvas,controller.signal)).then(scene=>{
-    loading=false;if(disposed||failed||controller.signal.aborted){scene.dispose();return;}field=scene;resize();
+   void import('@/lib/quantum-field').then(module=>{
+    // A navigation may begin while this chunk is loading. Keep shader creation
+    // out of its commit/arrival frames; the handoff resumes loading afterwards.
+    if(disposed||failed||controller.signal.aborted||!active())return null;
+    return module.createQuantumField(canvas,controller.signal);
+   }).then(scene=>{
+    loading=false;if(!scene)return;if(disposed||failed||controller.signal.aborted){scene.dispose();return;}field=scene;resize();
    }).catch(()=>{loading=false;if(!disposed)fallback();});
+  };
+  const navigation=(event:Event)=>{
+   const detail=(event as CustomEvent<{pending:boolean}>).detail;if(typeof detail?.pending!=='boolean')return;
+   // Ignore an older page's release while a newer root handoff is still active.
+   const next=detail.pending||document.documentElement.hasAttribute('data-iavse-transition');
+   if(next===navigationPending)return;navigationPending=next;
+   if(navigationPending){stop();return;}
+   load();resize();
   };
   const visibility=()=>{if(document.hidden)stop();else{load();resize();}};
   const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value:boolean}>).detail;if(detail?.action==='reduced')savedReduced=!!detail.value;else if(detail?.action==='paused'){if(!eligible)return;paused=!!detail.value;}else return;mode();};
@@ -62,8 +76,8 @@ export function QuantumBackdrop(){
   sync.current=next=>{eligible=quantumRoute(next);if(!eligible)paused=false;bind();};
   canvas.dataset.field='loading';sync.current(route.current);
   window.addEventListener('resize',resize);window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('pointermove',move,{passive:true});document.documentElement.addEventListener('pointerleave',leave);
-  preference.addEventListener('change',mode);document.addEventListener('visibilitychange',visibility);window.addEventListener('iavse-scene-control',control);canvas.addEventListener('webglcontextlost',lost);
-  return()=>{disposed=true;sync.current=()=>{};observer.disconnect();stop();controller.abort();field?.dispose();window.removeEventListener('resize',resize);window.removeEventListener('scroll',onScroll);window.removeEventListener('pointermove',move);document.documentElement.removeEventListener('pointerleave',leave);preference.removeEventListener('change',mode);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('iavse-scene-control',control);canvas.removeEventListener('webglcontextlost',lost);host?.removeAttribute('data-quantum-host');host?.removeAttribute('data-glass-scrolled');canvas.width=canvas.height=0;};
+  preference.addEventListener('change',mode);document.addEventListener('visibilitychange',visibility);window.addEventListener('iavse-scene-control',control);window.addEventListener('iavse-navigation-pending',navigation);canvas.addEventListener('webglcontextlost',lost);
+  return()=>{disposed=true;sync.current=()=>{};observer.disconnect();stop();controller.abort();field?.dispose();window.removeEventListener('resize',resize);window.removeEventListener('scroll',onScroll);window.removeEventListener('pointermove',move);document.documentElement.removeEventListener('pointerleave',leave);preference.removeEventListener('change',mode);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('iavse-scene-control',control);window.removeEventListener('iavse-navigation-pending',navigation);canvas.removeEventListener('webglcontextlost',lost);host?.removeAttribute('data-quantum-host');host?.removeAttribute('data-glass-scrolled');canvas.width=canvas.height=0;};
  },[]);
  useEffect(()=>{sync.current(path);},[path]);
  return <div ref={plane} className="quantum-backdrop" data-persistent hidden aria-hidden="true"><div className="quantum-backdrop-fallback"/><canvas ref={ref} data-field="loading"/></div>;
