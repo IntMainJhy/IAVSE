@@ -1,5 +1,5 @@
 /* Canvas-first operating layout, informed by Stitch. Authored page styles stay in the artboard. */
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:64px;--studio-canvas:#edf2f8;--studio-line:#e1e4e9;--studio-soft:#f2f4f7;--studio-selected:#e9eef9;--studio-ink:#283b63;background:var(--studio-ambient);font-family:Inter,"PingFang SC",sans-serif;--studio-paper:#fff;--studio-text:#29364a;--studio-muted:#657184;--studio-tool-active:#273c61;--studio-tool-on:#fff}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:64px;--studio-canvas:#ededee;--studio-line:#dddddf;--studio-soft:#f2f2f3;--studio-selected:#ffffff99;--studio-ink:#252526;background:var(--studio-ambient);font-family:Inter,"PingFang SC",sans-serif;--studio-paper:#fff;--studio-text:#252526;--studio-muted:#636366;--studio-tool-active:#303033;--studio-tool-on:#fff}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{height:var(--editor-topbar);min-height:var(--editor-topbar);flex-basis:var(--editor-topbar);padding:10px 20px;gap:20px;flex-wrap:nowrap;align-items:center;background:var(--studio-paper);border-bottom:1px solid var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading{gap:18px;flex-shrink:1}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading h1{font:600 16px/1.35 Inter,"PingFang SC",sans-serif;letter-spacing:-.02em;margin:0 0 3px}
@@ -13,15 +13,15 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .icon{display:block;flex:none;width:17px;height:17px;opacity:1;visibility:visible;min-width:17px;max-width:none;flex-basis:17px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-compact{display:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer{--bd-sidebar-width:72px;--bd-properties-width:304px;display:grid;grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:transparent;font:400 13px/1.5 Inter,"PingFang SC",sans-serif;overflow:hidden}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:336px}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-properties=true]{grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr) var(--bd-properties-width)}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:minmax(0,1fr);position:relative;min-width:0;overflow:hidden;background:transparent;border:0;z-index:8}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:72px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-properties=true]{grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:minmax(0,1fr);position:static;min-width:0;overflow:visible;background:transparent;border:0;z-index:8}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{grid-column:1;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:8px;padding:16px 8px;background:var(--studio-paper);border:0;border-right:1px solid var(--studio-line);overflow:visible}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;flex:none;min-height:62px;width:56px;padding:9px 3px;border:0;border-radius:11px;background:transparent;color:var(--studio-muted);font:500 11px/1.3 Inter,"PingFang SC",sans-serif;white-space:normal}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button .icon{display:block;width:20px;height:20px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button:hover{background:var(--studio-soft);color:#283b63}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button[aria-pressed=true]{background:var(--studio-selected);color:var(--studio-ink);font-weight:600}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{grid-column:2;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;margin:12px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:16px;box-shadow:var(--studio-glass-shadow)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{position:absolute;grid-column:1/-1;grid-row:1;left:84px;top:12px;bottom:88px;width:280px;max-width:calc(100% - 98px);z-index:9;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;margin:0;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:18px;box-shadow:var(--studio-glass-shadow)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel[hidden]{display:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;padding:12px 12px 12px 16px;min-height:58px;border-bottom:1px solid var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading h2{margin:0;font:600 13px/1.5 Inter,"PingFang SC",sans-serif;letter-spacing:0;color:var(--studio-text)}
@@ -48,7 +48,7 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions .bd-selection-name{max-width:140px;min-width:0;overflow:hidden;text-overflow:ellipsis;display:block}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .icon{display:block;width:16px;height:16px;flex:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock{position:absolute;z-index:5;left:50%;right:auto;bottom:30px;transform:translateX(-50%);height:auto;width:max-content;max-width:calc(100% - 32px);padding:0;gap:0;background:transparent;border:0;pointer-events:none}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{position:static;display:flex;align-items:center;justify-content:center;gap:4px;max-width:100%;padding:6px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:18px;box-shadow:var(--studio-glass-shadow);transform:none;pointer-events:auto}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{position:static;display:flex;align-items:center;justify-content:center;gap:4px;max-width:100%;padding:6px;background:var(--studio-reflection),var(--studio-glass);border:1px solid var(--studio-line);border-radius:18px;box-shadow:var(--studio-glass-shadow);transform:none;pointer-events:auto}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:auto;min-width:38px;min-height:38px;padding:9px;border:0;border-radius:8px;background:transparent;color:var(--studio-muted)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button:hover:not(:disabled){background:var(--studio-soft);color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{background:var(--studio-tool-active);color:#fff}
@@ -56,7 +56,7 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools i{display:block;flex:none;height:22px;width:1px;margin:0 5px;background:var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-zoom select{min-width:70px;min-height:38px;margin:0;border:0;border-radius:7px;background:var(--studio-paper);padding:7px;font:500 12px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-stage-hint{position:absolute;top:calc(100% + 8px);left:50%;bottom:auto;transform:translateX(-50%);max-width:calc(100vw - 110px);margin:0;font:400 10px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:relative;grid-column:3;grid-row:1;inset:auto;width:auto;max-width:none;min-width:0;min-height:0;margin:12px 12px 12px 0;padding:0 16px 24px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:16px;box-shadow:var(--studio-glass-shadow);overflow:auto;z-index:7}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:absolute;grid-column:auto;grid-row:auto;inset:64px 12px 88px auto;width:292px;max-width:calc(100% - var(--bd-sidebar-width) - 28px);min-width:0;min-height:0;margin:0;padding:0 16px 24px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:18px;box-shadow:var(--studio-glass-shadow);overflow:auto;z-index:7}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header{min-height:58px;padding:12px 0;margin-bottom:16px;top:0}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header h2{font-size:13px;color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-canvas-loading{inset:0;background:var(--studio-canvas)}
@@ -124,7 +124,7 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-insert>.bt-insert-heading,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bt-library>header{display:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library>header{padding:10px 14px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library>header strong,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library>header .bl-close{display:none}
-:root[data-ui][data-color-mode=dark] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-canvas:#151a22;--studio-paper:#202732;--studio-line:#364152;--studio-soft:#2a3442;--studio-selected:#2a405f;--studio-ink:#c8dcfc;--studio-text:#e3eaf4;--studio-muted:#a8b5c8;--studio-tool-active:#45668f}
+:root[data-ui][data-color-mode=dark] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-canvas:#1c1c1e;--studio-paper:#2c2c2e;--studio-line:#48484a;--studio-soft:#38383a;--studio-selected:#ffffff20;--studio-ink:#f5f5f7;--studio-text:#f5f5f7;--studio-muted:#b0b0b3;--studio-tool-active:#e5e5e7}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading h1{color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-status>span{color:var(--studio-muted)}
@@ -132,31 +132,35 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-language select{background:var(--studio-paper);color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-action{background:transparent;color:var(--studio-text)}
 
-/* Liquid glass belongs to the chrome. Static light and bounded blur keep the artboard immediate. */
+/* Clear, untinted glass. Panels float over a stable viewport instead of resizing it. */
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{
- --studio-ambient:radial-gradient(ellipse at 2% 14%,#b8d5f57a,transparent 43%),radial-gradient(ellipse at 95% 88%,#b7dcd075,transparent 45%),radial-gradient(ellipse at 91% 0%,#f0d9c652,transparent 38%),var(--studio-canvas);
- --studio-glass:#f6faff;--studio-glass-rim:#ffffffcf;--studio-glass-blur:18px;
- --studio-reflection:linear-gradient(135deg,#ffffffb3,#ffffff14 42%,#ffffff0a 64%,#c9e1ff55);
- --studio-glass-shadow:inset 0 1px 1px #ffffffeb,inset 0 -1px 1px #658bbf21,0 12px 32px -14px #42629242,0 2px 8px #2136500d,0 0 24px #8bc6ff1a;
- --studio-field:#ffffff80;--studio-line:#758fa32e;--studio-soft:#dce8f280;--studio-selected:#c9dff199;--studio-focus:#2b61a8;
+ --studio-ambient:var(--studio-canvas);--studio-glass:#f6f6f6;--studio-panel-glass:#f6f6f6;--studio-glass-rim:#ffffffbf;--studio-glass-blur:12px;
+ --studio-reflection:linear-gradient(155deg,#ffffff70,#ffffff05 42%,#ffffff00 65%,#ffffff26);
+ --studio-glass-shadow:inset 0 1px 1px #ffffffeb,inset 0 -1px 1px #0000000f,0 8px 24px -10px #00000029,0 2px 6px #00000006;
+ --studio-field:#ffffff66;--studio-line:#00000021;--studio-soft:#ffffff59;--studio-selected:#ffffff99;--studio-focus:#636366;
+ --studio-control-active:linear-gradient(155deg,#4b4b4f,#2c2c2e);--studio-control-hover:linear-gradient(155deg,#5a5a5e,#38383a);--studio-control-on:#fff;
 }
 html:root[data-ui][data-color-mode=dark] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{
- --studio-ambient:radial-gradient(ellipse at 0% 12%,#2a517a75,transparent 46%),radial-gradient(ellipse at 95% 88%,#28564e66,transparent 45%),radial-gradient(ellipse at 92% 0%,#72573d33,transparent 38%),var(--studio-canvas);
- --studio-glass:#242f3e;--studio-glass-rim:#c7e0ff30;--studio-reflection:linear-gradient(135deg,#d9edff17,#ffffff03 42%,#ffffff00 64%,#6bafe812);
- --studio-glass-shadow:inset 0 1px 1px #e6f4ff30,inset 0 -1px 1px #00000033,0 14px 36px -14px #00000080,0 0 24px #79b9ff12;
- --studio-field:#151e2d8c;--studio-line:#b3cceb2e;--studio-soft:#96c3f21a;--studio-selected:#79b5ef29;--studio-focus:#9dc8ff;
+ --studio-glass:#29292b;--studio-panel-glass:#29292b;--studio-glass-rim:#ffffff2e;
+ --studio-reflection:linear-gradient(155deg,#ffffff1c,#ffffff00 45%,#ffffff08);
+ --studio-glass-shadow:inset 0 1px 1px #ffffff33,inset 0 -1px 1px #00000040,0 12px 28px -10px #00000066;
+ --studio-field:#ffffff0d;--studio-line:#ffffff24;--studio-soft:#ffffff12;--studio-selected:#ffffff24;--studio-focus:#d1d1d6;
+ --studio-control-active:linear-gradient(155deg,#f5f5f7,#d1d1d6);--studio-control-hover:linear-gradient(155deg,#ffffff,#e5e5e7);--studio-control-on:#252526;
 }
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
- html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:#f4f9ffc2}
- html:root[data-ui][data-color-mode=dark] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:#202c3acf}
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:#ffffff99;--studio-panel-glass:#ffffffb8}
+ html:root[data-ui][data-color-mode=dark] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:#242426b8;--studio-panel-glass:#262628c7}
 }
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.be-heading,.bd-sidebar-tabs,.bd-library-panel,.bd-properties,.bc-publish-panel,.bd-stage-options,.bd-selection-actions,.bd-floating-tools){
  --site-text:var(--studio-text);--site-body:var(--studio-text);--site-muted:var(--studio-muted);--site-surface:var(--studio-glass);--site-raised:var(--studio-soft);--site-line:var(--studio-line);
  color:var(--studio-text);background:var(--studio-reflection),var(--studio-glass);border-color:var(--studio-glass-rim);box-shadow:var(--studio-glass-shadow);
- -webkit-backdrop-filter:blur(var(--studio-glass-blur)) saturate(135%);backdrop-filter:blur(var(--studio-glass-blur)) saturate(135%);
+ -webkit-backdrop-filter:blur(var(--studio-glass-blur));backdrop-filter:blur(var(--studio-glass-blur));
 }
-html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{box-shadow:inset 0 1px 0 #ffffff66,0 4px 24px -14px #42629229}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{box-shadow:inset 0 1px 0 #ffffff66,0 4px 20px -14px #0000001f}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{align-self:start;align-items:center;height:max-content;margin:12px 4px;padding:8px 3px;border:1px solid var(--studio-glass-rim);border-radius:16px}
+/* Large inspectors keep a little more white/black behind text; there is no color tint. */
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-library-panel,.bd-properties,.bc-publish-panel){--studio-glass:var(--studio-panel-glass);--studio-muted:#444446}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-designer,.bd-stage,.bd-sidebar,.bd-library-panel,.bd-properties,.bd-stage-options,.bd-floating-tools){transition:none}
 /* Avoid nested backdrop layers: only the outer panel blurs the canvas. */
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel :is(.bd-sticker-library,.bt-library,.bd-insert,.bd-sidebar-footer){background:transparent}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-library-heading,.bd-page-title,.bd-sidebar-footer,.bl-filters){border-color:var(--studio-line)}
@@ -167,10 +171,10 @@ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-ed
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-properties-note,.bl-family h3,.bl-family h3 span,.bd-layer-select,.bd-sidebar-footer summary){color:var(--studio-muted)}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-layer-row[data-active=true],.bd-stage-options>button[aria-pressed=true],.bd-sidebar-tabs button[aria-pressed=true]){background:var(--studio-selected);box-shadow:inset 0 1px 0 #ffffff55;color:var(--studio-ink)}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs button,.bd-floating-tools button,.bd-stage-options>button):hover:not(:disabled){background:var(--studio-soft);color:var(--studio-text)}
-html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{background:linear-gradient(155deg,#6388b9,#2a496f);color:#fff;box-shadow:inset 0 1px 1px #ffffff66,0 3px 9px #345e8c29}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{background:var(--studio-control-active);color:var(--studio-control-on);box-shadow:inset 0 1px 1px #ffffff66,0 2px 6px #0000001a}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-action-group :is(.bc-action,.blog-share-trigger):not(.primary){border-color:var(--studio-line);background:var(--studio-field);color:var(--studio-text)}
-html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:not(:disabled){background:linear-gradient(155deg,#4a73a6,#254e7b);color:#fff;box-shadow:inset 0 1px 1px #ffffff66,0 4px 12px #2e588a29}
-html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:not(:disabled):hover{background:linear-gradient(155deg,#5682b7,#305e8f)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:not(:disabled){background:var(--studio-control-active);color:var(--studio-control-on);box-shadow:inset 0 1px 1px #ffffff66,0 3px 10px #0000001a}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:not(:disabled):hover{background:var(--studio-control-hover)}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:disabled{background:var(--studio-soft);color:var(--studio-muted);box-shadow:inset 0 1px 0 #ffffff40}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs,.bd-library-panel,.bd-properties,.bd-stage-options,.bd-selection-actions,.bd-floating-tools,.be-heading) :is(button,select,input,textarea,a):focus-visible{outline:2px solid var(--studio-focus);outline-offset:2px}
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-library-panel,.bd-properties,.bc-publish-panel){scrollbar-width:thin;scrollbar-color:var(--studio-muted) transparent}
@@ -187,9 +191,17 @@ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-ed
  html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions{flex-basis:100%;width:100%;justify-content:flex-end}
 }
 @media(max-width:760px){
- html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass-blur:10px}
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass-blur:8px}
  html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{margin:8px 3px;padding:6px 0}
 }
 @media(prefers-reduced-transparency:reduce){
- html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:var(--studio-paper);--studio-reflection:none;--studio-glass-blur:0px;--studio-field:var(--studio-paper)}
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:var(--studio-paper);--studio-panel-glass:var(--studio-paper);--studio-reflection:none;--studio-glass-blur:0px;--studio-field:var(--studio-paper)}
 }
+
+/* Site-wide click particles never cover or repaint the operating canvas. */
+body:has(.blog-canvas-editor) :is(.iavse-quantum-pointer,.iavse-quantum-wave){visibility:hidden}
+
+/* Neutral ink stays legible as authored light or dark content passes behind glass. */
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs,.bd-floating-tools,.bd-stage-options)>button{color:var(--studio-text)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{color:var(--studio-control-on)}
+html:root[data-ui][data-color-mode=dark] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-library-panel,.bd-properties,.bc-publish-panel){--studio-muted:#d1d1d6}

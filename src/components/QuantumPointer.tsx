@@ -80,12 +80,19 @@ export function QuantumPointer(){
    if(alpha>.006||target>0)frame=requestAnimationFrame(draw);else previous=0;
   };
   const wake=()=>{if(!document.hidden&&!navigating&&!frame)frame=requestAnimationFrame(draw);};
+  // The editor has its own precise drag, focus and glass feedback. Keep site particles idle here.
+  const editing=(target:EventTarget|null)=>{
+   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor'))return false;
+   if(frame||waveFrame)clear();return true;
+  };
   const move=(event:PointerEvent)=>{
+   if(editing(event.target))return;
    if(event.pointerType==='touch'||!fine.matches||reduced()||document.hidden||navigating||document.documentElement.hasAttribute('data-iavse-transition'))return;
    dx=Math.max(-36,Math.min(36,event.clientX-x));dy=Math.max(-36,Math.min(36,event.clientY-y));x=event.clientX;y=event.clientY;
    lastMove=performance.now();light=bright(event.target instanceof Element?event.target:null);wake();
   };
   const click=(event:MouseEvent)=>{
+   if(editing(event.target))return;
    if(event.button!==0||document.hidden)return;
    const element=event.target instanceof Element?event.target.closest<HTMLElement>('a,button,summary,input[type=button],input[type=submit],[role=button],[role=tab],[role=option]'):null;
    if(!element||element.matches(':disabled,[aria-disabled=true]'))return;
