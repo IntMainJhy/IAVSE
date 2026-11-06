@@ -53,3 +53,10 @@ test('entry reveals once; hidden tabs and offscreen comments pause without reset
  window.emit('iavse-scene-control',{detail:{action:'reduced',value:true}});assert.equal(render()['data-quiet'],true);
  cleanup();assert.equal(observer.disconnected,true);for(const item of[document,window,preference])assert.equal(item.listeners.size,0);
 });
+
+test('every dynamically selected portrait exists and examples retain six distinct material tones',()=>{
+ const html=renderToStaticMarkup(React.createElement(load('en'))),nodes=descendants(parseDocument(html));
+ const cards=nodes.filter(node=>node.name==='figure'),tones=new Set(cards.map(node=>node.attribs['data-tone']));assert.equal(tones.size,6);
+ const portraits=new Set(nodes.filter(node=>node.name==='img').map(node=>node.attribs.src));assert.equal(portraits.size,6);
+ for(const portrait of portraits){const asset=new URL('../public'+portrait,import.meta.url);assert.ok(fs.existsSync(asset),'missing portrait: '+portrait);assert.match(fs.readFileSync(asset,'utf8'),/<svg\b/);}
+});

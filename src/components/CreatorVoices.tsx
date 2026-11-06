@@ -4,12 +4,12 @@ import {useEffect,useRef,useState} from 'react';
 import {useLocale} from './LocaleProvider';
 
 const voices=[
- {name:'Mira',avatar:'mira',role:['独立开发者','Independent developer','個人開発者'],text:['项目、文章和经历放在一起，别人终于能完整地认识我的创作。','My projects, writing, and experience finally belong in one place.','作品も文章も経験も、自分の創作をひとつの場所に。']},
- {name:'Lin',avatar:'lin',role:['技术写作者','Technical writer','技術ライター'],text:['我想要一个能认真写作，也能自由表达自己的空间。','A place to write thoughtfully and make something that feels like me.','じっくり書いて、自分らしく表現できる場所がほしい。']},
- {name:'Noah',avatar:'noah',role:['开源创作者','Open source creator','オープンソース開発者'],text:['好工具被整理、被分享，就能成为下一次创作的起点。','A useful discovery shared today can start someone’s next project.','今日共有した発見が、誰かの次の制作につながる。']},
- {name:'Aya',avatar:'aya',role:['设计工程师','Design engineer','デザインエンジニア'],text:['页面可以自己编排，作品也有了合适的展示方式。','Being able to arrange my own page gives the work room to speak.','自由にページを組み立てて、作品に合う見せ方を。']},
- {name:'Leo',avatar:'leo',role:['产品开发者','Product maker','プロダクト開発者'],text:['把开发途中那些小发现留下来，慢慢就有了自己的知识库。','Small discoveries along the way become a personal library over time.','開発中の小さな発見を残して、自分のライブラリに。']},
- {name:'Sora',avatar:'sora',role:['创意开发者','Creative developer','クリエイティブ開発者'],text:['从一个想法开始，让做过的事情被更多同路人看见。','Start with an idea. Let the things you make find their people.','ひとつのアイデアから、作品を同じ想いの人へ。']}
+ {name:'Mira',tone:'ink',avatar:'mira',role:['独立开发者','Independent developer','個人開発者'],text:['项目、文章和经历放在一起，别人终于能完整地认识我的创作。','My projects, writing, and experience finally belong in one place.','作品も文章も経験も、自分の創作をひとつの場所に。']},
+ {name:'Lin',tone:'paper',avatar:'lin',role:['技术写作者','Technical writer','技術ライター'],text:['我想要一个能认真写作，也能自由表达自己的空间。','A place to write thoughtfully and make something that feels like me.','じっくり書いて、自分らしく表現できる場所がほしい。']},
+ {name:'Noah',tone:'sage',avatar:'noah',role:['开源创作者','Open source creator','オープンソース開発者'],text:['好工具被整理、被分享，就能成为下一次创作的起点。','A useful discovery shared today can start someone’s next project.','今日共有した発見が、誰かの次の制作につながる。']},
+ {name:'Aya',tone:'clay',avatar:'aya',role:['设计工程师','Design engineer','デザインエンジニア'],text:['页面可以自己编排，作品也有了合适的展示方式。','Being able to arrange my own page gives the work room to speak.','自由にページを組み立てて、作品に合う見せ方を。']},
+ {name:'Leo',tone:'iris',avatar:'leo',role:['产品开发者','Product maker','プロダクト開発者'],text:['把开发途中那些小发现留下来，慢慢就有了自己的知识库。','Small discoveries along the way become a personal library over time.','開発中の小さな発見を残して、自分のライブラリに。']},
+ {name:'Sora',tone:'citrus',avatar:'sora',role:['创意开发者','Creative developer','クリエイティブ開発者'],text:['从一个想法开始，让做过的事情被更多同路人看见。','Start with an idea. Let the things you make find their people.','ひとつのアイデアから、作品を同じ想いの人へ。']}
 ];
 
 /** Illustrative feedback is explicitly labeled and never treated as real social proof. */
@@ -26,7 +26,7 @@ export function CreatorVoices(){
   preference.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);window.addEventListener('iavse-scene-control',control);
   return()=>{observer.disconnect();preference.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);window.removeEventListener('iavse-scene-control',control);};
  },[]);
- const card=(voice:typeof voices[number])=><figure className="creator-voice" key={voice.name}><blockquote>{voice.text[index]}</blockquote><figcaption><img src={'/avatars/creators/'+voice.avatar+'.svg'} alt="" width={44} height={44} loading="lazy" decoding="async"/><span>{voice.name}<small>{voice.role[index]}</small></span></figcaption></figure>;
+ const card=(voice:typeof voices[number])=><figure className="creator-voice" data-tone={voice.tone} key={voice.name}><blockquote>{voice.text[index]}</blockquote><figcaption><img src={'/avatars/creators/'+voice.avatar+'.svg'} alt="" width={44} height={44} loading="lazy" decoding="async"/><span>{voice.name}<small>{voice.role[index]}</small></span></figcaption></figure>;
  return <section ref={root} className="creator-voices" aria-labelledby="creator-voices-title" data-paused={quiet||hidden||globalPaused||!visible} data-quiet={quiet} data-entered={entered}>
   <header><div><h2 id="creator-voices-title">{copy.title}</h2><p>{copy.note}</p></div></header>
   <div className="creator-voices-window">{[voices.slice(0,3),voices.slice(3)].map((row,i)=><div className="creator-voices-row" key={i} data-direction={i?'right':'left'} tabIndex={0} role="region" aria-label={copy.title+' '+(i+1)} onBlur={event=>{if(!quiet)event.currentTarget.scrollLeft=0;}}><div className="creator-voices-track"><div className="creator-voices-group">{row.map(card)}</div><div className="creator-voices-group" aria-hidden="true">{row.map(card)}</div></div></div>)}</div>

@@ -129,11 +129,11 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   finally{skyGeometry.dispose();skyMaterial.dispose();panelGeometry.dispose();panelMaterials.forEach(value=>value.dispose());diffuser.dispose();pmrem.dispose();}
   await yieldRenderSetup(signal);
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uJourneyStage:{value:0},uJourneyTravel:{value:0},uJourneyAspect:{value:1},uJourneyPointer:{value:new Vector2()},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#0b1936')},uBlueMiddle:{value:new Color('#204d91')},uBlueBottom:{value:new Color('#a0b8d5')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uJourneyStage:{value:0},uJourneyTravel:{value:0},uJourneyAspect:{value:1},uJourneyPointer:{value:new Vector2()},uCopper:{value:new Color('#c99670')},uSeaGlass:{value:new Color('#72a99b')},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#0b1936')},uBlueMiddle:{value:new Color('#204d91')},uBlueBottom:{value:new Color('#a0b8d5')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
    varying vec4 vReceiverClip;
    void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);vReceiverClip=gl_Position;}
   `,fragmentShader:`
-   varying vec4 vReceiverClip;uniform float uScroll;uniform float uTime;uniform float uBrightness;uniform float uJourney;uniform float uJourneyStage;uniform float uJourneyTravel;uniform float uJourneyAspect;uniform vec2 uJourneyPointer;uniform vec2 uLensPosition;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
+   varying vec4 vReceiverClip;uniform float uScroll;uniform float uTime;uniform float uBrightness;uniform float uJourney;uniform float uJourneyStage;uniform float uJourneyTravel;uniform float uJourneyAspect;uniform vec2 uJourneyPointer;uniform vec2 uLensPosition;uniform vec3 uCopper;uniform vec3 uSeaGlass;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
    float softField(vec2 p,vec2 center,vec2 radius){vec2 d=(p-center)/radius;return exp(-dot(d,d));}
    float daylightBand(float distance,float width){float d=distance/width;return exp(-d*d);}
    void main(){
@@ -147,29 +147,34 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     float blueDepth=softField(field,vec2(.58,.49),vec2(.56,.25));
     color=mix(color,uBlueMiddle,blueDepth*.20*(1.-smoothstep(.8,1.1,documentY)));
     if(uJourney>.0001){
-     // Daylight is part of the same opaque receiver as the opening lens.
-     // Two wide refracted folds stay below the reading area, without particles,
-     // transparent overlays, extra geometry or a separate animation pass.
+     // Two broad optical folds continue through the content. Their copper and
+     // sea-glass shoulders follow the same receiver; no extra pass or geometry.
      float phase=uJourneyStage*.58;
      float drift=sin(uTime*.085+phase)*.012;
      vec2 p=uv-uJourneyPointer*vec2(.010,.007);
      float aspect=clamp(uJourneyAspect,.65,2.);
      vec2 bend=vec2(p.x-.08,p.x-.94);
-     float arcA=.10+.20*bend.x*bend.x*aspect+sin(phase)*.024+drift;
-     float arcB=.035+.23*bend.y*bend.y*aspect+cos(phase*.8)*.018-drift*.6;
+     float arcA=.22+.34*bend.x*bend.x*aspect+sin(phase)*.045+drift;
+     float arcB=.76-.30*bend.y*bend.y*aspect+cos(phase*.8)*.035-drift*.6;
      float distanceA=p.y-arcA-uJourneyTravel*.012;
      float distanceB=p.y-arcB+uJourneyTravel*.008;
-     float shoulderA=daylightBand(distanceA+.052,.15);
-     float shoulderB=daylightBand(distanceB+.038,.11);
-     float silverA=daylightBand(distanceA-.025,.040);
-     float silverB=daylightBand(distanceB-.018,.032);
-     float perimeter=1.-smoothstep(.25,.64,p.y);
-     float readingZone=softField(p,vec2(.51,.59),vec2(.39,.28));
-     float relief=perimeter*(1.-readingZone*.82);
+     float shoulderA=daylightBand(distanceA+.062,.14);
+     float shoulderB=daylightBand(distanceB-.052,.12);
+     float silverA=daylightBand(distanceA-.012,.018);
+     float silverB=daylightBand(distanceB+.012,.016);
+     float readingZone=softField(p,vec2(.51,.53),vec2(.36,.29));
+     float relief=1.-readingZone*.68;
      float galleryDepth=softField(uv,uLensPosition,vec2(.78,.60));
-     vec3 gallery=mix(uIce,uBlueBottom,galleryDepth*.18);
-     gallery=mix(gallery,uBlueBottom,(shoulderA*.16+shoulderB*.09)*relief);
-     gallery=mix(gallery,vec3(1.),(silverA*.23+silverB*.15)*relief);
+     vec3 gallery=mix(uIce,uBlueBottom,galleryDepth*.12);
+     float tint=sin(phase*.75)*.5+.5;
+     vec3 warm=mix(uCopper,uSeaGlass,tint*.28);
+     vec3 cool=mix(uSeaGlass,uBlueBottom,tint*.20);
+     gallery=mix(gallery,warm,shoulderA*.34*relief);
+     gallery=mix(gallery,cool,shoulderB*.32*relief);
+     float rimA=1.-smoothstep(.003,.014,abs(distanceA));
+     float rimB=1.-smoothstep(.003,.014,abs(distanceB));
+     gallery*=1.-(rimA*.055+rimB*.045)*relief;
+     gallery=mix(gallery,vec3(1.),(silverA*.48+silverB*.42)*relief);
      color=mix(color,gallery,uJourney);
     }
     color*=uBrightness;gl_FragColor=vec4(color,1.);
