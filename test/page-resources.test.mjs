@@ -28,7 +28,8 @@ test('SSR uses the same owner/reviewer permissions and local-community gate as H
  const denied=await pageResources(req(token),['admin'],{});assert.equal(denied.resources['/api/admin/bootstrap'].status,401);
  const admin=await pageResources(req(owner),['admin'],{});assert.equal(admin.resources['/api/admin/bootstrap'].status,200);assert.equal(admin.resources['/api/admin/statistics'].status,200);
  call('admin/community/accounts',{id:member.id,action:'role',role:'reviewer',reason:'首屏审核角色边界测试'});
- const reviewer=await pageResources(req(token),['admin','community','accounts'],{});assert.ok(!reviewer.resources['/api/admin/community/accounts']);assert.ok(!reviewer.resources['/api/admin/community/invites']);
+ const ownerCommunity=await pageResources(req(owner),['admin','community','reviews'],{});assert.equal(ownerCommunity.resources['/api/admin/bootstrap'].status,200);assert.ok(ownerCommunity.resources['/api/admin/community/reviews']);assert.ok(!ownerCommunity.resources['/api/admin/statistics']);
+ const reviewer=await pageResources(req(token),['admin','community','accounts'],{});assert.ok(!reviewer.resources['/api/admin/community/accounts']);assert.ok(!reviewer.resources['/api/admin/community/invites']);assert.ok(!reviewer.resources['/api/admin/bootstrap']);
  const publicHost=await pageResources(req(token,'https://public.example'),['community'],{});assert.equal(publicHost.resources['/api/community/config'].data.mode,'closed');assert.ok(!publicHost.resources['/api/community/posts']);
  assert.notEqual(admin.scope,guest.scope);
 });

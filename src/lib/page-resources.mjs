@@ -17,6 +17,7 @@ export async function pageResources(req,path=[],query={}){
   add('/api/community/config');
   if(user){add('/api/catalog/mine');if(query.edit)add('/api/catalog/mine/'+encodeURIComponent(String(query.edit)));}
  }
+ if(section==='admin'&&['community','catalog'].includes(path[1])&&user?.role==='owner')add('/api/admin/bootstrap');
  if(section==='admin'&&!['community','catalog'].includes(path[1])){
   const boot=await load('/api/admin/bootstrap');
   if(boot.status===200){const current=path[1]||'',editor=['new','edit'].includes(path[2]||''),types=['projects','articles','resources'],type=current==='trash'?(types.includes(String(query.type))?String(query.type):'resources'):current;

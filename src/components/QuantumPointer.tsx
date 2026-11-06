@@ -82,7 +82,7 @@ export function QuantumPointer(){
   const wake=()=>{if(!document.hidden&&!navigating&&!frame)frame=requestAnimationFrame(draw);};
   // The editor has its own precise drag, focus and glass feedback. Keep site particles idle here.
   const editing=(target:EventTarget|null)=>{
-   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor'))return false;
+   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center]'))return false;
    if(frame||waveFrame)clear();return true;
   };
   const move=(event:PointerEvent)=>{

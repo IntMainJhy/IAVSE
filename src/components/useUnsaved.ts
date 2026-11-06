@@ -12,7 +12,8 @@ export function useUnsaved(dirty:boolean){
    const anchor=event.target instanceof Element?event.target.closest('a'):null;
    if(anchor&&anchor.target!=='_blank'&&!anchor.hasAttribute('download')&&anchor.getAttribute('href')?.startsWith('/')&&new URL(anchor.href).href.split('#')[0]!==location.href.split('#')[0]&&!confirm(t('有尚未保存到服务器的修改，仍要离开吗？'))){event.preventDefault();event.stopImmediatePropagation();window.dispatchEvent(new Event('iavse-navigation-cancel'));}
   };
-  window.addEventListener('beforeunload',unload);document.addEventListener('click',click,true);
-  return()=>{window.removeEventListener('beforeunload',unload);document.removeEventListener('click',click,true);};
+  const inline=(event:Event)=>{if(!confirm(t('有尚未保存到服务器的修改，仍要离开吗？')))event.preventDefault();};
+  window.addEventListener('beforeunload',unload);document.addEventListener('click',click,true);window.addEventListener('iavse-before-inline-navigation',inline);
+  return()=>{window.removeEventListener('beforeunload',unload);document.removeEventListener('click',click,true);window.removeEventListener('iavse-before-inline-navigation',inline);};
  },[dirty,t]);
 }

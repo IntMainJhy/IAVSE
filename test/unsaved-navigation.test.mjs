@@ -71,3 +71,12 @@ test('editing a community submission uses the shared cancellation guard',()=>{
  assert.equal(guard.dispatched[0]?.type,'iavse-navigation-cancel','declining submission navigation releases PageMotion suspension');
  guard.cleanup();
 });
+
+test('in-page administration navigation uses the same unsaved decision before replacing the view',()=>{
+ for(const allow of [false,true]){
+  const f=mount(true,allow),event=new Event('iavse-before-inline-navigation',{cancelable:true});
+  f.listeners.get('iavse-before-inline-navigation')(event);assert.equal(f.prompts.length,1);assert.equal(event.defaultPrevented,!allow);
+  f.cleanup();assert.equal(f.listeners.size,0);
+ }
+ assert.equal(mount(false).listeners.has('iavse-before-inline-navigation'),false);
+});

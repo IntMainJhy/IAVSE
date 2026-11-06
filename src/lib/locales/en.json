@@ -3259,5 +3259,16 @@
   "确认并发布主页": "Review and publish your homepage",
   "保存与公开是两个步骤。检查公开资料、隐私和素材使用权后点击发布，当前版本立即公开；继续编辑只更新私人草稿。": "Saving and publishing are separate. Check your public details, privacy and media rights, then publish this version immediately. Later edits remain private drafts.",
   "文档和社区文章审核后公开；主页、作品、Skill、资源、评论和回复直接发布。共享栏目同步生成一份社区分享，草稿和待审文章不会提前公开。": "Documents and community articles require review. Homepages, projects, Skills, resources, comments and replies publish directly. Shared items create one linked community post; drafts and pending articles stay private.",
-  "注册和登录无需邮箱验证码。注册前必须阅读并确认规则；这不代表邮箱或身份已核验。验证邮箱用于密码恢复，依法需要的身份核验仍须按实际运营要求办理。": "Registration and sign-in do not require an email code. Accept the rules before registering; this does not verify a mailbox or identity. Email verification enables password recovery. Applicable identity checks remain an operating responsibility."
+  "注册和登录无需邮箱验证码。注册前必须阅读并确认规则；这不代表邮箱或身份已核验。验证邮箱用于密码恢复，依法需要的身份核验仍须按实际运营要求办理。": "Registration and sign-in do not require an email code. Accept the rules before registering; this does not verify a mailbox or identity. Email verification enables password recovery. Applicable identity checks remain an operating responsibility.",
+  "工作台": "Workspace",
+  "内容与页面": "Content & pages",
+  "系统": "System",
+  "页面与分享": "Pages & sharing",
+  "登录与安全": "Sign-in & security",
+  "管理公开页面、下载入口和登录安全。": "Manage public pages, downloads and account security.",
+  "设置分组": "Settings groups",
+  "用于未单独设置封面的公开页面。": "Used on public pages without their own cover.",
+  "所有更改已保存": "All changes saved",
+  "打开后台导航": "Open admin navigation",
+  "收起导航": "Close navigation"
 }

@@ -9,7 +9,7 @@ function mount({reduced=false,embedded=false}={}){
  const window=new EventTarget(),document=Object.assign(new EventTarget(),{hidden:false,querySelector:()=>null,documentElement:Object.assign(new EventTarget(),{dataset:{},hasAttribute:()=>false})});
  window.self=window;window.top=embedded?{}:window;
  const fine=Object.assign(new EventTarget(),{matches:true}),preference=Object.assign(new EventTarget(),{matches:reduced});
- class Element{constructor(actionable=false,editing=false){this.actionable=actionable;this.editing=editing;this.disabled=false;}closest(selector){if(selector==='.blog-canvas-editor')return this.editing?this:null;return selector.startsWith('.v2-landing')?null:this.actionable?this:null;}matches(){return this.disabled;}getBoundingClientRect(){return{left:100,top:200,width:80,height:40};}}
+ class Element{constructor(actionable=false,editing=false){this.actionable=actionable;this.editing=editing;this.disabled=false;}closest(selector){if(selector.includes('.blog-canvas-editor'))return this.editing===true||this.editing==='admin'&&selector.includes('[data-admin-layout=control-center]')?this:null;return selector.startsWith('.v2-landing')?null:this.actionable?this:null;}matches(){return this.disabled;}getBoundingClientRect(){return{left:100,top:200,width:80,height:40};}}
  const surfaces=[0,1].map(()=>{const context={arcs:[],totalArcs:0,fills:0,clears:0,paths:0,moves:0,globalAlpha:1,scale(){},clearRect(){this.clears++;this.arcs=[];},beginPath(){this.paths++;},moveTo(){this.moves++;},arc(...args){this.arcs.push(args);this.totalArcs++;},fill(){this.fills++;}};return{style:{},width:0,height:0,getContext:()=>context,context};});
  const [canvas,wave]=surfaces,effects=[],exports={},frames=new Map(),mathCalls={exp:0,hypot:0},math=Object.create(Math);let now=100,id=0,ref=0;
  for(const name of ['exp','hypot'])math[name]=(...args)=>{mathCalls[name]++;return Math[name](...args);};
@@ -22,10 +22,10 @@ function mount({reduced=false,embedded=false}={}){
  const advance=ms=>{while(ms>0){const interval=Math.min(ms,16);step(interval);ms-=interval;}};
  const dispatch=(target,type,values)=>target.dispatchEvent(Object.assign(new Event(type),values));
  const move=(x=600,y=400,type='mouse',target)=>{const event=Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType:type});if(target)Object.defineProperty(event,'target',{value:target});window.dispatchEvent(event);};
- const button=new Element(true),editorButton=new Element(true,true);
+ const button=new Element(true),editorButton=new Element(true,true),adminButton=new Element(true,'admin');
  const click=(detail=1,target=button)=>{const event=new Event('click');Object.defineProperty(event,'target',{value:target});Object.assign(event,{button:0,detail,clientX:300,clientY:320});document.dispatchEvent(event);};
  const navigation=pending=>dispatch(window,'iavse-navigation-pending',{detail:{pending}});
- return{window,document,fine,preference,frames,canvas,wave,mathCalls,step,advance,move,click,button,editorButton,navigation,cleanup};
+ return{window,document,fine,preference,frames,canvas,wave,mathCalls,step,advance,move,click,button,editorButton,adminButton,navigation,cleanup};
 }
 const extent=s=>Math.max(...s.wave.context.arcs.map(([x,y])=>Math.hypot(x-320,y-320)));
 const gridDistance=value=>Math.abs(value-Math.round(value/18)*18);
@@ -102,11 +102,11 @@ test('continuous pointer movement retains every point while batching fills on al
  assert.equal(s.wave.context.clears,0);t.diagnostic(JSON.stringify({pointerFrames:120,pointPaths:s.canvas.context.totalArcs,batchedFills:s.canvas.context.fills,maxFillsPerFrame:maxFills}));s.cleanup();
 });
 
-test('blog canvas interactions stop site particles and never schedule new effect frames',()=>{
- const s=mount();s.move();s.click();assert.equal(s.frames.size,2);
- s.move(400,300,'mouse',s.editorButton);assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');
+test('design and administration workspaces stop site particles and never schedule new effect frames',()=>{
+ for(const target of ['editorButton','adminButton']){const s=mount();s.move();s.click();assert.equal(s.frames.size,2);
+ s.move(400,300,'mouse',s[target]);assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');
  const fills=s.canvas.context.fills+s.wave.context.fills;
- for(let i=0;i<20;i++){s.move(400+i,300,'mouse',s.editorButton);s.click(1,s.editorButton)}
+ for(let i=0;i<20;i++){s.move(400+i,300,'mouse',s[target]);s.click(1,s[target])}
  assert.equal(s.frames.size,0);assert.equal(s.canvas.context.fills+s.wave.context.fills,fills);
- s.move();assert.equal(s.frames.size,1,'public-page feedback is still available outside the editor');s.cleanup();
+ s.move();assert.equal(s.frames.size,1,'public-page feedback is still available outside the editor');s.cleanup();}
 });
