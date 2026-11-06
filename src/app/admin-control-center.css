@@ -152,3 +152,46 @@ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-
 html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .table-wrap tr>:last-child{padding-right:12px}
 html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-topline{backdrop-filter:none;background:var(--admin-surface)}
 @media(min-width:641px) and (max-width:960px){html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-topline{margin-inline:-24px;padding-inline:24px}}
+
+/* Shared controls and nested navigation, including native top-layer dialogs. */
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder{flex:none}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder summary{display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 12px;list-style:none;cursor:pointer;color:var(--admin-ink);font-size:13px;border-radius:6px}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder summary::-webkit-details-marker{display:none}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder summary:hover{background:var(--admin-soft)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder summary .icon{width:16px;height:16px;flex:none}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder summary .icon:last-child{margin-left:auto;transition:transform .15s}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder[open] summary .icon:last-child{transform:rotate(180deg)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-subnav{display:grid;gap:2px;padding:4px 0 8px 20px}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-subnav a{font-size:12px;min-height:36px;padding:8px 12px}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(dialog,.editor-toolbar,.rich-editor,.editor-surface,.document-slash-menu,.tiptap,.ProseMirror,.file-library,.community-version-compare,.community-review-decision,.case-linked-content){background:var(--admin-surface);color:var(--admin-ink);border-color:var(--admin-line);box-shadow:none}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] dialog{max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);color-scheme:inherit}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] dialog::backdrop{background:rgb(0 0 0 / .55)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] dialog :is(h1,h2,h3,p,li,td,th){color:var(--admin-ink)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.organic-button,.organic-button-secondary,.space-btn,.editor-toolbar button){background:var(--admin-surface);border:1px solid var(--admin-line);color:var(--admin-ink);box-shadow:none;border-radius:6px;min-height:36px}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.organic-button.is-primary,.space-btn.primary){background:var(--admin-primary);color:var(--admin-on-primary)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.editor-toolbar button.active,.editor-toolbar button:hover){background:var(--admin-soft);color:var(--admin-ink)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(input,textarea)::placeholder{color:var(--admin-muted);opacity:1}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] input[type=checkbox]{accent-color:var(--admin-blue)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] input::file-selector-button{background:var(--admin-soft);color:var(--admin-ink);border:1px solid var(--admin-line);border-radius:6px;padding:8px 12px}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.app-feedback,.notice,.community-feedback){color:var(--admin-ink);background:var(--admin-soft);border-color:var(--admin-line)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.app-feedback.error,.community-feedback.is-error,.danger-text,.red){color:#c43d4a}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .btn.danger{background:transparent;border-color:currentColor;color:#c43d4a}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.community-badge,.tag){background:var(--admin-soft);color:var(--admin-ink);border-color:var(--admin-line)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.field-row,.form-grid,.form-section,.community-member-row){min-width:0}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.table-wrap,.admin-nav){overscroll-behavior:contain}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-drawer{inset:0 auto 0 0;width:min(320px,calc(100vw - 40px));height:100dvh;max-height:100dvh;max-width:none;border-radius:0;padding:20px 16px;padding-bottom:max(20px,env(safe-area-inset-bottom));overscroll-behavior:contain}
+@media(max-width:640px){
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.field-row,.form-grid,.community-review-layout){display:grid;grid-template-columns:minmax(0,1fr)}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .form-sticky{position:static;top:auto}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-main .page-head{align-items:flex-start;gap:12px}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.actions,.organic-actions,.table-actions){flex-wrap:wrap;gap:8px}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-topline .actions{flex-wrap:nowrap;gap:8px}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.admin-tools,.management-filters){display:flex;flex-wrap:wrap}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.admin-tools,.management-filters)>*{max-width:100%;min-width:0}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-subnav a{min-height:44px}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav-folder summary{min-height:44px}
+ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] dialog{padding:16px}
+}
+
+body:has(.admin-drawer[open]){overflow:hidden}
+html:root[data-ui][data-color-mode=dark] body .organic-site.organic-admin[data-admin-layout=control-center] :is(.app-feedback.error,.community-feedback.is-error,.danger-text,.red,.btn.danger){color:#ff9da7}

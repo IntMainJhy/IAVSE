@@ -72,7 +72,7 @@ test('the unconfigured legacy administration mode retains real reviewer delegati
 });
 
 test('embedded community management retains controls without nesting a second dashboard shell',()=>{
- const html=members({embedded:true});assert.ok(html.includes('admin-community-nav'));assert.ok(html.includes('member-action-member'));
+ const html=members({embedded:true});assert.ok(!html.includes('admin-community-nav'));assert.ok(html.includes('member-action-member'));
  for(const shell of ['class="admin-shell"','class="admin-side"','class="admin-main"','返回内容后台'])assert.ok(!html.includes(shell),shell+' belongs to the parent control center');
 });
 test('settings uses one continuous form instead of category cards and keeps password submission separate',()=>{
