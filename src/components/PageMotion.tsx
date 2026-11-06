@@ -43,7 +43,7 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    // Also bound suspended renderers when this page has no animated receiver.
    recovery=setTimeout(()=>{reset();if(pending?.to===to)pending=null;},8000);
    if(!preference.matches){
-    const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.v2-hero-copy,.creator-directory-intro');
+    const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.creator-directory-intro');
     if(content){
      const queryOnly=source.pathname===next.pathname;
      element.setAttribute('aria-busy','true');

@@ -7,7 +7,7 @@ import ts from 'typescript';
 function fixture({reduced=false,owned=false}={}){
  const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PageMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
  const effects=[],layouts=[],calls=[],contexts=[],observers=[],media=[],events=new Map(),changes=new Set(),timers=new Map(),menus=[{open:true}],dispatches=[],exports={};
- class Element{constructor(rect={left:100,top:100,width:160,height:44}){this.rect=rect;this.dataset={};this.scrollTop=0;this.nodes={};}getBoundingClientRect(){return this.rect;}querySelector(selector){return this.nodes[selector]||null;}querySelectorAll(){return this.links||[];}closest(){return this;}contains(){return true;}focus(){this.focused=true;}setAttribute(name,value){this[name]=value;}removeAttribute(name){delete this[name];}hasAttribute(){return false;}}
+ class Element{constructor(rect={left:100,top:100,width:160,height:44}){this.rect=rect;this.dataset={};this.scrollTop=0;this.nodes={};}getBoundingClientRect(){return this.rect;}querySelector(selector){return this.hero&&selector.split(',').includes('.v2-hero-copy')?this.hero:this.nodes[selector]||null;}querySelectorAll(){return this.links||[];}closest(){return this;}contains(){return true;}focus(){this.focused=true;}setAttribute(name,value){this[name]=value;}removeAttribute(name){delete this[name];}hasAttribute(){return false;}}
  let root=new Element(),path='/community',query='',refs=[],refIndex=0;
  const preference={matches:reduced,addEventListener:(_,fn)=>changes.add(fn),removeEventListener:(_,fn)=>changes.delete(fn)};
  const document={documentElement:{hasAttribute:()=>owned},querySelectorAll:()=>menus,addEventListener:(key,fn)=>events.set(key,fn),removeEventListener:(key)=>events.delete(key)};
@@ -120,7 +120,7 @@ test('a declined unsaved navigation immediately restores content and clears the 
 
 test('the current blog heading receives feedback while the 3D gallery root stays in its own coordinates',()=>{
  const f=fixture(),a=f.page('/blogs',100,'feed',{publicPage:true});
- const heading=a.content;a.root.nodes={'.community-route-content,.v2-hero-copy,.creator-directory-intro':heading};
+ const heading=a.content;a.root.nodes={'.community-route-content,.creator-directory-intro':heading};
  f.click('/community');assert.ok(f.calls.some(call=>call.node===heading&&call.to.opacity>=.85));assert.ok(f.calls.every(call=>call.node!==a.root),'the spatial stage does not inherit a page transform');
  a.cleanup();const b=f.page('/blogs',100,'feed',{publicPage:true,remount:true});b.cleanup();
 });
@@ -166,4 +166,9 @@ test('main-header navigation leaves departure and suspension to the persistent G
 
 test('local return to home skips both heading translation and whole-page fallback animation',()=>{
  const f=fixture(),source=f.page('/resources',100,'feed',{publicPage:true});f.click('/');source.cleanup();const before=f.calls.length,home=f.page('/',100,'feed',{publicPage:true});assert.equal(f.calls.length,before);assert.ok(f.dispatches.some(event=>event.type==='iavse-route-commit'&&event.detail.route==='/'));home.cleanup();
+});
+
+
+test('ordinary links leaving home do not translate or fade the hero copy',()=>{
+ const f=fixture(),home=f.page('/',100,'feed',{publicPage:true});home.root.nodes={};home.root.hero=home.content;const before=f.calls.length;f.click('/downloads');assert.equal(f.calls.length,before);home.cleanup();
 });
