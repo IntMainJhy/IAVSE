@@ -203,3 +203,7 @@ html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-
 html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-nav a:not(.active):hover{background:transparent;color:var(--admin-ink);text-decoration:underline;text-underline-offset:4px}
 html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-subnav{margin-left:18px;padding-left:10px;border-left:1px solid var(--admin-line)}
 html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-drawer::backdrop{backdrop-filter:none}
+/* Remove legacy half-second control morphs and translucent dialog entrances. */
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] :is(a,button,input,textarea,select){transition:color .12s ease,border-color .12s ease;transform:none}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-drawer[open]{animation:none;opacity:1;transform:none;background:var(--admin-surface)}
+html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-drawer::backdrop{animation:none;opacity:1}
