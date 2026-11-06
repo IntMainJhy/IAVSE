@@ -263,7 +263,7 @@ test('saved reduction applies before controls mount and manual changes preserve 
  assert.equal(s.preference.matches,false,'media getter stays stale for this regression');assert.equal(s.draws.at(-1)[4],true,'manual full motion cannot erase the system event');assert.equal(s.frames.size,0);s.cleanup();
 });
 
-test('cinematic chapter geometry is cached across scroll frames and refreshed only after layout changes',async()=>{
+test('natural chapter geometry is cached across scroll frames and refreshed only after layout changes',async()=>{
  const s=mount({animated:true,journey:true});s.intersection.set(true);await flush();
  assert.deepEqual(s.journeys.at(-1),[{id:'blog',start:2,end:3.4,side:-1},{id:'editor',start:3300/900,end:4560/900,side:1}]);
  assert.ok(s.resize.targets.has(s.host),'chapter layout changes are observed as well as viewport size');
@@ -274,12 +274,4 @@ test('cinematic chapter geometry is cached across scroll frames and refreshed on
  assert.equal(s.journeys.length,count+1,'layout events share one cache rebuild');assert.equal(s.journeys.at(-1)[1].start,3480/900);
  const refreshed=reads();s.host.dispatchEvent(new Event('load'));s.step();assert.ok(reads()>refreshed,'loaded images can invalidate cached geometry');
  s.cleanup();const after=reads();s.window.dispatchEvent(new Event('iavse-journey-layout'));s.host.dispatchEvent(new Event('load'));s.step();assert.equal(reads(),after,'late events cannot measure a disposed scene');
-});
-
-
-test('sticky film chapters have distinct virtual anchors even while their DOM panels overlap',async()=>{
- const s=mount({journey:true});s.host.dataset.journeyMotion='cinema';s.host.track={getBoundingClientRect:()=>({top:1800,height:4500})};
- s.sections[1].documentTop=1800;s.intersection.set(true);await flush();
- assert.deepEqual(s.journeys.at(-1),[{id:'blog',start:2,end:5,side:-1},{id:'editor',start:4,end:7,side:1}]);
- const initial=s.journeys.length;s.window.scrollY=2000;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.journeys.length,initial,'normal scroll keeps the cached virtual map');s.cleanup();
 });

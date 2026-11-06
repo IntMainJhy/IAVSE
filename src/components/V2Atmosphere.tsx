@@ -75,9 +75,8 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   if(!hasJourney())return;
   // Sections keep their document geometry while their children move. Cache these
   // measurements after layout changes, never on each scroll or animation frame.
-  const track=host.querySelector<HTMLElement>('.home-stories'),cinema=host.getAttribute('data-journey-motion')==='cinema',trackRect=cinema?track?.getBoundingClientRect():null,storyCount=host.querySelectorAll('[data-home-story]').length;
-  const chapters:HomeJourneyChapter[]=Array.from(host.querySelectorAll<HTMLElement>('[data-home-story],[data-home-scene="invitation"]')).map((element,index)=>{
-   const rect=element.getBoundingClientRect();const virtual=trackRect&&element.dataset.homeStory,span=trackRect?(trackRect.height-height)/Math.max(1,storyCount):0;return{id:element.dataset.homeStory||element.dataset.homeScene||'',start:((virtual?trackRect!.top+index*span:rect.top)-hostRect.top)/height,end:((virtual?trackRect!.top+(index+1)*span+height:rect.bottom)-hostRect.top)/height,side:element.dataset.homeSide==='right'?1:element.dataset.homeStory?-1:0};
+  const chapters:HomeJourneyChapter[]=Array.from(host.querySelectorAll<HTMLElement>('[data-home-story],[data-home-scene="invitation"]')).map(element=>{
+   const rect=element.getBoundingClientRect();return{id:element.dataset.homeStory||element.dataset.homeScene||'',start:(rect.top-hostRect.top)/height,end:(rect.bottom-hostRect.top)/height,side:element.dataset.homeSide==='right'?1:element.dataset.homeStory?-1:0};
   }).filter(chapter=>chapter.id&&Number.isFinite(chapter.start)&&Number.isFinite(chapter.end)&&chapter.end>chapter.start);
   scene?.setJourney?.(chapters);
  };

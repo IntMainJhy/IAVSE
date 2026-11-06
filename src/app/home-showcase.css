@@ -38,24 +38,3 @@ html[data-ui][data-color-mode] .v2-site .v2-home .v2-invitation h2{font-weight:5
 html[data-ui][data-color-mode] .v2-site .home-media-pause:hover{background:var(--site-action-glass-hover);color:#fff}
 
 .v2-hero-copy .iavse-brand-words{font-size:clamp(.62rem,1vw,.82rem);letter-spacing:.12em;line-height:1.9;max-width:740px;margin:24px auto 12px;text-wrap:balance}.v2-hero-copy .iavse-brand-mission{font-size:clamp(1rem,1.6vw,1.35rem);line-height:1.6;max-width:740px;margin:12px auto;text-wrap:balance}
-
-/* Native-scroll stages give the shared optical camera time to travel between stories. */
-.v2-home[data-journey-motion=full] .home-story[data-journey-active=true]:not([data-home-story=editor]):not([data-home-story=resources])>.home-story-visual,.v2-home[data-journey-motion=full] .home-story[data-journey-active=true]>.home-story-copy{will-change:transform,opacity}
-.v2-home[data-journey-motion=full] .home-story-visual::after{opacity:calc(.55 + var(--journey-focus,1)*.45)}
-@media(min-width:1001px) and (min-height:720px){
- .v2-home[data-journey-motion=full] .home-stories{gap:0;padding-top:0}
- .v2-home[data-journey-motion=full] .home-story{min-height:138svh;align-items:start;padding-block:8svh}
- .v2-home[data-journey-motion=full] .home-story>.home-story-visual{position:sticky;top:max(116px,calc(50svh - 270px));align-self:start}
- .v2-home[data-journey-motion=full] .home-story>.home-story-copy{position:sticky;top:max(148px,calc(50svh - 140px));align-self:start}
- .v2-home[data-journey-motion=full] .v2-section[data-home-scene=invitation]{min-height:82svh;display:flex;flex-direction:column;justify-content:center;padding-block:16svh 10svh}
-}
-@media(prefers-reduced-motion:reduce){
- .v2-home[data-journey-motion=full] .home-story{min-height:0;padding-block:0}
- .v2-home[data-journey-motion=full] .home-story>:is(.home-story-visual,.home-story-copy){position:relative;top:auto;will-change:auto;transform:none!important;opacity:1!important}
-}
-@media print{
- .v2-home[data-journey-motion=full] .home-story{min-height:0;padding-block:0}
- .v2-home[data-journey-motion=full] .home-story>:is(.home-story-visual,.home-story-copy){position:relative;top:auto;will-change:auto}
- .v2-home[data-journey-motion=full] .v2-section[data-home-scene=invitation]{min-height:0;padding-block:30px}
- .v2-home[data-journey-motion=full] .v2-section[data-home-scene=invitation]>:is(h2,div){transform:none!important;opacity:1!important}
-}
