@@ -3,6 +3,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {homeScrollRefresh} from '@/lib/home-scroll-refresh';
 
 const copy={
  zh:{loading:'正在准备 3D 空间',ready:'滚动，探索你的空间',fallback:'静态背景 · 所有功能均可使用',pause:'暂停背景',resume:'继续背景',reduce:'减少背景动态',system:'系统已减少动态效果',replay:'返回顶部并重播',controls:'空间动画控制'},
@@ -25,8 +26,7 @@ export function HomeCinema({locale}:{locale:string}){
   const host=root.current?.closest<HTMLElement>('.v2-home'),hero=host?.querySelector<HTMLElement>('.v2-hero-scene');if(!host||!hero||reduced)return;
   try{if(localStorage.getItem('iavse-background-motion')==='reduce')return;}catch{}
   gsap.registerPlugin(ScrollTrigger);
-  let live=true,refreshFrame=0;
-  const refresh=()=>{if(live&&!refreshFrame)refreshFrame=requestAnimationFrame(()=>{refreshFrame=0;if(live)ScrollTrigger.refresh();});};
+  const refreshWork=homeScrollRefresh(hero),refresh=refreshWork.request;
   const media=gsap.matchMedia();
   media.add('(prefers-reduced-motion: no-preference)',()=>{
    const heading=hero.querySelectorAll('h1>span'),copy=hero.querySelector('.v2-hero-copy'),intro=hero.querySelector('.v2-hero-intro'),showcase=hero.querySelector('.v2-hero-showcase'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
@@ -40,7 +40,7 @@ export function HomeCinema({locale}:{locale:string}){
   const images=Array.from(hero.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));
   document.fonts?.ready.then(refresh);refresh();
   return()=>{
-   live=false;cancelAnimationFrame(refreshFrame);images.forEach(image=>image.removeEventListener('load',refresh));
+   refreshWork.dispose();images.forEach(image=>image.removeEventListener('load',refresh));
    if(hero.isConnected)media.revert();
    else{
     // Only a detached homepage can discard its styles. Live preference changes

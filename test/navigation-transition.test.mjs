@@ -8,10 +8,10 @@ const compile=file=>ts.transpileModule(fs.readFileSync(new URL(file,import.meta.
 const source=compile('../src/components/NavigationTransition.tsx'),helper=compile('../src/lib/navigation-motion.ts');
 
 function fixture({reduced=false,iframe=false,hidden=false,throws=false,animationThrows=false,path='/',supported=false,scrollY=0}={}){
- const exports={},effects=[],events=new Map(),microtasks=[],timers=new Map(),pushes=[],timelines=[],contexts=[],pending=[],location=new URL(path,'http://localhost:3010');
+ const exports={},effects=[],events=new Map(),microtasks=[],timers=new Map(),pushes=[],timelines=[],tweens=[],contexts=[],pending=[],location=new URL(path,'http://localhost:3010');
  const headerSelectors={desktop:'.organic-header .organic-desktop-nav>a',mobile:'.organic-header .organic-mobile-menu>nav>a',brand:'.organic-header a.organic-brand'};
  class Element{
-  constructor(classes='',children=[]){this.classes=classes.split(' ');this.children=children;this.style={};this.dataset={};this.attrs=new Map();this.handlers=new Set();this.rect={top:50,bottom:150};for(const node of children)node.parent=this;}
+  constructor(classes='',children=[]){this.classes=classes.split(' ');this.children=children;this.style=Object.defineProperty({},'removeProperty',{value:name=>delete this.style[name]});this.dataset={};this.attrs=new Map();this.handlers=new Set();this.rect={top:50,bottom:150};for(const node of children)node.parent=this;}
   contains(node){return this===node||this.children.some(child=>child.contains(node));}
   matches(selector){return selector.split(',').some(part=>part===headerSelectors[this.kind]||part.startsWith('.')&&this.classes.includes(part.slice(1)));}
   closest(){return this.href?this:this.parent?.closest()||null;}
@@ -33,6 +33,11 @@ function fixture({reduced=false,iframe=false,hidden=false,throws=false,animation
  const window={addEventListener:(name,fn)=>events.set(name,fn),removeEventListener:name=>events.delete(name),dispatchEvent:event=>{if(event.type==='iavse-navigation-pending')pending.push(event.detail.pending);events.get(event.type)?.(event);}};window.self=window;window.top=iframe?{}:window;
  const styleKeys=value=>Object.keys(value||{}).filter(key=>!['duration','ease','overwrite','stagger','clearProps'].includes(key));
  const gsap={
+  to(target,options){
+   if(animationThrows)throw Error('Cannot initialize the visual handoff');
+   const tween={target,options,killed:false,kill(){this.killed=true;},render(values){if(!this.killed)Object.assign(target.style,values);}};
+   tweens.push(tween);return tween;
+  },
   context(fn,scope){
    const saved=new Map(),context={scope,reverted:false,reverts:0,add(callback){const before=currentContext;currentContext=context;try{return callback();}finally{currentContext=before;}},remember(target,values){let keys=saved.get(target);if(!keys){keys=new Map();saved.set(target,keys);}for(const key of styleKeys(values))if(!keys.has(key))keys.set(key,target.style[key]);},revert(){context.reverted=true;context.reverts++;for(const [target,keys]of saved)for(const[key,value]of keys){if(value===undefined)delete target.style[key];else target.style[key]=value;}}};
    contexts.push(context);context.add(fn);return context;
@@ -40,7 +45,7 @@ function fixture({reduced=false,iframe=false,hidden=false,throws=false,animation
   timeline(options){
    if(animationThrows)throw Error('Cannot initialize the visual handoff');
    const context=currentContext,operations=[];
-   const add=(target,from,to,at)=>{const targets=Array.isArray(target)?target:[target];for(const item of targets){context.remember(item,from);context.remember(item,to);for(const key of styleKeys(from||to))item.style[key]=(from||to)[key];}operations.push({targets,from,to,at});return timeline;};
+   const add=(target,from,to,at)=>{const targets=Array.isArray(target)?target:[target];for(const item of targets){context.remember(item,from);context.remember(item,to);for(const key of styleKeys(from))item.style[key]=from[key];}operations.push({targets,from,to,at});return timeline;};
    const timeline={options,context,operations,to:(target,to,at)=>add(target,null,to,at),fromTo:(target,from,to,at)=>add(target,from,to,at),complete(){if(!context.reverted)for(const operation of operations)for(const target of operation.targets)for(const key of styleKeys(operation.to))target.style[key]=operation.to[key];options.onComplete?.();}};
    timelines.push(timeline);return timeline;
   }
@@ -61,7 +66,7 @@ function fixture({reduced=false,iframe=false,hidden=false,throws=false,animation
  const commit=(route,root=scene('catalog-page-heading'))=>{current=root;root.dataset.motionRoute=route;location.href=new URL(route,location).href;events.get('iavse-route-commit')?.({detail:{route,root}});return root;};
  const expire=(delay=4000)=>{for(const [id,timer]of [...timers])if(timer.delay===delay){timers.delete(id);timer.fn();}};
  const emit=name=>events.get(name)?.();
- return{link,document,layer,old,events,timers,pushes,timelines,contexts,pending,capture,target,click,commit,expire,cleanup,preference,checkpoint,emit,node,scene,helpers,output,location};
+ return{link,document,layer,old,events,timers,pushes,timelines,tweens,contexts,pending,capture,target,click,commit,expire,cleanup,preference,checkpoint,emit,node,scene,helpers,output,location};
 }
 
 test('main navigation pushes immediately without snapshots, display frames or departure completion',()=>{
@@ -78,6 +83,32 @@ test('only the matching committed route starts one GSAP arrival and completion r
  assert.equal(root.children[0].style.opacity,.72);s.commit('/resources',root);assert.equal(s.timelines.length,2,'duplicate layout commits do not restart the transition');
  s.timelines[1].complete();assert.deepEqual(root.children[0].style,{});assert.deepEqual(s.old.children[0].style,{});assert.equal(s.layer.hidden,true);assert.equal(s.document.documentElement.attrs.size,0);
  assert.deepEqual(s.pending,[true,false]);assert.equal(s.timers.size,0);s.cleanup();assert.equal(s.events.size,0);
+});
+
+test('a route commit fades the current veil opacity without resetting or darkening it',()=>{
+ // Cover partially rendered, fully rendered, or a cached route committed before
+ // its first frame: all three must retain the value the user just saw.
+ for(const opacity of[undefined,.06,.16]){
+  const s=fixture();s.link.href=new URL('/blogs',s.location).href;s.click();
+  const departure=s.tweens[0];assert.equal(departure.target,s.layer);
+  if(opacity!==undefined)departure.render({opacity});
+  s.commit('/blogs',s.scene('creator-directory-intro'));
+  assert.equal(s.layer.style.opacity,opacity,'commit cannot reset the cover or force a brighter/darker starting frame');
+  assert.equal(departure.killed,true,'the departing cover cannot keep increasing after commit');
+  departure.render({opacity:.16});assert.equal(s.layer.style.opacity,opacity);
+  const fade=s.timelines[1].operations.find(operation=>operation.targets.includes(s.layer));
+  assert.equal(fade.from,null);assert.equal(fade.to.opacity,0);assert.equal(fade.to.duration,.32);
+  s.timelines[1].complete();assert.equal(s.layer.hidden,true);assert.deepEqual(s.layer.style,{});s.cleanup();
+ }
+});
+
+test('rapid navigation and cancellation dispose the independent departure cover',()=>{
+ const s=fixture();s.click();const stale=s.tweens[0];stale.render({opacity:.09});
+ s.link.href=new URL('/blogs',s.location).href;s.click();const latest=s.tweens[1];
+ assert.equal(stale.killed,true);assert.deepEqual(s.layer.style,{});
+ latest.render({opacity:.04});stale.render({opacity:.16});assert.equal(s.layer.style.opacity,.04);
+ s.emit('iavse-navigation-cancel');assert.equal(latest.killed,true);assert.equal(s.layer.hidden,true);assert.deepEqual(s.layer.style,{});
+ latest.render({opacity:.16});assert.deepEqual(s.layer.style,{});assert.equal(s.pending.at(-1),false);s.cleanup();
 });
 
 test('draft guards run before target interception and between-listener microtasks preserve navigation',()=>{
@@ -168,6 +199,7 @@ test('the visual bridge is opacity-only, non-interactive and below the independe
  for(const operation of s.timelines.flatMap(timeline=>timeline.operations).filter(operation=>operation.targets.includes(s.layer))){
   for(const values of[operation.from,operation.to].filter(Boolean))assert.ok(Object.keys(values).every(key=>['opacity','duration'].includes(key)),'the bridge cannot animate transforms, filters or layout');
  }
+ for(const tween of s.tweens.filter(tween=>tween.target===s.layer))assert.ok(Object.keys(tween.options).every(key=>['opacity','duration','ease','overwrite'].includes(key)));
  const css=fs.readFileSync(new URL('../src/app/navigation-transition.css',import.meta.url),'utf8'),wave=fs.readFileSync(new URL('../src/app/quantum-pointer.css',import.meta.url),'utf8');
  const veilRule=css.match(/\.iavse-route-veil\{([^}]+)\}/)[1];assert.match(veilRule,/pointer-events:none/);assert.match(veilRule,/position:fixed/);assert.match(veilRule,/contain:strict/);
  assert.ok(Number(veilRule.match(/z-index:(\d+)/)[1])<Number(wave.match(/z-index:(\d+)/)[1]));assert.doesNotMatch(css,/backdrop-filter|::view-transition|view-transition-name/);s.cleanup();

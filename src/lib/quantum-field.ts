@@ -4,6 +4,7 @@ import {Matrix4} from 'three/src/math/Matrix4.js';
 import {PerspectiveCamera} from 'three/src/cameras/PerspectiveCamera.js';
 
 export type QuantumField={resize:(width:number,height:number,dpr:number)=>void;render:(time:number,x:number,y:number,scroll:number,reduced:boolean)=>void;dispose:()=>void};
+type QuantumViewport={width:number;height:number;dpr:number};
 export const quantumQuality=(width:number,height:number,dpr:number)=>({
  mobile:width<768,
  ratio:Math.min(Math.max(.5,dpr||1),1.5,Math.sqrt((width<768?650000:1400000)/(Math.max(1,width)*Math.max(1,height)))),
@@ -72,8 +73,21 @@ const fragmentShader=`
  }
 `;
 
+// A frame followed by a task lets the current route/ripple paint between the
+// expensive driver and geometry phases, including when the chunk was cached.
+function yieldQuantumSetup(signal:AbortSignal){
+ return new Promise<void>((resolve,reject)=>{
+  if(signal.aborted){reject(new DOMException('Aborted','AbortError'));return;}
+  let frame=0,timer:ReturnType<typeof setTimeout>|undefined;
+  const abort=()=>{cancelAnimationFrame(frame);clearTimeout(timer);signal.removeEventListener('abort',abort);reject(new DOMException('Aborted','AbortError'));};
+  signal.addEventListener('abort',abort,{once:true});
+  frame=requestAnimationFrame(()=>{frame=0;timer=setTimeout(()=>{signal.removeEventListener('abort',abort);if(signal.aborted)reject(new DOMException('Aborted','AbortError'));else resolve();},0);});
+ });
+}
+
 /** The same two passes, buffers and camera, without a general-purpose scene renderer. */
-export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSignal):Promise<QuantumField>{
+export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSignal,initialViewport?:QuantumViewport):Promise<QuantumField>{
+ await yieldQuantumSetup(signal);
  if(signal.aborted)throw new DOMException('Aborted','AbortError');
  const gl=canvas.getContext('webgl',{alpha:true,antialias:false,powerPreference:'low-power',premultipliedAlpha:true});
  if(!gl)throw new Error('WebGL is unavailable');
@@ -84,16 +98,31 @@ export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSi
   buffers.forEach(buffer=>gl.deleteBuffer(buffer));shaders.forEach(shader=>gl.deleteShader(shader));if(program)gl.deleteProgram(program);
  };
  signal.addEventListener('abort',dispose,{once:true});
+ const assertActive=()=>{if(disposed||signal.aborted)throw new DOMException('Aborted','AbortError');if(gl.isContextLost())throw new Error('Background context lost');};
  try{
+  await yieldQuantumSetup(signal);assertActive();
+  const parallel=gl.getExtension('KHR_parallel_shader_compile');
   const compile=(type:number,source:string)=>{
    const shader=gl.createShader(type);if(!shader)throw new Error('Cannot allocate background shader');shaders.push(shader);
    gl.shaderSource(shader,'precision highp float;\n'+source);gl.compileShader(shader);
-   if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error('Cannot compile background shader');return shader;
+   return shader;
   };
   program=gl.createProgram();if(!program)throw new Error('Cannot allocate background program');
   gl.attachShader(program,compile(gl.VERTEX_SHADER,'attribute vec3 position;uniform mat4 modelViewMatrix,projectionMatrix;\n'+vertexShader));
   gl.attachShader(program,compile(gl.FRAGMENT_SHADER,fragmentShader));gl.linkProgram(program);
-  if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('Cannot link background program');
+  const compileDeadline=performance.now()+8000;
+  // Querying each COMPILE_STATUS immediately serializes the driver work. The
+  // extension's completion flag is nonblocking; unsupported drivers still get
+  // a paint opportunity before the single link-result query.
+  await yieldQuantumSetup(signal);assertActive();
+  while(parallel&&!gl.getProgramParameter(program,parallel.COMPLETION_STATUS_KHR)){
+   if(performance.now()>=compileDeadline)throw new Error('Background shader compilation timed out');
+   await yieldQuantumSetup(signal);assertActive();
+  }
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS)){
+   if(shaders.some(shader=>!gl.getShaderParameter(shader,gl.COMPILE_STATUS)))throw new Error('Cannot compile background shader');
+   throw new Error('Cannot link background program');
+  }
   gl.useProgram(program);gl.disable(gl.DEPTH_TEST);gl.enable(gl.BLEND);
   gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);
   const names=['uTime','uRatio','uReduced','uLine','uBounds','uPointer','uBlue','uSilver','modelViewMatrix','projectionMatrix'];
@@ -113,7 +142,7 @@ export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSi
   const camera=new PerspectiveCamera(46,1,.1,60),modelView=new Matrix4();
   const rotation=new Matrix4().makeRotationX(.16).multiply(new Matrix4().makeRotationY(-.13)).multiply(new Matrix4().makeRotationZ(-.04));
   let width=0,height=0,ratio=0,mobile=false,passes:Pass[]=[];
-  return{
+  const field:QuantumField={
    resize(nextWidth,nextHeight,dpr){
     if(disposed)return;
     const w=Math.max(1,nextWidth),h=Math.max(1,nextHeight),quality=quantumQuality(w,h,dpr);
@@ -139,5 +168,12 @@ export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSi
     });
    },dispose,
   };
+  if(initialViewport){
+   await yieldQuantumSetup(signal);assertActive();
+   geometry(quantumQuality(initialViewport.width,initialViewport.height,initialViewport.dpr).mobile);
+   await yieldQuantumSetup(signal);assertActive();
+   field.resize(initialViewport.width,initialViewport.height,initialViewport.dpr);
+  }
+  return field;
  }catch(error){dispose();throw error;}
 }

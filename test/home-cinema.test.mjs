@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {loadHomeScrollRefresh} from './home-refresh-fixture.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeCinema.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
@@ -22,8 +23,12 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
   if(to.scrollTrigger)animation.scrollTrigger=new ScrollTrigger(animation);return animation;
  };
  const gsap={registerPlugin(){},timeline(){return{fromTo(target,from,to){own(target,from,to,true);return this;}};},to(target,to){return own(target,undefined,to);},fromTo(target,from,to){return own(target,from,to);},matchMedia(){const m={contexts:[{data:[]}],add(query,callback,scope){this.scope=scope;if(!systemReduced){currentMedia=this;callback();currentMedia=undefined;}},revert(){this.reverted=true;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];},kill(revert){this.killMode=revert;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];}};media.push(m);return m;}};
- const exports={};vm.runInNewContext(source,{exports,window:{scrollY},document:{fonts:{ready:new Promise(resolve=>resolveFont=resolve)}},localStorage:{getItem:()=>savedReduced?'reduce':'full'},requestAnimationFrame:callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame:id=>frames.delete(id),require:name=>{
+ const window=Object.assign(new EventTarget(),{scrollY}),document=Object.assign(new EventTarget(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>resolveFont=resolve)}});
+ const requestAnimationFrame=callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame=id=>frames.delete(id);
+ const refreshModule=loadHomeScrollRefresh({window,document,ScrollTrigger,requestAnimationFrame,cancelAnimationFrame});
+ const exports={};vm.runInNewContext(source,{exports,window,document,localStorage:{getItem:()=>savedReduced?'reduce':'full'},requestAnimationFrame,cancelAnimationFrame,require:name=>{
   if(name==='react')return{useEffect:callback=>effects.push(callback),useRef:()=>({current:{closest:()=>host}}),useState:value=>[value,()=>{}]};
+  if(name==='@/lib/home-scroll-refresh')return refreshModule;
   if(name==='gsap')return{gsap};if(name==='gsap/ScrollTrigger')return{ScrollTrigger};if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};throw Error(name);
  }});
  const tree=exports.HomeCinema({locale:'en'}),cleanups=effects.map(fn=>fn());

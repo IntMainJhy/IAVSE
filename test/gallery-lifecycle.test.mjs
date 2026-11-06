@@ -102,6 +102,14 @@ test('floating starts only after the scene arrival, and navigation pauses select
  s.panelProps()[0].onSelect(0);s.flush();assert.equal(s.tree.props['data-focused'],true);const tween=s.tweens.at(-1);assert.equal(tween.vars.duration,1.2);s.navigation(true);assert.equal(tween.paused,true);s.navigation(false);assert.equal(tween.paused,false);tween.finish();s.unmount();
 });
 
+test('same-size resize notifications cannot cancel an active camera selection',()=>{
+ const s=fixture({count:2});s.intersect(true);s.panelProps()[0].onSelect(0);s.flush();
+ const tween=s.tweens.at(-1),transform=s.world.style.transform;
+ s.resizes[0].fn();assert.equal(tween.killed,false,'the observer initial delivery must not snap a moving camera');assert.equal(s.world.style.transform,transform);
+ s.stage.clientWidth=900;s.resizes[0].fn();assert.equal(tween.killed,true,'real resizing recomputes the original geometry');
+ assert.equal(s.stage.style['--gallery-scale'],String(Math.round(geometry.gallerySceneMetrics(900).cardWidth-2)/1200));s.unmount();
+});
+
 test('reduced motion keeps complete previews and spatial placement without selection tweens or float animation',()=>{
  const s=fixture({reduced:true,count:1});s.intersect(true);s.step();s.ready(s.mounted()[0]);s.step();assert.equal(s.tree.props['data-gallery-prepared'],true);assert.equal(s.root.hasAttribute('data-gallery-reduced'),true);
  s.panelProps()[0].onSelect(0);s.flush();assert.equal(s.tweens.length,0);assert.ok(s.panes[0].style.transform.includes('translate3d('));

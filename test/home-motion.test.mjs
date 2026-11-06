@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {loadHomeScrollRefresh} from './home-refresh-fixture.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
 function fixture({desktop=true,reduced=false,savedReduced=false}={}){
@@ -13,7 +14,7 @@ function fixture({desktop=true,reduced=false,savedReduced=false}={}){
  const closing=node('invitation'),images=[node('first image'),node('second image')],links=stories.map((s,i)=>Object.assign(node('link '+i),{hash:'#'+s.dataset.homeStory})),track=Object.assign(node('track'),{offsetHeight:5000,getBoundingClientRect:()=>({top:1000})});
  const root=Object.assign(node('root'),{isConnected:true,querySelectorAll:selector=>selector==='img'?images:selector==='.home-scene-nav a'?links:stories,querySelector:selector=>selector==='.home-stories'?track:closing});
  const window=Object.assign(new Target(),{dispatchEvent(event){events.push(event.type);return EventTarget.prototype.dispatchEvent.call(this,event);}});
- const document={fonts:{ready:new Promise(resolve=>fontResolve=resolve)}};
+ const document=Object.assign(new Target(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>fontResolve=resolve)}});
  class ScrollTrigger{
   constructor(animation,owner){this.animation=animation;this.calls=[];this.active=true;this.owner=owner;triggers.push(this);owner?.owned.push(this);}
   kill(revert){this.calls.push(revert);this.active=false;this.scrubKilled=true;if(revert!==false)this.reverted=true;this.animation.scrollTrigger=null;this.animation.kill();}
@@ -34,8 +35,11 @@ function fixture({desktop=true,reduced=false,savedReduced=false}={}){
    for(const step of steps){if(time<step.at)continue;const ratio=Math.max(0,Math.min(1,(time-step.at)/(step.to.duration||1))),from=step.from||{...step.target.style};for(const[key,value]of Object.entries({...from,...step.to})){if(ignored.has(key))continue;const start=from[key]??(key==='opacity'||key==='scale'?1:0),end=step.to[key]??value;step.target.style[key]=typeof start==='number'&&typeof end==='number'?start+(end-start)*ratio:end;}}
   },kill(){this.killed=true;for(const[target,style]of original){for(const key of Object.keys(target.style))delete target.style[key];Object.assign(target.style,style);}}};timelines.push(timeline);currentMedia?.owned.push(timeline);if(options.scrollTrigger)timeline.scrollTrigger=new ScrollTrigger(timeline,currentMedia);return timeline;
  }};
- const exports={};vm.runInNewContext(source,{exports,window,document,Event,CustomEvent,localStorage:{getItem:()=>savedReduced?'reduce':'full'},requestAnimationFrame:callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame:id=>frames.delete(id),require:name=>{
+ const requestAnimationFrame=callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame=id=>frames.delete(id);
+ const refreshModule=loadHomeScrollRefresh({window,document,ScrollTrigger,requestAnimationFrame,cancelAnimationFrame});
+ const exports={};vm.runInNewContext(source,{exports,window,document,Event,CustomEvent,localStorage:{getItem:()=>savedReduced?'reduce':'full'},requestAnimationFrame,cancelAnimationFrame,require:name=>{
   if(name==='react')return{useEffect:callback=>effects.push(callback),useRef:()=>({current:{closest:()=>root}})};
+  if(name==='@/lib/home-scroll-refresh')return refreshModule;
   if(name==='gsap')return{gsap};if(name==='gsap/ScrollTrigger')return{ScrollTrigger};if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props})};throw Error('Unexpected dependency '+name);
  }});
  const output=exports.HomeMotion(),cleanup=effects[0](),flush=()=>{const callbacks=[...frames.values()];frames.clear();callbacks.forEach(callback=>callback());};

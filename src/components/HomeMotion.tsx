@@ -2,6 +2,7 @@
 import {useEffect,useRef} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {homeScrollRefresh} from '@/lib/home-scroll-refresh';
 
 /** One scrollable film stage; native document flow remains the no-motion fallback. */
 export function HomeMotion(){
@@ -9,10 +10,10 @@ export function HomeMotion(){
  useEffect(()=>{
   const root=anchor.current?.closest<HTMLElement>('.v2-home');if(!root)return;
   gsap.registerPlugin(ScrollTrigger);
-  let reduced=false,live=true,frame=0,media:ReturnType<typeof gsap.matchMedia>|null=null;
+  let reduced=false,live=true,media:ReturnType<typeof gsap.matchMedia>|null=null;
   try{reduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
   const notify=()=>{if(live)window.dispatchEvent(new Event('iavse-journey-layout'));};
-  const refresh=()=>{if(live&&!frame)frame=requestAnimationFrame(()=>{frame=0;if(live)ScrollTrigger.refresh();});};
+  const refreshWork=homeScrollRefresh(root),refresh=refreshWork.request;
   const stories=Array.from(root.querySelectorAll<HTMLElement>('[data-home-story]')),track=root.querySelector<HTMLElement>('.home-stories');
   const links=Array.from(root.querySelectorAll<HTMLAnchorElement>('.home-scene-nav a'));
   const restore=()=>{delete root.dataset.journeyMotion;for(const s of stories){s.inert=false;s.removeAttribute('aria-hidden');delete s.dataset.journeyActive;}links.forEach(a=>a.removeAttribute('aria-current'));};
@@ -55,7 +56,7 @@ export function HomeMotion(){
   ScrollTrigger.addEventListener('refresh',notify);window.addEventListener('iavse-scene-control',control);root.addEventListener('click',jump);
   const images=Array.from(root.querySelectorAll('img'));images.forEach(i=>i.addEventListener('load',refresh));document.fonts?.ready.then(refresh);setup();
   return()=>{
-   live=false;cancelAnimationFrame(frame);
+   live=false;refreshWork.dispose();
    if(root.isConnected)media?.revert();
    else if(media){
     // Reverting a detached page initializes never-played startAt tweens just to

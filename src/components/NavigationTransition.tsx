@@ -20,11 +20,11 @@ export function NavigationTransition(){
    // Match the outgoing surface with a cheap painted gradient; no DOM copies,
    // canvas readback, full-page blur or native snapshot that can hold navigation.
    layer.dataset.surface=location.pathname==='/'&&scrollY<innerHeight?'landing':'reading';
-   let live=true,committed=false,incoming:gsap.Context|undefined,timer:ReturnType<typeof setTimeout>|undefined;
+   let live=true,committed=false,incoming:gsap.Context|undefined,cover:gsap.core.Tween|undefined,timer:ReturnType<typeof setTimeout>|undefined;
    const outgoing=gsap.context(()=>{},source||document.body);
    const release=()=>{
-    if(!live)return;live=false;clearTimeout(timer);outgoing.revert();incoming?.revert();
-    source?.removeAttribute('aria-busy');layer.hidden=true;
+    if(!live)return;live=false;clearTimeout(timer);cover?.kill();outgoing.revert();incoming?.revert();
+    source?.removeAttribute('aria-busy');layer.hidden=true;layer.style.removeProperty('opacity');
     document.documentElement.removeAttribute('data-iavse-transition');cancel=arrive=undefined;
     window.dispatchEvent(new CustomEvent('iavse-navigation-pending',{detail:{pending:false}}));
    };
@@ -36,8 +36,10 @@ export function NavigationTransition(){
     const targets=source?navigationReceivers(source):[];
     const timeline=gsap.timeline({defaults:{ease:'power2.out',overwrite:'auto'}});
     if(targets.length)timeline.to(targets,{opacity:.8,y:-4,duration:.14},0);
-    if(crossesHome){layer.hidden=false;timeline.to(layer,{opacity:.16,duration:.14},0);}
    });
+   // The persistent veil is independent of the departing page's context. Its
+   // current opacity must survive that context's revert at the route commit.
+   if(crossesHome){layer.hidden=false;cover=gsap.to(layer,{opacity:.16,duration:.14,ease:'power2.out',overwrite:'auto'});}
    // A failed/redirected response cannot leave dimmed content or suspended scenes.
    timer=setTimeout(release,4000);
    arrive=(route,root)=>{
@@ -46,11 +48,11 @@ export function NavigationTransition(){
     // handoff. Restore immediately so its own PageMotion arrival can take over.
     if(route!==to){if(route!==from)release();return;}
     if(committed)return;committed=true;
-    outgoing.revert();source?.removeAttribute('aria-busy');
+    cover?.kill();cover=undefined;outgoing.revert();source?.removeAttribute('aria-busy');
     incoming=gsap.context(()=>{
      const targets=navigationReceivers(root,true);
      const timeline=gsap.timeline({defaults:{ease:'power3.out',overwrite:'auto'},onComplete:release});
-     if(crossesHome){layer.hidden=false;timeline.fromTo(layer,{opacity:.72},{opacity:0,duration:.32},0);}
+     if(crossesHome){layer.hidden=false;timeline.to(layer,{opacity:0,duration:.32},0);}
      if(targets.length)timeline.fromTo(targets,{opacity:.72,y:10},{opacity:1,y:0,duration:.32,stagger:.025,clearProps:'transform,opacity'},0);
      // Even an empty streamed shell has a bounded handoff and releases renderers.
      if(!crossesHome&&!targets.length)timeline.to(layer,{opacity:0,duration:.16},0);

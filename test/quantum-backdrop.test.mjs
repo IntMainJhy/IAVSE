@@ -18,15 +18,19 @@ function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,d
  const initialHost=currentHost,canvas=Object.assign(new Target(),{dataset:{},width:300,height:150}),layer={hidden:true};
  const window=Object.assign(new Target(),{scrollY:0});window.self=window;window.top=iframe?{}:window;
  const document=Object.assign(new Target(),{hidden,body:{},querySelector:()=>currentHost,documentElement:Object.assign(new Target(),{hasAttribute:name=>name==='data-iavse-transition'&&navigationPending})}),preference=Object.assign(new Target(),{matches:systemReduced});
- const frames=new Map(),renders=[],sizes=[],exports={},refs=[],effects=[];let id=0,now=1000,disposes=0,signal,createCalls=0,resizeError=false,renderError=false,resolveScene,refIndex=0,effectIndex=0,scheduled=[];
- const scene={render:(...args)=>{if(renderError)throw Error('drawing failed');renders.push(args);},resize:(...args)=>{if(resizeError)throw Error('resize failed');sizes.push(args);},dispose:()=>{disposes++;}};
- const created=deferred?new Promise(resolve=>{resolveScene=resolve;}):Promise.resolve(scene);
+ const frames=new Map(),renders=[],sizes=[],exports={},refs=[],effects=[],attempts=[];let id=0,now=1000,disposes=0,signal,createCalls=0,resizeError=false,renderError=false,refIndex=0,effectIndex=0,scheduled=[];
  const jsx=(type,props)=>{if(props.ref)props.ref.current=type==='canvas'?canvas:layer;return{type,props};};
  const sandbox={exports,window,document,innerWidth:width,innerHeight:900,devicePixelRatio:2,AbortController,MutationObserver:class{constructor(fn){mutation=fn;}observe(){}disconnect(){observerDisconnected=true;}},matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':null},requestAnimationFrame:fn=>{frames.set(++id,fn);return id;},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
   if(name==='react')return{useEffect:(fn,deps)=>{const index=effectIndex++,previous=effects[index];if(!previous||deps.some((value,i)=>value!==previous.deps[i]))scheduled.push({index,fn,deps});},useRef:value=>refs[refIndex++]??(refs[refIndex-1]={current:value})};
   if(name==='next/navigation')return{usePathname:()=>currentPath};
   if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};
-  if(name==='@/lib/quantum-field')return{createQuantumField:(_canvas,abort)=>{signal=abort;createCalls++;return created;}};
+  if(name==='@/lib/quantum-field')return{createQuantumField:(_canvas,abort,viewport)=>{
+   signal=abort;createCalls++;
+   const attempt={signal:abort,viewport,renders:0,disposes:0};
+   const scene={render:(...args)=>{if(renderError)throw Error('drawing failed');attempt.renders++;renders.push(args);},resize:(...args)=>{if(resizeError)throw Error('resize failed');sizes.push(args);},dispose:()=>{attempt.disposes++;disposes++;}};
+   attempt.scene=scene;const created=new Promise((resolve,reject)=>{attempt.resolve=()=>resolve(scene);attempt.reject=reject;});attempts.push(attempt);
+   if(!deferred)attempt.resolve();return created;
+  }};
   throw Error('Unexpected dependency '+name);
  }};
  vm.runInNewContext(source,sandbox);
@@ -41,13 +45,14 @@ function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,d
  const replaceHost=()=>{if(currentHost)currentHost.isConnected=false;currentHost=makeHost();return currentHost;};
  const navigate=(next,{host=true}={})=>{currentPath=next;if(host)replaceHost();else{if(currentHost)currentHost.isConnected=false;currentHost=null;}render();};
  const navigation=(pending,{marker=pending}={})=>{navigationPending=marker;window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));};
- return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,navigation,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:()=>resolveScene(scene),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
+ return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,attempts,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,navigation,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:(index=attempts.length-1)=>attempts[index].resolve(),reject:(index,error)=>attempts[index].reject(error),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
 }
 
 test('one field starts after loading, coalesces pointer input and respects desktop and mobile cadence',async()=>{
  for(const width of[1440,390]){
   const s=mount({width});assert.equal(s.output.props['aria-hidden'],'true');assert.equal(s.frames.size,0);
   await flush();assert.equal(s.createCalls,1);assert.deepEqual(s.sizes[0],[width,900,2]);assert.equal(s.frames.size,1);
+  assert.deepEqual({...s.attempts[0].viewport},{width,height:900,dpr:2},'initial geometry uses the actual destination viewport');
   s.step(1);assert.equal(s.renders.length,1);
   for(let i=0;i<20;i++)s.move();assert.equal(s.frames.size,1,'pointer bursts cannot create extra frame loops');
   s.step(16);assert.equal(s.renders.length,1,'sub-cadence display frames do not issue GPU renders');
@@ -128,10 +133,10 @@ test('a shell arriving after pathname commit attaches without replacing the fiel
  s.cleanup();assert.equal(s.observerDisconnected,true);
 });
 
-test('a renderer resolving after leaving its route stays retained but paused until return',async()=>{
+test('leaving a route cancels unfinished setup and a late result is disposed before retry',async()=>{
  const s=mount({deferred:true});await flush();assert.equal(s.createCalls,1);s.navigate('/');s.resolve();await flush();
- assert.equal(s.disposes,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
- s.navigate('/docs/connect');await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
+ assert.equal(s.attempts[0].signal.aborted,true);assert.equal(s.disposes,1);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
+ s.navigate('/docs/connect');await flush();assert.equal(s.createCalls,2);s.resolve();await flush();s.step();assert.equal(s.renders.length,1);assert.equal(s.attempts[0].renders,0);s.cleanup();
 });
 
 
@@ -178,8 +183,39 @@ test('a chunk requested before navigation cannot compile during the handoff',asy
  s.navigation(false);await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
 });
 
-test('a scene already initializing when navigation begins is retained without drawing until release',async()=>{
+test('navigation cancels unfinished setup but release can immediately start a fresh attempt',async()=>{
  const s=mount({deferred:true});await flush();assert.equal(s.createCalls,1);s.navigation(true);s.resolve();await flush();
- assert.equal(s.disposes,0);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
- s.navigation(false);s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
+ assert.equal(s.attempts[0].signal.aborted,true);assert.equal(s.disposes,1);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
+ s.navigation(false);await flush();assert.equal(s.createCalls,2);s.resolve();await flush();s.step();assert.equal(s.renders.length,1);s.cleanup();
+});
+
+test('hidden setup is aborted and stale success or rejection cannot replace or fail its successor',async()=>{
+ for(const outcome of['success','abort','error']){
+  const s=mount({deferred:true});await flush();s.visibility(true);
+  assert.equal(s.attempts[0].signal.aborted,true);s.visibility(false);await flush();assert.equal(s.createCalls,2);
+  if(outcome==='success')s.resolve(0);else s.reject(0,outcome==='abort'?new DOMException('Aborted','AbortError'):new Error('stale driver failure'));
+  await flush();assert.notEqual(s.canvas.dataset.field,'fallback');assert.equal(s.attempts[1].signal.aborted,false);
+  s.resize();s.navigation(false);await flush();assert.equal(s.createCalls,2,'late failure must not clear the newer loading attempt');
+  s.resolve(1);await flush();s.step();assert.equal(s.renders.length,1);assert.equal(s.attempts[0].renders,0);assert.equal(s.attempts[1].renders,1);s.cleanup();
+ }
+});
+
+test('a late success cannot overwrite a fully initialized replacement',async()=>{
+ const s=mount({deferred:true});await flush();s.navigation(true);s.navigation(false);await flush();
+ s.resolve(1);await flush();s.step();assert.equal(s.attempts[1].renders,1);
+ s.resolve(0);await flush();s.step();assert.equal(s.attempts[0].disposes,1);assert.equal(s.attempts[0].renders,0);assert.equal(s.attempts[1].renders,2);assert.equal(s.attempts[1].signal.aborted,false);s.cleanup();
+});
+
+test('active AbortError is retryable while genuine setup failure enters the fallback',async()=>{
+ const s=mount({deferred:true});await flush();s.reject(0,new DOMException('Aborted','AbortError'));await flush();
+ assert.notEqual(s.canvas.dataset.field,'fallback');s.visibility(true);s.visibility(false);await flush();assert.equal(s.createCalls,2);
+ s.reject(1,new Error('shader link failed'));await flush();assert.equal(s.canvas.dataset.field,'fallback');assert.equal(s.attempts[1].signal.aborted,true);
+ s.visibility(true);s.visibility(false);s.navigation(true);s.navigation(false);await flush();assert.equal(s.createCalls,2);s.cleanup();
+});
+
+test('a ready field retains its controller across navigation, hiding and home round trips',async()=>{
+ const s=mount();await flush();const ready=s.signal;s.step();
+ s.navigation(true);s.visibility(true);s.navigate('/');assert.equal(ready.aborted,false);assert.equal(s.disposes,0);
+ s.navigate('/blogs');s.navigation(false);s.visibility(false);await flush();s.step();
+ assert.equal(s.createCalls,1);assert.equal(ready.aborted,false);assert.equal(s.disposes,0);s.cleanup();assert.equal(ready.aborted,true);assert.equal(s.disposes,1);
 });
