@@ -54,7 +54,23 @@ export function HomeMotion(){
   const control=(event:Event)=>{const d=(event as CustomEvent<{action:string;value:boolean}>).detail;if(d?.action==='reduced'&&reduced!==!!d.value){reduced=!!d.value;setup();}};
   ScrollTrigger.addEventListener('refresh',notify);window.addEventListener('iavse-scene-control',control);root.addEventListener('click',jump);
   const images=Array.from(root.querySelectorAll('img'));images.forEach(i=>i.addEventListener('load',refresh));document.fonts?.ready.then(refresh);setup();
-  return()=>{live=false;cancelAnimationFrame(frame);media?.revert();restore();ScrollTrigger.removeEventListener('refresh',notify);window.removeEventListener('iavse-scene-control',control);root.removeEventListener('click',jump);images.forEach(i=>i.removeEventListener('load',refresh));};
+  return()=>{
+   live=false;cancelAnimationFrame(frame);
+   if(root.isConnected)media?.revert();
+   else if(media){
+    // Reverting a detached page initializes never-played startAt tweens just to
+    // restore styles nobody can see. Keep full revert for live/StrictMode trees.
+    for(const context of media.contexts){
+     const triggers=context.data.filter((entry:unknown)=>entry instanceof ScrollTrigger) as ScrollTrigger[];
+     triggers.forEach(trigger=>trigger.kill(false));
+     // Context.kill(false) would otherwise call trigger.kill() a second time,
+     // whose default performs the expensive revert we are deliberately avoiding.
+     context.data=context.data.filter((entry:unknown)=>!triggers.includes(entry as ScrollTrigger));
+    }
+    media.kill(false);
+   }
+   restore();ScrollTrigger.removeEventListener('refresh',notify);window.removeEventListener('iavse-scene-control',control);root.removeEventListener('click',jump);images.forEach(i=>i.removeEventListener('load',refresh));
+  };
  },[]);
  return <span ref={anchor} hidden aria-hidden="true"/>;
 }

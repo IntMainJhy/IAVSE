@@ -111,7 +111,7 @@ html[data-ui][data-color-mode] .blog-public-shell.blog-gallery-embed{min-height:
 .blog-gallery[data-mode=spatial] .blog-gallery-exhibit{position:absolute;left:50%;top:50%;width:var(--gallery-card-width,360px);margin:0;min-width:0;perspective:none;transform-style:preserve-3d;transform:translate(-50%,-50%);backface-visibility:hidden;will-change:transform}
 .blog-gallery[data-mode=spatial]:not([data-gallery-ready]) .blog-gallery-exhibit{visibility:hidden}
 .blog-gallery-float{position:relative;transform-style:preserve-3d;animation:gallery-suspend var(--float-duration,8s) ease-in-out var(--float-delay,0s) infinite alternate;animation-play-state:paused}
-.blog-gallery[data-gallery-running][data-gallery-prepared=true]:not([data-gallery-reduced])[data-focused=false] .blog-gallery-float{animation-play-state:running}
+.blog-gallery[data-gallery-running][data-gallery-prepared=true][data-gallery-floating=true]:not([data-gallery-reduced])[data-focused=false] .blog-gallery-float{animation-play-state:running}
 .blog-gallery[data-focused=true] .blog-gallery-float{animation-play-state:paused}
 @keyframes gallery-suspend{from{transform:translate3d(0,-6px,3px) rotateX(-.5deg) rotateZ(-.35deg)}to{transform:translate3d(0,6px,-3px) rotateX(.5deg) rotateZ(.35deg)}}
 .blog-gallery[data-mode=spatial] .blog-gallery-plane{transform:none;border:1px solid #f8fbff;border-radius:8px;box-shadow:0 32px 50px -24px #233c6166,0 6px 18px -8px #31486c52;transition:border-color .2s ease}

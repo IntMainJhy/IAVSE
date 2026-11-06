@@ -39,7 +39,20 @@ export function HomeCinema({locale}:{locale:string}){
   },hero);
   const images=Array.from(hero.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));
   document.fonts?.ready.then(refresh);refresh();
-  return()=>{live=false;cancelAnimationFrame(refreshFrame);images.forEach(image=>image.removeEventListener('load',refresh));media.revert();};
+  return()=>{
+   live=false;cancelAnimationFrame(refreshFrame);images.forEach(image=>image.removeEventListener('load',refresh));
+   if(hero.isConnected)media.revert();
+   else{
+    // Only a detached homepage can discard its styles. Live preference changes
+    // and StrictMode cleanup still restore every GSAP-owned style with revert().
+    for(const context of media.contexts){
+     const triggers=context.data.filter((entry:unknown)=>entry instanceof ScrollTrigger) as ScrollTrigger[];
+     triggers.forEach(trigger=>trigger.kill(false));
+     context.data=context.data.filter((entry:unknown)=>!triggers.includes(entry as ScrollTrigger));
+    }
+    media.kill(false);
+   }
+  };
  },[reduced]);
  const loading=state==='loading',failed=state==='fallback',quiet=reduced||systemReduced;
  return <div ref={root} className="iavse-cinema-toolbar">

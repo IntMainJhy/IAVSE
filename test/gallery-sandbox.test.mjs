@@ -8,7 +8,7 @@ import * as geometry from '../src/lib/blog-gallery-space.mjs';
 const exports={},jsx=(type,props)=>({type,props});
 vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../src/components/BlogSpaceGallery.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports,require:name=>{
  if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};
- if(name==='react')return{useRef:value=>({current:value}),useEffect:()=>{},useCallback:fn=>fn,useMemo:fn=>fn(),useState:value=>[typeof value==='function'?value():value,()=>{}]};
+ if(name==='react')return{memo:fn=>fn,useRef:value=>({current:value}),useEffect:()=>{},useCallback:fn=>fn,useMemo:fn=>fn(),useState:value=>[typeof value==='function'?value():value,()=>{}]};
  if(name==='next/link')return{default:'Link'};
  if(name==='gsap')return{gsap:{}};
  if(name.includes('blog-gallery-space'))return geometry;
