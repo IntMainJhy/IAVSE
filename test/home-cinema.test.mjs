@@ -25,7 +25,7 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
   const animation={killed:false,kill(){this.killed=true;}};currentMedia?.contexts[0].data.push(animation);
   if(to.scrollTrigger)animation.scrollTrigger=new ScrollTrigger(animation);return animation;
  };
- const gsap={registerPlugin(){},timeline(){return{fromTo(target,from,to){own(target,from,to,true);return this;}};},to(target,to){return own(target,undefined,to);},fromTo(target,from,to){return own(target,from,to);},matchMedia(){const m={contexts:[{data:[]}],add(query,callback,scope){this.scope=scope;if(!systemReduced){currentMedia=this;callback();currentMedia=undefined;}},revert(){this.reverted=true;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];},kill(revert){this.killMode=revert;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];}};media.push(m);return m;}};
+ const gsap={registerPlugin(){},timeline(){throw Error('The hero must not create a timed text entrance');},to(target,to){return own(target,undefined,to);},fromTo(target,from,to){return own(target,from,to);},matchMedia(){const m={contexts:[{data:[]}],add(query,callback,scope){this.scope=scope;if(!systemReduced){currentMedia=this;callback();currentMedia=undefined;}},revert(){this.reverted=true;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];},kill(revert){this.killMode=revert;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];}};media.push(m);return m;}};
  const window=Object.assign(new EventTarget(),{scrollY}),document=Object.assign(new EventTarget(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>resolveFont=resolve)}});
  const requestAnimationFrame=callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame=id=>frames.delete(id);
  const refreshModule=loadHomeScrollRefresh({window,document,ScrollTrigger,requestAnimationFrame,cancelAnimationFrame});
@@ -39,14 +39,14 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
 }
 
 test('the product enters on its own viewport crossing after the brand scene, not during initial load',()=>{
- const f=mount(),reveal=f.calls.find(call=>call.target===f.stage),departure=f.calls.find(call=>call.target===f.copy);
- assert.equal(reveal.to.scrollTrigger.trigger,f.showcase);assert.notEqual(reveal.to.scrollTrigger.trigger,departure.to.scrollTrigger.trigger);
+ const f=mount(),reveal=f.calls.find(call=>call.target===f.stage);
+ assert.equal(reveal.to.scrollTrigger.trigger,f.showcase);
  assert.ok(reveal.from.autoAlpha===0&&reveal.to.autoAlpha===1);assert.ok(reveal.from.y>50&&reveal.to.y===0);assert.ok(reveal.from.rotationX>0&&reveal.to.rotationX===0);
  assert.ok(reveal.to.scrollTrigger.scrub>0);assert.equal(reveal.to.scrollTrigger.toggleActions,undefined,'a scrubbed reveal stays reversible without a conflicting play/reset trigger');
- assert.equal(departure.to.scrollTrigger.trigger,f.intro);assert.equal(f.media[0].scope,f.hero);f.cleanup();
+ assert.equal(f.calls.some(call=>call.target===f.copy),false);assert.equal(f.media[0].scope,f.hero);f.cleanup();
 });
-test('restored scroll positions skip the timed intro and reduced motion leaves native content readable',()=>{
- const resumed=mount({scrollY:500});assert.ok(!resumed.calls.some(call=>call.intro));assert.ok(resumed.calls.some(call=>call.target===resumed.stage));resumed.cleanup();
+test('initial and restored views never animate the headline or its parent, and reduced motion stays readable',()=>{
+ for(const scrollY of [0,500]){const f=mount({scrollY});assert.equal(f.calls.length,1);assert.equal(f.calls[0].target,f.stage);assert.ok(!f.calls.some(call=>call.target===f.copy||call.target===f.heading||f.heading.includes(call.target)));f.cleanup();}
  for(const options of [{savedReduced:true},{systemReduced:true}]){const f=mount(options);assert.equal(f.calls.length,0);f.cleanup();}
 });
 test('late images and fonts coalesce layout refreshes and teardown cancels queued refresh work',async()=>{
@@ -58,7 +58,7 @@ test('late images and fonts coalesce layout refreshes and teardown cancels queue
 
 test('detached cinema cleanup avoids reverting dormant hero animations and kills scrub work once',async()=>{
  const f=mount(),owned=[...f.triggers];f.hero.isConnected=false;f.cleanup();
- assert.ok(f.media.every(m=>m.killMode===false&&!m.reverted));assert.equal(owned.length,2);
+ assert.ok(f.media.every(m=>m.killMode===false&&!m.reverted));assert.equal(owned.length,1);
  assert.ok(owned.every(t=>t.calls.length===1&&t.calls[0]===false&&!t.reverted&&!t.active&&t.scrubKilled));
  assert.ok(f.media.every(m=>m.contexts.every(c=>c.data.length===0)));assert.equal(f.frames.size,0);
  f.resolveFont();await Promise.resolve();f.image.dispatchEvent(new Event('load'));assert.equal(f.frames.size,0);

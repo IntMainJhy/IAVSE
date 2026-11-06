@@ -162,3 +162,8 @@ test('main-header navigation leaves departure and suspension to the persistent G
  assert.equal(commit.detail.route,'/');assert.equal(commit.detail.root,a.root);
  a.cleanup();assert.equal(f.dispatches.filter(event=>event.type==='iavse-navigation-pending').length,0);
 });
+
+
+test('local return to home skips both heading translation and whole-page fallback animation',()=>{
+ const f=fixture(),source=f.page('/resources',100,'feed',{publicPage:true});f.click('/');source.cleanup();const before=f.calls.length,home=f.page('/',100,'feed',{publicPage:true});assert.equal(f.calls.length,before);assert.ok(f.dispatches.some(event=>event.type==='iavse-route-commit'&&event.detail.route==='/'));home.cleanup();
+});

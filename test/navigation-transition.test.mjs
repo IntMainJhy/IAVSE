@@ -204,3 +204,10 @@ test('the visual bridge is opacity-only, non-interactive and below the independe
  const veilRule=css.match(/\.iavse-route-veil\{([^}]+)\}/)[1];assert.match(veilRule,/pointer-events:none/);assert.match(veilRule,/position:fixed/);assert.match(veilRule,/contain:strict/);
  assert.ok(Number(veilRule.match(/z-index:(\d+)/)[1])<Number(wave.match(/z-index:(\d+)/)[1]));assert.doesNotMatch(css,/backdrop-filter|::view-transition|view-transition-name/);s.cleanup();
 });
+
+
+test('returning home leaves headline geometry and opacity untouched by the global handoff',()=>{
+ const f=fixture({path:'/resources'});f.link.href=new URL('/',f.location).href;f.click();const root=f.scene('v2-hero-copy'),headline=root.children[0];f.commit('/',root);
+ assert.deepEqual(headline.style,{});assert.equal(f.timelines[1].operations.some(operation=>operation.targets.includes(headline)),false);
+ f.timelines[1].complete();assert.deepEqual(headline.style,{});assert.equal(f.layer.hidden,true);f.cleanup();
+});

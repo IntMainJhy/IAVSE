@@ -43,8 +43,8 @@ test('sections stay in native flow with one-time reveals and no scroll or intera
  assert.ok(f.stories.every(scene=>scene.inert!==true));f.cleanup();
 });
 
-test('canvas and resource demos keep stable coordinates while copy and screenshots enter gently',()=>{
- const f=fixture();for(const scene of f.stories){const timeline=f.timelines.find(t=>t.options.scrollTrigger.trigger===scene),art=timeline.steps.find(s=>s.target===scene.art),copy=timeline.steps.find(s=>s.target===scene.copy);assert.equal(art.at,0);assert.equal(copy.at,.08);assert.ok(copy.from.y<=24);if(['editor','resources'].includes(scene.dataset.homeStory))for(const key of ['x','y','z','scale','rotation','clipPath']){assert.equal(art.from[key],undefined);assert.equal(art.to[key],undefined);}}
+test('art and copy enter together with limited travel and fast-scroll completion',()=>{
+ const f=fixture();for(const scene of f.stories){const timeline=f.timelines.find(t=>t.options.scrollTrigger.trigger===scene),art=timeline.steps.find(s=>s.target===scene.art),copy=timeline.steps.find(s=>s.target===scene.copy);assert.equal(art.at,0);assert.equal(copy.at,art.at);assert.equal(timeline.options.defaults.duration,.9);assert.equal(timeline.options.defaults.ease,'power2.out');assert.equal(timeline.options.scrollTrigger.start,'top bottom');assert.equal(timeline.options.scrollTrigger.fastScrollEnd,true);assert.equal(art.from.opacity,copy.from.opacity);assert.ok(copy.from.y<=10);assert.ok((art.from.y||0)<=14);if(['editor','resources'].includes(scene.dataset.homeStory))for(const key of ['x','y','z','scale','rotation','clipPath']){assert.equal(art.from[key],undefined);assert.equal(art.to[key],undefined);}}
  f.cleanup();
 });
 

@@ -29,12 +29,9 @@ export function HomeCinema({locale}:{locale:string}){
   const refreshWork=homeScrollRefresh(hero),refresh=refreshWork.request;
   const media=gsap.matchMedia();
   media.add('(prefers-reduced-motion: no-preference)',()=>{
-   const heading=hero.querySelectorAll('h1>span'),copy=hero.querySelector('.v2-hero-copy'),intro=hero.querySelector('.v2-hero-intro'),showcase=hero.querySelector('.v2-hero-showcase'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
-   const entrance=gsap.timeline({defaults:{ease:'power3.out'}});
-   if(window.scrollY<32)entrance.fromTo(heading,{y:10,opacity:.6},{y:0,opacity:1,duration:1,stagger:.075,clearProps:'transform,opacity',immediateRender:false});
-   // The opening frame belongs to the brand. The product approaches only once
-   // its own section crosses the viewport, and reverses with native scrolling.
-   if(copy&&intro)gsap.to(copy,{y:-36,opacity:.08,ease:'none',scrollTrigger:{id:'iavse-hero-departure',trigger:intro,start:'top top',end:'bottom 30%',scrub:.45,invalidateOnRefresh:true}});
+   const showcase=hero.querySelector('.v2-hero-showcase'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
+   // Headline, supporting copy and download action keep their server-rendered
+   // position. No timed entrance or scroll tween may rearrange the hero text.
    if(stage&&showcase)gsap.fromTo(stage,{autoAlpha:0,y:88,rotationX:7,scale:.94,transformPerspective:1800,transformOrigin:'center top'},{autoAlpha:1,y:0,rotationX:0,scale:1,ease:'power2.out',scrollTrigger:{id:'iavse-product-approach',trigger:showcase,start:'top 96%',end:'top 24%',scrub:.55,invalidateOnRefresh:true}});
   },hero);
   const images=Array.from(hero.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));

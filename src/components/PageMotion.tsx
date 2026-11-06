@@ -85,6 +85,9 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
   resetDeparture.current?.();
   // The persistent GSAP timeline owns main-nav arrivals; retain local/query FLIP.
   if(document.documentElement.hasAttribute('data-iavse-transition'))return;
+  // Home renders its headline at its final position; local/query arrivals must
+  // not introduce a second entrance on the copy or its entire page wrapper.
+  if(path==='/')return;
   if(!element.querySelector('.community-navigation-shell')){
    if(!changed)return;
    const queryOnly=(previous?.from||last).split('?')[0]===path;
@@ -92,7 +95,7 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
    media.add('(prefers-reduced-motion: no-preference)',()=>{
     // Keep full-screen WebGL scenes in their coordinate system; animate their text receivers.
     const content=element.querySelector<HTMLElement>(publicContentSelector);
-    const heading=element.querySelector<HTMLElement>('.v2-hero-copy,.creator-directory-intro,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
+    const heading=element.querySelector<HTMLElement>('.creator-directory-intro,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
     if(content)gsap.fromTo(content,{opacity:.9,x:previous?.resource&&queryOnly?previous.direction*8:0,y:queryOnly?0:8},{opacity:1,x:0,y:0,duration:queryOnly ? .22 : .28,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
     if(heading&&!queryOnly&&!content?.contains(heading))gsap.fromTo(heading,{opacity:.94,y:8},{opacity:1,y:0,duration:.28,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
     if(!content&&!heading)gsap.fromTo(element,{opacity:.9},{opacity:1,duration:.22,ease:'power2.out',clearProps:'opacity',overwrite:'auto'});

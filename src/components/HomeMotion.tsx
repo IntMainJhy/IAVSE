@@ -24,13 +24,14 @@ export function HomeMotion(){
      const art=scene.querySelector<HTMLElement>('.home-story-visual'),copy=scene.querySelector<HTMLElement>('.home-story-copy');
      const interactive=['editor','resources'].includes(scene.dataset.homeStory||'');
      // No pin, scrub or shared stage: the document always follows the user's
-     // wheel/touch input. Start partly visible, and never replay on scroll back.
-     const entrance=gsap.timeline({defaults:{duration:.7,ease:'power3.out'},scrollTrigger:{trigger:scene,start:'top 94%',once:true}});
-     if(art)entrance.fromTo(art,interactive?{opacity:.72}:{opacity:.72,y:24},interactive?{opacity:1,clearProps:'opacity'}:{opacity:1,y:0,clearProps:'transform,opacity'},0);
-     if(copy)entrance.fromTo(copy,{opacity:.6,y:18},{opacity:1,y:0,clearProps:'transform,opacity'},.08);
+     // wheel/touch input. Art and copy arrive together at the viewport edge,
+     // with less travel and a softer deceleration; fast scrolling completes them.
+     const entrance=gsap.timeline({defaults:{duration:.9,ease:'power2.out'},scrollTrigger:{trigger:scene,start:'top bottom',once:true,fastScrollEnd:true}});
+     if(art)entrance.fromTo(art,interactive?{opacity:.78}:{opacity:.78,y:14},interactive?{opacity:1,clearProps:'opacity'}:{opacity:1,y:0,clearProps:'transform,opacity'},0);
+     if(copy)entrance.fromTo(copy,{opacity:.78,y:10},{opacity:1,y:0,clearProps:'transform,opacity'},0);
     });
     const closing=root.querySelector<HTMLElement>('.v2-invitation');
-    if(closing)gsap.fromTo(closing,{opacity:.7,y:20},{opacity:1,y:0,duration:.7,ease:'power3.out',clearProps:'transform,opacity',scrollTrigger:{trigger:closing,start:'top 94%',once:true}});
+    if(closing)gsap.fromTo(closing,{opacity:.78,y:14},{opacity:1,y:0,duration:.9,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{trigger:closing,start:'top bottom',once:true,fastScrollEnd:true}});
     refresh();return restore;
    },root);}
    refresh();notify();

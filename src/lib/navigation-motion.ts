@@ -10,7 +10,7 @@ export function mainNavigationDestination(link:HTMLAnchorElement){
 
 /** Small visible receivers only: never transform a fixed rail, canvas or 3D world. */
 export function navigationReceivers(root:HTMLElement,entering=false){
- const candidates=Array.from(root.querySelectorAll<HTMLElement>('.v2-hero-copy,.creator-directory-intro,.resource-hub-tabs,.catalog-page-heading,.catalog-search,.resource-overview-search,.resource-overview-group,.community-route-content'));
+ const candidates=Array.from(root.querySelectorAll<HTMLElement>('.creator-directory-intro,.resource-hub-tabs,.catalog-page-heading,.catalog-search,.resource-overview-search,.resource-overview-group,.community-route-content'));
  return candidates.filter(node=>!candidates.some(parent=>parent!==node&&parent.contains(node)))
   // Next restores scroll after child layout effects; entering headings can still
   // have the previous page's scroll offset here. Bound their count, not visibility.
