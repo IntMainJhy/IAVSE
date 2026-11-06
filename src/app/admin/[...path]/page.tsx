@@ -1,3 +1,4 @@
+import '@/app/admin-react-bits.css';
 import '@/app/admin-control-center.css';
 import '@/app/route-styles/admin.css';
 import {routePage} from '@/lib/route-page';

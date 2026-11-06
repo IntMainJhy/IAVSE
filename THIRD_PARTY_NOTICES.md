@@ -79,3 +79,9 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 
 `public/avatars/creators/` 的六个手绘头像来自 DiceBear 的 Notionists（原作者 Zoish，CC0 1.0），
 已本地托管。对应名字与评论为明确标注的示例，不代表真实用户或背书。
+
+### React Bits / React Bits 动效
+
+`src/components/react-bits/SpotlightCard`, `StarBorder`, and `AnimatedContent` are sourced from [React Bits](https://reactbits.dev/) by David Haz, copyright 2026, using the official `TS-CSS` registries. Source and styles are included as part of the IAVSE application, with the complete [MIT + Commons Clause license](docs/licenses/React-Bits.txt). IAVSE disables pointer-only spotlight work on touch/reduced-motion devices and leaves AnimatedContent visible during SSR. The administration code configures short mount transitions, no ambient spotlight loop, and one visible StarBorder button; these are application settings, not a component redistribution service. Third-party portions retain their upstream terms.
+
+后台直接使用上述 React Bits 源码组件，补充触屏和减少动态效果适配。完整原许可已保留；本项目的原创部分许可不覆盖这些第三方部分。
