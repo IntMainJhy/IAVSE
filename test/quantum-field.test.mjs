@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {renderSetup} from './render-setup-fixture.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -28,6 +29,7 @@ function module(failure='',{manual=false,parallel=false,completion=[false,true]}
   deleteBuffer:value=>released.push(value.id),deleteProgram:value=>released.push(value.id),deleteShader:value=>released.push(value.id)};
  const canvas={getContext:(kind,config)=>{record('context');contexts++;assert.equal(kind,'webgl');options=config;return failure==='context'?null:gl;}};
  const exports={};vm.runInNewContext(source,{exports,DOMException,performance:{now:()=>now},requestAnimationFrame:callback=>schedule(frames,callback),cancelAnimationFrame:key=>frames.delete(key),setTimeout:callback=>schedule(tasks,callback),clearTimeout:key=>tasks.delete(key),require:name=>{
+  if(name==='./render-setup')return renderSetup({requestAnimationFrame:callback=>schedule(frames,callback),cancelAnimationFrame:key=>frames.delete(key),setTimeout:callback=>schedule(tasks,callback),clearTimeout:key=>tasks.delete(key)});
   if(name==='three/src/math/Color.js')return color;
   if(name==='three/src/math/Matrix4.js')return matrix;
   if(name==='three/src/cameras/PerspectiveCamera.js')return camera;

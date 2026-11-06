@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {renderSetup} from './render-setup-fixture.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -10,18 +11,20 @@ import {homePixelBudget} from '../src/lib/home-render-budget.ts';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/home-glass.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const originalChunk=three.ShaderChunk.transmission_pars_fragment;
 const bytes=fs.readFileSync(new URL('../public/models/iavse-optical-surface.glb',import.meta.url));
-async function studio({overrides={},signal,fetcher,compile,window,invalidProgram=false}={}){
- let scene,camera,environment,releases=0,environmentReleases=0,dpr,transmissionSize,renderer;
- class Renderer{debug={checkShaderErrors:true};info={programs:invalidProgram?[{program:{}}]:[]};allocations=[];target=null;constructor(){renderer=this;if(compile)this.compileAsync=compile;}getContext(){return{LINK_STATUS:1,getProgramParameter:()=>!invalidProgram}}getRenderTarget(){return this.target}setRenderTarget(value){this.target=value}setDrawingBufferSize(width,height,value){dpr=value;this.allocations.push([width,height,value]);}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
+async function studio({overrides={},signal,fetcher,compile,window,invalidProgram=false,onYield,onFactory}={}){
+ let programQueries=0,turn=0;let scene,camera,environment,releases=0,environmentReleases=0,dpr,transmissionSize,renderer;
+ class Renderer{debug={checkShaderErrors:true};info={programs:invalidProgram?[{program:{}}]:[]};allocations=[];target=null;constructor(){renderer=this;if(compile)this.compileAsync=compile;}getContext(){return{LINK_STATUS:1,getProgramParameter:()=>{programQueries++;return !invalidProgram}}}getRenderTarget(){return this.target}setRenderTarget(value){this.target=value}setDrawingBufferSize(width,height,value){dpr=value;this.allocations.push([width,height,value]);}dispose(){releases++;}render(s,c){scene=s;camera=c;scene.updateMatrixWorld(true);camera.updateMatrixWorld();}set transmissionResolutionScale(value){transmissionSize=value;}}
  class PMREM{fromScene(value){environment=value;return{texture:new three.Texture(),dispose(){environmentReleases++;}};}dispose(){}}
  const exports={};vm.runInNewContext(source,{exports,AbortController,DOMException,Math,Uint8Array,window,process:{env:{NODE_ENV:'production'}},fetch:fetcher||(async()=>({ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})),require:name=>{
+  if(name==='./render-setup'){const scheduler=renderSetup({requestAnimationFrame:setImmediate,cancelAnimationFrame:clearImmediate,setTimeout,clearTimeout});return{yieldRenderSetup:signal=>{onYield?.(++turn,{get releases(){return releases},get environmentReleases(){return environmentReleases}});return scheduler.yieldRenderSetup(signal);}};}
   if(name==='./home-render-budget')return{homePixelBudget};
   if(name==='three')return{...three,...overrides,WebGLRenderer:Renderer,PMREMGenerator:PMREM};if(name==='three/addons/loaders/GLTFLoader.js')return{GLTFLoader};throw Error('Unexpected dependency '+name);
  }});
+ onFactory?.(exports.createHomeGlass);
  const controller=new AbortController(),canvas={dataset:{}},progress=[];
  const adapter=await exports.createHomeGlass(canvas,signal||controller.signal,{onProgress:value=>progress.push(value)});adapter.resize(1440,900,2);adapter.render(0,0,false,0,false,2);
  const surface=scene.getObjectByName('iavse-optical-field'),wall=scene.getObjectByName('iavse-refraction-receiver'),meshes=[];surface.traverse(node=>{if(node.isMesh)meshes.push(node);});meshes.sort((a,b)=>Number(a.material.name.includes('PolishedRolledEdge'))-Number(b.material.name.includes('PolishedRolledEdge')));
- return{adapter,controller,canvas,surface,wall,meshes,progress,renderer,get scene(){return scene;},get camera(){return camera;},get environment(){return environment;},get releases(){return releases;},get environmentReleases(){return environmentReleases;},get dpr(){return dpr;},get transmissionSize(){return transmissionSize;}};
+ return{create:exports.createHomeGlass,adapter,controller,canvas,surface,wall,meshes,progress,renderer,get scene(){return scene;},get camera(){return camera;},get environment(){return environment;},get releases(){return releases;},get environmentReleases(){return environmentReleases;},get dpr(){return dpr;},get transmissionSize(){return transmissionSize;},get programQueries(){return programQueries;}};
 }
 
 // Project the exported vertices through the real object/camera matrices. This
@@ -184,4 +187,39 @@ test('production warms the linear capture receiver, validates links and restores
  assert.equal(s.renderer.getRenderTarget(),null);assert.equal(s.renderer.toneMapping,three.ACESFilmicToneMapping);s.adapter.dispose();
  await assert.rejects(studio({compile:async()=>{},invalidProgram:true}),/Optical shader unavailable/,'invalid production programs fail before the scene is handed off');
  const standard=await studio({window:{innerWidth:1440,devicePixelRatio:1}});assert.equal(standard.dpr,1,'a 1x display is not silently supersampled at 1.5x');assert.equal(standard.renderer.allocations.length,1,'one resize sets dimensions and density together');standard.adapter.render(0,0,false,.2,false,3);assert.equal(standard.renderer.allocations.length,1,'normal animation does not reallocate its drawing buffer');standard.adapter.dispose();
+});
+
+
+test('a return visit reuses validated source bytes while owning independent geometry and GPU resources',async()=>{
+ let requests=0;const s=await studio({fetcher:async()=>{requests++;return{ok:true,arrayBuffer:async()=>bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)}}});
+ const original=s.meshes[0].geometry,second=await s.create({dataset:{}},new AbortController().signal);second.resize(1440,900,1);second.render(0,0,false,0,false,2);
+ assert.equal(requests,1);const geometries=[];s.scene.getObjectByName('iavse-optical-field').traverse(node=>{if(node.isMesh)geometries.push(node.geometry)});assert.equal(geometries.length,2);assert.ok(geometries.every(geometry=>geometry!==original&&!s.meshes.some(mesh=>mesh.geometry===geometry)));
+ second.dispose();assert.equal(s.releases,1);s.adapter.render(0,0,false,0,false,3);s.adapter.dispose();assert.equal(s.releases,2);
+ await assert.rejects(s.create({dataset:{}},AbortSignal.abort()),{name:'AbortError'});assert.equal(requests,1);
+});
+
+test('every optical initialization boundary is cancellable and partial GPU ownership is released once',async()=>{
+ for(let phase=1;phase<=8;phase++){
+  const controller=new AbortController();let state;
+  await assert.rejects(studio({signal:controller.signal,compile:async()=>{},onYield:(turn,current)=>{state=current;if(turn===phase)controller.abort();}}),{name:'AbortError'});
+  assert.equal(state.releases,phase>=3?1:0,'renderer lifetime at phase '+phase);assert.equal(state.environmentReleases,phase>=5?1:0,'reflection lifetime at phase '+phase);
+ }
+});
+
+test('a compiled GPU program is validated once even when later warmup passes reuse it',async()=>{
+ let id=0;const s=await studio({compile:async function(){this.info.programs.push({program:{id:++id}});}});
+ assert.equal(id,3);assert.equal(s.programQueries,3,'three new programs require three checks, not six repeated queries');s.adapter.dispose();
+});
+
+
+test('a malformed model response is not cached as a successful return-visit source',async()=>{
+ let create,requests=0;await assert.rejects(studio({onFactory:factory=>create=factory,fetcher:async()=>({ok:true,arrayBuffer:async()=>++requests===1?new ArrayBuffer(0):bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength)})}));
+ const recovered=await create({dataset:{}},new AbortController().signal);assert.equal(requests,2);recovered.dispose();
+});
+
+
+test('a restored reading position allocates its final density before the first draw',async()=>{
+ const s=await studio(),journey=[{id:'blog',start:1.5,end:2.5,side:-1},{id:'editor',start:3,end:4,side:1}];s.adapter.setJourney(journey);
+ const before=s.renderer.allocations.length;s.adapter.resize(1440,900,2,{scroll:2.5,reduced:false});assert.equal(s.renderer.allocations.length,before+1);assert.equal(s.dpr,1.25);
+ s.adapter.render(0,0,false,2.5,false,2);assert.equal(s.renderer.allocations.length,before+1,'the first render must not replace a just-created hero framebuffer');s.adapter.dispose();
 });

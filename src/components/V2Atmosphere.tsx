@@ -100,11 +100,15 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const measure=()=>{
   if(!scene||disposed||lost)return;
   if(navigationPending){sizeDirty=true;return;}
+  sizeDirty=false;
   try{
    const rect=canvas.getBoundingClientRect(),width=Math.max(1,rect.width),height=Math.max(1,rect.height);pointerBounds=rect;
+   // Restored scroll positions choose their actual density before allocating
+   // the first framebuffer, rather than allocate hero pixels then replace them.
+   readLayout();layoutDirty=false;readProgress();progressDirty=false;
    displayDpr=Math.min(window.devicePixelRatio||1,2,Math.sqrt(homePixelBudget(width)/(width*height)));const dpr=displayDpr*quality;
-   if(width!==sizedWidth||height!==sizedHeight||dpr!==sizedDpr){scene.resize(width,height,dpr);sizedWidth=width;sizedHeight=height;sizedDpr=dpr;}
-   layoutDirty=progressDirty=true;draw();
+   if(width!==sizedWidth||height!==sizedHeight||dpr!==sizedDpr){scene.resize(width,height,dpr,{scroll:progress,reduced:reducedMotion});sizedWidth=width;sizedHeight=height;sizedDpr=dpr;}
+   draw();
   }catch{fail();}
  };
  const move=(event:PointerEvent)=>{
@@ -131,7 +135,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   // frame before the old scene can submit another expensive draw.
   startScene();dirty=true;sync();
  };
- const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(measure);
+ const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(()=>{sizeDirty=true;dirty=true;sync();});
  const intersection=typeof IntersectionObserver==='undefined'?null:new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);resume();},{threshold:.01});
  const theme=typeof MutationObserver==='undefined'?null:new MutationObserver(draw);
  const cleanup=()=>{

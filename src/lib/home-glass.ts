@@ -1,12 +1,15 @@
 import {ACESFilmicToneMapping,BackSide,Box3,BufferGeometry,Color,DataTexture,FrontSide,Frustum,Group,LinearFilter,LinearSRGBColorSpace,MathUtils,Matrix4,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,NoToneMapping,PerspectiveCamera,PlaneGeometry,PMREMGenerator,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,SphereGeometry,Vector2,Vector3,WebGLRenderer,WebGLRenderTarget} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {yieldRenderSetup} from './render-setup';
 import {homePixelBudget} from './home-render-budget';
 
 export type GlassReveal={left:number;top:number;width:number;height:number;progress:number;variant?:string};
 export type HomeJourneyChapter={id:string;start:number;end:number;side:number};
-export type HomeGlassScene={animated?:boolean;interactive?:boolean;resize:(width:number,height:number,dpr:number)=>void;setReveals?:(panels:GlassReveal[])=>void;setJourney?:(chapters:HomeJourneyChapter[])=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean,activeSeconds?:number)=>void;dispose:()=>void};
+export type HomeGlassScene={animated?:boolean;interactive?:boolean;resize:(width:number,height:number,dpr:number,view?:{scroll:number;reduced:boolean})=>void;setReveals?:(panels:GlassReveal[])=>void;setJourney?:(chapters:HomeJourneyChapter[])=>void;render:(x:number,y:number,dark:boolean,scroll:number,reduced:boolean,activeSeconds?:number)=>void;dispose:()=>void};
 type GlassOptions={onProgress?:(progress:number)=>void};
 const MODEL_URL='/models/iavse-optical-surface.glb',MOBILE_MODEL_URL='/models/iavse-optical-surface-mobile.glb';
+// At most the desktop and mobile source buffers; never cache live GPU resources.
+const modelSources=new Map<string,ArrayBuffer>();
 const originalChunk=ShaderChunk.transmission_pars_fragment,sample='return textureBicubic( transmissionSamplerMap, fragCoord.xy, lod );';
 const transmission=REVISION==='187'&&originalChunk.split(sample).length===2?originalChunk.replace(sample,'return textureLod( transmissionSamplerMap, fragCoord.xy, lod );'):null;
 
@@ -19,24 +22,31 @@ function disposeModel(model:Group){
 /** Closed Blender-authored optical surface. The visible boundary is its actual rolled edge. */
 export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSignal,{onProgress}:GlassOptions={}):Promise<HomeGlassScene>{
  const mobile=typeof window!=='undefined'&&window.innerWidth<768;
- const response=await fetch(mobile?MOBILE_MODEL_URL:MODEL_URL,{signal});
- if(!response.ok)throw Error('Optical surface unavailable');
- let buffer:ArrayBuffer;
- const length=Number(response.headers?.get('content-length')||0);
- if(response.body&&length>0){
-  const reader=response.body.getReader(),chunks:Uint8Array[]=[];let received=0;
-  try{while(true){const item=await reader.read();if(item.done)break;chunks.push(item.value);received+=item.value.byteLength;onProgress?.(Math.min(.9,received/length*.9));}const bytes=new Uint8Array(received);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}buffer=bytes.buffer;}
-  finally{reader.releaseLock();}
- }else{buffer=await response.arrayBuffer();onProgress?.(.9);}
- if(signal.aborted)throw new DOMException('Aborted','AbortError');
+ const url=mobile?MOBILE_MODEL_URL:MODEL_URL;
+ let buffer=modelSources.get(url);
+ if(!buffer){
+  const response=await fetch(url,{signal});
+  if(!response.ok)throw Error('Optical surface unavailable');
+
+  const length=Number(response.headers?.get('content-length')||0);
+  if(response.body&&length>0){
+   const reader=response.body.getReader(),chunks:Uint8Array[]=[];let received=0;
+   try{while(true){const item=await reader.read();if(item.done)break;chunks.push(item.value);received+=item.value.byteLength;onProgress?.(Math.min(.9,received/length*.9));}const bytes=new Uint8Array(received);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}buffer=bytes.buffer;}
+   finally{reader.releaseLock();}
+  }else{buffer=await response.arrayBuffer();onProgress?.(.9);}
+  if(signal.aborted)throw new DOMException('Aborted','AbortError');
+ }else onProgress?.(.9);
+ await yieldRenderSetup(signal);
  const gltf=await new GLTFLoader().parseAsync(buffer,''),model=gltf.scene;
  if(signal.aborted){disposeModel(model);throw new DOMException('Aborted','AbortError');}
+ modelSources.set(url,buffer);
  let renderer:WebGLRenderer;
- try{renderer=new WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});}catch(error){disposeModel(model);throw error;}
+ try{await yieldRenderSetup(signal);renderer=new WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});}catch(error){disposeModel(model);throw error;}
  let environment:ReturnType<PMREMGenerator['fromScene']>|undefined,disposed=false;
  const extraGeometry:BufferGeometry[]=[],extraMaterials:(ShaderMaterial|MeshBasicMaterial)[]=[];
  const dispose=()=>{if(disposed)return;disposed=true;signal.removeEventListener('abort',dispose);disposeModel(model);environment?.dispose();extraGeometry.forEach(value=>value.dispose());extraMaterials.forEach(value=>value.dispose());renderer.dispose();};
  try{
+  await yieldRenderSetup(signal);
   // First-use debug queries can synchronously drain the GPU queue while scrolling.
   // Production validates links after asynchronous warmup instead; development keeps diagnostics.
   if(process.env.NODE_ENV==='production')renderer.debug.checkShaderErrors=false;
@@ -115,8 +125,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   panel('left-grazing-window',[-6,2,-3],[5,4,1],'#d3e6ff',10);
   panel('upper-soft-fill',[-1,7,-2],[10,6,1],'#ffffff',8);
   const pmrem=new PMREMGenerator(renderer);
-  try{environment=pmrem.fromScene(studio,.025);scene.environment=environment.texture;for(const material of nativeMaterials){material.envMap=environment.texture;material.envMapIntensity=material.name.includes('PolishedRolledEdge')?1.65:.65;}}
+  try{await yieldRenderSetup(signal);environment=pmrem.fromScene(studio,.025);scene.environment=environment.texture;for(const material of nativeMaterials){material.envMap=environment.texture;material.envMapIntensity=material.name.includes('PolishedRolledEdge')?1.65:.65;}}
   finally{skyGeometry.dispose();skyMaterial.dispose();panelGeometry.dispose();panelMaterials.forEach(value=>value.dispose());diffuser.dispose();pmrem.dispose();}
+  await yieldRenderSetup(signal);
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
   const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uJourneyStage:{value:0},uJourneyTravel:{value:0},uJourneyAspect:{value:1},uJourneyPointer:{value:new Vector2()},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#0b1936')},uBlueMiddle:{value:new Color('#204d91')},uBlueBottom:{value:new Color('#a0b8d5')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
    varying vec4 vReceiverClip;
@@ -188,7 +199,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   // waits for this promise. Warm the fade variant as well, then restore the
   // accepted first-frame sorting before the scene is handed to the controller.
   if(typeof renderer.compileAsync==='function'){
+   const validated=new Set<WebGLProgram>();
    const compile=async(input:Scene|Group=scene)=>{
+    await yieldRenderSetup(signal);
     if(signal.aborted||disposed)throw new DOMException('Aborted','AbortError');
     let abort=()=>{};
     try{
@@ -198,7 +211,11 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     }finally{signal.removeEventListener('abort',abort);}
     if(signal.aborted||disposed)throw new DOMException('Aborted','AbortError');
     const gl=renderer.getContext();
-    for(const program of renderer.info.programs||[])if(!gl.getProgramParameter(program.program as WebGLProgram,gl.LINK_STATUS))throw new Error('Optical shader unavailable');
+    for(const entry of renderer.info.programs||[]){
+     const program=entry.program as WebGLProgram;if(validated.has(program))continue;
+     if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error('Optical shader unavailable');
+     validated.add(program);
+    }
    };
    await compile();
    const initial=Array.from(nativeMaterials,material=>({material,transparent:material.transparent,depthWrite:material.depthWrite,opacity:material.opacity}));
@@ -223,11 +240,12 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    // The new optical field leaves semantic HTML undistorted; no extra sheets over content.
    setReveals(){},
    setJourney,
-   resize(nextWidth,nextHeight,dpr){
+   resize(nextWidth,nextHeight,dpr,view){
     if(disposed)return;width=Math.max(1,nextWidth);height=Math.max(1,nextHeight);const mobile=width<768;
     pixelBudget=Math.sqrt(homePixelBudget(width)/(width*height));
     const displayDpr=typeof window!=='undefined'?Math.min(window.devicePixelRatio||1,2,pixelBudget):Math.max(1,dpr);qualityRatio=Math.min(1,dpr/Math.max(.1,displayDpr));
     heroDensity=Math.min(displayDpr,mobile?1.5:2);readingDensity=Math.min(displayDpr,mobile?1:1.25);
+    if(view){const first=chapters[0],mix=!view.reduced&&first?MathUtils.smootherstep(view.scroll,.65,Math.max(1.15,first.center)):0;readingMode=mix>.35;}
     applyDensity(readingMode?readingDensity:heroDensity,true);wallMaterial.uniforms.uJourneyAspect.value=width/height;camera.aspect=width/height;camera.updateProjectionMatrix();renderer.transmissionResolutionScale=readingMode?(mobile?.35:.5):(mobile?.5:.55);
    },
    render(x,y,dark,scroll,reduced,activeSeconds=0){

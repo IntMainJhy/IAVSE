@@ -1,3 +1,4 @@
+import {yieldRenderSetup} from './render-setup';
 // Keep the reading backdrop independent of Three.js's full renderer and shader library.
 import {Color} from 'three/src/math/Color.js';
 import {Matrix4} from 'three/src/math/Matrix4.js';
@@ -73,21 +74,9 @@ const fragmentShader=`
  }
 `;
 
-// A frame followed by a task lets the current route/ripple paint between the
-// expensive driver and geometry phases, including when the chunk was cached.
-function yieldQuantumSetup(signal:AbortSignal){
- return new Promise<void>((resolve,reject)=>{
-  if(signal.aborted){reject(new DOMException('Aborted','AbortError'));return;}
-  let frame=0,timer:ReturnType<typeof setTimeout>|undefined;
-  const abort=()=>{cancelAnimationFrame(frame);clearTimeout(timer);signal.removeEventListener('abort',abort);reject(new DOMException('Aborted','AbortError'));};
-  signal.addEventListener('abort',abort,{once:true});
-  frame=requestAnimationFrame(()=>{frame=0;timer=setTimeout(()=>{signal.removeEventListener('abort',abort);if(signal.aborted)reject(new DOMException('Aborted','AbortError'));else resolve();},0);});
- });
-}
-
 /** The same two passes, buffers and camera, without a general-purpose scene renderer. */
 export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSignal,initialViewport?:QuantumViewport):Promise<QuantumField>{
- await yieldQuantumSetup(signal);
+ await yieldRenderSetup(signal);
  if(signal.aborted)throw new DOMException('Aborted','AbortError');
  const gl=canvas.getContext('webgl',{alpha:true,antialias:false,powerPreference:'low-power',premultipliedAlpha:true});
  if(!gl)throw new Error('WebGL is unavailable');
@@ -100,7 +89,7 @@ export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSi
  signal.addEventListener('abort',dispose,{once:true});
  const assertActive=()=>{if(disposed||signal.aborted)throw new DOMException('Aborted','AbortError');if(gl.isContextLost())throw new Error('Background context lost');};
  try{
-  await yieldQuantumSetup(signal);assertActive();
+  await yieldRenderSetup(signal);assertActive();
   const parallel=gl.getExtension('KHR_parallel_shader_compile');
   const compile=(type:number,source:string)=>{
    const shader=gl.createShader(type);if(!shader)throw new Error('Cannot allocate background shader');shaders.push(shader);
@@ -114,10 +103,10 @@ export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSi
   // Querying each COMPILE_STATUS immediately serializes the driver work. The
   // extension's completion flag is nonblocking; unsupported drivers still get
   // a paint opportunity before the single link-result query.
-  await yieldQuantumSetup(signal);assertActive();
+  await yieldRenderSetup(signal);assertActive();
   while(parallel&&!gl.getProgramParameter(program,parallel.COMPLETION_STATUS_KHR)){
    if(performance.now()>=compileDeadline)throw new Error('Background shader compilation timed out');
-   await yieldQuantumSetup(signal);assertActive();
+   await yieldRenderSetup(signal);assertActive();
   }
   if(!gl.getProgramParameter(program,gl.LINK_STATUS)){
    if(shaders.some(shader=>!gl.getShaderParameter(shader,gl.COMPILE_STATUS)))throw new Error('Cannot compile background shader');
@@ -169,9 +158,9 @@ export async function createQuantumField(canvas:HTMLCanvasElement,signal:AbortSi
    },dispose,
   };
   if(initialViewport){
-   await yieldQuantumSetup(signal);assertActive();
+   await yieldRenderSetup(signal);assertActive();
    geometry(quantumQuality(initialViewport.width,initialViewport.height,initialViewport.dpr).mobile);
-   await yieldQuantumSetup(signal);assertActive();
+   await yieldRenderSetup(signal);assertActive();
    field.resize(initialViewport.width,initialViewport.height,initialViewport.dpr);
   }
   return field;

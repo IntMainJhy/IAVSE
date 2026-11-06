@@ -6,7 +6,7 @@ import ts from 'typescript';
 import {homePixelBudget} from '../src/lib/home-render-budget.ts';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0,navigationPending=false}={}){
+function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0,navigationPending=false,scrollY=0}={}){
  let cpuClock=0;
  class Target extends EventTarget{
   listeners=new Set();attributes=new Set();hasAttribute(name){return this.attributes.has(name)}setAttribute(name){this.attributes.add(name)}removeAttribute(name){this.attributes.delete(name)}dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
@@ -19,7 +19,7 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  const surface=new Target(),canvas=Object.assign(new Target(),{parentElement:surface,closest:selector=>['.v2-home','.v2-site'].includes(selector)?host:null});
  const panel=Object.assign(new Target(),{dataset:{glassReveal:'stage'},getBoundingClientRect:()=>({left:100,top:500,right:1100,bottom:860,width:1000,height:360})});
  const sections=[{id:'blog',top:1800,height:1260,side:'left'},{id:'editor',top:3300,height:1260,side:'right'}].map(item=>Object.assign(new Target(),{dataset:{homeStory:item.id,homeSide:item.side},documentTop:item.top,sectionHeight:item.height,getBoundingClientRect(){this.rectReads++;const top=this.documentTop-(window.scrollY||0);return{left:0,top,bottom:top+this.sectionHeight,width,height:this.sectionHeight};}}));
- if(journey)window.scrollY=0;
+ if(journey){window.scrollY=scrollY;host.top=-scrollY;}
  host.querySelectorAll=selector=>selector.includes('data-home-story')?(journey?sections:[]):reveal?[panel]:[];
  host.getAttribute=key=>key==='data-journey-motion'?host.dataset.journeyMotion:null;
  host.querySelector=selector=>{assert.equal(selector,'.home-stories');return host.track||null;};
@@ -119,7 +119,7 @@ test('glass follows every display frame with damping, bounds resolution, and sto
 
 test('touch and reduced motion keep the glass static, including preference changes during movement',async()=>{
  const s=mount({reduced:true,width:390,height:844});s.intersection.set(true);await flush();
- assert.deepEqual(s.sizes.at(-1),[390,844,2]);assert.equal(s.draws.length,1);s.move();assert.equal(s.frames.size,0);
+ assert.deepEqual(s.sizes.at(-1).slice(0,3),[390,844,2]);assert.equal(s.sizes.at(-1)[3].reduced,true);assert.equal(s.draws.length,1);s.move();assert.equal(s.frames.size,0);
  s.preference.matches=false;s.preference.dispatchEvent(new Event('change'));s.move(390,844,'touch');assert.equal(s.frames.size,0);
  s.move();s.step();assert.ok(s.draws.at(-1)[0]>0);
  s.preference.matches=true;s.preference.dispatchEvent(new Event('change'));
@@ -219,7 +219,7 @@ test('retired hero glass stops continuous work, paints scroll on demand and resu
 test('resize observes only the optical surface and never measures or tracks navigation layout',async()=>{
  for(const [width,height]of[[390,844],[2048,1055]]){
   const s=mount({width,height});s.intersection.set(true);await flush();assert.equal(s.canvas.dataset.atmosphere,'paused');assert.deepEqual([...s.resize.targets],[s.surface]);
-  s.resize.fn();assert.ok(s.draws.length>0,'resizing succeeds without requesting header geometry');assert.equal(s.canvas.dataset.atmosphere,'paused');s.cleanup();
+  s.resize.fn();s.step();assert.ok(s.draws.length>0,'resizing succeeds without requesting header geometry');assert.equal(s.canvas.dataset.atmosphere,'paused');s.cleanup();
  }
 });
 
@@ -274,4 +274,17 @@ test('natural chapter geometry is cached across scroll frames and refreshed only
  assert.equal(s.journeys.length,count+1,'layout events share one cache rebuild');assert.equal(s.journeys.at(-1)[1].start,3480/900);
  const refreshed=reads();s.host.dispatchEvent(new Event('load'));s.step();assert.ok(reads()>refreshed,'loaded images can invalidate cached geometry');
  s.cleanup();const after=reads();s.window.dispatchEvent(new Event('iavse-journey-layout'));s.host.dispatchEvent(new Event('load'));s.step();assert.equal(reads(),after,'late events cannot measure a disposed scene');
+});
+
+
+test('resize bursts share a display frame and do not render or reallocate inside observer callbacks',async()=>{
+ const s=mount();s.intersection.set(true);await flush();const draws=s.draws.length,sizes=s.sizes.length;
+ for(let i=0;i<20;i++)s.resize.fn();assert.equal(s.draws.length,draws);assert.equal(s.sizes.length,sizes);assert.equal(s.frames.size,1);
+ s.step();assert.equal(s.draws.length,draws+1);assert.equal(s.sizes.length,sizes,'identical bounds retain the same render targets');assert.equal(s.frames.size,0);
+ s.resize.fn();s.cleanup();s.step();assert.equal(s.draws.length,draws+1,'unmount cancels pending resize work');
+});
+
+
+test('the first viewport allocation receives restored scroll and chapter geometry',async()=>{
+ const s=mount({journey:true,scrollY:2500});s.intersection.set(true);await flush();assert.equal(s.sizes.length,1);assert.equal(s.sizes[0][3].scroll,2500/900);assert.equal(s.sizes[0][3].reduced,false);assert.ok(s.journeys.length);s.cleanup();
 });
