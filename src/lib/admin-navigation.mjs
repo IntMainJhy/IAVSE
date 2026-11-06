@@ -7,7 +7,9 @@ export function inlineAdminPath(href,base,current=[]){
  if(url.origin!==origin||url.search||url.hash)return null;
  const path=url.pathname.replace(/\/$/,'');
  if(path==='/admin/catalog')return ['community','catalog'];
- if(path==='/admin'&&['community','catalog'].includes(current[0]))return [];
+ if(path==='/admin')return [];
+ const leaf=path.match(/^\/admin\/(projects|articles|resources|files|taxonomy|settings|trash|logs)$/);
+ if(leaf)return [leaf[1]];
  const match=path.match(/^\/admin\/community(?:\/([^/]+))?$/);
  return match&&communitySections.has(match[1]||'')?['community',...(match[1]?[match[1]]:[])]:null;
 }

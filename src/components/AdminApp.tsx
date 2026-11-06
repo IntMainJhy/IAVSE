@@ -5,11 +5,10 @@ import '@/app/admin-control-center.css';
 import {BrandMark} from './BrandMark';
 import {localeDate} from '@/lib/locale-format.mjs';
 import {useLocale} from './LocaleProvider';
-import {lazy,Suspense,useState,useEffect,useCallback,useRef} from 'react';
+import {lazy,Suspense,useState,useEffect,useLayoutEffect,useCallback,useRef} from 'react';
 import Link from 'next/link';
 import Form from 'next/form';
 import {useResource} from './PageResources';
-import {PageMotion} from './PageMotion';
 import {useRouter} from 'next/navigation';
 import {api,post,bytes} from '@/lib/client';
 import {Icon} from './Icons';
@@ -37,14 +36,11 @@ function AdminThemeToggle(){
  useEffect(()=>{setDark(document.documentElement.dataset.colorMode==='dark')},[]);
  return <button type="button" className="admin-theme-toggle" aria-label={t('切换深色模式')} aria-pressed={dark} onClick={()=>{const next=!dark,mode=next?'dark':'light';setDark(next);document.documentElement.dataset.colorMode=mode;document.documentElement.dataset.colorPreference=mode;document.cookie='site-color-mode='+mode+'; Path=/; Max-Age=31536000; SameSite=Lax';}}><Icon name={dark?'sun':'moon'}/></button>;
 }
-function AdminNavGroup({label,icon,active,children}:{label:string;icon:string;active:boolean;children:React.ReactNode}){
- const [open,setOpen]=useState(active);
- useEffect(()=>{if(active)setOpen(true)},[active]);
- return <details className="admin-nav-folder" open={open} onToggle={e=>setOpen(e.currentTarget.open)}><summary><Icon name={icon}/><span>{label}</span><Icon name="chevron-down"/></summary><div className="admin-subnav">{children}</div></details>;
-}
-function AdminWorkspace({path=[],query={}}:{path?:string[],query?:Any}){const {t:tr}=useLocale();const access=useResource('/api/auth/me');
- const [view,setView]=useState(path),drawer=useRef<HTMLDialogElement>(null),main=useRef<HTMLElement>(null);
- useEffect(()=>{setView(path);drawer.current?.close()},[path.join('/')]);
+function AdminWorkspace({path=[],query:routeQuery={}}:{path?:string[],query?:Any}){const {t:tr}=useLocale();const access=useResource('/api/auth/me');
+ const [view,setView]=useState(path),[query,setQuery]=useState(routeQuery),[groups,setGroups]=useState<Record<string,boolean>>({community:['community','catalog'].includes(path[0]),articles:!!names[path[0]]}),drawer=useRef<HTMLDialogElement>(null),main=useRef<HTMLElement>(null);
+ useLayoutEffect(()=>{setView(path);setQuery(routeQuery);drawer.current?.close()},[path.join('/'),JSON.stringify(routeQuery)]);
+ const group=['community','catalog'].includes(view[0])?'community':names[view[0]]?'articles':'';
+ useEffect(()=>{if(group)setGroups(previous=>previous[group]?previous:{...previous,[group]:true})},[group,view.join('/')]);
  useEffect(()=>{const desktop=window.matchMedia('(min-width:961px)'),close=()=>{if(desktop.matches)drawer.current?.close()};desktop.addEventListener('change',close);return()=>desktop.removeEventListener('change',close)},[]);
  const router=useRouter(),section=view[0]||'',isEditor=['new','edit'].includes(view[1]||''),id=view[2]||'',type=section==='trash'?(names[query.type]?query.type:'resources'):section;
  const bootQuery=useResource('/api/admin/bootstrap');
@@ -64,24 +60,25 @@ function AdminWorkspace({path=[],query={}}:{path?:string[],query?:Any}){const {t
   const anchor=event.target instanceof Element?event.target.closest<HTMLAnchorElement>('a'):null;
   if(!anchor||anchor.target||anchor.hasAttribute('download'))return;
   const next=inlineAdminPath(anchor.href,location.href,view);if(!next)return;
+  if(next.join('/')===view.join('/')&&!Object.keys(query).length){event.preventDefault();drawer.current?.close();return;}
   const allowed=window.dispatchEvent(new Event('iavse-before-inline-navigation',{cancelable:true}));
   event.preventDefault();window.dispatchEvent(new Event('iavse-navigation-cancel'));if(!allowed)return;
-  setView(next);setMessage('');drawer.current?.close();
+  setView(next);setQuery({});setMessage('');drawer.current?.close();
   requestAnimationFrame(()=>{main.current?.focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'})});
  }
  const activeSection=section==='catalog'?'community':names[section]?'articles':section;
  const navigation=<nav className="admin-nav" aria-label={tr('后台导航')}>{nav.map(([key,icon,label])=>{
   const children=key==='community'?communityAdminNav.map(([sub,,title])=>['/admin/community'+(sub?'/'+sub:''),title,section==='catalog'?sub==='catalog':section==='community'&&(view[1]||'')===sub]):key==='articles'?Object.entries(names).map(([sub,title])=>['/admin/'+sub,title,section===sub]):null;
-  return children?<AdminNavGroup key={key} label={tr(label)} icon={icon} active={activeSection===key}>{children.map(([href,title,active])=><Link key={String(href)} href={String(href)} className={active?'active':''} aria-current={active?'page':undefined}>{tr(String(title))}</Link>)}</AdminNavGroup>:<Link className={activeSection===key?'active':''} href={'/admin'+(key?'/'+key:'')} key={key} aria-current={activeSection===key?'page':undefined}><Icon name={icon}/>{tr(label)}</Link>;
+  return children?<div className="admin-nav-folder" key={key} data-open={!!groups[key]} data-active={activeSection===key}><button type="button" className="admin-folder-toggle" aria-expanded={!!groups[key]} onClick={()=>setGroups(previous=>({...previous,[key]:!previous[key]}))}><Icon name={icon}/><span>{tr(label)}</span><Icon name="chevron-down"/></button><div className="admin-subnav" hidden={!groups[key]}>{children.map(([href,title,active])=><Link key={String(href)} href={String(href)} className={active?'active':''} aria-current={active?'page':undefined}>{tr(String(title))}</Link>)}</div></div>:<Link className={activeSection===key?'active':''} href={'/admin'+(key?'/'+key:'')} key={key} aria-current={activeSection===key?'page':undefined}><Icon name={icon}/>{tr(label)}</Link>;
  })}</nav>;
  const identity=<Link className="admin-identity" href="/workspace/account"><Icon name="user"/><span><strong>{tr('我的账号')}</strong><small>{boot?.username}</small></span></Link>;
  return <><a className="skip" href="#main">{tr('跳到主要内容')}</a><div className="admin-shell" onClickCapture={inlineNavigate}>
   <aside className="admin-side"><Link href="/admin" className="brand"><BrandMark/><span>IAVSE<small>{tr('管理中心')}</small></span></Link>{navigation}<div className="admin-bottom">{identity}</div></aside>
-  <dialog ref={drawer} className="admin-drawer" aria-label={tr('后台导航')} onClick={event=>{if(event.target===event.currentTarget)drawer.current?.close()}}><div className="admin-drawer-header"><strong>IAVSE</strong><button type="button" className="btn" onClick={()=>drawer.current?.close()} aria-label={tr('收起导航')}><Icon name="close"/></button></div>{navigation}{identity}</dialog>
+  <dialog ref={drawer} className="admin-drawer" aria-label={tr('后台导航')} onClick={event=>{if(event.target===event.currentTarget){const box=event.currentTarget.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)drawer.current?.close()}}}><div className="admin-drawer-header"><strong>IAVSE</strong><button type="button" className="btn" onClick={()=>drawer.current?.close()} aria-label={tr('收起导航')}><Icon name="close"/></button></div>{navigation}{identity}</dialog>
   <main ref={main} id="main" className="admin-main" tabIndex={-1}>
-   <div className="admin-topline"><div className="admin-breadcrumb"><button type="button" className="admin-menu-trigger" onClick={()=>drawer.current?.showModal()} aria-label={tr('打开后台导航')} aria-haspopup="dialog"><Icon name="menu"/></button><span>{tr('管理后台 / ')}<strong>{tr(nav.find(x=>x[0]===activeSection)?.[2]||'内容编辑')}</strong></span></div><div className="actions"><AdminThemeToggle/><SiteTools/><a href={access.data?.access?.surface==='admin'?access.data.access.platformUrl||'/':'/'} target="_blank" rel="noopener noreferrer" aria-label={tr('查看网站')}><Icon name="eye"/><span>{tr('查看网站')}</span></a><button className="link-button" onClick={()=>post('/api/auth/logout',{}).then(()=>{setAuth(false)}).catch(e=>setMessage(e.message))}>{tr('退出')}</button></div></div>
+   <div className="admin-topline"><div className="admin-breadcrumb"><button type="button" className="admin-menu-trigger" onClick={()=>drawer.current?.showModal()} aria-label={tr('打开后台导航')} aria-haspopup="dialog"><Icon name="menu"/></button><span>{tr('管理后台 / ')}<strong>{tr((activeSection==='community'?communityAdminNav.find(x=>x[0]===(section==='catalog'?'catalog':view[1]||''))?.[2]:names[section])||nav.find(x=>x[0]===activeSection)?.[2]||'内容编辑')}</strong></span></div><div className="actions"><AdminThemeToggle/><SiteTools/><a href={access.data?.access?.surface==='admin'?access.data.access.platformUrl||'/':'/'} target="_blank" rel="noopener noreferrer" aria-label={tr('查看网站')}><Icon name="eye"/><span>{tr('查看网站')}</span></a><button className="link-button" onClick={()=>post('/api/auth/logout',{}).then(()=>{setAuth(false)}).catch(e=>setMessage(e.message))}>{tr('退出')}</button></div></div>
    {message&&<div className="app-feedback" role="status">{tr(message)}<button className="link-button" onClick={()=>setMessage('')}>{tr('关闭')}</button></div>}
-   <PageMotion className="admin-route-content">{content}</PageMotion>
+   <div className="admin-route-content">{content}</div>
   </main>
  </div></>}
 
