@@ -8,7 +8,10 @@ import {defaultBlogDesign,applyBlogTemplate} from '../src/lib/blog-design.mjs';
 import {blogAppearances,applyBlogAppearance} from '../src/lib/blog-appearances.mjs';
 import {blogTemplates,resumePresentations} from '../src/lib/blog-templates.mjs';
 import {startServer,stopServer,loginServer} from './server.mjs';
-const directory=await mkdtemp(path.join(tmpdir(),'iavse-editor-http-')),base='http://127.0.0.1:3177';let server;
+const directory=await mkdtemp(path.join(tmpdir(),'iavse-editor-http-')),base='http://127.0.0.1:3177';let server,adminServer;
+function assertSiteBack(html,href='/'){
+ const back=html.match(/<a\b[^>]*class="bc-editor-back"[^>]*>/)?.[0];assert.ok(back,'editor retains an accessible return link');assert.ok(back.includes('href="'+href+'"'),back);assert.match(back,/aria-label="(?:返回网站|Back to site)"/);
+}
 try{
  Object.assign(process.env,{APP_DATA_DIR:directory,PUBLIC_URL:base,APP_SURFACE:'combined',INITIAL_ADMIN_PASSWORD:'integration-only-password-2026'});
  const D=await import('../src/lib/db.mjs'),d=D.db();for(const name of ['editor_alex','editor_blair'])d.prepare("INSERT INTO community_users(id,username,password,nickname,role,status,verification,created,updated) VALUES(?,?,?,?,'member','active','local_test',?,?)").run(name,name,D.passwordHash('editor-fixture-password-2026'),name,D.now(),D.now());d.close();delete globalThis.__personalSiteDb;
@@ -22,7 +25,8 @@ try{
  let mine=await(await call('/api/spaces/mine',undefined,alex)).json();const draft={...mine,profile:{...mine.profile,name:'Alex Rivera',alias:'Independent developer',skills:['TypeScript','Interface design'],intro:'I build thoughtful tools for everyday work.',github:'https://github.com/example',email:'alex@example.org',resume:{metrics:[{label:'Released projects',value:'12',note:'Synthetic test data'}],sections:[{id:'work',title:'Selected work',items:[{title:'A useful project',description:'An accessible interface, built with care.'}]}],certificates:[{imageId:image,caption:'Synthetic certificate fixture'}],gallery:[{imageId:image,caption:'Synthetic community workshop'}]}},layout:{...mine.layout,blog:{mode:'theme',theme:'anx',sections:[]}}};
  assert.equal((await call('/api/spaces/save',{...draft,profile:{...draft.profile,resume:{certificates:[{imageId:foreign}]}}},alex)).status,403);
  const saved=await call('/api/spaces/save',draft,alex);assert.equal(saved.status,200,await saved.clone().text());mine=await saved.json();assert.equal((await call('/api/spaces/save',draft,alex)).status,409);assert.equal((await fetch(base+'/media/'+image)).status,404);
- for(const language of ['zh','en']){const response=await fetch(base+'/workspace/blog',{headers:{Cookie:alex+'; site-locale='+language}});assert.equal(response.status,200);const html=await response.text();assert.match(html,/class="blog-editor blog-canvas-editor"/);assert.doesNotMatch(html,/class="blog-editor be-loading"/);assert.ok(html.includes('<title>'+(language==='zh'?'博客空间管理':'Manage blog home')+' · IAVSE</title>'));}
+ for(const language of ['zh','en']){const response=await fetch(base+'/workspace/blog',{headers:{Cookie:alex+'; site-locale='+language}});assert.equal(response.status,200);const html=await response.text();assert.match(html,/class="blog-editor blog-canvas-editor"/);assert.doesNotMatch(html,/class="blog-editor be-loading"/);assert.ok(html.includes('<title>'+(language==='zh'?'博客空间管理':'Manage blog home')+' · IAVSE</title>'));assertSiteBack(html);}
+ for(const route of ['/workspace/blog','/admin/blog']){const response=await fetch(base+route,{headers:{Cookie:owner+'; site-locale=en'}});assert.equal(response.status,200);assertSiteBack(await response.text());}
  const guestEditor=await(await fetch(base+'/workspace/blog')).text();assert.doesNotMatch(guestEditor,/class="blog-editor blog-canvas-editor"/);
  assert.equal((await fetch(base+'/api/spaces/save',{method:'POST',headers:{Origin:'https://foreign.invalid',Cookie:alex,'Content-Type':'application/json'},body:JSON.stringify(mine)})).status,403);
  const submission=await(await call('/api/spaces/submit',{revision:mine.revision,accepted:true},alex)).json(),review=submission.reviews.find(x=>x.kind==='board'&&x.status==='approved');assert.ok(review);assert.equal(submission.visibility,'public');assert.equal(submission.reviews.some(x=>x.status==='pending'),false);
@@ -80,7 +84,9 @@ try{
  assert.equal((await call('/api/admin/spaces/reviews',{id:articleReview.id,action:'approve',checked:true,reason:'Members cannot approve their own article'},alex)).status,403);
  assert.equal((await call('/api/admin/spaces/reviews',{id:articleReview.id,action:'approve',checked:true,reason:'Checked original isolated article and source'},owner)).status,200);assert.equal((await fetch(base+'/blog/'+articleState.handle+'/articles/reviewed-article')).status,200);
  const own=await(await call('/api/admin/blog/mine',undefined,owner)).json();assert.equal((await call('/api/admin/blog/save',{...own,profile:{...own.profile,name:'Synthetic default owner'},publish:true},owner)).status,200);assert.match(await(await fetch(base+'/blogs')).text(),/Synthetic default owner/);
+ adminServer=await startServer(directory,3178,1048576,{APP_SURFACE:'admin',PLATFORM_URL:base,ADMIN_URL:'http://127.0.0.1:3178',PLATFORM_LOGIN_MODE:'password'});
+ const adminCookie=await loginServer(adminServer.base),adminEditor=await fetch(adminServer.base+'/admin/blog',{headers:{Cookie:adminCookie+'; site-locale=en'}});assert.equal(adminEditor.status,200);assertSiteBack(await adminEditor.text(),base);
  if(process.env.EDITOR_UI==='true'){console.log('UI fixture ready: http://127.0.0.1:3177/login?next=/workspace/blog · editor_alex · editor-fixture-password-2026');await new Promise(resolve=>process.once('SIGTERM',resolve))}
  mine=await(await call('/api/spaces/mine',undefined,alex)).json();const offline=await call('/api/spaces/offline',{revision:mine.revision},alex);assert.equal(offline.status,200);assert.equal((await fetch(base+'/media/'+image)).status,404);
  console.log('Blog editor HTTP passed: real account separation, private résumé extraction, scoped certificates, stale revisions, CSRF, direct board publication → private revisions → takedown, pending article review, and owner updates.');
-}finally{if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}
+}finally{if(adminServer)await stopServer(adminServer);if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

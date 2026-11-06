@@ -8,7 +8,7 @@ const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/useUn
 function mount(dirty,allow=false){
  const listeners=new Map(),prompts=[],dispatched=[],exports={};let effect;
  class Element{
-  href='https://site.example/blogs';target='';rawHref='/blogs';download=false;
+  href='https://site.example/';target='';rawHref='/';download=false;
   closest(){return this}
   hasAttribute(name){return name==='download'&&this.download}
   getAttribute(name){return name==='href'?this.rawHref:null}

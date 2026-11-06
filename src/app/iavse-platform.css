@@ -24,7 +24,6 @@ html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .v2-hero-copy h1{fon
 html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .v2-hero-intro{position:relative;min-height:100svh;padding:112px 28px;align-items:center;justify-content:center}
 html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .v2-hero-showcase{padding-top:clamp(40px,6svh,72px)}
 html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .v2-hero-copy>.iavse-brand-words{font-size:10px;letter-spacing:.16em;max-width:760px}
-html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .v2-hero-actions{margin-top:30px;gap:16px}
 html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .home-story-copy h2{max-width:12em}
 
 html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .home-story-copy h2{font-size:clamp(26px,2.5vw,34px);line-height:1.25;font-weight:450;letter-spacing:-.04em}
