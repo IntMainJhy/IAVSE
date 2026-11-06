@@ -49,6 +49,14 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
 const flush=async()=>{await Promise.resolve();await Promise.resolve()};
 const navigation=(s,pending)=>s.window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));
 
+test('visibility, intersection and theme wakeups submit one latest-state draw on their shared frame',async()=>{
+ const s=mount({animated:true});s.intersection.set(true);await flush();s.step(16);const before=s.draws.length;
+ for(let index=0;index<5;index++)s.document.dispatchEvent(new Event('visibilitychange'));
+ s.intersection.set(true);s.root.dataset.colorMode='dark';s.theme.fn();s.window.dispatchEvent(new Event('afterprint'));
+ assert.equal(s.draws.length,before,'lifecycle observers cannot synchronously submit duplicate GPU work');assert.equal(s.frames.size,1);s.step(16);assert.equal(s.draws.length,before+1);assert.equal(s.draws.at(-1)[2],true,'the shared draw uses the final theme');
+ s.document.hidden=true;s.document.dispatchEvent(new Event('visibilitychange'));assert.equal(s.frames.size,0);s.document.hidden=false;s.document.dispatchEvent(new Event('visibilitychange'));assert.equal(s.draws.length,before+1);s.step(16);assert.equal(s.draws.length,before+2);s.cleanup();assert.equal(s.frames.size,0);
+});
+
 test('occlusion-length callback gaps are not mistaken for sustained GPU overload',async()=>{
  const s=mount({animated:true});s.intersection.set(true);await flush();s.step(16);const density=s.sizes.at(-1)[2];
  for(let i=0;i<100;i++)s.step(1000);
@@ -111,7 +119,7 @@ test('glass follows every display frame with damping, bounds resolution, and sto
  s.document.hidden=false;s.document.dispatchEvent(new Event('visibilitychange'));assert.equal(s.frames.size,1);
  s.window.dispatchEvent(new Event('beforeprint'));assert.equal(s.frames.size,0);
  s.window.dispatchEvent(new Event('afterprint'));assert.equal(s.frames.size,1);
- s.root.dataset.colorMode='dark';s.theme.fn();assert.equal(s.draws.at(-1)[2],true);
+ s.root.dataset.colorMode='dark';s.theme.fn();s.step(16);assert.equal(s.draws.at(-1)[2],true);
  s.cleanup();assert.equal(s.releases,1);assert.equal(s.signal.aborted,true);assert.equal(s.frames.size,0);
  assert.ok(s.resize.disconnected&&s.intersection.disconnected&&s.theme.disconnected);
  assert.equal(s.host.listeners.size+s.canvas.listeners.size+s.document.listeners.size+s.window.listeners.size+s.preference.listeners.size,0);
@@ -135,7 +143,7 @@ test('scrolling below the hero redraws the same viewport canvas and coalesces sc
  assert.equal(s.frames.size,0);assert.deepEqual(s.sizes.at(-1).slice(0,2),[1400,900],'GPU target stays viewport-sized');
  s.window.dispatchEvent(new Event('scroll'));s.step(1000/144);assert.equal(s.draws.length,before+2,'a fresh scroll update paints on the next high-refresh callback');s.step(19);assert.equal(s.draws.length,before+2,'static reduced-motion content sleeps again after the update');
  s.intersection.set(false);s.host.top=-2700;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.draws.length,before+2);
- s.intersection.set(true);assert.equal(s.draws.at(-1)[3],3);s.cleanup();assert.equal(s.window.listeners.size,0);
+ s.intersection.set(true);s.step(16);assert.equal(s.draws.at(-1)[3],3);s.cleanup();assert.equal(s.window.listeners.size,0);
 });
 
 test('visible optical motion follows 60/120/144Hz callbacks without changing animation speed',async()=>{

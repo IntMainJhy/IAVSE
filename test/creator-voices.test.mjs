@@ -34,13 +34,17 @@ test('creator comments keep six accessible examples in every language without a 
  }
 });
 
-test('entry reveals once; hidden tabs and offscreen comments pause without resetting motion preferences',()=>{
+function motionFixture(){
  const target=()=>{const listeners=new Map();return{listeners,addEventListener:(type,listener)=>listeners.set(type,listener),removeEventListener:(type,listener)=>{if(listeners.get(type)===listener)listeners.delete(type);},emit:(type,event={})=>listeners.get(type)?.(event)}};
- const document={...target(),hidden:false},window=target(),preference={...target(),matches:false},values=[];let cursor=0,effect,observer;
+ const attributes=new Set(),document={...target(),hidden:false,documentElement:{hasAttribute:name=>attributes.has(name)}},window=target(),preference={...target(),matches:false},values=[];let cursor=0,effect,observer;
  const react={useRef:()=>({current:{}}),useEffect:fn=>{effect??=fn;},useState:initial=>{const index=cursor++;if(!(index in values))values[index]=initial;return[values[index],value=>{values[index]=typeof value==='function'?value(values[index]):value;}];}};
  const Component=load('zh',react,{document,window,matchMedia:()=>preference,localStorage:{getItem:()=>null},IntersectionObserver:class{constructor(callback){this.callback=callback;observer=this;}observe(){}disconnect(){this.disconnected=true;}}});
  const render=()=>{cursor=0;return Component().props;};
  assert.equal(render()['data-paused'],true);const cleanup=effect();
+ return{render,cleanup,observer,document,window,preference,attributes};
+}
+test('entry reveals once; hidden tabs and offscreen comments pause without resetting motion preferences',()=>{
+ const{render,cleanup,observer,document,window,preference}=motionFixture();
  observer.callback([{isIntersecting:true}]);assert.equal(render()['data-paused'],false);assert.equal(render()['data-entered'],true);
  observer.callback([{isIntersecting:false}]);assert.equal(render()['data-paused'],true);assert.equal(render()['data-entered'],true);
  observer.callback([{isIntersecting:true}]);document.hidden=true;document.emit('visibilitychange');
@@ -52,6 +56,17 @@ test('entry reveals once; hidden tabs and offscreen comments pause without reset
  window.emit('iavse-scene-control',{detail:{action:'paused',value:false}});assert.equal(render()['data-paused'],false);
  window.emit('iavse-scene-control',{detail:{action:'reduced',value:true}});assert.equal(render()['data-quiet'],true);
  cleanup();assert.equal(observer.disconnected,true);for(const item of[document,window,preference])assert.equal(item.listeners.size,0);
+});
+
+test('already-visible cards never replay an entrance after hydration or re-entry; a future entrance remains gentle',()=>{
+ const restored=motionFixture();restored.observer.callback([{isIntersecting:true}]);assert.equal(restored.render()['data-entered'],true);assert.equal(restored.render()['data-arrival'],false);restored.observer.callback([{isIntersecting:false}]);restored.observer.callback([{isIntersecting:true}]);assert.equal(restored.render()['data-arrival'],false);restored.cleanup();
+ const future=motionFixture();future.observer.callback([{isIntersecting:false}]);future.observer.callback([{isIntersecting:true}]);assert.equal(future.render()['data-arrival'],true);future.cleanup();
+});
+
+test('route handoffs pause the marquee until the current root releases, preserving manual and visibility pauses',()=>{
+ const f=motionFixture(),navigate=pending=>f.window.emit('iavse-navigation-pending',{detail:{pending}});f.observer.callback([{isIntersecting:true}]);assert.equal(f.render()['data-paused'],false);
+ f.attributes.add('data-iavse-transition');navigate(true);assert.equal(f.render()['data-paused'],true);navigate(false);assert.equal(f.render()['data-paused'],true,'an old page cannot release the current transition');
+ f.document.emit('visibilitychange');assert.equal(f.render()['data-paused'],true);f.attributes.delete('data-iavse-transition');f.window.emit('iavse-scene-control',{detail:{action:'paused',value:true}});navigate(false);assert.equal(f.render()['data-paused'],true);f.window.emit('iavse-scene-control',{detail:{action:'paused',value:false}});assert.equal(f.render()['data-paused'],false);f.cleanup();assert.equal(f.window.listeners.size,0);
 });
 
 test('every dynamically selected portrait exists and examples retain six distinct material tones',()=>{

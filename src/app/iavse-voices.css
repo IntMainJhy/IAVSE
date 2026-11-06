@@ -4,7 +4,9 @@ html[data-ui][data-color-mode] .v2-site .creator-voices h2{font-size:clamp(26px,
 .creator-voices>header p{font-size:13px;line-height:1.7;color:#64768d;margin:0}
 .creator-voices-window{mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .creator-voices-window:focus-within,.creator-voices[data-quiet=true] .creator-voices-window{mask-image:none;-webkit-mask-image:none}
-.creator-voices-row{overflow:hidden;padding-block:16px;scrollbar-width:thin;scrollbar-color:#c4cfdd transparent}
+/* Static hydration and the moving track share a height, even with classic scrollbars. */
+.creator-voices-row{overflow:hidden;padding-block:16px;scrollbar-width:none}
+.creator-voices-row::-webkit-scrollbar{display:none}
 .creator-voices-track{display:flex;width:max-content;animation:creator-voices-travel 72s linear infinite;will-change:transform}
 .creator-voices-row[data-direction=right] .creator-voices-track{animation-direction:reverse;animation-duration:84s}
 .creator-voices-group{display:flex;gap:20px;flex:none;padding-right:20px}
@@ -22,9 +24,9 @@ html[data-ui][data-color-mode] .v2-site .creator-voices h2{font-size:clamp(26px,
 .creator-voice figcaption small{display:block;font-size:11px;color:var(--voice-muted);margin-top:4px}
 .creator-voices[data-paused=true] .creator-voices-track,.creator-voices-window:focus-within .creator-voices-track{animation-play-state:paused}
 .creator-voices[data-paused=true] .creator-voices-track{will-change:auto}
-.creator-voices[data-entered=true]>header{animation:creator-voices-arrive 640ms var(--voices-ease) both}
-.creator-voices[data-entered=true] .creator-voices-row{animation:creator-voices-arrive 720ms var(--voices-ease) 80ms both}
-.creator-voices[data-entered=true] .creator-voices-row[data-direction=right]{animation-delay:160ms}
+.creator-voices[data-arrival=true]>header{animation:creator-voices-arrive 640ms var(--voices-ease) both}
+.creator-voices[data-arrival=true] .creator-voices-row{animation:creator-voices-arrive 720ms var(--voices-ease) 80ms both}
+.creator-voices[data-arrival=true] .creator-voices-row[data-direction=right]{animation-delay:160ms}
 .creator-voices-row:focus-visible{overflow-x:auto;outline:2px solid #5b85c4;outline-offset:-3px;border-radius:12px}
 .creator-voices-row:focus-visible .creator-voices-track{animation:none;transform:none;will-change:auto}
 .creator-voices-row:focus-visible .creator-voices-group[aria-hidden]{display:none}
@@ -34,7 +36,7 @@ html[data-ui][data-color-mode] .v2-site .creator-voices h2{font-size:clamp(26px,
  .creator-voice:hover figcaption img{transform:translateY(-2px)}
 }
 @keyframes creator-voices-travel{to{transform:translateX(-50%)}}
-@keyframes creator-voices-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes creator-voices-arrive{from{opacity:.78;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:767px){
  .v2-home .creator-voices{padding:28px 0 64px}.creator-voices>header{padding-inline:24px;margin-bottom:20px}
  .creator-voice{width:min(310px,calc(100vw - 48px));min-height:220px;padding:28px;border-radius:32px}.creator-voice blockquote{font-size:16px;line-height:1.7}

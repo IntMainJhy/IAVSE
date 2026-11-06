@@ -8,7 +8,7 @@ import {loadHomeScrollRefresh} from './home-refresh-fixture.mjs';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeCinema.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
  const effects=[],calls=[],media=[],frames=new Map(),triggers=[],scrollEndListeners=new Set();let frameId=0,refreshes=0,resolveFont;
- const heading=[{}, {}, {}],copy={},intro={},showcase={},stage={},image=new EventTarget();
+ const heading=[{}, {}, {}],copy={},intro={},showcase={getBoundingClientRect:()=>({top:1100-scrollY})},stage={},image=new EventTarget();
  const hero={isConnected:true,getBoundingClientRect:()=>({top:0,left:0,width:1200,height:2000}),querySelector:selector=>({'.v2-hero-copy':copy,'.v2-hero-intro':intro,'.v2-hero-showcase':showcase,'.v2-stage,.v2-hero-empty':stage}[selector]||null),querySelectorAll:selector=>selector==='img'?[image]:[]};
  const host={querySelector:selector=>selector==='.v2-hero-scene'?hero:null};
  let currentMedia;
@@ -26,7 +26,7 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
   if(to.scrollTrigger)animation.scrollTrigger=new ScrollTrigger(animation);return animation;
  };
  const gsap={registerPlugin(){},timeline(){throw Error('The hero must not create a timed text entrance');},to(target,to){return own(target,undefined,to);},fromTo(target,from,to){return own(target,from,to);},matchMedia(){const m={contexts:[{data:[]}],add(query,callback,scope){this.scope=scope;if(!systemReduced){currentMedia=this;callback();currentMedia=undefined;}},revert(){this.reverted=true;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];},kill(revert){this.killMode=revert;for(const entry of this.contexts[0].data)entry.kill();this.contexts[0].data=[];}};media.push(m);return m;}};
- const window=Object.assign(new EventTarget(),{scrollY}),document=Object.assign(new EventTarget(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>resolveFont=resolve)}});
+ const window=Object.assign(new EventTarget(),{scrollY,innerHeight:900}),document=Object.assign(new EventTarget(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>resolveFont=resolve)}});
  const requestAnimationFrame=callback=>{frames.set(++frameId,callback);return frameId;},cancelAnimationFrame=id=>frames.delete(id);
  const refreshModule=loadHomeScrollRefresh({window,document,ScrollTrigger,requestAnimationFrame,cancelAnimationFrame});
  const exports={};vm.runInNewContext(source,{exports,window,document,localStorage:{getItem:()=>savedReduced?'reduce':'full'},requestAnimationFrame,cancelAnimationFrame,require:name=>{
@@ -46,8 +46,11 @@ test('the product enters on its own viewport crossing after the brand scene, not
  assert.equal(f.calls.some(call=>call.target===f.copy),false);assert.equal(f.media[0].scope,f.hero);f.cleanup();
 });
 test('initial and restored views never animate the headline or its parent, and reduced motion stays readable',()=>{
- for(const scrollY of [0,500]){const f=mount({scrollY});assert.equal(f.calls.length,1);assert.equal(f.calls[0].target,f.stage);assert.ok(!f.calls.some(call=>call.target===f.copy||call.target===f.heading||f.heading.includes(call.target)));f.cleanup();}
+ for(const scrollY of [0,500]){const f=mount({scrollY});assert.equal(f.calls.length,scrollY?0:1);assert.ok(!f.calls.some(call=>call.target===f.copy||call.target===f.heading||f.heading.includes(call.target)));f.cleanup();}
  for(const options of [{savedReduced:true},{systemReduced:true}]){const f=mount(options);assert.equal(f.calls.length,0);f.cleanup();}
+});
+test('restoring a visible or passed product never reapplies its start values or schedules a refresh',async()=>{
+ for(const scrollY of[500,4800]){const f=mount({scrollY});assert.equal(f.calls.length,0);f.image.dispatchEvent(new Event('load'));f.resolveFont();await Promise.resolve();f.flush();assert.equal(f.refreshes,0);f.cleanup();}
 });
 test('late images and fonts coalesce layout refreshes and teardown cancels queued refresh work',async()=>{
  const f=mount();assert.equal(f.frames.size,1);f.image.dispatchEvent(new Event('load'));f.resolveFont();await Promise.resolve();assert.equal(f.frames.size,1);f.flush();assert.equal(f.refreshes,1);

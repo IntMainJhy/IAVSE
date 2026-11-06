@@ -26,13 +26,15 @@ export function HomeCinema({locale}:{locale:string}){
   const host=root.current?.closest<HTMLElement>('.v2-home'),hero=host?.querySelector<HTMLElement>('.v2-hero-scene');if(!host||!hero||reduced)return;
   try{if(localStorage.getItem('iavse-background-motion')==='reduce')return;}catch{}
   gsap.registerPlugin(ScrollTrigger);
-  const refreshWork=homeScrollRefresh(hero),refresh=refreshWork.request;
+  let hasEntrance=false;
+  const refreshWork=homeScrollRefresh(hero),refresh=()=>{if(hasEntrance)refreshWork.request();};
   const media=gsap.matchMedia();
   media.add('(prefers-reduced-motion: no-preference)',()=>{
    const showcase=hero.querySelector('.v2-hero-showcase'),stage=hero.querySelector('.v2-stage,.v2-hero-empty');
    // Headline, supporting copy and download action keep their server-rendered
    // position. No timed entrance or scroll tween may rearrange the hero text.
-   if(stage&&showcase)gsap.fromTo(stage,{opacity:.78,y:14},{opacity:1,y:0,duration:.9,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{id:'iavse-product-approach',trigger:showcase,start:'top bottom',once:true,fastScrollEnd:true}});
+   if(stage&&showcase&&showcase.getBoundingClientRect().top>=window.innerHeight){gsap.fromTo(stage,{opacity:.78,y:14},{opacity:1,y:0,duration:.9,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{id:'iavse-product-approach',trigger:showcase,start:'top bottom',once:true,fastScrollEnd:true}});hasEntrance=true;}
+   return()=>{hasEntrance=false;};
   },hero);
   const images=Array.from(hero.querySelectorAll('img'));images.forEach(image=>image.addEventListener('load',refresh,{once:true}));
   document.fonts?.ready.then(refresh);refresh();

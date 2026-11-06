@@ -21,6 +21,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;lastDraw=null;if(scene)canvas.dataset.atmosphere=lost?'fallback':'paused';};
  const draw=()=>{
   if(!scene||disposed||lost||document.hidden||printing||!visible||navigationPending)return;
+  dirty=false;
   if(sizeDirty){sizeDirty=false;measure();return;}
   try{
    if(layoutDirty){readLayout();layoutDirty=false;}
@@ -118,7 +119,9 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
   targetY=Math.max(-1,Math.min(1,((event.clientY-rect.top)/Math.max(rect.height,1)-.5)*2));sync();
  };
  const leave=()=>{targetX=targetY=0;sync();};
- const resume=()=>{draw();sync();};
+ // Visibility, intersection and theme notifications can arrive in one task.
+ // Share their next display frame instead of submitting several full draws.
+ const resume=()=>{dirty=true;sync();};
  const beforePrint=()=>{printing=true;sync();};
  const afterPrint=()=>{printing=false;resume();};
  const reduced=(event?:MediaQueryListEvent)=>{if(typeof event?.matches==='boolean')systemReduced=event.matches;else if(event)systemReduced=preference.matches;reducedMotion=manualReduced||(event?systemReduced:systemReduced||preference.matches);if(reducedMotion){pointerX=pointerY=targetX=targetY=0;clearReveals();revealsDirty=false;draw();}else{revealsDirty=true;draw();}dirty=false;sync();};
@@ -137,7 +140,7 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  };
  const resize=typeof ResizeObserver==='undefined'?null:new ResizeObserver(()=>{sizeDirty=true;dirty=true;sync();});
  const intersection=typeof IntersectionObserver==='undefined'?null:new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);resume();},{threshold:.01});
- const theme=typeof MutationObserver==='undefined'?null:new MutationObserver(draw);
+ const theme=typeof MutationObserver==='undefined'?null:new MutationObserver(resume);
  const cleanup=()=>{
   if(disposed)return;
   disposed=true;controller.abort();stop();clearReveals();resize?.disconnect();intersection?.disconnect();theme?.disconnect();

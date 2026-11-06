@@ -6,18 +6,19 @@ import ts from 'typescript';
 import {loadHomeScrollRefresh} from './home-refresh-fixture.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-function fixture({reduced=false,savedReduced=false}={}){
+function fixture({reduced=false,savedReduced=false,scrollY=0}={}){
  const effects=[],timelines=[],mediaInstances=[],frames=new Map(),listeners=new Map(),refreshListeners=new Set(),scrollEndListeners=new Set(),triggers=[];let frameId=0,refreshes=0,currentMedia,fontResolve;
  class Target extends EventTarget{dataset={};style={};addEventListener(name,callback,options){super.addEventListener(name,callback,options);const set=listeners.get(this)||new Set();set.add(name);listeners.set(this,set);}removeEventListener(name,callback){super.removeEventListener(name,callback);listeners.get(this)?.delete(name);}}
  const node=name=>Object.assign(new Target(),{name});
- const stories=['blog','editor','skills','resources'].map(id=>{const art=node(id+' art'),copy=node(id+' copy');return Object.assign(node(id),{dataset:{homeStory:id},art,copy,querySelector:selector=>({'.home-story-visual':art,'.home-story-copy':copy}[selector]||null)});});
- const closing=node('invitation'),images=[node('first image'),node('second image')];
+ const stories=['blog','editor','skills','resources'].map((id,index)=>{const art=node(id+' art'),copy=node(id+' copy');return Object.assign(node(id),{dataset:{homeStory:id},art,copy,getBoundingClientRect:()=>({top:1200+index*800-scrollY}),querySelector:selector=>({'.home-story-visual':art,'.home-story-copy':copy}[selector]||null)});});
+ const closing=Object.assign(node('invitation'),{getBoundingClientRect:()=>({top:4400-scrollY})}),images=[node('first image'),node('second image')];
  const root=Object.assign(node('root'),{isConnected:true,getBoundingClientRect:()=>({top:0,left:0,width:1200,height:4000}),querySelectorAll:selector=>selector==='img'?images:selector==='[data-home-story]'?stories:[],querySelector:()=>closing});
- const window=new Target(),document=Object.assign(new Target(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>fontResolve=resolve)}});
+ const window=Object.assign(new Target(),{innerHeight:900}),document=Object.assign(new Target(),{hidden:false,documentElement:{hasAttribute:()=>false},fonts:{ready:new Promise(resolve=>fontResolve=resolve)}});
  class ScrollTrigger{
   constructor(animation,owner){this.animation=animation;this.calls=[];this.active=true;triggers.push(this);owner?.contexts[0].data.push(this);}
   kill(revert){this.calls.push(revert);this.active=false;this.animation.kill();}
   static isScrolling(){return false;}
+  static create({animation,...options}){assert.ok(animation.steps.length,'populate a timeline before attaching its trigger');animation.options.scrollTrigger=options;return animation.scrollTrigger=new ScrollTrigger(animation,currentMedia);}
   static addEventListener(name,callback){(name==='refresh'?refreshListeners:scrollEndListeners).add(callback);}
   static removeEventListener(name,callback){(name==='refresh'?refreshListeners:scrollEndListeners).delete(callback);}
   static refresh(){refreshes++;for(const callback of refreshListeners)callback();}
@@ -46,6 +47,11 @@ test('sections stay in native flow with one-time reveals and no scroll or intera
 test('art and copy enter together with limited travel and fast-scroll completion',()=>{
  const f=fixture();for(const scene of f.stories){const timeline=f.timelines.find(t=>t.options.scrollTrigger.trigger===scene),art=timeline.steps.find(s=>s.target===scene.art),copy=timeline.steps.find(s=>s.target===scene.copy);assert.equal(art.at,0);assert.equal(copy.at,art.at);assert.equal(timeline.options.defaults.duration,.9);assert.equal(timeline.options.defaults.ease,'power2.out');assert.equal(timeline.options.scrollTrigger.start,'top bottom');assert.equal(timeline.options.scrollTrigger.fastScrollEnd,true);assert.equal(art.from.opacity,copy.from.opacity);assert.ok(copy.from.y<=10);assert.ok((art.from.y||0)<=14);if(['editor','resources'].includes(scene.dataset.homeStory))for(const key of ['x','y','z','scale','rotation','clipPath']){assert.equal(art.from[key],undefined);assert.equal(art.to[key],undefined);}}
  f.cleanup();
+});
+
+test('restored sections keep their existing presentation and only future sections get fully populated triggers',async()=>{
+ const bottom=fixture({scrollY:4800});assert.equal(bottom.timelines.length,0);bottom.images.forEach(image=>image.dispatchEvent(new Event('load')));bottom.resolveFont();await Promise.resolve();bottom.flush();assert.equal(bottom.refreshes,0,'no entrance means no global refresh or scroll restoration writes');bottom.cleanup();
+ const middle=fixture({scrollY:1800});assert.deepEqual(middle.timelines.map(t=>t.options.scrollTrigger.trigger.name),['skills','resources','invitation']);assert.ok(middle.timelines.filter(t=>t.steps.length===2).every(t=>t.options.paused===true));middle.cleanup();
 });
 
 test('manual and system reduced motion leave all sections readable and restore entrances safely',()=>{

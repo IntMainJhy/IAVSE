@@ -10,28 +10,34 @@ export function HomeMotion(){
  useEffect(()=>{
   const root=anchor.current?.closest<HTMLElement>('.v2-home');if(!root)return;
   gsap.registerPlugin(ScrollTrigger);
-  let reduced=false,live=true,media:ReturnType<typeof gsap.matchMedia>|null=null;
+  let reduced=false,live=true,hasEntrances=false,media:ReturnType<typeof gsap.matchMedia>|null=null;
   try{reduced=localStorage.getItem('iavse-background-motion')==='reduce';}catch{}
   const notify=()=>{if(live)window.dispatchEvent(new Event('iavse-journey-layout'));};
-  const refreshWork=homeScrollRefresh(root),refresh=refreshWork.request;
+  const refreshWork=homeScrollRefresh(root),refresh=()=>{if(hasEntrances)refreshWork.request();};
   const stories=Array.from(root.querySelectorAll<HTMLElement>('[data-home-story]'));
-  const restore=()=>{delete root.dataset.journeyMotion;};
+  const restore=()=>{hasEntrances=false;delete root.dataset.journeyMotion;};
   const setup=()=>{
    media?.revert();media=null;restore();
    if(!reduced){media=gsap.matchMedia();media.add('(prefers-reduced-motion: no-preference)',()=>{
+    // Batch visibility reads before GSAP writes any start values. Restored or
+    // already-visible content keeps its server-rendered state.
+    const viewportHeight=window.innerHeight,upcoming=stories.filter(scene=>scene.getBoundingClientRect().top>=viewportHeight);
+    const closing=root.querySelector<HTMLElement>('.v2-invitation'),closingUpcoming=closing&&closing.getBoundingClientRect().top>=viewportHeight;
     root.dataset.journeyMotion='flow';
-    stories.forEach(scene=>{
+    upcoming.forEach(scene=>{
      const art=scene.querySelector<HTMLElement>('.home-story-visual'),copy=scene.querySelector<HTMLElement>('.home-story-copy');
      const interactive=['editor','resources'].includes(scene.dataset.homeStory||'');
      // No pin, scrub or shared stage: the document always follows the user's
      // wheel/touch input. Art and copy arrive together at the viewport edge,
      // with less travel and a softer deceleration; fast scrolling completes them.
-     const entrance=gsap.timeline({defaults:{duration:.9,ease:'power2.out'},scrollTrigger:{trigger:scene,start:'top bottom',once:true,fastScrollEnd:true}});
+     const entrance=gsap.timeline({paused:true,defaults:{duration:.9,ease:'power2.out'}});
      if(art)entrance.fromTo(art,interactive?{opacity:.78}:{opacity:.78,y:14},interactive?{opacity:1,clearProps:'opacity'}:{opacity:1,y:0,clearProps:'transform,opacity'},0);
      if(copy)entrance.fromTo(copy,{opacity:.78,y:10},{opacity:1,y:0,clearProps:'transform,opacity'},0);
+     // Attach only after the timeline is populated. An empty timeline's deferred
+     // refresh can remove earlier `once` triggers while GSAP iterates that list.
+     ScrollTrigger.create({animation:entrance,trigger:scene,start:'top bottom',once:true,fastScrollEnd:true});hasEntrances=true;
     });
-    const closing=root.querySelector<HTMLElement>('.v2-invitation');
-    if(closing)gsap.fromTo(closing,{opacity:.78,y:14},{opacity:1,y:0,duration:.9,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{trigger:closing,start:'top bottom',once:true,fastScrollEnd:true}});
+    if(closing&&closingUpcoming){gsap.fromTo(closing,{opacity:.78,y:14},{opacity:1,y:0,duration:.9,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{trigger:closing,start:'top bottom',once:true,fastScrollEnd:true}});hasEntrances=true;}
     refresh();return restore;
    },root);}
    refresh();notify();
