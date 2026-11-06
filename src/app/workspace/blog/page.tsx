@@ -4,6 +4,7 @@ import '@/app/blog-editor.css';
 import '@xyflow/react/dist/style.css';
 import '@/app/blog-canvas.css';
 import '@/app/blog-editor-controls.css';
+import '@/app/blog-editor-workspace.css';
 
 // Preserve the shared request/auth adapter while making editor styles render-blocking.
 export const dynamic='force-dynamic';

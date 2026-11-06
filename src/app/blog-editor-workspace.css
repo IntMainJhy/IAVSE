@@ -1,0 +1,133 @@
+/* Canvas-first operating layout, informed by Stitch. Authored page styles stay in the artboard. */
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:64px;--studio-canvas:#f4f5f7;--studio-line:#e1e4e9;--studio-soft:#f2f4f7;--studio-selected:#e9eef9;--studio-ink:#283b63;background:var(--studio-canvas);font-family:Inter,"PingFang SC",sans-serif;--studio-paper:#fff;--studio-text:#29364a;--studio-muted:#657184;--studio-tool-active:#273c61;--studio-tool-on:#fff}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{height:var(--editor-topbar);min-height:var(--editor-topbar);flex-basis:var(--editor-topbar);padding:10px 20px;gap:20px;flex-wrap:nowrap;align-items:center;background:var(--studio-paper);border-bottom:1px solid var(--studio-line)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading{gap:18px;flex-shrink:1}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading h1{font:600 16px/1.35 Inter,"PingFang SC",sans-serif;letter-spacing:-.02em;margin:0 0 3px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading .bc-editor-status{font-size:11px;line-height:1.5;color:var(--studio-muted)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-back{padding:8px;min-height:40px;font-size:12px;color:var(--studio-muted)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions{flex:0 0 auto;width:auto;gap:12px;flex-wrap:nowrap}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-action-preferences{padding-right:12px;border-color:var(--studio-line)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-action-commit{padding-left:12px;border-color:var(--studio-line)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions :is(.bc-action,.bc-save-action,.blog-share-trigger){min-height:40px;padding:8px 12px;font-size:12px;border-radius:9px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action{padding-inline:16px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .icon{display:block;flex:none;width:17px;height:17px;opacity:1;visibility:visible;min-width:17px;max-width:none;flex-basis:17px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-compact{display:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer{--bd-sidebar-width:72px;--bd-properties-width:304px;display:grid;grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:var(--studio-canvas);font:400 13px/1.5 Inter,"PingFang SC",sans-serif;overflow:hidden}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:336px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-properties=true]{grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr) var(--bd-properties-width)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:minmax(0,1fr);position:relative;min-width:0;overflow:hidden;background:transparent;border:0;z-index:8}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{grid-column:1;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:8px;padding:16px 8px;background:var(--studio-paper);border:0;border-right:1px solid var(--studio-line);overflow:visible}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;flex:none;min-height:62px;width:56px;padding:9px 3px;border:0;border-radius:11px;background:transparent;color:var(--studio-muted);font:500 11px/1.3 Inter,"PingFang SC",sans-serif;white-space:normal}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button .icon{display:block;width:20px;height:20px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button:hover{background:var(--studio-soft);color:#283b63}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button[aria-pressed=true]{background:var(--studio-selected);color:var(--studio-ink);font-weight:600}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{grid-column:2;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;margin:12px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:12px;box-shadow:0 2px 8px #17202d05}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel[hidden]{display:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;padding:12px 12px 12px 16px;min-height:58px;border-bottom:1px solid var(--studio-line)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading h2{margin:0;font:600 13px/1.5 Inter,"PingFang SC",sans-serif;letter-spacing:0;color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading>button{display:grid;place-items:center;width:32px;height:32px;min-height:32px;padding:7px;border:0;border-radius:7px;background:transparent;color:var(--studio-muted)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading>button:hover{background:var(--studio-soft)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading>button .icon{width:16px;height:16px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel :is(.bd-page-title,.bd-sidebar-footer){padding-inline:14px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-page-title{font-size:11px;color:var(--studio-muted);background:var(--studio-soft);border-bottom:1px solid #eef0f3;min-height:44px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layers{padding:8px;min-height:0;flex:1;overflow:auto}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel :is(.bd-sticker-library,.bt-library,.bd-insert){position:static;width:auto;max-width:none;max-height:none;min-height:0;flex:1;overflow:auto;border:0;border-radius:0;box-shadow:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library{overflow:hidden}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sidebar-footer{display:block;flex:none;padding-block:12px;border-top:1px solid var(--studio-line)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sidebar-footer>button{min-height:38px;font-size:12px;border-radius:8px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage{grid-column:2;grid-row:1;background:var(--studio-canvas);border:0;isolation:isolate}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage .react-flow__background{background:var(--studio-canvas)!important}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar{position:absolute;z-index:5;inset:16px 20px auto;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:40px;height:auto;padding:0;background:transparent;border:0;pointer-events:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span{gap:8px;font-size:11px;color:var(--studio-muted);pointer-events:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span b{font-weight:500;font-variant-numeric:tabular-nums;color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-stage-options,.bd-selection-actions){pointer-events:auto;flex:none;display:flex;align-items:center;gap:2px;margin:0;padding:4px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:11px;box-shadow:0 3px 12px #17202d09}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .bd-selection-actions{flex:0 1 auto;min-width:0;max-width:50%}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions>button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border:0;border-radius:7px;background:transparent;padding:7px 9px;font:500 11px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-muted);white-space:nowrap}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button:hover,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions>button:hover{background:var(--studio-soft)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button[aria-pressed=true]{background:var(--studio-selected);color:var(--studio-ink)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions .bd-selection-name{max-width:140px;min-width:0;overflow:hidden;text-overflow:ellipsis;display:block}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .icon{display:block;width:16px;height:16px;flex:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock{position:absolute;z-index:5;left:50%;right:auto;bottom:30px;transform:translateX(-50%);height:auto;width:max-content;max-width:calc(100% - 32px);padding:0;gap:0;background:transparent;border:0;pointer-events:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{position:static;display:flex;align-items:center;justify-content:center;gap:4px;max-width:100%;padding:6px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:13px;box-shadow:0 6px 24px #17202d17;transform:none;pointer-events:auto}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:auto;min-width:38px;min-height:38px;padding:9px;border:0;border-radius:8px;background:transparent;color:var(--studio-muted)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button:hover:not(:disabled){background:var(--studio-soft);color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{background:var(--studio-tool-active);color:#fff}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .icon{display:block;width:18px;height:18px;flex:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools i{display:block;flex:none;height:22px;width:1px;margin:0 5px;background:var(--studio-line)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-zoom select{min-width:70px;min-height:38px;margin:0;border:0;border-radius:7px;background:var(--studio-paper);padding:7px;font:500 12px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-stage-hint{position:absolute;top:calc(100% + 8px);left:50%;bottom:auto;transform:translateX(-50%);max-width:calc(100vw - 110px);margin:0;font:400 10px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:relative;grid-column:3;grid-row:1;inset:auto;width:auto;max-width:none;min-width:0;min-height:0;margin:12px 12px 12px 0;padding:0 16px 24px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:12px;box-shadow:0 2px 8px #17202d05;overflow:auto;z-index:7}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header{min-height:58px;padding:12px 0;margin-bottom:16px;top:0}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header h2{font-size:13px;color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-canvas-loading{inset:0;background:var(--studio-canvas)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-publish-panel{top:calc(var(--editor-topbar) + 12px);right:12px;bottom:12px;width:360px;max-width:calc(100% - 24px);padding:20px;border:1px solid var(--studio-line);border-radius:12px;box-shadow:0 8px 32px #17202d1a}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-artboard{box-shadow:0 2px 5px #17202d0d,0 14px 40px -12px #17202d1f}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-artboard>span{font:500 11px/1.5 Inter,"PingFang SC",sans-serif;letter-spacing:.01em;color:var(--studio-muted)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs,.bd-library-panel,.bd-stage-options,.bd-selection-actions,.bd-floating-tools) button:focus-visible{outline:2px solid #2458df;outline-offset:2px}
+@media(max-width:1179px){
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-properties=true]{grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr)}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:absolute;grid-column:auto;grid-row:auto;inset:64px 14px 90px auto;width:292px;max-width:calc(100% - var(--bd-sidebar-width) - 28px);margin:0;box-shadow:0 8px 28px #17202d1a}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar{inset-inline:14px}:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .bd-selection-actions{max-width:46%}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions .bd-selection-name{max-width:95px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button{padding-inline:7px}
+}
+@media(max-width:900px){
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:72px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{overflow:visible;position:static}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{position:absolute;z-index:9;left:84px;top:12px;bottom:88px;width:280px;max-width:calc(100% - 98px);margin:0;box-shadow:0 8px 28px #17202d1a}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>.bt-style-trigger{font-size:0;gap:0}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span{font-size:0;gap:0}:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span .icon{display:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span b{font-size:11px}
+}
+@media(max-width:760px){
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:120px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{flex-wrap:wrap;gap:6px;padding:8px 12px;align-content:center}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading{gap:12px;max-width:100%}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading h1{font-size:14px}:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading .bc-editor-status{font-size:10px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions{flex:0 0 100%;width:100%;justify-content:space-between;gap:8px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-action-preferences,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-action-commit{border:0;padding:0;margin:0;gap:6px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-action-views>.space-share-menu{display:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-action-label,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-label{display:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-compact{display:inline}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-language select{width:112px;max-width:112px;min-height:40px;height:40px;padding-inline:10px 22px;font-size:16px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-action{width:40px;min-width:40px;padding:10px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action{padding-inline:12px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:56px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{grid-template-columns:56px minmax(0,1fr)}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{padding:12px 4px;gap:8px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button{width:48px;min-height:56px;font-size:9px;gap:5px;padding:8px 2px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button .icon{width:18px;height:18px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{left:64px;right:8px;top:8px;bottom:84px;width:auto;max-width:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{inset:62px 8px 84px 64px;width:auto;max-width:none;padding-inline:14px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar{inset:12px 10px auto;gap:4px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .bd-selection-actions{max-width:53%;padding:2px;gap:0}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions .bd-selection-name{max-width:72px;font-size:10px;padding-inline:4px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions>button{min-width:25px;width:25px;padding:5px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options{padding:3px;gap:0}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button{font-size:0;gap:0;width:34px;min-width:34px;min-height:36px;padding:8px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>.bt-section-trigger{display:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock{bottom:28px;max-width:calc(100% - 12px)}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{gap:0;padding:4px;border-radius:11px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button{min-width:40px;width:40px;min-height:40px;padding:10px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-stack>span,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools i{display:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-zoom select{min-width:58px;width:58px;padding-inline:3px;font-size:11px;min-height:40px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-stage-hint{font-size:9px;max-width:calc(100vw - 76px)}
+}
+/* Panels retain their vertical reading flow on narrow screens. */
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layers{display:flex;flex-direction:column;align-items:stretch;gap:2px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layer-row{max-width:none;min-height:42px;flex:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layer-select{white-space:normal}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layers .icon{display:block;flex:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-insert{display:block;padding:14px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-insert>p{display:block;font-size:12px;line-height:1.7}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-insert>button{display:flex;align-items:center;gap:8px;width:100%;min-height:42px;margin-bottom:8px;padding:10px;font-size:12px;white-space:normal}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-insert>.bt-insert-heading,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bt-library>header{display:none}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library>header{padding:10px 14px}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library>header strong,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library>header .bl-close{display:none}
+:root[data-ui][data-color-mode=dark] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-canvas:#151a22;--studio-paper:#202732;--studio-line:#364152;--studio-soft:#2a3442;--studio-selected:#2a405f;--studio-ink:#c8dcfc;--studio-text:#e3eaf4;--studio-muted:#a8b5c8;--studio-tool-active:#45668f}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading h1{color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-status>span{color:var(--studio-muted)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-state[data-dirty=true]{color:var(--studio-ink)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-language select{background:var(--studio-paper);color:var(--studio-text)}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-action{background:transparent;color:var(--studio-text)}

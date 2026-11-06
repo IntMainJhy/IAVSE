@@ -3,6 +3,7 @@ import '@/app/blog-editor.css';
 import '@xyflow/react/dist/style.css';
 import '@/app/blog-canvas.css';
 import '@/app/blog-editor-controls.css';
+import '@/app/blog-editor-workspace.css';
 import Link from 'next/link';
 import {useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
 import {gsap} from 'gsap';
@@ -71,7 +72,7 @@ export function BlogEditor({owner:adminEntry=false}:{owner?:boolean}){
  const backLink=<Link className="bc-editor-back" href={access?.surface==='admin'&&access.platformUrl?access.platformUrl:'/'} aria-label={backLabel} title={backLabel}><Icon name="arrow"/><span>{backLabel}</span></Link>;
  if(!row)return <div className="blog-editor be-loading">{backLink}<h1>{say('编辑我的博客','Edit my blog')}</h1>{error?<><p role="alert">{error}</p>{signedOut?<Link className="space-btn primary" href={(owner?'/admin/login':'/login')+'?next='+encodeURIComponent(owner?'/admin/blog':'/workspace/blog')}>{say('登录后编辑','Sign in to edit')}</Link>:<button className="space-btn" onClick={()=>location.reload()}>{say('重新加载','Reload')}</button>}</>:<p role="status">{say('正在读取你的草稿…','Loading your draft…')}</p>}</div>;
  const pending=row.reviews.find((r:Data)=>r.kind==='board'&&r.status==='pending'),publicUrl='/blog/'+row.handle;
- return <div ref={editorRoot} className="blog-editor blog-canvas-editor"><header className="be-heading"><div className="bc-editor-heading">{backLink}<div><h1>{say('空间画布','Space canvas')}</h1><p className="bc-editor-status"><span>@{row.handle}</span><span className="bc-save-state" data-dirty={dirty}><Icon name={dirty?'file':'check'}/>{dirty?say('草稿未保存','Unsaved draft'):say('已保存','Saved')}</span></p></div></div><div className="be-primary-actions">
+ return <div ref={editorRoot} className="blog-editor blog-canvas-editor" data-editor-layout="canvas"><header className="be-heading"><div className="bc-editor-heading">{backLink}<div><h1>{say('空间画布','Space canvas')}</h1><p className="bc-editor-status"><span>@{row.handle}</span><span className="bc-save-state" data-dirty={dirty}><Icon name={dirty?'file':'check'}/>{dirty?say('草稿未保存','Unsaved draft'):say('已保存','Saved')}</span></p></div></div><div className="be-primary-actions">
   <div className="bc-action-group bc-action-preferences" role="group" aria-label={say('文字版本','Content language')}>
 
    <label className="bc-language"><span className="community-sr">{say('编辑文字版本','Content language')}</span><select aria-label={say('编辑文字版本','Content language')} value={language} disabled={busy||uploading} onChange={e=>setLanguage(e.target.value)}><option value="">{say('原文','Original')}</option><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option></select></label>
@@ -82,7 +83,7 @@ export function BlogEditor({owner:adminEntry=false}:{owner?:boolean}){
   </div>
   <div className="bc-action-group bc-action-commit" role="group" aria-label={say('保存与发布','Save and publish')}>
    <button type="button" className="space-btn bc-action bc-publish-toggle" aria-label={say('发布设置','Publish settings')} title={say('发布设置','Publish settings')} disabled={busy||uploading} aria-pressed={tab==='publish'} onClick={()=>setTab(tab==='publish'?'canvas':'publish')}><Icon name="upload"/><span className="bc-action-label">{say('发布设置','Publish settings')}</span></button>
-   <button type="button" className="space-btn primary bc-save-action" aria-busy={busy} title={say(owner?'保存并公开（⌘ / Ctrl S）':'保存草稿（⌘ / Ctrl S）',owner?'Save & publish (⌘ / Ctrl S)':'Save draft (⌘ / Ctrl S)')} disabled={busy||uploading||!dirty} onClick={()=>void run(async()=>{await save()})}>{busy?<span className="bc-save-spinner" aria-hidden="true"/>:<Icon name="check"/>}{busy?say('保存中…','Saving…'):say(owner?'保存并公开':'保存草稿',owner?'Save & publish':'Save draft')}</button>
+   <button type="button" className="space-btn primary bc-save-action" aria-busy={busy} aria-label={busy?say('保存中…','Saving…'):say(owner?'保存并公开':'保存草稿',owner?'Save & publish':'Save draft')} title={say(owner?'保存并公开（⌘ / Ctrl S）':'保存草稿（⌘ / Ctrl S）',owner?'Save & publish (⌘ / Ctrl S)':'Save draft (⌘ / Ctrl S)')} disabled={busy||uploading||!dirty} onClick={()=>void run(async()=>{await save()})}>{busy?<span className="bc-save-spinner" aria-hidden="true"/>:<Icon name="check"/>}<span className="bc-save-label">{busy?say('保存中…','Saving…'):say(owner?'保存并公开':'保存草稿',owner?'Save & publish':'Save draft')}</span><span className="bc-save-compact" aria-hidden="true">{busy?say('保存中…','Saving…'):say('保存','Save')}</span></button>
   </div>
  </div></header>
  <div className="be-feedback" aria-live="polite">{status&&<p role="status">{status}</p>}{error&&<p role="alert" className="space-error">{error}</p>}{language&&<span>{say('正在编辑翻译，图片与排列共用。','Editing a translation. Images and ordering are shared.')}</span>}</div>
