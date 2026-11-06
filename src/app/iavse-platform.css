@@ -35,7 +35,9 @@ html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home .home-story-copy h2{
  html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-stories-stage{display:block;position:sticky;top:0;height:100svh;isolation:isolate;perspective:1600px}
  html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story{position:absolute;inset:0;margin:auto;min-height:0;max-width:1440px;padding:105px clamp(40px,5vw,88px) 110px;gap:clamp(38px,5vw,88px);grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr);align-content:center;pointer-events:none}
  html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story[data-journey-active=true]{pointer-events:auto}
- html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story.is-reverse{grid-template-columns:minmax(0,.85fr) minmax(0,1.45fr)}
+ html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story.is-reverse{grid-template-columns:minmax(0,1.45fr) minmax(0,.85fr)}
+ html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story>.home-story-visual{grid-column:1;grid-row:1;align-self:center;transition:none}
+ html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story>.home-story-copy{grid-column:2;grid-row:1}
  html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story-visual{aspect-ratio:1.25;max-height:66svh;width:100%;border:1px solid #ffffffc9;box-shadow:0 36px 80px -36px #102e5f45,0 2px 8px #102e5f08}
  html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story-copy{position:relative;align-self:center}
  html[data-ui][data-color-mode] .v2-site.v2-landing .v2-home[data-journey-motion=cinema] .home-story[data-journey-active=true]>.home-story-copy{will-change:transform,opacity}

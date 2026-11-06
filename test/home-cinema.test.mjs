@@ -7,7 +7,7 @@ import {loadHomeScrollRefresh} from './home-refresh-fixture.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeCinema.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
- const effects=[],calls=[],media=[],frames=new Map(),triggers=[];let frameId=0,refreshes=0,resolveFont;
+ const effects=[],calls=[],media=[],frames=new Map(),triggers=[],scrollEndListeners=new Set();let frameId=0,refreshes=0,resolveFont;
  const heading=[{}, {}, {}],copy={},intro={},showcase={},stage={},image=new EventTarget();
  const hero={isConnected:true,querySelector:selector=>({'.v2-hero-copy':copy,'.v2-hero-intro':intro,'.v2-hero-showcase':showcase,'.v2-stage,.v2-hero-empty':stage}[selector]||null),querySelectorAll:selector=>selector==='img'?[image]:heading};
  const host={querySelector:selector=>selector==='.v2-hero-scene'?hero:null};
@@ -16,6 +16,9 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
   constructor(animation){this.animation=animation;this.calls=[];this.active=true;triggers.push(this);currentMedia?.contexts[0].data.push(this);}
   kill(revert){this.calls.push(revert);this.active=false;this.scrubKilled=true;if(revert!==false)this.reverted=true;this.animation.kill();}
   static refresh(){refreshes++;}
+  static isScrolling(){return false;}
+  static addEventListener(name,callback){assert.equal(name,'scrollEnd');scrollEndListeners.add(callback);}
+  static removeEventListener(name,callback){assert.equal(name,'scrollEnd');scrollEndListeners.delete(callback);}
  }
  const own=(target,from,to,intro=false)=>{
   calls.push({target,from,to,intro});
@@ -32,7 +35,7 @@ function mount({savedReduced=false,systemReduced=false,scrollY=0}={}){
   if(name==='gsap')return{gsap};if(name==='gsap/ScrollTrigger')return{ScrollTrigger};if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})};throw Error(name);
  }});
  const tree=exports.HomeCinema({locale:'en'}),cleanups=effects.map(fn=>fn());
- return{tree,heading,copy,intro,showcase,stage,hero,image,calls,media,triggers,frames,resolveFont:()=>resolveFont(),get refreshes(){return refreshes;},cleanup(){cleanups.forEach(fn=>fn?.());},flush(){const callbacks=[...frames.values()];frames.clear();callbacks.forEach(fn=>fn());}};
+ return{tree,heading,copy,intro,showcase,stage,hero,image,calls,media,triggers,frames,scrollEndListeners,resolveFont:()=>resolveFont(),get refreshes(){return refreshes;},cleanup(){cleanups.forEach(fn=>fn?.());},flush(){const callbacks=[...frames.values()];frames.clear();callbacks.forEach(fn=>fn());}};
 }
 
 test('the product enters on its own viewport crossing after the brand scene, not during initial load',()=>{
@@ -48,7 +51,7 @@ test('restored scroll positions skip the timed intro and reduced motion leaves n
 });
 test('late images and fonts coalesce layout refreshes and teardown cancels queued refresh work',async()=>{
  const f=mount();assert.equal(f.frames.size,1);f.image.dispatchEvent(new Event('load'));f.resolveFont();await Promise.resolve();assert.equal(f.frames.size,1);f.flush();assert.equal(f.refreshes,1);
- f.cleanup();assert.ok(f.media.every(m=>m.reverted));assert.equal(f.frames.size,0);f.image.dispatchEvent(new Event('load'));assert.equal(f.frames.size,0);
+ f.cleanup();assert.ok(f.media.every(m=>m.reverted));assert.equal(f.frames.size,0);assert.equal(f.scrollEndListeners.size,0);f.image.dispatchEvent(new Event('load'));assert.equal(f.frames.size,0);
  const late=mount();late.cleanup();late.resolveFont();await Promise.resolve();assert.equal(late.frames.size,0);assert.equal(late.refreshes,0);
 });
 

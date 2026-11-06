@@ -24,23 +24,38 @@ export function HomeMotion(){
     const desktop=!!match.conditions!.desktop;root.dataset.journeyMotion=desktop?'cinema':'flow';
     if(desktop&&track){
      const last=stories.length-1;
-     const timeline=gsap.timeline({defaults:{ease:'power2.inOut'},scrollTrigger:{id:'iavse-story-film',trigger:track,start:'top top',end:'bottom bottom',scrub:.65,invalidateOnRefresh:true,onUpdate:self=>{
+     const activate=(time:number)=>{
       if(root.dataset.journeyMotion!=='cinema')return;
-      const current=Math.min(last,Math.floor(self.progress*stories.length));
+      const current=Math.max(0,Math.min(last,Math.floor(time)));
       if(stories[current]?.dataset.journeyActive==='true')return;
       stories.forEach((s,i)=>{s.inert=i!==current;s.setAttribute('aria-hidden',String(i!==current));s.dataset.journeyActive=String(i===current);});
       links.forEach((a,i)=>{if(i===current)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
-     }}});
+     };
+     activate(0);
+     // The scrubbed playhead owns visual and interaction state together. Raw
+     // scroll progress can run ahead while the film is still catching up.
+     const timeline=gsap.timeline({defaults:{ease:'power1.inOut'},onUpdate:function(){activate(this.time());},scrollTrigger:{id:'iavse-story-film',trigger:track,start:'top top',end:'bottom bottom',scrub:.5}});
      stories.forEach((scene,i)=>{
       const art=scene.querySelector<HTMLElement>('.home-story-visual'),copy=scene.querySelector<HTMLElement>('.home-story-copy'),interactive=['editor','resources'].includes(scene.dataset.homeStory||'');
-      gsap.set(scene,{autoAlpha:i===0?1:0});scene.inert=i!==0;scene.setAttribute('aria-hidden',String(i!==0));scene.dataset.journeyActive=String(i===0);if(i===0)links[0]?.setAttribute('aria-current','step');
-      if(i>0)timeline.to(scene,{autoAlpha:1,duration:.22},i);
-      if(art&&i>0)timeline.fromTo(art,interactive?{opacity:0,clipPath:'inset(12% 0 12% 0 round 24px)'}:{opacity:0,y:100,z:-240,rotationY:scene.dataset.homeSide==='right'?-8:8,scale:.92,transformPerspective:1400},interactive?{opacity:1,clipPath:'inset(0% 0 0% 0 round 24px)',duration:.32,immediateRender:false}:{opacity:1,y:0,z:0,rotationY:0,scale:1,duration:.32,immediateRender:false},i);
-      if(copy&&i>0)timeline.fromTo(copy,{opacity:0,y:45},{opacity:1,y:0,duration:.28,immediateRender:false},i+.10);
-      if(i<last){if(art)timeline.to(art,interactive?{opacity:0,duration:.20}:{opacity:0,y:-65,z:100,scale:1.035,duration:.20},i+.80);if(copy)timeline.to(copy,{opacity:0,y:-24,duration:.16},i+.78);timeline.to(scene,{autoAlpha:0,duration:.12},i+.90);}
+      gsap.set(scene,{autoAlpha:i===0?1:0});
+      if(art)gsap.set(art,interactive?{opacity:i===0?1:0}:{opacity:i===0?1:0,y:0,z:0,scale:1});
+      if(copy)gsap.set(copy,{opacity:i===0?1:0,y:0});
+      // Adjacent chapters share the same anchor and handoff window. Their
+      // complementary fades never clear the stage between reading intervals.
+      if(i>0){
+       timeline.set(scene,{autoAlpha:1},i-.22);
+       if(art)timeline.fromTo(art,interactive?{opacity:0}:{opacity:0,y:24,z:-40,scale:.985},interactive?{opacity:1,duration:.44,immediateRender:false}:{opacity:1,y:0,z:0,scale:1,duration:.44,immediateRender:false},i-.22);
+       // Text changes hands at the boundary so two sentences never overlap.
+       if(copy)timeline.fromTo(copy,{opacity:0,y:12},{opacity:1,y:0,duration:.16,immediateRender:false},i);
+      }
+      if(i<last){
+       if(art)timeline.fromTo(art,interactive?{opacity:1}:{opacity:1,y:0,z:0,scale:1},interactive?{opacity:0,duration:.44,immediateRender:false}:{opacity:0,y:-20,z:24,scale:1.008,duration:.44,immediateRender:false},i+.78);
+       if(copy)timeline.fromTo(copy,{opacity:1,y:0},{opacity:0,y:-12,duration:.12,immediateRender:false},i+.88);
+       timeline.set(scene,{autoAlpha:0},i+1.22);
+      }
      });
-     const firstParts=stories[0]?.querySelectorAll('.home-story-visual,.home-story-copy');
-     if(firstParts?.length)gsap.fromTo(firstParts,{opacity:0,y:70},{opacity:1,y:0,ease:'power2.out',stagger:.08,scrollTrigger:{trigger:track,start:'top 88%',end:'top 8%',scrub:.5}});
+     // Keep the first panel in native view as the stage enters. A second
+     // entrance tween must not compete with chapter fades on the same nodes.
      timeline.to({hold:0},{hold:1,duration:.6},last+.4);
     }else{
      stories.forEach(scene=>{const parts=scene.querySelectorAll('.home-story-visual,.home-story-copy');gsap.fromTo(parts,{opacity:0,y:36},{opacity:1,y:0,duration:.9,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:scene,start:'top 88%',toggleActions:'play none none reverse'}});});

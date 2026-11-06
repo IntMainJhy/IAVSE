@@ -1,4 +1,4 @@
-import {ACESFilmicToneMapping,BackSide,Box3,BufferGeometry,Color,DataTexture,Float32BufferAttribute,FrontSide,Frustum,Group,LinearFilter,LinearSRGBColorSpace,MathUtils,Matrix4,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,NoToneMapping,PerspectiveCamera,PlaneGeometry,PMREMGenerator,Points,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,SphereGeometry,Vector2,Vector3,WebGLRenderer,WebGLRenderTarget} from 'three';
+import {ACESFilmicToneMapping,BackSide,Box3,BufferGeometry,Color,DataTexture,FrontSide,Frustum,Group,LinearFilter,LinearSRGBColorSpace,MathUtils,Matrix4,Mesh,MeshBasicMaterial,MeshPhysicalMaterial,NoToneMapping,PerspectiveCamera,PlaneGeometry,PMREMGenerator,REVISION,RGBAFormat,Scene,ShaderChunk,ShaderMaterial,SphereGeometry,Vector2,Vector3,WebGLRenderer,WebGLRenderTarget} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {homePixelBudget} from './home-render-budget';
 
@@ -118,12 +118,13 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   try{environment=pmrem.fromScene(studio,.025);scene.environment=environment.texture;for(const material of nativeMaterials){material.envMap=environment.texture;material.envMapIntensity=material.name.includes('PolishedRolledEdge')?1.65:.65;}}
   finally{skyGeometry.dispose();skyMaterial.dispose();panelGeometry.dispose();panelMaterials.forEach(value=>value.dispose());diffuser.dispose();pmrem.dispose();}
   const wallGeometry=new PlaneGeometry(80,52);extraGeometry.push(wallGeometry);
-  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#0b1936')},uBlueMiddle:{value:new Color('#204d91')},uBlueBottom:{value:new Color('#a0b8d5')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
+  const wallMaterial=new ShaderMaterial({depthWrite:false,toneMapped:false,uniforms:{uScroll:{value:0},uTime:{value:0},uBrightness:{value:1},uJourney:{value:0},uJourneyStage:{value:0},uJourneyTravel:{value:0},uJourneyAspect:{value:1},uJourneyPointer:{value:new Vector2()},uLensPosition:{value:new Vector2(.8,.5)},uBlueTop:{value:new Color('#0b1936')},uBlueMiddle:{value:new Color('#204d91')},uBlueBottom:{value:new Color('#a0b8d5')},uIce:{value:new Color('#f4f7fb')}},vertexShader:`
    varying vec4 vReceiverClip;
    void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);vReceiverClip=gl_Position;}
   `,fragmentShader:`
-   varying vec4 vReceiverClip;uniform float uScroll;uniform float uTime;uniform float uBrightness;uniform float uJourney;uniform vec2 uLensPosition;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
+   varying vec4 vReceiverClip;uniform float uScroll;uniform float uTime;uniform float uBrightness;uniform float uJourney;uniform float uJourneyStage;uniform float uJourneyTravel;uniform float uJourneyAspect;uniform vec2 uJourneyPointer;uniform vec2 uLensPosition;uniform vec3 uBlueTop;uniform vec3 uBlueMiddle;uniform vec3 uBlueBottom;uniform vec3 uIce;
    float softField(vec2 p,vec2 center,vec2 radius){vec2 d=(p-center)/radius;return exp(-dot(d,d));}
+   float daylightBand(float distance,float width){float d=distance/width;return exp(-d*d);}
    void main(){
     vec2 uv=vReceiverClip.xy/vReceiverClip.w*.5+.5;float documentY=max(0.,1.-uv.y+uScroll);
     vec3 color=mix(uBlueTop,uBlueMiddle,smoothstep(0.,.70,documentY));
@@ -134,57 +135,38 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     color=mix(color,uIce,clamp(silver*.38,0.,.54)*(1.-smoothstep(1.,1.2,documentY)));
     float blueDepth=softField(field,vec2(.58,.49),vec2(.56,.25));
     color=mix(color,uBlueMiddle,blueDepth*.20*(1.-smoothstep(.8,1.1,documentY)));
-    float galleryDepth=softField(uv,uLensPosition,vec2(.78,.60));
-    float galleryEdge=softField(uv,vec2(.08+sin(uTime*.10)*.08,.14),vec2(.40,.52));
-    vec3 gallery=mix(uIce,uBlueBottom,galleryDepth*.28+galleryEdge*.12);
-    color=mix(color,gallery,uJourney);
+    if(uJourney>.0001){
+     // Daylight is part of the same opaque receiver as the opening lens.
+     // Two wide refracted folds stay below the reading area, without particles,
+     // transparent overlays, extra geometry or a separate animation pass.
+     float phase=uJourneyStage*.58;
+     float drift=sin(uTime*.085+phase)*.012;
+     vec2 p=uv-uJourneyPointer*vec2(.010,.007);
+     float aspect=clamp(uJourneyAspect,.65,2.);
+     vec2 bend=vec2(p.x-.08,p.x-.94);
+     float arcA=.10+.20*bend.x*bend.x*aspect+sin(phase)*.024+drift;
+     float arcB=.035+.23*bend.y*bend.y*aspect+cos(phase*.8)*.018-drift*.6;
+     float distanceA=p.y-arcA-uJourneyTravel*.012;
+     float distanceB=p.y-arcB+uJourneyTravel*.008;
+     float shoulderA=daylightBand(distanceA+.052,.15);
+     float shoulderB=daylightBand(distanceB+.038,.11);
+     float silverA=daylightBand(distanceA-.025,.040);
+     float silverB=daylightBand(distanceB-.018,.032);
+     float perimeter=1.-smoothstep(.25,.64,p.y);
+     float readingZone=softField(p,vec2(.51,.59),vec2(.39,.28));
+     float relief=perimeter*(1.-readingZone*.82);
+     float galleryDepth=softField(uv,uLensPosition,vec2(.78,.60));
+     vec3 gallery=mix(uIce,uBlueBottom,galleryDepth*.18);
+     gallery=mix(gallery,uBlueBottom,(shoulderA*.16+shoulderB*.09)*relief);
+     gallery=mix(gallery,vec3(1.),(silverA*.23+silverB*.15)*relief);
+     color=mix(color,gallery,uJourney);
+    }
     color*=uBrightness;gl_FragColor=vec4(color,1.);
     #include <colorspace_fragment>
    }
   `});extraMaterials.push(wallMaterial);const wall=new Mesh(wallGeometry,wallMaterial);wall.name='iavse-refraction-receiver';wall.position.z=-7;wall.renderOrder=-10;scene.add(wall);
-  // Two interleaved optical veils share one GPU draw. Dense micro-points
-  // reveal the folds instead of isolated dots; no per-frame buffer uploads.
-  const fieldGeometry=new BufferGeometry(),fieldPositions:number[]=[],columns=mobile?42:72,rows=mobile?24:42,layers=2;
-  for(let layer=0;layer<layers;layer++)for(let row=0;row<rows;row++)for(let column=0;column<columns;column++){
-   fieldPositions.push(column/(columns-1)*2-1,row/(rows-1),layer);
-  }
-  fieldGeometry.setAttribute('position',new Float32BufferAttribute(fieldPositions,3));extraGeometry.push(fieldGeometry);
-  const fieldMaterial=new ShaderMaterial({transparent:true,depthWrite:false,toneMapped:false,uniforms:{uTime:opticalTime,uOpacity:{value:0},uDensity:{value:1},uStage:{value:0},uAspect:{value:1},uPointer:{value:new Vector2()},uTravel:{value:0}},vertexShader:`
-   uniform float uTime;uniform float uDensity;uniform float uStage;uniform float uAspect;uniform vec2 uPointer;uniform float uTravel;
-   varying float vDepth;varying float vHighlight;varying vec2 vScreen;
-   void main(){
-    float layer=position.z;float z=position.y*13.-7.-layer*1.4;float phase=uStage*.72+layer*1.8;
-    float wave=sin(position.x*3.5+z*.48+uTime*.28+phase)*(.70+layer*.12);
-    wave+=cos(z*.67-uTime*.19+phase)*.25;
-    vec3 p=vec3(position.x*(7.5+uAspect*1.7),-2.65+layer*1.75+wave,z);
-    // Each chapter changes the fold and the camera's relationship to its depth.
-    p.x+=sin(position.y*3.1+phase)*.48;
-    p.y+=sin(position.x*2.2-phase)*.24+uTravel*.12;
-    vec2 delta=p.xy-vec2(uPointer.x*5.,uPointer.y*3.);
-    float influence=exp(-dot(delta,delta)*.35);
-    p.xy+=delta*influence*.16;p.z+=influence*.65;
-    vec4 view=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*view;
-    vScreen=gl_Position.xy/gl_Position.w*.5+.5;
-    vDepth=1.-smoothstep(5.,17.,-view.z);
-    vHighlight=pow(.5+.5*sin(position.x*2.6+z*.66+phase-uTime*.42),3.);
-    gl_PointSize=clamp(20./max(1.,-view.z),1.25,3.)*uDensity;
-   }
-  `,fragmentShader:`
-   uniform float uOpacity;varying float vDepth;varying float vHighlight;varying vec2 vScreen;
-   void main(){
-    float radius=length(gl_PointCoord-.5);float circle=1.-smoothstep(.28,.5,radius);
-    // Keep the optical field at the bottom/perimeter, outside the reading area.
-    float perimeter=max(1.-smoothstep(.16,.50,vScreen.y),smoothstep(.42,.93,abs(vScreen.x-.5)*2.));
-    float alpha=circle*uOpacity*perimeter*(.42+vDepth*.32+vHighlight*.26);
-    if(alpha<.008)discard;
-    vec3 ink=mix(vec3(.08,.17,.33),vec3(.29,.48,.73),vHighlight);
-    gl_FragColor=vec4(ink,alpha);
-    #include <colorspace_fragment>
-   }
-  `});extraMaterials.push(fieldMaterial);
-  const field=new Points(fieldGeometry,fieldMaterial);field.name='iavse-journey-depth';field.frustumCulled=false;field.visible=false;scene.add(field);
   type JourneyKey=HomeJourneyChapter&{index:number;center:number;x:number;camera:number};
-  let chapters:JourneyKey[]=[],resourceDock=false,width=1,height=1,readingMode=false,heroDensity=1,readingDensity=1,qualityRatio=1,pixelBudget=1,appliedDensity=0;
+  let chapters:JourneyKey[]=[],resourceDock=false,width=1,height=1,readingMode=false,journeyLightVisible=false,motionReduced=false,heroDensity=1,readingDensity=1,qualityRatio=1,pixelBudget=1,appliedDensity=0;
   const setJourney=(input:HomeJourneyChapter[])=>{
    chapters=input.filter(chapter=>Number.isFinite(chapter.start)&&Number.isFinite(chapter.end)&&chapter.end>chapter.start).sort((a,b)=>a.start-b.start).map((chapter,index)=>({
     ...chapter,index,center:Math.max(.95,(chapter.start+chapter.end)*.5-.5),
@@ -197,11 +179,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
    const next=Math.min(density*qualityRatio,pixelBudget);
    if(!force&&Math.abs(appliedDensity-next)<.005)return;
    appliedDensity=next;renderer.setDrawingBufferSize(width,height,next);
-   fieldMaterial.uniforms.uDensity.value=Math.min(next,1.5);
    diagnostic('glassDensity',next.toFixed(2));
   };
   let lastDiagnosticTime=-1;
-  canvas.dataset.glassFilter=transmission?'linear-mip-r187':'three-default';canvas.dataset.glassModel=mobile?'mobile':'desktop';canvas.dataset.glassDesign='sunlit-meniscus-4';
+  canvas.dataset.glassFilter=transmission?'linear-mip-r187':'three-default';canvas.dataset.glassModel=mobile?'mobile':'desktop';canvas.dataset.glassDesign='sunlit-meniscus-4';canvas.dataset.journeyMaterial='refracted-daylight';
   signal.addEventListener('abort',dispose,{once:true});if(signal.aborted){dispose();throw new DOMException('Aborted','AbortError');}
   // Shader compilation is asynchronous where supported; semantic HTML never
   // waits for this promise. Warm the fade variant as well, then restore the
@@ -219,8 +200,7 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     const gl=renderer.getContext();
     for(const program of renderer.info.programs||[])if(!gl.getProgramParameter(program.program as WebGLProgram,gl.LINK_STATUS))throw new Error('Optical shader unavailable');
    };
-   field.visible=true;
-   try{await compile();}finally{field.visible=false;}
+   await compile();
    const initial=Array.from(nativeMaterials,material=>({material,transparent:material.transparent,depthWrite:material.depthWrite,opacity:material.opacity}));
    try{
     for(const {material} of initial){material.transparent=true;material.depthWrite=false;material.opacity=.92;material.needsUpdate=true;}
@@ -238,8 +218,8 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   if(signal.aborted||disposed){dispose();throw new DOMException('Aborted','AbortError');}
   onProgress?.(1);
   return{
-   get animated(){return !disposed&&(surface.visible||field.visible);},
-   get interactive(){return !disposed&&(surface.visible||field.visible);},
+   get animated(){return !disposed&&!motionReduced&&(surface.visible||journeyLightVisible);},
+   get interactive(){return !disposed&&!motionReduced&&(surface.visible||journeyLightVisible);},
    // The new optical field leaves semantic HTML undistorted; no extra sheets over content.
    setReveals(){},
    setJourney,
@@ -248,10 +228,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     pixelBudget=Math.sqrt(homePixelBudget(width)/(width*height));
     const displayDpr=typeof window!=='undefined'?Math.min(window.devicePixelRatio||1,2,pixelBudget):Math.max(1,dpr);qualityRatio=Math.min(1,dpr/Math.max(.1,displayDpr));
     heroDensity=Math.min(displayDpr,mobile?1.5:2);readingDensity=Math.min(displayDpr,mobile?1:1.25);
-    applyDensity(readingMode?readingDensity:heroDensity,true);fieldMaterial.uniforms.uAspect.value=width/height;camera.aspect=width/height;camera.updateProjectionMatrix();renderer.transmissionResolutionScale=readingMode?(mobile?.35:.5):(mobile?.5:.55);
+    applyDensity(readingMode?readingDensity:heroDensity,true);wallMaterial.uniforms.uJourneyAspect.value=width/height;camera.aspect=width/height;camera.updateProjectionMatrix();renderer.transmissionResolutionScale=readingMode?(mobile?.35:.5):(mobile?.5:.55);
    },
    render(x,y,dark,scroll,reduced,activeSeconds=0){
-    if(disposed)return;
+    if(disposed)return;motionReduced=reduced;
     const time=reduced?0:Math.max(0,Number.isFinite(activeSeconds)?activeSeconds:0),spatial=reduced?0:MathUtils.smootherstep(scroll,0,1.3),sweep=reduced?0:MathUtils.smootherstep(scroll,0,.95),intro=reduced?1:MathUtils.smootherstep(time,0,2.4),drift=reduced?0:Math.cos(time*.22)*.06;
     const first=chapters[0],last=chapters[chapters.length-1],journeyMix=!reduced&&first?MathUtils.smootherstep(scroll,.65,Math.max(1.15,first.center)):0;
     let a=first,b=first,linear=0,blend=0;
@@ -277,12 +257,12 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     if(journeyMix>.0001&&a&&b){
      const mix=(start:number,end:number)=>MathUtils.lerp(start,end,blend),positionX=mix(a.x,b.x);
      // The approved lens belongs only to the opening shot. Its exit reveals
-     // the spatial point sheet; it never becomes a giant object behind text.
+     // continuous refracted daylight; it never becomes an object behind text.
      resourceDock=chapter.id==='resources'&&journeyMix>.95;
      camera.position.x=positionX*.12*journeyMix;camera.position.y=travel*.08*journeyMix;
      camera.position.z=MathUtils.lerp(camera.position.z,mix(a.camera,b.camera)-travel*.45,journeyMix);
      camera.rotation.y=Math.sin(linear*Math.PI)*.025*Math.sign(b.x-a.x)*journeyMix;
-     fieldMaterial.uniforms.uStage.value=mix(a.index,b.index);
+     wallMaterial.uniforms.uJourneyStage.value=mix(a.index,b.index);
      diagnostic('journeyChapter',chapter.id);diagnostic('journeyPhase',MathUtils.clamp((scroll-chapter.start+.8)/Math.max(.01,chapter.end-chapter.start+1.3),0,1).toFixed(2));
     }else{surface.position.z=0;diagnostic('journeyChapter','hero');diagnostic('journeyPhase',MathUtils.clamp(scroll/1.3,0,1).toFixed(2));}
     const nextReadingMode=journeyMix>.35;
@@ -293,10 +273,9 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
     scene.environmentRotation.set(.08+journeyMix*.08,.15+sweep*.34+(reduced?0:Math.sin(time*.23+.4)*.38)+journeyMix*(scroll*.12),0);scene.environmentIntensity=1;
     wallMaterial.uniforms.uScroll.value=scroll;wallMaterial.uniforms.uTime.value=time;wallMaterial.uniforms.uBrightness.value=dark?.99:1;
     wallMaterial.uniforms.uJourney.value=journeyMix*journeyEnvelope;wallMaterial.uniforms.uLensPosition.value.set(.5+surface.position.x/(viewHeight*camera.aspect),.5+surface.position.y/viewHeight);
-    fieldMaterial.uniforms.uOpacity.value=journeyMix*journeyEnvelope*.72;
-    field.visible=fieldMaterial.uniforms.uOpacity.value>.001&&!reduced;
-    fieldMaterial.uniforms.uPointer.value.set(reduced?0:x,reduced?0:y);fieldMaterial.uniforms.uTravel.value=travel;
-    diagnostic('journeyFieldVisible',field.visible?'true':'false');diagnostic('journeyFieldCount',String(columns*rows*layers));
+    journeyLightVisible=wallMaterial.uniforms.uJourney.value>.001&&!reduced;
+    wallMaterial.uniforms.uJourneyPointer.value.set(reduced?0:x,reduced?0:y);wallMaterial.uniforms.uJourneyTravel.value=travel;
+    diagnostic('journeyLightVisible',journeyLightVisible?'true':'false');
     opticalTime.value=time;opticalFade.value=opacity;opticalLeft.value=width<768?-.35:-.73;
     opticalSunX.value=(width<768?.36:.78)+(scene.environmentRotation.y-.487)*(width<768?.30:.37);opticalSunDirection.value.copy(sunDirection).applyEuler(scene.environmentRotation).transformDirection(camera.matrixWorldInverse);
     for(const material of nativeMaterials){material.envMapRotation.copy(scene.environmentRotation);material.opacity=opacity;const alpha=opacity<.999;if(material.transparent!==alpha){material.transparent=alpha;material.depthWrite=!alpha;material.needsUpdate=true;}}
