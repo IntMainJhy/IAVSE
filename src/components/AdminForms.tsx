@@ -1,8 +1,5 @@
 'use client';
-import {ResumeImport} from './ResumeImport';
-import {EmailSettings} from './EmailSettings';
 import {DesktopDownloadsSettings} from './DesktopDownloadsSettings';
-import {ContentLanguageTabs,type ContentLanguage} from './ContentLanguageTabs';
 import {useLocale} from './LocaleProvider';
 import {useState,useEffect,useLayoutEffect,useRef} from 'react';
 import {api,post,bytes} from '@/lib/client';
@@ -19,69 +16,27 @@ function useDraft(key:string,initial:Any){
  useEffect(()=>{if(!ready)return;try{if(dirty)sessionStorage.setItem(key,JSON.stringify({base:base.current,data}));else sessionStorage.removeItem(key);}catch{}},[data,dirty,key,ready]);
  return{data,setData,ready,dirty,committed:()=>{base.current=JSON.stringify(data);try{sessionStorage.removeItem(key);}catch{}}};
 }
-export function ProfileForm({value,notify,refresh}:{value:Any,max:number,notify:(s:string)=>void,refresh:()=>void}){
- const {t:tr}=useLocale();
- const {data,setData,ready,committed}=useDraft('site-profile-draft',value);
- const [busy,setBusy]=useState(false),[uploading,setUploading]=useState(false),[contentLanguage,setContentLanguage]=useState<ContentLanguage>('original');
- const skillValues=(profile:Any)=>Object.fromEntries(['original','en','zh','ja'].map(language=>[language,(language==='original'?profile.skills:profile.translations?.[language]?.skills||[]).join(', ')]));
- const [skills,setSkills]=useState<Record<string,string>>(()=>skillValues(value));
- useLayoutEffect(()=>{if(ready)setSkills(skillValues(data));},[ready]);
- const patch=(v:Any)=>setData((d:Any)=>({...d,...v}));
- const translated=contentLanguage!=='original',textData=translated?data.translations?.[contentLanguage]||{}:data;
- const textPatch=(v:Any)=>setData((d:Any)=>!translated?{...d,...v}:{...d,translations:{...d.translations,[contentLanguage]:{...d.translations?.[contentLanguage],...v}}});
- function exp(index:number,v:Any){
-  if(!translated){patch({experiences:data.experiences.map((x:Any,i:number)=>i===index?{...x,...v}:x)});return;}
-  const id=data.experiences[index].id;
-  textPatch({experiences:{...textData.experiences,[id]:{...textData.experiences?.[id],...v}}});
- }
- return <><div className="page-head"><div><h1>{tr('个人资料与经历')}</h1><p>{tr('公开页面共用此资料。')}</p></div></div>
- <ResumeImport resume={data.resume} disabled={busy} onBusy={setUploading} onChange={resume=>patch({resume})} onImport={profile=>{const next={...data,...profile,name:profile.name||data.name,email:profile.email||data.email,github:profile.github||data.github,alias:data.alias,translations:{}};setData(next);setSkills(skillValues(next));setContentLanguage('original')}}/>
- <ContentLanguageTabs value={contentLanguage} onChange={setContentLanguage} disabled={busy||uploading}/>
- <form inert={busy} className="form-grid" onSubmit={async e=>{e.preventDefault();if(uploading)return;setBusy(true);try{await post('/api/admin/config',{key:'profile',value:data});committed();notify('个人资料与经历已更新');refresh()}catch(e:any){notify(e.message)}finally{setBusy(false)}}}>
- <div><section className="panel form-section"><h3>{tr('个人资料')}</h3>
- <div className="field-row"><Field label={tr('姓名')} name="name" value={textData.name||''} onChange={v=>textPatch({name:v})} required={!translated}/><Field label={tr('别名')} name="alias" value={textData.alias||''} onChange={v=>textPatch({alias:v})}/></div>
- <FileChoice label={tr('头像')} mode="image" onBusy={setUploading} value={data.avatarId} onChange={v=>patch({avatarId:v})} max={20000000}/>
- <Field label={tr('个人介绍')} name="intro" area value={textData.intro||''} onChange={v=>textPatch({intro:v})}/>
- <Field label={tr('技能与方向')} name="skills" value={skills[contentLanguage]||''} onChange={v=>{setSkills(previous=>({...previous,[contentLanguage]:v}));textPatch({skills:v.split(/[,，]/).map(x=>x.trim()).filter(Boolean)})}} help={tr('多个技能用逗号分隔。')}/>
- <div className="field-row"><Field label={tr('公开邮箱')} type="email" name="email" value={data.email} onChange={v=>patch({email:v})}/><Field label={tr('GitHub / 个人代码主页')} type="url" name="github" value={data.github} onChange={v=>patch({github:v})}/></div>
- <h3>{tr('其他社交链接')}</h3>{data.socials.map((x:Any,i:number)=><div className="field-row" key={i}><Field label={tr('名称')} name={'social-name-'+i} value={x.label} onChange={v=>patch({socials:data.socials.map((s:Any,j:number)=>j===i?{...s,label:v}:s)})}/><div><Field label={tr('网址')} name={'social-url-'+i} type="url" value={x.url} onChange={v=>patch({socials:data.socials.map((s:Any,j:number)=>j===i?{...s,url:v}:s)})}/><button className="link-button" type="button" onClick={()=>patch({socials:data.socials.filter((_:Any,j:number)=>i!==j)})}>{tr('移除')}</button></div></div>)}
- <button type="button" className="btn small" onClick={()=>patch({socials:[...data.socials,{label:'',url:''}]})}>{tr('添加社交链接')}</button></section>
- <section className="panel form-section"><div className="section-title"><h3 style={{margin:0}}>{tr('经历时间线')}</h3>{!translated&&<button type="button" className="btn small" onClick={()=>patch({experiences:[...data.experiences,{id:crypto.randomUUID(),title:'',type:'实践经历',start:'',end:'',description:'',visible:true,order:data.experiences.length}]})}><Icon name="plus"/>{tr(' 添加经历')}</button>}</div>
- {translated&&!data.experiences.length&&<p className="small-text">{tr('请先在原文中添加经历，再填写对应翻译。')}</p>}
- {data.experiences.map((original:Any,i:number)=>{const x=translated?textData.experiences?.[original.id]||{}:original;return <div className="experience-editor" key={original.id}>
- {translated&&<p className="small-text content-language-note">{tr('原文：{0}',[original.title])}</p>}
- <Field name={'exp-title-'+i} label={tr('经历标题')} value={x.title||''} onChange={v=>exp(i,{title:v})} required={!translated}/>
- <div className="field-row"><Field name={'exp-type-'+i} label={tr('经历类型')} value={x.type||''} onChange={v=>exp(i,{type:v})}/><Field name={'exp-order-'+i} label={tr('排序')} type="number" value={original.order} onChange={v=>patch({experiences:data.experiences.map((item:Any,j:number)=>j===i?{...item,order:Number(v)}:item)})}/></div>
- <div className="field-row experience-dates"><Field name={'exp-start-'+i} label={tr('开始时间')} type="month" value={original.start} onChange={v=>patch({experiences:data.experiences.map((item:Any,j:number)=>j===i?{...item,start:v}:item)})}/><Field name={'exp-end-'+i} label={tr('结束时间（空为至今）')} type="month" value={original.end} onChange={v=>patch({experiences:data.experiences.map((item:Any,j:number)=>j===i?{...item,end:v}:item)})}/></div>
- <Field name={'exp-desc-'+i} label={tr('经历说明')} area value={x.description||''} onChange={v=>exp(i,{description:v})}/>
- <label className="checkbox"><input type="checkbox" checked={original.visible} onChange={e=>patch({experiences:data.experiences.map((item:Any,j:number)=>j===i?{...item,visible:e.target.checked}:item)})}/>{tr('对外展示')}</label>
- {!translated&&<button className="link-button" type="button" onClick={()=>patch({experiences:data.experiences.filter((_:Any,j:number)=>j!==i)})}>{tr('移除此经历')}</button>}</div>})}</section></div>
- <aside className="panel form-sticky"><p className="small-text">{tr('保存后公开生效；空白联系方式不展示。')}</p><button className="btn primary wide" disabled={busy||uploading}>{busy?tr('正在保存…'):tr('保存更新')}</button><a className="btn wide" href="/about" target="_blank" rel="noopener noreferrer">{tr('查看关于页')}</a></aside></form></>;
-}
 export function SettingsForm({value,notify,refresh}:{value:Any,max:number,notify:(s:string)=>void,refresh:()=>void}){
  const {t:tr}=useLocale(),{data,setData,committed,dirty}=useDraft('site-settings-draft',value);
- const [section,setSection]=useState('page'),[busy,setBusy]=useState(false),[uploadFlags,setUploadFlags]=useState<Record<string,boolean>>({});
+ const [busy,setBusy]=useState(false),[uploadFlags,setUploadFlags]=useState<Record<string,boolean>>({});
  const uploading=Object.values(uploadFlags).some(Boolean),patch=(v:Any)=>setData((d:Any)=>({...d,...v}));
- const groups=[['page','页面与分享','image'],['downloads','桌面应用下载','download'],['security','登录与安全','lock']];
  return <div className="admin-settings">
-  <div className="page-head"><div><h1>{tr('网站设置')}</h1><p>{tr('管理公开页面、下载入口和登录安全。')}</p></div>{section!=='security'&&<button type="submit" form="admin-site-settings" className="btn primary" disabled={busy||uploading||!dirty}>{busy?tr('正在保存…'):tr('保存设置')}</button>}</div>
-  <div className="admin-settings-layout"><nav className="admin-settings-nav" aria-label={tr('设置分组')}>{groups.map(([key,label,icon])=><button type="button" key={key} aria-pressed={section===key} aria-controls={'admin-settings-'+key} onClick={()=>setSection(key)}><Icon name={icon}/><span>{tr(label)}</span></button>)}</nav>
+  <div className="page-head"><div><h1>{tr('网站设置')}</h1><p>{tr('公开页面设置与管理员安全。')}</p></div></div>
    <div className="admin-settings-content">
     <form id="admin-site-settings" inert={busy} onSubmit={async e=>{e.preventDefault();if(busy||uploading)return;setBusy(true);try{await post('/api/admin/config',{key:'site',value:{...value,shareImageId:data.shareImageId,desktopDownloads:data.desktopDownloads,resumeId:data.resumeId}});committed();notify('网站设置已保存');refresh()}catch(e:any){notify(e.message)}finally{setBusy(false)}}}>
-     <div id="admin-settings-page" hidden={section!=='page'}>
+     <div id="admin-settings-page">
       <section className="panel form-section"><h2>{tr('默认分享封面')}</h2><p className="small-text">{tr('用于未单独设置封面的公开页面。')}</p><FileChoice label={tr('默认分享封面')} mode="image" onBusy={v=>setUploadFlags(f=>({...f,cover:v}))} value={data.shareImageId} onChange={v=>patch({shareImageId:v})} max={20000000}/></section>
       <section className="panel form-section"><h2>{tr('附加简历 PDF')}</h2><p className="small-text">{tr('简历由公开资料自动生成，也可附加独立 PDF。')}</p><FileChoice label={tr('附加简历（可选）')} mode="pdf" onBusy={v=>setUploadFlags(f=>({...f,resume:v}))} value={data.resumeId} onChange={v=>patch({resumeId:v})} max={50000000}/><a className="text-link" href="/career" target="_blank" rel="noopener noreferrer">{tr('查看求职展示')}<Icon name="arrow"/></a></section>
      </div>
-     <div id="admin-settings-downloads" hidden={section!=='downloads'}><DesktopDownloadsSettings value={data.desktopDownloads} onChange={desktopDownloads=>patch({desktopDownloads})}/></div>
-     <footer className="admin-settings-save" hidden={section==='security'} aria-live="polite"><span data-dirty={dirty}>{tr(uploading?'正在上传…':dirty?'有未保存的修改':'所有更改已保存')}</span><button className="btn primary" disabled={busy||uploading||!dirty}>{busy?tr('正在保存…'):tr('保存设置')}</button></footer>
+     <div id="admin-settings-downloads"><DesktopDownloadsSettings value={data.desktopDownloads} onChange={desktopDownloads=>patch({desktopDownloads})}/></div>
+     <footer className="admin-settings-save" aria-live="polite"><span data-dirty={dirty}>{tr(uploading?'正在上传…':dirty?'有未保存的修改':'所有更改已保存')}</span><button className="btn primary" disabled={busy||uploading||!dirty}>{busy?tr('正在保存…'):tr('保存设置')}</button></footer>
     </form>
-    <div id="admin-settings-security" hidden={section!=='security'}><EmailSettings/><section className="panel form-section"><h2>{tr('修改管理员密码')}</h2><form inert={busy} onSubmit={async e=>{e.preventDefault();if(busy||uploading)return;const f=new FormData(e.currentTarget);if(f.get('password')!==f.get('confirm')){notify('两次输入的新密码不一致');return}setBusy(true);try{await post('/api/auth/password',{current:f.get('current'),password:f.get('password')});notify('密码已修改，请重新登录。');window.dispatchEvent(new Event('session-expired'))}catch(e:any){notify(e.message)}finally{setBusy(false)}}}>
+    <div id="admin-settings-security"><section className="panel form-section"><h2>{tr('修改管理员密码')}</h2><form inert={busy} onSubmit={async e=>{e.preventDefault();if(busy||uploading)return;const f=new FormData(e.currentTarget);if(f.get('password')!==f.get('confirm')){notify('两次输入的新密码不一致');return}setBusy(true);try{await post('/api/auth/password',{current:f.get('current'),password:f.get('password')});notify('密码已修改，请重新登录。');window.dispatchEvent(new Event('session-expired'))}catch(e:any){notify(e.message)}finally{setBusy(false)}}}>
      <div className="field"><label htmlFor="current">{tr('当前密码')}</label><input id="current" name="current" type="password" autoComplete="current-password" required/></div>
      <div className="field-row"><div className="field"><label htmlFor="new-password">{tr('新密码')}</label><input id="new-password" name="password" type="password" minLength={12} maxLength={256} autoComplete="new-password" required/></div><div className="field"><label htmlFor="confirm">{tr('确认新密码')}</label><input id="confirm" name="confirm" type="password" minLength={12} maxLength={256} autoComplete="new-password" required/></div></div>
      <button className="btn" disabled={busy||uploading}>{tr('修改密码并退出旧会话')}</button>
     </form></section></div>
    </div>
-  </div>
  </div>;
 }
 export function TaxonomyForm({value,notify,refresh}:{value:Any,notify:(s:string)=>void,refresh:()=>void}){const {t:tr}=useLocale();const{data,setData,committed}=useDraft('site-taxonomy-draft',{categories:value.categories.join('\n'),tags:value.tags.join('\n')}),[busy,setBusy]=useState(false);return <><div className="page-head"><div><h1>{tr("分类与标签")}</h1><p>{tr("每行一个；删除前须清除内容引用。")}</p></div></div><form inert={busy} onSubmit={async e=>{e.preventDefault();setBusy(true);try{await post('/api/admin/config',{key:'taxonomy',value:{categories:data.categories.split('\n'),tags:data.tags.split('\n')}});committed();notify("分类与标签已更新");refresh()}catch(e:any){notify(e.message)}finally{setBusy(false)}}}><div className="split"><section className="panel"><Field name="categories" label={tr("分类")} area value={data.categories} onChange={v=>setData((d:Any)=>({...d,categories:v}))}/></section><section className="panel"><Field name="tags" label={tr("标签")} area value={data.tags} onChange={v=>setData((d:Any)=>({...d,tags:v}))}/></section></div><button className="btn primary" style={{marginTop:20}} disabled={busy}>{tr("保存分类与标签")}</button></form></>}

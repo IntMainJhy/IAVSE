@@ -75,11 +75,11 @@ test('embedded community management retains controls without nesting a second da
  const html=members({embedded:true});assert.ok(html.includes('admin-community-nav'));assert.ok(html.includes('member-action-member'));
  for(const shell of ['class="admin-shell"','class="admin-side"','class="admin-main"','返回内容后台'])assert.ok(!html.includes(shell),shell+' belongs to the parent control center');
 });
-test('settings group panels retain the real form controls and separate password submission from site configuration',()=>{
+test('settings uses one continuous form instead of category cards and keeps password submission separate',()=>{
  const {SettingsForm}=load('AdminForms');const html=renderToStaticMarkup(element(SettingsForm,{value:{desktopDownloads:{},shareImageId:'',resumeId:''},max:10000000,notify(){},refresh(){}}));
  for(const id of ['admin-settings-page','admin-settings-downloads','admin-settings-security'])assert.ok(html.includes('id="'+id+'"'));
- assert.match(html,/id="admin-settings-downloads" hidden=""/);assert.match(html,/id="admin-settings-security" hidden=""/);
- assert.ok(html.includes('form="admin-site-settings"'));assert.ok(html.indexOf('</form>')<html.indexOf('name="current"'),'the password form is outside the public-site form');
+ assert.doesNotMatch(html,/hidden=|设置分组|admin-settings-nav|email-settings/);
+ assert.ok(html.includes('id="admin-site-settings"'));assert.ok(html.indexOf('</form>')<html.indexOf('name="current"'),'the password form is outside the public-site form');
 });
 
 test('reverting a settings draft removes its cached edit instead of restoring it again on refresh',()=>{

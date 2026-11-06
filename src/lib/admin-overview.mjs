@@ -41,6 +41,7 @@ export function adminOverview(req){
    timezone:'Asia/Shanghai'
   },
   pending:{
+   catalog:count("SELECT COUNT(*) n FROM catalog_entries WHERE pending IS NOT NULL"),
    posts:count("SELECT COUNT(*) n FROM community_revisions WHERE status IN ('pending','reviewing')"),
    comments:count("SELECT COUNT(*) n FROM community_comments WHERE status='pending'"),
    spaces:count("SELECT COUNT(*) n FROM space_reviews WHERE status='pending'"),

@@ -22,7 +22,7 @@ function AccountIdentity({user}:{user:Doc|null}){const {t:tr}=useLocale();
  const handle=user?.handle||user?.username;
  const role=user?.siteOwner?'站长':user?({owner:'站长',reviewer:'社区审核员',member:'社区成员'} as Doc)[user.role]||'社区成员':'';
  const profile=user?communityProfileDestination(user):'/login?next=/community';
- const settings=user?.id==='owner'?'/admin/profile':'/workspace/account';
+ const settings='/workspace/account';
  useEffect(()=>{
   const outside=(event:PointerEvent)=>{if(menu.current&&!menu.current.contains(event.target as Node))menu.current.open=false};
   const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'&&menu.current?.open){menu.current.open=false;menu.current.querySelector('summary')?.focus()}};

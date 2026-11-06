@@ -3270,5 +3270,14 @@
   "用于未单独设置封面的公开页面。": "Used on public pages without their own cover.",
   "所有更改已保存": "All changes saved",
   "打开后台导航": "Open admin navigation",
-  "收起导航": "Close navigation"
+  "收起导航": "Close navigation",
+  "注册用户": "Registered users",
+  "今日访客": "Visitors today",
+  "今日浏览": "Views today",
+  "累计浏览": "Total page views",
+  "待办与治理": "Review and moderation",
+  "审核队列": "Review queue",
+  "站点内容": "Site content",
+  "公开页面设置与管理员安全。": "Public page settings and administrator security.",
+  "前往博客编辑器更换头像": "Change avatar in the blog editor"
 }

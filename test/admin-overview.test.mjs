@@ -17,6 +17,7 @@ test('management overview uses real counts, excludes trash and stays owner-only'
   d.prepare('INSERT INTO content(id,type,slug,status,draft,updated,deleted) VALUES(?,?,?,?,?,?,?)').run('draft','articles','draft','draft',JSON.stringify({title:'Private draft'}),at,null);
   d.prepare('INSERT INTO content(id,type,slug,status,draft,updated,deleted) VALUES(?,?,?,?,?,?,?)').run('trash','articles','trash','draft',JSON.stringify({title:'Deleted draft'}),at,at);
   for(const [id,status] of [['test-member','active'],['closed-member','closed']])d.prepare('INSERT INTO community_users(id,username,password,nickname,status,created,updated) VALUES(?,?,?,?,?,?,?)').run(id,id,'!not-a-password!',id,status,at,at);
+  d.prepare("INSERT INTO catalog_entries(id,author,kind,pending,created,updated) VALUES('pending-catalog','test-member','docs','{}',?,?)").run(at,at);
   d.prepare("INSERT INTO community_posts(id,author,created,updated) VALUES('post','test-member',?,?)").run(at,at);
   d.prepare("INSERT INTO community_revisions(id,post,number,data,status,created) VALUES('revision','post',1,'{}','pending',?)").run(at);
   d.prepare("INSERT INTO community_comments(id,post,author,body,status,created) VALUES('comment','post','test-member','Pending comment','pending',?)").run(at);
@@ -33,7 +34,7 @@ test('management overview uses real counts, excludes trash and stays owner-only'
   assert.equal(data.audience.trafficToday.pv,1);assert.equal(data.audience.trafficToday.uv,1);
   assert.equal(data.audience.publicSpaces,0);assert.equal(data.audience.publishedArticles,0);
   assert.equal(data.audience.timezone,'Asia/Shanghai');
-  assert.equal(data.pending.posts,1);assert.equal(data.pending.comments,1);
+  assert.equal(data.pending.catalog,1);assert.equal(data.pending.posts,1);assert.equal(data.pending.comments,1);
   assert.equal(data.pending.spaces,1);assert.equal(data.pending.reports,1);assert.equal(data.totals.spaces,1);
   assert.equal(data.recent.length,1);assert.equal(data.recent[0].title,'Private draft');
   assert.equal(data.services.community,'local');assert.deepEqual(data.services.downloads,{macos:false,windows:false});
