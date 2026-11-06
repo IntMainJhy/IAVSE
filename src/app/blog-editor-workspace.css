@@ -1,5 +1,5 @@
 /* Canvas-first operating layout, informed by Stitch. Authored page styles stay in the artboard. */
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:64px;--studio-canvas:#f4f5f7;--studio-line:#e1e4e9;--studio-soft:#f2f4f7;--studio-selected:#e9eef9;--studio-ink:#283b63;background:var(--studio-canvas);font-family:Inter,"PingFang SC",sans-serif;--studio-paper:#fff;--studio-text:#29364a;--studio-muted:#657184;--studio-tool-active:#273c61;--studio-tool-on:#fff}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:64px;--studio-canvas:#edf2f8;--studio-line:#e1e4e9;--studio-soft:#f2f4f7;--studio-selected:#e9eef9;--studio-ink:#283b63;background:var(--studio-ambient);font-family:Inter,"PingFang SC",sans-serif;--studio-paper:#fff;--studio-text:#29364a;--studio-muted:#657184;--studio-tool-active:#273c61;--studio-tool-on:#fff}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{height:var(--editor-topbar);min-height:var(--editor-topbar);flex-basis:var(--editor-topbar);padding:10px 20px;gap:20px;flex-wrap:nowrap;align-items:center;background:var(--studio-paper);border-bottom:1px solid var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading{gap:18px;flex-shrink:1}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-editor-heading h1{font:600 16px/1.35 Inter,"PingFang SC",sans-serif;letter-spacing:-.02em;margin:0 0 3px}
@@ -12,7 +12,7 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action{padding-inline:16px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .icon{display:block;flex:none;width:17px;height:17px;opacity:1;visibility:visible;min-width:17px;max-width:none;flex-basis:17px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-compact{display:none}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer{--bd-sidebar-width:72px;--bd-properties-width:304px;display:grid;grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:var(--studio-canvas);font:400 13px/1.5 Inter,"PingFang SC",sans-serif;overflow:hidden}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer{--bd-sidebar-width:72px;--bd-properties-width:304px;display:grid;grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:transparent;font:400 13px/1.5 Inter,"PingFang SC",sans-serif;overflow:hidden}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:336px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-properties=true]{grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr) var(--bd-properties-width)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:minmax(0,1fr);position:relative;min-width:0;overflow:hidden;background:transparent;border:0;z-index:8}
@@ -21,7 +21,7 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button .icon{display:block;width:20px;height:20px}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button:hover{background:var(--studio-soft);color:#283b63}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs button[aria-pressed=true]{background:var(--studio-selected);color:var(--studio-ink);font-weight:600}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{grid-column:2;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;margin:12px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:12px;box-shadow:0 2px 8px #17202d05}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{grid-column:2;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;margin:12px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:16px;box-shadow:var(--studio-glass-shadow)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel[hidden]{display:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none;padding:12px 12px 12px 16px;min-height:58px;border-bottom:1px solid var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-heading h2{margin:0;font:600 13px/1.5 Inter,"PingFang SC",sans-serif;letter-spacing:0;color:var(--studio-text)}
@@ -35,12 +35,12 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sticker-library{overflow:hidden}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sidebar-footer{display:block;flex:none;padding-block:12px;border-top:1px solid var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-sidebar-footer>button{min-height:38px;font-size:12px;border-radius:8px}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage{grid-column:2;grid-row:1;background:var(--studio-canvas);border:0;isolation:isolate}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage .react-flow__background{background:var(--studio-canvas)!important}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage{grid-column:2;grid-row:1;background:transparent;border:0;isolation:isolate}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage .react-flow__background{background:transparent!important}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar{position:absolute;z-index:5;inset:16px 20px auto;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:40px;height:auto;padding:0;background:transparent;border:0;pointer-events:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span{gap:8px;font-size:11px;color:var(--studio-muted);pointer-events:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span b{font-weight:500;font-variant-numeric:tabular-nums;color:var(--studio-text)}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-stage-options,.bd-selection-actions){pointer-events:auto;flex:none;display:flex;align-items:center;gap:2px;margin:0;padding:4px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:11px;box-shadow:0 3px 12px #17202d09}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-stage-options,.bd-selection-actions){pointer-events:auto;flex:none;display:flex;align-items:center;gap:2px;margin:0;padding:4px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:14px;box-shadow:var(--studio-glass-shadow)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .bd-selection-actions{flex:0 1 auto;min-width:0;max-width:50%}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions>button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border:0;border-radius:7px;background:transparent;padding:7px 9px;font:500 11px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-muted);white-space:nowrap}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button:hover,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions>button:hover{background:var(--studio-soft)}
@@ -48,7 +48,7 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions .bd-selection-name{max-width:140px;min-width:0;overflow:hidden;text-overflow:ellipsis;display:block}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .icon{display:block;width:16px;height:16px;flex:none}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock{position:absolute;z-index:5;left:50%;right:auto;bottom:30px;transform:translateX(-50%);height:auto;width:max-content;max-width:calc(100% - 32px);padding:0;gap:0;background:transparent;border:0;pointer-events:none}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{position:static;display:flex;align-items:center;justify-content:center;gap:4px;max-width:100%;padding:6px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:13px;box-shadow:0 6px 24px #17202d17;transform:none;pointer-events:auto}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{position:static;display:flex;align-items:center;justify-content:center;gap:4px;max-width:100%;padding:6px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:18px;box-shadow:var(--studio-glass-shadow);transform:none;pointer-events:auto}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:auto;min-width:38px;min-height:38px;padding:9px;border:0;border-radius:8px;background:transparent;color:var(--studio-muted)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button:hover:not(:disabled){background:var(--studio-soft);color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{background:var(--studio-tool-active);color:#fff}
@@ -56,17 +56,17 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools i{display:block;flex:none;height:22px;width:1px;margin:0 5px;background:var(--studio-line)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-zoom select{min-width:70px;min-height:38px;margin:0;border:0;border-radius:7px;background:var(--studio-paper);padding:7px;font:500 12px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-stage-hint{position:absolute;top:calc(100% + 8px);left:50%;bottom:auto;transform:translateX(-50%);max-width:calc(100vw - 110px);margin:0;font:400 10px/1.4 Inter,"PingFang SC",sans-serif;color:var(--studio-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:relative;grid-column:3;grid-row:1;inset:auto;width:auto;max-width:none;min-width:0;min-height:0;margin:12px 12px 12px 0;padding:0 16px 24px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:12px;box-shadow:0 2px 8px #17202d05;overflow:auto;z-index:7}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:relative;grid-column:3;grid-row:1;inset:auto;width:auto;max-width:none;min-width:0;min-height:0;margin:12px 12px 12px 0;padding:0 16px 24px;background:var(--studio-paper);border:1px solid var(--studio-line);border-radius:16px;box-shadow:var(--studio-glass-shadow);overflow:auto;z-index:7}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header{min-height:58px;padding:12px 0;margin-bottom:16px;top:0}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header h2{font-size:13px;color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-canvas-loading{inset:0;background:var(--studio-canvas)}
-:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-publish-panel{top:calc(var(--editor-topbar) + 12px);right:12px;bottom:12px;width:360px;max-width:calc(100% - 24px);padding:20px;border:1px solid var(--studio-line);border-radius:12px;box-shadow:0 8px 32px #17202d1a}
+:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-publish-panel{top:calc(var(--editor-topbar) + 12px);right:12px;bottom:12px;width:360px;max-width:calc(100% - 24px);padding:20px;border:1px solid var(--studio-line);border-radius:16px;box-shadow:var(--studio-glass-shadow)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-artboard{box-shadow:0 2px 5px #17202d0d,0 14px 40px -12px #17202d1f}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-artboard>span{font:500 11px/1.5 Inter,"PingFang SC",sans-serif;letter-spacing:.01em;color:var(--studio-muted)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs,.bd-library-panel,.bd-stage-options,.bd-selection-actions,.bd-floating-tools) button:focus-visible{outline:2px solid #2458df;outline-offset:2px}
 @media(max-width:1179px){
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-properties=true]{grid-template-columns:var(--bd-sidebar-width) minmax(0,1fr)}
- :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:absolute;grid-column:auto;grid-row:auto;inset:64px 14px 90px auto;width:292px;max-width:calc(100% - var(--bd-sidebar-width) - 28px);margin:0;box-shadow:0 8px 28px #17202d1a}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties{position:absolute;grid-column:auto;grid-row:auto;inset:64px 14px 90px auto;width:292px;max-width:calc(100% - var(--bd-sidebar-width) - 28px);margin:0;box-shadow:var(--studio-glass-shadow)}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar{inset-inline:14px}:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar .bd-selection-actions{max-width:46%}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-selection-actions .bd-selection-name{max-width:95px}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button{padding-inline:7px}
@@ -74,7 +74,7 @@
 @media(max-width:900px){
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-designer[data-library-open=true]{--bd-sidebar-width:72px}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar{overflow:visible;position:static}
- :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{position:absolute;z-index:9;left:84px;top:12px;bottom:88px;width:280px;max-width:calc(100% - 98px);margin:0;box-shadow:0 8px 28px #17202d1a}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel{position:absolute;grid-column:1/-1;grid-row:1;z-index:9;left:84px;top:12px;bottom:88px;width:280px;max-width:calc(100% - 98px);margin:0;box-shadow:var(--studio-glass-shadow)}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>.bt-style-trigger{font-size:0;gap:0}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span{font-size:0;gap:0}:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span .icon{display:none}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-bar>span b{font-size:11px}
@@ -107,7 +107,7 @@
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>button{font-size:0;gap:0;width:34px;min-width:34px;min-height:36px;padding:8px}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-stage-options>.bt-section-trigger{display:none}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock{bottom:28px;max-width:calc(100% - 12px)}
- :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{gap:0;padding:4px;border-radius:11px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{gap:0;padding:4px;border-radius:16px}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button{min-width:40px;width:40px;min-height:40px;padding:10px}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-stack>span,:root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools i{display:none}
  :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools .bd-zoom select{min-width:58px;width:58px;padding-inline:3px;font-size:11px;min-height:40px}
@@ -131,3 +131,65 @@
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-state[data-dirty=true]{color:var(--studio-ink)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-language select{background:var(--studio-paper);color:var(--studio-text)}
 :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-action{background:transparent;color:var(--studio-text)}
+
+/* Liquid glass belongs to the chrome. Static light and bounded blur keep the artboard immediate. */
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{
+ --studio-ambient:radial-gradient(ellipse at 2% 14%,#b8d5f57a,transparent 43%),radial-gradient(ellipse at 95% 88%,#b7dcd075,transparent 45%),radial-gradient(ellipse at 91% 0%,#f0d9c652,transparent 38%),var(--studio-canvas);
+ --studio-glass:#f6faff;--studio-glass-rim:#ffffffcf;--studio-glass-blur:18px;
+ --studio-reflection:linear-gradient(135deg,#ffffffb3,#ffffff14 42%,#ffffff0a 64%,#c9e1ff55);
+ --studio-glass-shadow:inset 0 1px 1px #ffffffeb,inset 0 -1px 1px #658bbf21,0 12px 32px -14px #42629242,0 2px 8px #2136500d,0 0 24px #8bc6ff1a;
+ --studio-field:#ffffff80;--studio-line:#758fa32e;--studio-soft:#dce8f280;--studio-selected:#c9dff199;--studio-focus:#2b61a8;
+}
+html:root[data-ui][data-color-mode=dark] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{
+ --studio-ambient:radial-gradient(ellipse at 0% 12%,#2a517a75,transparent 46%),radial-gradient(ellipse at 95% 88%,#28564e66,transparent 45%),radial-gradient(ellipse at 92% 0%,#72573d33,transparent 38%),var(--studio-canvas);
+ --studio-glass:#242f3e;--studio-glass-rim:#c7e0ff30;--studio-reflection:linear-gradient(135deg,#d9edff17,#ffffff03 42%,#ffffff00 64%,#6bafe812);
+ --studio-glass-shadow:inset 0 1px 1px #e6f4ff30,inset 0 -1px 1px #00000033,0 14px 36px -14px #00000080,0 0 24px #79b9ff12;
+ --studio-field:#151e2d8c;--studio-line:#b3cceb2e;--studio-soft:#96c3f21a;--studio-selected:#79b5ef29;--studio-focus:#9dc8ff;
+}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:#f4f9ffc2}
+ html:root[data-ui][data-color-mode=dark] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:#202c3acf}
+}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.be-heading,.bd-sidebar-tabs,.bd-library-panel,.bd-properties,.bc-publish-panel,.bd-stage-options,.bd-selection-actions,.bd-floating-tools){
+ --site-text:var(--studio-text);--site-body:var(--studio-text);--site-muted:var(--studio-muted);--site-surface:var(--studio-glass);--site-raised:var(--studio-soft);--site-line:var(--studio-line);
+ color:var(--studio-text);background:var(--studio-reflection),var(--studio-glass);border-color:var(--studio-glass-rim);box-shadow:var(--studio-glass-shadow);
+ -webkit-backdrop-filter:blur(var(--studio-glass-blur)) saturate(135%);backdrop-filter:blur(var(--studio-glass-blur)) saturate(135%);
+}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{box-shadow:inset 0 1px 0 #ffffff66,0 4px 24px -14px #42629229}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{align-self:start;align-items:center;height:max-content;margin:12px 4px;padding:8px 3px;border:1px solid var(--studio-glass-rim);border-radius:16px}
+/* Avoid nested backdrop layers: only the outer panel blurs the canvas. */
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel :is(.bd-sticker-library,.bt-library,.bd-insert,.bd-sidebar-footer){background:transparent}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-library-heading,.bd-page-title,.bd-sidebar-footer,.bl-filters){border-color:var(--studio-line)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-properties>header{background:var(--studio-glass)!important;box-shadow:0 -12px 0 var(--studio-glass);border-color:var(--studio-line)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-floating-tools .bd-zoom select,.bc-language select){background:transparent;color:var(--studio-text)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-properties,.bc-publish-panel) :is(input:not([type=checkbox]),select,textarea,.bd-option,.bd-position-actions button,.bd-layer-actions button){background:var(--studio-field);border-color:var(--studio-line);color:var(--studio-text)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-properties,.bc-publish-panel) :is(label,h3){color:var(--studio-text)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-properties-note,.bl-family h3,.bl-family h3 span,.bd-layer-select,.bd-sidebar-footer summary){color:var(--studio-muted)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-layer-row[data-active=true],.bd-stage-options>button[aria-pressed=true],.bd-sidebar-tabs button[aria-pressed=true]){background:var(--studio-selected);box-shadow:inset 0 1px 0 #ffffff55;color:var(--studio-ink)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs button,.bd-floating-tools button,.bd-stage-options>button):hover:not(:disabled){background:var(--studio-soft);color:var(--studio-text)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-floating-tools button[aria-pressed=true]{background:linear-gradient(155deg,#6388b9,#2a496f);color:#fff;box-shadow:inset 0 1px 1px #ffffff66,0 3px 9px #345e8c29}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-action-group :is(.bc-action,.blog-share-trigger):not(.primary){border-color:var(--studio-line);background:var(--studio-field);color:var(--studio-text)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:not(:disabled){background:linear-gradient(155deg,#4a73a6,#254e7b);color:#fff;box-shadow:inset 0 1px 1px #ffffff66,0 4px 12px #2e588a29}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:not(:disabled):hover{background:linear-gradient(155deg,#5682b7,#305e8f)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action:disabled{background:var(--studio-soft);color:var(--studio-muted);box-shadow:inset 0 1px 0 #ffffff40}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-sidebar-tabs,.bd-library-panel,.bd-properties,.bd-stage-options,.bd-selection-actions,.bd-floating-tools,.be-heading) :is(button,select,input,textarea,a):focus-visible{outline:2px solid var(--studio-focus);outline-offset:2px}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bd-library-panel,.bd-properties,.bc-publish-panel){scrollbar-width:thin;scrollbar-color:var(--studio-muted) transparent}
+/* Legacy dark chrome uses important fills for these two surfaces. */
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-footer>button{background:var(--studio-field)!important;color:var(--studio-text);border-color:var(--studio-line)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-footer>button:hover{background:var(--studio-soft)!important}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layer-row{background:transparent;border-color:transparent}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layer-row button{background:transparent;color:var(--studio-muted)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-library-panel .bd-layer-row:is(:hover,[data-active=true]){background:var(--studio-selected)}
+html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] :is(.bc-language,.bd-properties,.bd-zoom) select option{background:var(--studio-paper);color:var(--studio-text)}
+@media(min-width:761px) and (max-width:900px){
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--editor-topbar:112px}
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-heading{flex-wrap:wrap;gap:8px;padding:8px 16px;align-content:center}
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions{flex-basis:100%;width:100%;justify-content:flex-end}
+}
+@media(max-width:760px){
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass-blur:10px}
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-sidebar-tabs{margin:8px 3px;padding:6px 0}
+}
+@media(prefers-reduced-transparency:reduce){
+ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:var(--studio-paper);--studio-reflection:none;--studio-glass-blur:0px;--studio-field:var(--studio-paper)}
+}
