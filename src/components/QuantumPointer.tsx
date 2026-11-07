@@ -82,7 +82,7 @@ export function QuantumPointer(){
   const wake=()=>{if(!document.hidden&&!navigating&&!frame)frame=requestAnimationFrame(draw);};
   // Interactive workspaces and product previews provide their own feedback.
   const editing=(target:EventTarget|null)=>{
-   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],[data-blog-product-film]'))return false;
+   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],[data-blog-product-film],[data-home-product]'))return false;
    if(frame||waveFrame)clear();return true;
   };
   const move=(event:PointerEvent)=>{

@@ -28,7 +28,7 @@ function resources(locale:string):ResourceGroup[]{
   {id:'tools',title:zh?'网站与工具':ja?'サイトとツール':'Tools',word:zh?'让发现触手可及':ja?'発見を手元に':'Keep a discovery close',icon:'folder',entries:[
    {title:zh?'资源目录':ja?'リソース一覧':'Resource directory',description:zh?'继续发现网站与实用工具。':ja?'サイトと便利なツールを探す。':'Explore websites and useful tools in one place.',href:'/resources?type=resources',icon:'search'},
    {title:zh?'法律咨询':ja?'法律相談':'Legal consultation',description:zh?'了解律师背景、业务范围与咨询方式。':ja?'弁護士の経歴、相談分野、連絡方法。':'Read the lawyer’s background, practice and contact options.',href:'/resources/legal-consultation',icon:'shield'},
-   {title:zh?'桌面客户端':ja?'デスクトップアプリ':'Desktop apps',description:zh?'查看 macOS 与 Windows 客户端。':ja?'macOS と Windows のアプリを確認する。':'Find the macOS and Windows desktop apps.',href:'/downloads',icon:'monitor'}
+   {title:zh?'社区发现':ja?'コミュニティの発見':'Community discoveries',description:zh?'探索创作者分享的作品与发现。':ja?'クリエイターが共有する作品や発見を探す。':'Explore work and discoveries shared by creators.',href:'/community',icon:'user'}
   ]}
  ];
 }
@@ -38,10 +38,10 @@ export function HomeResourceSculpture({label,pauseLabel,playLabel}:SculptureProp
  const {locale}=useLocale(),groups=resources(locale),host=useRef<HTMLDivElement>(null),plane=useRef<HTMLDivElement>(null);
  const chapterActive=useHomeChapterActive(host);
  const [category,setCategory]=useState(0),[selected,setSelected]=useState(0),[visible,setVisible]=useState(false),[hidden,setHidden]=useState(false),[reduced,setReduced]=useState(true),[printing,setPrinting]=useState(false),[paused,setPaused]=useState(false),[globalPaused,setGlobalPaused]=useState(false);
- const pointer=useRef({x:0,y:0,targetX:0,targetY:0,frame:0});
+ const pointer=useRef({x:0,y:0,targetX:0,targetY:0,frame:0,latest:null as {element:HTMLDivElement;clientX:number;clientY:number}|null});
  const group=groups[category],entry=group.entries[selected],quiet=reduced||printing;
  const running=chapterActive&&visible&&!hidden&&!quiet&&!paused&&!globalPaused;
- const resetPointer=()=>{const state=pointer.current;cancelAnimationFrame(state.frame);state.frame=0;state.x=state.y=state.targetX=state.targetY=0;plane.current?.style.setProperty('--atlas-x','0');plane.current?.style.setProperty('--atlas-y','0');};
+ const resetPointer=()=>{const state=pointer.current;cancelAnimationFrame(state.frame);state.frame=0;state.latest=null;state.x=state.y=state.targetX=state.targetY=0;plane.current?.style.setProperty('--atlas-x','0');plane.current?.style.setProperty('--atlas-y','0');};
  useEffect(()=>{
   const element=host.current;if(!element)return;
   const preference=matchMedia('(prefers-reduced-motion: reduce)');let systemReduced=preference.matches,manualReduced=false;
@@ -55,9 +55,14 @@ export function HomeResourceSculpture({label,pauseLabel,playLabel}:SculptureProp
  useEffect(()=>{if(!running)resetPointer();},[running]);
  const move=(event:PointerEvent<HTMLDivElement>)=>{
   if(!running||event.pointerType==='touch')return;
-  const rect=event.currentTarget.getBoundingClientRect(),state=pointer.current;state.targetX=Math.max(-1,Math.min(1,(event.clientX-rect.left)/rect.width*2-1));state.targetY=Math.max(-1,Math.min(1,(event.clientY-rect.top)/rect.height*2-1));
+  const state=pointer.current;state.latest={element:event.currentTarget,clientX:event.clientX,clientY:event.clientY};
   if(state.frame)return;
-  const draw=()=>{state.frame=0;state.x+=(state.targetX-state.x)*.16;state.y+=(state.targetY-state.y)*.16;plane.current?.style.setProperty('--atlas-x',state.x.toFixed(3));plane.current?.style.setProperty('--atlas-y',state.y.toFixed(3));if(Math.abs(state.x-state.targetX)+Math.abs(state.y-state.targetY)>.002)state.frame=requestAnimationFrame(draw);};
+  const draw=()=>{
+   state.frame=0;
+   // Only fresh pointer input needs bounds; settling frames reuse the target.
+   if(state.latest){const {element,clientX,clientY}=state.latest;state.latest=null;const rect=element.getBoundingClientRect();state.targetX=Math.max(-1,Math.min(1,(clientX-rect.left)/rect.width*2-1));state.targetY=Math.max(-1,Math.min(1,(clientY-rect.top)/rect.height*2-1));}
+   state.x+=(state.targetX-state.x)*.16;state.y+=(state.targetY-state.y)*.16;plane.current?.style.setProperty('--atlas-x',state.x.toFixed(3));plane.current?.style.setProperty('--atlas-y',state.y.toFixed(3));if(Math.abs(state.x-state.targetX)+Math.abs(state.y-state.targetY)>.002)state.frame=requestAnimationFrame(draw);
+  };
   state.frame=requestAnimationFrame(draw);
  };
  const groupLabel=locale==='zh'?'选择资源类型':locale==='ja'?'リソースの種類':'Choose a resource type',open=locale==='zh'?'打开资源':locale==='ja'?'リソースを開く':'Open resource';

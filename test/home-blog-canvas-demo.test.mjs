@@ -6,7 +6,7 @@ import ts from 'typescript';
 import {moveDesignNode} from '../src/lib/blog-design.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/HomeBlogCanvasDemo.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-function fixture({locale='zh',width=588,height=408,creator}={}){
+function fixture({locale='zh',width=588,height=408,creator,pageScroll}={}){
  const hooks=[],observers=[],exports={},scrolls=[],host={clientWidth:width,clientHeight:height,scrollTop:0,scrollTo(options){this.scrollTop=options.top;scrolls.push(options.top);}};
  const FeedAvatar=()=>null;
  let cursor=0,dirty=true,pending=[],tree;
@@ -33,7 +33,7 @@ function fixture({locale='zh',width=588,height=408,creator}={}){
  }});
  const nodes=(type,root=tree)=>!root||typeof root!=='object'?[]:[...(root.type===type?[root]:[]),...([root.props?.children].flat(Infinity).flatMap(child=>child?nodes(type,child):[]))];
  const text=root=>root===null||root===undefined||typeof root==='boolean'?'':typeof root==='string'||typeof root==='number'?String(root):Array.isArray(root)?root.map(text).join(''):text(root.props?.children);
- function flush(){for(let count=0;dirty&&count<12;count++){dirty=false;cursor=0;pending=[];tree=exports.HomeBlogCanvasDemo({locale,creator});for(const node of nodes('div'))if(node.props.ref)node.props.ref.current=host;for(const effect of pending)effect();}assert.equal(dirty,false,'state and effects settle');}
+ function flush(){for(let count=0;dirty&&count<12;count++){dirty=false;cursor=0;pending=[];tree=exports.HomeBlogCanvasDemo({locale,creator,pageScroll});for(const node of nodes('div'))if(node.props.ref)node.props.ref.current=host;for(const effect of pending)effect();}assert.equal(dirty,false,'state and effects settle');}
  const node=id=>nodes('div').find(item=>item.props['data-node-id']===id);
  const button=label=>{const buttons=nodes('button'),match=buttons.find(item=>item.props.className==='hbd-add'&&text(item)===label)||buttons.find(item=>item.props['aria-label']===label)||buttons.find(item=>text(item)===label);assert.ok(match,'button exists: '+label);return match;};
  const invoke=(element,event,...args)=>{assert.equal(typeof element?.props[event],'function',event+' exists');element.props[event](...args);flush();};
@@ -128,4 +128,61 @@ test('selecting a layer scrolls the long public page and new text is limited to 
 test('real public project layers still use scaled drag coordinates and stay within their full page bounds',()=>{
  const s=fixture({creator:publishedCreator,width:308,height:218}),height=s.nodes('div').find(n=>n.props.className==='hbd-paper').props.style.height,projectHeight=s.node('project-0').props.style.height;
  s.invoke(s.node('project-0'),'onPointerDown',s.pointer(100,100));s.invoke(s.node('project-0'),'onPointerMove',s.pointer(100000,100000));assert.equal(s.node('project-0').props.style.transform,`translate(84px,${height-projectHeight}px)`);s.invoke(s.node('project-0'),'onPointerCancel',s.pointer(100000,100000));assert.equal(s.button('撤销').props.disabled,true);s.unmount();
+});
+
+test('homepage page scrolling preserves layer navigation, scaled drag, local editing and undo',()=>{
+ const before=structuredClone(publishedCreator),s=fixture({creator:publishedCreator,width:308,height:218,pageScroll:true});
+ assert.equal(s.tree.props['data-page-scroll'],true);
+ const stage=s.nodes('div').find(n=>n.props.className==='hbd-stage');assert.equal(stage.props.onWheel,undefined,'wheel input is not intercepted by the demo');
+ s.click('CheckMe');const original=s.node('project-0').props.style.transform,projectY=Number(original.match(/,(\d+)px/)[1]);
+ assert.equal(s.host.scrollTop,Math.max(0,projectY*.5-65),'layer controls can still reveal content programmatically');assert.equal(s.node('project-0').props['data-selected'],true);
+ s.invoke(s.node('project-0'),'onPointerDown',s.pointer(100,100));s.invoke(s.node('project-0'),'onPointerMove',s.pointer(110,105));
+ assert.equal(s.node('project-0').props.style.transform,`translate(62px,${projectY+10}px)`);s.invoke(s.node('project-0'),'onPointerUp',s.pointer(110,105));
+ assert.equal(s.target.pointer,null);s.click('撤销');assert.equal(s.node('project-0').props.style.transform,original);assert.equal(s.button('撤销').props.disabled,true);
+ s.edit('本地项目标题\n本地项目说明');s.click('预览');assert.match(s.text(s.node('project-0')),/本地项目标题/);assert.match(s.text(s.nodes('footer')[0]),/演示改动仅在此处生效/);
+ s.click('编辑');s.click('撤销');assert.equal(s.field().props.value,'CheckMe\n'+publishedCreator.projects[0].description);assert.deepEqual(publishedCreator,before);
+ s.click('恢复初始画布');assert.equal(s.host.scrollTop,0);assert.equal(s.node('title').props['data-selected'],true);s.unmount();
+});
+
+test('only the standalone public demo invites internal scrolling and homepage hints describe editing in every language',()=>{
+ for(const [locale,hint,scroll,preview] of [
+  ['zh','选择文字或图层，试着修改内容与颜色','滚动画布浏览主页，选择文字试着编辑','预览'],
+  ['en','Select text or a layer to edit content and color','Scroll the page. Select text to edit.','Preview'],
+  ['ja','文字やレイヤーを選んで、内容と色を変更','スクロールして、文字を選択して編集。','プレビュー']
+ ]){
+  const standalone=fixture({locale,creator:publishedCreator});assert.equal(standalone.tree.props['data-page-scroll'],false);assert.ok(standalone.text(standalone.nodes('footer')[0]).includes(scroll));standalone.unmount();
+  const home=fixture({locale,creator:publishedCreator,pageScroll:true});assert.ok(home.text(home.nodes('footer')[0]).includes(hint));assert.ok(!home.text(home.nodes('footer')[0]).includes(scroll));
+  home.click(preview);assert.ok(!home.text(home.nodes('footer')[0]).includes(scroll));home.unmount();
+ }
+});
+
+test('homepage touch gestures select text without capturing page scroll while standalone touch dragging is retained',()=>{
+ const home=fixture({pageScroll:true,width:308,height:218}),start=home.node('note').props.style.transform,event=home.pointer(100,100,{pointerType:'touch'});
+ home.invoke(home.node('note'),'onPointerDown',event);assert.equal(home.node('note').props['data-selected'],true);assert.equal(home.target.focused,true);assert.equal(home.target.pointer,undefined);assert.equal(event.prevented,undefined);
+ home.invoke(home.node('note'),'onPointerMove',home.pointer(110,105,{pointerType:'touch'}));home.invoke(home.node('note'),'onPointerUp',home.pointer(110,105,{pointerType:'touch'}));assert.equal(home.node('note').props.style.transform,start);assert.equal(home.button('撤销').props.disabled,true);
+ home.edit('触屏也可修改');assert.equal(home.node('note').props.children[0],'触屏也可修改');home.click('撤销');assert.equal(home.node('note').props.children[0],'保持好奇。');home.unmount();
+ const standalone=fixture({width:308,height:218}),touch=standalone.pointer(100,100,{pointerType:'touch'});standalone.invoke(standalone.node('note'),'onPointerDown',touch);assert.equal(touch.prevented,true);assert.equal(standalone.target.pointer,4);
+ standalone.invoke(standalone.node('note'),'onPointerMove',standalone.pointer(110,105,{pointerType:'touch'}));standalone.invoke(standalone.node('note'),'onPointerUp',standalone.pointer(110,105,{pointerType:'touch'}));assert.equal(standalone.node('note').props.style.transform,'translate(366px,316px)');standalone.click('撤销');assert.equal(standalone.node('note').props.style.transform,start);standalone.unmount();
+});
+
+test('the mobile homepage layer selector stays outside the canvas and can return to the title without losing edits or undo',()=>{
+ const s=fixture({creator:publishedCreator,pageScroll:true,width:308,height:218}),select=()=>s.nodes('select')[0];
+ const label=s.nodes('label').find(node=>node.props.className==='hbd-mobile-layer-nav'),workspace=s.nodes('div').find(node=>node.props.className==='hbd-workspace');
+ assert.ok(label,'mobile layers have a persistent label outside the scrolling stage');assert.equal(s.nodes('select',label)[0],select());assert.equal(s.nodes('select',workspace).length,0);assert.equal(select().props['aria-label'],'图层');assert.equal(select().props.value,'title');
+ assert.deepEqual(s.nodes('option',select()).map(node=>node.props.value),s.nodes('div').filter(node=>node.props['data-node-id']).map(node=>node.props['data-node-id']));
+ const change=id=>s.invoke(select(),'onChange',{target:{value:id}}),scrollFor=id=>Math.max(0,Number(s.node(id).props.style.transform.match(/,(\d+)px/)[1])*.5-65);
+ s.invoke(s.field(),'onFocus');s.invoke(s.field(),'onChange',{target:{value:'手机端临时主页标题'}});
+ change('skills');assert.equal(select().props.value,'skills');assert.equal(s.node('skills').props['data-selected'],true);assert.equal(s.field().props.value,publishedCreator.skills.join(' · '));assert.equal(s.host.scrollTop,scrollFor('skills'));
+ assert.equal(s.node('title').props.children[0],'手机端临时主页标题');assert.equal(s.button('撤销').props.disabled,false,'changing layers finishes the active text edit as one undo operation');
+ change('title');assert.equal(s.host.scrollTop,scrollFor('title'));assert.equal(s.field().props.value,'手机端临时主页标题');
+ s.click('预览');assert.ok(select(),'layer navigation remains usable during preview');assert.equal(s.nodes('input').length,0);
+ change('project-0');assert.equal(select().props.value,'project-0');assert.equal(s.host.scrollTop,scrollFor('project-0'));assert.equal(s.tree.props['data-preview'],true);
+ change('title');assert.equal(s.host.scrollTop,scrollFor('title'));assert.equal(s.node('title').props.children[0],'手机端临时主页标题');assert.equal(s.tree.props['data-preview'],true);
+ s.click('编辑');assert.equal(s.node('title').props['data-selected'],true);s.click('撤销');assert.equal(s.field().props.value,publishedCreator.name);assert.equal(select().props.value,'title');assert.equal(s.button('撤销').props.disabled,true);s.unmount();
+});
+
+test('mobile layer navigation is limited to page-scroll demos with a real public creator',()=>{
+ for(const options of [{creator:publishedCreator},{creator:publishedCreator,pageScroll:false},{pageScroll:true},{creator:null,pageScroll:true}]){
+  const s=fixture({...options,width:308,height:218});assert.equal(s.nodes('select').length,0);assert.ok(!s.nodes('label').some(node=>node.props.className==='hbd-mobile-layer-nav'));s.click('预览');assert.equal(s.nodes('select').length,0);s.unmount();
+ }
 });

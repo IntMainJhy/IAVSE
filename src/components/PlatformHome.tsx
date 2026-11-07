@@ -2,7 +2,6 @@ import Link from 'next/link';
 import {serverI18n} from '@/lib/server-i18n';
 import {defaultBlogSpace} from '@/lib/spaces.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
-import {FeedAvatar} from './FeedAvatar';
 import {Icon} from './Icons';
 import {V2Atmosphere} from './V2Atmosphere';
 import {CreatorStage,type CreatorStageData,type CreatorProject} from './CreatorStage';
@@ -12,7 +11,9 @@ import {HomeBlogCanvasDemo,type HomeBlogDemoExample} from './HomeBlogCanvasDemo'
 import {HomeResourceSculpture} from './HomeResourceSculpture';
 import {HomeStoryVideo} from './HomeStoryVideo';
 import {CreatorVoices} from './CreatorVoices';
+import {homeProductCopy} from '@/lib/home-product-copy.mjs';
 import '@/app/home-showcase.css';
+import '@/app/home-product-showcase.css';
 export async function PlatformHome({req}:{req:Request}){
  const {t,locale}=await serverI18n();
  let featured:any=null;try{featured=defaultBlogSpace(req)}catch{}
@@ -28,32 +29,34 @@ export async function PlatformHome({req}:{req:Request}){
   creator={name:profile.name,handle:featured.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',skills:profile.skills||[],url,projects:resumeProjects.length?resumeProjects:documents};
   demoCreator={...creator,name:featured.layout.blog?.title||creator.name,description:featured.layout.blog?.description||profile.alias||'@'+featured.handle,skills:creator.skills.slice(0,6),projects:creator.projects.slice(0,2)};
  }
- const copy=locale==='zh'?{blogTitle:'你的故事，一个主页。',blogText:'介绍自己，也让作品与经历被看见。',skillTitle:'下一次创作，从这里开始。',skillText:'找到合适的 Skill，让想法更快落地。',resourceTitle:'好工具，随手找。',resourceText:'文档、网站与工具，随手探索。',editorTitle:'你的页面，随你编排。',editorText:'拖动、改字，马上看到新的样子。',editorAction:'创建我的空间',pause:'暂停演示',play:'继续演示',blogAlt:'IAVSE 真实博客主页',skillAlt:'IAVSE Skill 目录的实际操作演示',resourceAlt:'可交互的资源图谱',community:'去社区分享'}:locale==='ja'?{blogTitle:'あなたの物語を、ひとつのページに。',blogText:'自己紹介も、作品も、これまでの経験も。',skillTitle:'次の制作は、ここから。',skillText:'アイデアを形にする Skill を見つける。',resourceTitle:'見つけたものを、手元に。',resourceText:'ドキュメント、サイト、ツールを探索。',editorTitle:'あなたのページを、思いのままに。',editorText:'ドラッグして、言葉を変えて。その場で確かめる。',editorAction:'自分のスペースを作る',pause:'デモを停止',play:'デモを再生',blogAlt:'IAVSE の実際のブログページ',skillAlt:'IAVSE Skill ディレクトリの操作デモ',resourceAlt:'インタラクティブなリソースマップ',community:'コミュニティで共有'}:{blogTitle:'Your story. Your own page.',blogText:'Bring your work and experience into view.',skillTitle:'Start your next creation here.',skillText:'Find the right Skill to take an idea further.',resourceTitle:'Keep a good discovery close.',resourceText:'Explore documents, websites, and useful tools.',editorTitle:'Your page. Arranged your way.',editorText:'Drag, rewrite, and see your changes take shape.',editorAction:'Create my space',pause:'Pause demo',play:'Resume demo',blogAlt:'An actual IAVSE blog page',skillAlt:'A recording of the actual IAVSE Skill directory',resourceAlt:'Interactive resource atlas',community:'Share with the community'};
+ const copy=homeProductCopy(locale);
  return <div className="v2-home">
-  <HomeMotion/>
+  <HomeMotion layoutKey={locale}/>
   <div className="v2-home-atmosphere" aria-hidden="true"><V2Atmosphere/></div>
   <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}</div><HomeCinema locale={locale}/></div>
    <div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
   </section>
-  <div className="home-stories">
-   <section className="home-story" data-home-story="blog" data-home-side="left" id="creators" aria-labelledby="v2-creators-title">
-    <Link className="home-story-visual home-story-screenshot" href={creator?.url||'/blogs'} aria-label={t('查看博客空间')}><img src="/media/home/blog-space-current.webp" alt={copy.blogAlt} width={1200} height={900} loading="lazy"/></Link>
-    <div className="home-story-copy"><h2 id="v2-creators-title">{copy.blogTitle}</h2><p>{copy.blogText}</p>{creator&&<div className="home-story-person"><FeedAvatar name={creator.name} avatarId={creator.avatarId}/><span>{creator.name}<small>@{creator.handle}</small></span></div>}<Link className="home-story-link" href="/blogs">{t('发现更多主页')}<Icon name="arrow"/></Link></div>
+  <div className="home-stories home-product" data-home-product>
+   <section className="home-story home-story-primary" data-home-story="blog" data-home-side="left" id="creators" aria-labelledby="v2-creators-title">
+    <div className="home-story-copy"><h2 id="v2-creators-title">{copy.blogTitle}</h2><div className="home-story-body"><p>{copy.blogText}</p><Link className="home-story-link" href="/blogs">{t('发现更多主页')}<Icon name="arrow"/></Link></div></div>
+    <Link className="home-story-visual home-story-screenshot home-identity-stage" href="/blog/jianghaoyu2006" aria-label={copy.blogExample}><div className="home-identity-desktop"><img src="/media/home/creator-home.webp" alt={copy.blogAlt} width={1280} height={1000} loading="lazy" decoding="async"/></div><div className="home-identity-phone"><img src="/media/home/creator-home-mobile.webp" alt="" width={390} height={844} loading="lazy" decoding="async"/></div></Link>
+    <p className="home-story-caption">{copy.blogExample}</p>
    </section>
-   <section className="home-story is-reverse" id="canvas-demo" data-home-story="editor" data-home-side="right" aria-labelledby="v2-editor-title">
-    <div className="home-story-visual home-story-editor"><HomeBlogCanvasDemo locale={locale} creator={demoCreator}/></div>
-    <div className="home-story-copy"><h2 id="v2-editor-title">{copy.editorTitle}</h2><p>{copy.editorText}</p><Link className="home-story-link" href="/workspace/blog">{copy.editorAction}<Icon name="arrow"/></Link></div>
+   <section className="home-story home-story-primary is-reverse" id="canvas-demo" data-home-story="editor" data-home-side="right" aria-labelledby="v2-editor-title">
+    <div className="home-story-copy"><h2 id="v2-editor-title">{copy.editorTitle}</h2><div className="home-story-body"><p>{copy.editorText}</p><Link className="home-story-link" href="/workspace/blog">{copy.editorAction}<Icon name="arrow"/></Link></div></div>
+    <div className="home-story-visual home-story-editor"><div className="home-editor-window"><HomeBlogCanvasDemo locale={locale} creator={demoCreator} pageScroll/></div></div>
+    <ul className="home-editor-features">{copy.editorFeatures.map((feature:string,index:number)=><li key={feature}><Icon name={['cursor','text','eye'][index]}/>{feature}</li>)}</ul><p className="home-story-caption">{copy.editorHint}</p>
    </section>
-   <section className="home-story" id="skills-demo" data-home-story="skills" data-home-side="left" aria-labelledby="v2-skills-title">
-    <div className="home-story-visual"><HomeStoryVideo src="/media/home/skills-loop.mp4" poster="/media/home/skills-poster.webp" label={copy.skillAlt} pauseLabel={copy.pause} playLabel={copy.play}/></div>
-    <div className="home-story-copy"><h2 id="v2-skills-title">{copy.skillTitle}</h2><p>{copy.skillText}</p><Link className="home-story-link" href="/resources?type=skills">{t('探索 Skill')}<Icon name="arrow"/></Link><Link className="home-story-secondary" href="/skills/gsap">GSAP Skills<Icon name="arrow"/></Link></div>
+   <section className="home-story home-story-discovery" id="skills-demo" data-home-story="skills" data-home-side="left" aria-labelledby="v2-skills-title">
+    <div className="home-story-copy"><h2 id="v2-skills-title">{copy.skillTitle}</h2><div className="home-story-body"><p>{copy.skillText}</p><Link className="home-story-link" href="/resources?type=skills">{copy.skillAction}<Icon name="arrow"/></Link><Link className="home-story-secondary" href="/skills/gsap">GSAP Skills<Icon name="arrow"/></Link></div></div>
+    <div className="home-story-visual home-skill-stage"><HomeStoryVideo src="/media/home/skills-loop.mp4" poster="/media/home/skills-poster.webp" label={copy.skillAlt} pauseLabel={copy.pause} playLabel={copy.play}/></div>
    </section>
-   <section className="home-story is-reverse" id="resources-demo" data-home-story="resources" data-home-side="right" aria-labelledby="v2-tools-title">
-    <div className="home-story-visual"><HomeResourceSculpture posterSrc="/media/home/resources.webp" label={copy.resourceAlt} pauseLabel={copy.pause} playLabel={copy.play}/></div>
-    <div className="home-story-copy"><h2 id="v2-tools-title">{copy.resourceTitle}</h2><p>{copy.resourceText}</p><Link className="home-story-link" href="/resources">{t('资源')}<Icon name="arrow"/></Link><Link className="home-story-secondary" href="/community">{copy.community}<Icon name="arrow"/></Link></div>
+   <section className="home-story home-story-discovery is-reverse" id="resources-demo" data-home-story="resources" data-home-side="right" aria-labelledby="v2-tools-title">
+    <div className="home-story-copy"><h2 id="v2-tools-title">{copy.resourceTitle}</h2><div className="home-story-body"><p>{copy.resourceText}</p><Link className="home-story-link" href="/resources">{copy.resourceAction}<Icon name="arrow"/></Link><Link className="home-story-secondary" href="/community">{copy.community}<Icon name="arrow"/></Link></div></div>
+    <div className="home-story-visual home-resource-stage"><HomeResourceSculpture posterSrc="/media/home/resources.webp" label={copy.resourceAlt} pauseLabel={copy.pause} playLabel={copy.play}/></div>
    </section>
   </div>
-  <section className="v2-section v2-invitation" data-home-scene="invitation" aria-labelledby="v2-invitation-title"><h2 id="v2-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div><Link className="v2-primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div></section>
+  <section className="v2-section v2-invitation" data-home-scene="invitation" data-home-product aria-labelledby="v2-invitation-title"><h2 id="v2-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div><Link className="v2-primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div></section>
   <CreatorVoices/>
  </div>;
 }

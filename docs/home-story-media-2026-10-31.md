@@ -4,7 +4,7 @@
 
 | 文件 | 实际来源 | 用途 |
 | --- | --- | --- |
-| public/media/home/blog-space-current.webp | /blog/jianghaoyu2006 | 2026-11-02 使用 Ego 浏览器重新录制的 IAVSE 博客主页（1200×900） |
+| public/media/home/blog-space-current.webp（已退役） | /blog/jianghaoyu2006 | 2026-11-02 使用 Ego 浏览器录制（1200×900）；2026-11-07 首页改用新录制的 Jianghao Yu 真实主页桌面及手机截图，移除未再使用的旧截图，原资产保留于 Git 历史。 |
 | public/media/home/resources.webp | /resources | 资源3D卡片纹理与WebGL降级图 |
 | public/media/home/skills-poster.webp | /resources?type=skills | 2026-11-02 重录的匹配首帧，作为演示封面与低动态偏好静态图 |
 | public/media/home/skills-loop.mp4 | /resources?type=skills | 2026-11-02 重录的 8 秒、60fps 真实目录滚动循环 |

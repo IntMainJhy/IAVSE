@@ -137,3 +137,16 @@ test('a section can move inside an unchanged root and dirty work measures its fi
  top+=30;owner.request();f.navigate(true);top+=20;f.navigate(false);f.flush();assert.equal(f.refreshes,2);
  height+=50;owner.request();f.flush();assert.equal(f.refreshes,3);owner.request();f.flush();assert.equal(f.refreshes,3);owner.dispose();
 });
+
+test('locale target changes can force one shared refresh while ordinary geometry checks stay deduplicated',()=>{
+ const f=fixture(),owner=f.owner();owner.request();f.flush();assert.equal(f.refreshes,1);
+ owner.request(true);owner.request();owner.request(true);assert.equal(f.frames.size,1);f.flush();assert.equal(f.refreshes,2,'a forced locale request survives coalesced ordinary requests with unchanged section boxes');
+ owner.request();f.flush();assert.equal(f.refreshes,2,'the forced flag clears after its refresh');owner.dispose();
+});
+
+test('forced locale refreshes retain scroll, navigation and owner cleanup gates',()=>{
+ const f=fixture({scrolling:true}),owner=f.owner();owner.request(true);assert.equal(f.frames.size,0);f.scrollEnd();assert.equal(f.frames.size,1);
+ f.navigate(true);assert.equal(f.frames.size,0);f.navigate(false);f.flush();assert.equal(f.refreshes,1,'navigation retains the deferred forced request');
+ owner.request(true);owner.dispose();assert.equal(f.frames.size,0);f.flush();assert.equal(f.refreshes,1,'disposed locale work cannot refresh');
+ const detached=f.owner();detached.request(true);detached.root.isConnected=false;f.flush();assert.equal(f.refreshes,1,'a detached forced owner cannot refresh');detached.dispose();assert.equal(f.listeners.size,0);
+});

@@ -1,0 +1,23 @@
+{
+  "source": {
+    "kind": "public-page-screenshot",
+    "url": "http://127.0.0.1:3008/blog/jianghaoyu2006",
+    "path": "/blog/jianghaoyu2006",
+    "pageOwner": "Jianghao Yu",
+    "capturedAt": "2026-11-07T10:40:58.876Z",
+    "sourceCommit": "f214c307ddf785c9f344652796b13bc83a607986",
+    "locale": "en",
+    "viewport": {
+      "width": 1280,
+      "height": 1000
+    },
+    "browser": "Ego Browser",
+    "crop": "none",
+    "resize": "none"
+  },
+  "encoding": {
+    "format": "webp",
+    "quality": 90
+  },
+  "rights": "Screenshot of the owner’s publicly published IAVSE homepage, requested for Home product presentation. Existing source asset licenses and attribution remain applicable; not an AI-generated design or third-party testimonial."
+}
