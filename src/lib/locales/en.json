@@ -3280,5 +3280,14 @@
   "站点内容": "Site content",
   "公开页面设置与管理员安全。": "Public page settings and administrator security.",
   "前往博客编辑器更换头像": "Change avatar in the blog editor",
-  "切换深色模式": "Toggle dark mode"
+  "切换深色模式": "Toggle dark mode",
+  "待处理事项": "Items to review",
+  "内容审核、评论与投诉，集中处理。": "Review content, comments, and reports in one place.",
+  "已公开主页": "Published homepages",
+  "已发布站点内容": "Published site content",
+  "查看待办": "View review queues",
+  "创建内容": "Create content",
+  "管理文件": "Manage files",
+  "暂无内容，创建你的第一份内容。": "No content yet. Create your first item.",
+  "网站运行概览": "Your site at a glance"
 }

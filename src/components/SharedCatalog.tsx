@@ -24,7 +24,7 @@ export async function CatalogFilter({kind,q,category,categories}:{kind:'docs'|'r
 }
 export async function CatalogCards({items,kind='docs'}:{items:any[];kind?:string}){
  const {t}=await serverI18n();
- return <div className="shared-card-grid">{items.map(item=><article className={'shared-card'+(item.coverId?' has-cover':'')} key={item.id||item.url}>
+ return <div className="shared-card-grid">{items.map(item=><article className={'shared-card'+(item.coverId?' has-cover':'')} key={item.id||item.url} data-catalog-kind={kind}>
   <Link href={item.url}>
    {item.coverId&&<img src={'/media/'+item.coverId} alt={item.coverAlt||''} width={800} height={450} loading="lazy"/>}
    <div className="shared-card-copy">

@@ -3,6 +3,7 @@ import '@/app/admin-organic.css';
 import '@/app/iavse-admin.css';
 import '@/app/admin-control-center.css';
 import '@/app/admin-react-bits.css';
+import '@/app/admin-bento.css';
 import {AdminAppearance,useAdminAppearance} from './AdminAppearance';
 import {useAdminEffects,useAdminDrawer} from './useAdminEffects';
 import {BrandMark} from './BrandMark';
