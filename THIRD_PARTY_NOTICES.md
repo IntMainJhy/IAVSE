@@ -135,3 +135,36 @@ Reference brand names identify the studied websites; they do not claim official
 product status or endorsement. Third-party reference catalogs and their notices
 remain intact. The standalone component library is counted separately from
 website implementations. See [scope and removal record](docs/design-studio-independent-implementation.md).
+
+## Website catalog taxonomy and independent templates (2026-11-08)
+
+`src/lib/design-taxonomy-seed.json` derives factual scenario, style-type and tag
+assignments from AnxForever/stylekit at
+`38058485388d237745ccf58c6750c2ec661a72f4`. Source URLs and a scenario-file digest
+are retained in that JSON. The upstream MIT notice is preserved at
+[public/design-imports/stylekit/LICENSE.txt](public/design-imports/stylekit/LICENSE.txt).
+This classification data retains its upstream license independently of IAVSE's
+license. VibeUI industry labels are retained as factual category names.
+
+`src/components/website-showcases/` contains IAVSE-authored implementations,
+with distinct demonstration brands, content and locally operating interactions.
+Reference websites identify design-language research; StyleKit discovery links
+identify where a style was found. Neither is credited as the author of IAVSE's
+new implementation. Existing attributed upstream records remain separate.
+
+### Fonts used by independent website examples
+
+Gloock, Kalnia, Bricolage Grotesque, Dela Gothic One, Unbounded and Manrope are
+served locally from their unmodified Google Fonts distributions. Each font's
+copyright and SIL Open Font License 1.1 are retained separately in
+[public/fonts/stylekit-references/](public/fonts/stylekit-references/), alongside
+[SOURCES.json](public/fonts/stylekit-references/SOURCES.json) with the exact
+font and upstream license URLs. The font families are scoped to the isolated
+website examples; they are not StyleKit's proprietary assets and no proprietary
+brand font was downloaded.
+
+The editorial example reuses two pre-existing IAVSE raster assets, `lake-walk`
+and `quiet-studio`. Their adjacent provenance sidecars identify the known
+repository origin, rather than asserting an unverified photographer or
+reconstructing a missing generation prompt. No image was downloaded from
+Kinfolk, VibeUI or StyleKit for these new pages.

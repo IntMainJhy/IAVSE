@@ -1,0 +1,24 @@
+/* The frame owns sizing; the website keeps its own scroll and layout viewport. */
+html:root[data-ui][data-color-mode] body .design-studio .design-zoom-dialog.is-responsive-preview{width:min(1760px,calc(100vw - 40px));height:calc(100dvh - 40px);max-height:1120px;border-radius:12px;overscroll-behavior:contain}
+.design-zoom-dialog.is-responsive-preview>header{gap:20px;padding:14px 20px}
+.design-zoom-dialog.is-responsive-preview h2{font-size:17px!important;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.design-zoom-dialog.is-responsive-preview header p{font-size:11px;line-height:1.4}
+.design-zoom-dialog.is-responsive-preview header p>a{color:var(--ds-muted)!important;text-decoration:none;text-underline-offset:3px}
+.design-zoom-dialog.is-responsive-preview header p>a:hover{text-decoration:underline}
+.design-zoom-dialog.is-responsive-preview>footer{padding:10px 20px;min-height:48px}
+.design-preview-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:none;min-height:54px;padding:6px 20px;border-bottom:1px solid var(--ds-line);background:var(--ds-panel)}
+.design-preview-image-note{margin:0;font-size:12px;line-height:1.5;color:var(--ds-muted)}
+.design-preview-viewports{display:flex;align-items:center;gap:3px;min-width:0;overflow-x:auto;scrollbar-width:none}
+html:root[data-ui][data-color-mode] body .design-studio .design-preview-viewports>button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--ds-muted);font-size:12px;font-weight:500;line-height:1.3;white-space:nowrap;box-shadow:none;cursor:pointer}
+html:root[data-ui][data-color-mode] body .design-studio .design-preview-viewports>button[aria-pressed=true]{border-color:var(--ds-line);background:var(--ds-bg);color:var(--ds-text)}
+html:root[data-ui][data-color-mode] body .design-studio .design-preview-viewports>button:hover{background:var(--ds-bg);color:var(--ds-text);transform:none}
+.design-preview-viewports button>span{font-size:10px;font-variant-numeric:tabular-nums;color:var(--ds-muted)}
+.design-preview-dimensions{flex:none;font-size:10px;line-height:1.4;color:var(--ds-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.design-zoom-dialog.is-responsive-preview .design-preview-stage{display:flex;justify-content:center;flex:1;min-height:0;overflow:hidden;background:var(--ds-bg);padding:0}
+.design-preview-viewport{position:relative;flex:none;max-width:100%;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--ds-line)}
+.design-preview-scaled{position:absolute;inset:0;transform-origin:top left;overflow:hidden}
+.design-preview-scaled>iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.design-preview-scaled>.design-media{width:100%;height:100%}
+.design-preview-scaled>.design-media.is-large>iframe{position:absolute;inset:0;display:block;width:100%;height:100%;transform:none;pointer-events:auto}
+.design-preview-scaled>.design-media.is-large>img{object-fit:contain;object-position:top center}
+@media(max-width:760px){html:root[data-ui][data-color-mode] body .design-studio .design-zoom-dialog.is-responsive-preview{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:none;border-radius:9px}.design-zoom-dialog.is-responsive-preview>header{padding:10px 12px;gap:6px}.design-zoom-dialog.is-responsive-preview h2{font-size:15px!important}.design-zoom-dialog.is-responsive-preview header>div{flex-basis:calc(100% - 52px)}.design-zoom-dialog.is-responsive-preview header>a{font-size:12px;min-height:32px}.design-preview-tools{gap:6px;padding:4px 8px;min-height:52px}.design-preview-viewports{gap:1px}html:root[data-ui][data-color-mode] body .design-studio .design-preview-viewports>button{padding:8px 9px;min-height:44px;font-size:11px;gap:4px}.design-preview-dimensions{display:none}.design-zoom-dialog.is-responsive-preview>footer{padding:8px 12px;font-size:10px}.design-zoom-dialog.is-responsive-preview footer>span{display:none}.design-zoom-dialog.is-responsive-preview footer nav{width:100%;gap:12px;justify-content:space-between}.design-zoom-dialog.is-responsive-preview footer nav a{min-height:32px}}

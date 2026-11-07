@@ -1,0 +1,1212 @@
+[
+  {
+    "key": "apple",
+    "title": "克制产品网站 · Focus",
+    "sourceSlug": "stylekit-apple-style",
+    "summary": "以Apple公开产品网站的内容层级与完整产品场景为依据，独立编写Focus每日计划产品网站：宽幅可编辑工作区、工作流导览、真实专注计时和本地方案选择。",
+    "palette": [
+      "#f5f5f7",
+      "#1d1d1f",
+      "#0068d9",
+      "#e6efff",
+      "#151719",
+      "#ffffff"
+    ],
+    "layout": "62px轻量产品导航；浅灰首屏以居中双行标题和宽幅真实日程工作区展开，任务列表与时间轴并列；随后为三步骤产品导览、全宽深色专注计时、双方案比较、折叠问答与简洁页尾。650px以下工作区、导览、方案和问答改为单列。",
+    "scenarios": [
+      "saas",
+      "marketing",
+      "ecommerce"
+    ],
+    "observations": [
+      "Apple MacBook Air公开页面以产品价值、完整产品画面和功能章节推进叙事；本页采用原创可操作日程作为核心产品场景。",
+      "Apple iCloud+公开页面从使用收益连接方案比较与常见问题；本页据此组织Focus工作流、方案和问答，而不展示设计系统资料。",
+      "Apple HIG Layout强调信息层级、分组、渐进披露与适应可用空间；这里落实为任务/时间轴关系、产品导览切换和手机单列。",
+      "Apple HIG Accessibility强调键盘操作、清楚标签、非颜色单一反馈与减少动态；本页用原生表单、可访问tabs和持久状态文字实现。"
+    ],
+    "interactions": [
+      "Today / Tomorrow日期切换与各自任务列表",
+      "新增任务、空白校验、完成/恢复任务及重置示例日程",
+      "为未完成任务设定专注目标，时间轴同步显示该任务",
+      "产品导览三步骤切换，支持左右方向键与Home/End",
+      "15/25/45分钟真实倒计时，开始、暂停、继续与重置，切换任务/时长时重置",
+      "月付/年付价格与计费说明联动，Starter/Plus方案选择与页内确认",
+      "四项产品问答原生展开/收起"
+    ],
+    "referenceSite": {
+      "name": "Apple MacBook Air 产品网站",
+      "url": "https://www.apple.com/macbook-air/"
+    },
+    "referencePages": [
+      {
+        "name": "Apple MacBook Air：产品叙事与功能展示",
+        "url": "https://www.apple.com/macbook-air/"
+      },
+      {
+        "name": "Apple iCloud+：方案与产品问答",
+        "url": "https://www.apple.com/icloud/"
+      },
+      {
+        "name": "Apple HIG Layout：层级与自适应",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/layout"
+      },
+      {
+        "name": "Apple HIG Accessibility：操作与反馈",
+        "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      }
+    ],
+    "collectionReference": {
+      "name": "StyleKit 风格发现入口",
+      "url": "https://www.stylekit.top/zh/styles/apple-style"
+    },
+    "styleType": "visual",
+    "typography": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif。首屏clamp(52px,6.1vw,88px)/1.04、650；650px以下clamp(43px,11.4vw,64px)/1.06。章节48px/1.1、600，手机36px/1.12。说明20px/1.5，手机16px/1.55。任务12px/1.45，计时96px/1.3并使用tabular-nums；所有标题字距不紧于-.04em。",
+    "componentIds": [
+      "button",
+      "checkbox",
+      "input",
+      "tabs",
+      "timeline",
+      "pricing",
+      "accordion"
+    ],
+    "designDetails": {
+      "colorRoles": [
+        {
+          "role": "正文与标题",
+          "hex": "#1d1d1f",
+          "usage": "产品标题、任务和普通阅读文字。"
+        },
+        {
+          "role": "页面与章节底",
+          "hex": "#f5f5f7",
+          "usage": "首屏、Starter方案及页尾；工作区为白色。"
+        },
+        {
+          "role": "内容表面",
+          "hex": "#ffffff",
+          "usage": "日程工作区、主体阅读区和选中的浅色分段按钮。"
+        },
+        {
+          "role": "主要动作",
+          "hex": "#0068d9",
+          "usage": "试用、开始计时、选择方案、链接、输入光标与键盘焦点。"
+        },
+        {
+          "role": "次级文字",
+          "hex": "#63636a",
+          "usage": "浅底说明、任务反馈、示例声明与辅助内容。"
+        },
+        {
+          "role": "日程专注任务",
+          "hex": "#e6efff",
+          "usage": "时间轴当前任务底色；搭配#214d8b内容文字，不用颜色单独表达状态。"
+        },
+        {
+          "role": "专注场景背景",
+          "hex": "#151719",
+          "usage": "全宽深色计时章节；主文字#f5f5f7，辅助文字#acafb6。"
+        },
+        {
+          "role": "导览场景",
+          "hex": "#eaf0f7",
+          "usage": "原创便笺、日程与专注产品导览的浅蓝舞台。"
+        },
+        {
+          "role": "分隔线",
+          "hex": "#dedee3",
+          "usage": "工作区工具栏与问答行的轻分隔。"
+        }
+      ],
+      "typography": [
+        {
+          "role": "首屏标题",
+          "family": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif",
+          "size": "clamp(52px, 6.1vw, 88px)；650px以下clamp(43px, 11.4vw, 64px)；370px以下41px",
+          "weight": "650",
+          "lineHeight": "1.04；650px以下1.06"
+        },
+        {
+          "role": "章节标题",
+          "family": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif",
+          "size": "48px；650px以下36px",
+          "weight": "600",
+          "lineHeight": "1.1；650px以下1.12"
+        },
+        {
+          "role": "专注章节标题",
+          "family": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif",
+          "size": "56px；900px以下44px；650px以下42px",
+          "weight": "550",
+          "lineHeight": "1.06；650px以下1.08"
+        },
+        {
+          "role": "首屏说明",
+          "family": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif",
+          "size": "20px；650px以下16px",
+          "weight": "400",
+          "lineHeight": "1.5；650px以下1.55"
+        },
+        {
+          "role": "任务文字／输入",
+          "family": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif",
+          "size": "任务12px；输入桌面12px、650px以下16px",
+          "weight": "400",
+          "lineHeight": "任务1.45；输入继承1.5"
+        },
+        {
+          "role": "计时数字",
+          "family": "IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif",
+          "size": "96px；900px以下80px；650px以下86px",
+          "weight": "400",
+          "lineHeight": "1.3；tabular-nums固定数字宽度"
+        }
+      ],
+      "spacing": [
+        {
+          "token": "navigation",
+          "value": "62px；650px以下58px",
+          "usage": "粘性产品导航；锚点scroll-margin-top为84px。"
+        },
+        {
+          "token": "hero",
+          "value": "顶部68px；1440px起80px；900px以下58px；650px以下49px",
+          "usage": "首屏标题区域；说明后28px出现动作，工作区上距52px。"
+        },
+        {
+          "token": "workspace",
+          "value": "最大1120px；两列1.05fr / 1fr；顶栏55px",
+          "usage": "桌面任务与时间轴并列；650px以下单列，顶栏50px。"
+        },
+        {
+          "token": "section",
+          "value": "上下112px；650px以下70px",
+          "usage": "产品导览、方案章节主节奏；专注章节上下100px，手机65px/46px。"
+        },
+        {
+          "token": "control",
+          "value": "主要动作46px；普通点击目标44px；日期按钮桌面36px、手机40px",
+          "usage": "日期分段置于40–44px整体容器；任务标签最小48px，手机任务行54px。"
+        },
+        {
+          "token": "surface-radius",
+          "value": "工作区与导览16px；650px以下12px；任务块12px",
+          "usage": "大幅产品内容用轻圆角；胶囊仅用于按钮与分段操作。"
+        }
+      ],
+      "layoutRules": [
+        "62px轻量产品导航；浅灰首屏以居中双行标题和宽幅真实日程工作区展开，任务列表与时间轴并列；随后为三步骤产品导览、全宽深色专注计时、双方案比较、折叠问答与简洁页尾。650px以下工作区、导览、方案和问答改为单列。",
+        "所有章节保持正常文档流；仅导航sticky，不锁滚动，不用硬件外框或截图替代可操作产品。",
+        "工作区、导览和方案分别依据内容形成结构；当前任务、日期和计时状态明确关联。"
+      ],
+      "designFocus": [
+        "以实际日程工作区证明产品价值，首屏不展示手机硬件或设计系统样本。",
+        "短标题、大留白和完整产品场景建立顺序；浅灰首屏、白色导览和深色计时形成节奏。",
+        "任务、时间轴和计时器共享明确状态，完成当前任务时结束对应计时。",
+        "所有素材为原创文字、SVG线条图标与CSS几何；字体使用项目已许可的本地DM Sans。"
+      ],
+      "do": [
+        "保留产品网站的信息架构：价值主张、可操作工作区、工作流、专注体验、方案、问答。",
+        "正文、任务与按钮以语义HTML实现；原生checkbox/radio与关联label、键盘tabs、持久role=status配合可见焦点。",
+        "示例任务、虚构方案与页面内保存范围如实说明；用户输入只存在当前React页面状态。",
+        "用文案与图标共同表达选中、完成、错误；计时数字不逐秒向屏幕阅读器播报。"
+      ],
+      "dont": [
+        "不把配色表、字体样张、通用组件画廊、AI规则或设计哲学章节放进产品网站。",
+        "不复用收录站示例的导航、手机构图、统计数据、相机卡片、规则名称或句子。",
+        "不导入Apple照片、Logo、SF字体或官方界面截图；不仿造硬件外框。",
+        "不伪造购买、账号创建或跨刷新保存；方案选择只产生本页确认。"
+      ],
+      "responsive": [
+        "1440px首屏标题为88px，工作区最大1120px，任务与时间轴并列。",
+        "900px以下缩小工作区内距与章节字号；650px以下工作区/导览/方案/问答改为单列。",
+        "390px首屏约44.46px，内容边距18–25px；输入16px避免移动浏览器缩放，长任务使用overflow-wrap:anywhere。",
+        "手机导航保留Plans、Questions和Try Focus；370px以下保留Plans和Try Focus，所有隐藏导航对应内容仍在正常文档流。"
+      ],
+      "motion": [
+        "没有自动播放、滚动锁定、循环装饰动画或连续入场。",
+        "主要按钮只有背景与轻阴影反馈；文字链接箭头横移3px，原生问答保留即时开关。",
+        "计时器用Date.now截止时间计算剩余秒数，250ms检查；暂停与组件卸载清理interval。",
+        "prefers-reduced-motion时移除过渡与动画，脚本滚动使用auto，功能完整保留。"
+      ]
+    },
+    "prompt": "为[产品名称]独立实现一个以每日计划和专注工作为用途的完整产品网站。参考Apple公开产品网站的产品叙事方法，而不是任何收录平台的展示页；官方依据为https://www.apple.com/macbook-air/、https://www.apple.com/icloud/、https://developer.apple.com/design/human-interface-guidelines/layout和https://developer.apple.com/design/human-interface-guidelines/accessibility。自己编写品牌、任务、说明、图形和代码。\n\n用户任务：读懂产品价值，直接在首屏整理一天的任务，为一个任务开启专注时段，再比较方案。示例名称Focus，所有价格与任务均为虚构演示。不能用“配色/组件/AI规则/设计哲学”组成网站内容。\n\n页面结构：62px轻量产品导航；浅灰首屏以居中双行标题和宽幅真实日程工作区展开，任务列表与时间轴并列；随后为三步骤产品导览、全宽深色专注计时、双方案比较、折叠问答与简洁页尾。650px以下工作区、导览、方案和问答改为单列。\n首屏原创标题为“Make room for your best work.”；产品工作区直接显示日程内容，不放进手机、笔记本外壳。顶栏显示Your workspace与Reset day，左列Hello, today.、Today/Tomorrow、可勾选任务、任务输入与添加动作；右列以9:00/10:00/11:00时间轴展示留白和当前任务。标题之后是产品解释和Try your day / See how it works两类入口。任务列表可增长，内容不被截断。\n产品导览以Gather an idea / Give it time / Find your flow三项切换完整原创便笺、日程、专注场景及说明。接着以全宽深色场景展示One thing. Your full attention.，右侧为真实计时器。之后放Starter/Plus双方案、四条产品问答及页尾。\n\n颜色：\n- 正文与标题 #1d1d1f：产品标题、任务和普通阅读文字。\n- 页面与章节底 #f5f5f7：首屏、Starter方案及页尾；工作区为白色。\n- 内容表面 #ffffff：日程工作区、主体阅读区和选中的浅色分段按钮。\n- 主要动作 #0068d9：试用、开始计时、选择方案、链接、输入光标与键盘焦点。\n- 次级文字 #63636a：浅底说明、任务反馈、示例声明与辅助内容。\n- 日程专注任务 #e6efff：时间轴当前任务底色；搭配#214d8b内容文字，不用颜色单独表达状态。\n- 专注场景背景 #151719：全宽深色计时章节；主文字#f5f5f7，辅助文字#acafb6。\n- 导览场景 #eaf0f7：原创便笺、日程与专注产品导览的浅蓝舞台。\n- 分隔线 #dedee3：工作区工具栏与问答行的轻分隔。\n\n字体与排版：\n- 首屏标题：IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif；clamp(52px, 6.1vw, 88px)；650px以下clamp(43px, 11.4vw, 64px)；370px以下41px；字重650；行高1.04；650px以下1.06\n- 章节标题：IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif；48px；650px以下36px；字重600；行高1.1；650px以下1.12\n- 专注章节标题：IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif；56px；900px以下44px；650px以下42px；字重550；行高1.06；650px以下1.08\n- 首屏说明：IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif；20px；650px以下16px；字重400；行高1.5；650px以下1.55\n- 任务文字／输入：IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif；任务12px；输入桌面12px、650px以下16px；字重400；行高任务1.45；输入继承1.5\n- 计时数字：IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif；96px；900px以下80px；650px以下86px；字重400；行高1.3；tabular-nums固定数字宽度\n标题字距不紧于-.04em；任务与导航用清楚的正常字距，不加载Apple品牌字体。\n\n空间与尺寸：\n- navigation 62px；650px以下58px：粘性产品导航；锚点scroll-margin-top为84px。\n- hero 顶部68px；1440px起80px；900px以下58px；650px以下49px：首屏标题区域；说明后28px出现动作，工作区上距52px。\n- workspace 最大1120px；两列1.05fr / 1fr；顶栏55px：桌面任务与时间轴并列；650px以下单列，顶栏50px。\n- section 上下112px；650px以下70px：产品导览、方案章节主节奏；专注章节上下100px，手机65px/46px。\n- control 主要动作46px；普通点击目标44px；日期按钮桌面36px、手机40px：日期分段置于40–44px整体容器；任务标签最小48px，手机任务行54px。\n- surface-radius 工作区与导览16px；650px以下12px；任务块12px：大幅产品内容用轻圆角；胶囊仅用于按钮与分段操作。\n\n功能：\n- Today / Tomorrow日期切换与各自任务列表\n- 新增任务、空白校验、完成/恢复任务及重置示例日程\n- 为未完成任务设定专注目标，时间轴同步显示该任务\n- 产品导览三步骤切换，支持左右方向键与Home/End\n- 15/25/45分钟真实倒计时，开始、暂停、继续与重置，切换任务/时长时重置\n- 月付/年付价格与计费说明联动，Starter/Plus方案选择与页内确认\n- 四项产品问答原生展开/收起\n新增任务trim后判空，显示可修正错误；最长72字符。完成正在专注的任务时停止并重置计时，自动选择同一天另一个未完成任务；无未完成任务时禁用开始按钮并说明原因。日期切换只改变该日列表，任务的明确Focus操作才改变计时目标。倒计时依据截止时间，组件卸载清理计时器。所有状态仅存在当前页面；刷新恢复示例。Plus为$6按月，或等效$4/月、每年$48；金额与计费说明同步变化，选择后页内确认，不收款。\n\n响应式：\n- 1440px首屏标题为88px，工作区最大1120px，任务与时间轴并列。\n- 900px以下缩小工作区内距与章节字号；650px以下工作区/导览/方案/问答改为单列。\n- 390px首屏约44.46px，内容边距18–25px；输入16px避免移动浏览器缩放，长任务使用overflow-wrap:anywhere。\n- 手机导航保留Plans、Questions和Try Focus；370px以下保留Plans和Try Focus，所有隐藏导航对应内容仍在正常文档流。\n\n交互与动效：\n- 没有自动播放、滚动锁定、循环装饰动画或连续入场。\n- 主要按钮只有背景与轻阴影反馈；文字链接箭头横移3px，原生问答保留即时开关。\n- 计时器用Date.now截止时间计算剩余秒数，250ms检查；暂停与组件卸载清理interval。\n- prefers-reduced-motion时移除过渡与动画，脚本滚动使用auto，功能完整保留。\n\n交付完整React页面、独立作用域CSS、原创演示数据以及与实现一致的设计规范。用原生label、checkbox、radio、details/summary；tabs具有关联tabpanel与roving tabIndex。任务和方案反馈持久呈现，字体、颜色、结构和本地功能可直接复现。",
+    "componentPrompts": {
+      "button": "实现Focus产品网站的行动与计时按钮。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，14px/1.45、字重500；主动作#0068d9配白字，高46px，12px 22px内距，999px胶囊；hover变#075bb8并加0 5px 14px轻阴影。试用按钮链接真实工作区锚点，计时按钮在Start/Pause/Resume/Begin again之间随状态切换。无未完成任务时disabled并给出邻近解释。Reset按钮重置剩余时长。使用可见3px蓝色focus-visible，减少动态时关闭过渡；不要加模拟成功的外部购买动作。",
+      "checkbox": "实现Focus每日任务列表。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，任务12px/1.45，文字#1d1d1f；原生checkbox与可点击label关联，整行最小52px，手机54px。视觉圆形勾选框18px，未选边线#bdbdc6，完成后#e9e9ed底与勾号并对任务文字加删除线。每行有独立Focus按钮与aria-pressed；已完成任务的Focus禁用。勾选当前计时任务时停止计时并选择同一天下一条未完成任务，没有时禁用开始。长文字换行，状态用文字播报，键盘Space可切换，不能只以颜色说明完成。",
+      "input": "实现Focus首屏新增任务输入。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，桌面12px，650px以下16px；44px输入高度，透明底、底部#eeeef1细分隔、#0068d9光标，右侧44px加号提交按钮。提供关联label，最多72字符；提交先trim，空白时显示“Write a few words for your task.”并通过aria-invalid/aria-describedby关联。有效任务加入当前Today/Tomorrow列表，清空并重新聚焦输入，role=status说明加入日期与任务名。内容只存当前页面状态，刷新恢复示例；长标题不撑宽页面。",
+      "tabs": "实现Focus产品工作流导览，三项为Gather an idea、Give it time、Find your flow。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，桌面13px，手机11px；按钮至少44px，选中#1d1d1f配白字，未选透明底与#63636a。使用tablist/tab/tabpanel、aria-selected/controls/labelledby和roving tabIndex；左右键循环切换，Home/End选择首尾。切换后同时替换原创便笺/日程/专注场景、标题、解释和真实锚点CTA。桌面场景与说明为1.13fr/1fr，650px以下上下堆叠，不展示Buttons/Cards/Inputs/Nav组件样本。",
+      "timeline": "实现Focus工作区的日程时间轴。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，9:00/10:00/11:00使用time和10px等宽数字特性；有序列表以38px时间列、16px间距、弹性内容列构成。背景#f8fafc，普通项目上边线#e6eaf0；10:00的专注任务为#e6efff、12px圆角、16px 20px内距、17px任务文字#214d8b。选中本日任务时同步更新专注条目；无任务时显示Room for your next idea。650px以下移动到任务列表下方，不隐藏内容、不依赖颜色辨认专注状态。",
+      "pricing": "实现Focus的Starter/Plus方案比较。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，标题27px/1.2、价格44px/1.2、功能13px；两列等宽、26px间距，650px以下单列20px间距。Starter背景#f5f5f7、Plus#edf3fd，16px圆角、38px内距，手机12px圆角28px内距。月付/年付原生按钮组用aria-pressed，Plus在$6/月与$4/月且$48年付间同步切换；Starter始终免费。选择按钮更新本地方案与持久role=status，选中方案外描2px#0068d9并显示Selected文本。明确这是虚构示例，不创建账号、订阅或付款；内容不得伪造真实产品权益。",
+      "accordion": "实现Focus网站的四条产品问答：页面内试用、刷新后数据、专注流程、选择方案的结果。字体IAVSE Sans（项目本地 DM Sans）, Arial, sans-serif，问题14px/1.45，回答14px/1.7，手机13px；使用原生details/summary，单行分隔#dedee3，summary上下23px内距，右侧原创16px加号SVG，展开旋转45度。问题始终可见，支持Enter/Space且焦点清楚；回答说明输入仅在当前页面、刷新复原、计时可暂停/重置、方案不产生支付。桌面左侧章节标题与右侧问答为.85fr/1.15fr，手机单列。"
+    },
+    "evidenceNote": "2026-11-08依据Apple MacBook Air、iCloud+和HIG公开资料重新设计本页。代码、Focus品牌文案、任务数据、日程构图、SVG图标与产品交互均独立编写；使用项目本地DM Sans，不导入Apple照片、Logo、字体或官方UI截图。原sourceSlug及发现入口仅保留目录关联，不作为实现模板或提示词依据。",
+    "verifiedAt": "2026-11-08",
+    "theme": {
+      "bg": "#f5f5f7",
+      "ink": "#1d1d1f",
+      "surface": "#ffffff",
+      "muted": "#63636a",
+      "accent": "#0068d9",
+      "accentInk": "#ffffff",
+      "radius": 16,
+      "border": 1
+    }
+  },
+  {
+    "key": "stripe",
+    "title": "金融产品网站 · Flowpay",
+    "sourceSlug": "stylekit-stripe-style",
+    "summary": "从 Stripe Payments 的结账流程与统一财务信息组织出发，独立编写 Flowpay 产品网站。米白首屏将产品价值与商店结账、商户流水并列，连接商品选择、本地订单、产品介绍和演示价格。",
+    "palette": [
+      "#0a2540",
+      "#fcfbf8",
+      "#635bff",
+      "#f1f5f8",
+      "#2c463e",
+      "#425466"
+    ],
+    "layout": "72px纯白导航；米白非对称首屏，左侧产品标题与行动，右侧同一界面内并列商店结账和商户流水；产品标签、三档价格、深色能力章节与联系表单。",
+    "scenarios": [
+      "saas",
+      "marketing"
+    ],
+    "observations": [
+      "Stripe Payments 官方页将结账体验、支付方式与集成入口放在产品叙事核心，并通过具体订单信息说明支付流程。",
+      "官方页区分面向顾客的购买界面与面向商户的统一支付能力；本实现据此自写商品选择与商户流水联动，使用自有构图和本地样例。",
+      "Flowpay 使用单色文字品牌、米白画布与深蓝层级，以靛蓝标识操作；Form & Field 商店文字和商品、流水、金额、价格均为独立编写的示例。"
+    ],
+    "interactions": [
+      "商品单选与演示金额更新",
+      "添加本地订单并更新商户流水及合计",
+      "重置演示流水",
+      "产品标签切换与方向键导航",
+      "月年价格切换",
+      "方案选择",
+      "联系表单校验与本地反馈"
+    ],
+    "referenceSite": {
+      "name": "Stripe Payments 官方网站",
+      "url": "https://stripe.com/payments"
+    },
+    "referencePages": [
+      {
+        "name": "Stripe Payments 官方网站",
+        "url": "https://stripe.com/payments"
+      }
+    ],
+    "collectionReference": {
+      "name": "StyleKit 风格发现入口",
+      "url": "https://www.stylekit.top/zh/styles/stripe-style"
+    },
+    "styleType": "visual",
+    "typography": "首屏标题：IAVSE Sans，clamp(48px,4.5vw,68px)，字重750，行高1.06；1120px以下58px，760px以下clamp(39px,10.2vw,55px)，行高1.08。章节标题48px / 手机37px，行高1.1。首屏正文17px / 手机16px，行高1.75。商店子品牌及购买标题使用Georgia衬线体，26–29px；商户标题21–22px，金额33px / 手机29px，辅助信息9–13px。标题字距不紧于-.04em，金额使用tabular-nums。",
+    "componentIds": [
+      "button",
+      "pricing",
+      "tabs",
+      "input"
+    ],
+    "designDetails": {
+      "colorRoles": [
+        {
+          "role": "主要文字",
+          "hex": "#0a2540",
+          "usage": "产品标题、财务金额与导航；平台能力章节的深色背景。"
+        },
+        {
+          "role": "首屏画布",
+          "hex": "#fcfbf8",
+          "usage": "完整米白产品首屏；无网格、光晕或大面积渐变。"
+        },
+        {
+          "role": "主要动作",
+          "hex": "#635bff",
+          "usage": "主按钮、商品单选、产品标签、选中状态和焦点。"
+        },
+        {
+          "role": "商户流水面",
+          "hex": "#f1f5f8",
+          "usage": "同一个演示界面内的商户视图，与白色结账区用1px分隔线区分。"
+        },
+        {
+          "role": "商店文字",
+          "hex": "#2c463e",
+          "usage": "Form & Field 商店子品牌和衬线购买标题。"
+        },
+        {
+          "role": "正文与辅助文字",
+          "hex": "#425466",
+          "usage": "产品说明、界面说明和本地状态反馈。"
+        },
+        {
+          "role": "已结算状态",
+          "hex": "#20734b",
+          "usage": "仅标注演示流水的已结算状态。"
+        },
+        {
+          "role": "辅助章节底",
+          "hex": "#f6f9fc",
+          "usage": "价格与联系章节的浅色背景。"
+        }
+      ],
+      "spacing": [
+        {
+          "token": "navigation",
+          "value": "72px / 手机66px",
+          "usage": "纯白sticky导航，锚点保留86px滚动间距。"
+        },
+        {
+          "token": "hero",
+          "value": "桌面顶部84px、列间46px、最大内容宽1200px",
+          "usage": "标题与一块完整商务界面非对称并列；1120px以下先上下排列。"
+        },
+        {
+          "token": "commerce",
+          "value": "结账内边距24px、流水22px、外框14px圆角",
+          "usage": "两栏共用一条外边界；560px以下结账在上、流水在下，金额仍可清晰读取。"
+        },
+        {
+          "token": "section",
+          "value": "桌面100px / 手机70px",
+          "usage": "产品、价格、平台与联系章节。"
+        },
+        {
+          "token": "pricing",
+          "value": "22px间距；28–34px内边距",
+          "usage": "三档价格；手机单列间距30px。"
+        }
+      ],
+      "layoutRules": [
+        "72px纯白导航；米白非对称首屏，左侧产品标题与行动，右侧同一界面内并列商店结账和商户流水；产品标签、三档价格、深色能力章节与联系表单。",
+        "结账和流水共用同一外框；商品是原生单选行，不能变成悬浮银行卡、叠卡或旋转对象。",
+        "1120px以下首屏标题与说明横排，商务演示置于下方；760px以下文案单列，560px以下结账与流水也按阅读顺序堆叠。",
+        "所有章节保持正常文档流，导航sticky，界面不得依靠整体缩放隐藏溢出。"
+      ],
+      "designFocus": [
+        "用具体购买流程解释产品",
+        "同一订单连接顾客与商户视角",
+        "留白、文字层次和精细分隔",
+        "明确的本地示例数据与反馈"
+      ],
+      "do": [
+        "使用原生radio选择24或48美元示例商品，单选立即更新结账金额。",
+        "提交“Add demo order”后插入带编号流水并更新合计；重置恢复3条、96美元初始记录。",
+        "保持Flowpay单色文字品牌与米白首屏，商店衬线文字只用于演示中的独立商户。",
+        "价格切换同步更新金额，方案和表单操作给出可读本地反馈。"
+      ],
+      "dont": [
+        "不要使用支付卡正反面、悬浮确认条、叠卡、雷电品牌图形或网格背景。",
+        "不要请求银行卡信息、调用付款接口或把演示入账表述为真实付款。",
+        "不要用设计术语代替产品能力文案。"
+      ],
+      "responsive": [
+        "1440px展示左右非对称首屏和并列结账/流水；390px按产品介绍、结账、流水的顺序堆叠。",
+        "商品名和小额数据保持完整；主操作至少44px；页面无横向溢出。",
+        "产品tab可用方向键、Home与End切换，表单保持关联label和原生验证。"
+      ],
+      "motion": [
+        "主按钮hover上移2px，状态更新保持可见且无循环动画。",
+        "prefers-reduced-motion时移除过渡与位移但保留全部状态。"
+      ],
+      "typography": [
+        {
+          "role": "首屏展示标题",
+          "family": "IAVSE Sans, system sans-serif",
+          "size": "clamp(48px,4.5vw,68px)；手机clamp(39px,10.2vw,55px)",
+          "weight": "750",
+          "lineHeight": "1.06 / 手机1.08"
+        },
+        {
+          "role": "章节标题",
+          "family": "IAVSE Sans, system sans-serif",
+          "size": "48px / 手机37px",
+          "weight": "700",
+          "lineHeight": "1.1"
+        },
+        {
+          "role": "首屏正文",
+          "family": "IAVSE Sans, system sans-serif",
+          "size": "17px / 手机16px",
+          "weight": "400",
+          "lineHeight": "1.75"
+        },
+        {
+          "role": "商店子品牌与购买标题",
+          "family": "Georgia, Times New Roman, serif",
+          "size": "26–29px",
+          "weight": "400–600",
+          "lineHeight": "1.15"
+        },
+        {
+          "role": "商户金额",
+          "family": "IAVSE Sans, system sans-serif; tabular-nums",
+          "size": "33px / 手机29px",
+          "weight": "650",
+          "lineHeight": "1.3"
+        }
+      ]
+    },
+    "prompt": "为[产品名称]独立实现「金融产品网站 · Flowpay」网站。观察 https://stripe.com/payments 中的结账体验、支付方式与统一支付能力组织，使用自己的品牌、文案、数据和构图，不复用StyleKit/VibeUI的示例代码、构图与提示词。\n\n结构：72px纯白导航；米白非对称首屏，左侧产品标题与行动，右侧同一界面内并列商店结账和商户流水；产品标签、三档价格、深色能力章节与联系表单。\n\n首屏：单色flowpay.文字品牌；标题“Good business. Great checkout.”与产品说明在左，右侧是一块有共同外框的商务界面。白色Form & Field商店结账在左，浅灰商户流水在右，无悬浮卡、叠卡、网格、雷电标记、翻转或外置确认气泡。商店提供24美元Field notebook和48美元Everyday desk set，商品单选更新Demo total；“Add demo order”添加本地记录并更新流水与合计。初始记录为48、24、24美元，总额96美元；流水显示最近4条及所有记录合计；“Reset demo”恢复初始数据。示例状态始终清楚，不填写银行卡、不发起真实付款。\n\n色彩与职责：\n- 主要文字 #0a2540：产品标题、财务金额与导航；平台能力章节的深色背景。\n- 首屏画布 #fcfbf8：完整米白产品首屏；无网格、光晕或大面积渐变。\n- 主要动作 #635bff：主按钮、商品单选、产品标签、选中状态和焦点。\n- 商户流水面 #f1f5f8：同一个演示界面内的商户视图，与白色结账区用1px分隔线区分。\n- 商店文字 #2c463e：Form & Field 商店子品牌和衬线购买标题。\n- 正文与辅助文字 #425466：产品说明、界面说明和本地状态反馈。\n- 已结算状态 #20734b：仅标注演示流水的已结算状态。\n- 辅助章节底 #f6f9fc：价格与联系章节的浅色背景。\n\n字体：首屏标题：IAVSE Sans，clamp(48px,4.5vw,68px)，字重750，行高1.06；1120px以下58px，760px以下clamp(39px,10.2vw,55px)，行高1.08。章节标题48px / 手机37px，行高1.1。首屏正文17px / 手机16px，行高1.75。商店子品牌及购买标题使用Georgia衬线体，26–29px；商户标题21–22px，金额33px / 手机29px，辅助信息9–13px。标题字距不紧于-.04em，金额使用tabular-nums。\n\n留白与尺寸：\n- navigation 72px / 手机66px：纯白sticky导航，锚点保留86px滚动间距。\n- hero 桌面顶部84px、列间46px、最大内容宽1200px：标题与一块完整商务界面非对称并列；1120px以下先上下排列。\n- commerce 结账内边距24px、流水22px、外框14px圆角：两栏共用一条外边界；560px以下结账在上、流水在下，金额仍可清晰读取。\n- section 桌面100px / 手机70px：产品、价格、平台与联系章节。\n- pricing 22px间距；28–34px内边距：三档价格；手机单列间距30px。\n\n后续章节：Payments、Subscriptions、Reporting三个语义tab及对应内容；Starter、Growth、Scale三档演示价格，月年切换、方案选择和本地结果；深蓝平台能力章节用产品语言介绍结账、收入上下文与团队共同视图；联系表单使用email关联label及原生校验，只返回本地status；完整页尾含参考来源和返回顶部。\n\n适配：1440px展示完整非对称首屏；1120px以下商务演示放到文案下；760px以下文案单列；560px以下结账与商户流水上下排。390px不横溢，不缩小整页。按钮至少44px、focus-visible清楚、金额等宽数字、radio键盘可操作，tab支持方向键/Home/End。主按钮hover上移2px，减少动态时不位移；无后台循环动画。\n\n交付完整独立React页面、作用域CSS和真实运行的本地状态。保持导航、完整首屏、多个有内容章节、交互与页尾；演示数据只留在本页，不连接参考站生产账号，不发邮件。",
+    "componentPrompts": {
+      "button": "为[产品名称]独立实现Flowpay产品网站中的button组件。参考 https://stripe.com/payments 的支付流程与信息层级，自行编写代码、文案和本地数据。\n视觉环境：单色flowpay.品牌、米白#fcfbf8首屏、深蓝#0a2540正文、靛蓝#635bff操作、浅灰#f1f5f8商户面；结账与流水同框并列，页面无网格、悬浮银行卡或翻转。主产品字体IAVSE Sans；商店演示可用Georgia子品牌；金额用tabular-nums。\n细节：主按钮#635bff、白字、8px圆角、轻微内高光，hover上移2px。“Add demo order”读取所选商品的24/48美元示例金额，插入商户流水并更新合计；“Reset demo”恢复3条共96美元初始记录，初始时disabled；行动链接跳至对应章节。\n适配390/1440px，操作至少44px；保持原生语义、focus-visible、hover、disabled及所需反馈。所有操作真实更新本地状态，不连接生产账号、不收款、不发邮件；尊重prefers-reduced-motion。",
+      "pricing": "为[产品名称]独立实现Flowpay产品网站中的pricing组件。参考 https://stripe.com/payments 的支付流程与信息层级，自行编写代码、文案和本地数据。\n视觉环境：单色flowpay.品牌、米白#fcfbf8首屏、深蓝#0a2540正文、靛蓝#635bff操作、浅灰#f1f5f8商户面；结账与流水同框并列，页面无网格、悬浮银行卡或翻转。主产品字体IAVSE Sans；商店演示可用Georgia子品牌；金额用tabular-nums。\n细节：白色三档价格放在#f6f9fc章节。Starter为0美元；Growth月付29美元、年付折算23.20美元/月；Scale月付99美元、年付折算79.20美元/月。月年切换、选中方案和可读状态都必须运行，标明演示价格。\n适配390/1440px，操作至少44px；保持原生语义、focus-visible、hover、disabled及所需反馈。所有操作真实更新本地状态，不连接生产账号、不收款、不发邮件；尊重prefers-reduced-motion。",
+      "tabs": "为[产品名称]独立实现Flowpay产品网站中的tabs组件。参考 https://stripe.com/payments 的支付流程与信息层级，自行编写代码、文案和本地数据。\n视觉环境：单色flowpay.品牌、米白#fcfbf8首屏、深蓝#0a2540正文、靛蓝#635bff操作、浅灰#f1f5f8商户面；结账与流水同框并列，页面无网格、悬浮银行卡或翻转。主产品字体IAVSE Sans；商店演示可用Georgia子品牌；金额用tabular-nums。\n细节：Payments、Subscriptions、Reporting使用tablist/tab/tabpanel语义、aria-selected与受控面板，切换产品标题和演示数据。活动标签靛蓝下划线，支持左右方向键、Home、End和正确焦点顺序。\n适配390/1440px，操作至少44px；保持原生语义、focus-visible、hover、disabled及所需反馈。所有操作真实更新本地状态，不连接生产账号、不收款、不发邮件；尊重prefers-reduced-motion。",
+      "input": "为[产品名称]独立实现Flowpay产品网站中的input组件。参考 https://stripe.com/payments 的支付流程与信息层级，自行编写代码、文案和本地数据。\n视觉环境：单色flowpay.品牌、米白#fcfbf8首屏、深蓝#0a2540正文、靛蓝#635bff操作、浅灰#f1f5f8商户面；结账与流水同框并列，页面无网格、悬浮银行卡或翻转。主产品字体IAVSE Sans；商店演示可用Georgia子品牌；金额用tabular-nums。\n细节：商品使用原生radio，24美元Field notebook或48美元Everyday desk set选中后立即更新Demo total。联系表单使用email关联label、required和原生校验，提交仅更新status，无网络发送；不要添加银行卡、有效期或安全码输入。\n适配390/1440px，操作至少44px；保持原生语义、focus-visible、hover、disabled及所需反馈。所有操作真实更新本地状态，不连接生产账号、不收款、不发邮件；尊重prefers-reduced-motion。"
+    },
+    "evidenceNote": "独立实现依据 Stripe Payments 官方产品页的结账流程与信息组织；本轮首屏的构图、商店、商品、流水数据及联动代码重新编写。StyleKit仅保留为发现入口，不作为演示构图或代码来源。品牌及各来源权利归各自所有。",
+    "verifiedAt": "2026-11-08",
+    "theme": {
+      "bg": "#fcfbf8",
+      "ink": "#0a2540",
+      "surface": "#ffffff",
+      "muted": "#425466",
+      "accent": "#635bff",
+      "accentInk": "#ffffff",
+      "radius": 12,
+      "border": 1
+    }
+  },
+  {
+    "key": "editorial",
+    "title": "编辑杂志网站 · Fieldnotes",
+    "sourceSlug": "stylekit-editorial",
+    "summary": "参考编辑出版物的摄影叙事、衬线字与留白，独立设计 Fieldnotes 日志网站。使用本站已有图片和原创文章，包含主题筛选、阅读展开、档案与订阅演示。",
+    "palette": [
+      "#f8f7f4",
+      "#20201e",
+      "#6d6c65",
+      "#d8d6cf",
+      "#ffffff"
+    ],
+    "layout": "细线刊头；大号衬线标题与期号信息；全幅本站摄影、文章清单、错落档案和简洁邮件表单。",
+    "scenarios": [
+      "editorial",
+      "blog",
+      "portfolio"
+    ],
+    "observations": [
+      "Kinfolk官网以真实摄影、内容类别和阅读入口组织出版内容，而非营销功能卡片。",
+      "本页继承出版物的大图、克制细线与衬线/无衬线搭配，但期刊名、标题、文章和版式重新编写。",
+      "照片使用本项目已有lake-walk与quiet-studio素材，没有抓取Kinfolk或StyleKit摄影作品。"
+    ],
+    "interactions": [
+      "主题筛选",
+      "文章展开与收起",
+      "档案条目切换",
+      "邮件输入校验与本地订阅反馈"
+    ],
+    "referenceSite": {
+      "name": "Kinfolk 官方网站",
+      "url": "https://www.kinfolk.com/"
+    },
+    "referencePages": [
+      {
+        "name": "Kinfolk 官方网站",
+        "url": "https://www.kinfolk.com/"
+      }
+    ],
+    "collectionReference": {
+      "name": "StyleKit 风格发现入口",
+      "url": "https://www.stylekit.top/zh/styles/editorial"
+    },
+    "styleType": "visual",
+    "typography": "首屏展示标题：Georgia, Times New Roman, serif，clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)，字重500；第二行italic，行高.94 / 手机1；章节标题：Georgia, serif，42px / 手机34px，字重400，行高1.15；正文：IAVSE Sans, Arial, sans-serif，15px；展开文章Georgia 18px / 手机16px，字重400，行高1.75–1.9；栏目与图片说明：IAVSE Sans, sans-serif，9–11px，字重400，行高1.75。所有自有标题字距不紧于-.04em。",
+    "componentIds": [
+      "navigation",
+      "tabs",
+      "card",
+      "input"
+    ],
+    "designDetails": {
+      "colorRoles": [
+        {
+          "role": "纸色页面底",
+          "hex": "#f8f7f4",
+          "usage": "全站主要阅读底，避免纯白反差过硬。"
+        },
+        {
+          "role": "墨色主文",
+          "hex": "#20201e",
+          "usage": "标题、主文字、主要分隔线和交互焦点。"
+        },
+        {
+          "role": "元信息灰",
+          "hex": "#6d6c65",
+          "usage": "栏目、图片说明、摘要，保持从属于文章标题。"
+        },
+        {
+          "role": "分隔细线",
+          "hex": "#d8d6cf",
+          "usage": "刊头、文章行与页尾的1px分界，不使用阴影卡片。"
+        },
+        {
+          "role": "空白/图片对照",
+          "hex": "#ffffff",
+          "usage": "仅作为调色参考的纯白，页面主底仍为纸色。"
+        },
+        {
+          "role": "章节对照底",
+          "hex": "#eeede8",
+          "usage": "About章节的轻微纸色变化，不扩展为多色系统。"
+        }
+      ],
+      "typography": [
+        {
+          "role": "首屏展示标题",
+          "family": "Georgia, Times New Roman, serif",
+          "size": "clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)",
+          "weight": "500；第二行italic",
+          "lineHeight": ".94 / 手机1"
+        },
+        {
+          "role": "章节标题",
+          "family": "Georgia, serif",
+          "size": "42px / 手机34px",
+          "weight": "400",
+          "lineHeight": "1.15"
+        },
+        {
+          "role": "正文",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "15px；展开文章Georgia 18px / 手机16px",
+          "weight": "400",
+          "lineHeight": "1.75–1.9"
+        },
+        {
+          "role": "栏目与图片说明",
+          "family": "IAVSE Sans, sans-serif",
+          "size": "9–11px",
+          "weight": "400",
+          "lineHeight": "1.75"
+        }
+      ],
+      "spacing": [
+        {
+          "token": "container",
+          "value": "最大1200px；中屏30px边距；手机22px边距",
+          "usage": "保留出版物阅读边界。"
+        },
+        {
+          "token": "hero",
+          "value": "顶部120px / 手机70px；照片前85px / 手机45px",
+          "usage": "大标题、说明与摄影形成分开的阅读节奏。"
+        },
+        {
+          "token": "section",
+          "value": "桌面100px / 手机65px",
+          "usage": "文章和档案章节。"
+        },
+        {
+          "token": "article-row",
+          "value": "上下35px / 手机28px",
+          "usage": "索引、文章和展开操作对齐，展开正文另留28px。"
+        }
+      ],
+      "layoutRules": [
+        "细线刊头；大号衬线标题与期号信息；全幅本站摄影、文章清单、错落档案和简洁邮件表单。",
+        "所有章节使用正常文档流；只有页面导航允许sticky，锚点为其预留滚动间距。",
+        "中小视口先保持内容顺序，再将列折叠；不通过缩小整页隐藏溢出。"
+      ],
+      "designFocus": [
+        "摄影与内容先于界面装饰",
+        "可辨认的期刊层级",
+        "大衬线和小型元信息反差",
+        "阅读展开保持原生文档流"
+      ],
+      "do": [
+        "大衬线标题与小型无衬线栏目/图片说明分工清楚。",
+        "文章按分隔行组织，展开阅读留在文档流。",
+        "照片采用本站已有素材并保留图注，不冒充出版物摄影。"
+      ],
+      "dont": [
+        "不要把文章排成同尺寸圆角营销功能卡。",
+        "不要使用渐变、玻璃或粗投影打断纸面阅读。"
+      ],
+      "responsive": [
+        "在1440px展示桌面网格，在390px按阅读顺序堆叠。",
+        "长标题使用受限clamp字号，正文与输入不撑宽视口。",
+        "页面宽度内保留主导航、反馈与至少44px操作目标。"
+      ],
+      "motion": [
+        "只使用与交互相关的有限反馈；无后台连续动效。",
+        "prefers-reduced-motion时移除位移与过渡但保留状态。"
+      ]
+    },
+    "prompt": "为[产品名称]独立实现「编辑杂志网站 · Fieldnotes」网站。将参考资料 https://www.kinfolk.com/ 作为设计语言依据，而非复制模板。使用自己的产品名、文案、数据和已获授权素材，不复用StyleKit/VibeUI的示例代码与提示词。\n\n结构：细线刊头；大号衬线标题与期号信息；全幅本站摄影、文章清单、错落档案和简洁邮件表单。\n\n色彩与角色：\n- 纸色页面底 #f8f7f4：全站主要阅读底，避免纯白反差过硬。\n- 墨色主文 #20201e：标题、主文字、主要分隔线和交互焦点。\n- 元信息灰 #6d6c65：栏目、图片说明、摘要，保持从属于文章标题。\n- 分隔细线 #d8d6cf：刊头、文章行与页尾的1px分界，不使用阴影卡片。\n- 空白/图片对照 #ffffff：仅作为调色参考的纯白，页面主底仍为纸色。\n- 章节对照底 #eeede8：About章节的轻微纸色变化，不扩展为多色系统。\n\n字体排版：\n- 首屏展示标题：Georgia, Times New Roman, serif；clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)；字重500；第二行italic；行高.94 / 手机1\n- 章节标题：Georgia, serif；42px / 手机34px；字重400；行高1.15\n- 正文：IAVSE Sans, Arial, sans-serif；15px；展开文章Georgia 18px / 手机16px；字重400；行高1.75–1.9\n- 栏目与图片说明：IAVSE Sans, sans-serif；9–11px；字重400；行高1.75\n\n留白与尺寸：\n- container 最大1200px；中屏30px边距；手机22px边距：保留出版物阅读边界。\n- hero 顶部120px / 手机70px；照片前85px / 手机45px：大标题、说明与摄影形成分开的阅读节奏。\n- section 桌面100px / 手机65px：文章和档案章节。\n- article-row 上下35px / 手机28px：索引、文章和展开操作对齐，展开正文另留28px。\n\n设计重点：摄影与内容先于界面装饰；可辨认的期刊层级；大衬线和小型元信息反差；阅读展开保持原生文档流。\n推荐：大衬线标题与小型无衬线栏目/图片说明分工清楚。；文章按分隔行组织，展开阅读留在文档流。；照片采用本站已有素材并保留图注，不冒充出版物摄影。\n避免：不要把文章排成同尺寸圆角营销功能卡。；不要使用渐变、玻璃或粗投影打断纸面阅读。\n\n功能：主题筛选；文章展开与收起；档案条目切换；邮件输入校验与本地订阅反馈。按钮、过滤、表单和状态都需真实运行，示例数据只留在本页，不连接参考站生产账号，不发起真实付款或邮件。\n\n适配：1440px呈现完整桌面结构；390px按阅读顺序折叠，标题不横溢，操作至少44px、键盘焦点明确。使用独立作用域CSS、关联label、原生表单验证；保留正常文档流与合理锚点偏移，尊重prefers-reduced-motion。\n\n交付完整React页面、样式、本地数据和操作说明；导航、首屏、三个以上有内容章节、组件体验和页尾都需完整。不以换色后的共享布局代替此模板。",
+    "componentPrompts": {
+      "navigation": "为[产品名称]实现编辑杂志网站 · Fieldnotes中的navigation组件。\n设计依据：https://www.kinfolk.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：Georgia, Times New Roman, serif，clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)，字重500；第二行italic，行高.94 / 手机1；章节标题：Georgia, serif，42px / 手机34px，字重400，行高1.15；正文：IAVSE Sans, Arial, sans-serif，15px；展开文章Georgia 18px / 手机16px，字重400，行高1.75–1.9；栏目与图片说明：IAVSE Sans, sans-serif，9–11px，字重400，行高1.75。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 纸色页面底 #f8f7f4：全站主要阅读底，避免纯白反差过硬。\n- 墨色主文 #20201e：标题、主文字、主要分隔线和交互焦点。\n- 元信息灰 #6d6c65：栏目、图片说明、摘要，保持从属于文章标题。\n- 分隔细线 #d8d6cf：刊头、文章行与页尾的1px分界，不使用阴影卡片。\n- 空白/图片对照 #ffffff：仅作为调色参考的纯白，页面主底仍为纸色。\n- 章节对照底 #eeede8：About章节的轻微纸色变化，不扩展为多色系统。\n细节：细线导航链接到Stories、Archive和About；窄屏保留可触摸的短导航，不引入遮挡式菜单。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "tabs": "为[产品名称]实现编辑杂志网站 · Fieldnotes中的tabs组件。\n设计依据：https://www.kinfolk.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：Georgia, Times New Roman, serif，clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)，字重500；第二行italic，行高.94 / 手机1；章节标题：Georgia, serif，42px / 手机34px，字重400，行高1.15；正文：IAVSE Sans, Arial, sans-serif，15px；展开文章Georgia 18px / 手机16px，字重400，行高1.75–1.9；栏目与图片说明：IAVSE Sans, sans-serif，9–11px，字重400，行高1.75。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 纸色页面底 #f8f7f4：全站主要阅读底，避免纯白反差过硬。\n- 墨色主文 #20201e：标题、主文字、主要分隔线和交互焦点。\n- 元信息灰 #6d6c65：栏目、图片说明、摘要，保持从属于文章标题。\n- 分隔细线 #d8d6cf：刊头、文章行与页尾的1px分界，不使用阴影卡片。\n- 空白/图片对照 #ffffff：仅作为调色参考的纯白，页面主底仍为纸色。\n- 章节对照底 #eeede8：About章节的轻微纸色变化，不扩展为多色系统。\n细节：All、Places、Practice、Objects作为主题过滤器，按钮aria-pressed和结果数量同步。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "card": "为[产品名称]实现编辑杂志网站 · Fieldnotes中的card组件。\n设计依据：https://www.kinfolk.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：Georgia, Times New Roman, serif，clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)，字重500；第二行italic，行高.94 / 手机1；章节标题：Georgia, serif，42px / 手机34px，字重400，行高1.15；正文：IAVSE Sans, Arial, sans-serif，15px；展开文章Georgia 18px / 手机16px，字重400，行高1.75–1.9；栏目与图片说明：IAVSE Sans, sans-serif，9–11px，字重400，行高1.75。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 纸色页面底 #f8f7f4：全站主要阅读底，避免纯白反差过硬。\n- 墨色主文 #20201e：标题、主文字、主要分隔线和交互焦点。\n- 元信息灰 #6d6c65：栏目、图片说明、摘要，保持从属于文章标题。\n- 分隔细线 #d8d6cf：刊头、文章行与页尾的1px分界，不使用阴影卡片。\n- 空白/图片对照 #ffffff：仅作为调色参考的纯白，页面主底仍为纸色。\n- 章节对照底 #eeede8：About章节的轻微纸色变化，不扩展为多色系统。\n细节：摄影与文章标题构成一个可阅读单元；打开后在文档流中展开原创文章，避免不必要模态。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "input": "为[产品名称]实现编辑杂志网站 · Fieldnotes中的input组件。\n设计依据：https://www.kinfolk.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：Georgia, Times New Roman, serif，clamp(70px,9.2vw,132px) / 手机clamp(45px,13.3vw,66px)，字重500；第二行italic，行高.94 / 手机1；章节标题：Georgia, serif，42px / 手机34px，字重400，行高1.15；正文：IAVSE Sans, Arial, sans-serif，15px；展开文章Georgia 18px / 手机16px，字重400，行高1.75–1.9；栏目与图片说明：IAVSE Sans, sans-serif，9–11px，字重400，行高1.75。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 纸色页面底 #f8f7f4：全站主要阅读底，避免纯白反差过硬。\n- 墨色主文 #20201e：标题、主文字、主要分隔线和交互焦点。\n- 元信息灰 #6d6c65：栏目、图片说明、摘要，保持从属于文章标题。\n- 分隔细线 #d8d6cf：刊头、文章行与页尾的1px分界，不使用阴影卡片。\n- 空白/图片对照 #ffffff：仅作为调色参考的纯白，页面主底仍为纸色。\n- 章节对照底 #eeede8：About章节的轻微纸色变化，不扩展为多色系统。\n细节：底线式email输入配label，提交后原地显示本地订阅结果，不发送外部邮件。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。"
+    },
+    "evidenceNote": "已查看对应StyleKit发现页面，但独立模板的文字、构图与实现重新编写；底层参考资料单列。网站及其素材权利各自保留，不作独占原创或无侵权保证。",
+    "verifiedAt": "2026-11-08",
+    "theme": {
+      "bg": "#f8f7f4",
+      "ink": "#20201e",
+      "surface": "#eeede8",
+      "muted": "#6d6c65",
+      "accent": "#20201e",
+      "accentInk": "#ffffff",
+      "radius": 0,
+      "border": 1
+    }
+  },
+  {
+    "key": "brutalist",
+    "title": "高对比创作网站 · Make Room",
+    "sourceSlug": "stylekit-neo-brutalist",
+    "summary": "借鉴创作平台的高对比直角、粗线与醒目动作，自行设计 Make Room 创作资源网站。以原创文字海报、资源清单和可操作组件说明建立鲜明网站界面。",
+    "palette": [
+      "#d4ff00",
+      "#000000",
+      "#ffffff",
+      "#ff287d",
+      "#00d9ff"
+    ],
+    "layout": "粗线短导航；大号黑体宣言与排版海报；资源筛选、粗边框组件工坊、直白联系表单和黑色页尾。",
+    "scenarios": [
+      "creative",
+      "marketing",
+      "portfolio"
+    ],
+    "observations": [
+      "Gumroad作为创作平台参考具有直接的创作者入口、醒目主动作和清楚资源分类；它不被列为这种设计流派的唯一作者。",
+      "粗边框、直角、硬阴影和高对比排版是本页采用的通用设计手法。",
+      "本页Make Room品牌、资源内容、字号与结构均独立编写，未复制Gumroad或StyleKit的插图、模板和提示词。"
+    ],
+    "interactions": [
+      "资源类别过滤",
+      "资源收藏",
+      "按钮按压计数",
+      "联系表单本地提交"
+    ],
+    "referenceSite": {
+      "name": "Gumroad 官方网站",
+      "url": "https://gumroad.com/"
+    },
+    "referencePages": [
+      {
+        "name": "Gumroad 官方网站",
+        "url": "https://gumroad.com/"
+      }
+    ],
+    "collectionReference": {
+      "name": "StyleKit 风格发现入口",
+      "url": "https://www.stylekit.top/zh/styles/neo-brutalist"
+    },
+    "styleType": "visual",
+    "typography": "首屏展示标题：IAVSE Sans, Arial, sans-serif，96px / 800px以下64px，字重800，行高.94；章节标题：IAVSE Sans, Arial, sans-serif，61px / 手机46px，字重800，行高.97；正文：ui-monospace, SFMono-Regular, Consolas, monospace，16px / 手机14px，字重400，行高1.65–1.7；标记与动作：ui-monospace, monospace，10–12px，字重700，行高1.65。所有自有标题字距不紧于-.04em。",
+    "componentIds": [
+      "button",
+      "badge",
+      "card",
+      "input"
+    ],
+    "designDetails": {
+      "colorRoles": [
+        {
+          "role": "酸绿主视觉",
+          "hex": "#d4ff00",
+          "usage": "海报与主要宣言背景，大面积高对比色。"
+        },
+        {
+          "role": "结构黑",
+          "hex": "#000000",
+          "usage": "粗边框、硬阴影、标题、黑色页尾。"
+        },
+        {
+          "role": "阅读白",
+          "hex": "#ffffff",
+          "usage": "资源与组件阅读面；与黑色边界形成硬对比。"
+        },
+        {
+          "role": "动作粉",
+          "hex": "#ff287d",
+          "usage": "主操作阴影/标记、强调标签；不用于小号白字正文。"
+        },
+        {
+          "role": "信息青",
+          "hex": "#00d9ff",
+          "usage": "原创排版海报与辅助状态的小面积点色。"
+        }
+      ],
+      "typography": [
+        {
+          "role": "首屏展示标题",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "96px / 800px以下64px",
+          "weight": "800",
+          "lineHeight": ".94"
+        },
+        {
+          "role": "章节标题",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "61px / 手机46px",
+          "weight": "800",
+          "lineHeight": ".97"
+        },
+        {
+          "role": "正文",
+          "family": "ui-monospace, SFMono-Regular, Consolas, monospace",
+          "size": "16px / 手机14px",
+          "weight": "400",
+          "lineHeight": "1.65–1.7"
+        },
+        {
+          "role": "标记与动作",
+          "family": "ui-monospace, monospace",
+          "size": "10–12px",
+          "weight": "700",
+          "lineHeight": "1.65"
+        }
+      ],
+      "spacing": [
+        {
+          "token": "navigation",
+          "value": "至少80px；15px上下内边距",
+          "usage": "粗线导航，桌面横向分组。"
+        },
+        {
+          "token": "hero",
+          "value": "顶部100px / 手机65px",
+          "usage": "桌面列间60px，手机内容依序堆叠。"
+        },
+        {
+          "token": "section",
+          "value": "桌面85px / 手机65px",
+          "usage": "资源、工坊和联系上下留白。"
+        },
+        {
+          "token": "physical-control",
+          "value": "3px边框；6px硬阴影；工坊8px阴影",
+          "usage": "active按相同距离压平，控件至少50–54px高。"
+        }
+      ],
+      "layoutRules": [
+        "粗线短导航；大号黑体宣言与排版海报；资源筛选、粗边框组件工坊、直白联系表单和黑色页尾。",
+        "所有章节使用正常文档流；只有页面导航允许sticky，锚点为其预留滚动间距。",
+        "中小视口先保持内容顺序，再将列折叠；不通过缩小整页隐藏溢出。"
+      ],
+      "designFocus": [
+        "粗线与硬阴影构成明确物理状态",
+        "类型与正文密度形成节奏",
+        "鲜明但有限的强调色",
+        "功能性网格而非装饰卡片"
+      ],
+      "do": [
+        "粗黑边框、直角和硬边阴影同时成立。",
+        "按钮按下位移必须与阴影偏移对齐，形成完全压平。",
+        "高对比主色与等宽辅助文字形成粗犷但可用的信息层级。"
+      ],
+      "dont": [
+        "不要给粗野主义控件添加软阴影、模糊或任意圆角。",
+        "不要让hover透明淡出代替硬切背景与明确按压反馈。"
+      ],
+      "responsive": [
+        "在1440px展示桌面网格，在390px按阅读顺序堆叠。",
+        "长标题使用受限clamp字号，正文与输入不撑宽视口。",
+        "页面宽度内保留主导航、反馈与至少44px操作目标。"
+      ],
+      "motion": [
+        "只使用与交互相关的有限反馈；无后台连续动效。",
+        "prefers-reduced-motion时移除位移与过渡但保留状态。"
+      ]
+    },
+    "prompt": "为[产品名称]独立实现「高对比创作网站 · Make Room」网站。将参考资料 https://gumroad.com/ 作为设计语言依据，而非复制模板。使用自己的产品名、文案、数据和已获授权素材，不复用StyleKit/VibeUI的示例代码与提示词。\n\n结构：粗线短导航；大号黑体宣言与排版海报；资源筛选、粗边框组件工坊、直白联系表单和黑色页尾。\n\n色彩与角色：\n- 酸绿主视觉 #d4ff00：海报与主要宣言背景，大面积高对比色。\n- 结构黑 #000000：粗边框、硬阴影、标题、黑色页尾。\n- 阅读白 #ffffff：资源与组件阅读面；与黑色边界形成硬对比。\n- 动作粉 #ff287d：主操作阴影/标记、强调标签；不用于小号白字正文。\n- 信息青 #00d9ff：原创排版海报与辅助状态的小面积点色。\n\n字体排版：\n- 首屏展示标题：IAVSE Sans, Arial, sans-serif；96px / 800px以下64px；字重800；行高.94\n- 章节标题：IAVSE Sans, Arial, sans-serif；61px / 手机46px；字重800；行高.97\n- 正文：ui-monospace, SFMono-Regular, Consolas, monospace；16px / 手机14px；字重400；行高1.65–1.7\n- 标记与动作：ui-monospace, monospace；10–12px；字重700；行高1.65\n\n留白与尺寸：\n- navigation 至少80px；15px上下内边距：粗线导航，桌面横向分组。\n- hero 顶部100px / 手机65px：桌面列间60px，手机内容依序堆叠。\n- section 桌面85px / 手机65px：资源、工坊和联系上下留白。\n- physical-control 3px边框；6px硬阴影；工坊8px阴影：active按相同距离压平，控件至少50–54px高。\n\n设计重点：粗线与硬阴影构成明确物理状态；类型与正文密度形成节奏；鲜明但有限的强调色；功能性网格而非装饰卡片。\n推荐：粗黑边框、直角和硬边阴影同时成立。；按钮按下位移必须与阴影偏移对齐，形成完全压平。；高对比主色与等宽辅助文字形成粗犷但可用的信息层级。\n避免：不要给粗野主义控件添加软阴影、模糊或任意圆角。；不要让hover透明淡出代替硬切背景与明确按压反馈。\n\n功能：资源类别过滤；资源收藏；按钮按压计数；联系表单本地提交。按钮、过滤、表单和状态都需真实运行，示例数据只留在本页，不连接参考站生产账号，不发起真实付款或邮件。\n\n适配：1440px呈现完整桌面结构；390px按阅读顺序折叠，标题不横溢，操作至少44px、键盘焦点明确。使用独立作用域CSS、关联label、原生表单验证；保留正常文档流与合理锚点偏移，尊重prefers-reduced-motion。\n\n交付完整React页面、样式、本地数据和操作说明；导航、首屏、三个以上有内容章节、组件体验和页尾都需完整。不以换色后的共享布局代替此模板。",
+    "componentPrompts": {
+      "button": "为[产品名称]实现高对比创作网站 · Make Room中的button组件。\n设计依据：https://gumroad.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，96px / 800px以下64px，字重800，行高.94；章节标题：IAVSE Sans, Arial, sans-serif，61px / 手机46px，字重800，行高.97；正文：ui-monospace, SFMono-Regular, Consolas, monospace，16px / 手机14px，字重400，行高1.65–1.7；标记与动作：ui-monospace, monospace，10–12px，字重700，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 酸绿主视觉 #d4ff00：海报与主要宣言背景，大面积高对比色。\n- 结构黑 #000000：粗边框、硬阴影、标题、黑色页尾。\n- 阅读白 #ffffff：资源与组件阅读面；与黑色边界形成硬对比。\n- 动作粉 #ff287d：主操作阴影/标记、强调标签；不用于小号白字正文。\n- 信息青 #00d9ff：原创排版海报与辅助状态的小面积点色。\n细节：纯黑2–4px边框、6px硬阴影；hover偏移，active位移与阴影相等并压平，更新本地计数。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "badge": "为[产品名称]实现高对比创作网站 · Make Room中的badge组件。\n设计依据：https://gumroad.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，96px / 800px以下64px，字重800，行高.94；章节标题：IAVSE Sans, Arial, sans-serif，61px / 手机46px，字重800，行高.97；正文：ui-monospace, SFMono-Regular, Consolas, monospace，16px / 手机14px，字重400，行高1.65–1.7；标记与动作：ui-monospace, monospace，10–12px，字重700，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 酸绿主视觉 #d4ff00：海报与主要宣言背景，大面积高对比色。\n- 结构黑 #000000：粗边框、硬阴影、标题、黑色页尾。\n- 阅读白 #ffffff：资源与组件阅读面；与黑色边界形成硬对比。\n- 动作粉 #ff287d：主操作阴影/标记、强调标签；不用于小号白字正文。\n- 信息青 #00d9ff：原创排版海报与辅助状态的小面积点色。\n细节：All、Templates、Type、Notes过滤资源清单，当前项黑底白字并维护aria-pressed。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "card": "为[产品名称]实现高对比创作网站 · Make Room中的card组件。\n设计依据：https://gumroad.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，96px / 800px以下64px，字重800，行高.94；章节标题：IAVSE Sans, Arial, sans-serif，61px / 手机46px，字重800，行高.97；正文：ui-monospace, SFMono-Regular, Consolas, monospace，16px / 手机14px，字重400，行高1.65–1.7；标记与动作：ui-monospace, monospace，10–12px，字重700，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 酸绿主视觉 #d4ff00：海报与主要宣言背景，大面积高对比色。\n- 结构黑 #000000：粗边框、硬阴影、标题、黑色页尾。\n- 阅读白 #ffffff：资源与组件阅读面；与黑色边界形成硬对比。\n- 动作粉 #ff287d：主操作阴影/标记、强调标签；不用于小号白字正文。\n- 信息青 #00d9ff：原创排版海报与辅助状态的小面积点色。\n细节：资源块保持直角粗边框，收藏按钮与主标题动作分离，收藏状态即时变化。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "input": "为[产品名称]实现高对比创作网站 · Make Room中的input组件。\n设计依据：https://gumroad.com/；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，96px / 800px以下64px，字重800，行高.94；章节标题：IAVSE Sans, Arial, sans-serif，61px / 手机46px，字重800，行高.97；正文：ui-monospace, SFMono-Regular, Consolas, monospace，16px / 手机14px，字重400，行高1.65–1.7；标记与动作：ui-monospace, monospace，10–12px，字重700，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 酸绿主视觉 #d4ff00：海报与主要宣言背景，大面积高对比色。\n- 结构黑 #000000：粗边框、硬阴影、标题、黑色页尾。\n- 阅读白 #ffffff：资源与组件阅读面；与黑色边界形成硬对比。\n- 动作粉 #ff287d：主操作阴影/标记、强调标签；不用于小号白字正文。\n- 信息青 #00d9ff：原创排版海报与辅助状态的小面积点色。\n细节：直角高对比标签与输入框，required/email校验，不依赖色彩独自说明错误。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。"
+    },
+    "evidenceNote": "已查看对应StyleKit发现页面，但独立模板的文字、构图与实现重新编写；底层参考资料单列。网站及其素材权利各自保留，不作独占原创或无侵权保证。",
+    "verifiedAt": "2026-11-08",
+    "theme": {
+      "bg": "#d4ff00",
+      "ink": "#000000",
+      "surface": "#ffffff",
+      "muted": "#232323",
+      "accent": "#ff287d",
+      "accentInk": "#000000",
+      "radius": 0,
+      "border": 4
+    }
+  },
+  {
+    "key": "swiss",
+    "title": "瑞士网格网站 · Grid Practice",
+    "sourceSlug": "stylekit-swiss-style",
+    "summary": "以瑞士国际主义的网格、无衬线、非对称对齐与有限颜色为方法，独立设计排版工作室网站。原始资料作为流派说明，海报和数字内容均为本站原创。",
+    "palette": [
+      "#ffffff",
+      "#000000",
+      "#ef342b",
+      "#ededeb",
+      "#6c6c68"
+    ],
+    "layout": "常规文档流中的细线导航；首屏7:5非对称分栏，左侧文字、右侧原创红色几何海报；设计立场、可调4/8/12列网格、黑底字体标本、文章表格、红色联系区依次展开。",
+    "scenarios": [
+      "portfolio",
+      "editorial",
+      "creative",
+      "docs"
+    ],
+    "observations": [
+      "瑞士国家图书馆将International Style解释为强调网格、无衬线、精确结构和少量颜色的设计流派。",
+      "资料说明不是网站模板的所有权来源；本页海报、工作室内容和交互自行创作。",
+      "页面采用非对称留白、对齐列和红黑信号色，没有复用StyleKit的Form follows function首屏。"
+    ],
+    "interactions": [
+      "网格列数切换",
+      "系统标签切换",
+      "文章关键词过滤",
+      "联系表单本地确认"
+    ],
+    "referenceSite": {
+      "name": "瑞士国家图书馆 · International Style",
+      "url": "https://www.nb.admin.ch/en/the-international-style-1950-1970"
+    },
+    "referencePages": [
+      {
+        "name": "瑞士国家图书馆 · International Style",
+        "url": "https://www.nb.admin.ch/en/the-international-style-1950-1970"
+      },
+      {
+        "name": "瑞士联邦外交部 · Swiss Style 设计传统",
+        "url": "https://www.aboutswitzerland.eda.admin.ch/en/swiss-style-forever-the-story-of-a-graphic-design-tradition"
+      }
+    ],
+    "collectionReference": {
+      "name": "StyleKit 风格发现入口",
+      "url": "https://www.stylekit.top/zh/styles/swiss-style"
+    },
+    "styleType": "visual",
+    "typography": "Helvetica Neue / Arial / sans-serif；首屏104px（900px以下72px、600px以下62px），500字重、1.04行高；正文16px/1.65，辅助说明14px/1.8，元信息11–13px。",
+    "componentIds": [
+      "slider",
+      "tabs",
+      "navigation",
+      "table"
+    ],
+    "designDetails": {
+      "colorRoles": [
+        {
+          "role": "基础白",
+          "hex": "#ffffff",
+          "usage": "白底工作室页面与无装饰留白。"
+        },
+        {
+          "role": "排版黑",
+          "hex": "#000000",
+          "usage": "大标题、表格主文、关键分隔线。"
+        },
+        {
+          "role": "信号红",
+          "hex": "#ef342b",
+          "usage": "原创海报、活动标签和当前网格信号，只选一个主强调色。"
+        },
+        {
+          "role": "结构灰",
+          "hex": "#ededeb",
+          "usage": "示意网格和系统面板，不加入投影。"
+        },
+        {
+          "role": "辅助灰",
+          "hex": "#6c6c68",
+          "usage": "元信息与正文次级说明，保持稳定阅读层次。"
+        }
+      ],
+      "typography": [
+        {
+          "role": "展示标题",
+          "family": "Helvetica Neue / Arial",
+          "size": "104px → 72px → 62px",
+          "weight": "500",
+          "lineHeight": "1.04"
+        },
+        {
+          "role": "章节标题",
+          "family": "Helvetica Neue / Arial",
+          "size": "40px / 手机30px",
+          "weight": "500",
+          "lineHeight": "1.1"
+        },
+        {
+          "role": "正文",
+          "family": "Helvetica Neue / Arial",
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "1.65"
+        },
+        {
+          "role": "辅助说明",
+          "family": "Helvetica Neue / Arial",
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "1.8"
+        },
+        {
+          "role": "元信息",
+          "family": "Helvetica Neue / Arial",
+          "size": "11–13px",
+          "weight": "400–500",
+          "lineHeight": "1.5–1.65"
+        }
+      ],
+      "spacing": [
+        {
+          "token": "page-gutter",
+          "value": "40px → 24px → 20px",
+          "usage": "桌面／900px以下／600px以下页边距"
+        },
+        {
+          "token": "section",
+          "value": "100px / 手机70px",
+          "usage": "系统与文章区底部间距"
+        },
+        {
+          "token": "hero-columns",
+          "value": "7fr 5fr；间隔6%",
+          "usage": "桌面首屏非对称网格"
+        },
+        {
+          "token": "control",
+          "value": "44px；主要表格行64px",
+          "usage": "最小点击高度与信息行节奏"
+        }
+      ],
+      "layoutRules": [
+        "常规文档流中的细线导航；首屏7:5非对称分栏，左侧文字、右侧原创红色几何海报；设计立场、可调4/8/12列网格、黑底字体标本、文章表格、红色联系区依次展开。",
+        "海报使用有精确定义的同心圆与排版，不复制参考网站图片。",
+        "列数变化同步12、8或4列刻度与格线；图形内容始终保持可读。"
+      ],
+      "designFocus": [
+        "网格承担信息结构",
+        "非对称但严格对齐",
+        "红色仅用作信号",
+        "文字层级先于装饰"
+      ],
+      "do": [
+        "大标题、索引、正文和图形按同一列线对齐。",
+        "只以红色承担主信号，其他区域保持黑白灰。",
+        "网格数字与可见列数必须同步，表格保持对齐和表头。"
+      ],
+      "dont": [
+        "不要用居中口号代替实际网格和非对称排版。",
+        "不要用卡片阴影、胶囊按钮或装饰图标破坏理性结构。"
+      ],
+      "responsive": [
+        "900px以下页边距24px，首屏字72px；说明区由三列改为两列。",
+        "600px以下页边距20px，首屏字62px，主网格单列，保留7:5桌面构图的阅读顺序。",
+        "手机主导航保留Work/System/Contact，Notes也能从页面内容访问；表格采用正常列语义，长标题折行。"
+      ],
+      "motion": [
+        "只使用与交互相关的有限反馈；无后台连续动效。",
+        "prefers-reduced-motion时移除位移与过渡但保留状态。"
+      ]
+    },
+    "prompt": "为[产品名称]设计并实现一套独立的瑞士国际主义网站。参考瑞士国家图书馆对 International Style 的历史说明，使用自己的名称、海报、文章和联系文案，不复制 StyleKit 的示例或提示词。\n\n视觉方向：非对称构图、明确的网格与文字层级，红色只有一个主信号。白底 #ffffff，正文黑 #000000，结构面 #ededeb，辅助文字 #6c6c68，海报、强调字和联系区使用 #ef342b。红底使用黑字，禁止增加渐变、圆角卡片、胶囊按钮或投影。\n\n结构：常规文档流中的细线导航；首屏7:5非对称分栏，左侧文字、右侧原创红色几何海报；设计立场、可调4/8/12列网格、黑底字体标本、文章表格、红色联系区依次展开。\n\n排版：Helvetica Neue / Arial / sans-serif；首屏104px（900px以下72px、600px以下62px），500字重、1.04行高；正文16px/1.65，辅助说明14px/1.8，元信息11–13px。 标题字距不小于 -0.04em。字体家族用系统已有合法字体，未提供的商业字体不下载。全站页边距40px，900px以下24px，600px以下20px；系统与文章章节相隔100px，手机70px。首屏标题不居中，左边线与内容统一。\n\n交互：原生range让网格在4/8/12列间切换，刻度、列数与output同步；Typography/Layout/Color按钮更新不同设计说明，用aria-pressed表达状态；文章关键词过滤保留原生table表头，可展开正文，无匹配时提供清除；带label的邮箱和留言required校验，提交只在本页status回显，不发邮件。按钮至少44px，表格行至少64px，focus-visible清晰。\n\n适配：手机正常重排为单列，不缩放整个网站。桌面与手机都有完整内容、页尾和入口。交付React组件、局部CSS、自有示例数据，以及按颜色角色、字体层级、间距和交互状态拆分的设计说明。",
+    "componentPrompts": {
+      "slider": "为[产品名称]实现瑞士网格网站 · Grid Practice中的slider组件。\n设计依据：https://www.nb.admin.ch/en/the-international-style-1950-1970；独立编写代码、文案和演示数据。\n视觉：Helvetica Neue / Arial / sans-serif；展示标题桌面／手机 104px / 62px，正文16px，元信息11–12px。 色彩 #ffffff, #000000, #ef342b, #ededeb, #6c6c68。\n细节：控制网格列数4/8/12，数值与可见列同步；每列具有可读编号。\n适配390/1440px，提供清楚focus-visible、hover、disabled和相关错误/空状态；语义与行为一致，尊重减少动态设置，不访问生产账号。",
+      "tabs": "为[产品名称]实现瑞士网格网站 · Grid Practice中的tabs组件。\n设计依据：https://www.nb.admin.ch/en/the-international-style-1950-1970；独立编写代码、文案和演示数据。\n视觉：Helvetica Neue / Arial / sans-serif；展示标题桌面／手机 104px / 62px，正文16px，元信息11–12px。 色彩 #ffffff, #000000, #ef342b, #ededeb, #6c6c68。\n细节：Typography、Layout、Color切换不同系统说明，活动项维持明确状态和可访问焦点。\n适配390/1440px，提供清楚focus-visible、hover、disabled和相关错误/空状态；语义与行为一致，尊重减少动态设置，不访问生产账号。",
+      "navigation": "为[产品名称]实现瑞士网格网站 · Grid Practice中的navigation组件。\n设计依据：https://www.nb.admin.ch/en/the-international-style-1950-1970；独立编写代码、文案和演示数据。\n视觉：Helvetica Neue / Arial / sans-serif；展示标题桌面／手机 104px / 62px，正文16px，元信息11–12px。 色彩 #ffffff, #000000, #ef342b, #ededeb, #6c6c68。\n细节：简洁全大写短导航链接到项目、系统与联系区域；手机不丢失主要入口。\n适配390/1440px，提供清楚focus-visible、hover、disabled和相关错误/空状态；语义与行为一致，尊重减少动态设置，不访问生产账号。",
+      "table": "为[产品名称]实现瑞士网格网站 · Grid Practice中的table组件。\n设计依据：https://www.nb.admin.ch/en/the-international-style-1950-1970；独立编写代码、文案和演示数据。\n视觉：Helvetica Neue / Arial / sans-serif；展示标题桌面／手机 104px / 62px，正文16px，元信息11–12px。 色彩 #ffffff, #000000, #ef342b, #ededeb, #6c6c68。\n细节：文章列表采用对齐行与表头，搜索后保留空结果与清除路径，信息不依赖色块。\n适配390/1440px，提供清楚focus-visible、hover、disabled和相关错误/空状态；语义与行为一致，尊重减少动态设置，不访问生产账号。"
+    },
+    "evidenceNote": "已查看对应StyleKit发现页面，但独立模板的文字、构图与实现重新编写；底层参考资料单列。网站及其素材权利各自保留，不作独占原创或无侵权保证。",
+    "verifiedAt": "2026-11-08",
+    "theme": {
+      "bg": "#ffffff",
+      "ink": "#000000",
+      "surface": "#ededeb",
+      "muted": "#6c6c68",
+      "accent": "#ef342b",
+      "accentInk": "#000000",
+      "radius": 0,
+      "border": 1
+    }
+  },
+  {
+    "key": "minimal",
+    "title": "极简平面网站 · Plain Works",
+    "sourceSlug": "stylekit-minimalist-flat",
+    "summary": "以减少非必要视觉信息和让产品易懂的设计原则为参考，独立编写 Plain Works 网站。平面色块、充足留白、直接导航与功能组件形成自己的完整展示。",
+    "palette": [
+      "#ffffff",
+      "#111111",
+      "#ff4a6b",
+      "#00bfa5",
+      "#ffd43b"
+    ],
+    "layout": "细线四向导航；左侧大字与右侧功能色块；精选作品行、组件操作区、色彩角色与简短表单。",
+    "scenarios": [
+      "portfolio",
+      "saas",
+      "marketing",
+      "docs"
+    ],
+    "observations": [
+      "Vitsœ原始资料把易懂、克制与长期可用视为设计原则；本页仅据此理解方法，不复制其受许可约束的文章或产品图片。",
+      "平面色块、直白边框和留白构成此独立模板，不复制StyleKit的MINI/MAL/FLAT标题。",
+      "作品内容、组件、配色选择和提示词均重新编写；它不是Vitsœ现有网站的还原。"
+    ],
+    "interactions": [
+      "内容类别切换",
+      "强调色选择",
+      "组件按钮状态演示",
+      "表单校验与本地反馈"
+    ],
+    "referenceSite": {
+      "name": "Vitsœ · Good design 原始设计资料",
+      "url": "https://www.vitsoe.com/us/about/good-design"
+    },
+    "referencePages": [
+      {
+        "name": "Vitsœ · Good design 原始设计资料",
+        "url": "https://www.vitsoe.com/us/about/good-design"
+      }
+    ],
+    "collectionReference": {
+      "name": "StyleKit 风格发现入口",
+      "url": "https://www.stylekit.top/zh/styles/minimalist-flat"
+    },
+    "styleType": "visual",
+    "typography": "首屏展示标题：IAVSE Sans, Arial, sans-serif，112px；1260px以下clamp(65px,7.8vw,108px)；手机64px，字重700，行高.98；章节标题：IAVSE Sans, Arial, sans-serif，48px / 手机36px，字重600，行高1.12；正文：IAVSE Sans, Arial, sans-serif，16px / 手机15px，字重400，行高1.65–1.8；标签与导航：IAVSE Sans, Arial, sans-serif，9–11px，字重400–650，行高1.65。所有自有标题字距不紧于-.04em。",
+    "componentIds": [
+      "button",
+      "input",
+      "tabs",
+      "select"
+    ],
+    "designDetails": {
+      "colorRoles": [
+        {
+          "role": "基础白",
+          "hex": "#ffffff",
+          "usage": "主要页面、控件留白，固定平面背景。"
+        },
+        {
+          "role": "文字黑",
+          "hex": "#111111",
+          "usage": "标题、文字、主按钮与实线边框。"
+        },
+        {
+          "role": "珊瑚强调",
+          "hex": "#ff4a6b",
+          "usage": "默认单一强调，色块预览与动作反馈；小号文字仍用黑。"
+        },
+        {
+          "role": "青绿候选",
+          "hex": "#00bfa5",
+          "usage": "强调色选择器的可选方案，不与珊瑚共同作为主动作。"
+        },
+        {
+          "role": "黄色候选",
+          "hex": "#ffd43b",
+          "usage": "强调色选择器的可选方案；使用黑色文字保证对比。"
+        }
+      ],
+      "typography": [
+        {
+          "role": "首屏展示标题",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "112px；1260px以下clamp(65px,7.8vw,108px)；手机64px",
+          "weight": "700",
+          "lineHeight": ".98"
+        },
+        {
+          "role": "章节标题",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "48px / 手机36px",
+          "weight": "600",
+          "lineHeight": "1.12"
+        },
+        {
+          "role": "正文",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "16px / 手机15px",
+          "weight": "400",
+          "lineHeight": "1.65–1.8"
+        },
+        {
+          "role": "标签与导航",
+          "family": "IAVSE Sans, Arial, sans-serif",
+          "size": "9–11px",
+          "weight": "400–650",
+          "lineHeight": "1.65"
+        }
+      ],
+      "spacing": [
+        {
+          "token": "navigation",
+          "value": "78px / 手机68px",
+          "usage": "简单细线导航，不建立多层工具条。"
+        },
+        {
+          "token": "hero",
+          "value": "桌面100px / 手机65px",
+          "usage": "桌面列间65px；手机堆叠间距45px。"
+        },
+        {
+          "token": "section",
+          "value": "桌面95px / 手机65px",
+          "usage": "精选内容、工具与色彩章节。"
+        },
+        {
+          "token": "control",
+          "value": "50px / 手机48px",
+          "usage": "直角实线按钮与原生表单，禁用态文字说明清楚。"
+        }
+      ],
+      "layoutRules": [
+        "细线四向导航；左侧大字与右侧功能色块；精选作品行、组件操作区、色彩角色与简短表单。",
+        "所有章节使用正常文档流；只有页面导航允许sticky，锚点为其预留滚动间距。",
+        "中小视口先保持内容顺序，再将列折叠；不通过缩小整页隐藏溢出。"
+      ],
+      "designFocus": [
+        "移除非必要装饰",
+        "一项内容一个明确动作",
+        "平面色彩承担含义",
+        "直接可读的控件与状态"
+      ],
+      "do": [
+        "页面和控件保持平面，无投影、无模糊。",
+        "强调色一次只选一种，黑白承担基本信息结构。",
+        "按钮反转与表单状态直接明确，文字不依靠颜色才可识别。"
+      ],
+      "dont": [
+        "不要把所有候选强调色同时作为页面主动作。",
+        "不要添加无信息卡片、背景网格或纯装饰动画。"
+      ],
+      "responsive": [
+        "在1440px展示桌面网格，在390px按阅读顺序堆叠。",
+        "长标题使用受限clamp字号，正文与输入不撑宽视口。",
+        "页面宽度内保留主导航、反馈与至少44px操作目标。"
+      ],
+      "motion": [
+        "只使用与交互相关的有限反馈；无后台连续动效。",
+        "prefers-reduced-motion时移除位移与过渡但保留状态。"
+      ]
+    },
+    "prompt": "为[产品名称]独立实现「极简平面网站 · Plain Works」网站。将参考资料 https://www.vitsoe.com/us/about/good-design 作为设计语言依据，而非复制模板。使用自己的产品名、文案、数据和已获授权素材，不复用StyleKit/VibeUI的示例代码与提示词。\n\n结构：细线四向导航；左侧大字与右侧功能色块；精选作品行、组件操作区、色彩角色与简短表单。\n\n色彩与角色：\n- 基础白 #ffffff：主要页面、控件留白，固定平面背景。\n- 文字黑 #111111：标题、文字、主按钮与实线边框。\n- 珊瑚强调 #ff4a6b：默认单一强调，色块预览与动作反馈；小号文字仍用黑。\n- 青绿候选 #00bfa5：强调色选择器的可选方案，不与珊瑚共同作为主动作。\n- 黄色候选 #ffd43b：强调色选择器的可选方案；使用黑色文字保证对比。\n\n字体排版：\n- 首屏展示标题：IAVSE Sans, Arial, sans-serif；112px；1260px以下clamp(65px,7.8vw,108px)；手机64px；字重700；行高.98\n- 章节标题：IAVSE Sans, Arial, sans-serif；48px / 手机36px；字重600；行高1.12\n- 正文：IAVSE Sans, Arial, sans-serif；16px / 手机15px；字重400；行高1.65–1.8\n- 标签与导航：IAVSE Sans, Arial, sans-serif；9–11px；字重400–650；行高1.65\n\n留白与尺寸：\n- navigation 78px / 手机68px：简单细线导航，不建立多层工具条。\n- hero 桌面100px / 手机65px：桌面列间65px；手机堆叠间距45px。\n- section 桌面95px / 手机65px：精选内容、工具与色彩章节。\n- control 50px / 手机48px：直角实线按钮与原生表单，禁用态文字说明清楚。\n\n设计重点：移除非必要装饰；一项内容一个明确动作；平面色彩承担含义；直接可读的控件与状态。\n推荐：页面和控件保持平面，无投影、无模糊。；强调色一次只选一种，黑白承担基本信息结构。；按钮反转与表单状态直接明确，文字不依靠颜色才可识别。\n避免：不要把所有候选强调色同时作为页面主动作。；不要添加无信息卡片、背景网格或纯装饰动画。\n\n功能：内容类别切换；强调色选择；组件按钮状态演示；表单校验与本地反馈。按钮、过滤、表单和状态都需真实运行，示例数据只留在本页，不连接参考站生产账号，不发起真实付款或邮件。\n\n适配：1440px呈现完整桌面结构；390px按阅读顺序折叠，标题不横溢，操作至少44px、键盘焦点明确。使用独立作用域CSS、关联label、原生表单验证；保留正常文档流与合理锚点偏移，尊重prefers-reduced-motion。\n\n交付完整React页面、样式、本地数据和操作说明；导航、首屏、三个以上有内容章节、组件体验和页尾都需完整。不以换色后的共享布局代替此模板。",
+    "componentPrompts": {
+      "button": "为[产品名称]实现极简平面网站 · Plain Works中的button组件。\n设计依据：https://www.vitsoe.com/us/about/good-design；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，112px；1260px以下clamp(65px,7.8vw,108px)；手机64px，字重700，行高.98；章节标题：IAVSE Sans, Arial, sans-serif，48px / 手机36px，字重600，行高1.12；正文：IAVSE Sans, Arial, sans-serif，16px / 手机15px，字重400，行高1.65–1.8；标签与导航：IAVSE Sans, Arial, sans-serif，9–11px，字重400–650，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 基础白 #ffffff：主要页面、控件留白，固定平面背景。\n- 文字黑 #111111：标题、文字、主按钮与实线边框。\n- 珊瑚强调 #ff4a6b：默认单一强调，色块预览与动作反馈；小号文字仍用黑。\n- 青绿候选 #00bfa5：强调色选择器的可选方案，不与珊瑚共同作为主动作。\n- 黄色候选 #ffd43b：强调色选择器的可选方案；使用黑色文字保证对比。\n细节：黑白主按钮在悬停时直接反转，44px触摸高度，无阴影或模糊；动作更新旁边结果。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "input": "为[产品名称]实现极简平面网站 · Plain Works中的input组件。\n设计依据：https://www.vitsoe.com/us/about/good-design；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，112px；1260px以下clamp(65px,7.8vw,108px)；手机64px，字重700，行高.98；章节标题：IAVSE Sans, Arial, sans-serif，48px / 手机36px，字重600，行高1.12；正文：IAVSE Sans, Arial, sans-serif，16px / 手机15px，字重400，行高1.65–1.8；标签与导航：IAVSE Sans, Arial, sans-serif，9–11px，字重400–650，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 基础白 #ffffff：主要页面、控件留白，固定平面背景。\n- 文字黑 #111111：标题、文字、主按钮与实线边框。\n- 珊瑚强调 #ff4a6b：默认单一强调，色块预览与动作反馈；小号文字仍用黑。\n- 青绿候选 #00bfa5：强调色选择器的可选方案，不与珊瑚共同作为主动作。\n- 黄色候选 #ffd43b：强调色选择器的可选方案；使用黑色文字保证对比。\n细节：上置标签与实线输入，required/email原生校验，错误和成功以文本说明。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "tabs": "为[产品名称]实现极简平面网站 · Plain Works中的tabs组件。\n设计依据：https://www.vitsoe.com/us/about/good-design；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，112px；1260px以下clamp(65px,7.8vw,108px)；手机64px，字重700，行高.98；章节标题：IAVSE Sans, Arial, sans-serif，48px / 手机36px，字重600，行高1.12；正文：IAVSE Sans, Arial, sans-serif，16px / 手机15px，字重400，行高1.65–1.8；标签与导航：IAVSE Sans, Arial, sans-serif，9–11px，字重400–650，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 基础白 #ffffff：主要页面、控件留白，固定平面背景。\n- 文字黑 #111111：标题、文字、主按钮与实线边框。\n- 珊瑚强调 #ff4a6b：默认单一强调，色块预览与动作反馈；小号文字仍用黑。\n- 青绿候选 #00bfa5：强调色选择器的可选方案，不与珊瑚共同作为主动作。\n- 黄色候选 #ffd43b：强调色选择器的可选方案；使用黑色文字保证对比。\n细节：Work、Tools、Writing切换不同条目；窄屏仍保留清楚选中状态。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。",
+      "select": "为[产品名称]实现极简平面网站 · Plain Works中的select组件。\n设计依据：https://www.vitsoe.com/us/about/good-design；独立编写代码、文案和演示数据。\n视觉：首屏展示标题：IAVSE Sans, Arial, sans-serif，112px；1260px以下clamp(65px,7.8vw,108px)；手机64px，字重700，行高.98；章节标题：IAVSE Sans, Arial, sans-serif，48px / 手机36px，字重600，行高1.12；正文：IAVSE Sans, Arial, sans-serif，16px / 手机15px，字重400，行高1.65–1.8；标签与导航：IAVSE Sans, Arial, sans-serif，9–11px，字重400–650，行高1.65。所有自有标题字距不紧于-.04em。\n色彩角色：\n- 基础白 #ffffff：主要页面、控件留白，固定平面背景。\n- 文字黑 #111111：标题、文字、主按钮与实线边框。\n- 珊瑚强调 #ff4a6b：默认单一强调，色块预览与动作反馈；小号文字仍用黑。\n- 青绿候选 #00bfa5：强调色选择器的可选方案，不与珊瑚共同作为主动作。\n- 黄色候选 #ffd43b：强调色选择器的可选方案；使用黑色文字保证对比。\n细节：原生select选择单一强调色，预览色块与输出同步，不把全部色彩同时用作动作。\n适配390/1440px，操作至少44px；提供focus-visible、hover、disabled和该组件需要的错误/空状态。交互必须真实更新本地状态，不访问生产账号，尊重减少动态。"
+    },
+    "evidenceNote": "已查看对应StyleKit发现页面，但独立模板的文字、构图与实现重新编写；底层参考资料单列。网站及其素材权利各自保留，不作独占原创或无侵权保证。",
+    "verifiedAt": "2026-11-08",
+    "theme": {
+      "bg": "#ffffff",
+      "ink": "#111111",
+      "surface": "#ffffff",
+      "muted": "#555555",
+      "accent": "#ff4a6b",
+      "accentInk": "#111111",
+      "radius": 0,
+      "border": 1
+    }
+  }
+]

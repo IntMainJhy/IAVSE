@@ -1,60 +1,26 @@
 import Link from 'next/link';
-import Form from 'next/form';
 import {notFound} from 'next/navigation';
 import {serverI18n} from '@/lib/server-i18n';
 import {readPublishedDesigns} from '@/lib/design-intake.mjs';
-import {filterDesignEntries} from '@/lib/design-search.mjs';
-import {designCategories,designCategory,designCollection,designPage} from '@/lib/design-catalog.mjs';
+import {designCategory} from '@/lib/design-catalog.mjs';
+import {DesignCatalogExplorer} from './DesignCatalogExplorer';
 import type {DesignEntry} from '@/lib/design-types';
-import {CatalogSearch} from './CatalogSearch';
-import {CatalogNavigation} from './CatalogNavigation';
 import {DesignCopy} from './DesignCopy';
 import {DesignText} from './DesignText';
 import {DesignQuickPreview,type DesignPreviewItem} from './DesignQuickPreview';
 import '@/app/design-library.css';
 import '@/app/design-directory.css';
 import {StudioComponentPrompts} from './StudioComponentPrompts';
-import {studioResearch,studioPages} from '@/lib/design-studio.mjs';
+import {WebsiteDesignFacts} from './WebsiteDesignFacts';
 
 const maker=(entry:DesignEntry)=>entry.creator||(entry.external?entry.source:{name:'IAVSE',url:'https://github.com/IntMainJhy/IAVSE'});
 const reference=(entry:DesignEntry)=>entry.referenceSite||(!entry.external&&!entry.studio?entry.source:undefined);
 const previewItem=(entry:DesignEntry):DesignPreviewItem=>({studio:entry.studio,slug:entry.slug,title:entry.title,image:entry.image,external:entry.external,previewUrl:entry.previewUrl,previewVariants:entry.previewVariants,websiteUrl:entry.websiteUrl,source:entry.source,collection:entry.collection,preview:entry.preview,palette:entry.palette,creator:maker(entry),referenceSite:reference(entry),production:entry.production,previewPolicy:entry.previewPolicy});
-const collections=[{id:'studio',name:'网站参考重做'},{id:'iavse',name:'IAVSE'},{id:'vibeui',name:'VibeUI'},{id:'stylekit',name:'StyleKit'}];
-const value=(query:Record<string,string|string[]|undefined>,key:string)=>String(query[key]||'').trim();
-
 export async function DesignLibrary({query={}}:{query?:Record<string,string|string[]|undefined>}){
- const {t}=await serverI18n(),all=readPublishedDesigns() as DesignEntry[];
- const q=value(query,'q'),category=value(query,'category'),collection=value(query,'collection')||'studio',kind=collection==='studio'?(value(query,'view')==='components'?'components':'pages'):'';
- const pageEntries=all.filter(entry=>entry.studio?.kind!=='component');
- const scoped=kind==='components'?all.filter(entry=>entry.studio?.kind==='component'):pageEntries;
- const filtered=filterDesignEntries(scoped,{q,category,collection:collection==='all'?'':collection}),{items,page,pages,total}=designPage(filtered,{page:Number(value(query,'page'))});
- const href=(changes:Record<string,string>={})=>'/resources?'+new URLSearchParams({type:'designs',...(q?{q}:{}),...(category?{category}:{}),...(collection?{collection}:{}),...(kind?{view:kind}:{}),...changes});
- const group=collection&&collection!=='all'?scoped.filter(entry=>designCollection(entry)===collection):scoped;
- return <section className="design-studio design-directory" id="design-directory">
-  <header className="design-library-heading"><div><h1>{t(collection==='studio'?(kind==='components'?'交互组件':'网站参考重做'):'UI 设计目录')}</h1><p>{t('从真实网站出发，逐页重新实现。')}</p></div><Link href="/docs/iavse-design-system">{t('IAVSE 设计方法')} ↗</Link></header>
-  <CatalogNavigation active={collection} className="design-collection-tabs" label={t('收录目录')}><Link href={href({collection:'all',view:''})} scroll={false} aria-current={collection==='all'?'page':undefined}>{t('全部来源')} <span>{pageEntries.length}</span></Link>{collections.map(source=><Link key={source.id} href={href({collection:source.id,view:''})} scroll={false} aria-current={collection===source.id?'page':undefined}>{t(source.name)} <span>{pageEntries.filter(entry=>designCollection(entry)===source.id).length}</span></Link>)}</CatalogNavigation>
-  {collection==='studio'&&<div className="studio-directory-intro"><div><strong>{t('先看参考网站，再看这份实现。')}</strong><p>{t('每个条目单独实现页面结构，附具体参考页、观察记录和对应提示词。')} <span>{studioPages.length} {t('个网站参考')}</span></p></div><nav aria-label={t('示例类型')}>{[['pages','网站页面'],['components','单个组件']].map(([id,label])=><Link key={id} href={href({view:id})} aria-current={kind===id?'page':undefined} scroll={false}>{t(label)}</Link>)}</nav></div>}
-  <div className="design-filter">
-   <CatalogNavigation active={category} label={t('设计分类')} className="design-category-tabs"><Link href={href({category:''})} scroll={false} aria-current={!category?'page':undefined}>{t('全部')} <span>{group.length}</span></Link>{designCategories.map((name:string)=><Link key={name} href={href({category:name})} scroll={false} aria-current={category===name?'page':undefined}>{t(name)} <span>{group.filter(entry=>designCategory(entry)===name).length}</span></Link>)}</CatalogNavigation>
-   <Form action="/resources" scroll={false} role="search"><input type="hidden" name="type" value="designs"/>{category&&<input type="hidden" name="category" value={category}/>} {collection&&<input type="hidden" name="collection" value={collection}/>}{kind&&<input type="hidden" name="view" value={kind}/>}<CatalogSearch value={q} label={t('搜索 UI 设计')} placeholder={t('名称、来源或风格')}/></Form>
-  </div>
-  <div className="design-directory-meta"><p className="design-result" role="status">{total} {t(kind==='components'?'个组件':collection==='studio'?'个网站页面':'个设计')}{total>0&&<> · {(page-1)*36+1}–{Math.min(page*36,total)}</>}</p><span>{t(collection==='studio'?'真实参考站 · 独立页面实现 · 可操作演示':'分类参考 VibeUI · 来源逐项标注')}</span></div>
-  {collection==='studio'?<details className="design-origin-guide"><summary>{t('研究参考与实现范围')}</summary><p>{t('每个页面都列出具体参考网站与观察到的布局、排版和交互。只展示已单独实现的条目；未逐项重做的原收录内容继续留在原目录，不生成换色副本。')}</p><div className="studio-research-links">{studioResearch.map(source=><a key={source.name} href={source.url} target="_blank" rel="noopener noreferrer" title={source.focus}>{source.name} ↗</a>)}</div></details>:<details className="design-origin-guide"><summary>{t('这些示例是谁制作的？')}</summary><p>{t('VibeUI 是收录入口：品牌示例来自 VoltAgent 项目，由官网设计规范生成；另有第三方生成模板。StyleKit 的展示页由其开源仓库维护，部分参考既有品牌和艺术风格。它们不等于品牌官方模板，也不意味着风格由收录站首创。')}</p><p>{t('每项分别标注示例项目、风格参考和收录平台。许可未明确的条目仅保留目录与原站链接，不在本站嵌入或复制其示例。')}</p></details>}
-  <div className="design-grid">{items.map((entry:DesignEntry)=><article className="design-card" key={entry.id}>
-   {entry.studio?.referenceKey&&entry.referenceSite&&<a className="design-reference-origin" href={entry.referenceSite.url} target="_blank" rel="noopener noreferrer"><span>{t('参考网站')}</span><strong>{new URL(entry.referenceSite.url).hostname.replace(/^www\./,'')}</strong><span>↗</span></a>}
-   <DesignQuickPreview entry={previewItem(entry)}/>
-   <div className="design-card-copy"><div className="design-card-meta"><span>{t(designCategory(entry))}</span><span>{entry.collection?.name||'IAVSE'}</span></div>
-    <h2><Link href={'/resources/designs/'+entry.slug}>{entry.title}</Link></h2><p>{entry.summary}</p>
-    <div className="design-swatches" aria-label={t('设计配色')}>{entry.palette.slice(0,5).map((color,index)=><span key={index} style={{background:color}} title={color}/>)}</div>
-    <a className="design-card-source" href={maker(entry).url} target="_blank" rel="noopener noreferrer" title={maker(entry).name}>{t('示例项目')} · {maker(entry).name} ↗</a>
-    {reference(entry)&&<a className="design-card-source" href={reference(entry)!.url} target="_blank" rel="noopener noreferrer">{t(entry.studio?.referenceKey?'参考网站':'风格参考')} · {reference(entry)!.name} ↗</a>}
-    <div className="design-card-actions"><Link href={'/resources/designs/'+entry.slug}>{t('设计详情')}</Link><a href={entry.websiteUrl||entry.source.url} target="_blank" rel="noopener noreferrer">{t(entry.studio?'进入演示':'进入体验')} ↗</a></div>
-   </div>
-  </article>)}</div>
-  {!items.length&&<div className="design-empty"><h2>{t('还没有匹配的设计')}</h2><p>{t('换一个关键词，或浏览全部风格。')}</p><Link href="/resources?type=designs">{t('清除筛选')}</Link></div>}
-  {pages>1&&<nav className="design-pagination" aria-label={t('设计目录分页')}>{page>1?<Link href={href({page:String(page-1)})+'#design-directory'}>{t('上一页')}</Link>:<span aria-disabled="true">{t('上一页')}</span>}<span>{page} / {pages}</span>{page<pages?<Link href={href({page:String(page+1)})+'#design-directory'}>{t('下一页')}</Link>:<span aria-disabled="true">{t('下一页')}</span>}</nav>}
-  <p className="design-attribution">{t('仓库许可只覆盖相应权利人有权授权的部分，不替代品牌商标、图片、字体等素材的独立许可。来源核查不构成无侵权保证。')}</p>
- </section>;
+ void query;
+ const all=readPublishedDesigns() as DesignEntry[];
+ const entries=all.map(entry=>({...previewItem(entry),id:entry.id,summary:entry.summary,category:entry.category,tags:entry.tags,studio:entry.studio?{kind:entry.studio.kind,websiteKey:entry.studio.websiteKey,referenceKey:entry.studio.referenceKey,sourceSlug:entry.studio.sourceSlug,scenarios:entry.studio.scenarios,styleType:entry.studio.styleType,tags:entry.studio.tags}:undefined}));
+ return <DesignCatalogExplorer entries={entries}/>;
 }
 
 export async function DesignDetail({slug}:{slug:string}){
@@ -62,8 +28,9 @@ export async function DesignDetail({slug}:{slug:string}){
  const preview='/resources/designs/'+entry.slug+'/preview',full='# '+entry.title+'\n\n'+entry.prompt+'\n\n'+entry.specification+'\n\n来源：'+entry.source.name+' '+entry.source.url+(entry.collection?'\n收录自：'+entry.collection.name+' '+entry.collection.url:'')+(entry.license?'\n许可：'+entry.license.name+' '+entry.license.url:'');
  return <article className="design-studio design-detail"><Link className="design-back" href="/resources?type=designs">← {t('返回 UI 设计库')}</Link>
   <header className="design-detail-heading"><div><h1>{entry.title}</h1><p>{entry.summary}</p><div className="design-card-tags">{entry.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div><div className="design-detail-actions">{(entry.prompt||entry.specification)&&<DesignCopy text={full} label={t('复制完整提示词与规范')} filename={entry.slug+'-DESIGN.md'}/>}<a className="design-experience-link" href={entry.websiteUrl||entry.source.url} target="_blank" rel="noopener noreferrer">{t(entry.studio?'进入演示网站':'进入真实网站')} ↗</a>{entry.previewUrl&&entry.previewUrl!==entry.websiteUrl&&<a href={entry.previewUrl} target="_blank" rel="noopener noreferrer">{t('打开演示页面')} ↗</a>}</div></header>
-  {entry.studio?.referenceKey&&<div className="studio-reference-evidence"><a href={entry.referenceSite?.url} target="_blank" rel="noopener noreferrer">{t('查看参考网站')} · {entry.referenceSite?.name} ↗</a><p>{t('页面按所列具体参考独立实现；示例数据在本地运行，未连接原站账号。')}</p><ul>{entry.studio.observations.map((item:string)=><li key={item}>{item}</li>)}</ul></div>}
-  {entry.external?<div className="design-detail-art"><DesignQuickPreview entry={previewItem(entry)}/></div>:<div className="design-preview-shell"><iframe src={preview} title={entry.title+'交互预览'} loading="lazy" sandbox="allow-scripts allow-same-origin allow-downloads allow-popups allow-popups-to-escape-sandbox"/><div><span>{t('可交互预览 · 支持切换主题与示例操作')}</span><a href={preview} target="_blank" rel="noopener noreferrer">{t('新窗口预览')} ↗</a></div></div>}
+  {(entry.studio?.referenceKey||entry.studio?.websiteKey)&&<div className="studio-reference-evidence"><a href={entry.referenceSite?.url} target="_blank" rel="noopener noreferrer">{t('查看参考网站')} · {entry.referenceSite?.name} ↗</a><p>{t('页面按所列具体参考独立实现；示例数据在本地运行，未连接原站账号。')}</p><ul>{entry.studio.observations.map((item:string)=><li key={item}>{item}</li>)}</ul></div>}
+  {entry.external?<div className="design-detail-art"><DesignQuickPreview entry={previewItem(entry)}/></div>:<div className="design-preview-shell"><iframe src={preview+'?embed=1'} title={entry.title+'交互预览'} loading="lazy" sandbox="allow-scripts allow-same-origin allow-downloads allow-popups allow-popups-to-escape-sandbox"/><div><span>{t(entry.studio?.websiteKey?'完整网站示例 · 支持实际操作与响应式布局':'可交互预览 · 支持示例操作')}</span><a href={preview} target="_blank" rel="noopener noreferrer">{t('新窗口预览')} ↗</a></div></div>}
+  {entry.studio?.websiteKey&&<WebsiteDesignFacts entry={entry}/>}
   {entry.studio&&<StudioComponentPrompts key={entry.slug} entry={entry}/>}
   <div className="design-detail-layout"><aside><h2>{t('设计信息')}</h2><p>{t('示例项目')}</p><a href={maker(entry).url} target="_blank" rel="noopener noreferrer">{maker(entry).name} ↗</a>{reference(entry)&&<><p>{t('风格参考')}</p><a href={reference(entry)!.url} target="_blank" rel="noopener noreferrer">{reference(entry)!.name} ↗</a></>}{entry.external&&<><p>{t('源文件或页面')}</p><a href={entry.source.url} target="_blank" rel="noopener noreferrer">{entry.source.name} ↗</a></>}{entry.collection&&<><p>{t('收录平台')}</p><a href={entry.collection.url} target="_blank" rel="noopener noreferrer">{entry.collection.name} ↗</a></>}{entry.license&&<><p>{t('仓库声明许可')}</p>{entry.license.url?<a href={entry.license.url} target="_blank" rel="noopener noreferrer">{entry.license.name} ↗</a>:<span>{entry.license.name}</span>}</>}
    {!!entry.referenceUrls?.length&&<><p>{t('品牌与设计参考')}</p><ul className="design-reference-list">{entry.referenceUrls.map((ref,index)=>{const url=typeof ref==='string'?ref:ref.url,name=typeof ref==='string'?new URL(ref).hostname:ref.name;return <li key={index}><a href={url} target="_blank" rel="noopener noreferrer">{name} ↗</a></li>})}</ul></>}

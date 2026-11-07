@@ -1,0 +1,1795 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "name": "StyleKit taxonomy metadata",
+    "author": "AnxForever / StyleKit",
+    "copyright": "Copyright (c) 2026 AnxForever",
+    "license": "MIT",
+    "licenseFile": "/design-imports/stylekit/LICENSE.txt",
+    "licenseUrl": "https://github.com/AnxForever/stylekit/blob/38058485388d237745ccf58c6750c2ec661a72f4/LICENSE",
+    "indexSource": "https://www.stylekit.top/api/styles",
+    "industrySource": "https://vibeui.top/?lang=zh",
+    "indexRevision": "38058485388d237745ccf58c6750c2ec661a72f4",
+    "indexSnapshot": "scripts/design-import/stylekit-source.json.gz",
+    "scenarioSource": "https://github.com/AnxForever/stylekit/blob/38058485388d237745ccf58c6750c2ec661a72f4/lib/styles/scenarios.ts",
+    "scenarioSha256": "9a341f039726402a4086051aeb9c59f8c491eafc113ead9ce1e841ea988ec6ce",
+    "scope": "Only explicit scenario memberships, visual/layout types and taxonomy tags; no style descriptions, prompts or UI source are imported."
+  },
+  "scenarios": [
+    {
+      "id": "saas",
+      "label": "SaaS / B2B"
+    },
+    {
+      "id": "dashboard",
+      "label": "Dashboard"
+    },
+    {
+      "id": "admin",
+      "label": "后台管理"
+    },
+    {
+      "id": "portfolio",
+      "label": "作品集"
+    },
+    {
+      "id": "blog",
+      "label": "博客内容"
+    },
+    {
+      "id": "editorial",
+      "label": "编辑杂志"
+    },
+    {
+      "id": "docs",
+      "label": "文档知识库"
+    },
+    {
+      "id": "ecommerce",
+      "label": "电商零售"
+    },
+    {
+      "id": "marketing",
+      "label": "品牌营销"
+    },
+    {
+      "id": "creative",
+      "label": "创意表达"
+    }
+  ],
+  "styleTags": [
+    {
+      "id": "high-contrast",
+      "label": "高对比"
+    },
+    {
+      "id": "responsive",
+      "label": "响应式"
+    },
+    {
+      "id": "colorful",
+      "label": "多彩"
+    },
+    {
+      "id": "gradient",
+      "label": "渐变"
+    },
+    {
+      "id": "retro",
+      "label": "复古"
+    },
+    {
+      "id": "texture-heavy",
+      "label": "丰富纹理"
+    },
+    {
+      "id": "dark-theme",
+      "label": "深色主题"
+    },
+    {
+      "id": "glassmorphic",
+      "label": "玻璃拟态"
+    },
+    {
+      "id": "geometric",
+      "label": "几何"
+    },
+    {
+      "id": "brand-inspired",
+      "label": "品牌灵感"
+    },
+    {
+      "id": "game-ui",
+      "label": "游戏界面"
+    },
+    {
+      "id": "hand-drawn",
+      "label": "手绘"
+    },
+    {
+      "id": "anime-aesthetic",
+      "label": "动漫美学"
+    }
+  ],
+  "industries": [
+    {
+      "id": "AI",
+      "label": "AI"
+    },
+    {
+      "id": "开发工具",
+      "label": "开发工具"
+    },
+    {
+      "id": "基建与云",
+      "label": "基建与云"
+    },
+    {
+      "id": "设计生产",
+      "label": "设计生产"
+    },
+    {
+      "id": "金融加密",
+      "label": "金融加密"
+    },
+    {
+      "id": "企业消费",
+      "label": "企业消费"
+    },
+    {
+      "id": "通用",
+      "label": "通用"
+    },
+    {
+      "id": "落地页",
+      "label": "落地页"
+    },
+    {
+      "id": "分析仪表",
+      "label": "分析仪表"
+    }
+  ],
+  "styles": {
+    "neo-brutalist": {
+      "scenarios": [
+        "marketing",
+        "creative",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "editorial": {
+      "scenarios": [
+        "editorial",
+        "portfolio",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "neumorphism": {
+      "scenarios": [
+        "saas",
+        "marketing",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "bento-grid": {
+      "scenarios": [
+        "portfolio",
+        "marketing",
+        "dashboard"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "corporate-clean": {
+      "scenarios": [
+        "saas",
+        "admin",
+        "dashboard"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "minimalist-flat": {
+      "scenarios": [
+        "portfolio",
+        "ecommerce",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "soft-ui": {
+      "scenarios": [
+        "saas",
+        "marketing",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "natural-organic": {
+      "scenarios": [
+        "ecommerce",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "modern-gradient": {
+      "scenarios": [
+        "marketing",
+        "ecommerce",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "colorful",
+        "gradient"
+      ]
+    },
+    "retro-vintage": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "texture-heavy"
+      ]
+    },
+    "dark-mode": {
+      "scenarios": [
+        "portfolio",
+        "saas",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme"
+      ]
+    },
+    "macos-vibrancy": {
+      "scenarios": [
+        "saas",
+        "dashboard",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme",
+        "glassmorphic"
+      ]
+    },
+    "geometric-bold": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful",
+        "geometric"
+      ]
+    },
+    "masonry-flow": {
+      "scenarios": [
+        "portfolio",
+        "creative",
+        "ecommerce"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "split-screen": {
+      "scenarios": [
+        "marketing",
+        "portfolio",
+        "creative"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "full-page-scroll": {
+      "scenarios": [
+        "marketing",
+        "portfolio",
+        "creative"
+      ],
+      "styleType": "layout",
+      "tags": []
+    },
+    "timeline-vertical": {
+      "scenarios": [
+        "portfolio",
+        "docs",
+        "dashboard"
+      ],
+      "styleType": "layout",
+      "tags": []
+    },
+    "card-stack": {
+      "scenarios": [
+        "marketing",
+        "saas",
+        "docs"
+      ],
+      "styleType": "layout",
+      "tags": []
+    },
+    "sidebar-fixed": {
+      "scenarios": [
+        "admin",
+        "docs",
+        "dashboard"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "magazine-grid": {
+      "scenarios": [
+        "editorial",
+        "portfolio",
+        "blog"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "hero-fullscreen": {
+      "scenarios": [
+        "marketing",
+        "portfolio",
+        "creative"
+      ],
+      "styleType": "layout",
+      "tags": []
+    },
+    "claymorphism": {
+      "scenarios": [
+        "marketing",
+        "saas",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "glassmorphic"
+      ]
+    },
+    "notion-style": {
+      "scenarios": [
+        "docs",
+        "admin",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "stripe-style": {
+      "scenarios": [
+        "saas",
+        "ecommerce",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "glassmorphism": {
+      "scenarios": [
+        "saas",
+        "marketing",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "glassmorphic"
+      ]
+    },
+    "apple-style": {
+      "scenarios": [
+        "ecommerce",
+        "saas",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "pixel-art": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "game-ui"
+      ]
+    },
+    "vaporwave": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "colorful",
+        "gradient"
+      ]
+    },
+    "y2k": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "colorful",
+        "gradient"
+      ]
+    },
+    "memphis": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "colorful",
+        "geometric"
+      ]
+    },
+    "art-deco": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "geometric"
+      ]
+    },
+    "bauhaus": {
+      "scenarios": [
+        "creative",
+        "editorial",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful",
+        "geometric"
+      ]
+    },
+    "skeuomorphism": {
+      "scenarios": [
+        "creative",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro"
+      ]
+    },
+    "swiss-style": {
+      "scenarios": [
+        "portfolio",
+        "editorial",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "geometric"
+      ]
+    },
+    "ghibli-style": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "hand-drawn"
+      ]
+    },
+    "material-design": {
+      "scenarios": [
+        "dashboard",
+        "admin",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "fluent-design": {
+      "scenarios": [
+        "dashboard",
+        "admin",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired",
+        "glassmorphic"
+      ]
+    },
+    "comic-style": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "hand-drawn"
+      ]
+    },
+    "sketch-style": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "hand-drawn"
+      ]
+    },
+    "watercolor-style": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "hand-drawn"
+      ]
+    },
+    "f-pattern-layout": {
+      "scenarios": [
+        "blog",
+        "editorial",
+        "marketing"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "z-pattern-layout": {
+      "scenarios": [
+        "marketing",
+        "saas"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "holy-grail-layout": {
+      "scenarios": [
+        "docs",
+        "blog",
+        "admin"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "dashboard-layout": {
+      "scenarios": [
+        "dashboard",
+        "admin",
+        "saas"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "cyberpunk-neon": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "colorful"
+      ]
+    },
+    "synthwave": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme",
+        "colorful",
+        "gradient"
+      ]
+    },
+    "neo-brutalist-soft": {
+      "scenarios": [
+        "marketing",
+        "creative",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "neo-brutalist-playful": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "colorful"
+      ]
+    },
+    "art-nouveau": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro"
+      ]
+    },
+    "surrealism": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "hand-drawn"
+      ]
+    },
+    "ukiyo-e-digital": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro"
+      ]
+    },
+    "gothic": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme"
+      ]
+    },
+    "outrun": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme",
+        "colorful",
+        "gradient"
+      ]
+    },
+    "dark-academia": {
+      "scenarios": [
+        "blog",
+        "editorial",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "dark-theme",
+        "texture-heavy"
+      ]
+    },
+    "cottagecore": {
+      "scenarios": [
+        "creative",
+        "ecommerce",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "hand-drawn",
+        "texture-heavy"
+      ]
+    },
+    "risograph": {
+      "scenarios": [
+        "creative",
+        "editorial",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "texture-heavy"
+      ]
+    },
+    "mecha": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "game-ui",
+        "anime-aesthetic"
+      ]
+    },
+    "gothic-lolita": {
+      "scenarios": [
+        "creative",
+        "ecommerce",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "dark-theme"
+      ]
+    },
+    "cyber-chinese": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "anime-aesthetic"
+      ]
+    },
+    "acid-graphics": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful"
+      ]
+    },
+    "hand-drawn-doodle": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "hand-drawn"
+      ]
+    },
+    "swiss-poster": {
+      "scenarios": [
+        "editorial",
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "geometric"
+      ]
+    },
+    "watercolor-art": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "hand-drawn"
+      ]
+    },
+    "impressionist-oil": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "hand-drawn",
+        "texture-heavy"
+      ]
+    },
+    "immersive-photo": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme"
+      ]
+    },
+    "collage-art": {
+      "scenarios": [
+        "editorial",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "hand-drawn",
+        "texture-heavy"
+      ]
+    },
+    "cinematic-video-hero": {
+      "scenarios": [
+        "marketing",
+        "creative",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme"
+      ]
+    },
+    "glitch-art": {
+      "scenarios": [
+        "creative",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "visual-novel": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme",
+        "game-ui",
+        "anime-aesthetic"
+      ]
+    },
+    "shoujo-manga": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "anime-aesthetic"
+      ]
+    },
+    "cyber-anime": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "anime-aesthetic",
+        "game-ui"
+      ]
+    },
+    "pixel-anime": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "dark-theme",
+        "anime-aesthetic",
+        "game-ui"
+      ]
+    },
+    "japanese-fresh": {
+      "scenarios": [
+        "blog",
+        "creative",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "neon-samurai": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "anime-aesthetic"
+      ]
+    },
+    "magic-circle": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme",
+        "geometric",
+        "anime-aesthetic"
+      ]
+    },
+    "cyber-wafuu": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "anime-aesthetic"
+      ]
+    },
+    "steampunk": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme",
+        "texture-heavy"
+      ]
+    },
+    "pop-art": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "colorful"
+      ]
+    },
+    "solarpunk": {
+      "scenarios": [
+        "marketing",
+        "creative",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "jrpg": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme",
+        "anime-aesthetic",
+        "game-ui"
+      ]
+    },
+    "asymmetric-grid": {
+      "scenarios": [
+        "portfolio",
+        "creative",
+        "editorial"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "parallax-sections": {
+      "scenarios": [
+        "marketing",
+        "portfolio",
+        "creative"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "warm-dashboard": {
+      "scenarios": [
+        "dashboard",
+        "admin",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "neon-gradient": {
+      "scenarios": [
+        "marketing",
+        "saas",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme",
+        "gradient"
+      ]
+    },
+    "liquid-glass": {
+      "scenarios": [
+        "marketing",
+        "saas",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "scandinavian": {
+      "scenarios": [
+        "portfolio",
+        "blog",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "cel-shading": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "game-ui",
+        "anime-aesthetic"
+      ]
+    },
+    "wabi-sabi": {
+      "scenarios": [
+        "blog",
+        "portfolio",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "zen-garden": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "sci-fi-hud": {
+      "scenarios": [
+        "dashboard",
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "game-ui"
+      ]
+    },
+    "scrollytelling": {
+      "scenarios": [
+        "editorial",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "dark-theme"
+      ]
+    },
+    "kawaii-minimal": {
+      "scenarios": [
+        "creative",
+        "saas",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "film-noir": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme"
+      ]
+    },
+    "arcade-crt": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme",
+        "game-ui"
+      ]
+    },
+    "frutiger-aero": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro"
+      ]
+    },
+    "anti-design": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "holographic": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "colorful",
+        "gradient"
+      ]
+    },
+    "generative-art": {
+      "scenarios": [
+        "creative",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "particle": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme"
+      ]
+    },
+    "parallax-editorial": {
+      "scenarios": [
+        "editorial",
+        "portfolio",
+        "marketing"
+      ],
+      "styleType": "layout",
+      "tags": []
+    },
+    "vhs-aesthetic": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "dark-theme",
+        "texture-heavy"
+      ]
+    },
+    "ink-wash": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "monochrome": {
+      "scenarios": [
+        "portfolio",
+        "editorial",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "terracotta": {
+      "scenarios": [
+        "marketing",
+        "ecommerce",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "brutalist-web": {
+      "scenarios": [
+        "portfolio",
+        "creative",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast"
+      ]
+    },
+    "mid-century-modern": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "geometric"
+      ]
+    },
+    "constructivism": {
+      "scenarios": [
+        "editorial",
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast",
+        "colorful",
+        "geometric"
+      ]
+    },
+    "op-art": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "geometric"
+      ]
+    },
+    "islamic-geometric": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "geometric",
+        "texture-heavy"
+      ]
+    },
+    "indian-festive": {
+      "scenarios": [
+        "marketing",
+        "creative",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful",
+        "texture-heavy"
+      ]
+    },
+    "african-textile": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful",
+        "texture-heavy"
+      ]
+    },
+    "kinetic-typography": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "kinetic-constructivism": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "geometric",
+        "high-contrast",
+        "colorful"
+      ]
+    },
+    "broadcast-glitch": {
+      "scenarios": [
+        "creative",
+        "portfolio",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "dark-theme",
+        "high-contrast",
+        "texture-heavy"
+      ]
+    },
+    "korean-minimal": {
+      "scenarios": [
+        "portfolio",
+        "blog",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "pastel-goth": {
+      "scenarios": [
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme"
+      ]
+    },
+    "maximalism": {
+      "scenarios": [
+        "creative",
+        "marketing",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful",
+        "texture-heavy"
+      ]
+    },
+    "medieval-manuscript": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "texture-heavy"
+      ]
+    },
+    "graffiti-street": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "texture-heavy"
+      ]
+    },
+    "marble-luxury": {
+      "scenarios": [
+        "ecommerce",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "victorian-botanical": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "texture-heavy"
+      ]
+    },
+    "cubism": {
+      "scenarios": [
+        "creative",
+        "editorial"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro"
+      ]
+    },
+    "tropical-paradise": {
+      "scenarios": [
+        "ecommerce",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "colorful"
+      ]
+    },
+    "github-style": {
+      "scenarios": [
+        "saas",
+        "portfolio",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "witchcore": {
+      "scenarios": [
+        "creative",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme"
+      ]
+    },
+    "neon-tokyo": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme",
+        "gradient"
+      ]
+    },
+    "paper-craft": {
+      "scenarios": [
+        "creative",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "hand-drawn"
+      ]
+    },
+    "blueprint": {
+      "scenarios": [
+        "docs",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "dopamine-design": {
+      "scenarios": [
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "colorful"
+      ]
+    },
+    "linear-style": {
+      "scenarios": [
+        "saas",
+        "blog",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme"
+      ]
+    },
+    "shopify-clean": {
+      "scenarios": [
+        "ecommerce",
+        "marketing",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "luxury-retail": {
+      "scenarios": [
+        "ecommerce",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "fresh-market": {
+      "scenarios": [
+        "ecommerce",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "data-dense": {
+      "scenarios": [
+        "admin",
+        "dashboard",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme",
+        "responsive"
+      ]
+    },
+    "oversized-typography": {
+      "scenarios": [
+        "portfolio",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast"
+      ]
+    },
+    "developer-terminal": {
+      "scenarios": [
+        "portfolio",
+        "blog",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "dark-theme"
+      ]
+    },
+    "horizontal-gallery": {
+      "scenarios": [
+        "portfolio",
+        "creative",
+        "marketing"
+      ],
+      "styleType": "layout",
+      "tags": [
+        "responsive"
+      ]
+    },
+    "latex-paper": {
+      "scenarios": [
+        "portfolio",
+        "docs",
+        "blog"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "retro",
+        "high-contrast"
+      ]
+    },
+    "distill-style": {
+      "scenarios": [
+        "portfolio",
+        "blog",
+        "docs"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "brand-inspired"
+      ]
+    },
+    "gallery-dark": {
+      "scenarios": [
+        "portfolio",
+        "blog",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "dark-theme",
+        "responsive"
+      ]
+    },
+    "studio-bold": {
+      "scenarios": [
+        "portfolio",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "responsive",
+        "high-contrast",
+        "brand-inspired"
+      ]
+    },
+    "warm-organic": {
+      "scenarios": [
+        "portfolio",
+        "creative",
+        "ecommerce"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "texture-heavy"
+      ]
+    },
+    "launch-keynote": {
+      "scenarios": [
+        "marketing",
+        "saas",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "luxe-lookbook": {
+      "scenarios": [
+        "ecommerce",
+        "marketing",
+        "portfolio"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "shader-gradient": {
+      "scenarios": [
+        "saas",
+        "marketing",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": []
+    },
+    "pastel-ui": {
+      "scenarios": [
+        "ecommerce",
+        "saas",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "responsive",
+        "colorful"
+      ]
+    },
+    "mobile-editorial": {
+      "scenarios": [
+        "editorial",
+        "blog",
+        "creative"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "responsive",
+        "high-contrast"
+      ]
+    },
+    "soft-utility": {
+      "scenarios": [
+        "admin",
+        "dashboard",
+        "saas"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "responsive",
+        "high-contrast"
+      ]
+    },
+    "quantized-line-field": {
+      "scenarios": [
+        "creative",
+        "portfolio",
+        "marketing"
+      ],
+      "styleType": "visual",
+      "tags": [
+        "high-contrast",
+        "responsive",
+        "brand-inspired"
+      ]
+    }
+  }
+}
