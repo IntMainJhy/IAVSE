@@ -30,12 +30,12 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-ho
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] h2{font:600 clamp(36px,4vw,56px)/1.12 var(--site-font);letter-spacing:-.035em;color:#1d1d1f;margin-bottom:28px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] .v2-primary{background:#0071e3;color:#fff;box-shadow:none;font:400 16px/1.4 var(--site-font);min-height:44px;padding:11px 24px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] .v2-primary:hover{background:#0077ed;color:#fff;transform:none}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices{background:#f5f5f7;color:#1d1d1f}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices{background:linear-gradient(to bottom,#fff,#f5f5f7 160px);color:#1d1d1f}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices h2{color:#1d1d1f;font-weight:600}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices>header p{color:#6e6e73}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background :is(a,button,input,textarea,select,[tabindex]):focus-visible{outline:2px solid #0071e3;outline-offset:3px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background ::selection{background:#b9dcff;color:#1d1d1f}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing:has(.home-gallery-background)>.organic-footer{background:#f5f5f7!important}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing:has(.home-gallery-background)>.organic-footer{background:#f5f5f7!important;border:0!important;box-shadow:none!important}
 /* Community keeps its task layout with calm white panels on a silver canvas. */
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]{position:relative;--site-font:-apple-system,BlinkMacSystemFont,"IAVSE Sans","PingFang SC",sans-serif;--site-canvas:#f5f5f7;--site-surface:#fff;--site-raised:#eeeef0;--site-text:#1d1d1f;--site-body:#515154;--site-muted:#6e6e73;--site-line:#e5e5ea;--site-control-line:#d2d2d7;--site-heading-surface:transparent;--site-menu-surface:#fff;background:#f5f5f7;color:#1d1d1f;color-scheme:light}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header{background:#fbfbfded!important;border-bottom:1px solid #e5e5ea;box-shadow:none;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
@@ -53,7 +53,7 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-back
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.organic-button.is-secondary,.feed-discover nav a):hover{background-color:#e8e8ed}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-search.feed-search.feed-timeline-search{grid-template-columns:minmax(0,1fr) max-content max-content}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-search.feed-search.feed-timeline-search>.organic-button.is-secondary:not(.primary):not(.dark):not(.danger):not(.space-root *){width:auto;min-width:64px;white-space:nowrap;padding-inline:14px}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-footer{background:#f5f5f7!important}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-footer{background:#f5f5f7!important;border:0!important;box-shadow:none!important}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(a,button,input,textarea,select,[tabindex]):focus-visible{outline:2px solid #0071e3;outline-offset:3px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] ::selection{background:#b9dcff;color:#1d1d1f}
 @media(max-width:1000px){
@@ -101,3 +101,7 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-back
 @media(prefers-reduced-motion:reduce){html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background :is(a,button){transition:none}}
 @media(prefers-reduced-transparency:reduce){html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header,html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{background:#fbfbfd!important;backdrop-filter:none;-webkit-backdrop-filter:none}}
 @media print{html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background,html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]{background:#fff}}
+
+/* A paint-only dissolve joins the optical opening to the white product surface.
+   The creator preview keeps its own foreground stacking and all pointer targets. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background::before{content:"";position:absolute;inset:auto 0 100%;height:clamp(160px,20vw,240px);background:linear-gradient(to bottom,rgb(255 255 255 / 0),#fff);pointer-events:none;z-index:0}

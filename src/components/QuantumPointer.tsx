@@ -5,8 +5,7 @@ import {usePathname} from 'next/navigation';
 
 /** Two bounded fields: a passing pointer and an independently anchored, batched wave. */
 export function QuantumPointer(){
- const path=usePathname(),pointer=useRef<HTMLCanvasElement>(null),pulse=useRef<HTMLCanvasElement>(null),route=useRef(path),sync=useRef<()=>void>(()=>{});
- route.current=path;
+ const path=usePathname(),pointer=useRef<HTMLCanvasElement>(null),pulse=useRef<HTMLCanvasElement>(null),sync=useRef<()=>void>(()=>{});
  useEffect(()=>{
   // Embedded blog previews share the document styles, but never need a second cursor.
   if(window.top!==window.self)return;
@@ -16,8 +15,7 @@ export function QuantumPointer(){
   const size=240,waveSize=640,dpr=Math.min(devicePixelRatio||1,1.5);
   for(const [surface,context,length] of [[canvas,ctx,size],[wave,ink,waveSize]] as const){surface.width=surface.height=length*dpr;context.scale(dpr,dpr);}
   let frame=0,previous=0,x=0,y=0,dx=0,dy=0,alpha=0,lastMove=-Infinity,light=false,savedReduced=false,navigating=false;
-  let waveFrame=0,wavePrevious=0,waveElapsed=0,quietPulse=false,waveLight=false;
-  let gallery:HTMLElement|null=null,galleryTop=Infinity,quietGallery=false;
+  let waveFrame=0,wavePrevious=0,waveElapsed=0,quietPulse=false,waveLight=false,touchInput=false;
   // Reuse geometry and paths. The original ripple moves dots, rather than scaling a picture.
   const points=new Float32Array(37*37*5),groups=Array.from({length:16},()=>[] as number[]),pointerGroups=Array.from({length:16},()=>[] as number[]),falloffs=new Float32Array(1024);
   for(let i=0;i<falloffs.length;i++)falloffs[i]=Math.exp(-Math.pow(i/(falloffs.length-1)*3,2));
@@ -28,11 +26,6 @@ export function QuantumPointer(){
   const clearPointer=()=>{cancelAnimationFrame(frame);frame=0;previous=0;alpha=0;dx=dy=0;lastMove=-Infinity;ctx.clearRect(0,0,size,size);};
   const clearWave=()=>{cancelAnimationFrame(waveFrame);waveFrame=0;wavePrevious=waveElapsed=0;ink.clearRect(0,0,waveSize,waveSize);wave.style.opacity='0';};
   const clear=()=>{clearPointer();clearWave();};
-  const quiet=()=>/^\/(?:community|blogs|resources|docs|skills)(?:\/|$)/.test(route.current)||quietGallery;
-  // Cache the gallery boundary on layout changes. Scroll and pointer events
-  // never measure layout, including when a fixed header sits above that scene.
-  const scroll=()=>{quietGallery=!!gallery?.isConnected&&(window.scrollY||0)+(window.innerHeight||0)>=galleryTop;if(quiet()&&(frame||waveFrame))clear();};
-  const readSurface=()=>{gallery=route.current==='/'?document.querySelector<HTMLElement>('[data-home-background="gallery"]'):null;galleryTop=gallery?gallery.getBoundingClientRect().top+(window.scrollY||0):Infinity;scroll();};
   const paintWave=(progress:number)=>{
    // Follow the current surface after a route remount, without measuring layout.
    const host=document.querySelector('.organic-site,.blog-public-shell'),nextLight=host?bright(host):waveLight;
@@ -58,11 +51,11 @@ export function QuantumPointer(){
    // A busy route commit must not consume the entire effect before its first paint.
    waveElapsed+=Math.max(0,Math.min(now-wavePrevious,48));wavePrevious=now;
    const progress=waveElapsed/(quietPulse?180:760);
-   if(document.hidden||quiet()||progress>=1){clearWave();return;}
+   if(document.hidden||progress>=1){clearWave();return;}
    paintWave(progress);waveFrame=requestAnimationFrame(drawWave);
   };
   const draw=(now:number)=>{
-   frame=0;if(document.hidden||quiet()){clear();return;}
+   frame=0;if(document.hidden){clear();return;}
    const dt=previous?Math.min((now-previous)/1000,.05):1/60;previous=now;
    const target=fine.matches&&!reduced()?Math.max(0,Math.min(1,1-(now-lastMove-140)/420)):0;
    alpha+=(target-alpha)*(1-Math.exp(-16*dt));dx*=Math.exp(-7*dt);dy*=Math.exp(-7*dt);
@@ -87,21 +80,24 @@ export function QuantumPointer(){
    }
    if(alpha>.006||target>0)frame=requestAnimationFrame(draw);else previous=0;
   };
-  const wake=()=>{if(!document.hidden&&!navigating&&!quiet()&&!frame)frame=requestAnimationFrame(draw);};
-  // Interactive workspaces and product previews provide their own feedback.
+  const wake=()=>{if(!document.hidden&&!navigating&&!frame)frame=requestAnimationFrame(draw);};
+  // Only actual tools and input fields own their feedback. Reading pages and
+  // ordinary product/gallery backgrounds keep the original pointer interaction.
   const editing=(target:EventTarget|null)=>{
-   if(!quiet()&&(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],[data-blog-product-film],[data-home-product],[data-home-background="gallery"]')))return false;
+   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],.home-blog-demo,.resource-atlas,[data-film-interactive],.film-appearance-controls,input:not([type=button]):not([type=submit]),textarea,select,[contenteditable]:not([contenteditable=false]),[role=textbox]'))return false;
    if(frame||waveFrame)clear();return true;
   };
+  const contact=(event:PointerEvent)=>{touchInput=event.pointerType==='touch';if(touchInput)clear();};
   const move=(event:PointerEvent)=>{
    if(editing(event.target))return;
    if(event.pointerType==='touch'||!fine.matches||reduced()||document.hidden||navigating||document.documentElement.hasAttribute('data-iavse-transition'))return;
+   touchInput=false;
    dx=Math.max(-36,Math.min(36,event.clientX-x));dy=Math.max(-36,Math.min(36,event.clientY-y));x=event.clientX;y=event.clientY;
    lastMove=performance.now();light=bright(event.target instanceof Element?event.target:null);wake();
   };
   const click=(event:MouseEvent)=>{
    if(editing(event.target))return;
-   if(event.button!==0||document.hidden)return;
+   if(event.button!==0||document.hidden||event.detail!==0&&((event as PointerEvent).pointerType==='touch'||touchInput||!fine.matches))return;
    const element=event.target instanceof Element?event.target.closest<HTMLElement>('a,button,summary,input[type=button],input[type=submit],[role=button],[role=tab],[role=option]'):null;
    if(!element||element.matches(':disabled,[aria-disabled=true]'))return;
    let px=event.clientX,py=event.clientY;
@@ -123,13 +119,12 @@ export function QuantumPointer(){
   const mode=()=>{if(reduced())clear();else leave();};
   const visibility=()=>{if(document.hidden)clear();};
   const control=(event:Event)=>{const detail=(event as CustomEvent<{action:string;value:boolean}>).detail;if(detail?.action==='reduced'){savedReduced=!!detail.value;mode();}};
-  const navigation=(event:Event)=>{navigating=!!(event as CustomEvent<{pending:boolean}>).detail?.pending;if(quiet())clear();else if(navigating)clearPointer();};
-  sync.current=readSurface;
-  window.addEventListener('pointermove',move,{passive:true});document.addEventListener('click',click,true);document.documentElement.addEventListener('pointerleave',leave);window.addEventListener('blur',clear);
-  window.addEventListener('scroll',scroll,{passive:true});window.addEventListener('resize',readSurface);window.addEventListener('iavse-journey-layout',readSurface);
+  const navigation=(event:Event)=>{navigating=!!(event as CustomEvent<{pending:boolean}>).detail?.pending;if(navigating)clearPointer();};
+  sync.current=()=>{clearPointer();if(document.querySelector('.blog-canvas-editor,[data-admin-layout=control-center]'))clearWave();};
+  window.addEventListener('pointerdown',contact,{passive:true});window.addEventListener('pointermove',move,{passive:true});document.addEventListener('click',click,true);document.documentElement.addEventListener('pointerleave',leave);window.addEventListener('blur',clear);
   fine.addEventListener('change',mode);preference.addEventListener('change',mode);document.addEventListener('visibilitychange',visibility);window.addEventListener('iavse-scene-control',control);
   window.addEventListener('iavse-navigation-pending',navigation);
-  return()=>{sync.current=()=>{};clear();window.removeEventListener('pointermove',move);document.removeEventListener('click',click,{capture:true});document.documentElement.removeEventListener('pointerleave',leave);window.removeEventListener('blur',clear);window.removeEventListener('scroll',scroll);window.removeEventListener('resize',readSurface);window.removeEventListener('iavse-journey-layout',readSurface);fine.removeEventListener('change',mode);preference.removeEventListener('change',mode);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('iavse-scene-control',control);window.removeEventListener('iavse-navigation-pending',navigation);canvas.width=canvas.height=wave.width=wave.height=0;};
+  return()=>{sync.current=()=>{};clear();window.removeEventListener('pointerdown',contact);window.removeEventListener('pointermove',move);document.removeEventListener('click',click,{capture:true});document.documentElement.removeEventListener('pointerleave',leave);window.removeEventListener('blur',clear);fine.removeEventListener('change',mode);preference.removeEventListener('change',mode);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('iavse-scene-control',control);window.removeEventListener('iavse-navigation-pending',navigation);canvas.width=canvas.height=wave.width=wave.height=0;};
  },[]);
  useEffect(()=>{sync.current();},[path]);
  return <><canvas ref={pointer} className="iavse-quantum-pointer" aria-hidden="true"/><canvas ref={pulse} className="iavse-quantum-wave" aria-hidden="true"/></>;

@@ -15,7 +15,7 @@ function load({react=React,locale='en',globals={}}={}){
   if(name==='react')return react;if(name==='react/jsx-runtime')return runtime;
   if(name==='next/link')return{default:({href,children})=>React.createElement('a',{href},children)};
   if(name==='./LocaleProvider')return{useLocale:()=>({locale})};
-  if(name==='./Icons')return{Icon:()=>React.createElement('svg',{'aria-hidden':'true'})};
+  if(name==='./Icons')return{Icon:({name})=>React.createElement('svg',{'aria-hidden':'true','data-icon':name})};
   throw Error('Unmocked dependency '+name);
  }});return exports;
 }
@@ -31,13 +31,16 @@ test('server-seeded notices and offsets agree immediately; a lone text-only noti
  const viewport=nodes.find(node=>node.attribs?.class==='site-announcement-viewport');
  assert.equal(viewport.attribs.role,'region');assert.equal(viewport.attribs.tabindex,'0');assert.equal(viewport.attribs['aria-label'],'Site updates');
  assert.equal(nodes.filter(node=>node.name==='a').length,0,'plain notices do not acquire an invented destination');
+ assert.ok(nodes.some(node=>node.name==='svg'&&node.attribs['data-icon']==='megaphone'),'a decorative megaphone identifies the notice without audio');
+ const close=nodes.find(node=>node.name==='button');assert.equal(close.attribs.type,'button');assert.equal(close.attribs['aria-label'],'Dismiss announcement');
  const offset=nodes.find(node=>node.attribs?.class==='site-announcement-offset');assert.equal(offset.attribs['aria-hidden'],'true');
  for(const value of [{enabled:false,items:seed().items},{enabled:false,items:[]},{enabled:true,items:[]}])assert.equal(markup(value),'','disabled or empty announcements reserve no space');
 });
 
 test('localized default notices and real destinations retain safe accessible semantics',()=>{
- for(const [locale,label,text]of [['zh','网站公告','网站更新与公告将在这里发布。'],['en','Site updates','Website news and updates will appear here.'],['ja','お知らせ','サイトの更新やお知らせをここでお届けします。']]){
+ for(const [locale,label,text,close]of [['zh','网站公告','网站更新与公告将在这里发布。','关闭公告'],['en','Site updates','Website news and updates will appear here.','Dismiss announcement'],['ja','お知らせ','サイトの更新やお知らせをここでお届けします。','お知らせを閉じる']]){
   const html=markup(seed('网站更新与公告将在这里发布。'),locale);assert.ok(html.includes(label));assert.ok(html.includes(text));
+  assert.equal(descendants(parseDocument(html)).find(node=>node.name==='button').attribs['aria-label'],close);
  }
  const html=markup({enabled:true,items:[{title:'Internal guide',url:'/docs'},{title:'External update',url:'https://example.com/updates'},{title:'<script>literal text</script>',url:''}]}),nodes=descendants(parseDocument(html)),links=nodes.filter(node=>node.name==='a');
  assert.equal(links[0].attribs.href,'/docs');assert.equal(links[0].attribs.target,undefined);
@@ -46,11 +49,11 @@ test('localized default notices and real destinations retain safe accessible sem
 });
 
 function mount(initial=seed()){
- const hooks=[],listeners=new Map(),requests=[],channels=[];let index=0,layouts=[],effects=[],changed=false,output,props={initial,children:null};
+ const hooks=[],listeners=new Map(),requests=[],channels=[];let index=0,layouts=[],effects=[],changed=false,output,context,props={initial,children:null};
  const same=(a,b)=>a&&b&&a.length===b.length&&a.every((value,i)=>Object.is(value,b[i]));
  const effect=(queue,fn,deps)=>{const slot=index++,before=hooks[slot];if(!before||!same(before.deps,deps))queue.push({slot,fn,deps});};
  const react={
-  createContext:value=>({Provider:{},value}),useContext:context=>context.value,
+  createContext:value=>(context={Provider:{},value}),useContext:context=>context.value,
   useRef:value=>{const slot=index++;return hooks[slot]??=( {current:value});},
   useState:value=>{const slot=index++;if(!hooks[slot])hooks[slot]={value};return[hooks[slot].value,next=>{const value=typeof next==='function'?next(hooks[slot].value):next;if(!Object.is(value,hooks[slot].value)){hooks[slot].value=value;changed=true;}}];},
   useLayoutEffect:(fn,deps)=>effect(layouts,fn,deps),useEffect:(fn,deps)=>effect(effects,fn,deps),
@@ -62,11 +65,41 @@ function mount(initial=seed()){
  function render(next={}){
   props={...props,...next};let passes=0;
   do{assert.ok(++passes<=5,'layout synchronization converges before paint');changed=false;index=0;layouts=[];effects=[];output=api.SiteAnnouncementsProvider(props);commit(layouts);commit(effects);}while(changed);
-  return output.props.value;
+  context.value=output.props.value;return context.value.value;
  }
  render();
- return{requests,channels,listeners,document,render,get value(){return output.props.value;},saved:()=>listeners.get('iavse-announcements-updated')?.(),resolve:(position,value,ok=true)=>requests[position].resolve({ok,json:async()=>value}),settle:async()=>{await new Promise(resolve=>setImmediate(resolve));return render();},cleanup:()=>hooks.forEach(hook=>hook?.cleanup?.())};
+ return{requests,channels,listeners,document,render,get value(){return output.props.value.value;},get visible(){return output.props.value.visible;},dismiss:()=>{output.props.value.dismiss();render();},banner:()=>api.SiteAnnouncement(),offset:()=>api.SiteAnnouncementOffset(),saved:()=>listeners.get('iavse-announcements-updated')?.(),resolve:(position,value,ok=true)=>requests[position].resolve({ok,json:async()=>value}),settle:async()=>{await new Promise(resolve=>setImmediate(resolve));return render();},cleanup:()=>hooks.forEach(hook=>hook?.cleanup?.())};
 }
+
+test('closing stays local across route seeds, removes banner and offset together, and a full mount can show news again',()=>{
+ const initial=seed('Close this update'),f=mount(initial);
+ assert.ok(f.banner());assert.ok(f.offset());f.dismiss();
+ assert.equal(f.visible,false);assert.equal(f.banner(),null);assert.equal(f.offset(),null);assert.equal(f.document.documentElement.dataset.siteAnnouncements,'disabled');
+ assert.equal(f.value,initial);assert.equal(initial.enabled,true,'closing does not disable the saved announcement');assert.equal(f.requests.length,0);assert.deepEqual(f.channels[0].messages,[],'dismissal is not broadcast to another tab');
+ f.document.documentElement.dataset.siteAnnouncements='enabled';f.render({initial:seed('Close this update')});
+ assert.equal(f.visible,false,'an identical RSC seed does not reopen dismissed news');assert.equal(f.document.documentElement.dataset.siteAnnouncements,'disabled','route refresh cannot restore a dismissed offset');
+ const next=seed('A newer update');f.render({initial:next});assert.equal(f.visible,true);assert.ok(f.banner());assert.ok(f.offset());assert.equal(f.document.documentElement.dataset.siteAnnouncements,'enabled');
+ f.dismiss();f.render({initial});assert.equal(f.visible,true,'any changed announcement is new information');f.cleanup();
+ const refreshed=mount(initial);assert.equal(refreshed.visible,true,'a full refresh starts a new presentation, without hydration-time storage reads');refreshed.cleanup();
+});
+
+test('a changed announcement save reopens dismissed news; an identical save does not',async()=>{
+ const f=mount();f.dismiss();f.saved();f.resolve(0,seed());await f.settle();assert.equal(f.visible,false);
+ f.channels[0].receive('refresh');f.resolve(1,seed('New announcement from the editor','/docs'));await f.settle();
+ assert.equal(f.visible,true);assert.equal(f.document.documentElement.dataset.siteAnnouncements,'enabled');
+ f.dismiss();f.saved();f.resolve(2,{enabled:false,items:[]});await f.settle();assert.equal(f.visible,false);assert.equal(f.offset(),null);f.cleanup();
+});
+
+test('dismissal hands focus to surviving navigation, skipping hidden and disabled controls without scrolling',()=>{
+ for(const surface of ['chrome','editor']){
+  const f=mount(),focused=[];
+  const candidate=(id,{hidden=false,inert=false,disabled=false}={})=>({getClientRects:()=>hidden?[]:[{}],closest:()=>inert?{}:null,matches:()=>disabled,focus:options=>focused.push({id,options})});
+  const owner={querySelectorAll:()=>[candidate('hidden',{hidden:true}),candidate('disabled',{disabled:true}),candidate('inert',{inert:true}),candidate('navigation')]};
+  const button=f.banner().props.children[1];assert.equal(button.props.type,'button');
+  button.props.onClick({currentTarget:{closest:selector=>surface==='chrome'?(selector==='[data-site-chrome]'?owner:null):(selector==='[data-site-chrome]'?null:owner)}});f.render();
+  assert.equal(f.visible,false);assert.equal(focused.length,1);assert.equal(focused[0].id,'navigation');assert.equal(focused[0].options.preventScroll,true);f.cleanup();
+ }
+});
 
 test('hydration uses its initial seed without fetching and a changed RSC seed aborts stale refreshes before paint',async()=>{
  const first=seed('Initial server copy'),f=mount(first);assert.equal(f.value,first);assert.equal(f.requests.length,0);assert.equal(f.document.documentElement.dataset.siteAnnouncements,'enabled');

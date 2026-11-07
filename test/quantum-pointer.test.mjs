@@ -9,7 +9,7 @@ function mount({reduced=false,embedded=false,path='/',galleryTop=null,scrollY=0}
  const window=Object.assign(new EventTarget(),{scrollY,innerHeight:900}),gallery=galleryTop===null?null:{isConnected:true,documentTop:galleryTop,rectReads:0,getBoundingClientRect(){this.rectReads++;return{top:this.documentTop-window.scrollY};}},document=Object.assign(new EventTarget(),{hidden:false,querySelector:selector=>selector==='[data-home-background="gallery"]'?gallery:null,documentElement:Object.assign(new EventTarget(),{dataset:{},hasAttribute:()=>false})});
  window.self=window;window.top=embedded?{}:window;
  const fine=Object.assign(new EventTarget(),{matches:true}),preference=Object.assign(new EventTarget(),{matches:reduced});
- class Element{constructor(actionable=false,editing=false){this.actionable=actionable;this.editing=editing;this.disabled=false;}closest(selector){if(selector.includes('.blog-canvas-editor'))return this.editing===true||this.editing==='admin'&&selector.includes('[data-admin-layout=control-center]')||this.editing==='film'&&selector.includes('[data-blog-product-film]')||this.editing==='home-product'&&selector.includes('[data-home-product]')||this.editing==='gallery'&&selector.includes('[data-home-background="gallery"]')?this:null;return selector.startsWith('.v2-landing')?null:this.actionable?this:null;}matches(){return this.disabled;}getBoundingClientRect(){return{left:100,top:200,width:80,height:40};}}
+ class Element{constructor(actionable=false,region=''){this.actionable=actionable;this.region=region;this.disabled=false;}closest(selector){if(selector.includes('.blog-canvas-editor')){const regions={editor:'.blog-canvas-editor',admin:'[data-admin-layout=control-center]',canvas:'.home-blog-demo',atlas:'.resource-atlas',interactive:'[data-film-interactive]',looks:'.film-appearance-controls',input:'input:not([type=button]):not([type=submit])',textarea:'textarea',select:'select',editable:'[contenteditable]:not([contenteditable=false])',textbox:'[role=textbox]'};return regions[this.region]&&selector.split(',').includes(regions[this.region])?this:null;}return selector.startsWith('.v2-landing')?null:this.actionable?this:null;}matches(){return this.disabled;}getBoundingClientRect(){return{left:100,top:200,width:80,height:40};}}
  const surfaces=[0,1].map(()=>{const context={arcs:[],totalArcs:0,fills:0,clears:0,paths:0,moves:0,globalAlpha:1,scale(){},clearRect(){this.clears++;this.arcs=[];},beginPath(){this.paths++;},moveTo(){this.moves++;},arc(...args){this.arcs.push(args);this.totalArcs++;},fill(){this.fills++;}};return{style:{},width:0,height:0,getContext:()=>context,context};});
  const [canvas,wave]=surfaces,effects=[],refs=[],exports={},frames=new Map(),mathCalls={exp:0,hypot:0},math=Object.create(Math);let now=100,id=0,refIndex=0,effectIndex=0,scheduled=[],currentPath=path;
  for(const name of ['exp','hypot'])math[name]=(...args)=>{mathCalls[name]++;return Math[name](...args);};
@@ -23,12 +23,14 @@ function mount({reduced=false,embedded=false,path='/',galleryTop=null,scrollY=0}
  const step=(ms=16)=>{now+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(now));};
  const advance=ms=>{while(ms>0){const interval=Math.min(ms,16);step(interval);ms-=interval;}};
  const dispatch=(target,type,values)=>target.dispatchEvent(Object.assign(new Event(type),values));
- const move=(x=600,y=400,type='mouse',target)=>{const event=Object.assign(new Event('pointermove'),{clientX:x,clientY:y,pointerType:type});if(target)Object.defineProperty(event,'target',{value:target});window.dispatchEvent(event);};
- const button=new Element(true),editorButton=new Element(true,true),adminButton=new Element(true,'admin'),filmButton=new Element(true,'film'),homeProductButton=new Element(true,'home-product'),galleryButton=new Element(true,'gallery'),gallerySpace=new Element(false,'gallery');
- const click=(detail=1,target=button)=>{const event=new Event('click');Object.defineProperty(event,'target',{value:target});Object.assign(event,{button:0,detail,clientX:300,clientY:320});document.dispatchEvent(event);};
+ const move=(x=600,y=400,type='mouse',target)=>{const event=Object.assign(new Event('pointermove',{cancelable:true}),{clientX:x,clientY:y,pointerType:type});if(target)Object.defineProperty(event,'target',{value:target});window.dispatchEvent(event);return event;};
+ const button=new Element(true),editorButton=new Element(true,'editor'),adminButton=new Element(true,'admin'),filmButton=new Element(true,'film'),homeProductButton=new Element(true,'home-product'),galleryButton=new Element(true,'gallery'),gallerySpace=new Element(false,'gallery');
+ const tools=['canvas','atlas','interactive','looks'].map(region=>new Element(true,region)),inputs=['input','textarea','select','editable','textbox'].map(region=>new Element(false,region)),buttonInput=new Element(true,'button-input');
+ const click=(detail=1,target=button,pointerType)=>{const event=new Event('click',{cancelable:true});Object.defineProperty(event,'target',{value:target});Object.assign(event,{button:0,detail,clientX:300,clientY:320,...pointerType?{pointerType}:{}});document.dispatchEvent(event);return event;};
+ const contact=pointerType=>dispatch(window,'pointerdown',{pointerType});
  const navigation=pending=>dispatch(window,'iavse-navigation-pending',{detail:{pending}});
  const navigate=next=>{currentPath=next;render();},scroll=value=>{window.scrollY=value;window.dispatchEvent(new Event('scroll'));};
- return{window,document,fine,preference,frames,canvas,wave,gallery,mathCalls,step,advance,move,click,button,editorButton,adminButton,filmButton,homeProductButton,galleryButton,gallerySpace,navigation,navigate,scroll,cleanup};
+ return{window,document,fine,preference,frames,canvas,wave,gallery,mathCalls,step,advance,move,click,contact,button,buttonInput,editorButton,adminButton,filmButton,homeProductButton,galleryButton,gallerySpace,tools,inputs,navigation,navigate,scroll,cleanup};
 }
 const extent=s=>Math.max(...s.wave.context.arcs.map(([x,y])=>Math.hypot(x-320,y-320)));
 const gridDistance=value=>Math.abs(value-Math.round(value/18)*18);
@@ -105,35 +107,52 @@ test('continuous pointer movement retains every point while batching fills on al
  assert.equal(s.wave.context.clears,0);t.diagnostic(JSON.stringify({pointerFrames:120,pointPaths:s.canvas.context.totalArcs,batchedFills:s.canvas.context.fills,maxFillsPerFrame:maxFills}));s.cleanup();
 });
 
-test('workspaces and product previews stop site particles until the pointer leaves their region',()=>{
- for(const target of ['editorButton','adminButton','filmButton','homeProductButton','galleryButton','gallerySpace']){const s=mount();s.move();s.click();assert.equal(s.frames.size,2);
- s.move(400,300,'mouse',s[target]);assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');
+test('only actual workspaces, demo widgets, and form inputs pause feedback without intercepting their events',()=>{
+ const s=mount();
+ for(const target of [s.editorButton,s.adminButton,...s.tools,...s.inputs]){s.move();s.click();assert.equal(s.frames.size,2);
+ assert.equal(s.move(400,300,'mouse',target).defaultPrevented,false);assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');
  const fills=s.canvas.context.fills+s.wave.context.fills;
- for(let i=0;i<20;i++){s.move(400+i,300,'mouse',s[target]);s.click(i%2,s[target])}
+ for(let i=0;i<20;i++){s.move(400+i,300,'mouse',target);assert.equal(s.click(i%2,target).defaultPrevented,false);}
  assert.equal(s.frames.size,0);assert.equal(s.canvas.context.fills+s.wave.context.fills,fills);
  s.move();s.click();assert.equal(s.frames.size,2,'pointer and click feedback resume outside the region');s.step();
- assert.ok(s.canvas.context.fills+s.wave.context.fills>fills,'ordinary page interactions paint again');s.cleanup();}
+ assert.ok(s.canvas.context.fills+s.wave.context.fills>fills,'ordinary page interactions paint again');}
+ s.click(1,s.buttonInput);assert.equal(s.wave.style.opacity,'1','button inputs retain actionable feedback');s.cleanup();
 });
 
-test('Apple reading and discovery pages stay quiet while the original opening retains feedback',()=>{
- for(const path of ['/community','/community/','/community/post-id','/community/members','/community/members/member-id','/blogs','/resources','/resources/legal-consultation','/skills','/skills/gsap','/docs','/docs/connect']){
-  const s=mount({path});s.move();s.click();s.click(0);s.navigation(true);s.navigation(false);s.fine.dispatchEvent(new Event('change'));s.step();
-  assert.equal(s.frames.size,0,path);assert.equal(s.canvas.context.fills+s.wave.context.fills,0);
-  s.navigate('/about');s.move();s.click();s.step();assert.ok(s.canvas.context.fills+s.wave.context.fills>0,'leaving the quiet reading surfaces restores original feedback');
-  s.navigate(path);assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');assert.equal(s.canvas.context.arcs.length+s.wave.context.arcs.length,0);
-  const fills=s.canvas.context.fills+s.wave.context.fills;s.move();s.click();s.advance(1000);assert.equal(s.canvas.context.fills+s.wave.context.fills,fills,'a route commit clears every lingering RAF');
-  s.navigate('/');s.move();s.click();assert.equal(s.frames.size,2);s.cleanup();assert.equal(s.frames.size,0);
+test('community, account, reading, and discovery routes retain the original mouse and actionable feedback',()=>{
+ for(const path of ['/','/community','/community/','/community/post-id','/community/members','/community/members/member-id','/community/following','/community/bookmarks','/workspace','/workspace/account','/workspace/notifications','/blogs','/resources','/resources/legal-consultation','/skills','/skills/gsap','/docs','/docs/connect']){
+  const s=mount({path});assert.equal(s.move().defaultPrevented,false);assert.equal(s.click().defaultPrevented,false);s.step();
+  assert.ok(s.canvas.context.arcs.length>50,path);assert.ok(s.wave.context.arcs.length>0,path);assert.equal(s.frames.size,2,path);
+  s.navigation(true);assert.equal(s.frames.size,1,'navigation yields the pointer, keeping click acknowledgement');
+  s.navigate('/about');assert.equal(s.frames.size,1);assert.equal(s.canvas.context.arcs.length,0);assert.equal(s.wave.style.opacity,'1');
+  const fills=s.canvas.context.fills;s.move();s.step();assert.equal(s.canvas.context.fills,fills,'the route commit cannot restart the pointer during navigation');
+  s.navigation(false);s.navigate(path);assert.equal(s.frames.size,1);s.move();s.click(0);assert.equal(s.frames.size,2);s.step();assert.ok(s.canvas.context.arcs.length>50);
+  s.advance(1200);assert.equal(s.frames.size,0,'reading pages keep the same idle-stop behavior');
+  s.cleanup();s.move();s.click();assert.equal(s.frames.size,0);
  }
 });
 
-test('the gallery scene clears header feedback on entry without reading layout during scroll or pointer movement',()=>{
- const s=mount({galleryTop:1800});assert.equal(s.gallery.rectReads,1);s.move();s.click();assert.equal(s.frames.size,2,'the original opening retains its feedback');
- s.scroll(901);assert.equal(s.frames.size,0,'the independent scene entering the viewport retires the header ring too');assert.equal(s.wave.style.opacity,'0');
- const fills=s.canvas.context.fills+s.wave.context.fills,reads=s.gallery.rectReads;
- for(let i=0;i<20;i++){s.move();s.click(i%2);s.scroll(1000+i*30);}
- assert.equal(s.frames.size,0);assert.equal(s.canvas.context.fills+s.wave.context.fills,fills);assert.equal(s.gallery.rectReads,reads,'ordinary scroll and pointer events use cached bounds');
- s.gallery.documentTop=3000;s.window.dispatchEvent(new Event('iavse-journey-layout'));assert.equal(s.gallery.rectReads,reads+1);s.move();s.click();assert.equal(s.frames.size,2,'content layout changes refresh the boundary');
- s.scroll(2200);assert.equal(s.frames.size,0);s.scroll(0);s.move();s.click();assert.equal(s.frames.size,2,'scrolling back to the opening restores the original feedback');
- s.cleanup();const after=s.gallery.rectReads;s.window.dispatchEvent(new Event('resize'));s.window.dispatchEvent(new Event('iavse-journey-layout'));s.scroll(2800);s.move();s.click();s.step();
- assert.equal(s.gallery.rectReads,after);assert.equal(s.frames.size,0,'unmount removes boundary listeners and pending frames');
+test('scrolling into ordinary product and gallery sections preserves feedback with no boundary measurement',()=>{
+ const s=mount({galleryTop:1800});s.move();s.click();assert.equal(s.frames.size,2,'the original opening retains its feedback');
+ for(const target of [s.filmButton,s.homeProductButton,s.galleryButton,s.gallerySpace]){
+  for(let i=0;i<20;i++){s.scroll(901+i*100);s.move(400+i,300,'mouse',target);s.click(i%2,target);s.step();assert.ok(s.canvas.context.arcs.length>50);}
+  assert.equal(s.frames.size,2,'a product section or gallery wrapper does not silence the whole viewport');
+ }
+ assert.equal(s.gallery.rectReads,0,'ordinary scroll, pointer movement, and initial mount do not read section geometry');
+ s.window.dispatchEvent(new Event('resize'));s.window.dispatchEvent(new Event('iavse-journey-layout'));assert.equal(s.gallery.rectReads,0);
+ s.cleanup();s.scroll(2800);s.move();s.click();s.step();assert.equal(s.frames.size,0,'unmount removes all pointer work');
+});
+
+test('touch contact cancels a previous mouse field and synthetic touch clicks never paint',()=>{
+ const s=mount();s.move();s.click();s.step();assert.equal(s.frames.size,2);s.contact('touch');assert.equal(s.frames.size,0);assert.equal(s.canvas.context.arcs.length+s.wave.context.arcs.length,0);
+ const fills=s.canvas.context.fills+s.wave.context.fills;s.move(300,400,'touch');s.click();s.click(1,s.button,'touch');assert.equal(s.frames.size,0);assert.equal(s.canvas.context.fills+s.wave.context.fills,fills);
+ s.click(0);assert.equal(s.frames.size,1,'keyboard activation remains accessible after touching a hybrid device');s.advance(800);
+ s.contact('mouse');s.move();s.click();assert.equal(s.frames.size,2,'fresh mouse input restores original effects');s.cleanup();
+ const mobile=mount();mobile.fine.matches=false;mobile.click();assert.equal(mobile.frames.size,0);mobile.click(0);assert.equal(mobile.frames.size,1,'coarse-pointer devices can still show keyboard acknowledgement');mobile.cleanup();
+});
+
+test('committing an editor or admin workspace retires a travelling click wave',()=>{
+ for(const path of ['/workspace/blog','/admin']){const s=mount();s.move();s.click();s.step();s.navigation(true);
+  s.document.querySelector=selector=>selector==='.blog-canvas-editor,[data-admin-layout=control-center]'?{}:null;s.navigate(path);
+  assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');assert.equal(s.canvas.context.arcs.length+s.wave.context.arcs.length,0);s.cleanup();}
 });

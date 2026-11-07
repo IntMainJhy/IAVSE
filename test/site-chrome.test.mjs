@@ -109,7 +109,7 @@ test('interior chrome retains one bounded neutral glass layer without filtering 
   const header=fixture.chrome||fixture.row.slice(0,-1),backing=[...header.slice(0,-1),{...header.at(-1),pseudo:'before'}],after=[...header.slice(0,-1),{...header.at(-1),pseudo:'after'}];
   for(const files of [[shared,...legacy],[...legacy,shared]]){
    assert.equal(winner(files,header,'backdrop-filter',390)?.value,'none',fixture.name+' keeps menu positioning outside the blur layer');
-   for(const [property,value]of [['display','block'],['content','""'],['background','var(--platform-chrome-surface)'],['backdrop-filter','var(--platform-chrome-filter)'],['-webkit-backdrop-filter','var(--platform-chrome-filter)'],['height','100%'],['inset','0'],['z-index','-1'],['pointer-events','none']])assert.equal(winner(files,backing,property,390)?.value,value,fixture.name+' '+property);
+   for(const [property,value]of [['display','block'],['content','""'],['background','var(--platform-chrome-surface)'],['backdrop-filter','var(--platform-chrome-filter)'],['-webkit-backdrop-filter','var(--platform-chrome-filter)'],['height','calc(100% + var(--platform-chrome-fade))'],['inset','0'],['z-index','-1'],['pointer-events','none'],['mask','var(--platform-chrome-mask)'],['border','0']])assert.equal(winner(files,backing,property,390)?.value,value,fixture.name+' '+property);
    assert.equal(winner(files,after,'display',390)?.value,'none');
    assert.equal(winner(files,after,'content',390)?.value,'none');
   }
@@ -120,7 +120,8 @@ test('interior chrome retains one bounded neutral glass layer without filtering 
  for(const [name,condition]of [['media',/prefers-reduced-transparency:\s*reduce/],['supports',/^not .*backdrop-filter/]]){
   let fallback=false;sheets.get(shared).walkAtRules(name,rule=>{if(!condition.test(rule.params))return;const properties={};rule.walkDecls(decl=>{properties[decl.prop]=decl.value;});assert.equal(properties['--platform-chrome-surface'],'var(--platform-chrome-solid)');assert.equal(properties['--platform-chrome-filter'],'none');fallback=true;});assert.ok(fallback,name+' has a solid fallback');
  }
- assert.doesNotMatch(read(shared),/(?:linear|radial|conic)-gradient\(/,'the former oversized gradient layer stays retired');
+ assert.match(winner([shared],[html('light')],'--platform-chrome-mask',1440)?.value,/^linear-gradient\(/,'only the backing layer fades below the navigation');
+ assert.equal(winner([shared],[html('light')],'--platform-chrome-fade',1440)?.value,'36px','the fade stays bounded near the navigation');
 });
 
 test('home navigation floats over its actual backdrop while links and mobile disclosure stay usable',()=>{
