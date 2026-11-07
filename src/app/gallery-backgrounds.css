@@ -1,0 +1,88 @@
+/* Real-time spatial scenes below the optical opening and behind community.
+   Geometry is rendered in Three.js; the neutral ground also works without WebGL. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background{
+ position:relative;isolation:isolate;display:flow-root;min-width:0;background:#f7f6f2;color-scheme:light;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background>.spatial-backdrop{
+ position:sticky;top:0;height:100svh;margin-bottom:-100svh;z-index:-1;pointer-events:none;overflow:hidden;
+}
+.spatial-backdrop{pointer-events:none;overflow:hidden}
+.spatial-backdrop>canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .4s ease}
+/* The near field yields to headings; depth opens below the reading line. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background>.spatial-backdrop>canvas{
+ mask-image:linear-gradient(180deg,transparent 240px,#000 490px);-webkit-mask-image:linear-gradient(180deg,transparent 240px,#000 490px);
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product{
+ background:transparent;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-identity-stage{
+ background:#e9e8e2;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product]{
+ background:#faf9f5cc;box-shadow:0 22px 54px -42px #5c584938;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices{
+ background:transparent;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing:has(.home-gallery-background)>.organic-footer{
+ background:#f7f6f2!important;
+}
+/* The paper has its own route marker. Other reading scenes keep their field. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]{
+ position:relative;isolation:isolate;--site-canvas:#f5f4f0;--site-raised:#eeede8;--site-line:#ddded8;--site-control-line:#cccec7;
+ --site-heading-surface:transparent;--site-menu-surface:#fffefa;--organic-line:#ddded8;
+ background:#f5f4f0;color-scheme:light;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.spatial-backdrop{
+ position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.spatial-backdrop>canvas{
+ mask-image:linear-gradient(180deg,transparent 180px,#000 420px);-webkit-mask-image:linear-gradient(180deg,transparent 180px,#000 420px);
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header{
+ background:transparent!important;border:0;box-shadow:none;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header::before{
+ background:linear-gradient(180deg,#f8f7f3ee 0%,#f8f7f3c4 36%,#f8f7f35c 68%,#f8f7f300 100%);
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper][data-glass-scrolled]>.organic-header::before{
+ background:linear-gradient(180deg,#f8f7f3f5 0%,#f8f7f3e0 36%,#f8f7f370 68%,#f8f7f300 100%);
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-post,.community-empty,.community-member-card,.community-profile-header,.community-post-detail,.feed-workspace-main){
+ background:#fffefa;border-color:#ddded8;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-search{
+ background:#fffefa;border-color:#ddded8;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-tabs{
+ border-bottom-color:#d9dcd5;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-nav-links a,.feed-discover nav a)[aria-current]{
+ background:#e9ece6;
+}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-footer{
+ background:transparent!important;
+}
+@media(max-width:767px){
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background>.spatial-backdrop>canvas{
+  mask-image:linear-gradient(180deg,transparent 320px,#000 550px);-webkit-mask-image:linear-gradient(180deg,transparent 320px,#000 550px);
+ }
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.spatial-backdrop{opacity:.4}
+ /* Retain the liquid navigation geometry, use the new material beneath it. */
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{
+  background:linear-gradient(155deg,#fffefae8,#eeede3c4);box-shadow:inset 0 1px 0 #fff,0 8px 28px -14px #4e51432b;
+ }
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-navigation>.feed-nav-links :is(a,summary)[data-liquid-selected]{background:transparent}
+}
+@media(prefers-reduced-transparency:reduce){
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header{background:#f8f7f3!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header::before{display:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{background:#f3f2ec}
+}
+@media print{
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background{background:#fff}
+ .spatial-backdrop{display:none}
+}
+
+@media(prefers-reduced-motion:reduce){.spatial-backdrop>canvas{transition:none}}

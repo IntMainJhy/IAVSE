@@ -12,6 +12,7 @@ import {HomeResourceSculpture} from './HomeResourceSculpture';
 import {HomeStoryVideo} from './HomeStoryVideo';
 import {CreatorVoices} from './CreatorVoices';
 import {homeProductCopy} from '@/lib/home-product-copy.mjs';
+import {SpatialBackdrop} from './SpatialBackdrop';
 import '@/app/home-showcase.css';
 import '@/app/home-product-showcase.css';
 export async function PlatformHome({req}:{req:Request}){
@@ -36,6 +37,8 @@ export async function PlatformHome({req}:{req:Request}){
   <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}</div><HomeCinema locale={locale}/></div>
    <div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
   </section>
+  <div className="home-gallery-background" data-home-background="gallery">
+  <SpatialBackdrop mode="gallery"/>
   <div className="home-stories home-product" data-home-product>
    <section className="home-story home-story-primary" data-home-story="blog" data-home-side="left" id="creators" aria-labelledby="v2-creators-title">
     <div className="home-story-copy"><h2 id="v2-creators-title">{copy.blogTitle}</h2><div className="home-story-body"><p>{copy.blogText}</p><Link className="home-story-link" href="/blogs">{t('发现更多主页')}<Icon name="arrow"/></Link></div></div>
@@ -58,5 +61,6 @@ export async function PlatformHome({req}:{req:Request}){
   </div>
   <section className="v2-section v2-invitation" data-home-scene="invitation" data-home-product aria-labelledby="v2-invitation-title"><h2 id="v2-invitation-title">{t('下一份值得被看见的，')}<span>{t('是你的创造。')}</span></h2><div><Link className="v2-primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div></section>
   <CreatorVoices/>
+  </div>
  </div>;
 }

@@ -6,7 +6,7 @@ import ts from 'typescript';
 import {homePixelBudget} from '../src/lib/home-render-budget.ts';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/V2Atmosphere.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,retireHero=false,cpuRenderMs=0,navigationPending=false,scrollY=0}={}){
+function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=false,failed=false,animated=false,mode='home',reveal=false,journey=false,gallery=false,retireHero=false,cpuRenderMs=0,navigationPending=false,scrollY=0}={}){
  let cpuClock=0;
  class Target extends EventTarget{
   listeners=new Set();attributes=new Set();hasAttribute(name){return this.attributes.has(name)}setAttribute(name){this.attributes.add(name)}removeAttribute(name){this.attributes.delete(name)}dataset={};style={getPropertyValue(name){return this[name]||''},setProperty(name,value){this[name]=value},removeProperty(name){delete this[name]}};
@@ -22,7 +22,7 @@ function mount({reduced=false,savedReduced=false,width=1400,height=900,loading=f
  if(journey){window.scrollY=scrollY;host.top=-scrollY;}
  host.querySelectorAll=selector=>selector.includes('data-home-story')?(journey?sections:[]):reveal?[panel]:[];
  host.getAttribute=key=>key==='data-journey-motion'?host.dataset.journeyMotion:null;
- host.querySelector=selector=>{assert.equal(selector,'.home-stories');return host.track||null;};
+ host.querySelector=selector=>{if(selector==='[data-home-background="gallery"]')return gallery?{}:null;assert.equal(selector,'.home-stories');return host.track||null;};
  const draws=[],sizes=[],reveals=[],journeys=[];let releases=0,createCalls=0,resolve,reject,signal,opticalLive=animated;
  const adapter={get animated(){return opticalLive},get interactive(){return retireHero?opticalLive:undefined},resize:(...args)=>sizes.push(args),setReveals:value=>reveals.push(value),render:(...args)=>{draws.push(args);cpuClock+=cpuRenderMs;if(retireHero)opticalLive=args[3]<1.3||!!reveals.at(-1)?.length;},dispose:()=>releases++};
  if(journey)adapter.setJourney=value=>journeys.push(JSON.parse(JSON.stringify(value)));
@@ -282,6 +282,20 @@ test('natural chapter geometry is cached across scroll frames and refreshed only
  assert.equal(s.journeys.length,count+1,'layout events share one cache rebuild');assert.equal(s.journeys.at(-1)[1].start,3480/900);
  const refreshed=reads();s.host.dispatchEvent(new Event('load'));s.step();assert.ok(reads()>refreshed,'loaded images can invalidate cached geometry');
  s.cleanup();const after=reads();s.window.dispatchEvent(new Event('iavse-journey-layout'));s.host.dispatchEvent(new Event('load'));s.step();assert.equal(reads(),after,'late events cannot measure a disposed scene');
+});
+
+test('independent gallery skips old chapter light and layout while retaining the opening scene',async()=>{
+ const s=mount({animated:true,journey:true,gallery:true,reveal:true,retireHero:true});s.intersection.set(true);await flush();s.step(16);
+ assert.deepEqual(s.journeys.at(-1),[]);assert.equal(s.frames.size,1,'the approved hero keeps its optical clock');
+ assert.equal(s.panel.dataset.glassMotion,undefined,'gallery mode keeps the journey reveal contract');
+ assert.equal(s.sections.reduce((sum,section)=>sum+section.rectReads,0),0,'the independent gallery does not measure old light chapters');
+ s.window.scrollY=1800;s.host.top=-1800;for(let i=0;i<12;i++){s.window.dispatchEvent(new Event('scroll'));s.window.dispatchEvent(new Event('iavse-journey-layout'));}
+ s.step(16);assert.equal(s.frames.size,0,'retired hero has no hidden journey animation');assert.deepEqual(s.journeys.at(-1),[]);
+ const draws=s.draws.length;s.move();s.step();assert.equal(s.draws.length,draws,'the gallery cannot wake invisible hero glass');
+ assert.equal(s.sections.reduce((sum,section)=>sum+section.rectReads,0),0);
+ s.window.scrollY=0;s.host.top=0;s.window.dispatchEvent(new Event('scroll'));s.step();assert.equal(s.frames.size,1,'returning to the opening resumes the same scene');assert.equal(s.createCalls,1);
+ s.window.dispatchEvent(new Event('iavse-journey-layout'));s.cleanup();const reads=s.host.rectReads+s.canvas.rectReads;s.step();s.host.dispatchEvent(new Event('load'));s.window.dispatchEvent(new Event('iavse-journey-layout'));
+ assert.equal(s.host.rectReads+s.canvas.rectReads,reads,'unmount cancels pending layout work');assert.equal(s.frames.size,0);assert.equal(s.releases,1);
 });
 
 

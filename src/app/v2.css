@@ -74,7 +74,8 @@ html[data-ui][data-color-mode] .v2-site .v2-hero-secondary{display:inline-flex;g
 .v2-stage-chrome .icon{width:15px;height:15px}
 .v2-stage-body{display:grid;grid-template-columns:188px minmax(0,1fr);gap:24px;padding:24px}
 .v2-stage-profile{padding:4px 20px 0 0;border-right:1px solid #b8cae5;min-width:0}
-.v2-stage-profile .feed-avatar{width:56px;height:56px;flex-basis:56px;margin-bottom:12px;border-radius:16px;overflow:hidden}
+.v2-stage-profile .feed-avatar{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;flex-basis:56px;line-height:1;margin-bottom:12px;border-radius:16px;overflow:hidden}
+.v2-stage-profile .feed-avatar>img{display:block;width:100%;height:100%;object-fit:cover}
 html[data-ui][data-color-mode] .v2-site .v2-stage-profile h2{font-size:22px;font-weight:600;letter-spacing:-.035em;line-height:1.25;margin:0 0 4px;color:#182e53;font-family:var(--site-font)}
 .v2-stage-profile>span{font-size:11px;color:var(--v2-stage-muted)}
 html[data-ui][data-color-mode] .v2-site .v2-stage-profile>p{font-size:13px;line-height:1.8;color:var(--v2-stage-muted);margin:16px 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}

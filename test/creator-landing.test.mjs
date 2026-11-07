@@ -6,6 +6,7 @@ import ts from 'typescript';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
+import {parseDocument} from 'htmlparser2';
 import * as locales from '../src/lib/content-locales.mjs';
 import * as productCopy from '../src/lib/home-product-copy.mjs';
 
@@ -21,11 +22,12 @@ async function render(space,locale='zh',media=true){
   '@/lib/home-product-copy.mjs':productCopy,
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'./V2Atmosphere':{V2Atmosphere:()=>null},
   './HomeMotion':{HomeMotion:()=>React.createElement('span',{'data-home-motion':true})},'./HomeCinema':{HomeCinema:()=>React.createElement('span',{'data-home-cinema':true})},
+  './SpatialBackdrop':{SpatialBackdrop:({mode})=>React.createElement('div',{className:'spatial-backdrop','data-spatial-mode':mode,'aria-hidden':'true'},React.createElement('canvas'))},
   './CreatorVoices':{CreatorVoices:()=>React.createElement('section',{'data-creator-voices':true},'Illustrative creator comments')},
   './HomeResourceSculpture':{HomeResourceSculpture:({posterSrc,label})=>media?React.createElement('img',{src:posterSrc,alt:label,'data-resource-fallback':true}):null},
   './HomeStoryVideo':{HomeStoryVideo:({src,poster,label})=>media?React.createElement('img',{src:poster,alt:label,'data-video-src':src}):null},
   './HomeBlogCanvasDemo':{HomeBlogCanvasDemo:({locale,creator,pageScroll})=>React.createElement('div',{'data-editor-demo':true,'data-locale':locale,'data-page-scroll':pageScroll},React.createElement('pre',{'data-demo-creator':true},JSON.stringify(creator??null)))},
-  '@/app/home-showcase.css':{},'@/app/home-product-showcase.css':{},
+  '@/app/home-showcase.css':{},'@/app/home-product-showcase.css':{},'@/app/gallery-backgrounds.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
  vm.runInNewContext(source,{exports,Set,encodeURIComponent,require:name=>{if(!Object.hasOwn(modules,name))throw new Error(name);return modules[name]}});
@@ -97,6 +99,21 @@ test('the product stories begin after the preserved opening and reserve the larg
  assert.deepEqual(sections.filter(({classes})=>classes.includes('home-story-primary')).map(({story})=>story),['blog','editor']);
  assert.deepEqual(sections.filter(({classes})=>classes.includes('home-story-discovery')).map(({story})=>story),['skills','resources']);
  assert.match(html,/class="home-stories home-product" data-home-product="true"/);
+});
+
+test('the gallery background contains the complete lower homepage while the hero and creator stage remain outside it',async()=>{
+ const descendants=node=>(node.children||[]).flatMap(child=>[...(child.type==='tag'?[child]:[]),...descendants(child)]);
+ const hasClass=(node,name)=>node.attribs?.class?.split(/\s+/).includes(name);
+ for(const creator of [space,null]){
+  const nodes=descendants(parseDocument(await render(creator,'en'))),galleries=nodes.filter(node=>node.attribs['data-home-background']==='gallery');assert.equal(galleries.length,1);
+  const gallery=galleries[0],inside=descendants(gallery),hero=nodes.find(node=>hasClass(node,'v2-hero-scene')),scene=gallery.children.find(node=>node.type==='tag');
+  assert.ok(hasClass(gallery,'home-gallery-background'));assert.equal(hero.parent,gallery.parent,'the background starts after the independent hero scene');assert.ok(hero.parent.children.indexOf(hero)<hero.parent.children.indexOf(gallery));
+  assert.ok(hasClass(scene,'spatial-backdrop'),'the decorative scene is the first gallery element');assert.equal(scene.attribs['data-spatial-mode'],'gallery');assert.equal(scene.attribs['aria-hidden'],'true');assert.equal(descendants(scene).filter(node=>node.name==='canvas').length,1);assert.equal(inside.filter(node=>hasClass(node,'spatial-backdrop')).length,1);
+  assert.deepEqual(inside.filter(node=>node.attribs['data-home-story']).map(node=>[node.attribs['data-home-story'],node.attribs['data-home-side']]),[['blog','left'],['editor','right'],['skills','left'],['resources','right']]);
+  assert.equal(inside.filter(node=>node.attribs['data-home-scene']==='invitation').length,1);assert.equal(inside.filter(node=>node.attribs['data-creator-voices']==='true').length,1);
+  assert.ok(!inside.some(node=>hasClass(node,'v2-hero-scene')||hasClass(node,'v2-hero-intro')||hasClass(node,'v2-hero-showcase')||node.attribs['data-home-cinema']||node.attribs['data-stage']),'the optical opening and creator stage never receive the gallery background');
+  assert.ok(!descendants(hero).some(node=>hasClass(node,'spatial-backdrop')),'the gallery canvas never enters the hero');assert.ok(descendants(hero).some(node=>node.attribs[creator?'data-stage':'class']===(creator?'true':'v2-hero-empty')),'both published and empty hero states remain available');
+ }
 });
 test('the editor receives the real public snapshot without repeating a separate project row',async()=>{
  const intro='A long public creator introduction that belongs on the full profile rather than being repeated through every feature.';

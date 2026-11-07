@@ -74,6 +74,9 @@ export function mountV2Atmosphere(canvas:HTMLCanvasElement,createScene=loadScene
  const readLayout=()=>{
   const hostRect=host.getBoundingClientRect(),height=Math.max(pointerBounds.height,1);hostDocumentTop=hostRect.top+(window.scrollY||0);
   if(!hasJourney())return;
+  // The gallery owns a separate scene. Keep the hero renderer and its reveal
+  // contract, without measuring chapters or animating an overlapping backdrop.
+  if(host.querySelector('[data-home-background="gallery"]')){scene?.setJourney?.([]);return;}
   // Sections keep their document geometry while their children move. Cache these
   // measurements after layout changes, never on each scroll or animation frame.
   const chapters:HomeJourneyChapter[]=Array.from(host.querySelectorAll<HTMLElement>('[data-home-story],[data-home-scene="invitation"]')).map(element=>{

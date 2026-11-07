@@ -18,19 +18,19 @@ function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,d
  const initialHost=currentHost,canvas=Object.assign(new Target(),{dataset:{},width:300,height:150}),layer={hidden:true};
  const window=Object.assign(new Target(),{scrollY:0});window.self=window;window.top=iframe?{}:window;
  const document=Object.assign(new Target(),{hidden,body:{},querySelector:()=>currentHost,documentElement:Object.assign(new Target(),{hasAttribute:name=>name==='data-iavse-transition'&&navigationPending})}),preference=Object.assign(new Target(),{matches:systemReduced});
- const frames=new Map(),renders=[],sizes=[],exports={},refs=[],effects=[],attempts=[];let id=0,now=1000,disposes=0,signal,createCalls=0,resizeError=false,renderError=false,refIndex=0,effectIndex=0,scheduled=[];
+ const frames=new Map(),renders=[],sizes=[],exports={},refs=[],effects=[],attempts=[];let id=0,now=1000,disposes=0,signal,createCalls=0,moduleLoads=0,resizeError=false,renderError=false,refIndex=0,effectIndex=0,scheduled=[];
  const jsx=(type,props)=>{if(props.ref)props.ref.current=type==='canvas'?canvas:layer;return{type,props};};
  const sandbox={exports,window,document,innerWidth:width,innerHeight:900,devicePixelRatio:2,AbortController,MutationObserver:class{constructor(fn){mutation=fn;}observe(){}disconnect(){observerDisconnected=true;}},matchMedia:()=>preference,localStorage:{getItem:()=>savedReduced?'reduce':null},requestAnimationFrame:fn=>{frames.set(++id,fn);return id;},cancelAnimationFrame:key=>frames.delete(key),require:name=>{
   if(name==='react')return{useEffect:(fn,deps)=>{const index=effectIndex++,previous=effects[index];if(!previous||deps.some((value,i)=>value!==previous.deps[i]))scheduled.push({index,fn,deps});},useRef:value=>refs[refIndex++]??(refs[refIndex-1]={current:value})};
   if(name==='next/navigation')return{usePathname:()=>currentPath};
   if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};
-  if(name==='@/lib/quantum-field')return{createQuantumField:(_canvas,abort,viewport)=>{
+  if(name==='@/lib/quantum-field'){moduleLoads++;return{createQuantumField:(_canvas,abort,viewport)=>{
    signal=abort;createCalls++;
    const attempt={signal:abort,viewport,renders:0,disposes:0};
    const scene={render:(...args)=>{if(renderError)throw Error('drawing failed');attempt.renders++;renders.push(args);},resize:(...args)=>{if(resizeError)throw Error('resize failed');sizes.push(args);},dispose:()=>{attempt.disposes++;disposes++;}};
    attempt.scene=scene;const created=new Promise((resolve,reject)=>{attempt.resolve=()=>resolve(scene);attempt.reject=reject;});attempts.push(attempt);
    if(!deferred)attempt.resolve();return created;
-  }};
+  }}};
   throw Error('Unexpected dependency '+name);
  }};
  vm.runInNewContext(source,sandbox);
@@ -45,7 +45,7 @@ function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,d
  const replaceHost=()=>{if(currentHost)currentHost.isConnected=false;currentHost=makeHost();return currentHost;};
  const navigate=(next,{host=true}={})=>{currentPath=next;if(host)replaceHost();else{if(currentHost)currentHost.isConnected=false;currentHost=null;}render();};
  const navigation=(pending,{marker=pending}={})=>{navigationPending=marker;window.dispatchEvent(Object.assign(new Event('iavse-navigation-pending'),{detail:{pending}}));};
- return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,attempts,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,navigation,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:(index=attempts.length-1)=>attempts[index].resolve(),reject:(index,error)=>attempts[index].reject(error),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;}};
+ return{window,document,preference,canvas,layer,attributes:initialHost?.attributes,frames,renders,sizes,attempts,output,cleanup,step,control,scroll,move,visibility,contextLost,navigate,navigation,replaceHost,mutate:()=>mutation?.(),resize:()=>window.dispatchEvent(new Event('resize')),resolve:(index=attempts.length-1)=>attempts[index].resolve(),reject:(index,error)=>attempts[index].reject(error),failResize:()=>{resizeError=true;},failRender:()=>{renderError=true;},get host(){return currentHost;},get observerDisconnected(){return observerDisconnected;},get disposes(){return disposes;},get signal(){return signal;},get createCalls(){return createCalls;},get moduleLoads(){return moduleLoads;}};
 }
 
 test('one field starts after loading, coalesces pointer input and respects desktop and mobile cadence',async()=>{
@@ -110,7 +110,7 @@ test('unmount unregisters listeners, cancels pending work and releases canvas me
 
 test('reading routes share one field across new shells and return without recompiling',async()=>{
  const s=mount();await flush();s.step();const canvas=s.canvas,previous=s.host;
- s.scroll(160);s.navigate('/community');await flush();s.step();
+ s.scroll(160);s.navigate('/resources/shared/resource-id');await flush();s.step();
  assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.canvas,canvas);assert.equal(s.layer.hidden,false);
  assert.equal(previous.attributes.size,0);assert.ok(s.host.attributes.has('data-quantum-host'));assert.ok(s.host.attributes.has('data-glass-scrolled'));
  const before=s.renders.at(-1)[0];s.navigate('/');assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);s.step(60000);
@@ -126,21 +126,21 @@ test('home, author pages, showcase previews and embedded frames never initialize
  const s=mount({path:'/'});await flush();s.navigate('/docs/getting-started');await flush();assert.equal(s.createCalls,1);s.cleanup();
 });
 
-test('Bento indexes and filter shell replacements never initialize or wake a hidden field',async()=>{
- for(const path of ['/resources','/resources/','/docs','/docs/','/skills','/skills/','/resources/legal-consultation','/resources/legal-consultation/']){
+test('independent community scenes and Bento filter replacements never load or wake a hidden field',async()=>{
+ for(const path of ['/community','/community/','/community/post-id','/community/members','/community/members/member-id','/resources','/resources/','/docs','/docs/','/skills','/skills/','/resources/legal-consultation','/resources/legal-consultation/']){
   const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true);
   s.move();s.scroll(180);s.resize();s.control('reduced',true);s.control('reduced',false);
   s.visibility(true);s.visibility(false);s.navigation(true);s.navigation(false);
   // Query changes keep usePathname stable while streamed content replaces the host.
   s.navigate(path);s.mutate();await flush();s.step();
-  assert.equal(s.createCalls,0,path+' stays GPU-free after filters and visibility changes');
+  assert.equal(s.createCalls,0,path+' stays free of old GPU work after filters and visibility changes');assert.equal(s.moduleLoads,0,'independent scenes do not request the old shader module');
   assert.equal(s.frames.size,0);assert.equal(s.host.attributes.size,0);s.cleanup();
  }
 });
 
-test('Bento index round trips stop drawing and reuse the ready field on reading details',async()=>{
+test('community and Bento round trips stop drawing and reuse the ready field on reading details',async()=>{
  const s=mount();await flush();s.step();const canvas=s.canvas,ready=s.signal;
- for(const [index,detail] of [['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices'],['/resources/legal-consultation','/docs/connect']]){
+ for(const [index,detail] of [['/community','/blogs'],['/community/members/member-id','/docs/connect'],['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices'],['/resources/legal-consultation','/docs/connect']]){
   const renders=s.renders.length,time=s.renders.at(-1)[0],previous=s.host;
   s.navigate(index);await flush();assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);assert.equal(previous.attributes.size,0);
   s.move();s.scroll(120);s.resize();s.visibility(true);s.visibility(false);s.navigate(index);s.mutate();s.step(60000);await flush();
@@ -160,9 +160,11 @@ test('a shell arriving after pathname commit attaches without replacing the fiel
 });
 
 test('leaving a route cancels unfinished setup and a late result is disposed before retry',async()=>{
- const s=mount({deferred:true});await flush();assert.equal(s.createCalls,1);s.navigate('/');s.resolve();await flush();
- assert.equal(s.attempts[0].signal.aborted,true);assert.equal(s.disposes,1);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);
- s.navigate('/docs/connect');await flush();assert.equal(s.createCalls,2);s.resolve();await flush();s.step();assert.equal(s.renders.length,1);assert.equal(s.attempts[0].renders,0);s.cleanup();
+ for(const destination of ['/','/community','/community/members/member-id']){
+  const s=mount({deferred:true});await flush();assert.equal(s.createCalls,1);s.navigate(destination);assert.equal(s.attempts[0].signal.aborted,true);s.resolve();await flush();
+  assert.equal(s.disposes,1);assert.equal(s.sizes.length,0);assert.equal(s.frames.size,0);assert.equal(s.layer.hidden,true);
+  s.navigate('/docs/connect');await flush();assert.equal(s.createCalls,2);s.resolve();await flush();s.step();assert.equal(s.renders.length,1);assert.equal(s.attempts[0].renders,0);s.cleanup();
+ }
 });
 
 
@@ -176,7 +178,7 @@ test('temporary home pause controls cannot freeze a later reading route',async()
  const s=mount({path:'/'});s.control('paused',true);s.navigate('/docs/getting-started');await flush();s.step();
  assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);
  s.control('paused',true);s.step();assert.equal(s.canvas.dataset.field,'paused');
- s.navigate('/');s.control('paused',true);s.navigate('/community');await flush();s.step();
+ s.navigate('/');s.control('paused',true);s.navigate('/blogs');await flush();s.step();
  assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);s.cleanup();
 });
 
@@ -190,7 +192,7 @@ test('a handoff already active at mount defers shaders until the visible destina
 
 test('navigation suspends and retains the field across shell replacements and stale releases',async()=>{
  const s=mount();await flush();s.step();const time=s.renders.at(-1)[0],sizes=s.sizes.length;
- s.navigation(true);assert.equal(s.frames.size,0);s.navigate('/community');s.navigation(false,{marker:true});
+ s.navigation(true);assert.equal(s.frames.size,0);s.navigate('/docs/connect');s.navigation(false,{marker:true});
  s.scroll(300);s.resize();s.move();s.step(60000);await flush();
  assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.sizes.length,sizes);assert.equal(s.renders.length,1);assert.equal(s.frames.size,0);
  s.navigation(false);s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,2);assert.ok(s.renders.at(-1)[0]-time<.1,'handoff duration cannot advance the background clock');
