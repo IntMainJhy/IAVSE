@@ -7,7 +7,7 @@ import ts from 'typescript';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/QuantumBackdrop.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 const flush=async()=>{for(let n=0;n<8;n++)await Promise.resolve();};
 
-function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,deferred=false,path='/resources',iframe=false,missingHost=false,navigationPending=false}={}){
+function mount({width=1440,systemReduced=false,savedReduced=false,hidden=false,deferred=false,path='/docs/getting-started',iframe=false,missingHost=false,navigationPending=false}={}){
  class Target extends EventTarget{
   listeners=new Set();
   addEventListener(name,fn,options){super.addEventListener(name,fn,options);this.listeners.add(name);}
@@ -123,7 +123,33 @@ test('home, author pages, showcase previews and embedded frames never initialize
   const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true,path);assert.equal(s.frames.size,0);s.move();s.scroll(200);s.resize();assert.equal(s.frames.size,0);s.cleanup();
  }
  const frame=mount({iframe:true});await flush();assert.equal(frame.createCalls,0);assert.equal(frame.layer.hidden,true);frame.cleanup();
- const s=mount({path:'/'});await flush();s.navigate('/resources');await flush();assert.equal(s.createCalls,1);s.cleanup();
+ const s=mount({path:'/'});await flush();s.navigate('/docs/getting-started');await flush();assert.equal(s.createCalls,1);s.cleanup();
+});
+
+test('Bento indexes and filter shell replacements never initialize or wake a hidden field',async()=>{
+ for(const path of ['/resources','/resources/','/docs','/docs/','/skills','/skills/']){
+  const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true);
+  s.move();s.scroll(180);s.resize();s.control('reduced',true);s.control('reduced',false);
+  s.visibility(true);s.visibility(false);s.navigation(true);s.navigation(false);
+  // Query changes keep usePathname stable while streamed content replaces the host.
+  s.navigate(path);s.mutate();await flush();s.step();
+  assert.equal(s.createCalls,0,path+' stays GPU-free after filters and visibility changes');
+  assert.equal(s.frames.size,0);assert.equal(s.host.attributes.size,0);s.cleanup();
+ }
+});
+
+test('Bento index round trips stop drawing and reuse the ready field on reading details',async()=>{
+ const s=mount();await flush();s.step();const canvas=s.canvas,ready=s.signal;
+ for(const [index,detail] of [['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices']]){
+  const renders=s.renders.length,time=s.renders.at(-1)[0],previous=s.host;
+  s.navigate(index);await flush();assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);assert.equal(previous.attributes.size,0);
+  s.move();s.scroll(120);s.resize();s.visibility(true);s.visibility(false);s.navigate(index);s.mutate();s.step(60000);await flush();
+  assert.equal(s.renders.length,renders,index+' must not draw behind its neutral cards');assert.equal(s.frames.size,0);
+  assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(ready.aborted,false);
+  s.navigate(detail);await flush();s.step();assert.equal(s.layer.hidden,false);assert.equal(s.renders.length,renders+1);
+  assert.equal(s.canvas,canvas);assert.equal(s.createCalls,1);assert.ok(s.renders.at(-1)[0]-time<.1,'hidden index time cannot fast-forward the retained scene');
+ }
+ s.cleanup();
 });
 
 test('a shell arriving after pathname commit attaches without replacing the field',async()=>{
@@ -147,7 +173,7 @@ test('an initially hidden reading route defers GPU initialization until it is vi
 
 
 test('temporary home pause controls cannot freeze a later reading route',async()=>{
- const s=mount({path:'/'});s.control('paused',true);s.navigate('/resources');await flush();s.step();
+ const s=mount({path:'/'});s.control('paused',true);s.navigate('/docs/getting-started');await flush();s.step();
  assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);
  s.control('paused',true);s.step();assert.equal(s.canvas.dataset.field,'paused');
  s.navigate('/');s.control('paused',true);s.navigate('/community');await flush();s.step();
@@ -174,7 +200,7 @@ test('navigation suspends and retains the field across shell replacements and st
 test('rapid retargeting to home and hidden destinations never starts an unused renderer',async()=>{
  const s=mount({path:'/'});s.navigation(true);s.navigate('/blogs');await flush();assert.equal(s.createCalls,0);
  s.navigate('/');s.navigation(false);await flush();assert.equal(s.createCalls,0);assert.equal(s.layer.hidden,true);
- s.navigation(true);s.navigate('/resources');s.visibility(true);s.navigation(false);await flush();assert.equal(s.createCalls,0);
+ s.navigation(true);s.navigate('/docs/getting-started');s.visibility(true);s.navigation(false);await flush();assert.equal(s.createCalls,0);
  s.visibility(false);await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.renders.length,1);s.cleanup();
 });
 

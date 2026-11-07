@@ -13,3 +13,11 @@ export function inlineAdminPath(href,base,current=[]){
  const match=path.match(/^\/admin\/community(?:\/([^/]+))?$/);
  return match&&communitySections.has(match[1]||'')?['community',...(match[1]?[match[1]]:[])]:null;
 }
+
+// Native history updates keep the persistent workspace and the router URL in sync.
+export function adminLocation(href){
+ try{const url=new URL(href,'http://admin.local'),match=url.pathname.match(/^\/admin(?:\/(.*))?$/);if(!match)return null;
+  const path=(match[1]||'').split('/').filter(Boolean).map(decodeURIComponent);
+  return{path:path.length===1&&path[0]==='catalog'?['community','catalog']:path,query:Object.fromEntries(url.searchParams)};
+ }catch{return null}
+}

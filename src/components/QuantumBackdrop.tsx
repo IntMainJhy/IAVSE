@@ -4,7 +4,8 @@ import {useEffect,useRef} from 'react';
 import {usePathname} from 'next/navigation';
 import type {QuantumField} from '@/lib/quantum-field';
 
-const quantumRoute=(path:string)=>/^\/(?:community|resources|docs|skills)(?:\/|$)/.test(path)||/^\/blogs\/?$/.test(path);
+// Bento indexes own an opaque neutral canvas, so they need no hidden GPU work.
+const quantumRoute=(path:string)=>!/^\/(?:resources|docs|skills)\/?$/.test(path)&&(/^\/(?:community|resources|docs|skills)(?:\/|$)/.test(path)||/^\/blogs\/?$/.test(path));
 const hostSelector='.organic-site.v2-site[data-surface="reading"][data-reading-scene="quantum"]';
 
 /** A root-owned field retains its GPU resources between reading routes. */

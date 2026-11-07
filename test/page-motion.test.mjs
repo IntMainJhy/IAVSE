@@ -71,7 +71,7 @@ test('public header links bridge remounted frames without delaying or cancelling
 
 test('query routes keep public content in place and modified or external clicks cannot create a handoff',()=>{
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});f.click('/resources?type=skills');a.cleanup();
- const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.y===0&&call.to.duration===.22));b.cleanup();
+ const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});assert.ok(f.calls.some(call=>call.node===b.content&&call.from&&!('x' in call.from)&&!('y' in call.from)&&call.to.duration===.22));b.cleanup();
  for(const [to,overrides] of [['/downloads',{ctrlKey:true}],['https://example.com/downloads',{}],['/downloads',{defaultPrevented:true}],['/downloads',{button:1}]]){
   const p=f.page('/resources',100,'feed',{publicPage:true,remount:true});f.click(to,'members',false,overrides);p.cleanup();const start=f.calls.length,q=f.page('/downloads',100,'feed',{publicPage:true,remount:true});assert.equal(f.calls.length,start);q.cleanup();
  }
@@ -82,24 +82,38 @@ test('reduced motion public transitions retain the native content and query navi
 });
 
 
-test('resource navigation gives immediate departure feedback and a directional arrival across frame remounts',()=>{
+test('resource queries give immediate feedback without moving search or filter coordinates across frame remounts',()=>{
  const f=fixture(),a=f.page('/resources',100,'feed',{publicPage:true});
  const event=f.click('/resources?type=skills');assert.equal(event.defaultPrevented,undefined,'navigation never waits for animation');
- assert.ok(f.calls.some(call=>call.node===a.content&&call.to.opacity>=.85&&call.to.x===-6));
+ assert.ok(f.calls.some(call=>call.node===a.content&&call.to.opacity>=.85));
  assert.equal(a.root['aria-busy'],'true');a.cleanup();
  const b=f.page('/resources?type=skills',100,'feed',{publicPage:true,remount:true});
- assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.opacity>=.85&&call.from.x===8&&call.to.x===0));
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.opacity>=.85&&call.to.opacity===1&&call.to.clearProps==='opacity'));
+ for(const call of f.calls.filter(call=>call.node===a.content||call.node===b.content))for(const frame of [call.from,call.to].filter(Boolean))assert.ok(!('x' in frame)&&!('y' in frame),'query feedback must not translate the panel');
  b.cleanup();assert.equal(f.timers.size,0);
 });
 
 test('rapid resource clicks keep the latest destination and cancelled requests recover readable content',()=>{
  const f=fixture(),a=f.page('/resources?type=skills',100,'feed',{publicPage:true});
  f.click('/resources?type=resources');f.click('/resources?type=docs');assert.equal(f.timers.size,1,'one bounded recovery timer');
- assert.ok(f.calls.some(call=>call.node===a.content&&call.to.x===6),'earlier tabs depart in the opposite direction');
+ assert.ok(f.calls.some(call=>call.node===a.content&&call.to.opacity===.9));
  a.cleanup();const b=f.page('/resources?type=docs',100,'feed',{publicPage:true,remount:true});
- assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.x===-8));
+ assert.ok(f.calls.some(call=>call.node===b.content&&call.from?.opacity===.9&&call.to.opacity===1));
+ for(const call of f.calls.filter(call=>call.node===a.content||call.node===b.content))for(const frame of [call.from,call.to].filter(Boolean))assert.ok(!('x' in frame)&&!('y' in frame),'rapid filter reversals keep the panel anchored');
  f.click('/resources?type=skills');for(const recover of [...f.timers.values()])recover();
  assert.equal(b.root['aria-busy'],undefined);b.cleanup();
+});
+
+test('GET search commits without a captured link keep each resource index anchored',()=>{
+ for(const path of ['/resources','/docs','/skills']){
+  const f=fixture(),a=f.page(path,100,'feed',{publicPage:true});a.cleanup();
+  const start=f.calls.length,b=f.page(path+'?q=React',100,'feed',{publicPage:true});
+  const arrival=f.calls.slice(start).find(call=>call.node===b.content&&call.from);
+  assert.ok(arrival,'a mounted index acknowledges the new query');
+  assert.equal(arrival.to.clearProps,'opacity');
+  for(const frame of [arrival.from,arrival.to])assert.ok(!('x' in frame)&&!('y' in frame));
+  b.cleanup();
+ }
 });
 
 test('returning to the currently shown tab cancels outgoing feedback and pending handoffs',()=>{

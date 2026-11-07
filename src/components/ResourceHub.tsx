@@ -7,15 +7,16 @@ import {publicCatalog} from '@/lib/catalog.mjs';
 import {publicContent} from '@/lib/db.mjs';
 import {localizeContent} from '@/lib/content-locales.mjs';
 import {guides} from '@/lib/learning.mjs';
-import {curatedSkills} from '@/lib/skill-catalog.mjs';
+import {curatedSkills,filterSkills,skillFilters} from '@/lib/skill-catalog.mjs';
 import {legalConsultationResource,LEGAL_CONSULTATION_PATH} from '@/lib/legal-consultation.mjs';
 import {DocsPage,SkillsPage} from './LearningPages';
 import {ResourcesPage,CatalogCards,type CatalogQuery} from './SharedCatalog';
 import {Icon} from './Icons';
 
-export async function ResourceTabs({active='all'}:{active?:string}){
- const {t}=await serverI18n();
- return <nav className="resource-hub-tabs" aria-label={t('资源类型')}>{[['all','全部'],['docs','文档'],['skills','Skill'],['resources','网站与工具'],['legal','法律咨询']].map(([id,label])=><Link key={id} href={id==='legal'?LEGAL_CONSULTATION_PATH:'/resources'+(id==='all'?'':'?type='+id)} prefetch={true} scroll={false} aria-current={active===id?'page':undefined}>{t(label)}</Link>)}</nav>;
+export async function ResourceTabs({active='all',query={}}:{active?:string;query?:CatalogQuery}){
+ const {t}=await serverI18n(),q=String(query.q||'').trim();
+ const tabHref=(id:string)=>{if(id==='legal')return LEGAL_CONSULTATION_PATH;const search=new URLSearchParams({...id!=='all'?{type:id}:{},...q?{q}:{}}).toString();return '/resources'+(search?'?'+search:'')};
+ return <nav className="resource-hub-tabs" aria-label={t('资源类型')}>{[['all','全部'],['docs','文档'],['skills','Skill'],['resources','网站与工具'],['legal','法律咨询']].map(([id,label])=><Link key={id} href={tabHref(id)} prefetch={true} scroll={false} aria-current={active===id?'page':undefined}>{t(label)}</Link>)}</nav>;
 }
 
 async function ResourceOverview({query,baseUrl}:{query:CatalogQuery;baseUrl:string}){
@@ -24,23 +25,26 @@ async function ResourceOverview({query,baseUrl}:{query:CatalogQuery;baseUrl:stri
  const docs=[...guides.map(item=>({id:'guide-'+item.slug,title:t(item.title),summary:t(item.summary),category:t('使用指南'),url:'/docs/'+item.slug})),{id:'connect',title:'Connect API & MCP',summary:t('让 AI 直接发布文档、Skill 和其他资源。'),category:t('AI 工作流'),url:'/docs/connect'},...publicContent('articles').map((item:any)=>({...localizeContent(item,locale),url:'/docs/articles/'+encodeURIComponent(item.slug),authorName:'IAVSE'})),...published.filter((item:any)=>item.kind==='docs')];
  const skills=[...curatedSkills.map(item=>({id:'skill-'+item.id,title:item.name,summary:t(item.summary),category:'Skill',authorName:item.repo,url:'/skills/'+item.id})),...published.filter((item:any)=>item.kind==='skills')];
  const resources=[legalConsultationResource(locale),...published.filter((item:any)=>item.kind==='resources'),...publicContent('resources').map((item:any)=>({...localizeContent(item,locale),url:'/resources/'+encodeURIComponent(item.slug)}))];
- const groups=[{kind:'docs',label:t('文档'),items:docs},{kind:'skills',label:'Skill',items:skills},{kind:'resources',label:t('网站与工具'),items:resources}].map(group=>({...group,items:group.items.filter((item:any)=>!q||[item.title,item.summary,item.category].join(' ').toLowerCase().includes(q.toLowerCase()))}));
- return <div className="resource-overview"><header className="catalog-page-heading resource-bento-heading"><div><h1>{t('资源')}</h1></div></header>
+ const matchedCurated=new Set(filterSkills({q:skillFilters(query).q},t).map((skill:any)=>'skill-'+skill.id));
+ const groups=[{kind:'docs',label:t('文档'),items:docs},{kind:'skills',label:'Skill',items:skills},{kind:'resources',label:t('网站与工具'),items:resources}].map(group=>({...group,items:group.items.filter((item:any)=>group.kind==='skills'&&item.id?.startsWith('skill-')?matchedCurated.has(item.id):!q||[item.title,item.summary,item.category].join(' ').toLowerCase().includes(q.toLowerCase()))}));
+ const resultCount=groups.reduce((total,group)=>total+group.items.length,0),guide=docs[0];
+ return <div className="resource-overview" data-resource-query={!!q}>
+  <header className="catalog-page-heading resource-bento-heading"><div><h1>{t('资源')}</h1></div><Link className="resource-share-link" href="/resources?compose=1"><Icon name="plus"/>{t('分享资源')}</Link></header>
   <section className="resource-discovery-grid" aria-label={t('资源类型')}>
-   <div className="resource-discovery-tile"><h2>{t('教程、Skill、网站与工具，在一个地方发现。')}</h2>
-    <Form action="/resources" className="resource-overview-search" role="search"><label htmlFor="resource-hub-search">{t('搜索全部资源')}</label><div><Icon name="search"/><input id="resource-hub-search" name="q" type="search" defaultValue={q} key={q} placeholder={t('搜索全部资源')}/><button className="space-btn" type="submit">{t('搜索')}</button></div></Form>
+   <div className="resource-discovery-tile">
+    <h2>{t('教程、Skill、网站与工具，在一个地方发现。')}</h2>
+    <Form action="/resources" scroll={false} className="resource-overview-search" role="search"><label htmlFor="resource-hub-search">{t('搜索全部资源')}</label><div><Icon name="search"/><input id="resource-hub-search" name="q" type="search" defaultValue={q} key={q} placeholder={t('搜索全部资源')}/><button className="space-btn" type="submit">{t('搜索')}</button></div></Form>
+    <nav className="resource-index-stats" aria-label={t('资源类型')}>{groups.map(group=><Link key={group.kind} href={'/resources?'+new URLSearchParams({type:group.kind,...(q?{q}:{})})} scroll={false}><span>{group.label}</span><strong>{new Intl.NumberFormat(locale).format(group.items.length)}</strong></Link>)}</nav>
    </div>
-   {groups.slice(0,2).map(group=><Link className={'resource-metric-tile resource-metric-'+group.kind} key={group.kind} href={'/resources?'+new URLSearchParams({type:group.kind,...(q?{q}:{})})}><span className="resource-tile-top"><Icon name={group.kind==='docs'?'file':'layers'}/><Icon name="arrow"/></span><strong>{new Intl.NumberFormat(locale).format(group.items.length)}</strong><span>{group.label}</span></Link>)}
-   <Link className="resource-contribute-tile" href="/resources?compose=1"><div><h2>{t('分享资源')}</h2><p>{t('发布后会同时出现在这个栏目和社区。')}</p></div><span className="resource-tile-action"><Icon name="plus"/></span></Link>
-   <Link className="resource-connect-tile" href="/docs/connect"><div><h2>Connect API &amp; MCP</h2><p>{t('让 AI 直接发布文档、Skill 和其他资源。')}</p></div><Icon name="arrow"/></Link>
-   <Link className="resource-metric-tile resource-metric-resources" href={'/resources?'+new URLSearchParams({type:'resources',...(q?{q}:{})})}><span className="resource-tile-top"><Icon name="link"/><Icon name="arrow"/></span><strong>{new Intl.NumberFormat(locale).format(groups[2].items.length)}</strong><span>{t('网站与工具')}</span></Link>
+   {q?<div className="resource-assist-tile resource-search-summary" role="status"><span className="resource-assist-label">{t('搜索结果')}</span><strong>{new Intl.NumberFormat(locale).format(resultCount)}</strong><Link className="resource-assist-action" href="/resources" scroll={false}>{t('清除筛选')}<Icon name="arrow"/></Link></div>:<Link className="resource-assist-tile resource-guide-tile" href={guide.url}><span className="resource-assist-label"><Icon name="file"/>{t('使用指南')}</span><h2>{guide.title}</h2><p>{guide.summary}</p><span className="resource-assist-action">{t('查看详情')}<Icon name="arrow"/></span></Link>}
   </section>
   {groups.filter(group=>group.items.length).map(group=><section className="resource-overview-group" key={group.kind}><header><h2>{group.label}<span className="resource-group-count">{group.items.length}</span></h2><Link className="space-link" href={'/resources?'+new URLSearchParams({type:group.kind,...(q?{q}:{})})}>{t('浏览全部')}<Icon name="arrow"/></Link></header><CatalogCards items={group.items.slice(0,q?12:3)} kind={group.kind}/></section>)}
-  {!groups.some(group=>group.items.length)&&<div className="catalog-empty"><p>{t('没有匹配的资源。')}</p><Link href="/resources">{t('清除筛选')}</Link></div>}
+  {!groups.some(group=>group.items.length)&&<div className="catalog-empty"><p>{t('没有匹配的资源。')}</p><Link href="/resources" scroll={false}>{t('清除筛选')}</Link></div>}
+  {!q&&<aside className="resource-overview-support"><Link href="/docs/connect"><div><h2>Connect API &amp; MCP</h2><p>{t('让 AI 直接发布文档、Skill 和其他资源。')}</p></div><Icon name="arrow"/></Link></aside>}
  </div>;
 }
 
 export async function ResourceHub({query={},baseUrl}:{query?:CatalogQuery;baseUrl:string}){
  const requested=String(query.type||''),kind=['docs','skills','resources'].includes(requested)?requested:query.category?'resources':'all';
- return <div className="resource-hub resource-bento" data-resource-kind={kind}><ResourceTabs active={kind}/><div data-resource-panel>{kind==='skills'?<SkillsPage baseUrl={baseUrl} query={query}/>:kind==='docs'?<DocsPage path={['docs']} query={query}/>:kind==='resources'?<ResourcesPage query={query}/>:<ResourceOverview query={query} baseUrl={baseUrl}/>}</div></div>;
+ return <div className="resource-hub resource-bento" data-resource-kind={kind}><ResourceTabs active={kind} query={query}/><div data-resource-panel>{kind==='skills'?<SkillsPage baseUrl={baseUrl} query={query}/>:kind==='docs'?<DocsPage path={['docs']} query={query}/>:kind==='resources'?<ResourcesPage query={query}/>:<ResourceOverview query={query} baseUrl={baseUrl}/>}</div></div>;
 }

@@ -1,7 +1,7 @@
 'use client';
 import {createContext,useCallback,useContext,useEffect,useMemo,useState} from 'react';
 import {api} from '@/lib/client';
-import {resourceKey} from '@/lib/resource-key.mjs';
+import {resourceKey,resourceFamily} from '@/lib/resource-key.mjs';
 
 type Result={data:any;error:string;status:number};
 type Snapshot=Result&{key:string;family:string;loading:boolean;refreshing:boolean};
@@ -13,7 +13,7 @@ export function PageResources({seed,children}:{seed:PageSeed;children:React.Reac
 }
 export function usePageSeed(path:string){const context=useContext(Context);return context?.resources[resourceKey(path)];}
 export function useResource(path:string|null){
- const context=useContext(Context),normalized=path?resourceKey(path):'',key=(context?.scope||'client')+':'+normalized,family=(context?.scope||'client')+':'+normalized.split('?')[0],seed=context?.resources[normalized];
+ const context=useContext(Context),normalized=path?resourceKey(path):'',key=(context?.scope||'client')+':'+normalized,family=(context?.scope||'client')+':'+resourceFamily(normalized),seed=context?.resources[normalized];
  const initial:Snapshot={key,family,data:seed?.data??null,error:seed?.error||'',status:seed?.status||0,loading:!!path&&!seed,refreshing:false};
  const[state,setState]=useState<Snapshot>(initial),[revision,setRevision]=useState({key,version:0});
  const version=revision.key===key?revision.version:0;

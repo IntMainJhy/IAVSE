@@ -3,18 +3,21 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {inlineAdminPath} from '../src/lib/admin-navigation.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/useUnsaved.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 function mount(dirty,allow=false){
  const listeners=new Map(),prompts=[],dispatched=[],exports={};let effect;
  class Element{
   href='https://site.example/';target='';rawHref='/';download=false;
-  closest(){return this}
+  inAdmin=false;
+  closest(selector){return selector==='a'?this:this.inAdmin?this:null}
   hasAttribute(name){return name==='download'&&this.download}
   getAttribute(name){return name==='href'?this.rawHref:null}
  }
  const events={addEventListener:(name,handler)=>listeners.set(name,handler),removeEventListener:name=>listeners.delete(name),dispatchEvent:event=>{dispatched.push(event);return true;}};
  vm.runInNewContext(source,{exports,Element,Event,URL,location:new URL('https://site.example/workspace/blog'),document:events,window:events,confirm:message=>{prompts.push(message);return allow},require:name=>{
+  if(name==='@/lib/admin-navigation.mjs')return{inlineAdminPath};
   if(name==='react')return{useEffect:callback=>{effect=callback}};
   if(name==='./LocaleProvider')return{useLocale:()=>({t:value=>value})};
   throw new Error('Unexpected dependency: '+name);
@@ -79,4 +82,16 @@ test('in-page administration navigation uses the same unsaved decision before re
   f.cleanup();assert.equal(f.listeners.size,0);
  }
  assert.equal(mount(false).listeners.has('iavse-before-inline-navigation'),false);
+});
+
+
+test('an allowed dirty admin click asks once through the shell guard, while ordinary editor links remain protected',()=>{
+ for(const allow of [true,false]){
+  const f=mount(true,allow);Object.assign(f.click.target,{inAdmin:true,href:'https://site.example/admin/settings',rawHref:'/admin/settings'});
+  f.listeners.get('click')(f.click);assert.equal(f.prompts.length,0);
+  const inline=new Event('iavse-before-inline-navigation',{cancelable:true});f.listeners.get(inline.type)(inline);
+  assert.equal(f.prompts.length,1);assert.equal(inline.defaultPrevented,!allow);f.cleanup();
+ }
+ const ordinary=mount(true,false);Object.assign(ordinary.click.target,{inAdmin:true,href:'https://site.example/admin/articles/new',rawHref:'/admin/articles/new'});
+ ordinary.listeners.get('click')(ordinary.click);assert.equal(ordinary.prompts.length,1);assert.equal(ordinary.click.prevented,true);ordinary.cleanup();
 });
