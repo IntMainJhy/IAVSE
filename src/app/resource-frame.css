@@ -63,3 +63,18 @@ html:root[data-ui][data-color-mode=dark] body .organic-site.v2-site.public-conte
 @media(prefers-reduced-motion:reduce){
  html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-page-frame,.page-content:has(>.resource-hub-tabs)) .resource-hub-tabs>a{transition:none}
 }
+
+/* Keep contact confirmation and keyboard feedback in place. */
+html:root[data-ui][data-color-mode] body .resource-legal-frame .legal-copy-label{display:inline-grid;align-items:center}
+html:root[data-ui][data-color-mode] body .resource-legal-frame .legal-copy-label>span{grid-area:1/1;white-space:nowrap}
+html:root[data-ui][data-color-mode] body .resource-legal-frame .legal-copy-label>[aria-hidden]{visibility:hidden}
+html:root[data-ui][data-color-mode] body .resource-legal-frame #consultation-contact{scroll-margin-top:96px}
+@media(prefers-reduced-motion:no-preference){
+ html:root[data-ui][data-color-mode] body .resource-legal-frame .legal-contact-copy button[data-status=copied]>.icon{animation:legal-copy-confirm .16s cubic-bezier(.16,1,.3,1)}
+ @keyframes legal-copy-confirm{from{opacity:.4;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+ html:root[data-ui][data-color-mode] body .resource-legal-frame :is(.legal-back,.legal-contact-copy button,.legal-platform>a){transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease}
+ html:root[data-ui][data-color-mode] body .resource-legal-frame :is(.legal-primary,.legal-platform>a)>.icon{transition:transform .18s cubic-bezier(.16,1,.3,1)}
+ html:root[data-ui][data-color-mode] body .resource-legal-frame :is(.legal-primary,.legal-platform>a):hover>.icon{transform:translateX(3px)}
+}
+html:root[data-ui][data-color-mode] body .resource-legal-frame :is(a,button):focus-visible{outline:2px solid var(--resource-frame-accent);outline-offset:4px}
+html:root[data-ui][data-color-mode] body .resource-legal-frame .legal-profile a:focus-visible{outline-color:#edf5ff}

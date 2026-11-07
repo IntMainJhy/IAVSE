@@ -1,6 +1,9 @@
 const mainLinks='.organic-header .organic-desktop-nav>a,.organic-header .organic-mobile-menu>nav>a,.organic-header a.organic-brand';
 const destinations=new Set(['/','/community','/blogs','/resources']);
 
+/** Resource catalogs and legal consultation share stationary navigation and controls. */
+export const resourceFramePath=(path:string)=>/^\/(?:resources(?:\/legal-consultation)?|docs|skills)\/?$/.test(path.split(/[?#]/,1)[0]);
+
 /** Shared ownership rule: only the persistent controller animates these links. */
 export function mainNavigationDestination(link:HTMLAnchorElement){
  if(!link.matches(mainLinks)||link.target&&link.target!=='_self'||link.hasAttribute('download'))return null;

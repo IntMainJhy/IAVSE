@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
+const sharedMotion={};vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../src/lib/navigation-motion.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{exports:sharedMotion});
+
 function fixture({reduced=false,owned=false}={}){
  const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PageMotion.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
  const effects=[],layouts=[],calls=[],contexts=[],observers=[],media=[],events=new Map(),changes=new Set(),timers=new Map(),menus=[{open:true}],dispatches=[],exports={};
@@ -17,7 +19,7 @@ function fixture({reduced=false,owned=false}={}){
  vm.runInNewContext(source,{exports,document,window,CustomEvent,ResizeObserver,setTimeout:fn=>{const id=timers.size+1;timers.set(id,fn);return id},clearTimeout:id=>timers.delete(id),location:new URL('http://localhost:3010/community'),URL,Element,require:name=>{
   if(name==='react')return{useEffect:fn=>effects.push(fn),useLayoutEffect:fn=>layouts.push(fn),useRef:initial=>{const i=refIndex++;if(i===0)return refs[0]={current:root};return refs[i]||=( {current:initial});}};
   if(name==='gsap')return{gsap};
-  if(name==='@/lib/navigation-motion')return{mainNavigationDestination:link=>link.mainNavigation?new URL(link.href).pathname:null};
+  if(name==='@/lib/navigation-motion')return{resourceFramePath:sharedMotion.resourceFramePath,mainNavigationDestination:link=>link.mainNavigation?new URL(link.href).pathname:null};
   if(name==='next/navigation')return{usePathname:()=>path,useSearchParams:()=>new URLSearchParams(query)};
   if(name==='react/jsx-runtime')return{jsx:(type,props)=>({type,props})};
   if(name.endsWith('.css'))return{};
@@ -185,4 +187,24 @@ test('local return to home skips both heading translation and whole-page fallbac
 
 test('ordinary links leaving home do not translate or fade the hero copy',()=>{
  const f=fixture(),home=f.page('/',100,'feed',{publicPage:true});home.root.nodes={};home.root.hero=home.content;const before=f.calls.length;f.click('/downloads');assert.equal(f.calls.length,before);home.cleanup();
+});
+
+test('catalog aliases and legal consultation keep content anchored through the same navigation frame',()=>{
+ for(const [from,to]of [['/docs','/resources?type=skills'],['/skills?type=design','/resources?type=docs'],['/resources?type=resources','/resources/legal-consultation'],['/resources/legal-consultation','/resources']]){
+  const f=fixture(),a=f.page(from,100,'feed',{publicPage:true});f.click(to);a.cleanup();
+  const b=f.page(to,100,'feed',{publicPage:true,remount:true});
+  const feedback=f.calls.filter(call=>call.node===a.content||call.node===b.content);
+  assert.ok(feedback.some(call=>call.node===b.content&&call.to.opacity===1),to+' receives completion feedback');
+  for(const call of feedback)for(const frame of [call.from,call.to].filter(Boolean))assert.ok(!('x' in frame)&&!('y' in frame),from+' → '+to+' must not move cards, search, or headings');
+  b.cleanup();assert.equal(f.timers.size,0);
+ }
+});
+
+test('rapid cross-catalog choices discard cancelled arrivals without translating the retained frame',()=>{
+ const f=fixture(),a=f.page('/skills',100,'feed',{publicPage:true});f.click('/resources/legal-consultation');f.click('/resources?type=docs');
+ assert.equal(f.timers.size,1);a.cleanup();const b=f.page('/resources?type=docs',100,'feed',{publicPage:true,remount:true});
+ const feedback=f.calls.filter(call=>call.node===a.content||call.node===b.content);
+ assert.ok(feedback.some(call=>call.node===b.content&&call.to.clearProps==='opacity'));
+ for(const call of feedback)for(const frame of [call.from,call.to].filter(Boolean))assert.ok(!('x'in frame)&&!('y'in frame));
+ b.cleanup();
 });

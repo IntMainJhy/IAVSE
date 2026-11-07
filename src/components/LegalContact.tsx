@@ -12,7 +12,7 @@ export function LegalContact({wechat}:{wechat:string}){
  }
  return <div className="legal-contact-copy">
   <span>{t('微信号')}</span>
-  <div><code>{wechat}</code><button type="button" className="space-btn primary" onClick={copy} aria-label={t('复制律师微信号')}><Icon name={status==='copied'?'check':'copy'}/>{status==='copied'?t('已复制'):t('复制微信号')}</button></div>
+  <div><code>{wechat}</code><button type="button" className="space-btn primary" data-status={status} onClick={copy} aria-label={t('复制律师微信号')}><Icon name={status==='copied'?'check':'copy'}/><span className="legal-copy-label"><span aria-hidden="true">{t('复制微信号')}</span><span>{status==='copied'?t('已复制'):t('复制微信号')}</span></span></button></div>
   <p className={status==='error'?'legal-copy-feedback is-error':'legal-copy-feedback'} role="status" aria-live="polite">{status==='copied'?t('复制成功，添加时请备注法律咨询'):status==='error'?t('复制未成功，请长按或选中上方微信号手动复制。'):t('添加微信时请备注“法律咨询”。')}</p>
  </div>;
 }

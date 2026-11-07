@@ -5,13 +5,19 @@ export function CatalogNavigation({active,label,children,className='resource-hub
  const root=useRef<HTMLElement>(null);
  useLayoutEffect(()=>{
   const nav=root.current;if(!nav)return;
+  let frame=0,live=true;
   const reveal=()=>{
+   if(!live||nav.scrollWidth<=nav.clientWidth)return;
    const selected=nav.querySelector<HTMLElement>('[aria-current]');if(!selected)return;
-   const frame=nav.getBoundingClientRect(),tab=selected.getBoundingClientRect();
-   if(tab.left<frame.left)nav.scrollLeft+=tab.left-frame.left-5;
-   else if(tab.right>frame.right)nav.scrollLeft+=tab.right-frame.right+5;
+   const bounds=nav.getBoundingClientRect(),tab=selected.getBoundingClientRect();
+   const delta=tab.left<bounds.left?tab.left-bounds.left-5:tab.right>bounds.right?tab.right-bounds.right+5:0;
+   if(Math.abs(delta)>.5)nav.scrollLeft+=delta;
   };
-  reveal();const observer=new ResizeObserver(reveal);observer.observe(nav);return()=>observer.disconnect();
- },[active]);
+  // Reveal the committed choice before paint; defer resize bursts to one read/write frame.
+  reveal();
+  const observer=new ResizeObserver(()=>{if(live&&!frame)frame=requestAnimationFrame(()=>{frame=0;reveal();});});
+  observer.observe(nav);const selected=nav.querySelector<HTMLElement>('[aria-current]');if(selected)observer.observe(selected);
+  return()=>{live=false;cancelAnimationFrame(frame);observer.disconnect();};
+ },[active,label,children]);
  return <nav ref={root} className={className} aria-label={label}>{children}</nav>;
 }

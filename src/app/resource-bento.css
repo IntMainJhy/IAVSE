@@ -144,8 +144,6 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-si
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .shared-card-copy h3{font-size:21px;line-height:1.4;margin:18px 0 10px;letter-spacing:-.02em}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .shared-card:first-child .shared-card-copy h3{font-size:21px;max-width:none}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .shared-card-copy p{max-width:52ch;margin-bottom:20px;line-height:1.75}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview[data-resource-query=true] .shared-card-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview[data-resource-query=true] .shared-card:nth-child(n){grid-column:span 1}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview-support{margin-top:12px;padding-top:24px;border-top:1px solid var(--bento-line)}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview-support>a{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;color:var(--bento-ink);text-decoration:none}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview-support h2{font-size:16px;line-height:1.5;letter-spacing:0;font-weight:500;margin:0 0 6px;color:var(--bento-ink)}
@@ -161,7 +159,6 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-si
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-discovery-grid{grid-template-columns:minmax(0,1.6fr) minmax(220px,1fr)}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-discovery-tile{padding:24px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-assist-tile{padding:24px}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview[data-resource-query=true] .shared-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:767px){
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-bento-heading{margin-bottom:16px;gap:12px}
@@ -182,7 +179,6 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-si
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .shared-card-copy{min-height:216px;padding:22px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .shared-card-copy h3{font-size:21px}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .shared-card:first-child .shared-card-copy h3{font-size:21px}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview[data-resource-query=true] .shared-card-grid{grid-template-columns:minmax(0,1fr)}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-bento,.page-content:has(>.resource-hub-tabs)) .resource-overview-support{padding-top:20px;margin-top:0}
 }
 @media(prefers-reduced-motion:reduce){

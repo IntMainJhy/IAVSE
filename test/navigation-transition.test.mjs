@@ -7,7 +7,7 @@ import ts from 'typescript';
 const compile=file=>ts.transpileModule(fs.readFileSync(new URL(file,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 const source=compile('../src/components/NavigationTransition.tsx'),helper=compile('../src/lib/navigation-motion.ts');
 
-function fixture({reduced=false,iframe=false,hidden=false,throws=false,animationThrows=false,path='/',supported=false,scrollY=0}={}){
+function fixture({reduced=false,iframe=false,hidden=false,throws=false,animationThrows=false,path='/',supported=false,scrollY=0,receiver='v2-hero-copy'}={}){
  const exports={},effects=[],events=new Map(),microtasks=[],timers=new Map(),pushes=[],timelines=[],tweens=[],contexts=[],pending=[],location=new URL(path,'http://localhost:3010');
  const headerSelectors={desktop:'.organic-header .organic-desktop-nav>a',mobile:'.organic-header .organic-mobile-menu>nav>a',brand:'.organic-header a.organic-brand'};
  class Element{
@@ -25,7 +25,7 @@ function fixture({reduced=false,iframe=false,hidden=false,throws=false,animation
   cloneNode(){throw Error('A transition must not duplicate the live page');}
  }
  const node=(classes='',children=[])=>new Element(classes,children),scene=(classes='v2-hero-copy')=>node('page-content',[node(classes)]);
- let current=scene(),currentContext;
+ let current=scene(receiver),currentContext;
  const old=current,layer=node('iavse-route-veil');old.dataset.motionRoute=location.pathname+location.search;layer.hidden=true;
  const document={hidden,body:node(),documentElement:node(),querySelector:()=>current,addEventListener:(name,fn)=>events.set(name,fn),removeEventListener:name=>events.delete(name)};
  if(supported)document.startViewTransition=()=>{throw Error('Native snapshots must not be requested');};
@@ -210,4 +210,23 @@ test('returning home leaves headline geometry and opacity untouched by the globa
  const f=fixture({path:'/resources'});f.link.href=new URL('/',f.location).href;f.click();const root=f.scene('v2-hero-copy'),headline=root.children[0];f.commit('/',root);
  assert.deepEqual(headline.style,{});assert.equal(f.timelines[1].operations.some(operation=>operation.targets.includes(headline)),false);
  f.timelines[1].complete();assert.deepEqual(headline.style,{});assert.equal(f.layer.hidden,true);f.cleanup();
+});
+
+test('main-header returns within the catalog family preserve every receiver coordinate',()=>{
+ for(const path of ['/skills?type=design','/docs?category=AI','/resources?type=skills','/resources/legal-consultation','/resources/legal-consultation/']){
+  const s=fixture({path,receiver:'catalog-page-heading'});s.click();assert.deepEqual(s.pushes,['/resources']);
+  const root=s.commit('/resources'),feedback=s.timelines.flatMap(timeline=>timeline.operations);
+  assert.ok(feedback.some(operation=>operation.targets.includes(s.old.children[0])),'departure gives immediate feedback');
+  assert.ok(feedback.some(operation=>operation.targets.includes(root.children[0])),'arrival completes the handoff');
+  for(const operation of feedback)for(const values of[operation.from,operation.to].filter(Boolean))assert.ok(!('x'in values)&&!('y'in values),'catalog main-header navigation must not move tabs, headings or search');
+  assert.equal(s.layer.hidden,true);s.timelines[1].complete();assert.equal(s.pending.at(-1),false);s.cleanup();
+ }
+});
+
+test('the shared resource-frame rule excludes reading details and other application surfaces',()=>{
+ const s=fixture();for(const path of ['/resources','/resources?q=React','/resources/#all','/docs/','/skills?tool=codex','/resources/legal-consultation'])assert.equal(s.helpers.resourceFramePath(path),true,path);
+ for(const path of ['/','/community','/blogs','/skills/react-best-practices','/docs/connect','/resources/shared/example','/resources/legal-consultation/extra'])assert.equal(s.helpers.resourceFramePath(path),false,path);s.cleanup();
+ const detail=fixture({path:'/skills/react-best-practices',receiver:'catalog-page-heading'});detail.click();detail.commit('/resources');
+ assert.ok(detail.timelines[0].operations.some(operation=>operation.to.y===-4),'reading departure keeps its existing motion');
+ assert.ok(detail.timelines[1].operations.some(operation=>operation.from?.y===10&&operation.to.y===0),'reading arrival keeps its existing motion');detail.cleanup();
 });

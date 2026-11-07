@@ -3,7 +3,7 @@
 import {useEffect,useRef} from 'react';
 import {useRouter} from 'next/navigation';
 import {gsap} from 'gsap';
-import {mainNavigationDestination,navigationReceivers} from '@/lib/navigation-motion';
+import {mainNavigationDestination,navigationReceivers,resourceFramePath} from '@/lib/navigation-motion';
 
 /** Route requests start immediately. GSAP owns only the visual handoff. */
 export function NavigationTransition(){
@@ -16,7 +16,7 @@ export function NavigationTransition(){
    cancel?.();
    const source=document.querySelector<HTMLElement>('[data-motion-route]');
    const from=source?.dataset.motionRoute||location.pathname+location.search;
-   const crossesHome=(location.pathname==='/')!==(to==='/');
+   const crossesHome=(location.pathname==='/')!==(to==='/'),fixedFrame=resourceFramePath(from)&&resourceFramePath(to);
    // Match the outgoing surface with a cheap painted gradient; no DOM copies,
    // canvas readback, full-page blur or native snapshot that can hold navigation.
    layer.dataset.surface=location.pathname==='/'&&scrollY<innerHeight?'landing':'reading';
@@ -35,7 +35,7 @@ export function NavigationTransition(){
    outgoing.add(()=>{
     const targets=source?navigationReceivers(source):[];
     const timeline=gsap.timeline({defaults:{ease:'power2.out',overwrite:'auto'}});
-    if(targets.length)timeline.to(targets,{opacity:.8,y:-4,duration:.14},0);
+    if(targets.length)timeline.to(targets,{opacity:fixedFrame?.9:.8,...(fixedFrame?{}:{y:-4}),duration:.14},0);
    });
    // The persistent veil is independent of the departing page's context. Its
    // current opacity must survive that context's revert at the route commit.
@@ -53,7 +53,7 @@ export function NavigationTransition(){
      const targets=navigationReceivers(root,true);
      const timeline=gsap.timeline({defaults:{ease:'power3.out',overwrite:'auto'},onComplete:release});
      if(crossesHome){layer.hidden=false;timeline.to(layer,{opacity:0,duration:.32},0);}
-     if(targets.length)timeline.fromTo(targets,{opacity:.72,y:10},{opacity:1,y:0,duration:.32,stagger:.025,clearProps:'transform,opacity'},0);
+     if(targets.length)timeline.fromTo(targets,{opacity:fixedFrame?.9:.72,...(fixedFrame?{}:{y:10})},{opacity:1,...(fixedFrame?{}:{y:0}),duration:fixedFrame?.22:.32,stagger:fixedFrame?0:.025,clearProps:fixedFrame?'opacity':'transform,opacity'},0);
      // Even an empty streamed shell has a bounded handoff and releases renderers.
      if(!crossesHome&&!targets.length)timeline.to(layer,{opacity:0,duration:.16},0);
     },root);

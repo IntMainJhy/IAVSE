@@ -2,7 +2,7 @@
 import {useEffect,useLayoutEffect,useRef} from 'react';
 import {usePathname,useSearchParams} from 'next/navigation';
 import {gsap} from 'gsap';
-import {mainNavigationDestination} from '@/lib/navigation-motion';
+import {mainNavigationDestination,resourceFramePath} from '@/lib/navigation-motion';
 import '@/app/surface-clarity.css';
 import '@/app/interaction-motion.css';
 
@@ -12,7 +12,6 @@ const regions={nav:'.feed-nav-links',identity:'.feed-identity',compose:'.feed-na
 // PublicFrame can remount between routes; one pending handoff also bridges its header links.
 let pending:Snapshot|null=null;
 const resourceRoute=(path:string)=>/^\/(resources|docs|skills|articles)(\/|$)/.test(path);
-const resourceIndex=(path:string)=>/^\/(resources|docs|skills)\/?$/.test(path);
 const publicContentSelector='[data-resource-panel],.catalog-page,.skills-page,.product-download-page,.document-reader,.shared-reading-layout,.legal-consultation,.community-auth-form,.community-report,.community-policy-document,.community-receipt';
 const box=(element:Element):Box=>{const {left,top,width,height}=element.getBoundingClientRect();return{left,top,width,height};};
 
@@ -47,9 +46,9 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
     const content=element.querySelector<HTMLElement>(publicContentSelector)||element.querySelector<HTMLElement>('.community-route-content,.creator-directory-intro');
     if(content){
      const queryOnly=source.pathname===next.pathname;
-     const fixedQuery=queryOnly&&resourceIndex(next.pathname);
+     const fixedFrame=resourceFramePath(source.pathname)&&resourceFramePath(next.pathname);
      element.setAttribute('aria-busy','true');
-     context.add(()=>{gsap.to(content,{opacity:.9,...(fixedQuery?{}:{x:queryOnly?-direction*6:0,y:queryOnly?0:-4}),duration:.12,ease:'power2.out',overwrite:'auto'});});
+     context.add(()=>{gsap.to(content,{opacity:.9,...(fixedFrame?{}:{x:queryOnly?-direction*6:0,y:queryOnly?0:-4}),duration:.12,ease:'power2.out',overwrite:'auto'});});
     }
    }
   };
@@ -93,13 +92,13 @@ export function PageMotion({children,className=''}:{children:React.ReactNode;cla
   if(!element.querySelector('.community-navigation-shell')){
    if(!changed)return;
    const queryOnly=(previous?.from||last).split('?')[0]===path;
-   const fixedQuery=queryOnly&&resourceIndex(path);
+   const fixedFrame=resourceFramePath(path)&&resourceFramePath((previous?.from||last).split('?')[0]);
    const media=gsap.matchMedia();
    media.add('(prefers-reduced-motion: no-preference)',()=>{
     // Keep full-screen WebGL scenes in their coordinate system; animate their text receivers.
     const content=element.querySelector<HTMLElement>(publicContentSelector);
     const heading=element.querySelector<HTMLElement>('.creator-directory-intro,.catalog-page-heading,.organic-page-heading,.product-section-heading,.learning-heading');
-    if(content)gsap.fromTo(content,{opacity:.9,...(fixedQuery?{}:{x:previous?.resource&&queryOnly?previous.direction*8:0,y:queryOnly?0:8})},{opacity:1,...(fixedQuery?{}:{x:0,y:0}),duration:queryOnly ? .22 : .28,ease:'power3.out',clearProps:fixedQuery?'opacity':'transform,opacity',overwrite:'auto'});
+    if(content)gsap.fromTo(content,{opacity:.9,...(fixedFrame?{}:{x:previous?.resource&&queryOnly?previous.direction*8:0,y:queryOnly?0:8})},{opacity:1,...(fixedFrame?{}:{x:0,y:0}),duration:queryOnly ? .22 : .28,ease:'power3.out',clearProps:fixedFrame?'opacity':'transform,opacity',overwrite:'auto'});
     if(heading&&!queryOnly&&!content?.contains(heading))gsap.fromTo(heading,{opacity:.94,y:8},{opacity:1,y:0,duration:.28,ease:'power3.out',clearProps:'transform,opacity',overwrite:'auto'});
     if(!content&&!heading)gsap.fromTo(element,{opacity:.9},{opacity:1,duration:.22,ease:'power2.out',clearProps:'opacity',overwrite:'auto'});
    },element);
