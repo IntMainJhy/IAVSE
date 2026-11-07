@@ -8,6 +8,7 @@ import {LocaleProvider} from '@/components/LocaleProvider';
 import {normalizeLocale,htmlLocale} from '@/lib/i18n.mjs';
 import './globals.css';
 import './brand.css';
+import './site-chrome.css';
 import './organic.css';
 import './quantum-pointer.css';
 import './navigation-transition.css';

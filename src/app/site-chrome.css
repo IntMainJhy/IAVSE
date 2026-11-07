@@ -1,0 +1,78 @@
+/* Platform navigation owns this contract across independently loaded routes.
+   Important geometry/material declarations deliberately outlive legacy page skins.
+   Author-created blog content and secondary editing toolbars are outside this scope. */
+:root{
+ --platform-chrome-surface:rgb(255 255 255 / .58);
+ --platform-chrome-solid:#fafafa;
+ --platform-chrome-ink:#1d1d1f;
+ --platform-chrome-line:rgb(0 0 0 / .07);
+ --platform-chrome-filter:blur(16px) saturate(1.05);
+ --platform-chrome-focus:#0071e3;
+}
+:root[data-color-mode=dark]{
+ --platform-chrome-surface:rgb(29 29 31 / .68);
+ --platform-chrome-solid:#1d1d1f;
+ --platform-chrome-ink:#f5f5f7;
+ --platform-chrome-line:rgb(255 255 255 / .1);
+ --platform-chrome-focus:#9bc6ff;
+}
+html:root[data-ui][data-color-mode] body [data-site-chrome],
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-surface]>.organic-header[data-site-chrome=public]{
+ --glass-header-ink:var(--platform-chrome-ink)!important;
+ --chrome-accent:var(--platform-chrome-ink)!important;
+ background:transparent!important;color:var(--platform-chrome-ink)!important;
+ border:0!important;box-shadow:none!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ isolation:isolate;overflow:visible;
+}
+/* Blur only the backing layer: controls and their popovers retain their coordinates. */
+html:root[data-ui][data-color-mode] body [data-site-chrome]::before,
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-surface]>.organic-header[data-site-chrome=public]::before{
+ content:""!important;display:block!important;position:absolute;inset:0!important;
+ height:100%!important;width:auto;z-index:-1!important;pointer-events:none;
+ box-sizing:border-box;background:var(--platform-chrome-surface)!important;
+ backdrop-filter:var(--platform-chrome-filter)!important;-webkit-backdrop-filter:var(--platform-chrome-filter)!important;
+ mask:none!important;-webkit-mask:none!important;opacity:1!important;
+ border:0;border-bottom:1px solid var(--platform-chrome-line);box-shadow:none!important;transition:none!important;
+}
+html:root[data-ui][data-color-mode] body [data-site-chrome]::after,
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-surface]>.organic-header[data-site-chrome=public]::after{content:none!important;display:none!important}
+html:root[data-ui][data-color-mode] body [data-site-brand]{
+ display:flex!important;align-items:center!important;gap:10px!important;flex-shrink:0;
+ min-height:44px;font-family:-apple-system,BlinkMacSystemFont,"IAVSE Sans","PingFang SC",sans-serif!important;
+ font-size:22px!important;font-weight:500!important;line-height:1.2!important;letter-spacing:.1em!important;
+ white-space:nowrap;text-decoration:none!important;color:var(--platform-chrome-ink)!important;transition:none!important;
+}
+html:root[data-ui][data-color-mode] body [data-site-brand]>.site-brand-mark{
+ display:block!important;width:28px!important;height:28px!important;min-width:28px;
+ flex:0 0 28px!important;max-width:none!important;object-fit:contain;
+ border:0!important;border-radius:0!important;filter:none!important;transform:none!important;
+}
+html:root[data-ui][data-color-mode] body [data-site-brand]>.site-brand-copy{
+ position:static!important;width:auto!important;height:auto!important;min-width:0;
+ overflow:visible!important;clip-path:none!important;white-space:nowrap!important;
+}
+html:root[data-ui][data-color-mode] body [data-site-brand]>.site-brand-copy>span{display:none!important}
+html:root[data-ui][data-color-mode] body [data-site-chrome] :is(.organic-brand,.organic-desktop-nav>a,.organic-mobile-menu>summary,.site-account-menu>summary,.language-trigger,.blog-platform-logo,.blog-platform-actions>a,.blog-share-trigger){
+ color:var(--platform-chrome-ink)!important;text-shadow:none!important;background:transparent!important;transition:opacity .16s ease!important;
+}
+html:root[data-ui][data-color-mode] body [data-site-chrome] .organic-mobile-menu summary i{background:var(--platform-chrome-ink)!important}
+html:root[data-ui][data-color-mode] body [data-site-chrome] :is(a,button,summary,select):focus-visible{outline-color:var(--platform-chrome-focus)!important}
+html:root[data-ui][data-color-mode] body [data-site-chrome] :is(.organic-header-inner,.blog-platform-bar-inner){
+ position:relative;min-height:72px!important;width:100%!important;max-width:none!important;
+ margin-inline:0!important;padding:0 32px!important;gap:24px!important;
+}
+html:root[data-ui][data-color-mode] body [data-site-chrome=public] .organic-desktop-nav{gap:24px!important}
+html:root[data-ui][data-color-mode] body [data-site-chrome=public] .organic-desktop-nav>a{
+ min-height:44px;font-size:13px!important;font-weight:500!important;line-height:20px;padding:10px 0!important;
+}
+@media(max-width:767px){
+ html:root[data-ui][data-color-mode] body [data-site-brand]{font-size:20px!important}
+ html:root[data-ui][data-color-mode] body [data-site-chrome] :is(.organic-header-inner,.blog-platform-bar-inner){min-height:64px!important;padding-inline:20px!important;gap:12px!important}
+}
+@media(prefers-reduced-motion:reduce){html:root[data-ui][data-color-mode] body [data-site-chrome] :is(.organic-brand,.organic-desktop-nav>a,.organic-mobile-menu>summary,.site-account-menu>summary,.language-trigger,.blog-platform-logo,.blog-platform-actions>a,.blog-share-trigger){transition:none!important}}
+/* Narrow authored pages retain their existing two-row action layout. */
+@media(max-width:380px){html:root[data-ui][data-color-mode] body [data-site-chrome=blog] .blog-platform-bar-inner{padding-block:8px!important;row-gap:4px!important}}
+@media(prefers-reduced-transparency:reduce){:root{--platform-chrome-surface:var(--platform-chrome-solid)!important;--platform-chrome-filter:none!important}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){:root{--platform-chrome-surface:var(--platform-chrome-solid)!important;--platform-chrome-filter:none!important}}
+@media print{:root{--platform-chrome-surface:transparent!important;--platform-chrome-filter:none!important;--platform-chrome-line:transparent!important}}

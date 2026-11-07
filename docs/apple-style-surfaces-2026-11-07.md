@@ -1,5 +1,7 @@
 # Apple 风格产品展示与社区表面
 
+> 平台顶栏随后按 [透明玻璃共享规范](unified-glass-navigation-2026-11-07.md) 统一；本文产品内容、排版与原首屏边界继续保留。
+
 2026-11-07。用户将上一轮交互式背景方向改为“Apple 官网的样式”。参考 [Apple 中国官网](https://www.apple.com.cn/) 与 [MacBook Pro 页面](https://www.apple.com.cn/macbook-pro/) 的产品层级、居中排版、留白及蓝色操作。结合此前不要黑底的要求，采用浅色版本；不复制 Apple 标识、素材、文字或产品数据。
 
 ## 范围与层级
