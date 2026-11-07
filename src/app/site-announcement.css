@@ -1,7 +1,7 @@
 /* Announcements occupy a reserved row from the server render onward. */
-:root{--platform-promo-height:0px;--platform-announcement-paper:#f5f5f7;--platform-announcement-ink:#515154;--platform-announcement-link:#06c;--platform-announcement-glow:rgb(0 113 227 / .12);--platform-announcement-hover:rgb(0 0 0 / .06)}
+:root{--platform-promo-height:0px;--platform-announcement-paper:#ededed;--platform-announcement-ink:#343434;--platform-announcement-link:#414141;--platform-announcement-glow:rgb(255 255 255 / .54);--platform-announcement-hover:rgb(0 0 0 / .06)}
 :root[data-site-announcements=enabled]{--platform-promo-height:44px}
-:root[data-color-mode=dark]{--platform-announcement-paper:#1d1d1f;--platform-announcement-ink:#d2d2d7;--platform-announcement-link:#9bc6ff;--platform-announcement-glow:rgb(125 180 245 / .18);--platform-announcement-hover:rgb(255 255 255 / .1)}
+:root[data-color-mode=dark]{--platform-announcement-paper:#393939;--platform-announcement-ink:#f5f5f5;--platform-announcement-link:#e4e4e4;--platform-announcement-glow:rgb(255 255 255 / .1);--platform-announcement-hover:rgb(255 255 255 / .1)}
 .site-announcement{position:relative;flex:0 0 44px;height:44px;min-width:0;width:100%;margin:0;background:var(--platform-announcement-paper);color:var(--platform-announcement-ink);font-family:-apple-system,BlinkMacSystemFont,"IAVSE Sans","PingFang SC",sans-serif;isolation:isolate}
 .site-announcement::before{position:absolute;inset:0;z-index:-1;content:"";pointer-events:none;background:radial-gradient(ellipse at 50% 0,var(--platform-announcement-glow),transparent 72%);box-shadow:0 8px 24px -16px var(--platform-announcement-glow)}
 .site-announcement-viewport{display:flex;align-items:center;justify-content:safe center;gap:16px;width:calc(100% - 44px);height:44px;padding:0 20px 0 64px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding-inline:20px}
@@ -25,7 +25,7 @@ html:root[data-ui][data-color-mode] body [data-site-chrome=editor]{position:rela
 html:root[data-ui][data-color-mode] body [data-site-chrome=editor]::before{border-radius:inherit}
 body:has(.blog-canvas-editor) .organic-main>.site-announcement-offset{display:none}
 /* The space gallery is intentionally a light product surface in either theme. */
-html:root[data-ui][data-color-mode] body .organic-site.v2-site:has([data-spaces-surface=apple])>[data-site-chrome=public]{--platform-chrome-ink:#1d1d1f;--platform-chrome-focus:#0071e3;--platform-announcement-paper:#f5f5f7;--platform-announcement-ink:#515154;--platform-announcement-link:#06c;--platform-announcement-glow:rgb(0 113 227 / .12);--platform-announcement-hover:rgb(0 0 0 / .06)}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site:has([data-spaces-surface=apple])>[data-site-chrome=public]{--platform-chrome-ink:#1d1d1f;--platform-chrome-focus:#0071e3;--platform-announcement-paper:#ededed;--platform-announcement-ink:#343434;--platform-announcement-link:#414141;--platform-announcement-glow:rgb(255 255 255 / .54);--platform-announcement-hover:rgb(0 0 0 / .06)}
 @media(min-width:641px) and (max-width:960px){html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-topline-inner{padding-inline:24px}}
 @media(max-width:640px){
  html:root[data-ui][data-color-mode] body .organic-site.organic-admin[data-admin-layout=control-center] .admin-topline-inner{padding-inline:16px}
@@ -45,5 +45,6 @@ html:root[data-ui][data-color-mode] body .organic-admin[data-admin-layout=contro
 /* Publishing is positioned against the editor root, above its flexible canvas. */
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-publish-panel{top:calc(var(--editor-topbar) + var(--platform-promo-height) + 12px)}
 
-/* The announcement is a compact black news strip in either appearance. */
-html:root[data-ui][data-color-mode] body .site-announcement{--platform-announcement-paper:#111112;--platform-announcement-ink:#f5f5f7;--platform-announcement-link:#d5e6ff;--platform-announcement-glow:rgb(140 185 255 / .2);--platform-announcement-hover:rgb(255 255 255 / .12)}
+/* Local colors keep the silver notice consistent across inherited page themes. */
+html:root[data-ui][data-color-mode] body .site-announcement{--platform-announcement-paper:#ededed;--platform-announcement-ink:#343434;--platform-announcement-link:#414141;--platform-announcement-glow:rgb(255 255 255 / .54);--platform-announcement-hover:rgb(0 0 0 / .06)}
+html:root[data-ui][data-color-mode=dark] body .site-announcement{--platform-announcement-paper:#393939;--platform-announcement-ink:#f5f5f5;--platform-announcement-link:#e4e4e4;--platform-announcement-glow:rgb(255 255 255 / .1);--platform-announcement-hover:rgb(255 255 255 / .1)}

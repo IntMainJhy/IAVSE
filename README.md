@@ -27,7 +27,7 @@ IAVSE is being developed as a shared service with account-isolated data. Public 
 
 ## Current release
 
-The current main branch includes the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Published members appear first; bundled showcase profiles do not create accounts or alter member counts. The creator voices section uses illustrative comments, with two scrolling rows, hover feedback, keyboard reading and reduced-motion support.
+The current main branch includes the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Published members appear first; bundled showcase profiles do not create accounts or alter member counts. The creator voices section uses illustrative comments, with one continuous marquee, pause controls, hover and focus pausing, keyboard reading and reduced-motion support.
 
 See the [current repository update](docs/release-2026-11-04.md) and [performance review](docs/performance-2026-11-04.md).
 
@@ -65,7 +65,7 @@ Independent AI Skills, shared documents and tools are available through resource
 
 ### Creator voices
 
-Illustrative comments introduce the kinds of work the platform supports. Both rows support keyboard reading and reduced motion.
+Illustrative comments introduce the kinds of work the platform supports. The single scrolling row supports pause/resume, manual browsing, keyboard reading and reduced motion.
 
 ![IAVSE creator voices with refined cards and illustrative comments](docs/screenshots/creator-voices-current.webp)
 

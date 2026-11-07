@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "npx --yes hyperframes@0.9.20 preview",
     "check": "npx --yes hyperframes@0.9.20 check",
-    "render": "npx --yes hyperframes@0.9.20 render"
+    "render": "npx --yes hyperframes@0.9.20 render",
+    "prepare:films": "node prepare-films.mjs"
   }
 }
