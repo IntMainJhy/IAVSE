@@ -32,11 +32,11 @@ export function LanguageSwitcher(){
    if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();setFocus(selected);setOpen(true);}
    if(event.key==='Escape')close(true);
   }}><span lang={languages[selected].lang}>{languages[selected].label}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-  {open&&<div className="language-menu" id={id} role="listbox" aria-labelledby={id+'-trigger'} onKeyDown={event=>{
+  <div hidden={!open} inert={!open} className="language-menu" id={id} role="listbox" aria-labelledby={id+'-trigger'} onKeyDown={event=>{
    if(event.key==='Escape'){event.preventDefault();close(true);}
    else if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();setFocus(value=>(value+(event.key==='ArrowDown'?1:languages.length-1))%languages.length);}
    else if(event.key==='Home'||event.key==='End'){event.preventDefault();setFocus(event.key==='Home'?0:languages.length-1);}
-  }}>{languages.map((item,index)=><button key={item.value} type="button" role="option" aria-selected={locale===item.value} tabIndex={focus===index?0:-1} lang={item.lang} onPointerMove={()=>setFocus(index)} onClick={()=>{select(item.value);close(true);}}><span>{item.label}</span>{locale===item.value&&<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg>}</button>)}</div>}
+  }}>{languages.map((item,index)=><button key={item.value} type="button" role="option" aria-selected={locale===item.value} tabIndex={focus===index?0:-1} lang={item.lang} onPointerMove={()=>setFocus(index)} onClick={()=>{select(item.value);close(true);}}><span>{item.label}</span>{locale===item.value&&<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 8 3 3 7-7"/></svg>}</button>)}</div>
   <span className="community-sr" role="status">{t(notice)}</span>
  </div>;
 }
