@@ -85,3 +85,21 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 `src/components/react-bits/SpotlightCard`, `StarBorder`, and `AnimatedContent` are sourced from [React Bits](https://reactbits.dev/) by David Haz, copyright 2026, using the official `TS-CSS` registries. Source and styles are included as part of the IAVSE application, with the complete [MIT + Commons Clause license](docs/licenses/React-Bits.txt). IAVSE disables pointer-only spotlight work on touch/reduced-motion devices and leaves AnimatedContent visible during SSR. The administration code configures short mount transitions, no ambient spotlight loop, and one visible StarBorder button; these are application settings, not a component redistribution service. Third-party portions retain their upstream terms.
 
 后台直接使用上述 React Bits 源码组件，补充触屏和减少动态效果适配。完整原许可已保留；本项目的原创部分许可不覆盖这些第三方部分。
+
+## Imported UI design references (2026-11-08)
+
+- `src/lib/design-imports/stylekit.json` and `public/design-imports/stylekit/`
+  contain StyleKit documentation and original preview assets by AnxForever,
+  under the MIT license retained in `public/design-imports/stylekit/LICENSE.txt`.
+  Embedded Simple Icons glyphs retain the separately included CC0 notice.
+  Provenance and pinned source: [StyleKit import record](docs/design-sources-stylekit.md).
+- The 54 licensed brand-reference documents in `src/lib/design-imports/vibeui.json`
+  derive from VoltAgent's awesome-design-md, under the MIT license retained in
+  `docs/licenses/VoltAgent-awesome-design-md-MIT.txt`. The other 58 entries are
+  a factual directory with original summaries and external links to
+  yuanfu8899/uiuxskillProMax; their code and documents are not redistributed.
+  Provenance and pinned source: [VibeUI import record](docs/design-sources-vibeui.md).
+- Brand-reference demos are independent interpretations, not official brand
+  templates. Brand names, trademarks, third-party fonts and referenced media
+  remain subject to their respective rights. The IAVSE license does not replace
+  any of the above licenses or confer additional rights to these materials.

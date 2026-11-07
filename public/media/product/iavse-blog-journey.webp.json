@@ -1,5 +1,5 @@
 {
-  "prompt": "Original IAVSE blogs product film poster, extracted at 2.8 seconds from its independent HyperFrames 0.9.20 composition. Uses authentic public site captures and existing IAVSE original examples. Reproduce with scripts/media/creative-journey/prepare-films.mjs and the accompanying README. DM Sans under bundled OFL.",
+  "prompt": "Original IAVSE blogs product film poster, extracted at 6.2 seconds from its independent HyperFrames 0.9.20 composition. Uses authentic public site captures and rebuilt IAVSE original fictional portfolios with full project studies and notes. Reproduce with scripts/media/creative-journey/prepare-films.mjs and the accompanying README. DM Sans under bundled OFL.",
   "createdAt": "2026-11-08",
   "source": "scripts/media/creative-journey/films/blogs.html"
 }

@@ -48,7 +48,6 @@ tl.fromTo('.blog-one .screen',{y:90,scale:.96,opacity:0},{y:0,scale:1,opacity:1,
  .fromTo('.blog-triptych .screen img',{y:0},{y:-38,duration:1.3,stagger:.2,ease:'power2.inOut'},6.35)
  .fromTo('.blog-three .screen',{scale:.86,y:70,opacity:0},{scale:1,y:0,opacity:1,duration:1.05,ease:'power3.out'},8.85)
  .fromTo('.blog-three .phone',{x:70,y:35,opacity:0},{x:0,y:0,opacity:1,duration:.95,ease:'power3.out'},9.85)
- .fromTo('.blog-three .phone img',{y:0},{y:-100,duration:1.6,ease:'power2.inOut'},10.85)
  .fromTo('.blog-three .wordmark',{opacity:0,y:12},{opacity:1,y:0,duration:.55},11.5);`,
  resources:`
 tl.fromTo('.resources-one .screen',{x:180,opacity:0},{x:0,opacity:1,duration:1.15,ease:'power3.out'},.2)

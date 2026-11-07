@@ -27,6 +27,17 @@ test('only explicit public homepage and UI design previews permit same-origin fr
  assert.equal(response.headers.get('X-Frame-Options'),'SAMEORIGIN');
  assert.equal(response.headers.get('X-Robots-Tag'),'noindex, nofollow');
  }
+ for(const path of ['/resources/designs/vibeui-claude/preview','/resources/designs/vibeui-claude/preview?variant=1']){
+  const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
+  const policy=response.headers.get('Content-Security-Policy');
+  assert.match(policy,/frame-src 'self' https:\/\/vibeui\.top https:\/\/yuanfu8899\.github\.io(?:;|$)/);
+  assert.match(policy,/frame-ancestors 'self'/,'only the isolated preview can be framed by the catalog');
+ }
+ for(const path of ['/','/resources','/resources?type=designs','/resources?type=skills','/resources/designs/vibeui-claude','/blogs','/workspace/blog']){
+  const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
+  const policy=response.headers.get('Content-Security-Policy');
+  assert.match(policy,/frame-src 'self'(?:;|$)/);assert.doesNotMatch(policy,/vibeui|yuanfu8899/);
+ }
  const rules=await nextConfig.headers(),preview=rules.find(rule=>rule.source==='/blog/:handle');
  assert.deepEqual(preview.has,[{type:'query',key:'embed',value:'gallery'}]);
  const isolatedPreview=rules.find(rule=>rule.source==='/blog/:handle/preview');

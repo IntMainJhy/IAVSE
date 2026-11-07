@@ -28,7 +28,7 @@ npx --yes hyperframes@0.9.20 render scripts/media/creative-journey/.generated/ho
 npx --yes hyperframes@0.9.20 render scripts/media/creative-journey/.generated/blogs -o public/media/product/iavse-blog-journey.mp4 --fps 30 --quality high --workers 2 --strict --no-best-effort
 npx --yes hyperframes@0.9.20 render scripts/media/creative-journey/.generated/resources -o public/media/product/iavse-resource-journey.mp4 --fps 30 --quality high --workers 2 --strict --no-best-effort
 ffmpeg -ss 2.8 -i public/media/product/iavse-creative-journey.mp4 -frames:v 1 -c:v libwebp -quality 88 -y public/media/product/iavse-creative-journey.webp
-ffmpeg -ss 2.8 -i public/media/product/iavse-blog-journey.mp4 -frames:v 1 -c:v libwebp -quality 88 -y public/media/product/iavse-blog-journey.webp
+ffmpeg -ss 6.2 -i public/media/product/iavse-blog-journey.mp4 -frames:v 1 -c:v libwebp -quality 88 -y public/media/product/iavse-blog-journey.webp
 ffmpeg -ss 2.8 -i public/media/product/iavse-resource-journey.mp4 -frames:v 1 -c:v libwebp -quality 88 -y public/media/product/iavse-resource-journey.webp
 ```
 

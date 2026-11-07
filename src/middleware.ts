@@ -15,9 +15,14 @@ export function middleware(request:NextRequest){const pathname=request.nextUrl.p
  // Uploaded documents enforce their own opaque-origin sandbox even when opened directly.
  if(pathname.startsWith('/site-files/'))return NextResponse.next();
  const galleryPreview=/^\/resources\/designs\/[a-z0-9-]+\/preview\/?$/.test(pathname)||/^\/blog\/[^/]+\/preview\/?$/.test(pathname)||/^\/(?:blog\/[^/]+|blogs\/showcase\/[^/]+)\/?$/.test(pathname)&&request.nextUrl.searchParams.get('embed')==='gallery';
+ const designPreview=/^\/resources\/designs\/[a-z0-9-]+\/preview\/?$/.test(pathname);
+ // Reviewed demo hosts are isolated in same-origin preview documents. Client route
+ // changes keep the parent document's CSP, so directory pages must only embed self.
+ const designFrames=designPreview?"frame-src 'self' https://vibeui.top https://yuanfu8899.github.io":"frame-src 'self'";
  const nonce=btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(18))));
  const csp=["default-src 'self'",`script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${process.env.NODE_ENV==='development'?" 'unsafe-eval'":''}`,"style-src 'self' 'unsafe-inline'","img-src 'self' data: blob:","font-src 'self' data:","connect-src 'self' blob:"+(process.env.NODE_ENV==='development'?' ws:':''),"media-src 'self' blob:","object-src 'none'","base-uri 'none'","form-action 'self'",galleryPreview?"frame-ancestors 'self'":"frame-ancestors 'none'",...(process.env.PUBLIC_URL?.startsWith('https://')?['upgrade-insecure-requests']:[])].join('; ');
- const headers=new Headers(request.headers);headers.set('x-nonce',nonce);headers.set('Content-Security-Policy',csp);const response=NextResponse.next({request:{headers}});response.headers.set('Content-Security-Policy',csp);
+ const pageCsp=csp+'; '+designFrames;
+ const headers=new Headers(request.headers);headers.set('x-nonce',nonce);headers.set('Content-Security-Policy',pageCsp);const response=NextResponse.next({request:{headers}});response.headers.set('Content-Security-Policy',pageCsp);
  if(galleryPreview){response.headers.set('X-Frame-Options','SAMEORIGIN');response.headers.set('X-Robots-Tag','noindex, nofollow');}
  if(/^\/(?:admin|workspace|api|login|join|report)(?:\/|$)/.test(pathname))response.headers.set('X-Robots-Tag','noindex, nofollow');
  return response;
