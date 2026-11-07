@@ -1,88 +1,103 @@
-/* Real-time spatial scenes below the optical opening and behind community.
-   Geometry is rendered in Three.js; the neutral ground also works without WebGL. */
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background{
- position:relative;isolation:isolate;display:flow-root;min-width:0;background:#f7f6f2;color-scheme:light;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background>.spatial-backdrop{
- position:sticky;top:0;height:100svh;margin-bottom:-100svh;z-index:-1;pointer-events:none;overflow:hidden;
-}
-.spatial-backdrop{pointer-events:none;overflow:hidden}
-.spatial-backdrop>canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .4s ease}
-/* The near field yields to headings; depth opens below the reading line. */
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background>.spatial-backdrop>canvas{
- mask-image:linear-gradient(180deg,transparent 240px,#000 490px);-webkit-mask-image:linear-gradient(180deg,transparent 240px,#000 490px);
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product{
- background:transparent;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-identity-stage{
- background:#e9e8e2;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product]{
- background:#faf9f5cc;box-shadow:0 22px 54px -42px #5c584938;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices{
- background:transparent;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing:has(.home-gallery-background)>.organic-footer{
- background:#f7f6f2!important;
-}
-/* The paper has its own route marker. Other reading scenes keep their field. */
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]{
- position:relative;isolation:isolate;--site-canvas:#f5f4f0;--site-raised:#eeede8;--site-line:#ddded8;--site-control-line:#cccec7;
- --site-heading-surface:transparent;--site-menu-surface:#fffefa;--organic-line:#ddded8;
- background:#f5f4f0;color-scheme:light;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.spatial-backdrop{
- position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.spatial-backdrop>canvas{
- mask-image:linear-gradient(180deg,transparent 180px,#000 420px);-webkit-mask-image:linear-gradient(180deg,transparent 180px,#000 420px);
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header{
- background:transparent!important;border:0;box-shadow:none;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header::before{
- background:linear-gradient(180deg,#f8f7f3ee 0%,#f8f7f3c4 36%,#f8f7f35c 68%,#f8f7f300 100%);
- backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper][data-glass-scrolled]>.organic-header::before{
- background:linear-gradient(180deg,#f8f7f3f5 0%,#f8f7f3e0 36%,#f8f7f370 68%,#f8f7f300 100%);
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-post,.community-empty,.community-member-card,.community-profile-header,.community-post-detail,.feed-workspace-main){
- background:#fffefa;border-color:#ddded8;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-search{
- background:#fffefa;border-color:#ddded8;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-tabs{
- border-bottom-color:#d9dcd5;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-nav-links a,.feed-discover nav a)[aria-current]{
- background:#e9ece6;
-}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-footer{
- background:transparent!important;
+/* Apple-inspired product surfaces. Real products lead; the backdrop stays quiet. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background{position:relative;display:flow-root;min-width:0;background:#fff;color:#1d1d1f;color-scheme:light;--site-font:-apple-system,BlinkMacSystemFont,"IAVSE Sans","PingFang SC",sans-serif}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:104px 24px;max-width:1328px;padding:64px 40px 0;background:transparent;--home-product-ink:#1d1d1f;--home-product-body:#515154}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-primary{display:flex;flex-direction:column;grid-column:1/-1;align-items:stretch;gap:32px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-primary>.home-story-copy{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-copy h2{font:600 clamp(40px,4.6vw,64px)/1.08 var(--site-font);letter-spacing:-.035em;color:#1d1d1f;margin:0;white-space:pre-line}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-body{max-width:620px;margin-inline:auto;text-align:center}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-copy p{max-width:42ch;margin:0 auto 22px;font:400 19px/1.55 var(--site-font);color:#515154}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:11px 23px;border:0;border-radius:999px;background:#0071e3;box-shadow:none;color:#fff;font:400 16px/1.4 var(--site-font);text-decoration:none;transition:background-color .18s ease}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-link:hover{background:#0077ed;color:#fff;text-decoration:none;box-shadow:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-secondary{display:flex;justify-content:center;align-items:center;gap:8px;min-height:44px;width:max-content;max-width:100%;margin:12px auto 0;color:#06c;font-size:15px;text-decoration:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-secondary:hover{text-decoration:underline;text-underline-offset:4px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-visual{border-radius:24px;box-shadow:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-stage{height:620px;background:#f5f5f7}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-desktop{top:48px;left:5%;width:76%;height:calc(100% - 96px);box-shadow:0 24px 48px -28px #1d1d1f33}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-phone{background:#fff;border-color:#e8e8ed;box-shadow:0 20px 36px -20px #1d1d1f38}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-caption{margin:-10px 0 0;text-align:center;color:#6e6e73;font-size:12px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-editor{padding:56px 64px;background:#f5f5f7}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-editor-window{box-shadow:0 24px 48px -30px #1d1d1f35}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-editor-features{margin:0;gap:24px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-editor-features>li{color:#515154}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:32px;min-width:0;padding:40px 24px 24px;border-radius:24px;background:#f5f5f7}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery>.home-story-copy{display:block;text-align:center}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery .home-story-copy h2{font-size:36px;line-height:1.12;margin:0 0 18px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery .home-story-copy p{max-width:34ch;font-size:16px;line-height:1.6;margin-bottom:22px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery>.home-story-visual,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse>.home-story-visual{height:440px;aspect-ratio:auto;flex:none;border-radius:16px;box-shadow:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-skill-stage{background:#fff}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage{background:#fff;container:home-atlas / inline-size}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product]{max-width:1248px;width:calc(100% - 80px);padding:88px 24px;margin:24px auto 0;border:0;border-radius:0;background:#fff;box-shadow:none;text-align:center}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] h2{font:600 clamp(36px,4vw,56px)/1.12 var(--site-font);letter-spacing:-.035em;color:#1d1d1f;margin-bottom:28px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] .v2-primary{background:#0071e3;color:#fff;box-shadow:none;font:400 16px/1.4 var(--site-font);min-height:44px;padding:11px 24px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] .v2-primary:hover{background:#0077ed;color:#fff;transform:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices{background:#f5f5f7;color:#1d1d1f}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices h2{color:#1d1d1f;font-weight:600}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .creator-voices>header p{color:#6e6e73}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background :is(a,button,input,textarea,select,[tabindex]):focus-visible{outline:2px solid #0071e3;outline-offset:3px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background ::selection{background:#b9dcff;color:#1d1d1f}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing:has(.home-gallery-background)>.organic-footer{background:#f5f5f7!important}
+/* Community keeps its task layout with calm white panels on a silver canvas. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]{position:relative;--site-font:-apple-system,BlinkMacSystemFont,"IAVSE Sans","PingFang SC",sans-serif;--site-canvas:#f5f5f7;--site-surface:#fff;--site-raised:#eeeef0;--site-text:#1d1d1f;--site-body:#515154;--site-muted:#6e6e73;--site-line:#e5e5ea;--site-control-line:#d2d2d7;--site-heading-surface:transparent;--site-menu-surface:#fff;background:#f5f5f7;color:#1d1d1f;color-scheme:light}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header{background:#fbfbfded!important;border-bottom:1px solid #e5e5ea;box-shadow:none;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header::before{display:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-post,.community-empty,.community-member-card,.community-profile-header,.community-post-detail,.feed-workspace-main){background:#fff;border-color:#e5e5ea;border-radius:18px;box-shadow:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-search{background:#fff;border-color:#d2d2d7;border-radius:12px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-title,html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-empty h2{color:#1d1d1f;font-weight:600}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-tabs{border-bottom-color:#d2d2d7}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-tabs a[aria-current]{color:#1d1d1f;border-bottom-color:#0071e3}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-nav-links a,.feed-discover nav a)[aria-current]{background:#e8e8ed;color:#06c}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-post-content p,.community-empty-detail,.community-member-copy p){color:#515154}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-account-copy small,.feed-author time){color:#6e6e73}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.feed-write,.community-follow-button:not(.is-following)){background:#0071e3;color:#fff;box-shadow:none;border-color:transparent}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-write:hover{background:#0077ed;color:#fff}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(.organic-button.is-secondary,.feed-discover nav a):hover{background-color:#e8e8ed}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-search.feed-search.feed-timeline-search{grid-template-columns:minmax(0,1fr) max-content max-content}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-search.feed-search.feed-timeline-search>.organic-button.is-secondary:not(.primary):not(.dark):not(.danger):not(.space-root *){width:auto;min-width:64px;white-space:nowrap;padding-inline:14px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-footer{background:#f5f5f7!important}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] :is(a,button,input,textarea,select,[tabindex]):focus-visible{outline:2px solid #0071e3;outline-offset:3px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] ::selection{background:#b9dcff;color:#1d1d1f}
+@media(max-width:1000px){
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product{padding-inline:32px;gap:80px 24px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-copy h2{font-size:48px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-stage{height:540px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-editor{padding:40px 32px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse{padding:32px 20px 20px;gap:28px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery .home-story-copy h2{font-size:30px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery>.home-story-visual,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse>.home-story-visual{height:420px}
 }
 @media(max-width:767px){
- html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background>.spatial-backdrop>canvas{
-  mask-image:linear-gradient(180deg,transparent 320px,#000 550px);-webkit-mask-image:linear-gradient(180deg,transparent 320px,#000 550px);
- }
- html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.spatial-backdrop{opacity:.4}
- /* Retain the liquid navigation geometry, use the new material beneath it. */
- html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{
-  background:linear-gradient(155deg,#fffefae8,#eeede3c4);box-shadow:inset 0 1px 0 #fff,0 8px 28px -14px #4e51432b;
- }
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product{grid-template-columns:minmax(0,1fr);padding:48px 22px 0;gap:64px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-primary{gap:28px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-primary>.home-story-copy{gap:16px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-copy h2{font-size:38px;line-height:1.1}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-copy p{font-size:17px;line-height:1.55;margin-bottom:20px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-link{font-size:14px;padding:11px 20px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-secondary{font-size:14px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-stage{height:400px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-desktop{left:16px;top:28px;width:80%;height:auto;aspect-ratio:1280/1000}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-editor{padding:28px 12px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-caption{text-align:center;font-size:11px;margin-inline:auto}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse{padding:32px 12px 12px;gap:28px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery .home-story-copy h2{font-size:32px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery .home-story-copy p{font-size:16px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery>.home-story-visual,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse>.home-story-visual{height:400px;aspect-ratio:auto}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery>.home-resource-stage,html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-discovery.is-reverse>.home-resource-stage{height:450px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product]{width:calc(100% - 44px);padding:64px 12px;margin:0 auto}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .v2-invitation[data-home-product] h2{font-size:34px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{background:#fbfbfdef;box-shadow:0 10px 30px -14px #1d1d1f33}
  html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .feed-navigation>.feed-nav-links :is(a,summary)[data-liquid-selected]{background:transparent}
 }
-@media(prefers-reduced-transparency:reduce){
- html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header{background:#f8f7f3!important}
- html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header::before{display:none;backdrop-filter:none;-webkit-backdrop-filter:none}
- html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{background:#f3f2ec}
+/* The atlas follows its tile width, including paired tablet tiles. */
+@container home-atlas (max-width:380px){
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-toolbar{padding:9px 10px 0;gap:6px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-mode-switch{gap:0;padding:2px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-mode-switch>button{flex:none;min-height:44px;padding:8px 9px;font-size:10px;white-space:nowrap}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-mode-switch>button>.icon{display:none}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-node{min-height:44px;padding:8px 9px;gap:7px;font-size:10px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-node-icon{width:22px;height:22px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-resource-stage .atlas-node-icon>.icon{width:13px;height:13px}
 }
-@media print{
- html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background{background:#fff}
- .spatial-backdrop{display:none}
-}
-
-@media(prefers-reduced-motion:reduce){.spatial-backdrop>canvas{transition:none}}
+@media(max-width:359px){html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-identity-stage{height:340px}html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background .home-product .home-story-copy h2{font-size:34px}}
+@media(prefers-reduced-motion:reduce){html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background :is(a,button){transition:none}}
+@media(prefers-reduced-transparency:reduce){html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]>.organic-header,html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper] .community-navigation-shell>.feed-navigation{background:#fbfbfd!important;backdrop-filter:none;-webkit-backdrop-filter:none}}
+@media print{html:root[data-ui][data-color-mode] body .organic-site.v2-site.v2-landing .v2-home .home-gallery-background,html:root[data-ui][data-color-mode] body .organic-site.v2-site[data-reading-background=paper]{background:#fff}}

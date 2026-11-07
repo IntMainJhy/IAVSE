@@ -12,7 +12,6 @@ import {HomeResourceSculpture} from './HomeResourceSculpture';
 import {HomeStoryVideo} from './HomeStoryVideo';
 import {CreatorVoices} from './CreatorVoices';
 import {homeProductCopy} from '@/lib/home-product-copy.mjs';
-import {SpatialBackdrop} from './SpatialBackdrop';
 import '@/app/home-showcase.css';
 import '@/app/home-product-showcase.css';
 export async function PlatformHome({req}:{req:Request}){
@@ -38,7 +37,6 @@ export async function PlatformHome({req}:{req:Request}){
    <div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
   </section>
   <div className="home-gallery-background" data-home-background="gallery">
-  <SpatialBackdrop mode="gallery"/>
   <div className="home-stories home-product" data-home-product>
    <section className="home-story home-story-primary" data-home-story="blog" data-home-side="left" id="creators" aria-labelledby="v2-creators-title">
     <div className="home-story-copy"><h2 id="v2-creators-title">{copy.blogTitle}</h2><div className="home-story-body"><p>{copy.blogText}</p><Link className="home-story-link" href="/blogs">{t('发现更多主页')}<Icon name="arrow"/></Link></div></div>

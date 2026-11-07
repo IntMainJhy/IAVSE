@@ -55,7 +55,7 @@ test('the creator avatar keeps its intended dimensions before and after communit
  }
 });
 
-test('product showcase geometry and readable copy survive late legacy and editor styles at every breakpoint',()=>{
+test('centered product stories and discovery cards survive late legacy styles at every breakpoint',()=>{
  const legacy=['home-showcase.css','home-blog-canvas-demo.css','glass-studio.css','iavse-home.css','iavse-platform.css'],product='home-product-showcase.css',background='gallery-backgrounds.css';
  // Match the selectors that can receive these concrete elements, including
  // their older generic class names. Discovery-only rules cannot match blog.
@@ -64,19 +64,31 @@ test('product showcase geometry and readable copy survive late legacy and editor
  const primary=receives(['.home-story','.home-story.is-reverse','.home-story-primary']);
  const primaryCopy=receives(['.home-story-copy','.home-story.is-reverse>.home-story-copy','.home-story-primary>.home-story-copy'],/home-story-discovery/);
  const primaryVisual=receives(['.home-story-visual','.home-story.is-reverse>.home-story-visual','.home-story-primary>.home-story-visual'],/home-story-discovery/);
+ const discovery=receives(['.home-story','.home-story.is-reverse','.home-story-discovery','.home-story-discovery.is-reverse'],/home-story-primary/);
+ const discoveryCopy=receives(['.home-story-copy','.home-story.is-reverse>.home-story-copy','.home-story-discovery>.home-story-copy','.home-story-discovery.is-reverse>.home-story-copy','.home-story-discovery .home-story-copy'],/home-story-primary/);
  const editor=receives(['.home-story-visual','.home-story-visual.home-story-editor','.home-story-editor'],/home-story-discovery/);
  const blog=receives(['.home-story-visual','.home-identity-stage'],/home-story-discovery|is-reverse/);
  const paragraph=receives(['.home-story-copy p'],/home-story-discovery/);
  for(const files of [[...legacy,product,background],[background,product,...legacy],['home-showcase.css',product,background,...legacy.slice(1)]])for(const [width,height]of[[1440,1000],[900,1000],[390,844],[320,640]]){
   const mobile=width<=767,tablet=width<=1000,label=files.join(' → ')+' @ '+width;
-  assert.equal(winner(files,container,'gap',width,height),mobile?'64px':tablet?'80px':'104px',label);
-  assert.equal(winner(files,primary,'display',width,height),mobile?'flex':'grid',label);
-  assert.equal(winner(files,primary,'gap',width,height),mobile?'24px':'28px 64px',label);
-  assert.equal(winner(files,primaryCopy,'display',width,height),mobile?'block':'grid',label);
+  assert.equal(winner(files,container,'display',width,height),'grid',label);
+  assert.equal(winner(files,container,'grid-template-columns',width,height),mobile?'minmax(0,1fr)':'repeat(2,minmax(0,1fr))',label+' places discovery cards side by side until the mobile breakpoint');
+  assert.equal(winner(files,container,'gap',width,height),mobile?'64px':tablet?'80px 24px':'104px 24px',label);
+  assert.equal(winner(files,primary,'display',width,height),'flex',label);
+  assert.equal(winner(files,primary,'flex-direction',width,height),'column',label);
+  assert.equal(winner(files,primary,'grid-column',width,height),'1/-1',label+' keeps blog and editor full width');
+  assert.equal(winner(files,primary,'gap',width,height),mobile?'28px':'32px',label);
+  assert.equal(winner(files,primaryCopy,'display',width,height),'flex',label);
+  assert.equal(winner(files,primaryCopy,'text-align',width,height),'center',label);
+  assert.equal(winner(files,primaryCopy,'align-items',width,height),'center',label);
   assert.equal(winner(files,primaryCopy,'grid-column',width,height),'1/-1',label);
   assert.equal(winner(files,primaryVisual,'grid-column',width,height),'1/-1',label+' keeps the editor wide despite its legacy reverse class');
   assert.equal(winner(files,primaryVisual,'grid-row',width,height),'auto',label);
-  assert.equal(winner(files,blog,'height',width,height),width<360?'340px':mobile?'400px':tablet?'540px':'600px',label);
+  assert.equal(winner(files,discovery,'display',width,height),'flex',label);
+  assert.equal(winner(files,discovery,'flex-direction',width,height),'column',label);
+  assert.equal(winner(files,discoveryCopy,'display',width,height),'block',label);
+  assert.equal(winner(files,discoveryCopy,'text-align',width,height),'center',label);
+  assert.equal(winner(files,blog,'height',width,height),width<360?'340px':mobile?'400px':tablet?'540px':'620px',label);
   assert.equal(winner(files,editor,'height',width,height),'auto',label+' lets the larger editor window determine height');
   assert.equal(winner(files,'.home-editor-window','height',width,height),mobile?'500px':tablet?'540px':'560px',label);
   assert.equal(winner(files,paragraph,'overflow',width,height),'visible',label);
@@ -86,28 +98,27 @@ test('product showcase geometry and readable copy survive late legacy and editor
  }
 });
 
-test('spatial canvases remain decorative layers without changing content geometry or interactive transforms',()=>{
+test('Apple-style surfaces stay scoped below the opening without background renderers or scroll locks',()=>{
  const css=read('gallery-backgrounds.css'),root=postcss.parse(css),home='.home-gallery-background',paper='[data-reading-background=paper]';
- assert.doesNotMatch(css,/url\s*\(/i,'the spatial background uses a rendered canvas rather than an image');
+ assert.doesNotMatch(css,/url\s*\(/i,'the light surfaces do not load a decorative image');
  root.walkRules(rule=>{for(const selector of rule.selectors){
-  assert.ok(selector.startsWith('html:root[data-ui][data-color-mode] body .organic-site.v2-site')||selector.startsWith('.spatial-backdrop'),selector);
-  assert.ok(selector.includes(home)||selector.includes(paper)||selector.startsWith('.spatial-backdrop'),selector+' has an explicit background boundary');
+  assert.ok(selector.startsWith('html:root[data-ui][data-color-mode] body .organic-site.v2-site'),selector);
+  assert.ok(selector.includes(home)||selector.includes(paper),selector+' has an explicit page boundary');
+  assert.doesNotMatch(selector,/spatial-backdrop|(?:^|[\s>+~])canvas\b/,'the retired scene does not retain canvas or background component styles');
   assert.doesNotMatch(selector,/v2-hero|home-cinema|creator-stage|v2-home-atmosphere|hbd-node|home-resource-(?:canvas|sculpture)/,'background styles do not reach optical or interactive renderers');
-  assert.ok(!selector.includes(home+'::'),'the home scene belongs to a real canvas surface');
   rule.walkDecls(decl=>{
-   if(!selector.includes('.spatial-backdrop'))assert.doesNotMatch(decl.prop,/^(?:transform|translate|scale|rotate|scroll-timeline(?:-.+)?)$/,'background styles never overwrite interactive content transforms');
+   if(/^(?:transform|translate|scale|rotate|scroll-timeline(?:-.+)?)$/.test(decl.prop))assert.ok(decl.prop==='transform'&&decl.value==='none'&&selector.endsWith('.v2-primary:hover'),'only the creation button may suppress a legacy hover transform');
    if(decl.prop==='background-attachment')assert.notEqual(decl.value,'fixed');
-   if(selector.includes(home)&&!selector.includes('.spatial-backdrop')&&!selector.includes('::'))assert.doesNotMatch(decl.prop,/^(?:height|min-height|max-height|width|max-width|overflow(?:-.+)?|contain|grid(?:-.+)?|flex(?:-.+)?|gap)$/,'the scene wrapper adds no dimensions or clipping to its content');
-   if(selector.includes(paper)&&!selector.includes('::')&&/\.(?:feed-|community-)/.test(selector))assert.doesNotMatch(decl.prop,/^(?:display|position|inset|top|right|bottom|left|height|min-height|max-height|width|min-width|max-width|margin(?:-.+)?|padding(?:-.+)?|overflow(?:-.+)?|grid(?:-.+)?|flex(?:-.+)?|gap)$/,'community backgrounds preserve the existing navigation and feed layout');
+   if(decl.prop==='position')assert.ok(!['fixed','sticky'].includes(decl.value),'the surface does not create a viewport background layer');
+   if(selector.endsWith(home)||selector.endsWith(paper)){
+    assert.doesNotMatch(decl.prop,/^(?:height|max-height|overflow|overflow-y|contain)$/,'the page surface keeps content in native document flow');
+    if(decl.prop==='touch-action')assert.notEqual(decl.value,'none','page scrolling stays available');
+   }
+   if(selector.includes(paper)&&!selector.includes('::')&&/\.(?:feed-(?:post|navigation|timeline)|community-(?:navigation-shell|empty|member-card|profile-header|post-detail|surface))(?![\w-])/.test(selector))assert.doesNotMatch(decl.prop,/^(?:display|position|inset|top|right|bottom|left|height|min-height|max-height|width|min-width|max-width|margin(?:-.+)?|padding(?:-.+)?|overflow(?:-.+)?|grid(?:-.+)?|flex(?:-.+)?|gap)$/,'community surfaces preserve the existing navigation and feed layout');
   });
  }});
  for(const [width,height]of[[1440,1000],[390,844]]){
-  const files=['gallery-backgrounds.css','glass-studio.css','iavse-home.css','iavse-platform.css','home-showcase.css','home-product-showcase.css'],galleryScene=home+'>.spatial-backdrop',communityScene=paper+'>.spatial-backdrop';
-  assert.equal(winner(files,home,'position',width,height),'relative');assert.equal(winner(files,home,'isolation',width,height),'isolate');assert.equal(winner(files,home,'display',width,height),'flow-root');
-  assert.equal(winner(files,galleryScene,'position',width,height),'sticky');assert.equal(winner(files,galleryScene,'pointer-events',width,height),'none');assert.equal(winner(files,galleryScene,'height',width,height),'100svh');assert.equal(winner(files,galleryScene,'margin-bottom',width,height),'-100svh','the decorative scene has no net height in the document flow');
-  assert.equal(winner(files,communityScene,'position',width,height),'fixed');assert.equal(winner(files,communityScene,'inset',width,height),'0');assert.equal(winner(files,communityScene,'pointer-events',width,height),'none');
-  for(const scene of [galleryScene,communityScene])assert.equal(winner(files,scene,'z-index',width,height),'-1','the scene stays behind interactive content');
-  assert.equal(winner(files,'.spatial-backdrop>canvas','display',width,height),'block');assert.equal(winner(files,'.spatial-backdrop>canvas','width',width,height),'100%');assert.equal(winner(files,'.spatial-backdrop>canvas','height',width,height),'100%');
+  for(const surface of [home,paper])assert.equal(winner(['gallery-backgrounds.css'],surface,'color-scheme',width,height),'light','both pages opt into the intended light palette');
  }
 });
 
