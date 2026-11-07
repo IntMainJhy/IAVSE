@@ -21,7 +21,7 @@ export function PlatformGlass({scene='interior'}:{scene?:'home'|'interior'|'blog
   const measure=()=>{
    if(!live)return;
    const height=window.innerHeight;
-   brightAt=journey?.dataset.journey==='ready'?Math.max(1,journey.offsetHeight-height+(window.innerWidth<768?64:72))*.82:height*1.02;
+   brightAt=journey?.dataset.journey==='ready'?Math.max(1,journey.offsetHeight-height+(window.innerWidth<768?64:72))*.82:height*(scene==='home'?.74:1.02);
    update();
   };
   const bounds=journey?new ResizeObserver(measure):null;bounds?.observe(journey!);

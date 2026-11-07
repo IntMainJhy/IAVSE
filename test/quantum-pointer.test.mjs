@@ -115,14 +115,14 @@ test('workspaces and product previews stop site particles until the pointer leav
  assert.ok(s.canvas.context.fills+s.wave.context.fills>fills,'ordinary page interactions paint again');s.cleanup();}
 });
 
-test('all community scenes stay quiet and cancel arriving waves while other reading routes retain feedback',()=>{
- for(const path of ['/community','/community/','/community/post-id','/community/members','/community/members/member-id']){
+test('Apple reading and discovery pages stay quiet while the original opening retains feedback',()=>{
+ for(const path of ['/community','/community/','/community/post-id','/community/members','/community/members/member-id','/blogs','/resources','/resources/legal-consultation','/skills','/skills/gsap','/docs','/docs/connect']){
   const s=mount({path});s.move();s.click();s.click(0);s.navigation(true);s.navigation(false);s.fine.dispatchEvent(new Event('change'));s.step();
   assert.equal(s.frames.size,0,path);assert.equal(s.canvas.context.fills+s.wave.context.fills,0);
-  s.navigate('/docs/connect');s.move();s.click();s.step();assert.ok(s.canvas.context.fills+s.wave.context.fills>0,'leaving community restores both original effects');
+  s.navigate('/about');s.move();s.click();s.step();assert.ok(s.canvas.context.fills+s.wave.context.fills>0,'leaving the quiet reading surfaces restores original feedback');
   s.navigate(path);assert.equal(s.frames.size,0);assert.equal(s.wave.style.opacity,'0');assert.equal(s.canvas.context.arcs.length+s.wave.context.arcs.length,0);
   const fills=s.canvas.context.fills+s.wave.context.fills;s.move();s.click();s.advance(1000);assert.equal(s.canvas.context.fills+s.wave.context.fills,fills,'a route commit clears every lingering RAF');
-  s.navigate('/blogs');s.move();s.click();assert.equal(s.frames.size,2);s.cleanup();assert.equal(s.frames.size,0);
+  s.navigate('/');s.move();s.click();assert.equal(s.frames.size,2);s.cleanup();assert.equal(s.frames.size,0);
  }
 });
 

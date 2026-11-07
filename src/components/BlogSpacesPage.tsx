@@ -6,6 +6,7 @@ import {BlogProductShowcase} from './BlogProductShowcase';
 import {Icon} from './Icons';
 import {BlogSpaceGallery,type GallerySpace} from './BlogSpaceGallery';
 import {blogShowcases,showcaseProfile} from '@/lib/blog-showcase.mjs';
+import '@/app/blog-spaces-apple.css';
 
 /** Discovery always lists published, discoverable spaces, independently of login. */
 export async function BlogSpacesPage({req}:{req:Request}){
@@ -15,7 +16,7 @@ export async function BlogSpacesPage({req}:{req:Request}){
   const profile=localizeProfile(space.profile,locale);
   return {handle:space.handle,name:profile.name||space.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',href:'/blog/'+encodeURIComponent(space.handle),mode:space.mode};
  });
- return <div className="blog-spaces-page" data-blog-spaces>
+ return <div className="blog-spaces-page" data-blog-spaces data-spaces-surface="apple">
   <header className="creator-directory-intro">
    <div><h1>{t('博客空间')}</h1><p>{say('每一个主页，都是一个独立的世界。','Every homepage, a world of its own.','一つひとつのホームページに、その人の世界。')}</p></div>
    <Link className="space-btn primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link>

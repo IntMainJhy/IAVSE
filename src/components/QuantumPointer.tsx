@@ -28,7 +28,7 @@ export function QuantumPointer(){
   const clearPointer=()=>{cancelAnimationFrame(frame);frame=0;previous=0;alpha=0;dx=dy=0;lastMove=-Infinity;ctx.clearRect(0,0,size,size);};
   const clearWave=()=>{cancelAnimationFrame(waveFrame);waveFrame=0;wavePrevious=waveElapsed=0;ink.clearRect(0,0,waveSize,waveSize);wave.style.opacity='0';};
   const clear=()=>{clearPointer();clearWave();};
-  const quiet=()=>/^\/community(?:\/|$)/.test(route.current)||quietGallery;
+  const quiet=()=>/^\/(?:community|blogs|resources|docs|skills)(?:\/|$)/.test(route.current)||quietGallery;
   // Cache the gallery boundary on layout changes. Scroll and pointer events
   // never measure layout, including when a fixed header sits above that scene.
   const scroll=()=>{quietGallery=!!gallery?.isConnected&&(window.scrollY||0)+(window.innerHeight||0)>=galleryTop;if(quiet()&&(frame||waveFrame))clear();};

@@ -1,4 +1,4 @@
-/* Light product studio. All geometry is local; the spatial gallery above is untouched. */
+/* Product demonstrations share the same silver studio as the homepage gallery. */
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film{--film-canvas:#f7f7f5;--film-ink:#25282d;--film-body:#5e646e;--film-line:#dfe1e3;position:relative;isolation:isolate;margin-top:48px;padding:0 48px 32px;background:var(--film-canvas);color:var(--film-ink);color-scheme:light;overflow-wrap:anywhere}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film :where(h2,h3,p,figure,ul){margin:0}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film h2{font-family:var(--site-font);font-weight:500;letter-spacing:-.035em;line-height:1.12;color:var(--film-ink);white-space:pre-line;text-wrap:balance}
@@ -15,7 +15,7 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-si
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-scene-heading h2{font-size:clamp(28px,2.8vw,40px);line-height:1.2}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-scene-heading>p{max-width:42ch;color:var(--film-body);font-size:15px;line-height:1.8;text-wrap:pretty}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-canvas-scene{position:relative;padding:0 0 100px}
-html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-canvas-stage{position:relative;min-width:0;padding:64px 64px 72px;border-radius:16px;background:#edeae6 url('/media/blog-product/studio-light.webp') center/cover no-repeat}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-canvas-stage{position:relative;min-width:0;padding:64px 64px 72px;border-radius:16px;background:#f5f5f7}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-canvas-window{position:relative;height:580px;min-width:0;overflow:hidden;border-radius:12px;background:#f7f8fa;box-shadow:0 24px 50px -24px #3940444d}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-canvas-window .home-blog-demo{--site-text:#252830;--site-body:#59606c;--site-muted:#69717e;--site-surface:#fff;--site-raised:#f4f5f7;--site-control-line:#d6dae1;--site-focus:#3265a9;color-scheme:light}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .blog-product-film .film-canvas-window .hbd-header{grid-template-columns:64px minmax(0,1fr) auto}

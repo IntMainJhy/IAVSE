@@ -28,15 +28,15 @@ test('transparent home chrome begins with light ink and switches only after reac
  const f=fixture();assert.equal(f.attributes.size,0);assert.equal(f.observers.length,0);
  assert.equal(f.listeners.get('scroll').options.passive,true);
  f.scroll(49);assert.ok(f.attributes.has('data-glass-scrolled'));assert.ok(!f.attributes.has('data-glass-bright'));
- f.scroll(918);assert.ok(!f.attributes.has('data-glass-bright'),'the blue side of the boundary keeps light ink');
- f.scroll(920);assert.ok(f.attributes.has('data-glass-bright'),'the daylight side uses dark ink');
+ f.scroll(665);assert.ok(!f.attributes.has('data-glass-bright'),'the blue side of the boundary keeps light ink');
+ f.scroll(667);assert.ok(f.attributes.has('data-glass-bright'),'the daylight side uses dark ink');
  f.scroll(0);assert.equal(f.attributes.size,0,'scrolling back restores the initial ink');
  assert.equal(f.boundsReads,0,'ordinary scrolling never reads scene geometry');f.cleanup();
 });
 
 test('viewport resize corrects the ink state without requiring another scroll event',()=>{
  const f=fixture({height:800,scrollY:900});assert.ok(f.attributes.has('data-glass-bright'));
- f.resize(1100);assert.ok(!f.attributes.has('data-glass-bright'));
+ f.resize(1400);assert.ok(!f.attributes.has('data-glass-bright'));
  f.resize(700,622);assert.ok(f.attributes.has('data-glass-bright'));
  assert.equal(f.boundsReads,0);f.cleanup();
 });

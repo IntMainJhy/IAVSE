@@ -4,8 +4,8 @@ import {useEffect,useRef} from 'react';
 import {usePathname} from 'next/navigation';
 import type {QuantumField} from '@/lib/quantum-field';
 
-// Community owns its scene; Bento indexes need no hidden GPU work either.
-const quantumRoute=(path:string)=>!/^\/(?:resources(?:\/legal-consultation)?|docs|skills)\/?$/.test(path)&&(/^\/(?:resources|docs|skills)(?:\/|$)/.test(path)||/^\/blogs\/?$/.test(path));
+// Neutral discovery surfaces, including the spatial homepage gallery, need no decorative GPU field.
+const quantumRoute=(path:string)=>!/^\/(?:resources(?:\/legal-consultation)?|docs|skills)\/?$/.test(path)&&/^\/(?:resources|docs|skills)(?:\/|$)/.test(path);
 const hostSelector='.organic-site.v2-site[data-surface="reading"][data-reading-scene="quantum"]';
 
 /** A root-owned field retains its GPU resources between reading routes. */

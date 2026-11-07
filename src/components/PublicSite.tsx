@@ -21,6 +21,8 @@ import {PlatformGlass} from './PlatformGlass';
 import {ReadingBackdrop} from './ReadingBackdrop';
 import {ResumePrint} from './ResumePrint';
 import '@/app/gallery-backgrounds.css';
+import '@/app/apple-reading-surfaces.css';
+import {SiteAnnouncement,SiteAnnouncementOffset} from './SiteAnnouncement';
 
 type Doc = Record<string, any>;
 type Query = Record<string, string | string[] | undefined>;
@@ -212,8 +214,8 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
       <div className="organic-header-tools"><div className="iavse-account-slot"><AuthNav/></div>
       <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>
       <SiteTools/></div>
-    </div></header>
-    <main id="main" className="organic-container organic-main"><PageMotion>{children}</PageMotion></main>
+    </div>{!!section&&<SiteAnnouncement/>}</header>
+    <main id="main" className="organic-container organic-main">{!!section&&<SiteAnnouncementOffset/>}<PageMotion>{children}</PageMotion></main>
     <footer className="organic-footer organic-footer-compact"><div className="organic-container"><div className="iavse-footer-brand"><Link href="/" className="organic-footer-signature">IAVSE</Link><p>Insight through AI.<br/>Seize to Evolve.</p></div><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/legal/disclaimer">{tr("免责声明")}</Link><Link href="/report">{tr("举报投诉")}</Link><Link href="/workspace/account">{tr("我的账号")}</Link></nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
   </div>;
 }

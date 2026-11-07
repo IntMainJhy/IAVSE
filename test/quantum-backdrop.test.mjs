@@ -114,12 +114,12 @@ test('reading routes share one field across new shells and return without recomp
  assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.canvas,canvas);assert.equal(s.layer.hidden,false);
  assert.equal(previous.attributes.size,0);assert.ok(s.host.attributes.has('data-quantum-host'));assert.ok(s.host.attributes.has('data-glass-scrolled'));
  const before=s.renders.at(-1)[0];s.navigate('/');assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);s.step(60000);
- s.navigate('/blogs');await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.layer.hidden,false);
+ s.navigate('/docs/connect');await flush();s.step();assert.equal(s.createCalls,1);assert.equal(s.disposes,0);assert.equal(s.layer.hidden,false);
  assert.ok(s.renders.at(-1)[0]-before<.1,'inactive route time cannot fast-forward the field');s.cleanup();
 });
 
 test('home, author pages, showcase previews and embedded frames never initialize a field',async()=>{
- for(const path of ['/','/downloads','/workspace/blog','/blog/alice','/blog/alice/preview','/blogs/showcase/lin-studio','/blogs/showcase/lin-studio/preview']){
+ for(const path of ['/','/blogs','/blogs/','/downloads','/workspace/blog','/blog/alice','/blog/alice/preview','/blogs/showcase/lin-studio','/blogs/showcase/lin-studio/preview']){
   const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true,path);assert.equal(s.frames.size,0);s.move();s.scroll(200);s.resize();assert.equal(s.frames.size,0);s.cleanup();
  }
  const frame=mount({iframe:true});await flush();assert.equal(frame.createCalls,0);assert.equal(frame.layer.hidden,true);frame.cleanup();
@@ -127,7 +127,7 @@ test('home, author pages, showcase previews and embedded frames never initialize
 });
 
 test('independent community scenes and Bento filter replacements never load or wake a hidden field',async()=>{
- for(const path of ['/community','/community/','/community/post-id','/community/members','/community/members/member-id','/resources','/resources/','/docs','/docs/','/skills','/skills/','/resources/legal-consultation','/resources/legal-consultation/']){
+ for(const path of ['/blogs','/blogs/','/community','/community/','/community/post-id','/community/members','/community/members/member-id','/resources','/resources/','/docs','/docs/','/skills','/skills/','/resources/legal-consultation','/resources/legal-consultation/']){
   const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true);
   s.move();s.scroll(180);s.resize();s.control('reduced',true);s.control('reduced',false);
   s.visibility(true);s.visibility(false);s.navigation(true);s.navigation(false);
@@ -140,7 +140,7 @@ test('independent community scenes and Bento filter replacements never load or w
 
 test('community and Bento round trips stop drawing and reuse the ready field on reading details',async()=>{
  const s=mount();await flush();s.step();const canvas=s.canvas,ready=s.signal;
- for(const [index,detail] of [['/community','/blogs'],['/community/members/member-id','/docs/connect'],['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices'],['/resources/legal-consultation','/docs/connect']]){
+ for(const [index,detail] of [['/community','/docs/connect'],['/blogs','/docs/getting-started'],['/community/members/member-id','/docs/connect'],['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices'],['/resources/legal-consultation','/docs/connect']]){
   const renders=s.renders.length,time=s.renders.at(-1)[0],previous=s.host;
   s.navigate(index);await flush();assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);assert.equal(previous.attributes.size,0);
   s.move();s.scroll(120);s.resize();s.visibility(true);s.visibility(false);s.navigate(index);s.mutate();s.step(60000);await flush();
@@ -178,7 +178,7 @@ test('temporary home pause controls cannot freeze a later reading route',async()
  const s=mount({path:'/'});s.control('paused',true);s.navigate('/docs/getting-started');await flush();s.step();
  assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);
  s.control('paused',true);s.step();assert.equal(s.canvas.dataset.field,'paused');
- s.navigate('/');s.control('paused',true);s.navigate('/blogs');await flush();s.step();
+ s.navigate('/');s.control('paused',true);s.navigate('/docs/connect');await flush();s.step();
  assert.equal(s.canvas.dataset.field,'running');assert.equal(s.createCalls,1);s.cleanup();
 });
 
@@ -244,6 +244,6 @@ test('active AbortError is retryable while genuine setup failure enters the fall
 test('a ready field retains its controller across navigation, hiding and home round trips',async()=>{
  const s=mount();await flush();const ready=s.signal;s.step();
  s.navigation(true);s.visibility(true);s.navigate('/');assert.equal(ready.aborted,false);assert.equal(s.disposes,0);
- s.navigate('/blogs');s.navigation(false);s.visibility(false);await flush();s.step();
+ s.navigate('/docs/connect');s.navigation(false);s.visibility(false);await flush();s.step();
  assert.equal(s.createCalls,1);assert.equal(ready.aborted,false);assert.equal(s.disposes,0);s.cleanup();assert.equal(ready.aborted,true);assert.equal(s.disposes,1);
 });

@@ -1,4 +1,5 @@
 'use client';
+import {AnnouncementSettings} from './AnnouncementSettings';
 import {DesktopDownloadsSettings} from './DesktopDownloadsSettings';
 import {useLocale} from './LocaleProvider';
 import {useState,useEffect,useLayoutEffect,useRef} from 'react';
@@ -23,6 +24,7 @@ export function SettingsForm({value,notify,refresh}:{value:Any,max:number,notify
  return <div className="admin-settings">
   <div className="page-head"><div><h1>{tr('网站设置')}</h1><p>{tr('公开页面设置与管理员安全。')}</p></div></div>
    <div className="admin-settings-content">
+    <AnnouncementSettings notify={notify}/>
     <form id="admin-site-settings" inert={busy} onSubmit={async e=>{e.preventDefault();if(busy||uploading)return;setBusy(true);try{await post('/api/admin/config',{key:'site',value:{...value,shareImageId:data.shareImageId,desktopDownloads:data.desktopDownloads,resumeId:data.resumeId}});committed();notify('网站设置已保存');refresh()}catch(e:any){notify(e.message)}finally{setBusy(false)}}}>
      <div id="admin-settings-page">
       <section className="panel form-section"><h2>{tr('默认分享封面')}</h2><p className="small-text">{tr('用于未单独设置封面的公开页面。')}</p><FileChoice label={tr('默认分享封面')} mode="image" onBusy={v=>setUploadFlags(f=>({...f,cover:v}))} value={data.shareImageId} onChange={v=>patch({shareImageId:v})} max={20000000}/></section>

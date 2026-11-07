@@ -48,6 +48,33 @@ export function promotionData(input){
   return {title,url:url?(internal?url:httpUrl(url)):'',kind:item.kind};
  })};
 }
+/** Dedicated announcement config never overwrites general site settings. */
+export function siteAnnouncementsData(input){
+ requireValue(input&&typeof input==='object'&&!Array.isArray(input)&&typeof input.enabled==='boolean','公告设置格式无效');
+ requireValue(Array.isArray(input.items)&&input.items.length<=3,'网站公告最多保留 3 条');
+ const items=input.items.map(item=>{
+  requireValue(item&&typeof item==='object'&&!Array.isArray(item),'公告条目格式无效');
+  requireValue(typeof item.title==='string'&&(item.url===undefined||typeof item.url==='string'),'公告文字或链接格式无效');
+  requireValue(!/[\u0000-\u001f\u007f]/.test(item.title),'公告文字不能包含控制字符');
+  requireValue(!/[\\\s\u0000-\u001f\u007f]/.test(item.url||''),'公告链接不能包含空格、反斜杠或控制字符');
+  const title=cleanText(item.title,120),url=cleanText(item.url,2000);
+  requireValue(title,'请填写公告文字');
+  const internal=/^\/(?!\/)/.test(url);
+  requireValue(!url||internal||/^https:\/\//i.test(url),'公告链接仅支持站内路径或完整 HTTPS 网址');
+  let safe=url;
+  if(url){
+   let parsed;try{parsed=new URL(url,'https://announcements.invalid')}catch{throw new HttpError(400,'请填写有效的公告链接')}
+   requireValue(!parsed.username&&!parsed.password,'公告链接不能包含账号或密码');
+   requireValue(internal?parsed.origin==='https://announcements.invalid':parsed.protocol==='https:','公告链接格式无效');
+   let decoded;try{decoded=decodeURIComponent(url)}catch{throw new HttpError(400,'公告链接编码无效')}
+   requireValue(!/[\\\u0000-\u001f\u007f]/.test(decoded)&&!/^\/\//.test(decoded),'公告链接格式无效');
+   if(!internal)safe=parsed.href;
+  }
+  return {title,url:safe};
+ });
+ requireValue(!input.enabled||items.length>0,'启用公告时请至少保留一条公告');
+ return {enabled:input.enabled,items};
+}
 export function cleanHtml(value){requireValue(value==null||typeof value==='string','正文格式无效');requireValue(String(value||'').length<=2000000,'正文过长，请拆分后发布');return sanitize(String(value||''),{allowedTags:['p','br','strong','em','s','u','h1','h2','h3','h4','blockquote','ul','ol','li','pre','code','a','img','hr'],allowedAttributes:{a:['href','target','rel'],img:['src','alt','title'],code:['class']},allowedSchemes:['http','https','mailto'],allowProtocolRelative:false,transformTags:{a:(_,attrs)=>({tagName:'a',attribs:{...attrs,target:'_blank',rel:'noopener noreferrer'}})},exclusiveFilter:frame=>frame.tag==='img'&&!/^\/media\/[a-f0-9-]{36}$/.test(frame.attribs.src||'')})}
 function translationData(input,fields,limits,extra=()=>({})){
  if(input===undefined)return {};
@@ -78,9 +105,10 @@ export function writeContent(input){requireValue(input&&typeof input==='object'&
  if(action==='publish'){d.prepare("UPDATE content SET published=?,draft=NULL,status='published',updated=?,published_at=COALESCE(published_at,?),public_updated=?,revision=revision+1 WHERE id=?").run(JSON.stringify(data),now(),now(),now(),id);d.prepare("DELETE FROM refs WHERE owner=? AND visibility='draft'").run(id)}else d.prepare('UPDATE content SET draft=?,updated=?,revision=revision+1 WHERE id=?').run(JSON.stringify(data),now(),id);
  return adminRow(d.prepare('SELECT * FROM content WHERE id=?').get(id))
 })}
-export function saveConfiguration(key,input){requireValue(input&&typeof input==='object'&&!Array.isArray(input),'设置格式无效');for(const [field,limit] of [['skills',30],['socials',10],['experiences',200],['categories',100],['tags',200]])if(input[field]!==undefined)requireValue(Array.isArray(input[field])&&input[field].length<=limit,`${field} 必须是最多 ${limit} 项的列表`);requireValue(['profile','site','taxonomy'].includes(key),'设置类型无效');for(const field of ['socials','experiences'])if(input[field])requireValue(input[field].every(item=>item&&typeof item==='object'&&!Array.isArray(item)),'资料条目格式无效');let value;
+export function saveConfiguration(key,input){requireValue(input&&typeof input==='object'&&!Array.isArray(input),'设置格式无效');for(const [field,limit] of [['skills',30],['socials',10],['experiences',200],['categories',100],['tags',200]])if(input[field]!==undefined)requireValue(Array.isArray(input[field])&&input[field].length<=limit,`${field} 必须是最多 ${limit} 项的列表`);requireValue(['profile','site','taxonomy','announcements'].includes(key),'设置类型无效');for(const field of ['socials','experiences'])if(input[field])requireValue(input[field].every(item=>item&&typeof item==='object'&&!Array.isArray(item)),'资料条目格式无效');let value;
  if(key==='profile'){value={name:cleanText(input.name,80),alias:cleanText(input.alias,80),intro:cleanText(input.intro,3000),avatarId:fileId(input.avatarId),skills:(input.skills||[]).map(x=>cleanText(x,60)).filter(Boolean).slice(0,30),email:cleanText(input.email,200),github:httpUrl(input.github),socials:(input.socials||[]).slice(0,10).map(x=>({label:cleanText(x.label,60),url:httpUrl(x.url)})),experiences:(input.experiences||[]).slice(0,200).map((x,i)=>{const start=cleanText(x.start,10),end=cleanText(x.end,10);requireValue(!end||!start||end>=start,'经历结束时间不能早于开始时间');return{id:cleanText(x.id,50)||randomUUID(),title:cleanText(x.title,200),type:cleanText(x.type,40),start,end,description:cleanText(x.description,5000),visible:x.visible!==false,order:Number.isFinite(Number(x.order))?Number(x.order):i}})};value.resume=resumeData(input.resume===undefined?getConfig('profile').resume:input.resume);value.translations=profileTranslations(input.translations===undefined?getConfig('profile').translations:input.translations,value.experiences);requireValue(value.name,'请填写原文姓名');requireValue(!value.email||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.email),'邮箱格式无效')}
  else if(key==='site'){value={name:cleanText(input.name,100),tagline:cleanText(input.tagline,200),description:cleanText(input.description,1000),shareImageId:fileId(input.shareImageId),resumeId:fileId(input.resumeId),promotionBar:promotionData(input.promotionBar),desktopDownloads:desktopDownloadsData(input.desktopDownloads)};requireValue(value.name,'请填写网站名称');if(value.resumeId)requireValue(fileInfo(value.resumeId)?.mime==='application/pdf','简历必须为可用的 PDF 文件')}
+ else if(key==='announcements'){value=siteAnnouncementsData(input)}
  else{value={categories:[...new Set((input.categories||[]).map(x=>cleanText(x,60)).filter(Boolean))].slice(0,100),tags:[...new Set((input.tags||[]).map(x=>cleanText(x,40)).filter(Boolean))].slice(0,200)};const previous=getConfig('taxonomy');
   const documents=`SELECT draft data FROM content WHERE deleted IS NULL UNION ALL SELECT published FROM content WHERE deleted IS NULL UNION ALL SELECT draft FROM community_posts UNION ALL SELECT r.data FROM community_posts p JOIN community_revisions r ON r.id IN (p.public_revision,p.pending_revision) UNION ALL SELECT draft FROM space_content UNION ALL SELECT published FROM space_content`;
   for(const category of previous.categories.filter(x=>!value.categories.includes(x)))requireValue(!db().prepare(`SELECT 1 FROM (${documents}) WHERE json_extract(data,'$.category')=? LIMIT 1`).get(category),`分类“${category}”仍被内容使用，请先修改这些内容的分类`);
@@ -88,4 +116,4 @@ export function saveConfiguration(key,input){requireValue(input&&typeof input===
  }
  if(value.resume){for(const id of [...(value.resume.certificates||[]).map(x=>x.imageId),...value.resume.gallery.map(x=>x.imageId),...value.resume.sections.flatMap(x=>x.items.map(y=>y.coverId))].filter(Boolean))requireValue(fileInfo(id)?.mime.startsWith('image/'),'简历配图必须是有效图片');if(value.resume.resumeId)requireValue(fileInfo(value.resume.resumeId)?.mime==='application/pdf','简历必须为可用的 PDF 文件')}
  for(const field of ['avatarId','shareImageId'])if(value[field])requireValue(fileInfo(value[field])?.mime.startsWith('image/'),'头像和分享封面需要使用有效图片');
- return transaction(()=>{syncRefs('config:'+key,value,'public');setConfig(key,value);return value})}
+ return transaction(()=>{syncRefs('config:'+key,value,'public');if(key==='announcements')db().prepare('INSERT INTO config(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value').run(key,JSON.stringify(value));else setConfig(key,value);return value})}

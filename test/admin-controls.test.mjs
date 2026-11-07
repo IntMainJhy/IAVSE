@@ -22,14 +22,15 @@ function load(name,extra={},globals={}){
   './ResumeImport':{ResumeImport:empty},'./EmailSettings':{EmailSettings:empty},
   './ContentLanguageTabs':{ContentLanguageTabs:empty},
   './Upload':{FileChoice:({label,mode,value})=>element('label',null,label,element('input',{'data-kind':mode,defaultValue:value??''})),Upload:empty},
-  './Icons':{Icon:empty},'./PageResources':{useResource:()=>({})},
+  './Icons':{Icon:empty},'./PageResources':{useResource:path=>path==='/api/admin/config?key=announcements'?{data:{enabled:true,items:[{title:'PUBLIC_ANNOUNCEMENT_FIXTURE',url:'/docs'}]}}:{}},
+  './useUnsaved':{useUnsaved(){}},
   './HomeFlowBackground':{HomeFlowBackground:empty},'./CatalogAdmin':{CatalogAdmin:empty},
   './CaseContentLink':{CaseContentLink:empty},'./SpaceModeration':{SpaceModeration:empty},
   './SiteTools':{SiteTools:empty},'./PageMotion':{PageMotion:wrapper},
   './CommunityCommentsAdmin':{CommunityCommentsAdmin:empty},'./PostCover':{PostCover:empty},
   ...extra
  };
- if(name==='AdminForms')modules['./DesktopDownloadsSettings']=load('DesktopDownloadsSettings',extra);
+ if(name==='AdminForms'){modules['./DesktopDownloadsSettings']=load('DesktopDownloadsSettings',extra);modules['./AnnouncementSettings']=load('AnnouncementSettings',extra);}
  const exports={};vm.runInNewContext(source+(name==='AdminForms'?'\nexports.testUseDraft=useDraft;':''),{exports,Date,...globals,require:key=>{if(!(key in modules))throw Error('Unmocked dependency '+key);return modules[key]}});return exports;
 }
 
@@ -38,7 +39,7 @@ test('settings only offers controls consumed by the website and retains real dow
  const value={name:'UNUSED_BRAND_VALUE',tagline:'UNUSED_TAGLINE_VALUE',description:'UNUSED_SUMMARY_VALUE',shareImageId:'shared-cover',resumeId:'public-pdf',promotionBar:{enabled:true,items:[{title:'UNRENDERED_PROMOTION',url:'https://example.com',kind:'ad'}]},desktopDownloads:{macos:{url:'https://example.com/app.dmg',version:'1.2'},windows:{url:'https://example.com/app.exe',version:'2.0'}}};
  const html=renderToStaticMarkup(element(SettingsForm,{value,max:10000000,notify(){},refresh(){}}));
  for(const label of ['网站名称','网站简介','默认分享摘要','顶部推广条','添加推广内容','UNRENDERED_PROMOTION','UNUSED_BRAND_VALUE','UNUSED_TAGLINE_VALUE','UNUSED_SUMMARY_VALUE'])assert.ok(!html.includes(label),label+' is not an active public setting');
- for(const value of ['默认分享封面','shared-cover','附加简历 PDF','public-pdf','桌面应用下载','https://example.com/app.dmg','https://example.com/app.exe','保存设置'])assert.ok(html.includes(value),value+' remains functional');
+ for(const value of ['默认分享封面','shared-cover','附加简历 PDF','public-pdf','桌面应用下载','https://example.com/app.dmg','https://example.com/app.exe','保存设置','网站公告','启用网站公告','公告文字','PUBLIC_ANNOUNCEMENT_FIXTURE','保存公告'])assert.ok(html.includes(value),value+' remains functional');
  assert.equal(value.promotionBar.items[0].title,'UNRENDERED_PROMOTION','removing an editor does not delete stored compatibility data');
 });
 
@@ -75,11 +76,18 @@ test('embedded community management retains controls without nesting a second da
  const html=members({embedded:true});assert.ok(!html.includes('admin-community-nav'));assert.ok(html.includes('member-action-member'));
  for(const shell of ['class="admin-shell"','class="admin-side"','class="admin-main"','返回内容后台'])assert.ok(!html.includes(shell),shell+' belongs to the parent control center');
 });
-test('settings uses one continuous form instead of category cards and keeps password submission separate',()=>{
+test('site settings remain continuous while announcements and password submit independently',()=>{
  const {SettingsForm}=load('AdminForms');const html=renderToStaticMarkup(element(SettingsForm,{value:{desktopDownloads:{},shareImageId:'',resumeId:''},max:10000000,notify(){},refresh(){}}));
  for(const id of ['admin-settings-page','admin-settings-downloads','admin-settings-security'])assert.ok(html.includes('id="'+id+'"'));
  assert.doesNotMatch(html,/hidden=|设置分组|admin-settings-nav|email-settings/);
- assert.ok(html.includes('id="admin-site-settings"'));assert.ok(html.indexOf('</form>')<html.indexOf('name="current"'),'the password form is outside the public-site form');
+ const siteStart=html.indexOf('<form id="admin-site-settings"'),siteEnd=html.indexOf('</form>',siteStart),siteForm=html.slice(siteStart,siteEnd);
+ assert.ok(siteStart>=0&&siteEnd>siteStart,'the existing public-site form remains present');
+ for(const id of ['admin-settings-page','admin-settings-downloads'])assert.ok(siteForm.includes('id="'+id+'"'),id+' stays within the same site-settings submission');
+ assert.ok(html.indexOf('name="current"')>siteEnd,'the password form remains outside the public-site form');
+ const noticeStart=html.indexOf('id="admin-settings-announcements"'),noticeEnd=html.indexOf('</form>',noticeStart);
+ assert.ok(noticeStart>=0&&noticeEnd<siteStart,'announcements have a separate completed form before public-site settings');
+ assert.ok(!siteForm.includes('PUBLIC_ANNOUNCEMENT_FIXTURE'),'announcement data cannot be submitted through general site settings');
+ assert.equal((html.match(/<form(?:\s|>)/g)||[]).length,3,'announcement, general site settings and password each own one form');
 });
 
 test('reverting a settings draft removes its cached edit instead of restoring it again on refresh',()=>{

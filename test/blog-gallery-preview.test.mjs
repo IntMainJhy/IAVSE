@@ -49,7 +49,7 @@ test('legacy theme embeds redirect to their isolated renderer while static sites
   if(name.includes('blog-hosting.mjs'))return{publicBlogBundle:()=>({id:'bundle',files:['index.html'],entry:'index.html'}),staticPage:()=> 'index.html'};
   if(name==='./BlogTheme')return{BlogTheme:'StaticBlogTheme'};
   if(name.includes('content-locales'))return{localizeProfile:x=>x};
-  return Object.fromEntries(['PlatformGlass','BrandMark','PublicBlogTheme','BlogShare','StaticSite','SpaceVisit'].map(key=>[key,key]));
+  return Object.fromEntries(['PlatformGlass','BrandMark','PublicBlogTheme','BlogShare','StaticSite','SpaceVisit','SiteAnnouncement'].map(key=>[key,key]));
  };
  vm.runInNewContext(compile('../src/components/BlogPublic.tsx'),{exports,require:dependency});
  const walk=node=>node&&typeof node==='object'?[node,...[node.props?.children].flat().flatMap(walk)]:[];
@@ -59,7 +59,8 @@ test('legacy theme embeds redirect to their isolated renderer while static sites
  assert.equal(walk(normal).some(node=>node.type==='SpaceVisit'),true);
  assert.equal(walk(normal).some(node=>node.props?.className==='blog-platform-bar'),true);
  const chrome=walk(normal).find(node=>node.props?.className==='blog-platform-bar');
- assert.equal(chrome.props.children.props.className,'blog-platform-bar-inner','a full-width header owns a bounded inner row');
+ assert.equal(chrome.props.children[0].props.className,'blog-platform-bar-inner','a full-width header owns a bounded inner row');
+ assert.equal(chrome.props.children[1].type,'SiteAnnouncement','platform announcements occupy their own row outside author content');
  const actions=walk(chrome).find(node=>node.props?.className==='blog-platform-actions');assert.equal(actions.type,'nav');
  assert.equal(walk(actions).some(node=>node.type==='BlogShare'),true,'share remains inside the visible header stacking context');
  const normalTheme=walk(normal).find(node=>node.type==='PublicBlogTheme');assert.equal(normalTheme.props.data.layout.blog.design,data.layout.blog.design,'chrome changes do not rewrite the author canvas');

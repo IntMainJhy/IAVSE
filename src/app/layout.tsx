@@ -5,10 +5,13 @@ import {NavigationIntent} from '@/components/NavigationIntent';
 import {NavigationTransition} from '@/components/NavigationTransition';
 import {QuantumPointer} from '@/components/QuantumPointer';
 import {LocaleProvider} from '@/components/LocaleProvider';
+import {SiteAnnouncementsProvider,type SiteAnnouncements} from '@/components/SiteAnnouncement';
+import {readSiteAnnouncements} from '@/lib/site-announcements.mjs';
 import {normalizeLocale,htmlLocale} from '@/lib/i18n.mjs';
 import './globals.css';
 import './brand.css';
 import './site-chrome.css';
+import './site-announcement.css';
 import './organic.css';
 import './quantum-pointer.css';
 import './navigation-transition.css';
@@ -18,5 +21,6 @@ const designContract='<!-- THESIS: one clear optical space from discovery to cre
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const jar=await cookies(),locale=normalizeLocale(jar.get('site-locale')?.value);
   const colorMode=jar.get('site-color-mode')?.value==='dark'?'dark':'light';
-  return <html lang={htmlLocale(locale)} data-ui="x-social" data-color-mode={colorMode} data-color-preference={colorMode}><body><template id="public-design-contract" dangerouslySetInnerHTML={{__html:designContract}}/><LocaleProvider initialLocale={locale}><QuantumBackdrop/>{children}<NavigationIntent/><NavigationTransition/><QuantumPointer/></LocaleProvider></body></html>
+  let announcements:SiteAnnouncements={enabled:false,items:[]};try{announcements=readSiteAnnouncements({publicOnly:true})}catch{}
+  return <html data-site-announcements={announcements.enabled&&announcements.items.length?'enabled':'disabled'} lang={htmlLocale(locale)} data-ui="x-social" data-color-mode={colorMode} data-color-preference={colorMode}><body><template id="public-design-contract" dangerouslySetInnerHTML={{__html:designContract}}/><LocaleProvider initialLocale={locale}><SiteAnnouncementsProvider initial={announcements}><QuantumBackdrop/>{children}<NavigationIntent/><NavigationTransition/><QuantumPointer/></SiteAnnouncementsProvider></LocaleProvider></body></html>
 }
