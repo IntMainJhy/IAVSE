@@ -8,8 +8,9 @@ import '@/app/legal-consultation.css';
 
 export async function LegalConsultation(){
  const {t}=await serverI18n();
- return <div className="legal-consultation">
+ return <div className="resource-page-frame resource-legal-frame">
   <ResourceTabs active="legal"/>
+  <div className="legal-consultation">
   <Link className="legal-back" href="/resources"><Icon name="arrow"/>{t('返回资源')}</Link>
   <article className="legal-profile" aria-labelledby="legal-title">
    <div className="legal-portrait"><img src={lawyer.portrait} alt={t('张越律师个人照片')} width={1080} height={1499} fetchPriority="high"/></div>
@@ -37,5 +38,6 @@ export async function LegalConsultation(){
   </div>
   <aside className="legal-platform" aria-labelledby="legal-platform-title"><div><h2 id="legal-platform-title">{t('真律咨询 App')}</h2><p>{t('前往华为应用市场，查看应用详情与安装方式。')}</p></div><a className="space-btn" href={lawyer.platformUrl} target="_blank" rel="noopener noreferrer">{t('前往华为应用市场')}<Icon name="arrow"/><span className="community-sr">{t('在新窗口打开')}</span></a></aside>
   <p className="legal-source">{t('本页根据提供的律师介绍资料整理。')}</p>
+  </div>
  </div>;
 }

@@ -8,6 +8,7 @@ import {serverI18n} from '@/lib/server-i18n';
 import Link from 'next/link';
 import {BrandMark} from './BrandMark';
 import Form from 'next/form';
+import {CatalogSearch} from '@/components/CatalogSearch';
 import {PageMotion} from './PageMotion';
 import {notFound} from 'next/navigation';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
@@ -169,12 +170,12 @@ async function Collection({type, projects, articles, resources, taxonomy, query}
   const [title, emphasis] = type === 'projects' ? ['项目与作品，', '把想法落在实处。'] : type === 'articles' ? ['随手记下，', '让思考慢慢扎根。'] : ['好用的资源，', '也想分享给你。'];
   return <div className={'catalog-page catalog-'+type}>
     <header className="organic-page-heading"><h1>{tr(title)}<em>{tr(emphasis)}</em></h1>{type==='resources'&&<><p>{tr('工具、模板、素材与实用网站，集中收在这里。')}</p><nav className="resource-shortcuts" aria-label={tr('资源入口')}><Link href="/docs">{tr('教程与文档')}<Icon name="link"/></Link><Link href="/skills">Skill<Icon name="link"/></Link></nav></>}</header>
-    <Form key={'filters:'+pageUrl(1)} className="organic-filters" action={'/'+type}>
-      <div className="organic-search-field"><Icon name="search"/><label className="organic-visually-hidden" htmlFor="public-search">{tr("搜索内容")}</label><input className={input} id="public-search" name="q" placeholder={type === 'resources' ? tr("找找资源名称、用途或关键词") : tr("搜索标题或摘要")} defaultValue={q}/></div>
-      <div className="organic-filter-row"><label className="organic-visually-hidden" htmlFor="public-category">{tr("分类")}</label><select className={input} id="public-category" name="category" defaultValue={category}><option value="">{tr("全部分类")}</option>{taxonomy.categories.map((x: string) => <option key={x} value={x}>{tr(x)}</option>)}</select>
-        <label className="organic-visually-hidden" htmlFor="public-tag">{tr("标签")}</label><select className={input} id="public-tag" name="tag" defaultValue={tag}><option value="">{tr("全部标签")}</option>{taxonomy.tags.map((x: string) => <option key={x} value={x}>{tr(x)}</option>)}</select>
-        {type === 'resources' && <><label className="organic-visually-hidden" htmlFor="public-type">{tr("资源类型")}</label><select className={input} id="public-type" name="type" defaultValue={resourceType}><option value="">{tr("全部类型")}</option><option value="file">{tr("站内文件")}</option><option value="website">{tr("外部网站")}</option><option value="external">{tr("外部资源")}</option></select></>}
-        <button className={button + ' is-primary'}>{tr("搜索")}<Icon name="search"/></button>
+    <Form className="organic-filters page-search-toolbar" action={'/'+type}>
+      <CatalogSearch className="page-search-control" value={q} label={tr("搜索内容")} placeholder={type === 'resources' ? tr("找找资源名称、用途或关键词") : tr("搜索标题或摘要")} submit={false}/>
+      <div className="organic-filter-row"><label className="organic-visually-hidden" htmlFor="public-category">{tr("分类")}</label><select key={category} className={input} id="public-category" name="category" defaultValue={category}><option value="">{tr("全部分类")}</option>{taxonomy.categories.map((x: string) => <option key={x} value={x}>{tr(x)}</option>)}</select>
+        <label className="organic-visually-hidden" htmlFor="public-tag">{tr("标签")}</label><select key={tag} className={input} id="public-tag" name="tag" defaultValue={tag}><option value="">{tr("全部标签")}</option>{taxonomy.tags.map((x: string) => <option key={x} value={x}>{tr(x)}</option>)}</select>
+        {type === 'resources' && <><label className="organic-visually-hidden" htmlFor="public-type">{tr("资源类型")}</label><select key={resourceType} className={input} id="public-type" name="type" defaultValue={resourceType}><option value="">{tr("全部类型")}</option><option value="file">{tr("站内文件")}</option><option value="website">{tr("外部网站")}</option><option value="external">{tr("外部资源")}</option></select></>}
+        <button className={button + ' is-primary'}>{tr("筛选")}</button>
       </div>
     </Form>
     <div className="organic-results-info"><p>{tr("共 ")}{filtered.length} {type === 'projects' ? tr("个作品") : type === 'articles' ? tr("篇手记") : tr("份资源")}</p>{(q || category || tag || resourceType) && <Link href={'/' + type} className="organic-text-link">{tr("清空筛选")}</Link>}</div>

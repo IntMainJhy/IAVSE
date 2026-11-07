@@ -127,7 +127,7 @@ test('home, author pages, showcase previews and embedded frames never initialize
 });
 
 test('Bento indexes and filter shell replacements never initialize or wake a hidden field',async()=>{
- for(const path of ['/resources','/resources/','/docs','/docs/','/skills','/skills/']){
+ for(const path of ['/resources','/resources/','/docs','/docs/','/skills','/skills/','/resources/legal-consultation','/resources/legal-consultation/']){
   const s=mount({path});await flush();assert.equal(s.createCalls,0,path);assert.equal(s.layer.hidden,true);
   s.move();s.scroll(180);s.resize();s.control('reduced',true);s.control('reduced',false);
   s.visibility(true);s.visibility(false);s.navigation(true);s.navigation(false);
@@ -140,7 +140,7 @@ test('Bento indexes and filter shell replacements never initialize or wake a hid
 
 test('Bento index round trips stop drawing and reuse the ready field on reading details',async()=>{
  const s=mount();await flush();s.step();const canvas=s.canvas,ready=s.signal;
- for(const [index,detail] of [['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices']]){
+ for(const [index,detail] of [['/resources','/resources/shared/resource-id'],['/docs','/docs/connect'],['/skills','/skills/react-best-practices'],['/resources/legal-consultation','/docs/connect']]){
   const renders=s.renders.length,time=s.renders.at(-1)[0],previous=s.host;
   s.navigate(index);await flush();assert.equal(s.layer.hidden,true);assert.equal(s.frames.size,0);assert.equal(previous.attributes.size,0);
   s.move();s.scroll(120);s.resize();s.visibility(true);s.visibility(false);s.navigate(index);s.mutate();s.step(60000);await flush();

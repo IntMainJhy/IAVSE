@@ -4,6 +4,7 @@ import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {useState} from 'react';
 import Link from 'next/link';
 import Form from 'next/form';
+import {CatalogSearch} from '@/components/CatalogSearch';
 import {post} from '@/lib/client';
 import {platformDestination,caseTargetIds,communityProfileDestination} from '@/lib/navigation.mjs';
 import {Icon} from './Icons';
@@ -34,8 +35,7 @@ function Login({join,config,next,access={}}:{join:boolean,config:Doc,next:string
  </section></div>;
 }
 function CommunitySearch({config,query,discovery=false}:{config:Doc;query:Doc;discovery?:boolean}){const {t:tr}=useLocale();
- const searchId=discovery?'community-discovery-search':'community-search';
- return <Form action="/community" className={'community-search feed-search '+(discovery?'feed-discovery-search':'feed-timeline-search')} role="search" aria-label={discovery?tr("搜索社区分享"):tr("筛选社区分享")}>{query.feed==='following'&&<input type="hidden" name="feed" value="following"/>}<label className="community-sr" htmlFor={searchId}>{tr("搜索社区资源")}</label><input className={inputClass} id={searchId} name="q" type="search" autoComplete="off" defaultValue={query.q||''} key={'q:'+String(query.q||'')} placeholder={tr(discovery?"搜索分享":"搜索分享、工具或关键词")}/>{discovery?<input type="hidden" name="category" value={query.category||''}/>:<><label className="community-sr" htmlFor="community-filter">{tr("社区分类")}</label><select id="community-filter" name="category" defaultValue={query.category||''} key={'category:'+String(query.category||'')}><option value="">{tr("全部分类")}</option>{config.taxonomy.categories.map((c:string)=><option key={c} value={c}>{tr(c)}</option>)}</select></>}<button className={secondary} aria-label={tr("搜索社区资源")}><span>{tr("搜索")}</span><Icon name="search"/></button></Form>;
+ return <Form action="/community" className={'community-search feed-search page-search-toolbar '+(discovery?'feed-discovery-search':'feed-timeline-search')} role="search" aria-label={discovery?tr("搜索社区分享"):tr("筛选社区分享")}>{query.feed==='following'&&<input type="hidden" name="feed" value="following"/>}<CatalogSearch className="page-search-control" value={String(query.q||'')} label={tr("搜索社区资源")} placeholder={tr(discovery?"搜索分享":"搜索分享、工具或关键词")} submit={discovery}/>{discovery?<input type="hidden" name="category" value={query.category||''}/>:<><label className="community-sr" htmlFor="community-filter">{tr("社区分类")}</label><select id="community-filter" name="category" defaultValue={query.category||''} key={'category:'+String(query.category||'')}><option value="">{tr("全部分类")}</option>{config.taxonomy.categories.map((c:string)=><option key={c} value={c}>{tr(c)}</option>)}</select></>}{!discovery&&<button className={secondary}>{tr("筛选")}</button>}</Form>;
 }
 function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;user:Doc|null;query:Doc;membersOnly?:boolean}){const {t:tr}=useLocale();
  const members=useResource('/api/community/members?q=&page=1');useSocialRefresh(members.refresh);

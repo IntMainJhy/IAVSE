@@ -5,12 +5,13 @@ import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {useEffect,useRef,useState} from 'react';
 import Link from 'next/link';
 import Form from 'next/form';
+import {CatalogSearch} from '@/components/CatalogSearch';
 import {useRouter} from 'next/navigation';
 import {post} from '@/lib/client';
 import {FeedAvatar} from './FeedAvatar';
 import {FeedPost} from './CommunityFeed';
 import {FollowButton} from './CommunityActions';
-import {type Doc,CommunityBackBar,Empty,Notice,PolicyLinks,Loading,Retry,primary,secondary,date,useResource,useSocialRefresh,inputClass,Badge} from './CommunityUI';
+import {type Doc,CommunityBackBar,Empty,Notice,PolicyLinks,Loading,Retry,primary,secondary,date,useResource,useSocialRefresh,Badge} from './CommunityUI';
 
 export function Pager({data,setPage}:{data:Doc;setPage:(page:number)=>void}){const {t:tr}=useLocale();const nav=useRef<HTMLElement>(null),previous=useRef(data.page);
  useEffect(()=>{if(previous.current!==data.page){nav.current?.parentElement?.scrollIntoView({block:'start',behavior:'instant'});previous.current=data.page;}},[data.page]);
@@ -23,7 +24,7 @@ function MemberCard({initial,user}:{initial:Doc;user:Doc|null}){const {t:tr}=use
 export function MemberDirectory({user,query}:{user:Doc|null;query:Doc}){const {t:tr}=useLocale();
  const[page,setPage]=useState(1),r=useResource('/api/community/members?'+new URLSearchParams({q:String(query.q||''),page:String(page)}));
  useSocialRefresh(r.refresh);
- return <div className="feed-workspace-layout"><section className="feed-workspace-main" aria-busy={r.refreshing}><div className="community-heading"><div><h1>{tr("发现社区成员")}</h1></div></div><Form action="/community/members" className="community-member-search" role="search"><label htmlFor="member-search" className="community-sr">{tr("搜索成员")}</label><input className={inputClass} id="member-search" name="q" placeholder={tr("搜索成员昵称")} defaultValue={query.q||''}/><button className={secondary}>{tr("搜索")}</button></Form>{r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:<>{r.data.items.length?r.data.items.map((person:Doc)=><MemberCard key={person.id} initial={person} user={user}/>):<Empty title={tr("暂时没有找到这位成员")}>{tr("换一个昵称试试。")}</Empty>}<Pager data={r.data} setPage={setPage}/></>}</section></div>;
+ return <div className="feed-workspace-layout"><section className="feed-workspace-main" aria-busy={r.refreshing}><div className="community-heading"><div><h1>{tr("发现社区成员")}</h1></div></div><Form action="/community/members" className="community-member-search page-search-toolbar" role="search"><CatalogSearch className="page-search-control" value={String(query.q||'')} label={tr("搜索成员")} placeholder={tr("搜索成员昵称")}/></Form>{r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:<>{r.data.items.length?r.data.items.map((person:Doc)=><MemberCard key={person.id} initial={person} user={user}/>):<Empty title={tr("暂时没有找到这位成员")}>{tr("换一个昵称试试。")}</Empty>}<Pager data={r.data} setPage={setPage}/></>}</section></div>;
 }
 export function MemberProfile({id,user}:{id:string;user:Doc|null}){const {t:tr,locale}=useLocale(),profile=useResource('/api/community/members/'+encodeURIComponent(id)),data=profile.data;
  useSocialRefresh(profile.refresh);

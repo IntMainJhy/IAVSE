@@ -1,0 +1,23 @@
+/* Content is the focal point; search and scopes share a compact toolbar. */
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-display-actions{display:flex;align-items:center;gap:12px;flex:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-display-actions>form{margin:0;padding:0;width:auto}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-overview-index{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 32px;padding:0 0 20px;border-bottom:1px solid var(--bento-line)}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-overview-index .resource-index-stats{display:flex;flex-wrap:wrap;align-items:center;gap:6px 24px;margin:0;padding:0;border:0}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-overview-index .resource-index-stats>a{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0;border:0;border-radius:0;background:transparent;color:var(--bento-body);font-size:13px;text-decoration:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-overview-index .resource-index-stats strong{font-size:13px;font-weight:600;color:var(--bento-ink);font-variant-numeric:tabular-nums}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-query-summary{display:flex;align-items:center;gap:16px;color:var(--bento-body);font-size:13px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-query-summary>a{display:inline-flex;align-items:center;min-height:44px;color:var(--bento-brand);text-underline-offset:4px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:0 0 28px;padding:0 0 20px;border:0;border-bottom:1px solid var(--bento-line);border-radius:0;background:transparent;box-shadow:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-group{display:flex;align-items:flex-start;flex:1;gap:16px;min-width:0;margin:0;padding:0;border:0}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-group>span{flex:none;display:flex;align-items:center;min-height:44px;color:var(--bento-body);font-size:12px}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-options{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-options>a{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;padding:8px 12px;border-radius:8px;background:transparent;color:var(--bento-body);font-size:13px;text-decoration:none}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-options>a[aria-current]{background:var(--bento-brand-soft);color:var(--bento-brand)}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-compact-form{display:flex;align-items:center;flex:none;width:auto;min-width:0;margin:0;padding:0;background:transparent;box-shadow:none}
+@media(max-width:767px){
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-display-heading{flex-direction:column;align-items:stretch}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-display-actions{justify-content:space-between;gap:10px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-group{display:block}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-group>span{min-height:24px;margin-bottom:8px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-filter.catalog-display-toolbar .catalog-filter-options>a{padding:8px 10px;font-size:12px}
+}
