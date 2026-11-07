@@ -30,7 +30,7 @@ test('only explicit public homepage and UI design previews permit same-origin fr
  for(const path of ['/resources/designs/vibeui-claude/preview','/resources/designs/vibeui-claude/preview?variant=1']){
   const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
   const policy=response.headers.get('Content-Security-Policy');
-  assert.match(policy,/frame-src 'self' https:\/\/vibeui\.top https:\/\/yuanfu8899\.github\.io(?:;|$)/);
+  assert.match(policy,/frame-src 'self' https:\/\/vibeui\.top(?:;|$)/);
   assert.match(policy,/frame-ancestors 'self'/,'only the isolated preview can be framed by the catalog');
  }
  for(const path of ['/','/resources','/resources?type=designs','/resources?type=skills','/resources/designs/vibeui-claude','/blogs','/workspace/blog']){

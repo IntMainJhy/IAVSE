@@ -4,7 +4,7 @@ import {existsSync,readFileSync} from 'node:fs';
 import originals from '../src/lib/design-library-seed.json' with {type:'json'};
 import vibeui from '../src/lib/design-imports/vibeui.json' with {type:'json'};
 import stylekit from '../src/lib/design-imports/stylekit.json' with {type:'json'};
-import {designCategories,designCategory,designCollection,designPage,importedDesign,externalPreviewUrl} from '../src/lib/design-catalog.mjs';
+import {designCategories,designCategory,designCollection,designPage,importedDesign,externalPreviewUrl,designExternalOnly} from '../src/lib/design-catalog.mjs';
 import {filterDesignEntries} from '../src/lib/design-search.mjs';
 const all=[...originals,...vibeui.map(importedDesign),...stylekit.map(importedDesign)];
 
@@ -59,4 +59,20 @@ test('remote preview URLs come only from reviewed entries and variant indices',(
  assert.equal(externalPreviewUrl({previewUrl:'https://evil.example/'}),null);
  assert.equal(externalPreviewUrl({previewUrl:'https://vibeui.top.evil.example/'}),null);
  assert.equal(externalPreviewUrl({previewUrl:'http://vibeui.top/'}),null);
+});
+
+test('unconfirmed examples cannot be embedded, including stale embed policies, and brand references are not credited as demo authors',()=>{
+ const restricted=vibeui.filter(e=>e.license.status==='unconfirmed');assert.equal(restricted.length,58);
+ for(const entry of restricted){
+  assert.equal(designExternalOnly(entry),true);assert.equal(importedDesign(entry).previewPolicy,'external-only');
+  assert.equal(externalPreviewUrl({...entry,previewPolicy:'embed',previewUrl:'https://vibeui.top/preview.html'}),null);
+  assert.equal(entry.prompt,'');assert.equal(entry.specification,'');assert.equal(entry.image,'');
+ }
+ for(const entry of vibeui.filter(e=>e.license.status==='verified')){
+  assert.match(entry.creator.url,/github\.com\/VoltAgent\/awesome-design-md/);
+  assert.ok(entry.referenceSite.url);assert.match(entry.source.url,/\/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1\//);
+  assert.notEqual(entry.creator.url,entry.referenceSite.url);assert.equal(entry.previewPolicy,'embed');
+ }
+ assert.equal(filterDesignEntries(all,{q:'claude.ai',collection:'vibeui'})[0].slug,'vibeui-claude');
+ assert.equal(externalPreviewUrl({previewUrl:'https://yuanfu8899.github.io/uiuxskillProMax/preview.html'}),null);
 });

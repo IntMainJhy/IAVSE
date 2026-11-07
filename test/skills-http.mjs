@@ -38,7 +38,7 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
  assert.ok(html.includes('name="tool"'));
  assert.ok(!/<select[^>]*name="tool"/.test(html),'AI tools are visible links, not a collapsed select');
- const toolNav=html.split('<nav class="catalog-filter-options" aria-label="'+translate(locale,'按 AI 工具筛选')+'">')[1]?.split('</nav>')[0];
+ const toolNav=html.split('<nav class="skill-filter-options" aria-label="'+translate(locale,'按 AI 工具筛选')+'">')[1]?.split('</nav>')[0];
  assert.ok(toolNav,'visible AI tool choices');
  assert.equal((toolNav.match(/<a /g)||[]).length,skillAiTools.length+1,'all tool choices remain visible');
  assert.ok(html.includes('/skills?type=design&amp;tool='+tool.id),tool.id+': category link');
@@ -62,15 +62,15 @@ for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
 }
 const overview=await(await fetch(base+'/resources',{headers:{cookie:'site-locale=zh'}})).text();
 assert.ok(overview.includes('data-resource-kind="all"'),'resource hub opens with all resource types');
-const connectSearch=await(await fetch(base+'/resources?q=Connect',{headers:{cookie:'site-locale=zh'}})).text();
-assert.ok(connectSearch.includes('href="/docs/connect"'),'all-resource search includes Connect guide');
-assert.ok(overview.includes('href="/skills/'+curatedSkills[0].id+'"'),'overview includes curated skills');
-assert.ok(overview.includes(curatedSkills[0].repo),'third-party skills retain their source attribution');
-const allSearch=await(await fetch(base+'/resources?q=UI',{headers:{cookie:'site-locale=zh'}})).text();
-assert.ok(allSearch.includes('href="/resources?type=skills&amp;q=UI"'),'browse all preserves the search term');
-assert.ok(allSearch.includes('href="/skills/ui-ux-pro-max"'),'all-resource search finds curated skills');
-const empty=await(await fetch(base+'/skills?type=knowledge&tool=cursor',{headers:{cookie:'site-locale=en'}})).text();
-assert.ok(empty.includes(translate('en','精选目录中没有匹配的 Skill')));
+const connectSearch=await(await fetch(base+'/resources?type=docs&q=Connect',{headers:{cookie:'site-locale=zh'}})).text();
+assert.ok(connectSearch.includes('href="/docs/connect"'),'documents tab search includes Connect guide');
+assert.ok(overview.includes('href="/skills"'),'overview links to the Skill directory');
+const allSearch=await(await fetch(base+'/resources?type=skills&q=UI',{headers:{cookie:'site-locale=zh'}})).text();
+assert.ok(allSearch.includes('href="/resources?type=skills&amp;q=UI"'),'resource tabs preserve the search term');
+assert.ok(allSearch.includes('href="/skills/ui-ux-pro-max?q=UI"'),'resource Skill search finds curated skills');
+assert.ok(allSearch.includes('nextlevelbuilder/ui-ux-pro-max-skill'),'third-party skills retain their source attribution');
+const empty=await(await fetch(base+'/skills?type=knowledge&tool=cursor&q=no-such-skill-in-this-catalog',{headers:{cookie:'site-locale=en'}})).text();
+assert.ok(empty.includes(translate('en','目录中没有匹配的 Skill')));
 assert.ok(empty.includes('href="/skills"'));
 const sitemap=await(await fetch(base+'/sitemap.xml')).text();
 for(const skill of curatedSkills)assert.ok(sitemap.includes('/skills/'+skill.id+'</loc>'));

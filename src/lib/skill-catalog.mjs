@@ -61,7 +61,8 @@ export function filterSkills({category='all',q='',tool='all'}={},translate=text=
   return terms.every(term=>haystack.includes(term));
  });
 }
-export function skillFilterHref(category='all',q='',tool='all'){
+export function skillFilterHref(category='all',q='',tool='all',collection='all',page=1){
  const params=new URLSearchParams();if(category!=='all')params.set('type',category);if(q)params.set('q',q);if(tool!=='all')params.set('tool',tool);
+ if(collection!=='all')params.set('collection',collection);if(page>1)params.set('page',String(Math.floor(page)));
  return '/skills'+(params.size?'?'+params.toString():'');
 }

@@ -88,7 +88,7 @@ for (const style of catalog.styles) {
   seen.add(slug);
   const brief = bySlug.get(slug);
   if (!brief) throw new Error(`Missing index entry: ${slug}`);
-  // All 149 designs have original vector covers. Prefer these over the three
+  // All 149 designs have same-repository vector covers. Prefer these over the three
   // alternate photographic JPEG covers; no remote images/fonts are imported.
   const cover = `/styles/${slug}.svg`;
   const coverPath = resolve(source, 'public', cover.slice(1));
@@ -97,16 +97,17 @@ for (const style of catalog.styles) {
   if (!svg.includes('<svg') || /<(?:script|image|foreignObject)\b/i.test(svg) || /(?:href|src)\s*=\s*["'](?:https?:|data:|javascript:)/i.test(svg)) throw new Error(`Unsafe or externally dependent cover: ${slug}`);
   // Every catalog item must have an upstream interactive implementation.
   await stat(resolve(source, 'app/styles', slug, 'showcase/page.tsx'));
+  await stat(resolve(source, 'app/styles', slug, 'showcase/_content.tsx'));
   const filename = `${slug}${extname(cover)}`;
   await copyFile(coverPath, resolve(output, filename));
   const page = `${origin}/zh/styles/${slug}`;
   const referenceUrls = (references[slug] || []).map(([name, url]) => ({ name, url }));
   const palette = [...new Set([style.colors.primary, style.colors.secondary, ...(style.colors.accent || [])].filter(Boolean))];
   const nativeTokens = style.tokens || {};
-  const note = referenceUrls.length
-    ? '模板、封面与设计规则来自 StyleKit 开源仓库；原品牌、设计系统或素材来源另列于参考链接。这是 StyleKit 的风格实现，不代表参考品牌的官方模板或授权。'
-    : '模板、封面与设计规则来自 StyleKit 官方目录及 MIT 开源仓库；当前来源文件未声明独立的第三方模板作者。';
-  const attribution = `来源：StyleKit / ${style.name}\n${page}\n开源实现：${repository}/tree/${revision}\n${referenceUrls.map(item => `${item.name}：${item.url}`).join('\n')}\n\n${mit.trim()}`;
+  const production = 'StyleKit 仓库中的风格演示实现；部分参考既有品牌、设计系统或艺术风格，不代表相关品牌的官方模板。';
+  const note = '本条设计规则、代码说明与封面来自同一 StyleKit 仓库，已核对该版本的 MIT 声明；这不证明全部内容在全网原创。MIT 不替代独立第三方素材、字体及商标所需的授权。'
+    + (referenceUrls.length ? ' 已明确的参考品牌、设计系统或素材出处另列于参考链接。' : ' 当前风格定义未列出独立第三方模板作者，不据此推定不存在其他权利人。');
+  const attribution = `来源：StyleKit / ${style.name}\n${page}\n演示实现维护者：AnxForever / StyleKit\n开源实现：${repository}/tree/${revision}\n${production}\n${note}\n${referenceUrls.map(item => `${item.name}：${item.url}`).join('\n')}\n\n${mit.trim()}`;
   const extraNotice = slug === 'quantized-line-field'
     ? `\n\n图标路径来源：Simple Icons（CC0 1.0）。https://github.com/simple-icons/simple-icons/tree/develop/icons\nApple、Google、Tesla 标志与名称属于相应品牌；CC0 不授予商标使用权。\n\n${cc0.trim()}`
     : '';
@@ -128,6 +129,7 @@ for (const style of catalog.styles) {
     layout: style.styleType === 'layout' ? style.name : `${categoryNames[style.category] || style.category} · ${style.name}`,
     motion: [nativeTokens.interaction?.transition, nativeTokens.interaction?.hoverTranslate, nativeTokens.interaction?.active].filter(Boolean).join(' · '),
     source: { name: 'StyleKit', url: page }, collection: { name: 'StyleKit', url: `${origin}/zh/styles` },
+    creator: { name: 'AnxForever / StyleKit', url: `${repository}/tree/${revision}` }, production, previewPolicy: 'image',
     previewUrl: `${page}/showcase`, websiteUrl: `${page}/showcase`, image: `/design-imports/stylekit/${filename}`,
     license: { name: 'MIT', url: licenseUrl, status: 'verified' },
     provenance: { verifiedAt, evidenceUrl: `${repository}/blob/${revision}/lib/styles/${slug}.ts`, note },

@@ -40,7 +40,7 @@ export async function DocsPage({path,query={}}:{path:string[];query?:Record<stri
 
 export async function SkillsPage({baseUrl,query={}}:{baseUrl:string,query?:Record<string,string|string[]|undefined>}){
  const {t}=await serverI18n();
- return <div className="skills-page"><header className="catalog-page-heading"><div><h1>{t('第三方 Skill 精选')}</h1><p>{t('按实际任务挑选 Skill，查看来源、安装方法与使用建议。')}</p></div><Link className="space-btn primary" href="/skills?compose=1">{t('分享 Skill')}</Link></header>
+ return <div className="skills-page"><header className="catalog-page-heading"><div><h1>{t('Skill 目录')}</h1><p>{t('按任务浏览 Skill，核对上游定义、收录来源与许可。')}</p></div><Link className="space-btn primary" href="/skills?compose=1">{t('分享 Skill')}</Link></header>
   <SkillCatalog query={query}><MemberCatalog kind="skills" query={query}/></SkillCatalog>
   <div className="skill-platform-heading"><h2>{t('连接 IAVSE')}</h2><p>{t('把重复的整理，交给熟悉你工作流的工具。')}</p></div>
   <article className="skill-feature"><div className="skill-feature-copy"><h2>iavse-post</h2><p>{t('让 AI 直接发布文档、Skill 和其他资源。')}</p><p className="learning-muted">{t('可保存草稿，或在你的明确授权下提交发布。审核通过后自动分享到社区。')}</p><div className="space-actions"><a className="space-btn primary" href="/skills/iavse-post.tar.gz" download>{t('下载 Skill')}</a><Link className="space-link" href="/docs/connect">{t('阅读接入文档')}</Link></div></div>

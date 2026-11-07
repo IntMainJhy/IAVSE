@@ -1,0 +1,2469 @@
+{
+  "verifiedAt": "2026-11-08",
+  "documents": [
+    {
+      "repo": "AnxForever/stylekit-skill",
+      "commit": "93b9c1de903a6c3f6f7944224b26d154b325e1eb",
+      "path": "LICENSE",
+      "url": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/LICENSE",
+      "sha256": "dcd1e458e3d212d23f54c63dddf91dee8c1b09339f60c44afedf3be1e078c828"
+    },
+    {
+      "repo": "AnxForever/stylekit-skill",
+      "commit": "93b9c1de903a6c3f6f7944224b26d154b325e1eb",
+      "path": "README.en.md",
+      "url": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/README.en.md",
+      "sha256": "494d6ae1d47d2518eea6bd49f7892080e07b9c943d9724bcd0f70a49f4144343"
+    },
+    {
+      "repo": "AnxForever/stylekit-skill",
+      "commit": "93b9c1de903a6c3f6f7944224b26d154b325e1eb",
+      "path": "README.md",
+      "url": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/README.md",
+      "sha256": "92f3cb51f1a7df5b0744e4bd75c5a2759a13a02d46fafd7c48376242daf5a88c"
+    },
+    {
+      "repo": "AnxForever/stylekit-skill",
+      "commit": "93b9c1de903a6c3f6f7944224b26d154b325e1eb",
+      "path": "SKILL.md",
+      "url": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/SKILL.md",
+      "sha256": "63087d4acf0fcf9839ae43c8bff88b1566eaefa7ab7bce9141b885cccc914cdc"
+    },
+    {
+      "repo": "CloudAI-X/threejs-skills",
+      "commit": "0e181866f095b5f06d005133876e926515390d95",
+      "path": "LICENSE",
+      "url": "https://github.com/CloudAI-X/threejs-skills/blob/0e181866f095b5f06d005133876e926515390d95/LICENSE",
+      "sha256": "d26f12fa1a0e03fd5aa4d3cbf05262a9f1c684672d0864abac78b3bbb12b268c"
+    },
+    {
+      "repo": "CloudAI-X/threejs-skills",
+      "commit": "0e181866f095b5f06d005133876e926515390d95",
+      "path": "README.md",
+      "url": "https://github.com/CloudAI-X/threejs-skills/blob/0e181866f095b5f06d005133876e926515390d95/README.md",
+      "sha256": "e068ef3b64df1fbfd82e4f078f868abc3a3d011520e86e40c5eda3707086d6ad"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "README.md",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/README.md",
+      "sha256": "e693f2701840f26fb04c3058d55215f2c6575fff7f1c197ada5b64e2f7ee0c12"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "artifacts-builder/LICENSE.txt",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/artifacts-builder/LICENSE.txt",
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "artifacts-builder/SKILL.md",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/artifacts-builder/SKILL.md",
+      "sha256": "8455a64e627d203fd7b43df64c83d8870cb98907aae21edce4ec8eeef651d850"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "competitive-ads-extractor/SKILL.md",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/competitive-ads-extractor/SKILL.md",
+      "sha256": "c9bc0f711936ee058858c938c14ac2b52fc0241cde766eff7aca020e9874f157"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "domain-name-brainstormer/SKILL.md",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/domain-name-brainstormer/SKILL.md",
+      "sha256": "495707739b354f81d1e28c6188dd55b97fdf5c64ae3e3c182ba6f092b2ab782b"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "image-enhancer/SKILL.md",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/image-enhancer/SKILL.md",
+      "sha256": "57b003b9cd0c3e42861194c37e2df061061f3e1e4b03e776fa33bf27b045e40c"
+    },
+    {
+      "repo": "ComposioHQ/awesome-claude-skills",
+      "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "path": "video-downloader/SKILL.md",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills/blob/be2a406907dbc61b73e6827ded415c96139d13a2/video-downloader/SKILL.md",
+      "sha256": "093c29459a2e05eb076f64d069817d24f98e327b3dab24d9b72085b8ac2909c6"
+    },
+    {
+      "repo": "Leonxlnx/taste-skill",
+      "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
+      "path": "LICENSE",
+      "url": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/LICENSE",
+      "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df"
+    },
+    {
+      "repo": "Leonxlnx/taste-skill",
+      "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
+      "path": "README.md",
+      "url": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/README.md",
+      "sha256": "f044ee75b88772dc957b9526bde5d5229eccaca8d3caf4a3e6a4aab0c349c237"
+    },
+    {
+      "repo": "Leonxlnx/taste-skill",
+      "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
+      "path": "skills/taste-skill/SKILL.md",
+      "url": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/skills/taste-skill/SKILL.md",
+      "sha256": "0c7a5852a5217be79cab422c6d58329b776f0c25bd6da8a7a01707ce75be6206"
+    },
+    {
+      "repo": "LewisLiu007/full-page-screenshot",
+      "commit": "268dac71f1bc847e9926f434e6548aa6a1f71b19",
+      "path": "README.md",
+      "url": "https://github.com/LewisLiu007/full-page-screenshot/blob/268dac71f1bc847e9926f434e6548aa6a1f71b19/README.md",
+      "sha256": "60fea00530d6c1d21b1f0425be08107dc47aad89d35055b0495ec79562912eac"
+    },
+    {
+      "repo": "LewisLiu007/full-page-screenshot",
+      "commit": "268dac71f1bc847e9926f434e6548aa6a1f71b19",
+      "path": "SKILL.md",
+      "url": "https://github.com/LewisLiu007/full-page-screenshot/blob/268dac71f1bc847e9926f434e6548aa6a1f71b19/SKILL.md",
+      "sha256": "839175a348a98aeb437a56595087a96f61731cc9c18f61e695b5dda9535ebc1a"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "LICENSE",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/LICENSE",
+      "sha256": "eed4ccce37c2d24822da3bd9d5bee7bc12d494741de56ada513d0b97f537fcd0"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "README.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/README.md",
+      "sha256": "a82475844a437bf210fcd1590ce75c17a0721db72ae60654d3ced61670381b6c"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/frontend-dev/SKILL.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/frontend-dev/SKILL.md",
+      "sha256": "500ff2234e5adad4e2666ba633a1e242ef6af4c0da6bd94a3d6d37819e9aabce"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/gif-sticker-maker/SKILL.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/gif-sticker-maker/SKILL.md",
+      "sha256": "57002b47b7aaffb784acedae2750e14a75dc18ba58edb003f846755d7eb0c447"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/minimax-docx/LICENSE",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/minimax-docx/LICENSE",
+      "sha256": "8288840186d6d3d6a0b74395e17448c06160b38e796963c7745f579631b47b01"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/minimax-docx/SKILL.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/minimax-docx/SKILL.md",
+      "sha256": "45c169630f30b8f034bc7d53edf73d592fbd82e82188beec7da3ca1996a97fb5"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/minimax-pdf/SKILL.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/minimax-pdf/SKILL.md",
+      "sha256": "8b0497ddd27da142deb09b570a56f702f95e5f3f1e192cfe1ae24421416a408d"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/pptx-generator/SKILL.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/pptx-generator/SKILL.md",
+      "sha256": "6eeb36239fdef35ab133ca462e1ec4674cb96dd9c5cd63da39c29151899bda10"
+    },
+    {
+      "repo": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "path": "skills/shader-dev/SKILL.md",
+      "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/shader-dev/SKILL.md",
+      "sha256": "7d3cc9d69da2b598e423da5ec927ff61371edab669e2b9a2f4bcf3ec0f29db4d"
+    },
+    {
+      "repo": "Nutlope/hallmark",
+      "commit": "407fa689f4a276f2fd389208d271d0fef08f5058",
+      "path": "LICENSE",
+      "url": "https://github.com/Nutlope/hallmark/blob/407fa689f4a276f2fd389208d271d0fef08f5058/LICENSE",
+      "sha256": "06088a8b94598626f27612dea42300154bf7be967c85d9d3eee4490cb056af7d"
+    },
+    {
+      "repo": "Nutlope/hallmark",
+      "commit": "407fa689f4a276f2fd389208d271d0fef08f5058",
+      "path": "README.md",
+      "url": "https://github.com/Nutlope/hallmark/blob/407fa689f4a276f2fd389208d271d0fef08f5058/README.md",
+      "sha256": "d21933f906e8b9a2db0d32982b1523a679a89e97dc77a635e124c9a98ac3d8c5"
+    },
+    {
+      "repo": "Nutlope/hallmark",
+      "commit": "407fa689f4a276f2fd389208d271d0fef08f5058",
+      "path": "skills/hallmark/LICENSE",
+      "url": "https://github.com/Nutlope/hallmark/blob/407fa689f4a276f2fd389208d271d0fef08f5058/skills/hallmark/LICENSE",
+      "sha256": "06088a8b94598626f27612dea42300154bf7be967c85d9d3eee4490cb056af7d"
+    },
+    {
+      "repo": "Nutlope/hallmark",
+      "commit": "407fa689f4a276f2fd389208d271d0fef08f5058",
+      "path": "skills/hallmark/SKILL.md",
+      "url": "https://github.com/Nutlope/hallmark/blob/407fa689f4a276f2fd389208d271d0fef08f5058/skills/hallmark/SKILL.md",
+      "sha256": "25a1ff92d925b2389e8409f42fb8ad7e033fceca8b5d1f07ed4ca4c28da53dc3"
+    },
+    {
+      "repo": "Pixel-Process-UG/superkit-agents",
+      "commit": "cc7fcb7e47bc4c50020abdf352fa5d8914d0a7c2",
+      "path": "LICENSE",
+      "url": "https://github.com/Pixel-Process-UG/superkit-agents/blob/cc7fcb7e47bc4c50020abdf352fa5d8914d0a7c2/LICENSE",
+      "sha256": "7dbf3ca717ae5eedf98f8dbc35a5976707ed16693af88b51a326dbba5690e7b5"
+    },
+    {
+      "repo": "Pixel-Process-UG/superkit-agents",
+      "commit": "cc7fcb7e47bc4c50020abdf352fa5d8914d0a7c2",
+      "path": "README.md",
+      "url": "https://github.com/Pixel-Process-UG/superkit-agents/blob/cc7fcb7e47bc4c50020abdf352fa5d8914d0a7c2/README.md",
+      "sha256": "2a300e260d4fb01bc9b97d4ac931ead22ab00505ebc936737f0170e3be82545f"
+    },
+    {
+      "repo": "Pixel-Process-UG/superkit-agents",
+      "commit": "cc7fcb7e47bc4c50020abdf352fa5d8914d0a7c2",
+      "path": "templates/skills/ui-ux-pro-max/SKILL.md",
+      "url": "https://github.com/Pixel-Process-UG/superkit-agents/blob/cc7fcb7e47bc4c50020abdf352fa5d8914d0a7c2/templates/skills/ui-ux-pro-max/SKILL.md",
+      "sha256": "d59eeca71c5618260b7e2bef384f3ab51dc856fd6a6815779601737fe6d39af8"
+    },
+    {
+      "repo": "alchaincyf/huashu-design",
+      "commit": "b2460b031c33ff32d2bf3b97263527daa231e4de",
+      "path": "LICENSE",
+      "url": "https://github.com/alchaincyf/huashu-design/blob/b2460b031c33ff32d2bf3b97263527daa231e4de/LICENSE",
+      "sha256": "6d6a2a9caf2e6d2b76974050427053b2892d8aa4c33fd168ce63a537fcee9d96"
+    },
+    {
+      "repo": "alchaincyf/huashu-design",
+      "commit": "b2460b031c33ff32d2bf3b97263527daa231e4de",
+      "path": "README.md",
+      "url": "https://github.com/alchaincyf/huashu-design/blob/b2460b031c33ff32d2bf3b97263527daa231e4de/README.md",
+      "sha256": "f1a710d672084fce3fc85d5af124cf8a3981bb024e99d0e6c877ab70c5795393"
+    },
+    {
+      "repo": "alchaincyf/huashu-design",
+      "commit": "b2460b031c33ff32d2bf3b97263527daa231e4de",
+      "path": "SKILL.md",
+      "url": "https://github.com/alchaincyf/huashu-design/blob/b2460b031c33ff32d2bf3b97263527daa231e4de/SKILL.md",
+      "sha256": "a6c9beaa87d182b93792d3d0e7a212b9af28d54d89d7e1784c323b7a5cf479f7"
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "commit": "0ed94698aa0aeee471465fc9c867c2e8434c4d68",
+      "path": "LICENSE.md",
+      "url": "https://github.com/anthropics/claude-code/blob/0ed94698aa0aeee471465fc9c867c2e8434c4d68/LICENSE.md",
+      "sha256": "728158fd1037143fad6907e8fa34804177e598b7326519503fe83cafdef849e6"
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "commit": "0ed94698aa0aeee471465fc9c867c2e8434c4d68",
+      "path": "README.md",
+      "url": "https://github.com/anthropics/claude-code/blob/0ed94698aa0aeee471465fc9c867c2e8434c4d68/README.md",
+      "sha256": "07445fe9698dd4e038fa5b30ea3bde5f8f1480068b2f275fdd20725cecda0a6c"
+    },
+    {
+      "repo": "anthropics/financial-services",
+      "commit": "60565064557ca77b12f62aa7877f365d111c129d",
+      "path": "LICENSE",
+      "url": "https://github.com/anthropics/financial-services/blob/60565064557ca77b12f62aa7877f365d111c129d/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "repo": "anthropics/financial-services",
+      "commit": "60565064557ca77b12f62aa7877f365d111c129d",
+      "path": "README.md",
+      "url": "https://github.com/anthropics/financial-services/blob/60565064557ca77b12f62aa7877f365d111c129d/README.md",
+      "sha256": "52f689c6c32bd2a505fb75e774c8857d4a70db77b1b0057353fb10e7a6e5ca42"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "README.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/README.md",
+      "sha256": "1fca448ca17ccf901bd068c661209b15300bc5be3f039ba1a616c3a13a374ccb"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/algorithmic-art/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/algorithmic-art/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/algorithmic-art/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/algorithmic-art/SKILL.md",
+      "sha256": "3bc4092c09804853186524c826bc0621b940bb6122c05b84496dff95388e6eef"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/brand-guidelines/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/brand-guidelines/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/brand-guidelines/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/brand-guidelines/SKILL.md",
+      "sha256": "1120b3769e2985cefb3d25be981b1f914abeba57ae079b83c20c666c164fa9fe"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/canvas-design/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/canvas-design/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/canvas-design/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/canvas-design/SKILL.md",
+      "sha256": "a1f288079624402f30682753c1d43920b6664785698d21d3e7aa197450a6448b"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/docx/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/docx/LICENSE.txt",
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/docx/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/docx/SKILL.md",
+      "sha256": "9e8202e2524a9ed87da67a5b3eaa76e8e6038f4171f8251ad6aaefd34e82a3df"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/frontend-design/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/frontend-design/LICENSE.txt",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/frontend-design/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/frontend-design/SKILL.md",
+      "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/pdf/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/pdf/LICENSE.txt",
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/pdf/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/pdf/SKILL.md",
+      "sha256": "d1c7caf5f35eb7d37877dd7fc33a095037be2b34fb5d2f7f4d43bde3165bb4ee"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/pptx/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/pptx/LICENSE.txt",
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/pptx/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/pptx/SKILL.md",
+      "sha256": "b60bd282c6e01297f0eefe71594d1756dbf60a584f524c04a803ec6950b7fba2"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/slack-gif-creator/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/slack-gif-creator/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/slack-gif-creator/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/slack-gif-creator/SKILL.md",
+      "sha256": "2efca615ce55a3edd8fc05c779068a8085816617991987e446606403cd3abb22"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/theme-factory/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/theme-factory/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/theme-factory/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/theme-factory/SKILL.md",
+      "sha256": "c35893e221e28895c52143cc11bf30e41a44817796b39d4b15727dadc9796552"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/web-artifacts-builder/LICENSE.txt",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/web-artifacts-builder/LICENSE.txt",
+      "sha256": "bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362"
+    },
+    {
+      "repo": "anthropics/skills",
+      "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "path": "skills/web-artifacts-builder/SKILL.md",
+      "url": "https://github.com/anthropics/skills/blob/2c5958ecac7cee2b583967a2c4981d0f4a75c579/skills/web-artifacts-builder/SKILL.md",
+      "sha256": "81c5002c6643b0de7b8710b00e7a9038daa6fb9b68d59870ee6adb12da8d10f8"
+    },
+    {
+      "repo": "bitwize-music-studio/claude-ai-music-skills",
+      "commit": "597d928fb2c8316ee13159771405813174aa01de",
+      "path": "LICENSE",
+      "url": "https://github.com/bitwize-music-studio/claude-ai-music-skills/blob/597d928fb2c8316ee13159771405813174aa01de/LICENSE",
+      "sha256": "bf474cdfd02e162603358e4e3615182018cad27593d2bf5e75ca13e4a5a6af0c"
+    },
+    {
+      "repo": "bitwize-music-studio/claude-ai-music-skills",
+      "commit": "597d928fb2c8316ee13159771405813174aa01de",
+      "path": "README.md",
+      "url": "https://github.com/bitwize-music-studio/claude-ai-music-skills/blob/597d928fb2c8316ee13159771405813174aa01de/README.md",
+      "sha256": "a025d56d593f731c4c4c801635521f635bd109520b1eb5cfee2ee5db2a413864"
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "path": "LICENSE",
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/LICENSE",
+      "sha256": "b70d71e24e40fce5da8f4b6f9cd862096a048e433db7f3c8cac5e348e6d34591"
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "path": "README.md",
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/README.md",
+      "sha256": "69c172878d7a66305ef57928d0fbb4056e379cb8a316e23fc1d6f9869519f798"
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "path": "skills/ad-creative/SKILL.md",
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/skills/ad-creative/SKILL.md",
+      "sha256": "7af23285e4ac6df65f2f23e940279cdc9a70280a908a34214e86954ab7b0b000"
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "path": "skills/copywriting/SKILL.md",
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/skills/copywriting/SKILL.md",
+      "sha256": "02f0ab1ddd41d95b3c230d4bcff3de6578c8f2e45776c8ef2e4b931636af5bee"
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "path": "skills/marketing-psychology/SKILL.md",
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/skills/marketing-psychology/SKILL.md",
+      "sha256": "573bbe4f6e300e7fb75299e314f56e26382d284782caa2ae0e0f33eb2e646548"
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+      "path": "skills/seo-audit/SKILL.md",
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/skills/seo-audit/SKILL.md",
+      "sha256": "e0ebb5808787f2ff26b96d7b429423874d9785541cd4ab775629a5cf1137e7a9"
+    },
+    {
+      "repo": "ehmo/platform-design-skills",
+      "commit": "dc2be825d8b439caea78e9eaa8fb3ac23b0ff3e9",
+      "path": "LICENSE",
+      "url": "https://github.com/ehmo/platform-design-skills/blob/dc2be825d8b439caea78e9eaa8fb3ac23b0ff3e9/LICENSE",
+      "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685"
+    },
+    {
+      "repo": "ehmo/platform-design-skills",
+      "commit": "dc2be825d8b439caea78e9eaa8fb3ac23b0ff3e9",
+      "path": "README.md",
+      "url": "https://github.com/ehmo/platform-design-skills/blob/dc2be825d8b439caea78e9eaa8fb3ac23b0ff3e9/README.md",
+      "sha256": "50f6bc70f8b29165840a03803b31e516d1b59ba6cf6412d18ca6510344ae2080"
+    },
+    {
+      "repo": "emilkowalski/skill",
+      "commit": "c8a79627b59d72d764d6ab6f2c87c09a48169833",
+      "path": "LICENSE",
+      "url": "https://github.com/emilkowalski/skill/blob/c8a79627b59d72d764d6ab6f2c87c09a48169833/LICENSE",
+      "sha256": "4ff5bdb7887ec1435c9cab0e8d1a7caee704d894d65c2a008ccc68b1cc2f260b"
+    },
+    {
+      "repo": "emilkowalski/skill",
+      "commit": "c8a79627b59d72d764d6ab6f2c87c09a48169833",
+      "path": "README.md",
+      "url": "https://github.com/emilkowalski/skill/blob/c8a79627b59d72d764d6ab6f2c87c09a48169833/README.md",
+      "sha256": "dbbc8ba08c08104945e3eac7e4fc9cdaba49ff8a16208d0892c3cc544b760e24"
+    },
+    {
+      "repo": "fal-ai-community/skills",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "path": "LICENSE",
+      "url": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/LICENSE",
+      "sha256": "c8758c0a3b859614b7acc251766fe1f313502f23dd2b933f4dd2b44dc2c3c7e7"
+    },
+    {
+      "repo": "fal-ai-community/skills",
+      "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+      "path": "README.md",
+      "url": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/README.md",
+      "sha256": "4741ee6367f29a3b347968d53657fe1d97c252a6bf299a7ea1b959994e1068e9"
+    },
+    {
+      "repo": "flutter/skills",
+      "commit": "b7d5a0be4195b82fe073620fb52f594b0809eacf",
+      "path": "LICENSE",
+      "url": "https://github.com/flutter/skills/blob/b7d5a0be4195b82fe073620fb52f594b0809eacf/LICENSE",
+      "sha256": "5b95696b504e162bcf775060ec416005df9969a95cda6f7d4ddb57327dd74d35"
+    },
+    {
+      "repo": "flutter/skills",
+      "commit": "b7d5a0be4195b82fe073620fb52f594b0809eacf",
+      "path": "README.md",
+      "url": "https://github.com/flutter/skills/blob/b7d5a0be4195b82fe073620fb52f594b0809eacf/README.md",
+      "sha256": "dd4d6aa147deeb78efb318bb0fde117c870d847549acc4dbb81232a07a1d3fa5"
+    },
+    {
+      "repo": "frankbria/ralph-claude-code",
+      "commit": "11f9df5becc8093ff2265542107e8e53a42e9970",
+      "path": "LICENSE",
+      "url": "https://github.com/frankbria/ralph-claude-code/blob/11f9df5becc8093ff2265542107e8e53a42e9970/LICENSE",
+      "sha256": "13893fd6d87a33d7d78550b7845fed67bd0e4fbb9f296119c13dd0ea41112275"
+    },
+    {
+      "repo": "frankbria/ralph-claude-code",
+      "commit": "11f9df5becc8093ff2265542107e8e53a42e9970",
+      "path": "README.md",
+      "url": "https://github.com/frankbria/ralph-claude-code/blob/11f9df5becc8093ff2265542107e8e53a42e9970/README.md",
+      "sha256": "9f710a047fa3ca3da757edb05f825f71e9918b2d77a59c1f0bfee4eaa2cb8741"
+    },
+    {
+      "repo": "garrytan/gstack",
+      "commit": "9b491bb9be44cb7914a188cf66fb2a567b2994ba",
+      "path": "LICENSE",
+      "url": "https://github.com/garrytan/gstack/blob/9b491bb9be44cb7914a188cf66fb2a567b2994ba/LICENSE",
+      "sha256": "e56fbb5b3d95756f3fa1cfefa24732ec79f18ece1ad08a4e79e00df57e8b198c"
+    },
+    {
+      "repo": "garrytan/gstack",
+      "commit": "9b491bb9be44cb7914a188cf66fb2a567b2994ba",
+      "path": "README.md",
+      "url": "https://github.com/garrytan/gstack/blob/9b491bb9be44cb7914a188cf66fb2a567b2994ba/README.md",
+      "sha256": "4555c2ba9a2ce51b0778b004ae3e1006001f632e19ce17a4cddb4ae4fd708dad"
+    },
+    {
+      "repo": "garrytan/gstack",
+      "commit": "9b491bb9be44cb7914a188cf66fb2a567b2994ba",
+      "path": "design-consultation/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/9b491bb9be44cb7914a188cf66fb2a567b2994ba/design-consultation/SKILL.md",
+      "sha256": "095eaba207a3666515ee874955676de132cd34cc0d299cf84c1fd53a8c859cbc"
+    },
+    {
+      "repo": "garrytan/gstack",
+      "commit": "9b491bb9be44cb7914a188cf66fb2a567b2994ba",
+      "path": "design-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/9b491bb9be44cb7914a188cf66fb2a567b2994ba/design-review/SKILL.md",
+      "sha256": "56c3dcd8b33a692f73c26fc7a3f01974cbf9c861b2c3b3f3cc5b66da14046b8e"
+    },
+    {
+      "repo": "garrytan/gstack",
+      "commit": "9b491bb9be44cb7914a188cf66fb2a567b2994ba",
+      "path": "plan-design-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/9b491bb9be44cb7914a188cf66fb2a567b2994ba/plan-design-review/SKILL.md",
+      "sha256": "1e6b0a56695f5691ccc9f89eaf696ee0244d1fe42cf9f20d18b6c73decbe26cf"
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+      "path": "LICENSE",
+      "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/LICENSE",
+      "sha256": "b4133a55232c0996713349891dc55469d46a16ec027c033c9e4108b2149abb42"
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+      "path": "README.md",
+      "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/README.md",
+      "sha256": "350b366bf9880cacf9a37447c89248a158d0d96ea6054beac15842877c164a12"
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+      "path": "plugins/stitch-build/skills/shadcn-ui/SKILL.md",
+      "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/plugins/stitch-build/skills/shadcn-ui/SKILL.md",
+      "sha256": "2ddfe599ac2ba631ca019f7b6e37ee5df9cd34f83fc016f6ea9d4ba5bbfa0304"
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+      "path": "plugins/stitch-utilities/skills/design-md/SKILL.md",
+      "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/plugins/stitch-utilities/skills/design-md/SKILL.md",
+      "sha256": "eb15f44646528f3a087ce023329ae699c1b6e803662af68338e1eb1c0406b59b"
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+      "path": "plugins/stitch-utilities/skills/enhance-prompt/SKILL.md",
+      "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/plugins/stitch-utilities/skills/enhance-prompt/SKILL.md",
+      "sha256": "ccb200c798072438b642b1fa6a5c515563159e2fab3d56e813d76d8afa9a7ce6"
+    },
+    {
+      "repo": "google-labs-code/stitch-skills",
+      "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+      "path": "plugins/stitch-utilities/skills/stitch-loop/SKILL.md",
+      "url": "https://github.com/google-labs-code/stitch-skills/blob/0337446dadde6f8c94210444e2aa9d546126480f/plugins/stitch-utilities/skills/stitch-loop/SKILL.md",
+      "sha256": "05f39ecf81b0664872e6f3d6be01c53cf8c1f8b9ef14c741fe01d1ac424ce634"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "LICENSE",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/LICENSE",
+      "sha256": "51b04b06556662dd817e8f4aa6d06bc7139dc73739e1319a7233cfde3e147b90"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "README.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/README.md",
+      "sha256": "2cd27948cd1486056271d8d962918eec074e9956b594111b5f84304ec1c13914"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-core/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-core/SKILL.md",
+      "sha256": "3887b47e050ab5afbe2a9a820f23d39fa02ab785e06a343be44c6f91d84d12b3"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-frameworks/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-frameworks/SKILL.md",
+      "sha256": "842d9d3659ec3ddc8abbdc524708f8facf81f468ac25d0577f48c759c4fa31e6"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-performance/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-performance/SKILL.md",
+      "sha256": "cb5408d6fba707aabcbfe3320317a14c1f8fca6070074e5261047930f50d441e"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-plugins/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-plugins/SKILL.md",
+      "sha256": "5838b856c74c07fbc9fa99b6dfd1eee34ea554c3e530c30e0d58014b707d70a4"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-react/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-react/SKILL.md",
+      "sha256": "88e2a5312b45e8cc7b3c496637ff5bc9af2ae9c925b555c8b235b34cbc989d74"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-scrolltrigger/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-scrolltrigger/SKILL.md",
+      "sha256": "9351b6666a4749c0740406ea363aaccb99a087ff45cc5e8b99a0f367facf3ef4"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-timeline/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-timeline/SKILL.md",
+      "sha256": "1a8b0f39cc4be3ed3d834b89672e4ae2f151b901dc3450bebf10bbc45379fe02"
+    },
+    {
+      "repo": "greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "path": "skills/gsap-utils/SKILL.md",
+      "url": "https://github.com/greensock/gsap-skills/blob/aed9cfd3277740755f6bfc1155c7aa645403b760/skills/gsap-utils/SKILL.md",
+      "sha256": "1927bcc4ea95b38203404ad5ea1d060b15c4a886c65ae53e885ff1793aabe0ba"
+    },
+    {
+      "repo": "hairyf/skills",
+      "commit": "ffa1f904012f48f5bdf34ebb692daa09c778d47f",
+      "path": "LICENSE.md",
+      "url": "https://github.com/hairyf/skills/blob/ffa1f904012f48f5bdf34ebb692daa09c778d47f/LICENSE.md",
+      "sha256": "126ff11457c72477b122d36aa314bc7c1c96810e78a6e2d76762761299777276"
+    },
+    {
+      "repo": "hairyf/skills",
+      "commit": "ffa1f904012f48f5bdf34ebb692daa09c778d47f",
+      "path": "README.md",
+      "url": "https://github.com/hairyf/skills/blob/ffa1f904012f48f5bdf34ebb692daa09c778d47f/README.md",
+      "sha256": "127d40b0f3a72b774656fcf3d5e4d8e5540207e6ba817b4080d247ae00634c8e"
+    },
+    {
+      "repo": "hairyf/skills",
+      "commit": "ffa1f904012f48f5bdf34ebb692daa09c778d47f",
+      "path": "skills/tailwindcss/SKILL.md",
+      "url": "https://github.com/hairyf/skills/blob/ffa1f904012f48f5bdf34ebb692daa09c778d47f/skills/tailwindcss/SKILL.md",
+      "sha256": "c2fa19b055945dc89ee0cbf154138f680237fd6d7d3263cbf0977f9e4def1eeb"
+    },
+    {
+      "repo": "ibelick/ui-skills",
+      "commit": "97dea9e747ea94d5671ef1468cbb8f9bd5f32542",
+      "path": "LICENSE",
+      "url": "https://github.com/ibelick/ui-skills/blob/97dea9e747ea94d5671ef1468cbb8f9bd5f32542/LICENSE",
+      "sha256": "c615621c4cc1676ccde194e7a01b6469ba477780251bd71e007fc473a49c2c2b"
+    },
+    {
+      "repo": "ibelick/ui-skills",
+      "commit": "97dea9e747ea94d5671ef1468cbb8f9bd5f32542",
+      "path": "README.md",
+      "url": "https://github.com/ibelick/ui-skills/blob/97dea9e747ea94d5671ef1468cbb8f9bd5f32542/README.md",
+      "sha256": "4dc3e9f0216a750d980f55db8412f5c8d656066bc9aadd26deeb8fd4798f991d"
+    },
+    {
+      "repo": "inferen-sh/skills",
+      "commit": "0cbf91c26ada28702c79962406286f0c14292150",
+      "path": "README.md",
+      "url": "https://github.com/inferen-sh/skills/blob/0cbf91c26ada28702c79962406286f0c14292150/README.md",
+      "sha256": "271bc2a39b564f975b47dfb264d0b63425d3627f154f50c6f89bbb4ea8ddb6b6"
+    },
+    {
+      "repo": "inferen-sh/skills",
+      "commit": "0cbf91c26ada28702c79962406286f0c14292150",
+      "path": "tools/image/nano-banana-2/SKILL.md",
+      "url": "https://github.com/inferen-sh/skills/blob/0cbf91c26ada28702c79962406286f0c14292150/tools/image/nano-banana-2/SKILL.md",
+      "sha256": "3f87f7ea2cc2699df92759f3aacf40951c54c060ed89d5703d7203632c90af3b"
+    },
+    {
+      "repo": "inferen-sh/skills",
+      "commit": "0cbf91c26ada28702c79962406286f0c14292150",
+      "path": "tools/social/twitter-automation/SKILL.md",
+      "url": "https://github.com/inferen-sh/skills/blob/0cbf91c26ada28702c79962406286f0c14292150/tools/social/twitter-automation/SKILL.md",
+      "sha256": "d82b17994017242a51318bab022f9169a5b511d81c12da3cbcdd8be90e4f0fee"
+    },
+    {
+      "repo": "inferen-sh/skills",
+      "commit": "0cbf91c26ada28702c79962406286f0c14292150",
+      "path": "tools/video/ai-video-generation/SKILL.md",
+      "url": "https://github.com/inferen-sh/skills/blob/0cbf91c26ada28702c79962406286f0c14292150/tools/video/ai-video-generation/SKILL.md",
+      "sha256": "30521e6262ed22b6f548c9dd636b667fee916bc3ce9c747a208b8daa46aff427"
+    },
+    {
+      "repo": "jakubkrehel/make-interfaces-feel-better",
+      "commit": "35545ea1512ad59fa463e6b1f95ca9c052981fe6",
+      "path": "LICENSE",
+      "url": "https://github.com/jakubkrehel/make-interfaces-feel-better/blob/35545ea1512ad59fa463e6b1f95ca9c052981fe6/LICENSE",
+      "sha256": "ed1dfe988fc40511b4845ccd9050a143a2002fee3bedc8064c47fa342b5d8d4f"
+    },
+    {
+      "repo": "jakubkrehel/make-interfaces-feel-better",
+      "commit": "35545ea1512ad59fa463e6b1f95ca9c052981fe6",
+      "path": "README.md",
+      "url": "https://github.com/jakubkrehel/make-interfaces-feel-better/blob/35545ea1512ad59fa463e6b1f95ca9c052981fe6/README.md",
+      "sha256": "d1357d0aa07aa105bab5775c23124c197ab0b921891cf6876a05e5afb24255bd"
+    },
+    {
+      "repo": "jakubkrehel/make-interfaces-feel-better",
+      "commit": "35545ea1512ad59fa463e6b1f95ca9c052981fe6",
+      "path": "skills/make-interfaces-feel-better/SKILL.md",
+      "url": "https://github.com/jakubkrehel/make-interfaces-feel-better/blob/35545ea1512ad59fa463e6b1f95ca9c052981fe6/skills/make-interfaces-feel-better/SKILL.md",
+      "sha256": "c1d508fa7bef8e47ee682b4f214c7a4ed1416b91d05a97285e555bad1c41a23e"
+    },
+    {
+      "repo": "jezweb/claude-skills",
+      "commit": "1260fa7439b36b18dbf16648ccc7fb44783f6c23",
+      "path": "LICENSE",
+      "url": "https://github.com/jezweb/claude-skills/blob/1260fa7439b36b18dbf16648ccc7fb44783f6c23/LICENSE",
+      "sha256": "4530f92f44fe545e18773c7bbe0c312b0f04b78c161bdb784ff24f0ace9a5592"
+    },
+    {
+      "repo": "jezweb/claude-skills",
+      "commit": "1260fa7439b36b18dbf16648ccc7fb44783f6c23",
+      "path": "README.md",
+      "url": "https://github.com/jezweb/claude-skills/blob/1260fa7439b36b18dbf16648ccc7fb44783f6c23/README.md",
+      "sha256": "ce20972280a4c6f089e543639899fcd98e45397d45351d4f42a6d0bff172374c"
+    },
+    {
+      "repo": "jiannanya/snow-d3",
+      "commit": "f9c319c5f5b148f6c1c7d1669bcebb8a97b07b6f",
+      "path": "LICENSE",
+      "url": "https://github.com/jiannanya/snow-d3/blob/f9c319c5f5b148f6c1c7d1669bcebb8a97b07b6f/LICENSE",
+      "sha256": "9706d18bdd7a587e535dcb473820a05442f20e05c8ff084b257177680471f781"
+    },
+    {
+      "repo": "jiannanya/snow-d3",
+      "commit": "f9c319c5f5b148f6c1c7d1669bcebb8a97b07b6f",
+      "path": "README.md",
+      "url": "https://github.com/jiannanya/snow-d3/blob/f9c319c5f5b148f6c1c7d1669bcebb8a97b07b6f/README.md",
+      "sha256": "5d0f99738a2307c4d0e91030007bad60ad580cb8421ff4c35a877720bac4a578"
+    },
+    {
+      "repo": "jiannanya/snow-d3",
+      "commit": "f9c319c5f5b148f6c1c7d1669bcebb8a97b07b6f",
+      "path": "SKILL.md",
+      "url": "https://github.com/jiannanya/snow-d3/blob/f9c319c5f5b148f6c1c7d1669bcebb8a97b07b6f/SKILL.md",
+      "sha256": "260adf54f99207363d2ddd9d903224f48b0091dfcb074a376e65a49603993514"
+    },
+    {
+      "repo": "lewislulu/html-ppt-skill",
+      "commit": "fd1629067909ff55b36b905476de4e5f26062a1f",
+      "path": "LICENSE",
+      "url": "https://github.com/lewislulu/html-ppt-skill/blob/fd1629067909ff55b36b905476de4e5f26062a1f/LICENSE",
+      "sha256": "a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
+    },
+    {
+      "repo": "lewislulu/html-ppt-skill",
+      "commit": "fd1629067909ff55b36b905476de4e5f26062a1f",
+      "path": "README.md",
+      "url": "https://github.com/lewislulu/html-ppt-skill/blob/fd1629067909ff55b36b905476de4e5f26062a1f/README.md",
+      "sha256": "3f9d44b246ec0ef6a0d4c60928e2bd793d97989657a545fadc0bef5657fa2cc7"
+    },
+    {
+      "repo": "lewislulu/html-ppt-skill",
+      "commit": "fd1629067909ff55b36b905476de4e5f26062a1f",
+      "path": "SKILL.md",
+      "url": "https://github.com/lewislulu/html-ppt-skill/blob/fd1629067909ff55b36b905476de4e5f26062a1f/SKILL.md",
+      "sha256": "d30ff36b80424e2d19df9bf99f0bd4c9573335740ae8674f046b876c74193d86"
+    },
+    {
+      "repo": "meodai/skill.color-expert",
+      "commit": "5bf7c7704d56bccc6aeea38c36bcf449abe56a6c",
+      "path": "LICENSE",
+      "url": "https://github.com/meodai/skill.color-expert/blob/5bf7c7704d56bccc6aeea38c36bcf449abe56a6c/LICENSE",
+      "sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f"
+    },
+    {
+      "repo": "meodai/skill.color-expert",
+      "commit": "5bf7c7704d56bccc6aeea38c36bcf449abe56a6c",
+      "path": "README.md",
+      "url": "https://github.com/meodai/skill.color-expert/blob/5bf7c7704d56bccc6aeea38c36bcf449abe56a6c/README.md",
+      "sha256": "191f37c72f04bfae7e3b4bce760c817b4ef1c1a2edf8db391a42ee8e321bd1e8"
+    },
+    {
+      "repo": "meodai/skill.color-expert",
+      "commit": "5bf7c7704d56bccc6aeea38c36bcf449abe56a6c",
+      "path": "SKILL.md",
+      "url": "https://github.com/meodai/skill.color-expert/blob/5bf7c7704d56bccc6aeea38c36bcf449abe56a6c/SKILL.md",
+      "sha256": "6c1b407eb645ff3b2598ad368d362f03834015715e940b7b2b1f3c1491bf2f25"
+    },
+    {
+      "repo": "muthuishere/hand-drawn-diagrams",
+      "commit": "c8ffd6c3febbc0e745ab6691ea81c8703a9829c8",
+      "path": "LICENSE",
+      "url": "https://github.com/muthuishere/hand-drawn-diagrams/blob/c8ffd6c3febbc0e745ab6691ea81c8703a9829c8/LICENSE",
+      "sha256": "010fd60871eb8076e638c5e3da6a962384b942c475ec83a4190032099324a113"
+    },
+    {
+      "repo": "muthuishere/hand-drawn-diagrams",
+      "commit": "c8ffd6c3febbc0e745ab6691ea81c8703a9829c8",
+      "path": "README.md",
+      "url": "https://github.com/muthuishere/hand-drawn-diagrams/blob/c8ffd6c3febbc0e745ab6691ea81c8703a9829c8/README.md",
+      "sha256": "1d30849c45976793e8d2c2af0a459c8b1e42e0f968df90ddace77dd899e9df89"
+    },
+    {
+      "repo": "muthuishere/hand-drawn-diagrams",
+      "commit": "c8ffd6c3febbc0e745ab6691ea81c8703a9829c8",
+      "path": "SKILL.md",
+      "url": "https://github.com/muthuishere/hand-drawn-diagrams/blob/c8ffd6c3febbc0e745ab6691ea81c8703a9829c8/SKILL.md",
+      "sha256": "01e7282f0e8df2b8feebc71883242c71b482edbe336a611d3ab31690748f35d6"
+    },
+    {
+      "repo": "mvanhorn/last30days-skill",
+      "commit": "71dc2a1529f23dfe7b0d0e3b3e11d4a7e8afd428",
+      "path": "LICENSE",
+      "url": "https://github.com/mvanhorn/last30days-skill/blob/71dc2a1529f23dfe7b0d0e3b3e11d4a7e8afd428/LICENSE",
+      "sha256": "31803213a789825dc419de43542381e1d570b4408cf2bcf2e8a9947a6d3fd2ab"
+    },
+    {
+      "repo": "mvanhorn/last30days-skill",
+      "commit": "71dc2a1529f23dfe7b0d0e3b3e11d4a7e8afd428",
+      "path": "README.md",
+      "url": "https://github.com/mvanhorn/last30days-skill/blob/71dc2a1529f23dfe7b0d0e3b3e11d4a7e8afd428/README.md",
+      "sha256": "373ddd00c15b230807484c655bdc6e2ec52fcfbde5d17b85e0873b9400b41436"
+    },
+    {
+      "repo": "mvanhorn/last30days-skill",
+      "commit": "71dc2a1529f23dfe7b0d0e3b3e11d4a7e8afd428",
+      "path": "skills/last30days/SKILL.md",
+      "url": "https://github.com/mvanhorn/last30days-skill/blob/71dc2a1529f23dfe7b0d0e3b3e11d4a7e8afd428/skills/last30days/SKILL.md",
+      "sha256": "625e8743aead5448cfc9872cbb66af11ae6b2bce6e4679ff29ce64331b113dce"
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "0da327f37b436c173ce51177678b65ca92e6f3f7",
+      "path": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/0da327f37b436c173ce51177678b65ca92e6f3f7/.claude/skills/ui-ux-pro-max/SKILL.md",
+      "sha256": "9aa50bd44076db28624ea976056d915905ab9357748f90263a004fa0ef087147"
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "0da327f37b436c173ce51177678b65ca92e6f3f7",
+      "path": "LICENSE",
+      "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/0da327f37b436c173ce51177678b65ca92e6f3f7/LICENSE",
+      "sha256": "738f69dfa83db5c347c678fb9d90e560877059f0de93a327c39001bff92dc014"
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "0da327f37b436c173ce51177678b65ca92e6f3f7",
+      "path": "README.md",
+      "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/0da327f37b436c173ce51177678b65ca92e6f3f7/README.md",
+      "sha256": "86c60796b67ca7a6b6c5df1b2cf60876de0dc718804c6a58d134a7be5d81980b"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "LICENSE",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "README.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/README.md",
+      "sha256": "771ca7b051cb160ee350f71ad0cb4424e88733032c4f82b20cf545d34b645f46"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/article-magazine/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/article-magazine/SKILL.md",
+      "sha256": "1b580ad6e9cbf22f46e4dbb0cce88290cb4ba74500753f360139397d5ca43da3"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/card-twitter/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/card-twitter/SKILL.md",
+      "sha256": "40c371b365180e53b29a7a9b868aa2851d88e3ff312213f570ea11632385241b"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/card-xiaohongshu/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/card-xiaohongshu/SKILL.md",
+      "sha256": "fd814b10b2d000a33348408284193c40022febb146c196d69001d8902caff260"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/data-report/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/data-report/SKILL.md",
+      "sha256": "188e3d69adc8694bafa8db18664b33b6ccebaa4880231a40a7f6dc6bac64532c"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/deck-guizang-editorial/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/deck-guizang-editorial/SKILL.md",
+      "sha256": "61e081c3c046530f544c7738c0acbe5a647b2009699a4bf72f50a23eb6c381bc"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/deck-open-slide-canvas/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/deck-open-slide-canvas/SKILL.md",
+      "sha256": "3e072c6fcd09e7dfe6bf5d33bf62c9ed55de5fcd4c4e475500ab1c1059a0076e"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/deck-swiss-international/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/deck-swiss-international/SKILL.md",
+      "sha256": "8cab21cb0bedb2cdf7c7b35d332352b8268e03e6771445637cd5a71d2e9d96cc"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/doc-kami-parchment/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/doc-kami-parchment/SKILL.md",
+      "sha256": "81ebb3526f8c7c0beaacec46bfdf1406d0f7f7f04bd889b41ac1ad25f34fa8c0"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-data-chart-nyt/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-data-chart-nyt/SKILL.md",
+      "sha256": "8536e1ce1ea4a6b877f940e46235c175a3358a42c8970bb8decc65dace92b847"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-flowchart-sticky/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-flowchart-sticky/SKILL.md",
+      "sha256": "b8374d83cf03093d534c578127771281080337f8703cfbdc79af77751cfefa69"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-glitch-title/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-glitch-title/SKILL.md",
+      "sha256": "31133676d2a66875b5369e91ce67bc6efc3410c4df9c7cdba673c3ef9414c9a6"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-light-leak-cinema/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-light-leak-cinema/SKILL.md",
+      "sha256": "8762e5951a80c3a152d0a9e10b2dfe61e1cca1b7d4e31b759ff982b0dbad247c"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-liquid-bg-hero/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-liquid-bg-hero/SKILL.md",
+      "sha256": "f1b11d1b97b66d480cb40b04c8a10043db8f54ffd4b5f8d76e2b2773ad023a04"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-logo-outro/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-logo-outro/SKILL.md",
+      "sha256": "c6e899b8ba90c5c86172817b6f658bef920956eb4d7a779e4c1cdae55d87e4ba"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/frame-macos-notification/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/frame-macos-notification/SKILL.md",
+      "sha256": "bcfe3092e297a4c6e46fe26fcbb3b9acd0b9d374b90c2900b1f38076de13ad62"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/mockup-device-3d/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/mockup-device-3d/SKILL.md",
+      "sha256": "be0040976e3b405c6e800ec23f061a6c89c76c44ecd29957f712f00696daf9f6"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/poster-hero/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/poster-hero/SKILL.md",
+      "sha256": "b473ff517b34de31e0c114de0f3a6a7dffee99035c478740940373ecf298a4be"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/ppt-keynote/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/ppt-keynote/SKILL.md",
+      "sha256": "5a13f7e217ef352887ae0045c09dcedf18a01ea2094d7a6ab5d4329271670ad7"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/resume-modern/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/resume-modern/SKILL.md",
+      "sha256": "821a0d09f2db73f2fad4bd0bd67f276ebb6d0c5494897830fcd69c2dbcdc7e7c"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/social-reddit-card/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/social-reddit-card/SKILL.md",
+      "sha256": "7bbb1639ee11bf9ba5121702d17ade1eaa242bd6f5d3a495113f27ed31b0fae9"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/social-spotify-card/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/social-spotify-card/SKILL.md",
+      "sha256": "7ce215d2eb580cf939b7826d34893e8d37adb5e2608526871952b9ced33136af"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/social-x-post-card/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/social-x-post-card/SKILL.md",
+      "sha256": "4d0679eaf9734f721e7e689623ce5a616e6277afb9155290fdd66ac0afac57b9"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/vfx-text-cursor/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/vfx-text-cursor/SKILL.md",
+      "sha256": "9e71d760910de732f5ad0ff7ed229330eec84fbe1825caaaab8dd4d10c2cf082"
+    },
+    {
+      "repo": "nexu-io/html-anything",
+      "commit": "975fb3bcb98f1777781fb4c738902d36e32c8c46",
+      "path": "next/src/lib/templates/skills/video-hyperframes/SKILL.md",
+      "url": "https://github.com/nexu-io/html-anything/blob/975fb3bcb98f1777781fb4c738902d36e32c8c46/next/src/lib/templates/skills/video-hyperframes/SKILL.md",
+      "sha256": "ad307163de1690493bb43e213c1e2e83d7f4bb343129a2a933be7888be7d3d27"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": ".claude/skills/od-contribute/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/.claude/skills/od-contribute/SKILL.md",
+      "sha256": "3abb007bcdd4d632cc17c131995f49931e0d03c27ea09bf083fadfc0c4b648c4"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "LICENSE",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/LICENSE",
+      "sha256": "9d95806a26532623360eb84bb17d298f394b55ef73fb4c0796d99b4319b2b0da"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "README.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/README.md",
+      "sha256": "dbd9cd62043f52a7c38af33b10dc6dd66f7c01a88211d2a3ce8dbfd5a00ed74a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/audio-jingle/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/audio-jingle/SKILL.md",
+      "sha256": "87b872cf5b5d8df6182e0b89c292ce0b5606039bb364fb6b736ad3e3add33977"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/blog-post/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/blog-post/SKILL.md",
+      "sha256": "1c44d0284e77554b0b63e4204c245e4e9c0a5420c7092637817ab6348f78a910"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/clinical-case-report/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/clinical-case-report/SKILL.md",
+      "sha256": "997d0745f61c4a5f33e22b964c1d09d24522a7729323cf7dd86a021619a2ab77"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/dashboard/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/dashboard/SKILL.md",
+      "sha256": "a05a2cb84f7cb3457003859a08dfe9ae278f3cde32a75977e4a8048c11037a5d"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/dating-web/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/dating-web/SKILL.md",
+      "sha256": "ecf42ba6b4dbbab25d21c5094de7052d358f3ab55a62a8fbbbdb380ba3ad6267"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/digital-eguide/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/digital-eguide/SKILL.md",
+      "sha256": "79c861215b7db5ab08c1e6bd5fc826af251853b84d94c43a13875783f4ccc6cc"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/docs-page/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/docs-page/SKILL.md",
+      "sha256": "2446a71d3513e764800d5bca07c7d718021413a412ed87dd5939ae36a9a2ee9b"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/email-marketing/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/email-marketing/SKILL.md",
+      "sha256": "197f084a1b73858c14f9bea683000209a880b13956c00d54eb5323b52d36c695"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/eng-runbook/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/eng-runbook/SKILL.md",
+      "sha256": "ace1c36dfa92f153c1c7ec89b0f086877094e9b5973d2c4c9e474286c6f95f8b"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/finance-report/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/finance-report/SKILL.md",
+      "sha256": "bfbf6f3e6a1fdd43dfb894f5a978243b2b38e8c6bc22ea637bbae830fe9cea63"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/flowai-live-dashboard-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/flowai-live-dashboard-template/SKILL.md",
+      "sha256": "d63fbb97ee558961a127ed4638111eb7ee61952de1ce4ad64cf8842db54acf52"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/gamified-app/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/gamified-app/SKILL.md",
+      "sha256": "0fbc09046b5b94bdc20cb67d09489e13d6ad4bbc234bc7018099843f063eae12"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/github-dashboard/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/github-dashboard/SKILL.md",
+      "sha256": "f69eda62ae8a77e4f2c2a09b55fd8952ca3d1255579262080fb12433a2445a3e"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/hr-onboarding/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/hr-onboarding/SKILL.md",
+      "sha256": "2c7cd7a48ab583d792a8fb182bb2313479332b40d454b9f0311429f3ba86b132"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/hyperframes/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/hyperframes/SKILL.md",
+      "sha256": "0421d8b0cb1651c0368b8a863751abfcf8acb087373116aa976c3fc4a93748b2"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/image-poster/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/image-poster/SKILL.md",
+      "sha256": "20769996ade6c165d0865f086e441a91a3f88db14118cc06daed7a8ff24be366"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/invoice/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/invoice/SKILL.md",
+      "sha256": "6c12ddb7b2b971d62f2bae0051bd98a1f75625af6f7bff5a0169dae0d734c1ee"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/kanban-board/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/kanban-board/SKILL.md",
+      "sha256": "e16c5a931c651d4ea1371dfba9c88dc13ffe7fb1d746402ba7a890705ff505e5"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/live-artifact/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/live-artifact/SKILL.md",
+      "sha256": "2f445ea893709f0b0d054547ebd61cbdf370f3d3c2c8e6665e063ea19203a0e6"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/live-dashboard/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/live-dashboard/SKILL.md",
+      "sha256": "e6220cd3fd28c097fffa56d1f9f8bc16a9f3523cc991c3e2ac389b97886ab3a7"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/magazine-poster/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/magazine-poster/SKILL.md",
+      "sha256": "3aec85e228ca828d4cda8b2a9b39ff7a32a84dd4614396eb5d88ca57401c79eb"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/meeting-notes/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/meeting-notes/SKILL.md",
+      "sha256": "544e1caccfea768e47bdaea1c88647b857ad75767d73832d5b6a4c5148c6d8a3"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/mobile-app/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/mobile-app/SKILL.md",
+      "sha256": "8a59f65e089d1f1a69e6f34eba42c23ffcdf93a26d9efa56e5de518103254db1"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/mobile-onboarding/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/mobile-onboarding/SKILL.md",
+      "sha256": "18af747eb2ceb500c115ba7baade2fbd7a6f23f2bf036a6a0f0db69d125e983b"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/motion-frames/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/motion-frames/SKILL.md",
+      "sha256": "c6ca317d618a67b55e4431552cca9b030df8229d22507ef51db51c6a00c82014"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/open-design-landing-deck/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/open-design-landing-deck/SKILL.md",
+      "sha256": "fd82e93ee2c5bbc4b61994d9cba50a9d43220c36e9e8bb08708bf619469ced29"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/open-design-landing/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/open-design-landing/SKILL.md",
+      "sha256": "8f34df9064105683305768fa64aac5fcf1eded195edf6813f908049e204dfbac"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/orbit-general/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/orbit-general/SKILL.md",
+      "sha256": "4132c6b984c9a0cb19461c06242d9b8892528495c9abe60b3f147019a17b0055"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/orbit-github/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/orbit-github/SKILL.md",
+      "sha256": "c36d87e40e6b54df72078aac86de1a5a82acf27c848ce72ecfb3104abe28c1fb"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/orbit-gmail/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/orbit-gmail/SKILL.md",
+      "sha256": "b21841b7f680e6e526c5af482f8915acdd791605855aea0b32286252e8572280"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/orbit-linear/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/orbit-linear/SKILL.md",
+      "sha256": "83397eafb280801c7b122e7723d049ebcff554a17a34d6d9c0bf84c5b6745878"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/orbit-notion/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/orbit-notion/SKILL.md",
+      "sha256": "7c3ac23b47b70a96000f6d43f0bf7670a7f021280c6ab937ce2e04c6650d4683"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/pm-spec/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/pm-spec/SKILL.md",
+      "sha256": "ababc9812085557898ff4195e0f8d5f468d3d713fdb5aa10d2233109f563b962"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/pricing-page/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/pricing-page/SKILL.md",
+      "sha256": "468327c0815f477d0ac636a4a0ca3cd40bbb53262100ed9cd0eca08994ecd2d1"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/replit-deck/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/replit-deck/SKILL.md",
+      "sha256": "3f8ed24a3024aa8c106b3a654ace6127b2c6593326482a5b0662227077d70666"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/saas-landing/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/saas-landing/SKILL.md",
+      "sha256": "38b3ab78e02c44710912ce63683d0bf4c2319dad78a3d225ac046a07ef3ef0e3"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/simple-deck/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/simple-deck/SKILL.md",
+      "sha256": "db2be4b432619e4a61badbc509c3718d454bd742484bf580d58e14fdac6e3310"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/social-carousel/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/social-carousel/SKILL.md",
+      "sha256": "b2a0b27c1dbf1dfba5d80db3c08a14da482eac664342b8177d679b37ba633845"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/social-media-dashboard/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/social-media-dashboard/SKILL.md",
+      "sha256": "8755632fff868dc44e6ecedfaa2fcb41c68568b65b52ff5de5755174ea8bda56"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/social-media-matrix-tracker-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/social-media-matrix-tracker-template/SKILL.md",
+      "sha256": "c8d319c0166074079e61f6afa1e790f721732db0f9183bb6410930ec0016028a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/sprite-animation/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/sprite-animation/SKILL.md",
+      "sha256": "d0ac82e6d616ec62fad60dea8d61ac120563509140a9a95cf0688bfba15f94b1"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/team-okrs/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/team-okrs/SKILL.md",
+      "sha256": "6734db5dcac51923f7c89b3f768d72de2a73a91967d24440858c8d36a9ad5da4"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/trading-analysis-dashboard-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/trading-analysis-dashboard-template/SKILL.md",
+      "sha256": "c8aa0da35bd6d860226d74d7dd8c43fd2d46c62427fc7018de3992e9ad19d4d2"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/video-shortform/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/video-shortform/SKILL.md",
+      "sha256": "b1f8d998c755dee3c08253585d65e1db4325e39d09ea3c3e187ca2a4301afce3"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/waitlist-page/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/waitlist-page/SKILL.md",
+      "sha256": "16c6f7e1f65353491e9a114c939ec94b25ca67071a3455f4123843ba02d90e58"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/web-prototype/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/web-prototype/SKILL.md",
+      "sha256": "8f36016a362c056b57ab7ded3ff3ab6048f9ce49980708aec468c351a0652855"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/weekly-update/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/weekly-update/SKILL.md",
+      "sha256": "90eb501176278d2d06f31424bde45dc60d43e5ee14f829712ccbc94a50d5346b"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "design-templates/wireframe-sketch/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/design-templates/wireframe-sketch/SKILL.md",
+      "sha256": "fd4e93e2cfea8ba71792490528a00f9c4ea4ff228c83bfea4ebe4fe2493f404a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "docs/examples/saas-landing-skill/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/docs/examples/saas-landing-skill/SKILL.md",
+      "sha256": "4e495a905036dbdbd8efc81db7079d98a43110f829c22db698c0b59e9cb1f9c2"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/build-test/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/build-test/SKILL.md",
+      "sha256": "eb9e1d0d5cd44d660cd86c77b668366306ceca1b28a556ccdcbe759f3827d51c"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/code-import/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/code-import/SKILL.md",
+      "sha256": "f803ec69d9c1b55deba16ee03fed64dbcd498fb6f95b158abda922b81d0438f7"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/critique-theater/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/critique-theater/SKILL.md",
+      "sha256": "dc0d2b0046d29b42fc3bdd6db80f3bf3be98c1a301a95fdca82777374e6692a9"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/design-extract/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/design-extract/SKILL.md",
+      "sha256": "3cc86a85b2f3c9476b49dfef00311212c63b50fc18253bf1ca6d72f3848da68c"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/diff-review/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/diff-review/SKILL.md",
+      "sha256": "46709f440a0356a8ee187e0fad4b726e2d797ffcca4f05ea5697276eb143f3ba"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/direction-picker/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/direction-picker/SKILL.md",
+      "sha256": "9e24489a0b8be69986e517cfc0abdd07da52c5249c3d3369112d1d40d52f2e33"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/discovery-question-form/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/discovery-question-form/SKILL.md",
+      "sha256": "36256f5df5c9428639ba1da7b6d2a5b4fff5cbe93ac3c3aedb82a326cea67f02"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/figma-extract/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/figma-extract/SKILL.md",
+      "sha256": "9828c1d256b933019509a271802885ce99868e2a49b2e64dd08a7a47b28d4e93"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/handoff/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/handoff/SKILL.md",
+      "sha256": "6d3bade7d4aeef991221f30abd7b39c45e52e949bc7fb42eba35457018e63c66"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/patch-edit/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/patch-edit/SKILL.md",
+      "sha256": "bb1573fa724182d70c46787993ea914c8f27cf5d60e574cea80f2cd2d009669c"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/rewrite-plan/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/rewrite-plan/SKILL.md",
+      "sha256": "dd344a48ef9523d1bd99fcf62232adf36e2e78c922ab3c3dcff44ad862efc8b8"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/todo-write/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/todo-write/SKILL.md",
+      "sha256": "de0da70a25a35e4401b1c0027ef16b465f3ec18ec05a6fb874e6ddacc2c5ac7e"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/atoms/token-map/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/atoms/token-map/SKILL.md",
+      "sha256": "64d236eb0d000af5a6e6cbe24144adf85aec7f01587e9947d042eee39845146c"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/examples/codex-interactive-capability-map/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/examples/codex-interactive-capability-map/SKILL.md",
+      "sha256": "686a166aa33891d7a99af7b7f47f37d90cf198a561bfaf0fd89c5a4f66823a3d"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/examples/od-plugin-contribute-open-design/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/examples/od-plugin-contribute-open-design/SKILL.md",
+      "sha256": "362f139f3e60d37e6d9dd0ba78548ed9cafb0547ddf592e585258fa606a95d73"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/examples/od-plugin-publish-github/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/examples/od-plugin-publish-github/SKILL.md",
+      "sha256": "68dbe077cbf7e267c5ae91a3faaad840e9d79ec75c8b01e1ebb5fc5ea2959c2a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-code-migration/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-code-migration/SKILL.md",
+      "sha256": "5b7a8f30d8ecc1cc83dacbaf7f55d87e83e2d70ba30d7ee0ac685f6d9e8d6c8e"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-default/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-default/SKILL.md",
+      "sha256": "ba395512e9a3d12b3fd46e5078a1aa0e491dcb41b29ab8e362844e1c1869fbf8"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-design-refine/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-design-refine/SKILL.md",
+      "sha256": "ebbe0310f75921810900ce7e5f782741bc3e6a8b134c677e5bb0f6e298954f45"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-figma-migration/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-figma-migration/SKILL.md",
+      "sha256": "2bb0f7fa48b1a04cdf75555e31e1a32489bc41ac30a96153bb5ec39953e91086"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-media-generation/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-media-generation/SKILL.md",
+      "sha256": "de11705b603d59c4ab56e1376129efe51f7e043cac3dd8c037b90f2a634b4952"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-new-generation/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-new-generation/SKILL.md",
+      "sha256": "2300eba063923930d59c6dff90c84083d0e77d9f8d2281015ca18483cb047d02"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-nextjs-export/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-nextjs-export/SKILL.md",
+      "sha256": "17362ac7b15de6eb8065690c6d3e78666b1a338984cce3645a0c669799161990"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-plugin-authoring/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-plugin-authoring/SKILL.md",
+      "sha256": "5556b04b1f65d4fde6b8cf68e4d35d45a5c019b64ee4379f6d852b923c93a3c9"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-react-export/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-react-export/SKILL.md",
+      "sha256": "5e9a6be9bd83a3ea2b4d1b906d83aea3c09cc3a947f3e8dcb35fccea15e6a800"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-tune-collab/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-tune-collab/SKILL.md",
+      "sha256": "1d93952d0cab0955e75106eb8fddb131477b3064e7c7d6956865f5874dcdbfd6"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/_official/scenarios/od-vue-export/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/_official/scenarios/od-vue-export/SKILL.md",
+      "sha256": "fbfb65f12d6e3bc193f0a3ee604d304e0a1e635c937d5d77a67267fc4fab4113"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/community/import-smoke-test/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/community/import-smoke-test/SKILL.md",
+      "sha256": "9cf115adeb7404d7450bec3de364d1f11f1ad03b3d1a824d865adaed3a6d72e8"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/community/registry-starter/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/community/registry-starter/SKILL.md",
+      "sha256": "eb275960934c01affcf99b2ed14651e3b61b23783408c544922fad8a8eb6baeb"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/create-hyperframes-launch/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/create-hyperframes-launch/SKILL.md",
+      "sha256": "80b2bde1714c9d872c16363e26a3584a9eda0f55c06e9998e75ffe517b458fe1"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/create-image-campaign/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/create-image-campaign/SKILL.md",
+      "sha256": "f354e0bee55a4eb4a4ce7c3039ec1c36a7185191737adb7a13fbae95789c7a55"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/create-live-artifact-ops/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/create-live-artifact-ops/SKILL.md",
+      "sha256": "19654506e92925bba58323e910123b3347e8b3e1f2435bc2d4fe0a5285911767"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/create-prototype-dashboard/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/create-prototype-dashboard/SKILL.md",
+      "sha256": "9a9642cabe9c5ccb300685824c97d937aadf1cbda109adc48859d736578009d3"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/create-slides-pitch/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/create-slides-pitch/SKILL.md",
+      "sha256": "a8951c5833a43e5205c4b2b38bf79ff64423890fd608f06056f3d5178466544d"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/create-video-storyboard/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/create-video-storyboard/SKILL.md",
+      "sha256": "0b655f25671621555a6876b1a50b48cbdc87ef426e7948b66f5614255ec1960d"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/deploy-vercel-static/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/deploy-vercel-static/SKILL.md",
+      "sha256": "6718e6af01dbb60333368108171585f1b2de034895bd578c657e66214a3a9bc3"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/export-nextjs-handoff/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/export-nextjs-handoff/SKILL.md",
+      "sha256": "b7d160808b222375d156609da1a76f667a8facd1575678872cfda1058ca3386a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/extend-plugin-author/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/extend-plugin-author/SKILL.md",
+      "sha256": "d3184931dde74767e1b7a3f1f827d14d53005c018494f8f286bf68c781875c37"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/import-screenshot-to-prototype/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/import-screenshot-to-prototype/SKILL.md",
+      "sha256": "8224efe430dbdfc3b58bf3b1630ef130b236832eca093ca5f53fb62d19f2fca2"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/refine-critique-loop/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/refine-critique-loop/SKILL.md",
+      "sha256": "8795f63103e3f739499c26344304862756daa4a05a823768ad4473ab785dedbe"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "plugins/spec/examples/share-github-pr/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/plugins/spec/examples/share-github-pr/SKILL.md",
+      "sha256": "88ba5602e1c9f0209904218def478ef4791977e50e22d4bd2122a3ee73c7812d"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/8-bit-orbit-video-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/8-bit-orbit-video-template/SKILL.md",
+      "sha256": "4493e5c363e447e05210d0a715c8db8b9a742f42eb21a2c2be63b63da3ede80a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/after-hours-editorial-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/after-hours-editorial-template/SKILL.md",
+      "sha256": "d32adf3724add543c148e41debc8c958c8c90227d27e3831101949b27a153829"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/design-brief/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/design-brief/SKILL.md",
+      "sha256": "de27756b79d8f91349a6c0e9d7f8808993c2bcd7fa9c133c91dd18e0a04d6294"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/digits-fintech-swiss-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/digits-fintech-swiss-template/SKILL.md",
+      "sha256": "5602e8a2354fc204ff1f09efff294eb75f8b07765ed37a9d25fe7600b2abc6eb"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/editorial-burgundy-principles-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/editorial-burgundy-principles-template/SKILL.md",
+      "sha256": "8eb1a2cddf472cfd8f40980947023df1f166487f931b3a62a51886208f27c359"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/export-download-debugging/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/export-download-debugging/SKILL.md",
+      "sha256": "ab8c72be5a940e17bda272bbf126b43d72f16b0a8adab25f9f654fb72010d55f"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/faq-page/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/faq-page/SKILL.md",
+      "sha256": "2538f077fce82ad655954916b8d9d20b6e9b647d115430580993b65ab86fd38a"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/field-notes-editorial-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/field-notes-editorial-template/SKILL.md",
+      "sha256": "d6adbb24dc20b889ca060bb4605c0c9380238fa8a545ed014a4af28c9488040e"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/html-ppt-retro-quarterly-review/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/html-ppt-retro-quarterly-review/SKILL.md",
+      "sha256": "b247a581aa52ea9c9ca5686ab79179abe0a82f7caa521775a7e981c2ea168b29"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/login-flow/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/login-flow/SKILL.md",
+      "sha256": "e8a05879a495106374ccae4a686ed7e47dcabc61aa99db3e8f2984cc0ca9e069"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/pptx-html-fidelity-audit/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/pptx-html-fidelity-audit/SKILL.md",
+      "sha256": "4d1fe39410f0169830aa1f1ad5342e14541f89060d8bb9f695484f21d57e23a1"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/pr-feedback-quality-gate/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/pr-feedback-quality-gate/SKILL.md",
+      "sha256": "c48696513ecc35d254576c1363a6058eb37340225e946b4687c9b01e333abba0"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/reference-design-contract/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/reference-design-contract/SKILL.md",
+      "sha256": "56d5e0c077263cd30f586ffa763fec5caebdee2821fa9653e86c3376b937e222"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/release-notes-one-pager/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/release-notes-one-pager/SKILL.md",
+      "sha256": "737fe25f57a7199a6beb80b072f8335ca25a38470844669e3ccf96319d1c41ea"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/research-decision-room/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/research-decision-room/SKILL.md",
+      "sha256": "592b414c257c4b4bf85f8c21f2c682cb056fa9441f77c5f9b46fe56ca8587a33"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/swiss-creative-mode-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/swiss-creative-mode-template/SKILL.md",
+      "sha256": "24fe4255035316bfd85e4f460d651e98666b52fd66d50e945bbec3489975b791"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/swiss-user-research-video-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/swiss-user-research-video-template/SKILL.md",
+      "sha256": "843390c5018f6dd5fbd8e011b0cff51b33cdeaae5cc97f5d26e40e76e854e9f5"
+    },
+    {
+      "repo": "nexu-io/open-design",
+      "commit": "87a4f91c308170a8270458fc40fc66a86ed69aac",
+      "path": "skills/weread-year-in-review-video-template/SKILL.md",
+      "url": "https://github.com/nexu-io/open-design/blob/87a4f91c308170a8270458fc40fc66a86ed69aac/skills/weread-year-in-review-video-template/SKILL.md",
+      "sha256": "d9616b58ae49a1fe9ab459f327463240594437b0a3057b18959caa8cb8ccfc0d"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "LICENSE",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/LICENSE",
+      "sha256": "a37e0e9697144819e1d965176ac4ae5bc3fa02d11e7812036bbcadf6dafe2400"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "README.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/README.md",
+      "sha256": "79f29f50c735862d2e304ea547b4c9aa67d9db6909ff6fb7b5ea922d7bcbc3e7"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/brainstorming/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/brainstorming/SKILL.md",
+      "sha256": "2c9ca71f94886f9ca9f4aef055f7cafb3e1a9bdf3aeebf8f4cb547c69405d207"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/writing-skills/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/writing-skills/SKILL.md",
+      "sha256": "8cb3ac68c6d8c4bb46886b998b09af7989643cab8bd0e46ee86dd62e64546bbe"
+    },
+    {
+      "repo": "op7418/NanoBanana-PPT-Skills",
+      "commit": "0c18b9abde04ad42f4f62c7e9ead346b7bb39260",
+      "path": "README.md",
+      "url": "https://github.com/op7418/NanoBanana-PPT-Skills/blob/0c18b9abde04ad42f4f62c7e9ead346b7bb39260/README.md",
+      "sha256": "2a4e9a8fd2006dce5d01fa8ffaab552b7369dd1e08f4036c0e8d87ab36110869"
+    },
+    {
+      "repo": "op7418/NanoBanana-PPT-Skills",
+      "commit": "0c18b9abde04ad42f4f62c7e9ead346b7bb39260",
+      "path": "SKILL.md",
+      "url": "https://github.com/op7418/NanoBanana-PPT-Skills/blob/0c18b9abde04ad42f4f62c7e9ead346b7bb39260/SKILL.md",
+      "sha256": "999626c476cb46dff3af2fb7fde4823794ef395c2e57ea1c49c99efdd8377300"
+    },
+    {
+      "repo": "op7418/Youtube-clipper-skill",
+      "commit": "f31f077ee0905c95a510a6f34bbd0c3c85b15129",
+      "path": "LICENSE",
+      "url": "https://github.com/op7418/Youtube-clipper-skill/blob/f31f077ee0905c95a510a6f34bbd0c3c85b15129/LICENSE",
+      "sha256": "954179ac6635cd6fb0d7cfc49cdbec4f12019cc53f25db927dd34cd039015ea8"
+    },
+    {
+      "repo": "op7418/Youtube-clipper-skill",
+      "commit": "f31f077ee0905c95a510a6f34bbd0c3c85b15129",
+      "path": "README.md",
+      "url": "https://github.com/op7418/Youtube-clipper-skill/blob/f31f077ee0905c95a510a6f34bbd0c3c85b15129/README.md",
+      "sha256": "16234a04fc31ebd88e44c294220619c4b98b331a7356101bee8d05821a831d1e"
+    },
+    {
+      "repo": "op7418/Youtube-clipper-skill",
+      "commit": "f31f077ee0905c95a510a6f34bbd0c3c85b15129",
+      "path": "SKILL.md",
+      "url": "https://github.com/op7418/Youtube-clipper-skill/blob/f31f077ee0905c95a510a6f34bbd0c3c85b15129/SKILL.md",
+      "sha256": "1039e3c3ac3028ec6e0e4d47c25553886a9b7f2bccdd62a76c160e14813f9ce8"
+    },
+    {
+      "repo": "op7418/guizang-ppt-skill",
+      "commit": "93d21bf4a73a851907a6eb00acbf30618236667a",
+      "path": "LICENSE",
+      "url": "https://github.com/op7418/guizang-ppt-skill/blob/93d21bf4a73a851907a6eb00acbf30618236667a/LICENSE",
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+    },
+    {
+      "repo": "op7418/guizang-ppt-skill",
+      "commit": "93d21bf4a73a851907a6eb00acbf30618236667a",
+      "path": "README.md",
+      "url": "https://github.com/op7418/guizang-ppt-skill/blob/93d21bf4a73a851907a6eb00acbf30618236667a/README.md",
+      "sha256": "a400d36ce1660468f1e04f6c846e1493321fd07bdcc2b9f94cee3b502484a35d"
+    },
+    {
+      "repo": "op7418/guizang-ppt-skill",
+      "commit": "93d21bf4a73a851907a6eb00acbf30618236667a",
+      "path": "SKILL.md",
+      "url": "https://github.com/op7418/guizang-ppt-skill/blob/93d21bf4a73a851907a6eb00acbf30618236667a/SKILL.md",
+      "sha256": "1c2c70d153c401be00ef4a1cd1b1cea31169c943450c4ba0e1ac504041c7f9bd"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "README.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/README.md",
+      "sha256": "0f6a07580f3c627253e15a58dd0439e135049ec38eb16cf3587f7e50abc6f590"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-code-connect-components/LICENSE.TXT",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-code-connect-components/LICENSE.TXT",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-code-connect-components/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-code-connect-components/SKILL.md",
+      "sha256": "0f19edad8aed28063a3517c419fbcbef5421d024f189fd02a17fae25093ec69d"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-create-design-system-rules/LICENSE.TXT",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-create-design-system-rules/LICENSE.TXT",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-create-design-system-rules/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-create-design-system-rules/SKILL.md",
+      "sha256": "1f4d7e16ba5325a80da32e2e6bde0ea850ba9287f35f4675d51d55d2f0dc6e2a"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-create-new-file/LICENSE.TXT",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-create-new-file/LICENSE.TXT",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-create-new-file/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-create-new-file/SKILL.md",
+      "sha256": "23f429203bd57f186905b2523d4ff8bdf10d3b85b39fc7eed4786097d81f1adc"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-generate-design/LICENSE.TXT",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-generate-design/LICENSE.TXT",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-generate-design/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-generate-design/SKILL.md",
+      "sha256": "45d2b97103bdeb31cb2744fca2c79bcefb659c88faca626bea30ec2f9342dcc9"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-generate-library/LICENSE.TXT",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-generate-library/LICENSE.TXT",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-generate-library/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-generate-library/SKILL.md",
+      "sha256": "7f42103c59fc181d7081404a56545f321c458d97f5ee7f7a0ab2af75ea69a85f"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-implement-design/LICENSE.txt",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-implement-design/LICENSE.txt",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-implement-design/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-implement-design/SKILL.md",
+      "sha256": "63f3d12d444547bbf68c10a12982b1f42e0f6e26fc074324564a13184d4b15ad"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-use/LICENSE.TXT",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-use/LICENSE.TXT",
+      "sha256": "36bdad8e8a43a282ba3a5af4ac022d8b117c5826b8b473fe6a32622e83856ae3"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/figma-use/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/figma-use/SKILL.md",
+      "sha256": "afa9c4ae068a18b93e4914b2d224180ace113db7713dd66f4df397f16ba9c4b4"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/hatch-pet/LICENSE.txt",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/hatch-pet/LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/hatch-pet/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/hatch-pet/SKILL.md",
+      "sha256": "7ab0f01e8561085d1b494a6ca74abed766c655da8ec98284fb38a362c19d6871"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/screenshot/LICENSE.txt",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/screenshot/LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/screenshot/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/screenshot/SKILL.md",
+      "sha256": "081935a6a163277537d46365f49d6b4a3cb40b4748347e7e88759c5927fa8cf5"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/speech/LICENSE.txt",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/speech/LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/speech/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/speech/SKILL.md",
+      "sha256": "d6120efc03ea0e80204f687801cfaec8efc4519a3430b68e13e4ebd8e1c69b52"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.system/imagegen/LICENSE.txt",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.system/imagegen/LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9"
+    },
+    {
+      "repo": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.system/imagegen/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.system/imagegen/SKILL.md",
+      "sha256": "826d05b806d51fa81cd650f1c0854b0a1f7fbccd1b152c588ded1797a2e7218f"
+    },
+    {
+      "repo": "pbakaus/impeccable",
+      "commit": "687bc381bc9091bf252c0a05303640561014a425",
+      "path": "plugin/skills/impeccable/SKILL.md",
+      "url": "https://github.com/pbakaus/impeccable/blob/687bc381bc9091bf252c0a05303640561014a425/plugin/skills/impeccable/SKILL.md",
+      "sha256": "0594cbd68a3ad7bb972e56195385369e2c34feb17ef8f7c851b365f0804135e9"
+    },
+    {
+      "repo": "pbakaus/impeccable",
+      "commit": "687bc381bc9091bf252c0a05303640561014a425",
+      "path": "LICENSE",
+      "url": "https://github.com/pbakaus/impeccable/blob/687bc381bc9091bf252c0a05303640561014a425/LICENSE",
+      "sha256": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812"
+    },
+    {
+      "repo": "pbakaus/impeccable",
+      "commit": "687bc381bc9091bf252c0a05303640561014a425",
+      "path": "README.md",
+      "url": "https://github.com/pbakaus/impeccable/blob/687bc381bc9091bf252c0a05303640561014a425/README.md",
+      "sha256": "6c4a86424a12eac2a568e4cc3afa411d9f2acb08fce3e97b41c9d6e951ba8bdf"
+    },
+    {
+      "repo": "raintree-technology/apple-hig-skills",
+      "commit": "a0f1e4ec3c5ada82e538710b54a344db63189d8b",
+      "path": "LICENSE",
+      "url": "https://github.com/raintree-technology/apple-hig-skills/blob/a0f1e4ec3c5ada82e538710b54a344db63189d8b/LICENSE",
+      "sha256": "3da455a4b6ffe1a2020ba68af8c9b1ffe5169bd8553e61b718273c4e554578f2"
+    },
+    {
+      "repo": "raintree-technology/apple-hig-skills",
+      "commit": "a0f1e4ec3c5ada82e538710b54a344db63189d8b",
+      "path": "README.md",
+      "url": "https://github.com/raintree-technology/apple-hig-skills/blob/a0f1e4ec3c5ada82e538710b54a344db63189d8b/README.md",
+      "sha256": "9849e266b396d88eed9f4d3f4fd915455269f4682a9033e0796a417d21943ad1"
+    },
+    {
+      "repo": "remotion-dev/remotion",
+      "commit": "5dee2b6b14f7f0cebb040b7d92b0097b6be582a9",
+      "path": "LICENSE.md",
+      "url": "https://github.com/remotion-dev/remotion/blob/5dee2b6b14f7f0cebb040b7d92b0097b6be582a9/LICENSE.md",
+      "sha256": "bd65083b940f61904f6ef298aade918a7cad72a3e35bc406e36fab365844b673"
+    },
+    {
+      "repo": "remotion-dev/remotion",
+      "commit": "5dee2b6b14f7f0cebb040b7d92b0097b6be582a9",
+      "path": "README.md",
+      "url": "https://github.com/remotion-dev/remotion/blob/5dee2b6b14f7f0cebb040b7d92b0097b6be582a9/README.md",
+      "sha256": "4c6717ce4a4f556300edf18cb8c64965786754649889353599b3435810268e58"
+    },
+    {
+      "repo": "remotion-dev/skills",
+      "commit": "a2824c67f8b4585c294a8101db9f9f0ad3c643f8",
+      "path": "README.md",
+      "url": "https://github.com/remotion-dev/skills/blob/a2824c67f8b4585c294a8101db9f9f0ad3c643f8/README.md",
+      "sha256": "79241f8ff6e82d0e9e9976cac579ed86b05d3e63527ce7493b5081a8c38a0f2e"
+    },
+    {
+      "repo": "remotion-dev/skills",
+      "commit": "a2824c67f8b4585c294a8101db9f9f0ad3c643f8",
+      "path": "skills/remotion-best-practices/SKILL.md",
+      "url": "https://github.com/remotion-dev/skills/blob/a2824c67f8b4585c294a8101db9f9f0ad3c643f8/skills/remotion-best-practices/SKILL.md",
+      "sha256": "b9712d028fe9c3f8d08dbdc08d17e33d4f9b26da44d945ce84995e4011b36096"
+    },
+    {
+      "repo": "replicate/skills",
+      "commit": "2f36e415965ae63baa1c9f6635888092bcd771d3",
+      "path": "LICENSE",
+      "url": "https://github.com/replicate/skills/blob/2f36e415965ae63baa1c9f6635888092bcd771d3/LICENSE",
+      "sha256": "f7fe9e559ee33341e61df0bc9c31b7bcf967a4350feeb9d8cbb48bf3ea5f8a6a"
+    },
+    {
+      "repo": "replicate/skills",
+      "commit": "2f36e415965ae63baa1c9f6635888092bcd771d3",
+      "path": "README.md",
+      "url": "https://github.com/replicate/skills/blob/2f36e415965ae63baa1c9f6635888092bcd771d3/README.md",
+      "sha256": "ef5359c03879d0e3d6fe861ddf606b761eb7e09a58a2a1da781b328c35d36215"
+    },
+    {
+      "repo": "shadcn/ui",
+      "commit": "42f3bb63b46a69e52a24bd005cdc9ec15ba7a7b9",
+      "path": "LICENSE.md",
+      "url": "https://github.com/shadcn/ui/blob/42f3bb63b46a69e52a24bd005cdc9ec15ba7a7b9/LICENSE.md",
+      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+    },
+    {
+      "repo": "shadcn/ui",
+      "commit": "42f3bb63b46a69e52a24bd005cdc9ec15ba7a7b9",
+      "path": "README.md",
+      "url": "https://github.com/shadcn/ui/blob/42f3bb63b46a69e52a24bd005cdc9ec15ba7a7b9/README.md",
+      "sha256": "bb0869848a2063e405b141aa6fae8b10f132ac45036f613459e2d778b7609619"
+    },
+    {
+      "repo": "shadcn/ui",
+      "commit": "42f3bb63b46a69e52a24bd005cdc9ec15ba7a7b9",
+      "path": "skills/shadcn/SKILL.md",
+      "url": "https://github.com/shadcn/ui/blob/42f3bb63b46a69e52a24bd005cdc9ec15ba7a7b9/skills/shadcn/SKILL.md",
+      "sha256": "93951e5e83f616a3e046491c00d770bd54c0a64164706cd1191822a233d27592"
+    },
+    {
+      "repo": "smixs/creative-director-skill",
+      "commit": "ac06eb255371da35d1db0a146dbfcca8c8857543",
+      "path": "LICENSE",
+      "url": "https://github.com/smixs/creative-director-skill/blob/ac06eb255371da35d1db0a146dbfcca8c8857543/LICENSE",
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "repo": "smixs/creative-director-skill",
+      "commit": "ac06eb255371da35d1db0a146dbfcca8c8857543",
+      "path": "NOTICE",
+      "url": "https://github.com/smixs/creative-director-skill/blob/ac06eb255371da35d1db0a146dbfcca8c8857543/NOTICE",
+      "sha256": "b82cfae27f5c2e390ce50f99534763d3896819ca85380836c39fbaa3612dbb43"
+    },
+    {
+      "repo": "smixs/creative-director-skill",
+      "commit": "ac06eb255371da35d1db0a146dbfcca8c8857543",
+      "path": "README.md",
+      "url": "https://github.com/smixs/creative-director-skill/blob/ac06eb255371da35d1db0a146dbfcca8c8857543/README.md",
+      "sha256": "ef305dab78239db61d0cc09310740ed75f9e875d8c8b34c9a1c67003e3ebb65e"
+    },
+    {
+      "repo": "smixs/creative-director-skill",
+      "commit": "ac06eb255371da35d1db0a146dbfcca8c8857543",
+      "path": "creative-director/SKILL.md",
+      "url": "https://github.com/smixs/creative-director-skill/blob/ac06eb255371da35d1db0a146dbfcca8c8857543/creative-director/SKILL.md",
+      "sha256": "9c312234bf6ad35c61860a63f08724736ba66a7f96b653a1ac5210ae672eeac6"
+    },
+    {
+      "repo": "tw93/kami",
+      "commit": "588a727e1f11fd911efa166af2aa59416a002268",
+      "path": "LICENSE",
+      "url": "https://github.com/tw93/kami/blob/588a727e1f11fd911efa166af2aa59416a002268/LICENSE",
+      "sha256": "83ef2e3caa22ff257740df8684627ef8c4e21102986cf943e3fdd31ca7b430d5"
+    },
+    {
+      "repo": "tw93/kami",
+      "commit": "588a727e1f11fd911efa166af2aa59416a002268",
+      "path": "README.md",
+      "url": "https://github.com/tw93/kami/blob/588a727e1f11fd911efa166af2aa59416a002268/README.md",
+      "sha256": "a3c3fcbb81fd16f082ebc9c726a92a47b5073e310ec76878073b42b42fb6cc51"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "LICENSE",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/LICENSE",
+      "sha256": "0c3d01f6c80957efc97dd3a7b2e8ffb77d18de499ed4c372cf86048f03076307"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "README.md",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/README.md",
+      "sha256": "9009e57074f2396244de0cd0eb990baf0ef690e12ee0d293a50b07696a5ec462"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "skills/venice-audio-music/SKILL.md",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/skills/venice-audio-music/SKILL.md",
+      "sha256": "39ebd9c768bdcf1f432e1c7bbe8ac1d3d2cdf89787a05355e50697fa4c95b4b8"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "skills/venice-audio-speech/SKILL.md",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/skills/venice-audio-speech/SKILL.md",
+      "sha256": "ece2755f1a8e86d28d9901a99d9d2254ed92c15d4de883056f61748c2eb48288"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "skills/venice-image-edit/SKILL.md",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/skills/venice-image-edit/SKILL.md",
+      "sha256": "c588ece004c7f413658ff26907d5f689894b81c6a9ed3dcde875345c86a0da05"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "skills/venice-image-generate/SKILL.md",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/skills/venice-image-generate/SKILL.md",
+      "sha256": "fa8db3d8e933f007746ecbb3e5df38d8dbe4a0f6000ed4c64ae0e3d4931461ac"
+    },
+    {
+      "repo": "veniceai/skills",
+      "commit": "15a6fa63ff7466cd894ccc5bab91985e3b88f216",
+      "path": "skills/venice-video/SKILL.md",
+      "url": "https://github.com/veniceai/skills/blob/15a6fa63ff7466cd894ccc5bab91985e3b88f216/skills/venice-video/SKILL.md",
+      "sha256": "0fb5c89d8380a4b3a2ef49a313900d1a1a2eb29d14d763aef0ebdd5eec6591ee"
+    },
+    {
+      "repo": "vercel-labs/agent-browser",
+      "commit": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca",
+      "path": "LICENSE",
+      "url": "https://github.com/vercel-labs/agent-browser/blob/d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca/LICENSE",
+      "sha256": "014bb31e83d5c2e76aea1cc6e82217346ab41362f32cb355ad0f5c10aa0aeaff"
+    },
+    {
+      "repo": "vercel-labs/agent-browser",
+      "commit": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca",
+      "path": "README.md",
+      "url": "https://github.com/vercel-labs/agent-browser/blob/d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca/README.md",
+      "sha256": "a96587f37a6e624a56ceba9402892f072229b49f50dc6f56b1c128ce9a2126b2"
+    },
+    {
+      "repo": "vercel-labs/agent-browser",
+      "commit": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca",
+      "path": "skills/agent-browser/SKILL.md",
+      "url": "https://github.com/vercel-labs/agent-browser/blob/d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca/skills/agent-browser/SKILL.md",
+      "sha256": "ef7c2da16e25e86b78396bd9a2fd112e23c42cdd2de435197a920b9fc646d1c2"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "path": "README.md",
+      "url": "https://github.com/vercel-labs/agent-skills/blob/1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62/README.md",
+      "sha256": "9429e781e3fb2f005e619b96fe18cdc59f8db38b619a4c98f0c46c86357e56a0"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "path": "skills/web-design-guidelines/SKILL.md",
+      "url": "https://github.com/vercel-labs/agent-skills/blob/1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62/skills/web-design-guidelines/SKILL.md",
+      "sha256": "f4647ca866a3accf763777f83e7682954f0187cd6bea7eea0399796652414e8f"
+    },
+    {
+      "repo": "vercel-labs/skills",
+      "commit": "d3701c11b1101251af14c9d148f026e1a47ebe17",
+      "path": "LICENSE",
+      "url": "https://github.com/vercel-labs/skills/blob/d3701c11b1101251af14c9d148f026e1a47ebe17/LICENSE",
+      "sha256": "661142e53c313d2bb5e1b055f5c0a39001450ff1b5e27b89dc4bc7de9a6352ca"
+    },
+    {
+      "repo": "vercel-labs/skills",
+      "commit": "d3701c11b1101251af14c9d148f026e1a47ebe17",
+      "path": "README.md",
+      "url": "https://github.com/vercel-labs/skills/blob/d3701c11b1101251af14c9d148f026e1a47ebe17/README.md",
+      "sha256": "d2626339f5ad0e9a25d764c1ff2e3030dbc51c926ca369a6c229e3ce1865770e"
+    },
+    {
+      "repo": "vercel-labs/skills",
+      "commit": "d3701c11b1101251af14c9d148f026e1a47ebe17",
+      "path": "skills/find-skills/SKILL.md",
+      "url": "https://github.com/vercel-labs/skills/blob/d3701c11b1101251af14c9d148f026e1a47ebe17/skills/find-skills/SKILL.md",
+      "sha256": "c00eeea0e13e74fe4a9d84ba0a8542205a1b736d65f13134fe1a6647eb14976f"
+    },
+    {
+      "repo": "virattt/dexter",
+      "commit": "534f6be455523c5926eba72bdaf4f914555be5c9",
+      "path": "README.md",
+      "url": "https://github.com/virattt/dexter/blob/534f6be455523c5926eba72bdaf4f914555be5c9/README.md",
+      "sha256": "982f4294335c2941b01297d00f4da6756a1b73dd9c02cdad705e58db767e3a09"
+    },
+    {
+      "repo": "virattt/dexter",
+      "commit": "534f6be455523c5926eba72bdaf4f914555be5c9",
+      "path": "src/skills/dcf/SKILL.md",
+      "url": "https://github.com/virattt/dexter/blob/534f6be455523c5926eba72bdaf4f914555be5c9/src/skills/dcf/SKILL.md",
+      "sha256": "7baceee38642fb2fa461b64a5de0b4bea488ab6892e34f57ed71e9b3e54dce93"
+    },
+    {
+      "repo": "virattt/dexter",
+      "commit": "534f6be455523c5926eba72bdaf4f914555be5c9",
+      "path": "src/skills/x-research/SKILL.md",
+      "url": "https://github.com/virattt/dexter/blob/534f6be455523c5926eba72bdaf4f914555be5c9/src/skills/x-research/SKILL.md",
+      "sha256": "6b6de27142c24af10b8dac48c677f556b6ed28a77b59007fe21259e46512c77b"
+    },
+    {
+      "repo": "wholiver/swiftui-design-skill",
+      "commit": "2c82638ebd3c801d9d2d12b5f2d6c20495939995",
+      "path": "LICENSE",
+      "url": "https://github.com/wholiver/swiftui-design-skill/blob/2c82638ebd3c801d9d2d12b5f2d6c20495939995/LICENSE",
+      "sha256": "afc95b20041e69b4caee42924c661f23cdaa177c8c429f30ec014a5a6d378fff"
+    },
+    {
+      "repo": "wholiver/swiftui-design-skill",
+      "commit": "2c82638ebd3c801d9d2d12b5f2d6c20495939995",
+      "path": "README.md",
+      "url": "https://github.com/wholiver/swiftui-design-skill/blob/2c82638ebd3c801d9d2d12b5f2d6c20495939995/README.md",
+      "sha256": "fb838a4f51b8dbb7d491fa7e7a5366cefd71db82bc9d472301e2a5ec702b4940"
+    },
+    {
+      "repo": "wholiver/swiftui-design-skill",
+      "commit": "2c82638ebd3c801d9d2d12b5f2d6c20495939995",
+      "path": "SKILL.md",
+      "url": "https://github.com/wholiver/swiftui-design-skill/blob/2c82638ebd3c801d9d2d12b5f2d6c20495939995/SKILL.md",
+      "sha256": "3047b0543e0b7ab07ff727a6a63d259c840dd676275c8e92016ea68ed73fee1e"
+    },
+    {
+      "repo": "wshobson/agents",
+      "commit": "4bde3168b43c0655c4d00ea2726e631719908a6d",
+      "path": "LICENSE",
+      "url": "https://github.com/wshobson/agents/blob/4bde3168b43c0655c4d00ea2726e631719908a6d/LICENSE",
+      "sha256": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746"
+    },
+    {
+      "repo": "wshobson/agents",
+      "commit": "4bde3168b43c0655c4d00ea2726e631719908a6d",
+      "path": "README.md",
+      "url": "https://github.com/wshobson/agents/blob/4bde3168b43c0655c4d00ea2726e631719908a6d/README.md",
+      "sha256": "fa2d6d0adda7de1f7f76c57bf30ac8493eeb45618c909f61f831034721758397"
+    },
+    {
+      "repo": "wshobson/agents",
+      "commit": "4bde3168b43c0655c4d00ea2726e631719908a6d",
+      "path": "plugins/frontend-mobile-development/skills/tailwind-design-system/SKILL.md",
+      "url": "https://github.com/wshobson/agents/blob/4bde3168b43c0655c4d00ea2726e631719908a6d/plugins/frontend-mobile-development/skills/tailwind-design-system/SKILL.md",
+      "sha256": "b6577edb7b7f71a6954f68b80c7eea1748ccdf31862759f864bce558fb2bcf83"
+    },
+    {
+      "repo": "zarazhangrui/frontend-slides",
+      "commit": "9906a34d640d2111f724544cbc50f7f130569ae1",
+      "path": "LICENSE",
+      "url": "https://github.com/zarazhangrui/frontend-slides/blob/9906a34d640d2111f724544cbc50f7f130569ae1/LICENSE",
+      "sha256": "62928eb197fe4662d1efc3af0735b3ba5df3c0308badd9a2baf2b619009f5366"
+    },
+    {
+      "repo": "zarazhangrui/frontend-slides",
+      "commit": "9906a34d640d2111f724544cbc50f7f130569ae1",
+      "path": "README.md",
+      "url": "https://github.com/zarazhangrui/frontend-slides/blob/9906a34d640d2111f724544cbc50f7f130569ae1/README.md",
+      "sha256": "e358f7aab79a0193b5494c4423ad0e47f13624ee5153095e283e4ae9d1982dac"
+    },
+    {
+      "repo": "zarazhangrui/frontend-slides",
+      "commit": "9906a34d640d2111f724544cbc50f7f130569ae1",
+      "path": "plugins/frontend-slides/skills/frontend-slides/SKILL.md",
+      "url": "https://github.com/zarazhangrui/frontend-slides/blob/9906a34d640d2111f724544cbc50f7f130569ae1/plugins/frontend-slides/skills/frontend-slides/SKILL.md",
+      "sha256": "832994fe1dfcce2aa7ceca9a1b7b708eca94becef242713999855f4e946cf4d5"
+    }
+  ]
+}

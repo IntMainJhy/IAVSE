@@ -1,5 +1,8 @@
 import {curatedSkills,skillAiTools,skillCategories,skillCatalogVerifiedAt} from './skill-catalog.mjs';
 import {readPublishedSkills} from './design-intake.mjs';
+import {mergeImportedSkills,skillCollectionIds,skillCollections} from './skill-import-directory.mjs';
+import vibeuiSkills from './skill-imports/vibeui.json' with {type:'json'};
+import stylekitSkills from './skill-imports/stylekit.json' with {type:'json'};
 
 export {normalizeSkillToolNames as normalizePublicSkillTools} from './skill-tool-names.mjs';
 import {normalizeSkillToolNames} from './skill-tool-names.mjs';
@@ -10,7 +13,7 @@ const recommendation=skill=>Array.isArray(skill.recommendedFor)?skill.recommende
 /** Merge deterministic editorial entries with owner-approved snapshots, never private drafts.
  * @returns {PublicSkill[]}
  */
-export function mergePublicSkills(curated,published){
+export function mergePublicSkills(curated,published,imported=[]){
  const entries=curated.map(skill=>({...skill,slug:skill.id,origin:'curated',recommendation:recommendation(skill),featured:skill.featured===true||skill.recommended===true,verifiedAt:skillCatalogVerifiedAt}));
  const slugs=new Set(entries.map(skill=>skill.slug)),ids=new Set(entries.map(skill=>skill.id)),repos=new Set(entries.map(skill=>skill.repo.toLowerCase()));
  for(const skill of published){
@@ -19,20 +22,21 @@ export function mergePublicSkills(curated,published){
   const tools=normalizeSkillToolNames(skill.tools);if(!tools.length)continue;
   entries.push({...skill,name:skill.name||skill.title,slug,origin:'reviewed',tools,recommendation:recommendation(skill),featured:skill.recommended===true||skill.featured===true,verifiedAt:skill.verifiedAt||''});slugs.add(slug);ids.add(skill.id);repos.add(repo);
  }
- return entries;
+ return mergeImportedSkills(entries,imported);
 }
-export function readPublicSkills(){return mergePublicSkills(curatedSkills,readPublishedSkills())}
+export function readPublicSkills(){return mergePublicSkills(curatedSkills,readPublishedSkills(),[...vibeuiSkills,...stylekitSkills].filter(skill=>skill.sourceStatus==='verified'&&['single','collection'].includes(skill.kind)))}
 export function findPublicSkill(id,entries=readPublicSkills()){return entries.find(skill=>skill.slug===id||skill.id===id)||null}
 /** @param {PublicSkill[]} entries
  * @returns {PublicSkill[]}
  */
-export function filterPublicSkills(entries,{category='all',q='',tool='all'}={},translate=text=>text){
+export function filterPublicSkills(entries,{category='all',q='',tool='all',collection='all'}={},translate=text=>text){
  const terms=q.normalize('NFKC').toLocaleLowerCase().split(/\s+/).filter(Boolean);
  return entries.filter(skill=>{
   if(category!=='all'&&skill.category!==category)return false;
   if(tool!=='all'&&!skill.tools.some(item=>item.id===tool))return false;
+  if(collection!=='all'&&!skillCollectionIds(skill).includes(collection))return false;
   const categoryLabel=skillCategories.find(item=>item.id===skill.category)?.label||'';
-  const haystack=[skill.name,skill.slug,skill.repo,skill.summary,translate(skill.summary),skill.recommendation,translate(skill.recommendation||''),categoryLabel,translate(categoryLabel),...(skill.tags||[]),...skill.tools.map(item=>item.label)].join(' ').normalize('NFKC').toLocaleLowerCase();
+  const haystack=[skill.name,skill.slug,skill.repo,skill.upstreamSkillName,skill.summary,translate(skill.summary),skill.recommendation,translate(skill.recommendation||''),categoryLabel,translate(categoryLabel),...(skill.tags||[]),...skill.tools.map(item=>item.label),...skillCollections(skill).map(source=>source.name)].join(' ').normalize('NFKC').toLocaleLowerCase();
   return terms.every(term=>haystack.includes(term));
  });
 }

@@ -1,0 +1,916 @@
+[
+  {
+    "id": "vibeui-anthropics-claude-code-reference",
+    "slug": "vibeui-anthropics-claude-code-reference",
+    "name": "claude-code · 待核实来源",
+    "category": "design",
+    "repo": "anthropics/claude-code",
+    "commit": "0ed94698aa0aeee471465fc9c867c2e8434c4d68",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/anthropics/claude-code/blob/0ed94698aa0aeee471465fc9c867c2e8434c4d68/README.md",
+    "source": {
+      "name": "anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "figma-designer"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "上游专用条款",
+    "licenseUrl": "https://github.com/anthropics/claude-code/blob/0ed94698aa0aeee471465fc9c867c2e8434c4d68/LICENSE.md",
+    "licenseStatus": "custom",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/anthropics/claude-code/blob/0ed94698aa0aeee471465fc9c867c2e8434c4d68/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/anthropics/claude-code/blob/0ed94698aa0aeee471465fc9c867c2e8434c4d68/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-supercent-io-skills-template-reference",
+    "slug": "vibeui-supercent-io-skills-template-reference",
+    "name": "skills-template · 待核实来源",
+    "category": "testing",
+    "repo": "supercent-io/skills-template",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/supercent-io/skills-template",
+    "source": {
+      "name": "supercent-io/skills-template",
+      "url": "https://github.com/supercent-io/skills-template"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "web-accessibility",
+      "code-review-agents"
+    ],
+    "tags": [
+      "待核实",
+      "testing"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/supercent-io/skills-template",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/supercent-io/skills-template",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-frankbria-ralph-claude-code-reference",
+    "slug": "vibeui-frankbria-ralph-claude-code-reference",
+    "name": "ralph-claude-code · 待核实来源",
+    "category": "agents",
+    "repo": "frankbria/ralph-claude-code",
+    "commit": "11f9df5becc8093ff2265542107e8e53a42e9970",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/frankbria/ralph-claude-code/blob/11f9df5becc8093ff2265542107e8e53a42e9970/README.md",
+    "source": {
+      "name": "frankbria/ralph-claude-code",
+      "url": "https://github.com/frankbria/ralph-claude-code"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "ralph-loop"
+    ],
+    "tags": [
+      "待核实",
+      "agents"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/frankbria/ralph-claude-code/blob/11f9df5becc8093ff2265542107e8e53a42e9970/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/frankbria/ralph-claude-code/blob/11f9df5becc8093ff2265542107e8e53a42e9970/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/frankbria/ralph-claude-code/blob/11f9df5becc8093ff2265542107e8e53a42e9970/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-context7-skills-reference",
+    "slug": "vibeui-context7-skills-reference",
+    "name": "skills · 待核实来源",
+    "category": "design",
+    "repo": "context7/skills",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/context7/skills",
+    "source": {
+      "name": "context7/skills",
+      "url": "https://github.com/context7/skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "context7"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/context7/skills",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/context7/skills",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-jezweb-claude-skills-reference",
+    "slug": "vibeui-jezweb-claude-skills-reference",
+    "name": "claude-skills · 待核实来源",
+    "category": "motion",
+    "repo": "jezweb/claude-skills",
+    "commit": "1260fa7439b36b18dbf16648ccc7fb44783f6c23",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/jezweb/claude-skills/blob/1260fa7439b36b18dbf16648ccc7fb44783f6c23/README.md",
+    "source": {
+      "name": "jezweb/claude-skills",
+      "url": "https://github.com/jezweb/claude-skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "motion-skill"
+    ],
+    "tags": [
+      "待核实",
+      "motion"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/jezweb/claude-skills/blob/1260fa7439b36b18dbf16648ccc7fb44783f6c23/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/jezweb/claude-skills/blob/1260fa7439b36b18dbf16648ccc7fb44783f6c23/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/jezweb/claude-skills/blob/1260fa7439b36b18dbf16648ccc7fb44783f6c23/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-guilhermemarketing-gui-marketing-skills-reference",
+    "slug": "vibeui-guilhermemarketing-gui-marketing-skills-reference",
+    "name": "gui-marketing-skills · 待核实来源",
+    "category": "motion",
+    "repo": "guilhermemarketing/gui-marketing-skills",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/guilhermemarketing/gui-marketing-skills",
+    "source": {
+      "name": "guilhermemarketing/gui-marketing-skills",
+      "url": "https://github.com/guilhermemarketing/gui-marketing-skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "animation-systems"
+    ],
+    "tags": [
+      "待核实",
+      "motion"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/guilhermemarketing/gui-marketing-skills",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/guilhermemarketing/gui-marketing-skills",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-typeui-design-skills-reference",
+    "slug": "vibeui-typeui-design-skills-reference",
+    "name": "TypeUI Design Skills · 待核实来源",
+    "category": "design",
+    "repo": "",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://www.typeui.sh/design-skills",
+    "source": {
+      "name": "TypeUI",
+      "url": "https://www.typeui.sh/design-skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "typeui-design-skills"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://www.typeui.sh/design-skills",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "原收录链接未能对应到具体 Skill 文件。"
+    },
+    "tools": [],
+    "installUrl": "https://www.typeui.sh/design-skills",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-coreyhaines31-marketingskills-reference",
+    "slug": "vibeui-coreyhaines31-marketingskills-reference",
+    "name": "marketingskills · 待核实来源",
+    "category": "knowledge",
+    "repo": "coreyhaines31/marketingskills",
+    "commit": "96798cf38736ecdba015a1d2b0521b0c8f8f41dd",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/README.md",
+    "source": {
+      "name": "coreyhaines31/marketingskills",
+      "url": "https://github.com/coreyhaines31/marketingskills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "product-marketing-context",
+      "pricing-strategy",
+      "od-paywall-upgrade-cro"
+    ],
+    "tags": [
+      "待核实",
+      "knowledge"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/coreyhaines31/marketingskills/blob/96798cf38736ecdba015a1d2b0521b0c8f8f41dd/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-bitwize-music-studio-claude-ai-music-skills-reference",
+    "slug": "vibeui-bitwize-music-studio-claude-ai-music-skills-reference",
+    "name": "claude-ai-music-skills · 待核实来源",
+    "category": "motion",
+    "repo": "bitwize-music-studio/claude-ai-music-skills",
+    "commit": "597d928fb2c8316ee13159771405813174aa01de",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/bitwize-music-studio/claude-ai-music-skills/blob/597d928fb2c8316ee13159771405813174aa01de/README.md",
+    "source": {
+      "name": "bitwize-music-studio/claude-ai-music-skills",
+      "url": "https://github.com/bitwize-music-studio/claude-ai-music-skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-ai-music-album"
+    ],
+    "tags": [
+      "待核实",
+      "motion"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://github.com/bitwize-music-studio/claude-ai-music-skills/blob/597d928fb2c8316ee13159771405813174aa01de/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/bitwize-music-studio/claude-ai-music-skills/blob/597d928fb2c8316ee13159771405813174aa01de/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/bitwize-music-studio/claude-ai-music-skills/blob/597d928fb2c8316ee13159771405813174aa01de/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-leonxlnx-taste-skill-reference",
+    "slug": "vibeui-leonxlnx-taste-skill-reference",
+    "name": "taste-skill · 待核实来源",
+    "category": "design",
+    "repo": "Leonxlnx/taste-skill",
+    "commit": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/README.md",
+    "source": {
+      "name": "Leonxlnx/taste-skill",
+      "url": "https://github.com/Leonxlnx/taste-skill"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-brandkit",
+      "od-brutalist-skill",
+      "od-gpt-tasteskill",
+      "od-html-ppt-taste-brutalist",
+      "od-html-ppt-taste-editorial",
+      "od-image-to-code-skill",
+      "od-imagegen-frontend-mobile",
+      "od-imagegen-frontend-web",
+      "od-minimalist-skill",
+      "od-output-skill",
+      "od-redesign-skill",
+      "od-soft-skill",
+      "od-stitch-skill",
+      "od-taste-skill-v1",
+      "od-web-prototype-taste-brutalist",
+      "od-web-prototype-taste-editorial",
+      "od-web-prototype-taste-soft"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/Leonxlnx/taste-skill/blob/f6b76575f949707b4e3c37cd86cb44b0b98643e8/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-openai-skills-reference",
+    "slug": "vibeui-openai-skills-reference",
+    "name": "skills · 待核实来源",
+    "category": "knowledge",
+    "repo": "openai/skills",
+    "commit": "49f948faa9258a0c61caceaf225e179651397431",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/README.md",
+    "source": {
+      "name": "openai/skills",
+      "url": "https://github.com/openai/skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-doc",
+      "od-frontend-skill",
+      "od-slides",
+      "od-sora"
+    ],
+    "tags": [
+      "待核实",
+      "knowledge"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-fal-ai-community-skills-reference",
+    "slug": "vibeui-fal-ai-community-skills-reference",
+    "name": "skills · 待核实来源",
+    "category": "design",
+    "repo": "fal-ai-community/skills",
+    "commit": "ca79376d624d244e601f9182fa80b5bf66efec9c",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/README.md",
+    "source": {
+      "name": "fal-ai-community/skills",
+      "url": "https://github.com/fal-ai-community/skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-fal-3d",
+      "od-fal-generate",
+      "od-fal-image-edit",
+      "od-fal-kling-o3",
+      "od-fal-lip-sync",
+      "od-fal-realtime",
+      "od-fal-restore",
+      "od-fal-train",
+      "od-fal-tryon",
+      "od-fal-upscale",
+      "od-fal-video-edit",
+      "od-fal-vision"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/fal-ai-community/skills/blob/ca79376d624d244e601f9182fa80b5bf66efec9c/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-flutter-skills-reference",
+    "slug": "vibeui-flutter-skills-reference",
+    "name": "skills · 待核实来源",
+    "category": "design",
+    "repo": "flutter/skills",
+    "commit": "b7d5a0be4195b82fe073620fb52f594b0809eacf",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/flutter/skills/blob/b7d5a0be4195b82fe073620fb52f594b0809eacf/README.md",
+    "source": {
+      "name": "flutter/skills",
+      "url": "https://github.com/flutter/skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-flutter-animating-apps"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "BSD（以上游条款为准）",
+    "licenseUrl": "https://github.com/flutter/skills/blob/b7d5a0be4195b82fe073620fb52f594b0809eacf/LICENSE",
+    "licenseStatus": "custom",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/flutter/skills/blob/b7d5a0be4195b82fe073620fb52f594b0809eacf/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/flutter/skills/blob/b7d5a0be4195b82fe073620fb52f594b0809eacf/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-anthropics-financial-services-reference",
+    "slug": "vibeui-anthropics-financial-services-reference",
+    "name": "financial-services · 待核实来源",
+    "category": "design",
+    "repo": "anthropics/financial-services",
+    "commit": "60565064557ca77b12f62aa7877f365d111c129d",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/anthropics/financial-services/blob/60565064557ca77b12f62aa7877f365d111c129d/README.md",
+    "source": {
+      "name": "anthropics/financial-services",
+      "url": "https://github.com/anthropics/financial-services"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-ib-pitch-book"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://github.com/anthropics/financial-services/blob/60565064557ca77b12f62aa7877f365d111c129d/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/anthropics/financial-services/blob/60565064557ca77b12f62aa7877f365d111c129d/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/anthropics/financial-services/blob/60565064557ca77b12f62aa7877f365d111c129d/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-sanjay3290-imagen-reference",
+    "slug": "vibeui-sanjay3290-imagen-reference",
+    "name": "imagen · 待核实来源",
+    "category": "design",
+    "repo": "sanjay3290/imagen",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/sanjay3290/imagen",
+    "source": {
+      "name": "sanjay3290/imagen",
+      "url": "https://github.com/sanjay3290/imagen"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-imagen"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/sanjay3290/imagen",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/sanjay3290/imagen",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-tw93-kami-reference",
+    "slug": "vibeui-tw93-kami-reference",
+    "name": "kami · 待核实来源",
+    "category": "knowledge",
+    "repo": "tw93/kami",
+    "commit": "588a727e1f11fd911efa166af2aa59416a002268",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/tw93/kami/blob/588a727e1f11fd911efa166af2aa59416a002268/README.md",
+    "source": {
+      "name": "tw93/kami",
+      "url": "https://github.com/tw93/kami"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-kami-deck",
+      "od-kami-landing"
+    ],
+    "tags": [
+      "待核实",
+      "knowledge"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/tw93/kami/blob/588a727e1f11fd911efa166af2aa59416a002268/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/tw93/kami/blob/588a727e1f11fd911efa166af2aa59416a002268/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/tw93/kami/blob/588a727e1f11fd911efa166af2aa59416a002268/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-pixelbin-dev-skills-reference",
+    "slug": "vibeui-pixelbin-dev-skills-reference",
+    "name": "skills · 待核实来源",
+    "category": "design",
+    "repo": "pixelbin-dev/skills",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/pixelbin-dev/skills",
+    "source": {
+      "name": "pixelbin-dev/skills",
+      "url": "https://github.com/pixelbin-dev/skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-pixelbin-media"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/pixelbin-dev/skills",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/pixelbin-dev/skills",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-remotion-dev-remotion-reference",
+    "slug": "vibeui-remotion-dev-remotion-reference",
+    "name": "remotion · 待核实来源",
+    "category": "motion",
+    "repo": "remotion-dev/remotion",
+    "commit": "5dee2b6b14f7f0cebb040b7d92b0097b6be582a9",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/remotion-dev/remotion/blob/5dee2b6b14f7f0cebb040b7d92b0097b6be582a9/README.md",
+    "source": {
+      "name": "remotion-dev/remotion",
+      "url": "https://github.com/remotion-dev/remotion"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-remotion"
+    ],
+    "tags": [
+      "待核实",
+      "motion"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/remotion-dev/remotion/blob/5dee2b6b14f7f0cebb040b7d92b0097b6be582a9/LICENSE.md",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/remotion-dev/remotion/blob/5dee2b6b14f7f0cebb040b7d92b0097b6be582a9/README.md",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "仓库存在，但当前固定版本没有与此收录名称对应的独立 Skill；保留待核实来源索引。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/remotion-dev/remotion/blob/5dee2b6b14f7f0cebb040b7d92b0097b6be582a9/README.md",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-shpigford-screenshots-reference",
+    "slug": "vibeui-shpigford-screenshots-reference",
+    "name": "screenshots · 待核实来源",
+    "category": "knowledge",
+    "repo": "Shpigford/screenshots",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/Shpigford/screenshots",
+    "source": {
+      "name": "Shpigford/screenshots",
+      "url": "https://github.com/Shpigford/screenshots"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-screenshots-marketing"
+    ],
+    "tags": [
+      "待核实",
+      "knowledge"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/Shpigford/screenshots",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/Shpigford/screenshots",
+    "installCommand": "",
+    "kind": "reference"
+  },
+  {
+    "id": "vibeui-wordpress-skills-reference",
+    "slug": "vibeui-wordpress-skills-reference",
+    "name": "skills · 待核实来源",
+    "category": "design",
+    "repo": "WordPress/skills",
+    "commit": "",
+    "upstreamSkillName": "",
+    "path": "",
+    "skillFile": "",
+    "sourceUrl": "https://github.com/WordPress/skills",
+    "source": {
+      "name": "WordPress/skills",
+      "url": "https://github.com/WordPress/skills"
+    },
+    "collection": {
+      "name": "VibeUI",
+      "url": "https://vibeui.top/?lang=zh"
+    },
+    "collectionEntries": [
+      "od-wpds"
+    ],
+    "tags": [
+      "待核实",
+      "design"
+    ],
+    "summary": "保留原目录的来源线索；尚未确认与原收录名称对应的独立 Skill，请先查看上游说明。",
+    "license": "待核实",
+    "licenseUrl": "",
+    "licenseStatus": "unverified",
+    "licenseScope": "repository",
+    "licenseNote": "记录该 Skill 目录或所属仓库公布的条款；不代表其中外部素材、商标和服务均获相同授权。",
+    "sourceStatus": "unverified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/WordPress/skills",
+      "collectionEvidenceUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/site-assets/hotkeys-skills.js",
+      "note": "上游仓库本次读取未成功（404 或原缓存读取错误），未据此声明作者或许可。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/WordPress/skills",
+    "installCommand": "",
+    "kind": "reference"
+  }
+]

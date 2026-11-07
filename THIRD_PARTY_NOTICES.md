@@ -89,17 +89,39 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 ## Imported UI design references (2026-11-08)
 
 - `src/lib/design-imports/stylekit.json` and `public/design-imports/stylekit/`
-  contain StyleKit documentation and original preview assets by AnxForever,
+  contain StyleKit documentation and preview SVG assets maintained in
+  AnxForever/StyleKit,
   under the MIT license retained in `public/design-imports/stylekit/LICENSE.txt`.
   Embedded Simple Icons glyphs retain the separately included CC0 notice.
   Provenance and pinned source: [StyleKit import record](docs/design-sources-stylekit.md).
 - The 54 licensed brand-reference documents in `src/lib/design-imports/vibeui.json`
-  derive from VoltAgent's awesome-design-md, under the MIT license retained in
-  `docs/licenses/VoltAgent-awesome-design-md-MIT.txt`. The other 58 entries are
-  a factual directory with original summaries and external links to
-  yuanfu8899/uiuxskillProMax; their code and documents are not redistributed.
-  Provenance and pinned source: [VibeUI import record](docs/design-sources-vibeui.md).
+  derive from VoltAgent's awesome-design-md at the verified historical revision
+  `f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1`, under the MIT license retained in
+  `docs/licenses/VoltAgent-awesome-design-md-MIT.txt` and every downloadable
+  specification. They are third-party generated UI studies based on extracted
+  brand references, not official brand templates or VibeUI originals. The other
+  58 entries are a factual directory with original summaries and external links
+  to yuanfu8899/uiuxskillProMax. Its README describes generated examples but
+  provides no clear open license; IAVSE does not embed or redistribute their
+  code, documents or screenshots.
+  Provenance and pinned source: [VibeUI import record](docs/design-sources-vibeui.md),
+  [file-level audit](docs/design-rights-vibeui-audit.md).
 - Brand-reference demos are independent interpretations, not official brand
   templates. Brand names, trademarks, third-party fonts and referenced media
   remain subject to their respective rights. The IAVSE license does not replace
   any of the above licenses or confer additional rights to these materials.
+
+## Imported Skill directory references (2026-11-08)
+
+`src/lib/skill-imports/` records factual metadata, original purpose summaries,
+pinned source links and audit evidence for 227 VibeUI-discovered Skill entries
+and one StyleKit Skill. No third-party Skill bodies, executable packages or
+associated media are redistributed. Catalog platforms are discovery sources,
+not claims of authorship. Each upstream definition retains its own terms,
+including Figma Developer Terms, CC BY 4.0 and AGPL-3.0 where applicable.
+See the [complete audit](docs/skill-sources-audit-2026-11-08.md) for exclusions,
+duplicate mappings and distinctions between license texts and declarations.
+
+Skills 目录仅保存用途摘要、事实元数据、固定版本来源及核查记录，不分发第三方
+Skill 正文或源码包。收录站不被视为原作者；每项上游许可分别适用。仅有许可声明、
+专用条款或许可未明确的条目不提供自动安装命令。

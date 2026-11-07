@@ -4,7 +4,7 @@
 
 ## 已核实的一手来源
 
-- [StyleKit 中文风格目录](https://www.stylekit.top/zh/styles)：浏览与作者展示入口。
+- [StyleKit 中文风格目录](https://www.stylekit.top/zh/styles)：StyleKit 项目的浏览与展示入口。
 - [官方目录 API](https://www.stylekit.top/api/styles)：149 个条目的名称、分类、简介和封面地址。
 - [完整设计规则 API](https://www.stylekit.top/api/styles/all.json)：全部设计规则、设计变量、建议/禁用清单，并明确返回 `license: "MIT"`。
 - [官方仓库](https://github.com/AnxForever/stylekit)：AnxForever/stylekit，核验提交 `38058485388d237745ccf58c6750c2ec661a72f4`。
@@ -17,9 +17,11 @@
 
 导入的设计说明、AI 设计规则、设计变量、建议与禁用清单来自上述官方 API。卡片封面来自同一仓库的 `public/styles/{slug}.svg`。所有 149 个文件均为自包含 SVG，没有远程图片、内嵌位图、脚本或 `foreignObject`。其中 scandinavian、cel-shading、wabi-sabi 的目录当前选择 JPEG，本站选择同仓库中对应的官方 SVG 版本。没有下载或再分发展示站中的第三方照片、视频和字体文件。
 
-每项的 `source` 链接到具体 StyleKit 风格页，而非目录首页；`collection` 标记发现来源；`provenance.evidenceUrl` 链接到固定提交的具体风格源文件；`referenceUrls` 单独标注来源文件明确提及的品牌、设计系统、原型或素材来源。提示词和规范保留 StyleKit 作者、源页面、固定版本仓库地址与 MIT 许可全文。
+每项的 `source` 链接到具体 StyleKit 风格页，而非目录首页；`creator` 指向 AnxForever / StyleKit 的固定版本仓库，表示这份演示实现的维护项目；`production` 说明它是风格研究，品牌启发条目不是品牌官方模板；`collection` 标记发现来源；`provenance.evidenceUrl` 链接到固定提交的具体风格源文件；`referenceUrls` 单独标注来源文件明确提及的品牌、设计系统、原型或素材来源。提示词和规范保留维护者署名、源页面、固定版本仓库地址、上述来源边界与 MIT 许可全文。
 
-StyleKit 的模板实现可以根据其 MIT 许可使用，但这不把 Apple、Notion、GitHub 等品牌的商标、官方页面或第三方素材变成 StyleKit 所有。本站将这些条目表述为 **StyleKit 的风格实现/研究**，没有标注为品牌官方模板。未发现独立第三方模板作者的条目仅记录“当前来源文件未声明”，不声称完成了全互联网原创性鉴定。
+已核对 StyleKit 固定版本的 MIT 声明，且 149 项都能匹配到仓库中的风格定义、独立 showcase 页面及其实现模块。这支持“StyleKit 维护的风格演示实现”，不证明全部美术、代码和底层素材均由同一人独立创作，更不能证明全网不存在其他权利人。品牌风格是对既有设计的研究或再实现，不是 Apple、Notion、GitHub 等品牌提供的官方模板。MIT 只可能授予许可方有权授予的部分，不把品牌商标、官方页面、独立字体或第三方照片变成 StyleKit 所有。每项来源说明均保留这一限制；没有明确第三方模板作者的条目也不据此推定没有其他权利。
+
+本轮对官方 README、作者指南、提交历史、149 个演示模块及第三方素材边界的复核见 [StyleKit 作者与权利复核](design-rights-stylekit-audit.md)。这一核查不能替代所有素材权利人的授权文件，不构成“保证不侵权”。
 
 ### 另行保留的原来源
 
@@ -46,7 +48,7 @@ StyleKit 的模板实现可以根据其 MIT 许可使用，但这不把 Apple、
 
 ## 预览与真实体验
 
-本地放大预览使用上述授权 SVG；“进入设计体验”打开每项独立的 `https://www.stylekit.top/zh/styles/{slug}/showcase`，保留真实交互和原作者站点。StyleKit 返回 `X-Frame-Options: SAMEORIGIN`，因此不使用会被浏览器阻止的跨域 iframe。完整交互页面仍由原站提供，本站未复制其运行代码与第三方媒体。
+本地放大预览使用上述仓库声明 MIT 的 SVG，条目的 `previewPolicy` 为 `image`；“进入设计体验”打开每项独立的 `https://www.stylekit.top/zh/styles/{slug}/showcase`，保留真实交互和 StyleKit 展示站的出处。StyleKit 返回 `X-Frame-Options: SAMEORIGIN`，因此不使用会被浏览器阻止的跨域 iframe。完整交互页面仍由原站提供，本站未复制其运行代码与第三方媒体。原站体验中可能包含照片、字体、生成图片与标志，不能据“可以打开”推定其可另行复制或商用。
 
 2026-11-08 已逐项请求 149 个体验地址，全部返回 HTTP 200，全部声明 `X-Frame-Options: SAMEORIGIN`；同时核对了固定提交中每项独立的 showcase 页面源码。外站之后的内容或可用性仍可能变化。
 
@@ -70,4 +72,4 @@ node scripts/design-import/stylekit.mjs --source /tmp/stylekit-import
 
 导入器会核对提交、MIT 作者、149 项数量、18 项布局、每项互动页源码、SVG 安全内容与唯一 slug，生成稳定结果。更新版本时应先重新核实目录与许可，再有意更新固定提交、快照和核验日期；不得仅绕过数量或许可校验。
 
-MIT 适用于上述第三方材料；IAVSE 原创代码继续遵循项目原有许可。
+对已核对的仓库代码、文档和 SVG 保留上游的 MIT 声明；它不扩大独立第三方素材的授权范围。IAVSE 原创代码继续遵循项目原有许可。

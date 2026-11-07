@@ -1,0 +1,47 @@
+[
+  {
+    "id": "stylekit",
+    "slug": "stylekit",
+    "name": "StyleKit",
+    "category": "design",
+    "repo": "AnxForever/stylekit-skill",
+    "commit": "93b9c1de903a6c3f6f7944224b26d154b325e1eb",
+    "upstreamSkillName": "stylekit",
+    "path": "",
+    "skillFile": "SKILL.md",
+    "sourceUrl": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/SKILL.md",
+    "source": {
+      "name": "AnxForever/stylekit-skill",
+      "url": "https://github.com/AnxForever/stylekit-skill"
+    },
+    "collection": {
+      "name": "StyleKit",
+      "url": "https://www.stylekit.top/zh/styles"
+    },
+    "collectionEntries": [
+      "stylekit-official-skill"
+    ],
+    "tags": [
+      "风格规范",
+      "界面审查",
+      "设计系统"
+    ],
+    "summary": "读取 StyleKit 的风格规格，再结合项目的框架与组件实现界面、调整视觉或检查一致性。一个 Skill 对应整个风格目录；脚本需要 Python 3.10+。",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/LICENSE",
+    "licenseStatus": "verified",
+    "licenseScope": "repository",
+    "licenseNote": "Skill 仓库以 MIT 发布；所引用的外部组件、模板、品牌与素材须分别核对原始条款。",
+    "sourceStatus": "verified",
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/README.md",
+      "collectionEvidenceUrl": "https://github.com/AnxForever/stylekit/blob/38058485388d237745ccf58c6750c2ec661a72f4/README.md",
+      "note": "StyleKit 主仓库 README 直接链接此独立 Skill 仓库，名称、许可与安装指令已核实。"
+    },
+    "tools": [],
+    "installUrl": "https://github.com/AnxForever/stylekit-skill/blob/93b9c1de903a6c3f6f7944224b26d154b325e1eb/README.md",
+    "installCommand": "npx skills@latest add AnxForever/stylekit-skill",
+    "kind": "single"
+  }
+]

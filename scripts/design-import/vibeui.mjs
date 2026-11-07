@@ -9,7 +9,7 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const revision='fa4175f8d5c06683d70d05a4544e466e77fa2544';
-const upstreamRevision='fcc70284932276d085f01ef9f83edde90b1258cb';
+const upstreamRevision='f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1';
 const templateRevision='5c1fb49813069920bdc3fcbb8aee02cd6e8f5157';
 const base=`https://raw.githubusercontent.com/Charlo-O/awesome-design-md/${revision}/`;
 const stamp='2026-11-08';
@@ -137,7 +137,7 @@ const styleNotes=[
  ['Z 世代极繁','结合拼贴、贴纸和高密度图形，呈现自由而富有节奏的表达。'],
  ['仿生与有机 2.0','从自然形态和生长节奏提取界面语言，观察流动与结构的配合。'],
 ];
-const docs=await parallel(entries.filter(e=>!e.slug.startsWith('uiuxpro-')),async entry=>[entry.slug,await text(base+entry.files.design)]);
+const docs=await parallel(entries.filter(e=>!e.slug.startsWith('uiuxpro-')),async entry=>[entry.slug,await text(`https://raw.githubusercontent.com/VoltAgent/awesome-design-md/${upstreamRevision}/design-md/${entry.slug}/DESIGN.md`)]);
 const docBySlug=new Map(docs);
 const licenseText=await text(`https://raw.githubusercontent.com/VoltAgent/awesome-design-md/${upstreamRevision}/LICENSE`);
 if(!licenseText.startsWith('MIT License')||!licenseText.includes('2026 VoltAgent'))throw Error('License changed; review required.');
@@ -148,18 +148,20 @@ const result=entries.map(entry=>{
  const slug='vibeui-'+entry.slug.replaceAll('.','-');
  const templatePath=template?entry.files.preview.replace('extra/uiuxskillProMax/',''):'';
  const previewUrl=template?'https://yuanfu8899.github.io/uiuxskillProMax/'+templatePath:'https://vibeui.top/'+entry.files.preview;
- const source=template?{name:'yuanfu8899 · UI/UX Pro Max',url:`https://github.com/yuanfu8899/uiuxskillProMax/blob/${templateRevision}/${templatePath}`}:{name:entry.name,url:entry.sourceSite.url};
+ const source=template?{name:'yuanfu8899 · UI/UX Pro Max',url:`https://github.com/yuanfu8899/uiuxskillProMax/blob/${templateRevision}/${templatePath}`}:{name:'VoltAgent · 生成式设计示例',url:`https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/design-md/${entry.slug}/preview.html`};
+ const creator=template?{name:'yuanfu8899 / uiuxskillProMax',url:`https://github.com/yuanfu8899/uiuxskillProMax/tree/${templateRevision}`}:{name:'VoltAgent / awesome-design-md',url:`https://github.com/VoltAgent/awesome-design-md/tree/${upstreamRevision}/design-md/${entry.slug}`};
+ const production=template?'由 UI/UX Pro Max Skill 生成的示例 UI；仓库未明确授予开放使用许可。':'从真实官网提取设计规范，再据此生成演示 UI；不是品牌官方模板或官网原页面。';
  const license=template?{name:'未确认开放许可',url:'https://github.com/yuanfu8899/uiuxskillProMax',status:'unconfirmed'}:{name:'MIT · VoltAgent',url:`https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/LICENSE`,status:'verified'};
  const title=template?note[0]:entry.name;
  const collection={name:'VibeUI',url:'https://vibeui.top/style.html?slug='+encodeURIComponent(entry.slug)+'&lang=zh'};
- return {id:slug,slug,title,summary:template?note[1]:brandDescriptions[entry.slug],category:taxonomy[entry.categoryKey],tags:template?[entry.name,taxonomy[entry.categoryKey],'风格模板']:[entry.name,'品牌参考','浅色 / 深色'],palette:entry.colors,source,collection,
+ return {id:slug,slug,title,summary:template?note[1]:brandDescriptions[entry.slug],category:taxonomy[entry.categoryKey],tags:template?[entry.name,taxonomy[entry.categoryKey],'风格模板']:[entry.name,'品牌参考','浅色 / 深色'],palette:entry.colors,source,creator,...(!template?{referenceSite:{name:entry.name,url:entry.sourceSite.url}}:{}),production,previewPolicy:template?'external-only':'embed',collection,
  previewUrl,websiteUrl:template?previewUrl:entry.sourceSite.url,image:'',license,
- provenance:{verifiedAt:stamp,evidenceUrl:template?`https://github.com/yuanfu8899/uiuxskillProMax/tree/${templateRevision}`:`https://github.com/Charlo-O/awesome-design-md/tree/${revision}/design-md/${entry.slug}`,note:template?'原始演示来自 yuanfu8899/uiuxskillProMax，由 VibeUI 收录；原作者库未声明可核实的开放许可。本站仅整理事实目录并链接原作者在线演示，未复制其源码、图片或说明正文。':'品牌网站是设计参考来源；风格演示与规范由 VoltAgent 编写、VibeUI 收录，并非品牌官方模板。MIT 仅适用于开源演示与文档，不扩大品牌素材或字体许可。'},
- referenceUrls:template?[]:[{name:'演示与规范作者 · VoltAgent',url:'https://github.com/VoltAgent/awesome-design-md'},{name:'VibeUI 收录版本',url:`https://github.com/Charlo-O/awesome-design-md/tree/${revision}/design-md/${entry.slug}`}],
+ provenance:{verifiedAt:stamp,evidenceUrl:template?`https://github.com/yuanfu8899/uiuxskillProMax/blob/${templateRevision}/README.md`:`https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/design-md/${entry.slug}/README.md`,note:template?'示例文件可追溯至 yuanfu8899/uiuxskillProMax；其 README 说明页面由 UI/UX Pro Max Skill 生成，但未提供明确开放许可。本站仅提供原创摘要、事实目录和原作者外链，不自动嵌入或复制其源码、图片及说明正文。':'品牌网站是风格参考。VoltAgent 从真实官网提取设计规范，再生成示例 UI，VibeUI 收录了这些文件；已核对历史版本文件内容一致。这不是品牌官网原页面或官方模板。MIT 声明适用于仓库内相应代码与文档，不授予品牌商标、专有图片或字体的使用权，也不构成对全部素材权利的保证。'},
+ referenceUrls:template?[]:[{name:'上游规范与示例项目 · VoltAgent',url:`https://github.com/VoltAgent/awesome-design-md/tree/${upstreamRevision}`},{name:'VibeUI 收录版本',url:`https://github.com/Charlo-O/awesome-design-md/tree/${revision}/design-md/${entry.slug}`}],
  previewVariants:[{label:'默认',url:previewUrl},...(entry.files.previewDark?[{label:'深色',url:'https://vibeui.top/'+entry.files.previewDark}]:[])],
  typography:template?'':Object.entries(entry.fonts).filter(([,value])=>value).map(([key,value])=>`${key}: ${value}`).join('\n'),
- prompt:template?'':`参考下方由 VoltAgent 编写的 ${entry.name} 设计规范，为我的产品设计一个独立界面。保留规范中的布局层次、间距与颜色关系，替换为自己的内容与品牌。不要复制原站商标、人物、专有图片或未获授权的字体。请补齐响应式布局、键盘操作、减少动态效果和真实数据的空状态。设计参考：${entry.sourceSite.url}；规范来源：VoltAgent/awesome-design-md（MIT）。`,
- specification:template?'':`> 本设计研究由 VoltAgent 编写，VibeUI 收录；遵循 MIT 许可。品牌原站：${entry.sourceSite.url}\n\n${docBySlug.get(entry.slug)}\n\n---\n\n来源版本：https://github.com/Charlo-O/awesome-design-md/tree/${revision}/design-md/${entry.slug}\n\n许可：https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/LICENSE\n`+licenseAppendix,
+ prompt:template?'':`参考下方由 VoltAgent 从 ${entry.name} 官网提取整理的设计规范，为我的产品设计一个独立界面。这是第三方生成式设计研究，并非品牌官方模板。保留规范中的布局层次、间距与颜色关系，替换为自己的内容与品牌。不要复制原站商标、人物、专有图片或未获授权的字体。请补齐响应式布局、键盘操作、减少动态效果和真实数据的空状态。设计参考：${entry.sourceSite.url}；规范来源：VoltAgent/awesome-design-md（MIT）。`,
+ specification:template?'':`> 本设计研究由 VoltAgent 从品牌官网提取规范，并据此生成演示 UI，VibeUI 收录；不是品牌官方模板或官网原页面。仓库代码和文档声明 MIT 许可，不扩大品牌商标、图片及字体的权利。风格参考站：${entry.sourceSite.url}\n\n${docBySlug.get(entry.slug)}\n\n---\n\n原始规范：https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/design-md/${entry.slug}/DESIGN.md\n\n生成说明：https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/design-md/${entry.slug}/README.md\n\n收录版本：https://github.com/Charlo-O/awesome-design-md/tree/${revision}/design-md/${entry.slug}\n\n许可：https://github.com/VoltAgent/awesome-design-md/blob/${upstreamRevision}/LICENSE\n`+licenseAppendix,
  };
 });
 if(result.some(e=>!e.title||!e.summary))throw Error('Missing authored catalog copy');

@@ -18,7 +18,7 @@ export function middleware(request:NextRequest){const pathname=request.nextUrl.p
  const designPreview=/^\/resources\/designs\/[a-z0-9-]+\/preview\/?$/.test(pathname);
  // Reviewed demo hosts are isolated in same-origin preview documents. Client route
  // changes keep the parent document's CSP, so directory pages must only embed self.
- const designFrames=designPreview?"frame-src 'self' https://vibeui.top https://yuanfu8899.github.io":"frame-src 'self'";
+ const designFrames=designPreview?"frame-src 'self' https://vibeui.top":"frame-src 'self'";
  const nonce=btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(18))));
  const csp=["default-src 'self'",`script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${process.env.NODE_ENV==='development'?" 'unsafe-eval'":''}`,"style-src 'self' 'unsafe-inline'","img-src 'self' data: blob:","font-src 'self' data:","connect-src 'self' blob:"+(process.env.NODE_ENV==='development'?' ws:':''),"media-src 'self' blob:","object-src 'none'","base-uri 'none'","form-action 'self'",galleryPreview?"frame-ancestors 'self'":"frame-ancestors 'none'",...(process.env.PUBLIC_URL?.startsWith('https://')?['upgrade-insecure-requests']:[])].join('; ');
  const pageCsp=csp+'; '+designFrames;
