@@ -1,0 +1,8 @@
+{
+  "prompt": "Original IAVSE interactive design study screenshot. Rendered at 1200×800 in Ego Browser from /resources/designs/linear-precision/preview. Components: src/components/DesignPreview.tsx and src/app/design-preview.css. Reference: Linear https://linear.app/. This image is an original local demonstration using sample content, not a screenshot of the source website.",
+  "source": {
+    "name": "Linear",
+    "url": "https://linear.app/"
+  },
+  "capturedAt": "2026-11-07"
+}

@@ -1,0 +1,8 @@
+{
+  "prompt": "Original IAVSE interactive design study screenshot. Rendered at 1200×800 in Ego Browser from /resources/designs/material-adaptive/preview. Components: src/components/DesignPreview.tsx and src/app/design-preview.css. Reference: Google Material Design https://m3.material.io/. This image is an original local demonstration using sample content, not a screenshot of the source website.",
+  "source": {
+    "name": "Google Material Design",
+    "url": "https://m3.material.io/"
+  },
+  "capturedAt": "2026-11-07"
+}

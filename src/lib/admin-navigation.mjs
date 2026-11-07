@@ -8,7 +8,7 @@ export function inlineAdminPath(href,base,current=[]){
  const path=url.pathname.replace(/\/$/,'');
  if(path==='/admin/catalog')return ['community','catalog'];
  if(path==='/admin')return [];
- const leaf=path.match(/^\/admin\/(projects|articles|resources|files|taxonomy|settings|trash|logs)$/);
+ const leaf=path.match(/^\/admin\/(projects|articles|resources|files|discovery|taxonomy|settings|trash|logs)$/);
  if(leaf)return [leaf[1]];
  const match=path.match(/^\/admin\/community(?:\/([^/]+))?$/);
  return match&&communitySections.has(match[1]||'')?['community',...(match[1]?[match[1]]:[])]:null;

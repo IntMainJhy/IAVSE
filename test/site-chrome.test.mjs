@@ -118,7 +118,7 @@ test('interior chrome retains one bounded neutral glass layer without filtering 
  assert.equal(winner([shared],[html('dark')],'--platform-chrome-surface',1440)?.value,'rgb(18 18 20 / .22)');
  assert.equal(winner([shared],[html('light')],'--platform-chrome-filter',1440)?.value,'blur(8px) saturate(1.1)');
  for(const [name,condition]of [['media',/prefers-reduced-transparency:\s*reduce/],['supports',/^not .*backdrop-filter/]]){
-  let fallback=false;sheets.get(shared).walkAtRules(name,rule=>{if(!condition.test(rule.params))return;const properties={};rule.walkDecls(decl=>{properties[decl.prop]=decl.value;});assert.equal(properties['--platform-chrome-surface'],'var(--platform-chrome-solid)');assert.equal(properties['--platform-chrome-filter'],'none');fallback=true;});assert.ok(fallback,name+' has a solid fallback');
+  let fallback=false;sheets.get(shared).walkAtRules(name,rule=>{if(!condition.test(rule.params))return;const properties={};rule.walkDecls(decl=>{properties[decl.prop]=decl.value;});if(!Object.hasOwn(properties,'--platform-chrome-surface'))return;assert.equal(properties['--platform-chrome-surface'],'var(--platform-chrome-solid)');assert.equal(properties['--platform-chrome-filter'],'none');fallback=true;});assert.ok(fallback,name+' has a solid fallback');
  }
  assert.match(winner([shared],[html('light')],'--platform-chrome-mask',1440)?.value,/^linear-gradient\(/,'only the backing layer fades below the navigation');
  assert.equal(winner([shared],[html('light')],'--platform-chrome-fade',1440)?.value,'36px','the fade stays bounded near the navigation');
@@ -139,4 +139,16 @@ test('home navigation floats over its actual backdrop while links and mobile dis
  assert.match(source,/<nav className="organic-desktop-nav"[\s\S]*?aria-current=\{current\s*===\s*href\s*\?\s*'page'/,'desktop links retain their current-page accessibility state');
  assert.match(source,/<details className="organic-mobile-menu"[^>]*><summary/,'mobile navigation keeps the native disclosure control');
  assert.match(source,/<PlatformGlass scene="home"\/>/,'the home chrome follows the existing scene state');
+});
+
+
+test('scrolling home content enables a single frosted layer without filtering controls',()=>{
+ for(const mode of ['light','dark'])for(const width of [1440,390]){
+  const fixture=fixtures(mode).find(item=>item.name==='home'),header=fixture.row.slice(0,-1);header[2].attrs['data-glass-scrolled']='';
+  const backing=[...header.slice(0,-1),{...header.at(-1),pseudo:'before'}];
+  assert.equal(winner([shared],backing,'display',width).value,'block');
+  assert.equal(winner([shared],backing,'backdrop-filter',width).value,'blur(20px) saturate(1.15)');
+  assert.equal(winner([shared],header,'backdrop-filter',width).value,'none');
+  assert.equal(winner([shared],header,'--platform-chrome-ink',width).value,'#1d1d1f');
+ }
 });

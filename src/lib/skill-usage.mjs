@@ -1,3 +1,4 @@
+import {extraSkillUsage} from './skill-library-extra.mjs';
 // Original illustrative workflows and prompts; expected deliverables are not claims of completed runs.
 export const skillUsage={
   "react-best-practices": {
@@ -307,3 +308,5 @@ export const skillUsage={
     ]
   }
 };
+
+Object.assign(skillUsage,extraSkillUsage);

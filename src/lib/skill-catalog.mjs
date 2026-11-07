@@ -1,8 +1,9 @@
+import {extraSkillEntries} from './skill-library-extra.mjs';
 // Editorial directory: original summaries and links only; upstream skills are not bundled.
 // Checked against each project's README, skill definition and license on this date.
 import {skillAiTools,skillSupportedTools} from './skill-installations.mjs';
 export {skillAiTools};
-export const skillCatalogVerifiedAt='2026-10-21';
+export const skillCatalogVerifiedAt='2026-11-07';
 export const skillCategories=[
  {id:'engineering',label:'开发工程',description:'组件架构、代码质量与性能。'},
  {id:'design',label:'界面设计',description:'从视觉方向到界面细节。'},
@@ -26,7 +27,7 @@ export const skillCategories=[
 function entry(id,name,category,repo,skillPath,summary,tags,license,licensePath){
  const root='https://github.com/'+repo;
  const skill={id,name,category,repo,summary,tags,license,sourceUrl:root+'/blob/main/'+skillPath,installUrl:root+(repo==='greensock/gsap-skills'?'#installing':repo==='oil-oil/vibe-hub-skill'?'#github-安装':'#installation'),licenseUrl:root+'/blob/main/'+licensePath};
- return {...skill,tools:skillSupportedTools(skill)};
+ return {...skill,tools:skillSupportedTools(skill),featured:false,recommendedFor:'',verifiedAt:skillCatalogVerifiedAt};
 }
 
 export const curatedSkills=[
@@ -41,6 +42,9 @@ export const curatedSkills=[
  entry('gsap','GSAP Skills','motion','greensock/gsap-skills','README.md','一套完整的 GSAP 动效技能，涵盖基础补间、时间线、滚动、插件、React、Vue、性能与工具函数。',['GSAP','Animation','Timeline','ScrollTrigger','React','Vue'],'MIT','LICENSE'),
  entry("vibehub","VibeHub","agents","oil-oil/vibe-hub-skill","skills/vibehub/SKILL.md","把口语需求整理成准确的开发表达，并结合当前任务解释术语、提供可核对的词条链接。",["Communication", "Vibe coding", "Node.js"],"MIT","LICENSE"),
 ];
+
+for(const item of extraSkillEntries){const {skillPath,licensePath,...metadata}=item;curatedSkills.push({...entry(item.id,item.name,item.category,item.repo,skillPath,item.summary,item.tags,item.license,licensePath),...metadata});}
+for(const item of curatedSkills){if(['react-best-practices','impeccable','systematic-debugging','gsap'].includes(item.id)){item.featured=true;item.recommendedFor=item.summary;}}
 
 export function skillFilters(query={}){
  const category=typeof query.type==='string'&&skillCategories.some(item=>item.id===query.type)?query.type:'all';

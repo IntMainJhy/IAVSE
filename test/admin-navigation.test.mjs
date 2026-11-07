@@ -15,7 +15,7 @@ test('external origins, public community links, downloads and query-bearing URLs
  for(const href of ['https://outside.example/admin/community','/community','/download/item','javascript:alert(1)','/admin/community?filter=pending','/admin/community#help'])assert.equal(inlineAdminPath(href,base),null);
 });
 
-test('all sidebar destinations switch in place, including returning to the address already in the browser',()=>{assert.deepEqual(inlineAdminPath('/admin',base),[]);for(const section of ['projects','articles','resources','files','taxonomy','settings','trash','logs'])assert.deepEqual(inlineAdminPath('/admin/'+section,base,['community','accounts']),[section]);});
+test('all sidebar destinations switch in place, including returning to the address already in the browser',()=>{assert.deepEqual(inlineAdminPath('/admin',base),[]);for(const section of ['projects','articles','resources','files','discovery','taxonomy','settings','trash','logs'])assert.deepEqual(inlineAdminPath('/admin/'+section,base,['community','accounts']),[section]);});
 
 
 test('workspace location restores selected views, editors and filters from the real URL',()=>{

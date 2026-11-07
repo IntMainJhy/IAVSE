@@ -16,12 +16,12 @@ test('catalog keeps distinct, categorized upstream sources and per-skill license
   assert.ok(skill.summary&&skill.tags.length);
   for(const locale of ['en','ja'])assert.notEqual(translate(locale,skill.summary),skill.summary);
  }
- assert.equal(curatedSkills.length,10);
- assert.ok(curatedSkills.every(item=>!['anthropics/skills','openai/skills'].includes(item.repo)));
+ assert.equal(curatedSkills.length,24);
+ assert.equal(curatedSkills.filter(item=>item.repo==='anthropics/skills').length,11);
  assert.equal(curatedSkills.filter(item=>item.repo==='greensock/gsap-skills').length,1);
  assert.ok(curatedSkills.some(item=>item.id==='vibehub'));
  assert.ok(curatedSkills.some(item=>item.id==='ui-ux-pro-max'));
- for(const id of ['docx','pdf','pptx','xlsx','frontend-design','webapp-testing','mcp-builder','skill-creator'])assert.equal(getSkillDetail(id),null);
+ for(const id of ['docx','pdf','pptx','xlsx','frontend-design','webapp-testing','mcp-builder','skill-creator'])assert.ok(getSkillDetail(id));
  assert.ok(skillCategories.every(type=>curatedSkills.some(item=>item.category===type.id)));
 });
 
@@ -71,6 +71,8 @@ test('each catalog entry has a complete, translated detail page and tool-specifi
 test('setup uses actual upstream skill names and preserves independent host selection',()=>{
  const react=getSkillDetail('react-best-practices').installation.methods;
  assert.ok(react.find(item=>item.id==='codex').commands[0].endsWith('--skill vercel-react-best-practices -a codex'));
+ assert.ok(getSkillDetail('web-design-guidelines').installation.methods.find(item=>item.id==='codex').commands[0].endsWith('--skill web-design-guidelines -a codex'));
+ for(const id of ['frontend-design','canvas-design','theme-factory','brand-guidelines','webapp-testing','mcp-builder','skill-creator','docx','pdf','pptx','xlsx']){const detail=getSkillDetail(id);assert.equal(detail.license,'Apache-2.0');assert.ok(detail.licenseUrl.endsWith('/skills/'+id+'/LICENSE.txt'));assert.ok(detail.installation.methods.find(item=>item.id==='codex').commands[0].endsWith('--skill '+id+' -a codex'));}
  const canvas=getSkillDetail('json-canvas').installation.methods;
  assert.ok(canvas.find(item=>item.id==='opencode').commands[0].includes('kepano/obsidian-skills --skill json-canvas -a opencode'));
  for(const id of ['gsap-core','gsap-timeline','gsap-scrolltrigger','gsap-plugins','gsap-utils','gsap-react','gsap-performance','gsap-frameworks','vibehub']){
@@ -106,9 +108,9 @@ test('all skills have distinct practical examples and complete localized prompts
 
 test('tool filters combine with tasks and search, and reflect documented setup paths without duplicate Codex variants',()=>{
  assert.equal(skillAiTools.length,5);
- assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:10,'claude-code':10,cursor:8,'gemini-cli':6,opencode:6});
- assert.deepEqual(filterSkills({tool:'codex',category:'design',q:'UI'}).map(skill=>skill.id),['impeccable','ui-ux-pro-max']);
- assert.deepEqual(filterSkills({tool:'cursor',category:'knowledge'}),[]);
+ assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:24,'claude-code':24,cursor:22,'gemini-cli':18,opencode:18});
+ assert.deepEqual(filterSkills({tool:'codex',category:'design',q:'UI'}).map(skill=>skill.id),['impeccable','ui-ux-pro-max','frontend-design','brand-guidelines','web-design-guidelines']);
+ assert.deepEqual(filterSkills({tool:'cursor',category:'knowledge'}).map(item=>item.id),['docx','pdf','pptx','xlsx']);
  assert.deepEqual(filterSkills({q:'Cursor'}).map(skill=>skill.id),filterSkills({tool:'cursor'}).map(skill=>skill.id));
  assert.deepEqual(filterSkills({q:'Claude.ai'}),[]);
  assert.equal(filterSkills({tool:'codex',category:'motion'}).length,1);

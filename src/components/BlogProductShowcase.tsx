@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import {BlogProductMotion} from './BlogProductMotion';
+import {ProductCinema} from './ProductCinema';
 import {HomeBlogCanvasDemo} from './HomeBlogCanvasDemo';
 import {BlogProductLooks} from './BlogProductLooks';
 import {FeedAvatar} from './FeedAvatar';
@@ -19,6 +20,7 @@ export function BlogProductShowcase({locale,spaces,labels}:Props){
    <div className="film-heading"><h2 id="blog-product-title">{c.title}</h2></div>
    <div className="film-opening-copy"><p>{c.intro}</p><div className="film-opening-actions"><Link className="film-create-link" href="/workspace/blog">{c.create}<Icon name="arrow"/></Link><a className="film-text-link" href="#film-canvas-title">{c.tryCanvas}<Icon name="chevron-down"/></a></div></div>
   </section>
+  <ProductCinema locale={locale} variant="blogs"/>
   <section className="film-canvas-scene" data-film-scene aria-labelledby="film-canvas-title">
    <header className="film-scene-heading"><h2 id="film-canvas-title">{c.canvasTitle}</h2><p>{c.canvasBody}</p></header>
    <div className="film-canvas-stage"><div className="film-canvas-window" data-film-interactive><HomeBlogCanvasDemo key={locale} locale={locale}/></div></div>

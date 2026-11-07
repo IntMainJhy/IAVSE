@@ -1,3 +1,4 @@
+import {extraSkillDetails} from './skill-library-extra.mjs';
 import {skillInstallation} from './skill-installations.mjs';
 import {curatedSkills} from './skill-catalog.mjs';
 import {skillUsage} from './skill-usage.mjs';
@@ -140,6 +141,8 @@ export const skillDetailContent={
     "requirements": "需要 Node.js 20 或更高版本及网络连接。查询只发送脱敏短术语，不应发送源代码、密钥或整段项目需求。"
   }
 };
+
+Object.assign(skillDetailContent,extraSkillDetails);
 
 const gsapIds=['gsap-core','gsap-timeline','gsap-scrolltrigger','gsap-plugins','gsap-utils','gsap-react','gsap-performance','gsap-frameworks'];
 skillDetailContent.gsap={features:['补间、缓动、时间线与滚动动画统一收录在一个技能合集。','包含插件选择、React / Vue 生命周期、性能优化与常用工具函数。'],scenarios:skillDetailContent['gsap-core'].scenarios,requirements:skillDetailContent['gsap-core'].requirements,modules:gsapIds.map(id=>({id,description:skillDetailContent[id].features[0],sourceUrl:'https://github.com/greensock/gsap-skills/blob/main/skills/'+id+'/SKILL.md'}))};

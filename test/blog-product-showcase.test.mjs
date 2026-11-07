@@ -19,6 +19,7 @@ const fixtures=[{handle:'alpha',name:'Alpha <script>alert(1)</script>',intro:'A 
 function render(locale='zh',spaces=fixtures){
  let lookProps;
  const modules={
+  './ProductCinema':{ProductCinema:()=>null},
   'react':React,'react/jsx-runtime':runtime,
   'next/link':{default:({href,children,prefetch,...props})=>element('a',{href,...props},children)},
   './BlogProductMotion':{BlogProductMotion:({children})=>element('div',{'data-product-motion':''},children)},

@@ -15,6 +15,7 @@ async function render(space,locale='zh',media=true){
  const exports={};
  const Link=({href,children,...props})=>React.createElement('a',{href,...props},children);
  const modules={
+  './ProductCinema':{ProductCinema:()=>null},
   'react/jsx-runtime':runtime,'next/link':{default:Link},
   '@/lib/server-i18n':{serverI18n:async()=>({t:(value,args=[])=>value.replace(/\{(\d+)\}/g,(_,i)=>String(args[i]??'{'+i+'}')),locale})},
   '@/lib/spaces.mjs':{defaultBlogSpace:()=>space},

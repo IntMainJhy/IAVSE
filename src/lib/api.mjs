@@ -1,3 +1,4 @@
+import {discoveryQueue,discoveryAction} from './design-intake.mjs';
 import {readSiteAnnouncements} from './site-announcements.mjs';
 import {importResumeFile,parseResume} from './resume-import.mjs';
 import {catalogApi} from './catalog.mjs';
@@ -45,6 +46,8 @@ export async function handle(req){try{const url=new URL(req.url),p=url.pathname.
  if(p[0]==='analytics'&&method==='POST'){const result=track(req,await body(req));return json({ok:true},200,result.cookie?{'Set-Cookie':result.cookie}:{})}
  admin(req);
  const actor=currentUser(req);
+ if(p.length===2&&p[0]==='admin'&&p[1]==='discovery'){if(method==='GET')return json(discoveryQueue(url.searchParams));if(method==='POST')return json(await discoveryAction(actor,await body(req,240000)));throw new HttpError(405,'请使用 GET 或 POST')}
+
  if(p.length===3&&p[0]==='admin'&&p[1]==='resume'&&method==='POST'){const input=await body(req,650000);if(p[2]==='import')return json(await importResumeFile(input.fileId,actor));if(p[2]==='parse')return json(parseResume(input.text));throw new HttpError(404,'接口不存在')}
 
  if(p[0]==='admin'&&p[1]==='logs'&&p.length===2&&method==='GET')return json(managementLog(req,url.searchParams));

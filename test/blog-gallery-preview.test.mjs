@@ -8,7 +8,7 @@ import nextConfig from '../next.config.mjs';
 
 const compile=path=>ts.transpileModule(fs.readFileSync(new URL(path,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 
-test('only the explicit public homepage gallery preview permits same-origin framing',async()=>{
+test('only explicit public homepage and UI design previews permit same-origin framing',async()=>{
  const exports={};
  class NextResponse{constructor(body,options={}){this.body=body;this.headers=new Headers(options.headers);}static next(){return new NextResponse(null);}static json(){return new NextResponse(null);}static redirect(){return new NextResponse(null);}}
  vm.runInNewContext(compile('../src/middleware.ts'),{exports,Headers,Map,Date,URL,Uint8Array,crypto:webcrypto,btoa,process:{env:{NODE_ENV:'production'}},require:name=>{
@@ -17,11 +17,11 @@ test('only the explicit public homepage gallery preview permits same-origin fram
   if(name.includes('request-security'))return{clientIp:()=> 'gallery-test'};
   throw Error(name);
  }});
- for(const path of ['/blog/alice','/blog/alice?embed=other','/blog/alice/articles/one?embed=gallery','/workspace/blog?embed=gallery','/login?embed=gallery','/blogs/showcase/lin-studio','/blogs/showcase/lin-studio?embed=other','/blogs/showcase/lin-studio/private?embed=gallery','/blog/alice/preview/private?embed=gallery','/blog/alice/articles/preview?embed=gallery']){
+ for(const path of ['/resources/designs/notion-paper-workspace','/resources/designs/notion-paper-workspace/preview/private','/resources/designs/notion-paper-workspace/private','/resources/designs/INVALID/preview','/blog/alice','/blog/alice?embed=other','/blog/alice/articles/one?embed=gallery','/workspace/blog?embed=gallery','/login?embed=gallery','/blogs/showcase/lin-studio','/blogs/showcase/lin-studio?embed=other','/blogs/showcase/lin-studio/private?embed=gallery','/blog/alice/preview/private?embed=gallery','/blog/alice/articles/preview?embed=gallery']){
   const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
   assert.match(response.headers.get('Content-Security-Policy'),/frame-ancestors 'none'/,path);
  }
- for(const path of ['/blog/alice?embed=gallery','/blogs/showcase/lin-studio?embed=gallery','/blog/alice/preview']){
+ for(const path of ['/resources/designs/notion-paper-workspace/preview','/blog/alice?embed=gallery','/blogs/showcase/lin-studio?embed=gallery','/blog/alice/preview']){
  const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
  assert.match(response.headers.get('Content-Security-Policy'),/frame-ancestors 'self'/);
  assert.equal(response.headers.get('X-Frame-Options'),'SAMEORIGIN');
@@ -32,6 +32,8 @@ test('only the explicit public homepage gallery preview permits same-origin fram
  const isolatedPreview=rules.find(rule=>rule.source==='/blog/:handle/preview');
  assert.equal(isolatedPreview.has,undefined);
  assert.equal(isolatedPreview.headers.find(header=>header.key==='X-Frame-Options').value,'SAMEORIGIN');
+ const designPreview=rules.find(rule=>rule.source==='/resources/designs/:slug/preview');
+ assert.equal(designPreview.headers.find(header=>header.key==='X-Frame-Options').value,'SAMEORIGIN');
  const samplePreview=rules.find(rule=>rule.source==='/blogs/showcase/:handle');
  assert.deepEqual(samplePreview.has,[{type:'query',key:'embed',value:'gallery'}]);
  assert.equal(samplePreview.headers.find(header=>header.key==='X-Frame-Options').value,'SAMEORIGIN');

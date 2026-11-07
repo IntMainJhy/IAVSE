@@ -1,14 +1,17 @@
 import Link from 'next/link';
+import '@/app/skill-directory-grid.css';
 import {notFound,redirect} from 'next/navigation';
-import {curatedSkills,skillCategories,skillCatalogVerifiedAt,skillFilters,skillFilterHref} from '@/lib/skill-catalog.mjs';
+import {skillCategories,skillCatalogVerifiedAt,skillFilters,skillFilterHref} from '@/lib/skill-catalog.mjs';
+import {readPublicSkills,findPublicSkill} from '@/lib/catalog-public-skills.mjs';
 import {getSkillDetail} from '@/lib/skill-details.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 import {SkillInstallation,SkillCopyBlock} from './SkillInstallation';
 import {Icon} from './Icons';
 
 export async function SkillDetail({id,query={}}:{id:string;query?:Record<string,string|string[]|undefined>}){
+ const catalog=readPublicSkills(),reviewed=findPublicSkill(id,catalog);if(reviewed?.origin==='reviewed'){if(reviewed.slug!==id)redirect('/skills/'+reviewed.slug);return <ReviewedSkillDetail skill={reviewed} query={query} catalog={catalog}/>;}
  const skill=getSkillDetail(id);if(!skill)notFound();if(skill.id!==id)redirect('/skills/'+skill.id);
- const {t,locale}=await serverI18n(),{category,q,tool}=skillFilters(query),type=skillCategories.find(item=>item.id===skill.category),related=curatedSkills.filter(item=>item.category===skill.category&&item.id!==id);
+ const {t,locale}=await serverI18n(),{category,q,tool}=skillFilters(query),type=skillCategories.find(item=>item.id===skill.category),related=catalog.filter(item=>item.category===skill.category&&item.id!==id).slice(0,4);
  return <article className="skills-page skill-detail"><Link className="learning-back" href={skillFilterHref(category,q,tool)}>← {t('返回 Skill 目录')}</Link><header className="learning-heading"><h1>{skill.name}</h1><p>{t(skill.summary)}</p><div className="skill-detail-meta"><Link href={skillFilterHref(skill.category)}>{t(type?.label||'Skill')}</Link><span>{skill.repo}</span><a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{t(skill.license)}</a><span>{t('资料核对：{0}',[skillCatalogVerifiedAt])}</span></div><div className="space-actions"><a className="space-btn primary" href="#installation">{t('查看安装方法')}</a><a className="space-link" href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">{t('查看原始 Skill')}<Icon name="link"/></a></div></header>
   <div className="skill-detail-layout"><aside className="skill-detail-nav"><nav aria-label={t('详情页目录')}>{[['features','功能'],['scenarios','适用场景'],['examples','实际使用示例'],['prompts','推荐提示词'],['tools','支持的 AI 工具'],['installation','安装方法']].map(([anchor,label])=><a key={anchor} href={'#'+anchor}>{t(label)}</a>)}</nav></aside><div className="skill-detail-body">
    <section id="features"><h2>{t('功能')}</h2><ul className="skill-feature-list">{skill.features.map((feature:string)=><li key={feature}>{t(feature)}</li>)}</ul>{skill.modules&&<><h3>{t('包含的模块')}</h3><ul className="skill-module-list">{skill.modules.map((module:any)=><li key={module.id}><a href={module.sourceUrl} target="_blank" rel="noopener noreferrer">{module.id}<Icon name="link"/></a><p>{t(module.description)}</p></li>)}</ul></>}</section>
@@ -18,7 +21,21 @@ export async function SkillDetail({id,query={}}:{id:string;query?:Record<string,
    <section id="tools"><h2>{t('支持的 AI 工具')}</h2><ul className="skill-supported-tools">{skill.installation.methods.map((method:{id:string;label:string;where:string;sourceUrl:string})=><li key={method.id}><span>{method.label}</span><a href={method.sourceUrl} target="_blank" rel="noopener noreferrer">{t(method.where)}<Icon name="link"/></a></li>)}</ul><p className="learning-muted">{t(skill.installation.supportNote)}</p></section>
    <section id="installation"><h2>{t('安装方法')}</h2><p>{t(skill.installation.requirements)}</p><SkillInstallation key={skill.id} installation={skill.installation}/></section>
    <section className="skill-detail-source"><h2>{t('来源与许可')}</h2><p>{t('内容根据原项目的 Skill 定义、README 与安装文档整理。安装后所需的模型、账号及外部服务由相应工具提供。')}</p><div><a href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">{skill.id==='gsap'?'README':'SKILL.md'}<Icon name="link"/></a><a href={skill.installUrl} target="_blank" rel="noopener noreferrer">README<Icon name="link"/></a><a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{t('许可条款')}<Icon name="link"/></a></div>{skill.repo==='greensock/gsap-skills'&&<p>{t('GSAP Skill 的 MIT 许可不等于 GSAP 运行库的许可；使用运行库与插件前，请查阅 GSAP 标准许可。')} <a href="https://gsap.com/standard-license/" target="_blank" rel="noopener noreferrer">{t('GSAP 运行库许可')}</a></p>}</section>
-   {related.length>0&&<section className="skill-detail-related"><h2>{t('同类 Skill')}</h2>{related.map(item=><Link key={item.id} href={'/skills/'+item.id}><span>{item.name}</span><Icon name="link"/></Link>)}</section>}
+   {related.length>0&&<section className="skill-detail-related"><h2>{t('同类 Skill')}</h2>{related.map(item=><Link key={item.id} href={'/skills/'+item.slug}><span>{item.name}</span><Icon name="link"/></Link>)}</section>}
+  </div></div>
+ </article>;
+}
+
+async function ReviewedSkillDetail({skill,query,catalog}:{skill:Record<string,any>;query:Record<string,string|string[]|undefined>;catalog:Record<string,any>[]}){
+ const {t}=await serverI18n(),{category,q,tool}=skillFilters(query),type=skillCategories.find(item=>item.id===skill.category),related=catalog.filter(item=>item.id!==skill.id&&item.category===skill.category).slice(0,4);
+ return <article className="skills-page skill-detail"><Link className="learning-back" href={skillFilterHref(category,q,tool)}>← {t('返回 Skill 目录')}</Link><header className="learning-heading"><h1>{skill.name}</h1><p>{t(skill.summary)}</p><div className="skill-detail-meta"><Link href={skillFilterHref(skill.category)}>{t(type?.label||'Skill')}</Link><span>{skill.repo}</span>{skill.licenseUrl?<a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{skill.license}</a>:<span>{skill.license}</span>}{skill.verifiedAt&&<span>{t('资料核对：{0}',[skill.verifiedAt])}</span>}</div><div className="space-actions"><a className="space-btn primary" href="#installation">{t('查看安装方法')}</a><a className="space-link" href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">{t('查看原始 Skill')}<Icon name="link"/></a></div></header>
+  <div className="skill-detail-layout"><aside className="skill-detail-nav"><nav aria-label={t('详情页目录')}><a href="#scenarios">{t('适用场景')}</a><a href="#installation">{t('安装方法')}</a>{skill.prompt&&<a href="#prompts">{t('推荐提示词')}</a>}<a href="#source">{t('来源与许可')}</a></nav></aside><div className="skill-detail-body">
+   <section id="scenarios"><h2>{t('适用场景')}</h2><p>{t(skill.recommendation)}</p><h3>{t('支持的 AI 工具')}</h3><ul className="skill-tool-badges">{skill.tools.map((item:{id:string;label:string})=><li key={item.id}>{item.label}</li>)}</ul></section>
+   <section id="installation"><h2>{t('安装方法')}</h2><SkillCopyBlock text={skill.installCommand} title={t('安装命令')} copyLabel={t('复制命令')} copyAriaLabel={t('复制安装命令')}/><a className="space-link" href={skill.installUrl} target="_blank" rel="noopener noreferrer">{t('核对官方安装说明')}<Icon name="link"/></a></section>
+   {skill.prompt&&<section id="prompts"><h2>{t('推荐提示词')}</h2><SkillCopyBlock text={skill.prompt} title={t('推荐提示词')} kind="prompt" copyLabel={t('复制提示词')} copyAriaLabel={t('复制提示词')}/></section>}
+   {skill.specification&&<section><h2>{t('使用说明')}</h2><div className="skill-reviewed-notes">{skill.specification}</div></section>}
+   <section className="skill-detail-source" id="source"><h2>{t('来源与许可')}</h2><p>{skill.source?.name||skill.repo} · {skill.license}</p><div><a href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">{t('原始来源')}<Icon name="link"/></a><a href={skill.installUrl} target="_blank" rel="noopener noreferrer">{t('安装说明')}<Icon name="link"/></a>{skill.licenseUrl&&<a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{t('许可条款')}<Icon name="link"/></a>}</div></section>
+   {related.length>0&&<section className="skill-detail-related"><h2>{t('同类 Skill')}</h2>{related.map(item=><Link key={item.id} href={'/skills/'+item.slug}><span>{item.name}</span><Icon name="link"/></Link>)}</section>}
   </div></div>
  </article>;
 }

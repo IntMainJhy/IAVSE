@@ -6,8 +6,8 @@ const tool=(id,label,where,commands,note,sourceUrl)=>({id,label,where,commands,n
 
 export function skillInstallation(skill){
  const root='https://github.com/'+skill.repo;
- if(['vercel-labs/agent-skills','kepano/obsidian-skills','greensock/gsap-skills','oil-oil/vibe-hub-skill'].includes(skill.repo)){
-  const name=skill.repo==='vercel-labs/agent-skills'?'vercel-'+skill.id:skill.id;
+ if(['vercel-labs/agent-skills','kepano/obsidian-skills','greensock/gsap-skills','oil-oil/vibe-hub-skill','anthropics/skills'].includes(skill.repo)){
+  const name=skill.repo==='vercel-labs/agent-skills'&&['react-best-practices','composition-patterns'].includes(skill.id)?'vercel-'+skill.id:skill.id;
   const agents=skill.repo==='kepano/obsidian-skills'?[['claude-code','Claude Code'],['codex','Codex'],['opencode','OpenCode']]:[['claude-code','Claude Code'],['codex','Codex'],['cursor','Cursor'],['gemini-cli','Gemini CLI'],['opencode','OpenCode']];
   return {supportNote:'下列工具由 Skills CLI 的支持列表确认；实际任务效果取决于模型、项目与所需运行环境。',requirements:skill.id==='gsap'?'需要 Node.js 22.20 或更高版本。一次安装 GSAP 官方技能合集，按安装器提示选择模块。':cliRequirements,after:reload,methods:agents.map(([id,label])=>tool(id,label,terminal,[`npx skills add ${skill.repo}${skill.id==='gsap'?'':' --skill '+name} -a ${id}`],'通过 Skills CLI 安装到所选工具；原项目还提供其他安装方式。',cliGuide))};
  }

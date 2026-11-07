@@ -44,3 +44,6 @@ html:root[data-ui][data-color-mode] body .organic-admin[data-admin-layout=contro
 @media(max-width:380px){.site-announcement-label{display:none}}
 /* Publishing is positioned against the editor root, above its flexible canvas. */
 html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-publish-panel{top:calc(var(--editor-topbar) + var(--platform-promo-height) + 12px)}
+
+/* The announcement is a compact black news strip in either appearance. */
+html:root[data-ui][data-color-mode] body .site-announcement{--platform-announcement-paper:#111112;--platform-announcement-ink:#f5f5f7;--platform-announcement-link:#d5e6ff;--platform-announcement-glow:rgb(140 185 255 / .2);--platform-announcement-hover:rgb(255 255 255 / .12)}

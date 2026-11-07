@@ -1,0 +1,19 @@
+[Unit]
+Description=IAVSE daily resource discovery (owner approval required)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/iavse
+ExecStart=/usr/bin/node /srv/iavse/scripts/discover-resources.mjs --daemon
+Restart=on-failure
+RestartSec=30
+Environment=NODE_ENV=production
+# Use the same APP_DATA_DIR and .env.local as the website.
+Environment=APP_DATA_DIR=/srv/iavse-data
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

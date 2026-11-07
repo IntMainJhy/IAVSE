@@ -1,7 +1,8 @@
 import type {ReactNode} from 'react';
 import Link from 'next/link';
 import Form from 'next/form';
-import {curatedSkills,skillAiTools,skillCategories,skillCatalogVerifiedAt,skillFilters,filterSkills,skillFilterHref} from '@/lib/skill-catalog.mjs';
+import {skillAiTools,skillCategories,skillFilters,skillFilterHref} from '@/lib/skill-catalog.mjs';
+import {readPublicSkills,filterPublicSkills} from '@/lib/catalog-public-skills.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 import {Icon} from './Icons';
 import {CatalogSearch} from './CatalogSearch';
@@ -9,11 +10,12 @@ import {CatalogNavigation} from './CatalogNavigation';
 import '@/app/skill-directory-grid.css';
 
 export async function SkillCatalog({query={},children}:{query?:Record<string,string|string[]|undefined>;children?:ReactNode}){
- const {t}=await serverI18n(),{category,q,tool}=skillFilters(query),results=filterSkills({category,q,tool},t);
- const categoryScope=filterSkills({q,tool},t),toolScope=filterSkills({category,q},t);
+ const {t}=await serverI18n(),{category,q,tool}=skillFilters(query),catalog=readPublicSkills(),results=filterPublicSkills(catalog,{category,q,tool},t);
+ const recommendations=results.filter(skill=>skill.featured&&skill.recommendation).slice(0,3);
+ const categoryScope=filterPublicSkills(catalog,{q,tool},t),toolScope=filterPublicSkills(catalog,{category,q},t);
  const toolOptions=[{id:'all',label:'全部 AI 工具',count:toolScope.length},...skillAiTools.map(item=>({...item,count:toolScope.filter(skill=>skill.tools.some(supported=>supported.id===item.id)).length}))];
  return <section className="skill-directory skill-directory-cards skill-directory-flat" aria-label={t('GitHub Skill 目录')}>
-  <div className="skill-directory-toolbar"><p className="skill-catalog-meta">{t('收录 {0} 项 · 核对于 {1}',[curatedSkills.length,skillCatalogVerifiedAt])}</p><Form action="/skills" scroll={false} className="skill-filter-form" role="search">
+  <div className="skill-directory-toolbar"><p className="skill-catalog-meta">{t('收录 {0} 项',[catalog.length])} · {t('来源与核对日期见详情')}</p><Form action="/skills" scroll={false} className="skill-filter-form" role="search">
    {category!=='all'&&<input type="hidden" name="type" value={category}/>}
    {tool!=='all'&&<input type="hidden" name="tool" value={tool}/>}
    <CatalogSearch value={q} label={t('搜索 Skill 名称、用途或技术')} placeholder={t('搜索名称、用途或技术…')} maxLength={120}/>
@@ -24,9 +26,9 @@ export async function SkillCatalog({query={},children}:{query?:Record<string,str
    <Link href={skillFilterHref('all',q,tool)} scroll={false} aria-current={category==='all'?'page':undefined}>{t('全部类型')}<span>{categoryScope.length}</span></Link>
    {skillCategories.map(type=><Link key={type.id} href={skillFilterHref(type.id,q,tool)} scroll={false} aria-current={category===type.id?'page':undefined}>{t(type.label)}<span>{categoryScope.filter(item=>item.category===type.id).length}</span></Link>)}
   </CatalogNavigation></div></div>
-  <div className="skill-directory-results"><div className="skill-results-heading"><p role="status">{t('找到 {0} 项精选 Skill',[results.length])}{q&&<> · “{q}”</>}{tool!=='all'&&<> · {skillAiTools.find(item=>item.id===tool)?.label}</>}</p>{(q||category!=='all'||tool!=='all')&&<Link href="/skills" scroll={false}>{t('清除筛选')}</Link>}</div>
-   {results.length?<ul className="skill-list skill-results-grid">{results.map(skill=>{const detailHref=skillFilterHref(category,q,tool).replace('/skills','/skills/'+skill.id),type=skillCategories.find(item=>item.id===skill.category);return <li key={skill.id} className="skill-entry"><div className="skill-entry-copy"><span className="skill-entry-category">{type?t(type.label):skill.category}</span><h3><Link href={detailHref}>{skill.name}</Link></h3><span className="skill-upstream">{skill.repo}</span><p>{t(skill.summary)}</p><div className="skill-entry-tools"><span>{t('支持工具')}</span><ul className="skill-tool-badges" aria-label={t('支持的 AI 工具')}>{skill.tools.map(item=><li key={item.id} data-selected={item.id===tool?'true':undefined}>{item.label}</li>)}</ul></div><ul className="skill-tags" aria-label={t('适用技术')}>{skill.tags.map(tag=><li key={tag}>{tag}</li>)}</ul></div>
-     <div className="skill-entry-links"><Link href={detailHref}>{t('查看详情')}<Icon name="link"/></Link><Link href={detailHref+'#installation'}>{t('安装方法')}</Link><a className="skill-license" href={skill.licenseUrl} target="_blank" rel="noopener noreferrer" aria-label={t('{0} 的许可：{1}',[skill.name,t(skill.license)])}>{t(skill.license)}</a></div>
+  <div className="skill-directory-results">{recommendations.length>0&&<section className="skill-task-recommendations" aria-label={t('按任务推荐')}><div><h2>{t('从你的任务开始。')}</h2><p>{t('根据适用场景选择，不按热度排名。')}</p></div><ul>{recommendations.map(skill=><li key={skill.id}><Link href={'/skills/'+skill.slug}><span>{skill.name}<Icon name="arrow"/></span><p>{t(skill.recommendation)}</p></Link></li>)}</ul></section>}<div className="skill-results-heading"><p role="status">{t('找到 {0} 项精选 Skill',[results.length])}{q&&<> · “{q}”</>}{tool!=='all'&&<> · {skillAiTools.find(item=>item.id===tool)?.label}</>}</p>{(q||category!=='all'||tool!=='all')&&<Link href="/skills" scroll={false}>{t('清除筛选')}</Link>}</div>
+   {results.length?<ul className="skill-list skill-results-grid">{results.map(skill=>{const detailHref=skillFilterHref(category,q,tool).replace('/skills','/skills/'+skill.slug),type=skillCategories.find(item=>item.id===skill.category);return <li key={skill.id} className="skill-entry"><div className="skill-entry-copy"><span className="skill-entry-category">{type?t(type.label):skill.category}{skill.featured?' · '+t('精选'):''}</span><h3><Link href={detailHref}>{skill.name}</Link></h3><span className="skill-upstream">{skill.repo}</span><p>{t(skill.summary)}</p>{skill.recommendation&&<p className="skill-task-note"><strong>{t('适合任务')}</strong>{t(skill.recommendation)}</p>}<div className="skill-entry-tools"><span>{t('支持工具')}</span><ul className="skill-tool-badges" aria-label={t('支持的 AI 工具')}>{skill.tools.map(item=><li key={item.id} data-selected={item.id===tool?'true':undefined}>{item.label}</li>)}</ul></div><ul className="skill-tags" aria-label={t('适用技术')}>{skill.tags.map(tag=><li key={tag}>{tag}</li>)}</ul></div>
+     <div className="skill-entry-links"><Link href={detailHref}>{t('查看详情')}<Icon name="link"/></Link><Link href={detailHref+'#installation'}>{t('安装方法')}</Link>{skill.licenseUrl?<a className="skill-license" href={skill.licenseUrl} target="_blank" rel="noopener noreferrer" aria-label={t('{0} 的许可：{1}',[skill.name,t(skill.license)])}>{t(skill.license)}</a>:<span className="skill-license">{t(skill.license)}</span>}</div>
     </li>})}</ul>:<div className="skill-empty"><h2>{t('精选目录中没有匹配的 Skill')}</h2><p>{t('试试 GSAP、设计、React 或 Obsidian，也可以清除筛选查看全部。')}</p><Link className="space-btn" href="/skills">{t('查看全部 Skill')}</Link></div>}
    {children}
    <div className="skill-catalog-note"><p>{t('工具标签对应本站已整理的安装方式；更多兼容性请查看详情或原项目。')}</p><p>{t('收录依据：原作者仓库、明确的使用说明、配套资料与可查阅的许可。这里提供用途索引和原始链接，不打包第三方源码。')}</p><p>{t('这里只做用途索引与安装指引。第三方 Skill 和其调用的软件、图片、模型服务分别适用原作者的许可。')}</p></div>
