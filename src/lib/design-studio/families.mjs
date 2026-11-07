@@ -1,0 +1,35 @@
+// Authored design recipes. No third-party prompt, specification or example code is imported.
+export const studioFamilies=[
+ {id:'editorial',name:'编辑排版',match:'editorial|magazine|news|journal|newspaper|typography|reading|academic|dark-academia|financial-times',layout:'editorial',bg:'#f4f0e6',ink:'#25251f',accent:'#a33e2a',font:'serif',radius:0,border:1,rule:'以衬线大标题、细分隔线与非对称栏宽建立编辑节奏；正文每行控制在 65–75 个字符，日期和栏目使用小号无衬线。'},
+ {id:'brutal',name:'粗野构成',match:'brutal|anti-design|bold|memphis|pop-art|bauhaus|comic|constructiv|swiss-poster',layout:'poster',bg:'#f4ef38',ink:'#171717',accent:'#f04c30',font:'sans',radius:0,border:3,rule:'使用粗边框、硬边平面色块和强烈字号差；仅粗野主义方向允许硬偏移阴影，按钮按下时抵消偏移。'},
+ {id:'glass',name:'通透叠层',match:'glass|vibrancy|fluent|aero|aurora|holograph|irides|liquid',layout:'product',bg:'#e7eef9',ink:'#1c2948',accent:'#3c65cf',font:'sans',radius:24,border:1,rule:'透明只用于确有背景关系的浮层；正文使用可读实面，以层间色差、局部高光和背景模糊表现厚度，低透明度偏好时改成实色。'},
+ {id:'soft',name:'柔和触感',match:'neumorph|soft-ui|clay|skeuomorph|tactile|pastel|kawaii|shoujo|cute',layout:'product',bg:'#f1eaf0',ink:'#3c3344',accent:'#9166a6',font:'sans',radius:28,border:0,rule:'圆润表面配合有方向的柔影，选中与未选中同时通过描边、文字和位置区分；避免让低对比阴影承担唯一的操作提示。'},
+ {id:'terminal',name:'命令行工作面',match:'terminal|hacker|developer|code|github|vercel|railway|supabase|convex|turso|resend|cursor|replit|windsurf|ollama',layout:'developer',bg:'#111513',ink:'#e5f2e8',accent:'#a8e3b4',font:'mono',radius:8,border:1,rule:'以代码与真实操作占据首屏，等宽字体用于命令、状态和日志，导航与说明保持可读层级；代码块独立横向滚动。'},
+ {id:'neon',name:'夜色发光',match:'cyber|neon|synthwave|vapor|outrun|acid|glitch|broadcast|sci-fi|hud|mecha|samurai|anime|magic-circle|hologram',layout:'poster',bg:'#111426',ink:'#eff5ff',accent:'#4af3d1',font:'mono',radius:4,border:1,rule:'在深色底上使用少量高亮信号色，发光只强调局部操作与几何轮廓；正文不发光，故障位移只运行一次并尊重减少动态效果。'},
+ {id:'pixel',name:'像素网格',match:'pixel|arcade|crt|8-bit|retro-game|jrpg',layout:'poster',bg:'#211c36',ink:'#fff1c9',accent:'#f5b94e',font:'mono',radius:0,border:3,rule:'尺寸对齐 4px 像素步长，轮廓采用阶梯边缘和有限色板；正文仍使用可读字体，扫描线只作为可关闭的轻量背景。'},
+ {id:'organic',name:'自然留白',match:'organic|nature|natural|cottage|solar|botanical|green|scandinavian|japanese-fresh|zen|wabi|ghibli|watercolor|impression|ukiyo',layout:'editorial',bg:'#efefe5',ink:'#2d3c30',accent:'#647b4d',font:'serif',radius:12,border:1,rule:'以纸色、植物色和疏密变化组织内容，宽留白与细节文字并置；图形为自制抽象构成，不使用影视角色或未授权艺术素材。'},
+ {id:'luxury',name:'精密陈列',match:'lux|deco|nouveau|gothic|noir|steampunk|vintage|heritage|old-money|fashion',layout:'commerce',bg:'#eee8dc',ink:'#30261d',accent:'#9d753b',font:'serif',radius:0,border:1,rule:'窄幅标签、衬线标题和大留白构成陈列节奏；以材质色和细线控制层级，商品图使用自行构造的抽象物件。'},
+ {id:'dashboard',name:'数据工作台',match:'dashboard|analytics|chart|data|finance|fintech|crypto|binance|coinbase|robinhood|plaid|stripe|ramp|mercury|wise|brex',layout:'dashboard',bg:'#f3f5f4',ink:'#20312b',accent:'#33765c',font:'sans',radius:12,border:1,rule:'侧栏导航与主工作区分离，指标、趋势和明细具有清楚的阅读顺序；数字等宽，筛选、排序、空状态与加载状态完整。'},
+ {id:'workspace',name:'协作工作区',match:'notion|linear|asana|slack|miro|figma|canva|airtable|clickup|trello|workspace|sidebar|holy-grail|corporate|enterprise',layout:'workspace',bg:'#f5f4f1',ink:'#2b2b2c',accent:'#5965bd',font:'sans',radius:8,border:1,rule:'保留固定任务导航和可搜索的内容列表；行、状态、负责人和下一步动作对齐，编辑反馈在原位置出现，窄屏折叠辅助栏。'},
+ {id:'masonry',name:'作品瀑布流',match:'masonry|collage|gallery|portfolio|pinterest|framer|webflow|awwward|immersive|photo',layout:'gallery',bg:'#f3f2ef',ink:'#242424',accent:'#c95e3e',font:'sans',radius:8,border:0,rule:'用不等高的作品与紧凑说明形成浏览节奏；保持合理阅读顺序，过滤后显示真实结果和空状态，作品放大后可用 Escape 返回。'},
+ {id:'timeline',name:'连续叙事',match:'timeline|scroll|parallax|story|cinematic|full-page|fullscreen|hero-fullscreen|visual-novel',layout:'story',bg:'#e8e5df',ink:'#242b31',accent:'#526c85',font:'serif',radius:0,border:1,rule:'每个章节有完整的标题、主体和阅读出口，滚动由用户控制；时间顺序或章节序列清楚，减少动态效果时完整内容保持可见。'},
+ {id:'bento',name:'模块编排',match:'bento|card-stack|grid|modular|f-pattern|z-pattern|split-screen|apple',layout:'bento',bg:'#f3f3f2',ink:'#242426',accent:'#416e9d',font:'sans',radius:20,border:0,rule:'主模块与次模块以跨度和留白区分重要性，不把每个内容块做成相同大小；手机保留信息顺序并还原成单列。'},
+ {id:'ai',name:'对话与创作',match:'claude|cohere|elevenlabs|minimax|mistral|openai|chatgpt|perplexity|gemini|deepseek|grok|(^|-)ai($|-)',layout:'conversation',bg:'#f4f1e9',ink:'#302e29',accent:'#b96241',font:'serif',radius:18,border:1,rule:'把输入、参考素材和输出放在同一工作流中，提供可编辑的输入与可撤销反馈；对话消息区分角色，生成结果明确为演示。'},
+ {id:'minimal',name:'理性极简',match:'.*',layout:'landing',bg:'#f6f6f3',ink:'#252524',accent:'#416e9d',font:'sans',radius:8,border:1,rule:'以规则网格、充足留白和稳定字号承载内容；少量强调色指向主要动作，交互状态完整，避免把装饰当作信息。'},
+];
+export function familyFor(slug){return studioFamilies.find(f=>new RegExp(f.match,'i').test(slug))}
+export const studioLayouts={
+ service:'服务说明 → 带标签与帮助的申请表单 → 信息确认 → 本地提交反馈 → 返回修改',
+ editorial:'页眉 → 版面标题与导语 → 主文与旁注双栏 → 精选文章 → 订阅表单',
+ poster:'紧凑导航 → 大字号主题与几何构成 → 展览／事件索引 → 筛选结果 → 详情展开',
+ product:'轻量导航 → 产品介绍与材质演示 → 可调参数与状态 → 功能细节 → 行动入口',
+ developer:'项目导航 → 可复制命令与运行状态 → 文件／日志双栏 → 文档与安装步骤',
+ dashboard:'侧栏 → 标题与时间筛选 → 指标与趋势 → 可搜索、排序的项目明细 → 状态反馈',
+ workspace:'项目侧栏 → 工作区标题与搜索 → 列表／看板切换 → 任务编辑 → 保存反馈',
+ gallery:'作品导航 → 分类筛选 → 不等高作品网格 → 选中作品详情 → 收藏状态',
+ story:'简洁导航 → 开篇与章节锚点 → 连续正文与图形 → 时间记录 → 下一章',
+ bento:'简洁导航 → 主标题 → 跨列主模块与侧模块 → 次要信息 → 底部行动',
+ conversation:'项目导航 → 对话主题 → 可选择的起始任务 → 输入框 → 本地演示回复',
+ commerce:'品牌导航 → 系列标题 → 自制物件陈列 → 分类过滤 → 收藏／购物袋状态',
+ landing:'导航 → 清楚的价值说明 → 产品工作画面 → 功能与价格切换 → 开始体验',
+};

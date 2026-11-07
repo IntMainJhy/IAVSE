@@ -125,3 +125,13 @@ duplicate mappings and distinctions between license texts and declarations.
 Skills 目录仅保存用途摘要、事实元数据、固定版本来源及核查记录，不分发第三方
 Skill 正文或源码包。收录站不被视为原作者；每项上游许可分别适用。仅有许可声明、
 专用条款或许可未明确的条目不提供自动安装命令。
+
+## IAVSE independent UI studies (2026-11-08)
+
+The added Studio descriptions, prompts, React/CSS examples, fictional Oriel
+content and procedural geometry are independently authored implementations.
+Generic style names, factual palette values and reference links identify the
+studied direction; they do not claim authorship of the underlying style or
+endorsement by a referenced brand. No third-party demo source or media is
+bundled in the new examples. The existing imported references and their
+original notices remain intact. See [implementation scope](docs/design-studio-independent-implementation.md).

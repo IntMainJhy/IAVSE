@@ -8,7 +8,7 @@ const localCategories={
  'lusion-spatial-story':'落地页','primer-developer-space':'开发工具','atlassian-teamwork':'设计生产','radix-component-lab':'开发工具',
 };
 export function designCategory(entry){return designCategories.includes(entry.category)?entry.category:localCategories[entry.slug]||'通用'}
-export function designCollection(entry){const name=entry.collection?.name?.toLowerCase()||'';return name.includes('vibeui')?'vibeui':name.includes('stylekit')?'stylekit':'iavse'}
+export function designCollection(entry){if(entry.studio)return 'studio';const name=entry.collection?.name?.toLowerCase()||'';return name.includes('vibeui')?'vibeui':name.includes('stylekit')?'stylekit':'iavse'}
 export function designExternalOnly(entry){return entry.previewPolicy==='external-only'||entry.license?.status==='unconfirmed'}
 export function importedDesign(entry){return {...entry,external:true,previewPolicy:designExternalOnly(entry)?'external-only':entry.image?'image':'embed',preview:{theme:'light',layout:'product',accent:entry.palette?.[0]||'#4b5563'},typography:entry.typography||'',layout:entry.layout||'',motion:entry.motion||'',prompt:entry.prompt||'',specification:entry.specification||'',palette:entry.palette||[],tags:entry.tags||[]}}
 export function externalPreviewUrl(entry,variant=0){if(designExternalOnly(entry))return null;const index=Number(variant),url=entry.previewVariants?.[Number.isInteger(index)&&index>=0?index:0]?.url||entry.previewUrl;try{return ['https://vibeui.top'].includes(new URL(url).origin)?url:null}catch{return null}}

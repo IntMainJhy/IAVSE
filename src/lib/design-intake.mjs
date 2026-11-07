@@ -2,6 +2,7 @@ import designSeeds from './design-library-seed.json' with {type:'json'};
 import vibeuiDesigns from './design-imports/vibeui.json' with {type:'json'};
 import stylekitDesigns from './design-imports/stylekit.json' with {type:'json'};
 import {importedDesign} from './design-catalog.mjs';
+import {studioDesigns} from './design-studio.mjs';
 import {randomUUID} from 'node:crypto';
 import {isIP} from 'node:net';
 import {db,transaction,recordAudit} from './db.mjs';
@@ -16,7 +17,7 @@ const previewLayouts=['optical','spatial','bento','editorial','workspace','produ
 const previewAliases={dashboard:'workspace',cinematic:'spatial',minimal:'product'};
 const emptySettings={enabled:true,hour:9,timeZone:'Asia/Shanghai',lastScheduledDate:'',heartbeat:''};
 function sourceKeyOrNull(value){try{return canonicalSource(value)}catch{return null}}
-const catalogDesigns=[...designSeeds.filter(entry=>entry.featured),...vibeuiDesigns.map(importedDesign),...stylekitDesigns.map(importedDesign),...designSeeds.filter(entry=>!entry.featured)];
+const catalogDesigns=[...studioDesigns,...designSeeds.filter(entry=>entry.featured),...vibeuiDesigns.map(importedDesign),...stylekitDesigns.map(importedDesign),...designSeeds.filter(entry=>!entry.featured)];
 function seedDesigns(){return catalogDesigns}
 export function intakeDb(){
  const d=db();if(schemas.has(d))return d;
