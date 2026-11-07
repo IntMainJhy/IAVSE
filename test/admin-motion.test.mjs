@@ -6,7 +6,7 @@ import ts from 'typescript';
 
 function fixture(reduced=false){
  const layouts=[],effects=[],animations=[],listeners=new Map();
- const node={open:false,showModal(){this.open=true},close(){this.open=false},animate(){const animation={canceled:false,cancel(){this.canceled=true},onfinish:null};animations.push(animation);return animation},addEventListener:(key,fn)=>listeners.set(key,fn),removeEventListener:key=>listeners.delete(key)};
+ const node={open:false,showModal(){this.open=true},close(){this.open=false},animate(keyframes){const animation={keyframes,canceled:false,cancel(){this.canceled=true},onfinish:null};animations.push(animation);return animation},addEventListener:(key,fn)=>listeners.set(key,fn),removeEventListener:key=>listeners.delete(key)};
  const source=ts.transpileModule(readFileSync(new URL('../src/components/useAdminEffects.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
  const exports={};vm.runInNewContext(source,{exports,matchMedia:()=>({matches:reduced}),require:()=>({useRef:initial=>({current:initial}),useEffect:fn=>effects.push(fn),useLayoutEffect:fn=>layouts.push(fn)})});
  return{...exports,node,layouts,effects,animations,listeners};
@@ -26,6 +26,6 @@ test('Escape uses an animated close and reduced motion closes synchronously',()=
 });
 
 test('page motion cancels its previous run and does not stack a second entrance over React Bits cards',()=>{
- const f=fixture(),stage={querySelector:()=>null,animate:f.node.animate};f.useAdminEffects({current:{querySelector:()=>stage}},'settings');const cleanup=f.layouts[0]();assert.equal(f.animations.length,1);cleanup();assert.equal(f.animations[0].canceled,true);
+ const f=fixture(),stage={querySelector:()=>null,animate:f.node.animate};f.useAdminEffects({current:{querySelector:()=>stage}},'settings');const cleanup=f.layouts[0]();assert.equal(f.animations.length,1);assert.ok(f.animations[0].keyframes.every(frame=>!('transform' in frame)),'ordinary page changes must not move forms or table geometry');cleanup();assert.equal(f.animations[0].canceled,true);
  stage.querySelector=()=>({});f.useAdminEffects({current:{querySelector:()=>stage}},'overview');f.layouts[1]();assert.equal(f.animations.length,1);
 });

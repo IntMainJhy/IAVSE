@@ -6,7 +6,7 @@ export function useAdminEffects(root:RefObject<HTMLElement|null>,readyKey:string
   const host=root.current;if(!host||!readyKey||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const stage=host.querySelector<HTMLElement>('.admin-route-content');if(!stage)return;
   if(stage.querySelector('.admin-task-cards'))return; // React Bits handles the overview itself.
-  const animations=[stage.animate([{opacity:.65,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,easing:'cubic-bezier(.16,1,.3,1)'})];
+  const animations=[stage.animate([{opacity:.82},{opacity:1}],{duration:260,easing:'cubic-bezier(.16,1,.3,1)'})];
   return()=>animations.forEach(animation=>animation.cancel());
  },[root,readyKey]);
 
