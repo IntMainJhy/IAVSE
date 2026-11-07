@@ -36,7 +36,7 @@ export function DesignQuickPreview({entry}:{entry:DesignPreviewItem}){
    <header><div><h2 id={id}>{entry.title}</h2><p>{entry.creator?.name||entry.source.name}{entry.collection?' · '+t('收录自')+' '+entry.collection.name:''}</p></div><a href={experience} target="_blank" rel="noopener noreferrer">{t(entry.studio?'进入交互演示':'进入真实网站')}<Icon name="arrow"/></a><button type="button" onClick={close} aria-label={t('关闭预览')} autoFocus><Icon name="close"/></button></header>
    {!!entry.previewVariants&&entry.previewVariants.length>1&&<div className="design-preview-variants" aria-label={t('预览版本')}>{entry.previewVariants.map(item=><button type="button" key={item.url} onClick={()=>setVariant(item.url)} aria-pressed={variant===item.url}>{t(item.label)}</button>)}</div>}
    {open&&<div className="design-zoom-content">{entry.external?<DesignMedia entry={{...entry,previewUrl:variant}} large/>:<iframe src={'/resources/designs/'+entry.slug+'/preview'} title={entry.title} sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"/>}</div>}
-   <footer><span>{t(entry.studio?'IAVSE 本地交互演示；共享结构与研究范围见设计详情。':entry.external?'外部设计预览；演示作者与使用许可见设计详情。':'IAVSE 原创风格演示；真实网站由原作者维护。')}</span><nav>{variant&&<a href={variant} target="_blank" rel="noopener noreferrer">{t('独立打开预览')} ↗</a>}<Link href={'/resources/designs/'+entry.slug} onClick={close}>{t('来源与许可')} ↗</Link></nav></footer>
+   <footer><span>{t(entry.studio?'IAVSE 本地交互演示；具体参考页与实现范围见设计详情。':entry.external?'外部设计预览；演示作者与使用许可见设计详情。':'IAVSE 原创风格演示；真实网站由原作者维护。')}</span><nav>{variant&&<a href={variant} target="_blank" rel="noopener noreferrer">{t('独立打开预览')} ↗</a>}<Link href={'/resources/designs/'+entry.slug} onClick={close}>{t('来源与许可')} ↗</Link></nav></footer>
   </dialog>
  </>;
 }

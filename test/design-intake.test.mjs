@@ -20,7 +20,19 @@ test('resource discovery remains private until owner review; collection and sche
    assert.throws(()=>D.transaction(()=>{I.intakeDb();throw new Error('rollback initialization')}),/rollback initialization/);
    assert.equal(D.db().prepare("SELECT name FROM sqlite_master WHERE name='design_intake_entries'").get(),undefined);
    const duplicate=await send({action:'create',kind:'design',draft:{...design,source:{name:'Linear',url:'https://linear.app/'}}});assert.equal(duplicate.status,409);
-   const response=await API.handle(request(null));assert.equal(response.status,200);assert.equal((await response.json()).total,0);assert.ok(I.readPublishedDesigns().some(item=>item.source?.url==='https://linear.app/'));
+   const response=await API.handle(request(null));assert.equal(response.status,200);assert.equal((await response.json()).total,0);assert.ok(I.readPublishedDesigns().some(item=>item.referenceSite?.url==='https://linear.app/'));
+  });
+  await t.test('catalog reference sites and entry aliases reject duplicate creation and draft revisions',async()=>{
+   const imported=I.readPublishedDesigns().find(item=>item.slug==='vibeui-linear-app');assert.ok(imported);
+   const aliases=[...new Set(['https://linear.app/?utm_source=collector#home',imported.source.url,imported.websiteUrl,imported.previewUrl,imported.collection.url,...imported.previewVariants.map(variant=>variant.url)])];
+   const candidate=I.createDiscoveryDraft({kind:'design',draft:{...design,title:'Catalog alias fixture',source:{name:'Unique candidate',url:'https://example.org/catalog-alias-fixture'}}});
+   for(const url of aliases){
+    assert.equal((await send({action:'create',kind:'design',draft:{...design,source:{name:'Existing catalog reference',url}}})).status,409,url);
+    await assert.rejects(I.discoveryAction(owner,{action:'save',id:candidate.id,version:candidate.version,draft:{...candidate.draft,source:{name:'Existing catalog reference',url}}}),error=>error.status===409,url);
+    assert.ok(I.existingDiscoverySources().has(I.canonicalSource(url)),url);
+   }
+   const row=I.intakeDb().prepare('SELECT source_key,version FROM design_intake_entries WHERE id=?').get(candidate.id);assert.equal(row.source_key,'https://example.org/catalog-alias-fixture');assert.equal(row.version,1);
+   assert.ok(!I.existingDiscoverySources().has('https://linear.app/not-a-catalog-entry'),'deduplication matches exact canonical URLs, not whole domains');
   });
   await t.test('owner-only route and strict same-origin mutations',async()=>{
    assert.equal((await API.handle(new Request(base+'/api/admin/discovery'))).status,401);

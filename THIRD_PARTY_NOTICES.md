@@ -126,12 +126,12 @@ Skills 目录仅保存用途摘要、事实元数据、固定版本来源及核�
 Skill 正文或源码包。收录站不被视为原作者；每项上游许可分别适用。仅有许可声明、
 专用条款或许可未明确的条目不提供自动安装命令。
 
-## IAVSE independent UI studies (2026-11-08)
+## Website-reference implementations (2026-11-08)
 
-The added Studio descriptions, prompts, React/CSS examples, fictional Oriel
-content and procedural geometry are independently authored implementations.
-Generic style names, factual palette values and reference links identify the
-studied direction; they do not claim authorship of the underlying style or
-endorsement by a referenced brand. No third-party demo source or media is
-bundled in the new examples. The existing imported references and their
-original notices remain intact. See [implementation scope](docs/design-studio-independent-implementation.md).
+The earlier generated page-family catalog and sixteen generic brand-template
+examples have been removed. New website studies retain specific public reference
+pages and implement their own React/CSS, local demo data and interactions.
+Reference brand names identify the studied websites; they do not claim official
+product status or endorsement. Third-party reference catalogs and their notices
+remain intact. The standalone component library is counted separately from
+website implementations. See [scope and removal record](docs/design-studio-independent-implementation.md).

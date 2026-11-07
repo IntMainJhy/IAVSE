@@ -1,0 +1,78 @@
+[
+  {
+    "key": "linear",
+    "title": "Linear · 议题工作区",
+    "referenceSite": {"name": "Linear 产品演示", "url": "https://linear.app/"},
+    "referencePages": [
+      {"name": "Linear 官网中的公开议题工作区演示", "url": "https://linear.app/"},
+      {"name": "VibeUI 收录的 Linear 设计规范预览", "url": "https://vibeui.top/design-md/linear.app/preview.html"}
+    ],
+    "originSlugs": ["vibeui-linear-app"],
+    "summary": "参照 Linear 官网实际展示的议题界面，重写深色工作区、团队侧栏、议题正文、活动讨论和右侧属性栏。信息以紧凑行和细分隔线组织。",
+    "palette": ["#101112", "#e9e9eb", "#8489ef", "#151617", "#292a2c"],
+    "typography": "系统无衬线；议题标题25px，正文13px，侧栏和元信息10–12px，稳定字重层级。",
+    "layout": "224px 团队导航 + 弹性议题正文 + 228px 属性栏；顶部58px上下文工具条。窄屏改为可展开侧栏和正文后置属性。",
+    "observations": [
+      "官网首页含可读取的实际产品演示：工作区导航、当前议题、活动、Properties 和 Labels，不只是品牌色板。",
+      "正文没有大号营销标题；项目上下文、议题编号和前后导航放在顶部细工具栏。",
+      "深色层级由#101112、#151617和细灰线区分，强调色只用于状态和主要操作。",
+      "VibeUI 的对应条目是生成的 token 目录；本实现的构图参照 Linear 官网中的产品界面，而非复制该目录。"
+    ],
+    "components": ["工作区侧栏", "议题列表与搜索", "议题详情", "状态／优先级／负责人选择器", "收藏列表", "活动流与评论输入", "新建议题对话框"],
+    "prompt": "参考 https://linear.app/ 首页中公开展示的 Linear 议题工作区，独立实现一个可运行的产品团队议题界面。不要制作营销落地页，也不要用几何插画代替真实工作内容。桌面采用224px左侧团队导航、弹性议题正文、228px右侧属性栏；顶部58px工具条包含团队、议题编号、收藏和前后议题。底色#101112，侧栏#151617，分隔线#292a2c，正文#e9e9eb，功能强调#8489ef。标题25px、正文13px、辅助信息10–12px，布局紧凑但保留阅读空隙。正文包括任务描述、可勾选子任务、活动和评论；右栏包括状态、优先级、负责人、标签、项目和周期。实现新建议题、标题搜索、切换议题、修改属性、逐议题评论、收藏及取消收藏，所有变化在当前页面真实可见。手机将团队导航收进可开关抽屉，属性移到正文后；触控操作至少44px，保留键盘焦点和原生表单语义。自行编写项目、任务和成员内容，不复制官网人物、产品截图、图标或商标资产。完整交付页面、独立作用域样式及本地演示数据。",
+    "interactions": ["新建议题后直接打开新记录", "搜索标题、编号和标签", "修改状态、负责人、优先级", "切换前后议题", "按议题保存本地评论", "收藏记录与侧栏同步", "手机展开和关闭侧栏"],
+    "verifiedAt": "2026-11-08",
+    "evidenceNote": "实际浏览 Linear 官方首页中的产品演示，以及 VibeUI 对应预览页。参考截图为 linear-official.png、linear-vibeui.png；实现未使用这些截图作为页面资产。"
+  },
+  {
+    "key": "notion",
+    "title": "Notion · 块式文档与清单",
+    "referenceSite": {"name": "Notion 编辑与内容块说明", "url": "https://www.notion.com/help/writing-and-editing-basics"},
+    "referencePages": [
+      {"name": "Notion 官方写作与编辑基础", "url": "https://www.notion.com/help/writing-and-editing-basics"},
+      {"name": "StyleKit 的 Notion 工作区演示", "url": "https://www.stylekit.top/zh/styles/notion-style/showcase"},
+      {"name": "VibeUI 的 Notion 规范预览", "url": "https://vibeui.top/design-md/notion/preview.html"}
+    ],
+    "originSlugs": ["vibeui-notion", "stylekit-notion-style"],
+    "summary": "根据 Notion 的块编辑方式和 StyleKit 对应工作区展示重写。灰白侧栏、横幅封面、文档属性、可编辑内容块与内联数据库共同组成阅读和编辑界面。",
+    "palette": ["#fffefc", "#37352f", "#4792ca", "#f7f7f5", "#e9e9e7"],
+    "typography": "无衬线文档排版；页面标题40px，小节标题25px，正文14px／1.85，侧栏12px，属性10–11px。",
+    "layout": "244px 低对比工作区侧栏，52px文档工具条，190px横幅封面，最大830px的居中文档区；属性、内容块和数据库按文档流展开。",
+    "observations": [
+      "StyleKit 的 Notion Showcase 实际采用灰白侧栏、封面、居中文档、属性和块句柄，区别于营销页。",
+      "官方帮助文档明确说明文字、标题、待办等内容块的编辑方式；本实现把这些行为写成可操作本地状态。",
+      "块控制只在悬停／焦点时强调；窄屏直接保留可触摸的插入入口，页面导航折叠。",
+      "设计以阅读内容为中心，按钮和标签从属文档；没有统一套用卡片网格。"
+    ],
+    "components": ["工作区页面导航", "文档封面和标题", "属性列表", "可编辑文字／标题／待办块", "插入菜单与块重排", "内联数据库", "状态筛选与选择器"],
+    "prompt": "独立重写一个 Notion 式的块文档工作区，具体参照 https://www.notion.com/help/writing-and-editing-basics 和 https://www.stylekit.top/zh/styles/notion-style/showcase 中可观察的文档结构。不要用普通产品首页替代文档编辑器。左侧244px灰白导航，顶部52px面包屑和分享工具条，正文上方190px安静的横幅封面；文档最大830px，内部横向留白54px。使用#fffefc纸面、#f7f7f5侧栏、#37352f正文和#e9e9e7分隔线；标题40px，正文14px、行高1.85。文档包含可编辑标题、创建时间／状态／项目／负责人属性、标题块、文字块、待办块、提示块和一张内联交付清单。实现内容编辑、勾选待办、插入不同类型块、拖动或上下调整块顺序、创建页面、页面搜索、清单状态筛选和修改状态。所有内容均为自写演示资料，变化保存在本页。手机收起侧栏、文档使用24px边距，保留真实的44px触控入口和可见焦点。不要复制 Notion 或 StyleKit 的文案、表情图标、字体文件、Logo或源码。输出独立组件和作用域样式。",
+    "interactions": ["直接编辑标题及内容块", "勾选待办事项", "插入文字、标题和待办块", "拖动和上下调整内容块", "搜索并创建页面，逐页保留内容", "数据库按状态筛选", "新增清单事项并修改状态", "复制当前页面链接", "显示或隐藏封面"],
+    "verifiedAt": "2026-11-08",
+    "evidenceNote": "浏览器读取了 Notion 官方编辑帮助、StyleKit Notion Showcase 和 VibeUI Notion 规范预览；参考截图为 notion-official.png、notion-stylekit.png、notion-vibeui.png。官方帮助用于行为核对，StyleKit 的解释用于工作区构图对照；两者没有混称为同一个页面。"
+  },
+  {
+    "key": "github",
+    "title": "GitHub · 仓库文件与议题",
+    "referenceSite": {"name": "GitHub 公开仓库", "url": "https://github.com/octocat/Hello-World"},
+    "referencePages": [
+      {"name": "GitHub 官方公开示例仓库", "url": "https://github.com/octocat/Hello-World"},
+      {"name": "StyleKit 的 GitHub 仓库风格演示", "url": "https://www.stylekit.top/zh/styles/github-style/showcase"}
+    ],
+    "originSlugs": ["stylekit-github-style"],
+    "summary": "按 GitHub 公开仓库和 StyleKit 的对应演示重写仓库界面：仓库标题、栏目、分支、提交记录、文件列表、README 与右侧项目信息完整分开。",
+    "palette": ["#ffffff", "#24292f", "#0969da", "#f6f8fa", "#1f883d"],
+    "typography": "无衬线操作界面与等宽代码；仓库名19px，文件行11px，README标题29px，正文13px。",
+    "layout": "深色全局搜索栏、灰白仓库标题和标签导航；最大1296px的文件主体及270px About侧栏。文件区包含分支操作、提交摘要和多列文件记录，README另成连续阅读区。",
+    "observations": [
+      "GitHub 公开仓库具有独立的仓库导航、分支选择、提交摘要和文件列表，不是通用后台仪表盘。",
+      "StyleKit 对应演示采用经典深色全局导航，本实现据此保留深色顶栏；当前官方示例仓库的顶栏布局已不同，未宣称整页等同当前官网。",
+      "主区文件与 README 是两个边界明确的面板，右侧 About、Releases、Contributors、Languages保持紧凑。",
+      "蓝色链接、绿色 Code 操作和暖色栏目下划线承担不同功能，未用同一个强调色泛化全部状态。"
+    ],
+    "components": ["仓库栏目导航", "分支选择", "文件／目录列表", "文件内容与本地编辑", "克隆命令浮层", "README阅读面", "议题列表和开闭状态", "项目信息侧栏"],
+    "prompt": "参考 https://github.com/octocat/Hello-World 和 https://www.stylekit.top/zh/styles/github-style/showcase，独立实现一个可操作的仓库页面。采用 StyleKit 对经典 GitHub 深色全局栏的解释，明确不宣称它等于当前官网全部细节。结构必须是全局搜索栏、仓库名称与可见性、Code／Issues／Pull requests／Actions栏目、分支与Code按钮、提交摘要、文件目录、README，以及右侧About／Releases／Contributors／Languages；不要套用项目看板、抽象几何英雄区或营销卡片。背景#ffffff、次背景#f6f8fa、正文#24292f、边框#d0d7de、链接#0969da，Code主要动作#1f883d。桌面最大1296px，右侧信息栏270px，文件行保留文件名／提交说明／时间三列。实现目录进入和返回、文件搜索、内容查看与本地编辑保存、分支选择、Star切换、克隆命令复制、创建议题、查看并关闭／重新打开议题。使用自写的虚构仓库和提交内容，不请求真实GitHub账号、Star或Fork。手机侧栏放在内容后，文件列表简化为文件名和时间，操作至少44px。输出完整React组件和独立样式，不复制原页面代码、Logo、用户头像或README正文。",
+    "interactions": ["切换仓库栏目", "文件搜索和目录返回", "查看和编辑本地演示文件", "选择分支", "Star和计数同步", "展开并复制演示克隆命令", "创建议题", "关闭或重新打开议题"],
+    "verifiedAt": "2026-11-08",
+    "evidenceNote": "浏览器实际读取公开 octocat/Hello-World 仓库和 StyleKit GitHub Showcase；参考截图为 github-official.png、github-stylekit.png。未对真实仓库或账号执行操作，截图未作为新演示资产。"
+  }
+]

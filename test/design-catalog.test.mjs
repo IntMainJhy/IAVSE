@@ -9,7 +9,7 @@ import {filterDesignEntries} from '../src/lib/design-search.mjs';
 const all=[...originals,...vibeui.map(importedDesign),...stylekit.map(importedDesign)];
 
 test('both complete source catalogs retain distinct IDs, provenance and public experience URLs',()=>{
- assert.equal(vibeui.length,112);assert.equal(stylekit.length,149);assert.equal(all.length,281);
+ assert.equal(vibeui.length,112);assert.equal(stylekit.length,149);assert.equal(all.length,265);
  assert.equal(new Set(all.map(e=>e.id)).size,all.length);assert.equal(new Set(all.map(e=>e.slug)).size,all.length);
  for(const entry of [...vibeui,...stylekit]){
   assert.ok(designCategories.includes(entry.category),entry.slug);

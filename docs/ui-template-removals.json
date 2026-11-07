@@ -1,0 +1,71 @@
+{
+  "reason": "用户要求移除高度相似的自研UI模板",
+  "removedGeneratedPages": 269,
+  "removedLegacyPages": [
+    {
+      "slug": "apple-product-stage",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "notion-paper-workspace",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "linear-precision",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "stripe-gradient-platform",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "geist-engineering",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "carbon-enterprise",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "polaris-commerce",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "govuk-service",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "figma-playful-canvas",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "framer-portfolio",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "airbnb-discovery",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "material-adaptive",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "lusion-spatial-story",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "primer-developer-space",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "atlassian-teamwork",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    },
+    {
+      "slug": "radix-component-lab",
+      "reason": "早期共享布局的仿品牌示例，未逐站核对构图。"
+    }
+  ],
+  "generatedRoutes": "所有旧 studio-stylekit-*、studio-vibeui-*、studio-iavse-* 页面；组件条目另存，不保留这些旧整页入口。"
+}

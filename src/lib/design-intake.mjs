@@ -18,6 +18,13 @@ const previewAliases={dashboard:'workspace',cinematic:'spatial',minimal:'product
 const emptySettings={enabled:true,hour:9,timeZone:'Asia/Shanghai',lastScheduledDate:'',heartbeat:''};
 function sourceKeyOrNull(value){try{return canonicalSource(value)}catch{return null}}
 const catalogDesigns=[...studioDesigns,...designSeeds.filter(entry=>entry.featured),...vibeuiDesigns.map(importedDesign),...stylekitDesigns.map(importedDesign),...designSeeds.filter(entry=>!entry.featured)];
+// Independent implementations keep code ownership in source and the studied site
+// in referenceSite. Reserve both identities and exact entry/preview aliases;
+// research citations in referenceUrls are evidence, not duplicate identities.
+const catalogSourceKeys=new Set(catalogDesigns.flatMap(entry=>[
+ entry.source?.url,entry.referenceSite?.url,entry.websiteUrl,entry.previewUrl,entry.collection?.url,
+ ...(entry.previewVariants||[]).map(variant=>variant.url),
+].map(sourceKeyOrNull).filter(Boolean)));
 function seedDesigns(){return catalogDesigns}
 export function intakeDb(){
  const d=db();if(schemas.has(d))return d;
@@ -92,7 +99,7 @@ export function discoveryQueue(params=new URLSearchParams()){
  const total=d.prepare('SELECT COUNT(*) n FROM design_intake_entries WHERE '+where).get(...args).n,pages=Math.max(1,Math.ceil(total/24)),page=Math.min(requestedPage,pages);
  return {items:d.prepare('SELECT * FROM design_intake_entries WHERE '+where+' ORDER BY created DESC,id DESC LIMIT 24 OFFSET ?').all(...args,(page-1)*24).map(dto),total,page,pages,counts:d.prepare('SELECT status,COUNT(*) count FROM design_intake_entries GROUP BY status').all(),runs:d.prepare('SELECT * FROM design_intake_runs ORDER BY started DESC LIMIT 10').all().map(row=>({...row,results:parse(row.results)})),settings:discoverySettings()};
 }
-export function existingDiscoverySources(){const d=intakeDb();return new Set([...d.prepare('SELECT source_key FROM design_intake_source_keys UNION SELECT source_key FROM design_intake_entries').all().map(row=>row.source_key),...seedDesigns().flatMap(item=>{try{return [canonicalSource(item.source.url)]}catch{return []}})])}
+export function existingDiscoverySources(){const d=intakeDb();return new Set([...d.prepare('SELECT source_key FROM design_intake_source_keys UNION SELECT source_key FROM design_intake_entries').all().map(row=>row.source_key),...catalogSourceKeys])}
 export function createDiscoveryDraft(input,{collector='manual',actor=null}={}){
  intakeDb();
  const id=randomUUID(),kind=input.kind;requireValue(['design','skill'].includes(kind),'资源类型无效');const draft=normalizeDraft(input.draft,kind,id),key=canonicalSource(draft.source.url);
@@ -116,7 +123,7 @@ export async function discoveryAction(actor,input){
   const at=stamp(),reason=text(input.reason,1000);let draft=parse(row.draft),published=row.published,visibility=row.visibility,status=row.status;
   if(input.action==='save'){
    draft=normalizeDraft(input.draft,row.kind,row.id);status='pending';
-   const key=canonicalSource(draft.source.url);requireValue(!seedDesigns().some(entry=>sourceKeyOrNull(entry.source?.url)===key),'这个来源已在精选设计中',409);
+   const key=canonicalSource(draft.source.url);requireValue(!catalogSourceKeys.has(key),'这个来源已在精选设计中',409);
    requireValue(!d.prepare('SELECT entry_id FROM design_intake_source_keys WHERE source_key=? AND entry_id<>?').get(key,row.id),'这个来源已在审核队列中',409);
    d.prepare('INSERT OR IGNORE INTO design_intake_source_keys(source_key,entry_id) VALUES(?,?)').run(key,row.id);
   }else if(input.action==='approve'){

@@ -1,42 +1,30 @@
-# IAVSE 自研 UI 工作室
+# 逐站参考重做与模板清理
 
-2026-11-08。此版本是供用户并排比较和评审的独立实现；旧目录、提示词、许可声明和外部体验链接全部保留。
+用户指出上一版是共享布局加配色、缺少实际参考页面，未满足逐站重新实现的需求。本轮移除全部 269 条生成的整页条目，以及更早一版共用布局的 16 条仿品牌示例。旧条目不再出现在目录，旧预览入口返回 404；对应 16 份缩略图与元数据一起删除。Git 历史保留变更记录。
 
-## 内容与边界
+原 VibeUI 112 项、StyleKit 149 项参考收录仍保留，用于对照。IAVSE 原有四个本站示例保留。24 个单个组件放在独立组件视图，不计作新增网站风格。
 
-- 对原有 VibeUI 112 项、StyleKit 149 项建立 261 个一对一参考映射；增加 8 个研究方向，共 269 个整页风格条目。
-- 另有 24 个交互组件条目，并为每个风格提供这 24 类组件的独立提示词。
-- 目录默认显示 IAVSE 自研；可切换整页／组件、原有 IAVSE、VibeUI、StyleKit，或显示全部。
-- 描述、提示词、实现规范、React/CSS、虚构品牌 Oriel、演示文字和程序化几何由本轮单独编写。新实现不调用第三方预览 iframe，不载入外部图片、字体或品牌 Logo，也不读取旧条目的 prompt/specification 作为新内容。
-- 通用风格名称、事实性的颜色与参考站链接用于研究映射，不主张风格由 IAVSE 发明。
+## 当前做法
 
-这一版采用 16 个视觉族、13 种结构和逐项主题／构图参数共享实现，**不是 261 份手工制作的逐像素复刻页面**。同族条目会共享结构与交互。摄影、绘画、影视角色等方向使用自行构造的抽象图形，不重用原示例素材。这是本轮可评审版本的保真范围；不得将其描述为已经做到全部 1:1 或保证无侵权。
+新目录只发布已经单独观察、单独编写页面的 9 个网站参考。每个条目必须列出真实参考网站、具体公开页面、观察到的构图与组件、重新编写的实现提示词和可以操作的本地行为。主页默认显示这 9 个页面，不从原目录批量映射条目。
 
-重写源代码不能单独证明视觉表达和关联素材均获授权；新演示通过自有内容和几何减少直接复制，品牌启发方向仍标明参考。原目录的许可证和限制继续适用。
+- 工作协作：Linear 的任务／属性工作区、Notion 的块文档、GitHub 的仓库与文件。
+- 产品与基础设施：Stripe 的结账、Apple 的产品选择、Vercel 的部署详情。
+- 创作与操作：Claude 的对话、Figma 的设计画布、Raycast 的命令搜索。
 
-## 研究来源
+每一项各有 React 组件和局部 CSS，没有通用页面工厂，没有标题和色板替换生成的页面。仅预览外层的参考链接栏是共用的。
 
-| 来源 | 使用方式 |
-| --- | --- |
-| [VibeUI](https://vibeui.top/?lang=zh) | 目录分类、浅深预览、品牌参考与规范入口；原来源链见现有审计 |
-| [StyleKit](https://www.stylekit.top/zh/styles) | 风格索引、整页演示与提示词的对应关系；不转抄其新提示词或演示源码 |
-| [Carbon](https://www.carbondesignsystem.com/) | 企业数据工作面的阅读顺序与状态覆盖 |
-| [GOV.UK Design System](https://design-system.service.gov.uk/) | 原生表单、标签、校验与确认流程 |
-| [Atlassian Design](https://atlassian.design/components/) | 协作导航、列表与操作反馈 |
-| [Radix accessibility](https://www.radix-ui.com/primitives/docs/overview/accessibility) | 键盘、焦点、状态与语义的检查依据 |
-| [Material Design](https://m3.material.io/) | 自适应布局研究入口 |
-| [Shopify Polaris](https://shopify.dev/docs/api/polaris) | 经营任务与组件组织研究入口 |
-| [shadcn/ui](https://ui.shadcn.com/docs/components) | 组件组合和分组的研究入口，未导入其源码 |
-| [Awwwards](https://www.awwwards.com/)、[Curated Design](https://www.curated.design/)、[Page Flows](https://pageflows.com/)、[Hover.dev](https://www.hover.dev/) | 扩展构图、网站及流程的发现渠道，不把收集站当成作品作者或素材许可方 |
+具体访问地址、核查限制与观察保存在 `src/lib/design-references/*.json`；前台卡片、详情和预览工具栏都提供可直接打开的参考网站。对应的 VibeUI / StyleKit 条目作为收录对照，而不是将其网站名字冒充原站作者。
 
-公开页面的读取不构成版权授权。本轮既有来源审计保留于 design-rights-vibeui-audit.md 与 design-rights-stylekit-audit.md。
+## 复现边界
 
-## 实现与检查
+参考对象可能是公开官网中的产品画面、官方文档的截图或 StyleKit 的公开演示；条目分别标明，不把三者混为同一页面。遇到登录、验证或媒体未加载时记录实际可见范围，不声称看到了不可访问内容。
 
-- `src/lib/design-studio.mjs` 只从旧目录选择名称、分类、颜色和参考链接，生成独立提示词与规范；映射在 `studio.originSlug`。
-- `src/lib/design-studio/families.mjs` 保存独立编写的视觉配方与结构说明。
-- `src/lib/design-studio/components.mjs` 保存 24 份行为规范及风格化提示词构造器。
-- `DesignStudioPreview.tsx` 实现本地交互，`design-studio-preview.css` 隔离演示样式。
-- `StudioComponentPrompts.tsx` 支持组件选择、复制／下载提示词和直接打开对应组件。
-- 新预览的路径在本站，旧 58 项授权未明的示例继续仅提供外链。
-- Skills 前台移除收录平台标签与过滤入口，保留上游项目及其许可。原始核查记录继续存档。
+代码与演示数据重新编写。没有接入参考网站的生产账号、付费接口或私有数据，也没有下载其品牌照片或专有字体作为本站素材。品牌名称用于指明参考对象；不代表官方产品或授权。重写代码本身不等于取得所有视觉和素材的权利，也不作为零侵权证明。
+
+## 目录规则
+
+- 新增整页必须有具体网页证据、独立渲染组件与至少三条结构观察；不能只换颜色和标题。
+- 单个组件与整页页面分别计数。
+- 删除的生成器 `src/lib/design-studio/families.mjs` 不恢复；新登记表只读取逐项核对的参考记录。
+- 只发布已实现的页面，其余原站参考继续保留在原收录目录中，不补造换色副本。

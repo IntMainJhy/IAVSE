@@ -3,16 +3,16 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {filterDesignEntries} from '../src/lib/design-search.mjs';
 
-const entries=JSON.parse(readFileSync(new URL('../src/lib/design-library-seed.json',import.meta.url),'utf8'));
+const entries=[...JSON.parse(readFileSync(new URL('../src/lib/design-library-seed.json',import.meta.url),'utf8')),...JSON.parse(readFileSync(new URL('../src/lib/design-imports/vibeui.json',import.meta.url),'utf8'))];
 const slugs=filters=>filterDesignEntries(entries,filters).map(entry=>entry.slug);
 
 test('design search finds source brands even when their titles are Chinese',()=>{
- assert.deepEqual(slugs({q:'Notion'}),['notion-paper-workspace']);
- assert.deepEqual(slugs({q:'LINEAR'}),['linear-precision']);
+ assert.deepEqual(slugs({q:'Notion'}),['vibeui-notion']);
+ assert.deepEqual(slugs({q:'LINEAR'}),['vibeui-linear-app']);
  assert.deepEqual(slugs({q:'  iAvSe  '}),[
   'iavse-optical-glass','iavse-spatial-gallery','iavse-resource-story','iavse-bento-control',
  ]);
- assert.deepEqual(slugs({q:'Ｎｏｔｉｏｎ'}),['notion-paper-workspace']);
+ assert.deepEqual(slugs({q:'Ｎｏｔｉｏｎ'}),['vibeui-notion']);
 });
 
 test('source name, source URL, slug and category are searchable fields',()=>{
@@ -23,8 +23,8 @@ test('source name, source URL, slug and category are searchable fields',()=>{
 });
 
 test('category and keyword filters must both match',()=>{
- assert.deepEqual(slugs({category:'工作空间',q:'notion'}),['notion-paper-workspace']);
- assert.deepEqual(slugs({category:'工作空间',q:'linear'}),['linear-precision']);
+ assert.deepEqual(slugs({category:'设计生产',q:'notion'}),['vibeui-notion']);
+ assert.deepEqual(slugs({category:'开发工具',q:'linear'}),['vibeui-linear-app']);
  assert.deepEqual(slugs({category:'原创设计',q:'notion'}),[]);
  assert.deepEqual(slugs({category:'工作空间',q:'IAVSE'}),[]);
 });
