@@ -80,9 +80,9 @@ export function QuantumPointer(){
    if(alpha>.006||target>0)frame=requestAnimationFrame(draw);else previous=0;
   };
   const wake=()=>{if(!document.hidden&&!navigating&&!frame)frame=requestAnimationFrame(draw);};
-  // The editor has its own precise drag, focus and glass feedback. Keep site particles idle here.
+  // Interactive workspaces and product previews provide their own feedback.
   const editing=(target:EventTarget|null)=>{
-   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center]'))return false;
+   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],[data-blog-product-film]'))return false;
    if(frame||waveFrame)clear();return true;
   };
   const move=(event:PointerEvent)=>{
