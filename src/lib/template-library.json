@@ -977,6 +977,504 @@
     "image": "/template-covers/project-resume.webp?v=0ac05e1a48f783c3"
   },
   {
+    "id": "template-adminkit",
+    "slug": "template-adminkit",
+    "title": "AdminKit · 免费后台工作台",
+    "summary": "深色固定侧栏与浅色内容区形成稳定分区，指标、折线图与数据表格适合业务后台。仅收录免费 MIT 演示。",
+    "category": "分析仪表",
+    "tags": [
+      "响应式侧栏和管理页面",
+      "图表、表单与数据表格"
+    ],
+    "source": {
+      "name": "AdminKit Authors",
+      "url": "https://github.com/adminkit/adminkit"
+    },
+    "creator": {
+      "name": "AdminKit Authors",
+      "url": "https://github.com/adminkit"
+    },
+    "collection": {
+      "name": "GitHub 原作者项目",
+      "url": "https://github.com/adminkit/adminkit"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/LICENSE",
+      "status": "verified"
+    },
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/src/pages/index.html",
+      "note": "按原作者仓库固定版本核对 MIT 及原始页面；封面为真实界面截图。仅免费 MIT 演示；不收录 demo.adminkit.io 的 Pro 功能。"
+    },
+    "template": {
+      "kind": "project",
+      "repository": "https://github.com/adminkit/adminkit",
+      "licenseUrl": "https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/LICENSE",
+      "author": "AdminKit Authors",
+      "sourcePath": "src/pages/index.html",
+      "stack": [
+        "HTML",
+        "Bootstrap 5",
+        "Sass",
+        "JavaScript"
+      ],
+      "features": [
+        "响应式侧栏和管理页面",
+        "图表、表单与数据表格",
+        "登录、个人资料与发票页面"
+      ],
+      "scenarios": [
+        "dashboard",
+        "admin"
+      ],
+      "industries": [],
+      "visualStyles": [
+        "technical",
+        "minimal"
+      ],
+      "upstreamDemoUrl": "https://demo-mit.adminkit.io/",
+      "downloadUrl": "https://github.com/adminkit/adminkit/archive/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd.zip"
+    },
+    "previewPolicy": "embed",
+    "previewUrl": "https://demo-mit.adminkit.io/",
+    "websiteUrl": "https://demo-mit.adminkit.io/",
+    "image": "/template-covers/project-adminkit.webp?v=4942731c957b0df9",
+    "preview": {
+      "theme": "light",
+      "layout": "product",
+      "accent": "#3B7DDD"
+    },
+    "palette": [
+      "#222E3C",
+      "#3B7DDD",
+      "#F5F7FB",
+      "#FFFFFF"
+    ],
+    "typography": "具体字体、字重与回退栈以原始仓库为准。",
+    "layout": "侧栏使用深海军蓝，正文保持浅灰画布与白色面板；蓝色只用于主操作、图表线条和选中导航。指标数字突出，表格行高紧凑，表单保持明确标签。",
+    "motion": "优先保持原项目自然滚动与可访问导航。",
+    "prompt": "基于 AdminKit · 免费后台工作台 的原始开源实现调整一个可实际浏览的网站。侧栏使用深海军蓝，正文保持浅灰画布与白色面板；蓝色只用于主操作、图表线条和选中导航。指标数字突出，表格行高紧凑，表单保持明确标签。 保留原项目的信息架构、响应式导航和内容组织方式；依据实际框架扩展组件，使用自有名称与获得授权的素材。所有按钮和表单必须具备可理解的用途、焦点、错误与完成状态。手机优先保证阅读和操作，不增加无意义的动画。使用代码时保留原项目 MIT 版权与许可，第三方服务按其各自条款配置。",
+    "specification": "# AdminKit · 免费后台工作台\n\n## 项目与来源\n\n作者 / 维护者：AdminKit Authors\n\n原始仓库：https://github.com/adminkit/adminkit\n\n核对版本：9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd\n\n原始文件位置：src/pages/index.html\n\n许可：MIT。许可原文：https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/LICENSE\n\n## 设计重点\n\n侧栏使用深海军蓝，正文保持浅灰画布与白色面板；蓝色只用于主操作、图表线条和选中导航。指标数字突出，表格行高紧凑，表单保持明确标签。\n\n参考色值：#222E3C, #3B7DDD, #F5F7FB, #FFFFFF。具体字重、间距、组件与断点以原项目源文件为准。\n\n## 可用内容\n\n- 响应式侧栏和管理页面\n- 图表、表单与数据表格\n- 登录、个人资料与发票页面\n\n## 组件提示词\n\n后台导航：生成可折叠侧栏，分组标题与图标链接层级清楚，窄屏由按钮展开。\n指标卡片：标题、数值、趋势和比较区间分别排版，图表必须配文字说明。\n数据表格：保留列标题、排序提示、状态文字和键盘焦点，不只用颜色表达状态。\n\n## 预览与使用边界\n\n仅免费 MIT 演示；不收录 demo.adminkit.io 的 Pro 功能。 本站封面来自实际演示，已省略位图与背景照片；不打包这些示例照片。表单、第三方搜索、分析与托管需要按实际项目配置，不声称静态预览已经连接业务服务。\n\n## 许可全文\n\nThe MIT License (MIT)\n\nCopyright (c) 2020-2024 AdminKit Authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+    "verifiedAt": "2026-11-08",
+    "external": true
+  },
+  {
+    "id": "template-agency",
+    "slug": "template-agency",
+    "title": "Agency · 机构作品集",
+    "summary": "以大字号标题、黄色主按钮和清楚的章节节奏组织机构介绍，包含项目网格、时间线和联系区域。",
+    "category": "作品集",
+    "tags": [
+      "服务、项目、团队与联系章节",
+      "作品网格与项目详情对话框"
+    ],
+    "source": {
+      "name": "Start Bootstrap",
+      "url": "https://github.com/StartBootstrap/startbootstrap-agency"
+    },
+    "creator": {
+      "name": "Start Bootstrap",
+      "url": "https://github.com/StartBootstrap"
+    },
+    "collection": {
+      "name": "GitHub 原作者项目",
+      "url": "https://github.com/StartBootstrap/startbootstrap-agency"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/LICENSE",
+      "status": "verified"
+    },
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/dist/index.html",
+      "note": "按原作者仓库固定版本核对 MIT 及原始页面；封面为真实界面截图。原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    "template": {
+      "kind": "project",
+      "repository": "https://github.com/StartBootstrap/startbootstrap-agency",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/LICENSE",
+      "author": "Start Bootstrap",
+      "sourcePath": "dist/index.html",
+      "stack": [
+        "HTML",
+        "Bootstrap",
+        "Sass",
+        "JavaScript"
+      ],
+      "features": [
+        "服务、项目、团队与联系章节",
+        "作品网格与项目详情对话框",
+        "响应式导航和时间线"
+      ],
+      "scenarios": [
+        "portfolio",
+        "marketing"
+      ],
+      "industries": [],
+      "visualStyles": [
+        "bold",
+        "editorial"
+      ],
+      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-agency/",
+      "downloadUrl": "https://github.com/StartBootstrap/startbootstrap-agency/archive/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1.zip"
+    },
+    "previewPolicy": "embed",
+    "previewUrl": "https://startbootstrap.github.io/startbootstrap-agency/",
+    "websiteUrl": "https://startbootstrap.github.io/startbootstrap-agency/",
+    "image": "/template-covers/project-agency.webp?v=cbec723540f49353",
+    "preview": {
+      "theme": "light",
+      "layout": "product",
+      "accent": "#FFC800"
+    },
+    "palette": [
+      "#212529",
+      "#FFC800",
+      "#F8F9FA",
+      "#FFFFFF"
+    ],
+    "typography": "具体字体、字重与回退栈以原始仓库为准。",
+    "layout": "大标题与正文形成鲜明比例，黄色用于主要行动入口；正文采用宽松的白色章节，项目区按网格排列，时间线承担经历叙事。图片需要自行替换为获许可素材。",
+    "motion": "优先保持原项目自然滚动与可访问导航。",
+    "prompt": "基于 Agency · 机构作品集 的原始开源实现调整一个可实际浏览的网站。大标题与正文形成鲜明比例，黄色用于主要行动入口；正文采用宽松的白色章节，项目区按网格排列，时间线承担经历叙事。图片需要自行替换为获许可素材。 保留原项目的信息架构、响应式导航和内容组织方式；依据实际框架扩展组件，使用自有名称与获得授权的素材。所有按钮和表单必须具备可理解的用途、焦点、错误与完成状态。手机优先保证阅读和操作，不增加无意义的动画。使用代码时保留原项目 MIT 版权与许可，第三方服务按其各自条款配置。",
+    "specification": "# Agency · 机构作品集\n\n## 项目与来源\n\n作者 / 维护者：Start Bootstrap\n\n原始仓库：https://github.com/StartBootstrap/startbootstrap-agency\n\n核对版本：b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1\n\n原始文件位置：dist/index.html\n\n许可：MIT。许可原文：https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/LICENSE\n\n## 设计重点\n\n大标题与正文形成鲜明比例，黄色用于主要行动入口；正文采用宽松的白色章节，项目区按网格排列，时间线承担经历叙事。图片需要自行替换为获许可素材。\n\n参考色值：#212529, #FFC800, #F8F9FA, #FFFFFF。具体字重、间距、组件与断点以原项目源文件为准。\n\n## 可用内容\n\n- 服务、项目、团队与联系章节\n- 作品网格与项目详情对话框\n- 响应式导航和时间线\n\n## 组件提示词\n\n机构首屏：用简洁导航、大标题和单个主要行动按钮建立层级，不依赖大背景照片。\n项目卡片：提供标题、项目类型和可访问的详情按钮，对话框支持 Esc 与焦点返回。\n联系表单：使用真实标签、输入校验和提交状态；邮件服务需自行配置，不把静态演示当作已连接的业务后端。\n\n## 预览与使用边界\n\n原作者公开演示；第三方在线服务与素材各自适用原条款。 本站封面来自实际演示，已省略位图与背景照片；不打包这些示例照片。表单、第三方搜索、分析与托管需要按实际项目配置，不声称静态预览已经连接业务服务。\n\n## 许可全文\n\nThe MIT License (MIT)\n\nCopyright (c) 2013-2023 Start Bootstrap LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+    "verifiedAt": "2026-11-08",
+    "external": true
+  },
+  {
+    "id": "template-starlight",
+    "slug": "template-starlight",
+    "title": "Starlight · 多语言文档站",
+    "summary": "Astro 官方文档主题，包含分层导航、页内目录、搜索和明暗模式，适合维护产品指南与知识库。",
+    "category": "文档",
+    "tags": [
+      "侧栏、页内目录与站内搜索",
+      "明暗主题和多语言导航"
+    ],
+    "source": {
+      "name": "Astro contributors",
+      "url": "https://github.com/withastro/starlight"
+    },
+    "creator": {
+      "name": "Astro contributors",
+      "url": "https://github.com/withastro"
+    },
+    "collection": {
+      "name": "GitHub 原作者项目",
+      "url": "https://github.com/withastro/starlight"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/LICENSE",
+      "status": "verified"
+    },
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/docs/src/content/docs/index.mdx",
+      "note": "按原作者仓库固定版本核对 MIT 及原始页面；封面为真实界面截图。原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    "template": {
+      "kind": "project",
+      "repository": "https://github.com/withastro/starlight",
+      "licenseUrl": "https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/LICENSE",
+      "author": "Astro contributors",
+      "sourcePath": "docs/src/content/docs/index.mdx",
+      "stack": [
+        "Astro",
+        "MDX",
+        "TypeScript"
+      ],
+      "features": [
+        "侧栏、页内目录与站内搜索",
+        "明暗主题和多语言导航",
+        "Markdown / MDX 文档与组件"
+      ],
+      "scenarios": [
+        "docs"
+      ],
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "technical"
+      ],
+      "upstreamDemoUrl": "https://starlight.astro.build/",
+      "downloadUrl": "https://github.com/withastro/starlight/archive/5a061c123d10ed01c0c376bf16af30ae37b30a7d.zip"
+    },
+    "previewPolicy": "embed",
+    "previewUrl": "https://starlight.astro.build/",
+    "websiteUrl": "https://starlight.astro.build/",
+    "image": "/template-covers/project-starlight.webp?v=44641515cd1dd2f9",
+    "preview": {
+      "theme": "light",
+      "layout": "product",
+      "accent": "#5865F2"
+    },
+    "palette": [
+      "#17181C",
+      "#5865F2",
+      "#FFFFFF",
+      "#F6F6F7"
+    ],
+    "typography": "具体字体、字重与回退栈以原始仓库为准。",
+    "layout": "正文阅读宽度受控，侧栏和页内提纲分担导航；紫蓝色用于链接、焦点与行动入口，代码块、提示块和步骤列表有清楚语义。",
+    "motion": "优先保持原项目自然滚动与可访问导航。",
+    "prompt": "基于 Starlight · 多语言文档站 的原始开源实现调整一个可实际浏览的网站。正文阅读宽度受控，侧栏和页内提纲分担导航；紫蓝色用于链接、焦点与行动入口，代码块、提示块和步骤列表有清楚语义。 保留原项目的信息架构、响应式导航和内容组织方式；依据实际框架扩展组件，使用自有名称与获得授权的素材。所有按钮和表单必须具备可理解的用途、焦点、错误与完成状态。手机优先保证阅读和操作，不增加无意义的动画。使用代码时保留原项目 MIT 版权与许可，第三方服务按其各自条款配置。",
+    "specification": "# Starlight · 多语言文档站\n\n## 项目与来源\n\n作者 / 维护者：Astro contributors\n\n原始仓库：https://github.com/withastro/starlight\n\n核对版本：5a061c123d10ed01c0c376bf16af30ae37b30a7d\n\n原始文件位置：docs/src/content/docs/index.mdx\n\n许可：MIT。许可原文：https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/LICENSE\n\n## 设计重点\n\n正文阅读宽度受控，侧栏和页内提纲分担导航；紫蓝色用于链接、焦点与行动入口，代码块、提示块和步骤列表有清楚语义。\n\n参考色值：#17181C, #5865F2, #FFFFFF, #F6F6F7。具体字重、间距、组件与断点以原项目源文件为准。\n\n## 可用内容\n\n- 侧栏、页内目录与站内搜索\n- 明暗主题和多语言导航\n- Markdown / MDX 文档与组件\n\n## 组件提示词\n\n文档侧栏：显示分组和当前页面，支持折叠与移动端导航。\n阅读页：包含标题、概述、页内目录、代码示例以及上一页和下一页链接。\n全文搜索：显示加载、无结果、匹配摘要和键盘选中状态，并保留可访问名称。\n\n## 预览与使用边界\n\n原作者公开演示；第三方在线服务与素材各自适用原条款。 本站封面来自实际演示，已省略位图与背景照片；不打包这些示例照片。表单、第三方搜索、分析与托管需要按实际项目配置，不声称静态预览已经连接业务服务。\n\n## 许可全文\n\nMIT License\n\nCopyright (c) 2023 [Astro contributors](https://github.com/withastro/starlight/graphs/contributors)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "verifiedAt": "2026-11-08",
+    "external": true
+  },
+  {
+    "id": "template-nextra",
+    "slug": "template-nextra",
+    "title": "Nextra · MDX 文档与博客",
+    "summary": "以 Next.js 与 MDX 构建文档和博客，结合嵌套侧栏、页内提纲、代码示例与明暗主题。",
+    "category": "文档",
+    "tags": [
+      "MDX 文档和博客主题",
+      "嵌套导航、搜索与代码示例"
+    ],
+    "source": {
+      "name": "Shu Ding / Nextra contributors",
+      "url": "https://github.com/shuding/nextra"
+    },
+    "creator": {
+      "name": "Shu Ding / Nextra contributors",
+      "url": "https://github.com/shuding"
+    },
+    "collection": {
+      "name": "GitHub 原作者项目",
+      "url": "https://github.com/shuding/nextra"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/LICENSE",
+      "status": "verified"
+    },
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/docs/app/page.tsx",
+      "note": "按原作者仓库固定版本核对 MIT 及原始页面；封面为真实界面截图。原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    "template": {
+      "kind": "project",
+      "repository": "https://github.com/shuding/nextra",
+      "licenseUrl": "https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/LICENSE",
+      "author": "Shu Ding / Nextra contributors",
+      "sourcePath": "docs/app/page.tsx",
+      "stack": [
+        "Next.js",
+        "React",
+        "MDX"
+      ],
+      "features": [
+        "MDX 文档和博客主题",
+        "嵌套导航、搜索与代码示例",
+        "明暗主题和响应式阅读布局"
+      ],
+      "scenarios": [
+        "docs",
+        "blog"
+      ],
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ],
+      "upstreamDemoUrl": "https://nextra.site/",
+      "downloadUrl": "https://github.com/shuding/nextra/archive/d6e80e1dd627b781429a6ee989b15ebba688c8ea.zip"
+    },
+    "previewPolicy": "embed",
+    "previewUrl": "https://nextra.site/",
+    "websiteUrl": "https://nextra.site/",
+    "image": "/template-covers/project-nextra.webp?v=b888e3d50773127c",
+    "preview": {
+      "theme": "light",
+      "layout": "product",
+      "accent": "#111111"
+    },
+    "palette": [
+      "#0074DE",
+      "#111111",
+      "#FFFFFF",
+      "#F4F4F5"
+    ],
+    "typography": "具体字体、字重与回退栈以原始仓库为准。",
+    "layout": "轻量顶栏、侧栏、主阅读列和右侧提纲组成清楚的文档框架；正文用字重与间距建立层级，蓝色链接承担导航提示，代码与内容保持同一阅读节奏。",
+    "motion": "优先保持原项目自然滚动与可访问导航。",
+    "prompt": "基于 Nextra · MDX 文档与博客 的原始开源实现调整一个可实际浏览的网站。轻量顶栏、侧栏、主阅读列和右侧提纲组成清楚的文档框架；正文用字重与间距建立层级，蓝色链接承担导航提示，代码与内容保持同一阅读节奏。 保留原项目的信息架构、响应式导航和内容组织方式；依据实际框架扩展组件，使用自有名称与获得授权的素材。所有按钮和表单必须具备可理解的用途、焦点、错误与完成状态。手机优先保证阅读和操作，不增加无意义的动画。使用代码时保留原项目 MIT 版权与许可，第三方服务按其各自条款配置。",
+    "specification": "# Nextra · MDX 文档与博客\n\n## 项目与来源\n\n作者 / 维护者：Shu Ding / Nextra contributors\n\n原始仓库：https://github.com/shuding/nextra\n\n核对版本：d6e80e1dd627b781429a6ee989b15ebba688c8ea\n\n原始文件位置：docs/app/page.tsx\n\n许可：MIT。许可原文：https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/LICENSE\n\n## 设计重点\n\n轻量顶栏、侧栏、主阅读列和右侧提纲组成清楚的文档框架；正文用字重与间距建立层级，蓝色链接承担导航提示，代码与内容保持同一阅读节奏。\n\n参考色值：#0074DE, #111111, #FFFFFF, #F4F4F5。具体字重、间距、组件与断点以原项目源文件为准。\n\n## 可用内容\n\n- MDX 文档和博客主题\n- 嵌套导航、搜索与代码示例\n- 明暗主题和响应式阅读布局\n\n## 组件提示词\n\nMDX 阅读布局：主列限制宽度，页内提纲随视口调整，窄屏保持自然阅读顺序。\n代码示例：代码块包含语言标识、复制按钮及成功反馈，长代码可独立横向滚动。\n博客索引：展示标题、时间和摘要，文章页保留返回列表及相关内容入口。\n\n## 预览与使用边界\n\n原作者公开演示；第三方在线服务与素材各自适用原条款。 本站封面来自实际演示，已省略位图与背景照片；不打包这些示例照片。表单、第三方搜索、分析与托管需要按实际项目配置，不声称静态预览已经连接业务服务。\n\n## 许可全文\n\nMIT License\n\nCopyright (c) 2020 Shu Ding\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+    "verifiedAt": "2026-11-08",
+    "external": true
+  },
+  {
+    "id": "template-console",
+    "slug": "template-console",
+    "title": "Console · 终端风格博客",
+    "summary": "用等宽字体、路径导航和命令行提示组织个人站与文章，提供明暗及 Hacker 配色，区别于常规卡片博客。",
+    "category": "博客",
+    "tags": [
+      "深色、浅色与 Hacker 主题",
+      "文章、分类页面和代码高亮"
+    ],
+    "source": {
+      "name": "b2a3e8",
+      "url": "https://github.com/b2a3e8/jekyll-theme-console"
+    },
+    "creator": {
+      "name": "b2a3e8",
+      "url": "https://github.com/b2a3e8"
+    },
+    "collection": {
+      "name": "GitHub 原作者项目",
+      "url": "https://github.com/b2a3e8/jekyll-theme-console"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/LICENSE.txt",
+      "status": "verified"
+    },
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/_layouts/home.html",
+      "note": "按原作者仓库固定版本核对 MIT 及原始页面；封面为真实界面截图。原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    "template": {
+      "kind": "project",
+      "repository": "https://github.com/b2a3e8/jekyll-theme-console",
+      "licenseUrl": "https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/LICENSE.txt",
+      "author": "b2a3e8",
+      "sourcePath": "_layouts/home.html",
+      "stack": [
+        "Jekyll",
+        "Liquid",
+        "Sass"
+      ],
+      "features": [
+        "深色、浅色与 Hacker 主题",
+        "文章、分类页面和代码高亮",
+        "路径导航与命令行式提示"
+      ],
+      "scenarios": [
+        "blog",
+        "portfolio"
+      ],
+      "industries": [],
+      "visualStyles": [
+        "terminal",
+        "monochrome"
+      ],
+      "upstreamDemoUrl": "https://b2a3e8.github.io/jekyll-theme-console-demo-dark/",
+      "downloadUrl": "https://github.com/b2a3e8/jekyll-theme-console/archive/36631985b1b2e30646320c509c5b6d93577588f6.zip"
+    },
+    "previewPolicy": "embed",
+    "previewUrl": "https://b2a3e8.github.io/jekyll-theme-console-demo-dark/",
+    "websiteUrl": "https://b2a3e8.github.io/jekyll-theme-console-demo-dark/",
+    "image": "/template-covers/project-console.webp?v=e417f323c7f230a1",
+    "preview": {
+      "theme": "dark",
+      "layout": "product",
+      "accent": "#FFFFFF"
+    },
+    "palette": [
+      "#000000",
+      "#FFFFFF",
+      "#00FF00",
+      "#999999"
+    ],
+    "typography": "具体字体、字重与回退栈以原始仓库为准。",
+    "layout": "终端语言来自路径、提示符、等宽字和克制的链接标识；正文使用自然流布局，避免装饰性面板。代码高亮与文章日期要保持易读，主题切换不能隐藏内容。",
+    "motion": "优先保持原项目自然滚动与可访问导航。",
+    "prompt": "基于 Console · 终端风格博客 的原始开源实现调整一个可实际浏览的网站。终端语言来自路径、提示符、等宽字和克制的链接标识；正文使用自然流布局，避免装饰性面板。代码高亮与文章日期要保持易读，主题切换不能隐藏内容。 保留原项目的信息架构、响应式导航和内容组织方式；依据实际框架扩展组件，使用自有名称与获得授权的素材。所有按钮和表单必须具备可理解的用途、焦点、错误与完成状态。手机优先保证阅读和操作，不增加无意义的动画。使用代码时保留原项目 MIT 版权与许可，第三方服务按其各自条款配置。",
+    "specification": "# Console · 终端风格博客\n\n## 项目与来源\n\n作者 / 维护者：b2a3e8\n\n原始仓库：https://github.com/b2a3e8/jekyll-theme-console\n\n核对版本：36631985b1b2e30646320c509c5b6d93577588f6\n\n原始文件位置：_layouts/home.html\n\n许可：MIT。许可原文：https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/LICENSE.txt\n\n## 设计重点\n\n终端语言来自路径、提示符、等宽字和克制的链接标识；正文使用自然流布局，避免装饰性面板。代码高亮与文章日期要保持易读，主题切换不能隐藏内容。\n\n参考色值：#000000, #FFFFFF, #00FF00, #999999。具体字重、间距、组件与断点以原项目源文件为准。\n\n## 可用内容\n\n- 深色、浅色与 Hacker 主题\n- 文章、分类页面和代码高亮\n- 路径导航与命令行式提示\n\n## 组件提示词\n\n路径导航：将当前位置与可返回路径分开，链接保持可辨识和键盘焦点。\n文章列表：使用日期与标题组成对齐行，长标题允许换行，不裁掉必要信息。\n代码块：提供横向滚动与文本选择，保留语法颜色的文字对比，不依赖闪烁动画表达终端感。\n\n## 预览与使用边界\n\n原作者公开演示；第三方在线服务与素材各自适用原条款。 本站封面来自实际演示，已省略位图与背景照片；不打包这些示例照片。表单、第三方搜索、分析与托管需要按实际项目配置，不声称静态预览已经连接业务服务。\n\n## 许可全文\n\nThe MIT License (MIT)\n\nCopyright (c) 2018 b2a3e8\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+    "verifiedAt": "2026-11-08",
+    "external": true
+  },
+  {
+    "id": "template-hugo-awesome",
+    "slug": "template-hugo-awesome",
+    "title": "Hugo Blog Awesome · 阅读型个人博客",
+    "summary": "围绕个人简介与文章阅读组织内容，包含明暗主题、多语言、文章目录和代码高亮，适合维护轻量技术博客。",
+    "category": "博客",
+    "tags": [
+      "文章列表与独立阅读页",
+      "明暗主题与多语言内容"
+    ],
+    "source": {
+      "name": "Sidharth R. / Hugo Blog Awesome contributors",
+      "url": "https://github.com/hugo-sid/hugo-blog-awesome"
+    },
+    "creator": {
+      "name": "Sidharth R. / Hugo Blog Awesome contributors",
+      "url": "https://github.com/hugo-sid"
+    },
+    "collection": {
+      "name": "GitHub 原作者项目",
+      "url": "https://github.com/hugo-sid/hugo-blog-awesome"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/LICENSE",
+      "status": "verified"
+    },
+    "provenance": {
+      "verifiedAt": "2026-11-08",
+      "evidenceUrl": "https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/layouts/home.html",
+      "note": "按原作者仓库固定版本核对 MIT 及原始页面；封面为真实界面截图。原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    "template": {
+      "kind": "project",
+      "repository": "https://github.com/hugo-sid/hugo-blog-awesome",
+      "licenseUrl": "https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/LICENSE",
+      "author": "Sidharth R. / Hugo Blog Awesome contributors",
+      "sourcePath": "layouts/home.html",
+      "stack": [
+        "Hugo",
+        "Go Templates",
+        "Sass"
+      ],
+      "features": [
+        "文章列表与独立阅读页",
+        "明暗主题与多语言内容",
+        "文章目录、代码高亮和数学排版"
+      ],
+      "scenarios": [
+        "blog"
+      ],
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ],
+      "upstreamDemoUrl": "https://hba.sid.one/",
+      "downloadUrl": "https://github.com/hugo-sid/hugo-blog-awesome/archive/6fcfddf960a41309a6a376d513ff661ed422119a.zip"
+    },
+    "previewPolicy": "embed",
+    "previewUrl": "https://hba.sid.one/",
+    "websiteUrl": "https://hba.sid.one/",
+    "image": "/template-covers/project-hugo-awesome.webp?v=f79f4394ed122c25",
+    "preview": {
+      "theme": "light",
+      "layout": "product",
+      "accent": "#F5F5F5"
+    },
+    "palette": [
+      "#1D1E20",
+      "#F5F5F5",
+      "#A9ABB3",
+      "#FFFFFF"
+    ],
+    "typography": "具体字体、字重与回退栈以原始仓库为准。",
+    "layout": "以单列内容和一致的阅读宽度保持安静的页面节奏，标题、摘要、日期与分隔线构成主要层级；强调文字可读性，主题开关与移动导航保持轻量。",
+    "motion": "优先保持原项目自然滚动与可访问导航。",
+    "prompt": "基于 Hugo Blog Awesome · 阅读型个人博客 的原始开源实现调整一个可实际浏览的网站。以单列内容和一致的阅读宽度保持安静的页面节奏，标题、摘要、日期与分隔线构成主要层级；强调文字可读性，主题开关与移动导航保持轻量。 保留原项目的信息架构、响应式导航和内容组织方式；依据实际框架扩展组件，使用自有名称与获得授权的素材。所有按钮和表单必须具备可理解的用途、焦点、错误与完成状态。手机优先保证阅读和操作，不增加无意义的动画。使用代码时保留原项目 MIT 版权与许可，第三方服务按其各自条款配置。",
+    "specification": "# Hugo Blog Awesome · 阅读型个人博客\n\n## 项目与来源\n\n作者 / 维护者：Sidharth R. / Hugo Blog Awesome contributors\n\n原始仓库：https://github.com/hugo-sid/hugo-blog-awesome\n\n核对版本：6fcfddf960a41309a6a376d513ff661ed422119a\n\n原始文件位置：layouts/home.html\n\n许可：MIT。许可原文：https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/LICENSE\n\n## 设计重点\n\n以单列内容和一致的阅读宽度保持安静的页面节奏，标题、摘要、日期与分隔线构成主要层级；强调文字可读性，主题开关与移动导航保持轻量。\n\n参考色值：#1D1E20, #F5F5F5, #A9ABB3, #FFFFFF。具体字重、间距、组件与断点以原项目源文件为准。\n\n## 可用内容\n\n- 文章列表与独立阅读页\n- 明暗主题与多语言内容\n- 文章目录、代码高亮和数学排版\n\n## 组件提示词\n\n个人介绍：使用姓名、简短简介和明确的社交链接，不强制使用人物头像。\n文章卡片：标题、摘要、日期有清楚层级，整块入口保持语义链接。\n阅读页：支持 Markdown、页内目录、代码和数学内容，长公式与代码仅在各自区域滚动。\n\n## 预览与使用边界\n\n原作者公开演示；第三方在线服务与素材各自适用原条款。 本站封面来自实际演示，已省略位图与背景照片；不打包这些示例照片。表单、第三方搜索、分析与托管需要按实际项目配置，不声称静态预览已经连接业务服务。\n\n## 许可全文\n\nThe MIT License (MIT)\n\nCopyright (c) 2023 Sidharth R.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+    "verifiedAt": "2026-11-08",
+    "external": true
+  },
+  {
     "id": "voltagent-claude",
     "slug": "voltagent-claude",
     "title": "Claude · 设计规范",

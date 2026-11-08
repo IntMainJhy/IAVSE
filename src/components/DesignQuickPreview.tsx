@@ -2,6 +2,7 @@
 import {useEffect,useId,useRef,useState} from 'react';
 import Link from 'next/link';
 import {Icon} from './Icons';
+import {templateCoverSrcSet} from '@/lib/template-cover.mjs';
 import {useLocale} from './LocaleProvider';
 import type {DesignEntry} from '@/lib/design-types';
 import '@/app/design-quick-preview.css';
@@ -15,7 +16,7 @@ export function DesignMedia({entry,large=false}:{entry:DesignPreviewItem;large?:
  const failed=failedSrc===src,loaded=loadedSrc===src;
  useEffect(()=>{const image=picture.current;if(image?.complete){if(image.naturalWidth>0)setLoadedSrc(src);else if(image.currentSrc)setFailedSrc(src)}},[src]);
  return <div className={'design-media'+(large?' is-large':'')} data-frame="false">
-  {src&&!failed&&<img ref={picture} src={src} alt={entry.title} width={1200} height={800} loading={large?'eager':'lazy'} decoding="async" style={{opacity:loaded?1:0}} onLoad={()=>setLoadedSrc(src)} onError={()=>setFailedSrc(src)}/>}
+  {src&&!failed&&<img ref={picture} src={src} srcSet={templateCoverSrcSet(src,large)} alt={entry.title} width={1200} height={800} loading={large?'eager':'lazy'} decoding="async" style={{opacity:loaded?1:0}} onLoad={()=>setLoadedSrc(src)} onError={()=>setFailedSrc(src)}/>}
   {(!src||failed||!loaded)&&<div className="design-media-fallback"><span className="design-cover-kind">{t(entry.template?.kind==='project'?'开源项目':entry.template?.kind==='design-system'?'设计规范预览':'页面模板')}</span><strong>{entry.title}</strong><div>{entry.palette.slice(0,5).map((color,index)=><i key={index} style={{background:color}}/>)}</div><span>{entry.template?.stack?.slice(0,3).join(' · ')||entry.creator?.name||entry.source.name}</span></div>}
  </div>;
 }

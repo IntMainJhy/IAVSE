@@ -1,6 +1,6 @@
 import catalogTaxonomy from './catalog-taxonomy.json' with {type:'json'};
 /** Current industry labels and retained legacy labels are recognized without collapsing to generic. */
-export const designCategories=[...new Set([...catalogTaxonomy.industries.map(item=>item.label),'AI','开发工具','基建与云','设计生产','金融加密','企业消费','通用','落地页','分析仪表','博客','SaaS'])];
+export const designCategories=[...new Set([...catalogTaxonomy.industries.map(item=>item.label),'AI','开发工具','基建与云','设计生产','金融加密','企业消费','通用','落地页','分析仪表','博客','SaaS','文档','作品集'])];
 const localCategories={
  'iavse-optical-glass':'落地页','iavse-spatial-gallery':'设计生产','iavse-resource-story':'通用','iavse-bento-control':'分析仪表',
  'apple-product-stage':'企业消费','notion-paper-workspace':'设计生产','linear-precision':'开发工具','stripe-gradient-platform':'金融加密',

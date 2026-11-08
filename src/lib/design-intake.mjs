@@ -1,4 +1,5 @@
 import templateLibrary from './template-library.json' with {type:'json'};
+import {designDirectoryEntry} from './design-directory-data.mjs';
 import {randomUUID} from 'node:crypto';
 import {isIP} from 'node:net';
 import {db,transaction,recordAudit} from './db.mjs';
@@ -14,6 +15,8 @@ const previewAliases={dashboard:'workspace',cinematic:'spatial',minimal:'product
 const emptySettings={enabled:true,hour:9,timeZone:'Asia/Shanghai',lastScheduledDate:'',heartbeat:''};
 function sourceKeyOrNull(value){try{return canonicalSource(value)}catch{return null}}
 const catalogDesigns=templateLibrary;
+const catalogBySlug=new Map(catalogDesigns.map(entry=>[entry.slug,entry]));
+const directorySeeds=catalogDesigns.map(designDirectoryEntry);
 // Independent implementations keep code ownership in source and the studied site
 // in referenceSite. Reserve both identities and exact entry/preview aliases;
 // research citations in referenceUrls are evidence, not duplicate identities.
@@ -31,6 +34,8 @@ export function intakeDb(){
  version INTEGER NOT NULL DEFAULT 1,draft TEXT NOT NULL,published TEXT,collector TEXT NOT NULL DEFAULT '',
  created TEXT NOT NULL,updated TEXT NOT NULL,reviewed TEXT,reviewer TEXT,reason TEXT NOT NULL DEFAULT '');
  CREATE INDEX IF NOT EXISTS design_intake_queue ON design_intake_entries(status,created);
+ CREATE INDEX IF NOT EXISTS design_intake_public ON design_intake_entries(kind,visibility,reviewed DESC,id DESC) WHERE published IS NOT NULL;
+ CREATE INDEX IF NOT EXISTS design_intake_public_slug ON design_intake_entries(json_extract(published,'$.slug'),reviewed DESC,id DESC) WHERE kind='design' AND visibility='public' AND published IS NOT NULL AND json_valid(published);
  CREATE TABLE IF NOT EXISTS design_intake_source_keys(source_key TEXT PRIMARY KEY,entry_id TEXT NOT NULL REFERENCES design_intake_entries(id) ON DELETE CASCADE);
  INSERT OR IGNORE INTO design_intake_source_keys(source_key,entry_id) SELECT source_key,id FROM design_intake_entries;
  INSERT OR IGNORE INTO design_intake_source_keys(source_key,entry_id) SELECT json_extract(published,'$.source.url'),id FROM design_intake_entries WHERE published IS NOT NULL AND json_valid(published) AND json_type(published,'$.source.url')='text';
@@ -83,9 +88,17 @@ function publicationReady(draft,kind){
  }else {requireValue(skillCategories.some(category=>category.id===draft.category),'请选择目录支持的 Skill 分类');requireValue(draft.repo&&draft.installCommand&&draft.license&&draft.tools.length&&draft.recommendation.length>=20,'发布前请补充仓库、安装命令、许可、支持工具及推荐说明（至少 20 字）');}
 }
 const dto=row=>({...row,draft:parse(row.draft),published:row.published?parse(row.published):null});
-export function readPublishedDesigns(){
- const seeds=seedDesigns(),items=intakeDb().prepare("SELECT published FROM design_intake_entries WHERE kind='design' AND visibility='public' AND published IS NOT NULL ORDER BY reviewed DESC").all().map(row=>parse(row.published));
+export function readPublishedDesigns({summary=false}={}){
+ const seeds=summary?directorySeeds:seedDesigns(),projection=summary?"CASE WHEN json_valid(published) THEN json_remove(published,'$.specification','$.prompt','$.bodyHtml','$.typography','$.layout','$.motion') ELSE '{}' END":'published';
+ const items=intakeDb().prepare("SELECT "+projection+" AS published FROM design_intake_entries WHERE kind='design' AND visibility='public' AND published IS NOT NULL ORDER BY reviewed DESC,id DESC").all().map(row=>summary?designDirectoryEntry(parse(row.published)):parse(row.published));
  const seen=new Set(seeds.map(item=>item.slug));return [...seeds,...items.filter(item=>!seen.has(item.slug))];
+}
+/** Detail reads stay live and indexed; never cache mutable publication/visibility decisions. */
+export function findPublishedDesign(slug){
+ if(typeof slug!=='string'||!slug||slug.length>100)return null;
+ const seed=catalogBySlug.get(slug);if(seed)return seed;
+ const row=intakeDb().prepare("SELECT published FROM design_intake_entries INDEXED BY design_intake_public_slug WHERE kind='design' AND visibility='public' AND published IS NOT NULL AND json_valid(published) AND json_extract(published,'$.slug')=? ORDER BY reviewed DESC,id DESC LIMIT 1").get(slug);
+ return row?parse(row.published):null;
 }
 export function readPublishedSkills(){return intakeDb().prepare("SELECT published FROM design_intake_entries WHERE kind='skill' AND visibility='public' AND published IS NOT NULL ORDER BY reviewed DESC").all().map(row=>parse(row.published))}
 export function discoveryQueue(params=new URLSearchParams()){

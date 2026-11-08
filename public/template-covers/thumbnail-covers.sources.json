@@ -1,0 +1,508 @@
+{
+  "records": [
+    {
+      "path": "/template-covers/thumbs/project-astro-paper.webp",
+      "sha256": "7b0c452b381f95fc4c7260bbc57d5c40f445d0036a3201f2876fa068ad0dd773",
+      "source": "/template-covers/project-astro-paper.webp",
+      "sourceSha256": "47e21e35c9a53e59480975f142a28c496e2c0050d7845877fedd6951e633dfbc",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-fuwari.webp",
+      "sha256": "2bded8f0f286f05a9ea19f64b64fbf110eba048ec8913b4a22fa9c295ada58e7",
+      "source": "/template-covers/project-fuwari.webp",
+      "sourceSha256": "dce29f34192a3855473e3d908be643fde6259819e012357d931f064cb50b00e7",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-astrowind.webp",
+      "sha256": "95b5baf884a64bd136ccf9be076a868b7d5292fddd49c00419ee23daf54fb521",
+      "source": "/template-covers/project-astrowind.webp",
+      "sourceSha256": "ffa95ba9e57664768e3caff3adf774d7fb38a7e7752365bf61107acda9b4a67c",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-nextdevtpl.webp",
+      "sha256": "c9d4383bcbd1d31c0a43ab8b23778a40b244cbadac33f4bddabe75737d660a5d",
+      "source": "/template-covers/project-nextdevtpl.webp",
+      "sourceSha256": "29a4d1c2dbd3fb6d5925ba3edb9ec950feff5037c748683cdc14f2b1f6531978",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-tabler.webp",
+      "sha256": "b8245ee581fdb88e13ce569efbd1f2d067b43fce5d18093a4fe7cb54db5a5d12",
+      "source": "/template-covers/project-tabler.webp",
+      "sourceSha256": "e451a924234ed73ceb18ece8ff0a8c4a8df92bbbca6eb1520d5fd5951b9b878d",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-hextra.webp",
+      "sha256": "182acaa9208dd1b0fea7d93b291868689eba43a509caf7fd0fc62bad8556a2c3",
+      "source": "/template-covers/project-hextra.webp",
+      "sourceSha256": "cd0c4f660b9b23f0ba314ba9280ffc30c241dbaa3bef44b57f1862a07fb08975",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-just-docs.webp",
+      "sha256": "c4f9150ebb9b04a4b4d93b7dc25a2ea8b6051654856580259f64bf9d93b62628",
+      "source": "/template-covers/project-just-docs.webp",
+      "sourceSha256": "98ae9026138b95e66c708ee37706d987281c1506f51aaea85a722e85d2a77f3f",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-clean-blog.webp",
+      "sha256": "74620914632f71d9ca178b9644913b147f0a3932d24a7c1fad4116651c3f42ec",
+      "source": "/template-covers/project-clean-blog.webp",
+      "sourceSha256": "cf6d8909605268b35b9dfc1b74366e9138675a047e4578a675ada383ffa17c8f",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-freelancer.webp",
+      "sha256": "7bf9b94fb4c72e456dc9739edd7874a77b89fa5dd2380b6b137307f104236393",
+      "source": "/template-covers/project-freelancer.webp",
+      "sourceSha256": "1790e9f0a617789715581eea7e8c220981287993955ab696e42ffbdf8d6312a6",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-landwind.webp",
+      "sha256": "312826d25055fe03f3f128e81a94f44778e85b65bc30d566c80da9cfb9cf45fd",
+      "source": "/template-covers/project-landwind.webp",
+      "sourceSha256": "dd56eb94fc267a2d910bba41f55d65fc568ffdb26dcf252d41a5a856a5043fdc",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-bigspring.webp",
+      "sha256": "2805b2513800edc91cadc800f4ac101ce186b9e40a528d2a1648835bd76b3bf4",
+      "source": "/template-covers/project-bigspring.webp",
+      "sourceSha256": "4f73d1667e86af69a853e38d93b5c0486792ef96e56aa1d9bab812ef874ab0da",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-resume.webp",
+      "sha256": "66daef736f68c40d3dfc4dceabd7baf447ef1cd0c80ee08fe09177730e7a7d9e",
+      "source": "/template-covers/project-resume.webp",
+      "sourceSha256": "0ac05e1a48f783c3e26ff1df9ecaaa4d031538c47497cbf90be270abcf4eb7ac",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-adminkit.webp",
+      "sha256": "afc470b6f11a8601a86c6341d37b536e7bcbe95f3b4e61a3f7bedf0220410bb2",
+      "source": "/template-covers/project-adminkit.webp",
+      "sourceSha256": "4942731c957b0df9b27b0480300678ae54c6baee355e2d4e1b5b68be1ff4459a",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-agency.webp",
+      "sha256": "a591d8acbe8bde80cfd6aa7ef77e683eb91726cbf2a60ead9e4018609bc0df89",
+      "source": "/template-covers/project-agency.webp",
+      "sourceSha256": "cbec723540f493536cfbd3873fb1846724a62a9f9ddd8efdacf00783354a19e1",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-starlight.webp",
+      "sha256": "de235f89da73fffc319e70a1e0fe55e38fc46542a6cc4dba0a76ec2e97079b1e",
+      "source": "/template-covers/project-starlight.webp",
+      "sourceSha256": "44641515cd1dd2f950909279fbcd341078010093c5389aca90d35543a50b9d9e",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-nextra.webp",
+      "sha256": "7033a2286d7c47abcc4cd76e8e1ccd83e7a7abcd2c9d197d8ec347fd87395d41",
+      "source": "/template-covers/project-nextra.webp",
+      "sourceSha256": "b888e3d50773127c9a8977597b8b28115d33543a3cf17e2694ed02c562dff5d8",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-console.webp",
+      "sha256": "725f9fa09fedc83e426ac3c44816da529f37128a9aa668d22ed1e215fa3bcf73",
+      "source": "/template-covers/project-console.webp",
+      "sourceSha256": "e417f323c7f230a12f4891767ecd93e32eefd42b182e63e931df0d00f7b9b67d",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/project-hugo-awesome.webp",
+      "sha256": "97c953a3803a39a32e049280d009405738aba17cd03e1fcec673685e49056a74",
+      "source": "/template-covers/project-hugo-awesome.webp",
+      "sourceSha256": "f79f4394ed122c25506eab11e8c2086976fd9259e032a903c704f6e1be62030c",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-claude.webp",
+      "sha256": "837c5a873e8e3efe2e384fc660509bdb907271e07d14a24e7832578184479f12",
+      "source": "/template-covers/voltagent-claude.webp",
+      "sourceSha256": "65cea0f9bd3eaa1c69bd6d8058f879c48b1e80e78c8f57273fa8d9af125edbcc",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-cohere.webp",
+      "sha256": "ae4d9ac7375a71d0fc4da1d54727321b127592659b5b3ecba838ba22519ca684",
+      "source": "/template-covers/voltagent-cohere.webp",
+      "sourceSha256": "9a52cc129b1ccb1f80291aa9de929583d89966319bfce7812ff3d2ceb29e904c",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-elevenlabs.webp",
+      "sha256": "88b539cad4b88e2756b0ff8e49ee34f1f35464838d9132adbf3997d3ce311a8d",
+      "source": "/template-covers/voltagent-elevenlabs.webp",
+      "sourceSha256": "51dc33766cfc5e3c87265759c4fa9bd1fd89e7cbfa71888e8666e819c93f3b9a",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-minimax.webp",
+      "sha256": "431162a97eeba2193c3f5ce92d8fe6b177fb41d6853527b997120e50e6eb6cdd",
+      "source": "/template-covers/voltagent-minimax.webp",
+      "sourceSha256": "c91655fb659f702099052a49c5e813bdddfb93e5db37b2a1d37552ca978b462a",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-mistral-ai.webp",
+      "sha256": "c87cc0cdd4f3c1d1ff0e3b0f929ba3a89dbf3a0d5babd7c6abff1dfcf1418891",
+      "source": "/template-covers/voltagent-mistral-ai.webp",
+      "sourceSha256": "99e6b29f76297b94f636c6d4d3d13d5651098fa982eab2ae3a11014a3d666141",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-ollama.webp",
+      "sha256": "e3900dfac6c10ff552df2f44332ea8443e0b7397d6914732e30cf7802248060e",
+      "source": "/template-covers/voltagent-ollama.webp",
+      "sourceSha256": "253d6e1a5769edd9fa6cd1be504d68322d88eb0e0db40fdff630911843227c28",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-opencode-ai.webp",
+      "sha256": "5479749d8daa48aadfe632b88d3746246bc4efaefba7a2f2a8c071c7149d23a9",
+      "source": "/template-covers/voltagent-opencode-ai.webp",
+      "sourceSha256": "6ba0315e5245cf7f6a54ca851a95ed1aa562ab0dd527b064de7c4ae988e6fb8e",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-replicate.webp",
+      "sha256": "58835dcc0aa27536b0eeec0b3204a61ffbef1c150d075f586802ff658712424b",
+      "source": "/template-covers/voltagent-replicate.webp",
+      "sourceSha256": "20d0fea036b087731f22b1fc8946c0dafddc6dec1f006370c56ab19dabcc666f",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-runwayml.webp",
+      "sha256": "33ef2db6ec1d42abf421bf4e1ae8a754653615573a71bb9c18856344db7cbf8f",
+      "source": "/template-covers/voltagent-runwayml.webp",
+      "sourceSha256": "bcdb959c15095561bf3d463a154bbc8797d0b4e640a82836eafa61610e181393",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-together-ai.webp",
+      "sha256": "45143eb957db5bdf67e0d849e4efbe3d8c3e9662468141416373ef879716a6f8",
+      "source": "/template-covers/voltagent-together-ai.webp",
+      "sourceSha256": "e83632097d0fece79ed8d8493662f1f7502afb3ee59df532bf1a018b1758c59a",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-voltagent.webp",
+      "sha256": "10d4e487d62980d8a7c33655e0973af1773fbbf428c77fe812dd27c8d108d470",
+      "source": "/template-covers/voltagent-voltagent.webp",
+      "sourceSha256": "4dea2a1c110df6b8b55329782284ef82d4872f0cf6e4a85eceaa92e03447b3b0",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-x-ai.webp",
+      "sha256": "5db5e1a713e0a1eeebe061110471180b32c9d012028c5344721041b77fd7f23e",
+      "source": "/template-covers/voltagent-x-ai.webp",
+      "sourceSha256": "7b98eab19e14afccb71d1cd5280dcd2065135d8fc982437e2f2630ed25d26067",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-cursor.webp",
+      "sha256": "8bcf6bea0d9ec5323c2474707707185ca4648c7a568db669e7be7bd922a24580",
+      "source": "/template-covers/voltagent-cursor.webp",
+      "sourceSha256": "f1a059ff57b98c7797e69debba14f691fc1314ec2793bbd67e5e3828208dd160",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-expo.webp",
+      "sha256": "f152aca9014a31d0c283829e3a48af1be272813d9ea0da0b33b68d003fbf9228",
+      "source": "/template-covers/voltagent-expo.webp",
+      "sourceSha256": "e8e2ebbba7a33ebffbfd381a2969c7071e3b20d78242a20a33ba231e7a6d1bbe",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-linear-app.webp",
+      "sha256": "a6e18541b88ec36c63656e83a6eb92dfbd4ac3dbdb40aa53f827ab85b553d523",
+      "source": "/template-covers/voltagent-linear-app.webp",
+      "sourceSha256": "93c131d83672552a8e984130120807f83a8d5c526b552c5b47117ae9f0084c16",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-lovable.webp",
+      "sha256": "8c4e4f41667664522fe91ad4f0b4c993c413be7b97a9375721f7cb43e58555a0",
+      "source": "/template-covers/voltagent-lovable.webp",
+      "sourceSha256": "cecd3b33d7851590c8827ff3dcf229337b8bb8a36ef5b1e87e42f100c6c39e1b",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-mintlify.webp",
+      "sha256": "7d0d2f8728b9d1cab6f014ad25c0e20fd3cffe39d6bbb0669d63d2ac10f89a3d",
+      "source": "/template-covers/voltagent-mintlify.webp",
+      "sourceSha256": "fbcd650870f644a3974a74799fa9d2384ff70017e5f3f76750a30a7921eab32b",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-posthog.webp",
+      "sha256": "6045aaae791c7797dc34cd03ff4a18186865751565f9f01c56539feba0a5018f",
+      "source": "/template-covers/voltagent-posthog.webp",
+      "sourceSha256": "e6ea2f75d9eb60b7cf519c02eadd30f5a410fdd979b8d08dcc51db14fe95db7f",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-raycast.webp",
+      "sha256": "88d1ccb901cc256f11071f9e8fedd08d22159df1df6b9c939ea858f1944cc790",
+      "source": "/template-covers/voltagent-raycast.webp",
+      "sourceSha256": "9f91a0bb0488d1eb84655b679908a716f0d5fd55a953dd0bcb16a56b3775ab8c",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-resend.webp",
+      "sha256": "1dae56a05dfc31e5e9c1ef1ec5fce12872d2c2b8aa0060aa4b7d46336b443972",
+      "source": "/template-covers/voltagent-resend.webp",
+      "sourceSha256": "c75c1c7db313dc66a9f6cd4138c943cce7bf8fd68222852b672f371c92778912",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-sentry.webp",
+      "sha256": "bf144e8f1ab10f0c8147415a3de06fe3b30e24c64d55ee84b994fa688435142a",
+      "source": "/template-covers/voltagent-sentry.webp",
+      "sourceSha256": "bbeacc26602a6a4d806c0657eeda5238f164c203e8488567d3c8529c8be28c32",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-supabase.webp",
+      "sha256": "fc08bb63df63906d100c0aa27756f0f2d63001c9e75d068fb0d31d45527d8739",
+      "source": "/template-covers/voltagent-supabase.webp",
+      "sourceSha256": "6cc270388cb86d59328997a6f42e11ea80367dd5b9afa6e9d99f6979c510dc41",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-superhuman.webp",
+      "sha256": "879903902f36820c8195a9bc79653bbbbf692f13731462eb7e3b27669c5e8520",
+      "source": "/template-covers/voltagent-superhuman.webp",
+      "sourceSha256": "a79e3c7bcd90cf9b8c068053b809a70ee539d99eb300ce2f4cc80eba960b26ce",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-vercel.webp",
+      "sha256": "181ec76f56838b5ac09d6c288758797a5c0872be2f653373c9a8cae49bf92c50",
+      "source": "/template-covers/voltagent-vercel.webp",
+      "sourceSha256": "ab4ee41825d41cee30f1efffb8c63457e414c9b375fca1cab92272d5b1b2f0c1",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-warp.webp",
+      "sha256": "711448af8edbc7e658bea172368e662b838e196e3c81cbb9beeec195bdf243af",
+      "source": "/template-covers/voltagent-warp.webp",
+      "sourceSha256": "73e37fbfd8ad1b80c75f16b58a5435f4cf0b99d1adb60cd4ea6d1cd7e19bb48c",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-zapier.webp",
+      "sha256": "f98869a2ab28f955c806c84e11dea5649b8de6e10d903689ff640b97e2963a34",
+      "source": "/template-covers/voltagent-zapier.webp",
+      "sourceSha256": "e0d3a7b4443cb0e9c5524fc7dec69c22853412917a051f2c0043202ce71e019c",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-clickhouse.webp",
+      "sha256": "c10cffa8da3fb3239677963bfc6f6f46f8267c4e6c123c89275ad772a7284713",
+      "source": "/template-covers/voltagent-clickhouse.webp",
+      "sourceSha256": "9bb2392ca84707e09bf4bfda04cb86b1c37c69d45098df9bd9810fd6401a80b8",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-composio.webp",
+      "sha256": "a04799cc044e5c53aa35ba212a17b6a7e249d5c9059e5d8d2d7f96c81bb1f04e",
+      "source": "/template-covers/voltagent-composio.webp",
+      "sourceSha256": "493dd55e95416551aba9025b3fd722e2cd46ee786260bb49e9b935d37551488f",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-hashicorp.webp",
+      "sha256": "53a3863de2bbeaefcd9b7d337916f19dbd45e35651f675bcf600f8f1b3ce01fb",
+      "source": "/template-covers/voltagent-hashicorp.webp",
+      "sourceSha256": "01a37f5ebfe4a01628b642b82143529abc495d84c7686a0147ea045e3e812285",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-mongodb.webp",
+      "sha256": "b30064469920417c8489eb4078489e9ca0f297e797ea43828e1d607d51a58b7f",
+      "source": "/template-covers/voltagent-mongodb.webp",
+      "sourceSha256": "71d75dbb782a3656aed7fbc95fbb5d40e793e2a518a4790e5d1259a05a8b8135",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-sanity.webp",
+      "sha256": "7611c884bac296b13f7737c14c6f781ab79cb75a4d6af5e1a7736dce0dea590d",
+      "source": "/template-covers/voltagent-sanity.webp",
+      "sourceSha256": "a391de96ae6c4c66adf965ceca2f6e4ed3cc88cb19c47f2bdf44d6bd6ac4efd5",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-stripe.webp",
+      "sha256": "d1040374d8f66c2f0169f90e715e71c5c8b0c1a244bb7d02799b3546e527883d",
+      "source": "/template-covers/voltagent-stripe.webp",
+      "sourceSha256": "58009b1d29eae6f3f21988dc666d5bffeb4b71b2baf3a6362154a8bf3379d2a2",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-airtable.webp",
+      "sha256": "68663439e4fc840ea5118e3a231340d8b686116adae00beb8ca48e5cd71cb41e",
+      "source": "/template-covers/voltagent-airtable.webp",
+      "sourceSha256": "c8d8f5b66253ddbdeca7979630d9d1efd50c7864561da1e6d7616968fda66ca9",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-cal.webp",
+      "sha256": "e98ccd24e4e24a7bc1f4734bdbaee47026711ad6565779cf8a46c06e7b72b5a4",
+      "source": "/template-covers/voltagent-cal.webp",
+      "sourceSha256": "8684c94b352a98dfd2ce20f25e89db1676ba6510e1a15fb0cdbe30670ec921ff",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-clay.webp",
+      "sha256": "a6c8ff5557467f996398b46626d61e13d0d0a9c4c76cd76c80a2f822a7c26f38",
+      "source": "/template-covers/voltagent-clay.webp",
+      "sourceSha256": "ce15affb6bc105a3bf01adf93866140c284e6fbb0ce901b236f1c41ff6890607",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-figma.webp",
+      "sha256": "49d81ba06652093acf4140cff791a020f58abd1775b931c9f73a306e41862703",
+      "source": "/template-covers/voltagent-figma.webp",
+      "sourceSha256": "5471341d6b0a10ec2f50d7325aef532124b674c8978cdacaf8ecb452ef638f03",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-framer.webp",
+      "sha256": "903bec134b32eaf1acfd7a77430e8de8e13195df0af95900570a65737cdf1851",
+      "source": "/template-covers/voltagent-framer.webp",
+      "sourceSha256": "7b0ea3351d3ee5f0a5d432160b463c64c534ab80d1f0642ff953e44e28a49355",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-intercom.webp",
+      "sha256": "4abd81ab782bc0c04a005b1cb903156f15502995d8d0e1ad2b0963a02fa06479",
+      "source": "/template-covers/voltagent-intercom.webp",
+      "sourceSha256": "e84efaf5f55df86e077400a3f3c69722182586c755ec5d3601ff1402ebf12882",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-miro.webp",
+      "sha256": "b5f9c73846003d91b26a24b48b8b014bb0947e7c45c020a44b72eeb0a3ee6509",
+      "source": "/template-covers/voltagent-miro.webp",
+      "sourceSha256": "36367589d50c3bc5e76b60bda00311153334807d1c2138f15418d1af36ef63a8",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-notion.webp",
+      "sha256": "6fde3f690550e6301fead8ab9602fafd826c113a20d6b67c6f3608a5abf5a05a",
+      "source": "/template-covers/voltagent-notion.webp",
+      "sourceSha256": "619811a46906c9e25397ac5b709ce86b62958decfaaaa5f85156105ae05c30f4",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-pinterest.webp",
+      "sha256": "09c00528d9f23eff100dbd5affb7130687c7b45540a0724f8b98887b10837910",
+      "source": "/template-covers/voltagent-pinterest.webp",
+      "sourceSha256": "20c4719439ac7f9b2a2d244ecb70ac138acb54b4bbd5f41dc9867d8742f70639",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-webflow.webp",
+      "sha256": "04a4ba682486c5c5e77d67401c6c2ae22a0eb0869b5bfc5a7564d394e20ab259",
+      "source": "/template-covers/voltagent-webflow.webp",
+      "sourceSha256": "11fe0b03e1a81b0b51f96c9885835dce2280bd2c776e039bc3e9c676ff6387db",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-coinbase.webp",
+      "sha256": "fd0e554e92e26807005d82e6582903f74c7dd2532bab88db804008c005415183",
+      "source": "/template-covers/voltagent-coinbase.webp",
+      "sourceSha256": "1ca1cfafe7fd768b67096952638736c469dbc81ed3dceaea376e5f01d3faaed2",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-kraken.webp",
+      "sha256": "24b9bc86bb9f205489311ba0975af97e3ebc1936563cb95b53bafc989e691e26",
+      "source": "/template-covers/voltagent-kraken.webp",
+      "sourceSha256": "7f7d20343e814c021b237bed7d3c48e9fe858b26ea4f547e5192ad38100a504d",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-revolut.webp",
+      "sha256": "062e5a930b5807fec635415b978027032d7453d679b7bef43e434e9bd4d93317",
+      "source": "/template-covers/voltagent-revolut.webp",
+      "sourceSha256": "ca0b7b5c1f68f6fccdde6443daf23e2c8e3452cd27795702ffa0ee7efc2b8ff5",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-wise.webp",
+      "sha256": "d58f02c6ba59d6abbbb4909fd76855dab447a2f0afe435fd14ce0b81f767b3fd",
+      "source": "/template-covers/voltagent-wise.webp",
+      "sourceSha256": "e44d41fa822cec9fdba7eb41f6d67fa08ed0839738d885f06a2d07e77b0af59d",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-airbnb.webp",
+      "sha256": "5147cea75646aa1d1faf5ea731be798314479907c88ca151d615a14993891d40",
+      "source": "/template-covers/voltagent-airbnb.webp",
+      "sourceSha256": "1a894d7a3c8dbbf1791303f6b6a60673a92fdbdd229bf9c12138a2a9ddc66eab",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-apple.webp",
+      "sha256": "2a4e2e8c72bf505e15304359eade84ee0d027ee7badd2de5fc48f943fb7b7890",
+      "source": "/template-covers/voltagent-apple.webp",
+      "sourceSha256": "68bac3f02c28b9809a515e43562f9dbe1299849a6ca4b6d3e0270b7cdaa9cbbd",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-bmw.webp",
+      "sha256": "7620d8e7f5e25796b8940994a8462b01d86d450785762b077c17d17dc0683d4e",
+      "source": "/template-covers/voltagent-bmw.webp",
+      "sourceSha256": "6cd2f9a218596c8a16982279f43bf45a69a04655f3e9e3227db458d1d26b47ed",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-ibm.webp",
+      "sha256": "146e814548b2b751505232bc9f9513875a409065582beb36aeaea6af60a5f4af",
+      "source": "/template-covers/voltagent-ibm.webp",
+      "sourceSha256": "ee33f08dca1a3ff52730992f8ede1cd6cf4f4aabd1b88f6866aa922cd777b10e",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-nvidia.webp",
+      "sha256": "a53b3d21e76fcd69702edfc6323e8054a61dcbfe373a5aee40efb1e7784b990b",
+      "source": "/template-covers/voltagent-nvidia.webp",
+      "sourceSha256": "995889ec040e632b33e7a5efa87b31f3f4446d2a44e85679731bbb3cec2cc9bc",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-spacex.webp",
+      "sha256": "899031f4db56db1ad39180d2c4600e959940426afeab491313da920e7d49ac5a",
+      "source": "/template-covers/voltagent-spacex.webp",
+      "sourceSha256": "49138045cc2ea0886deeca26eaa5ca11347dd955821d903343e8dc61d92a8a95",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-spotify.webp",
+      "sha256": "7516958cb2e685b67283750d7eb156de7ba1000e48038a0195007f8be1029c04",
+      "source": "/template-covers/voltagent-spotify.webp",
+      "sourceSha256": "8f11b802ff32640c0d704c52c73d04c8abbfed53fee430acf00605e38a7e7195",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    },
+    {
+      "path": "/template-covers/thumbs/voltagent-uber.webp",
+      "sha256": "46bea29b80a87027416722c704f721ff27961a5541a9105f83514bef72ac1ce4",
+      "source": "/template-covers/voltagent-uber.webp",
+      "sourceSha256": "adc8b5d60f228f8a02e764cd1a85a9e1de48e4b082f39405b9f46ee8da04d3d1",
+      "method": "Resize original reviewed cover to at most 480px; WebP quality 74. Rights and attribution follow the original cover source manifest."
+    }
+  ]
+}

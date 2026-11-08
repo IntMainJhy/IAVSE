@@ -1,8 +1,9 @@
+import {readRequestSkills} from '@/lib/request-catalog';
 import Link from 'next/link';
 import '@/app/skill-directory-grid.css';
 import {notFound,redirect} from 'next/navigation';
 import {skillCategories,skillCatalogVerifiedAt,skillFilters,skillFilterHref} from '@/lib/skill-catalog.mjs';
-import {readPublicSkills,findPublicSkill} from '@/lib/catalog-public-skills.mjs';
+import {findPublicSkill} from '@/lib/catalog-public-skills.mjs';
 import {getSkillDetail} from '@/lib/skill-details.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 import {SkillInstallation,SkillCopyBlock} from './SkillInstallation';
@@ -11,7 +12,7 @@ import {ImportedSkillDetail} from './ImportedSkillDetail';
 import {skillCollectionFilter} from '@/lib/skill-import-directory.mjs';
 
 export async function SkillDetail({id,query={}}:{id:string;query?:Record<string,string|string[]|undefined>}){
- const catalog=readPublicSkills(),reviewed=findPublicSkill(id,catalog);if(reviewed?.origin==='imported'){if(reviewed.slug!==id)redirect('/skills/'+reviewed.slug);return <ImportedSkillDetail skill={reviewed} query={query}/>;}if(reviewed?.origin==='reviewed'){if(reviewed.slug!==id)redirect('/skills/'+reviewed.slug);return <ReviewedSkillDetail skill={reviewed} query={query} catalog={catalog}/>;}
+ const catalog=readRequestSkills(),reviewed=findPublicSkill(id,catalog);if(reviewed?.origin==='imported'){if(reviewed.slug!==id)redirect('/skills/'+reviewed.slug);return <ImportedSkillDetail skill={reviewed} query={query}/>;}if(reviewed?.origin==='reviewed'){if(reviewed.slug!==id)redirect('/skills/'+reviewed.slug);return <ReviewedSkillDetail skill={reviewed} query={query} catalog={catalog}/>;}
  const detail=getSkillDetail(id);if(!detail)notFound();const skill={...detail,...(reviewed||{})};if(skill.id!==id)redirect('/skills/'+skill.id);
  const {t,locale}=await serverI18n(),{category,q,tool}=skillFilters(query),type=skillCategories.find(item=>item.id===skill.category),related=catalog.filter(item=>item.category===skill.category&&item.id!==id).slice(0,4);
  return <article className="skills-page skill-detail"><Link className="learning-back" href={skillFilterHref(category,q,tool,skillCollectionFilter(query),Math.max(1,Number(query.page)||1))}>← {t('返回 Skill 目录')}</Link><header className="learning-heading"><h1>{skill.name}</h1><p>{t(skill.summary)}</p><div className="skill-detail-meta"><Link href={skillFilterHref(skill.category)}>{t(type?.label||'Skill')}</Link><span>{skill.repo}</span><a href={skill.licenseUrl} target="_blank" rel="noopener noreferrer">{t(skill.license)}</a><span>{t('资料核对：{0}',[skill.provenance?.verifiedAt||skillCatalogVerifiedAt])}</span></div><div className="space-actions"><a className="space-btn primary" href="#installation">{t('查看安装方法')}</a><a className="space-link" href={skill.sourceUrl} target="_blank" rel="noopener noreferrer">{t('查看原始 Skill')}<Icon name="link"/></a></div></header>

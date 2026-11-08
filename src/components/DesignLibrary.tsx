@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {serverI18n} from '@/lib/server-i18n';
-import {readPublishedDesigns} from '@/lib/design-intake.mjs';
+import {readPublishedDesigns,findPublishedDesign} from '@/lib/design-intake.mjs';
 import {DesignCatalogExplorer} from './DesignCatalogExplorer';
 import type {DesignEntry} from '@/lib/design-types';
 import {DesignCopy} from './DesignCopy';
@@ -16,12 +16,12 @@ import '@/app/template-library.css';
 const previewItem=(entry:DesignEntry):DesignPreviewItem=>({slug:entry.slug,title:entry.title,image:entry.image,external:entry.external,previewUrl:entry.previewUrl,previewVariants:entry.previewVariants,websiteUrl:entry.websiteUrl,source:entry.source,collection:entry.collection,preview:entry.preview,palette:entry.palette,creator:entry.creator,referenceSite:entry.referenceSite,production:entry.production,previewPolicy:entry.previewPolicy,template:entry.template,license:entry.license});
 export async function DesignLibrary({query={}}:{query?:Record<string,string|string[]|undefined>}){
  void query;
- const entries=(readPublishedDesigns() as DesignEntry[]).map(entry=>({...previewItem(entry),id:entry.id,summary:entry.summary,category:entry.category,tags:entry.tags}));
+ const entries=readPublishedDesigns({summary:true}) as DesignEntry[];
  return <DesignCatalogExplorer entries={entries}/>;
 }
 
 export async function DesignDetail({slug}:{slug:string}){
- const {t}=await serverI18n(),entry=(readPublishedDesigns() as DesignEntry[]).find(item=>item.slug===slug);if(!entry)notFound();
+ const {t}=await serverI18n(),entry=findPublishedDesign(slug) as DesignEntry|undefined;if(!entry)notFound();
  const template=entry.template,author=entry.creator||entry.source;
  const facets=designFacets(entry),classifications=[{label:'网站用途',key:'scenario',values:facets.scenarios,options:SCENARIOS},{label:'参考行业',key:'industry',values:facets.industries,options:REFERENCE_INDUSTRIES},{label:'视觉风格',key:'visual',values:facets.visualStyles,options:VISUAL_STYLES}];
  const full='# '+entry.title+'\n\n'+entry.prompt+'\n\n'+entry.specification+'\n\n来源：'+entry.source.url+'\n许可：'+(entry.license?.name||'')+' '+(entry.license?.url||'');

@@ -1,0 +1,114 @@
+{
+  "verifiedAt": "2026-11-08",
+  "projects": [
+    {
+      "id": "adminkit",
+      "repository": "adminkit/adminkit",
+      "revision": "9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/LICENSE",
+      "licenseBlobSha": "b2d19ec9edaafaf533eb601efe935a0085d6fbb7",
+      "licenseText": "The MIT License (MIT)\n\nCopyright (c) 2020-2024 AdminKit Authors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "readmeUrl": "https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/README.md",
+      "sourcePath": "src/pages/index.html",
+      "sourceBlobSha": "f8a5849e73ad460b63e181fb166ba65b64783012",
+      "demo": "https://demo-mit.adminkit.io/",
+      "coverNote": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "previewScope": "仅免费 MIT 演示；不收录 demo.adminkit.io 的 Pro 功能。"
+    },
+    {
+      "id": "agency",
+      "repository": "StartBootstrap/startbootstrap-agency",
+      "revision": "b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/LICENSE",
+      "licenseBlobSha": "5ff52f416ad2c5d5f875a44712cd0f5517904ed6",
+      "licenseText": "The MIT License (MIT)\n\nCopyright (c) 2013-2023 Start Bootstrap LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "readmeUrl": "https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/README.md",
+      "sourcePath": "dist/index.html",
+      "sourceBlobSha": "ad49b20c6eaa24f492b7a9b94f7e244b8d5c49bd",
+      "demo": "https://startbootstrap.github.io/startbootstrap-agency/",
+      "coverNote": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "previewScope": "原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    {
+      "id": "starlight",
+      "repository": "withastro/starlight",
+      "revision": "5a061c123d10ed01c0c376bf16af30ae37b30a7d",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/LICENSE",
+      "licenseBlobSha": "385b09dbf084027aa08be278f255975d5fd27406",
+      "licenseText": "MIT License\n\nCopyright (c) 2023 [Astro contributors](https://github.com/withastro/starlight/graphs/contributors)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "readmeUrl": "https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/README.md",
+      "sourcePath": "docs/src/content/docs/index.mdx",
+      "sourceBlobSha": "a2c4611be94640c1f7da52edeb36b21173cf106e",
+      "demo": "https://starlight.astro.build/",
+      "coverNote": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "previewScope": "原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    {
+      "id": "nextra",
+      "repository": "shuding/nextra",
+      "revision": "d6e80e1dd627b781429a6ee989b15ebba688c8ea",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/LICENSE",
+      "licenseBlobSha": "6734428423eb7901685e1dd807578d34a4f63309",
+      "licenseText": "MIT License\n\nCopyright (c) 2020 Shu Ding\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n",
+      "readmeUrl": "https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/README.md",
+      "sourcePath": "docs/app/page.tsx",
+      "sourceBlobSha": "ffb22ab64929ae39fdc697060fc896b2e86ced8b",
+      "demo": "https://nextra.site/",
+      "coverNote": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "previewScope": "原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    {
+      "id": "console",
+      "repository": "b2a3e8/jekyll-theme-console",
+      "revision": "36631985b1b2e30646320c509c5b6d93577588f6",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/LICENSE.txt",
+      "licenseBlobSha": "e4476f31d358d2ac63794796f7f647c6afbbced8",
+      "licenseText": "The MIT License (MIT)\n\nCopyright (c) 2018 b2a3e8\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "readmeUrl": "https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/README.md",
+      "sourcePath": "_layouts/home.html",
+      "sourceBlobSha": "9e050fec208f7fe4e5a20b7c4899c47c830caf73",
+      "demo": "https://b2a3e8.github.io/jekyll-theme-console-demo-dark/",
+      "coverNote": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "previewScope": "原作者公开演示；第三方在线服务与素材各自适用原条款。"
+    },
+    {
+      "id": "hugo-awesome",
+      "repository": "hugo-sid/hugo-blog-awesome",
+      "revision": "6fcfddf960a41309a6a376d513ff661ed422119a",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/LICENSE",
+      "licenseBlobSha": "e9925221c0ac82603f083c717cfd271671acf0f6",
+      "licenseText": "The MIT License (MIT)\n\nCopyright (c) 2023 Sidharth R.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "readmeUrl": "https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/README.md",
+      "sourcePath": "layouts/home.html",
+      "demo": "https://hba.sid.one/",
+      "coverNote": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "previewScope": "原作者公开演示；第三方在线服务与素材各自适用原条款。",
+      "sourceBlobSha": "b5ceeb4a7ec1c50025c2373301eeb9c1ba88471e"
+    }
+  ],
+  "excluded": [
+    {
+      "repository": "yuanfu8899/uiuxskillProMax",
+      "reason": "未找到覆盖 58 份示例的明确许可，不导入。"
+    },
+    {
+      "repository": "zeon-studio/astroplate",
+      "reason": "虽然代码为 MIT，README 明确示例图片不获分享许可；本轮不收录该演示。"
+    },
+    {
+      "repository": "andrewbanchich/forty-jekyll-theme",
+      "reason": "归档且许可标识未能自动明确；本轮不引入。"
+    },
+    {
+      "repository": "adminkit/adminkit",
+      "demo": "https://demo.adminkit.io/",
+      "reason": "这是 Pro 演示，改用免费 MIT 版本 demo-mit.adminkit.io。"
+    }
+  ]
+}

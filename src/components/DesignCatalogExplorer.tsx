@@ -6,7 +6,7 @@ import {Icon} from './Icons';
 import {DirectorySearch} from './DirectorySearch';
 import {useLocale} from './LocaleProvider';
 import {DesignPreviewCard,DesignPreviewDialog,type DesignPreviewItem} from './DesignQuickPreview';
-import {SCENARIOS,REFERENCE_INDUSTRIES,VISUAL_STYLES,designFacets,filterCatalog} from '@/lib/design-taxonomy.mjs';
+import {SCENARIOS,REFERENCE_INDUSTRIES,VISUAL_STYLES,designFacets,filterCatalog,createCatalogIndex} from '@/lib/design-taxonomy.mjs';
 import {CATALOG_FILTER_DEFAULTS,readCatalogFilters,catalogQuery,readCatalogFavorites} from '@/lib/design-catalog-state.mjs';
 import '@/app/design-catalog-explorer.css';
 
@@ -19,16 +19,17 @@ const kindLabel=(kind?:string)=>kind==='project'?'完整开源项目':kind==='de
 
 export function DesignCatalogExplorer({entries}:{entries:CatalogDesign[]}){
  const {t}=useLocale(),params=useSearchParams(),[filters,setFilters]=useState<Filters>(()=>readCatalogFilters(new URLSearchParams(params.toString()))),[favorites,setFavorites]=useState<string[]>([]),[storageMessage,setStorageMessage]=useState(''),[favoritesReady,setFavoritesReady]=useState(false),loadedFavorites=useRef(false),[visibleCount,setVisibleCount]=useState(batchSize),[preview,setPreview]=useState<CatalogDesign|null>(null),previewTrigger=useRef<HTMLButtonElement|null>(null),sentinel=useRef<HTMLDivElement>(null);
+ const indexed=useMemo(()=>createCatalogIndex(entries),[entries]);
  const queryString=params.toString();
  useEffect(()=>{const next=readCatalogFilters(new URLSearchParams(queryString));setFilters(next);setVisibleCount(batchSize)},[queryString]);
  useEffect(()=>{const slugs=entries.map(entry=>entry.slug);if(!loadedFavorites.current){loadedFavorites.current=true;try{setFavorites(readCatalogFavorites(localStorage.getItem(favoriteKey)||'[]',slugs))}catch{setStorageMessage(t('浏览器未允许保存，收藏仅在本次访问中保留。'))}setFavoritesReady(true)}else setFavorites(current=>readCatalogFavorites(current,slugs));const sync=(event:StorageEvent)=>{if(event.key===favoriteKey||event.key===null)setFavorites(readCatalogFavorites(event.newValue||'[]',slugs))};window.addEventListener('storage',sync);return()=>window.removeEventListener('storage',sync)},[entries,t]);
  const update=(changes:Partial<Filters>)=>{const next={...filters,...changes};setFilters(next);setVisibleCount(batchSize);const query=catalogQuery(next);window.history[Object.hasOwn(changes,'q')?'replaceState':'pushState'](null,'','/resources?'+query.toString())};
- const filtered=useMemo(()=>filterCatalog(entries,filters,favorites) as CatalogDesign[],[entries,filters,favorites]),items=filtered.slice(0,visibleCount),hasMore=visibleCount<filtered.length;
- const counts=useMemo(()=>Object.fromEntries(groups.map(([id])=>[id,filterCatalog(entries,{...empty,collection:id}).length])),[entries]);
- const favoriteCount=useMemo(()=>filterCatalog(entries,{...empty,collection:filters.collection,favorites:'1'},favorites).length,[entries,filters.collection,favorites]),waitingForFavorites=filters.favorites==='1'&&!favoritesReady;
- const availableScenarios=useMemo(()=>{const ids=new Set(entries.flatMap(entry=>designFacets(entry).scenarios));return SCENARIOS.filter(({id}:{id:string})=>ids.has(id))},[entries]);
- const industryChoices=useMemo(()=>REFERENCE_INDUSTRIES.map(option=>({...option,count:filterCatalog(entries,{...empty,industry:option.id}).length})).filter(option=>option.count),[entries]);
- const visualChoices=useMemo(()=>VISUAL_STYLES.map(option=>({...option,count:filterCatalog(entries,{...empty,visual:option.id}).length})).filter(option=>option.count),[entries]);
+ const filtered=useMemo(()=>filterCatalog(entries,filters,favorites,indexed) as CatalogDesign[],[entries,filters,favorites,indexed]),items=filtered.slice(0,visibleCount),hasMore=visibleCount<filtered.length;
+ const counts=indexed.counts;
+ const favoriteCount=useMemo(()=>filterCatalog(entries,{...empty,collection:filters.collection,favorites:'1'},favorites,indexed).length,[entries,filters.collection,favorites]),waitingForFavorites=filters.favorites==='1'&&!favoritesReady;
+ const availableScenarios=SCENARIOS.filter(({id}:{id:string})=>indexed.scenarios.has(id));
+ const industryChoices=useMemo(()=>REFERENCE_INDUSTRIES.map(option=>({...option,count:indexed.industries.get(option.id)||0})).filter(option=>option.count),[indexed]);
+ const visualChoices=useMemo(()=>VISUAL_STYLES.map(option=>({...option,count:indexed.visualStyles.get(option.id)||0})).filter(option=>option.count),[indexed]);
  useEffect(()=>{const element=sentinel.current;if(!element||!hasMore||waitingForFavorites)return;if(!('IntersectionObserver'in window)){setVisibleCount(filtered.length);return}const observer=new IntersectionObserver(observations=>{if(observations.some(observation=>observation.isIntersecting)){observer.disconnect();setVisibleCount(current=>Math.min(current+batchSize,filtered.length))}},{rootMargin:'700px 0px'});observer.observe(element);return()=>observer.disconnect()},[hasMore,visibleCount,filtered.length,waitingForFavorites]);
  const favorite=(slug:string)=>{const next=favorites.includes(slug)?favorites.filter(item=>item!==slug):[...favorites,slug];setFavorites(next);try{localStorage.setItem(favoriteKey,JSON.stringify(next));setStorageMessage('')}catch{setStorageMessage(t('浏览器未允许保存，收藏仅在本次访问中保留。'))}};
  const active=filters.q||filters.scenario||filters.industry||filters.visual||filters.favorites;

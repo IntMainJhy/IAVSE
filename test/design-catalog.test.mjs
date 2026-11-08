@@ -6,10 +6,10 @@ import {templatePreviewUrl} from '../src/lib/template-preview.mjs';
 import {catalogPresentationEntries,filterCatalog} from '../src/lib/design-taxonomy.mjs';
 
 test('reset catalog contains independent GitHub projects and separately named design references',()=>{
- assert.equal(entries.length,66);
- assert.equal(new Set(entries.map(entry=>entry.slug)).size,66);
- assert.deepEqual(['project','page','design-system'].map(collection=>filterCatalog(entries,{collection}).length),[12,0,54]);
- assert.equal(catalogPresentationEntries(entries).length,66);
+ assert.equal(entries.length,72);
+ assert.equal(new Set(entries.map(entry=>entry.slug)).size,72);
+ assert.deepEqual(['project','page','design-system'].map(collection=>filterCatalog(entries,{collection}).length),[18,0,54]);
+ assert.equal(catalogPresentationEntries(entries).length,72);
  for(const entry of entries){
   assert.equal(entry.license.status,'verified');assert.equal(entry.license.name.startsWith('MIT'),true);
   assert.ok(entry.template.repository.startsWith('https://github.com/'));

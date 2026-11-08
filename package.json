@@ -14,6 +14,7 @@
     "start": "next start --hostname 127.0.0.1 --port 3008",
     "setup": "node scripts/setup.mjs",
     "test": "node --test test/*.test.mjs",
+    "bench:catalog": "node scripts/benchmark-catalog.mjs",
     "test:integration": "node test/integration.mjs",
     "backup": "node scripts/backup.mjs",
     "restore": "node scripts/restore.mjs",

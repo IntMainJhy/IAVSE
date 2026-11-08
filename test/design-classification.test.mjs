@@ -7,7 +7,7 @@ import {readCatalogFilters,catalogQuery} from '../src/lib/design-catalog-state.m
 
 test('documentation purpose returns actual documentation websites, never token catalogs',()=>{
  const docs=filterCatalog(entries,{scenario:'docs'});
- assert.deepEqual(docs.map(x=>x.slug),['template-hextra','template-just-docs']);
+ assert.deepEqual(docs.map(x=>x.slug),['template-hextra','template-just-docs','template-starlight','template-nextra']);
  for(const entry of entries.filter(x=>x.template.kind==='design-system'))assert.deepEqual(designFacets(entry).scenarios,[]);
  // A malformed future import cannot accidentally put a design specimen under deployable docs.
  assert.deepEqual(designFacets({template:{kind:'design-system',scenarios:['docs']}}).scenarios,[]);

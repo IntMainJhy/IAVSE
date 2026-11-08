@@ -471,6 +471,180 @@
           "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.x/LICENSE.txt"
         }
       ]
+    },
+    {
+      "path": "/template-covers/project-adminkit.webp",
+      "sha256": "4942731c957b0df9b27b0480300678ae54c6baee355e2d4e1b5b68be1ff4459a",
+      "source": "https://demo-mit.adminkit.io/",
+      "observedUrl": "https://demo-mit.adminkit.io/",
+      "creator": "adminkit/adminkit",
+      "repository": "https://github.com/adminkit/adminkit",
+      "revision": "9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/adminkit/adminkit/blob/9d33e5592e0cbe0154809edf6730ffe8e4e9d9fd/LICENSE",
+      "licensePath": "/template-covers/licenses/adminkit-MIT.txt",
+      "licenseSha256": "9d4d9eb14d93beede52c26ac34ea16796a736fcce8c704b8f467a12c68c2d285",
+      "capturedAt": "2026-11-08",
+      "viewport": {
+        "width": 1200,
+        "height": 750
+      },
+      "output": {
+        "width": 900,
+        "height": 563,
+        "format": "WebP"
+      },
+      "method": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "review": {
+        "scope": "Inspected first viewport; does not grant rights to unshown images, services or other project assets.",
+        "visibleRasterImages": 0,
+        "visibleCssImageUrls": 0
+      }
+    },
+    {
+      "path": "/template-covers/project-agency.webp",
+      "sha256": "cbec723540f493536cfbd3873fb1846724a62a9f9ddd8efdacf00783354a19e1",
+      "source": "https://startbootstrap.github.io/startbootstrap-agency/",
+      "observedUrl": "https://startbootstrap.github.io/startbootstrap-agency/",
+      "creator": "StartBootstrap/startbootstrap-agency",
+      "repository": "https://github.com/StartBootstrap/startbootstrap-agency",
+      "revision": "b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-agency/blob/b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1/LICENSE",
+      "licensePath": "/template-covers/licenses/agency-MIT.txt",
+      "licenseSha256": "e8b857747301fcd4c885b3216544b18bbf60328aec2c34da614787346cf40282",
+      "capturedAt": "2026-11-08",
+      "viewport": {
+        "width": 1200,
+        "height": 750
+      },
+      "output": {
+        "width": 900,
+        "height": 563,
+        "format": "WebP"
+      },
+      "method": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。 Photo background replaced by neutral #212529 to preserve contrast; original text, navigation, typography and layout retained.",
+      "review": {
+        "scope": "Inspected first viewport; does not grant rights to unshown images, services or other project assets.",
+        "visibleRasterImages": 0,
+        "visibleCssImageUrls": 0
+      }
+    },
+    {
+      "path": "/template-covers/project-starlight.webp",
+      "sha256": "44641515cd1dd2f950909279fbcd341078010093c5389aca90d35543a50b9d9e",
+      "source": "https://starlight.astro.build/",
+      "observedUrl": "https://starlight.astro.build/",
+      "creator": "withastro/starlight",
+      "repository": "https://github.com/withastro/starlight",
+      "revision": "5a061c123d10ed01c0c376bf16af30ae37b30a7d",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/withastro/starlight/blob/5a061c123d10ed01c0c376bf16af30ae37b30a7d/LICENSE",
+      "licensePath": "/template-covers/licenses/starlight-MIT.txt",
+      "licenseSha256": "a0ee39c239b80f632b663fc02a44893be6c8489815a776e231a2fff17c12ef42",
+      "capturedAt": "2026-11-08",
+      "viewport": {
+        "width": 1200,
+        "height": 750
+      },
+      "output": {
+        "width": 900,
+        "height": 563,
+        "format": "WebP"
+      },
+      "method": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "review": {
+        "scope": "Inspected first viewport; does not grant rights to unshown images, services or other project assets.",
+        "visibleRasterImages": 0,
+        "visibleCssImageUrls": 0
+      }
+    },
+    {
+      "path": "/template-covers/project-nextra.webp",
+      "sha256": "b888e3d50773127c9a8977597b8b28115d33543a3cf17e2694ed02c562dff5d8",
+      "source": "https://nextra.site/",
+      "observedUrl": "https://nextra.site/",
+      "creator": "shuding/nextra",
+      "repository": "https://github.com/shuding/nextra",
+      "revision": "d6e80e1dd627b781429a6ee989b15ebba688c8ea",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/shuding/nextra/blob/d6e80e1dd627b781429a6ee989b15ebba688c8ea/LICENSE",
+      "licensePath": "/template-covers/licenses/nextra-MIT.txt",
+      "licenseSha256": "c75f396ea53044324cfb385912ec1983c246ec3c5070ab1cd1732175597d70a3",
+      "capturedAt": "2026-11-08",
+      "viewport": {
+        "width": 1200,
+        "height": 750
+      },
+      "output": {
+        "width": 900,
+        "height": 563,
+        "format": "WebP"
+      },
+      "method": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "review": {
+        "scope": "Inspected first viewport; does not grant rights to unshown images, services or other project assets.",
+        "visibleRasterImages": 0,
+        "visibleCssImageUrls": 0
+      }
+    },
+    {
+      "path": "/template-covers/project-console.webp",
+      "sha256": "e417f323c7f230a12f4891767ecd93e32eefd42b182e63e931df0d00f7b9b67d",
+      "source": "https://b2a3e8.github.io/jekyll-theme-console-demo-dark/",
+      "observedUrl": "https://b2a3e8.github.io/jekyll-theme-console-demo-dark/",
+      "creator": "b2a3e8/jekyll-theme-console",
+      "repository": "https://github.com/b2a3e8/jekyll-theme-console",
+      "revision": "36631985b1b2e30646320c509c5b6d93577588f6",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/b2a3e8/jekyll-theme-console/blob/36631985b1b2e30646320c509c5b6d93577588f6/LICENSE.txt",
+      "licensePath": "/template-covers/licenses/console-MIT.txt",
+      "licenseSha256": "216d8f89cbd75ce8520cfbd2f0ac422452bcc4a63195cbae5721b3e421f80c12",
+      "capturedAt": "2026-11-08",
+      "viewport": {
+        "width": 1200,
+        "height": 750
+      },
+      "output": {
+        "width": 900,
+        "height": 563,
+        "format": "WebP"
+      },
+      "method": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "review": {
+        "scope": "Inspected first viewport; does not grant rights to unshown images, services or other project assets.",
+        "visibleRasterImages": 0,
+        "visibleCssImageUrls": 0
+      }
+    },
+    {
+      "path": "/template-covers/project-hugo-awesome.webp",
+      "sha256": "f79f4394ed122c25506eab11e8c2086976fd9259e032a903c704f6e1be62030c",
+      "source": "https://hba.sid.one/",
+      "observedUrl": "https://hba.sid.one/",
+      "creator": "hugo-sid/hugo-blog-awesome",
+      "repository": "https://github.com/hugo-sid/hugo-blog-awesome",
+      "revision": "6fcfddf960a41309a6a376d513ff661ed422119a",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/hugo-sid/hugo-blog-awesome/blob/6fcfddf960a41309a6a376d513ff661ed422119a/LICENSE",
+      "licensePath": "/template-covers/licenses/hugo-awesome-MIT.txt",
+      "licenseSha256": "20451b2c54737c535ea64010cb1b0bdd45bc4696dee8bff41abbd6223061bff9",
+      "capturedAt": "2026-11-08",
+      "viewport": {
+        "width": 1200,
+        "height": 750
+      },
+      "output": {
+        "width": 900,
+        "height": 563,
+        "format": "WebP"
+      },
+      "method": "原作者实际界面截图；本地封面省略位图、人物头像和 URL 背景照片，不分发原演示中的照片素材。",
+      "review": {
+        "scope": "Inspected first viewport; does not grant rights to unshown images, services or other project assets.",
+        "visibleRasterImages": 0,
+        "visibleCssImageUrls": 0
+      }
     }
   ]
 }
