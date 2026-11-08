@@ -7,7 +7,7 @@
     "node": ">=24.15.0"
   },
   "scripts": {
-    "prebuild": "node scripts/brand-icons.mjs && node scripts/package-skill.mjs && node scripts/build-template-sites.mjs && node scripts/version-template-covers.mjs",
+    "prebuild": "node scripts/brand-icons.mjs && node scripts/package-skill.mjs && node scripts/version-template-covers.mjs",
     "package:skill": "node scripts/package-skill.mjs",
     "dev": "next dev --hostname 127.0.0.1 --port 3008",
     "build": "next build",
@@ -26,11 +26,7 @@
     "test:resume:http": "node test/resume-http.mjs",
     "brand:icons": "node scripts/brand-icons.mjs",
     "test:blog-editor:http": "node test/blog-editor-http.mjs",
-    "test:registration:http": "node test/email-registration-http.mjs",
-    "build:template-sites": "node scripts/build-template-sites.mjs",
-    "predev": "node scripts/build-template-sites.mjs",
-    "pretest": "node scripts/build-template-sites.mjs",
-    "pretypecheck": "node scripts/build-template-sites.mjs"
+    "test:registration:http": "node test/email-registration-http.mjs"
   },
   "dependencies": {
     "@tiptap/core": "3.32.0",
@@ -41,11 +37,9 @@
     "@tiptap/react": "3.32.0",
     "@tiptap/starter-kit": "3.32.0",
     "@xyflow/react": "12.12.0",
-    "clsx": "2.1.1",
     "gsap": "3.15.0",
     "htmlparser2": "12.0.0",
     "jszip": "3.10.2",
-    "lucide-react": "0.563.0",
     "next": "15.5.28",
     "nodemailer": "10.1.7",
     "pdfjs-dist": "5.4.296",
@@ -54,20 +48,16 @@
     "react-dom": "19.2.8",
     "sanitize-html": "2.18.1",
     "sharp": "0.35.5",
-    "tailwind-merge": "3.4.0",
     "three": "0.187.0"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "4.1.18",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@types/sanitize-html": "2.16.2",
     "@types/three": "0.186.0",
     "@xyflow/system": "0.0.83",
-    "esbuild": "0.28.2",
     "postcss": "8.5.30",
-    "tailwindcss": "4.1.18",
     "typescript": "5.9.3"
   },
   "overrides": {

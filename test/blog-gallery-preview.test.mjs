@@ -40,12 +40,7 @@ test('only explicit public homepage and UI design previews permit same-origin fr
   const policy=response.headers.get('Content-Security-Policy');
   assert.match(policy,/frame-src 'self'(?:;|$)/);assert.doesNotMatch(policy,/vibeui|yuanfu8899/);
  }
- for(const path of ['/template-sites/brutal-landing','/template-sites/editorial-profile-archive/work/sample']){
-  const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
-  const policy=response.headers.get('Content-Security-Policy');
-  assert.match(policy,/script-src 'self';/);assert.doesNotMatch(policy,/script-src[^;]*(unsafe-inline|unsafe-eval)/);
-  assert.match(policy,/frame-ancestors 'self'/);assert.equal(response.headers.get('X-Frame-Options'),'SAMEORIGIN');
- }
+
  const artifact=exports.middleware({nextUrl:new URL('https://example.test/design-artifacts/vibeui-claude/index.html'),headers:new Headers()});
  assert.match(artifact.headers.get('Content-Security-Policy'),/sandbox allow-scripts;/);
  assert.match(artifact.headers.get('Content-Security-Policy'),/connect-src 'none'/);

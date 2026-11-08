@@ -1,3 +1,5 @@
+> 本文保留 StyleKit 工作流与早期移植的研究记录；当前已按用户要求移除其自制模板和同一作者个人站，仅保留四个独立 GitHub 项目。发布范围见 [当前目录核查](template-catalog-audit-2026-11-08.md)。
+
 # StyleKit 风格提取、编写与演示流程研究
 
 核对日期：2026-11-08。仓库 [AnxForever/stylekit](https://github.com/AnxForever/stylekit)，固定提交 `38058485388d237745ccf58c6750c2ec661a72f4`。本文件记录可见源码行为，不推测每个条目的创作历史。

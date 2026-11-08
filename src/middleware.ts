@@ -15,14 +15,6 @@ export function middleware(request:NextRequest){const pathname=request.nextUrl.p
  if(blocked(clientIp(request)+':'+bucket,upload?1800:api?600:180))return new NextResponse(api?JSON.stringify({error:'请求过于频繁，请稍后重试'}):'Too many requests. Please try again shortly.',{status:429,headers:{'Retry-After':'60','Cache-Control':'no-store','Content-Type':api?'application/json':'text/plain; charset=utf-8'}});
  // Uploaded documents enforce their own opaque-origin sandbox even when opened directly.
  if(pathname.startsWith('/site-files/'))return NextResponse.next();
- // Vendored MIT templates render in standalone documents, outside the platform layout.
- if(pathname.startsWith('/template-sites/')){
-  const response=NextResponse.next();
-  response.headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'");
-  response.headers.set('X-Frame-Options','SAMEORIGIN');response.headers.set('X-Robots-Tag','noindex, nofollow');
-  return response;
- }
-
  // Independently authored/licensed HTML never receives the React document nonce
  // policy. Its response sandbox also protects direct visits to the public file.
  if(pathname.startsWith('/design-artifacts/')){
@@ -46,4 +38,4 @@ export function middleware(request:NextRequest){const pathname=request.nextUrl.p
  if(/^\/(?:admin|workspace|api|login|join|report)(?:\/|$)/.test(pathname))response.headers.set('X-Robots-Tag','noindex, nofollow');
  return response;
 }
-export const config={matcher:['/((?!_next/static|_next/image|favicon.ico|images/|fonts/|template-site-assets/|template-covers/).*)']};
+export const config={matcher:['/((?!_next/static|_next/image|favicon.ico|images/|fonts/|template-covers/).*)']};

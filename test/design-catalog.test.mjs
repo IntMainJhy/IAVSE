@@ -5,11 +5,11 @@ import entries from '../src/lib/template-library.json' with {type:'json'};
 import {templatePreviewUrl} from '../src/lib/template-preview.mjs';
 import {catalogPresentationEntries,filterCatalog} from '../src/lib/design-taxonomy.mjs';
 
-test('reset catalog contains real source projects, original StyleKit templates and separately named design references',()=>{
- assert.equal(entries.length,96);
- assert.equal(new Set(entries.map(entry=>entry.slug)).size,96);
- assert.deepEqual(['project','page','design-system'].map(collection=>filterCatalog(entries,{collection}).length),[5,37,54]);
- assert.equal(catalogPresentationEntries(entries).length,96);
+test('reset catalog contains independent GitHub projects and separately named design references',()=>{
+ assert.equal(entries.length,58);
+ assert.equal(new Set(entries.map(entry=>entry.slug)).size,58);
+ assert.deepEqual(['project','page','design-system'].map(collection=>filterCatalog(entries,{collection}).length),[4,0,54]);
+ assert.equal(catalogPresentationEntries(entries).length,58);
  for(const entry of entries){
   assert.equal(entry.license.status,'verified');assert.equal(entry.license.name.startsWith('MIT'),true);
   assert.ok(entry.template.repository.startsWith('https://github.com/'));
@@ -41,8 +41,10 @@ test('preview selection allows only reviewed local documents and exact external 
  const study=entries.find(entry=>entry.slug==='voltagent-claude');
  assert.equal(templatePreviewUrl(study,1),study.previewVariants[1].url);
  for(const value of [-1,NaN,10000,'https://evil.example'])assert.equal(templatePreviewUrl(study,value),study.previewUrl);
- const page=entries.find(entry=>entry.slug==='template-brutal-landing');assert.equal(templatePreviewUrl(page),'/template-sites/brutal-landing');
+ assert.ok(!entries.some(entry=>entry.template.repository.startsWith('https://github.com/AnxForever/')));
+ assert.ok(!existsSync(new URL('../src/app/template-sites',import.meta.url)));
  const project=entries.find(entry=>entry.slug==='template-fuwari');assert.equal(templatePreviewUrl(project),'https://fuwari.vercel.app');
  for(const url of ['javascript:alert(1)','//evil.example/','/template-sites/../admin','https://evil.example/','https://fuwari.vercel.app.evil.example/','https://user:pass@fuwari.vercel.app/'])assert.equal(templatePreviewUrl({...project,previewUrl:url}),null);
- for(const slug of ['template-anx-portfolio','template-astrowind'])assert.equal(templatePreviewUrl(entries.find(entry=>entry.slug===slug)),null);
+ assert.equal(templatePreviewUrl(entries.find(entry=>entry.slug==='template-astrowind')),null);
+ for(const entry of entries)assert.match(entry.image,/^\/template-covers\/[a-z0-9-]+\.webp\?v=[a-f0-9]{16}$/);
 });
