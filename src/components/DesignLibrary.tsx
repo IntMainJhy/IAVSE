@@ -1,23 +1,23 @@
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {serverI18n} from '@/lib/server-i18n';
-import {readPublishedDesigns,findPublishedDesign} from '@/lib/design-intake.mjs';
+import {findPublishedDesign} from '@/lib/design-intake.mjs';
+import {queryDesignCatalog} from '@/lib/design-catalog-query.mjs';
 import {DesignCatalogExplorer} from './DesignCatalogExplorer';
 import type {DesignEntry} from '@/lib/design-types';
 import {DesignCopy} from './DesignCopy';
 import {DesignText} from './DesignText';
 import {DesignQuickPreview,type DesignPreviewItem} from './DesignQuickPreview';
 import {SCENARIOS,REFERENCE_INDUSTRIES,VISUAL_STYLES,designFacets} from '@/lib/design-taxonomy.mjs';
-import {catalogQuery} from '@/lib/design-catalog-state.mjs';
+import {catalogQuery,readCatalogFilters} from '@/lib/design-catalog-state.mjs';
 import '@/app/design-library.css';
 import '@/app/design-directory.css';
 import '@/app/template-library.css';
 
 const previewItem=(entry:DesignEntry):DesignPreviewItem=>({slug:entry.slug,title:entry.title,image:entry.image,external:entry.external,previewUrl:entry.previewUrl,previewVariants:entry.previewVariants,websiteUrl:entry.websiteUrl,source:entry.source,collection:entry.collection,preview:entry.preview,palette:entry.palette,creator:entry.creator,referenceSite:entry.referenceSite,production:entry.production,previewPolicy:entry.previewPolicy,template:entry.template,license:entry.license});
 export async function DesignLibrary({query={}}:{query?:Record<string,string|string[]|undefined>}){
- void query;
- const entries=readPublishedDesigns({summary:true}) as DesignEntry[];
- return <DesignCatalogExplorer entries={entries}/>;
+ const filters=readCatalogFilters(new URLSearchParams(Object.entries(query).map(([key,value])=>[key,String(value||'')])));
+ return <DesignCatalogExplorer initial={queryDesignCatalog({filters})}/>;
 }
 
 export async function DesignDetail({slug}:{slug:string}){

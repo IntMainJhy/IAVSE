@@ -36,6 +36,11 @@ export function intakeDb(){
  CREATE INDEX IF NOT EXISTS design_intake_queue ON design_intake_entries(status,created);
  CREATE INDEX IF NOT EXISTS design_intake_public ON design_intake_entries(kind,visibility,reviewed DESC,id DESC) WHERE published IS NOT NULL;
  CREATE INDEX IF NOT EXISTS design_intake_public_slug ON design_intake_entries(json_extract(published,'$.slug'),reviewed DESC,id DESC) WHERE kind='design' AND visibility='public' AND published IS NOT NULL AND json_valid(published);
+ CREATE TABLE IF NOT EXISTS design_catalog_revision(id INTEGER PRIMARY KEY CHECK(id=1),version INTEGER NOT NULL);
+ INSERT OR IGNORE INTO design_catalog_revision(id,version) VALUES(1,1);
+ CREATE TRIGGER IF NOT EXISTS design_catalog_insert AFTER INSERT ON design_intake_entries WHEN NEW.kind='design' AND NEW.visibility='public' BEGIN UPDATE design_catalog_revision SET version=version+1 WHERE id=1; END;
+ CREATE TRIGGER IF NOT EXISTS design_catalog_update AFTER UPDATE ON design_intake_entries WHEN (NEW.kind='design' AND NEW.visibility='public') OR (OLD.kind='design' AND OLD.visibility='public') BEGIN UPDATE design_catalog_revision SET version=version+1 WHERE id=1; END;
+ CREATE TRIGGER IF NOT EXISTS design_catalog_delete AFTER DELETE ON design_intake_entries WHEN OLD.kind='design' AND OLD.visibility='public' BEGIN UPDATE design_catalog_revision SET version=version+1 WHERE id=1; END;
  CREATE TABLE IF NOT EXISTS design_intake_source_keys(source_key TEXT PRIMARY KEY,entry_id TEXT NOT NULL REFERENCES design_intake_entries(id) ON DELETE CASCADE);
  INSERT OR IGNORE INTO design_intake_source_keys(source_key,entry_id) SELECT source_key,id FROM design_intake_entries;
  INSERT OR IGNORE INTO design_intake_source_keys(source_key,entry_id) SELECT json_extract(published,'$.source.url'),id FROM design_intake_entries WHERE published IS NOT NULL AND json_valid(published) AND json_type(published,'$.source.url')='text';

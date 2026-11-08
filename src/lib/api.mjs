@@ -1,4 +1,5 @@
 import {discoveryQueue,discoveryAction} from './design-intake.mjs';
+import {queryDesignCatalog} from './design-catalog-query.mjs';
 import {readSiteAnnouncements} from './site-announcements.mjs';
 import {importResumeFile,parseResume} from './resume-import.mjs';
 import {catalogApi} from './catalog.mjs';
@@ -24,6 +25,7 @@ import {statfs} from 'node:fs/promises';
 const json=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'no-store',...headers}});
 async function body(req,max=2200000){try{requireValue((req.headers.get('content-type')||'').split(';')[0].trim()==='application/json','请使用JSON请求',415);const value=JSON.parse((await readLimited(req,max)).toString());requireValue(value&&typeof value==='object'&&!Array.isArray(value),'请求格式无效');return value}catch(error){if(error instanceof HttpError)throw error;throw new HttpError(400,'请求格式无效')}}
 export async function handle(req){try{const url=new URL(req.url),p=url.pathname.split('/').filter(Boolean).slice(1),method=req.method,apiPath='/api/'+p.join('/');requireValue(apiAllowed(apiPath),'接口不存在',404);requireValue(registrationEnabled()||apiPath!=='/api/community/register','注册暂未开放',403);if(!registrationEnabled()&&p[0]==='auth'&&p[1]==='email'&&method==='POST'){const preview=req.clone();const input=await body(preview,8192);requireValue(input.purpose!=='register','注册暂未开放',403);}const principal=currentUser(req);if(principal?.experience)requireValue(!/^\/api\/(?:auth\/email\/(?:request|bind|reset)|community\/account|spaces\/keys)(?:\/|$)/.test(apiPath),'体验账号暂不支持此操作',403);if(p[0]==='connect'){requireValue(method==='POST','请使用POST调用工具接口',405);return json(await connectApi(req,await body(req,2200000)))}if(method!=='GET')origin(req);
+ if(p.length===1&&p[0]==='design-catalog'){requireValue(method==='POST','请使用 POST 查询目录',405);return json(queryDesignCatalog(await body(req,128000)))}
  if(p.length===1&&p[0]==='announcements'){requireValue(method==='GET','接口不存在',404);return json(readSiteAnnouncements({publicOnly:true}))}
  if(p[0]==='auth'&&p[1]==='login'&&method==='POST'){const token=await loginAsync(req,await body(req,4096));return json({ok:true},200,{'Set-Cookie':sessionCookie(token)})}
  if(p[0]==='auth'&&p[1]==='email'&&p.length===3){if(p[2]==='status'&&method==='GET')return json(emailStatus(req));const input=await body(req,8192);if(p[2]==='request'&&method==='POST')return json(await requestEmail(req,input));if(p[2]==='bind'&&method==='POST')return json(await bindEmailAsync(req,input));if(p[2]==='reset'&&method==='POST')return json(await resetEmailPasswordAsync(req,input),200,{'Set-Cookie':sessionCookie('',true)});throw new HttpError(404,'接口不存在')}
