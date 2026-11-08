@@ -10,7 +10,7 @@ const cache=new Map<string,Entry>(),queue:Job[]=[],documents:DocumentJob[]=[],st
 const ttl=30000,limit=24,maxDocument=350000;
 let active=0,manifest:{locale:string;at:number;promise:Promise<void>}|undefined;
 let cancelProcessing:(()=>void)|undefined,listening=false,navigationPending=false;
-const valid=(url:string)=>/^\/blog\/[^/?#]+\/preview$/.test(url)||/^\/blogs\/showcase\/[^/?#]+\?embed=gallery$/.test(url);
+const valid=(url:string)=>/^\/blog\/[^/?#]+\/preview$/.test(url)||/^\/blogs\/showcase\/[^/?#]+\?(?:template=builtin&)?embed=gallery$/.test(url);
 const keyFor=(url:string,locale:string)=>locale+':'+url;
 
 export function cachedGalleryPreview(url:string,locale:string){

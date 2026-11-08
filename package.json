@@ -22,6 +22,7 @@
     "typecheck": "tsc --noEmit",
     "test:community:http": "node test/community-http.mjs",
     "test:homepage:http": "node test/blog-http.mjs",
+    "test:gallery:http": "node test/blog-gallery-http.mjs",
     "test:skills:http": "node test/skills-http.mjs",
     "test:catalog:http": "node test/catalog-http.mjs",
     "test:resume:http": "node test/resume-http.mjs",

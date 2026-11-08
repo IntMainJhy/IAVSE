@@ -18,7 +18,7 @@ vm.runInNewContext(ts.transpileModule(fs.readFileSync(new URL('../src/components
 }});
 const walk=node=>node&&typeof node==='object'?[node,...[node.props?.children].flat().flatMap(walk)]:[];
 test('themed previews cannot execute scripts while authored static-site previews retain their sandbox',()=>{
- const spaces=[{handle:'theme',name:'Theme',href:'/blog/theme'},{handle:'static',name:'Static',href:'/blog/static',mode:'static'},{handle:'sample',name:'Sample',href:'/blogs/showcase/sample',showcase:true}];
+ const spaces=[{handle:'theme',name:'Theme',href:'/blog/theme'},{handle:'static',name:'Static',href:'/blog/static',mode:'static'},{handle:'sample',name:'Sample',href:'/blogs/showcase/sample?template=builtin',showcase:true}];
  const wrapped=exports.BlogSpaceGallery({spaces,labels:{}}),gallery=wrapped.type(wrapped.props),panels=walk(gallery).filter(node=>typeof node.type==='function'&&Object.hasOwn(node.props||{},'mounted'));
  const frames=panels.map(panel=>walk(panel.type({...panel.props,mounted:true})).find(node=>node.type==='iframe'));
  assert.equal(frames.length,3);
@@ -27,6 +27,6 @@ test('themed previews cannot execute scripts while authored static-site previews
  assert.equal(frames[2].props.sandbox,'allow-same-origin');
  assert.equal(frames[0].props.src,'/blog/theme/preview');
  assert.equal(frames[1].props.src,'/blog/static?embed=gallery');
- assert.equal(frames[2].props.src,'/blogs/showcase/sample?embed=gallery');
+ assert.equal(frames[2].props.src,'/blogs/showcase/sample?template=builtin&embed=gallery');
  for(const frame of frames){assert.equal(frame.props.tabIndex,-1);assert.equal(frame.props['aria-hidden'],'true');assert.equal(frame.props.loading,'eager');}
 });

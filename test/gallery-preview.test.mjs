@@ -37,6 +37,13 @@ test('failed, oversized and non-preview responses leave no stale HTML and do not
  const s=fixture();for(const path of ['/blog/static?embed=gallery','https://evil.example/blog/a/preview','//evil.example/blog/a/preview','/api/auth/me','/blog/a/preview?draft=1'])assert.equal(await s.loadGalleryPreview(path,'en'),null);assert.equal(s.requests.length,0);
 });
 
+test('built-in template examples use the same bounded preview cache without admitting arbitrary queries',async()=>{
+ const s=fixture(),href='/blogs/showcase/maya-lab?template=builtin&embed=gallery',promise=s.loadGalleryPreview(href,'zh');
+ assert.equal(s.requests[0].href,href);s.requests[0].respond('actual editor template');await s.flushWork();assert.match(await promise,/actual editor template/);assert.ok(s.cachedGalleryPreview(href,'zh'));
+ for(const path of ['/blogs/showcase/maya-lab?template=private&embed=gallery','/blogs/showcase/maya-lab?template=builtin&embed=gallery&draft=1','/blogs/showcase/maya-lab?template=builtin','https://evil.example/blogs/showcase/maya-lab?template=builtin&embed=gallery'])assert.equal(await s.loadGalleryPreview(path,'en'),null);
+ assert.equal(s.requests.filter(r=>r.href.includes('/blogs/')).length,1);
+});
+
 test('slow queued work remains deduplicated beyond the completed-document TTL',async()=>{
  const s=fixture(),a=s.loadGalleryPreview(url(0),'en'),b=s.loadGalleryPreview(url(1),'en'),queued=s.loadGalleryPreview(url(2),'en');s.advance(30001);assert.equal(s.loadGalleryPreview(url(2),'en',true),queued);
  s.requests[0].respond();s.requests[1].respond();await s.flush();s.requests.find(r=>r.href===url(2)).respond();await s.flushWork();await Promise.all([a,b,queued]);assert.equal(s.maxActive,2);

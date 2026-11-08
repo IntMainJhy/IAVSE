@@ -19,7 +19,7 @@ const avatarPaths=new Set(['lin','maya','leo','aki','yun','nora','sam','kei','an
 export const showcaseAvatarSrc=value=>typeof value==='string'&&avatarPaths.has(value)?value:'';
 export function showcaseProfile(handle,locale='en'){
  const item=blogShowcases.find(item=>item.handle===handle);if(!item)return null;
- return {handle:item.handle,name:item.name,role:item.role,template:item.template,intro:locale==='zh'?item.intro:item.introEn,avatarSrc:item.avatarSrc,avatarId:'',href:'/blogs/showcase/'+item.handle,showcase:true};
+ return {handle:item.handle,name:item.name,role:item.role,template:item.template,intro:locale==='zh'?item.intro:item.introEn,avatarSrc:item.avatarSrc,avatarId:'',href:'/blogs/showcase/'+item.handle+'?template=builtin',showcase:true};
 }
 /** Use the same template factory, appearance and public renderer as the blog editor. */
 export function showcasePageData(handle,locale='en'){

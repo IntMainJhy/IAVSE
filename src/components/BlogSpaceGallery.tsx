@@ -16,7 +16,7 @@ type Labels={open:string;preview:string;browse:string;directory:string;previous:
 function GalleryAvatar({space}:{space:GallerySpace}){return space.avatarSrc?<img className="gallery-avatar" src={space.avatarSrc} alt="" width={36} height={36}/>:<FeedAvatar name={space.name} avatarId={space.avatarId}/>;}
 
 const GalleryPanel=memo(function GalleryPanel({space,labels,selected,mounted,index,onSelect,onReady}:{space:GallerySpace;labels:Labels;selected:boolean;mounted:boolean;index:number;onSelect:(index:number)=>void;onReady:(handle:string)=>void}){
- const {locale}=useLocale(),src=space.showcase||space.mode==='static'?space.href+'?embed=gallery':space.href+'/preview';
+ const {locale}=useLocale(),src=space.showcase||space.mode==='static'?space.href+(space.href.includes('?')?'&':'?')+'embed=gallery':space.href+'/preview';
  const [html,setHtml]=useState<string|null|undefined>(()=>space.mode==='static'?null:cachedGalleryPreview(src,locale));
  const readiness=useRef<(()=>void)|null>(null),done=useRef(false),[loaded,setLoaded]=useState(false);
  const ready=useCallback(()=>{if(done.current)return;done.current=true;onReady(space.handle);},[onReady,space.handle]);
