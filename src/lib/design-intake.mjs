@@ -1,9 +1,4 @@
-import designSeeds from './design-library-seed.json' with {type:'json'};
-import vibeuiDesigns from './design-imports/vibeui.json' with {type:'json'};
-import stylekitDesigns from './design-imports/stylekit.json' with {type:'json'};
-import {importedDesign} from './design-catalog.mjs';
-import {studioDesigns} from './design-studio.mjs';
-import {websiteShowcases} from './website-showcases.mjs';
+import templateLibrary from './template-library.json' with {type:'json'};
 import {randomUUID} from 'node:crypto';
 import {isIP} from 'node:net';
 import {db,transaction,recordAudit} from './db.mjs';
@@ -18,7 +13,7 @@ const previewLayouts=['optical','spatial','bento','editorial','workspace','produ
 const previewAliases={dashboard:'workspace',cinematic:'spatial',minimal:'product'};
 const emptySettings={enabled:true,hour:9,timeZone:'Asia/Shanghai',lastScheduledDate:'',heartbeat:''};
 function sourceKeyOrNull(value){try{return canonicalSource(value)}catch{return null}}
-const catalogDesigns=[...websiteShowcases,...studioDesigns,...designSeeds.filter(entry=>entry.featured),...vibeuiDesigns.map(importedDesign),...stylekitDesigns.map(importedDesign),...designSeeds.filter(entry=>!entry.featured)];
+const catalogDesigns=templateLibrary;
 // Independent implementations keep code ownership in source and the studied site
 // in referenceSite. Reserve both identities and exact entry/preview aliases;
 // research citations in referenceUrls are evidence, not duplicate identities.
@@ -100,7 +95,7 @@ export function discoveryQueue(params=new URLSearchParams()){
  const total=d.prepare('SELECT COUNT(*) n FROM design_intake_entries WHERE '+where).get(...args).n,pages=Math.max(1,Math.ceil(total/24)),page=Math.min(requestedPage,pages);
  return {items:d.prepare('SELECT * FROM design_intake_entries WHERE '+where+' ORDER BY created DESC,id DESC LIMIT 24 OFFSET ?').all(...args,(page-1)*24).map(dto),total,page,pages,counts:d.prepare('SELECT status,COUNT(*) count FROM design_intake_entries GROUP BY status').all(),runs:d.prepare('SELECT * FROM design_intake_runs ORDER BY started DESC LIMIT 10').all().map(row=>({...row,results:parse(row.results)})),settings:discoverySettings()};
 }
-export function existingDiscoverySources(){const d=intakeDb();return new Set([...d.prepare('SELECT source_key FROM design_intake_source_keys UNION SELECT source_key FROM design_intake_entries').all().map(row=>row.source_key),...catalogSourceKeys])}
+export function existingDiscoverySources(){seedDesigns();const d=intakeDb();return new Set([...d.prepare('SELECT source_key FROM design_intake_source_keys UNION SELECT source_key FROM design_intake_entries').all().map(row=>row.source_key),...catalogSourceKeys])}
 export function createDiscoveryDraft(input,{collector='manual',actor=null}={}){
  intakeDb();
  const id=randomUUID(),kind=input.kind;requireValue(['design','skill'].includes(kind),'资源类型无效');const draft=normalizeDraft(input.draft,kind,id),key=canonicalSource(draft.source.url);

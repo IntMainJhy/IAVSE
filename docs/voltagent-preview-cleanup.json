@@ -1,0 +1,4052 @@
+{
+  "date": "2026-11-08",
+  "entries": 54,
+  "htmlFiles": 108,
+  "originalRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+  "removed": [
+    "IAVSE study toolbar and section selector",
+    "Generic button/input/color feedback",
+    "Fake color selection attributes",
+    "Added interaction scripts",
+    "Added blanket responsive/focus/motion CSS",
+    "Added main wrapper and altered titles"
+  ],
+  "retained": [
+    "Complete upstream HTML content, original CSS/layout and original titles",
+    "Individually licensed self-hosted OFL fonts and existing license files",
+    "Audited plain-text navigation/footer identity",
+    "Full MIT text and distinct modification/source notice",
+    "Necessary local source/Apple card anchors"
+  ],
+  "records": [
+    {
+      "slug": "vibeui-claude",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-claude/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/claude/preview.html",
+      "upstreamGitBlobSHA": "f8323cf3958f45c8da5003bfbb05787ecf542480",
+      "sourceSHA256": "3d6be6eca2d69f36a3a25a2149085d2c6092f0cb7381aab53ee2d146bab14d63",
+      "localSHA256": "c12aa014f595daf9ca1ffca98cb5a2cb31942d43b452124a8b8e4b3dfa3df52a",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Claude / Anthropic (Light)",
+      "originalHeadings": [
+        "Design System Preview: Claude",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-claude",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-claude/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/claude/preview-dark.html",
+      "upstreamGitBlobSHA": "13d7c7eb2cfcb87f06073eed6b05ae778979d0ed",
+      "sourceSHA256": "e9ce8b405638d54ca65ed9782651543d2f336413204088f96b7f59337d86f6ce",
+      "localSHA256": "e98e056d7b8f5dccec93955326637d9446599933abf6bd1cb77e318fc6f02a87",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Claude / Anthropic (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Claude",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-cohere",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-cohere/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cohere/preview.html",
+      "upstreamGitBlobSHA": "e8849b7eba25159040a7555e078ad40031a72080",
+      "sourceSHA256": "ed323b8d96afe940a6196b556c41a8e3421af651f0dd90aaad44d5ab49bfdb06",
+      "localSHA256": "91ddabbf34ed56b199cf4ae2d44c33c35e492c28c5a55eb1c9cb9c22bb33a630",
+      "fontFamilies": [
+        "Inter",
+        "Space Grotesk",
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Cohere (Light)",
+      "originalHeadings": [
+        "Design System Preview: Cohere",
+        "Color Palette & Roles",
+        "Enterprise AI Platform",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-cohere",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-cohere/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cohere/preview-dark.html",
+      "upstreamGitBlobSHA": "f38b326a5445de9c31f22058b6867ad72738b9e5",
+      "sourceSHA256": "02d22996cdbd960b0d34b91e46ded99cfdfc4702ec2c9a1c7a35c24bac5db038",
+      "localSHA256": "971fc95a77ffd9c5a5ba867f1a7e5ff9f222471e765c6b2970f4972eb6b1fe90",
+      "fontFamilies": [
+        "Inter",
+        "Space Grotesk",
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Cohere (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Cohere",
+        "Color Palette & Roles",
+        "Enterprise AI Platform",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-elevenlabs",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-elevenlabs/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/elevenlabs/preview.html",
+      "upstreamGitBlobSHA": "4fb1c1af703d53c8dc697d3ace910aa42e49a38d",
+      "sourceSHA256": "c44752c62df5e9bb7f51dfd5404bed9e6e4e1a142139779c694bf60ab174a072",
+      "localSHA256": "93b8158cb66f90467741e5c7b76ffe1b146d78265096894cd3bbfdffda0c1a9d",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Geist+Mono&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://elevenlabs.io/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: ElevenLabs (Light)",
+      "originalHeadings": [
+        "Design System Inspired by ElevenLabs",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-elevenlabs",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-elevenlabs/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/elevenlabs/preview-dark.html",
+      "upstreamGitBlobSHA": "646c697137babcf60de7f44c45bafc1ae2d82a50",
+      "sourceSHA256": "7b7192021a57f6ccf99eb7f9e148977ee4b2b5eef1e9071dedd7e44488a00afe",
+      "localSHA256": "5da75a593f88138dd0d9a0d31b351657fabb9f05d87b4f07ec6381226ce8fad1",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Geist+Mono&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://elevenlabs.io/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: ElevenLabs (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by ElevenLabs",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-minimax",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-minimax/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/minimax/preview.html",
+      "upstreamGitBlobSHA": "7a3993b049b019d8a153d6a025d236d88525bdd6",
+      "sourceSHA256": "b24192bc0ef4c81f75d1826d60e9780d8c3afb780014da9934698c118fdb615a",
+      "localSHA256": "d2a2a5094e8d11fb3dd6521f8e277694d85d0ebb254d9583f2ccb001b9f054e3",
+      "fontFamilies": [
+        "DM Sans",
+        "Outfit",
+        "Poppins",
+        "Roboto"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: MiniMax (Light)",
+      "originalHeadings": [
+        "Design System Inspired by MiniMax",
+        "1. Color Palette",
+        "2. Typography Scale",
+        "3. Button Variants",
+        "4. Card Examples",
+        "5. Form Elements",
+        "6. Spacing Scale",
+        "7. Border Radius Scale",
+        "8. Elevation / Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-minimax",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-minimax/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/minimax/preview-dark.html",
+      "upstreamGitBlobSHA": "f397a2ff6d11d7e782f0bf334aadc2f22a2b85af",
+      "sourceSHA256": "bbe2e1338d156569bc41ea1df48cb121c9df9d60d280d17787ab1909b34e077e",
+      "localSHA256": "b1586a1349175e22eb1514f533e6be99cab50c50bd57e79b2cf35726e6f80420",
+      "fontFamilies": [
+        "DM Sans",
+        "Outfit",
+        "Poppins",
+        "Roboto"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: MiniMax (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by MiniMax",
+        "1. Color Palette",
+        "2. Typography Scale",
+        "3. Button Variants",
+        "4. Card Examples",
+        "5. Form Elements",
+        "6. Spacing Scale",
+        "7. Border Radius Scale",
+        "8. Elevation / Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-mistral-ai",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-mistral-ai/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mistral.ai/preview.html",
+      "upstreamGitBlobSHA": "a6d6f8e578a7ef78780d453cc66c270bfe89a206",
+      "sourceSHA256": "cf257229415401e9205c5ea6f877781a87f4196ae2c587d07533f9ec31a27f50",
+      "localSHA256": "e2ff2e8fbf1c58ed26c88733e52c9a85ef626c6a68c8598de88c76392da44e09",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Mistral AI (Light)",
+      "originalHeadings": [
+        "Design System Preview: Mistral AI",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-mistral-ai",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-mistral-ai/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mistral.ai/preview-dark.html",
+      "upstreamGitBlobSHA": "49d78d3cd9645781e3f4c497dc121a180428f7c4",
+      "sourceSHA256": "43173e72ba64a57c4d3ce0ac6981774e6ee9e0e9beb188cfee46cdca974efcc0",
+      "localSHA256": "dda3dc70edd0161947646507c35a3c905862c47ec57db584d57e962e27209d78",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Mistral AI (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Mistral AI",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-ollama",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-ollama/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ollama/preview.html",
+      "upstreamGitBlobSHA": "cdd3e3e689598e47f099a62a25d69daff1ed8da3",
+      "sourceSHA256": "e19ff293afb958aaea4000fe3f0e00bf14a6474b803ff3d383fc3b517d762154",
+      "localSHA256": "8e42e3725e698beaeaab97c63370512fe8df2c365b11cb4e68a003e7b7967d81",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Ollama (Light)",
+      "originalHeadings": [
+        "Design System Preview: Ollama",
+        "Grayscale Palette",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Binary Radius System",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-ollama",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-ollama/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ollama/preview-dark.html",
+      "upstreamGitBlobSHA": "d476484c8f52bf4421033ec073ed7f8f6de272fe",
+      "sourceSHA256": "696468880d00a72c83c58945d4af28cf2d2c54580c9557582e9d5b76e8ecbf3b",
+      "localSHA256": "e627475f9bd177c3631a99a025a58e14838b6c13c5cc07a24fa96ec73400f741",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Ollama (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Ollama",
+        "Grayscale Palette",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Binary Radius System",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-opencode-ai",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-opencode-ai/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/opencode.ai/preview.html",
+      "upstreamGitBlobSHA": "ceeaf0111994667d65cff6b168924969cb3caf0f",
+      "sourceSHA256": "660a495442752c5011ef3807686a67ddc81384d48b0bc56c13854fe84d3a6a31",
+      "localSHA256": "2bb810a3140a50ef13d20d8aba295dd4ea6a04a60dcbd5be49d1aa462535df44",
+      "fontFamilies": [
+        "IBM Plex Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://opencode.ai/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: OpenCode (Light)",
+      "originalHeadings": [
+        "Design System Inspired by OpenCode",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-opencode-ai",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-opencode-ai/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/opencode.ai/preview-dark.html",
+      "upstreamGitBlobSHA": "c123364b46038a164f70540d6c612d3abc141d3e",
+      "sourceSHA256": "47811fde6d0c52ca1cee042e49dbaaae058cbe7e8ed562e139fd134443936192",
+      "localSHA256": "93708d4ce223f1fed5a231b8b343b5a850df05dbc152b20580fc04f11980e1ea",
+      "fontFamilies": [
+        "IBM Plex Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://opencode.ai/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: OpenCode (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by OpenCode",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-replicate",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-replicate/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/replicate/preview.html",
+      "upstreamGitBlobSHA": "6ece5247aa67fb29f5e0dda4052fea048c0cd8b5",
+      "sourceSHA256": "a87b1c6bbe311805fc30d9c4765b4c03179ea3ed130ad0c63d1b54454cb4596c",
+      "localSHA256": "b7d2a4b5ca853a7414593828493f4f3682ab25614c8cbce991209ce2ba2ba783",
+      "fontFamilies": [
+        "Inter",
+        "JetBrains Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Replicate (Light)",
+      "originalHeadings": [
+        "Design System Preview: Replicate",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-replicate",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-replicate/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/replicate/preview-dark.html",
+      "upstreamGitBlobSHA": "46a1b043282447cbcd72c85f6660ff19a1d6f8b1",
+      "sourceSHA256": "7fe9c1c9958c1baaba3c8bc11eba83cbab1e90409c8ea2fbe7b70dfebe93406e",
+      "localSHA256": "705901835947d0476e0ef0157a9de79485c2c5ee6db2db783f02a836e10c9073",
+      "fontFamilies": [
+        "Inter",
+        "JetBrains Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Replicate (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Replicate",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-runwayml",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-runwayml/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/runwayml/preview.html",
+      "upstreamGitBlobSHA": "002aaa1c3d1ed657ff2da22dab47d36e35cf3f0a",
+      "sourceSHA256": "6ad250564d4a2c15e27eb8232e087788a0f63ed993f5f6b3c6018af20d95c8a6",
+      "localSHA256": "7c7972ea22eb945bba23a5b38fb817522cce0c816291f7327a8be70ac6a957e1",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Runway (Light)",
+      "originalHeadings": [
+        "Design System Preview: Runway",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-runwayml",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-runwayml/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/runwayml/preview-dark.html",
+      "upstreamGitBlobSHA": "003b0384347a6918a6c71f2c72789ec3e4c7bdbf",
+      "sourceSHA256": "236594bd44e413a392553f26126daaa24c7c2ebaf9645b05c6707fa2f2c78836",
+      "localSHA256": "e57475f5da86bc42389d0712957dc9dd46e74dea176be4b29d762fec1b95f28e",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Runway (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Runway",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-together-ai",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-together-ai/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/together.ai/preview.html",
+      "upstreamGitBlobSHA": "cb97b0444dd831b2393c8083a9a10b30936ff7d6",
+      "sourceSHA256": "a1ab62382a59626f42d832d909b9036b6140d60224161b20fb42a15a44765650",
+      "localSHA256": "4290a499d8638947254f705c00050251e4329faa55cfb7cca00cdbf833662115",
+      "fontFamilies": [
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Together AI (Light)",
+      "originalHeadings": [
+        "Design System Preview: Together AI",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-together-ai",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-together-ai/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/together.ai/preview-dark.html",
+      "upstreamGitBlobSHA": "43d7da6711fcc3865096d9d682cd75f8e5fba628",
+      "sourceSHA256": "5496e97b60f73b4b422a986cfcb064c156a000a44a4ae238ee1ea9da17e1de98",
+      "localSHA256": "11cc35720c37125d96e7c9fa1affe9a068536fce9e24dfbb032ac3bffc86a2b5",
+      "fontFamilies": [
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Together AI (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Together AI",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-voltagent",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-voltagent/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/voltagent/preview.html",
+      "upstreamGitBlobSHA": "430dd8003fffd228c33cab65542dd7965a9e6ed7",
+      "sourceSHA256": "358ffc5fcbe1ddc9f37335ecdae6cf0073face9aacff5a97eeea59de51bb0f9e",
+      "localSHA256": "c711a39e504f9083eb8b5d5b7aa0adc966b3b37f306e7d0e43bbd29fd12dabf1",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: VoltAgent (Light)",
+      "originalHeadings": [
+        "Design System Preview: VoltAgent",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-voltagent",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-voltagent/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/voltagent/preview-dark.html",
+      "upstreamGitBlobSHA": "bc03db72894013f129f79000d0f09b6b67c0820e",
+      "sourceSHA256": "8ed7a766ee7bc211a8f027971c3a2c6e8dd12a06c147c7bbd32b36d143bda00e",
+      "localSHA256": "2f0aa8a104cf3828c2d1d8d01aaacc5e95e6618bdac9b3696c74588c961fc1c4",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: VoltAgent (Dark)",
+      "originalHeadings": [
+        "Design System Preview: VoltAgent",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-x-ai",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-x-ai/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/x.ai/preview.html",
+      "upstreamGitBlobSHA": "d9631ca9925ab6b286271704dec8385e525e3120",
+      "sourceSHA256": "5a6babb47e44e4e74509e3d53859f0f5cc98ecaffb329beadf7689388e340e87",
+      "localSHA256": "3bb8040e79480300293cfdbbf6fdfce244e8e21a6f1910083be32e41e82efff0",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://x.ai/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: xAI (Light)",
+      "originalHeadings": [
+        "Design System Inspired by xAI",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Monospace at Scale",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Elevation (No Shadows)"
+      ]
+    },
+    {
+      "slug": "vibeui-x-ai",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-x-ai/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/x.ai/preview-dark.html",
+      "upstreamGitBlobSHA": "682cf622b7a3abd276cd314d7aa70b064fe55095",
+      "sourceSHA256": "eb8704629f7638a0d6d1f8bb59b9ef8068884e988056e475112e993272a918b1",
+      "localSHA256": "5261dead6bfc9114a67ec387cd31f7194d84f4c559320673aa399fbad0069022",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://x.ai/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: xAI (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by xAI",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Elevation (No Shadows)"
+      ]
+    },
+    {
+      "slug": "vibeui-cursor",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-cursor/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cursor/preview.html",
+      "upstreamGitBlobSHA": "668e40f0382957aa49003c9c0e0a0aaae97d79ef",
+      "sourceSHA256": "397435876978651bf9a67d476cdd0c0a3e0362dbea6d203be0dc11a81c312a86",
+      "localSHA256": "ac9c461bc15b6990f70936ec7bca6a364992cbffcb2c823c407d141191a26895",
+      "fontFamilies": [
+        "Lato",
+        "Source Serif 4"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://cursor.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Cursor (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Cursor",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-cursor",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-cursor/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cursor/preview-dark.html",
+      "upstreamGitBlobSHA": "4af6960ab65b24a6a933666e1092e1885a1743af",
+      "sourceSHA256": "b1d7525bfe9568c171be692cb83df6fe54ea802a8a47c4d7fbe1f6b242775139",
+      "localSHA256": "4dcecddee197d474749c84715fe85aaa2b65bad00eb3c0744ac50f8282a1b33f",
+      "fontFamilies": [
+        "Lato",
+        "Source Serif 4"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://cursor.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Cursor (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Cursor",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-expo",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-expo/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/expo/preview.html",
+      "upstreamGitBlobSHA": "7414b9207cdccd26f091438832b398327294ca53",
+      "sourceSHA256": "feb22ec14df1b766035db3a1e53cfbb800b8c34e5e5537ec1428cfcd19e66450",
+      "localSHA256": "7bb86dff73452e3a9ae6786e5941ee8e9af2e998780cd62491338ed5821f0b2f",
+      "fontFamilies": [
+        "Inter",
+        "JetBrains Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Expo (Light)",
+      "originalHeadings": [
+        "Design System Preview: Expo",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-expo",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-expo/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/expo/preview-dark.html",
+      "upstreamGitBlobSHA": "fab9605a9958ee334f8b5a89b8d873f2148b0112",
+      "sourceSHA256": "d0d18f53a3d3705021a286778a507e970311363aa456fca324757efd47f0af92",
+      "localSHA256": "6e3c351c237a6e18df53e4aceccabccb27c307e69c4dec9ff69f55b0abd114c6",
+      "fontFamilies": [
+        "Inter",
+        "JetBrains Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Expo (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Expo",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-linear-app",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-linear-app/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/linear.app/preview.html",
+      "upstreamGitBlobSHA": "eb718468811a29103a9fd4239a7320bd519e8c0e",
+      "sourceSHA256": "ad381e5057cde37e6986754d69e34e80f0fa2fc29a3c74663ab449b13e674707",
+      "localSHA256": "baf8ff8b4442796ee6423358105d69ae8adf5667066aacd68189707c17411643",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://linear.app/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Linear (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Linear",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-linear-app",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-linear-app/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/linear.app/preview-dark.html",
+      "upstreamGitBlobSHA": "f55e75a8c4884a7abfa7d7bbd78776a9d76796a4",
+      "sourceSHA256": "c091c72bb343b0e4bea3c61128a34edade72ad3e8199348d1da60bc5efe01474",
+      "localSHA256": "56759ad41edab99b3bcb67a73604b3876d06a778ce7557ef643ab32bbb1d82f2",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://linear.app/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Linear (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Linear",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-lovable",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-lovable/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/lovable/preview.html",
+      "upstreamGitBlobSHA": "a99a30768428ec5714b929c00693d589b6043b5c",
+      "sourceSHA256": "825b5c37108b0452f275ba0428a930d6f218bedcfd8481fd5ff3b9d1570d54e8",
+      "localSHA256": "e09ae6dd286152efe2e4184205aea02f5799bbae46f61e5a61dc11ae9cf83d10",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;480;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://lovable.dev/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Lovable (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Lovable",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-lovable",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-lovable/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/lovable/preview-dark.html",
+      "upstreamGitBlobSHA": "794ef3b4a4223492320c25e3bb9cc597495f353f",
+      "sourceSHA256": "23aa62568bd8048400f048e346bfb88d597fea4e334851c1320deca13db4ba88",
+      "localSHA256": "53c85d4000d0b2fb6ebb61d774685bdb82e2e9273c8eaeb520774148bd472360",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;480;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://lovable.dev/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Lovable (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Lovable",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-mintlify",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-mintlify/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mintlify/preview.html",
+      "upstreamGitBlobSHA": "3eba850c1c4a665d785cc8bcabb6f355f03fbb42",
+      "sourceSHA256": "9e668a1f60c1f4308542417ded006d3f2fed7450e975feb4a7a635a2d8621b51",
+      "localSHA256": "4519a80f954e9335fbe080693ccf8996d48754dcee20b7510fd86e16226761a9",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://mintlify.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Mintlify (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Mintlify",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-mintlify",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-mintlify/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mintlify/preview-dark.html",
+      "upstreamGitBlobSHA": "5daa1d54a4159a28a52bb0d4dd7f23d5a6bbb1cb",
+      "sourceSHA256": "149fc89311c3991c26b78fd7c9f6a53efad30b5ae3f028512745a7d00f344634",
+      "localSHA256": "fcb17243fb4ee8905897e14553c6536fc31853ac0c8d3b65482d5ae32d9488cf",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://mintlify.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Mintlify (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Mintlify",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-posthog",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-posthog/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/posthog/preview.html",
+      "upstreamGitBlobSHA": "c165d8c9742aa9cc7e6844b3ed7d14b9053c4677",
+      "sourceSHA256": "d9a6099f1a651a145df4033dca5cd2e7874a979d661606103c68628f6a3fb807",
+      "localSHA256": "21a514b9433a9385dfee5c4a22ca76784f9793fb27730386dd2ebbad3a2a5243",
+      "fontFamilies": [
+        "IBM Plex Sans",
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=Source+Code+Pro:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by PostHog",
+      "originalHeadings": [
+        "Design System Inspired by PostHog",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-posthog",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-posthog/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/posthog/preview-dark.html",
+      "upstreamGitBlobSHA": "935c167f22ceb6dc2f3249f821acbe7cdf9093da",
+      "sourceSHA256": "6ef3619731219ea277fe394b03dc0aa59f6bc604c11a022181e94df98dd90a79",
+      "localSHA256": "b77b00ca156e02ed76ae786651ed28000231d3817d4e6ddd467d88ef6662dc44",
+      "fontFamilies": [
+        "IBM Plex Sans",
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=Source+Code+Pro:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by PostHog — Dark Mode",
+      "originalHeadings": [
+        "Design System Inspired by PostHog",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-raycast",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-raycast/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/raycast/preview.html",
+      "upstreamGitBlobSHA": "f921fea1e13864b457969d681940f0c860bc0c4c",
+      "sourceSHA256": "2fc9a1c16ef3385b711be384bcf1a1dfc15e09540b95ae4afa3745957bc9cbac",
+      "localSHA256": "f70c09a5991aa94a5e6e37cdf909f25923699520467f237adb769e81d936d8de",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://raycast.com"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Raycast",
+      "originalHeadings": [
+        "Design System Inspired by Raycast",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-raycast",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-raycast/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/raycast/preview-dark.html",
+      "upstreamGitBlobSHA": "94a05679f2266a87b9ae613e77392b5951ab41c4",
+      "sourceSHA256": "0465463398a32915b7272b03b4310e3d466a37fc19137227fc3dd801580a6049",
+      "localSHA256": "b318626d24a452a36e93f0a89f8e370372281ddf724b95c0c9039829c8c883a2",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://raycast.com"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Raycast — Dark Mode",
+      "originalHeadings": [
+        "Design System Inspired by Raycast",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-resend",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-resend/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/resend/preview.html",
+      "upstreamGitBlobSHA": "9c00289abf3e93d219c590aec8d9b87086536674",
+      "sourceSHA256": "9b4fe81bba23fb8303afc95a5472cbffb346cceb485880f03c98f372d41fcb8a",
+      "localSHA256": "f8b1e62a636894d1185211b357dbfcb6abedefd8cb50a29faf09a7cad1d3f016",
+      "fontFamilies": [
+        "Commit Mono",
+        "DM Serif Display",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display&family=Commit+Mono&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://resend.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Resend (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Resend",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-resend",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-resend/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/resend/preview-dark.html",
+      "upstreamGitBlobSHA": "192d86e8e36da653f5eef00406277fa2b39f7124",
+      "sourceSHA256": "70ddd36191db15a6273bd593f2aec3f3220fe4f78da266effa1659d878329c24",
+      "localSHA256": "966f2d903df252c421c63a05912a2f2e69b6a22c1c8f44f153c0ee351a58b371",
+      "fontFamilies": [
+        "Commit Mono",
+        "DM Serif Display",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=DM+Serif+Display&family=Commit+Mono&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://resend.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Resend (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Resend",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-sentry",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-sentry/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sentry/preview.html",
+      "upstreamGitBlobSHA": "baac639573812618d2f41724915889f8e809b64d",
+      "sourceSHA256": "b5b562ecc1d69b03e0e6bc590b0b75285de4782d5d7c2f37bdd467ec9407b827",
+      "localSHA256": "8ec88ec9aca36468648c223aa88f935f2bea5eb4d2728d38c47e6c59620152b9",
+      "fontFamilies": [
+        "Rubik"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://sentry.io/welcome/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Sentry (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Sentry",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-sentry",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-sentry/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sentry/preview-dark.html",
+      "upstreamGitBlobSHA": "6767526d17f7708ea560ca5d4fcd4048f5a5b07a",
+      "sourceSHA256": "3aa95f4f39a225f0b719c805a037481e1e8a10f6d333617d9fb28f6b7a4b5cca",
+      "localSHA256": "55096afd0a73cbc4df4fe3de760fb7c70d6166a89c544d0ab53d6d862f23a9cc",
+      "fontFamilies": [
+        "Rubik"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://sentry.io/welcome/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Sentry (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Sentry",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-supabase",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-supabase/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/supabase/preview.html",
+      "upstreamGitBlobSHA": "dedfbdf15532124c85f47696c0c434f91002e7cc",
+      "sourceSHA256": "27cbf97ce5359feae094908592e8c22edc6e3a2066a813a75d80ff3c8eb4dbd4",
+      "localSHA256": "25a8ca3d57619ef450690328aa154844e3543c78aef8456c37b630382c3de660",
+      "fontFamilies": [
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Supabase (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Supabase",
+        "Color Palette",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Form Elements",
+        "Spacing System",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-supabase",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-supabase/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/supabase/preview-dark.html",
+      "upstreamGitBlobSHA": "9469f942c8bf0d14bccb77a846db713a6316ef9e",
+      "sourceSHA256": "1ef49a46d03ce4dc2cdd8bd61e22545e296fdffc0f46b8715727744cf49e147e",
+      "localSHA256": "2ebc76e84ac9755ef09a909a394232826665ac7244d3b815b6eae105b8e5b596",
+      "fontFamilies": [
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Supabase (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Supabase",
+        "Color Palette",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Form Elements",
+        "Spacing System",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-superhuman",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-superhuman/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/superhuman/preview.html",
+      "upstreamGitBlobSHA": "c08173a9f631866d8f2895623ca816f0cd73e89d",
+      "sourceSHA256": "79fcdad9614ba58120c9336ee3e23df2a56d24659e9c9df6f2ebe0ecdfca066b",
+      "localSHA256": "236f02dc4845da2ec864183466747d57544d965ae0235bde8cccb1a349a89c05",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Superhuman",
+      "originalHeadings": [
+        "Design System Inspired by Superhuman",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-superhuman",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-superhuman/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/superhuman/preview-dark.html",
+      "upstreamGitBlobSHA": "c8bad89d3c226a17201fe8c1a38da41bd2c80d8c",
+      "sourceSHA256": "f6446b382c2e2666eb3f28068aa6b9ef9313222e152ba5bff1bdcca5f5ac8068",
+      "localSHA256": "29bafad7d93b608541a1d7e4d2dd0d0849d9e1dea9a6f7960681c06e9c8c391f",
+      "fontFamilies": [],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Superhuman — Dark Mode",
+      "originalHeadings": [
+        "Design System Inspired by Superhuman",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-vercel",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-vercel/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/vercel/preview.html",
+      "upstreamGitBlobSHA": "0ad0ff05e2011445dc9ff4f46d6421a5f3626056",
+      "sourceSHA256": "41bd90029489fa19efc1ceacdb4c62f5209c9067b3a81a7f6d1d2b5884e79e9a",
+      "localSHA256": "1ac8691323f6b3dd0d7c01e4229db61f506b7562d6bd0b050a88b1fb6d76618f",
+      "fontFamilies": [
+        "Geist",
+        "Geist Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://vercel.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Vercel (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Vercel",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-vercel",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-vercel/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/vercel/preview-dark.html",
+      "upstreamGitBlobSHA": "ff5812e8400136216f74295a2d20f26fd4204c90",
+      "sourceSHA256": "178e85d75d54dd4e652df896c27c38da583ca8e5c7a9132150241b5e98a9c3aa",
+      "localSHA256": "985b74c4cdef6a3a6ceab829dcd605dfc281bbbb3c7b66a07a4c9a0eb3a57eb2",
+      "fontFamilies": [
+        "Geist",
+        "Geist Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://vercel.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Vercel (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Vercel",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-warp",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-warp/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/warp/preview.html",
+      "upstreamGitBlobSHA": "0d248259f31ca784edcb71b4cd72132083f30b31",
+      "sourceSHA256": "b93e326ea1d1a3d517124dc0690f9982177ab910856574522f3b954978315256",
+      "localSHA256": "d88a2b440bc428c8c0bdafbfab117e5258717912dd3c8a279719907ea9f3c1a1",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap",
+        "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://warp.dev"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Warp",
+      "originalHeadings": [
+        "Design System Inspired by Warp",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-warp",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-warp/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/warp/preview-dark.html",
+      "upstreamGitBlobSHA": "66d6cb83614e73d2941b4ea290b765619ef65601",
+      "sourceSHA256": "87a84d356c03f154a35c7ce0c62f6aa13a5ed079d16fdb491066aa852407b9aa",
+      "localSHA256": "508f42a0b76be27f1456359f89654543d28d04f598ef859d5227dd7ed61d3082",
+      "fontFamilies": [
+        "Geist Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap",
+        "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://warp.dev"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Warp — Dark Mode",
+      "originalHeadings": [
+        "Design System Inspired by Warp",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-zapier",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-zapier/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/zapier/preview.html",
+      "upstreamGitBlobSHA": "bbb95e3dbe8470392c82b94b337d75693e4b945d",
+      "sourceSHA256": "be5ccbcd86e472de70cf121873816cff6513e9b6d9f236b1e18aebcb7b073371",
+      "localSHA256": "6db5a45c3a6d04f3f2c06ada7ba6fe20c37110f4514b9f153d263eedc3db4f0c",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": true,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://zapier.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Zapier (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Zapier",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-zapier",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-zapier/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/zapier/preview-dark.html",
+      "upstreamGitBlobSHA": "8808b032de9c1ffc3efc683563bea71e470a646d",
+      "sourceSHA256": "35613fdf5b8d7211b695c1bd384d6c642331b1989943a5fa1d90e12f83db7866",
+      "localSHA256": "1ea3b2fa0c78279af8c89c6f9c7eb5cbbf03c20643f2a6672cbb484c7e7edf53",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": true,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://zapier.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Zapier (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Zapier",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-clickhouse",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-clickhouse/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clickhouse/preview.html",
+      "upstreamGitBlobSHA": "fb278e9a6784711fe87dc56543ea0905cac1de84",
+      "sourceSHA256": "fc2cd480449d72f5fea2682df7eb54beaef0b3e1813dbdaf22c8de680c209f3f",
+      "localSHA256": "b7aa59a8a6823d2c04958acdf60d9d1f6bfdf5dd4f872925423811aeda18731f",
+      "fontFamilies": [
+        "Inconsolata",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Inconsolata:wght@400;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: ClickHouse (Light)",
+      "originalHeadings": [
+        "Design System Preview: ClickHouse",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-clickhouse",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-clickhouse/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clickhouse/preview-dark.html",
+      "upstreamGitBlobSHA": "a208341faaec78549a720a89b08e89ca46971838",
+      "sourceSHA256": "dee82084dcb667e68521f78eaa9b678c252da34a5149f22c3215f364fd458484",
+      "localSHA256": "44a0614214ca1e7c639d37d5497a361b26d3b3400c5b83e096e15a342d110bd0",
+      "fontFamilies": [
+        "Inconsolata",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Inconsolata:wght@400;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: ClickHouse (Dark)",
+      "originalHeadings": [
+        "Design System Preview: ClickHouse",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-composio",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-composio/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/composio/preview.html",
+      "upstreamGitBlobSHA": "d3c147604449467d323090447d64e9fcba7e3a7b",
+      "sourceSHA256": "5130383c64a9b0ffe353cc281f5c707e4cb184d0c2e15f26b1ce7376f10205ab",
+      "localSHA256": "049abbf91058c1d356a36b9ce7bb9fd0c34fc3008ad56f6fb76d98b9f6753430",
+      "fontFamilies": [
+        "JetBrains Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Composio",
+      "originalHeadings": [
+        "Design System Preview: Composio",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Inputs & Forms",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-composio",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-composio/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/composio/preview-dark.html",
+      "upstreamGitBlobSHA": "95bc781240e4f384b2c65afd252a46b29d5fa8ab",
+      "sourceSHA256": "8a2b0415b8e75a347cfa8e6e0e246d58e8cb9499ab3f02e80eca0c4e9c3f7b6e",
+      "localSHA256": "493245863b5f0ed86c728cbe1cdb994708f331fbcdc0246c903d4e72ae45e2ba",
+      "fontFamilies": [
+        "JetBrains Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Composio (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Composio",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Inputs & Forms",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-hashicorp",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-hashicorp/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/hashicorp/preview.html",
+      "upstreamGitBlobSHA": "ae2023f8fce52059c4c87cb143519004a85f0903",
+      "sourceSHA256": "61ca53c22e2fbea4fcacd73024ab51d9c568c57cf2501c44549a0841c4bc128a",
+      "localSHA256": "efed32043430c69043419690d690beee44d86921605859ab0d443458fc0e5c80",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://hashicorp.com"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: HashiCorp (Light)",
+      "originalHeadings": [
+        "Design System Inspired by HashiCorp",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-hashicorp",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-hashicorp/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/hashicorp/preview-dark.html",
+      "upstreamGitBlobSHA": "788636a6d97fe13a24d26352ff5f94eb8f8b54d6",
+      "sourceSHA256": "881810fa62c7cdab9a2dc40f78fbd373e88841c4d2e31e799d7ef3fcf49d1cac",
+      "localSHA256": "5f8e2e27aaf3a912227679f3e7f017d8bd45bc05833562241db4c66e111d18c2",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://hashicorp.com"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: HashiCorp (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by HashiCorp",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-mongodb",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-mongodb/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mongodb/preview.html",
+      "upstreamGitBlobSHA": "bdad998413fe7f83ba37532e33acc24f36a77e0c",
+      "sourceSHA256": "330ecffaff5abd83826507458a338f8e86e67f39c7b41bf7f7926c715f3b7715",
+      "localSHA256": "2c98301046e90a26747c65197a8a3393e103cdd3accea13c9ab4828121e58f4c",
+      "fontFamilies": [
+        "DM Serif Display",
+        "Inter",
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://www.mongodb.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: MongoDB (Light)",
+      "originalHeadings": [
+        "Design System Inspired by MongoDB",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-mongodb",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-mongodb/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mongodb/preview-dark.html",
+      "upstreamGitBlobSHA": "8ae27e7f81aa2ee8cc6f0cb202c1ea70b558b303",
+      "sourceSHA256": "2d8972180cb6d93a53a6e07c4be774b0bceee4fe874d1e362edc5d715443cf89",
+      "localSHA256": "209c0156dcd5f89b9ae7f14284f493bcb0b893fcee48bfd80282f57221d71c52",
+      "fontFamilies": [
+        "DM Serif Display",
+        "Inter",
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://www.mongodb.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n\n/* IAVSE readability repair: upstream --white becomes forest background,\n   but hero/navigation/dark-section text still used it as a foreground. */\n.nav-brand,.nav-cta,.nav-links a:hover,.hero,.btn-green,.btn-outline-light,.section-dark,.btn-outline-dark{color:#e8edeb}\n.section-dark .card[style],.section-dark .card[style] h3{color:#e8edeb!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: MongoDB (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by MongoDB",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-sanity",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-sanity/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sanity/preview.html",
+      "upstreamGitBlobSHA": "80cd48adb7720ead13ed76aebc43997145c6aae6",
+      "sourceSHA256": "15c3f6f698f9597f8cf6c7abe801af1ed7db12328c05d8c9a478f23f8c3b22ae",
+      "localSHA256": "f138d5b9868587770b00109baaa034398271e948ad9546f9973bd5c9176122f0",
+      "fontFamilies": [
+        "IBM Plex Mono",
+        "Space Grotesk"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Sanity (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Sanity",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-sanity",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-sanity/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sanity/preview-dark.html",
+      "upstreamGitBlobSHA": "64c5977d3b399f26df0bd06ddb44e1637b3c5f56",
+      "sourceSHA256": "9bce6844eefa47da49fe5fd4cef1797ee1c0c1d0ec3730a2042f9f5134e9a7ea",
+      "localSHA256": "b325949eba372d589f804fbce87ac7684a31301d399fe8b7cd8ec5b20f8a70a6",
+      "fontFamilies": [
+        "IBM Plex Mono",
+        "Space Grotesk"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Sanity (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Sanity",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-stripe",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-stripe/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/stripe/preview.html",
+      "upstreamGitBlobSHA": "14694dc1408bdcdf99006abf914e1cb37d88cf7a",
+      "sourceSHA256": "cefb87eb3499d7b6b95732c71b50002697ab17ab2c1966b501863d21e625bbfc",
+      "localSHA256": "cf3f49bd5f732ae76b0881b9fdad803c4107ef01444de60164097189fade4753",
+      "fontFamilies": [
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": true,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://stripe.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Stripe (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Stripe",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-stripe",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-stripe/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/stripe/preview-dark.html",
+      "upstreamGitBlobSHA": "6662d9b70834afaa4775aafeeb7264c943a135dd",
+      "sourceSHA256": "311b9925f39117d1698a1c95a7368853376c74c02cd1eff672c68b9758cdd6b2",
+      "localSHA256": "e2e7590bb09e16f79d1a6419dab3ac942a0db2c6ba7fc5616e02431f91f7cec6",
+      "fontFamilies": [
+        "Source Code Pro"
+      ],
+      "removedProprietaryLocalFontFace": true,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://stripe.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Stripe (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Stripe",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-airtable",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-airtable/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airtable/preview.html",
+      "upstreamGitBlobSHA": "4ab55c02a5bc68e74a7faeb62aeb4065f49c7a5d",
+      "sourceSHA256": "ddc23eeee12509112850a1a5592b0a57ab428f8e78faf89dcc8654b4efc4235c",
+      "localSHA256": "f3f4fd21bb0b617ec5fc30130dfe82f0554003efc039b978bc99372ae3b4dda6",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://airtable.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Airtable (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Airtable",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-airtable",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-airtable/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airtable/preview-dark.html",
+      "upstreamGitBlobSHA": "dfcbb7658d186c67fda63ea91ef7d0d249457ccd",
+      "sourceSHA256": "47d42fb67fd9821c3b9b6ed17f3e6add9a8c58989519c67e1aefd7cdbdf087d2",
+      "localSHA256": "a87e4fca24632426ba2e87871ff7d3588598baf2bdaae5bcbdc50305192d55a6",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://airtable.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Airtable (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Airtable",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-cal",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-cal/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cal/preview.html",
+      "upstreamGitBlobSHA": "01d23a3968e1f824e21b53159ab63039f79df96a",
+      "sourceSHA256": "70008b1a4d799d82276ec477f3db62a68378441560fcf4ab214fa077c120650d",
+      "localSHA256": "5deecb7c89ce0af8dbf9eed989b75b7f4951c76d7348cb68933f1d87d63408b6",
+      "fontFamilies": [
+        "Cal Sans",
+        "Inter",
+        "Roboto Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Cal.com",
+      "originalHeadings": [
+        "Design System Inspired by Cal.com",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-cal",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-cal/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cal/preview-dark.html",
+      "upstreamGitBlobSHA": "a0d931ed2b72912c3373d113521e1bc1bf942f3a",
+      "sourceSHA256": "36f6c08aae6242303569dca7b25777f250ea006e8178a92ff2a139c002f70a3c",
+      "localSHA256": "83ac350f13a18bd6a76365f87ead2e49f2b84c8774115031e75ea880fb63f25f",
+      "fontFamilies": [
+        "Cal Sans",
+        "Inter",
+        "Roboto Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Cal.com — Dark Mode",
+      "originalHeadings": [
+        "Design System Inspired by Cal.com",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-clay",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-clay/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clay/preview.html",
+      "upstreamGitBlobSHA": "10cb0dac7554f3e3de838e17552c483b78da0d85",
+      "sourceSHA256": "d33f637f631d8cbfe37448a9a780235f106f477398242250475a3e0126a336da",
+      "localSHA256": "5cfd30ec83581ef2ef6e5b144e0ca6a034c904af56b1acc6de411e742fcbfc88",
+      "fontFamilies": [
+        "DM Sans",
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://clay.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Clay (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Clay",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-clay",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-clay/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clay/preview-dark.html",
+      "upstreamGitBlobSHA": "d197b91601d79fe67df108ed0a067538e2548c1e",
+      "sourceSHA256": "8f93a5877fb8d0dac4b62cd1ee125857fd0c522aa2e0e9bb32e505d848a87e34",
+      "localSHA256": "7501f77c8779dd6699504ebaad6dfc362c6e44e5b304f70f459b0ea962ca3eed",
+      "fontFamilies": [
+        "DM Sans",
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://clay.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Clay (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Clay",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-figma",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-figma/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/figma/preview.html",
+      "upstreamGitBlobSHA": "097cdbc74230394d5777a85123f8a34d8fc6fd1a",
+      "sourceSHA256": "0a5fc9b813ee7b6fcc5bafc588805c34faee174da36af929fa13028e50fd3828",
+      "localSHA256": "26880825a57557488d357baa0b6768b18daf6a4a202699addbfaa6f903b34040",
+      "fontFamilies": [
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Figma (Light)",
+      "originalHeadings": [
+        "Design System Preview: Figma",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-figma",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-figma/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/figma/preview-dark.html",
+      "upstreamGitBlobSHA": "18d93dfd1f371e0d4a8d8c426cc36d9ab88e3e3c",
+      "sourceSHA256": "c620dbd4d915f9193795945ad0e6801a9198a93c20508c6730847681fff29831",
+      "localSHA256": "fa20125f5dbb26abaeb80ca3aebca2a3c6aef77850ac630c1cdf8025d376706f",
+      "fontFamilies": [
+        "Space Mono"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Figma (Dark)",
+      "originalHeadings": [
+        "Design System Preview: Figma",
+        "Color Palette & Roles",
+        "Typography Rules",
+        "Buttons",
+        "Cards & Containers",
+        "Spacing System",
+        "Border Radius",
+        "Depth & Elevation"
+      ]
+    },
+    {
+      "slug": "vibeui-framer",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-framer/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/framer/preview.html",
+      "upstreamGitBlobSHA": "945df78c6dd11fa98f6ce312b475a266244afbd8",
+      "sourceSHA256": "572be104dba1b7e660dac5a07d8be74c7a3933aada21377adf12d69e686bafe1",
+      "localSHA256": "21448fb79ab2a20bca2ca11543b91cbc1e48e7480d8e7d959a438b0b4ba6f8ca",
+      "fontFamilies": [
+        "Azeret Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&display=swap",
+        "https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://framer.com"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Framer",
+      "originalHeadings": [
+        "Design System Inspired by Framer",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-framer",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-framer/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/framer/preview-dark.html",
+      "upstreamGitBlobSHA": "d20da6225edcaee481921eca605ac3830dd37c61",
+      "sourceSHA256": "9ae898a886be181480667a9f2391ce16e7c362380e9b902a93ce4301e43ef35e",
+      "localSHA256": "193bd4f6c2d06cd417a0af97511ec9705663333f51c1e01c1f4fec6c1efeb506",
+      "fontFamilies": [
+        "Azeret Mono",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&display=swap",
+        "https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://framer.com"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Inspired by Framer — Dark Mode",
+      "originalHeadings": [
+        "Design System Inspired by Framer",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-intercom",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-intercom/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/intercom/preview.html",
+      "upstreamGitBlobSHA": "0972987d2bdb717538ec2fe289f2dc0c55eeb9a1",
+      "sourceSHA256": "206cc0faa65bff8e935510678b51440eeee9c43e6d83ac98256903d8d6b67ef8",
+      "localSHA256": "572f962731bb29366cdb9b8568b2bf897b7c8572d4a32fbe0b28ed7229d62534",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://www.intercom.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Intercom (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Intercom",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-intercom",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-intercom/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/intercom/preview-dark.html",
+      "upstreamGitBlobSHA": "6f685da1243968c5d477be00f25519df5b9884ed",
+      "sourceSHA256": "62e81ada0aea2e01b5865687789e2ac0cd86dfcf562fd213fc1ce2ab69b194b3",
+      "localSHA256": "1599860e9c10849cc1fe579bb9fa2fe3700d67725360f8b14f1ad9fadbe0df67",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://www.intercom.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Intercom (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Intercom",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-miro",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-miro/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/miro/preview.html",
+      "upstreamGitBlobSHA": "c8827068f788d7b26bcaaaf4dea9d6b1e33186d8",
+      "sourceSHA256": "5284e246a6e393591c49f80ad8049dabf18fb02e2f1463bf41a350aa3dc2cde2",
+      "localSHA256": "7dd1db985552a8ea48f6d239158e612f2cbef9f558fa3fcbb16a68ed1b7c604d",
+      "fontFamilies": [
+        "Inter",
+        "Noto Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://miro.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Miro (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Miro",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-miro",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-miro/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/miro/preview-dark.html",
+      "upstreamGitBlobSHA": "93b0adb0785c970e9c22bd7b6d99a01a4c90a8bb",
+      "sourceSHA256": "79eeda768965a47d30aa47a3afef13f786b7365557e1837533f4e2f7fbfb0fea",
+      "localSHA256": "fa306777aebfd269b2cfdd57a674936cdf4111ee6af90ab0069a94971f4a4385",
+      "fontFamilies": [
+        "Inter",
+        "Noto Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://miro.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Miro (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Miro",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-notion",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-notion/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/notion/preview.html",
+      "upstreamGitBlobSHA": "23b784a906d098769a9684f4d927b40ffd63220f",
+      "sourceSHA256": "3117b51fc534647644974b74dc5917c8223f5af078059c9ce033895d43159639",
+      "localSHA256": "57cd5d206b22fd874ad37f10a0dee6f9115e1d019e61db38edc2a26507c08777",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://notion.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Notion (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Notion",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-notion",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-notion/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/notion/preview-dark.html",
+      "upstreamGitBlobSHA": "d8a5851e83cb11649b29820c24be39d10dd1ad72",
+      "sourceSHA256": "d352a4a7c98222b5728516b0c586e1c4114cfdbe3ec929edb8a7c94a8113ca55",
+      "localSHA256": "02c2045fbde8b3a0d1a4c506674e5defc8afb736396aaef9cf8a1597731b86fb",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://notion.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Notion (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Notion",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-pinterest",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-pinterest/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/pinterest/preview.html",
+      "upstreamGitBlobSHA": "5a6da6d51dab40c453071b3a6948625dbf8e876d",
+      "sourceSHA256": "c92f514e98f9ceefa8958f31cc65a7e93dffd618271dc71bd666a1e3ab3a00b6",
+      "localSHA256": "056123e2f14d6030d4383d0d58a205b99412b2ecdc1735c764399c6fdb1fe2d5",
+      "fontFamilies": [
+        "Nunito Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://pinterest.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Pinterest (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Pinterest",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-pinterest",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-pinterest/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/pinterest/preview-dark.html",
+      "upstreamGitBlobSHA": "c37b01ff3edfa7715a5add47b270daaa64464510",
+      "sourceSHA256": "a34ddc6d9804eddd49c22c005b7106cb84d7f94a4cfcb4d5787d5556903f2d58",
+      "localSHA256": "7aba9b79ff36f7f491115521f0e662e8995fbdc7a2639d5e8a0da4fc4b5afd78",
+      "fontFamilies": [
+        "Nunito Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://pinterest.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Pinterest (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Pinterest",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-webflow",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-webflow/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/webflow/preview.html",
+      "upstreamGitBlobSHA": "357e1df7c26601c5a91d9732361616d60ef2aced",
+      "sourceSHA256": "558b3381b26ea2fc751e7187e6f4214a4874641f675ed2014767e83e5619b0b3",
+      "localSHA256": "d8e28c6f8e40698089570cbe842b742027cad9f109e2fdb4e17518be8fb70d53",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://webflow.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Webflow (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Webflow",
+        "Color Palette",
+        "Typography",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-webflow",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-webflow/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/webflow/preview-dark.html",
+      "upstreamGitBlobSHA": "40a31a24546086fec993b446406a950d56647c19",
+      "sourceSHA256": "5cbed9d6e9d2abf40d2da88dc158a6b27e934d20502040e758e2cf59fba45be1",
+      "localSHA256": "f80fc973feec0cd3abced59419b99c59101e83f78fb61d9be9c2e4b4c3e41be3",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://webflow.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Webflow (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Webflow",
+        "Color Palette",
+        "Typography",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-coinbase",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-coinbase/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/coinbase/preview.html",
+      "upstreamGitBlobSHA": "6c76754d29f910f9fbed89bc03180ddd6ae59730",
+      "sourceSHA256": "b3905172151761bfa3483d30a76885635cde9ad857ed70c8c53f92b2982090b2",
+      "localSHA256": "47c4b98ae298090c208b8ee378fc75dd8d75e7153642620597193ebb516edf1a",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://coinbase.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Coinbase (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Coinbase",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-coinbase",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-coinbase/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/coinbase/preview-dark.html",
+      "upstreamGitBlobSHA": "313295bba149023397188d647b32914979b87174",
+      "sourceSHA256": "4041d9d845c172bed0773ff0fae9f8513e0332924b69ee72e5f51f757492e235",
+      "localSHA256": "9282d7ecb58dac7c9c10262b456959e5fcaca79599392af3dd3082361500fff2",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://coinbase.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Coinbase (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Coinbase",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-kraken",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-kraken/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/kraken/preview.html",
+      "upstreamGitBlobSHA": "410e68268ebc49d7944b96200488c551dab96125",
+      "sourceSHA256": "5fdbb4a065a3f9f920cb2d926cfe3e2fa62294c0a78908a285e0852f88b6b55a",
+      "localSHA256": "c607818da502ed472dd2dfa220de47e7b3461f75ee25a0e823515027c1d0c820",
+      "fontFamilies": [
+        "IBM Plex Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://kraken.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Kraken (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Kraken",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-kraken",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-kraken/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/kraken/preview-dark.html",
+      "upstreamGitBlobSHA": "3a0165b7154bfe2fe1600afb57b46a32367f4bae",
+      "sourceSHA256": "c199641496e57dbba759e4bde8a408bdc444c950c3fe2a63ee45dacc7e2381f4",
+      "localSHA256": "c2cc32bfd7551baf277611d4fdbef65c1d6ca99d2f3b7c309db278af374739e2",
+      "fontFamilies": [
+        "IBM Plex Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://kraken.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Kraken (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Kraken",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-revolut",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-revolut/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/revolut/preview.html",
+      "upstreamGitBlobSHA": "d0f62b7abf68bceb436ffdba3ddf14d5d7bc868a",
+      "sourceSHA256": "20cdeac6d1e225e4dcc94f02ccb7efcf144fa0432f97b1b7b015bbba46a2ad13",
+      "localSHA256": "722dc7a67383d42d371dffddef24e0d06972c6bfaa6baad1c0c8f01d0c2a0e85",
+      "fontFamilies": [
+        "DM Sans",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://revolut.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Revolut (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Revolut",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-revolut",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-revolut/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/revolut/preview-dark.html",
+      "upstreamGitBlobSHA": "3ea9bea75241dc9f71d66579ffb3db108511ebfe",
+      "sourceSHA256": "f283648587dbb6332ae4f4c950bfc1cda64bf6fc52a14508629c33523de7d9b7",
+      "localSHA256": "aa45c9fa6d01fc7f8f9bb44203c6b7637a27882e1c8a063493299487e3cc8d82",
+      "fontFamilies": [
+        "DM Sans",
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://revolut.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Revolut (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Revolut",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-wise",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-wise/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/wise/preview.html",
+      "upstreamGitBlobSHA": "94214f0ab9e2a679b6380a184dc55097e14a4527",
+      "sourceSHA256": "5170f66cd464b592aa1dee5d78c6c327817cb9527cf1a35d76dda810beffb48b",
+      "localSHA256": "a40c0b8dcb5ce0c17138eeba715b5ef5a28341c523a097b751403bb1a2937a1b",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://wise.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Wise (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Wise",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-wise",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-wise/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/wise/preview-dark.html",
+      "upstreamGitBlobSHA": "3a0338d170b0c1db7966b7e4ec878eb1151be542",
+      "sourceSHA256": "22868bb40d879719cd514c4ff2c472fcde63114773a66754352aaf15742f2e71",
+      "localSHA256": "130382e756669323d8477d88e0b56d38c72d195403978cc646590ac87ef039e9",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://wise.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Wise (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Wise",
+        "Color Palette",
+        "Typography Scale",
+        "Buttons",
+        "Cards",
+        "Forms",
+        "Spacing",
+        "Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-airbnb",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-airbnb/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airbnb/preview.html",
+      "upstreamGitBlobSHA": "c957683e74e95dff4344303feae9bf860c987a92",
+      "sourceSHA256": "ef9c797ac124b71e87a526b27ca343721bc69142e10f20992d5defef1f516acb",
+      "localSHA256": "a1d6f654c3577b39aed1f9a48a4c2a865e964349fcde78a31147b3071c751af2",
+      "fontFamilies": [
+        "Nunito Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://airbnb.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Airbnb (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Airbnb",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-airbnb",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-airbnb/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airbnb/preview-dark.html",
+      "upstreamGitBlobSHA": "0c77230a6432c271a1bdb37e45c1755a8d07d9a1",
+      "sourceSHA256": "9e05142f1725de63669872edcc7ccb27b1eefc082563d0c7aed9c3536aa260eb",
+      "localSHA256": "eedc5b52b8353df413111afe3a53a9046c8f94e1e53e7da962a54f65e211f896",
+      "fontFamilies": [
+        "Nunito Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://airbnb.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Airbnb (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Airbnb",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-apple",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-apple/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/apple/preview.html",
+      "upstreamGitBlobSHA": "a2396fc5515e759d1a9ff7b62c7e5ba390a02e39",
+      "sourceSHA256": "f9ba9d0a913d8092d924a13ebf07512042383e17cc6f1479b3497ffb43c5eea3",
+      "localSHA256": "f904d0fadb8fe37b7cc3d9c471aa5ecb0256b7ab897d1ec5331c93d7eaa5646a",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://apple.com/"
+      ],
+      "anchorFixes": [
+        {
+          "from": "#cards",
+          "to": "#cards-dark"
+        }
+      ],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Apple (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Apple",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Cards on Dark Background",
+        "Cards on Light Background",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-apple",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-apple/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/apple/preview-dark.html",
+      "upstreamGitBlobSHA": "d49504824fd18dc03e909623356cb38e1e07d68c",
+      "sourceSHA256": "87fa7554b0be56512336dfc472312cb75a8a5f9eb6e8c2b18e1d3c5d2f0e219d",
+      "localSHA256": "7c5941cd8e3bee6295749b80832affe2ef3c5905461de3ded64cfb6f9b84e193",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://apple.com/"
+      ],
+      "anchorFixes": [
+        {
+          "from": "#cards",
+          "to": "#cards-dark"
+        }
+      ],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Apple (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Apple",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Cards on Dark Background",
+        "Cards on Gray Background",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-bmw",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-bmw/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/bmw/preview.html",
+      "upstreamGitBlobSHA": "ed60e92efef011d9df9d2de358640ca61a77e05e",
+      "sourceSHA256": "248008c87fa738dc5c029532c62dd1135a0906dd811cc2dbb67a6d7cd6e3ea05",
+      "localSHA256": "f701cc371d1f273d63ac698741dce94dcaec912ada685968d9220524f8684c47",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://www.bmw.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: BMW (Light)",
+      "originalHeadings": [
+        "Design System Inspired by BMW",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-bmw",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-bmw/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/bmw/preview-dark.html",
+      "upstreamGitBlobSHA": "a416d42d10d2199956b1005b14acc94f243f27c3",
+      "sourceSHA256": "6333b90e4ddf399c7f3142bdcbe7eaeee3665f32fb61f663d6002984bdc51132",
+      "localSHA256": "9837ee7658f8c48b1f9c67534cf0042905e185d08e69901b938c7453f94601fc",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://www.bmw.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n\n/* IAVSE readability repair: upstream --white becomes the dark background,\n   but hero/navigation/example text still used it as a foreground. */\n.nav-brand,.nav-links a,.nav-cta,.hero,.btn-blue,.btn-outline{color:#f5f5f5}\n.hero p{color:#b8b8b8}\n.btn-outline{border-color:#e0e0e0}\n.button-item>span[style],.card[style],.card[style] h3,.elevation-card[style]{color:#f5f5f5!important}\n.card[style] p{color:#b8b8b8!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: BMW (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by BMW",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-ibm",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-ibm/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ibm/preview.html",
+      "upstreamGitBlobSHA": "2c1f31e4323ef5e01d9a737534d537a61609d998",
+      "sourceSHA256": "b1dd6269566e3eaef3b2d0ccaa954f5c33c170a0a85a7b7611b7a06f0723bdda",
+      "localSHA256": "b02df598cb3699786e2650a1cc87569f7ac09ef240e7247e1c9fc564f1e2b92b",
+      "fontFamilies": [
+        "IBM Plex Mono",
+        "IBM Plex Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://ibm.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: IBM (Light)",
+      "originalHeadings": [
+        "Design System Inspired by IBM",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card & Tile Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-ibm",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-ibm/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ibm/preview-dark.html",
+      "upstreamGitBlobSHA": "8578f6ec299f2ba7f372f7f71aede8884525766b",
+      "sourceSHA256": "9f866ebae0aa0ca4d8d468c712ff7cfabee5cb3f5b1a7f72916b2e1896461d7f",
+      "localSHA256": "0d2af1449ddbbab59d8a5bf0596799cae0d4dd90340552e45395692d69f241aa",
+      "fontFamilies": [
+        "IBM Plex Mono",
+        "IBM Plex Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://ibm.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: IBM (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by IBM",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card & Tile Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-nvidia",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-nvidia/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/nvidia/preview.html",
+      "upstreamGitBlobSHA": "21416fc917f71c35499d069143bc8ac66267afa4",
+      "sourceSHA256": "927e0a251f5e71ca653a2fd5a41ea88fd1f29ce5c7f8d6afc38831fc4017aa53",
+      "localSHA256": "598f114b9f89eaac223ae1211f5b4679ecebf54af1c7c2d6c52a039c1ae2c20b",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://nvidia.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: NVIDIA (Light)",
+      "originalHeadings": [
+        "Design System Inspired by NVIDIA",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-nvidia",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-nvidia/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/nvidia/preview-dark.html",
+      "upstreamGitBlobSHA": "44a8d0e940703334367bf763164a3e0411dee001",
+      "sourceSHA256": "6fe04d3ba945e15a304ca41e507e0bb2b75afa7fb32dcac10e7fb01769ff23f4",
+      "localSHA256": "5ea4b08ba363ab84d2d373ed1f437605620f5386534f77d50ec4726c56987113",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://nvidia.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: NVIDIA (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by NVIDIA",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius Scale",
+        "Elevation & Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-spacex",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-spacex/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spacex/preview.html",
+      "upstreamGitBlobSHA": "531451c8feca979f660de9e4e9653a3fda099289",
+      "sourceSHA256": "e17b3277b0154385c0c7bbf4af7567c8ba456805088b399840fb8903c76db6cd",
+      "localSHA256": "80c65aa5d08b14ac1921508260d43966d23f3e1ff86f8e94904c3ce7206cc86e",
+      "fontFamilies": [
+        "Share Tech"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Share+Tech&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://spacex.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: SpaceX (Light)",
+      "originalHeadings": [
+        "Design System Inspired by SpaceX",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Content Sections",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-spacex",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-spacex/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spacex/preview-dark.html",
+      "upstreamGitBlobSHA": "438fa3bc20e31f5ad8016dc531943a924360a166",
+      "sourceSHA256": "5e5940fc4251a5dfa81a5a15c2dc9bcc4d15283d347b0c640a0b7538462bff70",
+      "localSHA256": "298a0cd64a9137022e0695f60dd10023f3f92a446ce1b85db39e04535bbdf806",
+      "fontFamilies": [
+        "Share Tech"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Share+Tech&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://spacex.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: SpaceX (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by SpaceX",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Content Sections",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-spotify",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-spotify/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spotify/preview.html",
+      "upstreamGitBlobSHA": "c0560937fc6e2051cc8899d1be98d7170701b92e",
+      "sourceSHA256": "0b7cff059321ea2bd6d6870845370ea9752476f34adeb7f5307bc1c0e0c4cd94",
+      "localSHA256": "a4a1544d078c7616982f7d3aba6627349ef922fe32ca6834aaad7e0d7f603589",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://spotify.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Spotify (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Spotify",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-spotify",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-spotify/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spotify/preview-dark.html",
+      "upstreamGitBlobSHA": "9226ae3aaf9f7301445dd70dec49c680633f73c6",
+      "sourceSHA256": "1c2385d29477bb54e10458bc7da01fe2f4bd107bca4f19e0e80e5b3e261d0cc6",
+      "localSHA256": "a3c04bc9ddb8a3b67338673dd2d84b0c0ec2375bd0a230369ccebb4825654b28",
+      "fontFamilies": [
+        "Inter"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [
+        "https://spotify.com/"
+      ],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Spotify (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Spotify",
+        "Color Palette",
+        "Typography Scale",
+        "Button Variants",
+        "Card Examples",
+        "Form Elements",
+        "Spacing Scale",
+        "Border Radius",
+        "Depth"
+      ]
+    },
+    {
+      "slug": "vibeui-uber",
+      "theme": "light",
+      "path": "public/design-artifacts/vibeui-uber/index.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/uber/preview.html",
+      "upstreamGitBlobSHA": "907d1e03b71242acc8b6a6b52e0d6c88ffaaecf1",
+      "sourceSHA256": "d16c00d4f934160119234b02c93437333aac7a1d226e172304cc58b506c27d1f",
+      "localSHA256": "9b48ee6ebfe4eab470677f57a3bf4a039b9615d33f77c206c0ab28912da97082",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": false,
+      "repairCss": "",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Uber (Light)",
+      "originalHeadings": [
+        "Design System Inspired by Uber",
+        "Stark Duality",
+        "UberMove Type System",
+        "Pill-Shaped Actions",
+        "Content Cards",
+        "Input Components",
+        "8px Grid System",
+        "Corner Shapes",
+        "Shadow Hierarchy"
+      ]
+    },
+    {
+      "slug": "vibeui-uber",
+      "theme": "dark",
+      "path": "public/design-artifacts/vibeui-uber/dark.html",
+      "sourceURL": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/uber/preview-dark.html",
+      "upstreamGitBlobSHA": "e648599182ab0a0e3421a131c6cc5a170e47e057",
+      "sourceSHA256": "61a0528dbd1446fda73e7e33b973b80033a8bb9c9debd87f23dd20fec7c5cd7c",
+      "localSHA256": "f13334d55caa397996b7a32653ff7df83aa231a4787a87e827c3a7805bf5eda4",
+      "fontFamilies": [
+        "DM Sans"
+      ],
+      "removedProprietaryLocalFontFace": false,
+      "removedRemoteStylesheets": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&display=swap"
+      ],
+      "externalAnchorsPointingToLocalSourceNotice": [],
+      "anchorFixes": [],
+      "themeBadgeRepositioned": true,
+      "repairCss": "\n/* IAVSE positioning repair: preserve the original theme indicator without\n   covering the sticky navigation CTA at top:16px. No new control or script. */\n.iavse-theme-badge{position:absolute!important;top:80px!important;right:16px!important}\n",
+      "scripts": 0,
+      "addedInteractionControls": 0,
+      "originalTitlePreserved": "Design System Preview: Uber (Dark)",
+      "originalHeadings": [
+        "Design System Inspired by Uber",
+        "Stark Duality",
+        "UberMove Type System",
+        "Pill-Shaped Actions",
+        "Content Cards",
+        "Input Components",
+        "8px Grid System",
+        "Corner Shapes",
+        "Shadow Hierarchy"
+      ]
+    }
+  ]
+}

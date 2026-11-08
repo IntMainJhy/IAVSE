@@ -23,10 +23,10 @@ test('resource discovery remains private until owner review; collection and sche
    const response=await API.handle(request(null));assert.equal(response.status,200);assert.equal((await response.json()).total,0);assert.ok(I.readPublishedDesigns().some(item=>item.referenceSite?.url==='https://linear.app/'));
   });
   await t.test('catalog reference sites and entry aliases reject duplicate creation and draft revisions',async()=>{
-   const imported=I.readPublishedDesigns().find(item=>item.slug==='vibeui-linear-app');assert.ok(imported);
+   const imported=I.readPublishedDesigns().find(item=>item.slug==='voltagent-linear-app');assert.ok(imported);
    const aliases=[...new Set(['https://linear.app/?utm_source=collector#home',imported.source.url,imported.websiteUrl,imported.previewUrl,imported.collection.url,...imported.previewVariants.map(variant=>variant.url)])];
    const candidate=I.createDiscoveryDraft({kind:'design',draft:{...design,title:'Catalog alias fixture',source:{name:'Unique candidate',url:'https://example.org/catalog-alias-fixture'}}});
-   for(const url of aliases){
+   for(const url of aliases.filter(url=>url.startsWith('https://'))){
     assert.equal((await send({action:'create',kind:'design',draft:{...design,source:{name:'Existing catalog reference',url}}})).status,409,url);
     await assert.rejects(I.discoveryAction(owner,{action:'save',id:candidate.id,version:candidate.version,draft:{...candidate.draft,source:{name:'Existing catalog reference',url}}}),error=>error.status===409,url);
     assert.ok(I.existingDiscoverySources().has(I.canonicalSource(url)),url);

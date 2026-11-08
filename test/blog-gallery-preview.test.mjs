@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import {webcrypto} from 'node:crypto';
 import ts from 'typescript';
 import nextConfig from '../next.config.mjs';
+import {websiteArtifactHeaders} from '../src/lib/website-artifact-security.mjs';
 
 const compile=path=>ts.transpileModule(fs.readFileSync(new URL(path,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 
@@ -14,6 +15,7 @@ test('only explicit public homepage and UI design previews permit same-origin fr
  vm.runInNewContext(compile('../src/middleware.ts'),{exports,Headers,Map,Date,URL,Uint8Array,crypto:webcrypto,btoa,process:{env:{NODE_ENV:'production'}},require:name=>{
   if(name==='next/server')return{NextResponse};
   if(name.includes('app-access'))return{apiAllowed:()=>true,pageRedirect:()=>null,appSurface:()=> 'combined'};
+  if(name.includes('website-artifact-security'))return{websiteArtifactHeaders};
   if(name.includes('request-security'))return{clientIp:()=> 'gallery-test'};
   throw Error(name);
  }});
@@ -30,7 +32,7 @@ test('only explicit public homepage and UI design previews permit same-origin fr
  for(const path of ['/resources/designs/vibeui-claude/preview','/resources/designs/vibeui-claude/preview?variant=1']){
   const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
   const policy=response.headers.get('Content-Security-Policy');
-  assert.match(policy,/frame-src 'self' https:\/\/vibeui\.top(?:;|$)/);
+  assert.match(policy,/frame-src 'self' https:\/\/astro-paper\.pages\.dev https:\/\/fuwari\.vercel\.app https:\/\/nextdevtpl\.chaosyn\.com(?:;|$)/);
   assert.match(policy,/frame-ancestors 'self'/,'only the isolated preview can be framed by the catalog');
  }
  for(const path of ['/','/resources','/resources?type=designs','/resources?type=skills','/resources/designs/vibeui-claude','/blogs','/workspace/blog']){
@@ -38,6 +40,15 @@ test('only explicit public homepage and UI design previews permit same-origin fr
   const policy=response.headers.get('Content-Security-Policy');
   assert.match(policy,/frame-src 'self'(?:;|$)/);assert.doesNotMatch(policy,/vibeui|yuanfu8899/);
  }
+ for(const path of ['/template-sites/brutal-landing','/template-sites/editorial-profile-archive/work/sample']){
+  const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
+  const policy=response.headers.get('Content-Security-Policy');
+  assert.match(policy,/script-src 'self';/);assert.doesNotMatch(policy,/script-src[^;]*(unsafe-inline|unsafe-eval)/);
+  assert.match(policy,/frame-ancestors 'self'/);assert.equal(response.headers.get('X-Frame-Options'),'SAMEORIGIN');
+ }
+ const artifact=exports.middleware({nextUrl:new URL('https://example.test/design-artifacts/vibeui-claude/index.html'),headers:new Headers()});
+ assert.match(artifact.headers.get('Content-Security-Policy'),/sandbox allow-scripts;/);
+ assert.match(artifact.headers.get('Content-Security-Policy'),/connect-src 'none'/);
  const rules=await nextConfig.headers(),preview=rules.find(rule=>rule.source==='/blog/:handle');
  assert.deepEqual(preview.has,[{type:'query',key:'embed',value:'gallery'}]);
  const isolatedPreview=rules.find(rule=>rule.source==='/blog/:handle/preview');

@@ -86,30 +86,17 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 
 后台直接使用上述 React Bits 源码组件，补充触屏和减少动态效果适配。完整原许可已保留；本项目的原创部分许可不覆盖这些第三方部分。
 
-## Imported UI design references (2026-11-08)
+## Source website templates and design specifications (2026-11-08)
 
-- `src/lib/design-imports/stylekit.json` and `public/design-imports/stylekit/`
-  contain StyleKit documentation and preview SVG assets maintained in
-  AnxForever/StyleKit,
-  under the MIT license retained in `public/design-imports/stylekit/LICENSE.txt`.
-  Embedded Simple Icons glyphs retain the separately included CC0 notice.
-  Provenance and pinned source: [StyleKit import record](docs/design-sources-stylekit.md).
-- The 54 licensed brand-reference documents in `src/lib/design-imports/vibeui.json`
-  derive from VoltAgent's awesome-design-md at the verified historical revision
-  `f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1`, under the MIT license retained in
-  `docs/licenses/VoltAgent-awesome-design-md-MIT.txt` and every downloadable
-  specification. They are third-party generated UI studies based on extracted
-  brand references, not official brand templates or VibeUI originals. The other
-  58 entries are a factual directory with original summaries and external links
-  to yuanfu8899/uiuxskillProMax. Its README describes generated examples but
-  provides no clear open license; IAVSE does not embed or redistribute their
-  code, documents or screenshots.
-  Provenance and pinned source: [VibeUI import record](docs/design-sources-vibeui.md),
-  [file-level audit](docs/design-rights-vibeui-audit.md).
-- Brand-reference demos are independent interpretations, not official brand
-  templates. Brand names, trademarks, third-party fonts and referenced media
-  remain subject to their respective rights. The IAVSE license does not replace
-  any of the above licenses or confer additional rights to these materials.
+The previous generated/independently rewritten UI catalog and its source discovery cards have been removed. The current library contains 42 StyleKit-discovered templates (5 independently hosted projects, 37 in-repository templates) and 54 VoltAgent design-system previews. See the [source and license audit](docs/template-catalog-audit-2026-11-08.md).
+
+- `vendor/stylekit-templates/` preserves original StyleKit TSX, runtime adapters and per-file transformation records at commit `38058485388d237745ccf58c6750c2ec661a72f4`. The original code, associated style rules in `src/lib/template-library.json`, and compiled preview assets retain the [StyleKit MIT license](docs/licenses/StyleKit-MIT.txt), copyright AnxForever. They are not IAVSE-authored templates.
+- The 5 external project entries link their original repositories, authors, licenses and demos. They do not redistribute the projects' photographs, personal information or identifying marks. Anx portfolio retains Chánh Đại and Anx notices and its explicit trademark/likeness restrictions; AstroWind retains onWidget attribution.
+- `public/design-artifacts/vibeui-*/` contains 108 light/dark HTML design previews from VoltAgent at `f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1`. Each retains the [MIT notice](docs/licenses/VoltAgent-awesome-design-md-MIT.txt). These are design-system studies generated from brand guidelines, not official brand websites or complete applications. The 58 unlicensed UI/UX Pro Max examples are excluded entirely.
+- Fonts in `public/fonts/design-artifacts/` and `public/template-site-assets/fonts/` retain their separate OFL notices and exact upstream records. Lucide icons retain ISC and applicable Feather MIT notices in the vendor license directory. Screenshots in `public/template-covers/` capture these locally licensed previews and the separately audited AstroPaper/NextDevTpl original demos; they do not copy third-party personal photographs.
+- The factual taxonomy retained in `src/lib/design-taxonomy-seed.json` derives from StyleKit under MIT; only explicit template scenarios participate in the new directory.
+
+Third-party portions retain their original rights; IAVSE's PolyForm Noncommercial license does not override MIT, ISC or OFL permissions. Brand names identify references; their trademark rights remain separate.
 
 ## Imported Skill directory references (2026-11-08)
 
@@ -125,46 +112,3 @@ duplicate mappings and distinctions between license texts and declarations.
 Skills 目录仅保存用途摘要、事实元数据、固定版本来源及核查记录，不分发第三方
 Skill 正文或源码包。收录站不被视为原作者；每项上游许可分别适用。仅有许可声明、
 专用条款或许可未明确的条目不提供自动安装命令。
-
-## Website-reference implementations (2026-11-08)
-
-The earlier generated page-family catalog and sixteen generic brand-template
-examples have been removed. New website studies retain specific public reference
-pages and implement their own React/CSS, local demo data and interactions.
-Reference brand names identify the studied websites; they do not claim official
-product status or endorsement. Third-party reference catalogs and their notices
-remain intact. The standalone component library is counted separately from
-website implementations. See [scope and removal record](docs/design-studio-independent-implementation.md).
-
-## Website catalog taxonomy and independent templates (2026-11-08)
-
-`src/lib/design-taxonomy-seed.json` derives factual scenario, style-type and tag
-assignments from AnxForever/stylekit at
-`38058485388d237745ccf58c6750c2ec661a72f4`. Source URLs and a scenario-file digest
-are retained in that JSON. The upstream MIT notice is preserved at
-[public/design-imports/stylekit/LICENSE.txt](public/design-imports/stylekit/LICENSE.txt).
-This classification data retains its upstream license independently of IAVSE's
-license. VibeUI industry labels are retained as factual category names.
-
-`src/components/website-showcases/` contains IAVSE-authored implementations,
-with distinct demonstration brands, content and locally operating interactions.
-Reference websites identify design-language research; StyleKit discovery links
-identify where a style was found. Neither is credited as the author of IAVSE's
-new implementation. Existing attributed upstream records remain separate.
-
-### Fonts used by independent website examples
-
-Gloock, Kalnia, Bricolage Grotesque, Dela Gothic One, Unbounded and Manrope are
-served locally from their unmodified Google Fonts distributions. Each font's
-copyright and SIL Open Font License 1.1 are retained separately in
-[public/fonts/stylekit-references/](public/fonts/stylekit-references/), alongside
-[SOURCES.json](public/fonts/stylekit-references/SOURCES.json) with the exact
-font and upstream license URLs. The font families are scoped to the isolated
-website examples; they are not StyleKit's proprietary assets and no proprietary
-brand font was downloaded.
-
-The editorial example reuses two pre-existing IAVSE raster assets, `lake-walk`
-and `quiet-studio`. Their adjacent provenance sidecars identify the known
-repository origin, rather than asserting an unverified photographer or
-reconstructing a missing generation prompt. No image was downloaded from
-Kinfolk, VibeUI or StyleKit for these new pages.

@@ -1,8 +1,0 @@
-{
-  "prompt": "Original IAVSE interactive design study screenshot. Rendered at 1200×800 in Ego Browser from /resources/designs/iavse-bento-control/preview. Components: src/components/DesignPreview.tsx and src/app/design-preview.css. Reference: IAVSE 管理中心 /admin. This image is an original local demonstration using sample content, not a screenshot of the source website.",
-  "source": {
-    "name": "IAVSE 管理中心",
-    "url": "/admin"
-  },
-  "capturedAt": "2026-11-07"
-}

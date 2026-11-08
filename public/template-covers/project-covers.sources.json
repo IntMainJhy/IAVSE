@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "path": "/template-covers/project-astro-paper.webp",
+      "sha256": "47e21e35c9a53e59480975f142a28c496e2c0050d7845877fedd6951e633dfbc",
+      "source": "https://astro-paper.pages.dev",
+      "observedUrl": "https://astro-paper.pages.dev/",
+      "creator": "Sat Naing",
+      "repository": "https://github.com/satnaing/astro-paper",
+      "repositoryTreeSha": "6f61e2dc0e45bbcefc05f4055f293cd7f81bcb03",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/satnaing/astro-paper/blob/main/LICENSE",
+      "licensePath": "/template-covers/project-licenses/astro-paper-MIT.txt",
+      "capturedAt": "2026-11-08T07:07:50.442Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website captured in Ego Browser TaskSpace29 p4, uniformly resized 50%; no page content alteration.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "content": "Original MIT project text/CSS and bundled Tabler SVG icons; Google Sans Code rendered font.",
+        "scope": "Only this inspected first viewport. No permission claim for unshown imagery, portraits or other project assets."
+      },
+      "relatedLicenses": [
+        {
+          "path": "/template-covers/project-licenses/tabler-MIT.txt",
+          "source": "https://raw.githubusercontent.com/tabler/tabler-icons/main/LICENSE",
+          "sha256": "b740a1d46122672da62833e97f7e7c8a13fa85cbc7445b584b297cc00dde93db"
+        },
+        {
+          "path": "/template-covers/project-licenses/Google-Sans-Code-OFL.txt",
+          "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/googlesanscode/OFL.txt",
+          "sha256": "ff8f4fbc4f1a71c7d4c6481c48dc2b21c43f8dc15872536667fee45c15d20928"
+        }
+      ]
+    },
+    {
+      "path": "/template-covers/project-nextdevtpl.webp",
+      "sha256": "29a4d1c2dbd3fb6d5925ba3edb9ec950feff5037c748683cdc14f2b1f6531978",
+      "source": "https://nextdevtpl.chaosyn.com",
+      "observedUrl": "https://nextdevtpl.chaosyn.com/zh",
+      "creator": "yeton / evepupil",
+      "repository": "https://github.com/evepupil/NextDevTpl",
+      "repositoryTreeSha": "cf647277214bb708980f323706976c1bbe89f971",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/evepupil/NextDevTpl/blob/master/LICENSE",
+      "licensePath": "/template-covers/project-licenses/nextdevtpl-MIT.txt",
+      "capturedAt": "2026-11-08T07:07:50.495Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website captured in Ego Browser TaskSpace29 p4, uniformly resized 50%; no page content alteration.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "content": "Original MIT project text/CSS/SVG identity, Lucide icons and procedural canvas chart; Geist/system CJK rendered fonts. Cookie choice: necessary only.",
+        "scope": "Only this inspected first viewport. No permission claim for unshown imagery, portraits or other project assets."
+      },
+      "relatedLicenses": [
+        {
+          "path": "/template-covers/project-licenses/lucide-ISC.txt",
+          "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/LICENSE",
+          "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+        },
+        {
+          "path": "/template-covers/project-licenses/Geist-OFL.txt",
+          "source": "https://raw.githubusercontent.com/vercel/geist-font/main/OFL.txt",
+          "sha256": "021caa749f89fecd7c2e40a50499de29e84d2bc19251659b47d499c2fbfffc17"
+        }
+      ]
+    }
+  ]
+}

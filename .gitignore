@@ -20,6 +20,9 @@
 !/deploy/
 !/test/
 !/docs/
+!/vendor/
+/vendor/*
+!/vendor/stylekit-templates/
 
 # Dependencies, generated output, local state and credentials.
 **/node_modules/
@@ -72,3 +75,15 @@
 /public/images/**/*.prompt.txt
 /public/images/**/provenance.json
 /public/images/**/*.webp.json
+
+# Reproducible isolated template build products; keep sources and licensed fonts.
+/public/template-site-assets/entries/
+/public/template-site-assets/chunks/
+/public/template-site-assets/assets/
+/public/template-site-assets/template-base.css
+/public/template-site-assets/fonts.css
+/src/lib/template-sites-manifest.json
+/vendor/stylekit-templates/entries/
+/vendor/stylekit-templates/template-base.css
+/vendor/stylekit-templates/build-metafile.json
+/vendor/stylekit-templates/qa.json
