@@ -33,7 +33,7 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer .desi
 /* A compact glass shelf: the cover dissolves into a readable lower surface. */
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer{--catalog-glass:rgb(255 255 255 / .82);--catalog-glass-edge:rgb(255 255 255 / .95);--catalog-shadow:0 8px 24px -14px rgb(24 31 48 / .22),0 2px 5px rgb(24 31 48 / .03)}
 html:root[data-ui][data-color-mode=dark] body .design-directory.design-explorer{--catalog-glass:rgb(29 29 31 / .88);--catalog-glass-edge:rgb(255 255 255 / .14);--catalog-shadow:0 10px 28px -12px rgb(0 0 0 / .45),0 2px 6px rgb(0 0 0 / .15)}
-html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:start}
+html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:22px;align-items:stretch}
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-card{position:relative;isolation:isolate;border:0;border-radius:20px;overflow:hidden;background:var(--ds-panel);box-shadow:var(--catalog-shadow);transform:translateY(0);transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s;content-visibility:auto;contain-intrinsic-size:auto 390px}
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-card-preview{aspect-ratio:8/5;border:0;border-radius:0;background:var(--ds-panel)}
 .design-directory.design-explorer .design-card-preview .design-media{height:100%}
@@ -48,7 +48,7 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer .expl
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-card-copy>p{font-size:12px;line-height:1.7;min-height:0;max-height:41px;margin:0 0 10px;-webkit-line-clamp:2}
 .design-directory.design-explorer .explorer-stack{gap:4px 9px;font-size:10px;margin:0 0 8px;line-height:1.5}
 .design-directory.design-explorer .explorer-preview-note{font-size:10px;line-height:1.6;border:0;background:none;padding:0;margin:0 0 8px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
-html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-card-actions{margin:0;padding:0;border-top:1px solid color-mix(in srgb,var(--ds-line) 55%,transparent);min-height:40px}
+html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-card-actions{margin:auto 0 0;padding:0;border-top:1px solid color-mix(in srgb,var(--ds-line) 55%,transparent);min-height:40px}
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-card-actions>a{min-height:40px;font-size:11px;padding:0}
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer .design-preview-trigger span{font-size:10px;padding:6px 9px;min-height:32px;border-radius:999px;backdrop-filter:blur(14px) saturate(145%);background:var(--catalog-glass);box-shadow:inset 0 1px 0 var(--catalog-glass-edge),0 3px 12px rgb(0 0 0 / .06)}
 .design-directory.design-explorer .design-preview-trigger span{bottom:38px;right:10px}
