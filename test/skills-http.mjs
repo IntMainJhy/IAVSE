@@ -27,10 +27,10 @@ let toolLists=0;
 for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  const response=await fetch(base+'/skills?tool='+tool.id,{headers:{cookie:'site-locale='+locale}}),html=await response.text();
  assert.equal(response.status,200);
- const entries=[...html.matchAll(/<li class="skill-entry">([\s\S]*?)<div class="skill-entry-links">/g)];
+ const entries=[...html.matchAll(/<li class="[^"]*\bskill-entry\b[^"]*">([\s\S]*?)<div class="[^"]*\bskill-entry-links\b[^"]*">/g)];
  assert.equal(entries.length,filterSkills({tool:tool.id}).length,locale+': '+tool.id);
  for(const [,entry] of entries){
-  assert.match(entry,/<h3><a [^>]*href="\/skills\//,'each result retains its real detail destination');
+  assert.match(entry,/<h2><a [^>]*href="\/skills\//,'each result retains its real detail destination');
   assert.ok(entry.includes('class="skill-upstream"'),'source attribution stays visible');
   assert.ok(!entry.includes('/api/covers?'),'text-first directory does not request decorative cover images');
  }
@@ -38,7 +38,7 @@ for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
  assert.ok(html.includes('name="tool"'));
  assert.ok(!/<select[^>]*name="tool"/.test(html),'AI tools are visible links, not a collapsed select');
- const toolNav=html.split('<nav class="skill-filter-options" aria-label="'+translate(locale,'按 AI 工具筛选')+'">')[1]?.split('</nav>')[0];
+ const toolNav=[...html.matchAll(/<nav class="([^"]*)" aria-label="([^"]+)">([\s\S]*?)<\/nav>/g)].find(match=>match[1].includes('skill-filter-options')&&match[2]===translate(locale,'按 AI 工具筛选'))?.[3];
  assert.ok(toolNav,'visible AI tool choices');
  assert.equal((toolNav.match(/<a /g)||[]).length,skillAiTools.length+1,'all tool choices remain visible');
  assert.ok(html.includes('/skills?type=design&amp;tool='+tool.id),tool.id+': category link');
