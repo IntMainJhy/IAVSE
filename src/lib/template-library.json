@@ -49,7 +49,12 @@
         "blog"
       ],
       "author": "Sat Naing",
-      "upstreamDemoUrl": "https://astro-paper.pages.dev"
+      "upstreamDemoUrl": "https://astro-paper.pages.dev",
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "palette": [
       "#000000",
@@ -125,7 +130,11 @@
         "blog"
       ],
       "author": "saicaca",
-      "upstreamDemoUrl": "https://fuwari.vercel.app"
+      "upstreamDemoUrl": "https://fuwari.vercel.app",
+      "industries": [],
+      "visualStyles": [
+        "playful"
+      ]
     },
     "palette": [
       "#6366f1",
@@ -205,7 +214,12 @@
       ],
       "author": "arthelokyo; upstream onWidget",
       "upstreamDemoUrl": "https://astrowind.vercel.app",
-      "previewNote": "原项目演示地址当前返回 HTTP 402，暂时无法在线预览；源码与 README 仍可从 GitHub 获取。"
+      "previewNote": "原项目演示地址当前返回 HTTP 402，暂时无法在线预览；源码与 README 仍可从 GitHub 获取。",
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "gradient"
+      ]
     },
     "palette": [
       "#1e40af",
@@ -282,7 +296,12 @@
         "saas"
       ],
       "author": "yeton / evepupil",
-      "upstreamDemoUrl": "https://nextdevtpl.chaosyn.com"
+      "upstreamDemoUrl": "https://nextdevtpl.chaosyn.com",
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "technical"
+      ]
     },
     "palette": [],
     "typography": "",
@@ -355,7 +374,12 @@
         "admin"
       ],
       "author": "tabler",
-      "upstreamDemoUrl": "https://preview.tabler.io/"
+      "upstreamDemoUrl": "https://preview.tabler.io/",
+      "industries": [],
+      "visualStyles": [
+        "technical",
+        "minimal"
+      ]
     },
     "palette": [
       "#206bc4",
@@ -432,7 +456,12 @@
         "blog"
       ],
       "author": "imfing",
-      "upstreamDemoUrl": "https://imfing.github.io/hextra/"
+      "upstreamDemoUrl": "https://imfing.github.io/hextra/",
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "palette": [
       "#111111",
@@ -509,7 +538,12 @@
         "docs"
       ],
       "author": "just-the-docs",
-      "upstreamDemoUrl": "https://just-the-docs.github.io/just-the-docs/"
+      "upstreamDemoUrl": "https://just-the-docs.github.io/just-the-docs/",
+      "industries": [],
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "palette": [
       "#7253ed",
@@ -586,7 +620,11 @@
         "blog"
       ],
       "author": "StartBootstrap",
-      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-clean-blog/"
+      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-clean-blog/",
+      "industries": [],
+      "visualStyles": [
+        "editorial"
+      ]
     },
     "palette": [
       "#212529",
@@ -664,7 +702,12 @@
         "creative"
       ],
       "author": "StartBootstrap",
-      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-freelancer/"
+      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-freelancer/",
+      "industries": [],
+      "visualStyles": [
+        "bold",
+        "playful"
+      ]
     },
     "palette": [
       "#1abc9c",
@@ -740,7 +783,11 @@
         "marketing"
       ],
       "author": "themesberg",
-      "upstreamDemoUrl": "https://demo.themesberg.com/landwind/"
+      "upstreamDemoUrl": "https://demo.themesberg.com/landwind/",
+      "industries": [],
+      "visualStyles": [
+        "minimal"
+      ]
     },
     "palette": [
       "#7e3af2",
@@ -818,7 +865,12 @@
         "blog"
       ],
       "author": "themefisher",
-      "upstreamDemoUrl": "https://tf-bigspring-light-astro.vercel.app/"
+      "upstreamDemoUrl": "https://tf-bigspring-light-astro.vercel.app/",
+      "industries": [],
+      "visualStyles": [
+        "bold",
+        "editorial"
+      ]
     },
     "palette": [
       "#0aa8a7",
@@ -895,7 +947,12 @@
         "portfolio"
       ],
       "author": "StartBootstrap",
-      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-resume/"
+      "upstreamDemoUrl": "https://startbootstrap.github.io/startbootstrap-resume/",
+      "industries": [],
+      "visualStyles": [
+        "editorial",
+        "minimal"
+      ]
     },
     "palette": [
       "#bd5d38",
@@ -924,7 +981,7 @@
     "slug": "voltagent-claude",
     "title": "Claude · 设计规范",
     "summary": "用温暖纸色、衬线标题与陶土色强调阅读感，适合观察内容与对话产品的层次。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Claude",
       "品牌参考",
@@ -1012,10 +1069,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/claude",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1025,7 +1086,7 @@
     "slug": "voltagent-cohere",
     "title": "Cohere · 设计规范",
     "summary": "以明亮界面、清晰卡片与克制的紫色组织企业 AI 产品信息。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Cohere",
       "品牌参考",
@@ -1113,10 +1174,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/cohere",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1126,7 +1192,7 @@
     "slug": "voltagent-elevenlabs",
     "title": "ElevenLabs · 设计规范",
     "summary": "通过深浅对照与音频相关的视觉节奏，呈现语音产品与创作工具。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "ElevenLabs",
       "品牌参考",
@@ -1214,10 +1280,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/elevenlabs",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "monochrome"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1227,7 +1298,7 @@
     "slug": "voltagent-minimax",
     "title": "Minimax · 设计规范",
     "summary": "用强对比画面与鲜明强调色组织 AI 产品介绍，突出入口和示例内容。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Minimax",
       "品牌参考",
@@ -1315,10 +1386,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/minimax",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1328,7 +1404,7 @@
     "slug": "voltagent-mistral-ai",
     "title": "Mistral AI · 设计规范",
     "summary": "以醒目橙色、简洁文字与模块化内容展示模型平台的品牌语言。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Mistral AI",
       "品牌参考",
@@ -1416,10 +1492,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/mistral-ai",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1429,7 +1510,7 @@
     "slug": "voltagent-ollama",
     "title": "Ollama · 设计规范",
     "summary": "围绕本地模型使用场景，采用黑白配色和接近终端工具的简约表达。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Ollama",
       "品牌参考",
@@ -1517,10 +1598,16 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/ollama",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "monochrome",
+        "terminal"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1530,7 +1617,7 @@
     "slug": "voltagent-opencode-ai",
     "title": "OpenCode AI · 设计规范",
     "summary": "面向编程任务的暗色工具界面，以文字、代码和操作区建立优先级。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "OpenCode AI",
       "品牌参考",
@@ -1618,10 +1705,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/opencode-ai",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "monochrome",
+        "terminal"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1631,7 +1723,7 @@
     "slug": "voltagent-replicate",
     "title": "Replicate · 设计规范",
     "summary": "用留白、代码示例与 API 信息组织模型服务，突出开发者的下一步操作。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Replicate",
       "品牌参考",
@@ -1719,10 +1811,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/replicate",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1732,7 +1828,7 @@
     "slug": "voltagent-runwayml",
     "title": "RunwayML · 设计规范",
     "summary": "以大幅媒体和深色场景呈现创作工具，适合研究影像产品的展示节奏。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "RunwayML",
       "品牌参考",
@@ -1820,10 +1916,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/runwayml",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1833,7 +1934,7 @@
     "slug": "voltagent-together-ai",
     "title": "Together AI · 设计规范",
     "summary": "围绕模型基础设施组织技术信息，以克制色彩和清楚的模块边界辅助阅读。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "Together AI",
       "品牌参考",
@@ -1921,10 +2022,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/together-ai",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -1934,7 +2040,7 @@
     "slug": "voltagent-voltagent",
     "title": "VoltAgent · 设计规范",
     "summary": "深黑背景与绿色强调结合终端语汇，展示 AI Agent 开发工具的视觉方向。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "VoltAgent",
       "品牌参考",
@@ -2022,10 +2128,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/voltagent",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "terminal"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2035,7 +2145,7 @@
     "slug": "voltagent-x-ai",
     "title": "xAI · 设计规范",
     "summary": "以黑白反差、简洁排版和大面积空间塑造 AI 产品的品牌形象。",
-    "category": "AI",
+    "category": "AI 模型与应用",
     "tags": [
       "xAI",
       "品牌参考",
@@ -2121,10 +2231,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/x-ai",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "ai"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "monochrome"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2222,10 +2337,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/cursor",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "monochrome"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2323,10 +2443,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/expo",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2336,7 +2461,7 @@
     "slug": "voltagent-linear-app",
     "title": "Linear · 设计规范",
     "summary": "通过精细间距、安静边界与少量强调色建立工程团队工作区的秩序。",
-    "category": "开发工具",
+    "category": "协作与效率",
     "tags": [
       "Linear",
       "品牌参考",
@@ -2424,10 +2549,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/linear-app",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "productivity"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "gradient"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2525,10 +2655,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/lovable",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2626,10 +2761,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/mintlify",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2727,10 +2867,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/posthog",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2828,10 +2973,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/raycast",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -2929,10 +3079,16 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/resend",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "editorial",
+        "monochrome"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3030,10 +3186,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/sentry",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3043,7 +3204,7 @@
     "slug": "voltagent-supabase",
     "title": "Supabase · 设计规范",
     "summary": "用深色画布、绿色强调与代码内容展示面向开发者的后端服务。",
-    "category": "开发工具",
+    "category": "云服务与数据",
     "tags": [
       "Supabase",
       "品牌参考",
@@ -3131,10 +3292,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/supabase",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3144,7 +3310,7 @@
     "slug": "voltagent-superhuman",
     "title": "Superhuman · 设计规范",
     "summary": "围绕邮件处理和键盘操作呈现效率工具，强调紧凑而清楚的信息层级。",
-    "category": "开发工具",
+    "category": "协作与效率",
     "tags": [
       "Superhuman",
       "品牌参考",
@@ -3232,10 +3398,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/superhuman",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "productivity"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3245,7 +3416,7 @@
     "slug": "voltagent-vercel",
     "title": "Vercel · 设计规范",
     "summary": "以黑白、几何排版与代码示例表达前端部署平台的产品体系。",
-    "category": "开发工具",
+    "category": "云服务与数据",
     "tags": [
       "Vercel",
       "品牌参考",
@@ -3333,10 +3504,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/vercel",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "monochrome",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3434,10 +3610,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/warp",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "developer"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "terminal"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3447,7 +3628,7 @@
     "slug": "voltagent-zapier",
     "title": "Zapier · 设计规范",
     "summary": "通过温暖橙色、流程示例和清楚的步骤说明自动化产品。",
-    "category": "开发工具",
+    "category": "协作与效率",
     "tags": [
       "Zapier",
       "品牌参考",
@@ -3535,10 +3716,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/zapier",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "productivity"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3548,7 +3734,7 @@
     "slug": "voltagent-clickhouse",
     "title": "ClickHouse · 设计规范",
     "summary": "以黄色强调、技术文档和数据内容构成分析数据库的视觉语言。",
-    "category": "基建与云",
+    "category": "云服务与数据",
     "tags": [
       "ClickHouse",
       "品牌参考",
@@ -3636,10 +3822,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/clickhouse",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3649,7 +3840,7 @@
     "slug": "voltagent-composio",
     "title": "Composio · 设计规范",
     "summary": "围绕工具连接与集成场景组织界面，用不同色彩区分连接对象。",
-    "category": "基建与云",
+    "category": "云服务与数据",
     "tags": [
       "Composio",
       "品牌参考",
@@ -3737,10 +3928,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/composio",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3750,7 +3946,7 @@
     "slug": "voltagent-hashicorp",
     "title": "HashiCorp · 设计规范",
     "summary": "以严整排版、黑白对比与产品分区呈现基础设施工具体系。",
-    "category": "基建与云",
+    "category": "云服务与数据",
     "tags": [
       "HashiCorp",
       "品牌参考",
@@ -3838,10 +4034,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/hashicorp",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "monochrome",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3851,7 +4052,7 @@
     "slug": "voltagent-mongodb",
     "title": "MongoDB · 设计规范",
     "summary": "围绕数据开发组织产品与文档，通过绿色强调和内容层级引导浏览。",
-    "category": "基建与云",
+    "category": "云服务与数据",
     "tags": [
       "MongoDB",
       "品牌参考",
@@ -3939,10 +4140,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/mongodb",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -3952,7 +4157,7 @@
     "slug": "voltagent-sanity",
     "title": "Sanity · 设计规范",
     "summary": "用鲜明红色、编辑式排版和内容示例介绍可组合的内容平台。",
-    "category": "基建与云",
+    "category": "云服务与数据",
     "tags": [
       "Sanity",
       "品牌参考",
@@ -4040,10 +4245,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/sanity",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4053,7 +4263,7 @@
     "slug": "voltagent-stripe",
     "title": "Stripe · 设计规范",
     "summary": "结合渐变、精细排版和结构化示例，呈现支付与开发者产品。",
-    "category": "基建与云",
+    "category": "金融与支付",
     "tags": [
       "Stripe",
       "品牌参考",
@@ -4141,10 +4351,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/stripe",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "finance"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4154,7 +4368,7 @@
     "slug": "voltagent-airtable",
     "title": "Airtable · 设计规范",
     "summary": "以彩色标识和表格结构展示协作数据，适合观察复杂信息的友好呈现。",
-    "category": "设计生产",
+    "category": "协作与效率",
     "tags": [
       "Airtable",
       "品牌参考",
@@ -4242,10 +4456,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/airtable",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "productivity"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4255,7 +4473,7 @@
     "slug": "voltagent-cal",
     "title": "Cal.com · 设计规范",
     "summary": "以中性配色、留白和明确的时间信息组织预约与日程安排。",
-    "category": "设计生产",
+    "category": "协作与效率",
     "tags": [
       "Cal.com",
       "品牌参考",
@@ -4343,10 +4561,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/cal",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "productivity"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4356,7 +4578,7 @@
     "slug": "voltagent-clay",
     "title": "Clay · 设计规范",
     "summary": "围绕数据工作流与信息整理，用清楚的模块关系说明产品能力。",
-    "category": "设计生产",
+    "category": "企业与营销",
     "tags": [
       "Clay",
       "品牌参考",
@@ -4444,10 +4666,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/clay",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "business"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4457,7 +4684,7 @@
     "slug": "voltagent-figma",
     "title": "Figma · 设计规范",
     "summary": "通过明亮色块、协作画布与灵活排版展示设计生产工具。",
-    "category": "设计生产",
+    "category": "设计与创作",
     "tags": [
       "Figma",
       "品牌参考",
@@ -4545,10 +4772,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/figma",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "design"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4558,7 +4789,7 @@
     "slug": "voltagent-framer",
     "title": "Framer · 设计规范",
     "summary": "以丰富的页面示例与大幅作品视觉，呈现建站工具的创作能力。",
-    "category": "设计生产",
+    "category": "设计与创作",
     "tags": [
       "Framer",
       "品牌参考",
@@ -4646,10 +4877,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/framer",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "design"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4659,7 +4895,7 @@
     "slug": "voltagent-intercom",
     "title": "Intercom · 设计规范",
     "summary": "围绕客服对话和用户支持组织产品信息，强调消息与操作的关联。",
-    "category": "设计生产",
+    "category": "企业与营销",
     "tags": [
       "Intercom",
       "品牌参考",
@@ -4747,10 +4983,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/intercom",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "business"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4760,7 +5001,7 @@
     "slug": "voltagent-miro",
     "title": "Miro · 设计规范",
     "summary": "以便签、画布与协作内容说明团队工作方式，观察大空间中的信息组织。",
-    "category": "设计生产",
+    "category": "设计与创作",
     "tags": [
       "Miro",
       "品牌参考",
@@ -4848,10 +5089,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/miro",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "design"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4861,7 +5106,7 @@
     "slug": "voltagent-notion",
     "title": "Notion · 设计规范",
     "summary": "以接近文档的界面、克制色彩和清楚的区块层级承载知识与协作。",
-    "category": "设计生产",
+    "category": "协作与效率",
     "tags": [
       "Notion",
       "品牌参考",
@@ -4949,10 +5194,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/notion",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "productivity"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -4962,7 +5212,7 @@
     "slug": "voltagent-pinterest",
     "title": "Pinterest · 设计规范",
     "summary": "通过连续图像网格和简洁导航组织灵感，突出浏览与发现体验。",
-    "category": "设计生产",
+    "category": "文娱与社区",
     "tags": [
       "Pinterest",
       "品牌参考",
@@ -5050,10 +5300,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/pinterest",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "media"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5063,7 +5318,7 @@
     "slug": "voltagent-webflow",
     "title": "Webflow · 设计规范",
     "summary": "通过作品展示与编辑器示例介绍网页构建工具，连接视觉设计和发布。",
-    "category": "设计生产",
+    "category": "设计与创作",
     "tags": [
       "Webflow",
       "品牌参考",
@@ -5151,10 +5406,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/webflow",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "design"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5164,7 +5424,7 @@
     "slug": "voltagent-coinbase",
     "title": "Coinbase · 设计规范",
     "summary": "以明确的蓝色强调、结构化信息与清楚操作组织数字资产产品。",
-    "category": "金融加密",
+    "category": "金融与支付",
     "tags": [
       "Coinbase",
       "品牌参考",
@@ -5252,10 +5512,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/coinbase",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "finance"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5265,7 +5530,7 @@
     "slug": "voltagent-kraken",
     "title": "Kraken · 设计规范",
     "summary": "用鲜明品牌色和对比排版组织交易产品的功能与市场信息。",
-    "category": "金融加密",
+    "category": "金融与支付",
     "tags": [
       "Kraken",
       "品牌参考",
@@ -5353,10 +5618,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/kraken",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "finance"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "gradient",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5366,7 +5636,7 @@
     "slug": "voltagent-revolut",
     "title": "Revolut · 设计规范",
     "summary": "以大幅产品画面、紧凑卡片和明确入口展示金融应用的不同场景。",
-    "category": "金融加密",
+    "category": "金融与支付",
     "tags": [
       "Revolut",
       "品牌参考",
@@ -5454,10 +5724,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/revolut",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "finance"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "gradient"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5467,7 +5742,7 @@
     "slug": "voltagent-wise",
     "title": "Wise · 设计规范",
     "summary": "围绕转账与货币信息，用清晰数字、绿色强调和直接操作降低理解成本。",
-    "category": "金融加密",
+    "category": "金融与支付",
     "tags": [
       "Wise",
       "品牌参考",
@@ -5555,10 +5830,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/wise",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "finance"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5568,7 +5848,7 @@
     "slug": "voltagent-airbnb",
     "title": "Airbnb · 设计规范",
     "summary": "以真实场景图像、圆润控件与清楚的搜索路径组织住宿探索。",
-    "category": "企业消费",
+    "category": "旅行与出行",
     "tags": [
       "Airbnb",
       "品牌参考",
@@ -5656,10 +5936,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/airbnb",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "travel"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal",
+        "editorial"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5669,7 +5954,7 @@
     "slug": "voltagent-apple",
     "title": "Apple · 设计规范",
     "summary": "通过大幅产品视觉、充足留白与分段叙事展示产品细节。",
-    "category": "企业消费",
+    "category": "科技硬件",
     "tags": [
       "Apple",
       "品牌参考",
@@ -5757,10 +6042,14 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/apple",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "hardware"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "minimal"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5770,7 +6059,7 @@
     "slug": "voltagent-bmw",
     "title": "BMW · 设计规范",
     "summary": "以影像、精细排版和产品配置入口，组织汽车品牌与车型展示。",
-    "category": "企业消费",
+    "category": "汽车与航天",
     "tags": [
       "BMW",
       "品牌参考",
@@ -5858,10 +6147,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/bmw",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "automotive-aerospace"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5871,7 +6165,7 @@
     "slug": "voltagent-ibm",
     "title": "IBM · 设计规范",
     "summary": "通过严谨网格、技术内容和系统化导航表达企业产品与服务。",
-    "category": "企业消费",
+    "category": "云服务与数据",
     "tags": [
       "IBM",
       "品牌参考",
@@ -5959,10 +6253,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/ibm",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "cloud"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "editorial",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -5972,7 +6271,7 @@
     "slug": "voltagent-nvidia",
     "title": "NVIDIA · 设计规范",
     "summary": "以黑绿品牌色、硬件图像和技术信息建立计算产品的展示层级。",
-    "category": "企业消费",
+    "category": "科技硬件",
     "tags": [
       "NVIDIA",
       "品牌参考",
@@ -6060,10 +6359,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/nvidia",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "hardware"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "technical"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -6073,7 +6377,7 @@
     "slug": "voltagent-spacex",
     "title": "SpaceX · 设计规范",
     "summary": "以沉浸影像、强对比文字和纵向叙事呈现航天项目。",
-    "category": "企业消费",
+    "category": "汽车与航天",
     "tags": [
       "SpaceX",
       "品牌参考",
@@ -6158,10 +6462,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/spacex",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "automotive-aerospace"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "monochrome",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -6171,7 +6480,7 @@
     "slug": "voltagent-spotify",
     "title": "Spotify · 设计规范",
     "summary": "以高辨识度色彩、专辑封面与内容分组组织音乐发现。",
-    "category": "企业消费",
+    "category": "文娱与社区",
     "tags": [
       "Spotify",
       "品牌参考",
@@ -6259,10 +6568,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/spotify",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "media"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "bold",
+        "playful"
+      ]
     },
     "layout": "",
     "motion": ""
@@ -6272,7 +6586,7 @@
     "slug": "voltagent-uber",
     "title": "Uber · 设计规范",
     "summary": "通过黑白对照、服务场景与明确表单入口组织出行产品。",
-    "category": "企业消费",
+    "category": "旅行与出行",
     "tags": [
       "Uber",
       "品牌参考",
@@ -6360,10 +6674,15 @@
       "repository": "https://github.com/VoltAgent/awesome-design-md",
       "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
       "sourcePath": "design-md/uber",
-      "scenarios": [
-        "docs"
+      "scenarios": [],
+      "author": "VoltAgent",
+      "industries": [
+        "travel"
       ],
-      "author": "VoltAgent"
+      "visualStyles": [
+        "monochrome",
+        "bold"
+      ]
     },
     "layout": "",
     "motion": ""

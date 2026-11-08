@@ -1,0 +1,3345 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-08",
+  "collection": {
+    "name": "VibeUI",
+    "url": "https://vibeui.top/?lang=zh",
+    "repository": "https://github.com/Charlo-O/awesome-design-md",
+    "revision": "fa4175f8d5c06683d70d05a4544e466e77fa2544",
+    "readmeUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/README.md"
+  },
+  "summary": {
+    "indexed": 112,
+    "upstreamCollected": 112,
+    "licenseVerified": 54,
+    "licenseUnconfirmed": 58,
+    "included": 54,
+    "newlyAdded": 0,
+    "excluded": 58,
+    "matchedDesignFiles": 54,
+    "matchedPreviewFiles": 166,
+    "htmlPermissionReviews": 58
+  },
+  "scope": "112 UI design entries only. Existing licensed copies are retained without duplication. No unlicensed HTML, screenshot, generated prose or prompt is republished; evidence records factual names, paths, URLs and Git blob hashes. This verifies source and license declarations, not a guarantee of all third-party rights.",
+  "upstream": [
+    {
+      "repository": "VoltAgent/awesome-design-md",
+      "revision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "treeComplete": true,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE"
+    },
+    {
+      "repository": "yuanfu8899/uiuxskillProMax",
+      "revision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "treeComplete": true,
+      "license": null,
+      "licenseFiles": []
+    }
+  ],
+  "entries": [
+    {
+      "id": "airbnb",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-airbnb",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/airbnb/DESIGN.md",
+          "blobSha": "a33b96aaa733813c0120791fce4a9c9f169a2332",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airbnb/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/airbnb/DESIGN.md"
+        },
+        {
+          "path": "design-md/airbnb/preview.html",
+          "blobSha": "c957683e74e95dff4344303feae9bf860c987a92",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airbnb/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/airbnb/preview.html"
+        },
+        {
+          "path": "design-md/airbnb/preview-dark.html",
+          "blobSha": "0c77230a6432c271a1bdb37e45c1755a8d07d9a1",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airbnb/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/airbnb/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "airtable",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-airtable",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/airtable/DESIGN.md",
+          "blobSha": "a5146aee9475b486f1aa06ff004ee1c1739448ab",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airtable/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/airtable/DESIGN.md"
+        },
+        {
+          "path": "design-md/airtable/preview.html",
+          "blobSha": "4ab55c02a5bc68e74a7faeb62aeb4065f49c7a5d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airtable/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/airtable/preview.html"
+        },
+        {
+          "path": "design-md/airtable/preview-dark.html",
+          "blobSha": "dfcbb7658d186c67fda63ea91ef7d0d249457ccd",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/airtable/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/airtable/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "apple",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-apple",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/apple/DESIGN.md",
+          "blobSha": "e596b150e7443e12d7a77ac0e47a2950fb56b46d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/apple/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/apple/DESIGN.md"
+        },
+        {
+          "path": "design-md/apple/preview.html",
+          "blobSha": "a2396fc5515e759d1a9ff7b62c7e5ba390a02e39",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/apple/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/apple/preview.html"
+        },
+        {
+          "path": "design-md/apple/preview-dark.html",
+          "blobSha": "d49504824fd18dc03e909623356cb38e1e07d68c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/apple/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/apple/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "bmw",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-bmw",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/bmw/DESIGN.md",
+          "blobSha": "2b7d8123a47480d1a4e74dacea6a24150c45279d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/bmw/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/bmw/DESIGN.md"
+        },
+        {
+          "path": "design-md/bmw/preview.html",
+          "blobSha": "ed60e92efef011d9df9d2de358640ca61a77e05e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/bmw/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/bmw/preview.html"
+        },
+        {
+          "path": "design-md/bmw/preview-dark.html",
+          "blobSha": "a416d42d10d2199956b1005b14acc94f243f27c3",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/bmw/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/bmw/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "cal",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-cal",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/cal/DESIGN.md",
+          "blobSha": "4be11d2777a35f6044cf0e74c2ae2b47081046a2",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cal/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cal/DESIGN.md"
+        },
+        {
+          "path": "design-md/cal/preview.html",
+          "blobSha": "01d23a3968e1f824e21b53159ab63039f79df96a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cal/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cal/preview.html"
+        },
+        {
+          "path": "design-md/cal/preview-dark.html",
+          "blobSha": "a0d931ed2b72912c3373d113521e1bc1bf942f3a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cal/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cal/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "claude",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-claude",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/claude/DESIGN.md",
+          "blobSha": "a12d89dcd1d7c7dc4b5392e00619853022c55673",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/claude/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/claude/DESIGN.md"
+        },
+        {
+          "path": "design-md/claude/preview.html",
+          "blobSha": "f8323cf3958f45c8da5003bfbb05787ecf542480",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/claude/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/claude/preview.html"
+        },
+        {
+          "path": "design-md/claude/preview-dark.html",
+          "blobSha": "13d7c7eb2cfcb87f06073eed6b05ae778979d0ed",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/claude/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/claude/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "clay",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-clay",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/clay/DESIGN.md",
+          "blobSha": "152711cba9fc75b96bff9957eba889eb2cecc7ec",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clay/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/clay/DESIGN.md"
+        },
+        {
+          "path": "design-md/clay/preview.html",
+          "blobSha": "10cb0dac7554f3e3de838e17552c483b78da0d85",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clay/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/clay/preview.html"
+        },
+        {
+          "path": "design-md/clay/preview-dark.html",
+          "blobSha": "d197b91601d79fe67df108ed0a067538e2548c1e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clay/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/clay/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "clickhouse",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-clickhouse",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/clickhouse/DESIGN.md",
+          "blobSha": "b044df4ac613ea678361eb5f9af70d384854c14c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clickhouse/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/clickhouse/DESIGN.md"
+        },
+        {
+          "path": "design-md/clickhouse/preview.html",
+          "blobSha": "fb278e9a6784711fe87dc56543ea0905cac1de84",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clickhouse/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/clickhouse/preview.html"
+        },
+        {
+          "path": "design-md/clickhouse/preview-dark.html",
+          "blobSha": "a208341faaec78549a720a89b08e89ca46971838",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/clickhouse/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/clickhouse/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "cohere",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-cohere",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/cohere/DESIGN.md",
+          "blobSha": "7c0c604f5074f2054c62645e04b890d17f5d7e06",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cohere/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cohere/DESIGN.md"
+        },
+        {
+          "path": "design-md/cohere/preview.html",
+          "blobSha": "e8849b7eba25159040a7555e078ad40031a72080",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cohere/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cohere/preview.html"
+        },
+        {
+          "path": "design-md/cohere/preview-dark.html",
+          "blobSha": "f38b326a5445de9c31f22058b6867ad72738b9e5",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cohere/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cohere/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "coinbase",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-coinbase",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/coinbase/DESIGN.md",
+          "blobSha": "f39884c5f950ab50dc3f3c15471dffe399002faf",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/coinbase/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/coinbase/DESIGN.md"
+        },
+        {
+          "path": "design-md/coinbase/preview.html",
+          "blobSha": "6c76754d29f910f9fbed89bc03180ddd6ae59730",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/coinbase/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/coinbase/preview.html"
+        },
+        {
+          "path": "design-md/coinbase/preview-dark.html",
+          "blobSha": "313295bba149023397188d647b32914979b87174",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/coinbase/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/coinbase/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "composio",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-composio",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/composio/DESIGN.md",
+          "blobSha": "64d80983f5d8707a95848dff71623b45658a1c61",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/composio/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/composio/DESIGN.md"
+        },
+        {
+          "path": "design-md/composio/preview.html",
+          "blobSha": "d3c147604449467d323090447d64e9fcba7e3a7b",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/composio/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/composio/preview.html"
+        },
+        {
+          "path": "design-md/composio/preview-dark.html",
+          "blobSha": "95bc781240e4f384b2c65afd252a46b29d5fa8ab",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/composio/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/composio/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-cursor",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/cursor/DESIGN.md",
+          "blobSha": "81a38a20faa690143b49719c2ef1a09f93bbac6a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cursor/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cursor/DESIGN.md"
+        },
+        {
+          "path": "design-md/cursor/preview.html",
+          "blobSha": "668e40f0382957aa49003c9c0e0a0aaae97d79ef",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cursor/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cursor/preview.html"
+        },
+        {
+          "path": "design-md/cursor/preview-dark.html",
+          "blobSha": "4af6960ab65b24a6a933666e1092e1885a1743af",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/cursor/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/cursor/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "elevenlabs",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-elevenlabs",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/elevenlabs/DESIGN.md",
+          "blobSha": "2cb6b3f19fbc5aa3293d454b9bb2c9adffb0e5e2",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/elevenlabs/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/elevenlabs/DESIGN.md"
+        },
+        {
+          "path": "design-md/elevenlabs/preview.html",
+          "blobSha": "4fb1c1af703d53c8dc697d3ace910aa42e49a38d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/elevenlabs/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/elevenlabs/preview.html"
+        },
+        {
+          "path": "design-md/elevenlabs/preview-dark.html",
+          "blobSha": "646c697137babcf60de7f44c45bafc1ae2d82a50",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/elevenlabs/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/elevenlabs/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "expo",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-expo",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/expo/DESIGN.md",
+          "blobSha": "200cbd3e50914ce80332753d2db06e3219bfb54d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/expo/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/expo/DESIGN.md"
+        },
+        {
+          "path": "design-md/expo/preview.html",
+          "blobSha": "7414b9207cdccd26f091438832b398327294ca53",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/expo/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/expo/preview.html"
+        },
+        {
+          "path": "design-md/expo/preview-dark.html",
+          "blobSha": "fab9605a9958ee334f8b5a89b8d873f2148b0112",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/expo/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/expo/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "figma",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-figma",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/figma/DESIGN.md",
+          "blobSha": "377dc2e0f6dcaf168fda4e4130b865eaffba832e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/figma/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/figma/DESIGN.md"
+        },
+        {
+          "path": "design-md/figma/preview.html",
+          "blobSha": "097cdbc74230394d5777a85123f8a34d8fc6fd1a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/figma/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/figma/preview.html"
+        },
+        {
+          "path": "design-md/figma/preview-dark.html",
+          "blobSha": "18d93dfd1f371e0d4a8d8c426cc36d9ab88e3e3c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/figma/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/figma/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "framer",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-framer",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/framer/DESIGN.md",
+          "blobSha": "9ca27d27a6b3858d585c2fd15035197011cb7196",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/framer/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/framer/DESIGN.md"
+        },
+        {
+          "path": "design-md/framer/preview.html",
+          "blobSha": "945df78c6dd11fa98f6ce312b475a266244afbd8",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/framer/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/framer/preview.html"
+        },
+        {
+          "path": "design-md/framer/preview-dark.html",
+          "blobSha": "d20da6225edcaee481921eca605ac3830dd37c61",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/framer/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/framer/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "hashicorp",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-hashicorp",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/hashicorp/DESIGN.md",
+          "blobSha": "393f27d84f6c82695410907c7efee144dfb8f97d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/hashicorp/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/hashicorp/DESIGN.md"
+        },
+        {
+          "path": "design-md/hashicorp/preview.html",
+          "blobSha": "ae2023f8fce52059c4c87cb143519004a85f0903",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/hashicorp/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/hashicorp/preview.html"
+        },
+        {
+          "path": "design-md/hashicorp/preview-dark.html",
+          "blobSha": "788636a6d97fe13a24d26352ff5f94eb8f8b54d6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/hashicorp/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/hashicorp/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "ibm",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-ibm",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/ibm/DESIGN.md",
+          "blobSha": "6669a34c0495df6153b23f79941d1677181f0371",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ibm/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/ibm/DESIGN.md"
+        },
+        {
+          "path": "design-md/ibm/preview.html",
+          "blobSha": "2c1f31e4323ef5e01d9a737534d537a61609d998",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ibm/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/ibm/preview.html"
+        },
+        {
+          "path": "design-md/ibm/preview-dark.html",
+          "blobSha": "8578f6ec299f2ba7f372f7f71aede8884525766b",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ibm/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/ibm/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "intercom",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-intercom",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/intercom/DESIGN.md",
+          "blobSha": "ca5b8db226c7b331032baf5e2f47d066b32e2d63",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/intercom/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/intercom/DESIGN.md"
+        },
+        {
+          "path": "design-md/intercom/preview.html",
+          "blobSha": "0972987d2bdb717538ec2fe289f2dc0c55eeb9a1",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/intercom/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/intercom/preview.html"
+        },
+        {
+          "path": "design-md/intercom/preview-dark.html",
+          "blobSha": "6f685da1243968c5d477be00f25519df5b9884ed",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/intercom/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/intercom/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "kraken",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-kraken",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/kraken/DESIGN.md",
+          "blobSha": "63461e015fe17173ca9194b08b3fa8c8b0b28ab4",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/kraken/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/kraken/DESIGN.md"
+        },
+        {
+          "path": "design-md/kraken/preview.html",
+          "blobSha": "410e68268ebc49d7944b96200488c551dab96125",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/kraken/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/kraken/preview.html"
+        },
+        {
+          "path": "design-md/kraken/preview-dark.html",
+          "blobSha": "3a0165b7154bfe2fe1600afb57b46a32367f4bae",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/kraken/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/kraken/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "linear.app",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-linear-app",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/linear.app/DESIGN.md",
+          "blobSha": "01509d6661d30f7a656611da4d712f6522aa076a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/linear.app/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/linear.app/DESIGN.md"
+        },
+        {
+          "path": "design-md/linear.app/preview.html",
+          "blobSha": "eb718468811a29103a9fd4239a7320bd519e8c0e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/linear.app/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/linear.app/preview.html"
+        },
+        {
+          "path": "design-md/linear.app/preview-dark.html",
+          "blobSha": "f55e75a8c4884a7abfa7d7bbd78776a9d76796a4",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/linear.app/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/linear.app/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "lovable",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-lovable",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/lovable/DESIGN.md",
+          "blobSha": "6b0df43ca0016b0160c8440143a9ddcdbdf873f6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/lovable/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/lovable/DESIGN.md"
+        },
+        {
+          "path": "design-md/lovable/preview.html",
+          "blobSha": "a99a30768428ec5714b929c00693d589b6043b5c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/lovable/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/lovable/preview.html"
+        },
+        {
+          "path": "design-md/lovable/preview-dark.html",
+          "blobSha": "794ef3b4a4223492320c25e3bb9cc597495f353f",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/lovable/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/lovable/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "minimax",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-minimax",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/minimax/DESIGN.md",
+          "blobSha": "6a67b53c902757740ad5907de18610c88057ece9",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/minimax/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/minimax/DESIGN.md"
+        },
+        {
+          "path": "design-md/minimax/preview.html",
+          "blobSha": "7a3993b049b019d8a153d6a025d236d88525bdd6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/minimax/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/minimax/preview.html"
+        },
+        {
+          "path": "design-md/minimax/preview-dark.html",
+          "blobSha": "f397a2ff6d11d7e782f0bf334aadc2f22a2b85af",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/minimax/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/minimax/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "mintlify",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-mintlify",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/mintlify/DESIGN.md",
+          "blobSha": "c85cfde4dfbfb52ba7909f0b21f04a04028f53a2",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mintlify/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mintlify/DESIGN.md"
+        },
+        {
+          "path": "design-md/mintlify/preview.html",
+          "blobSha": "3eba850c1c4a665d785cc8bcabb6f355f03fbb42",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mintlify/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mintlify/preview.html"
+        },
+        {
+          "path": "design-md/mintlify/preview-dark.html",
+          "blobSha": "5daa1d54a4159a28a52bb0d4dd7f23d5a6bbb1cb",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mintlify/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mintlify/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "miro",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-miro",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/miro/DESIGN.md",
+          "blobSha": "8edab3bd5d3af13759d86061f6684f33e88731aa",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/miro/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/miro/DESIGN.md"
+        },
+        {
+          "path": "design-md/miro/preview.html",
+          "blobSha": "c8827068f788d7b26bcaaaf4dea9d6b1e33186d8",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/miro/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/miro/preview.html"
+        },
+        {
+          "path": "design-md/miro/preview-dark.html",
+          "blobSha": "93b0adb0785c970e9c22bd7b6d99a01a4c90a8bb",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/miro/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/miro/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "mistral.ai",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-mistral-ai",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/mistral.ai/DESIGN.md",
+          "blobSha": "fa60efffc9a770a21939259b83221c3dc8907a1d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mistral.ai/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mistral.ai/DESIGN.md"
+        },
+        {
+          "path": "design-md/mistral.ai/preview.html",
+          "blobSha": "a6d6f8e578a7ef78780d453cc66c270bfe89a206",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mistral.ai/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mistral.ai/preview.html"
+        },
+        {
+          "path": "design-md/mistral.ai/preview-dark.html",
+          "blobSha": "49d78d3cd9645781e3f4c497dc121a180428f7c4",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mistral.ai/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mistral.ai/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "mongodb",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-mongodb",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/mongodb/DESIGN.md",
+          "blobSha": "7ddf2076c4e175b00f3ddb0874516ffe5c8a11f3",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mongodb/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mongodb/DESIGN.md"
+        },
+        {
+          "path": "design-md/mongodb/preview.html",
+          "blobSha": "bdad998413fe7f83ba37532e33acc24f36a77e0c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mongodb/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mongodb/preview.html"
+        },
+        {
+          "path": "design-md/mongodb/preview-dark.html",
+          "blobSha": "8ae27e7f81aa2ee8cc6f0cb202c1ea70b558b303",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/mongodb/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/mongodb/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "notion",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-notion",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/notion/DESIGN.md",
+          "blobSha": "65c706609942fb6ee8344db8f30f99928df7bcac",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/notion/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/notion/DESIGN.md"
+        },
+        {
+          "path": "design-md/notion/preview.html",
+          "blobSha": "23b784a906d098769a9684f4d927b40ffd63220f",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/notion/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/notion/preview.html"
+        },
+        {
+          "path": "design-md/notion/preview-dark.html",
+          "blobSha": "d8a5851e83cb11649b29820c24be39d10dd1ad72",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/notion/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/notion/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "nvidia",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-nvidia",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/nvidia/DESIGN.md",
+          "blobSha": "8b60922c0a82aeb5837aa2309b452dd4c11af0ff",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/nvidia/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/nvidia/DESIGN.md"
+        },
+        {
+          "path": "design-md/nvidia/preview.html",
+          "blobSha": "21416fc917f71c35499d069143bc8ac66267afa4",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/nvidia/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/nvidia/preview.html"
+        },
+        {
+          "path": "design-md/nvidia/preview-dark.html",
+          "blobSha": "44a8d0e940703334367bf763164a3e0411dee001",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/nvidia/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/nvidia/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "ollama",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-ollama",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/ollama/DESIGN.md",
+          "blobSha": "e36fd8eb53e8028ad38ca4b53e44d77d23930d4b",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ollama/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/ollama/DESIGN.md"
+        },
+        {
+          "path": "design-md/ollama/preview.html",
+          "blobSha": "cdd3e3e689598e47f099a62a25d69daff1ed8da3",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ollama/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/ollama/preview.html"
+        },
+        {
+          "path": "design-md/ollama/preview-dark.html",
+          "blobSha": "d476484c8f52bf4421033ec073ed7f8f6de272fe",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/ollama/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/ollama/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "opencode.ai",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-opencode-ai",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/opencode.ai/DESIGN.md",
+          "blobSha": "d92ab24480fa789066850f4be2d4050d8f4a6cb0",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/opencode.ai/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/opencode.ai/DESIGN.md"
+        },
+        {
+          "path": "design-md/opencode.ai/preview.html",
+          "blobSha": "ceeaf0111994667d65cff6b168924969cb3caf0f",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/opencode.ai/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/opencode.ai/preview.html"
+        },
+        {
+          "path": "design-md/opencode.ai/preview-dark.html",
+          "blobSha": "c123364b46038a164f70540d6c612d3abc141d3e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/opencode.ai/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/opencode.ai/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "pinterest",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-pinterest",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/pinterest/DESIGN.md",
+          "blobSha": "5d9119bd5e0ee08ab76b37c7ca119aa2e4fd96b6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/pinterest/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/pinterest/DESIGN.md"
+        },
+        {
+          "path": "design-md/pinterest/preview.html",
+          "blobSha": "5a6da6d51dab40c453071b3a6948625dbf8e876d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/pinterest/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/pinterest/preview.html"
+        },
+        {
+          "path": "design-md/pinterest/preview-dark.html",
+          "blobSha": "c37b01ff3edfa7715a5add47b270daaa64464510",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/pinterest/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/pinterest/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "posthog",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-posthog",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/posthog/DESIGN.md",
+          "blobSha": "701c894238b489e60dfdf9c23825c1cf15895ede",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/posthog/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/posthog/DESIGN.md"
+        },
+        {
+          "path": "design-md/posthog/preview.html",
+          "blobSha": "c165d8c9742aa9cc7e6844b3ed7d14b9053c4677",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/posthog/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/posthog/preview.html"
+        },
+        {
+          "path": "design-md/posthog/preview-dark.html",
+          "blobSha": "935c167f22ceb6dc2f3249f821acbe7cdf9093da",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/posthog/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/posthog/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "raycast",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-raycast",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/raycast/DESIGN.md",
+          "blobSha": "ca6961a889f417482d9cc93bb90ee45c3f46ac3d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/raycast/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/raycast/DESIGN.md"
+        },
+        {
+          "path": "design-md/raycast/preview.html",
+          "blobSha": "f921fea1e13864b457969d681940f0c860bc0c4c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/raycast/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/raycast/preview.html"
+        },
+        {
+          "path": "design-md/raycast/preview-dark.html",
+          "blobSha": "94a05679f2266a87b9ae613e77392b5951ab41c4",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/raycast/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/raycast/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "replicate",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-replicate",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/replicate/DESIGN.md",
+          "blobSha": "801a6c801e54ce07f9ec8232b0122572cb61dccd",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/replicate/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/replicate/DESIGN.md"
+        },
+        {
+          "path": "design-md/replicate/preview.html",
+          "blobSha": "6ece5247aa67fb29f5e0dda4052fea048c0cd8b5",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/replicate/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/replicate/preview.html"
+        },
+        {
+          "path": "design-md/replicate/preview-dark.html",
+          "blobSha": "46a1b043282447cbcd72c85f6660ff19a1d6f8b1",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/replicate/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/replicate/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "resend",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-resend",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/resend/DESIGN.md",
+          "blobSha": "1baf579182dcaf57e7cb757167050daa01495c42",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/resend/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/resend/DESIGN.md"
+        },
+        {
+          "path": "design-md/resend/preview.html",
+          "blobSha": "9c00289abf3e93d219c590aec8d9b87086536674",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/resend/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/resend/preview.html"
+        },
+        {
+          "path": "design-md/resend/preview-dark.html",
+          "blobSha": "192d86e8e36da653f5eef00406277fa2b39f7124",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/resend/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/resend/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "revolut",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-revolut",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/revolut/DESIGN.md",
+          "blobSha": "cd14ae062b2f15051032ffd91b4f611e5bd5f7e6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/revolut/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/revolut/DESIGN.md"
+        },
+        {
+          "path": "design-md/revolut/preview.html",
+          "blobSha": "d0f62b7abf68bceb436ffdba3ddf14d5d7bc868a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/revolut/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/revolut/preview.html"
+        },
+        {
+          "path": "design-md/revolut/preview-dark.html",
+          "blobSha": "3ea9bea75241dc9f71d66579ffb3db108511ebfe",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/revolut/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/revolut/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "runwayml",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-runwayml",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/runwayml/DESIGN.md",
+          "blobSha": "838e226ac1e32daab42940f1fb92fa137768d66e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/runwayml/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/runwayml/DESIGN.md"
+        },
+        {
+          "path": "design-md/runwayml/preview.html",
+          "blobSha": "002aaa1c3d1ed657ff2da22dab47d36e35cf3f0a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/runwayml/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/runwayml/preview.html"
+        },
+        {
+          "path": "design-md/runwayml/preview-dark.html",
+          "blobSha": "003b0384347a6918a6c71f2c72789ec3e4c7bdbf",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/runwayml/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/runwayml/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "sanity",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-sanity",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/sanity/DESIGN.md",
+          "blobSha": "e5678c9da57615a924deb0bee2c7bd265eaa184e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sanity/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/sanity/DESIGN.md"
+        },
+        {
+          "path": "design-md/sanity/preview.html",
+          "blobSha": "80cd48adb7720ead13ed76aebc43997145c6aae6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sanity/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/sanity/preview.html"
+        },
+        {
+          "path": "design-md/sanity/preview-dark.html",
+          "blobSha": "64c5977d3b399f26df0bd06ddb44e1637b3c5f56",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sanity/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/sanity/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "sentry",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-sentry",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/sentry/DESIGN.md",
+          "blobSha": "ab84831cedaf369b8e0d45eb53153e0208c059bf",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sentry/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/sentry/DESIGN.md"
+        },
+        {
+          "path": "design-md/sentry/preview.html",
+          "blobSha": "baac639573812618d2f41724915889f8e809b64d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sentry/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/sentry/preview.html"
+        },
+        {
+          "path": "design-md/sentry/preview-dark.html",
+          "blobSha": "6767526d17f7708ea560ca5d4fcd4048f5a5b07a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/sentry/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/sentry/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "spacex",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-spacex",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/spacex/DESIGN.md",
+          "blobSha": "c6a1bec42183b936509acba6a5ddb8066cc119ff",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spacex/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/spacex/DESIGN.md"
+        },
+        {
+          "path": "design-md/spacex/preview.html",
+          "blobSha": "531451c8feca979f660de9e4e9653a3fda099289",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spacex/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/spacex/preview.html"
+        },
+        {
+          "path": "design-md/spacex/preview-dark.html",
+          "blobSha": "438fa3bc20e31f5ad8016dc531943a924360a166",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spacex/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/spacex/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "spotify",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-spotify",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/spotify/DESIGN.md",
+          "blobSha": "222e46741cd0826c4cf57eeb02ea77630f2f7737",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spotify/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/spotify/DESIGN.md"
+        },
+        {
+          "path": "design-md/spotify/preview.html",
+          "blobSha": "c0560937fc6e2051cc8899d1be98d7170701b92e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spotify/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/spotify/preview.html"
+        },
+        {
+          "path": "design-md/spotify/preview-dark.html",
+          "blobSha": "9226ae3aaf9f7301445dd70dec49c680633f73c6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/spotify/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/spotify/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "stripe",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-stripe",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/stripe/DESIGN.md",
+          "blobSha": "46eb28897f4a29ceef1d82de1bd53c786bd1fa84",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/stripe/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/stripe/DESIGN.md"
+        },
+        {
+          "path": "design-md/stripe/preview.html",
+          "blobSha": "14694dc1408bdcdf99006abf914e1cb37d88cf7a",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/stripe/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/stripe/preview.html"
+        },
+        {
+          "path": "design-md/stripe/preview-dark.html",
+          "blobSha": "6662d9b70834afaa4775aafeeb7264c943a135dd",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/stripe/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/stripe/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "supabase",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-supabase",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/supabase/DESIGN.md",
+          "blobSha": "c302357a4406cd55a94cb42eff808c6263085a2d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/supabase/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/supabase/DESIGN.md"
+        },
+        {
+          "path": "design-md/supabase/preview.html",
+          "blobSha": "dedfbdf15532124c85f47696c0c434f91002e7cc",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/supabase/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/supabase/preview.html"
+        },
+        {
+          "path": "design-md/supabase/preview-dark.html",
+          "blobSha": "9469f942c8bf0d14bccb77a846db713a6316ef9e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/supabase/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/supabase/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "superhuman",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-superhuman",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/superhuman/DESIGN.md",
+          "blobSha": "0a9ed9e862d3a6f1a49a03e01edfddb48f2867e6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/superhuman/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/superhuman/DESIGN.md"
+        },
+        {
+          "path": "design-md/superhuman/preview.html",
+          "blobSha": "c08173a9f631866d8f2895623ca816f0cd73e89d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/superhuman/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/superhuman/preview.html"
+        },
+        {
+          "path": "design-md/superhuman/preview-dark.html",
+          "blobSha": "c8bad89d3c226a17201fe8c1a38da41bd2c80d8c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/superhuman/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/superhuman/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "together.ai",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-together-ai",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/together.ai/DESIGN.md",
+          "blobSha": "3cc30db26ba48fa2bc3be8a49173c6b3384202e4",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/together.ai/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/together.ai/DESIGN.md"
+        },
+        {
+          "path": "design-md/together.ai/preview.html",
+          "blobSha": "cb97b0444dd831b2393c8083a9a10b30936ff7d6",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/together.ai/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/together.ai/preview.html"
+        },
+        {
+          "path": "design-md/together.ai/preview-dark.html",
+          "blobSha": "43d7da6711fcc3865096d9d682cd75f8e5fba628",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/together.ai/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/together.ai/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "uber",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-uber",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/uber/DESIGN.md",
+          "blobSha": "ddd01426539fd5c9605d476a9386f030381b0744",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/uber/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/uber/DESIGN.md"
+        },
+        {
+          "path": "design-md/uber/preview.html",
+          "blobSha": "907d1e03b71242acc8b6a6b52e0d6c88ffaaecf1",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/uber/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/uber/preview.html"
+        },
+        {
+          "path": "design-md/uber/preview-dark.html",
+          "blobSha": "e648599182ab0a0e3421a131c6cc5a170e47e057",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/uber/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/uber/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "vercel",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-vercel",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/vercel/DESIGN.md",
+          "blobSha": "b2e23996e145a8c50058c84665a779cdbfba530d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/vercel/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/vercel/DESIGN.md"
+        },
+        {
+          "path": "design-md/vercel/preview.html",
+          "blobSha": "0ad0ff05e2011445dc9ff4f46d6421a5f3626056",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/vercel/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/vercel/preview.html"
+        },
+        {
+          "path": "design-md/vercel/preview-dark.html",
+          "blobSha": "ff5812e8400136216f74295a2d20f26fd4204c90",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/vercel/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/vercel/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "voltagent",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-voltagent",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/voltagent/DESIGN.md",
+          "blobSha": "8195ea0b3f7c096a8a93566fc8b554cf515ab30c",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/voltagent/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/voltagent/DESIGN.md"
+        },
+        {
+          "path": "design-md/voltagent/preview.html",
+          "blobSha": "430dd8003fffd228c33cab65542dd7965a9e6ed7",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/voltagent/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/voltagent/preview.html"
+        },
+        {
+          "path": "design-md/voltagent/preview-dark.html",
+          "blobSha": "bc03db72894013f129f79000d0f09b6b67c0820e",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/voltagent/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/voltagent/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "warp",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-warp",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/warp/DESIGN.md",
+          "blobSha": "d8075e80a871fc0e2a10b8aa13a4e02948841e1f",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/warp/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/warp/DESIGN.md"
+        },
+        {
+          "path": "design-md/warp/preview.html",
+          "blobSha": "0d248259f31ca784edcb71b4cd72132083f30b31",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/warp/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/warp/preview.html"
+        },
+        {
+          "path": "design-md/warp/preview-dark.html",
+          "blobSha": "66d6cb83614e73d2941b4ea290b765619ef65601",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/warp/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/warp/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "webflow",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-webflow",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/webflow/DESIGN.md",
+          "blobSha": "cb36b4438f8e4e0d13cb8f1d028572504bcb89a8",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/webflow/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/webflow/DESIGN.md"
+        },
+        {
+          "path": "design-md/webflow/preview.html",
+          "blobSha": "357e1df7c26601c5a91d9732361616d60ef2aced",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/webflow/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/webflow/preview.html"
+        },
+        {
+          "path": "design-md/webflow/preview-dark.html",
+          "blobSha": "40a31a24546086fec993b446406a950d56647c19",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/webflow/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/webflow/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "wise",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-wise",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/wise/DESIGN.md",
+          "blobSha": "2f654dad8220569faa63531eda1ac32039b71e15",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/wise/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/wise/DESIGN.md"
+        },
+        {
+          "path": "design-md/wise/preview.html",
+          "blobSha": "94214f0ab9e2a679b6380a184dc55097e14a4527",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/wise/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/wise/preview.html"
+        },
+        {
+          "path": "design-md/wise/preview-dark.html",
+          "blobSha": "3a0338d170b0c1db7966b7e4ec878eb1151be542",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/wise/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/wise/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "x.ai",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-x-ai",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/x.ai/DESIGN.md",
+          "blobSha": "01ce3185090eb6bd66ff56b9a88b3fc3d02f77f9",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/x.ai/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/x.ai/DESIGN.md"
+        },
+        {
+          "path": "design-md/x.ai/preview.html",
+          "blobSha": "d9631ca9925ab6b286271704dec8385e525e3120",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/x.ai/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/x.ai/preview.html"
+        },
+        {
+          "path": "design-md/x.ai/preview-dark.html",
+          "blobSha": "682cf622b7a3abd276cd314d7aa70b064fe55095",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/x.ai/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/x.ai/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "zapier",
+      "kind": "brand-design-reference",
+      "upstreamRepository": "https://github.com/VoltAgent/awesome-design-md",
+      "upstreamRevision": "f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/LICENSE",
+      "licenseBlobSha": "5cea5d78a41df83eafe1fb9fc0710675a5b7acf6",
+      "decision": "included",
+      "localSlug": "voltagent-zapier",
+      "basis": "Matching upstream files and applicable MIT declaration; retain copyright and full permission notice. Third-party brand/media/font rights are separate.",
+      "files": [
+        {
+          "path": "design-md/zapier/DESIGN.md",
+          "blobSha": "aa46d49d78f89728d312c30446f42c96ef77f4cf",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/zapier/DESIGN.md",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/zapier/DESIGN.md"
+        },
+        {
+          "path": "design-md/zapier/preview.html",
+          "blobSha": "bbb95e3dbe8470392c82b94b337d75693e4b945d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/zapier/preview.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/zapier/preview.html"
+        },
+        {
+          "path": "design-md/zapier/preview-dark.html",
+          "blobSha": "8808b032de9c1ffc3efc683563bea71e470a646d",
+          "upstreamUrl": "https://github.com/VoltAgent/awesome-design-md/blob/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md/zapier/preview-dark.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/design-md/zapier/preview-dark.html"
+        }
+      ]
+    },
+    {
+      "id": "01-minimalism",
+      "name": "Minimalism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/01-minimalism.html",
+          "blobSha": "e238cdf3b61444d5f0b029d32d7598cdbf995493",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/01-minimalism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/01-minimalism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "02-neumorphism",
+      "name": "Neumorphism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/02-neumorphism.html",
+          "blobSha": "3cb126d4b0afd4ec1824fcad850dd5f2efb5754e",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/02-neumorphism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/02-neumorphism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "03-glassmorphism",
+      "name": "Glassmorphism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/03-glassmorphism.html",
+          "blobSha": "33cf5a91bf268156acc569721cdedcd1e76fc94e",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/03-glassmorphism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/03-glassmorphism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "04-brutalism",
+      "name": "Brutalism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/04-brutalism.html",
+          "blobSha": "82f0846fde8d949ce1883aa8b6361f1be53d91a2",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/04-brutalism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/04-brutalism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "05-3d-hyperrealism",
+      "name": "3D Hyperrealism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/05-3d-hyperrealism.html",
+          "blobSha": "ed9e22cdbb2c3c9b292645856eca89fdc0d9db42",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/05-3d-hyperrealism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/05-3d-hyperrealism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "06-vibrant-block",
+      "name": "Vibrant Block",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/06-vibrant-block.html",
+          "blobSha": "c6ea7ffc1ebddf5c52326d169a21b7d9412e7f54",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/06-vibrant-block.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/06-vibrant-block.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "07-dark-mode-oled",
+      "name": "Dark Mode OLED",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/07-dark-mode-oled.html",
+          "blobSha": "5f7a7aba87dbd0f8cd0178682c041c48a1938e4b",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/07-dark-mode-oled.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/07-dark-mode-oled.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "08-accessible",
+      "name": "Accessible",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/08-accessible.html",
+          "blobSha": "4c15b6eed700bf7aacae80a971e5a0ffe4b81f62",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/08-accessible.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/08-accessible.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "09-claymorphism",
+      "name": "Claymorphism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/09-claymorphism.html",
+          "blobSha": "5674e71e083f7cb518583a05406b1fbc9ef4a5e0",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/09-claymorphism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/09-claymorphism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "10-aurora-ui",
+      "name": "Aurora UI",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/10-aurora-ui.html",
+          "blobSha": "4224679e53da4820798adf81b5d16e1ae8499fbe",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/10-aurora-ui.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/10-aurora-ui.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "11-retro-futurism",
+      "name": "Retro Futurism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/11-retro-futurism.html",
+          "blobSha": "3b544c77711510738c95d8db10ff4e2c0a40115f",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/11-retro-futurism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/11-retro-futurism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "12-flat-design",
+      "name": "Flat Design",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/12-flat-design.html",
+          "blobSha": "21b8962d741533f656fbcf169d3d79d72953316c",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/12-flat-design.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/12-flat-design.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "13-skeuomorphism",
+      "name": "Skeuomorphism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/13-skeuomorphism.html",
+          "blobSha": "347c01d19ee09e39e6d11e5994fd7df2e657f367",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/13-skeuomorphism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/13-skeuomorphism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "14-liquid-glass",
+      "name": "Liquid Glass",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/14-liquid-glass.html",
+          "blobSha": "c86795e95bc7c72a8835c8501aa197d0ef9002ed",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/14-liquid-glass.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/14-liquid-glass.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "15-motion-driven",
+      "name": "Motion Driven",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/15-motion-driven.html",
+          "blobSha": "e9e5ed86cd3735419e8706b0bd842cba9d98ac6e",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/15-motion-driven.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/15-motion-driven.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "16-micro-interactions",
+      "name": "Micro Interactions",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/16-micro-interactions.html",
+          "blobSha": "bd9cf4516a03ebcfe0f078b5982d5f721614857b",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/16-micro-interactions.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/16-micro-interactions.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "17-inclusive-design",
+      "name": "Inclusive Design",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/17-inclusive-design.html",
+          "blobSha": "c3db52fb3ecafa690c2d30fbb65ae230b694cc26",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/17-inclusive-design.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/17-inclusive-design.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "18-zero-interface",
+      "name": "Zero Interface",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/18-zero-interface.html",
+          "blobSha": "7eab5b5a00369714bb693d5700bbb15cf4bfe507",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/18-zero-interface.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/18-zero-interface.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "19-soft-ui-evolution",
+      "name": "Soft UI Evolution",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/19-soft-ui-evolution.html",
+          "blobSha": "bc8635075c5fda24ad0ad7435782c7f47ec48427",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/19-soft-ui-evolution.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/19-soft-ui-evolution.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "20-hero-centric",
+      "name": "Hero Centric",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/20-hero-centric.html",
+          "blobSha": "1fe90238eefdfda50e2ca2be91a22a238948ccde",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/20-hero-centric.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/20-hero-centric.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "21-conversion-optimized",
+      "name": "Conversion Optimized",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/21-conversion-optimized.html",
+          "blobSha": "10af9a095b50b572a8ea723499ef5a84257be55d",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/21-conversion-optimized.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/21-conversion-optimized.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "22-feature-rich",
+      "name": "Feature Rich",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/22-feature-rich.html",
+          "blobSha": "c2d1a5743cdee0cedb395a1dfb8abfbb1158f692",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/22-feature-rich.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/22-feature-rich.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "23-minimal-direct",
+      "name": "Minimal Direct",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/23-minimal-direct.html",
+          "blobSha": "a9af44b5aa3f94800ed38549ac80238310b6ad1a",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/23-minimal-direct.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/23-minimal-direct.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "24-social-proof",
+      "name": "Social Proof",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/24-social-proof.html",
+          "blobSha": "4de5b551ffcd098ffa8a0a194ac50bca63b32951",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/24-social-proof.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/24-social-proof.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "25-interactive-demo",
+      "name": "Interactive Demo",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/25-interactive-demo.html",
+          "blobSha": "8fa1d355fde6fa3053e76e69e5b4f960f31397dc",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/25-interactive-demo.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/25-interactive-demo.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "26-trust-authority",
+      "name": "Trust Authority",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/26-trust-authority.html",
+          "blobSha": "38ce4c5597571ed3418eb7fc0c8111240ea409e6",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/26-trust-authority.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/26-trust-authority.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "27-storytelling",
+      "name": "Storytelling",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/27-storytelling.html",
+          "blobSha": "0e9b685537451cc53a4b72437f28011984cfe8b7",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/27-storytelling.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/27-storytelling.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "28-data-dense-dashboard",
+      "name": "Data Dense Dashboard",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/28-data-dense-dashboard.html",
+          "blobSha": "5b74e694e4b23adb31c2572c97a98adfbe1011dd",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/28-data-dense-dashboard.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/28-data-dense-dashboard.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "29-heatmap-density",
+      "name": "Heatmap Density",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/29-heatmap-density.html",
+          "blobSha": "2f976de99e8effc787d647dbf7e21668d1f9f37e",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/29-heatmap-density.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/29-heatmap-density.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "30-executive-summary",
+      "name": "Executive Summary",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/30-executive-summary.html",
+          "blobSha": "57643571689cb2d290c8fa8be9aece427ae8057b",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/30-executive-summary.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/30-executive-summary.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "31-real-time-monitoring",
+      "name": "Real Time Monitoring",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/31-real-time-monitoring.html",
+          "blobSha": "18bfa67bb6d63db6c79a8f7c486a3117d53a7090",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/31-real-time-monitoring.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/31-real-time-monitoring.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "32-drill-down-analytics",
+      "name": "Drill Down Analytics",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/32-drill-down-analytics.html",
+          "blobSha": "1a1d5f74b021814b5c14fdfe586b6d153097d6b1",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/32-drill-down-analytics.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/32-drill-down-analytics.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "33-comparative-analytics",
+      "name": "Comparative Analytics",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/33-comparative-analytics.html",
+          "blobSha": "8048f238746f6ac87a63df989fb439a6c0f048e7",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/33-comparative-analytics.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/33-comparative-analytics.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "34-predictive-analytics",
+      "name": "Predictive Analytics",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/34-predictive-analytics.html",
+          "blobSha": "e92e2d9c97b9cad41a3f0f05b428a40bc1fda479",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/34-predictive-analytics.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/34-predictive-analytics.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "35-user-behavior-analytics",
+      "name": "User Behavior Analytics",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/35-user-behavior-analytics.html",
+          "blobSha": "06291291cfccd06006dba57cc9fe55eb3cf6eb92",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/35-user-behavior-analytics.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/35-user-behavior-analytics.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "36-financial-analytics",
+      "name": "Financial Analytics",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/36-financial-analytics.html",
+          "blobSha": "94551eefd1ee6817c41dc1ab6640b75825906a02",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/36-financial-analytics.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/36-financial-analytics.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "37-sales-intelligence",
+      "name": "Sales Intelligence",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/37-sales-intelligence.html",
+          "blobSha": "67a20c5dc47e9260e0c2e56e3ee84b46328ad869",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/37-sales-intelligence.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/37-sales-intelligence.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "38-neubrutalism",
+      "name": "Neubrutalism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/38-neubrutalism.html",
+          "blobSha": "766148b990084e99d992c5c7350e8c1d236ffee0",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/38-neubrutalism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/38-neubrutalism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "39-bento-box",
+      "name": "Bento Box",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/39-bento-box.html",
+          "blobSha": "05c13bc721da2b375bf7a38668a02bae8c01c9fd",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/39-bento-box.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/39-bento-box.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "40-y2k-revival",
+      "name": "Y2K Revival",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/40-y2k-revival.html",
+          "blobSha": "ec61b502df93e5bbd8894191ebe8ae88a530f4ae",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/40-y2k-revival.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/40-y2k-revival.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "41-cyberpunk",
+      "name": "Cyberpunk",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/41-cyberpunk.html",
+          "blobSha": "41ed25a79fa269d2f92b43f4dc64ad5aa9535677",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/41-cyberpunk.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/41-cyberpunk.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "42-organic-biophilic",
+      "name": "Organic Biophilic",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/42-organic-biophilic.html",
+          "blobSha": "b6edbc532bf01bd1fda99030405810e2d435e92a",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/42-organic-biophilic.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/42-organic-biophilic.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "43-ai-native",
+      "name": "AI Native",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/43-ai-native.html",
+          "blobSha": "9deb30790f30edb961f321b87ce8e8fd9ab4ba8d",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/43-ai-native.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/43-ai-native.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "44-memphis-revival",
+      "name": "Memphis Revival",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/44-memphis-revival.html",
+          "blobSha": "f958ec916bbfc2c37e61314aca8f3884b5570035",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/44-memphis-revival.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/44-memphis-revival.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "45-vaporwave",
+      "name": "Vaporwave",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/45-vaporwave.html",
+          "blobSha": "6635c9922ebe1b0dce7cc11e1354303f4966b0de",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/45-vaporwave.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/45-vaporwave.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "46-dimensional-layering",
+      "name": "Dimensional Layering",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/46-dimensional-layering.html",
+          "blobSha": "9cbd127b1e51784ef8f96dcbaede7110b90c47ab",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/46-dimensional-layering.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/46-dimensional-layering.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "47-exaggerated-minimalism",
+      "name": "Exaggerated Minimalism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/47-exaggerated-minimalism.html",
+          "blobSha": "28f72ca8f4abeb60111ad841b54644e5d1746892",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/47-exaggerated-minimalism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/47-exaggerated-minimalism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "48-kinetic-typography",
+      "name": "Kinetic Typography",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/48-kinetic-typography.html",
+          "blobSha": "be316fe7d23f7bfe51da54623c06b68fe1f53d09",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/48-kinetic-typography.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/48-kinetic-typography.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "49-parallax-storytelling",
+      "name": "Parallax Storytelling",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/49-parallax-storytelling.html",
+          "blobSha": "06edce8ed3d9eb56cab263c5f0c4b617ca6ef337",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/49-parallax-storytelling.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/49-parallax-storytelling.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "50-swiss-modernism",
+      "name": "Swiss Modernism",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/50-swiss-modernism.html",
+          "blobSha": "07dc8f7a6a9c4e17bc7c1f1af66167e76af332b7",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/50-swiss-modernism.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/50-swiss-modernism.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "51-hud-scifi",
+      "name": "HUD SciFi",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/51-hud-scifi.html",
+          "blobSha": "274ff4bd7b821aeb5915ed18d33e373888cd9014",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/51-hud-scifi.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/51-hud-scifi.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "52-pixel-art",
+      "name": "Pixel Art",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/52-pixel-art.html",
+          "blobSha": "57b544e4c4a1c90e925b688e46d7aaa95a6367cd",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/52-pixel-art.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/52-pixel-art.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "53-bento-grids",
+      "name": "Bento Grids",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/53-bento-grids.html",
+          "blobSha": "dcab4836414287e551dc4f8f3b00a3331b570107",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/53-bento-grids.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/53-bento-grids.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "54-neubrutalism-v2",
+      "name": "Neubrutalism V2",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/54-neubrutalism-v2.html",
+          "blobSha": "95cecb74e55f86b84f79d6dae6f1bbf70fc45802",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/54-neubrutalism-v2.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/54-neubrutalism-v2.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "55-spatial-ui",
+      "name": "Spatial UI",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/55-spatial-ui.html",
+          "blobSha": "7bffa8783bee4020bc4c9ab40f69fc6d82fdfc1d",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/55-spatial-ui.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/55-spatial-ui.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "56-e-ink-paper",
+      "name": "E Ink Paper",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/56-e-ink-paper.html",
+          "blobSha": "65dbf6d0121ae1395f449c887a181c4837bf1e86",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/56-e-ink-paper.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/56-e-ink-paper.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "57-gen-z-chaos",
+      "name": "Gen Z Chaos",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/57-gen-z-chaos.html",
+          "blobSha": "577144ca7dd6cfc658dad52fa246652aa5dc443b",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/57-gen-z-chaos.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/57-gen-z-chaos.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    },
+    {
+      "id": "58-biomimetic-organic",
+      "name": "Biomimetic Organic",
+      "kind": "skill-generated-demo",
+      "upstreamRepository": "https://github.com/yuanfu8899/uiuxskillProMax",
+      "upstreamRevision": "5c1fb49813069920bdc3fcbb8aee02cd6e8f5157",
+      "license": null,
+      "decision": "excluded-license-unconfirmed",
+      "basis": "Full tree has no LICENSE/LICENCE/COPYING; README License section only names the generation tool. No explicit permission covering these demos was located. The generator license is not assigned to its output.",
+      "readmeUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/README.md",
+      "files": [
+        {
+          "path": "refstyles/58-biomimetic-organic.html",
+          "blobSha": "4acacfba231e8df35ebb4c751f4fabb1c6e47bf5",
+          "upstreamUrl": "https://github.com/yuanfu8899/uiuxskillProMax/blob/5c1fb49813069920bdc3fcbb8aee02cd6e8f5157/refstyles/58-biomimetic-organic.html",
+          "collectionUrl": "https://github.com/Charlo-O/awesome-design-md/blob/fa4175f8d5c06683d70d05a4544e466e77fa2544/extra/uiuxskillProMax/refstyles/58-biomimetic-organic.html"
+        }
+      ],
+      "permissionEvidence": {
+        "upstreamTreeComplete": true,
+        "licenseFiles": [],
+        "readmeContainsExplicitGrant": false,
+        "htmlReviewed": true,
+        "inlineLicenseNoticeFound": false,
+        "linkedTemplateRepositories": []
+      }
+    }
+  ],
+  "generatorLicenseReview": {
+    "repository": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/blob/main/LICENSE",
+    "matchingDemoFileBlobs": 0,
+    "scope": "The official generator repository has MIT, but no file-identical copy of these 58 output demos was found in its complete current tree. This is not permission to redistribute another author's generated output.",
+    "exampleRepositoryLicenseField": null,
+    "exampleRepositoryLicenseFileStatus": 404
+  }
+}

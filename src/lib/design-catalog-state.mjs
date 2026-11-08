@@ -1,13 +1,14 @@
-import {SCENARIOS} from './design-taxonomy.mjs';
+import {SCENARIOS,REFERENCE_INDUSTRIES,VISUAL_STYLES} from './design-taxonomy.mjs';
 
-export const CATALOG_FILTER_DEFAULTS={collection:'all',q:'',scenario:'',favorites:'',sort:'recommended'};
+export const CATALOG_FILTER_DEFAULTS={collection:'all',q:'',scenario:'',industry:'',visual:'',favorites:'',sort:'recommended'};
 const collections=new Set(['all','project','page','design-system']);
 const scenarios=new Set(SCENARIOS.map(item=>item.id));
+const industries=new Set(REFERENCE_INDUSTRIES.map(item=>item.id)),visualStyles=new Set(VISUAL_STYLES.map(item=>item.id));
 const valid=(value,allowed,fallback='')=>allowed.has(value)?value:fallback;
 
-/** Obsolete source groups, style facets and page offsets are not public template controls. */
+/** Source platforms and pagination are not content categories. Facets have stable IDs. */
 export function readCatalogFilters(params=new URLSearchParams()){
- return {collection:valid(params.get('collection'),collections,'all'),q:params.get('q')||'',scenario:valid(params.get('scenario'),scenarios),favorites:params.get('favorites')==='1'?'1':'',sort:params.get('sort')==='name'?'name':'recommended'};
+ return {collection:valid(params.get('collection'),collections,'all'),q:params.get('q')||'',scenario:valid(params.get('scenario'),scenarios),industry:valid(params.get('industry'),industries),visual:valid(params.get('visual'),visualStyles),favorites:params.get('favorites')==='1'?'1':'',sort:params.get('sort')==='name'?'name':'recommended'};
 }
 export function catalogQuery(filters={}){
  const query=new URLSearchParams({type:'designs'});

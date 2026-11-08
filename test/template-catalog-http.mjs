@@ -2,12 +2,23 @@ import assert from 'node:assert/strict';
 import entries from '../src/lib/template-library.json' with {type:'json'};
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:3008';
 let checked=0;
-async function get(path){const response=await fetch(base+path);assert.equal(response.status,200,path);checked++;return response}
+async function get(path){const response=await fetch(base+path,{headers:{cookie:'site-locale=zh'}});assert.equal(response.status,200,path);checked++;return response}
 const directory=await (await get('/resources?type=designs')).text();
 for(const label of ['完整开源项目','设计规范预览'])assert.ok(directory.includes(label));
 for(const label of ['本站重写','授权引用','设计目录分页','下一页'])assert.ok(!directory.includes(label),label);
 assert.equal((directory.match(/<iframe\b/g)||[]).length,0,'directory never loads idle live previews');
 assert.equal((directory.match(/data-template-slug=/g)||[]).length,24,'first response stays bounded');
+for(const [query,slugs]of [
+ ['scenario=docs',['template-hextra','template-just-docs']],
+ ['industry=finance',['voltagent-stripe','voltagent-coinbase','voltagent-kraken','voltagent-revolut','voltagent-wise']],
+ ['industry=finance&visual=gradient&q=Stripe',['voltagent-stripe']],
+]){
+ const html=await(await get('/resources?type=designs&'+query)).text();
+ assert.deepEqual([...html.matchAll(/data-template-slug="([^"]+)"/g)].map(match=>match[1]),slugs,query);
+ assert.match(html,/aria-label="按参考行业筛选"/);assert.match(html,/aria-label="按视觉风格筛选"/);
+}
+const sourceAudit=await(await get('/catalog-audits/vibeui-112.json')).json();
+assert.equal(sourceAudit.entries.length,112);assert.equal(sourceAudit.summary.included,54);assert.equal(sourceAudit.summary.excluded,58);
 for(const entry of entries.filter(entry=>entry.template.kind==='design-system'))for(const variant of entry.previewVariants){
  const response=await get(variant.url),html=await response.text();assert.match(response.headers.get('content-security-policy'),/sandbox allow-scripts/);assert.match(html,/Copyright \(c\) 2026 VoltAgent/);assert.doesNotMatch(html,/<script\b/i);
 }

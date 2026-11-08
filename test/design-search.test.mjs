@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {filterDesignEntries} from '../src/lib/design-search.mjs';
+import {designCategory} from '../src/lib/design-catalog.mjs';
 
 const entries=JSON.parse(readFileSync(new URL('../src/lib/template-library.json',import.meta.url),'utf8')).filter(entry=>entry.template.kind==='design-system');
 const slugs=filters=>filterDesignEntries(entries,filters).map(entry=>entry.slug);
@@ -21,10 +22,16 @@ test('source name, source URL, slug and category are searchable fields',()=>{
 });
 
 test('category and keyword filters must both match',()=>{
- assert.deepEqual(slugs({category:'设计生产',q:'notion'}),['voltagent-notion']);
- assert.deepEqual(slugs({category:'开发工具',q:'linear'}),['voltagent-linear-app']);
+ assert.deepEqual(slugs({category:'协作与效率',q:'notion'}),['voltagent-notion']);
+ assert.deepEqual(slugs({category:'协作与效率',q:'linear'}),['voltagent-linear-app']);
  assert.deepEqual(slugs({category:'原创设计',q:'notion'}),[]);
  assert.deepEqual(slugs({category:'工作空间',q:'IAVSE'}),[]);
+});
+
+test('reviewed reference industry labels never collapse into the generic category',()=>{
+ for(const entry of entries)assert.equal(designCategory(entry),entry.category,entry.slug);
+ assert.deepEqual(slugs({category:'金融与支付',q:'stripe'}),['voltagent-stripe']);
+ assert.deepEqual(slugs({category:'云服务与数据',q:'stripe'}),[]);
 });
 
 test('empty search preserves ordering, category-only results and real empty results',()=>{

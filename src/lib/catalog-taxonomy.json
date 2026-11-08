@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-08",
+  "provenance": {
+    "author": "IAVSE",
+    "method": "逐项编辑分类；用途依据完整项目功能，行业依据参考品牌业务，视觉语言依据原始设计规范。分类不代表原作者官方标签，不使用标题或关键词自动推断。",
+    "sourceAudit": "/catalog-audits/vibeui-112.json"
+  },
+  "industries": [
+    {
+      "id": "ai",
+      "label": "AI 模型与应用"
+    },
+    {
+      "id": "developer",
+      "label": "开发工具"
+    },
+    {
+      "id": "cloud",
+      "label": "云服务与数据"
+    },
+    {
+      "id": "design",
+      "label": "设计与创作"
+    },
+    {
+      "id": "productivity",
+      "label": "协作与效率"
+    },
+    {
+      "id": "business",
+      "label": "企业与营销"
+    },
+    {
+      "id": "finance",
+      "label": "金融与支付"
+    },
+    {
+      "id": "hardware",
+      "label": "科技硬件"
+    },
+    {
+      "id": "media",
+      "label": "文娱与社区"
+    },
+    {
+      "id": "travel",
+      "label": "旅行与出行"
+    },
+    {
+      "id": "automotive-aerospace",
+      "label": "汽车与航天"
+    }
+  ],
+  "visualStyles": [
+    {
+      "id": "minimal",
+      "label": "极简清晰"
+    },
+    {
+      "id": "editorial",
+      "label": "编辑排版"
+    },
+    {
+      "id": "monochrome",
+      "label": "黑白对比"
+    },
+    {
+      "id": "gradient",
+      "label": "渐变光感"
+    },
+    {
+      "id": "bold",
+      "label": "大胆醒目"
+    },
+    {
+      "id": "playful",
+      "label": "活泼图形"
+    },
+    {
+      "id": "terminal",
+      "label": "终端语言"
+    },
+    {
+      "id": "technical",
+      "label": "技术网格"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-export type WebsiteTemplate={kind:'project'|'page'|'design-system';stack:string[];features:string[];repository:string;licenseUrl:string;downloadUrl?:string;sourcePath?:string;scenarios:string[];author:string;upstreamDemoUrl?:string;previewNote?:string};
+export type WebsiteTemplate={kind:'project'|'page'|'design-system';stack:string[];features:string[];repository:string;licenseUrl:string;downloadUrl?:string;sourcePath?:string;scenarios:string[];industries?:string[];visualStyles?:string[];author:string;upstreamDemoUrl?:string;previewNote?:string};
 export type DesignSource={name:string;url:string};
 export type WebsiteAuthorship='independent'|'licensed';
 export type WebsiteArtifactFields={artifactId:string;authorship:WebsiteAuthorship;sourceSlug:string;artifactFiles?:string[];componentLabels?:Record<string,string>;assetManifest:Array<{path:string;creator:string;source:string;license:string;licensePath?:string;sha256?:string;note?:string}>};
