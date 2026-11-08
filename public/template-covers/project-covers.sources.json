@@ -160,6 +160,317 @@
           "source": "https://github.com/tabler/tabler-icons/blob/main/LICENSE"
         }
       ]
+    },
+    {
+      "path": "/template-covers/project-tabler.webp",
+      "sha256": "e451a924234ed73ceb18ece8ff0a8c4a8df92bbbca6eb1520d5fd5951b9b878d",
+      "source": "https://preview.tabler.io/",
+      "observedUrl": "https://preview.tabler.io/",
+      "creator": "tabler",
+      "repository": "https://github.com/tabler/tabler",
+      "repositoryTreeSha": "7ecb81656f5dead041668a0bd0296b12fb2c074f",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/tabler/tabler/blob/7ecb81656f5dead041668a0bd0296b12fb2c074f/LICENSE",
+      "licensePath": "/template-covers/project-licenses/tabler-project-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.627Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "system-ui, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": []
+    },
+    {
+      "path": "/template-covers/project-hextra.webp",
+      "sha256": "cd0c4f660b9b23f0ba314ba9280ffc30c241dbaa3bef44b57f1862a07fb08975",
+      "source": "https://imfing.github.io/hextra/",
+      "observedUrl": "https://imfing.github.io/hextra/",
+      "creator": "imfing",
+      "repository": "https://github.com/imfing/hextra",
+      "repositoryTreeSha": "e58687ee6c2e7ccd054c7ef31307d2147a7b8bd7",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/imfing/hextra/blob/e58687ee6c2e7ccd054c7ef31307d2147a7b8bd7/LICENSE",
+      "licensePath": "/template-covers/project-licenses/hextra-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.655Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": []
+    },
+    {
+      "path": "/template-covers/project-just-docs.webp",
+      "sha256": "98ae9026138b95e66c708ee37706d987281c1506f51aaea85a722e85d2a77f3f",
+      "source": "https://just-the-docs.github.io/just-the-docs/",
+      "observedUrl": "https://just-the-docs.github.io/just-the-docs/",
+      "creator": "just-the-docs",
+      "repository": "https://github.com/just-the-docs/just-the-docs",
+      "repositoryTreeSha": "c66a13657020dfe439c37c97e1de4b595896c22a",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/just-the-docs/just-the-docs/blob/c66a13657020dfe439c37c97e1de4b595896c22a/LICENSE.txt",
+      "licensePath": "/template-covers/project-licenses/just-docs-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.684Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "system-ui, -apple-system, blinkmacsystemfont, \"Segoe UI\", roboto, \"Helvetica Neue\", arial, sans-serif, \"Segoe UI Emoji\""
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": []
+    },
+    {
+      "path": "/template-covers/project-clean-blog.webp",
+      "sha256": "cf6d8909605268b35b9dfc1b74366e9138675a047e4578a675ada383ffa17c8f",
+      "source": "https://startbootstrap.github.io/startbootstrap-clean-blog/",
+      "observedUrl": "https://startbootstrap.github.io/startbootstrap-clean-blog/",
+      "creator": "StartBootstrap",
+      "repository": "https://github.com/StartBootstrap/startbootstrap-clean-blog",
+      "repositoryTreeSha": "1ebc4f8f3b6194335df237a2a7837955a5a4a9aa",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/1ebc4f8f3b6194335df237a2a7837955a5a4a9aa/LICENSE",
+      "licensePath": "/template-covers/project-licenses/clean-blog-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.706Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "\"Open Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "Lora, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": [
+        {
+          "path": "/template-covers/project-licenses/OpenSans-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/opensans/OFL.txt"
+        },
+        {
+          "path": "/template-covers/project-licenses/Lora-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/lora/OFL.txt"
+        },
+        {
+          "path": "/template-covers/project-licenses/fontawesome-LICENSE.txt",
+          "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.x/LICENSE.txt"
+        }
+      ]
+    },
+    {
+      "path": "/template-covers/project-freelancer.webp",
+      "sha256": "1790e9f0a617789715581eea7e8c220981287993955ab696e42ffbdf8d6312a6",
+      "source": "https://startbootstrap.github.io/startbootstrap-freelancer/",
+      "observedUrl": "https://startbootstrap.github.io/startbootstrap-freelancer/",
+      "creator": "StartBootstrap",
+      "repository": "https://github.com/StartBootstrap/startbootstrap-freelancer",
+      "repositoryTreeSha": "5bc65b4bd01e4ab63186395d5f95c7fdaa26216d",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-freelancer/blob/5bc65b4bd01e4ab63186395d5f95c7fdaa26216d/LICENSE",
+      "licensePath": "/template-covers/project-licenses/freelancer-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.726Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "Montserrat, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "Lato, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": [
+        {
+          "path": "/template-covers/project-licenses/Montserrat-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/montserrat/OFL.txt"
+        },
+        {
+          "path": "/template-covers/project-licenses/fontawesome-LICENSE.txt",
+          "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.x/LICENSE.txt"
+        },
+        {
+          "path": "/fonts/design-artifacts/voltagent/lato-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/lato/OFL.txt"
+        }
+      ]
+    },
+    {
+      "path": "/template-covers/project-landwind.webp",
+      "sha256": "dd56eb94fc267a2d910bba41f55d65fc568ffdb26dcf252d41a5a856a5043fdc",
+      "source": "https://demo.themesberg.com/landwind/",
+      "observedUrl": "https://demo.themesberg.com/landwind/",
+      "creator": "themesberg",
+      "repository": "https://github.com/themesberg/landwind",
+      "repositoryTreeSha": "f8be851cc8b4b44ff9d842ca8f5149d7911af88c",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/themesberg/landwind/blob/f8be851cc8b4b44ff9d842ca8f5149d7911af88c/LICENSE",
+      "licensePath": "/template-covers/project-licenses/landwind-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.749Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "ui-sans-serif, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": []
+    },
+    {
+      "path": "/template-covers/project-bigspring.webp",
+      "sha256": "4f73d1667e86af69a853e38d93b5c0486792ef96e56aa1d9bab812ef874ab0da",
+      "source": "https://tf-bigspring-light-astro.vercel.app/",
+      "observedUrl": "https://tf-bigspring-light-astro.vercel.app/",
+      "creator": "themefisher",
+      "repository": "https://github.com/themefisher/bigspring-light-astro",
+      "repositoryTreeSha": "4b40e8ec4f1d4ed4d10699496e2423828263ae29",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/themefisher/bigspring-light-astro/blob/4b40e8ec4f1d4ed4d10699496e2423828263ae29/LICENSE",
+      "licensePath": "/template-covers/project-licenses/bigspring-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.769Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "Lato-152fae70650f2c78, \"Lato-152fae70650f2c78 fallback: Arial\", \"Lato-152fae70650f2c78 fallback: Arial Bold\", sans-serif"
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": [
+        {
+          "path": "/fonts/design-artifacts/voltagent/lato-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/lato/OFL.txt"
+        }
+      ]
+    },
+    {
+      "path": "/template-covers/project-resume.webp",
+      "sha256": "0ac05e1a48f783c3e26ff1df9ecaaa4d031538c47497cbf90be270abcf4eb7ac",
+      "source": "https://startbootstrap.github.io/startbootstrap-resume/",
+      "observedUrl": "https://startbootstrap.github.io/startbootstrap-resume/",
+      "creator": "StartBootstrap",
+      "repository": "https://github.com/StartBootstrap/startbootstrap-resume",
+      "repositoryTreeSha": "c6fbe5ef431642984d0f17960194632f20cf67bc",
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-resume/blob/c6fbe5ef431642984d0f17960194632f20cf67bc/LICENSE",
+      "licensePath": "/template-covers/project-licenses/resume-MIT.txt",
+      "capturedAt": "2026-11-08T08:10:49.790Z",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "output": {
+        "width": 720,
+        "height": 480,
+        "format": "WebP"
+      },
+      "method": "Actual original website screenshot; raster images, videos and CSS image backgrounds omitted. Original text, layout, CSS and inline geometric SVG retained. No generated replacement artwork.",
+      "review": {
+        "visibleRasterImages": 0,
+        "visibleVideo": 0,
+        "visibleCssImageUrls": 0,
+        "fonts": [
+          "Muli, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "\"Saira Extra Condensed\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+        ],
+        "scope": "Captured first viewport only. No permission claim for unshown third-party media."
+      },
+      "relatedLicenses": [
+        {
+          "path": "/template-covers/project-licenses/Muli-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/mulish/OFL.txt"
+        },
+        {
+          "path": "/template-covers/project-licenses/SairaExtraCondensed-OFL.txt",
+          "source": "https://github.com/google/fonts/blob/main/ofl/sairaextracondensed/OFL.txt"
+        },
+        {
+          "path": "/template-covers/project-licenses/fontawesome-LICENSE.txt",
+          "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.x/LICENSE.txt"
+        }
+      ]
     }
   ]
 }

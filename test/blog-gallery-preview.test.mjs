@@ -32,7 +32,7 @@ test('only explicit public homepage and UI design previews permit same-origin fr
  for(const path of ['/resources/designs/vibeui-claude/preview','/resources/designs/vibeui-claude/preview?variant=1']){
   const response=exports.middleware({nextUrl:new URL('https://example.test'+path),url:'https://example.test'+path,headers:new Headers()});
   const policy=response.headers.get('Content-Security-Policy');
-  assert.match(policy,/frame-src 'self' https:\/\/astro-paper\.pages\.dev https:\/\/fuwari\.vercel\.app https:\/\/nextdevtpl\.chaosyn\.com(?:;|$)/);
+  assert.deepEqual(policy.match(/frame-src ([^;]+)/)[1].trim().split(/\s+/).sort(),["'self'",'https://astro-paper.pages.dev','https://fuwari.vercel.app','https://nextdevtpl.chaosyn.com','https://preview.tabler.io','https://imfing.github.io','https://just-the-docs.github.io','https://startbootstrap.github.io','https://demo.themesberg.com','https://tf-bigspring-light-astro.vercel.app'].sort());
   assert.match(policy,/frame-ancestors 'self'/,'only the isolated preview can be framed by the catalog');
  }
  for(const path of ['/','/resources','/resources?type=designs','/resources?type=skills','/resources/designs/vibeui-claude','/blogs','/workspace/blog']){

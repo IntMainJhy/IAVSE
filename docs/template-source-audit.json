@@ -23720,11 +23720,14 @@
   },
   "publication": {
     "updatedAt": "2026-11-08",
-    "activeEntries": 58,
-    "independentGithubProjects": 4,
+    "activeEntries": 66,
+    "independentGithubProjects": 12,
     "voltAgentDesignPreviews": 54,
     "removedStyleKitTemplates": 37,
     "removedSameMaintainerPortfolio": 1,
-    "note": "StyleKit entries below remain historical audit evidence only. Per the latest user request, publish only the four independently maintained GitHub projects; remove StyleKit-maintained page templates and the Anx portfolio, including local source and runtime assets."
+    "note": "StyleKit entries below remain historical audit evidence only. Per the latest user request, publish only the four independently maintained GitHub projects; remove StyleKit-maintained page templates and the Anx portfolio, including local source and runtime assets.",
+    "githubExpansionEvidence": "github-template-expansion-2026-11-08.json",
+    "newProjectsVerifiedEmbeddable": 8,
+    "excludedBlockedDemo": "LekoArts/gatsby-starter-portfolio-cara (X-Frame-Options: DENY)"
   }
 }

@@ -6,10 +6,10 @@ import {templatePreviewUrl} from '../src/lib/template-preview.mjs';
 import {catalogPresentationEntries,filterCatalog} from '../src/lib/design-taxonomy.mjs';
 
 test('reset catalog contains independent GitHub projects and separately named design references',()=>{
- assert.equal(entries.length,58);
- assert.equal(new Set(entries.map(entry=>entry.slug)).size,58);
- assert.deepEqual(['project','page','design-system'].map(collection=>filterCatalog(entries,{collection}).length),[4,0,54]);
- assert.equal(catalogPresentationEntries(entries).length,58);
+ assert.equal(entries.length,66);
+ assert.equal(new Set(entries.map(entry=>entry.slug)).size,66);
+ assert.deepEqual(['project','page','design-system'].map(collection=>filterCatalog(entries,{collection}).length),[12,0,54]);
+ assert.equal(catalogPresentationEntries(entries).length,66);
  for(const entry of entries){
   assert.equal(entry.license.status,'verified');assert.equal(entry.license.name.startsWith('MIT'),true);
   assert.ok(entry.template.repository.startsWith('https://github.com/'));
@@ -18,6 +18,7 @@ test('reset catalog contains independent GitHub projects and separately named de
   assert.ok(!entry.studio,'no rewritten or generated page metadata remains');
  }
  assert.ok(!existsSync(new URL('../src/lib/design-imports',import.meta.url)));
+ assert.ok(!entries.some(entry=>entry.slug==='template-cara'));
  assert.ok(!entries.some(entry=>entry.slug.startsWith('website-')||entry.slug.includes('uiuxpro-')));
  const publicFolders=readdirSync(new URL('../public/design-artifacts',import.meta.url));
  assert.equal(publicFolders.length,54);assert.ok(publicFolders.every(name=>name.startsWith('vibeui-')&&!name.includes('uiuxpro-')));
@@ -47,4 +48,15 @@ test('preview selection allows only reviewed local documents and exact external 
  for(const url of ['javascript:alert(1)','//evil.example/','/template-sites/../admin','https://evil.example/','https://fuwari.vercel.app.evil.example/','https://user:pass@fuwari.vercel.app/'])assert.equal(templatePreviewUrl({...project,previewUrl:url}),null);
  assert.equal(templatePreviewUrl(entries.find(entry=>entry.slug==='template-astrowind')),null);
  for(const entry of entries)assert.match(entry.image,/^\/template-covers\/[a-z0-9-]+\.webp\?v=[a-f0-9]{16}$/);
+});
+
+test('new GitHub projects retain verified licenses, component guidance and direct complete previews',()=>{
+ const additions=['tabler','hextra','just-docs','clean-blog','freelancer','landwind','bigspring','resume'].map(id=>entries.find(entry=>entry.slug==='template-'+id));
+ for(const entry of additions){
+  assert.ok(entry);assert.equal(entry.previewPolicy,'embed');assert.equal(entry.license.name,'MIT');assert.equal(templatePreviewUrl(entry),entry.template.upstreamDemoUrl);
+  assert.match(entry.specification,/组件提示词/);assert.match(entry.specification,/核对版本：[a-f0-9]{40}/);assert.ok(entry.prompt.length>200);
+ }
+ const audit=JSON.parse(readFileSync(new URL('../docs/github-template-expansion-2026-11-08.json',import.meta.url),'utf8'));
+ assert.equal(audit.projects.length,8);assert.ok(audit.projects.every(project=>project.browserEmbeddingVerified&&project.demo.xFrameOptions!=='DENY'));
+ assert.ok(audit.excluded.some(project=>project.repository.includes('gatsby-starter-portfolio-cara')));
 });

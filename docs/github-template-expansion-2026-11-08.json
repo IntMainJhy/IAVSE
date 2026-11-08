@@ -1,0 +1,212 @@
+{
+  "verifiedAt": "2026-11-08",
+  "projects": [
+    {
+      "repo": "tabler/tabler",
+      "branch": "dev",
+      "homepage": "https://tabler.io",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/tabler/tabler/blob/dev/LICENSE",
+      "commit": "7ecb81656f5dead041668a0bd0296b12fb2c074f",
+      "readmeEvidence": "https://github.com/tabler/tabler/blob/7ecb81656f5dead041668a0bd0296b12fb2c074f/README.md",
+      "demo": {
+        "url": "https://preview.tabler.io/",
+        "status": 200,
+        "finalUrl": "https://preview.tabler.io/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "4f88a82d13be3c5c63a12c5631eae914aa4381b6dc17641bf1ab85f3f8f6c8a5",
+      "publicationSlug": "template-tabler",
+      "previewPolicy": "embed",
+      "browserTitle": "Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.",
+      "browserUrl": "https://preview.tabler.io/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "imfing/hextra",
+      "branch": "main",
+      "homepage": "https://imfing.github.io/hextra/",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/imfing/hextra/blob/main/LICENSE",
+      "commit": "e58687ee6c2e7ccd054c7ef31307d2147a7b8bd7",
+      "readmeEvidence": "https://github.com/imfing/hextra/blob/e58687ee6c2e7ccd054c7ef31307d2147a7b8bd7/README.md",
+      "demo": {
+        "url": "https://imfing.github.io/hextra/",
+        "status": 200,
+        "finalUrl": "https://imfing.github.io/hextra/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "749fbcaf565aeec8feab572b554ad7f4798397521b737a35ee1dbdbfe6b9c1db",
+      "publicationSlug": "template-hextra",
+      "previewPolicy": "embed",
+      "browserTitle": "Hextra",
+      "browserUrl": "https://imfing.github.io/hextra/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "just-the-docs/just-the-docs",
+      "branch": "main",
+      "homepage": "https://just-the-docs.com",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/just-the-docs/just-the-docs/blob/main/LICENSE.txt",
+      "commit": "c66a13657020dfe439c37c97e1de4b595896c22a",
+      "readmeEvidence": "https://github.com/just-the-docs/just-the-docs/blob/c66a13657020dfe439c37c97e1de4b595896c22a/README.md",
+      "demo": {
+        "url": "https://just-the-docs.github.io/just-the-docs/",
+        "status": 200,
+        "finalUrl": "https://just-the-docs.github.io/just-the-docs/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "2ca62729bcac3d0b534e7e03b7693d4436e1aec4a6e0f2a766fab8263a3a1b85",
+      "publicationSlug": "template-just-docs",
+      "previewPolicy": "embed",
+      "browserTitle": "Home | Just the Docs",
+      "browserUrl": "https://just-the-docs.github.io/just-the-docs/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "StartBootstrap/startbootstrap-clean-blog",
+      "branch": "master",
+      "homepage": "https://startbootstrap.com/theme/clean-blog/",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE",
+      "commit": "1ebc4f8f3b6194335df237a2a7837955a5a4a9aa",
+      "readmeEvidence": "https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/1ebc4f8f3b6194335df237a2a7837955a5a4a9aa/README.md",
+      "demo": {
+        "url": "https://startbootstrap.github.io/startbootstrap-clean-blog/",
+        "status": 200,
+        "finalUrl": "https://startbootstrap.github.io/startbootstrap-clean-blog/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "e8b857747301fcd4c885b3216544b18bbf60328aec2c34da614787346cf40282",
+      "publicationSlug": "template-clean-blog",
+      "previewPolicy": "embed",
+      "browserTitle": "Clean Blog - Start Bootstrap Theme",
+      "browserUrl": "https://startbootstrap.github.io/startbootstrap-clean-blog/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "StartBootstrap/startbootstrap-freelancer",
+      "branch": "master",
+      "homepage": "https://startbootstrap.com/theme/freelancer/",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-freelancer/blob/master/LICENSE",
+      "commit": "5bc65b4bd01e4ab63186395d5f95c7fdaa26216d",
+      "readmeEvidence": "https://github.com/StartBootstrap/startbootstrap-freelancer/blob/5bc65b4bd01e4ab63186395d5f95c7fdaa26216d/README.md",
+      "demo": {
+        "url": "https://startbootstrap.github.io/startbootstrap-freelancer/",
+        "status": 200,
+        "finalUrl": "https://startbootstrap.github.io/startbootstrap-freelancer/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "7cfb7483fa643abcce409ac1d6f4004b65ebbdcf6a419e02f6897eee3a4f1694",
+      "publicationSlug": "template-freelancer",
+      "previewPolicy": "embed",
+      "browserTitle": "Freelancer - Start Bootstrap Theme",
+      "browserUrl": "https://startbootstrap.github.io/startbootstrap-freelancer/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "themesberg/landwind",
+      "branch": "main",
+      "homepage": "https://demo.themesberg.com/landwind/",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/themesberg/landwind/blob/main/LICENSE",
+      "commit": "f8be851cc8b4b44ff9d842ca8f5149d7911af88c",
+      "readmeEvidence": "https://github.com/themesberg/landwind/blob/f8be851cc8b4b44ff9d842ca8f5149d7911af88c/README.md",
+      "demo": {
+        "url": "https://demo.themesberg.com/landwind/",
+        "status": 429,
+        "finalUrl": "https://demo.themesberg.com/landwind/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "ead3772867f8a6249ebb563c10f592a2ff485c8793b83ca50f18b642825fa19d",
+      "publicationSlug": "template-landwind",
+      "previewPolicy": "embed",
+      "browserTitle": "Landwind - Tailwind CSS Landing Page Demo",
+      "browserUrl": "https://demo.themesberg.com/landwind/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "themefisher/bigspring-light-astro",
+      "branch": "main",
+      "homepage": "https://themefisher.com/products/bigspring-light-astro",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/themefisher/bigspring-light-astro/blob/main/LICENSE",
+      "commit": "4b40e8ec4f1d4ed4d10699496e2423828263ae29",
+      "readmeEvidence": "https://github.com/themefisher/bigspring-light-astro/blob/4b40e8ec4f1d4ed4d10699496e2423828263ae29/README.md",
+      "demo": {
+        "url": "https://tf-bigspring-light-astro.vercel.app/",
+        "status": 200,
+        "finalUrl": "https://tf-bigspring-light-astro.vercel.app/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "47145c03c8ed9ff3526de790d77a35a23a743d77aaa60164817efe9f451c5b1f",
+      "publicationSlug": "template-bigspring",
+      "previewPolicy": "embed",
+      "browserTitle": "Bigspring Light Astro",
+      "browserUrl": "https://tf-bigspring-light-astro.vercel.app/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "mediaExclusion": "README separates MIT code from demonstration images; all sample raster media omitted.",
+      "browserEmbeddingVerified": true
+    },
+    {
+      "repo": "StartBootstrap/startbootstrap-resume",
+      "branch": "master",
+      "homepage": "https://startbootstrap.com/theme/resume/",
+      "archived": false,
+      "license": "MIT",
+      "licenseUrl": "https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE",
+      "commit": "c6fbe5ef431642984d0f17960194632f20cf67bc",
+      "readmeEvidence": "https://github.com/StartBootstrap/startbootstrap-resume/blob/c6fbe5ef431642984d0f17960194632f20cf67bc/README.md",
+      "demo": {
+        "url": "https://startbootstrap.github.io/startbootstrap-resume/",
+        "status": 200,
+        "finalUrl": "https://startbootstrap.github.io/startbootstrap-resume/",
+        "xFrameOptions": null,
+        "csp": null
+      },
+      "licenseSha256": "e8b857747301fcd4c885b3216544b18bbf60328aec2c34da614787346cf40282",
+      "publicationSlug": "template-resume",
+      "previewPolicy": "embed",
+      "browserTitle": "Resume - Start Bootstrap Theme",
+      "browserUrl": "https://startbootstrap.github.io/startbootstrap-resume/",
+      "descriptionAuthor": "IAVSE; based on original README and real interface",
+      "browserEmbeddingVerified": true
+    }
+  ],
+  "excluded": [
+    {
+      "repository": "https://github.com/LekoArts/gatsby-starter-portfolio-cara",
+      "reason": "Original demo sends X-Frame-Options: DENY; excluded per user requirement."
+    },
+    {
+      "repository": "https://github.com/timlrx/tailwind-nextjs-starter-blog",
+      "reason": "Official demo is Deployment Paused; not added."
+    },
+    {
+      "repository": "https://github.com/cruip/open-react-template",
+      "reason": "No standard project license verified in the checked root; not added."
+    }
+  ]
+}

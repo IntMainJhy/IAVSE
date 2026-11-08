@@ -14,9 +14,16 @@ for(const entry of entries.filter(entry=>entry.template.kind==='design-system'))
 for(const slug of ['template-astro-paper','voltagent-claude','template-fuwari']){
  const html=await (await get('/resources/designs/'+slug)).text();assert.ok(html.includes('GitHub')&&html.includes('MIT'));assert.equal((html.match(/<iframe\b/g)||[]).length,0,'details start without heavy previews');
 }
+for(const id of ['tabler','hextra','just-docs','clean-blog','freelancer','landwind','bigspring','resume']){
+ const entry=entries.find(item=>item.slug==='template-'+id);
+ const preview=await get('/resources/designs/'+entry.slug+'/preview'),html=await preview.text();
+ assert.ok(html.includes('src="'+entry.template.upstreamDemoUrl+'"'),id);
+ assert.ok(preview.headers.get('content-security-policy').includes(new URL(entry.template.upstreamDemoUrl).origin),id);
+ const detail=await(await get('/resources/designs/'+entry.slug)).text();assert.ok(detail.includes('组件提示词')&&detail.includes(entry.template.repository),id);
+}
 for(const old of ['website-apple','stylekit-minimalist-flat','vibeui-claude','website-stylekit-acid-graphics','template-brutal-landing','template-anx-portfolio'])assert.equal((await fetch(base+'/resources/designs/'+old)).status,404,old);
 for(const entry of entries.filter(entry=>entry.image)){
  const response=await get(entry.image);assert.match(response.headers.get('content-type'),/image\/webp/);assert.match(response.headers.get('cache-control'),/max-age=86400/);
 }
 assert.equal((await fetch(base+'/template-sites/brutal-landing')).status,404);
-console.log(JSON.stringify({httpChecks:checked,projects:4,sourceVariants:108,staticCovers:entries.filter(entry=>entry.image).length,retiredRoutes:6,idleIframes:0}));
+console.log(JSON.stringify({httpChecks:checked,projects:12,sourceVariants:108,staticCovers:entries.filter(entry=>entry.image).length,retiredRoutes:6,idleIframes:0}));
