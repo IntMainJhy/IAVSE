@@ -8,6 +8,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {parseDocument} from 'htmlparser2';
 import ts from 'typescript';
 import {blogProductCopy} from '../src/lib/blog-product-copy.mjs';
+import * as showroomData from '../src/lib/product-showcase.mjs';
 import {blogTemplates} from '../src/lib/blog-templates.mjs';
 import {blogAppearances} from '../src/lib/blog-appearances.mjs';
 import {blogShowcases} from '../src/lib/blog-showcase.mjs';
@@ -20,12 +21,13 @@ function render(locale='zh',spaces=fixtures){
  let lookProps;
  const modules={
   './ProductCinema':{ProductCinema:()=>null},
-  'react':React,'react/jsx-runtime':runtime,
+  'react':React,'react/jsx-runtime':runtime,'@/lib/product-showcase.mjs':showroomData,'@/app/product-showroom.css':{},
   'next/link':{default:({href,children,prefetch,...props})=>element('a',{href,...props},children)},
   './BlogProductMotion':{BlogProductMotion:({children})=>element('div',{'data-product-motion':''},children)},
   './HomeBlogCanvasDemo':{HomeBlogCanvasDemo:({locale})=>element('div',{'data-local-demo':locale})},
   './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'@/lib/blog-product-copy.mjs':{blogProductCopy},'@/app/blog-product-film.css':{}
  };
+ const previewExports={};vm.runInNewContext(ts.transpileModule(readFileSync(new URL('../src/components/ShowcasePreview.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports:previewExports,require:name=>modules[name]});modules['./ShowcasePreview']=previewExports;
  const looksExports={};vm.runInNewContext(looksSource,{exports:looksExports,require:name=>{if(!Object.hasOwn(modules,name))throw Error('Unexpected dependency '+name);return modules[name];}});
  modules['./BlogProductLooks']={BlogProductLooks:props=>{lookProps=props;return element(looksExports.BlogProductLooks,props);}};
  const exports={};vm.runInNewContext(source,{exports,require:name=>{if(!Object.hasOwn(modules,name))throw Error('Unexpected dependency '+name);return modules[name];}});
@@ -36,9 +38,9 @@ function render(locale='zh',spaces=fixtures){
 test('the product story retains its gallery anchor, three real feature scenes and complete server-rendered creator directory',()=>{
  const{html,nodes,lookProps}=render(),copy=blogProductCopy('zh');
  assert.ok(nodes.some(node=>node.attribs?.id==='blog-spaces-directory'));
- assert.equal(nodes.filter(node=>Object.hasOwn(node.attribs||{},'data-film-scene')).length,3);
- for(const id of ['film-canvas-title','film-looks-title','film-publish-title'])assert.ok(nodes.some(node=>node.attribs?.id===id));
- const directory=nodes.find(node=>Object.hasOwn(node.attribs||{},'data-blog-directory'));assert.ok(directory);assert.equal(directory.name,'details');assert.equal(Object.hasOwn(directory.attribs,'open'),false);
+ assert.ok(nodes.some(node=>node.attribs?.['data-product-showroom']==='blogs'));
+ for(const id of ['blog-product-title','film-canvas-title','film-publish-title'])assert.ok(nodes.some(node=>node.attribs?.id===id));
+ const directory=nodes.find(node=>Object.hasOwn(node.attribs||{},'data-blog-directory'));assert.ok(directory);assert.equal(directory.name,'section','public creators remain directly discoverable');
  const links=walk(directory).filter(node=>node.name==='a').map(node=>node.attribs.href);assert.deepEqual(links,fixtures.map(space=>space.href));
  assert.equal(nodes.filter(node=>node.name==='iframe').length,0,'the product story must not execute additional embedded member sites');
  assert.equal(nodes.filter(node=>node.name==='script').length,0);assert.ok(nodes.some(node=>node.type==='text'&&node.data===fixtures[0].name),'public author names remain escaped text');
@@ -52,10 +54,10 @@ test('the product story retains its gallery anchor, three real feature scenes an
 });
 
 test('product visuals reserve geometry and an empty public directory keeps a real creation path',()=>{
- const{nodes}=render('en',[]),images=nodes.filter(node=>node.name==='img');assert.equal(images.length,5);
+ const{nodes}=render('en',[]),images=nodes.filter(node=>node.name==='img');assert.equal(images.length,4);
  for(const image of images){assert.match(image.attribs.src,/^\/media\/blog-product\/[a-z-]+\.webp$/);const mobile=image.attribs.src.endsWith('/portfolio-mobile.webp');assert.equal(image.attribs.width,mobile?'390':'900');assert.equal(image.attribs.height,mobile?'844':'1015');assert.equal(image.attribs.loading,'lazy');assert.equal(image.attribs.decoding,'async');assert.ok(image.attribs.alt);}
  const selected=nodes.filter(node=>node.attribs?.role==='tabpanel'&&node.attribs['aria-hidden']==='false');assert.equal(selected.length,1);assert.equal(walk(selected[0]).find(node=>node.name==='img').attribs.src,'/media/blog-product/portfolio.webp');
- assert.equal(images.filter(image=>image.attribs.src.endsWith('/portfolio-mobile.webp')).length,1);
+ assert.equal(images.filter(image=>image.attribs.src.endsWith('/portfolio-mobile.webp')).length,0,'the second device image loads only when selected');
  const directory=nodes.find(node=>Object.hasOwn(node.attribs||{},'data-blog-directory'));assert.ok(text(directory).includes('No public spaces yet.'));
  assert.deepEqual(walk(directory).filter(node=>node.name==='a').map(node=>node.attribs.href),['/workspace/blog']);
 });

@@ -9,6 +9,7 @@ import * as runtime from 'react/jsx-runtime';
 import {parseDocument} from 'htmlparser2';
 import * as locales from '../src/lib/content-locales.mjs';
 import * as productCopy from '../src/lib/home-product-copy.mjs';
+import * as showroomData from '../src/lib/product-showcase.mjs';
 
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/PlatformHome.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
 async function render(space,locale='zh',media=true){
@@ -16,7 +17,8 @@ async function render(space,locale='zh',media=true){
  const Link=({href,children,...props})=>React.createElement('a',{href,...props},children);
  const modules={
   './ProductCinema':{ProductCinema:()=>null},
-  'react/jsx-runtime':runtime,'next/link':{default:Link},
+  'react':React,'react/jsx-runtime':runtime,'next/link':{default:Link},
+  '@/lib/product-showcase.mjs':showroomData,'./LocaleProvider':{useLocale:()=>({locale,t:value=>value})},
   '@/lib/server-i18n':{serverI18n:async()=>({t:(value,args=[])=>value.replace(/\{(\d+)\}/g,(_,i)=>String(args[i]??'{'+i+'}')),locale})},
   '@/lib/spaces.mjs':{defaultBlogSpace:()=>space},
   '@/lib/content-locales.mjs':locales,
@@ -30,6 +32,7 @@ async function render(space,locale='zh',media=true){
   '@/app/home-showcase.css':{},'@/app/home-product-showcase.css':{},'@/app/gallery-backgrounds.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
+ for(const name of ['ShowcasePreview','ShowcaseDiscovery','HomeProductShowcase']){const component={};const code=ts.transpileModule(fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(code,{exports:component,Set,require:key=>{if(key.endsWith('.css'))return{};if(!Object.hasOwn(modules,key))throw Error(key);return modules[key]}});modules['./'+name]=component;}
  vm.runInNewContext(source,{exports,Set,encodeURIComponent,require:name=>{if(!Object.hasOwn(modules,name))throw new Error(name);return modules[name]}});
  return renderToStaticMarkup(await exports.PlatformHome({req:new Request('http://site.example/')}));
 }
@@ -55,28 +58,21 @@ test('hidden résumé projects stay out of the landing and published documents p
  assert.ok(!html.includes('Not a portfolio project'));
  const example=demoSnapshot(html);assert.equal(example.projects.length,1);assert.equal(example.projects[0].title,'Published document');assert.ok(!JSON.stringify(example).includes('Real work'));assert.ok(!JSON.stringify(example).includes('published-cover'));
 });
-test('large feature rows alternate real media while keeping public navigation independent of renderers',async()=>{
+test('product proof uses one readable homepage surface and real catalog links without idle films',async()=>{
  const html=await render(space,'en');
- assert.deepEqual(Array.from(html.matchAll(/data-home-story="([^"]+)" data-home-side="([^"]+)"/g),match=>[match[1],match[2]]),[['blog','left'],['editor','right'],['skills','left'],['resources','right']]);
- for(const src of ['/media/home/creator-home.webp','/media/home/creator-home-mobile.webp','/media/home/skills-poster.webp','/media/home/resources.webp'])assert.ok(html.includes('src="'+src+'"'),src+' supplies real imagery');
- assert.ok(html.includes('data-video-src="/media/home/skills-loop.mp4"'));
- const noMedia=await render(space,'en',false);
+ assert.deepEqual([...html.matchAll(/data-home-story="([^"]+)"/g)].map(match=>match[1]),['blog','editor','skills','resources']);
+ assert.match(html,/src="\/media\/home\/creator-home.webp"/);assert.doesNotMatch(html,/<video|<iframe|data-cinema-variant/);
  assert.ok(html.includes('data-editor-demo="true" data-locale="en" data-page-scroll="true"'));
- for(const href of ['/workspace/blog','/blogs','/community','/resources','/resources?type=skills','/skills/gsap'])assert.ok(noMedia.includes('href="'+href+'"'),href+' remains a normal public link without video or GPU content');
- const copy=productCopy.homeProductCopy('en');for(const title of [copy.blogTitle,copy.editorTitle,copy.skillTitle,copy.resourceTitle])assert.ok(noMedia.includes(title),'feature copy stays readable without client renderers');
+ for(const href of ['/workspace/blog','/blogs','/community','/resources?type=designs','/resources?type=skills','/docs/showcase'])assert.ok(html.includes('href="'+href+'"'),href+' remains a real destination');
+ const copy=productCopy.homeProductCopy('en');for(const title of [copy.blogTitle,copy.editorTitle,copy.skillTitle,copy.resourceTitle])assert.ok(html.includes(title));
 });
 
-test('the portfolio shows Jianghao Yu’s real public homepage in every language without borrowing the featured creator’s identity',async()=>{
+test('homepage proof keeps Jianghao Yu’s captured identity separate from the editable featured creator',async()=>{
  for(const locale of ['zh','en','ja']){
   const html=await render(space,locale),copy=productCopy.homeProductCopy(locale),blog=html.match(/<section[^>]*data-home-story="blog"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(blog,'the portfolio story is present');
-  assert.ok(blog.includes('href="/blog/jianghaoyu2006"'));
-  for(const src of ['/media/home/creator-home.webp','/media/home/creator-home-mobile.webp'])assert.ok(blog.includes('src="'+src+'"'));
-  assert.match(copy.blogExample,/Jianghao\s?Yu/);assert.match(copy.blogAlt,/Jianghao\s?Yu/);
-  assert.ok(blog.includes('aria-label="'+copy.blogExample+'"'));
-  assert.ok(blog.includes('alt="'+copy.blogAlt+'"'));
-  assert.ok(blog.includes('<p class="home-story-caption">'+copy.blogExample+'</p>'));
-  assert.doesNotMatch(blog,/Maya|maya-lab|\/media\/blog-product\/portfolio|Published author|published-author|published-cover|home-story-person/,'the real captured homepage keeps its own identity');
+  assert.ok(blog);assert.ok(blog.includes('href="/blog/jianghaoyu2006"'));assert.ok(blog.includes('/media/home/creator-home.webp'));
+  assert.ok(blog.includes(copy.blogAlt));assert.ok(blog.includes(copy.blogExample));assert.ok(blog.includes('data-preview-device="desktop"'));
+  assert.doesNotMatch(blog,/Maya|maya-lab|\/media\/blog-product\/portfolio|Published author|published-author|published-cover/);
  }
 });
 
@@ -89,31 +85,16 @@ test('product copy supplies complete localized labels and features with a Chines
  assert.equal(productCopy.homeProductCopy('unknown'),base);
 });
 
-test('the product stories begin after the preserved opening and reserve the large treatment for blog and editor',async()=>{
- const html=await render(space,'en'),opening=html.slice(html.indexOf('<section class="v2-hero-scene"'),html.indexOf('<div class="home-stories home-product"'));
- assert.match(opening,/class="v2-hero-intro"/);assert.match(opening,/id="product-title"/);assert.match(opening,/data-home-cinema="true"/);assert.match(opening,/data-glass-reveal="stage"/);assert.match(opening,/data-stage="true"/);
- assert.doesNotMatch(opening,/data-home-product|home-story|data-editor-demo/);
- assert.equal((html.match(/data-home-motion="true"/g)||[]).length,1);assert.match(html,/class="v2-home-atmosphere" aria-hidden="true"/);
- const sections=Array.from(html.matchAll(/<section class="([^"]+)"[^>]*data-home-story="([^"]+)"/g),match=>({classes:match[1],story:match[2]}));
- assert.deepEqual(sections.map(({story})=>story),['blog','editor','skills','resources']);
- assert.deepEqual(sections.filter(({classes})=>classes.includes('home-story-primary')).map(({story})=>story),['blog','editor']);
- assert.deepEqual(sections.filter(({classes})=>classes.includes('home-story-discovery')).map(({story})=>story),['skills','resources']);
- assert.match(html,/class="home-stories home-product" data-home-product="true"/);
-});
-
-test('the gallery contains the complete lower homepage without adding a background renderer to the independent hero',async()=>{
+test('the complete product showroom follows the protected opening and adds no background renderer',async()=>{
  const descendants=node=>(node.children||[]).flatMap(child=>[...(child.type==='tag'?[child]:[]),...descendants(child)]);
  const hasClass=(node,name)=>node.attribs?.class?.split(/\s+/).includes(name);
  for(const creator of [space,null]){
-  const nodes=descendants(parseDocument(await render(creator,'en'))),galleries=nodes.filter(node=>node.attribs['data-home-background']==='gallery');assert.equal(galleries.length,1);
-  const gallery=galleries[0],inside=descendants(gallery),hero=nodes.find(node=>hasClass(node,'v2-hero-scene'));
-  assert.ok(hasClass(gallery,'home-gallery-background'));assert.equal(hero.parent,gallery.parent,'the background starts after the independent hero scene');assert.ok(hero.parent.children.indexOf(hero)<hero.parent.children.indexOf(gallery));
-  assert.ok(!inside.some(node=>node.name==='canvas'||hasClass(node,'spatial-backdrop')||node.attribs['data-spatial-mode']),'the lower homepage uses its CSS surfaces without an additional background renderer');
-  assert.ok(!nodes.some(node=>hasClass(node,'spatial-backdrop')||node.attribs['data-spatial-mode']),'the removed spatial background is not mounted anywhere on the homepage');
-  assert.deepEqual(inside.filter(node=>node.attribs['data-home-story']).map(node=>[node.attribs['data-home-story'],node.attribs['data-home-side']]),[['blog','left'],['editor','right'],['skills','left'],['resources','right']]);
+  const html=await render(creator,'en'),nodes=descendants(parseDocument(html)),showroom=nodes.find(node=>node.attribs['data-product-showroom']==='home'),hero=nodes.find(node=>hasClass(node,'v2-hero-scene'));assert.ok(showroom);assert.equal(hero.parent,showroom.parent);assert.ok(hero.parent.children.indexOf(hero)<hero.parent.children.indexOf(showroom));
+  const inside=descendants(showroom);assert.deepEqual(inside.filter(node=>node.attribs['data-home-story']).map(node=>node.attribs['data-home-story']),['blog','editor','skills','resources']);
+  assert.ok(!inside.some(node=>node.name==='canvas'||node.name==='video'||node.name==='iframe'||hasClass(node,'v2-hero-scene')||node.attribs['data-home-cinema']||node.attribs['data-stage']));
   assert.equal(inside.filter(node=>node.attribs['data-home-scene']==='invitation').length,1);assert.equal(inside.filter(node=>node.attribs['data-creator-voices']==='true').length,1);
-  assert.ok(!inside.some(node=>hasClass(node,'v2-hero-scene')||hasClass(node,'v2-hero-intro')||hasClass(node,'v2-hero-showcase')||node.attribs['data-home-cinema']||node.attribs['data-stage']),'the optical opening and creator stage never receive the gallery background');
-  assert.ok(descendants(hero).some(node=>node.attribs[creator?'data-stage':'class']===(creator?'true':'v2-hero-empty')),'both published and empty hero states remain available');
+  assert.ok(descendants(hero).some(node=>node.attribs[creator?'data-stage':'class']===(creator?'true':'v2-hero-empty')));
+  assert.equal((html.match(/data-home-motion="true"/g)||[]).length,1);assert.ok(html.includes('data-glass-reveal="stage"'));
  }
 });
 test('the editor receives the real public snapshot without repeating a separate project row',async()=>{
@@ -130,14 +111,8 @@ test('the editor receives the real public snapshot without repeating a separate 
  assert.ok(!stories.includes('Text-only project'));
  assert.ok(!stories.includes('Another illustrated work'));
 });
-test('homepage retains the creation invitation and adds a separate creator-voices section',async()=>{
- const html=await render(space);
- assert.ok(html.includes('data-home-scene="invitation"'));
- assert.ok(!html.includes('data-card-gallery'));
- assert.ok(!html.includes('home-card'));
- const afterInvitation=html.slice(html.indexOf('data-home-scene="invitation"'));
- assert.equal(Array.from(afterInvitation.matchAll(/<section/g)).length,1,'the creator-voices section follows the invitation');
- assert.ok(afterInvitation.includes('data-creator-voices="true"'));
+test('the illustrative creator comments precede a clear final creation action',async()=>{
+ const html=await render(space);assert.ok(html.includes('data-home-scene="invitation"'));assert.ok(html.indexOf('data-creator-voices="true"')<html.indexOf('data-home-scene="invitation"'));assert.ok(html.slice(html.indexOf('data-home-scene="invitation"')).includes('href="/workspace/blog"'));
 });
 test('the editor story and real navigation remain available without a published creator',async()=>{
  const html=await render(null,'en');

@@ -181,8 +181,8 @@ test('the mobile homepage layer selector stays outside the canvas and can return
  s.click('编辑');assert.equal(s.node('title').props['data-selected'],true);s.click('撤销');assert.equal(s.field().props.value,publishedCreator.name);assert.equal(select().props.value,'title');assert.equal(s.button('撤销').props.disabled,true);s.unmount();
 });
 
-test('mobile layer navigation is limited to page-scroll demos with a real public creator',()=>{
+test('mobile layer navigation is available in all page-scroll demos and absent in standalone embeds',()=>{
  for(const options of [{creator:publishedCreator},{creator:publishedCreator,pageScroll:false},{pageScroll:true},{creator:null,pageScroll:true}]){
-  const s=fixture({...options,width:308,height:218});assert.equal(s.nodes('select').length,0);assert.ok(!s.nodes('label').some(node=>node.props.className==='hbd-mobile-layer-nav'));s.click('预览');assert.equal(s.nodes('select').length,0);s.unmount();
+  const s=fixture({...options,width:308,height:218});const expected=options.pageScroll?1:0;assert.equal(s.nodes('select').length,expected);assert.equal(s.nodes('label').some(node=>node.props.className==='hbd-mobile-layer-nav'),!!options.pageScroll);s.click('预览');assert.equal(s.nodes('select').length,expected);s.unmount();
  }
 });

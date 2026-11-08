@@ -8,6 +8,8 @@
 @media(prefers-reduced-motion:reduce){.showcase-portfolio *{scroll-behavior:auto!important;transition:none!important}}
 @media print{.showcase-portfolio{--showcase-paper:#fff;--showcase-ink:#111;--showcase-muted:#555}.showcase-study,.showcase-sample-note,.showcase-footer{break-inside:avoid}.showcase-case:not([open])>.showcase-case-body,.showcase-note:not([open])>.showcase-note-body{display:block}.showcase-projects{display:block}.showcase-project{margin-bottom:30px}}
 /* Site-wide prose colors must not override an individual portfolio's palette. */
+/* The notebook's desktop selector is more specific than the shared mobile layout. */
+@media(max-width:680px){.showcase-portfolio[data-art=notebook] .showcase-hero{grid-template-columns:1fr;}}
 .showcase-portfolio .showcase-statement{color:var(--showcase-ink)}
 .showcase-portfolio .showcase-study p{color:inherit}
 
