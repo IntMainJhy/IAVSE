@@ -2,29 +2,25 @@
 
 IAVSE stands for **Insight · Artificial Intelligence · Vigilance · Seize · Evolve**. The approved mission is **“Insight through AI. Vigilance for Opportunity. Seize to Evolve.”** Its Chinese presentation is **“以洞察驱动智能，以敏锐发现机遇，以行动实现进化。”**
 
-The mark is an **open aperture**: two solid, oblique facets form an open V silhouette, separated by a clear vertical negative-space slit. The upright slit references the I and the opening references the V in IAVSE. It replaces the retired Folivo lowercase-f mark. It uses original path geometry, with no font-derived outlines or third-party icon artwork.
-
-The five ideas inform the whole visual system: the opening suggests insight, the related geometric facets suggest intelligence, the crisp boundaries suggest vigilance, their direction suggests action, and the unfolding spatial treatment suggests evolution. The favicon does not attempt to encode five tiny letters or pictograms.
+The mark is the **outlined V** approved by the user from the independent exploration page. Several oblique strokes converge into one V silhouette. The exact original path is shared by website navigation, browser-tab icons, touch icons and metadata exports; it contains no font-derived outlines or third-party artwork.
 
 ## Source and deterministic exports
 
-The source of truth is `src/app/icon.svg`, a 64px grid with white facets on deep indigo `#17234e`. Its central opening remains 8 source units wide, or 2px at 16px output. The final source was inspected at 16, 32, 48 and 64px. The static, solid silhouette retains its shape without glass, gradients, shadows or animation.
+The source of truth is `src/app/icon.svg`: a 28-unit viewBox, 2-unit stroke and white linework on graphite `#161617`. Its geometry matches the approved exploration-page symbol. Run `npm run brand:icons` after changing it. `scripts/brand-icons.mjs` generates:
 
-Run `npm run brand:icons` after changing the SVG. `scripts/brand-icons.mjs` deterministically generates:
-
-- `public/brand/iavse-symbol.svg`: transparent blue navigation mark;
+- `public/brand/iavse-symbol.svg`: transparent black navigation/export mark;
 - `src/app/favicon.ico`: 16, 32 and 48px browser-tab icons;
-- `src/app/apple-icon.png`: 180px icon flattened onto white;
-- `public/brand/iavse-icon.png`: 512px metadata/share icon;
-- `src/lib/brand-icon.ts`: versioned navigation URL using the first 12 characters of the SVG SHA-256.
+- `src/app/apple-icon.png`: 180px touch icon;
+- `public/brand/iavse-icon.png`: 512px metadata icon;
+- `src/lib/brand-icon.ts`: the versioned URL, viewBox and path used by `BrandMark`.
 
-The legacy filenames preserve existing links and integrations. SVG, ICO and 512px PNG retain transparent outer corners. PNG exports contain an origin note; no image-generation model is involved in these brand assets. Regenerate and commit the source, exports and URL module together so navigation and browser tabs agree.
+The component renders the shared path inline with `currentColor`, so it follows black text on Apple-style light surfaces and white text over the approved dark home opening. Generated PNGs retain an embedded origin note. Regenerate and commit the source, exports and module together.
 
 ## Placement and accessibility
 
-The transparent symbol sits beside the complete IAVSE wordmark. It may be shown white on a dark background or blue on a light background through the site's existing treatment. `BrandMark` retains empty `alt` and `aria-hidden="true"`: the surrounding link takes its accessible name from the visible wordmark. A symbol used alone as a control must have its own accessible name.
+The abstract symbol is decorative beside the IAVSE wordmark. `BrandMark` uses `aria-hidden="true"` and `focusable="false"`; the surrounding link owns the accessible name. A symbol used alone as a control needs its own accessible label.
 
-Authored portfolio illustrations, résumé images, certificates and screenshots remain content, not reusable brand assets. The archived leaf-traveler character is not part of this mark or the current website.
+User avatars, authored portfolio illustrations and screenshots remain user content. They are not changed by the shared brand update.
 
 ## Compatibility identifiers
 

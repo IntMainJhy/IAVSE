@@ -1,5 +1,5 @@
-/* The open-space symbol stays independent of the active wordmark typography. */
-img.site-brand-mark{display:block;width:28px;height:28px;flex:0 0 28px;max-width:none;border-radius:0}
+/* Shared outlined V mark inherits the surrounding brand text color. */
+.site-brand-mark{display:block;width:28px;height:28px;flex:0 0 28px;max-width:none;border-radius:0}
 html[data-ui] .organic-brand,.blog-platform-logo{display:flex;align-items:center;gap:12px}
 .site-brand-copy{min-width:0}
 html[data-ui] a:hover>.site-brand-mark{transform:none}
