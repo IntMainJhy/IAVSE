@@ -184,6 +184,10 @@ export async function createHomeGlass(canvas:HTMLCanvasElement,signal:AbortSigna
   type JourneyKey=HomeJourneyChapter&{index:number;center:number;x:number;camera:number};
   let chapters:JourneyKey[]=[],resourceDock=false,width=1,height=1,readingMode=false,journeyLightVisible=false,motionReduced=false,heroDensity=1,readingDensity=1,qualityRatio=1,pixelBudget=1,appliedDensity=0;
   const setJourney=(input:HomeJourneyChapter[])=>{
+   // Product surfaces inherit the opening's blue-silver daylight in this same renderer.
+   const productFlow=input.some(chapter=>chapter.id==='products');
+   wallMaterial.uniforms.uCopper.value.set(productFlow?'#b4c8e1':'#c99670');
+   wallMaterial.uniforms.uSeaGlass.value.set(productFlow?'#dce7f3':'#72a99b');
    chapters=input.filter(chapter=>Number.isFinite(chapter.start)&&Number.isFinite(chapter.end)&&chapter.end>chapter.start).sort((a,b)=>a.start-b.start).map((chapter,index)=>({
     ...chapter,index,center:Math.max(.95,(chapter.start+chapter.end)*.5-.5),
     x:chapter.id==='invitation'?0:-Math.sign(chapter.side||1)*.98,

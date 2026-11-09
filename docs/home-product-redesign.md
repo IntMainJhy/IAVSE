@@ -6,11 +6,11 @@ The user has already settled the direction and purpose: light Apple styling, bla
 
 THESIS: Visitors can sample real resources, understand public sharing, and open the same built-in blog templates used by the editor.
 
-OWN-WORLD: White and neutral gray fields, black text and actions, system typography, substantial screenshots, clear rectangular content and minimal chrome. No repeated framed browser windows or invented activity.
+OWN-WORLD: The approved opening’s continuous blue-silver optical environment, pale reading surfaces, black text and actions, system typography, substantial screenshots, clear rectangular content and minimal chrome. No repeated framed browser windows or invented activity.
 
 STORY: Discover a useful starting point, exchange experience, then make room for personal work. Every displayed item links to a real existing destination.
 
-FIRST VIEWPORT: The protected blue opening leads into the product statement and a spatial stage. Native scrolling or fixed chapter controls bring one working product surface forward; the two neighboring surfaces recede with physical gaps. Mobile, short viewports and reduced motion expose all three surfaces in document order.
+FIRST VIEWPORT: The protected blue opening flows directly into the product statement and an open spatial stage; no opaque white section or separate gray stage interrupts the existing renderer. Native scrolling or fixed chapter controls bring one working product surface forward; the two neighboring surfaces recede with physical gaps. Mobile, short viewports and reduced motion expose all three surfaces in document order.
 
 FORM: User-pinned Apple direction, updated at the user’s request to one spatial showroom: source-first resources, public community, and genuine template comparison. No visual-world roll overrides the user's fixed direction.
 

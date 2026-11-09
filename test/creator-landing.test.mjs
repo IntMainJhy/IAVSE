@@ -21,6 +21,7 @@ test('homepage preserves the opening and replaces every old product display and 
  for(const phrase of ['Insight through AI.','Vigilance for Opportunity.','Seize to Evolve.'])assert.ok(html.includes(phrase));
  assert.equal((html.match(/data-protected-opening/g)||[]).length,1);
  assert.match(html,/data-home-experience="community-discovery"/);
+ assert.match(html,/data-home-story="products"/,'product stage joins the same optical scene as the opening');
  for(const old of ['iavse-cinema-toolbar','v2-hero-showcase','v2-stage-profile','product-showroom-home','home-blog-demo','data-creator-voices','creator-home.webp','jianghaoyu2006'])assert.ok(!html.includes(old),old);
  assert.doesNotMatch(html,/<iframe|<video/);
 });

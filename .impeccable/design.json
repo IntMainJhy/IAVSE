@@ -169,10 +169,12 @@
       "depthStep": "130px",
       "turnStep": "10deg",
       "surfaceRadius": "22px",
-      "stageRadius": "32px",
+      "stageRadius": "0px",
       "enabledWhen": "min-width 1100px and min-height 900px and no reduced motion",
       "fallback": "Complete native document flow; every surface remains readable",
-      "runtime": "CSS perspective; native scroll; cached geometry; one queued frame"
+      "runtime": "CSS perspective; native scroll; cached geometry; one queued frame",
+      "environment": "Existing V2Atmosphere/home-glass renderer; transparent product ground; blue-silver refracted daylight; no additional canvas",
+      "surface": "95% white, fine top highlight, soft blue-gray downward shadow"
     }
   },
   "components": [
@@ -234,9 +236,9 @@
   ],
   "narrative": {
     "northStar": "Light Apple Spatial Showroom",
-    "overview": "Three real product surfaces share one perspective stage below the protected blue opening. Native scrolling or fixed chapter controls selects resource discovery, community exchange, or blog spaces. Foreground text stays clear; mobile, short viewports and reduced motion expose all content in normal reading order.",
+    "overview": "Three real product surfaces share one perspective stage within the protected blue opening’s continuous optical environment. Native scrolling or fixed chapter controls selects resource discovery, community exchange, or blog spaces. Foreground text stays clear; mobile, short viewports and reduced motion expose all content in normal reading order.",
     "keyCharacteristics": [
-      "Neutral lit stage, white surfaces, black actions and fixed chapter navigation.",
+      "Shared blue-silver daylight, pale reading surfaces, black actions and fixed chapter navigation.",
       "Separated perspective surfaces with an unblurred pixel-aligned foreground.",
       "Actual resource controls, qualified public sharing and built-in template screenshots.",
       "Native reading flow before enhancement and for reduced motion or constrained viewports."

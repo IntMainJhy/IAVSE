@@ -20,7 +20,7 @@ IAVSE brings community exchange and resource discovery together, with personal b
 
 ## Brand Commitments
 
-The user chose a light Apple-like interface, black actions rather than blue accents, and the shared outlined V mark. The homepage product presentation now uses a spatial showroom with resource, community, and blog-space chapters. The English mission remains “Insight through AI. Vigilance for Opportunity. Seize to Evolve.”
+The user chose a light Apple-like interface, black actions rather than blue accents, and the shared outlined V mark. The homepage product presentation now uses a spatial showroom with resource, community, and blog-space chapters, sharing the opening’s blue-silver optical environment without a hard background boundary. The English mission remains “Insight through AI. Vigilance for Opportunity. Seize to Evolve.”
 
 ## Evidence on Hand
 

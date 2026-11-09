@@ -45,7 +45,7 @@ typography:
 rounded:
   surface: "16px"
   pill: "999px"
-  spatial-stage: "32px"
+  spatial-stage: "0px"
   spatial-panel: "22px"
 spacing:
   compact: "8px"
@@ -99,7 +99,7 @@ components:
 
 **Creative North Star: "Light Apple Spatial Showroom"**
 
-The user-selected Apple-like direction becomes a white and neutral-gray spatial showroom. Resource discovery, community exchange, and blog spaces share one perspective camera. Native document scrolling moves the current surface into focus while neighboring surfaces recede with clear separation. Black chapter controls remain fixed in place. System typography and actual product content stay readable in the foreground.
+The user-selected Apple-like direction becomes a light spatial showroom within the approved opening’s continuous blue-silver optical environment. Resource discovery, community exchange, and blog spaces share one perspective camera. Native document scrolling moves the current surface into focus while neighboring surfaces recede with clear separation. Black chapter controls remain fixed in place. System typography and actual product content stay readable in the foreground.
 
 This document governs only `.home-experience`, from the first product section below the approved blue opening through the final invitation. It does not redefine the shared navigation, outlined V mark, blue glass opening, account flows, other pages, or the visual identities inside resource and template screenshots. The outlined V remains the shared identity asset described in [PRODUCT.md](PRODUCT.md), outside this boundary.
 
@@ -107,9 +107,9 @@ Ground truth is [home-experience.css](src/app/home-experience.css), [HomeProduct
 
 **Key Characteristics:**
 
-- White and soft-gray fields, dark text, and black primary actions.
+- A continuous blue-silver environment, pale reading surfaces, dark text, and black primary actions.
 - Generous section spacing with distinct resource, community, and template compositions.
-- Rounded controls and restrained surface corners; depth is reserved for the template preview and selected template control.
+- Rounded controls and restrained surface corners; separated product planes establish depth without obscuring foreground text.
 - Real catalog records, qualified public content, and visibly identified fictional template examples.
 
 ## Colors
@@ -125,7 +125,7 @@ The sidecar's eight-step OKLCH tonal strips are synthesized panel previews, not 
 ### Neutral
 
 - **Body Gray** (`colors.body`): supporting copy, inactive tabs, metadata, and screenshot captions.
-- **Paper** (`colors.paper`): the presentation background, community reading panel, search field, and selected template tab.
+- **Paper** (`colors.paper`): reading surfaces, search fields, and the selected template tab. The presentation itself is transparent so the existing optical environment remains visible.
 - **Soft Surface** (`colors.surface`): resource cards, community section field, search trigger, and template switcher track.
 - **Divider Gray** (`colors.line`): resource toolbar, reading-card borders, search underline, and usage-note separators.
 - **Quiet Divider** (`colors.quiet-line`): community panel header and public-post separators.
@@ -154,7 +154,7 @@ The sidecar's eight-step OKLCH tonal strips are synthesized panel previews, not 
 
 ## Layout
 
-The existing centered introduction and neutral palette lead into `.hs-journey`, a three-chapter product stage. On viewports at least 1100px wide and 900px tall, with no reduced-motion preference, the journey occupies 270svh (minimum 2250px). Its shell sticks 86px from the viewport top. The stage is at most 1680px wide; its visible window is at most 710px tall, bounded by the available viewport height.
+The centered-width introduction sits directly in the shared optical environment and leads into `.hs-journey`, a three-chapter product stage. On viewports at least 1100px wide and 900px tall, with no reduced-motion preference, the journey occupies 270svh (minimum 2250px). Its shell sticks 86px from the viewport top. The open stage spans the viewport without a separate background box; its visible window is at most 710px tall, bounded by the available viewport height.
 
 All three product surfaces have the same width: min(930px, viewport width minus 350px). Their horizontal distance is one surface width plus 96px, preserving a real gap. The selected surface starts 24px below the stage top and is aligned to whole pixels. Resource, community and space controls keep their actual behavior inside that surface. The blog preview shrinks on shorter spatial viewports so every action remains visible. The spatial community view shows the newest public post when present; the full-flow version can show two. Empty and unavailable states remain truthful.
 
@@ -164,7 +164,7 @@ Below 1100px width or 900px height, before enhancement, in reduced-motion mode, 
 
 ## Elevation & Depth
 
-The stage uses a neutral lit ground and a perspective distance of 1800px. The active surface has no blur or depth scale; its top and left positions are pixel-aligned for clear text. Neighboring surfaces recede by 130px and turn by 10 degrees per chapter offset, with slight blur and reduced opacity. They stay outside the foreground surface instead of crossing over its content. A floor shadow and a soft downward surface shadow establish depth without additional canvas or WebGL renderers.
+The stage uses the opening’s existing WebGL optical environment and a CSS perspective distance of 1800px. The outer journey registers as `data-home-story="products"`, using stable document bounds rather than the moving product planes. The existing renderer transitions from the glass opening into blue-silver refracted daylight; no second canvas or independent gray ground is introduced. The active surface has no blur or depth scale; its top and left positions are pixel-aligned for clear text. Neighboring surfaces recede by 130px and turn by 10 degrees per chapter offset, with slight blur and reduced opacity. They stay outside the foreground surface instead of crossing over its content. Near-white surfaces at 95% opacity, a fine top highlight, and soft blue-gray downward shadows connect the reading planes to the same light. There is no separate floor-shadow layer. The foreground remains unblurred and controls stay black.
 
 Camera transitions use 0.7s transform easing, with 0.5s opacity and blur transitions. Scrolling within a chapter updates only a small progress transform. Reduced motion removes the spatial presentation and transitions, exposing the full readable document. Actual template screenshots keep their existing modest preview shadow.
 
@@ -200,7 +200,7 @@ Shipping rasters are [space-editorial.webp](public/media/home-product/space-edit
 
 Native `details` / `summary` rows use fine bottom separators, text labels, and a plus SVG that rotates into a close mark while open. Answers remain gray, readable text. This is the presentation's disclosure pattern for source/license, publication, and template explanations; the shared navigation is outside the documented component set.
 
-The spatial presentation was checked in an actual browser at 1671 × 959 and 1100 × 900, including all three focused surfaces. Normal reading flow was checked at 1100 × 850, 390 × 844, and 320 × 780, plus reduced-motion mode. Local verification captures are not shipping media or approved image comps.
+The spatial presentation was checked in an actual browser at 1671 × 959 and 1100 × 900, including all three focused surfaces. Normal reading flow was checked at 1100 × 850, 390 × 844, and 320 × 780, plus reduced-motion mode. The continuous environment was also checked at 2048 × 978 and 390 × 844, with keyboard chapter navigation and reduced-motion fallback. Local verification captures are not shipping media or approved image comps.
 
 ## Do's and Don'ts
 
