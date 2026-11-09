@@ -1,0 +1,50 @@
+{
+  "capturedAt": "2026-11-09",
+  "sourceCommit": "427cdc99156a16ab50eab45c25551c10e17ad67a",
+  "locale": "zh-CN",
+  "source": "Actual local website rendered from main; no test accounts or posts created. Only Next.js development toolbar excluded from captures.",
+  "entries": [
+    {
+      "file": "docs/screenshots/home-current.webp",
+      "route": "/",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "docs/screenshots/product-current.webp",
+      "route": "/#home-product",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "docs/screenshots/resources-current.webp",
+      "route": "/resources?type=designs",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "docs/screenshots/community-current.webp",
+      "route": "/community",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "docs/screenshots/blog-home-current.webp",
+      "route": "/blogs/showcase/lin-studio?template=builtin",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "file": "docs/screenshots/blog-spaces-current.webp",
+      "route": "/blogs",
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "socialPreview": {
+    "file": "docs/screenshots/social-preview.png",
+    "route": "/",
+    "width": 1280,
+    "height": 640
+  }
+}

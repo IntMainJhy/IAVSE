@@ -26,3 +26,23 @@ Start from main, describe the problem and resulting behavior, and submit a focus
 [LICENSE](LICENSE) retains the unmodified official terms and controls the license grants. This guide explains the maintenance workflow and attribution; it does not replace or expand those grants.
 
 For a copyable original-author notice and redistribution scope, see the [license and attribution guide](docs/licensing.md). / 可保留的原作者声明与分发范围见[许可与署名指南](docs/licensing.md)。
+
+## Development checklist / 开发检查
+
+Read [local setup](docs/getting-started.md) and [architecture](docs/architecture.md) first. Start a focused contribution from the current `main` and include a clear reproduction or user scenario.
+
+```sh
+npm ci
+npm run docs:check
+npm test
+npm run build
+npm run typecheck
+```
+
+For documentation-only changes, run `npm run docs:check` and inspect the rendered result. For runtime changes, include the relevant tests, production build and type check; run a matching HTTP suite when changing request behavior. UI changes should include readable desktop and mobile evidence. Do not validate against a real site's data directory.
+
+Documentation uses `README.md` as the Chinese default, `README.en.md` for the complete English version, and `README.zh-CN.md` as a synchronized Chinese compatibility entry. Keep the two Chinese files identical and update English for changed product facts. Screenshot captures identify their date and source scope.
+
+纯文档修改检查链接、事实与渲染；运行代码修改补充相关测试、构建与类型检查。中文默认首页和兼容入口保持相同，产品事实变动同步英文。截图说明日期、来源与示例身份。
+
+Use the issue and PR templates. The [participation guide](CODE_OF_CONDUCT.md), [support routes](SUPPORT.md) and [security reporting policy](SECURITY.md) describe how to ask questions and handle concerns.

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation / 使用文档
+    url: https://github.com/IntMainJhy/IAVSE/blob/main/docs/README.md
+    about: Setup, editing, deployment and troubleshooting / 安装、编辑、部署与故障排查
+  - name: Security reporting / 安全报告
+    url: https://github.com/IntMainJhy/IAVSE/blob/main/SECURITY.md
+    about: Report security problems through the documented private route / 按说明私下报告安全问题

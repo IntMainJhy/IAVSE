@@ -112,3 +112,7 @@ duplicate mappings and distinctions between license texts and declarations.
 Skills 目录仅保存用途摘要、事实元数据、固定版本来源及核查记录，不分发第三方
 Skill 正文或源码包。收录站不被视为原作者；每项上游许可分别适用。仅有许可声明、
 专用条款或许可未明确的条目不提供自动安装命令。
+
+## Repository wordmark
+
+The README IAVSE lettering is derived from the bundled Cormorant Garamond typeface, copyright 2015 the Cormorant Project Authors, under SIL Open Font License 1.1. The font and its unmodified notice are retained at `public/fonts/CormorantGaramond-Variable.woff2` and `public/fonts/CormorantGaramond-OFL.txt`. `docs/brand/wordmark-light.svg` and `wordmark-dark.svg` contain vector glyph outlines. This font attribution does not change the website code license or grant rights to third-party brand identities.

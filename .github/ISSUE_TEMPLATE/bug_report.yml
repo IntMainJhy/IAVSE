@@ -1,0 +1,48 @@
+name: Bug report / 问题反馈
+description: Report a reproducible issue with the website or documentation / 提交可复现问题
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use disposable data and redact credentials, personal details and private uploads. Security vulnerabilities follow SECURITY.md. / 请使用临时数据并删除敏感信息。"
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version / 提交或版本
+      placeholder: main at 427cdc9
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment / 环境
+      description: Node.js, OS, browser, viewport and local/deployment mode. / Node、系统、浏览器、尺寸和运行模式。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / 复现步骤
+      placeholder: "1. Open…\n2. Choose…\n3. Observe…"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior / 期望与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted logs or screenshots / 脱敏日志或截图
+      description: Include the first relevant error. Do not attach a real environment file or database.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting / 提交前确认
+      options:
+        - label: I checked the documentation and existing issues. / 已检查文档和已有问题。
+          required: true
+        - label: I removed credentials and private user data. / 已移除凭据与私有资料。
+          required: true

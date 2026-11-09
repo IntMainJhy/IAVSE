@@ -25,3 +25,11 @@ User avatars, authored portfolio illustrations and screenshots remain user conte
 ## Compatibility identifiers
 
 The public product, authored asset filenames, font aliases, integration and deployment examples use IAVSE. New integrations use `IAVSE_URL`, `IAVSE_TOKEN`, `iavse_*` tools and `integrations/iavse-mcp.mjs`. Old MCP launch paths, tool names and environment variables remain compatibility inputs; old public brand/Skill URLs redirect to their IAVSE equivalents without duplicate assets. Persisted database ownership keys and token formats are unchanged. Existing deployments keep their own service user, paths and data directory; new deployment examples do not migrate a live installation.
+
+## README editorial wordmark
+
+`docs/brand/wordmark-light.svg` and `wordmark-dark.svg` provide the IAVSE title used in repository documentation. They use outlined glyphs from the already bundled **Cormorant Garamond**, instantiated at weight 500, with deliberate letter spacing. The outlines avoid font substitution in GitHub's SVG rendering; the light and dark variants follow the reader's color scheme through a README `picture` element.
+
+Typeface source and unmodified license remain in `public/fonts/CormorantGaramond-Variable.woff2` and `public/fonts/CormorantGaramond-OFL.txt`. The wordmarks contain no font file, external image request, script or animation. Their accessible SVG title is IAVSE. They complement the approved navigation mark and do not replace site navigation, favicons or the underlying brand geometry.
+
+README 艺术字使用已随仓库提供的 Cormorant Garamond 字体转为矢量轮廓，提供深浅背景版本。字体沿用 SIL OFL；它是文档展示字标，不改变网站导航与图标。

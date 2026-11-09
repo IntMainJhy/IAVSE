@@ -1,69 +1,79 @@
-# IAVSE documentation / 文档导航
+# IAVSE 文档 / Documentation
 
-[English project introduction](../README.md) · [中文项目介绍](../README.zh-CN.md)
+[中文项目首页](../README.md) · [English README](../README.en.md) · [更新记录 / Changelog](../CHANGELOG.md)
 
-IAVSE combines editable developer blog homepages with shared docs, independent AI Skills and useful resources. Original website code is source-available under [PolyForm Noncommercial 1.0.0](../LICENSE), permitting noncommercial use, modification, deployment and redistribution within its terms. See [NOTICE](../NOTICE) for attribution and scope.
+IAVSE 将资源发现、实践交流和可编辑博客主页连接在一起。网站原创部分采用 [PolyForm Noncommercial 1.0.0](../LICENSE)，署名和范围见 [NOTICE](../NOTICE)。
 
-IAVSE 将可编辑的开发者博客主页与共享文档、独立 AI Skill、实用资源连接起来。网站原创源码按 [PolyForm Noncommercial 1.0.0](../LICENSE) 允许非商业使用、修改、部署和再分发，署名与范围见 [NOTICE](../NOTICE)。欢迎非商业学习与维护；保留原作者及项目来源，参与方式见[维护指南](../CONTRIBUTING.md)。
+IAVSE connects resource discovery, community practice and editable blog homepages. Original website material is source-available under the noncommercial license linked above.
 
-## Read and create / 阅读与创作
+## 开始使用 / Start here
 
-| Topic / 主题 | English | 简体中文 |
+| 要做什么 / Task | Guide |
+| --- | --- |
+| 在本地运行 / Run locally | [安装与验证 / Getting started](getting-started.md) |
+| 了解代码 / Read the implementation | [架构与学习导览 / Architecture](architecture.md) |
+| 解决运行问题 / Diagnose a problem | [故障排查 / Troubleshooting](troubleshooting.md) |
+| 查看当前页面 / View the current UI | [真实截图与范围 / Captures](screenshots/README.md) |
+| 反馈和参与 / Ask or contribute | [Support](../SUPPORT.md) · [Contributing](../CONTRIBUTING.md) |
+
+## 阅读与创作 / Read and create
+
+| 主题 / Topic | English | 简体中文 |
 | --- | --- | --- |
-| Email registration / 邮箱与密码注册 | [Registration and SMTP](email-registration.md) | 同页含中文说明 |
-| Blog editing and publication / 博客编辑与发布 | [Blog editor](blog-editor.md) | [博客编辑](blog-editor.zh-CN.md) |
-| Résumé extraction and privacy / 简历提取与隐私 | [Résumé import](resume-import.md) | [简历导入](resume-import.zh-CN.md) |
-| Existing static-site hosting / 已有静态托管 | [Hosting](blog-hosting.md) | [托管说明](blog-hosting.zh-CN.md) |
-| AI publishing and scoped credentials / AI 发布与权限凭据 | [REST and stdio MCP reference](../integrations/iavse-post/references/api.md) | 同页含凭据配置中文说明 |
+| 博客编辑与发布 / Blog editing | [Blog editor](blog-editor.md) | [博客编辑](blog-editor.zh-CN.md) |
+| 简历提取与隐私 / Résumé import | [Import guide](resume-import.md) | [简历导入](resume-import.zh-CN.md) |
+| 静态网站包 / Static site hosting | [Hosting](blog-hosting.md) | [托管说明](blog-hosting.zh-CN.md) |
+| 邮箱与注册 / Registration and mail | [Registration and SMTP](email-registration.md) | 同页含中文说明 |
+| 资源发现 / Catalog discovery | [Resource directory](resource-discovery.md) | 同页含实现说明 |
+| 法律咨询资料入口 / Legal resource page | [Scope and source](legal-consultation.md) | 同页含中文说明 |
 
-The current editor provides six page layouts and eight visual themes, inline canvas editing and responsive preview. Public blog discovery includes the spatial gallery. Saving keeps a private draft; publishing creates an explicit public snapshot. Articles and shared documents require review; blog homepages, projects, Skills and resources publish directly under the existing account and takedown controls.
+当前编辑器提供六种布局与八种视觉主题，支持内联画布编辑与响应式预览。保存、公开和审核是不同操作；实际权限与类型规则见编辑和部署指南。内置示例不创建账号，也不计入真实成员数量。
 
-当前编辑器支持六种排版、八种视觉主题、画布内联编辑与响应式预览；公开博客发现页包含空间展廊。保存保持私有草稿，显式发布生成公开快照。文章与共享文档需审核，博客主页、项目、Skill 和资源按现有账号及下架规则直接发布。
+The current editor provides six layouts, eight visual themes, inline editing and responsive preview. Saving, publishing and review are distinct. Built-in examples do not create accounts or inflate member counts.
 
-最新维护记录：[2026-11-04 仓库介绍、截图与许可收尾](release-2026-11-04.md)。此前的[运行时代码审计](release-2026-11-02.md)与[性能记录](performance-2026-11-03.md)保留各自的验证范围。
+## AI 工具接入 / AI integration
 
-[2026-11-06 名称统一与废弃文件清理](cleanup-2026-11-06.md)
+- [IAVSE Skill](../integrations/iavse-post/SKILL.md)
+- [REST API、凭据范围与 MCP 配置 / API, scopes and MCP](../integrations/iavse-post/references/api.md)
+- [stdio MCP bridge](../integrations/iavse-mcp.mjs)
 
-## Maintain and operate / 维护与运营
+按范围授权工具，先保存草稿，再按实际授权提交。旧 `/workspace/connect` 地址跳到编辑器，创建凭据请以 API 文档为准。
 
-| Topic / 主题 | English | 简体中文 |
+## 部署与维护 / Deploy and maintain
+
+| 主题 / Topic | English | 简体中文 |
 | --- | --- | --- |
-| Administration / 网站管理 | [Administration](administration.en.md) | [管理中心](管理中心说明.md) |
-| Platform/admin deployment / 分入口部署 | [Deployment](../deploy/README-split.en.md) | [部署说明](../deploy/README-split.md) |
-| Moderation and launch / 审核与上线 | [Launch checklist](moderation-and-launch.md) | 同页含中文说明 |
-| Scoped audit and validation / 审计与验证 | [2026-10-22 audit](audit-2026-10-22.md) | 同页含中文说明 |
-| IAVSE identity and generated icons / 站点标识与图标生成 | [Brand assets](brand.md) | 英文技术说明 |
-| Third-party attribution / 第三方署名 | [Notices](../THIRD_PARTY_NOTICES.md) | 以原始许可条款为准 |
-| Noncommercial license and author credit / 非商业许可与原作者署名 | [License and attribution](licensing.md) | 同页含中文说明及可保留的声明 |
-| Current interface screenshots / 当前界面截图 | [Capture details](screenshots/README.md) | 同页含截图范围与拍摄日期 |
+| 平台 / 管理端分入口 | [Deployment](../deploy/README-split.en.md) | [部署](../deploy/README-split.md) |
+| 管理中心 | [Administration](administration.en.md) | [管理中心](管理中心说明.md) |
+| 公开运营边界 | [Public operation](public-launch.en.md) | [公开运营](public-launch.md) |
+| 审核与上线准备 | [Moderation and launch](moderation-and-launch.md) | 同页含中文说明 |
+| 安全问题 | [Reporting policy](../SECURITY.md) | 同页含中文说明 |
+| 许可与署名 | [License guidance](licensing.md) | 同页含中文说明 |
+| 第三方材料 | [Notices](../THIRD_PARTY_NOTICES.md) | 以各原始许可为准 |
+| 标志与艺术字 | [Brand assets](brand.md) | 共享标志和 README 标题的来源 |
 
-Production registration and publishing depend on explicit deployment settings. Local rule screening is triage, not a compliance certificate. There is no public production demo URL at present. Application data, real résumé sources and user media belong in private storage; macOS and Windows clients are outside this repository.
+数据库、真实环境文件、上传、邮件、密钥和备份保存在私有存储。客户端不属于此网站源码仓库。当前仓库未声明一个经过生产验收的公开演示地址；本机地址不作为在线演示发布。
 
-公网注册与生产发布由部署配置显式启用；本地规则仅作风险初筛，不代表合规认证。目前没有公开生产演示地址。应用数据、真实简历源文件及用户媒体保存在私有存储，macOS、Windows 客户端不属于此仓库。
+## 当前实现与历史记录 / Current design and history
 
-## Performance / 性能
+- [2026-11-09 首页产品空间](home-product-redesign.md): resource discovery, community and blog spaces within one optical environment.
+- [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
+- [模板与展廊修复](blog-gallery-template-repair-2026-11-08.md).
+- [2026-11-06 名称与清理](cleanup-2026-11-06.md).
+- [2026-11-04 仓库维护记录](release-2026-11-04.md).
+- [2026-11-02 检查记录](release-2026-11-02.md).
 
-[2026-11-06 GSAP 页面切换衔接](performance-2026-11-06.md) · immediate navigation, coordinated GSAP arrivals, background scheduling and preserved click waves.
+带日期的设计、性能和验证记录只描述当时范围，不替代当前代码或运行结果。Latest repository changes are summarized in [CHANGELOG.md](../CHANGELOG.md).
 
-[2026-11-04 全站性能优化与测量记录](performance-2026-11-04.md) · covers lightweight WebGL, directory/feed pagination, lean editor data, route CSS, script-free theme previews and asynchronous password checks. Includes the shared pointer field and expanding click feedback.
+## 仓库入口 / Repositories
 
-Earlier: [2026-11-03](performance-2026-11-03.md) · shared loading, fonts, catalog reads and editor code splitting.
+- [GitHub · IntMainJhy/IAVSE](https://github.com/IntMainJhy/IAVSE) is the source repository and issue/PR entry point.
+- [AtomGit · InMainJhy/IAVSE](https://atomgit.com/InMainJhy/IAVSE) is a downstream mirror. Its synchronization state should be checked independently.
 
-## Repository presentation / 仓库简介
+Current description:
 
-Current repository description / 当前仓库简介：
+> A creator platform for resources, community and editable blog homepages. Visual canvas, spatial gallery, docs, AI Skills and scoped MCP/REST integration. PolyForm Noncommercial 1.0.0.
 
-> Developer blog homepages and knowledge sharing: 3D spaces, a visual editor, community, docs and AI Skills. PolyForm Noncommercial 1.0.0; retain IntMainJhy attribution when redistributing.
+Chinese introduction:
 
-AtomGit also includes this Chinese introduction / AtomGit 同时提供以下中文介绍：
-
-> IAVSE 是面向开发者的博客主页与知识共享平台，提供 3D 博客空间、可视化主页编辑器、社区、文档、AI Skill 与实用资源。网站原创部分允许协议定义的非商业使用、部署、修改和维护；商业使用须另行授权。再分发必须保留原作者 IntMainJhy 和 IAVSE 项目来源，不得冒称原项目为自己原创。
-
-Suggested topics: `nextjs`, `react`, `typescript`, `sqlite`, `portfolio`, `developer-community`, `agent-skills`, `mcp`, `source-available`.
-
-Both repositories carry the same website commits and license:
-
-- [GitHub · IntMainJhy/IAVSE](https://github.com/IntMainJhy/IAVSE)
-- [AtomGit · InMainJhy/IAVSE](https://atomgit.com/InMainJhy/IAVSE)
-
-GitHub's social preview uses [the current homepage capture](screenshots/social-preview.png) at 1280 × 640. Both READMEs use the same current screenshots. GitHub 与 AtomGit 的授权范围和项目说明保持一致；未正式上线前，不将本机地址或尚未上线的域名填写为在线演示。
+> IAVSE 是面向开发者与创作者的社区和博客平台，连接资源发现、实践分享与可编辑个人主页，提供可视化画布、空间展廊、文档、AI Skill 和按范围授权的 MCP / REST 接入。网站源码采用 PolyForm Noncommercial 1.0.0，欢迎保留署名的非商业学习与维护。

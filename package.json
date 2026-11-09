@@ -28,7 +28,8 @@
     "test:resume:http": "node test/resume-http.mjs",
     "brand:icons": "node scripts/brand-icons.mjs",
     "test:blog-editor:http": "node test/blog-editor-http.mjs",
-    "test:registration:http": "node test/email-registration-http.mjs"
+    "test:registration:http": "node test/email-registration-http.mjs",
+    "docs:check": "node scripts/check-docs.mjs"
   },
   "dependencies": {
     "@tiptap/core": "3.32.0",
@@ -65,5 +66,30 @@
   "overrides": {
     "postcss": "8.5.30"
   },
-  "license": "PolyForm-Noncommercial-1.0.0"
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "description": "IAVSE creator community and blog platform with resource discovery, a visual editor, spatial gallery, AI Skills and scoped MCP/REST integration.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IntMainJhy/IAVSE.git"
+  },
+  "homepage": "https://github.com/IntMainJhy/IAVSE#readme",
+  "bugs": {
+    "url": "https://github.com/IntMainJhy/IAVSE/issues"
+  },
+  "author": "IntMainJhy",
+  "keywords": [
+    "creator-platform",
+    "blog-platform",
+    "portfolio",
+    "visual-editor",
+    "nextjs",
+    "react",
+    "typescript",
+    "sqlite",
+    "threejs",
+    "agent-skills",
+    "mcp",
+    "self-hosted",
+    "source-available"
+  ]
 }

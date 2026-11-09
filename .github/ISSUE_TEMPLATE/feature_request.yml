@@ -1,0 +1,27 @@
+name: Feature request / 功能建议
+description: Explain a real use case and the behavior that would help / 说明使用场景与希望的行为
+title: "[Feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Use case and problem / 场景与问题
+      description: Who is trying to do what, and where does the current behavior get in the way?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior / 期望行为
+      description: Describe the observable result, including an example if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and constraints / 替代方案与限制
+  - type: textarea
+    id: references
+    attributes:
+      label: References / 参考材料
+      description: Link to public sources and identify their license when proposing reused material.

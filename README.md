@@ -1,180 +1,88 @@
-# IAVSE
+<div align="center">
 
-**English** | [简体中文](README.zh-CN.md)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/brand/wordmark-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/brand/wordmark-light.svg">
+  <img src="docs/brand/wordmark-light.svg" alt="IAVSE" width="680" height="160">
+</picture>
+
+**为开发者与创作者，连接资源、交流与个人主页。**
+
+发现实用的设计、文档与 AI Skill，分享你的实践，
+用可视化画布整理自己的作品、经历与文字。
+
+
+[![CI](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml)
+[![GitHub stars](https://img.shields.io/github/stars/IntMainJhy/IAVSE?style=flat-square&color=e3b341)](https://github.com/IntMainJhy/IAVSE/stargazers)
+[![License](https://img.shields.io/badge/License-PolyForm_Noncommercial_1.0.0-64748b?style=flat-square)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5-111111?style=flat-square&logo=nextdotjs)](package.json)
+[![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react)](package.json)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
+[![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A524.15-43853d?style=flat-square&logo=nodedotjs&logoColor=white)](package.json)
+
+**简体中文** · [English](README.en.md)
+
+[功能概览](#功能概览) · [界面预览](#界面预览) · [快速开始](#快速开始) · [学习路线](#学习路线) · [文档中心](docs/README.md) · [问题反馈](https://github.com/IntMainJhy/IAVSE/issues)
+
+</div>
+
+![IAVSE 当前主分支的蓝色光学玻璃首页](docs/screenshots/home-current.webp)
+
+## 关于 IAVSE
 
 **Insight through AI. Vigilance for Opportunity. Seize to Evolve.**
+以洞察驱动智能，以敏锐发现机遇，以行动实现进化。
 
-INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE
+IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源发现、实践分享和个人主页放在同一套账号体系中：你可以浏览设计模板与工具，发布文档和经验，也可以导入简历，在画布里编辑一个自己的主页。
 
-IAVSE is a developer blog and knowledge-sharing platform. Build a personal homepage from your résumé, arrange it in a visual editor, and share projects, articles, AI Skills and useful resources. Discover other homepages in a 3D spatial gallery. Each member manages their own profile, private drafts and uploaded files.
+本仓库包含网站前端、后端、测试、AI 接入与部署示例，适合学习 Next.js 全栈应用、可视化编辑器、Three.js 交互、内容发布及账号隔离的实现。当前仍在持续开发；生产部署、邮件投递和社区开放需要在实际环境中单独验收。
 
-[GitHub repository](https://github.com/IntMainJhy/IAVSE) · [AtomGit mirror](https://atomgit.com/InMainJhy/IAVSE) · [Documentation](docs/README.md)
+> 网站原创部分采用 **[PolyForm Noncommercial 1.0.0](LICENSE)**，允许协议范围内的非商业学习、使用、部署、修改与再分发。商业使用须另行授权。再分发保留 [NOTICE](NOTICE) 中的原作者与项目来源声明，第三方材料保留各自许可。macOS / Windows 客户端源码、安装包和真实站点数据不在本仓库。
 
-This repository contains the website's frontend, backend, tests and deployment examples, making its interface, content model and permission system available to study. It is built with Next.js, React, TypeScript and Node.js's built-in SQLite.
+## 功能概览
 
-> **Source available for noncommercial use.** Original website material is licensed under [PolyForm Noncommercial 1.0.0](LICENSE), allowing use, modification, deployment and redistribution for its permitted purposes. Commercial use is not granted. This is a source-available license, not an OSI-approved open-source license. Noncommercial study and maintenance contributions are welcome. Retain the original author and project notices; do not claim the original project as your own work. See [NOTICE](NOTICE) for attribution and scope, and [CONTRIBUTING.md](CONTRIBUTING.md) to contribute.
-
-**This repository publishes only the website. macOS and Windows client source code, installers and proprietary assets remain private. This repository's license grants no rights to use or distribute those clients.** Viewing and forking on GitHub remain subject to GitHub's applicable terms.
-
-## What IAVSE is for
-
-- **Developers:** build a shareable résumé homepage with projects, experience, skills and compact certificate galleries.
-- **Authors and curators:** publish categorized tutorials, third-party Skills and useful resources, with source and license information.
-- **AI-assisted workflows:** let an authorized agent prepare private drafts and submit them through scoped REST credentials or a local stdio MCP bridge.
-- **Site operators:** review submitted articles, handle reports and takedowns, manage accounts and inspect real audience statistics and audit history.
-
-IAVSE is being developed as a shared service with account-isolated data. Public accounts and community routes are explicitly enabled for HTTPS deployments; registration requires opening and acknowledging the current community rules and disclaimer. Members can then sign in with their email and password without an email code; that acknowledgment is recorded separately from mailbox verification. Account restrictions and deployment access controls still apply. See [public launch requirements](docs/public-launch.en.md).
-
-## Current release
-
-The current main branch includes the optical blue homepage, macOS download entry, resource transitions and a 12-page spatial blog gallery. The gallery uses existing blog templates, loads two previews at a time, supports drag-to-look and click-to-focus, and honors reduced motion. Published members appear first; bundled showcase profiles do not create accounts or alter member counts. The creator voices section uses illustrative comments, with one continuous marquee, pause controls, hover and focus pausing, keyboard reading and reduced-motion support.
-
-See the [current repository update](docs/release-2026-11-04.md) and [performance review](docs/performance-2026-11-04.md).
-
-## Preview
-
-Captured from the current website on **2026-11-04**, using its Simplified Chinese interface. English and Japanese are also supported. Showcase profiles and illustrative comments demonstrate the interface; they are not user-count or endorsement claims. [Capture details](docs/screenshots/README.md).
-
-### Homepage
-
-The current optical glass homepage, followed by spaces, the editable canvas, Skills and resources.
-
-![IAVSE optical glass homepage and macOS download entry](docs/screenshots/home-current.webp)
-
-### Spatial blog discovery
-
-![IAVSE spatial blog gallery using existing themes](docs/screenshots/blog-spaces-current.webp)
-
-### Community
-
-Community navigation, search and categories. The current local site has no published community posts, so this capture shows the empty state.
-
-![Current IAVSE community and category navigation](docs/screenshots/community-current.webp)
-
-### Blog homepage
-
-The Blog spaces directory lists discoverable published homepages; each opens its own public layout, introduction, skills, experience and work. Editing stays on a separate page: **Create / edit my blog** opens the signed-in member’s own content. The owner can use **Administration → Blog homes** at `/admin/blog`. See the [blog editing guide](docs/blog-editor.md).
-
-![IAVSE blog homepage using the existing paper theme](docs/screenshots/blog-home-current.webp)
-
-### Skills and resources
-
-Independent AI Skills, shared documents and tools are available through resource navigation.
-
-![Current IAVSE resource directory](docs/screenshots/resources-current.webp)
-
-### Creator voices
-
-Illustrative comments introduce the kinds of work the platform supports. The single scrolling row supports pause/resume, manual browsing, keyboard reading and reduced motion.
-
-![IAVSE creator voices with refined cards and illustrative comments](docs/screenshots/creator-voices-current.webp)
-
-## Features
-
-| Area | Capabilities |
+| 模块 | 已实现的能力 |
 | --- | --- |
-| Accounts | Email/password registration without an email code or invitation; opening and acknowledging the current community rules and disclaimer is required. Consent version and hash are checked by the server; email ownership is not marked verified. Production access is explicitly configured |
-| Blog homepages | Design the actual Anx template or a blank page; inline editing, layers, properties, width/position controls, custom blocks, undo/redo, dot grid and desktop/mobile preview. Preserve résumé sections, certificates, PDFs and translations; save a private draft, then explicitly publish a fixed homepage version; article content still requires review |
-| Existing static website hosting | Backend APIs accept HTML or ZIP packages with relative CSS/JS/assets, isolate previews and explicitly publish fixed homepage versions without pre-review; existing hosted sites and stable sharing URLs remain supported |
-| Shared documentation | Title-and-body editor with slash insertion, lists, code, tables, account-scoped inline images, imports and a heading outline; document-only private autosave after 1,600 ms preserves typing. Reading uses library/document/outline navigation |
-| Skill directory | Independent upstream Skills with category/search/tool filters, scenarios, installation commands and localized copyable prompts; GSAP is one entry with eight modules and legacy module redirects. Member submissions start with a name and HTTPS URL, with optional description and collapsed metadata |
-| Other resources | Share websites, tools and references with a name and HTTPS URL; description is optional and extra metadata is collapsed |
-| Publishing & community | Original community posts require only a body, with derived title/summary and optional extras; explicit publication consent and account restrictions still apply. Community posts and shared documents require review; blog layouts, projects, Skills, resources, comments and guestbook entries publish directly. Published catalog entries create one linked share, revisions reuse it, and takedowns stop its public visibility |
-| Sharing & community profiles | Direct public blog navigation, public links, system sharing and QR codes; community profiles retain a short introduction with a link to the full blog |
-| Résumé import | Local PDF, DOCX, TXT and Markdown text extraction into a reviewable profile draft; original uploads stay private, and a separate redacted PDF can be selected for public download |
-| Content and files | Private account-isolated drafts, versions, blog content, uploaded images, attachments and file references |
-| Moderation & administration | Article/document review, post-publication reports and takedowns, account controls, notifications and audit logs. The dashboard shows database-backed registered users, account status, new registrations, public spaces, content, storage and measured PV/UV, with date-range traffic details |
-| AI integration | The IAVSE Skill and local stdio MCP bridge can read, save and submit documents, Skills and resources through scoped credentials; publication uses the same moderation and community-sharing pipeline as the editor |
+| 资源发现 | UI 模板、文档、独立 AI Skill、网站和工具目录；按类型、用途、行业与风格筛选，查看原始来源和许可 |
+| 社区交流 | 投稿、评论、关注、收藏、成员资料、消息、搜索和分类；保留真实空状态与审核状态 |
+| 博客空间 | 3D 空间展廊、公开主页与内置示例；编辑器提供六种布局与八种视觉主题 |
+| 可视化画布 | 内联编辑、图层、属性、拖放、宽度与位置、撤销重做、桌面与手机预览 |
+| 简历导入 | PDF / DOCX / TXT / Markdown 本地文本提取；先检查生成的资料草稿，再选择公开内容 |
+| 内容发布 | 私有草稿、固定公开快照、修订与下线；社区文章和文档需审核，其他支持类型按既有权限直接发布 |
+| 文档编辑 | 富文本、标题大纲、代码、表格、图片、导入与文档私有自动保存 |
+| AI 接入 | IAVSE Skill、REST API 与本地 stdio MCP 桥；通过独立范围凭据保存草稿和提交发布 |
+| 管理中心 | 内容审核、举报处理、账号限制、文件管理、操作记录及实际 PV / UV 统计 |
+| 部署维护 | SQLite、私有文件目录、备份恢复、清理脚本、Nginx / systemd 和平台 / 管理端分入口示例 |
+| 多语言 | 简体中文、English、日本語；适配桌面、平板和手机，支持减少动态设置 |
 
-The download page can link to externally hosted client installers. Client binaries and source code are not stored in this repository.
+## 界面预览
 
-## Interface and interaction
+以下为 **2026-11-09** 从 `main` 实际页面拍摄的截图。示例主页不代表真实注册成员或用户背书；社区保留拍摄时的实际空状态。详见[截图说明](docs/screenshots/README.md)。
 
-Deep navy, cobalt and porcelain surfaces connect the homepage and platform interface. The homepage uses a live Three.js glass surface with refraction, reflection and restrained dispersion, followed by a particle field. Spaces, the editable canvas, Skills and resources follow native document scrolling straight through to the footer. GSAP ScrollTrigger provides light, one-time entrances without a pinned stage or screen-by-screen transitions. The canvas is an operable product demo, the Skill card plays a real interface recording, and the resource card uses a separate interactive 3D scene. Fine-pointer hover interactions add a local dot-lattice response.
+### 首页产品空间
 
-The header places the brand at the left, navigation at the center, and account and language controls at the right. Mobile and reduced-motion layouts use native document flow. Inactive chapters do not initialize video or 3D cards; previously loaded media pauses or uses demand rendering offstage. Global and per-card pause controls, reduced motion, hidden-tab suspension, loading/error fallbacks and renderer cleanup preserve usability and limit unnecessary work.
+资源发现、社区交流和博客空间组成三个可切换章节。大屏支持原生滚动空间展示，手机与减少动态模式按文档顺序阅读。
 
-The interface supports English, Simplified Chinese and Japanese across desktop, tablet and mobile. The editor uses restrained blue accents and pale working surfaces; authored blog themes retain their own saved colors. Desktop public pages follow the saved design; narrow screens maintain a stacked reading layout. Existing templates remain compatible. Live collaboration is not provided.
+![首页资源、社区与博客产品展示](docs/screenshots/product-current.webp)
 
-Static hosting accepts UTF-8 HTML (5 MB) or ZIP files (25 MB compressed, 50 MB extracted, up to 1,000 entries). Packages need `index.html` or `index.htm` and relative asset paths. Browser-side interactions work in an opaque-origin sandbox; external scripts, API requests, forms and server-side execution are blocked. Sources and extracted files count toward storage, with up to 20 immutable packages per account. Publishing a blog layout or static package is an explicit author action and does not require pre-review. Articles remain reviewable separately; ownership, sandbox, access restrictions and complaint-based takedowns are retained. Production access is configured by the operator. Backups retain source packages and restore their verified static assets.
+### 博客空间与个人主页
 
-Legacy `/u/...` URLs redirect to public blogs; former workspace pages redirect to the independent blog editor. Existing content and backend data contracts remain intact. See the [static hosting guide](docs/blog-hosting.md) for packaging, previews and supported interactions.
+![博客空间展廊](docs/screenshots/blog-spaces-current.webp)
 
-## Publishing and AI workflows
+<details>
+<summary>查看更多界面：资源目录、社区和内置主页示例</summary>
 
-The platform connects Home, Community, Blog spaces and Resources, with documentation and Skills available in the resource navigation. Community posts derive a title and summary when only a body is supplied; links and extra metadata remain optional. Community posts and shared documents always enter review, regardless of whether local screening flags their content. Blog homepage layouts and static sites, projects, Skills and resources publish directly after an explicit publish action. Comments and guestbook entries also appear without pre-review.
+![UI 设计资源目录](docs/screenshots/resources-current.webp)
 
-Saving remains private. A published version is an immutable snapshot: later edits remain drafts until the author publishes again, or until an article revision is approved. Published catalog entries create one linked community share and reuse that share on revision; there is no need to post the same item twice. Every public item retains its author, source and usage terms, and entries without an image receive a typographic cover.
+![社区导航、分类与实际空状态](docs/screenshots/community-current.webp)
 
-Removing pre-review does not remove account restrictions, unsafe-link validation, content sanitization, ownership checks, submission limits, reports or administrative takedowns. Local screening provides signals for moderation; it is not semantic AI review or a guarantee of legal compliance. Deployment-specific public access controls remain in place; see [public operating requirements](docs/public-launch.en.md).
+![内置示例主页，非真实注册用户](docs/screenshots/blog-home-current.webp)
 
-For AI publishing, an authenticated account can create a credential through the authenticated `/api/spaces/keys` API with **catalog** scope, adding **submit** only if the agent may submit content for publication. The former `/workspace/connect` page currently redirects to the blog editor; it is not a working credential-management screen. See [credential setup](integrations/iavse-post/references/api.md#credential-setup-local-accounts). Existing library/community credentials are not silently expanded. Configure the [stdio MCP bridge](integrations/iavse-mcp.mjs) or [IAVSE Skill](integrations/iavse-post/SKILL.md) with a private site URL and token. The workflow is `catalog.save`, then `catalog.submit` after authorization and reading the current policy. A submission returns its actual published or pending status; it cannot approve its own review. Writes use stable request IDs to prevent duplicate retries. See the [API reference](integrations/iavse-post/references/api.md) for fields and MCP setup.
+</details>
 
-The curated Skill directory links to upstream repositories rather than bundling third-party code. It focuses on independent projects rather than duplicating skills bundled with AI tools; the previously listed Anthropic examples and document Skills have been removed. Tool badges describe the installation paths documented by this directory, not universal compatibility. GSAP Skills use MIT; the GSAP runtime has separate license terms.
+## 快速开始
 
-### A typical publishing flow
-
-1. Register after opening and acknowledging the community rules and disclaimer, then sign in with email and password. Open the relevant catalog editor or **Create / edit my blog**.
-2. Add your content, check extracted résumé facts, remove private details and preview your draft.
-3. Save privately, then explicitly publish. Articles and documents enter review; other supported content publishes directly. Saving alone does not publish.
-4. Share the public link after publication. Published catalog entries also appear in the community automatically.
-5. Revise a private draft without replacing the public snapshot, then publish again or submit the article revision for review. Take content offline when needed.
-
-## Technology
-
-| Layer | Implementation |
-| --- | --- |
-| Pages and API | Next.js 15 App Router, server-rendered pages and same-site APIs |
-| Interface | React 19, TypeScript 5, CSS, GSAP and ScrollTrigger |
-| 3D and media | Three.js, GLB models, shaders and lazy-loaded video |
-| Rich text | Tiptap |
-| Runtime and storage | Node.js 24.15+, built-in SQLite and a private file directory |
-| Email and media | Nodemailer, Sharp and QRCode |
-| Validation and deployment | Node.js test runner, isolated HTTP tests, Nginx and systemd examples |
-
-## Project status
-
-IAVSE is under active development. Publishing its source demonstrates the implementation; it does not certify production deployment, email delivery or readiness to open the community to the public.
-
-This repository covers website development only. macOS and Windows clients remain private. Client source, installers and real site data are not included.
-
-The [2026-10-22 audit report](docs/audit-2026-10-22.md) records an earlier scoped review and its checks, including 162 unit tests, type checking, a production build and three HTTP suites. That result applies to the reviewed version and environment, not a guarantee of production readiness.
-
-## Documentation
-
-| Task | Guide |
-| --- | --- |
-| Register and configure email | [Email registration and SMTP](docs/email-registration.md) |
-| Edit and publish a blog | [Blog editor](docs/blog-editor.md) |
-| Import a résumé safely | [Résumé import](docs/resume-import.md) |
-| Understand static hosting | [Hosting and sandbox limits](docs/blog-hosting.md) |
-| Connect an AI tool | [API and stdio MCP reference](integrations/iavse-post/references/api.md) |
-| Operate the platform | [Administration](docs/administration.en.md) · [Deployment](deploy/README-split.en.md) |
-| Review launch boundaries | [Moderation and launch](docs/moderation-and-launch.md) · [Audit](docs/audit-2026-10-22.md) |
-| Review loading and rendering performance | [Performance audit](docs/performance-2026-11-04.md) |
-| Understand assets and permissions | [Brand assets](docs/brand.md) · [Third-party notices](THIRD_PARTY_NOTICES.md) |
-
-## Repository layout
-
-| Directory | Contents |
-| --- | --- |
-| `src/app/` | Pages, APIs, media/download routes and styles |
-| `src/components/` | Website components and shared interactions |
-| `src/lib/` | Authentication, content, community, workspaces, files, email, database and permissions |
-| `test/` | Unit tests and isolated HTTP tests with disposable fixtures |
-| `scripts/` | Initialization, backup, restore, cleanup and Skill packaging |
-| `integrations/` | Website submission Skill, MCP integration and request scripts |
-| `deploy/` | Nginx, systemd and separate platform/admin deployment examples |
-| `public/` | Static website assets and the generated submission Skill package |
-| `docs/` | Website administration guides, screenshots and third-party licenses |
-
-Local databases, user uploads, captured email, real environment variables, credentials, backups, local design-review artifacts, temporary previews, dependencies and build output are excluded. Runtime demo accounts, automatic sign-in and data-seeding scripts have been removed. Automated regression tests use disposable fixtures, never live credentials.
-
-## Local development
-
-You may use these instructions for the noncommercial purposes permitted by LICENSE. Commercial purposes require separate permission; these instructions do not expand the license grants.
-
-Use Node.js **24.15 or a newer compatible version**, npm and the committed lockfile. Database access uses a single Node process; multiple instances must not write concurrently to the same upload directory.
+需要 **Node.js 24.15+**、npm 和 Git。数据库使用 Node.js 内置 SQLite，首次本地运行无需单独安装数据库服务。
 
 ```sh
 git clone https://github.com/IntMainJhy/IAVSE.git
@@ -185,41 +93,85 @@ node --env-file=.env.local scripts/setup.mjs
 npm run dev
 ```
 
-The default local URL is `http://127.0.0.1:3008/`. The repository is already the website root; there is no additional `site-v1` directory to enter. Preserve any existing environment file.
+打开 **http://127.0.0.1:3008/**。本仓库根目录就是网站目录。已有 `.env.local` 时保留原配置，不重复覆盖。
 
-`APP_DATA_DIR` defaults to `../.site-v1-data`, outside the application directory, and can be set to another private absolute path. On first initialization, randomly generated administrator credentials are saved to `initial-admin.txt` in the actual data directory. Re-running setup does not reset existing data. Never upload that file, the database or real configuration.
+- 初始化脚本会打印私有数据目录；首次管理员凭据保存在该目录的 `initial-admin.txt`，重复初始化不会重置密码。
+- 默认数据目录是仓库外的 `../.site-v1-data`。继续维护已有站点时，将 `APP_DATA_DIR` 固定为原数据目录的绝对路径。
+- `PUBLIC_URL` 的主机名和端口须与浏览器地址一致。Node 脚本需要显式使用 `--env-file=.env.local`。
+- 注册使用邮箱和密码，并要求打开和确认当前规则；注册本身不需要邮件验证码。邮箱验证及密码找回需要 SMTP。
 
-When continuing an existing site, pin `APP_DATA_DIR=/absolute/path/to/existing-data` in the local `.env.local` file and keep `PUBLIC_URL` aligned with the browser hostname and port. Restart the server after changes. If default profiles, demo accounts or missing avatars suddenly appear, check the active data directory first: a different directory opens a different database and does not mean the original data was deleted. Do not overwrite the original database with an empty one. Direct Node scripts require `node --env-file=.env.local scripts/setup.mjs` or explicitly supplied environment variables; plain Node does not load `.env.local` automatically.
+更多步骤见[本地运行与验证](docs/getting-started.md)，遇到数据、端口、登录或邮件问题见[故障排查](docs/troubleshooting.md)。
 
-The local environment template contains only loopback URLs and cookie settings. Registration does not require SMTP. For mailbox verification and password recovery, configure SMTP using [.env.example](.env.example); local capture mode is for integration testing. Real SMTP delivery, backup restoration and production deployment require separate validation in the target environment.
+## 开发与验证
 
 ```sh
-npm test
-npm run typecheck
-npm run build
-npm run test:homepage:http
-npm run test:resume:http
-npm run test:blog-editor:http
-npm run test:registration:http
-npm start
+npm test                 # 单元与回归测试，使用隔离数据
+npm run build            # 生成品牌导出与 Skill 包，然后构建网站
+npm run typecheck        # TypeScript 检查
+npm run docs:check       # 文档链接、图片与仓库入口检查
+npm start                # 运行已构建的网站，默认 3008
 ```
 
-HTTP integration scripts in `test/` use temporary data directories. Check that their test ports are free before running them. Tests create and remove their own accounts and content; they must not target an existing site data directory.
+HTTP 集成测试按需运行，例如 `npm run test:homepage:http`、`npm run test:gallery:http`、`npm run test:registration:http`。这些脚本使用临时数据和独立端口，不应连接现有站点的数据目录。
 
-## Deployment and administration
+GitHub Actions 在 `main` 推送和 Pull Request 时执行文档检查、单元测试、生产构建和类型检查。运行中的结果见 [Actions](https://github.com/IntMainJhy/IAVSE/actions)。
 
-The recommended deployment uses one codebase and database with separate platform and administration subdomains. `APP_SURFACE` and server-side permissions isolate the two services and their sessions. Administrators sign in only on the admin surface, members on the platform; neither arbitrary-account experience login nor automatic demo access is available.
+## 学习路线
 
-- [Separate platform and admin deployment](deploy/README-split.en.md)
-- [Administration guide](docs/administration.en.md)
-- Configuration examples: [platform](deploy/platform.env.example), [admin](deploy/admin.env.example) and [Nginx](deploy/nginx-split.conf.example).
+| 想学习什么 | 从哪里开始 |
+| --- | --- |
+| Next.js 页面、路由与服务端组织 | [架构与目录导览](docs/architecture.md)、`src/app/`、`src/components/AppPage.tsx` |
+| 博客画布与模板 | [编辑器说明](docs/blog-editor.zh-CN.md)、`src/components/BlogCanvas.tsx`、`src/lib/blog-templates.mjs` |
+| 草稿、公开版本与权限边界 | [发布说明](docs/public-launch.md)、`src/lib/spaces.mjs`、`src/lib/community.mjs` |
+| 目录查询、筛选与性能 | [资源目录实现](docs/resource-discovery.md)、[目录性能记录](docs/catalog-performance-2026-11-08.md) |
+| 3D、滚动与减少动态 | [首页设计](docs/home-product-redesign.md)、`src/components/HomeSpatialShowcase.tsx`、`src/lib/home-glass.ts` |
+| AI Skill / MCP / REST | [接入 Skill](integrations/iavse-post/SKILL.md)、[API 参考](integrations/iavse-post/references/api.md)、`integrations/iavse-mcp.mjs` |
+| 账号隔离、测试与恢复 | `test/`、[管理文档](docs/管理中心说明.md)、`scripts/backup.mjs`、`scripts/restore.mjs` |
 
-Production requires a separate private data directory, correct HTTPS URLs, Secure cookies and a trusted proxy configuration. Client links, ICP registration details, account settings and email settings must match the actual site. Default content and registration identifiers in the code do not authorize their use on another site.
+建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。历史设计与性能记录标有日期，结论只对应当时的版本和测量范围。
 
-## License and permission
+## 部署与数据
 
-Original website material is provided under the [PolyForm Noncommercial License 1.0.0](LICENSE). It permits use, modification and redistribution for noncommercial purposes, including the personal uses and organizations defined in its terms. Commercial use is not licensed; contact [IntMainJhy](https://github.com/IntMainJhy) for separate permission if your intended purpose is outside those grants.
+推荐一套代码和数据、两个独立入口：平台供成员使用，管理端供管理员使用。通过 `APP_SURFACE`、同源校验和服务端权限限制访问。
 
-[LICENSE](LICENSE) contains the unmodified official English terms. Redistribution must include the license text or its official URL, plus **both `Required Notice:` lines** in [NOTICE](NOTICE), naming **IntMainJhy** and the original **IAVSE** project. Contributors may credit their own changes without replacing that attribution or claiming the pre-existing project as their original work. See the [license and attribution guide](docs/licensing.md) for a copyable notice.
+- [平台 / 管理端分入口部署](deploy/README-split.md)
+- [生产环境与公开运营要求](docs/public-launch.md)
+- [平台环境示例](deploy/platform.env.example) · [管理端环境示例](deploy/admin.env.example) · [Nginx 示例](deploy/nginx-split.conf.example)
 
-This is **source-available software under a noncommercial license**. Its commercial-use restriction means it does not meet the [OSI Open Source Definition](https://opensource.org/osd). Third-party materials retain their own licenses; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The private desktop clients and user content are not relicensed. Noncommercial maintenance contributions are welcome through [CONTRIBUTING.md](CONTRIBUTING.md).
+生产环境使用私有持久数据目录、实际 HTTPS 地址及正确的代理和 Cookie 配置。公网账号和社区功能由部署配置显式启用。数据库、用户上传、邮件、密钥、初始凭据和备份均不提交 Git。
+
+保存草稿和公开发布是不同操作。社区文章、共享文档及其修订需要审核；博客主页、项目、Skill、资源、评论和回复按现有规则直接公开，并继续受账号权限、内容清理、限流、举报与下架约束。站长主页存在特定保存行为，详见[博客编辑指南](docs/blog-editor.zh-CN.md)。
+
+静态网站托管支持受限的 HTML / ZIP 包及相对素材，不提供任意服务端执行；具体限制见[静态托管说明](docs/blog-hosting.zh-CN.md)。AI 凭据按范围授权，保存与提交分别处理；现有 `/workspace/connect` 会跳到编辑器，凭据创建方式以 [API 文档](integrations/iavse-post/references/api.md#credential-setup-local-accounts) 为准。
+
+## 仓库结构
+
+```text
+IAVSE/
+├── src/app/          # 页面、API、路由样式与元数据
+├── src/components/   # 公共界面、画布、社区与管理端
+├── src/lib/          # 数据、权限、目录、发布和媒体逻辑
+├── integrations/     # IAVSE Skill、stdio MCP 与 REST 客户端
+├── scripts/          # 初始化、品牌导出、文档检查、备份恢复
+├── test/             # 单元、组件与隔离 HTTP 回归
+├── deploy/           # 环境、Nginx 和 systemd 示例
+├── public/           # 网站静态资源与可下载 Skill
+├── docs/             # 使用指南、架构、截图、设计与许可记录
+└── .github/          # CI、问题模板与 Pull Request 模板
+```
+
+## 文档与社区
+
+[文档中心](docs/README.md) · [更新记录](CHANGELOG.md) · [贡献指南](CONTRIBUTING.md) · [问题与支持](SUPPORT.md) · [安全报告](SECURITY.md) · [行为准则](CODE_OF_CONDUCT.md)
+
+欢迎提交可复现的问题、文档改进、翻译、无障碍和性能贡献。提出功能建议时说明实际场景，提交 PR 时说明行为变化及验证方式。
+
+如果这个项目帮你理解了一个实现，或成为你下一次创作的参考，欢迎在 [GitHub 给 IAVSE 点一个 Star](https://github.com/IntMainJhy/IAVSE)。也欢迎分享你学到的部分，并保留原作者与项目来源。
+
+## 许可与署名
+
+网站原创代码和材料采用 [PolyForm Noncommercial 1.0.0](LICENSE)。这是带非商业限制的源码公开许可，不属于 OSI 定义的开源许可；商业使用需另行授权。
+
+再分发须保留协议及 [NOTICE](NOTICE) 中的两条 `Required Notice`。可以署名自己的原创修改，不得把既有项目冒称为自己原创。第三方代码、字体、图标、模板与素材保留各自条款，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本页艺术字由已随仓库提供的 Cormorant Garamond 转为矢量轮廓，字体沿用 SIL OFL，说明见[品牌资源](docs/brand.md)。
+
+[GitHub 主仓库](https://github.com/IntMainJhy/IAVSE) · [AtomGit 镜像](https://atomgit.com/InMainJhy/IAVSE) · [原作者 IntMainJhy](https://github.com/IntMainJhy)
