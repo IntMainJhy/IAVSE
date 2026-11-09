@@ -84,7 +84,7 @@ export function QuantumPointer(){
   // Only actual tools and input fields own their feedback. Reading pages and
   // ordinary product/gallery backgrounds keep the original pointer interaction.
   const editing=(target:EventTarget|null)=>{
-   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],.home-blog-demo,.home-discovery-stage,.resource-atlas,[data-film-interactive],.film-appearance-controls,input:not([type=button]):not([type=submit]),textarea,select,[contenteditable]:not([contenteditable=false]),[role=textbox]'))return false;
+   if(!(target instanceof Element)||!target.closest('.blog-canvas-editor,[data-admin-layout=control-center],.home-blog-demo,.home-experience,.resource-atlas,[data-film-interactive],.film-appearance-controls,input:not([type=button]):not([type=submit]),textarea,select,[contenteditable]:not([contenteditable=false]),[role=textbox]'))return false;
    if(frame||waveFrame)clear();return true;
   };
   const contact=(event:PointerEvent)=>{touchInput=event.pointerType==='touch';if(touchInput)clear();};

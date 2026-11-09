@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T02:58:49.438789Z",
+  "title": "Design System: IAVSE Homepage Product Presentation",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.00381 286.10)",
+          "oklch(27% 0.00381 286.10)",
+          "oklch(39% 0.00381 286.10)",
+          "oklch(51% 0.00381 286.10)",
+          "oklch(63% 0.00381 286.10)",
+          "oklch(75% 0.00381 286.10)",
+          "oklch(87% 0.00381 286.10)",
+          "oklch(95% 0.00381 286.10)"
+        ]
+      },
+      "body": {
+        "role": "neutral",
+        "displayName": "Body Gray",
+        "tonalRamp": [
+          "oklch(15% 0.01101 285.99)",
+          "oklch(27% 0.01101 285.99)",
+          "oklch(39% 0.01101 285.99)",
+          "oklch(51% 0.01101 285.99)",
+          "oklch(63% 0.01101 285.99)",
+          "oklch(75% 0.01101 285.99)",
+          "oklch(87% 0.01101 285.99)",
+          "oklch(95% 0.01101 285.99)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Divider Gray",
+        "tonalRamp": [
+          "oklch(15% 0.00676 286.26)",
+          "oklch(27% 0.00676 286.26)",
+          "oklch(39% 0.00676 286.26)",
+          "oklch(51% 0.00676 286.26)",
+          "oklch(63% 0.00676 286.26)",
+          "oklch(75% 0.00676 286.26)",
+          "oklch(87% 0.00676 286.26)",
+          "oklch(95% 0.00676 286.26)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Soft Surface",
+        "tonalRamp": [
+          "oklch(15% 0.00265 286.35)",
+          "oklch(27% 0.00265 286.35)",
+          "oklch(39% 0.00265 286.35)",
+          "oklch(51% 0.00265 286.35)",
+          "oklch(63% 0.00265 286.35)",
+          "oklch(75% 0.00265 286.35)",
+          "oklch(87% 0.00265 286.35)",
+          "oklch(95% 0.00265 286.35)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.00000 0.00)",
+          "oklch(27% 0.00000 0.00)",
+          "oklch(39% 0.00000 0.00)",
+          "oklch(51% 0.00000 0.00)",
+          "oklch(63% 0.00000 0.00)",
+          "oklch(75% 0.00000 0.00)",
+          "oklch(87% 0.00000 0.00)",
+          "oklch(95% 0.00000 0.00)"
+        ]
+      },
+      "quiet-line": {
+        "role": "neutral",
+        "displayName": "Quiet Divider",
+        "tonalRamp": [
+          "oklch(15% 0.00535 286.30)",
+          "oklch(27% 0.00535 286.30)",
+          "oklch(39% 0.00535 286.30)",
+          "oklch(51% 0.00535 286.30)",
+          "oklch(63% 0.00535 286.30)",
+          "oklch(75% 0.00535 286.30)",
+          "oklch(87% 0.00535 286.30)",
+          "oklch(95% 0.00535 286.30)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Product Statement",
+        "purpose": "Two-line opening statement in the product presentation."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Community and personal-space headings."
+      },
+      "title": {
+        "displayName": "Visual Resource Title",
+        "purpose": "Titles in illustrated directory cards; reading variant is larger."
+      },
+      "body": {
+        "displayName": "Section Body",
+        "purpose": "Measured-width descriptions beside product content."
+      },
+      "compact-body": {
+        "displayName": "Compact Body",
+        "purpose": "Reading-resource and community summaries."
+      },
+      "label": {
+        "displayName": "Control Label",
+        "purpose": "Resource tabs and compact secondary actions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "template-control-selected",
+        "value": "0 2px 8px #0000000d",
+        "purpose": "Selected white segment on the gray template-switcher track."
+      },
+      {
+        "name": "template-preview",
+        "value": "0 16px 40px -22px #1d1d1f55",
+        "purpose": "Ambient lift under the actual built-in-template screenshot."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-state",
+        "value": "color .2s, background-color .2s",
+        "purpose": "Resource and template tab state transitions."
+      },
+      {
+        "name": "primary-hover",
+        "value": "background-color .2s",
+        "purpose": "Primary action background state change."
+      },
+      {
+        "name": "search-reveal",
+        "value": "opacity 0 to 1; transform translateX(8px) to none; .2s ease-out both",
+        "purpose": "Search field opening. Reduced-motion preference disables animation and transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1100px"
+      },
+      {
+        "name": "stack-introduction-and-spaces",
+        "value": "850px"
+      },
+      {
+        "name": "mobile",
+        "value": "767px"
+      },
+      {
+        "name": "narrow-mobile",
+        "value": "359px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Black pill action used throughout the scoped product presentation.",
+      "html": "<a class=\"ds-primary\" href=\"/resources\">探索资源<svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding:12px 23px;border:0;border-radius:999px;background:#1d1d1f;color:#fff;font:500 14px/1.6 -apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif;text-decoration:none;transition:background-color .2s}.ds-primary:hover{background:#3c3c3f;color:#fff}.ds-primary:focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "link-secondary",
+      "description": "Text-and-arrow link paired with a primary action.",
+      "html": "<a class=\"ds-secondary\" href=\"/community\">去社区聊聊<svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;gap:10px;min-height:48px;color:#1d1d1f;font:500 14px/1.7 -apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif;text-decoration:none}.ds-secondary:focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}@media(hover:hover){.ds-secondary:hover{text-decoration:underline;text-underline-offset:5px}}"
+    },
+    {
+      "name": "Resource category tabs",
+      "kind": "nav",
+      "refersTo": "tab",
+      "description": "Internal category navigation; selected state is a black pill. Shared site navigation is outside scope.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"目录精选\"><button type=\"button\" role=\"tab\" aria-selected=\"true\">UI 设计</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Skill</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">文档</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">网站与工具</button></div>",
+      "css": ".ds-tabs{display:flex;flex-wrap:wrap;gap:6px}.ds-tabs button{min-height:44px;padding:10px 18px;border:0;border-radius:999px;background:transparent;color:#626269;font:500 14px/1.5 -apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif;cursor:pointer;transition:color .2s,background-color .2s}.ds-tabs button[aria-selected=true]{background:#1d1d1f;color:#fff}.ds-tabs button:not([aria-selected=true]):hover{background:#f5f5f7;color:#1d1d1f}.ds-tabs button:focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}@media(max-width:767px){.ds-tabs{gap:2px}.ds-tabs button{padding:9px 12px;font-size:12px}}@media(prefers-reduced-motion:reduce){.ds-tabs button{transition:none}}"
+    },
+    {
+      "name": "Search field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "Expanded bounded-selection search, shown with its circular trigger; live opening and focus behavior remain in HomeResourceExplorer.",
+      "html": "<div class=\"ds-search\"><button type=\"button\" aria-label=\"搜索精选\" aria-expanded=\"true\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><circle cx=\"10.8\" cy=\"10.8\" r=\"6.8\"/><path d=\"m16 16 4.5 4.5\"/></svg></button><input type=\"search\" aria-label=\"在本组精选中搜索\" placeholder=\"名称、关键词或用途\"/></div>",
+      "css": ".ds-search{display:flex;align-items:center}.ds-search button{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:12px;border:0;border-radius:50%;background:#f5f5f7;color:#1d1d1f;cursor:pointer}.ds-search input{appearance:none;max-width:220px;width:100%;min-height:44px;margin:0 0 0 12px;padding:8px;border:0;border-bottom:1px solid #dedee3;border-radius:0;background:#fff;color:#1d1d1f;caret-color:#1d1d1f;font:400 14px/1.7 -apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif}.ds-search input::placeholder{color:#626269}.ds-search :is(button,input):focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}@media(max-width:767px){.ds-search{width:100%}.ds-search input{max-width:none;min-width:0;flex:1;font-size:16px}}"
+    },
+    {
+      "name": "Reading resource card",
+      "kind": "card",
+      "refersTo": "resource-card",
+      "description": "Image-free resource variant with source metadata; the illustrated card variant shares its corner and title behavior.",
+      "html": "<article class=\"ds-reading\"><a href=\"/resources?type=docs\"><div class=\"ds-reading-content\"><h3>文档<svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></h3><p>打开完整目录，查看原始来源、项目仓库和各自的使用说明。</p><span>来源 / 许可</span></div></a></article>",
+      "css": ".ds-reading{min-height:270px}.ds-reading>a{display:block;height:100%;overflow:hidden;border:1px solid #dedee3;border-radius:16px;background:#fff;color:#1d1d1f;text-decoration:none}.ds-reading-content{display:flex;flex-direction:column;height:100%;padding:30px 24px;font-family:-apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif}.ds-reading h3{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin:0;font-size:24px;line-height:1.5;font-weight:600;letter-spacing:-.02em}.ds-reading h3 svg{flex:none;margin-top:4px}.ds-reading p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;margin:18px 0 0;color:#626269;font-size:14px;line-height:1.85}.ds-reading span{margin-top:auto;padding-top:24px;color:#626269;font-size:11px;line-height:1.7;overflow-wrap:anywhere}.ds-reading>a:focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}@media(hover:hover){.ds-reading>a:hover h3{text-decoration:underline;text-underline-offset:4px}}@media(max-width:767px){.ds-reading{min-height:210px}.ds-reading-content{padding-inline:22px}.ds-reading h3{font-size:18px}.ds-reading span{font-size:12px}}"
+    },
+    {
+      "name": "Template comparison tabs",
+      "kind": "chip",
+      "refersTo": "template-tab",
+      "description": "Two-choice template switcher with a softly lifted white selected segment; live implementation changes an actual screenshot and example links.",
+      "html": "<div class=\"ds-template-tabs\" role=\"tablist\" aria-label=\"选择内置模板示例\"><button type=\"button\" role=\"tab\" aria-selected=\"true\">阅读型</button><button type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">履历型</button></div>",
+      "css": ".ds-template-tabs{display:flex;justify-content:center;gap:4px;width:max-content;max-width:100%;padding:4px;border-radius:999px;background:#f5f5f7}.ds-template-tabs button{min-height:44px;padding:8px 24px;border:0;border-radius:999px;background:transparent;color:#626269;font:500 13px/1.5 -apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif;cursor:pointer;transition:color .2s,background-color .2s}.ds-template-tabs button[aria-selected=true]{background:#fff;color:#1d1d1f;box-shadow:0 2px 8px #0000000d}.ds-template-tabs button:focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}@media(prefers-reduced-motion:reduce){.ds-template-tabs button{transition:none}}"
+    },
+    {
+      "name": "Usage disclosure",
+      "kind": "custom",
+      "description": "Native details/summary disclosure, retaining actual open-state plus rotation and keyboard focus.",
+      "html": "<details class=\"ds-disclosure\"><summary>这里的资源怎么使用？<svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>打开资源详情，查看原始来源、项目仓库和各自的使用说明。第三方资源分别适用其原始许可。</p></details>",
+      "css": ".ds-disclosure{border-bottom:1px solid #dedee3;font-family:-apple-system,BlinkMacSystemFont,\"PingFang SC\",\"Helvetica Neue\",sans-serif;color:#1d1d1f}.ds-disclosure summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;padding:24px 0;cursor:pointer;font-size:15px;line-height:1.6;list-style:none}.ds-disclosure summary::-webkit-details-marker{display:none}.ds-disclosure summary svg{flex:none}.ds-disclosure[open] summary svg{transform:rotate(45deg)}.ds-disclosure summary:focus-visible{outline:2px solid #1d1d1f;outline-offset:5px;}.ds-disclosure p{max-width:70ch;margin:0;padding:0 36px 26px 0;color:#626269;font-size:14px;line-height:1.9}@media(max-width:767px){.ds-disclosure summary{padding-block:22px;font-size:14px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Light Apple Product Presentation",
+    "overview": "The user-selected Apple-like direction becomes a quiet white and neutral-gray surface: large, tightly spaced headings, black actions, light controls, and actual product content. The system gives resources, public sharing, and personal work room to be understood without decorative interface chrome. System typography is an explicit part of this chosen direction.\n\nThis document governs only `.home-experience`, from the first product section below the approved blue opening through the final invitation. It does not redefine the shared navigation, outlined V mark, blue glass opening, account flows, other pages, or the visual identities inside resource and template screenshots. The outlined V remains the shared identity asset described in [PRODUCT.md](PRODUCT.md), outside this boundary.",
+    "keyCharacteristics": [
+      "White and soft-gray fields, dark text, and black primary actions.",
+      "Generous section spacing with distinct resource, community, and template compositions.",
+      "Rounded controls and restrained surface corners; depth is reserved for the template preview and selected template control.",
+      "Real catalog records, qualified public content, and visibly identified fictional template examples."
+    ],
+    "rules": [
+      {
+        "name": "The Black Action Rule",
+        "body": "Within this boundary, primary actions and selected resource categories use Ink; blue belongs to the separately approved opening, not these action states.",
+        "section": "colors"
+      },
+      {
+        "name": "The Source Color Rule",
+        "body": "Colors inside actual catalog and template screenshots belong to the depicted source; they do not expand this presentation's token palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heading Line Rule",
+        "body": "Preserve the authored heading line groups and tight tracking; supporting prose wraps naturally within its measured width.",
+        "section": "typography"
+      },
+      {
+        "name": "The Distinct Composition Rule",
+        "body": "Keep the resource shelf, community reading panel, and large template comparison visually distinct within this presentation; a repeated framed-browser treatment is not the established pattern.",
+        "section": "layout"
+      },
+      {
+        "name": "The Quiet Depth Rule",
+        "body": "Use tonal separation for ordinary content surfaces; preserve the existing template-specific shadow roles rather than adding shadows to every card.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep this system scoped to the product presentation below the approved opening.",
+      "**Do** pair black primary actions with quieter text actions and visible keyboard focus.",
+      "**Do** preserve source/license metadata, bounded-search wording, truthful empty states, and the fictional-template caption.",
+      "**Do** use actual catalog records and built-in template screenshots, with provenance beside shipping preview rasters.",
+      "**Do** retain working tabs, full-directory routes, native disclosures, and the mobile stacking behavior."
+    ],
+    "donts": [
+      "**Don't** recolor the protected blue opening or shared navigation from this document.",
+      "**Don't** introduce blue primary actions into this neutral product presentation.",
+      "**Don't** turn screenshot colors, fonts, sample people, or internal template layouts into presentation-system primitives.",
+      "**Don't** invent public posts, customer claims, testimonials, user totals, engagement figures, or broader third-party reuse rights.",
+      "**Don't** replace the distinct section compositions with repeated framed browser windows or add shadows to every surface."
+    ]
+  }
+}
