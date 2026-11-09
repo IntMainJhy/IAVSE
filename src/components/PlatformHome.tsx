@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import {serverI18n} from '@/lib/server-i18n';
 import {defaultBlogSpace} from '@/lib/spaces.mjs';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
-import {Icon} from './Icons';
 import {V2Atmosphere} from './V2Atmosphere';
-import {CreatorStage,type CreatorStageData,type CreatorProject} from './CreatorStage';
+import type {CreatorStageData,CreatorProject} from './CreatorStage';
+import {HomeDiscoveryStage} from './HomeDiscoveryStage';
 import {HomeMotion} from './HomeMotion';
 import {HomeCinema} from './HomeCinema';
 import type {HomeBlogDemoExample} from './HomeBlogCanvasDemo';
@@ -29,7 +28,7 @@ export async function PlatformHome({req}:{req:Request}){
   <HomeMotion layoutKey={locale}/>
   <div className="v2-home-atmosphere" aria-hidden="true"><V2Atmosphere/></div>
   <section className="v2-hero-scene" aria-labelledby="product-title"><div className="v2-hero-intro"><div className="v2-hero-copy"><h1 id="product-title" lang="en"><span>Insight through AI.</span><span>Vigilance for Opportunity.</span><span>Seize to Evolve.</span></h1><p className="iavse-brand-words" lang="en">INSIGHT · ARTIFICIAL INTELLIGENCE · VIGILANCE · SEIZE · EVOLVE</p>{locale!=='en'&&<p className="iavse-brand-translation">{t('以洞察驱动智能，以敏锐发现机遇，以行动实现进化。')}</p>}</div><HomeCinema locale={locale}/></div>
-   <div className="v2-hero-showcase" data-glass-reveal="stage">{creator?<CreatorStage creator={creator}/>:<div className="v2-hero-empty"><h2>{t('完整介绍你自己')}</h2><p>{t('个人介绍、经历、技能与作品。')}</p><Link href="/workspace/blog">{t('创建我的空间')}<Icon name="arrow"/></Link></div>}</div>
+   <div className="v2-hero-showcase" data-glass-reveal="stage"><HomeDiscoveryStage locale={locale}/></div>
   </section>
   <HomeProductShowcase locale={locale} creator={demoCreator}/>
  </div>;

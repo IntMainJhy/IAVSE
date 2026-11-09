@@ -32,7 +32,7 @@ async function render(space,locale='zh',media=true){
   '@/app/home-showcase.css':{},'@/app/home-product-showcase.css':{},'@/app/gallery-backgrounds.css':{},
   './CreatorStage':{CreatorStage:({creator})=>React.createElement('pre',{'data-stage':true},JSON.stringify(creator))}
  };
- for(const name of ['ShowcasePreview','ShowcaseDiscovery','HomeProductShowcase']){const component={};const code=ts.transpileModule(fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(code,{exports:component,Set,require:key=>{if(key.endsWith('.css'))return{};if(!Object.hasOwn(modules,key))throw Error(key);return modules[key]}});modules['./'+name]=component;}
+ for(const name of ['ShowcasePreview','ShowcaseDiscovery','HomeProductShowcase','HomeDiscoveryStage']){const component={};const code=ts.transpileModule(fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(code,{exports:component,Set,require:key=>{if(key.endsWith('.css'))return{};if(!Object.hasOwn(modules,key))throw Error(key);return modules[key]}});modules['./'+name]=component;}
  vm.runInNewContext(source,{exports,Set,encodeURIComponent,require:name=>{if(!Object.hasOwn(modules,name))throw new Error(name);return modules[name]}});
  return renderToStaticMarkup(await exports.PlatformHome({req:new Request('http://site.example/')}));
 }
@@ -46,7 +46,7 @@ test('creator landing projects use the reviewed résumé cover and localized pub
  assert.ok(!html.includes('private-marker'));
  const example=demoSnapshot(html);assert.equal(example.name,'Published author');assert.equal(example.projects[0].title,'Translated work');assert.equal(example.projects[0].imageId,'published-cover');
  assert.ok(html.includes('data-glass-reveal="stage"'));
- assert.ok(html.includes('data-stage="true"'));
+ assert.ok(html.includes('home-discovery-stage'));
 });
 test('hidden résumé projects stay out of the landing and published documents provide the fallback',async()=>{
  const hidden={...space,layout:{blog:{design:{nodes:[{part:'section:projects',hidden:true}]}}},content:[{type:'projects',slug:'public-project',title:'Published document',summary:'Public summary',coverId:'document-cover'},{type:'articles',slug:'article',title:'Not a portfolio project',summary:'Article'}]};
@@ -93,17 +93,17 @@ test('the complete product showroom follows the protected opening and adds no ba
   const inside=descendants(showroom);assert.deepEqual(inside.filter(node=>node.attribs['data-home-story']).map(node=>node.attribs['data-home-story']),['blog','editor','skills','resources']);
   assert.ok(!inside.some(node=>node.name==='canvas'||node.name==='video'||node.name==='iframe'||hasClass(node,'v2-hero-scene')||node.attribs['data-home-cinema']||node.attribs['data-stage']));
   assert.equal(inside.filter(node=>node.attribs['data-home-scene']==='invitation').length,1);assert.equal(inside.filter(node=>node.attribs['data-creator-voices']==='true').length,1);
-  assert.ok(descendants(hero).some(node=>node.attribs[creator?'data-stage':'class']===(creator?'true':'v2-hero-empty')));
+  assert.ok(descendants(hero).some(node=>hasClass(node,'home-discovery-stage')));
+  assert.ok(!descendants(hero).some(node=>hasClass(node,'v2-stage-profile')));
   assert.equal((html.match(/data-home-motion="true"/g)||[]).length,1);assert.ok(html.includes('data-glass-reveal="stage"'));
  }
 });
 test('the editor receives the real public snapshot without repeating a separate project row',async()=>{
  const intro='A long public creator introduction that belongs on the full profile rather than being repeated through every feature.';
  const mixed={...space,profile:{...space.profile,intro,resume:{sections:[{id:'projects',title:'代表项目',items:[{title:'Text-only project',description:'Visible on the original portfolio'},space.profile.resume.sections[0].items[0],{title:'Another illustrated work',description:'Second cover',coverId:'secondary-cover'}]}]}}};
- const html=await render(mixed),stage=html.match(/<pre data-stage="true">([\s\S]*?)<\/pre>/)?.[1],stories=html.replace(/<pre data-stage="true">[\s\S]*?<\/pre>/,'').replace(/<pre data-demo-creator="true">[\s\S]*?<\/pre>/,'');
- assert.ok(stage?.includes(intro));assert.ok(stage?.includes('Text-only project'));assert.ok(stage?.includes('Another illustrated work'));
+ const html=await render(mixed),stories=html.replace(/<pre data-demo-creator="true">[\s\S]*?<\/pre>/,'');
  const example=demoSnapshot(html);assert.equal(example.intro,intro);assert.equal(example.projects.length,2);assert.equal(example.projects[0].title,'Text-only project');assert.equal(example.projects[1].title,'Real work');
- assert.ok(!stories.includes(intro),'the authored introduction appears only inside the two window renderers');
+ assert.ok(!stories.includes(intro),'the authored introduction stays in the editable demo');
  assert.equal(Array.from(stories.matchAll(/data-home-story="editor"/g)).length,1);
  assert.ok(!stories.includes('data-home-story="work"'));
  assert.ok(!stories.includes('published-cover'));
@@ -152,5 +152,17 @@ test('home introduction and closing invitation do not offer unavailable app down
   const html=await render(space,locale);
   assert.doesNotMatch(html,/iavse-mac-download|v2-hero-actions|href="\/downloads(?:#[^"]*)?"/);
   assert.ok(html.includes('href="/workspace/blog"'));
+ }
+});
+
+
+test('the opening invites visitors into the community and real directory without requiring a featured author',async()=>{
+ for(const locale of ['zh','en','ja']){
+  const html=await render(null,locale),stage=html.match(/<section class="v2-stage home-discovery-stage"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(stage,'discovery stays available without a published personal homepage');
+  for(const href of ['/community','/resources','/resources?type=designs','/resources/designs/template-astro-paper','/resources/designs/template-adminkit','/skills/impeccable'])assert.ok(stage.includes('href="'+href+'"'),href);
+  const templates=showroomData.showcaseResources.find(item=>item.id==='designs').items.slice(0,2);
+  for(const item of templates){assert.ok(stage.includes(item.image.replaceAll('&','&amp;')));assert.ok(stage.includes(item.source));}
+  assert.doesNotMatch(stage,/v2-stage-profile|data-stage-address|published-author|jianghaoyu2006|<iframe|<video/);
  }
 });
