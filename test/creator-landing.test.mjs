@@ -8,20 +8,25 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import * as experience from '../src/lib/home-experience.mjs';
 import * as spatial from '../src/lib/home-spatial.mjs';
+import * as bits from '../src/lib/home-bits.mjs';
 
 function load(name,modules){const exports={};const code=ts.transpileModule(fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(code,{exports,Set,encodeURIComponent,require:key=>{if(key.endsWith('.css'))return{};assert.ok(Object.hasOwn(modules,key),key);return modules[key]}});return exports;}
-async function render(locale='zh',read=()=>({items:[]})){
- const modules={'react':React,'react/jsx-runtime':runtime,'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},'./Icons':{Icon:()=>null},'@/lib/home-experience.mjs':experience,'@/lib/home-spatial.mjs':spatial,'@/lib/community.mjs':{publicPosts:read},'@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},'./V2Atmosphere':{V2Atmosphere:()=>React.createElement('canvas',{'data-protected-opening':true})}};
- for(const name of ['HomeResourceExplorer','HomeSpacePreview','HomeSpatialShowcase','HomeProductShowcase'])modules['./'+name]=load(name,modules);
+async function render(locale='zh',read=()=>({items:[]}),theme='light'){
+ const modules={'react':React,'react/jsx-runtime':runtime,'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},'next/headers':{cookies:async()=>({get:()=>({value:theme})})},'./Icons':{Icon:()=>null},'@/lib/home-experience.mjs':experience,'@/lib/home-spatial.mjs':spatial,'@/lib/home-bits.mjs':bits,'@/lib/community.mjs':{publicPosts:read},'@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},'./react-bits/Silk':{default:({lightMode})=>React.createElement('canvas',{'data-home-silk':true,'data-light-mode':lightMode})}};
+ for(const name of ['HomeBitsAtmosphere','HomeBitsMotion','HomeResourceExplorer','HomeSpacePreview','HomeSpatialShowcase','HomeProductShowcase'])modules['./'+name]=load(name,modules);
  const page=load('PlatformHome',modules);return renderToStaticMarkup(await page.PlatformHome({req:new Request('http://example.test/')}));
 }
 
-test('homepage preserves the opening and replaces every old product display and visible background toolbar',async()=>{
+test('React Bits homepage retains the brand and real product content without the discarded scene',async()=>{
  const html=await render();
  for(const phrase of ['Insight through AI.','Vigilance for Opportunity.','Seize to Evolve.'])assert.ok(html.includes(phrase));
- assert.equal((html.match(/data-protected-opening/g)||[]).length,1);
+ assert.equal((html.match(/data-home-silk/g)||[]).length,1);
+ assert.match(html,/class="v2-home rb-home"/);
+ assert.match(html,/data-light-mode="true"/);
+ assert.match(html,/aria-label="切换深色外观"/);
+ const dark=await render('en',undefined,'dark');assert.match(dark,/data-light-mode="false"/);assert.match(dark,/aria-label="Switch to light theme"/);
  assert.match(html,/data-home-experience="community-discovery"/);
- assert.match(html,/data-home-story="products"/,'product stage joins the same optical scene as the opening');
+ assert.match(html,/data-home-story="products"/);
  for(const old of ['iavse-cinema-toolbar','v2-hero-showcase','v2-stage-profile','product-showroom-home','home-blog-demo','data-creator-voices','creator-home.webp','jianghaoyu2006'])assert.ok(!html.includes(old),old);
  assert.doesNotMatch(html,/<iframe|<video/);
 });
@@ -55,7 +60,7 @@ test('interactive excerpts stay small and all shipped space screenshots have sou
 });
 
 
-test('spatial chapters follow bounded native scroll positions and SSR retains every chapter in reading order',async()=>{
+test('legacy spatial helpers remain stable and the new homepage retains every chapter in native reading order',async()=>{
  assert.equal(spatial.spatialChapterAt(100,100,1000,3),0);
  assert.equal(spatial.spatialChapterAt(600,100,1000,3),1);
  assert.equal(spatial.spatialChapterAt(1100,100,1000,3),2);
@@ -63,7 +68,7 @@ test('spatial chapters follow bounded native scroll positions and SSR retains ev
  assert.equal(spatial.spatialChapterAt(99999,100,1000,3),2);
  assert.equal(spatial.spatialChapterAt(NaN,100,1000,3),0);
  assert.equal(spatial.spatialChapterAt(300,100,0,3),0);
- const html=await render();assert.ok(html.includes('class="hs-journey" data-spatial="false"'));
- assert.deepEqual([...html.matchAll(/class="hs-panel" data-scene="([^"]+)"/g)].map(match=>match[1]),['discover','community-product','spaces']);
+ const html=await render();assert.ok(!html.includes('class="hs-journey"'));
+ assert.deepEqual([...html.matchAll(/class="rb-chapter rb-chapter-\d" id="([^"]+)"/g)].map(match=>match[1]),['discover','community-product','spaces']);
  assert.ok(!html.includes('inert=""'),'server content stays usable before enhancement');
 });

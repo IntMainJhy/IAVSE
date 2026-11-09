@@ -56,7 +56,8 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 ## 当前实现与历史记录 / Current design and history
 
-- [2026-11-09 首页产品空间](home-product-redesign.md): resource discovery, community and blog spaces within one optical environment.
+- [当前首页：React Bits 参考与实现 / Current homepage](home-react-bits.md): flowing blue light, working resource controls, native scroll, appearance and reduced-motion behavior.
+- [旧版首页产品空间 / Historical spatial homepage](home-product-redesign.md): superseded optical opening and scroll-driven chapters; retained as a historical design record.
 - [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
 - [模板与展廊修复](blog-gallery-template-repair-2026-11-08.md).
 - [2026-11-06 名称与清理](cleanup-2026-11-06.md).

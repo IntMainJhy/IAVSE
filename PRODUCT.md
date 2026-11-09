@@ -16,11 +16,11 @@ IAVSE brings community exchange and resource discovery together, with personal b
 - Blog spaces use the site's built-in templates and publishing workflow.
 - Keep source and license information for third-party resources. Existing material must not be presented as universally reusable or officially endorsed.
 - Preserve user data, publishing permissions, account flows and the existing shared navigation.
-- Keep the approved blue glass homepage opening. The product presentation below it is being replaced in place; an independent page was explicitly cancelled.
+- The latest user direction replaces the old homepage, including the former protected glass opening and spatial chapters, using the Cloudlight, Portfolio, and Security references. This scope is the homepage; other routes and product functionality remain unchanged.
 
 ## Brand Commitments
 
-The user chose a light Apple-like interface, black actions rather than blue accents, and the shared outlined V mark. The homepage product presentation now uses a spatial showroom with resource, community, and blog-space chapters, sharing the opening’s blue-silver optical environment without a hard background boundary. The English mission remains “Insight through AI. Vigilance for Opportunity. Seize to Evolve.”
+Retain IAVSE blue, the shared outlined V mark, and the English mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.” The current homepage presents real resource discovery, community exchange, and blog spaces in a light blue rounded canvas with a persistent dark appearance option. Its centered opening, working resource panel, calm motion, and original ASCII/serif closing express the latest reference direction; they do not prescribe the composition of every platform page. See [DESIGN.md](DESIGN.md) and [homepage implementation notes](docs/home-react-bits.md) for the built visual system and reference boundaries.
 
 ## Evidence on Hand
 

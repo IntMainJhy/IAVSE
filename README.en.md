@@ -26,7 +26,7 @@ Arrange your work, experience and writing in a visual canvas.
 
 </div>
 
-![IAVSE optical blue homepage on the current main branch](docs/screenshots/home-current.webp)
+![IAVSE homepage with flowing blue light and a working resource panel](docs/screenshots/home-current.webp)
 
 ## About IAVSE
 
@@ -58,11 +58,11 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 Captured from the actual `main` website on **2026-11-09**. Bundled showcase profiles are examples, not registered-user or endorsement claims. Community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
 
-### Homepage product spaces
+### Homepage and resource workbench
 
-Resources, community and blog spaces form three working chapters. Larger viewports use native scroll-driven spatial staging; mobile and reduced motion retain the complete document flow.
+A flowing light-blue opening leads into a working resource panel, followed by community and built-in blog examples. The page uses native scrolling, persisted light/dark appearance and reduced-motion support.
 
-![Resource, community and blog product presentation](docs/screenshots/product-current.webp)
+![Homepage resource workbench with actual catalog selections](docs/screenshots/product-current.webp)
 
 ### Spatial blog discovery
 
@@ -123,11 +123,11 @@ GitHub Actions checks documentation, unit tests, the production build and types 
 | Blog canvas and templates | [Editor guide](docs/blog-editor.md), `src/components/BlogCanvas.tsx`, `src/lib/blog-templates.mjs` |
 | Drafts, public versions and authorization | [Publication boundaries](docs/public-launch.en.md), `src/lib/spaces.mjs`, `src/lib/community.mjs` |
 | Catalog queries, filters and performance | [Resource discovery](docs/resource-discovery.md), [catalog measurements](docs/catalog-performance-2026-11-08.md) |
-| 3D, scrolling and reduced motion | [Homepage design](docs/home-product-redesign.md), `src/components/HomeSpatialShowcase.tsx`, `src/lib/home-glass.ts` |
+| WebGL, ASCII and reduced motion | [Current homepage implementation](docs/home-react-bits.md), `src/components/HomeBitsAtmosphere.tsx`, `src/components/HomeBitsMotion.tsx` |
 | AI Skill / MCP / REST | [IAVSE Skill](integrations/iavse-post/SKILL.md), [API reference](integrations/iavse-post/references/api.md), `integrations/iavse-mcp.mjs` |
 | Isolation, tests and recovery | `test/`, [administration](docs/administration.en.md), `scripts/backup.mjs`, `scripts/restore.mjs` |
 
-Start with one page and its tests, then follow its API and data modules. Dated design and performance records describe their original versions and measurement scope.
+Start with one page and its tests, then follow its API and data modules. Dated design and performance records describe their original versions and measurement scope. The former [spatial homepage design](docs/home-product-redesign.md) is historical.
 
 ## Deployment and data
 

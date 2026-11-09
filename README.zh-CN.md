@@ -26,7 +26,7 @@
 
 </div>
 
-![IAVSE 当前主分支的蓝色光学玻璃首页](docs/screenshots/home-current.webp)
+![IAVSE 当前首页：浅蓝流动背景与资源工作台](docs/screenshots/home-current.webp)
 
 ## 关于 IAVSE
 
@@ -59,11 +59,11 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 以下为 **2026-11-09** 从 `main` 实际页面拍摄的截图。示例主页不代表真实注册成员或用户背书；社区保留拍摄时的实际空状态。详见[截图说明](docs/screenshots/README.md)。
 
-### 首页产品空间
+### 首页与资源工作台
 
-资源发现、社区交流和博客空间组成三个可切换章节。大屏支持原生滚动空间展示，手机与减少动态模式按文档顺序阅读。
+浅蓝色流动首屏连接可用的资源工作台，社区交流和博客示例依次展开。页面保留原生滚动，并提供深浅外观与减少动态适配。
 
-![首页资源、社区与博客产品展示](docs/screenshots/product-current.webp)
+![首页资源工作台与实际目录精选](docs/screenshots/product-current.webp)
 
 ### 博客空间与个人主页
 
@@ -124,11 +124,11 @@ GitHub Actions 在 `main` 推送和 Pull Request 时执行文档检查、单元�
 | 博客画布与模板 | [编辑器说明](docs/blog-editor.zh-CN.md)、`src/components/BlogCanvas.tsx`、`src/lib/blog-templates.mjs` |
 | 草稿、公开版本与权限边界 | [发布说明](docs/public-launch.md)、`src/lib/spaces.mjs`、`src/lib/community.mjs` |
 | 目录查询、筛选与性能 | [资源目录实现](docs/resource-discovery.md)、[目录性能记录](docs/catalog-performance-2026-11-08.md) |
-| 3D、滚动与减少动态 | [首页设计](docs/home-product-redesign.md)、`src/components/HomeSpatialShowcase.tsx`、`src/lib/home-glass.ts` |
+| WebGL、ASCII 与减少动态 | [当前首页实现](docs/home-react-bits.md)、`src/components/HomeBitsAtmosphere.tsx`、`src/components/HomeBitsMotion.tsx` |
 | AI Skill / MCP / REST | [接入 Skill](integrations/iavse-post/SKILL.md)、[API 参考](integrations/iavse-post/references/api.md)、`integrations/iavse-mcp.mjs` |
 | 账号隔离、测试与恢复 | `test/`、[管理文档](docs/管理中心说明.md)、`scripts/backup.mjs`、`scripts/restore.mjs` |
 
-建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。历史设计与性能记录标有日期，结论只对应当时的版本和测量范围。
+建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。历史设计与性能记录标有日期，结论只对应当时的版本和测量范围；旧版[首页产品空间设计](docs/home-product-redesign.md)仅供历史参考。
 
 ## 部署与数据
 

@@ -86,6 +86,10 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 
 后台直接使用上述 React Bits 源码组件，补充触屏和减少动态效果适配。完整原许可已保留；本项目的原创部分许可不覆盖这些第三方部分。
 
+The homepage also embeds `Silk.tsx` and `Silk.css` from the official React Bits repository ([TypeScript source](https://github.com/DavidHDev/react-bits/blob/main/src/ts-default/Backgrounds/Silk/Silk.tsx), Git blob `9774aca10c0bd0c03c35fc67d07fd7f913db2a7e`; styles blob `9a7c0bb233ace4df8a07672834d4b9b750888b75`), under the same preserved MIT + Commons Clause license. Application settings add IAVSE colors, theme persistence and reduced-motion behavior. The independent ASCII canvas and page layout are IAVSE application code. React Bits Pro Security, Cloudlight and Portfolio demos informed the visual direction; their paid template source, branding, illustrations and demo claims are not included.
+
+首页使用官方开放组件 Silk，保留上游版权与许可。Security、Cloudlight 和 Portfolio 演示站仅作为视觉及技术研究参考，未将 Pro 模板作为可再分发的源码包发布。
+
 ## Source website templates and design specifications (2026-11-08)
 
 The current library contains eighteen independently maintained GitHub projects and 54 VoltAgent design-system previews. Four initial projects were discovered through StyleKit; eight additions (Tabler, Hextra, Just the Docs, Clean Blog, Freelancer, Landwind, Bigspring Light and Resume) were verified directly against their original MIT repositories. See [expansion evidence](docs/github-template-expansion-2026-11-08.json). At the user's request, the 37 StyleKit-maintained page templates and AnxForever's portfolio have been removed, together with their vendored source, runtime assets and covers. See the [source and license audit](docs/template-catalog-audit-2026-11-08.md).
