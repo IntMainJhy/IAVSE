@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-11-09T02:58:49.438789Z",
-  "title": "Design System: IAVSE Homepage Product Presentation",
+  "title": "Design System: IAVSE Homepage Spatial Product Presentation",
   "extensions": {
     "colorMeta": {
       "ink": {
@@ -161,7 +161,19 @@
         "name": "narrow-mobile",
         "value": "359px"
       }
-    ]
+    ],
+    "spatial": {
+      "perspective": "1800px",
+      "surfaceWidth": "min(930px, calc(100vw - 350px))",
+      "chapterGap": "96px",
+      "depthStep": "130px",
+      "turnStep": "10deg",
+      "surfaceRadius": "22px",
+      "stageRadius": "32px",
+      "enabledWhen": "min-width 1100px and min-height 900px and no reduced motion",
+      "fallback": "Complete native document flow; every surface remains readable",
+      "runtime": "CSS perspective; native scroll; cached geometry; one queued frame"
+    }
   },
   "components": [
     {
@@ -221,13 +233,13 @@
     }
   ],
   "narrative": {
-    "northStar": "Light Apple Product Presentation",
-    "overview": "The user-selected Apple-like direction becomes a quiet white and neutral-gray surface: large, tightly spaced headings, black actions, light controls, and actual product content. The system gives resources, public sharing, and personal work room to be understood without decorative interface chrome. System typography is an explicit part of this chosen direction.\n\nThis document governs only `.home-experience`, from the first product section below the approved blue opening through the final invitation. It does not redefine the shared navigation, outlined V mark, blue glass opening, account flows, other pages, or the visual identities inside resource and template screenshots. The outlined V remains the shared identity asset described in [PRODUCT.md](PRODUCT.md), outside this boundary.",
+    "northStar": "Light Apple Spatial Showroom",
+    "overview": "Three real product surfaces share one perspective stage below the protected blue opening. Native scrolling or fixed chapter controls selects resource discovery, community exchange, or blog spaces. Foreground text stays clear; mobile, short viewports and reduced motion expose all content in normal reading order.",
     "keyCharacteristics": [
-      "White and soft-gray fields, dark text, and black primary actions.",
-      "Generous section spacing with distinct resource, community, and template compositions.",
-      "Rounded controls and restrained surface corners; depth is reserved for the template preview and selected template control.",
-      "Real catalog records, qualified public content, and visibly identified fictional template examples."
+      "Neutral lit stage, white surfaces, black actions and fixed chapter navigation.",
+      "Separated perspective surfaces with an unblurred pixel-aligned foreground.",
+      "Actual resource controls, qualified public sharing and built-in template screenshots.",
+      "Native reading flow before enhancement and for reduced motion or constrained viewports."
     ],
     "rules": [
       {

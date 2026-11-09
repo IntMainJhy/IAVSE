@@ -17,10 +17,10 @@ typography:
     letterSpacing: "-0.035em"
   headline:
     fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif'
-    fontSize: "clamp(34px, 4vw, 54px)"
+    fontSize: "23px"
     fontWeight: 600
-    lineHeight: 1.25
-    letterSpacing: "-0.035em"
+    lineHeight: 1.35
+    letterSpacing: "-0.025em"
   title:
     fontFamily: '-apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif'
     fontSize: "17px"
@@ -45,6 +45,8 @@ typography:
 rounded:
   surface: "16px"
   pill: "999px"
+  spatial-stage: "32px"
+  spatial-panel: "22px"
 spacing:
   compact: "8px"
   control: "12px"
@@ -95,13 +97,13 @@ components:
 
 ## Overview
 
-**Creative North Star: "Light Apple Product Presentation"**
+**Creative North Star: "Light Apple Spatial Showroom"**
 
-The user-selected Apple-like direction becomes a quiet white and neutral-gray surface: large, tightly spaced headings, black actions, light controls, and actual product content. The system gives resources, public sharing, and personal work room to be understood without decorative interface chrome. System typography is an explicit part of this chosen direction.
+The user-selected Apple-like direction becomes a white and neutral-gray spatial showroom. Resource discovery, community exchange, and blog spaces share one perspective camera. Native document scrolling moves the current surface into focus while neighboring surfaces recede with clear separation. Black chapter controls remain fixed in place. System typography and actual product content stay readable in the foreground.
 
 This document governs only `.home-experience`, from the first product section below the approved blue opening through the final invitation. It does not redefine the shared navigation, outlined V mark, blue glass opening, account flows, other pages, or the visual identities inside resource and template screenshots. The outlined V remains the shared identity asset described in [PRODUCT.md](PRODUCT.md), outside this boundary.
 
-Ground truth is [home-experience.css](src/app/home-experience.css), [HomeProductShowcase.tsx](src/components/HomeProductShowcase.tsx), [HomeResourceExplorer.tsx](src/components/HomeResourceExplorer.tsx), [HomeSpacePreview.tsx](src/components/HomeSpacePreview.tsx), and [home-experience.mjs](src/lib/home-experience.mjs). [PlatformHome.tsx](src/components/PlatformHome.tsx) establishes the protected opening before this boundary; [the direction contract](docs/home-product-redesign.md) explains the approved scope. The recorded review disposition is **ship**, with no requested fixes; this document describes the implemented artifact.
+Ground truth is [home-experience.css](src/app/home-experience.css), [HomeProductShowcase.tsx](src/components/HomeProductShowcase.tsx), [HomeResourceExplorer.tsx](src/components/HomeResourceExplorer.tsx), [HomeSpacePreview.tsx](src/components/HomeSpacePreview.tsx), and [home-experience.mjs](src/lib/home-experience.mjs). [PlatformHome.tsx](src/components/PlatformHome.tsx) establishes the protected opening before this boundary; [the direction contract](docs/home-product-redesign.md) explains the approved scope. The spatial layout extends this boundary in place; this document describes the implemented artifact.
 
 **Key Characteristics:**
 
@@ -143,7 +145,7 @@ The sidecar's eight-step OKLCH tonal strips are synthesized panel previews, not 
 ### Hierarchy
 
 - **Display:** the opening product statement uses the `display` role, split into explicit lines. At the mobile breakpoint it becomes (42px / 1.2), then (36px) below (359px).
-- **Headline:** community and space headings use the `headline` role and explicit line spans. On mobile they become (35px / 1.28). The closing invitation has its own observed desktop range (34–48px / 1.3) and mobile size (32px).
+- **Headline:** the current product-space heading uses (23px / 1.35) in the spatial stage and (26px) in document flow. The closing invitation retains its observed desktop range (34–48px / 1.3) and mobile size (32px).
 - **Title:** visual resource cards use `title`. Reading-oriented cards enlarge their titles to (24px); visual card titles become (18px) on mobile.
 - **Body:** section descriptions use `body`, generally limited to (32–36ch) on desktop. The discovery introduction uses (17px / 1.9), becoming (15px) on mobile. Compact resource and community summaries use the `compact-body` role; visual resource summaries begin at (13px).
 - **Label:** tabs and supporting actions use `label`, with control-specific line height where implemented. Sources and captions use smaller supporting text (11–12px), increasing to (12px) on mobile.
@@ -152,26 +154,19 @@ The sidecar's eight-step OKLCH tonal strips are synthesized panel previews, not 
 
 ## Layout
 
-The centered container is capped at (1280px), including horizontal padding. Desktop gutters are (48px), narrowing to (32px) at (1100px), (24px) at (767px), and (20px) below (359px). Repeated small spacing steps live in the frontmatter; section spacing deliberately extends beyond that compact scale.
+The existing centered introduction and neutral palette lead into `.hs-journey`, a three-chapter product stage. On viewports at least 1100px wide and 900px tall, with no reduced-motion preference, the journey occupies 270svh (minimum 2250px). Its shell sticks 86px from the viewport top. The stage is at most 1680px wide; its visible window is at most 710px tall, bounded by the available viewport height.
 
-The discovery section has (96px) above and (104px) below. Its introduction is a two-column grid (1.12fr / 1fr) with a (70px) gap; the resource shelf is a three-column grid with a (24px) gap. The community section is a full-width soft-gray band with (104px) vertical padding and an internal two-column grid (1fr / 1.12fr), separated by (90px). The space section reverses the emphasis toward the large preview (0.85fr / 1.2fr) with an (80px) gap and (116px / 90px) vertical padding. Usage notes narrow to (960px). The centered closing invitation has (116px / 110px) vertical padding.
+All three product surfaces have the same width: min(930px, viewport width minus 350px). Their horizontal distance is one surface width plus 96px, preserving a real gap. The selected surface starts 24px below the stage top and is aligned to whole pixels. Resource, community and space controls keep their actual behavior inside that surface. The blog preview shrinks on shorter spatial viewports so every action remains visible. The spatial community view shows the newest public post when present; the full-flow version can show two. Empty and unavailable states remain truthful.
 
-At (1100px), gaps and card padding become tighter. At (850px), the discovery introduction stacks, the resource shelf remains three columns with (16px) gaps, and the space section becomes a single column with a preview capped at (720px). At (767px), resource cards and community columns stack; the shelf loses its desktop minimum height, open search uses the full toolbar width, metadata footers stack, and captions become vertical. Discovery padding becomes (64px / 70px), the community band (70px), space section (72px / 50px), and closing section (74px / 80px).
+The chapter navigation has three fixed-position pill controls. Scrolling selects the nearest chapter from cached document geometry; the page never captures wheel input or substitutes its own scrolling. The native previous/next actions and keyboard arrows/Home/End reach the same three chapters. Only the current surface is interactive; inactive surfaces use `inert` and `aria-hidden`.
 
-Actions wrap instead of overflowing. Resource titles and metadata can shrink or wrap inside their grid cells; visual summaries are limited to two lines and reading summaries to four. Catalog screenshots use a wide crop (1.6 ratio, 1.65 on mobile), while built-in template screenshots retain their captured (1280 / 860) ratio. Anchor offsets account for the existing shared navigation. Print removes search and template shadows and reduces section spacing.
-
-**The Distinct Composition Rule.** Keep the resource shelf, community reading panel, and large template comparison visually distinct within this presentation; a repeated framed-browser treatment is not the established pattern.
+Below 1100px width or 900px height, before enhancement, in reduced-motion mode, and when printing, every chapter remains in normal reading order. There is no fixed-length scroll journey or perspective transform in this fallback. The mobile chapter navigation and underlying resource controls retain touch targets of at least 44px. The original compact resource, source metadata, template screenshot, disclosure and closing-action patterns remain in use.
 
 ## Elevation & Depth
 
-The presentation is predominantly flat. White and soft-gray fields, fine dividers, screenshot crops, and generous separation establish depth. Resource cards and the community panel have no resting shadow. The two shadow treatments below are confined to the template comparison.
+The stage uses a neutral lit ground and a perspective distance of 1800px. The active surface has no blur or depth scale; its top and left positions are pixel-aligned for clear text. Neighboring surfaces recede by 130px and turn by 10 degrees per chapter offset, with slight blur and reduced opacity. They stay outside the foreground surface instead of crossing over its content. A floor shadow and a soft downward surface shadow establish depth without additional canvas or WebGL renderers.
 
-### Shadow Vocabulary
-
-- **Selected template control** (`0 2px 8px #0000000d`): a small lift distinguishes the white selected segment from its gray track.
-- **Template preview** (`0 16px 40px -22px #1d1d1f55`): restrained ambient lift beneath the actual template screenshot.
-
-**The Quiet Depth Rule.** Use tonal separation for ordinary content surfaces; preserve the existing template-specific shadow roles rather than adding shadows to every card.
+Camera transitions use 0.7s transform easing, with 0.5s opacity and blur transitions. Scrolling within a chapter updates only a small progress transform. Reduced motion removes the spatial presentation and transitions, exposing the full readable document. Actual template screenshots keep their existing modest preview shadow.
 
 ## Shapes
 
@@ -193,7 +188,7 @@ The circular search trigger reveals an underlined field with a short (0.2s ease-
 
 Visual resource cards place real catalog screenshots above title, description, and source/license text on Soft Surface. Titles underline on hover. Reading-oriented categories use white bordered cards without images and allow longer summaries. The full card links to the actual resource, skill, document, or website; external URLs open with `noopener noreferrer`. Resource selection is bounded to three records per group, not a full-directory search.
 
-The community composition places explanatory copy beside a white reading panel on the gray band. The panel header has a quiet separator. Public content is drawn from the qualified public feed, limited to two entries. The reviewed state has zero public posts and explicitly says so; an unavailable read has separate copy and a community link. Neither state is replaced with invented activity, engagement figures, or sample public posts. Publishing actions retain the existing submission workflow.
+The community product surface contains a soft-gray reading area within its white spatial pane. The panel header has a quiet separator. Public content is drawn from the qualified public feed, limited to two records; spatial mode displays the latest record and normal document flow can display both. The reviewed state has zero public posts and explicitly says so; an unavailable read has separate copy and a community link. Neither state is replaced with invented activity, engagement figures, or sample public posts. Publishing actions retain the existing submission workflow.
 
 ### Built-in template comparison
 
@@ -205,7 +200,7 @@ Shipping rasters are [space-editorial.webp](public/media/home-product/space-edit
 
 Native `details` / `summary` rows use fine bottom separators, text labels, and a plus SVG that rotates into a close mark while open. Answers remain gray, readable text. This is the presentation's disclosure pattern for source/license, publication, and template explanations; the shared navigation is outside the documented component set.
 
-The supplied review evidence is local, not shipping page media. Full captures: `.impeccable/review/desktop.png` (1425 × 4395), `mobile.png` (390 × 5466), and `user-1671.png` (1656 × 4354 raster for the named 1671px check). Section captures: `desktop-discover.png` (1425 × 973), `desktop-hx-community-title.png` (1425 × 597), `desktop-spaces.png` (1425 × 772), `mobile-discover.png` (390 × 1600), `mobile-hx-community-title.png` (390 × 905), and `mobile-spaces.png` (390 × 872), all under the same review directory. These nine captures are the reported finished-build review set; they are not an approved image comp or a generated visual-world study.
+The spatial presentation was checked in an actual browser at 1671 × 959 and 1100 × 900, including all three focused surfaces. Normal reading flow was checked at 1100 × 850, 390 × 844, and 320 × 780, plus reduced-motion mode. Local verification captures are not shipping media or approved image comps.
 
 ## Do's and Don'ts
 
@@ -224,3 +219,7 @@ The supplied review evidence is local, not shipping page media. Full captures: `
 - **Don't** turn screenshot colors, fonts, sample people, or internal template layouts into presentation-system primitives.
 - **Don't** invent public posts, customer claims, testimonials, user totals, engagement figures, or broader third-party reuse rights.
 - **Don't** replace the distinct section compositions with repeated framed browser windows or add shadows to every surface.
+
+## Spatial Implementation
+
+Ground truth for the spatial enhancement is [HomeSpatialShowcase.tsx](src/components/HomeSpatialShowcase.tsx), [home-spatial.css](src/app/home-spatial.css), and [home-spatial.mjs](src/lib/home-spatial.mjs). Resize observation caches stage geometry; scroll work is coalesced into one animation frame. Navigation listeners, resize observation and pending work are released on unmount. No new raster, font, video, or third-party runtime is required by the spatial effect.

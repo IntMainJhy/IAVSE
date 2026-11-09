@@ -7,11 +7,12 @@ import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import * as experience from '../src/lib/home-experience.mjs';
+import * as spatial from '../src/lib/home-spatial.mjs';
 
 function load(name,modules){const exports={};const code=ts.transpileModule(fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(code,{exports,Set,encodeURIComponent,require:key=>{if(key.endsWith('.css'))return{};assert.ok(Object.hasOwn(modules,key),key);return modules[key]}});return exports;}
 async function render(locale='zh',read=()=>({items:[]})){
- const modules={'react':React,'react/jsx-runtime':runtime,'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},'./Icons':{Icon:()=>null},'@/lib/home-experience.mjs':experience,'@/lib/community.mjs':{publicPosts:read},'@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},'./V2Atmosphere':{V2Atmosphere:()=>React.createElement('canvas',{'data-protected-opening':true})}};
- for(const name of ['HomeResourceExplorer','HomeSpacePreview','HomeProductShowcase'])modules['./'+name]=load(name,modules);
+ const modules={'react':React,'react/jsx-runtime':runtime,'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},'./Icons':{Icon:()=>null},'@/lib/home-experience.mjs':experience,'@/lib/home-spatial.mjs':spatial,'@/lib/community.mjs':{publicPosts:read},'@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},'./V2Atmosphere':{V2Atmosphere:()=>React.createElement('canvas',{'data-protected-opening':true})}};
+ for(const name of ['HomeResourceExplorer','HomeSpacePreview','HomeSpatialShowcase','HomeProductShowcase'])modules['./'+name]=load(name,modules);
  const page=load('PlatformHome',modules);return renderToStaticMarkup(await page.PlatformHome({req:new Request('http://example.test/')}));
 }
 
@@ -50,4 +51,18 @@ test('public feed projection is bounded, strips private fields and never turns u
 test('interactive excerpts stay small and all shipped space screenshots have source records',()=>{
  const groups=experience.homeResourceSelections;assert.deepEqual(groups.map(g=>g.id),['designs','skills','docs','resources']);assert.ok(groups.every(g=>g.items.length<=3));assert.ok(Buffer.byteLength(JSON.stringify(groups))<16000);
  for(const name of ['editorial','resume']){const file=new URL('../public/media/home-product/space-'+name+'.webp',import.meta.url);assert.ok(fs.statSync(file).size>1000);const origin=JSON.parse(fs.readFileSync(new URL(file.href+'.json'),'utf8'));assert.match(origin.prompt,/Actual screenshot of IAVSE built-in/);}
+});
+
+
+test('spatial chapters follow bounded native scroll positions and SSR retains every chapter in reading order',async()=>{
+ assert.equal(spatial.spatialChapterAt(100,100,1000,3),0);
+ assert.equal(spatial.spatialChapterAt(600,100,1000,3),1);
+ assert.equal(spatial.spatialChapterAt(1100,100,1000,3),2);
+ assert.equal(spatial.spatialChapterAt(-300,100,1000,3),0);
+ assert.equal(spatial.spatialChapterAt(99999,100,1000,3),2);
+ assert.equal(spatial.spatialChapterAt(NaN,100,1000,3),0);
+ assert.equal(spatial.spatialChapterAt(300,100,0,3),0);
+ const html=await render();assert.ok(html.includes('class="hs-journey" data-spatial="false"'));
+ assert.deepEqual([...html.matchAll(/class="hs-panel" data-scene="([^"]+)"/g)].map(match=>match[1]),['discover','community-product','spaces']);
+ assert.ok(!html.includes('inert=""'),'server content stays usable before enhancement');
 });

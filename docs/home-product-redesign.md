@@ -10,9 +10,9 @@ OWN-WORLD: White and neutral gray fields, black text and actions, system typogra
 
 STORY: Discover a useful starting point, exchange experience, then make room for personal work. Every displayed item links to a real existing destination.
 
-FIRST VIEWPORT: The protected blue opening leads into a large two-line product statement, two clear actions, and an operable directory excerpt. Community reading and the built-in template comparison use different compositions below it.
+FIRST VIEWPORT: The protected blue opening leads into the product statement and a spatial stage. Native scrolling or fixed chapter controls bring one working product surface forward; the two neighboring surfaces recede with physical gaps. Mobile, short viewports and reduced motion expose all three surfaces in document order.
 
-FORM: User-pinned Apple direction; source-first resource shelf, editorial community section, genuine template comparison. No visual-world roll overrides the user's fixed direction.
+FORM: User-pinned Apple direction, updated at the user’s request to one spatial showroom: source-first resources, public community, and genuine template comparison. No visual-world roll overrides the user's fixed direction.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 

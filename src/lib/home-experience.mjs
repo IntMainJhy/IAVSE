@@ -43,3 +43,10 @@ const copy={
  }
 };
 export const homeExperienceCopy=(locale='zh')=>copy[locale]||copy.zh;
+
+const spatialCopy={
+ zh:{label:'产品空间',chapters:['资源发现','社区交流','博客空间'],descriptions:['设计、知识与工具，找到下一次创作的起点。','分享做过的事，在讨论中交换经验。','选择真正的内置模板，整理作品、文章与经历。'],previous:'上一个产品空间',next:'下一个产品空间'},
+ en:{label:'Product spaces',chapters:['Discover resources','Community','Blog spaces'],descriptions:['Design, knowledge, and tools for your next project.','Share what you made and exchange experience.','Actual built-in templates for your work, writing, and experience.'],previous:'Previous product space',next:'Next product space'},
+ ja:{label:'プロダクトスペース',chapters:['リソース発見','コミュニティ','ブログスペース'],descriptions:['次の制作に役立つデザイン、知識、ツール。','制作したことを共有し、経験を交換する。','実際の内蔵テンプレートで作品、文章、経歴を整理。'],previous:'前のプロダクトスペース',next:'次のプロダクトスペース'}
+};
+export const homeSpatialCopy=(locale='zh')=>spatialCopy[locale]||spatialCopy.zh;
