@@ -21,11 +21,13 @@ IAVSE brings community exchange and resource discovery together, with personal b
 
 ## Brand Commitments
 
-Retain the IAVSE name, outlined V identity, blue focus accent and mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.” The existing RBP Portfolio component structure, destinations and interaction behavior remain the application's baseline.
+Retain the IAVSE name, outlined V identity, blue focus accent and mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.”
 
-The user has now asked for independently authored refinements of the current application inspired by general design principles—clear spacing, type hierarchy, pale surfaces and content grouping—seen in Cloudlight. The cancelled direct template migration stays cancelled. Do not import Cloudlight code, shaders, assets or reconstruct its distinctive template composition. This is an IAVSE design refinement, not an exact Cloudlight port or an assertion that visual inspiration changes a license.
+On 2026-11-10 the user chose two UI implementations: a private Pro UI using individually authorized uiX / React Bits Pro materials, followed by an independently authored public UI using verified open-source components. Both share business behavior, permissions, data and authored-content boundaries. Write the development plan first, then implement step by step. The [dual-UI development plan](docs/dual-ui-development-plan.zh-CN.md) and [task board](docs/dual-ui-task-board.md) govern this future work. This decision supersedes the earlier requirement to preserve the Portfolio composition in future redesigns; it does not assert that the current application has already been replaced.
 
-The existing homepage is Hero → four Projects → Contact, with a split hero and a centered capsule navigation. Improve its typography, spacing, color hierarchy and card surfaces coherently across public, resource, community, account, administration and editor shells. Authored blogs, saved canvas documents, third-party previews and uploaded images remain content with their own appearances. Preserve all publishing, account and moderation behavior. [DESIGN.md](DESIGN.md) records the current visual rules; [implementation notes](docs/portfolio-frontend.md) explain the baseline and independent changes. All existing third-party licenses remain in force.
+The private Pro source must stay outside the public Git root and its history. The public UI must build and run without private components or uiX credentials. Restore the blog-space 3D opening in both versions, with accessible directory fallbacks. A purchased catalog subscription is not proof of upstream redistribution rights; each material needs its own evidence. The root PolyForm Noncommercial license remains unchanged. A separate open-source license for newly authored public UI is pending an explicit scope decision.
+
+The currently implemented homepage remains Hero → four Projects → Contact, with the retained RBP composition, independent IAVSE styling and a centered capsule navigation. [DESIGN.md](DESIGN.md) describes that current implementation, not a completed dual-UI system. The previous direct Cloudlight migration stays cancelled; future use of any Pro template requires the new selection and authorization process. Authored blogs, saved canvas documents, third-party previews and uploaded images retain their own appearances. All existing third-party licenses remain in force.
 
 ## Evidence on Hand
 
@@ -33,4 +35,4 @@ Actual resource records live in the existing catalogs; public community content 
 
 ## Open Decisions
 
-No additional audience demographics, growth targets or commercial claims have been confirmed.
+The independently authored public UI's license scope, the private build arrangement, individual Pro material authorizations and any third-party delivery of Pro application builds remain pending. No additional audience demographics, growth targets, pricing tiers or commercial claims have been confirmed.
