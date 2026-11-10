@@ -1,17 +1,17 @@
 # Current interface captures / 当前界面截图
 
-Captured in Ego Browser on **2026-11-10**, using the Simplified Chinese interface and the actual rendered `main` website. The homepage, resource workbench, resource directory, community, blog directory and social preview show the signed-out Portfolio frontend production build. Their source base and file hashes are recorded under `portfolioSource` in `captures.json`. The unchanged built-in authored homepage retains source commit **`427cdc9`**. These are product screenshots, not design mockups. Chinese and English READMEs share the images.
+Captured in Ego Browser on **2026-11-10**, using the Simplified Chinese interface and the actual rendered `main` website. The homepage, project cards, resource overview, community, blog directory and social preview show the signed-out production build with the original RBP composition and IAVSE content. Their source base and file hashes are recorded under `portfolioSource` in `captures.json`. The unchanged built-in authored homepage retains source commit **`427cdc9`**. These are product screenshots, not design mockups. Chinese and English READMEs share the images.
 
-截图于 **2026-11-10** 从 `main` 的实际页面拍摄。首页、资源工作台、资源目录、社区、博客目录与分享预览均已更新为未登录的 Portfolio 前端生产构建，来源基线和文件哈希见 `captures.json` 的 `portfolioSource`。未改变的内置作者主页截图保留 `427cdc9` 来源。未添加帖子或统计数据。英文和日文同样受产品支持。
+截图于 **2026-11-10** 从 `main` 的实际页面拍摄。首页、项目卡片、资源总览、社区、博客目录与分享预览均已更新为未登录的 Portfolio 前端生产构建，来源基线和文件哈希见 `captures.json` 的 `portfolioSource`。未改变的内置作者主页截图保留 `427cdc9` 来源。未添加帖子或统计数据。英文和日文同样受产品支持。
 
 | Image / 图片 | View / 页面 | Size |
 | --- | --- | --- |
 | [Homepage / 首页](home-current.webp) | `/` · monochrome flow, split hero and actual template preview / 黑白流动背景、分栏首屏与真实模板预览 | 1440 × 1000 |
-| [Resource workbench / 资源工作台](product-current.webp) | `/#discover` · working categories, search and source links / 分类、搜索与来源链接 | 1440 × 1000 |
+| [Project cards / 内容入口卡片](product-current.webp) | `/` · four original Projects cards with IAVSE content / 四张原始 Projects 排版的内容入口卡片 | 1440 × 1000 |
 | [Blog directory / 博客空间](blog-spaces-current.webp) | `/blogs` · public spaces and clearly labeled built-in examples / 公开空间与明确标识的内置示例 | 1440 × 1000 |
 | [Community / 社区](community-current.webp) | `/community` · signed-out view and actual empty state / 未登录与实际空状态 | 1440 × 1000 |
 | [Built-in homepage / 示例主页](blog-home-current.webp) | `/blogs/showcase/lin-studio?template=builtin` · fictional example / 虚构人物模板 | 1440 × 1000 |
-| [Resource directory / 资源目录](resources-current.webp) | `/resources?type=designs` · UI catalog, source and license links / 设计目录与来源许可 | 1440 × 1000 |
+| [Resource overview / 资源总览](resources-current.webp) | `/resources` · original ProjectsPage heading and cards / 原始 ProjectsPage 标题与卡片 | 1440 × 1000 |
 | [Social preview / 分享预览](social-preview.png) | `/` · repository link preview / 仓库链接预览 | 1280 × 640 |
 
 The blog gallery can include genuine discoverable public homepages alongside clearly identified bundled examples. Bundled examples do not create accounts or change real member counts. The community image shows the actual empty feed, without generated posts. No private drafts, account settings, administration panels or credentials were captured.

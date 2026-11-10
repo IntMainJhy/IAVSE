@@ -22,7 +22,7 @@ The blog editor uses `@xyflow/react` (MIT) for viewport gestures, node selection
 
 ### Three.js
 
-The homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT). The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The reading-page point backdrop uses Three.js camera/math modules and its linear-to-sRGB transfer formula with two native WebGL draw passes. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
+The retained earlier homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT); it is not the current RBP homepage backdrop. The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The reading-page point backdrop uses Three.js camera/math modules and its linear-to-sRGB transfer formula with two native WebGL draw passes. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
 
 ### npm dependencies
 
@@ -56,7 +56,7 @@ macOS and Windows client source code, installers and proprietary assets are not 
 
 ### Three.js
 
-首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment，保留[完整许可](docs/licenses/Three.js-MIT.txt)。阅读页点阵背景使用 Three.js 相机、数学模块及线性颜色到 sRGB 的转换公式，通过原生 WebGL 绘制两个图层。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
+保留的旧版首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment（当前 RBP 首页不挂载该背景），保留[完整许可](docs/licenses/Three.js-MIT.txt)。阅读页点阵背景使用 Three.js 相机、数学模块及线性颜色到 sRGB 的转换公式，通过原生 WebGL 绘制两个图层。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
 
 ### npm 依赖
 
@@ -86,15 +86,33 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 
 后台直接使用上述 React Bits 源码组件，补充触屏和减少动态效果适配。完整原许可已保留；本项目的原创部分许可不覆盖这些第三方部分。
 
-### RBP Portfolio frontend foundation
+### RBP Portfolio content port
 
-IAVSE adapts selected components from [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio), revision `1581b9b8e5876f60e5eb844970747506980c4412`: the OGL flow shader and portrait morph, plus the navigation, hero/contact-card structure, motion easing and Lenis setup. Attribution and the upstream README permission are preserved in [docs/licenses/RBP-Portfolio.txt](docs/licenses/RBP-Portfolio.txt). The upstream template permits use in personal and commercial projects and prohibits resale or redistribution of the template itself. These components are integrated into the IAVSE application with its own content and functional routes; the standalone portfolio template is not repackaged. Adaptations add IAVSE cookie themes, authored-content boundaries, reduced-motion/fallback behavior and lifecycle cleanup.
+IAVSE adapts selected components from [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio), revision `1581b9b8e5876f60e5eb844970747506980c4412`: the OGL flow shader and portrait morph, navigation, Hero/Projects/About/Contact structures, motion primitives, global styling and Lenis setup. Attribution and the upstream README permission are preserved in [docs/licenses/RBP-Portfolio.txt](docs/licenses/RBP-Portfolio.txt). The upstream README permits use in personal and commercial projects and prohibits resale or redistribution of the template itself; it does not declare the template MIT-licensed. These components are integrated into the IAVSE application with its own content and functional routes; the standalone portfolio template is not repackaged. The template-backed pages retain the upstream layout and normal-motion parameters, with IAVSE content, routes, cookie themes, authored-content boundaries, reduced-motion/fallback behavior and lifecycle cleanup.
 
 当前平台前端以这个公开仓库为基础，保留原作者、版本与许可；IAVSE 原创部分和第三方部分分别遵循各自许可。未包含付费 Gradient Bars 源码。
 
 ### Lenis / 平滑滚动
 
-The public frontend uses [Lenis](https://github.com/darkroomengineering/lenis) 1.3.27 by darkroom.engineering under the MIT License, preserved in [docs/licenses/Lenis.txt](docs/licenses/Lenis.txt). Its smooth-scroll setup follows the public Portfolio template and uses a route-owned animation loop. Reduced motion disables this enhancement, touch scrolling remains native, and the instance is destroyed when entering an editing, administration or authored-blog route. GSAP retains its own upstream terms as noted above.
+The public frontend uses [Lenis](https://github.com/darkroomengineering/lenis) 1.3.23 by darkroom.engineering under the MIT License, preserved in [docs/licenses/Lenis.txt](docs/licenses/Lenis.txt). Its smooth-scroll setup follows the public Portfolio template and uses a route-owned animation loop. Reduced motion disables this enhancement, touch scrolling remains native, and the instance is destroyed when entering an editing, administration or authored-blog route. GSAP retains its own upstream terms as noted above.
+
+### Matter.js / 关于页物理标签
+
+The About page's draggable technology stack uses Matter.js 0.20.0. Its MIT license, copyright Liam Brummitt and contributors, is copied unchanged from the installed package into [docs/licenses/Matter.js-MIT.txt](docs/licenses/Matter.js-MIT.txt). The original physics settings are retained; reduced motion presents static labels.
+
+关于页技术标签使用 Matter.js 0.20.0；完整 MIT 原文来自实际安装包，IAVSE 原创许可不覆盖其权利。
+
+### Tailwind CSS / 模板样式编译
+
+Tailwind CSS and its CLI 4.1.18 compile the retained Portfolio utility classes. The generated stylesheet is scoped to the template surface; native editors and authored themes remain outside its reset boundary. The installed Tailwind CSS MIT license, copyright Tailwind Labs, Inc., is preserved unchanged in [docs/licenses/Tailwind-CSS-MIT.txt](docs/licenses/Tailwind-CSS-MIT.txt).
+
+Tailwind CSS 4.1.18 用于编译原始工具类；完整 MIT 原文来自实际安装包。模板页面实际使用系统字体回退，保留的 Geist 与 Cormorant 仍按其各自字体许可处理。
+
+### Portfolio screenshot content / Portfolio 页面截图
+
+The four raster assets in `public/media/portfolio/` are actual IAVSE built-in template, signed-out Skill-directory and community screenshots, with adjacent provenance JSON. They are not newly generated images or claims of real-member endorsement. Each source page and any included third-party material retain their own rights.
+
+`public/media/portfolio/` 的四张位图来自实际页面，来源记录随图保留；未生成虚构用户、帖子或背书。来源页面和其中第三方材料的许可分别适用。
 
 ## Source website templates and design specifications (2026-11-08)
 

@@ -1,25 +1,23 @@
+import {cookies} from 'next/headers';
 import {localeDate} from '@/lib/locale-format.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 /* Public routes use the user-selected rbp-portfolio frontend foundation.
    Keep real content, publishing permissions, file access, analytics and account behavior.
    Member-authored blog/canvas styling remains independently configurable. */
 import Link from 'next/link';
-import {BrandMark} from './BrandMark';
 import Form from 'next/form';
 import {CatalogSearch} from '@/components/CatalogSearch';
-import {PageMotion} from './PageMotion';
 import {notFound} from 'next/navigation';
 import {localizeContent,localizeProfile} from '@/lib/content-locales.mjs';
 import {getConfig, publicContent, publicBySlug, fileInfo} from '@/lib/db.mjs';
 import {Icon} from './Icons';
 import {Tracker, TrackedLink} from './Tracker';
-import {AuthNav} from './AuthNav';
-import {SiteTools} from './SiteTools';
-import {PortfolioNavigation,PortfolioThemeToggle} from './portfolio/PortfolioNavigation';
+
+import {SiteFrame} from './rbp/layout/site-frame';
+import {AboutPage as PortfolioAbout} from './rbp/AboutPage';
 import {ResumePrint} from './ResumePrint';
 import '@/app/gallery-backgrounds.css';
 import '@/app/apple-reading-surfaces.css';
-import {SiteAnnouncement,SiteAnnouncementOffset} from './SiteAnnouncement';
 
 type Doc = Record<string, any>;
 type Query = Record<string, string | string[] | undefined>;
@@ -111,18 +109,6 @@ async function Home({profile, projects, articles, resources}: {profile: Doc, pro
     <section className="organic-about-band"><div><h2>{tr("从作品之外，")}<br/>{tr("再多认识我一点。")}</h2><p>{tr("个人介绍、成长经历与技能，也都收在这份持续更新的记录里。")}</p></div><div className="organic-about-band-links"><TextLink href="/about">{tr("关于我与我的经历")}</TextLink><TextLink href="/career">{tr("查看求职展示")}</TextLink></div></section>
   </div>;
 }
-async function About({profile}: {profile: Doc}) {const {t:tr}=await serverI18n();
-  const entries = profile.experiences.some((x: Doc) => x.visible);
-  return <><header className="organic-page-heading"><h1>{tr("关于我，")}<em>{tr("和一路走来的经历。")}</em></h1></header>
-    <div className="organic-about-layout"><aside className="organic-person">
-      {profile.avatarId ? <img className="organic-portrait" src={'/media/' + profile.avatarId} alt={profile.name} width="220" height="260"/> : <div className="organic-initials" aria-hidden="true">{profile.name.slice(-2)}</div>}
-      <h2>{profile.name}</h2>{profile.alias && <p className="organic-person-alias">{profile.alias}</p>}<Tags literal tags={profile.skills}/><ProfileLinks profile={profile}/>
-      <Link href="/career" className={button + ' is-secondary'}>{tr("查看求职展示 ")}</Link>
-    </aside><div><section className="organic-about-intro"><h2>{tr("很高兴，在这里遇见你。")}</h2><p className="organic-body-copy">{profile.intro}</p></section>
-      <section className="organic-about-experiences"><h2>{tr("成长的足迹")}</h2>{entries ? <Timeline profile={profile}/> : <p className="organic-quiet-copy">{tr("这份经历还在整理中。可以先从项目与作品看看我的实践。")}</p>}<TextLink href="/projects">{tr("从项目继续了解")}</TextLink></section>
-    </div></div>
-  </>;
-}
 async function Career({profile, site, projects}: {profile: Doc, site: Doc, projects: Doc[]}) {const {t:tr}=await serverI18n();
   const selected=projects.filter(x=>x.career),experiences=profile.experiences.filter((x:Doc)=>x.visible).sort((a:Doc,b:Doc)=>a.order-b.order);
   return <div className="resume-page"><div className="resume-toolbar"><div><ResumePrint/>{site.resumeId&&<a href={'/download/'+site.resumeId} className={button+' is-secondary'}>{tr('下载附件简历')}</a>}</div></div><article className="resume-document" aria-label={tr('个人简历')}>
@@ -189,30 +175,21 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
   const projects = (publicContent('projects') as Doc[]).map(item=>localizeContent(item,locale)).sort((a, b) => a.order - b.order), articles = (publicContent('articles') as Doc[]).map(item=>localizeContent(item,locale)), resources = (publicContent('resources') as Doc[]).map(item=>localizeContent(item,locale));
   let body;
   if (!section) body = <Home profile={profile} projects={projects} articles={articles} resources={resources}/>;
-  else if (section === 'about' && path.length === 1) body = <About profile={profile}/>;
+  else if (section === 'about' && path.length === 1) body = <PortfolioAbout locale={locale}/>;
   else if (section === 'career' && path.length === 1) body = <Career profile={profile} site={site} projects={projects}/>;
   else if (['projects', 'articles', 'resources'].includes(section) && path.length === 2) body = <Detail type={section} slug={path[1]}/>;
   else if (['projects', 'articles', 'resources'].includes(section) && path.length === 1) body = <Collection type={section} projects={projects} articles={articles} resources={resources} taxonomy={taxonomy} query={query}/>;
   else notFound();
   return <PublicFrame path={path}>{body}</PublicFrame>;
 }
-export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr,locale}=await serverI18n();
-  const section=path[0]||'',current='/'+path.join('/');
-  const nav=[['/','首页'],['/community','社区'],['/blogs','博客空间'],['/resources','资源']];
-  const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);
-  const communitySurface=section==='community'||section==='workspace'&&path[1]!=='blog';
-  const active = (href: string) => href==='/blogs'?homepageRoute:href==='/community'?communitySurface&&!homepageRoute:href==='/resources'?['resources','docs','skills','articles'].includes(section):href==='/'?!section:current===href||current.startsWith(href+'/');
-  const authPage=section==='login'||section==='join';
-  const quantumPage=['community','blogs','resources','docs','skills'].includes(section);
-  return <div data-surface={path.length?'reading':'landing'} data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined} className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
-    <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
-    <header className="organic-header" data-site-chrome="public">{!!section&&<SiteAnnouncement/>}<div className="organic-container organic-header-inner"><Link href="/" className="organic-brand" data-site-brand><BrandMark/><div className="site-brand-copy">IAVSE<span>{tr('社区与博客主页')}</span></div></Link>
-      <PortfolioNavigation items={nav.map(([href,label])=>({href,label:tr(label),active:active(href),current:current===href?'page' as const:active(href)?'location' as const:undefined}))} label={tr('主导航')} locale={locale}/>
-      <div className="organic-header-tools"><div className="iavse-account-slot"><AuthNav/></div>
-      <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>
-      <div className="portfolio-mobile-theme"><PortfolioThemeToggle locale={locale}/></div><SiteTools/></div>
-    </div></header>
-    <main id="main" className="organic-container organic-main">{!!section&&<SiteAnnouncementOffset/>}<PageMotion>{children}</PageMotion></main>
-    <footer className="organic-footer organic-footer-compact"><div className="organic-container"><div className="iavse-footer-brand"><Link href="/" className="organic-footer-signature">IAVSE</Link><p>Insight through AI.<br/>Seize to Evolve.</p></div><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/legal/disclaimer">{tr("免责声明")}</Link><Link href="/report">{tr("举报投诉")}</Link><Link href="/workspace/account">{tr("我的账号")}</Link></nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
-  </div>;
+export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr}=await serverI18n();
+ const section=path[0]||'';
+ const native=!(path.length===0||['about','blogs','resources'].includes(section)&&path.length===1);
+ const communitySurface=section==='community'||section==='workspace'&&path[1]!=='blog';
+ const quantumPage=['community','blogs','resources','docs','skills'].includes(section);
+ const dark=(await cookies()).get('site-color-mode')?.value==='dark';
+ return <div className={'rbp-surface'+(dark?' dark':'')} data-rbp-route={section||'home'}>
+   <SiteFrame/><a className="skip-to-content" href="#main">{tr('跳到主要内容')}</a><Tracker/>
+   {native?<div className={'rbp-native organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading" data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined}><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}
+ </div>;
 }

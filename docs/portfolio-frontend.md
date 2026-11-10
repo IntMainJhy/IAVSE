@@ -1,47 +1,69 @@
-# IAVSE 前端：基于 RBP Portfolio 的适配
+# IAVSE 前端：保留 RBP Portfolio 排版与动效的内容移植
 
-当前整套前端以 [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) 和[示例网站](https://rbp-portfolio.vercel.app/)为基础，固定参考版本为 `1581b9b8e5876f60e5eb844970747506980c4412`。平台采用其黑白色彩、Geist 字体、胶囊导航、流动背景和图像变形效果，并接入 IAVSE 原有的资源、社区、博客、账号、管理与编辑功能。
+当前实现遵循用户确认的方向：“动效也要保持不变呀，还有排版，都跟这个开源仓库保持一致，就是内容合并过来。”参考为 [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) 和[示例网站](https://rbp-portfolio.vercel.app/)，固定版本 `1581b9b8e5876f60e5eb844970747506980c4412`。模板页面保留原始组件顺序、几何尺寸、响应式排版与正常模式的动效参数，只替换 IAVSE 的文字、真实图片、数据和目的链接。
 
-这次范围包含共享前端体系。首页采用左右分栏，资源介绍和博客目录使用清晰的内容卡片；社区、账号、管理和编辑器保留各自的操作布局。作者发布的博客主题、内置模板和资源预览继续保留其自身外观。旧的首页专属 Silk、海面、Gradient Bars 和 ASCII 方案已被替换。
+首页为 **Hero → 四张 Projects 卡片 → Contact**。关于页保留六张点阵拍立得、介绍、可展开列表、使用说明列表、能力标签、物理技术栈与 Contact。资源总览和博客目录使用原始 ProjectsPage 的居中标题、双列卡片与 Contact。之前的自定义首页资源工作台、完整品牌头部、三列博客目录和自定义字体方案不再是当前模板页面。
 
 ## 上游源码与本地文件
 
-| 上游文件 | IAVSE 实现与适配 |
+| 上游文件 | 当前挂载实现 |
 | --- | --- |
-| `components/shaders/shader-flow.tsx` | [`ShaderFlow.tsx`](../src/components/portfolio/ShaderFlow.tsx)：保留流动场算法，加入主题观察、减少动态、可见性判断与 WebGL 失败回退 |
-| `components/hero/portrait-morph.tsx` | [`PortraitMorph.tsx`](../src/components/portfolio/PortraitMorph.tsx)：使用 IAVSE 内置博客模板截图；触屏与减少动态初始化使用静态图片，结束变形后停止连续绘制 |
-| `components/hero/hero.tsx`、`hero-ctas.tsx` | [`PortfolioHero.tsx`](../src/components/portfolio/PortfolioHero.tsx)：分栏比例、入场节奏和图像框架，配合实际资源/社区入口与品牌使命 |
-| `components/layout/nav.tsx` | [`PortfolioNavigation.tsx`](../src/components/portfolio/PortfolioNavigation.tsx)：弹簧活动指示器、圆形主题揭示；沿用 IAVSE 路由、当前页面语义与外观 cookie |
-| `components/layout/smooth-scroll.tsx` | [`PortfolioRuntime.tsx`](../src/components/portfolio/PortfolioRuntime.tsx)：Lenis 时长和缓动、按路由创建/销毁、保留触屏与编辑操作 |
-| `components/contact/contact-card.tsx` | [`PortfolioCardBackdrop.tsx`](../src/components/portfolio/PortfolioCardBackdrop.tsx)：收尾卡片的流动场，并使用 IAVSE 艺术字与实际入口 |
-| 上游全局视觉基础 | [`portfolio-foundation.css`](../src/app/portfolio-foundation.css)：共享颜色、字体、导航、卡片、响应式与深浅外观，适配已有应用样式 |
+| `components/hero/hero.tsx`、`hero-ctas.tsx` | [`rbp/hero/`](../src/components/rbp/hero/)：原始分栏、标题比例、方形预览、CTA 布局与入场 |
+| `components/projects/projects.tsx` | [`rbp/projects/projects.tsx`](../src/components/rbp/projects/projects.tsx)：原始 CSS columns、卡片层级、图片比例和悬停 |
+| `app/projects/page.tsx` | [`rbp/ProjectsPage.tsx`](../src/components/rbp/ProjectsPage.tsx)：原始大留白标题区、Projects 与 Contact |
+| `app/about/page.tsx`、`components/about/*` | [`rbp/AboutPage.tsx`](../src/components/rbp/AboutPage.tsx)、[`rbp/about/`](../src/components/rbp/about/)：原始结构与交互，内容为产品介绍、使用说明和实际技术 |
+| `components/layout/nav.tsx` | [`rbp/layout/nav.tsx`](../src/components/rbp/layout/nav.tsx)：固定三链接胶囊、活动弹簧指示器和圆形主题揭示 |
+| `components/layout/page-backdrop.tsx`、`app/layout.tsx` 中的框架标记 | [`rbp/layout/`](../src/components/rbp/layout/)：原始背景尺寸与透明度；把 layout 中的边框和角部提取为本地 `site-frame.tsx` |
+| `components/layout/smooth-scroll.tsx` | [`PortfolioRuntime.tsx`](../src/components/portfolio/PortfolioRuntime.tsx)：保留 Lenis 参数，适配路由生命周期与原生操作区域 |
+| `components/contact/*`、`components/ui/*` | [`rbp/contact/`](../src/components/rbp/contact/)、[`rbp/ui/`](../src/components/rbp/ui/)：原始收尾框架、按钮与动效原语 |
+| `components/shaders/shader-flow.tsx` | [`ShaderFlow.tsx`](../src/components/portfolio/ShaderFlow.tsx)：原始流场与参数，增加 IAVSE 主题观察、可见性与减少动态回退 |
+| `components/hero/portrait-morph.tsx` | [`PortraitMorph.tsx`](../src/components/portfolio/PortraitMorph.tsx)：原始图像变形与持续时间循环，图片替换为实际内置模板截图 |
+| `app/globals.css` 与组件工具类 | [`rbp-template.input.css`](../src/styles/rbp-template.input.css) → [`rbp-template.css`](../src/app/rbp-template.css)：编译原始工具类并隔离作用域 |
 
-应用继续使用 Next.js 15.5.28 和 React 19.2.8，未将网站后端迁移到模板的框架版本。新前端的动画依赖为 Motion 14.11.1、Lenis 1.3.27 和 OGL 1.0.11；锁定结果见 [`package-lock.json`](../package-lock.json)。现有 GSAP 依赖仍供原有模块使用，新 Portfolio 基础不通过 ScrollTrigger 驱动页面。
+`PortfolioHero.tsx`、`PortfolioNavigation.tsx`、`PortfolioCardBackdrop.tsx` 是早期适配留下的文件，当前入口没有挂载它们；不要再以它们作为当前页面的源码映射。
+
+应用仍使用 Next.js 15.5.28、React 19.2.8。当前实际安装版本为 Motion **12.23.26**、Lenis **1.3.23**、OGL **1.0.11**、Matter.js **0.20.0**、Lucide React **0.562.0**；Tailwind CSS 和 CLI **4.1.18** 为样式编译依赖。精确安装树见 [`package-lock.json`](../package-lock.json)。现有 GSAP、Three.js 和编辑器依赖继续服务原有功能。
+
+## 样式、字体与应用边界
+
+[`build-portfolio-styles.mjs`](../scripts/build-portfolio-styles.mjs) 编译模板工具类，输出 `@scope (.rbp-surface) to (.rbp-native)`，让原始排版与重置规则止于原生操作区。`npm run portfolio:styles` 可重建；`predev` 和 `prebuild` 自动运行。修改输入与组件，不手工维护生成文件。
+
+[`rbp-bridge.css`](../src/app/rbp-bridge.css) 只解决宿主隔离、根字号、导航不折行与主题映射等接入问题。模板路由根字号为 16px。实际字体遵循参考网站的计算结果：`ui-sans-serif, system-ui, sans-serif` 及系统 emoji 回退；`font-serif` 角色也回退到该字体。它们不使用自定义 Geist 或 Cormorant。现存 [`portfolio-foundation.css`](../src/app/portfolio-foundation.css) 继续为原生业务页面提供颜色、Geist 和控件别名；README 的艺术字资源仍独立保留。
+
+根 [`layout.tsx`](../src/app/layout.tsx) 挂载 PortfolioRuntime，导航跨公共路由持续存在。胶囊只有首页、资源、关于三个链接和外观按钮；账号与语言入口位于 Contact。主导航不再使用完整宽度的品牌、账号和语言头部。
+
+[`PublicSite.tsx`](../src/components/PublicSite.tsx) 挂载模板框架，并把需要原有交互布局的区域放入 `.rbp-native`。社区、筛选目录、账号、管理与编辑器保留实际操作、权限和内容流程。上游没有这些完整业务页面，因此不声称它们逐像素复刻模板。作者发布的博客、内置博客主题及其预览保持各自外观。
 
 ## 页面与真实内容
 
-- [`layout.tsx`](../src/app/layout.tsx) 挂载共享运行时；[`PublicSite.tsx`](../src/components/PublicSite.tsx) 接入胶囊导航、外观按钮和原有账号/语言入口。
-- [`PlatformHome.tsx`](../src/components/PlatformHome.tsx) 组合分栏首屏与 [`HomeProductShowcase.tsx`](../src/components/HomeProductShowcase.tsx)。资源分类、搜索、社区状态、模板切换和 FAQ 均使用现有产品组件。
-- [`ResourceIntroduction.tsx`](../src/components/ResourceIntroduction.tsx) 用卡片和实际分类链接介绍资源；目录的数据、筛选、来源和许可不变。
-- [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 将公开成员与明确标识的内置示例放入目录。仅展示符合现有公开条件的成员，不创建虚构账号或活动。
-- 管理中心、账号和画布采用共同的字体、色彩与控件基础，保留权限、数据、编辑、保存及发布行为。独立博客主题仍由现有模板/主题工厂渲染。
+- [`PlatformHome.tsx`](../src/components/PlatformHome.tsx) 直接组合 Hero、Projects、Contact，不挂载旧的 HomeProductShowcase。四张项目卡分别连接 UI 设计、AI Skills、社区和博客空间。
+- [`ResourceIntroduction.tsx`](../src/components/ResourceIntroduction.tsx) 在 `/resources` 使用原始 ProjectsPage 介绍目录入口；带 `type` 的资源路由保留原有分类、筛选、搜索、来源与许可功能。
+- [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 通过 ProjectsPage 展示符合现有发现条件的公开成员与明确标记的内置示例。卡片为单列/双列 CSS columns，不是三列网格。
+- [`rbp/AboutPage.tsx`](../src/components/rbp/AboutPage.tsx) 用原 About 结构承载 IAVSE 产品介绍；Experience/Education 名称是组件来源，不表示虚构的个人任职或学历。十个可拖动技术标签对应现有技术栈。
+- [`portfolio-content.ts`](../src/lib/portfolio-content.ts) 和 [`rbp/about/copy.ts`](../src/components/rbp/about/copy.ts) 保存中英日内容。示例人物、模板预览和实际公开成员保持区分。
 
-首屏两张方形图片位于 [`public/media/portfolio/`](../public/media/portfolio/)，由实际内置模板页面拍摄，旁边的 JSON 保存来源和拍摄记录。它们是示例页面截图，非生成的人物照片或真实用户背书。图片悬停变形时，目标链接随当前展示的模板同步。
+[`public/media/portfolio/`](../public/media/portfolio/) 中四张图片均为实际页面截图：两张内置模板预览，以及未登录的 Skill 目录和社区。旁边的 JSON 记录各自页面和来源；新增两张业务截图来自 `4481459f080730acb71ae52216ea7e5e97dfe4de`。没有用图片生成补造内容、用户或帖子。Hero 的变形图片是视觉预览，不含随悬停切换的链接。
 
 ## 滚动、动效与回退
 
-Lenis 仅在合适的公共路由运行：`/blog/*`、`/blogs/showcase/*`、`/admin` 及其子路由、`/workspace` 及其子路由排除。配置为 `duration: 1.6`、`smoothWheel: true`、`syncTouch: false`；表单、指定原生滚动区域与打开的详情组件不被接管。进入排除路由或卸载时销毁实例并取消其帧循环。
+正常模式保留原始参数：FadeIn 为 `y: 12`、0.8 秒；ScaleUnblur 为 `scale: 0.7`、`blur(20px)`、1 秒；通用缓动为 `[0.22, 1, 0.36, 1]`。胶囊活动指示器使用 `stiffness: 380, damping: 32`。主题圆形揭示为 700ms。CTA 布局变化为 0.55 秒，文字变化为 0.35 秒，复制状态图标变化为 0.2 秒。Projects 悬停抬升 4px / 400ms，图片放大至 1.06 / 700ms。
 
-系统减少动态设置变化时，Lenis 会停止或重新初始化，流动背景改为静态帧。图像变形组件在挂载时检查减少动态和悬停能力；符合回退条件时保留静态图片。导航和主题转换也遵守减少动态设置。主题写入已有 `site-color-mode` cookie，刷新后保持选择。
+关于页六张拍立得保留原始旋转值和入场：0.9 秒，延迟 `0.05 + index × 0.08` 秒；指针弹簧为 220 / 18 / 0.6。可展开列表使用 0.5 秒高度变化。Matter.js 保留重力 1、恢复系数 0.35、摩擦 0.5、空气摩擦 0.025 与密度 0.0018，支持拖动和重置。内容标签替换不改变物理交互。
 
-流动背景像素比上限为 1，图像变形为 1.5。流动场在后台标签页或离开可视区域时跳过绘制；图像变形结束后停止连续帧。卸载释放监听器、观察器、帧任务和 WebGL 上下文，异步图片加载受销毁标记保护。WebGL 初始化失败时，文本、图片、链接与产品功能仍可使用；背景是装饰，不承载必要信息。
+Lenis 保留 `duration: 1.6`、`Math.min(1, 1.001 - Math.pow(2, -10 * t))`、纵向滚动、`smoothWheel: true`、`wheelMultiplier: 1`、`touchMultiplier: 2`，锚点偏移为 -100px。`/blog/*`、`/blogs/showcase/*`、`/admin` 与 `/workspace` 及其子路由排除；表单、`data-lenis-prevent` 和展开的详情区域也保留原生滚动。路由变化销毁实例、事件与帧循环。
+
+页面流场保留 900px 高度、亮度 3、10 次迭代与 `[0, 0.1]` 流速；Contact 流场保留 scale 3、brightness 3、原始遮罩及浅/深色透明度。图像变形 DPR 上限为 2，进入/离开刚度分别为 2.4 / 2.0。可见时即使变形已稳定，仍保留原始持续帧循环；后台标签页暂停并在返回后继续。不要重新引入“变形结束即停帧”的优化。
+
+减少动态时，Lenis 停止；流场绘制静态帧；FadeIn、ScaleUnblur、拍立得和展开列表取消对应运动，物理标签变为静态换行列表。主题直接切换；图像组件在初始化时遇到减少动态或无悬停能力则显示静态图。不要据此声称全部 Motion 过渡都会被全局关闭。流场跳过后台/离屏绘制；GPU 初始化失败保留可读内容与图片。卸载清理观察器、事件、帧任务和 GPU 上下文。
 
 ## 验证与学习入口
 
-本轮主任务记录了 667 项测试通过与生产构建通过；最后的组件/导航定向测试 12 项通过。浏览器验收覆盖首页桌面/手机/深色外观，以及资源、社区、博客目录、账号、管理和准备完成的编辑画布。截图、设备范围与具体拍摄版本见[截图说明](screenshots/README.md)。这些是本地实现验证，不代表生产环境、邮件或公开运营已完成验收。
+本轮最终全量测试 **668/668** 通过，生产构建通过。独立终审对照固定源码、参考渲染与 19 张要求的验收截图，确认主要几何与正常动效保持；最后的修正范围为文档持久化。验收包含模板桌面、手机、深色外观及原生操作边界。公开图片仅为未登录界面，设备、来源与版本见[截图说明](screenshots/README.md)和 `captures.json`。本地验证不代表生产部署、邮件投递或公开运营已验收。
 
-从 [`PortfolioRuntime.tsx`](../src/components/portfolio/PortfolioRuntime.tsx) 学习路由生命周期与滚动增强，从 [`PortfolioNavigation.tsx`](../src/components/portfolio/PortfolioNavigation.tsx) 学习布局测量和主题转换，再阅读两个上游着色器组件。全局视觉约定见 [DESIGN.md](../DESIGN.md)，产品边界见 [PRODUCT.md](../PRODUCT.md)。
+阅读顺序：RBP Hero/Projects/About/Contact → 作用域编译脚本 → PortfolioRuntime → 两个着色器组件。视觉约定见 [DESIGN.md](../DESIGN.md)，产品约束见 [PRODUCT.md](../PRODUCT.md)。
 
 ## 来源与许可
 
-上游 README 允许在个人和商业项目中使用模板，并禁止转售或再分发模板本身。IAVSE 将选定组件适配为自己的应用界面，保留作者、固定版本和[上游声明](licenses/RBP-Portfolio.txt)，不作为独立模板重新包装。Lenis 的 MIT 原文见 [Lenis.txt](licenses/Lenis.txt)；字体及其他第三方声明见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。未包含付费 Gradient Bars 组件源码。IAVSE 原创部分继续遵循原有 [PolyForm Noncommercial 1.0.0](../LICENSE) 和 [NOTICE](../NOTICE)。
+保留[上游 README 声明](licenses/RBP-Portfolio.txt)：模板允许个人和商业项目使用，禁止转售或再分发模板本身。**这不是 MIT 许可声明。** 本实现把来源组件接入 IAVSE 应用并保留作者与固定版本，不作为独立模板重新包装；IAVSE 的原创许可不覆盖或扩大这些条款。
+
+Lenis、Matter.js 与 Tailwind CSS 的实际许可分别保留于 [Lenis.txt](licenses/Lenis.txt)、[Matter.js-MIT.txt](licenses/Matter.js-MIT.txt)、[Tailwind-CSS-MIT.txt](licenses/Tailwind-CSS-MIT.txt)。其他依赖、字体和图标声明见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。未包含付费 Gradient Bars 源码。IAVSE 原创部分继续遵循 [PolyForm Noncommercial 1.0.0](../LICENSE) 与 [NOTICE](../NOTICE)。

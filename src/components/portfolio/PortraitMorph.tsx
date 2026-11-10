@@ -138,7 +138,7 @@ export function PortraitMorph({
     try { renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 1.5),
+      dpr: Math.min(window.devicePixelRatio || 1, 2),
     }); } catch { return; }
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
@@ -229,8 +229,7 @@ export function PortraitMorph({
       program.uniforms.uImageSize.value = imageSize;
 
       renderer.render({ scene });
-      if (Math.abs(target - progressRef.current) > 0.001) raf = requestAnimationFrame(tick);
-      else raf = 0;
+      raf = requestAnimationFrame(tick);
     };
     const wake = () => { if (running && !raf && !document.hidden) raf = requestAnimationFrame(tick); };
     const visibility = () => { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else wake(); };

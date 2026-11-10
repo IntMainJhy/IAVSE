@@ -1,48 +1,34 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T00:10:43.864718+00:00",
-  "title": "Design System: IAVSE Portfolio Foundation",
+  "generatedAt": "2026-11-10T00:36:30.552449+00:00",
+  "title": "Design System: IAVSE · RBP Portfolio Content Port",
   "extensions": {
     "colorMeta": {
-      "paper": {
+      "background": {
         "role": "neutral",
-        "displayName": "Paper",
+        "displayName": "Background",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "ink": {
+      "foreground": {
         "role": "primary",
-        "displayName": "Ink",
+        "displayName": "Foreground",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
-          "oklch(95% 0 0)"
-        ]
-      },
-      "body": {
-        "role": "neutral",
-        "displayName": "Body",
-        "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
@@ -51,96 +37,82 @@
         "displayName": "Muted",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "muted-ink": {
+      "muted-foreground": {
         "role": "neutral",
-        "displayName": "Muted Ink",
+        "displayName": "Muted Foreground",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "line": {
+      "border": {
         "role": "neutral",
-        "displayName": "Line",
+        "displayName": "Border",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "focus": {
+      "ring": {
         "role": "primary",
-        "displayName": "Focus",
+        "displayName": "Ring",
         "tonalRamp": [
-          "oklch(15% 0.12 260)",
-          "oklch(27% 0.12 260)",
-          "oklch(39% 0.12 260)",
-          "oklch(51% 0.12 260)",
-          "oklch(63% 0.12 260)",
-          "oklch(75% 0.12 260)",
-          "oklch(87% 0.12 260)",
-          "oklch(95% 0.12 260)"
+          "oklch(15% 0.16 260)",
+          "oklch(26% 0.16 260)",
+          "oklch(38% 0.16 260)",
+          "oklch(49% 0.16 260)",
+          "oklch(61% 0.16 260)",
+          "oklch(72% 0.16 260)",
+          "oklch(84% 0.16 260)",
+          "oklch(95% 0.16 260)"
         ]
       },
-      "dark-paper": {
+      "dark-background": {
         "role": "neutral",
-        "displayName": "Dark Paper",
+        "displayName": "Dark Background",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "dark-ink": {
+      "dark-foreground": {
         "role": "primary",
-        "displayName": "Dark Ink",
+        "displayName": "Dark Foreground",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
-          "oklch(95% 0 0)"
-        ]
-      },
-      "dark-body": {
-        "role": "neutral",
-        "displayName": "Dark Body",
-        "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
@@ -149,243 +121,274 @@
         "displayName": "Dark Muted",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "dark-muted-ink": {
+      "dark-muted-foreground": {
         "role": "neutral",
-        "displayName": "Dark Muted Ink",
+        "displayName": "Dark Muted Foreground",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "dark-line": {
+      "dark-border": {
         "role": "neutral",
-        "displayName": "Dark Line",
+        "displayName": "Dark Border",
         "tonalRamp": [
           "oklch(15% 0 0)",
-          "oklch(27% 0 0)",
-          "oklch(39% 0 0)",
-          "oklch(51% 0 0)",
-          "oklch(63% 0 0)",
-          "oklch(75% 0 0)",
-          "oklch(87% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
           "oklch(95% 0 0)"
         ]
       },
-      "dark-focus": {
+      "dark-ring": {
         "role": "primary",
-        "displayName": "Dark Focus",
+        "displayName": "Dark Ring",
         "tonalRamp": [
-          "oklch(15% 0.12 260)",
-          "oklch(27% 0.12 260)",
-          "oklch(39% 0.12 260)",
-          "oklch(51% 0.12 260)",
-          "oklch(63% 0.12 260)",
-          "oklch(75% 0.12 260)",
-          "oklch(87% 0.12 260)",
-          "oklch(95% 0.12 260)"
+          "oklch(15% 0.16 260)",
+          "oklch(26% 0.16 260)",
+          "oklch(38% 0.16 260)",
+          "oklch(49% 0.16 260)",
+          "oklch(61% 0.16 260)",
+          "oklch(72% 0.16 260)",
+          "oklch(84% 0.16 260)",
+          "oklch(95% 0.16 260)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Display"
+        "displayName": "Desktop hero",
+        "purpose": "System-ui computed reference output; do not load a new custom face."
       },
       "headline": {
-        "displayName": "Headline"
-      },
-      "card-title": {
-        "displayName": "Card Title"
-      },
-      "body": {
-        "displayName": "Body"
-      },
-      "hero-body": {
-        "displayName": "Hero Body"
-      },
-      "label": {
-        "displayName": "Label"
-      },
-      "navigation": {
-        "displayName": "Navigation"
-      },
-      "signature": {
-        "displayName": "Signature"
+        "displayName": "Projects heading",
+        "purpose": "The serif utility resolves to the same system-ui stack."
       }
     },
     "shadows": [
       {
-        "name": "soft-panel",
-        "value": "0 12px 36px -22px #0003",
-        "purpose": "Quiet product-panel elevation."
+        "name": "project-rest",
+        "value": "0 1px 2px rgb(0 0 0 / 0.04)",
+        "purpose": "Original project card at rest."
       },
       {
-        "name": "nav",
-        "value": "0 3px 6px -3px #0002",
-        "purpose": "Capsule separation."
+        "name": "project-hover",
+        "value": "0 10px 20px -8px rgb(0 0 0 / 0.12), 0 4px 8px -4px rgb(0 0 0 / 0.08)",
+        "purpose": "Original hover elevation."
       },
       {
-        "name": "card-hover",
-        "value": "0 16px 34px -22px #0004",
-        "purpose": "Hover-capable directory/card response."
+        "name": "project-dark-rest",
+        "value": "0 1px 2px rgb(0 0 0 / 0.4)",
+        "purpose": "Original dark card at rest."
+      },
+      {
+        "name": "project-dark-hover",
+        "value": "0 10px 24px -8px rgb(0 0 0 / 0.6), 0 4px 8px -4px rgb(0 0 0 / 0.4)",
+        "purpose": "Original dark hover elevation."
       }
     ],
     "motion": [
       {
-        "name": "interface-ease",
-        "value": "cubic-bezier(.22,1,.36,1)",
-        "purpose": "Portfolio hero, card and theme transition rhythm."
+        "name": "ease",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Original common transition curve."
       },
       {
-        "name": "nav-spring",
-        "value": "stiffness 380; damping 32",
-        "purpose": "Active navigation pill."
+        "name": "fade-in",
+        "value": "opacity 0 → 1; y 12px → 0; 0.8s",
+        "purpose": "Template entrance; reduced motion resolves immediately."
+      },
+      {
+        "name": "scale-unblur",
+        "value": "scale 0.7 → 1; blur 20px → 0; 1s",
+        "purpose": "Portrait entrance; reduced motion resolves immediately."
+      },
+      {
+        "name": "navigation-pill",
+        "value": "spring stiffness 380; damping 32",
+        "purpose": "Persistent capsule selection; initial measurement is immediate."
+      },
+      {
+        "name": "theme-reveal",
+        "value": "700ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Circle reveal; direct change when reduced motion or View Transitions unsupported."
+      },
+      {
+        "name": "cta-layout",
+        "value": "0.55s; text 0.35s; icon 0.2s",
+        "purpose": "Original expanding source-copy control."
+      },
+      {
+        "name": "project-hover",
+        "value": "translateY(-4px) 400ms; image scale(1.06) 700ms",
+        "purpose": "Original Projects interaction."
+      },
+      {
+        "name": "polaroid-entry",
+        "value": "y -120px; blur 18px; duration 0.9s; delay 0.05s + index × 0.08s",
+        "purpose": "Six original dotted frames."
+      },
+      {
+        "name": "polaroid-pointer",
+        "value": "spring 220 / 18 / 0.6; clamp ±18px; pointer factor 0.25",
+        "purpose": "Original pointer attraction; reduced motion skips it."
+      },
+      {
+        "name": "about-list",
+        "value": "height 0.5s; fade/chevron 0.25s",
+        "purpose": "Expandable rows; immediate under reduced motion."
       },
       {
         "name": "lenis",
-        "value": "duration 1.6; smoothWheel true; syncTouch false",
-        "purpose": "Eligible public routes; native touch and excluded editing/authored routes."
+        "value": "duration 1.6; min(1, 1.001 - 2^(-10t)); wheel 1; touch 2",
+        "purpose": "Eligible public routes only; anchor offset -100px."
       },
       {
-        "name": "reduced-motion",
-        "value": "Lenis off, flow static, CSS movement disabled; static portrait selected at mount",
-        "purpose": "Preserve reading and product operation."
+        "name": "portrait",
+        "value": "hover stiffness 2.4; leave 2.0; dt cap 0.05; DPR cap 2",
+        "purpose": "Visible loop continues after blend settles; hidden tab pauses it."
+      },
+      {
+        "name": "physics-stack",
+        "value": "gravity 1; restitution 0.35; friction 0.5; air friction 0.025; density 0.0018",
+        "purpose": "Original Matter.js behavior; static wrapped chips under reduced motion."
       }
     ],
     "breakpoints": [
       {
-        "name": "compact",
-        "value": "1000px",
-        "purpose": "Tighter gutters and two-column blog directory."
+        "name": "sm",
+        "value": "640px"
       },
       {
-        "name": "mobile",
-        "value": "767px",
-        "purpose": "Stack public sections and use mobile navigation."
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "frame-hidden-max",
+        "value": "850px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
       }
-    ],
-    "rendering": {
-      "source": "src/app/portfolio-foundation.css",
-      "scope": "Shared frontend foundation; authored blog themes and operate layouts retain their own composition.",
-      "shaderDprCap": 1,
-      "portraitDprCap": 1.5,
-      "flow": "Skips drawing offscreen/hidden; static reduced-motion frame.",
-      "portrait": "Stops rendering when settled; static fallback on no WebGL, reduced motion or no hover at mount."
-    }
+    ]
   },
   "components": [
     {
-      "name": "Primary action",
+      "name": "Source copy button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Working product link with the shared Portfolio action treatment.",
-      "html": "<a class=\"ds-primary\" href=\"/resources\">探索资源<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
-      "css": ".ds-primary{display:inline-flex;align-items:center;gap:16px;min-height:46px;padding:11px 20px;border-radius:12px;background:var(--pf-ink,#0a0a0a);color:var(--pf-bg,#fff);border:1px solid transparent;font-size:14px;font-weight:450;line-height:1.5;text-decoration:none;transition:transform .4s cubic-bezier(.22,1,.36,1);font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);}.ds-primary:hover{transform:translateY(-2px)}.ds-primary:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none;transform:none}}"
+      "description": "Original 44px primary control; the live component expands on hover/focus and copies the repository URL.",
+      "html": "<button class=\"ds-source\">Get the source</button>",
+      "css": ".ds-source{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;border:0;border-radius:12px;background:var(--foreground,#0a0a0a);color:var(--background,#fff);font:500 14px/20px ui-sans-serif,system-ui,sans-serif;cursor:pointer}.ds-source:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
     },
     {
-      "name": "Secondary action",
+      "name": "Explore resources",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Working product link with the shared Portfolio action treatment.",
-      "html": "<a class=\"ds-secondary\" href=\"/community\">去社区聊聊<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a>",
-      "css": ".ds-secondary{display:inline-flex;align-items:center;gap:16px;min-height:46px;padding:11px 20px;border-radius:12px;background:var(--pf-bg,#fff);color:var(--pf-ink,#0a0a0a);border:1px solid var(--pf-line,#e5e5e5);font-size:14px;font-weight:450;line-height:1.5;text-decoration:none;transition:transform .4s cubic-bezier(.22,1,.36,1);font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);}.ds-secondary:hover{transform:translateY(-2px)}.ds-secondary:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none;transform:none}}"
+      "description": "Original secondary action and its arrow hover state.",
+      "html": "<a class=\"ds-explore\" href=\"/resources\">Explore resources<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
+      "css": ".ds-explore{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 5%,transparent);border-radius:12px;background:var(--background,#fff);color:var(--foreground,#0a0a0a);font:500 14px/20px ui-sans-serif,system-ui,sans-serif;text-decoration:none;transition:background-color .15s}.ds-explore:hover{background:color-mix(in srgb,var(--foreground,#0a0a0a) 4%,var(--background,#fff))}.ds-explore svg{width:16px;height:16px;transition:transform .3s}.ds-explore:hover svg{transform:translateX(2px)}.ds-explore:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
     },
     {
-      "name": "Capsule navigation",
+      "name": "Three-link capsule",
       "kind": "nav",
       "refersTo": "navigation",
-      "description": "Current-section selection; production adds the measured Motion spring and appearance control.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"主导航\"><a href=\"/\" aria-current=\"page\">首页</a><a href=\"/resources\">资源</a><a href=\"/community\">社区</a><a href=\"/blogs\">博客空间</a></nav>",
-      "css": ".ds-nav{display:flex;gap:2px;padding:6px;border:1px solid var(--pf-line,#e5e5e5);border-radius:999px;background:var(--pf-bg,#fff);box-shadow:0 3px 6px -3px #0002;font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);}.ds-nav a{padding:8px 16px;border-radius:999px;color:var(--pf-ink,#0a0a0a);font-size:13px;line-height:20px;text-decoration:none}.ds-nav a[aria-current],.ds-nav a:hover{background:var(--pf-muted,#f5f5f5)}.ds-nav a:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}"
+      "description": "Compact public navigation; the mounted version is fixed at top center and animates its measured active pill.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main\"><a aria-current=\"page\" href=\"/\">Home</a><a href=\"/resources\">Resources</a><a href=\"/about\">About</a><button aria-label=\"Toggle theme\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z\"/></svg></button></nav>",
+      "css": ".ds-nav{display:inline-flex;align-items:center;gap:4px;padding:6px;white-space:nowrap;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:9999px;background:var(--background,#fff);color:var(--foreground,#0a0a0a);box-shadow:0 1px 3px rgb(0 0 0 / .1),0 1px 2px -1px rgb(0 0 0 / .1);font:500 14px/20px ui-sans-serif,system-ui,sans-serif}.ds-nav a{padding:6px 16px;color:color-mix(in srgb,var(--foreground,#0a0a0a) 60%,transparent);border-radius:9999px;text-decoration:none;transition:color .3s}.ds-nav a:hover{color:var(--foreground,#0a0a0a)}.ds-nav [aria-current]{color:var(--foreground,#0a0a0a);background:color-mix(in srgb,var(--foreground,#0a0a0a) 5%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent)}.ds-nav button{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:9999px;background:var(--background,#fff);color:inherit;box-shadow:0 0 0 1px color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);cursor:pointer}.ds-nav svg{width:16px;height:16px}.ds-nav a:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}.ds-nav button:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
     },
     {
-      "name": "Selected resource category",
-      "kind": "chip",
-      "refersTo": "category-selected",
-      "description": "A real category filter; keyboard selection and result updates remain in HomeResourceExplorer.",
-      "html": "<button class=\"ds-category\" type=\"button\" aria-pressed=\"true\">UI 设计</button>",
-      "css": ".ds-category{min-height:44px;padding:10px 18px;border:1px solid var(--pf-line,#e5e5e5);border-radius:999px;background:var(--pf-muted,#f5f5f5);color:var(--pf-ink,#0a0a0a);font-size:14px;font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);}.ds-category:hover{border-color:var(--pf-ink,#0a0a0a)}.ds-category:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}"
-    },
-    {
-      "name": "Resource search field",
-      "kind": "input",
-      "refersTo": "input",
-      "description": "A neutral search field; production retains the featured-category query and Escape behavior.",
-      "html": "<label class=\"ds-field\">搜索资源<input type=\"search\" placeholder=\"在当前分类中搜索\"/></label>",
-      "css": ".ds-field{display:grid;gap:8px;color:var(--pf-ink,#0a0a0a);font-size:14px;font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);}.ds-field input{padding:12px;border:1px solid var(--pf-line,#e5e5e5);border-radius:10px;background:var(--pf-bg,#fff);color:var(--pf-ink,#0a0a0a);font:inherit}.ds-field input:hover{border-color:var(--pf-muted-ink,#575757)}.ds-field input:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}"
-    },
-    {
-      "name": "Blog-space card",
+      "name": "Project card",
       "kind": "card",
-      "refersTo": "space-card",
-      "description": "Directory surface for a qualified public member or a clearly marked built-in example.",
-      "html": "<article class=\"ds-card\"><small>内置示例</small><h2>Lin Studio</h2><p>使用实际内置模板的示例主页。</p><a href=\"/blogs/showcase/lin-studio?template=builtin\">查看主页<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></a></article>",
-      "css": ".ds-card{padding:28px;border:1px solid var(--pf-line,#e5e5e5);border-radius:20px;background:var(--pf-bg,#fff);color:var(--pf-ink,#0a0a0a);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);}.ds-card small,.ds-card p{color:var(--pf-body,#424242);line-height:1.8}.ds-card h2{font-size:22px;font-weight:500;letter-spacing:-.025em}.ds-card a{display:inline-flex;align-items:center;gap:14px;min-height:44px;color:inherit;font-size:13px}.ds-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px -22px #0004}.ds-card a:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-card{transition:none;transform:none}}"
+      "refersTo": "project-card",
+      "description": "A content-only preview of the original project card geometry and hover; live cards carry genuine sourced images.",
+      "html": "<a class=\"ds-project\" href=\"/resources?type=skills\"><span class=\"ds-project-label\">AI Skills</span><div class=\"ds-project-media\" aria-hidden=\"true\"><div></div></div><h3>Turn a method into steps that give your tools another capability.</h3><p>Read what a Skill does, when to use it, and where it comes from.</p><small>Skill directory · original sources</small></a>",
+      "css": ".ds-project{display:flex;flex-direction:column;gap:16px;padding:14px;max-width:420px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:24px;background:var(--background,#fff);color:var(--foreground,#0a0a0a);font-family:ui-sans-serif,system-ui,sans-serif;text-decoration:none;box-shadow:0 1px 2px rgb(0 0 0 / .04);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s cubic-bezier(.22,1,.36,1),border-color .4s cubic-bezier(.22,1,.36,1)}.ds-project:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--foreground,#0a0a0a) 14%,transparent);box-shadow:0 10px 20px -8px rgb(0 0 0 / .12),0 4px 8px -4px rgb(0 0 0 / .08)}.ds-project-label{padding:8px 4px 0;font-size:14px;font-weight:500}.ds-project-media{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:16px;background:color-mix(in srgb,var(--foreground,#0a0a0a) 5%,transparent)}.ds-project-media div{position:absolute;inset:0;transition:transform .7s cubic-bezier(.22,1,.36,1)}.ds-project:hover .ds-project-media div{transform:scale(1.06)}.ds-project h3{margin:0;padding:0 4px;font-size:22px;font-weight:500;line-height:1.2;letter-spacing:-.025em}.ds-project p{margin:0;padding:0 4px;color:color-mix(in srgb,var(--foreground,#0a0a0a) 65%,transparent);font-size:15px;line-height:1.5;letter-spacing:-.025em}.ds-project small{padding:0 4px 8px;font-size:12px;color:color-mix(in srgb,var(--foreground,#0a0a0a) 50%,transparent)}.ds-project:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
+    },
+    {
+      "name": "Feature chip",
+      "kind": "chip",
+      "refersTo": "feature-chip",
+      "description": "Static capability label in About; it is not a filter control.",
+      "html": "<span class=\"ds-feature\">Visual editing</span>",
+      "css": ".ds-feature{display:inline-block;padding:8px 16px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:9999px;background:var(--background,#fff);color:color-mix(in srgb,var(--foreground,#0a0a0a) 85%,transparent);font:400 15px/1.5 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}"
+    },
+    {
+      "name": "Framed panel",
+      "kind": "custom",
+      "refersTo": "framed-panel",
+      "description": "Original outer and inner frame geometry used around portrait and Contact; shaders are implemented by the live components.",
+      "html": "<div class=\"ds-frame\"><div class=\"ds-frame-inner\"><p>Let’s connect</p></div></div>",
+      "css": ".ds-frame{padding:6px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:32px;overflow:hidden;background:var(--background,#fff);color:var(--foreground,#0a0a0a);box-shadow:0 1px 3px rgb(0 0 0 / .1),0 1px 2px -1px rgb(0 0 0 / .1)}.ds-frame-inner{padding:24px;overflow:hidden;border-radius:1.6rem}.ds-frame p{margin:0;font:500 36px/1.05 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}"
+    },
+    {
+      "name": "Native administration field",
+      "kind": "input",
+      "refersTo": "native-input",
+      "description": "Existing operating-surface styling; not an upstream Portfolio form. Sizes and labels stay owned by the native form.",
+      "html": "<label class=\"ds-native-label\">Title <input class=\"ds-native-input\" type=\"text\" value=\"IAVSE\" /></label>",
+      "css": ".ds-native-label{font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);color:var(--pf-ink,#0a0a0a)}.ds-native-input{font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);border-radius:10px;color:var(--pf-ink,#0a0a0a);background:var(--site-surface,#fff);border:1px solid var(--site-control-line,#d4d4d4)}.ds-native-input:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}"
     }
   ],
   "narrative": {
-    "northStar": "IAVSE in Portfolio Flow",
-    "overview": "The current frontend uses the public RBP Portfolio repository as its visual and motion foundation: white and charcoal surfaces, Geist typography, a capsule navigation with a spring-driven selection, and a restrained grayscale flow field. Actual IAVSE resources, community activity and editable blog spaces supply the content. The outlined V, IAVSE name, English mission and blue focus accent retain the product identity.\n\nThis is the shared application system, not a homepage-only skin. Public pages use the common chrome, palette, typography and controls. Resource and blog directories use readable product cards; community keeps its real feed structure. Account, administration and editor surfaces retain their task-oriented structure with the shared foundation. Authored blog themes and source previews retain their own visual identity. The Portfolio split opening is a homepage composition, not a required layout for every route.",
+    "northStar": "Portfolio, with IAVSE content",
+    "overview": "The confirmed direction is to keep the open repository's layout and motion unchanged and merge IAVSE's content into it. The authority is [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) at `1581b9b8e5876f60e5eb844970747506980c4412`, checked against its rendered demo. Preserve the original composition, responsive spacing, neutral surfaces, fixed capsule navigation, flow shader, image morph and transition parameters. This supersedes the earlier broad visual adaptation.\n\nTemplate-backed pages use the original Hero, Projects, About and Contact structures. IAVSE supplies real resource destinations, product descriptions and clearly labeled examples. Community, filtered catalogs, account, administration and editor screens retain their existing functional layouts within the application boundary. The upstream template has no matching operating screens; do not describe those screens as pixel-identical ports. Authored blogs and their templates retain their own visual identity.\n\nThe sources of truth are [RBP components](src/components/rbp/), [template CSS input](src/styles/rbp-template.input.css), [compiled scoped CSS](src/app/rbp-template.css), [host bridge](src/app/rbp-bridge.css), and [PortfolioRuntime](src/components/portfolio/PortfolioRuntime.tsx). [Implementation notes](docs/portfolio-frontend.md) map the upstream files and integration boundaries. The host [foundation stylesheet](src/app/portfolio-foundation.css) still supplies native operating-surface aliases; it is not the template's geometry or typography authority.",
     "keyCharacteristics": [
-      "Monochrome reading surfaces with IAVSE identity and blue keyboard focus.",
-      "Shared capsule navigation, measured rounded cards and visible real product controls.",
-      "Geist for the application and a restrained Cormorant IAVSE signature.",
-      "Portfolio flow and portrait morph, Motion transitions and route-scoped Lenis scrolling.",
-      "Native editing and authored-content behavior, static fallbacks and reduced-motion support."
+      "Original public-page composition and normal-motion timing, with IAVSE text, images and routes.",
+      "A centered three-link capsule, a theme button and account/language access in Contact.",
+      "System-ui typography matching the reference's computed output, including serif-class headings.",
+      "Two-column Projects cards, six About polaroids and the original interactive stack.",
+      "Native operating layouts and independent authored blogs, with source attribution and fallbacks."
     ],
     "rules": [
       {
-        "name": "The Readable Field Rule",
-        "body": "Flow is decorative and remains behind content. Inner public pages reduce the backdrop opacity to (0.34), or (0.45) in dark appearance; the closing card uses (0.35), or (0.12) in dark appearance. Text, empty states and actions must remain complete when WebGL is unavailable.",
+        "name": "Source Identity",
+        "body": "Resource screenshots, genuine member content and authored blog themes retain their source appearance and attribution. Do not imply that template screenshots represent real members or endorsements.",
         "section": "colors"
       },
       {
-        "name": "The Source Identity Rule",
-        "body": "Catalog screenshots and authored blog themes retain their source colors and typography. The shared application system must not rewrite content authors' chosen appearance.",
-        "section": "colors"
-      },
-      {
-        "name": "The Brand Signature Rule",
-        "body": "Keep the outlined V in shared navigation and the artistic IAVSE wordmark in the closing. Real product names and useful labels remain readable text.",
+        "name": "Computed Type",
+        "body": "Match the pinned reference's rendered type and wrapping. Do not infer a new typeface from a source variable name or replace its typography with a custom brand system.",
         "section": "typography"
       },
       {
-        "name": "The Task Layout Rule",
-        "body": "Carry the shared type, palette and control language across the frontend. Choose composition for each route's purpose: browsing, reading or operating. Do not place a marketing hero, hover portrait or scroll enhancement inside an editing canvas.",
+        "name": "Content Port",
+        "body": "Replace content and destinations in the original components. Preserve their structure, dimensions, breakpoints and normal-motion behavior. The operational surfaces that have no upstream equivalent retain their own necessary layouts.",
         "section": "layout"
-      },
-      {
-        "name": "The Motion Boundary Rule",
-        "body": "Use Motion for interface transitions, OGL for the template's flow and portrait shaders, and Lenis for eligible public-page scrolling. Authored blog, administration and workspace routes keep native scrolling. Reduced motion disables Lenis and movement; the flow renders a static frame, and portrait initialization uses its fallback image when reduced motion or no hover is detected.",
-        "section": "elevation & depth"
       }
     ],
     "dos": [
-      "Do use the Portfolio foundation for shared application chrome, palette, typography and controls.",
-      "Do preserve actual content, native editing behavior, publishing permissions and source attribution.",
-      "Do keep built-in template examples clearly identified and leave their authored appearance intact.",
-      "Do pair visual state with a working destination, keyboard state or meaningful product behavior.",
-      "Do respect reduced motion, no-WebGL fallbacks and route lifecycle cleanup."
+      "Do preserve the pinned template's composition, responsive geometry and normal-motion parameters.",
+      "Do put real IAVSE content and working destinations into the original component slots.",
+      "Do match the reference's system-ui rendering, including the serif-class fallback.",
+      "Do keep source attribution, labeled examples, real empty states and native operating behavior.",
+      "Do preserve existing reduced-motion fallbacks and route/unmount cleanup."
     ],
     "donts": [
-      "Don't reintroduce the superseded Silk, Gradient Bars, optical tide or ASCII direction as the current frontend.",
-      "Don't impose the homepage split composition on community feeds, settings, administration or editors.",
-      "Don't replace real empty states with invented members, activity, testimonials or engagement totals.",
-      "Don't treat the public template's permission as a license for paid Pro components or as a replacement for IAVSE's original license."
+      "Don't reintroduce a full-width brand header, homepage workbench or three-column blog directory.",
+      "Don't substitute custom fonts, new section spacing or new animation timing for the reference.",
+      "Don't stop the visible portrait's normal frame loop after its hover blend settles.",
+      "Don't claim upstream pixel identity for administration, editing or other pages absent from the template.",
+      "Don't present the RBP template as MIT-licensed or extend its permissions to unrelated material."
     ]
   }
 }

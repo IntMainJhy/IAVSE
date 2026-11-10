@@ -59,11 +59,11 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 以下为 **2026-11-10** 从 `main` 实际页面拍摄的截图。示例主页不代表真实注册成员或用户背书；社区保留拍摄时的实际空状态。详见[截图说明](docs/screenshots/README.md)。
 
-### 首页与资源工作台
+### 首页与内容入口
 
-整套前端基于 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 适配：黑白流动背景、分栏首屏、胶囊导航与图像变形连接真实资源和社区内容。公共页面使用 Lenis 平滑滚动；编辑器与作者主页保留原生操作，支持深浅外观和减少动态。详见[源码映射与实现说明](docs/portfolio-frontend.md)。
+模板页面保留 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 的原始排版和正常动效，只合并 IAVSE 内容：首页为 Hero → 四张 Projects 卡片 → Contact，关于页和资源/博客总览沿用原始页面结构。导航保持固定的三链接胶囊，字体匹配参考网站实际使用的 system-ui。社区、筛选目录、账号与编辑管理页面保留原生业务布局；作者主页保留独立外观。详见[源码映射、动效参数与适用边界](docs/portfolio-frontend.md)。
 
-![首页资源工作台与实际目录精选](docs/screenshots/product-current.webp)
+![首页四张内容入口卡片，沿用原始 Projects 排版](docs/screenshots/product-current.webp)
 
 ### 博客空间与个人主页
 
@@ -72,7 +72,7 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 <details>
 <summary>查看更多界面：资源目录、社区和内置主页示例</summary>
 
-![UI 设计资源目录](docs/screenshots/resources-current.webp)
+![资源总览：原始 ProjectsPage 标题和双列卡片](docs/screenshots/resources-current.webp)
 
 ![社区导航、分类与实际空状态](docs/screenshots/community-current.webp)
 
@@ -124,7 +124,7 @@ GitHub Actions 在 `main` 推送和 Pull Request 时执行文档检查、单元�
 | 博客画布与模板 | [编辑器说明](docs/blog-editor.zh-CN.md)、`src/components/BlogCanvas.tsx`、`src/lib/blog-templates.mjs` |
 | 草稿、公开版本与权限边界 | [发布说明](docs/public-launch.md)、`src/lib/spaces.mjs`、`src/lib/community.mjs` |
 | 目录查询、筛选与性能 | [资源目录实现](docs/resource-discovery.md)、[目录性能记录](docs/catalog-performance-2026-11-08.md) |
-| Portfolio 前端、WebGL 与平滑滚动 | [当前前端实现与上游映射](docs/portfolio-frontend.md)、`src/components/portfolio/`、`src/app/portfolio-foundation.css` |
+| Portfolio 前端、WebGL 与平滑滚动 | [当前前端实现与上游映射](docs/portfolio-frontend.md)、`src/components/rbp/`、`src/components/portfolio/`、`src/styles/rbp-template.input.css` |
 | AI Skill / MCP / REST | [接入 Skill](integrations/iavse-post/SKILL.md)、[API 参考](integrations/iavse-post/references/api.md)、`integrations/iavse-mcp.mjs` |
 | 账号隔离、测试与恢复 | `test/`、[管理文档](docs/管理中心说明.md)、`scripts/backup.mjs`、`scripts/restore.mjs` |
 

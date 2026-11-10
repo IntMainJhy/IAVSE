@@ -7,7 +7,7 @@
     "node": ">=24.15.0"
   },
   "scripts": {
-    "prebuild": "node scripts/brand-icons.mjs && node scripts/package-skill.mjs && node scripts/version-template-covers.mjs",
+    "prebuild": "node scripts/brand-icons.mjs && node scripts/package-skill.mjs && node scripts/version-template-covers.mjs && npm run portfolio:styles",
     "package:skill": "node scripts/package-skill.mjs",
     "dev": "next dev --hostname 127.0.0.1 --port 3008",
     "build": "next build",
@@ -29,7 +29,9 @@
     "brand:icons": "node scripts/brand-icons.mjs",
     "test:blog-editor:http": "node test/blog-editor-http.mjs",
     "test:registration:http": "node test/email-registration-http.mjs",
-    "docs:check": "node scripts/check-docs.mjs"
+    "docs:check": "node scripts/check-docs.mjs",
+    "portfolio:styles": "node scripts/build-portfolio-styles.mjs",
+    "predev": "npm run portfolio:styles"
   },
   "dependencies": {
     "@tiptap/core": "3.32.0",
@@ -43,8 +45,10 @@
     "gsap": "3.15.0",
     "htmlparser2": "12.0.0",
     "jszip": "3.10.2",
-    "lenis": "^1.3.27",
-    "motion": "^14.11.1",
+    "lenis": "^1.3.23",
+    "lucide-react": "^0.562.0",
+    "matter-js": "^0.20.0",
+    "motion": "^12.23.26",
     "next": "15.5.28",
     "nodemailer": "10.1.7",
     "ogl": "^1.0.11",
@@ -57,6 +61,8 @@
     "three": "0.187.0"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "@types/matter-js": "^0.20.2",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -64,6 +70,7 @@
     "@types/three": "0.186.0",
     "@xyflow/system": "0.0.83",
     "postcss": "8.5.30",
+    "tailwindcss": "^4.1.18",
     "typescript": "5.9.3"
   },
   "overrides": {

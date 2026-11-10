@@ -1,0 +1,6 @@
+{
+  "prompt": "Actual signed-out IAVSE homepage screenshot, Ego Browser, 2026-11-10, 1280x640. Original RBP Portfolio composition with IAVSE content; working-tree source hashes in captures.json#portfolioSource. No generated imagery.",
+  "route": "/",
+  "capturedAt": "2026-11-10",
+  "sourceRecord": "captures.json#portfolioSource"
+}

@@ -2,6 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import postcss from 'postcss';
+import vm from 'node:vm';
+import ts from 'typescript';
+import React from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {parseDocument,DomUtils} from 'htmlparser2';
+import * as jsx from 'react/jsx-runtime';
 
 const app=new URL('../src/app/',import.meta.url);
 const read=name=>fs.readFileSync(new URL(name,app),'utf8');
@@ -56,7 +62,7 @@ function winner(files,path,property,width){let result,order=0;const key=JSON.str
   for(const selector of rule.selectors){if(!cache.has(selector))cache.set(selector,matches(selector,path));if(!cache.get(selector))continue;for(const {decl,value}of declarations){const rank=[decl.important?1:0,...specificity(selector),order++];if(!result||compare(rank,result.rank)>0)result={value,rank,source:file+': '+selector};}}
  });return result;}
 
-test('platform marks and wordmarks retain one geometry after route CSS arrives in any order',()=>{
+test('retained legacy platform marks and wordmarks resist route CSS order changes',()=>{
  for(const files of [[shared,...legacy],[...legacy,shared],[...legacy.slice(0,8),shared,...legacy.slice(8)]])for(const width of [1440,900,390,320])for(const mode of ['light','dark'])for(const fixture of fixtures(mode)){
   const label=`${fixture.name} ${mode} @ ${width}; shared at ${files.indexOf(shared)}`;
   for(const property of ['width','height','flex-basis']){const actual=winner(files,[...fixture.brand,mark],property,width);assert.equal(actual?.value,'28px',`${label} ${property}; ${actual?.source}`);}
@@ -95,12 +101,18 @@ test('reduced motion overrides the same important chrome controls without losing
  assert.deepEqual(reduced.sort(),normal.sort(),'the reduced-motion selector has the same specificity and receivers as the base control rule');
 });
 
-test('the root loads shared chrome for every route and only platform receivers opt in',()=>{
+test('the template shell is distinct from the scoped legacy blog and admin chrome',()=>{
  assert.match(read('layout.tsx'),/import ['"]\.\/site-chrome\.css['"]/);
  const component=name=>fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8');
- for(const [name,kind]of [['PublicSite','public'],['BlogPublic','blog']])assert.match(component(name),new RegExp(`<header[^>]*data-site-chrome="${kind}"`),name);
+ assert.match(component('BlogPublic'),/<header[^>]*data-site-chrome="blog"/);
+ const runtime=component('portfolio/PortfolioRuntime');
+ assert.match(runtime,/from ['"]\.\.\/rbp\/layout\/nav['"]/);
+ assert.equal([...runtime.matchAll(/<Nav\b/g)].length,1,'the persistent runtime renders one template navigation');
+ assert.match(read('layout.tsx'),/<PortfolioRuntime\s*\/>\{children\}/,'navigation stays in the shared layout outside route children');
+ assert.doesNotMatch(component('PublicSite'),/<Nav\b/,'page frames do not remount or duplicate template navigation');
+ assert.match(component('PublicSite'),/rbp-surface/);
  assert.match(component('AdminApp'),/<div className="admin-topline" data-site-chrome="admin"/);
- for(const [name,count]of [['PublicSite',1],['BlogPublic',1],['AdminApp',2]])assert.equal([...component(name).matchAll(/data-site-brand\b/g)].length,count,name+' opts in its platform brand links');
+ for(const [name,count]of [['BlogPublic',1],['AdminApp',2]])assert.equal([...component(name).matchAll(/data-site-brand\b/g)].length,count,name+' opts in its platform brand links');
  sheets.get(shared).walkRules(rule=>{if(rule.nodes.every(node=>node.type!=='decl'||node.prop.startsWith('--')))return;for(const selector of rule.selectors){assert.match(selector,/\[data-site-(?:chrome|brand)(?:[=\]])/,selector+' needs an explicit platform owner');assert.doesNotMatch(selector,/anx-portfolio|bd-block|blog-canvas|(?:^|[\s>])canvas\b/,selector+' leaves author canvases alone');}});
 });
 
@@ -124,7 +136,7 @@ test('interior chrome retains one bounded neutral glass layer without filtering 
  assert.equal(winner([shared],[html('light')],'--platform-chrome-fade',1440)?.value,'36px','the fade stays bounded near the navigation');
 });
 
-test('home navigation floats over its actual backdrop while links and mobile disclosure stay usable',()=>{
+test('retained legacy public chrome keeps its floating fallback and native mobile disclosure',()=>{
  for(const files of [[shared,...legacy],[...legacy,shared]])for(const width of [1440,900,390,320])for(const mode of ['light','dark'])for(const fixture of fixtures(mode).filter(item=>item.home)){
   const label=`${fixture.name} ${mode} @ ${width}; shared at ${files.indexOf(shared)}`,header=fixture.row.slice(0,-1);
   for(const [property,value]of [['background','transparent'],['border','0'],['box-shadow','none'],['backdrop-filter','none'],['--platform-chrome-ink',fixture.bright?'#1d1d1f':'#f5f5f7'],['--platform-chrome-focus',fixture.bright?'#0071e3':'#fff']])assert.equal(winner(files,header,property,width)?.value,value,label+' '+property);
@@ -135,15 +147,11 @@ test('home navigation floats over its actual backdrop while links and mobile dis
   assert.ok(Number(winner(files,active,'font-weight',width)?.value)>Number(winner(files,inactive,'font-weight',width)?.value),label+' emphasizes the current page by weight');
   if(width<=767){const menu=[...fixture.row,element('div','organic-header-tools'),element('details','organic-mobile-menu',{open:''})],summary=[...menu,element('summary')];assert.equal(winner(files,menu,'display',width)?.value,'block',label+' retains the mobile menu');assert.equal(winner(files,summary,'display',width)?.value,'flex');assert.equal(winner(files,summary,'min-height',width)?.value,'44px');}
  }
- const source=fs.readFileSync(new URL('../src/components/PublicSite.tsx',import.meta.url),'utf8');
- assert.match(source,/<PortfolioNavigation[\s\S]*?current:current===href\?'page'[\s\S]*?'location'/,'desktop links retain page versus parent-location accessibility state');
- const navigation=fs.readFileSync(new URL('../src/components/portfolio/PortfolioNavigation.tsx',import.meta.url),'utf8');assert.match(navigation,/aria-current=\{item.current\}/,'the adapted Portfolio navigation exposes the server-owned accessibility state');
- assert.match(source,/<details className="organic-mobile-menu"[^>]*><summary/,'mobile navigation keeps the native disclosure control');
- assert.match(fs.readFileSync(new URL('../src/app/layout.tsx',import.meta.url),'utf8'),/<PortfolioRuntime\/>/,'the shared frontend uses the selected Portfolio backdrop');
+
 });
 
 
-test('scrolling home content enables a single frosted layer without filtering controls',()=>{
+test('retained legacy scrolling chrome uses a single frosted layer without filtering controls',()=>{
  for(const mode of ['light','dark'])for(const width of [1440,390]){
   const fixture=fixtures(mode).find(item=>item.name==='home'),header=fixture.row.slice(0,-1);header[2].attrs['data-glass-scrolled']='';
   const backing=[...header.slice(0,-1),{...header.at(-1),pseudo:'before'}];
@@ -152,4 +160,34 @@ test('scrolling home content enables a single frosted layer without filtering co
   assert.equal(winner([shared],header,'backdrop-filter',width).value,'none');
   assert.equal(winner([shared],header,'--platform-chrome-ink',width).value,'#1d1d1f');
  }
+});
+
+
+function renderTemplateNav(pathname,items){
+ const source=fs.readFileSync(new URL('../src/components/rbp/layout/nav.tsx',import.meta.url),'utf8');
+ const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
+ const exports={},modules={
+  react:React,'react/jsx-runtime':jsx,'next/navigation':{usePathname:()=>pathname},
+  'next/link':{default:({children,...props})=>React.createElement('a',props,children)},
+  'lucide-react':{Sun:()=>null,Moon:()=>null},
+  'motion/react':{motion:{span:({initial,animate,transition,children,...props})=>React.createElement('span',props,children)}},
+ };
+ vm.runInNewContext(code,{exports,require:key=>{assert.ok(Object.hasOwn(modules,key),key);return modules[key]}});
+ return parseDocument(renderToStaticMarkup(React.createElement(exports.Nav,{items,locale:'en',label:'Primary'})));
+}
+
+test('upstream navigation keeps accessible current-page and parent-location links in every route state',()=>{
+ const items=[{href:'/',label:'Home'},{href:'/resources',label:'Resources'},{href:'/community',label:'Community'},{href:'/blogs',label:'Blog spaces'}];
+ for(const [pathname,href,current]of [['/','/','page'],['/resources','/resources','page'],['/community/post-1','/community','location'],['/unlisted',null,null]]){
+  const document=renderTemplateNav(pathname,items),links=DomUtils.findAll(node=>node.type==='tag'&&node.name==='a',document.children),selected=links.filter(node=>node.attribs['aria-current']);
+  assert.deepEqual(links.map(node=>node.attribs.href),items.map(item=>item.href));
+  assert.deepEqual(links.map(node=>DomUtils.textContent(node)),items.map(item=>item.label));
+  assert.equal(selected.length,href?1:0);
+  if(href){assert.equal(selected[0].attribs.href,href);assert.equal(selected[0].attribs['aria-current'],current);}
+  const nav=DomUtils.findAll(node=>node.type==='tag'&&node.name==='nav',document.children);assert.equal(nav.length,1);assert.equal(nav[0].attribs['aria-label'],'Primary');
+  assert.equal(DomUtils.findAll(node=>node.type==='tag'&&node.name==='button'&&node.attribs.type==='button',document.children).length,1,'theme switch remains a native button');
+ }
+ const document=renderTemplateNav('/workspace/account',[{href:'/',label:'Home',active:false},{href:'/community',label:'Community',active:true,current:'location'}]);
+ const selected=DomUtils.findAll(node=>node.type==='tag'&&node.attribs['aria-current'],document.children);assert.equal(selected.length,1);assert.equal(selected[0].attribs.href,'/community');assert.equal(selected[0].attribs['aria-current'],'location');
+ assert.match(read('layout.tsx'),/<PortfolioRuntime\s*\/>/,'route scrolling and backdrop enhancement are owned by the shared root');
 });

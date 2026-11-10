@@ -1,243 +1,218 @@
 ---
-name: "IAVSE Portfolio Foundation"
-description: "A shared monochrome product interface built on the public RBP Portfolio template."
+name: "IAVSE · RBP Portfolio Content Port"
+description: "The pinned Portfolio layout and normal motion, with IAVSE content and routes."
 colors:
-  paper: "#ffffff"
-  ink: "#0a0a0a"
-  body: "#424242"
+  background: "#ffffff"
+  foreground: "#0a0a0a"
   muted: "#f5f5f5"
-  muted-ink: "#575757"
-  line: "#e5e5e5"
-  focus: "#0066ff"
-  dark-paper: "#0a0a0a"
-  dark-ink: "#fafafa"
-  dark-body: "#dedede"
+  muted-foreground: "#737373"
+  border: "#e5e5e5"
+  ring: "#0066ff"
+  dark-background: "#0a0a0a"
+  dark-foreground: "#fafafa"
   dark-muted: "#171717"
-  dark-muted-ink: "#b7b7b7"
-  dark-line: "#303030"
-  dark-focus: "#60a5fa"
+  dark-muted-foreground: "#a3a3a3"
+  dark-border: "#262626"
+  dark-ring: "#3b82f6"
 typography:
   display:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
-    fontSize: "clamp(38px, 4vw, 58px)"
+    fontFamily: 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
+    fontSize: "3.65rem"
     fontWeight: 500
-    lineHeight: 1.13
-    letterSpacing: "-0.035em"
+    lineHeight: 1.05
+    letterSpacing: "-0.025em"
   headline:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
-    fontSize: "36px"
+    fontFamily: 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
+    fontSize: "3.5rem"
     fontWeight: 500
-    lineHeight: 1.2
-    letterSpacing: "-0.03em"
+    lineHeight: 1.05
+    letterSpacing: "-0.025em"
+  hero-body:
+    fontFamily: 'ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
+    fontSize: "22px"
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: "-0.025em"
   card-title:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
     fontSize: "22px"
     fontWeight: 500
-    lineHeight: 1.3
+    lineHeight: 1.2
     letterSpacing: "-0.025em"
-  body:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+  card-body:
     fontSize: "15px"
     fontWeight: 400
-    lineHeight: 1.85
-  hero-body:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
-    fontSize: "19px"
-    fontWeight: 400
-    lineHeight: 1.6
-  label:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
-    fontSize: "14px"
-    fontWeight: 450
     lineHeight: 1.5
-  navigation:
-    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
-    fontSize: "13px"
-    fontWeight: 450
+    letterSpacing: "-0.025em"
+  label:
+    fontSize: "14px"
+    fontWeight: 500
     lineHeight: "20px"
-  signature:
-    fontFamily: "\"Portfolio Signature\", serif"
-    fontSize: "74px"
+  metadata:
+    fontSize: "12px"
     fontWeight: 400
-    lineHeight: 0.9
-    letterSpacing: "-0.04em"
+    lineHeight: 1.5
+    letterSpacing: "-0.025em"
 rounded:
-  input: "10px"
+  icon: "8px"
   control: "12px"
-  card: "16px"
-  panel: "20px"
-  portrait: "32px"
-  pill: "999px"
+  preview: "16px"
+  card: "24px"
+  frame-inner: "1.6rem"
+  frame: "32px"
+  pill: "9999px"
+  native-input: "10px"
 spacing:
-  small: "12px"
-  control: "16px"
-  card-gap: "20px"
-  panel-gap: "24px"
-  panel: "28px"
-  compact-gutter: "32px"
+  frame-inset: "6px"
+  control-inline: "20px"
+  gutter-mobile: "24px"
+  card-gap: "24px"
+  card-gap-desktop: "28px"
   gutter: "40px"
-  hero-gap: "48px"
 components:
   button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
+    backgroundColor: "{colors.foreground}"
+    textColor: "{colors.background}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "11px 20px"
-    height: "46px"
+    padding: "0 20px"
+    height: "44px"
   button-secondary:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "11px 20px"
-    height: "46px"
+    padding: "10px 20px"
   navigation:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    typography: "{typography.navigation}"
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
+    typography: "{typography.label}"
     rounded: "{rounded.pill}"
     padding: "6px"
-  nav-selected:
-    backgroundColor: "{colors.muted}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.pill}"
-  category-selected:
-    backgroundColor: "{colors.muted}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.pill}"
-  resource-card:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+  project-card:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
     rounded: "{rounded.card}"
-  space-card:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.panel}"
-    padding: "28px"
-  input:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.input}"
-  closing:
-    backgroundColor: "{colors.muted}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.portrait}"
-    padding: "64px 48px"
+    padding: "14px"
+  feature-chip:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.pill}"
+    padding: "8px 16px"
+  framed-panel:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.frame}"
+    padding: "6px"
+  native-input:
+    rounded: "{rounded.native-input}"
 ---
 
-# Design System: IAVSE Portfolio Foundation
+# Design System: IAVSE · RBP Portfolio Content Port
 
 ## Overview
 
-**Creative North Star: "IAVSE in Portfolio Flow"**
+**Creative North Star: "Portfolio, with IAVSE content"**
 
-The current frontend uses the public RBP Portfolio repository as its visual and motion foundation: white and charcoal surfaces, Geist typography, a capsule navigation with a spring-driven selection, and a restrained grayscale flow field. Actual IAVSE resources, community activity and editable blog spaces supply the content. The outlined V, IAVSE name, English mission and blue focus accent retain the product identity.
+The confirmed direction is to keep the open repository's layout and motion unchanged and merge IAVSE's content into it. The authority is [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) at `1581b9b8e5876f60e5eb844970747506980c4412`, checked against its rendered demo. Preserve the original composition, responsive spacing, neutral surfaces, fixed capsule navigation, flow shader, image morph and transition parameters. This supersedes the earlier broad visual adaptation.
 
-This is the shared application system, not a homepage-only skin. Public pages use the common chrome, palette, typography and controls. Resource and blog directories use readable product cards; community keeps its real feed structure. Account, administration and editor surfaces retain their task-oriented structure with the shared foundation. Authored blog themes and source previews retain their own visual identity. The Portfolio split opening is a homepage composition, not a required layout for every route.
+Template-backed pages use the original Hero, Projects, About and Contact structures. IAVSE supplies real resource destinations, product descriptions and clearly labeled examples. Community, filtered catalogs, account, administration and editor screens retain their existing functional layouts within the application boundary. The upstream template has no matching operating screens; do not describe those screens as pixel-identical ports. Authored blogs and their templates retain their own visual identity.
 
-Ground truth is [portfolio-foundation.css](src/app/portfolio-foundation.css), [the Portfolio components](src/components/portfolio/), [PublicSite.tsx](src/components/PublicSite.tsx), and [layout.tsx](src/app/layout.tsx). The [implementation and source mapping](docs/portfolio-frontend.md) records the pinned upstream revision and adaptations. The former Silk, optical tide, gradient bars and ASCII homepage directions are superseded.
+The sources of truth are [RBP components](src/components/rbp/), [template CSS input](src/styles/rbp-template.input.css), [compiled scoped CSS](src/app/rbp-template.css), [host bridge](src/app/rbp-bridge.css), and [PortfolioRuntime](src/components/portfolio/PortfolioRuntime.tsx). [Implementation notes](docs/portfolio-frontend.md) map the upstream files and integration boundaries. The host [foundation stylesheet](src/app/portfolio-foundation.css) still supplies native operating-surface aliases; it is not the template's geometry or typography authority.
 
 **Key Characteristics:**
 
-- Monochrome reading surfaces with IAVSE identity and blue keyboard focus.
-- Shared capsule navigation, measured rounded cards and visible real product controls.
-- Geist for the application and a restrained Cormorant IAVSE signature.
-- Portfolio flow and portrait morph, Motion transitions and route-scoped Lenis scrolling.
-- Native editing and authored-content behavior, static fallbacks and reduced-motion support.
+- Original public-page composition and normal-motion timing, with IAVSE text, images and routes.
+- A centered three-link capsule, a theme button and account/language access in Contact.
+- System-ui typography matching the reference's computed output, including serif-class headings.
+- Two-column Projects cards, six About polaroids and the original interactive stack.
+- Native operating layouts and independent authored blogs, with source attribution and fallbacks.
 
 ## Colors
 
-Paper, Ink and the muted neutral layers carry hierarchy. The light semantic roles map to their `dark-` counterparts through the runtime `--pf-*` tokens. Shared `--site-*` aliases connect existing product surfaces to that foundation.
+The frontmatter records the template scope's actual light and dark tokens. Foreground opacity supplies most text and border hierarchy: supporting copy uses foreground at (65%), metadata at (50%) and card borders at (8%). These composited roles are intentional and should not be replaced by the older host muted-text aliases.
 
 ### Primary
 
-- **Ink** (`colors.ink`): headings, primary actions and high-emphasis controls. The dark mapping reverses action foreground and background.
-- **IAVSE Focus Blue** (`colors.focus`): the keyboard focus ring; its dark counterpart stays visible on charcoal surfaces.
+- **Foreground:** headings, text, primary actions and the monochrome interaction vocabulary.
+- **Focus Blue:** the existing keyboard-focus role; it does not recolor neutral cards or navigation.
 
 ### Neutral
 
-- **Paper** (`colors.paper`): application background, navigation and product cards.
-- **Body** and **Muted Ink** (`colors.body`, `colors.muted-ink`): supporting content and metadata, with separate dark mappings.
-- **Muted Surface** (`colors.muted`): selected navigation, selected categories, sidebar surfaces and the closing card.
-- **Fine Divider** (`colors.line`): structural card and control borders.
+- **Background:** page ground, capsule, project cards and framed panels.
+- **Muted Surface / Muted Foreground:** secondary surfaces and supporting semantic roles.
+- **Border:** the neutral divider token, supplemented by translucent foreground borders in the original components.
 
-**The Readable Field Rule.** Flow is decorative and remains behind content. Inner public pages reduce the backdrop opacity to (0.34), or (0.45) in dark appearance; the closing card uses (0.35), or (0.12) in dark appearance. Text, empty states and actions must remain complete when WebGL is unavailable.
-
-**The Source Identity Rule.** Catalog screenshots and authored blog themes retain their source colors and typography. The shared application system must not rewrite content authors' chosen appearance.
+**The Source Identity Rule.** Resource screenshots, genuine member content and authored blog themes retain their source appearance and attribution. Do not imply that template screenshots represent real members or endorsements.
 
 ## Typography
 
-**Application Font:** locally served Geist under the `Portfolio Geist` alias, with PingFang SC and sans-serif fallbacks. The runtime loads the existing variable font asset and its retained license.
+The public template's effective font is the system-ui stack recorded in the frontmatter. Both sans and serif utility roles resolve to this stack, matching the published reference. The presence of serif class names does not authorize adding a serif face. Geist and Cormorant font files remain in the repository for native surfaces and existing brand assets; they are not the mounted RBP pages' font selection.
 
-**Signature Font:** locally served Cormorant Garamond under `Portfolio Signature`. It is used for the IAVSE closing wordmark, not as a replacement for interface labels or authored template fonts.
+The homepage display uses (2.75rem) below the medium breakpoint, (2.5rem) at medium, and the frontmatter desktop value at large. Its greeting is (20px), and its supporting paragraph is limited to (34ch). Projects section titles step from (2.5rem) to (3rem) to the desktop headline role. Projects-page titles use (2.75rem / 3.25rem / 3.75rem); their introductory text is limited to (33ch).
 
-The system pairs medium display weights and tight tracking with calm, readable body text. The frontmatter records the homepage and recurring card/navigation roles; dense editor and administration text retains its existing functional sizing.
+Project card titles use (20px) on small screens and the frontmatter title role from the small breakpoint; descriptions similarly use (14px / 15px). About prose uses (17px / 18px), line height (1.7), and the original emphasis within each paragraph. Navigation and actions use the compact label role.
 
-- **Display:** the opening uses `display`; mobile uses (38px). Directory headings share the display rhythm with a (36px) minimum.
-- **Headline:** the home community and blog sections use `headline`, reducing to (32px) on mobile.
-- **Card title:** public blog-space cards use `card-title`.
-- **Body:** section descriptions use `body`; the opening uses `hero-body`, reducing to (17px) on mobile.
-- **Navigation and labels:** `navigation` and `label` keep controls compact without replacing their text with unexplained symbols.
-- **Signature:** the closing uses `signature`, reducing to (66px) on mobile. The English mission remains small supporting copy (11px / 1.7).
-
-**The Brand Signature Rule.** Keep the outlined V in shared navigation and the artistic IAVSE wordmark in the closing. Real product names and useful labels remain readable text.
+**The Computed Type Rule.** Match the pinned reference's rendered type and wrapping. Do not infer a new typeface from a source variable name or replace its typography with a custom brand system.
 
 ## Layout
 
-The shared header has a compact identity on the left, capsule navigation and existing account/locale controls. Its inner padding is (32px) with a minimum height of (84px); mobile uses (18px) and (72px). The mobile menu replaces the desktop capsule while keeping a separate appearance control.
+RBP routes restore a (16px) root rem base. The public capsule stays centered and fixed at (24px) from the top, containing Home, Resources, About and the theme control. It stays a compact capsule on mobile. There is no full-width identity/account header. The root runtime persists the navigation across eligible route changes so the active pill can travel between destinations.
 
-Public product sections use a maximum container of (1100px). Homepage gutters are (40px), tightening to (32px) below (1000px) and (26px) on mobile. Its split opening pairs product copy with a square template preview, then exposes real resource tabs, community content, blog examples, disclosures and a closing invitation. Below (767px), the opening and later paired sections become one column without changing reading order.
+The homepage order is **Hero → four Projects → Contact**, followed by the original bottom spacer. Its section gap is (80px), becoming (112px) from the small breakpoint. Main containers are at most (1100px), with horizontal gutters of (24px / 40px). Hero padding is (176px) above and (96px) below, becoming (224px / 128px). The hero becomes two columns at medium width; its preview is square, with a desktop maximum of (420px).
 
-The blog directory uses three columns, then two below (1000px), and one on mobile. The resource introduction uses two columns, then one on mobile. Community, account, administration and editing retain their existing functional layout and responsive controls; the resource catalog retains its muted listing surface.
+Projects use CSS columns: one below medium and two from medium, with gaps of (24px / 28px) and cards kept intact within a column. Resource overview `/resources` and blog directory `/blogs` use the original ProjectsPage composition, with centered title/intro, Projects and Contact. The title section retains its large desktop top spacing (400px); do not compress it into an application toolbar. Resource filter routes retain the working catalog separately.
 
-**The Task Layout Rule.** Carry the shared type, palette and control language across the frontend. Choose composition for each route's purpose: browsing, reading or operating. Do not place a marketing hero, hover portrait or scroll enhancement inside an editing canvas.
+About keeps six tilted dotted polaroids, a narrow introduction panel, Experience-style expandable rows, Education-style usage rows, feature chips, the physics stack and Contact, in that order. The main prose/list width is (640px); the polaroid strip container is (1248px). These are product descriptions and usage guidance, not an invented personal biography.
+
+**The Content Port Rule.** Replace content and destinations in the original components. Preserve their structure, dimensions, breakpoints and normal-motion behavior. The operational surfaces that have no upstream equivalent retain their own necessary layouts.
 
 ## Elevation & Depth
 
-Thin borders and quiet neutral shadows separate cards from the page. The live flow field adds background movement; it is not a simulated physical scene. Framed template images show real IAVSE example pages.
+Original thin borders, nested rounded frames, restrained shadows and shader layers provide depth. The page backdrop is (900px) tall, with opacity (0.5) below medium and (1) from medium. Contact's masked shader uses opacity (0.45) in light appearance and (0.25) in dark appearance. Keep the original mask, shader parameters and stacking; opaque wrapper backgrounds must not hide the negative-z-index flow.
 
-- **Shared soft shadow:** `0 12px 36px -22px #0003` under selected content panels.
-- **Navigation:** `0 3px 6px -3px #0002` gives the capsule a small separation from its backdrop.
-- **Portrait frame:** `0 2px 5px #0002` keeps the square screenshot grounded.
-- **Resource and directory hover:** `0 16px 34px -22px #0004` accompanies an upward translation of (4px) on hover-capable devices.
+Project cards rest on `0 1px 2px rgb(0 0 0 / 0.04)`. Hover changes the shadow to `0 10px 20px -8px rgb(0 0 0 / 0.12), 0 4px 8px -4px rgb(0 0 0 / 0.08)` and raises the card by (4px). The dark variants retain their stronger original shadows. Frame and capsule shadows use the compiled template utilities, not the earlier custom foundation shadow.
 
-**The Motion Boundary Rule.** Use Motion for interface transitions, OGL for the template's flow and portrait shaders, and Lenis for eligible public-page scrolling. Authored blog, administration and workspace routes keep native scrolling. Reduced motion disables Lenis and movement; the flow renders a static frame, and portrait initialization uses its fallback image when reduced motion or no hover is detected.
+Normal motion uses `cubic-bezier(0.22, 1, 0.36, 1)`. FadeIn starts at (12px) below over (0.8s); ScaleUnblur starts at scale (0.7) and blur (20px) over (1s). Project hover movement lasts (0.4s); image scale reaches (1.06) over (0.7s). Preserve these values. Exact spring, theme, scrolling, polaroid and shader parameters are recorded in the sidecar and implementation notes.
 
 ## Shapes
 
-Capsules define navigation and selection. Rounded rectangles define controls, cards and previews, using the named radii in the frontmatter. The portrait includes an inner clipped radius of (25px); its outer frame uses `portrait`. The closing card shares that larger radius and reduces to (24px) on mobile. Member avatars remain small circles (58px), distinct from square template previews. Fine borders provide boundaries without glass effects.
+The original rounded scale distinguishes controls, previews, project cards and outer frames. Portrait and Contact frames retain the narrow (6px) inset and inner clipped radius. About panels use the outer-frame radius, while individual list rows use the card radius. Six polaroids retain their (3:4) aspect and tilted framing; the ten technology chips use their original physics-chip shape. Do not replace these with a uniform card radius.
 
 ## Components
 
-### Actions and fields
+### Navigation
 
-Primary actions use Ink on Paper's inverse; secondary actions use Paper, Ink and a Fine Divider. Opening actions have a minimum height of (46px) and use the `label` role. Hover-capable devices lift them by (2px). Shared keyboard focus is a (2px) blue outline with (4px) offset. Administration inputs use `input` corners with existing labels, validation and disabled semantics; existing product search behavior remains in its component.
+The three-link capsule is mounted by the root PortfolioRuntime. Links use an active spring pill (stiffness 380, damping 32), measured initially without animation. The adjacent theme button preserves the circular reveal (700ms) where View Transitions are supported; otherwise, or under reduced motion, it changes appearance directly. It writes the existing `site-color-mode` cookie. Native administration and authored-blog routes keep their own chrome.
 
-### Navigation and appearance
+### Actions
 
-The capsule wraps the existing destinations. An active pill moves with a spring (stiffness 380, damping 32); reduced motion resolves the position immediately. `aria-current="page"` identifies a direct match and `location` its parent section. The appearance control writes the existing `site-color-mode` cookie. Supported browsers reveal the new theme with a circle (0.7s); reduced motion or absent View Transition support applies the appearance directly.
+The primary ContactButton copies the IAVSE repository URL. Hover and keyboard focus expand its label; the layout transition is (0.55s), label blur/fade is (0.35s), copied-icon transition is (0.2s), and copied feedback resets after (1600ms). Secondary actions navigate to resources. Keep these original control dimensions and behavior while localizing the text.
 
-### Cards and directories
+### Projects and directories
 
-Resources use bordered `resource-card` surfaces. Blog spaces use `space-card`, showing genuinely public members and clearly marked built-in examples. Their permissions, routes and empty states are product behavior, not decorative fixtures. The resource introduction offers direct links to actual catalog groups. Account and administration panels adopt the same neutral language while keeping their operating affordances.
+Four homepage cards lead to UI designs, AI Skills, community and blog spaces. Cards preserve the original media ratios, inset image, icon label, title, description and metadata. Resource overview and blog directory reuse this same Projects component. Directory members come from the existing public discovery rules; bundled examples are visibly labeled. There is no mounted homepage category/search workbench or three-column blog grid.
 
-### Product controls
+### About
 
-Resource categories and template choices remain native, keyboard-operable controls. Search stays bounded to its selected featured category and retains its empty state and Escape behavior. Public community content comes from the existing qualified feed. Template previews use actual built-in layouts, with their fictional-example disclosure and real destinations.
+The six polaroids retain their dotted contents, rotations and pointer springs. Expandable rows retain the original partial-row reveal and height transition. Feature chips describe current capabilities. The Matter.js stack represents the actual installed technologies, supports dragging and reset, and uses a static wrapped layout under reduced motion. It does not assert personal education or employment history.
 
-### Flow and template portrait
+### Flow and portrait
 
-The full-page flow and closing-card shader derive from the pinned upstream Portfolio component. The square opening portrait adapts the upstream image morph to two genuine IAVSE template screenshots; mouse hover changes the preview and its destination together. Touch and reduced-motion initialization show the static image. Server-rendered text, links and the fallback image remain available if GPU setup fails. The animation instances release frames, observers, listeners and GPU contexts on unmount.
+The page flow, Contact flow and portrait morph retain the upstream normal-motion behavior. The portrait is a visual preview, not a link whose destination switches on hover. Its visible normal-motion frame loop continues after the blend settles; only background-tab visibility pauses that loop. Reduced-motion or no-hover initialization leaves the fallback image, and WebGL failure leaves content readable. Flow skips offscreen/background drawing and uses a static frame under reduced motion. Unmounts release listeners, observers, frame tasks and WebGL contexts.
+
+### Native controls and authored content
+
+Filtered catalogs, community feeds, account forms, administration and editing retain working layouts, permissions, validation and content behavior. Native inputs keep their existing labels and sizes with the host foundation's field radius and color aliases. Template CSS is scoped from `.rbp-surface` to `.rbp-native`; it must not reset an editor or a member-authored theme. Lenis excludes administration, workspace and authored-blog routes. Reduced-motion accommodations are component-specific; do not claim that every Motion transition is disabled globally.
 
 ## Do's and Don'ts
 
-- Do use the Portfolio foundation for shared application chrome, palette, typography and controls.
-- Do preserve actual content, native editing behavior, publishing permissions and source attribution.
-- Do keep built-in template examples clearly identified and leave their authored appearance intact.
-- Do pair visual state with a working destination, keyboard state or meaningful product behavior.
-- Do respect reduced motion, no-WebGL fallbacks and route lifecycle cleanup.
-- Don't reintroduce the superseded Silk, Gradient Bars, optical tide or ASCII direction as the current frontend.
-- Don't impose the homepage split composition on community feeds, settings, administration or editors.
-- Don't replace real empty states with invented members, activity, testimonials or engagement totals.
-- Don't treat the public template's permission as a license for paid Pro components or as a replacement for IAVSE's original license.
+- Do preserve the pinned template's composition, responsive geometry and normal-motion parameters.
+- Do put real IAVSE content and working destinations into the original component slots.
+- Do match the reference's system-ui rendering, including the serif-class fallback.
+- Do keep source attribution, labeled examples, real empty states and native operating behavior.
+- Do preserve existing reduced-motion fallbacks and route/unmount cleanup.
+- Don't reintroduce a full-width brand header, homepage workbench or three-column blog directory.
+- Don't substitute custom fonts, new section spacing or new animation timing for the reference.
+- Don't stop the visible portrait's normal frame loop after its hover blend settles.
+- Don't claim upstream pixel identity for administration, editing or other pages absent from the template.
+- Don't present the RBP template as MIT-licensed or extend its permissions to unrelated material.

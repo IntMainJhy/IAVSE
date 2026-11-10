@@ -20,7 +20,9 @@ IAVSE brings community exchange and resource discovery together, with personal b
 
 ## Brand Commitments
 
-Retain the IAVSE name, shared outlined V, blue identity/focus accent and English mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.” The current frontend uses Portfolio's monochrome surfaces, Geist typography, capsule navigation and restrained shader motion, with an artistic IAVSE closing wordmark. The homepage, directories, community and operating surfaces share that foundation without forcing a single composition on every route. See [DESIGN.md](DESIGN.md) and the [Portfolio implementation notes](docs/portfolio-frontend.md).
+Retain the IAVSE name, existing outlined V identity, blue focus accent and English mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.” The user's binding visual direction is: “动效也要保持不变呀，还有排版，都跟这个开源仓库保持一致，就是内容合并过来.” For the template-backed public pages, preserve the pinned RBP Portfolio composition, spacing, responsive behavior and normal-motion parameters, replacing the sample content with actual IAVSE content. The published reference's computed system-ui font stack, including its serif-class fallback, is the typography authority.
+
+The public shell has the original centered, fixed three-link capsule and theme control; account and language access are in Contact. The homepage is Hero → four Projects → Contact; About and the resource/blog overviews use the upstream About and Projects page structures. Do not reintroduce a full-width branded header or the earlier custom homepage workbench. Existing identity assets remain available without inserting new branding into the template composition. Native community, catalog, account, administration and editor layouts keep their working behavior; authored blog appearances remain independent. Those operational views have no upstream page equivalent, so this commitment does not claim pixel identity for them. See [DESIGN.md](DESIGN.md) and the [Portfolio implementation notes](docs/portfolio-frontend.md).
 
 ## Evidence on Hand
 

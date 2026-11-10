@@ -1,27 +1,16 @@
-import Link from 'next/link';
 import {publicSpaces} from '@/lib/spaces.mjs';
 import {localizeProfile} from '@/lib/content-locales.mjs';
 import {serverI18n} from '@/lib/server-i18n';
-import {BlogProductShowcase} from './BlogProductShowcase';
-import {Icon} from './Icons';
-import type {GallerySpace} from './BlogSpaceGallery';
-import {FeedAvatar} from './FeedAvatar';
+import {portfolioCopy} from '@/lib/portfolio-content';
 import {blogShowcases,showcaseProfile} from '@/lib/blog-showcase.mjs';
-
-/** Discovery always lists published, discoverable spaces, independently of login. */
+import {UserRound} from 'lucide-react';
+import {ProjectsPage} from './rbp/ProjectsPage';
+import type {Project} from './rbp/projects/projects';
+/** Published/discoverable members and labeled built-in examples; no synthetic activity. */
 export async function BlogSpacesPage({req}:{req:Request}){
- const {t,locale}=await serverI18n();
- const say=(zh:string,en:string,ja:string)=>locale==='en'?en:locale==='ja'?ja:zh;
- const spaces:GallerySpace[]=publicSpaces(req).map((space:any)=>{
-  const profile=localizeProfile(space.profile,locale);
-  return {handle:space.handle,name:profile.name||space.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',href:'/blog/'+encodeURIComponent(space.handle),mode:space.mode};
- });
- return <div className="blog-spaces-page" data-blog-spaces data-spaces-surface="portfolio">
-  <header className="creator-directory-intro">
-   <div><h1>{t('博客空间')}</h1><p>{say('每一个主页，都是一个独立的世界。','Every homepage, a world of its own.','一つひとつのホームページに、その人の世界。')}</p></div>
-   <Link className="space-btn primary" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link>
-  </header>
-  <section className="portfolio-spaces-directory" aria-label={t("发现博客空间")}>{[...spaces,...blogShowcases.map(item=>showcaseProfile(item.handle,locale)).filter(Boolean) as GallerySpace[]].map(space=><article className="portfolio-space-card" key={space.handle}>{space.showcase?<small>{say("内置模板 · 虚构人物示例","Built-in template · fictional example","組み込みテンプレート · 架空の人物")}</small>:<small>{say("公开博客空间","Public blog space","公開ブログスペース")}</small>}{space.avatarSrc?<img src={space.avatarSrc} alt="" width={58} height={58}/>:<FeedAvatar name={space.name} avatarId={space.avatarId}/>}<h2>{space.name}</h2><p>{space.intro}</p><Link href={space.href}>{t("进入博客空间")}<Icon name="arrow"/></Link></article>)}</section>
-  <BlogProductShowcase locale={locale} spaces={spaces} labels={{open:t('进入博客空间'),empty:t('暂时没有公开博客空间。'),emptyBody:t('作品、经历与想法，在这里相遇。')}}/>
- </div>;
+ const {locale}=await serverI18n(),c=portfolioCopy(locale),zh=locale==='zh',ja=locale==='ja';
+ const members=publicSpaces(req).map((space:any)=>{const p=localizeProfile(space.profile,locale);return {handle:space.handle,name:p.name||space.handle,intro:p.intro||'',avatarId:p.avatarId||'',href:'/blog/'+encodeURIComponent(space.handle),showcase:false,avatarSrc:''};});
+ const examples=blogShowcases.map(item=>showcaseProfile(item.handle,locale)).filter(Boolean);
+ const items:Project[]=[...members,...examples].map((space:any,index)=>({id:space.handle,icon:UserRound,iconLabel:space.showcase?(zh?'内置模板 · 虚构人物':ja?'内蔵テンプレート · 架空の人物':'Built-in template · fictional example'):(zh?'公开博客空间':ja?'公開ブログ':'Public blog space'),title:space.name,description:space.intro,meta:space.showcase?c.templateAlt:'@'+space.handle,href:space.href,image:space.avatarSrc||(space.avatarId?'/media/'+space.avatarId:'/media/home-product/space-editorial.webp'),imageAlt:space.name,imageRatio:index===0?752/497:1024/768}));
+ return <div data-blog-spaces data-spaces-surface="upstream-portfolio"><ProjectsPage title={c.blogsTitle} intro={c.blogsIntro} items={items} locale={locale}/></div>;
 }

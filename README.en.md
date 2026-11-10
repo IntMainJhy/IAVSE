@@ -58,11 +58,11 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 Captured from the actual `main` website on **2026-11-10**. Bundled showcase profiles are examples, not registered-user or endorsement claims. Community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
 
-### Homepage and resource workbench
+### Homepage and content entry points
 
-The frontend adapts [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio): monochrome flow, a split hero, capsule navigation and image morphing connect real resources and community content. Eligible public pages use Lenis smooth scrolling; editors and authored pages retain native operation. Light/dark appearance and reduced motion are supported. See the [implementation and source mapping](docs/portfolio-frontend.md).
+Template-backed pages preserve [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio)’s original layout and normal-motion behavior while merging IAVSE content. The homepage is Hero → four Projects cards → Contact; About and the resource/blog overviews retain the upstream page structures. A fixed three-link capsule and the reference’s computed system-ui typography remain intact. Community, filtered catalogs, accounts, administration and editing retain native operating layouts; authored blogs retain their own appearance. See the [source mapping, motion parameters and boundaries](docs/portfolio-frontend.md).
 
-![Homepage resource workbench with actual catalog selections](docs/screenshots/product-current.webp)
+![Four homepage entry cards in the original Projects composition](docs/screenshots/product-current.webp)
 
 ### Blog discovery and personal homepages
 
@@ -71,7 +71,7 @@ The frontend adapts [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio):
 <details>
 <summary>More views: resource catalog, community and a built-in homepage</summary>
 
-![UI resource directory](docs/screenshots/resources-current.webp)
+![Resource overview with the original ProjectsPage title and two-column cards](docs/screenshots/resources-current.webp)
 
 ![Community navigation, categories and actual empty state](docs/screenshots/community-current.webp)
 
@@ -123,7 +123,7 @@ GitHub Actions checks documentation, unit tests, the production build and types 
 | Blog canvas and templates | [Editor guide](docs/blog-editor.md), `src/components/BlogCanvas.tsx`, `src/lib/blog-templates.mjs` |
 | Drafts, public versions and authorization | [Publication boundaries](docs/public-launch.en.md), `src/lib/spaces.mjs`, `src/lib/community.mjs` |
 | Catalog queries, filters and performance | [Resource discovery](docs/resource-discovery.md), [catalog measurements](docs/catalog-performance-2026-11-08.md) |
-| Portfolio frontend, WebGL and smooth scrolling | [Current implementation and upstream mapping](docs/portfolio-frontend.md), `src/components/portfolio/`, `src/app/portfolio-foundation.css` |
+| Portfolio frontend, WebGL and smooth scrolling | [Current implementation and upstream mapping](docs/portfolio-frontend.md), `src/components/rbp/`, `src/components/portfolio/`, `src/styles/rbp-template.input.css` |
 | AI Skill / MCP / REST | [IAVSE Skill](integrations/iavse-post/SKILL.md), [API reference](integrations/iavse-post/references/api.md), `integrations/iavse-mcp.mjs` |
 | Isolation, tests and recovery | `test/`, [administration](docs/administration.en.md), `scripts/backup.mjs`, `scripts/restore.mjs` |
 
