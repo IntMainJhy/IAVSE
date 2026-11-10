@@ -56,7 +56,7 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 ## 当前实现 / Current implementation
 
-- [双 UI 开发计划](dual-ui-development-plan.zh-CN.md)与[阶段任务表](dual-ui-task-board.md)：2026-11-10 确定的下一步方案——Pro 私有 UI、原创公开 UI、共享业务与数据。当前仅完成规划，不代表两版已实现，也不更改现行许可。
+- [双 UI 开发计划](dual-ui-development-plan.zh-CN.md)与[阶段任务表](dual-ui-task-board.md)：Pro 私有 UI、原创公开 UI、共享业务与数据。已进入阶段 1，见[来源盘点与候选](ui-source-audit-2026-11-10.md)；私有仓库已初始化，两版 UI 尚未实现，现行许可不变。
 - [唯一平台视觉规范 / Platform design system](../DESIGN.md): the independently refined IAVSE font role, light/dark palette, tinted groups, cards, controls and entry motion.
 - [IAVSE 前端接入与源码映射 / Frontend integration](portfolio-frontend.md): retained RBP components, independently refined type and spacing, CSS atmosphere, shared operating controls, Scroll Reveal / Fade In Up / Staggered Reveal, portrait OGL, Lenis and authored-content boundaries.
 - [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
