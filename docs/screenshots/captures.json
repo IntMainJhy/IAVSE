@@ -1,59 +1,43 @@
 {
-  "capturedAt": "2026-11-09",
+  "capturedAt": "2026-11-10",
   "locale": "zh-CN",
-  "source": "Actual local website rendered from main. Homepage/workbench captures refreshed from the signed-out production build; per-entry revision and hashes distinguish them from unchanged captures. No test accounts or posts created.",
+  "source": "Actual signed-out local production build of IAVSE on main. Portfolio frontend captures are linked to the working-tree source record below; unchanged authored-template captures retain their own revision. No test posts or accounts were created.",
   "entries": [
     {
       "file": "docs/screenshots/home-current.webp",
       "route": "/",
       "width": 1440,
       "height": 1000,
-      "capturedAt": "2026-11-09",
-      "sourceBaseCommit": "2b90d51ede29255200fb67b67701c6078440a9a6",
-      "sourceState": "React Bits homepage working tree, captured before committing this update",
-      "sourceFilesSha256": {
-        "src/components/PlatformHome.tsx": "2a60619da22df8278a17e3a22d4a141ea8a51e50f5e04c6a41a5ea7640e8c9f8",
-        "src/components/HomeProductShowcase.tsx": "a72317762534cfc04390801ca66ea971bd242135aaaf6d7e943e0d95934e1065",
-        "src/components/HomeBitsAtmosphere.tsx": "991b4656956fa75d03c9e7787f25a011110f3a678c41952c32830f41d32c0331",
-        "src/components/HomeBitsMotion.tsx": "fc8e016de8e84c27d8e77c7e1888edcd8b071422850efc1778dc60fa3bf05396",
-        "src/app/home-react-bits.css": "86f8e5efa0688890cf5c60cfe666214c50bd0ba0cd75fd7f0562f59a28c092d7",
-        "src/components/react-bits/Silk.tsx": "914207f4ea92dd289afd9425aff990b0c25bb491b16017b2c4955e198d85b09b",
-        "src/lib/home-bits.mjs": "52bc7f76495f4532e394158e8239b11089f1d4887152c3c8ad96474418b76f0c"
-      },
-      "signedIn": false
+      "capturedAt": "2026-11-10",
+      "signedIn": false,
+      "sourceRecord": "portfolioSource"
     },
     {
       "file": "docs/screenshots/product-current.webp",
       "route": "/#discover",
       "width": 1440,
       "height": 1000,
-      "capturedAt": "2026-11-09",
-      "sourceBaseCommit": "2b90d51ede29255200fb67b67701c6078440a9a6",
-      "sourceState": "React Bits homepage working tree, captured before committing this update",
-      "sourceFilesSha256": {
-        "src/components/PlatformHome.tsx": "2a60619da22df8278a17e3a22d4a141ea8a51e50f5e04c6a41a5ea7640e8c9f8",
-        "src/components/HomeProductShowcase.tsx": "a72317762534cfc04390801ca66ea971bd242135aaaf6d7e943e0d95934e1065",
-        "src/components/HomeBitsAtmosphere.tsx": "991b4656956fa75d03c9e7787f25a011110f3a678c41952c32830f41d32c0331",
-        "src/components/HomeBitsMotion.tsx": "fc8e016de8e84c27d8e77c7e1888edcd8b071422850efc1778dc60fa3bf05396",
-        "src/app/home-react-bits.css": "86f8e5efa0688890cf5c60cfe666214c50bd0ba0cd75fd7f0562f59a28c092d7",
-        "src/components/react-bits/Silk.tsx": "914207f4ea92dd289afd9425aff990b0c25bb491b16017b2c4955e198d85b09b",
-        "src/lib/home-bits.mjs": "52bc7f76495f4532e394158e8239b11089f1d4887152c3c8ad96474418b76f0c"
-      },
-      "signedIn": false
+      "capturedAt": "2026-11-10",
+      "signedIn": false,
+      "sourceRecord": "portfolioSource"
     },
     {
       "file": "docs/screenshots/resources-current.webp",
       "route": "/resources?type=designs",
       "width": 1440,
       "height": 1000,
-      "sourceCommit": "427cdc99156a16ab50eab45c25551c10e17ad67a"
+      "capturedAt": "2026-11-10",
+      "sourceRecord": "portfolioSource",
+      "signedIn": false
     },
     {
       "file": "docs/screenshots/community-current.webp",
       "route": "/community",
       "width": 1440,
       "height": 1000,
-      "sourceCommit": "427cdc99156a16ab50eab45c25551c10e17ad67a"
+      "capturedAt": "2026-11-10",
+      "sourceRecord": "portfolioSource",
+      "signedIn": false
     },
     {
       "file": "docs/screenshots/blog-home-current.webp",
@@ -67,7 +51,9 @@
       "route": "/blogs",
       "width": 1440,
       "height": 1000,
-      "sourceCommit": "427cdc99156a16ab50eab45c25551c10e17ad67a"
+      "capturedAt": "2026-11-10",
+      "sourceRecord": "portfolioSource",
+      "signedIn": false
     }
   ],
   "socialPreview": {
@@ -75,7 +61,27 @@
     "route": "/",
     "width": 1280,
     "height": 640,
-    "sourceCommit": "427cdc99156a16ab50eab45c25551c10e17ad67a"
+    "capturedAt": "2026-11-10",
+    "sourceRecord": "portfolioSource",
+    "signedIn": false
   },
-  "defaultSourceCommit": "427cdc99156a16ab50eab45c25551c10e17ad67a"
+  "portfolioSource": {
+    "sourceBaseCommit": "64d340353afb3adfcf03b5ca60df4293658d201d",
+    "sourceState": "Portfolio frontend working tree, captured before committing this update",
+    "sourceFilesSha256": {
+      "src/app/layout.tsx": "670437d73f2ec9a1e524f86ff7078a1ee633accd60e7feadb21bb0e4128cf2f0",
+      "src/app/portfolio-foundation.css": "90c85bf1b58e489675288ebeb6af19879b613779f409624e4d1afd50ea7697d1",
+      "src/components/PublicSite.tsx": "721303f484231e17be6940ea1269ec4d74d3d650293f480aa6c8bf7b40a6b8cd",
+      "src/components/PlatformHome.tsx": "a2108911940efde20ffd2e267713178ea930f4bad43cd45520b7d37aeb28c52d",
+      "src/components/HomeProductShowcase.tsx": "314fdc679b518124ce35df6b986a716ceb41d3b699794c934f4eb3844c3f4746",
+      "src/components/ResourceIntroduction.tsx": "dcd85a75da2815cdb24e1882b3b9f740473153574c7b27f5c15c290e199194a6",
+      "src/components/BlogSpacesPage.tsx": "066a22f6949b48e98cd5fff6fdf52f1b694677928e9168171ceaad29988db64a",
+      "src/components/portfolio/PortfolioCardBackdrop.tsx": "c153a84734366335f2cb31033360c561e0b9fe96e426ea81667696abab8e7fc6",
+      "src/components/portfolio/PortfolioHero.tsx": "64f41061eac14059b8c79c126b9a8bc0ec27e9f7986c21dae9ed8b0cf731fb16",
+      "src/components/portfolio/PortfolioNavigation.tsx": "8e16a8b3bed2aad7d74b31404e5cdd3d8ffeb832355362cbd2cac06d86486125",
+      "src/components/portfolio/PortfolioRuntime.tsx": "fbbbe2292205392a81d5b786c2ef74528107448c240488a7b7a7734491072fc7",
+      "src/components/portfolio/PortraitMorph.tsx": "226b5360a6d079a4c03ddfc27e7a0a4e91d0599b1ac19e3dab8a552326bc74d7",
+      "src/components/portfolio/ShaderFlow.tsx": "6f919f55630bd743ee3551a67274b28c992b74816b94348d187f43aa3e68a451"
+    }
+  }
 }

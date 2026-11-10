@@ -1,268 +1,243 @@
 ---
-name: IAVSE Homepage
-description: Flowing blue light around real resource discovery, community exchange, and personal work.
+name: "IAVSE Portfolio Foundation"
+description: "A shared monochrome product interface built on the public RBP Portfolio template."
 colors:
-  paper: "#f8fafc"
-  ink: "#122536"
-  body: "#405569"
-  panel: "#fff"
-  soft: "#f0f5f9"
-  line: "#dbe5ed"
-  dark-paper: "#09121c"
-  dark-ink: "#eaf4ff"
-  dark-body: "#aec2d4"
-  dark-panel: "#12202d"
-  dark-soft: "#192a39"
-  dark-line: "#314556"
-  atmosphere: "#deeffb"
-  dark-atmosphere: "#102539"
-  action-hover: "#285477"
-  focus: "#3274ad"
-  closing: "#071e34"
-  closing-ink: "#eff7ff"
-  closing-body: "#b9cee0"
-  signature: "#dceeff"
+  paper: "#ffffff"
+  ink: "#0a0a0a"
+  body: "#424242"
+  muted: "#f5f5f5"
+  muted-ink: "#575757"
+  line: "#e5e5e5"
+  focus: "#0066ff"
+  dark-paper: "#0a0a0a"
+  dark-ink: "#fafafa"
+  dark-body: "#dedede"
+  dark-muted: "#171717"
+  dark-muted-ink: "#b7b7b7"
+  dark-line: "#303030"
+  dark-focus: "#60a5fa"
 typography:
   display:
-    fontFamily: '"IAVSE Inter", "PingFang SC", sans-serif'
-    fontSize: "clamp(42px, 4.6vw, 68px)"
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+    fontSize: "clamp(38px, 4vw, 58px)"
     fontWeight: 500
-    lineHeight: 1.18
+    lineHeight: 1.13
     letterSpacing: "-0.035em"
   headline:
-    fontFamily: '"IAVSE Inter", "PingFang SC", sans-serif'
-    fontSize: "clamp(34px, 3.3vw, 46px)"
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+    fontSize: "36px"
     fontWeight: 500
-    lineHeight: 1.24
-    letterSpacing: "-0.035em"
-  title:
-    fontFamily: '"IAVSE Inter", "PingFang SC", sans-serif'
-    fontSize: "17px"
-    fontWeight: 600
-    lineHeight: 1.5
-    letterSpacing: "-0.02em"
+    lineHeight: 1.2
+    letterSpacing: "-0.03em"
+  card-title:
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+    fontSize: "22px"
+    fontWeight: 500
+    lineHeight: 1.3
+    letterSpacing: "-0.025em"
   body:
-    fontFamily: '"IAVSE Inter", "PingFang SC", sans-serif'
-    fontSize: "16px"
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+    fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.85
-  compact-body:
-    fontFamily: '"IAVSE Inter", "PingFang SC", sans-serif'
-    fontSize: "14px"
+  hero-body:
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+    fontSize: "19px"
     fontWeight: 400
-    lineHeight: 1.9
+    lineHeight: 1.6
   label:
-    fontFamily: '"IAVSE Inter", "PingFang SC", sans-serif'
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
     fontSize: "14px"
-    fontWeight: 500
+    fontWeight: 450
     lineHeight: 1.5
+  navigation:
+    fontFamily: "\"Portfolio Geist\", \"PingFang SC\", sans-serif"
+    fontSize: "13px"
+    fontWeight: 450
+    lineHeight: "20px"
   signature:
-    fontFamily: '"IAVSE Signature", serif'
-    fontSize: "clamp(130px, 24vw, 340px)"
+    fontFamily: "\"Portfolio Signature\", serif"
+    fontSize: "74px"
     fontWeight: 400
-    lineHeight: 0.88
+    lineHeight: 0.9
     letterSpacing: "-0.04em"
-  ascii:
-    fontFamily: '"IAVSE Mono", monospace'
-    fontSize: "10px"
-    fontWeight: 400
 rounded:
+  input: "10px"
   control: "12px"
-  panel: "16px"
-  closing: "24px"
-  hero: "28px"
+  card: "16px"
+  panel: "20px"
+  portrait: "32px"
   pill: "999px"
 spacing:
-  compact: "8px"
-  control: "12px"
-  small: "16px"
-  medium: "20px"
-  content: "24px"
+  small: "12px"
+  control: "16px"
+  card-gap: "20px"
+  panel-gap: "24px"
   panel: "28px"
-  gutter: "32px"
+  compact-gutter: "32px"
+  gutter: "40px"
+  hero-gap: "48px"
 components:
   button-primary:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.paper}"
     typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "13px 22px"
-  button-primary-hover:
-    backgroundColor: "{colors.action-hover}"
-    textColor: "{colors.panel}"
+    padding: "11px 20px"
+    height: "46px"
   button-secondary:
-    backgroundColor: "{colors.panel}"
+    backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
+    typography: "{typography.label}"
     rounded: "{rounded.control}"
-    padding: "13px 22px"
-  workbench:
-    backgroundColor: "{colors.panel}"
+    padding: "11px 20px"
+    height: "46px"
+  navigation:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    typography: "{typography.navigation}"
+    rounded: "{rounded.pill}"
+    padding: "6px"
+  nav-selected:
+    backgroundColor: "{colors.muted}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+  category-selected:
+    backgroundColor: "{colors.muted}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+  resource-card:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.card}"
+  space-card:
+    backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
     rounded: "{rounded.panel}"
-  tab:
-    backgroundColor: "transparent"
-    textColor: "{colors.body}"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "10px 18px"
-  tab-selected:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-  resource-card:
-    backgroundColor: "{colors.soft}"
+    padding: "28px"
+  input:
+    backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.control}"
-  search-field:
-    backgroundColor: "{colors.panel}"
-    textColor: "{colors.ink}"
-    padding: "8px"
-  template-tab:
-    backgroundColor: "transparent"
-    textColor: "{colors.body}"
-    rounded: "{rounded.pill}"
-    padding: "8px 24px"
-  template-tab-selected:
-    backgroundColor: "{colors.panel}"
-    textColor: "{colors.ink}"
+    rounded: "{rounded.input}"
   closing:
-    backgroundColor: "{colors.closing}"
-    textColor: "{colors.closing-ink}"
-    rounded: "{rounded.closing}"
+    backgroundColor: "{colors.muted}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.portrait}"
+    padding: "64px 48px"
 ---
 
-# Design System: IAVSE Homepage
+# Design System: IAVSE Portfolio Foundation
 
 ## Overview
 
-**Creative North Star: "IAVSE in Flowing Light"**
+**Creative North Star: "IAVSE in Portfolio Flow"**
 
-The built homepage places usable creator tools inside a calm blue field. A centered product statement and two direct actions lead into a real resource workbench. Open community and blog-space sections follow in native reading order. A dark ASCII wave field and large serif IAVSE wordmark close the page. The outlined V, IAVSE blue, and English mission remain the shared identity.
+The current frontend uses the public RBP Portfolio repository as its visual and motion foundation: white and charcoal surfaces, Geist typography, a capsule navigation with a spring-driven selection, and a restrained grayscale flow field. Actual IAVSE resources, community activity and editable blog spaces supply the content. The outlined V, IAVSE name, English mission and blue focus accent retain the product identity.
 
-This document governs the current homepage, including its homepage-only treatment of shared chrome. It does not make this composition a template for resource directories, community pages, blog galleries, authored templates, account flows, or administration. Their existing layouts, permissions, and visual rules remain in force. The user's latest Cloudlight, Portfolio, and Security references supersede the former protected glass opening and spatial homepage chapters; those are historical implementations, not current homepage constraints. These references establish a quality bar, not an approved image comp.
+This is the shared application system, not a homepage-only skin. Public pages use the common chrome, palette, typography and controls. Resource and blog directories use readable product cards; community keeps its real feed structure. Account, administration and editor surfaces retain their task-oriented structure with the shared foundation. Authored blog themes and source previews retain their own visual identity. The Portfolio split opening is a homepage composition, not a required layout for every route.
 
-Ground truth is [PlatformHome.tsx](src/components/PlatformHome.tsx), [home-react-bits.css](src/app/home-react-bits.css), [HomeBitsAtmosphere.tsx](src/components/HomeBitsAtmosphere.tsx), [HomeBitsMotion.tsx](src/components/HomeBitsMotion.tsx), and the React Bits branch of [HomeProductShowcase.tsx](src/components/HomeProductShowcase.tsx). Existing [resource controls](src/components/HomeResourceExplorer.tsx), [template controls](src/components/HomeSpacePreview.tsx), and [home-experience.css](src/app/home-experience.css) supply the retained product behavior. [Reference and license notes](docs/home-react-bits.md) distinguish the licensed open Silk component from the visual references; no paid Pro template source is bundled.
+Ground truth is [portfolio-foundation.css](src/app/portfolio-foundation.css), [the Portfolio components](src/components/portfolio/), [PublicSite.tsx](src/components/PublicSite.tsx), and [layout.tsx](src/app/layout.tsx). The [implementation and source mapping](docs/portfolio-frontend.md) records the pinned upstream revision and adaptations. The former Silk, optical tide, gradient bars and ASCII homepage directions are superseded.
 
 **Key Characteristics:**
 
-- Flowing blue light, cool reading surfaces, dark ink, and an explicit dark appearance.
-- A functional resource workbench near the opening, followed by distinct community and template compositions.
-- Inter for product content, a restrained serif IAVSE signature, and a decorative mono character field.
-- Native scrolling, modest magnetic and lift feedback, and complete content with reduced motion or no WebGL.
+- Monochrome reading surfaces with IAVSE identity and blue keyboard focus.
+- Shared capsule navigation, measured rounded cards and visible real product controls.
+- Geist for the application and a restrained Cormorant IAVSE signature.
+- Portfolio flow and portrait morph, Motion transitions and route-scoped Lenis scrolling.
+- Native editing and authored-content behavior, static fallbacks and reduced-motion support.
 
 ## Colors
 
-Blue carries the atmosphere and identity; cool neutrals keep real product content legible. The six light semantic roles map to their `dark-` counterparts when the existing site color mode is dark. Component frontmatter describes the light defaults; runtime custom properties provide the mode mapping.
+Paper, Ink and the muted neutral layers carry hierarchy. The light semantic roles map to their `dark-` counterparts through the runtime `--pf-*` tokens. Shared `--site-*` aliases connect existing product surfaces to that foundation.
 
 ### Primary
 
-- **Deep Blue Ink** (`colors.ink`): headings, primary actions, selected resource tabs, and product-control focus outlines. In dark appearance, `colors.dark-ink` becomes the foreground and selected fill while `colors.dark-paper` supplies the contrasting action text.
-- **IAVSE Action Blue** (`colors.action-hover`) and **Focus Blue** (`colors.focus`): hero primary hover and the opening/theme-control keyboard outline.
+- **Ink** (`colors.ink`): headings, primary actions and high-emphasis controls. The dark mapping reverses action foreground and background.
+- **IAVSE Focus Blue** (`colors.focus`): the keyboard focus ring; its dark counterpart stays visible on charcoal surfaces.
 
 ### Neutral
 
-- **Cool Paper** / **Night Paper** (`colors.paper`, `colors.dark-paper`): page ground.
-- **Reading Panel** / **Night Panel** (`colors.panel`, `colors.dark-panel`): workbench, community reading panel, secondary action, and search field.
-- **Soft Blue Surface** / **Night Surface** (`colors.soft`, `colors.dark-soft`): resource cards, search trigger, and template track.
-- **Slate Body** / **Night Body** (`colors.body`, `colors.dark-body`): supporting copy, inactive controls, source metadata, and captions.
-- **Blue Divider** / **Night Divider** (`colors.line`, `colors.dark-line`): quiet control and content separators.
-- **Daylight Field** / **Night Field** (`colors.atmosphere`, `colors.dark-atmosphere`): fallback ground beneath the decorative Silk canvas.
-- **Closing Navy**, **Closing Frost**, **Closing Body**, and **Signature Frost** (`colors.closing`, `colors.closing-ink`, `colors.closing-body`, `colors.signature`): the closing invitation and serif mark in both appearances.
+- **Paper** (`colors.paper`): application background, navigation and product cards.
+- **Body** and **Muted Ink** (`colors.body`, `colors.muted-ink`): supporting content and metadata, with separate dark mappings.
+- **Muted Surface** (`colors.muted`): selected navigation, selected categories, sidebar surfaces and the closing card.
+- **Fine Divider** (`colors.line`): structural card and control borders.
 
-**The Readable Field Rule.** Keep text above the moving field. The dark hero uses Dark Ink for both headline and supporting copy, with shader opacity capped at (0.32); do not restore the lower-contrast ordinary dark-body color there. The reviewed worst-case white shader composite remains above (4.5:1).
+**The Readable Field Rule.** Flow is decorative and remains behind content. Inner public pages reduce the backdrop opacity to (0.34), or (0.45) in dark appearance; the closing card uses (0.35), or (0.12) in dark appearance. Text, empty states and actions must remain complete when WebGL is unavailable.
 
-**The Source Color Rule.** Colors and typography inside actual catalog and template screenshots belong to their source, not the homepage token palette. The sidecar's synthesized tonal strips are panel previews, not runtime tokens.
+**The Source Identity Rule.** Catalog screenshots and authored blog themes retain their source colors and typography. The shared application system must not rewrite content authors' chosen appearance.
 
 ## Typography
 
-**Product Font:** locally served Inter under the `IAVSE Inter` alias, with PingFang SC and sans-serif fallback for Chinese content.
+**Application Font:** locally served Geist under the `Portfolio Geist` alias, with PingFang SC and sans-serif fallbacks. The runtime loads the existing variable font asset and its retained license.
 
-**Signature Font:** locally served Cormorant Garamond under `IAVSE Signature`. The small workbench wordmark uses the same family at (26px / 1), weight (600); the closing uses the `signature` role.
+**Signature Font:** locally served Cormorant Garamond under `Portfolio Signature`. It is used for the IAVSE closing wordmark, not as a replacement for interface labels or authored template fonts.
 
-**Decorative Mono:** locally served Geist Mono under `IAVSE Mono`, used by the original ASCII canvas. It carries no required information.
+The system pairs medium display weights and tight tracking with calm, readable body text. The frontmatter records the homepage and recurring card/navigation roles; dense editor and administration text retains its existing functional sizing.
 
-The product voice is direct and measured. Medium display weights and tight tracking carry hierarchy; the serif appears as a brand signature rather than a competing editorial heading system.
+- **Display:** the opening uses `display`; mobile uses (38px). Directory headings share the display rhythm with a (36px) minimum.
+- **Headline:** the home community and blog sections use `headline`, reducing to (32px) on mobile.
+- **Card title:** public blog-space cards use `card-title`.
+- **Body:** section descriptions use `body`; the opening uses `hero-body`, reducing to (17px) on mobile.
+- **Navigation and labels:** `navigation` and `label` keep controls compact without replacing their text with unexplained symbols.
+- **Signature:** the closing uses `signature`, reducing to (66px) on mobile. The English mission remains small supporting copy (11px / 1.7).
 
-### Hierarchy
-
-- **Display:** the two authored opening lines use `display`; mobile uses (clamp(32px, 8.7vw, 48px) / 1.2).
-- **Headline:** community and blog-space sections use `headline`, becoming (34px / 1.24) on mobile. The closing heading uses (clamp(32px, 3.2vw, 46px) / 1.25), becoming (31px) on mobile.
-- **Title:** visual resource cards use `title`, becoming (18px) on mobile. Reading cards use (24px) on desktop with the retained mobile title treatment.
-- **Body:** opening copy uses `body` within (48ch), becoming (14px) within (32ch) on mobile. Section descriptions use (15px / 1.9), becoming (14px). Resource summaries use (13px / 1.85), becoming (14px); community summaries use the compact role.
-- **Label:** resource controls use `label`; mobile category labels use (12px). Sources and captions remain supporting text (11–12px), not substitutes for the resource name or action.
-- **Signature:** the large closing wordmark uses `signature`; mobile uses (clamp(110px, 28vw, 200px)).
-
-**The Signature Rule.** Keep the outlined V as the shared navigation mark. The serif wordmark belongs to this homepage's workbench and closing; do not replace other routes' identity or authored template fonts with it.
+**The Brand Signature Rule.** Keep the outlined V in shared navigation and the artistic IAVSE wordmark in the closing. Real product names and useful labels remain readable text.
 
 ## Layout
 
-The homepage has a cool page ground with an inset rounded hero canvas. Desktop outer padding is (14px); mobile uses (8px). The centered opening copy has a maximum width of (1050px), generous top space, and wrapping action rows. The blue field fades into the page ground behind the workbench. There is no pinned camera, chapter switcher, wheel capture, or custom scroll engine in the active homepage.
+The shared header has a compact identity on the left, capsule navigation and existing account/locale controls. Its inner padding is (32px) with a minimum height of (84px); mobile uses (18px) and (72px). The mobile menu replaces the desktop capsule while keeping a separate appearance control.
 
-The content container is centered at (1240px) with (32px) horizontal gutters, expanding to (1360px) at viewport widths of at least (1800px). The resource workbench is a full-width reading panel: identity and directory action, category/search toolbar, three actual catalog records, and a bounded-selection footer. Community and blog-space sections use a two-column proportion of (0.82fr / 1.18fr) with a (90px) gap. They deliberately pair an open text column with a reading panel or real template screenshot rather than repeating the opening workbench.
+Public product sections use a maximum container of (1100px). Homepage gutters are (40px), tightening to (32px) below (1000px) and (26px) on mobile. Its split opening pairs product copy with a square template preview, then exposes real resource tabs, community content, blog examples, disclosures and a closing invitation. Below (767px), the opening and later paired sections become one column without changing reading order.
 
-Below (1000px), gutters and column gaps tighten. At (767px) and below, community and blog sections stack and resource cards form one column. Controls wrap, the resource workbench label simplifies, and search expands to the toolbar width. Content remains in the same document order in every mode. Usage disclosures sit in a narrower column before the full-width closing invitation. The theme control is fixed at the lower right with a (44px) target; its preference survives reload through the existing site color-mode cookie.
+The blog directory uses three columns, then two below (1000px), and one on mobile. The resource introduction uses two columns, then one on mobile. Community, account, administration and editing retain their existing functional layout and responsive controls; the resource catalog retains its muted listing surface.
 
-**The Surface Scope Rule.** Carry the palette and interaction care to future homepage work; choose composition from each route's purpose. This homepage's centered opening, workbench, and ASCII ending are not mandatory structures for other pages.
+**The Task Layout Rule.** Carry the shared type, palette and control language across the frontend. Choose composition for each route's purpose: browsing, reading or operating. Do not place a marketing hero, hover portrait or scroll enhancement inside an editing canvas.
 
 ## Elevation & Depth
 
-Depth is quiet and local. The workbench has one broad blue-gray shadow, resource cards gain a small lift on hover, and the actual template screenshot has a restrained ambient shadow. There is no perspective staging in the current homepage. The decorative Silk field supplies atmosphere behind the opening and fades away before the later reading sections.
+Thin borders and quiet neutral shadows separate cards from the page. The live flow field adds background movement; it is not a simulated physical scene. Framed template images show real IAVSE example pages.
 
-### Shadow Vocabulary
+- **Shared soft shadow:** `0 12px 36px -22px #0003` under selected content panels.
+- **Navigation:** `0 3px 6px -3px #0002` gives the capsule a small separation from its backdrop.
+- **Portrait frame:** `0 2px 5px #0002` keeps the square screenshot grounded.
+- **Resource and directory hover:** `0 16px 34px -22px #0004` accompanies an upward translation of (4px) on hover-capable devices.
 
-- **Workbench:** `0 26px 60px -28px #254f7440` beneath the main resource panel.
-- **Resource hover:** `0 15px 25px -15px #254f7455` with an upward movement of (5px).
-- **Template preview:** `0 20px 44px -22px #254f7440`, with an upward movement of (4px) on hover.
-- **Selected template:** `0 3px 10px -4px #18365030` beneath the selected segment.
-- **Theme control:** `0 6px 24px -7px #16385666` beneath the floating appearance button.
-
-Magnetic feedback is limited to the two opening actions and uses a short (0.22s) return. Resource and template hover responses use (0.35s) and (0.5s). These use `cubic-bezier(.16,1,.3,1)`. Reduced motion disables translations, transitions, and pointer effects, freezes both decorative fields, and retains native reading order. The canvas work pauses in hidden tabs and outside its visible region; required content is server-rendered independently.
+**The Motion Boundary Rule.** Use Motion for interface transitions, OGL for the template's flow and portrait shaders, and Lenis for eligible public-page scrolling. Authored blog, administration and workspace routes keep native scrolling. Reduced motion disables Lenis and movement; the flow renders a static frame, and portrait initialization uses its fallback image when reduced motion or no hover is detected.
 
 ## Shapes
 
-Rounded rectangles establish the hierarchy: hero, large closing field, reading panels, then controls and cards. The desktop radii are named in the frontmatter. Mobile tightens the hero to (20px) and closing to (18px). Resource categories and template segments remain pills; search and appearance triggers are circular. Fine dividers and underlined fields keep the workbench precise. Thin inline SVG arrows and utility icons support labels without becoming decoration.
+Capsules define navigation and selection. Rounded rectangles define controls, cards and previews, using the named radii in the frontmatter. The portrait includes an inner clipped radius of (25px); its outer frame uses `portrait`. The closing card shares that larger radius and reduces to (24px) on mobile. Member avatars remain small circles (58px), distinct from square template previews. Fine borders provide boundaries without glass effects.
 
 ## Components
 
-### Opening actions and navigation
+### Actions and fields
 
-The opening pairs a filled Ink action to `/resources` with a Panel action to `/community`. Both are real links with (50px) minimum height, becoming (48px) on mobile. Primary hover uses Action Blue; secondary hover uses Soft Blue Surface. They retain a visible (2px) focus outline with (5px) offset. Product-region controls inherit the Ink outline; opening and appearance controls use Focus Blue. The shared navigation keeps its existing destinations, account behavior, locale menu, and outlined V; its homepage-only colors follow the current appearance.
+Primary actions use Ink on Paper's inverse; secondary actions use Paper, Ink and a Fine Divider. Opening actions have a minimum height of (46px) and use the `label` role. Hover-capable devices lift them by (2px). Shared keyboard focus is a (2px) blue outline with (4px) offset. Administration inputs use `input` corners with existing labels, validation and disabled semantics; existing product search behavior remains in its component.
 
-### Resource workbench, tabs, and search
+### Navigation and appearance
 
-The workbench contains existing product controls rather than a simulated dashboard. Categories are real tabs with (44px) minimum height and arrow/Home/End keyboard navigation. The active tab uses an Ink fill and Paper text, including the dark-mode mapping. The search trigger opens and focuses an underlined field; Escape or close clears the query and returns focus. Search remains bounded to the active featured group, keeps the query on group changes, and offers the full directory. An unmatched search has a truthful empty state and clear action. Mobile input text uses (16px).
+The capsule wraps the existing destinations. An active pill moves with a spring (stiffness 380, damping 32); reduced motion resolves the position immediately. `aria-current="page"` identifies a direct match and `location` its parent section. The appearance control writes the existing `site-color-mode` cookie. Supported browsers reveal the new theme with a circle (0.7s); reduced motion or absent View Transition support applies the appearance directly.
 
-Visual resource cards use actual catalog screenshots, descriptions, and source/license metadata. Reading categories use image-free Soft Surface cards. Each complete card links to its actual destination; external links retain `noopener noreferrer`. The selected group contains at most three records, not a fabricated catalog count.
+### Cards and directories
 
-### Community reading panel
+Resources use bordered `resource-card` surfaces. Blog spaces use `space-card`, showing genuinely public members and clearly marked built-in examples. Their permissions, routes and empty states are product behavior, not decorative fixtures. The resource introduction offers direct links to actual catalog groups. Account and administration panels adopt the same neutral language while keeping their operating affordances.
 
-A compact Panel reading area sits beside open section copy. It consumes the qualified public feed and can show at most two actual records. Empty and unavailable reads have distinct messages and real community/submission links. The reviewed site has no public posts; this remains a product state, not a place for sample testimonials or invented activity. Publishing behavior remains unchanged.
+### Product controls
 
-### Built-in template comparison
+Resource categories and template choices remain native, keyboard-operable controls. Search stays bounded to its selected featured category and retains its empty state and Escape behavior. Public community content comes from the existing qualified feed. Template previews use actual built-in layouts, with their fictional-example disclosure and real destinations.
 
-Two pill tabs switch the actual editorial and résumé screenshots and corresponding full-example links. The selected segment is a raised Panel on Soft Surface. The caption identifies fictional example creators; the examples render through the site's real template factory and do not imply public member accounts. Existing [editorial](public/media/home-product/space-editorial.webp.json) and [résumé](public/media/home-product/space-resume.webp.json) provenance records remain authoritative. Their source colors and internal layouts stay separate from this homepage system.
+### Flow and template portrait
 
-### Usage disclosures
-
-Native `details` / `summary` rows use fine bottom rules and a plus icon that rotates when open. Keyboard focus and open state remain native. Answers explain source/license, publishing, and template behavior without introducing a new flow.
-
-### Flowing atmosphere and ASCII closing
-
-The opening embeds the licensed open React Bits Silk component with homepage-specific parameters, a static color fallback, and pixel ratio capped at (1). The closing is an original Canvas character field behind readable text and links, followed by the large IAVSE signature. Its drawing is bounded to about (28fps) with pixel ratio capped at (1.5). Both canvases are decorative and hidden from assistive technology. No paid template source, sample metrics, portraits, or demo claims are included. Reduced motion freezes the fields; no WebGL leaves the complete product content on the blue fallback ground.
+The full-page flow and closing-card shader derive from the pinned upstream Portfolio component. The square opening portrait adapts the upstream image morph to two genuine IAVSE template screenshots; mouse hover changes the preview and its destination together. Touch and reduced-motion initialization show the static image. Server-rendered text, links and the fallback image remain available if GPU setup fails. The animation instances release frames, observers, listeners and GPU contexts on unmount.
 
 ## Do's and Don'ts
 
-### Do:
-
-- **Do** scope these tokens and compositions to the homepage; preserve the independent rules of resources, community, blog galleries, account, and admin routes.
-- **Do** keep the outlined V, IAVSE blue identity, English mission, real links, and readable content above decorative fields.
-- **Do** preserve dark-hero contrast, visible focus, native scrolling, persisted appearance, and reduced-motion behavior.
-- **Do** retain actual catalog sources/licenses, qualified public-feed states, and labeled fictional built-in template examples.
-- **Do** distinguish the licensed open Silk component, original ASCII work, and reference-only Pro templates in provenance.
-
-### Don't:
-
-- **Don't** restore the discarded glass opening or spatial chapter stage as a current homepage requirement.
-- **Don't** turn this homepage composition or the fonts inside screenshots into a template for every route.
-- **Don't** make decorative motion necessary to read, navigate, search, or publish.
-- **Don't** invent public posts, customers, testimonials, user totals, engagement figures, or broader third-party reuse rights.
-- **Don't** bundle paid Pro template source or present this implementation as an exact reproduction of the reference sites.
+- Do use the Portfolio foundation for shared application chrome, palette, typography and controls.
+- Do preserve actual content, native editing behavior, publishing permissions and source attribution.
+- Do keep built-in template examples clearly identified and leave their authored appearance intact.
+- Do pair visual state with a working destination, keyboard state or meaningful product behavior.
+- Do respect reduced motion, no-WebGL fallbacks and route lifecycle cleanup.
+- Don't reintroduce the superseded Silk, Gradient Bars, optical tide or ASCII direction as the current frontend.
+- Don't impose the homepage split composition on community feeds, settings, administration or editors.
+- Don't replace real empty states with invented members, activity, testimonials or engagement totals.
+- Don't treat the public template's permission as a license for paid Pro components or as a replacement for IAVSE's original license.

@@ -56,7 +56,8 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 ## 当前实现与历史记录 / Current design and history
 
-- [当前首页：React Bits 参考与实现 / Current homepage](home-react-bits.md): flowing blue light, working resource controls, native scroll, appearance and reduced-motion behavior.
+- [当前前端：RBP Portfolio 适配 / Current frontend](portfolio-frontend.md): shared monochrome design, source mapping, OGL flow and portrait morph, Motion, Lenis, route boundaries and fallbacks.
+- [旧版首页混合参考方案 / Historical mixed-reference homepage](home-react-bits.md): superseded Silk and ASCII direction; retained only as a historical record.
 - [旧版首页产品空间 / Historical spatial homepage](home-product-redesign.md): superseded optical opening and scroll-driven chapters; retained as a historical design record.
 - [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
 - [模板与展廊修复](blog-gallery-template-repair-2026-11-08.md).
@@ -73,8 +74,8 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 Current description:
 
-> A creator platform for resources, community and editable blog homepages. Visual canvas, spatial gallery, docs, AI Skills and scoped MCP/REST integration. PolyForm Noncommercial 1.0.0.
+> A creator platform for resources, community and editable blog homepages. Visual canvas, public blog directory, docs, AI Skills and scoped MCP/REST integration. PolyForm Noncommercial 1.0.0.
 
 Chinese introduction:
 
-> IAVSE 是面向开发者与创作者的社区和博客平台，连接资源发现、实践分享与可编辑个人主页，提供可视化画布、空间展廊、文档、AI Skill 和按范围授权的 MCP / REST 接入。网站源码采用 PolyForm Noncommercial 1.0.0，欢迎保留署名的非商业学习与维护。
+> IAVSE 是面向开发者与创作者的社区和博客平台，连接资源发现、实践分享与可编辑个人主页，提供可视化画布、公开博客目录、文档、AI Skill 和按范围授权的 MCP / REST 接入。网站源码采用 PolyForm Noncommercial 1.0.0，欢迎保留署名的非商业学习与维护。

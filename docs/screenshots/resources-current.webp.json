@@ -1,0 +1,9 @@
+{
+  "prompt": "Actual IAVSE signed-out product screenshot of /resources?type=designs, Ego Browser, 2026-11-10, 1440x1000. Source base 64d340353afb3adfcf03b5ca60df4293658d201d; working-tree file hashes in captures.json. No generated content.",
+  "route": "/resources?type=designs",
+  "capturedAt": "2026-11-10",
+  "width": 1440,
+  "height": 1000,
+  "sourceRecord": "captures.json#portfolioSource",
+  "signedIn": false
+}

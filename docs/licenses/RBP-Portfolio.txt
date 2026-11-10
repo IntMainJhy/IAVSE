@@ -1,0 +1,8 @@
+RBP Portfolio — David Haz / DavidHDev
+Source: https://github.com/DavidHDev/rbp-portfolio
+Revision: 1581b9b8e5876f60e5eb844970747506980c4412
+
+Upstream README License section:
+This template is free to use in personal and commercial projects. You may not resell or redistribute the template itself.
+
+IAVSE adapts selected frontend components as part of its application; this repository does not repackage or distribute the standalone portfolio template. Third-party portions retain upstream terms and attribution; IAVSE original content remains under its own license.

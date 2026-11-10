@@ -26,7 +26,7 @@ Arrange your work, experience and writing in a visual canvas.
 
 </div>
 
-![IAVSE homepage with flowing blue light and a working resource panel](docs/screenshots/home-current.webp)
+![IAVSE Portfolio-based split homepage with a flowing background](docs/screenshots/home-current.webp)
 
 ## About IAVSE
 
@@ -44,7 +44,7 @@ This repository contains the website frontend, backend, tests, AI integrations a
 | --- | --- |
 | Resource discovery | UI templates, guides, independent AI Skills, websites and tools; purpose, industry and style filters; original sources and licenses |
 | Community | Posts, comments, follows, bookmarks, member profiles, notifications, search and categories; truthful empty and moderation states |
-| Blog spaces | A 3D spatial gallery, public homepages and built-in examples; six editor layouts and eight visual themes |
+| Blog spaces | A public blog directory, personal homepages and built-in examples; six editor layouts and eight visual themes |
 | Visual canvas | Inline editing, layers, properties, drag-and-drop, width and position controls, undo/redo, desktop and mobile preview |
 | Résumé import | Local text extraction from PDF / DOCX / TXT / Markdown; review a private profile draft before choosing what becomes public |
 | Publishing | Private drafts, fixed public snapshots, revisions and takedowns; community articles and documents require review |
@@ -56,17 +56,17 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 ## Preview
 
-Captured from the actual `main` website on **2026-11-09**. Bundled showcase profiles are examples, not registered-user or endorsement claims. Community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
+Captured from the actual `main` website on **2026-11-10**. Bundled showcase profiles are examples, not registered-user or endorsement claims. Community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
 
 ### Homepage and resource workbench
 
-A flowing light-blue opening leads into a working resource panel, followed by community and built-in blog examples. The page uses native scrolling, persisted light/dark appearance and reduced-motion support.
+The frontend adapts [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio): monochrome flow, a split hero, capsule navigation and image morphing connect real resources and community content. Eligible public pages use Lenis smooth scrolling; editors and authored pages retain native operation. Light/dark appearance and reduced motion are supported. See the [implementation and source mapping](docs/portfolio-frontend.md).
 
 ![Homepage resource workbench with actual catalog selections](docs/screenshots/product-current.webp)
 
-### Spatial blog discovery
+### Blog discovery and personal homepages
 
-![Spatial blog gallery](docs/screenshots/blog-spaces-current.webp)
+![Public blog directory and built-in examples](docs/screenshots/blog-spaces-current.webp)
 
 <details>
 <summary>More views: resource catalog, community and a built-in homepage</summary>
@@ -123,11 +123,11 @@ GitHub Actions checks documentation, unit tests, the production build and types 
 | Blog canvas and templates | [Editor guide](docs/blog-editor.md), `src/components/BlogCanvas.tsx`, `src/lib/blog-templates.mjs` |
 | Drafts, public versions and authorization | [Publication boundaries](docs/public-launch.en.md), `src/lib/spaces.mjs`, `src/lib/community.mjs` |
 | Catalog queries, filters and performance | [Resource discovery](docs/resource-discovery.md), [catalog measurements](docs/catalog-performance-2026-11-08.md) |
-| WebGL, ASCII and reduced motion | [Current homepage implementation](docs/home-react-bits.md), `src/components/HomeBitsAtmosphere.tsx`, `src/components/HomeBitsMotion.tsx` |
+| Portfolio frontend, WebGL and smooth scrolling | [Current implementation and upstream mapping](docs/portfolio-frontend.md), `src/components/portfolio/`, `src/app/portfolio-foundation.css` |
 | AI Skill / MCP / REST | [IAVSE Skill](integrations/iavse-post/SKILL.md), [API reference](integrations/iavse-post/references/api.md), `integrations/iavse-mcp.mjs` |
 | Isolation, tests and recovery | `test/`, [administration](docs/administration.en.md), `scripts/backup.mjs`, `scripts/restore.mjs` |
 
-Start with one page and its tests, then follow its API and data modules. Dated design and performance records describe their original versions and measurement scope. The former [spatial homepage design](docs/home-product-redesign.md) is historical.
+Start with one page and its tests, then follow its API and data modules. Dated design and performance records describe their original versions and measurement scope. The former [mixed-reference homepage](docs/home-react-bits.md) and [spatial homepage design](docs/home-product-redesign.md) are historical.
 
 ## Deployment and data
 

@@ -13,14 +13,14 @@ IAVSE brings community exchange and resource discovery together, with personal b
 ## Capabilities and Constraints
 
 - The existing website offers community sharing, discussion, bookmarks and following; resource directories include UI designs, Skills, documentation, websites and tools.
-- Blog spaces use the site's built-in templates and publishing workflow.
+- Blog spaces use the site's built-in templates, visual editor and publishing workflow.
 - Keep source and license information for third-party resources. Existing material must not be presented as universally reusable or officially endorsed.
-- Preserve user data, publishing permissions, account flows and the existing shared navigation.
-- The latest user direction replaces the old homepage, including the former protected glass opening and spatial chapters, using the Cloudlight, Portfolio, and Security references. This scope is the homepage; other routes and product functionality remain unchanged.
+- Preserve user data, publishing permissions, account flows, real destinations and authored blog appearances.
+- The latest user instruction is to base the entire frontend on the public [RBP Portfolio repository](https://github.com/DavidHDev/rbp-portfolio) and [demo](https://rbp-portfolio.vercel.app/). This supersedes the earlier homepage-only Cloudlight/Security blend, Gradient Bars experiment, optical tide scene and protected-opening constraints. The adaptation covers the shared application system while retaining task-oriented layouts for editing and administration.
 
 ## Brand Commitments
 
-Retain IAVSE blue, the shared outlined V mark, and the English mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.” The current homepage presents real resource discovery, community exchange, and blog spaces in a light blue rounded canvas with a persistent dark appearance option. Its centered opening, working resource panel, calm motion, and original ASCII/serif closing express the latest reference direction; they do not prescribe the composition of every platform page. See [DESIGN.md](DESIGN.md) and [homepage implementation notes](docs/home-react-bits.md) for the built visual system and reference boundaries.
+Retain the IAVSE name, shared outlined V, blue identity/focus accent and English mission “Insight through AI. Vigilance for Opportunity. Seize to Evolve.” The current frontend uses Portfolio's monochrome surfaces, Geist typography, capsule navigation and restrained shader motion, with an artistic IAVSE closing wordmark. The homepage, directories, community and operating surfaces share that foundation without forcing a single composition on every route. See [DESIGN.md](DESIGN.md) and the [Portfolio implementation notes](docs/portfolio-frontend.md).
 
 ## Evidence on Hand
 

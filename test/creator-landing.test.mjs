@@ -8,23 +8,20 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import * as experience from '../src/lib/home-experience.mjs';
 import * as spatial from '../src/lib/home-spatial.mjs';
-import * as bits from '../src/lib/home-bits.mjs';
 
 function load(name,modules){const exports={};const code=ts.transpileModule(fs.readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(code,{exports,Set,encodeURIComponent,require:key=>{if(key.endsWith('.css'))return{};assert.ok(Object.hasOwn(modules,key),key);return modules[key]}});return exports;}
 async function render(locale='zh',read=()=>({items:[]}),theme='light'){
- const modules={'react':React,'react/jsx-runtime':runtime,'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},'next/headers':{cookies:async()=>({get:()=>({value:theme})})},'./Icons':{Icon:()=>null},'@/lib/home-experience.mjs':experience,'@/lib/home-spatial.mjs':spatial,'@/lib/home-bits.mjs':bits,'@/lib/community.mjs':{publicPosts:read},'@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},'./react-bits/Silk':{default:({lightMode})=>React.createElement('canvas',{'data-home-silk':true,'data-light-mode':lightMode})}};
- for(const name of ['HomeBitsAtmosphere','HomeBitsMotion','HomeResourceExplorer','HomeSpacePreview','HomeSpatialShowcase','HomeProductShowcase'])modules['./'+name]=load(name,modules);
+ const modules={'react':React,'react/jsx-runtime':runtime,'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},'next/headers':{cookies:async()=>({get:()=>({value:theme})})},'./Icons':{Icon:()=>null},'@/lib/home-experience.mjs':experience,'@/lib/home-spatial.mjs':spatial,'@/lib/community.mjs':{publicPosts:read},'@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},'motion/react':{useReducedMotion:()=>true,motion:{div:({initial,animate,transition,children,...props})=>React.createElement('div',props,children),figure:({initial,animate,whileInView,viewport,transition,children,...props})=>React.createElement('figure',props,children)}},'./PortraitMorph':{PortraitMorph:({srcA,alt})=>React.createElement('img',{src:srcA,alt,'data-portfolio-portrait':true})},'../Icons':{Icon:()=>null},'./portfolio/PortfolioCardBackdrop':{PortfolioCardBackdrop:()=>null}};
+ for(const name of ['HomeResourceExplorer','HomeSpacePreview','HomeSpatialShowcase','HomeProductShowcase'])modules['./'+name]=load(name,modules);
+ modules['./portfolio/PortfolioHero']=load('portfolio/PortfolioHero',modules);
  const page=load('PlatformHome',modules);return renderToStaticMarkup(await page.PlatformHome({req:new Request('http://example.test/')}));
 }
 
 test('React Bits homepage retains the brand and real product content without the discarded scene',async()=>{
  const html=await render();
  for(const phrase of ['Insight through AI.','Vigilance for Opportunity.','Seize to Evolve.'])assert.ok(html.includes(phrase));
- assert.equal((html.match(/data-home-silk/g)||[]).length,1);
- assert.match(html,/class="v2-home rb-home"/);
- assert.match(html,/data-light-mode="true"/);
- assert.match(html,/aria-label="切换深色外观"/);
- const dark=await render('en',undefined,'dark');assert.match(dark,/data-light-mode="false"/);assert.match(dark,/aria-label="Switch to light theme"/);
+ assert.equal((html.match(/data-portfolio-portrait/g)||[]).length,1);
+ assert.match(html,/class="v2-home rb-home portfolio-home"/);
  assert.match(html,/data-home-experience="community-discovery"/);
  assert.match(html,/data-home-story="products"/);
  for(const old of ['iavse-cinema-toolbar','v2-hero-showcase','v2-stage-profile','product-showroom-home','home-blog-demo','data-creator-voices','creator-home.webp','jianghaoyu2006'])assert.ok(!html.includes(old),old);

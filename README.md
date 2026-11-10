@@ -26,7 +26,7 @@
 
 </div>
 
-![IAVSE 当前首页：浅蓝流动背景与资源工作台](docs/screenshots/home-current.webp)
+![IAVSE 当前首页：Portfolio 分栏布局与流动背景](docs/screenshots/home-current.webp)
 
 ## 关于 IAVSE
 
@@ -45,7 +45,7 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 | --- | --- |
 | 资源发现 | UI 模板、文档、独立 AI Skill、网站和工具目录；按类型、用途、行业与风格筛选，查看原始来源和许可 |
 | 社区交流 | 投稿、评论、关注、收藏、成员资料、消息、搜索和分类；保留真实空状态与审核状态 |
-| 博客空间 | 3D 空间展廊、公开主页与内置示例；编辑器提供六种布局与八种视觉主题 |
+| 博客空间 | 公开博客目录、个人主页与内置示例；编辑器提供六种布局与八种视觉主题 |
 | 可视化画布 | 内联编辑、图层、属性、拖放、宽度与位置、撤销重做、桌面与手机预览 |
 | 简历导入 | PDF / DOCX / TXT / Markdown 本地文本提取；先检查生成的资料草稿，再选择公开内容 |
 | 内容发布 | 私有草稿、固定公开快照、修订与下线；社区文章和文档需审核，其他支持类型按既有权限直接发布 |
@@ -57,17 +57,17 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 ## 界面预览
 
-以下为 **2026-11-09** 从 `main` 实际页面拍摄的截图。示例主页不代表真实注册成员或用户背书；社区保留拍摄时的实际空状态。详见[截图说明](docs/screenshots/README.md)。
+以下为 **2026-11-10** 从 `main` 实际页面拍摄的截图。示例主页不代表真实注册成员或用户背书；社区保留拍摄时的实际空状态。详见[截图说明](docs/screenshots/README.md)。
 
 ### 首页与资源工作台
 
-浅蓝色流动首屏连接可用的资源工作台，社区交流和博客示例依次展开。页面保留原生滚动，并提供深浅外观与减少动态适配。
+整套前端基于 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 适配：黑白流动背景、分栏首屏、胶囊导航与图像变形连接真实资源和社区内容。公共页面使用 Lenis 平滑滚动；编辑器与作者主页保留原生操作，支持深浅外观和减少动态。详见[源码映射与实现说明](docs/portfolio-frontend.md)。
 
 ![首页资源工作台与实际目录精选](docs/screenshots/product-current.webp)
 
 ### 博客空间与个人主页
 
-![博客空间展廊](docs/screenshots/blog-spaces-current.webp)
+![公开博客目录与内置示例](docs/screenshots/blog-spaces-current.webp)
 
 <details>
 <summary>查看更多界面：资源目录、社区和内置主页示例</summary>
@@ -124,11 +124,11 @@ GitHub Actions 在 `main` 推送和 Pull Request 时执行文档检查、单元�
 | 博客画布与模板 | [编辑器说明](docs/blog-editor.zh-CN.md)、`src/components/BlogCanvas.tsx`、`src/lib/blog-templates.mjs` |
 | 草稿、公开版本与权限边界 | [发布说明](docs/public-launch.md)、`src/lib/spaces.mjs`、`src/lib/community.mjs` |
 | 目录查询、筛选与性能 | [资源目录实现](docs/resource-discovery.md)、[目录性能记录](docs/catalog-performance-2026-11-08.md) |
-| WebGL、ASCII 与减少动态 | [当前首页实现](docs/home-react-bits.md)、`src/components/HomeBitsAtmosphere.tsx`、`src/components/HomeBitsMotion.tsx` |
+| Portfolio 前端、WebGL 与平滑滚动 | [当前前端实现与上游映射](docs/portfolio-frontend.md)、`src/components/portfolio/`、`src/app/portfolio-foundation.css` |
 | AI Skill / MCP / REST | [接入 Skill](integrations/iavse-post/SKILL.md)、[API 参考](integrations/iavse-post/references/api.md)、`integrations/iavse-mcp.mjs` |
 | 账号隔离、测试与恢复 | `test/`、[管理文档](docs/管理中心说明.md)、`scripts/backup.mjs`、`scripts/restore.mjs` |
 
-建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。历史设计与性能记录标有日期，结论只对应当时的版本和测量范围；旧版[首页产品空间设计](docs/home-product-redesign.md)仅供历史参考。
+建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。历史设计与性能记录标有日期，结论只对应当时的版本和测量范围；旧版[首页混合参考方案](docs/home-react-bits.md)与[首页产品空间设计](docs/home-product-redesign.md)仅供历史参考。
 
 ## 部署与数据
 

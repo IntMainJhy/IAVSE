@@ -136,9 +136,10 @@ test('home navigation floats over its actual backdrop while links and mobile dis
   if(width<=767){const menu=[...fixture.row,element('div','organic-header-tools'),element('details','organic-mobile-menu',{open:''})],summary=[...menu,element('summary')];assert.equal(winner(files,menu,'display',width)?.value,'block',label+' retains the mobile menu');assert.equal(winner(files,summary,'display',width)?.value,'flex');assert.equal(winner(files,summary,'min-height',width)?.value,'44px');}
  }
  const source=fs.readFileSync(new URL('../src/components/PublicSite.tsx',import.meta.url),'utf8');
- assert.match(source,/<nav className="organic-desktop-nav"[\s\S]*?aria-current=\{current\s*===\s*href\s*\?\s*'page'/,'desktop links retain their current-page accessibility state');
+ assert.match(source,/<PortfolioNavigation[\s\S]*?current:current===href\?'page'[\s\S]*?'location'/,'desktop links retain page versus parent-location accessibility state');
+ const navigation=fs.readFileSync(new URL('../src/components/portfolio/PortfolioNavigation.tsx',import.meta.url),'utf8');assert.match(navigation,/aria-current=\{item.current\}/,'the adapted Portfolio navigation exposes the server-owned accessibility state');
  assert.match(source,/<details className="organic-mobile-menu"[^>]*><summary/,'mobile navigation keeps the native disclosure control');
- assert.match(source,/<PlatformGlass scene="home"\/>/,'the home chrome follows the existing scene state');
+ assert.match(fs.readFileSync(new URL('../src/app/layout.tsx',import.meta.url),'utf8'),/<PortfolioRuntime\/>/,'the shared frontend uses the selected Portfolio backdrop');
 });
 
 

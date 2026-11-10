@@ -1,10 +1,8 @@
 import {localeDate} from '@/lib/locale-format.mjs';
 import {serverI18n} from '@/lib/server-i18n';
-/* Natural Organic — user-pinned public redesign, seed c1ce478a, code-led.
-   Serif personal introduction and natural still life; content indexes below.
-   Keep real content, publication, file access, analytics and admin behavior.
-   FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
-*/
+/* Public routes use the user-selected rbp-portfolio frontend foundation.
+   Keep real content, publishing permissions, file access, analytics and account behavior.
+   Member-authored blog/canvas styling remains independently configurable. */
 import Link from 'next/link';
 import {BrandMark} from './BrandMark';
 import Form from 'next/form';
@@ -17,8 +15,7 @@ import {Icon} from './Icons';
 import {Tracker, TrackedLink} from './Tracker';
 import {AuthNav} from './AuthNav';
 import {SiteTools} from './SiteTools';
-import {PlatformGlass} from './PlatformGlass';
-import {ReadingBackdrop} from './ReadingBackdrop';
+import {PortfolioNavigation,PortfolioThemeToggle} from './portfolio/PortfolioNavigation';
 import {ResumePrint} from './ResumePrint';
 import '@/app/gallery-backgrounds.css';
 import '@/app/apple-reading-surfaces.css';
@@ -199,7 +196,7 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
   else notFound();
   return <PublicFrame path={path}>{body}</PublicFrame>;
 }
-export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr}=await serverI18n();
+export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr,locale}=await serverI18n();
   const section=path[0]||'',current='/'+path.join('/');
   const nav=[['/','首页'],['/community','社区'],['/blogs','博客空间'],['/resources','资源']];
   const homepageRoute=section==='blogs'||section==='blog'||section==='workspace'&&['blog','profile','library','files','insights','connect'].includes(path[1]);
@@ -208,13 +205,12 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
   const authPage=section==='login'||section==='join';
   const quantumPage=['community','blogs','resources','docs','skills'].includes(section);
   return <div data-surface={path.length?'reading':'landing'} data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined} className={'organic-site v2-site'+(!path.length?' v2-landing':'')+(authPage?' public-auth-site':path.length?' public-content-site':'')}>
-    {!path.length?<PlatformGlass scene="home"/>:communitySurface?<PlatformGlass scene="interior"/>:!quantumPage?<ReadingBackdrop/>:null}
     <a className="organic-skip" href="#main">{tr("跳到主要内容")}</a><Tracker/>
     <header className="organic-header" data-site-chrome="public">{!!section&&<SiteAnnouncement/>}<div className="organic-container organic-header-inner"><Link href="/" className="organic-brand" data-site-brand><BrandMark/><div className="site-brand-copy">IAVSE<span>{tr('社区与博客主页')}</span></div></Link>
-      <nav className="organic-desktop-nav" aria-label={tr("主导航")}>{nav.map(([href, label]) => <Link href={href} className={active(href) ? 'is-active' : ''} aria-current={current === href ? 'page' : active(href) ? 'location' : undefined} key={href}>{tr(label)}</Link>)}</nav>
+      <PortfolioNavigation items={nav.map(([href,label])=>({href,label:tr(label),active:active(href),current:current===href?'page' as const:active(href)?'location' as const:undefined}))} label={tr('主导航')} locale={locale}/>
       <div className="organic-header-tools"><div className="iavse-account-slot"><AuthNav/></div>
       <details className="organic-mobile-menu" name="site-tools"><summary aria-label={tr("菜单")}><span className="organic-menu-label">{tr("菜单")}</span><span aria-hidden="true"><i/><i/></span></summary><nav aria-label={tr("手机导航")}>{nav.map(([href, label]) => <Link href={href} aria-current={active(href) ? 'page' : undefined} key={href}>{tr(label)}</Link>)}<AuthNav mobile/></nav></details>
-      <SiteTools/></div>
+      <div className="portfolio-mobile-theme"><PortfolioThemeToggle locale={locale}/></div><SiteTools/></div>
     </div></header>
     <main id="main" className="organic-container organic-main">{!!section&&<SiteAnnouncementOffset/>}<PageMotion>{children}</PageMotion></main>
     <footer className="organic-footer organic-footer-compact"><div className="organic-container"><div className="iavse-footer-brand"><Link href="/" className="organic-footer-signature">IAVSE</Link><p>Insight through AI.<br/>Seize to Evolve.</p></div><nav aria-label={tr("页脚导航")}><Link href="/downloads">{tr("客户端下载")}</Link><Link href="/blogs">{tr("发现博客空间")}</Link><Link href="/legal/community">{tr("社区规则")}</Link><Link href="/legal/terms">{tr("用户协议")}</Link><Link href="/legal/privacy">{tr("隐私政策")}</Link><Link href="/legal/disclaimer">{tr("免责声明")}</Link><Link href="/report">{tr("举报投诉")}</Link><Link href="/workspace/account">{tr("我的账号")}</Link></nav></div><div className="organic-container organic-footer-filing"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a></div></footer>
