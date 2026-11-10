@@ -22,13 +22,13 @@ const LENIS_OPTIONS = {
 export function PortfolioRuntime(){
   const path = usePathname();
   const {locale,t} = useLocale();
-  const chromeEnabled = !/^\/(?:blog(?:\/|$)|blogs\/showcase\/|workspace\/blog(?:\/|$)|admin(?:\/|$))/.test(path);
+  const chromeEnabled = path !== '/' && !/^\/(?:blog(?:\/|$)|blogs\/showcase\/|workspace\/blog(?:\/|$)|admin(?:\/|$))/.test(path);
   const navItems = [
     {href:'/',label:t('首页'),active:path==='/'},
     {href:'/resources',label:t('资源'),active:/^\/(?:resources|docs|skills)(?:\/|$)/.test(path)},
     {href:'/about',label:locale==='en'?'About':locale==='ja'?'紹介':'关于',active:path==='/about'},
   ];
-  const enabled = !/^\/(?:blog\/|blogs\/showcase\/|admin(?:\/|$)|workspace(?:\/|$))/.test(path);
+  const enabled = path !== '/' && !/^\/(?:blog\/|blogs\/showcase\/|admin(?:\/|$)|workspace(?:\/|$))/.test(path);
 
   useEffect(() => {
     const sync = () => document.querySelectorAll('.rbp-surface').forEach(node => node.classList.toggle('dark',document.documentElement.dataset.colorMode==='dark'));

@@ -1,0 +1,120 @@
+@font-face{font-family:"IAVSE Display";src:url('/fonts/ZCOOLXiaoWei-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:"IAVSE Wordmark";src:url('/fonts/CormorantGaramond-Variable.woff2') format('woff2');font-weight:300 700;font-display:swap}
+
+.iavse-landing{--iv-ink:#241c35;--iv-body:#665d76;--iv-purple:#7446d9;--iv-purple-deep:#6433c7;--iv-border:#e8e0f0;--iv-soft:#f3edfd;--iv-shadow:0 14px 38px -10px rgb(77 43 125 / .14);--site-surface:#fff;--site-text:#241c35;--site-muted:#665d76;--site-line:#e8e0f0;--site-accent-soft:#f3edfd;--site-focus:#7446d9;--site-action:#7446d9;--site-on-action:#fff;position:relative;isolation:isolate;min-height:100svh;background:#fff;color:var(--iv-ink);color-scheme:light;font:400 16px/1.65 var(--iavse-font),"PingFang SC","Microsoft YaHei",sans-serif;overflow:clip}
+.iavse-landing *{box-sizing:border-box}
+.iavse-landing ::selection{color:#352055;background:#e1d1ff}
+.iavse-landing :is(h1,h2,h3,p){margin:0}
+.iavse-landing :is(a,button){-webkit-tap-highlight-color:transparent}
+.iavse-landing :is(a,button,summary):focus-visible{outline:3px solid var(--iv-purple);outline-offset:5px}
+.iavse-landing button{font:inherit}
+.iavse-landing .iv-backdrop-wrap{position:absolute;z-index:-1;inset:0 0 auto;height:1000px;pointer-events:none}
+.iavse-landing .iv-container{width:min(1120px,100% - 80px);margin-inline:auto;padding-top:20px}
+
+.iavse-landing .iv-nav{position:sticky;top:20px;z-index:30;min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:9px 13px 9px 24px;border:1px solid rgb(120 120 120 / .13);border-radius:999px;background:transparent;color:#242424;box-shadow:0 7px 25px -12px rgb(0 0 0 / .12),inset 0 1px 0 rgb(255 255 255 / .6)}
+.iavse-landing .iv-brand{display:flex;align-items:center;gap:10px;flex-shrink:0;color:#242424}
+.iavse-landing .iv-brand span{font:600 33px/1 "IAVSE Wordmark",Georgia,serif;letter-spacing:-.025em}
+.iavse-landing .iv-brand .site-brand-mark{width:27px;height:27px;flex-basis:27px}
+.iavse-landing .iv-nav-links{display:flex;align-items:center;gap:4px;font-size:14px}
+.iavse-landing .iv-nav-links a{padding:8px 16px;border-radius:999px;transition:background .18s}
+.iavse-landing .iv-nav-links a:hover{background:rgb(0 0 0 / .035)}
+.iavse-landing .iv-identity{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.iavse-landing .iv-identity>.organic-login-nav{display:inline-flex;justify-content:center;align-items:center;min-height:42px;padding:9px 20px;background:#242424;color:#fff;border:0;border-radius:999px;font-size:14px}
+.iavse-landing .iv-guest-avatar{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgb(0 0 0 / .08);border-radius:50%;color:#515155}
+.iavse-landing .iv-identity:has(.site-account-menu) .iv-guest-avatar{display:none}
+.iavse-landing .site-account-menu{color:#242424}
+.iavse-landing .site-account-menu>summary{padding:2px;min-height:42px;border-radius:50%}
+.iavse-landing .site-account-menu>summary>.feed-avatar{width:42px;height:42px;flex-basis:42px}
+.iavse-landing .site-account-menu>summary>span:not(.feed-avatar),.iavse-landing .site-account-menu>summary>svg{display:none}
+.iavse-landing .site-account-panel{background:#fff;color:var(--iv-ink);border-radius:14px;box-shadow:0 14px 40px rgb(40 30 55 / .15);backdrop-filter:none;min-width:220px;font-size:14px}
+.iavse-landing .site-account-panel :is(a,button){color:var(--iv-ink)}
+.iavse-landing .iv-mobile-nav{display:none}
+
+.iavse-landing .iv-hero{text-align:center;padding:62px 10px 50px}
+.iavse-landing .iv-title{font:400 clamp(44px,4.5vw,60px)/1.35 "IAVSE Display","Songti SC",serif;letter-spacing:-.02em;text-wrap:balance;color:var(--iv-ink)}
+.iavse-landing .iv-title span{display:inline-block}
+.iavse-landing .iv-hero>p{font-size:17px;line-height:1.8;color:var(--iv-body);margin-top:17px;text-wrap:balance}
+.iavse-landing .iv-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:28px}
+.iavse-landing .iv-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:11px 23px;background:var(--iv-purple);color:#fff;border:0;border-radius:12px;font-size:15px;font-weight:500;box-shadow:0 9px 24px -10px rgb(116 70 217 / .6);transition:transform .18s,box-shadow .18s,background .18s}
+.iavse-landing .iv-button:hover{background:var(--iv-purple-deep);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(116 70 217 / .65)}
+.iavse-landing .iv-button:active{transform:scale(.98)}
+.iavse-landing .iv-button-secondary{background:#fff;color:var(--iv-ink);box-shadow:0 6px 20px -9px rgb(77 43 125 / .22)}
+.iavse-landing .iv-button-secondary:hover{background:#fff;color:var(--iv-purple-deep);box-shadow:0 10px 25px -10px rgb(77 43 125 / .26)}
+.iavse-landing[data-landing-locale=en] .iv-title{font-family:"IAVSE Wordmark",Georgia,serif;font-weight:500;font-size:clamp(44px,4.7vw,62px)}
+.iavse-landing[data-landing-locale=en] .iv-title span{display:block}
+.iavse-landing[data-landing-locale=ja] .iv-title{font-family:"Songti SC","Yu Mincho",serif;font-size:clamp(36px,3.7vw,50px)}
+
+.iavse-landing .iv-community{padding:12px 8px 0}
+.iavse-landing .iv-section-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:25px}
+.iavse-landing .iv-section-heading h2{font:400 32px/1.45 "IAVSE Display","Songti SC",serif;letter-spacing:-.01em}
+.iavse-landing .iv-filters{display:flex;gap:5px;flex-wrap:wrap}
+.iavse-landing .iv-filters button{border:0;padding:8px 14px;border-radius:999px;min-height:40px;background:transparent;color:var(--iv-body);font-size:14px;transition:background .18s,color .18s}
+.iavse-landing .iv-filters button[aria-pressed=true]{background:#fff;color:var(--iv-purple-deep);box-shadow:0 4px 15px -6px rgb(77 43 125 / .2)}
+.iavse-landing .iv-board{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:26px;align-items:start}
+.iavse-landing .iv-feed{display:grid;gap:20px;min-width:0}
+.iavse-landing [data-landing-reveal]{min-width:0}
+.iavse-landing .iv-card{position:relative;isolation:isolate;display:block;min-width:0;overflow:hidden;border-radius:16px;background:#fff;box-shadow:var(--iv-shadow);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}
+.iavse-landing .iv-card::after{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(circle 230px at var(--iv-pointer-x,50%) var(--iv-pointer-y,50%),rgb(177 139 241 / .11),transparent 72%);opacity:0;transition:opacity .25s}
+@media(hover:hover) and (pointer:fine){.iavse-landing .iv-card:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(77 43 125 / .23)}.iavse-landing .iv-card:hover::after{opacity:1}}
+.iavse-landing .iv-cover{height:240px;background:#f4effb;overflow:hidden}
+.iavse-landing .iv-cover>img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;transition:transform .35s}
+.iavse-landing .iv-feature:hover .iv-cover>img{transform:scale(1.025)}
+.iavse-landing .iv-cover.is-missing{height:185px;background:linear-gradient(125deg,#e7dbfb,#d4bff2 65%,#e9e0f9);display:grid;place-items:center}
+.iavse-landing .iv-cover-type{display:flex;align-items:center;gap:12px;color:#67418f}
+.iavse-landing .iv-cover-type .site-brand-mark{width:40px;height:40px}
+.iavse-landing .iv-cover-type>span{font:500 58px/1 "IAVSE Wordmark",Georgia,serif;letter-spacing:-.03em}
+.iavse-landing .iv-card-content{padding:23px 26px}
+.iavse-landing .iv-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-size:12px;line-height:1.5;color:var(--iv-body)}
+.iavse-landing .iv-meta>span:first-child{color:var(--iv-purple-deep)}
+.iavse-landing .iv-card h3{font-size:21px;font-weight:600;line-height:1.55;overflow-wrap:anywhere;color:var(--iv-ink)}
+.iavse-landing .iv-excerpt{font-size:14px;line-height:1.8;color:var(--iv-body);margin-top:9px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.iavse-landing .iv-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:23px;color:var(--iv-body);font-size:12px}
+.iavse-landing .iv-author{display:inline-flex;align-items:center;gap:8px;min-width:0;font-size:12px;color:var(--iv-body)}
+.iavse-landing .iv-author>.feed-avatar{width:25px;height:25px;flex:0 0 25px;font-size:11px}
+.iavse-landing .iv-author>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iavse-landing .iv-card-action{display:inline-flex;align-items:center;gap:5px;flex-shrink:0;color:var(--iv-purple-deep);font-size:12px}
+.iavse-landing .iv-discussion{display:grid;grid-template-columns:minmax(0,1fr) 40px;align-items:center;gap:20px;padding:23px 26px}
+.iavse-landing .iv-discussion h3{font-size:18px}
+.iavse-landing .iv-discussion .iv-author{margin-top:13px}
+.iavse-landing .iv-discussion-mark{width:40px;height:40px;background:var(--iv-soft);color:#7446b2;border-radius:50%;display:grid;place-items:center}
+.iavse-landing .iv-empty{padding:45px 35px;min-height:320px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.iavse-landing .iv-empty>svg{color:#8d6abc;margin-bottom:22px}
+.iavse-landing .iv-empty h3{font-size:25px;font-weight:500}
+.iavse-landing .iv-empty>p{max-width:35ch;font-size:15px;line-height:1.9;color:var(--iv-body);margin-top:14px}
+.iavse-landing .iv-empty-actions{display:flex;gap:23px;flex-wrap:wrap;margin-top:18px}
+.iavse-landing .iv-text-link{display:inline-flex;align-items:center;gap:7px;min-height:40px;border:0;background:transparent;color:var(--iv-purple-deep);font-size:14px;line-height:1.5;padding:0}
+.iavse-landing .iv-text-link>svg{transition:transform .2s}
+.iavse-landing .iv-text-link:hover>svg{transform:translate(2px,-2px)}
+.iavse-landing .iv-resources{padding:28px 25px 23px}
+.iavse-landing .iv-resources>h3{font-size:20px}
+.iavse-landing .iv-resources>p{font-size:13px;line-height:1.8;color:var(--iv-body);margin-top:7px}
+.iavse-landing .iv-resource-links{margin-top:20px}
+.iavse-landing .iv-resource-links>a{display:grid;grid-template-columns:25px minmax(0,1fr) 14px;align-items:center;gap:14px;min-height:77px;padding:16px 0;border-top:1px solid #f1ebf8;color:var(--iv-ink);font-size:14px}
+.iavse-landing .iv-resource-links>a>svg{color:#8052bc}
+.iavse-landing .iv-resource-links>a>svg:last-child{color:#9482a6;transition:transform .2s}
+.iavse-landing .iv-resource-links>a:hover>svg:last-child{transform:translate(2px,-2px)}
+.iavse-landing .iv-resource-links small{display:block;margin-top:4px;color:var(--iv-body);font-size:12px;line-height:1.5}
+.iavse-landing .iv-resources>.iv-resource-note{font-size:11px;line-height:1.8;margin-top:16px;max-width:27ch}
+
+.iavse-landing .iv-spaces{padding:30px 8px 0}
+.iavse-landing .iv-space{display:grid;grid-template-columns:190px minmax(0,1fr) auto;gap:30px;align-items:center;padding:28px}
+.iavse-landing .iv-space-cover{height:125px;border-radius:10px;background:#f0e8fb;position:relative;overflow:hidden;display:grid;place-items:center}
+.iavse-landing .iv-space-cover>img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.iavse-landing .iv-space-cover>.feed-avatar{width:64px;height:64px;font-size:23px}
+.iavse-landing .iv-space-cover>span:last-child{position:absolute;bottom:0;left:0;right:0;background:rgb(255 255 255 / .95);font-size:10px;line-height:1.7;padding:4px 8px;color:var(--iv-body)}
+.iavse-landing .iv-space-copy h2{font:400 28px/1.5 "IAVSE Display","Songti SC",serif;color:var(--iv-ink)}
+.iavse-landing .iv-space-copy p{font-size:14px;line-height:1.8;color:var(--iv-body);margin-top:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.iavse-landing .iv-space>.iv-text-link{white-space:nowrap}
+.iavse-landing .iv-footer{display:flex;align-items:center;flex-wrap:wrap;gap:15px 22px;padding:27px 8px 34px;margin-top:34px;border-top:1px solid var(--iv-border);font-size:12px;color:var(--iv-body)}
+.iavse-landing .iv-footer-brand{font:600 27px/1 "IAVSE Wordmark",Georgia,serif;color:var(--iv-ink)}
+.iavse-landing .iv-footer>nav{display:flex;gap:19px;flex-wrap:wrap;margin-left:auto}
+.iavse-landing .iv-footer>nav>a:hover{color:var(--iv-purple-deep)}
+.iavse-landing .iv-footer .language-trigger{border:0;background:transparent;color:var(--iv-body);font-size:12px;padding:6px 0;min-height:36px}
+.iavse-landing .iv-footer .language-menu{background:#fff;color:var(--iv-ink);box-shadow:var(--iv-shadow);border-radius:12px;bottom:calc(100% + 8px);top:auto}
+.iavse-landing .iv-footer .language-menu>button{background:#fff;color:var(--iv-ink)}
+
+@media(min-width:1500px){.iavse-landing .iv-container{width:min(1240px,100% - 100px)}.iavse-landing .iv-hero{padding-top:76px;padding-bottom:62px}.iavse-landing .iv-title{font-size:66px}}
+@media(max-width:900px){.iavse-landing .iv-container{width:calc(100% - 48px)}.iavse-landing .iv-nav{gap:14px;padding-left:19px}.iavse-landing .iv-nav-links a{padding:8px 12px}.iavse-landing .iv-title{font-size:48px}.iavse-landing .iv-board{grid-template-columns:minmax(0,1.7fr) minmax(240px,1fr);gap:20px}.iavse-landing .iv-card-content,.iavse-landing .iv-discussion{padding:22px}.iavse-landing .iv-resources{padding:24px 20px}.iavse-landing .iv-space{grid-template-columns:160px minmax(0,1fr);gap:18px 24px}.iavse-landing .iv-space>.iv-text-link{grid-column:2;margin-top:-15px}.iavse-landing .iv-cover{height:210px}.iavse-landing .iv-footer>nav{margin-left:0}}
+@media(max-width:650px){.iavse-landing .iv-container{width:calc(100% - 32px);padding-top:12px}.iavse-landing .iv-nav{top:12px;min-height:60px;padding:8px 10px 8px 15px;gap:9px}.iavse-landing .iv-nav-links{display:none}.iavse-landing .iv-brand{gap:7px}.iavse-landing .iv-brand span{font-size:28px}.iavse-landing .iv-brand .site-brand-mark{width:23px;height:23px;flex-basis:23px}.iavse-landing .iv-mobile-nav{display:block;margin-left:auto}.iavse-landing .iv-mobile-nav>summary{display:grid;place-items:center;width:38px;min-height:42px;border-radius:50%;list-style:none;cursor:pointer}.iavse-landing .iv-mobile-nav>summary::-webkit-details-marker{display:none}.iavse-landing .iv-mobile-nav>nav{position:absolute;top:calc(100% + 8px);left:0;right:0;display:flex;justify-content:space-around;gap:4px;padding:12px 10px;background:#fff;box-shadow:var(--iv-shadow);border-radius:14px;font-size:13px}.iavse-landing .iv-mobile-nav>nav a{padding:8px}.iavse-landing .iv-identity{gap:7px}.iavse-landing .iv-identity>.organic-login-nav{min-height:40px;font-size:13px;padding:8px 16px}.iavse-landing .iv-guest-avatar{width:39px;height:39px}.iavse-landing .iv-hero{padding:43px 2px 35px}.iavse-landing .iv-title{font-size:40px;line-height:1.4}.iavse-landing .iv-title span{display:block}.iavse-landing .iv-hero>p{font-size:14px;max-width:27ch;margin:16px auto 0}.iavse-landing .iv-actions{margin-top:23px;gap:10px}.iavse-landing .iv-button{font-size:14px;min-height:45px;padding:10px 18px}.iavse-landing .iv-community{padding:12px 3px 0}.iavse-landing .iv-section-heading{gap:12px;flex-wrap:wrap;margin-bottom:20px}.iavse-landing .iv-section-heading h2{font-size:28px}.iavse-landing .iv-filters button{font-size:13px;padding:7px 11px;min-height:38px}.iavse-landing .iv-board{grid-template-columns:1fr;gap:22px}.iavse-landing .iv-feed{gap:18px}.iavse-landing .iv-cover{height:210px}.iavse-landing .iv-cover.is-missing{height:170px}.iavse-landing .iv-card-content{padding:21px}.iavse-landing .iv-card h3{font-size:19px}.iavse-landing .iv-discussion{padding:21px;gap:15px}.iavse-landing .iv-discussion h3{font-size:17px}.iavse-landing .iv-empty{padding:32px 27px;min-height:290px}.iavse-landing .iv-empty h3{font-size:24px}.iavse-landing .iv-empty>p{font-size:14px}.iavse-landing .iv-resources{padding:25px 23px 22px}.iavse-landing .iv-resource-links{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}.iavse-landing .iv-resource-links>a{grid-template-columns:21px minmax(0,1fr);gap:9px;min-height:87px;padding:15px 0;font-size:14px}.iavse-landing .iv-resource-links>a>svg:last-child{display:none}.iavse-landing .iv-resource-links small{font-size:11px}.iavse-landing .iv-resources>.iv-resource-note{max-width:none;font-size:11px}.iavse-landing .iv-spaces{padding:24px 3px 0}.iavse-landing .iv-space{grid-template-columns:1fr;gap:22px;padding:23px}.iavse-landing .iv-space-cover{height:170px}.iavse-landing .iv-space-copy h2{font-size:26px}.iavse-landing .iv-space>.iv-text-link{grid-column:auto;margin:0}.iavse-landing .iv-footer{margin-top:30px;padding:25px 3px 30px;gap:16px}.iavse-landing .iv-footer>nav{gap:10px 19px;width:100%}.iavse-landing .iv-backdrop-wrap{height:1120px}.iavse-landing[data-landing-locale=en] .iv-title{font-size:42px}.iavse-landing[data-landing-locale=ja] .iv-title{font-size:32px}.iavse-landing[data-landing-locale=ja] .iv-mobile-nav>nav{font-size:11px}}
+@media(max-width:360px){.iavse-landing .iv-title{font-size:35px}.iavse-landing .iv-brand span{font-size:25px}.iavse-landing .iv-nav{padding-left:11px;gap:5px}.iavse-landing .iv-identity>.organic-login-nav{padding-inline:12px}.iavse-landing .iv-identity{gap:5px}.iavse-landing .iv-section-heading h2{font-size:26px}.iavse-landing .iv-card-bottom{gap:10px}.iavse-landing .iv-card-action{font-size:11px}.iavse-landing .iv-resource-links{gap:0 14px}.iavse-landing .iv-resource-links>a{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.iavse-landing *,.iavse-landing *::before,.iavse-landing *::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}.iavse-landing .iv-card:hover,.iavse-landing .iv-button:hover,.iavse-landing .iv-button:active,.iavse-landing .iv-feature:hover .iv-cover>img{transform:none}}

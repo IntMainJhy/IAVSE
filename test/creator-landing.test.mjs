@@ -15,20 +15,29 @@ import * as spatial from '../src/lib/home-spatial.mjs';
 const sourceRoot=fileURLToPath(new URL('../src/',import.meta.url));
 const motionTag=tag=>({initial,animate,exit,transition,layout,whileInView,viewport,onHoverStart,onHoverEnd,children,...props})=>React.createElement(tag,props,children);
 const image=({fill,priority,unoptimized,...props})=>React.createElement('img',props);
-function components(locale='zh'){
+const emptyContent={posts:[],works:[],space:null,communityUnavailable:false};
+function components(locale='zh',{content=emptyContent,user=null}={}){
+ const reads=[];
+ const avatar=({name,avatarId})=>React.createElement('span',{'data-avatar-name':name},avatarId?React.createElement('img',{src:'/media/'+encodeURIComponent(avatarId),alt:''}):null);
  const modules={
   react:React,'react/jsx-runtime':runtime,
   'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},
   'next/image':{default:image},
+  'next/navigation':{useRouter:()=>({refresh:()=>{}})},
   'lucide-react':new Proxy({},{get:()=>()=>null}),
   'motion/react':{useReducedMotion:()=>true,motion:new Proxy({},{get:(_,tag)=>motionTag(tag)}),LayoutGroup:({children})=>children,AnimatePresence:({children})=>children},
   '@/lib/home-experience.mjs':experience,
+  '@/lib/landing-content.mjs':{loadLandingContent:async(req,requestedLocale)=>{reads.push({req,locale:requestedLocale});return content;}},
   '@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},
+  '@/components/LocaleProvider':{useLocale:()=>({locale,t:value=>value}),LanguageSwitcher:()=>React.createElement('button',{'aria-label':'Language','data-language-switcher':true})},
+  '@/components/AuthNav':{AuthNav:()=>user?React.createElement('a',{href:'/workspace/account','data-auth-account':true},avatar(user),user.name):React.createElement('a',{href:'/login','data-auth-login':true},'Sign in')},
+  '@/components/FeedAvatar':{FeedAvatar:avatar},
   '@/components/SiteTools':{SiteTools:()=>React.createElement('button',{'aria-label':'Language'})},
  };
  const cache=new Map();
  function load(file){
   file=path.resolve(file);if(cache.has(file))return cache.get(file);
+  if(file.endsWith('/landing/IavseFlowBackdrop.tsx'))return{default:()=>React.createElement('div',{'data-flow-backdrop-stub':true,'aria-hidden':'true'})};
   if(file.endsWith('/portfolio/PortraitMorph.tsx'))return{PortraitMorph:({srcA,alt})=>React.createElement('img',{src:srcA,alt,'data-portfolio-portrait':true})};
   if(file.endsWith('/portfolio/ShaderFlow.tsx'))return{ShaderFlow:()=>null};
   const exports={};cache.set(file,exports);
@@ -43,42 +52,68 @@ function components(locale='zh'){
   }});
   return exports;
  }
- return {page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),copy:load(path.join(sourceRoot,'lib/portfolio-content.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx'))};
+ return {page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads};
 }
-async function render(locale='zh'){
- const loaded=components(locale),html=renderToStaticMarkup(await loaded.page.PlatformHome({req:new Request('http://example.test/')}));
+async function render(locale='zh',options={}){
+ const loaded=components(locale,options),req=new Request('http://example.test/'),html=renderToStaticMarkup(await loaded.page.PlatformHome({req}));
+ assert.equal(loaded.reads.length,1);assert.equal(loaded.reads[0].req,req);assert.equal(loaded.reads[0].locale,locale);
  return {...loaded,html,document:parseDocument(html)};
 }
 const find=(document,predicate)=>DomUtils.findAll(node=>node.type==='tag'&&predicate(node),document.children);
 const text=node=>DomUtils.textContent(node);
-const hasClass=(node,name)=>(node.attribs.class||'').split(/\s+/).includes(name);
 
-test('Portfolio homepage keeps the template reading order and exposes four real IAVSE destinations',async()=>{
- const {html,document}=await render();
- const headings=find(document,node=>/^h[12]$/.test(node.name));
- assert.deepEqual(headings.map(node=>node.name),['h1','h2','h2']);
- const cards=find(document,node=>hasClass(node,'project-card'));
- assert.equal(cards.length,4);
- assert.deepEqual(cards.map(node=>node.attribs.href),['/resources?type=designs','/resources?type=skills','/community','/blogs']);
- assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-portfolio-portrait')).length,1);
- assert.ok(text(document).includes('IAVSE'));
- assert.ok(html.indexOf('<h1')<html.indexOf('project-card'));
- assert.ok(html.indexOf('project-card')<html.indexOf('Let’s connect'));
- for(const old of ['iavse-cinema-toolbar','v2-hero-showcase','v2-stage-profile','product-showroom-home','home-blog-demo','data-creator-voices','creator-home.webp','jianghaoyu2006','hx-explorer','hx-questions','rb-chapter'])assert.ok(!html.includes(old),old);
- assert.doesNotMatch(html,/<iframe|<video/);
+test('homepage server markup keeps the hero, community empty state, resource links, blog space and footer in reading order',async()=>{
+ const {document,copy}=await render(),c=copy.landingCopy('zh'),all=find(document,()=>true);
+ const hero=find(document,node=>node.name==='h1');assert.equal(hero.length,1);assert.equal(text(hero[0]),c.title.join(''));
+ const filters=find(document,node=>node.attribs.role==='group'&&node.attribs['aria-label']===c.filters);assert.equal(filters.length,1);
+ const buttons=find(filters[0],node=>node.name==='button');
+ assert.deepEqual(buttons.map(text),[c.all,c.works,c.discussions]);assert.deepEqual(buttons.map(node=>node.attribs['aria-pressed']),['true','false','false']);
+ const empty=find(document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));assert.equal(empty.length,1);
+ assert.ok(text(empty[0]).includes(c.emptyTitle));assert.ok(text(empty[0]).includes(c.emptyBody));
+ assert.deepEqual(find(empty[0],node=>node.name==='a').map(node=>node.attribs.href),['/community']);
+ const resources=find(document,node=>node.name==='aside'&&node.attribs['aria-label']===c.resources);assert.equal(resources.length,1);
+ assert.deepEqual(find(resources[0],node=>node.name==='a').map(node=>node.attribs.href),['/resources?type=designs','/resources?type=skills','/resources?type=docs','/resources?type=resources']);
+ const spaces=find(document,node=>node.name==='section'&&node.attribs['aria-label']===c.blogs);assert.equal(spaces.length,1);
+ const footer=find(document,node=>node.name==='footer');assert.equal(footer.length,1);
+ const order=[hero[0],filters[0],empty[0],resources[0],spaces[0],footer[0]].map(node=>all.indexOf(node));
+ assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'semantic content stays in its intended reading order');
+ const primary=find(document,node=>node.name==='nav'&&node.attribs['aria-label']===c.nav);
+ assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/community','/resources','/blogs']);
+ assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length,1);
+ assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-flow-backdrop-stub')).length,1,'the optional background is isolated from server content');
+ const preview=find(spaces[0],node=>node.name==='img');assert.equal(preview.length,1);
+ assert.equal(preview[0].attribs.src,'/media/home-product/space-editorial.webp');assert.equal(preview[0].attribs.alt,c.example);assert.ok(text(spaces[0]).includes(c.example));
+ assert.equal(find(document,node=>['iframe','video'].includes(node.name)).length,0);
+ assert.equal(find(document,node=>node.name==='a'&&/^\/(?:community\/|blog\/|blogs\/showcase\/)/.test(node.attribs.href||'')).length,0,'empty content does not fabricate public posts, projects or creators');
+ for(const name of ['Lin Chen','Maya Zhou','Leo Park','Josh Mercer','jianghaoyu2006'])assert.ok(!text(document).includes(name),name);
+
+ const failed=await render('zh',{content:{...emptyContent,communityUnavailable:true}}),failedEmpty=find(failed.document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));
+ assert.equal(failedEmpty.length,1);assert.ok(text(failedEmpty[0]).includes(c.unavailable));assert.ok(text(failedEmpty[0]).includes(c.unavailableBody));
+ assert.deepEqual(find(failedEmpty[0],node=>node.name==='button').map(text),[c.retry]);
 });
 
-test('every locale merges translated product content without placeholder template identities or broken destinations',async()=>{
+test('three locales preserve real destinations, labeled template fallback and supplied public author avatars',async()=>{
  for(const locale of ['zh','en','ja']){
-  const {html,document,copy,projects}=await render(locale),c=copy.portfolioCopy(locale),content=text(document);
-  for(const value of [c.greeting,...c.title,c.intro,c.projectTitle,c.projectIntro,c.connect,c.connectBody,c.source,c.explore])assert.ok(content.includes(value),`${locale}: ${value}`);
-  for(const href of ['/resources','/community','/blogs','/workspace/account','/about','/legal/privacy','https://github.com/IntMainJhy/IAVSE'])assert.ok(find(document,node=>node.name==='a'&&node.attribs.href===href).length,href);
-  const expected=projects.productProjects(locale),images=find(document,node=>node.name==='img');
-  for(const project of expected){assert.ok(content.includes(project.title));assert.ok(content.includes(project.meta));assert.ok(images.some(node=>node.attribs.src===project.image&&node.attribs.alt===project.imageAlt));}
-  assert.ok(images.some(node=>node.attribs.alt===c.templateAlt));
-  for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!html.includes(marker),marker);
+  const empty=await render(locale),c=empty.copy.landingCopy(locale),content=text(empty.document);
+  assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-iavse-landing'))[0].attribs['data-landing-locale'],locale);
+  for(const value of [...c.title,c.intro,c.communityTitle,c.emptyTitle,c.emptyBody,c.resourceTitle,c.resourceIntro,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.example,c.source,c.privacy,c.footer])assert.ok(content.includes(value),`${locale}: ${value}`);
+  for(const href of ['/','/login','/resources','/community','/blogs','/workspace/account','/about','/legal/privacy','https://github.com/IntMainJhy/IAVSE'])assert.ok(find(empty.document,node=>node.name==='a'&&node.attribs.href===href).length,`${locale}: ${href}`);
+  assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-language-switcher')).length,1);
+  for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!content.includes(marker),marker);
+
+  const supplied={posts:[{id:'published-post',title:'Reviewed discussion',summary:'Published excerpt',category:'Practice',source:'Author',license:'Author license',coverId:'',authorName:'Discussion author',authorAvatarId:'discussion-avatar',commentCount:0,likeCount:0,href:'/community/published-post'}],works:[{id:'published-work',title:'Published project',summary:'Published project excerpt',coverId:'',authorName:'Project author',authorAvatarId:'project-avatar',href:'/blog/public-member/projects/project-one',type:'work'}],space:{handle:'public-member',name:'Public member',intro:'Published member introduction',avatarId:'space-avatar',coverId:'',href:'/blog/public-member',count:1},communityUnavailable:false};
+  const published=await render(locale,{content:supplied,user:{name:'Signed-in member',avatarId:'signed-in-avatar'}}),publishedText=text(published.document);
+  assert.equal(find(published.document,node=>Object.hasOwn(node.attribs,'data-landing-empty')).length,0);
+  assert.equal(find(published.document,node=>Object.hasOwn(node.attribs,'data-auth-account')).length,1);
+  for(const href of ['/community/published-post','/blog/public-member/projects/project-one','/blog/public-member'])assert.ok(find(published.document,node=>node.name==='a'&&node.attribs.href===href).length,href);
+  for(const name of ['Reviewed discussion','Published project','Project author','Discussion author','Public member','Signed-in member'])assert.ok(publishedText.includes(name),name);
+  const images=find(published.document,node=>node.name==='img');
+  for(const id of ['signed-in-avatar','project-avatar','discussion-avatar','space-avatar'])assert.ok(images.some(node=>node.attribs.src==='/media/'+id),id);
+  assert.ok(publishedText.includes('0 '+c.comments),'zero is the actual published comment count');
+  assert.ok(!publishedText.includes(c.example));assert.ok(images.every(node=>node.attribs.src!=='/media/home-product/space-editorial.webp'),'a real public space replaces the labeled template fallback');
+  assert.equal(find(published.document,node=>['iframe','video'].includes(node.name)).length,0);
  }
- const fallback=components().copy;assert.equal(fallback.portfolioCopy('unknown'),fallback.portfolioCopy('zh'));
+ const fallback=components().copy;assert.equal(fallback.landingCopy('unknown'),fallback.landingCopy('zh'));
 });
 
 test('public feed projection remains bounded and strips private fields without inventing unavailable activity',()=>{

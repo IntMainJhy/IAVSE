@@ -586,8 +586,6 @@ html[data-frontend=portfolio][data-theme-anim="1"]::view-transition-new(root) {
     gap: calc(var(--spacing) * 8);
   }.gap-10 {
     gap: calc(var(--spacing) * 10);
-  }.gap-20 {
-    gap: calc(var(--spacing) * 20);
   }.space-y-6 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -979,10 +977,6 @@ html[data-frontend=portfolio][data-theme-anim="1"]::view-transition-new(root) {
   }.sm\:gap-10 {
     @media (width >= 40rem) {
       gap: calc(var(--spacing) * 10);
-    }
-  }.sm\:gap-28 {
-    @media (width >= 40rem) {
-      gap: calc(var(--spacing) * 28);
     }
   }.sm\:p-3\.5 {
     @media (width >= 40rem) {

@@ -10,11 +10,14 @@ test('server route CSS preserves the established cascade and excludes unrelated 
  const baseline=files('fallback');
  for(const name of ['home','blogs','blog','catalog','community','workspace','admin','account']){
   const selected=files(name);assert.equal(new Set(selected).size,selected.length,name);
-  assert.deepEqual(selected,baseline.filter(file=>selected.includes(file)),name+' keeps the old cascade');
+  const shared=selected.filter(file=>file!=='iavse-landing.css');
+  assert.deepEqual(shared,baseline.filter(file=>shared.includes(file)),name+' keeps the shared cascade');
+  if(name!=='home')assert.ok(!selected.includes('iavse-landing.css'),name+' excludes the homepage redesign');
   for(const file of selected)assert.ok(fs.existsSync(new URL(file,root)),file);
  }
  assert.ok(!files('home').includes('anx-portfolio.css'));
  assert.ok(!files('home').includes('community-feed.css'));
+ assert.equal(files('home').at(-1),'iavse-landing.css','the homepage owns its scoped visual override');
  assert.ok(!files('blogs').includes('iavse-home.css'));
  assert.ok(!files('community').includes('blog-appearances.css'));
  for(const feature of ['blog-appearances.css','anx-portfolio.css','blog-reading-finish.css'])assert.ok(files('workspace').includes(feature),'editor needs preview templates');
