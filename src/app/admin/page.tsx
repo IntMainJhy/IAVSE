@@ -1,9 +1,6 @@
-import '@/app/admin-react-bits.css';
 import '@/app/admin-control-center.css';
 import '@/app/route-styles/admin.css';
 import Page,{generateMetadata as metadataForPage} from '@/components/AppPage';
-import '@/app/admin-organic.css';
-import '@/app/iavse-admin.css';
 import '@/components/AdminOverview.module.css';
 
 // Load the dashboard's structural CSS with its HTML, before the lazy client boundary.

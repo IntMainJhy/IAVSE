@@ -1,9 +1,5 @@
 'use client';
-import '@/app/admin-organic.css';
-import '@/app/iavse-admin.css';
 import '@/app/admin-control-center.css';
-import '@/app/admin-react-bits.css';
-import '@/app/admin-bento.css';
 import '@/app/admin-workspace.css';
 import '@/app/admin-essentials.css';
 import {AdminAppearance,useAdminAppearance} from './AdminAppearance';
@@ -91,4 +87,4 @@ function AdminWorkspace({path=[],query:routeQuery={}}:{path?:string[],query?:Any
  </div></>}
 
 
-export function AdminApp(props:{path?:string[],query?:Any,initialDark?:boolean}){const auth=useResource('/api/auth/me');if(auth.data?.user?.role!=='owner'&&props.path?.[0]==='catalog')return <CommunityAdmin path={['catalog']}/>;if(auth.data?.user?.role!=='owner'&&props.path?.[0]==='community')return <CommunityAdmin path={props.path.slice(1)}/>;return <AdminAppearance initialDark={props.initialDark}><div className="organic-site organic-admin public-content-site" data-admin-layout="control-center"><AdminWorkspace {...props}/></div></AdminAppearance>}
+export function AdminApp(props:{path?:string[],query?:Any,initialDark?:boolean}){const auth=useResource('/api/auth/me');if(auth.data?.user?.role!=='owner'&&props.path?.[0]==='catalog')return <CommunityAdmin path={['catalog']}/>;if(auth.data?.user?.role!=='owner'&&props.path?.[0]==='community')return <CommunityAdmin path={props.path.slice(1)}/>;return <AdminAppearance initialDark={props.initialDark}><div className="rbp-application organic-site organic-admin public-content-site" data-admin-layout="control-center"><AdminWorkspace {...props}/></div></AdminAppearance>}

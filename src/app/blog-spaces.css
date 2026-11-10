@@ -61,3 +61,20 @@ html[data-ui][data-color-mode] .organic-site .blog-spaces-card>p{font-size:14px;
 }
 @media(prefers-reduced-motion:reduce){.blog-spaces-heading{opacity:1;transform:none}.blog-spaces-card-art>img{transition:none!important;transform:none!important}.blog-spaces-opening[data-journey=ready]{height:90svh}.blog-spaces-journey>canvas{display:none}.blog-spaces-static-preview{display:block!important}}
 @media print{.blog-spaces-opening{display:none}.blog-spaces-page{background:#fff}.blog-spaces-directory{padding:20px 0}.blog-spaces-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.blog-spaces-card-art{height:150px;box-shadow:none}}
+
+/* Isolated legacy gallery component animation, not a platform theme. */
+
+
+.blog-gallery[data-gallery-reduced] .blog-gallery-plane{transform:none}
+
+.blog-gallery[data-gallery-reduced] :is(.blog-gallery-open>span,.blog-gallery-viewport>iframe){transition:none}
+
+.blog-gallery[data-gallery-running][data-gallery-prepared=true][data-gallery-floating=true]:not([data-gallery-reduced])[data-focused=false] .blog-gallery-float{animation-play-state:running}
+
+.blog-gallery[data-gallery-reduced] .blog-gallery-float,.blog-gallery[data-gallery-reduced] .blog-gallery-exhibits{animation:none!important}
+
+.blog-gallery[data-gallery-reduced] .blog-gallery-progress>i{transition:none}
+
+.blog-gallery[data-gallery-reduced] .gallery-view-tools{display:none}
+
+.blog-gallery-world{transform-style:preserve-3d}

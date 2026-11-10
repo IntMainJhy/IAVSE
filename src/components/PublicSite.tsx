@@ -16,8 +16,6 @@ import {Tracker, TrackedLink} from './Tracker';
 import {SiteFrame} from './rbp/layout/site-frame';
 import {AboutPage as PortfolioAbout} from './rbp/AboutPage';
 import {ResumePrint} from './ResumePrint';
-import '@/app/gallery-backgrounds.css';
-import '@/app/apple-reading-surfaces.css';
 
 type Doc = Record<string, any>;
 type Query = Record<string, string | string[] | undefined>;
@@ -190,6 +188,6 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
  const dark=(await cookies()).get('site-color-mode')?.value==='dark';
  return <div className={'rbp-surface'+(dark?' dark':'')} data-rbp-route={section||'home'}>
    <SiteFrame/><a className="skip-to-content" href="#main">{tr('跳到主要内容')}</a><Tracker/>
-   {native?<div className={'rbp-native organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading" data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined}><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}
+   {native?<div className={'rbp-native rbp-application organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading" data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined}><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}
  </div>;
 }

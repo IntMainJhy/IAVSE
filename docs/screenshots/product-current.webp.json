@@ -1,8 +1,8 @@
 {
-  "prompt": "Actual signed-out IAVSE screenshot of / (project cards), Ego Browser, 2026-11-10, 1440x1000. Original RBP Portfolio layout with IAVSE content. Base 4481459f080730acb71ae52216ea7e5e97dfe4de; working-tree source hashes in captures.json. No generated content.",
+  "prompt": "Actual signed-out IAVSE screenshot of / (project cards), Ego Browser, 2026-11-10, 1440x1000. Unified RBP Portfolio platform design with IAVSE content. Base dcc9be3301ed29b34f6fd98d7a91bbcd25915e93; working-tree source hashes in captures.json#portfolioSource. No generated content.",
   "route": "/ (project cards)",
   "capturedAt": "2026-11-10",
   "signedIn": false,
-  "sourceBaseCommit": "4481459f080730acb71ae52216ea7e5e97dfe4de",
+  "sourceBaseCommit": "dcc9be3301ed29b34f6fd98d7a91bbcd25915e93",
   "sourceRecord": "captures.json#portfolioSource"
 }

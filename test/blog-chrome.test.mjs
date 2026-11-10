@@ -16,22 +16,13 @@ test('authored-blog chrome has one full-width surface and a separately bounded c
  assert.equal(shell.background,bar.background,'the full viewport and chrome share one paper surface');
 });
 
-test('platform glass no longer owns blog backgrounds or paints a second header panel',()=>{
- const shared=postcss.parse(read('glass-platform.css'));let platformBackground=false;
- shared.walkRules(rule=>{
-  if(rule.selector==='html[data-ui][data-color-mode] .v2-site:not(.blog-public-shell)')platformBackground=rule.nodes.some(node=>node.prop==='background');
-  assert.ok(!rule.selector.startsWith('.blog-public-shell'));assert.ok(!rule.selector.startsWith('html[data-ui][data-color-mode] .blog-public-shell'));
- });assert.equal(platformBackground,true,'the platform gradient explicitly excludes author shells');
- const legacy=postcss.parse(read('blog.css'));legacy.walkRules(rule=>assert.ok(!/blog-platform|blog-public-shell/.test(rule.selector),'legacy template CSS cannot restyle platform chrome'));
- assert.doesNotMatch(read('blog-shell.css'),/backdrop-filter|clip-path|overflow:\s*(?:hidden|clip)/,'header and popovers need no optical overlay or clipping');
-});
-
-test('blog, editor preview and fallback routes load the shell owner after shared chrome',()=>{
+test('platform design stops at authored documents and keeps shared chrome separate',()=>{
+ const css=read('rbp-system.css');assert.match(css,/@scope \(\.rbp-application\) to \([^)]*\.space-root/);
  for(const group of ['blog','workspace','admin','fallback']){
-  const css=read('route-styles/'+group+'.css');assert.ok(css.indexOf("@import '../blog-shell.css';")>css.indexOf("@import '../glass-platform.css';"),group);
+  const route=read('route-styles/'+group+'.css');assert.ok(route.includes("@import '../blog-shell.css';"));assert.doesNotMatch(route,/glass-platform|iavse-quantum|liquid-controls/);
  }
+ assert.doesNotMatch(read('blog-shell.css'),/backdrop-filter|clip-path|overflow:\s*(?:hidden|clip)/);
 });
-
 
 test('phone chrome keeps the complete wordmark and gives narrow-screen actions room to wrap',()=>{
  const logo=declarations('.blog-platform-logo');assert.equal(logo['flex-shrink'],'0');assert.equal(logo['min-width'],'max-content');

@@ -22,7 +22,7 @@ const LENIS_OPTIONS = {
 export function PortfolioRuntime(){
   const path = usePathname();
   const {locale,t} = useLocale();
-  const chromeEnabled = !/^\/(?:blog(?:\/|$)|blogs\/showcase\/|admin(?:\/|$))/.test(path);
+  const chromeEnabled = !/^\/(?:blog(?:\/|$)|blogs\/showcase\/|workspace\/blog(?:\/|$)|admin(?:\/|$))/.test(path);
   const navItems = [
     {href:'/',label:t('首页'),active:path==='/'},
     {href:'/resources',label:t('资源'),active:/^\/(?:resources|docs|skills)(?:\/|$)/.test(path)},

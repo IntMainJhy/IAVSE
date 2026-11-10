@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T00:36:30.552449+00:00",
-  "title": "Design System: IAVSE · RBP Portfolio Content Port",
+  "generatedAt": "2026-11-10T01:19:02.762632+00:00",
+  "title": "Design System: IAVSE · RBP Portfolio",
   "extensions": {
     "colorMeta": {
       "background": {
@@ -171,16 +171,122 @@
           "oklch(84% 0.16 260)",
           "oklch(95% 0.16 260)"
         ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Supporting text",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "dark-secondary": {
+        "role": "neutral",
+        "displayName": "Dark supporting text",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "success": {
+        "role": "primary",
+        "displayName": "Success",
+        "tonalRamp": [
+          "oklch(15% 0.1 150)",
+          "oklch(26% 0.1 150)",
+          "oklch(38% 0.1 150)",
+          "oklch(49% 0.1 150)",
+          "oklch(61% 0.1 150)",
+          "oklch(72% 0.1 150)",
+          "oklch(84% 0.1 150)",
+          "oklch(95% 0.1 150)"
+        ]
+      },
+      "error": {
+        "role": "primary",
+        "displayName": "Error",
+        "tonalRamp": [
+          "oklch(15% 0.1 30)",
+          "oklch(26% 0.1 30)",
+          "oklch(38% 0.1 30)",
+          "oklch(49% 0.1 30)",
+          "oklch(61% 0.1 30)",
+          "oklch(72% 0.1 30)",
+          "oklch(84% 0.1 30)",
+          "oklch(95% 0.1 30)"
+        ]
+      },
+      "dark-success": {
+        "role": "primary",
+        "displayName": "Dark success",
+        "tonalRamp": [
+          "oklch(15% 0.1 150)",
+          "oklch(26% 0.1 150)",
+          "oklch(38% 0.1 150)",
+          "oklch(49% 0.1 150)",
+          "oklch(61% 0.1 150)",
+          "oklch(72% 0.1 150)",
+          "oklch(84% 0.1 150)",
+          "oklch(95% 0.1 150)"
+        ]
+      },
+      "dark-error": {
+        "role": "primary",
+        "displayName": "Dark error",
+        "tonalRamp": [
+          "oklch(15% 0.1 30)",
+          "oklch(26% 0.1 30)",
+          "oklch(38% 0.1 30)",
+          "oklch(49% 0.1 30)",
+          "oklch(61% 0.1 30)",
+          "oklch(72% 0.1 30)",
+          "oklch(84% 0.1 30)",
+          "oklch(95% 0.1 30)"
+        ]
+      },
+      "dark-selection": {
+        "role": "neutral",
+        "displayName": "Dark text selection",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Desktop hero",
-        "purpose": "System-ui computed reference output; do not load a new custom face."
+        "purpose": "Reference system-ui output; shared font stack across all platform UI."
       },
       "headline": {
         "displayName": "Projects heading",
         "purpose": "The serif utility resolves to the same system-ui stack."
+      },
+      "application-body": {
+        "displayName": "Operating body",
+        "purpose": "Community, catalog, account, administration and editor-shell copy."
+      },
+      "application-heading": {
+        "displayName": "Operating heading",
+        "purpose": "Shared responsive title treatment within existing functional layouts."
       }
     },
     "shadows": [
@@ -203,6 +309,11 @@
         "name": "project-dark-hover",
         "value": "0 10px 24px -8px rgb(0 0 0 / 0.6), 0 4px 8px -4px rgb(0 0 0 / 0.4)",
         "purpose": "Original dark hover elevation."
+      },
+      {
+        "name": "application-rest",
+        "value": "0 1px 3px #0000000d",
+        "purpose": "Subtle shared elevation for operating cards; navigation panels stay flat."
       }
     ],
     "motion": [
@@ -214,7 +325,27 @@
       {
         "name": "fade-in",
         "value": "opacity 0 → 1; y 12px → 0; 0.8s",
-        "purpose": "Template entrance; reduced motion resolves immediately."
+        "purpose": "Once on first viewport entry; Hero explicitly uses mount entry. Reduced motion resolves immediately."
+      },
+      {
+        "name": "application-entry",
+        "value": "opacity 0 → 1; y 12px → 0; 550ms",
+        "purpose": "Once per operating element; keyboard focus or reduced-motion preference reveals immediately."
+      },
+      {
+        "name": "entry-viewport",
+        "value": "threshold 0.12; root margin 0px 0px -6% 0px",
+        "purpose": "Shared template and operating entry threshold."
+      },
+      {
+        "name": "application-stagger",
+        "value": "70ms per observer-batch index; maximum 210ms",
+        "purpose": "Position-sorted operating batch; dynamic results are discovered without re-hiding revealed nodes."
+      },
+      {
+        "name": "project-stagger",
+        "value": "60ms per card index; maximum 210ms",
+        "purpose": "Original project index delay bounded by the shared FadeIn primitive."
       },
       {
         "name": "scale-unblur",
@@ -341,43 +472,53 @@
       "css": ".ds-frame{padding:6px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:32px;overflow:hidden;background:var(--background,#fff);color:var(--foreground,#0a0a0a);box-shadow:0 1px 3px rgb(0 0 0 / .1),0 1px 2px -1px rgb(0 0 0 / .1)}.ds-frame-inner{padding:24px;overflow:hidden;border-radius:1.6rem}.ds-frame p{margin:0;font:500 36px/1.05 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}"
     },
     {
-      "name": "Native administration field",
+      "name": "Application field",
       "kind": "input",
-      "refersTo": "native-input",
-      "description": "Existing operating-surface styling; not an upstream Portfolio form. Sizes and labels stay owned by the native form.",
-      "html": "<label class=\"ds-native-label\">Title <input class=\"ds-native-input\" type=\"text\" value=\"IAVSE\" /></label>",
-      "css": ".ds-native-label{font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);color:var(--pf-ink,#0a0a0a)}.ds-native-input{font-family:var(--site-font,\"Portfolio Geist\",\"PingFang SC\",sans-serif);border-radius:10px;color:var(--pf-ink,#0a0a0a);background:var(--site-surface,#fff);border:1px solid var(--site-control-line,#d4d4d4)}.ds-native-input:focus-visible{outline:2px solid var(--site-focus,#0066ff);outline-offset:4px}"
+      "refersTo": "application-input",
+      "description": "Shared RBP field for operating screens; labels and validation remain functional.",
+      "html": "<label class=\"ds-field-label\">Title <input class=\"ds-field-input\" type=\"text\" value=\"IAVSE\" /></label>",
+      "css": ".ds-field-label{display:grid;gap:8px;font:400 15px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);color:var(--rbp-secondary,#666)}.ds-field-input{min-height:44px;padding:10px 14px;border:1px solid var(--rbp-border,#e5e5e5);border-radius:12px;background:var(--rbp-background,#fff);color:var(--rbp-foreground,#0a0a0a);font:400 14px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em;transition:color 180ms,background-color 180ms,border-color 180ms,box-shadow 180ms}.ds-field-input:hover{border-color:var(--rbp-border,#e5e5e5)}.ds-field-input:focus-visible{outline:2px solid var(--rbp-focus,#0066ff);outline-offset:4px}.ds-field-input:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Application primary action",
+      "kind": "button",
+      "refersTo": "application-button",
+      "description": "Monochrome primary control shared across catalog, account, administration and editor shells.",
+      "html": "<button class=\"ds-app-action\">Save changes</button>",
+      "css": ".ds-app-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:12px;background:var(--rbp-foreground,#0a0a0a);color:var(--rbp-background,#fff);font:500 14px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em;cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms,box-shadow 180ms}.ds-app-action:hover{background:var(--rbp-foreground,#0a0a0a)}.ds-app-action:focus-visible{outline:2px solid var(--rbp-focus,#0066ff);outline-offset:4px}.ds-app-action:disabled{opacity:.5;cursor:not-allowed}"
+    },
+    {
+      "name": "Selected filter pill",
+      "kind": "chip",
+      "refersTo": "filter-pill",
+      "description": "Shared capsule filter; selected state inverts foreground and background.",
+      "html": "<div class=\"ds-filter-group\" aria-label=\"Category\"><button class=\"ds-filter\" aria-pressed=\"true\">All resources</button><button class=\"ds-filter\" aria-pressed=\"false\">AI Skills</button></div>",
+      "css": ".ds-filter-group{display:flex;flex-wrap:wrap;gap:8px}.ds-filter{min-height:37px;padding:7px 13px;border:1px solid var(--rbp-border,#e5e5e5);border-radius:999px;background:var(--rbp-muted,#f5f5f5);color:var(--rbp-secondary,#666);font:400 13px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms}.ds-filter:hover{border-color:var(--rbp-border,#e5e5e5)}.ds-filter[aria-pressed=true]{background:var(--rbp-foreground,#0a0a0a);color:var(--rbp-background,#fff)}.ds-filter:focus-visible{outline:2px solid var(--rbp-focus,#0066ff);outline-offset:4px}"
+    },
+    {
+      "name": "Operating card",
+      "kind": "card",
+      "refersTo": "application-card",
+      "description": "Neutral rounded surface for a functional panel, independent of authored content.",
+      "html": "<section class=\"ds-app-card\"><h3>Saved resources</h3><p>Find the material you bookmarked from the directory.</p></section>",
+      "css": ".ds-app-card{padding:28px;border:1px solid var(--rbp-border,#e5e5e5);border-radius:24px;background:var(--rbp-background,#fff);color:var(--rbp-foreground,#0a0a0a);box-shadow:var(--rbp-shadow,0 1px 3px #0000000d);font:400 15px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif)}.ds-app-card h3{margin:0 0 12px;font:500 20px/1.2 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em}.ds-app-card p{margin:0;color:var(--rbp-secondary,#666)}"
     }
   ],
   "narrative": {
-    "northStar": "Portfolio, with IAVSE content",
-    "overview": "The confirmed direction is to keep the open repository's layout and motion unchanged and merge IAVSE's content into it. The authority is [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) at `1581b9b8e5876f60e5eb844970747506980c4412`, checked against its rendered demo. Preserve the original composition, responsive spacing, neutral surfaces, fixed capsule navigation, flow shader, image morph and transition parameters. This supersedes the earlier broad visual adaptation.\n\nTemplate-backed pages use the original Hero, Projects, About and Contact structures. IAVSE supplies real resource destinations, product descriptions and clearly labeled examples. Community, filtered catalogs, account, administration and editor screens retain their existing functional layouts within the application boundary. The upstream template has no matching operating screens; do not describe those screens as pixel-identical ports. Authored blogs and their templates retain their own visual identity.\n\nThe sources of truth are [RBP components](src/components/rbp/), [template CSS input](src/styles/rbp-template.input.css), [compiled scoped CSS](src/app/rbp-template.css), [host bridge](src/app/rbp-bridge.css), and [PortfolioRuntime](src/components/portfolio/PortfolioRuntime.tsx). [Implementation notes](docs/portfolio-frontend.md) map the upstream files and integration boundaries. The host [foundation stylesheet](src/app/portfolio-foundation.css) still supplies native operating-surface aliases; it is not the template's geometry or typography authority.",
+    "northStar": "One Portfolio language across IAVSE",
+    "overview": "RBP Portfolio is the sole visual authority for the IAVSE platform. The pinned source is [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) at `1581b9b8e5876f60e5eb844970747506980c4412`, checked against its rendered demo. Public pages preserve the original Hero, Projects, About and Contact composition, responsive spacing, flow shader, portrait morph and interaction parameters. Platform operating pages carry the same system-ui type, grayscale surfaces, rounded cards, pills and controls into their existing functional layouts.\n\nCommunity, filtered catalogs, account forms, administration and the editor shell share this visual system. Their hierarchy, data, validation and permissions stay functional; the upstream repository supplies no equivalent operating screens, so visual consistency does not imply pixel identity. User-authored canvas documents, published blog themes, uploaded images and third-party previews are content boundaries and retain their own appearance.\n\nThis file is the single platform visual specification. [Platform tokens and controls](src/app/rbp-system.css) implement it; [RBP components](src/components/rbp/), [template CSS input](src/styles/rbp-template.input.css) and its [compiled scoped output](src/app/rbp-template.css) retain the template implementation. The [host bridge](src/app/rbp-bridge.css) owns integration only. [Implementation notes](docs/portfolio-frontend.md) document source mapping, route boundaries and entry motion. Earlier platform skins and competing design guides have been removed; third-party catalog studies are reference content.",
     "keyCharacteristics": [
-      "Original public-page composition and normal-motion timing, with IAVSE text, images and routes.",
-      "A centered three-link capsule, a theme button and account/language access in Contact.",
-      "System-ui typography matching the reference's computed output, including serif-class headings.",
-      "Two-column Projects cards, six About polaroids and the original interactive stack.",
-      "Native operating layouts and independent authored blogs, with source attribution and fallbacks."
+      "Original public-page composition and interaction parameters, with real IAVSE content and destinations.",
+      "One system-ui font and light/dark grayscale palette across all platform surfaces.",
+      "Shared rounded cards, monochrome actions, capsule filters and accessible fields.",
+      "First viewport entry with a short upward fade and capped group staggering.",
+      "Functional operating layouts and independent authored content, with source attribution and fallbacks."
     ],
-    "rules": [
-      {
-        "name": "Source Identity",
-        "body": "Resource screenshots, genuine member content and authored blog themes retain their source appearance and attribution. Do not imply that template screenshots represent real members or endorsements.",
-        "section": "colors"
-      },
-      {
-        "name": "Computed Type",
-        "body": "Match the pinned reference's rendered type and wrapping. Do not infer a new typeface from a source variable name or replace its typography with a custom brand system.",
-        "section": "typography"
-      },
-      {
-        "name": "Content Port",
-        "body": "Replace content and destinations in the original components. Preserve their structure, dimensions, breakpoints and normal-motion behavior. The operational surfaces that have no upstream equivalent retain their own necessary layouts.",
-        "section": "layout"
-      }
-    ],
+    "rules": [],
     "dos": [
-      "Do preserve the pinned template's composition, responsive geometry and normal-motion parameters.",
+      "Do preserve the pinned template's public composition, responsive geometry and interaction parameters.",
+      "Do use the shared RBP tokens and controls on every platform operating page.",
+      "Do trigger content entry once in the viewport and cap group delays at 210ms.",
       "Do put real IAVSE content and working destinations into the original component slots.",
       "Do match the reference's system-ui rendering, including the serif-class fallback.",
       "Do keep source attribution, labeled examples, real empty states and native operating behavior.",
@@ -385,7 +526,9 @@
     ],
     "donts": [
       "Don't reintroduce a full-width brand header, homepage workbench or three-column blog directory.",
-      "Don't substitute custom fonts, new section spacing or new animation timing for the reference.",
+      "Don't reintroduce a competing platform skin, font stack or design specification.",
+      "Don't change the template's public geometry or interaction timing beyond the documented viewport-entry enhancement.",
+      "Don't hide keyboard-focused content or animate authored canvas documents.",
       "Don't stop the visible portrait's normal frame loop after its hover blend settles.",
       "Don't claim upstream pixel identity for administration, editing or other pages absent from the template.",
       "Don't present the RBP template as MIT-licensed or extend its permissions to unrelated material."

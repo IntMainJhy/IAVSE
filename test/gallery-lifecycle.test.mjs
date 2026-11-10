@@ -113,7 +113,7 @@ test('same-size resize notifications cannot cancel an active camera selection',(
 test('reduced motion keeps complete previews and spatial placement without selection tweens or float animation',()=>{
  const s=fixture({reduced:true,count:1});s.intersect(true);s.step();s.ready(s.mounted()[0]);s.step();assert.equal(s.tree.props['data-gallery-prepared'],true);assert.equal(s.root.hasAttribute('data-gallery-reduced'),true);
  s.panelProps()[0].onSelect(0);s.flush();assert.equal(s.tweens.length,0);assert.ok(s.panes[0].style.transform.includes('translate3d('));
- const css=fs.readFileSync(new URL('../src/app/iavse-blogs.css',import.meta.url),'utf8');assert.match(css,/\[data-gallery-floating=true\]:not\(\[data-gallery-reduced\]\)/);assert.match(css,/\.blog-gallery\[data-gallery-reduced\] \.blog-gallery-float[^}]+animation:none!important/);assert.match(css,/\.blog-gallery-world\{[^}]*transform-style:preserve-3d/);s.unmount();
+ const css=fs.readFileSync(new URL('../src/app/blog-spaces.css',import.meta.url),'utf8');assert.match(css,/\[data-gallery-floating=true\]:not\(\[data-gallery-reduced\]\)/);assert.match(css,/\.blog-gallery\[data-gallery-reduced\] \.blog-gallery-float[^}]+animation:none!important/);assert.match(css,/\.blog-gallery-world\{[^}]*transform-style:preserve-3d/);s.unmount();
 });
 
 

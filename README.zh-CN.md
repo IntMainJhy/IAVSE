@@ -61,7 +61,7 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 ### 首页与内容入口
 
-模板页面保留 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 的原始排版和正常动效，只合并 IAVSE 内容：首页为 Hero → 四张 Projects 卡片 → Contact，关于页和资源/博客总览沿用原始页面结构。导航保持固定的三链接胶囊，字体匹配参考网站实际使用的 system-ui。社区、筛选目录、账号与编辑管理页面保留原生业务布局；作者主页保留独立外观。详见[源码映射、动效参数与适用边界](docs/portfolio-frontend.md)。
+全平台以 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 为唯一设计体系，共用 system-ui 字体、浅深色中性表面、卡片、按钮、字段与胶囊筛选。首页为 Hero → 四张 Projects 卡片 → Contact；关于页和资源/博客总览保留原模板结构，公共导航使用固定三链接胶囊。社区、目录、账号、管理与编辑器外壳保留功能布局并统一为 RBP 控件；内容首次滚动进入视口时上移淡入，同组交错延迟有上限。作者画布、已发布博客主题和第三方预览保留独立外观。旧平台皮肤和设计规范已清理。视觉约定见 [DESIGN.md](DESIGN.md)，源码与边界见[前端接入说明](docs/portfolio-frontend.md)。
 
 ![首页四张内容入口卡片，沿用原始 Projects 排版](docs/screenshots/product-current.webp)
 
@@ -124,11 +124,11 @@ GitHub Actions 在 `main` 推送和 Pull Request 时执行文档检查、单元�
 | 博客画布与模板 | [编辑器说明](docs/blog-editor.zh-CN.md)、`src/components/BlogCanvas.tsx`、`src/lib/blog-templates.mjs` |
 | 草稿、公开版本与权限边界 | [发布说明](docs/public-launch.md)、`src/lib/spaces.mjs`、`src/lib/community.mjs` |
 | 目录查询、筛选与性能 | [资源目录实现](docs/resource-discovery.md)、[目录性能记录](docs/catalog-performance-2026-11-08.md) |
-| Portfolio 前端、WebGL 与平滑滚动 | [当前前端实现与上游映射](docs/portfolio-frontend.md)、`src/components/rbp/`、`src/components/portfolio/`、`src/styles/rbp-template.input.css` |
+| 统一 RBP 前端与滚动入场 | [唯一视觉规范](DESIGN.md)、[接入与上游映射](docs/portfolio-frontend.md)、`src/app/rbp-system.css`、`src/lib/rbp-motion.mjs`、`src/components/rbp/` |
 | AI Skill / MCP / REST | [接入 Skill](integrations/iavse-post/SKILL.md)、[API 参考](integrations/iavse-post/references/api.md)、`integrations/iavse-mcp.mjs` |
 | 账号隔离、测试与恢复 | `test/`、[管理文档](docs/管理中心说明.md)、`scripts/backup.mjs`、`scripts/restore.mjs` |
 
-建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。历史设计与性能记录标有日期，结论只对应当时的版本和测量范围；旧版[首页混合参考方案](docs/home-react-bits.md)与[首页产品空间设计](docs/home-product-redesign.md)仅供历史参考。
+建议从一个具体页面及其测试读起，再追踪对应 API 和数据模块。平台视觉只遵循 [DESIGN.md](DESIGN.md)；旧实现从 Git 历史追溯，资源目录中的第三方规范属于学习内容。带日期的功能与性能记录只对应当时版本和测量范围。
 
 ## 部署与数据
 

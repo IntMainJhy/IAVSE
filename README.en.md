@@ -60,7 +60,7 @@ Captured from the actual `main` website on **2026-11-10**. Bundled showcase prof
 
 ### Homepage and content entry points
 
-Template-backed pages preserve [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio)’s original layout and normal-motion behavior while merging IAVSE content. The homepage is Hero → four Projects cards → Contact; About and the resource/blog overviews retain the upstream page structures. A fixed three-link capsule and the reference’s computed system-ui typography remain intact. Community, filtered catalogs, accounts, administration and editing retain native operating layouts; authored blogs retain their own appearance. See the [source mapping, motion parameters and boundaries](docs/portfolio-frontend.md).
+[RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) is the sole platform design system: system-ui type, neutral light/dark surfaces, rounded cards, buttons, fields and capsule filters. The homepage is Hero → four Projects cards → Contact; About and resource/blog overviews retain the upstream structures and fixed three-link capsule. Community, catalogs, accounts, administration and the editor shell use the same RBP controls within their functional layouts. Content fades upward on first viewport entry with capped group staggering. Authored canvas documents, published blog themes and third-party previews retain their own appearance. Earlier platform skins and competing design guides have been removed. See [DESIGN.md](DESIGN.md) and the [frontend integration notes](docs/portfolio-frontend.md).
 
 ![Four homepage entry cards in the original Projects composition](docs/screenshots/product-current.webp)
 
@@ -123,11 +123,11 @@ GitHub Actions checks documentation, unit tests, the production build and types 
 | Blog canvas and templates | [Editor guide](docs/blog-editor.md), `src/components/BlogCanvas.tsx`, `src/lib/blog-templates.mjs` |
 | Drafts, public versions and authorization | [Publication boundaries](docs/public-launch.en.md), `src/lib/spaces.mjs`, `src/lib/community.mjs` |
 | Catalog queries, filters and performance | [Resource discovery](docs/resource-discovery.md), [catalog measurements](docs/catalog-performance-2026-11-08.md) |
-| Portfolio frontend, WebGL and smooth scrolling | [Current implementation and upstream mapping](docs/portfolio-frontend.md), `src/components/rbp/`, `src/components/portfolio/`, `src/styles/rbp-template.input.css` |
+| Unified RBP frontend and viewport entry | [Visual specification](DESIGN.md), [integration and upstream mapping](docs/portfolio-frontend.md), `src/app/rbp-system.css`, `src/lib/rbp-motion.mjs`, `src/components/rbp/` |
 | AI Skill / MCP / REST | [IAVSE Skill](integrations/iavse-post/SKILL.md), [API reference](integrations/iavse-post/references/api.md), `integrations/iavse-mcp.mjs` |
 | Isolation, tests and recovery | `test/`, [administration](docs/administration.en.md), `scripts/backup.mjs`, `scripts/restore.mjs` |
 
-Start with one page and its tests, then follow its API and data modules. Dated design and performance records describe their original versions and measurement scope. The former [mixed-reference homepage](docs/home-react-bits.md) and [spatial homepage design](docs/home-product-redesign.md) are historical.
+Start with one page and its tests, then follow its API and data modules. [DESIGN.md](DESIGN.md) is the only platform visual specification; earlier implementations remain in Git history. Third-party design guides in the catalog are learning content. Dated feature and performance records describe their original versions and measurement scope.
 
 ## Deployment and data
 

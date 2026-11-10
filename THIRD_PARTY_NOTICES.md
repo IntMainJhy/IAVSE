@@ -82,13 +82,13 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 
 ### React Bits / React Bits 动效
 
-`src/components/react-bits/SpotlightCard`, `StarBorder`, and `AnimatedContent` are sourced from [React Bits](https://reactbits.dev/) by David Haz, copyright 2026, using the official `TS-CSS` registries. Source and styles are included as part of the IAVSE application, with the complete [MIT + Commons Clause license](docs/licenses/React-Bits.txt). IAVSE disables pointer-only spotlight work on touch/reduced-motion devices and leaves AnimatedContent visible during SSR. The administration code configures short mount transitions, no ambient spotlight loop, and one visible StarBorder button; these are application settings, not a component redistribution service. Third-party portions retain their upstream terms.
+`src/components/react-bits/SpotlightCard`, `StarBorder`, and `AnimatedContent` are sourced from [React Bits](https://reactbits.dev/) by David Haz, copyright 2026, using the official `TS-CSS` registries. Source and styles are included as part of the IAVSE application, with the complete [MIT + Commons Clause license](docs/licenses/React-Bits.txt). IAVSE disables pointer-only spotlight work on touch/reduced-motion devices and leaves AnimatedContent visible during SSR. These retained components are no longer mounted by the administration overview; it now uses the shared RBP controls and viewport-entry enhancement. Retained source is not a component redistribution service. Third-party portions retain their upstream terms.
 
-后台直接使用上述 React Bits 源码组件，补充触屏和减少动态效果适配。完整原许可已保留；本项目的原创部分许可不覆盖这些第三方部分。
+上述 React Bits 源码与许可仍保留，但管理总览已改用统一 RBP 控件和滚动入场，不再挂载这三个组件。本项目的原创部分许可不覆盖这些第三方部分。
 
 ### RBP Portfolio content port
 
-IAVSE adapts selected components from [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio), revision `1581b9b8e5876f60e5eb844970747506980c4412`: the OGL flow shader and portrait morph, navigation, Hero/Projects/About/Contact structures, motion primitives, global styling and Lenis setup. Attribution and the upstream README permission are preserved in [docs/licenses/RBP-Portfolio.txt](docs/licenses/RBP-Portfolio.txt). The upstream README permits use in personal and commercial projects and prohibits resale or redistribution of the template itself; it does not declare the template MIT-licensed. These components are integrated into the IAVSE application with its own content and functional routes; the standalone portfolio template is not repackaged. The template-backed pages retain the upstream layout and normal-motion parameters, with IAVSE content, routes, cookie themes, authored-content boundaries, reduced-motion/fallback behavior and lifecycle cleanup.
+IAVSE adapts selected components from [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio), revision `1581b9b8e5876f60e5eb844970747506980c4412`: the OGL flow shader and portrait morph, navigation, Hero/Projects/About/Contact structures, motion primitives, global styling and Lenis setup. Attribution and the upstream README permission are preserved in [docs/licenses/RBP-Portfolio.txt](docs/licenses/RBP-Portfolio.txt). The upstream README permits use in personal and commercial projects and prohibits resale or redistribution of the template itself; it does not declare the template MIT-licensed. These components are integrated into the IAVSE application with its own content and functional routes; the standalone portfolio template is not repackaged. The template-backed pages retain the upstream composition and interaction parameters, with IAVSE content, routes, cookie themes, authored-content boundaries, reduced-motion/fallback behavior and lifecycle cleanup. RBP also supplies the sole platform typography, palette and control language for operating pages. IAVSE adds first-viewport entry and bounded staggering through its shared motion policy; operating layouts remain application-specific.
 
 当前平台前端以这个公开仓库为基础，保留原作者、版本与许可；IAVSE 原创部分和第三方部分分别遵循各自许可。未包含付费 Gradient Bars 源码。
 
@@ -106,7 +106,7 @@ The About page's draggable technology stack uses Matter.js 0.20.0. Its MIT licen
 
 Tailwind CSS and its CLI 4.1.18 compile the retained Portfolio utility classes. The generated stylesheet is scoped to the template surface; native editors and authored themes remain outside its reset boundary. The installed Tailwind CSS MIT license, copyright Tailwind Labs, Inc., is preserved unchanged in [docs/licenses/Tailwind-CSS-MIT.txt](docs/licenses/Tailwind-CSS-MIT.txt).
 
-Tailwind CSS 4.1.18 用于编译原始工具类；完整 MIT 原文来自实际安装包。模板页面实际使用系统字体回退，保留的 Geist 与 Cormorant 仍按其各自字体许可处理。
+Tailwind CSS 4.1.18 用于编译原始工具类；完整 MIT 原文来自实际安装包。全平台 UI 使用系统字体回退，保留的 Geist 与 Cormorant 仍按其各自字体许可处理。
 
 ### Portfolio screenshot content / Portfolio 页面截图
 

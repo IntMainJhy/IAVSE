@@ -1,14 +1,12 @@
-/* Server-loaded route styles; preserve the original cascade order. */
+/* Server-loaded route styles; feature structure only; RBP tokens own visual design. */
 @import '../appearance.css';
 @import '../compact.css';
 @import '../member-avatars.css';
-@import '../quiet-ui.css';
 @import '../motion.css';
 @import '../x-social.css';
 @import '../detail.css';
 @import '../resume-auth.css';
 @import '../spaces.css';
-@import '../site-unified.css';
 @import '../blog.css';
 @import '../blog-themes.css';
 @import '../anx-portfolio.css';
@@ -18,15 +16,7 @@
 @import '../blog-personalization.css';
 @import '../blog-theme-motion.css';
 @import '../site-owner.css';
-@import '../site-appearance.css';
 @import '../blog-reading-finish.css';
 @import '../blog-entry.css';
-@import '../v2.css';
-@import '../glass-platform.css';
 @import '../blog-shell.css';
 @import '../account-menu.css';
-@import '../iavse-platform.css';
-@import '../iavse-interiors.css';
-@import '../iavse-blogs.css';
-@import '../iavse-quantum.css';
-@import '../iavse-liquid-controls.css';

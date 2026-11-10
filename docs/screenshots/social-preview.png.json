@@ -1,6 +1,8 @@
 {
-  "prompt": "Actual signed-out IAVSE homepage screenshot, Ego Browser, 2026-11-10, 1280x640. Original RBP Portfolio composition with IAVSE content; working-tree source hashes in captures.json#portfolioSource. No generated imagery.",
+  "prompt": "Actual signed-out IAVSE screenshot of /, Ego Browser, 2026-11-10, 1280x640. Unified RBP Portfolio platform design with IAVSE content. Base dcc9be3301ed29b34f6fd98d7a91bbcd25915e93; working-tree source hashes in captures.json#portfolioSource. No generated content.",
   "route": "/",
   "capturedAt": "2026-11-10",
+  "signedIn": false,
+  "sourceBaseCommit": "dcc9be3301ed29b34f6fd98d7a91bbcd25915e93",
   "sourceRecord": "captures.json#portfolioSource"
 }

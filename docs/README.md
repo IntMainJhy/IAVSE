@@ -54,18 +54,17 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 数据库、真实环境文件、上传、邮件、密钥和备份保存在私有存储。客户端不属于此网站源码仓库。当前仓库未声明一个经过生产验收的公开演示地址；本机地址不作为在线演示发布。
 
-## 当前实现与历史记录 / Current design and history
+## 当前实现 / Current implementation
 
-- [当前前端：RBP Portfolio 适配 / Current frontend](portfolio-frontend.md): shared monochrome design, source mapping, OGL flow and portrait morph, Motion, Lenis, route boundaries and fallbacks.
-- [旧版首页混合参考方案 / Historical mixed-reference homepage](home-react-bits.md): superseded Silk and ASCII direction; retained only as a historical record.
-- [旧版首页产品空间 / Historical spatial homepage](home-product-redesign.md): superseded optical opening and scroll-driven chapters; retained as a historical design record.
+- [唯一平台视觉规范 / Platform design system](../DESIGN.md): the RBP Portfolio font, light/dark palette, cards, controls and entry motion across all platform pages.
+- [RBP 前端接入与源码映射 / Frontend integration](portfolio-frontend.md): original template composition, shared operating controls, Scroll Reveal / Fade In Up / Staggered Reveal, OGL, Lenis and authored-content boundaries.
 - [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
 - [模板与展廊修复](blog-gallery-template-repair-2026-11-08.md).
 - [2026-11-06 名称与清理](cleanup-2026-11-06.md).
 - [2026-11-04 仓库维护记录](release-2026-11-04.md).
 - [2026-11-02 检查记录](release-2026-11-02.md).
 
-带日期的设计、性能和验证记录只描述当时范围，不替代当前代码或运行结果。Latest repository changes are summarized in [CHANGELOG.md](../CHANGELOG.md).
+旧平台皮肤及相互竞争的设计规范已清理，历史实现可从 Git 历史追溯。资源目录里的第三方设计规范仍作为学习内容保留。带日期的功能、性能和验证记录只描述当时范围，不替代当前代码或运行结果。Latest repository changes are summarized in [CHANGELOG.md](../CHANGELOG.md).
 
 ## 仓库入口 / Repositories
 

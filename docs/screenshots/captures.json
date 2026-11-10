@@ -66,18 +66,17 @@
     "signedIn": false
   },
   "portfolioSource": {
-    "sourceBaseCommit": "4481459f080730acb71ae52216ea7e5e97dfe4de",
-    "sourceState": "Original-layout content port working tree, captured before this update is committed",
+    "sourceBaseCommit": "dcc9be3301ed29b34f6fd98d7a91bbcd25915e93",
+    "sourceState": "Unified RBP design system and viewport entry working tree, captured before this update is committed",
     "sourceFilesSha256": {
-      "src/app/layout.tsx": "18e6679faba148f056f553d368eabe6df82a525d2647380b459b31cb86861bfe",
-      "src/app/portfolio-foundation.css": "f7f124b62abffbbe4468f8ef897401d01362de6679ee7c877c309b7074a5f664",
+      "src/app/layout.tsx": "d4585888912b68c9234583afc7f2b04fcb4b75c4331988a9ed1d899c5ddfb916",
       "src/app/rbp-template.css": "4503019197b60dacc804c7757fa8e262d4cf3139e5b57629473f379918031a84",
       "src/app/rbp-bridge.css": "4aeaaefafa68035b53cc9c20b8744a8b7d807f29a6d5c10e6ed99c771ed27f4c",
-      "src/components/PublicSite.tsx": "8fb6d1f34d3c4ac4973d0f6ca9ed1d17466ef9c92b7df953774f61bd9d2dcc5f",
-      "src/components/PlatformHome.tsx": "d2741984280728bf32e953a0a0422a1d86d0dd34e79dc8018e4b2b94c802ecd2",
+      "src/components/PublicSite.tsx": "1ba6bcf95e88f8ac7f490d2b13cef33dc3bfaa83e2b370e0e7f3ddffd9da3342",
+      "src/components/PlatformHome.tsx": "ace9d74f4ea9b57dfee573b714307933e5478795acdb7e17989cd2b72575de4d",
       "src/components/ResourceIntroduction.tsx": "ed8a7edb9a408f50e2f80c953cdbe628adae44d736f5163aaa5ab5080be1d8ed",
       "src/components/BlogSpacesPage.tsx": "15a9abc146d305b148f828f69fbcb85adcbeb06c71748deac14513b9f59a08f2",
-      "src/components/portfolio/PortfolioRuntime.tsx": "fa2a4f2574c83afef1acc198ecee82575b927b0e5d3f19af31083fff7655a92c",
+      "src/components/portfolio/PortfolioRuntime.tsx": "eae4641997e8870ad6b555ef99c4839e0ad79ddaed42f941d8eb5b512b030e7c",
       "src/components/portfolio/PortraitMorph.tsx": "f27dbdea841d7aad197e310860f37556fb29694e12507b2b28188069ee2b182f",
       "src/components/portfolio/ShaderFlow.tsx": "6f919f55630bd743ee3551a67274b28c992b74816b94348d187f43aa3e68a451",
       "src/lib/portfolio-content.ts": "f40df9aaccce8192fab0236f56604d1d64544a7c39487a6535a709fefe3f6274",
@@ -93,13 +92,19 @@
       "src/components/rbp/contact/contact-card-ctas.tsx": "e076541a2d3f1dc8cb6b01a7b46be147c2fac5ff9b608773e7b1bdef5de8e70a",
       "src/components/rbp/contact/contact-card.tsx": "d259bbe1f3cb7274e907d5323f48eb220d1660f3b9cbed570d1872afe6d94e48",
       "src/components/rbp/hero/hero-ctas.tsx": "35fede293f89af5bd43e08f724f3ea9570e44102823fc07d2d997613d99ca68e",
-      "src/components/rbp/hero/hero.tsx": "3cc63b3652295b07dcc4605ec8c24edaa595c265450356c3d89132d8111f629f",
+      "src/components/rbp/hero/hero.tsx": "4af37910901bedafcb18ef19f980b83f0bf497dee8357490147a0d31c25a9904",
       "src/components/rbp/layout/nav.tsx": "6273a116bedb19fffcc85f57a9d534ecffba9d0ad6221673f83a20147b7916e3",
       "src/components/rbp/layout/page-backdrop.tsx": "0a131c56dc5eca14611f54c5137d2b9c1088dbd455b163fed3d7440b9ac7b93f",
       "src/components/rbp/layout/site-frame.tsx": "7b3cf66ead3bd2bff80f239b02ed11ac3f613db3dc31930c347a29c3b46d6020",
       "src/components/rbp/projects/projects.tsx": "b82262ccc822637f1b6a371cea4fcc58b4d8e2927b9909f4d84628d7a4edc52c",
       "src/components/rbp/ui/dotted-pattern.tsx": "ffecd4bab4c163b3979372bde1cb11ad55344a8c2fbb24e36731ad55f9659500",
-      "src/components/rbp/ui/motion-primitives.tsx": "00c354080209117d68625b23649ba3444c11c3e2e5eacb18915e5dee3da31dc6"
+      "src/components/rbp/ui/motion-primitives.tsx": "c9a0979049f1c6ba55f97345dac294922191b3294e4a3e50410eaac609d1f199",
+      "src/app/rbp-system.css": "45c7255d70aa2b264e7ffefe0094f766b78e21cef107e5c208ad8c637f6ff280",
+      "src/components/rbp/ui/application-reveal.tsx": "25317a2bd7e73d8c4249943d87a225b4781ac739acd1dd54199bca505d1d4d84",
+      "src/lib/rbp-motion.mjs": "57e491e5064596b95483d62856c915a8309024ddc55dfe37480b2db965b53d77",
+      "src/components/ResourceHub.tsx": "e7db53ad4aeaee90832cbaf67dd1fffa218f7dad5f15b1c1671db0bc9d4c9213",
+      "public/media/portfolio/skills.webp": "6e4054908bbc124f30231f266c5e0a5a7647d67a8dc7038049b2c9ec7cf4074c",
+      "public/media/portfolio/community.webp": "56e088b5633e0b9173ccc834e616f3df860fe358ce2058427d7a7577103a76a7"
     }
   }
 }
