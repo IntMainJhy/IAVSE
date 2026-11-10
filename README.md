@@ -26,7 +26,7 @@
 
 </div>
 
-![IAVSE 当前首页：Portfolio 分栏布局与流动背景](docs/screenshots/home-current.webp)
+![IAVSE 当前首页：独立细化的分栏布局与浅色氛围背景](docs/screenshots/home-current.webp)
 
 ## 关于 IAVSE
 
@@ -57,13 +57,13 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 ## 界面预览
 
-以下为 **2026-11-10** 从 `main` 实际页面拍摄的截图。示例主页不代表真实注册成员或用户背书；社区保留拍摄时的实际空状态。详见[截图说明](docs/screenshots/README.md)。
+以下为 **2026-11-10** 从本地实际生产构建拍摄的截图，展示当前 IAVSE 独立设计细化。工作区源码哈希与来源基线见相邻的 [captures.json](docs/screenshots/captures.json)。示例主页不代表真实注册成员或用户背书；社区保留实际空状态。详见[截图说明](docs/screenshots/README.md)。
 
 ### 首页与内容入口
 
-全平台以 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 为唯一设计体系，共用 system-ui 字体、浅深色中性表面、卡片、按钮、字段与胶囊筛选。首页为 Hero → 四张 Projects 卡片 → Contact；关于页和资源/博客总览保留原模板结构，公共导航使用固定三链接胶囊。社区、目录、账号、管理与编辑器外壳保留功能布局并统一为 RBP 控件；内容首次滚动进入视口时上移淡入，同组交错延迟有上限。作者画布、已发布博客主题和第三方预览保留独立外观。旧平台皮肤和设计规范已清理。视觉约定见 [DESIGN.md](DESIGN.md)，源码与边界见[前端接入说明](docs/portfolio-frontend.md)。
+当前平台采用独立细化的 **IAVSE 设计系统**：自托管 Geist 字体（CSS 别名 IAVSE Sans）、冷白与深蓝画布、蓝灰文字、浅色分组和统一控件。现有 [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) 组件仍是组合与交互基线：首页保持 Hero → 四张 Projects 卡片 → Contact，公共导航保持三链接胶囊。此次在当前应用上独立调整字体、留白、卡片与 CSS 氛围背景；Cloudlight 只提供通用设计原则参考，已取消的直接模板迁移没有恢复，也未引入其代码、着色器或资产。社区、目录、账号、管理和编辑器保留功能布局，共用 IAVSE 控件与首次视口入场。作者画布、已发布博客主题和第三方预览保持自身外观。视觉约定见 [DESIGN.md](DESIGN.md)，组件来源、改动和许可边界见[前端接入说明](docs/portfolio-frontend.md)。
 
-![首页四张内容入口卡片，沿用原始 Projects 排版](docs/screenshots/product-current.webp)
+![首页四张内容入口卡片，使用 IAVSE 表面与双列组合](docs/screenshots/product-current.webp)
 
 ### 博客空间与个人主页
 
@@ -72,7 +72,7 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 <details>
 <summary>查看更多界面：资源目录、社区和内置主页示例</summary>
 
-![资源总览：原始 ProjectsPage 标题和双列卡片](docs/screenshots/resources-current.webp)
+![资源总览：细化后的标题留白和双列卡片](docs/screenshots/resources-current.webp)
 
 ![社区导航、分类与实际空状态](docs/screenshots/community-current.webp)
 
@@ -124,7 +124,7 @@ GitHub Actions 在 `main` 推送和 Pull Request 时执行文档检查、单元�
 | 博客画布与模板 | [编辑器说明](docs/blog-editor.zh-CN.md)、`src/components/BlogCanvas.tsx`、`src/lib/blog-templates.mjs` |
 | 草稿、公开版本与权限边界 | [发布说明](docs/public-launch.md)、`src/lib/spaces.mjs`、`src/lib/community.mjs` |
 | 目录查询、筛选与性能 | [资源目录实现](docs/resource-discovery.md)、[目录性能记录](docs/catalog-performance-2026-11-08.md) |
-| 统一 RBP 前端与滚动入场 | [唯一视觉规范](DESIGN.md)、[接入与上游映射](docs/portfolio-frontend.md)、`src/app/rbp-system.css`、`src/lib/rbp-motion.mjs`、`src/components/rbp/` |
+| IAVSE 设计系统与滚动入场 | [唯一视觉规范](DESIGN.md)、[接入与上游映射](docs/portfolio-frontend.md)、`src/app/iavse-system.css`、`src/lib/rbp-motion.mjs`、`src/components/rbp/` |
 | AI Skill / MCP / REST | [接入 Skill](integrations/iavse-post/SKILL.md)、[API 参考](integrations/iavse-post/references/api.md)、`integrations/iavse-mcp.mjs` |
 | 账号隔离、测试与恢复 | `test/`、[管理文档](docs/管理中心说明.md)、`scripts/backup.mjs`、`scripts/restore.mjs` |
 

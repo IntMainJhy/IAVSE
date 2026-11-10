@@ -26,7 +26,7 @@ Arrange your work, experience and writing in a visual canvas.
 
 </div>
 
-![IAVSE Portfolio-based split homepage with a flowing background](docs/screenshots/home-current.webp)
+![IAVSE split homepage with independently refined type, surfaces and CSS atmosphere](docs/screenshots/home-current.webp)
 
 ## About IAVSE
 
@@ -56,13 +56,13 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 ## Preview
 
-Captured from the actual `main` website on **2026-11-10**. Bundled showcase profiles are examples, not registered-user or endorsement claims. Community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
+Captured from the actual local production build on **2026-11-10**, showing the independent IAVSE design refinement. Working-tree source hashes and the source base are recorded in the adjacent [captures.json](docs/screenshots/captures.json). Bundled showcase profiles are labeled examples; community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
 
 ### Homepage and content entry points
 
-[RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) is the sole platform design system: system-ui type, neutral light/dark surfaces, rounded cards, buttons, fields and capsule filters. The homepage is Hero → four Projects cards → Contact; About and resource/blog overviews retain the upstream structures and fixed three-link capsule. Community, catalogs, accounts, administration and the editor shell use the same RBP controls within their functional layouts. Content fades upward on first viewport entry with capped group staggering. Authored canvas documents, published blog themes and third-party previews retain their own appearance. Earlier platform skins and competing design guides have been removed. See [DESIGN.md](DESIGN.md) and the [frontend integration notes](docs/portfolio-frontend.md).
+The current **IAVSE design system** independently refines the existing application with self-hosted Geist (the IAVSE Sans CSS alias), cool light and deep-blue canvases, blue-gray type, pale content groups and shared controls. [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) remains the component and interaction baseline: Hero → four Projects cards → Contact, with the three-link public capsule. Type, spacing, card surfaces and the CSS atmosphere are IAVSE refinements. Cloudlight informed general design principles; the cancelled direct template migration remains cancelled, with no Cloudlight code, shader or assets included. Community, catalogs, accounts, administration and the editor retain their functional layouts with IAVSE controls and first-viewport entry motion. Authored canvases, published themes and third-party previews keep their own appearance. See [DESIGN.md](DESIGN.md) and the [frontend notes](docs/portfolio-frontend.md) for current rules, source mapping and license boundaries.
 
-![Four homepage entry cards in the original Projects composition](docs/screenshots/product-current.webp)
+![Four homepage entry cards with IAVSE surfaces and the retained two-column composition](docs/screenshots/product-current.webp)
 
 ### Blog discovery and personal homepages
 
@@ -71,7 +71,7 @@ Captured from the actual `main` website on **2026-11-10**. Bundled showcase prof
 <details>
 <summary>More views: resource catalog, community and a built-in homepage</summary>
 
-![Resource overview with the original ProjectsPage title and two-column cards](docs/screenshots/resources-current.webp)
+![Resource overview with refined title spacing and two-column cards](docs/screenshots/resources-current.webp)
 
 ![Community navigation, categories and actual empty state](docs/screenshots/community-current.webp)
 
@@ -123,7 +123,7 @@ GitHub Actions checks documentation, unit tests, the production build and types 
 | Blog canvas and templates | [Editor guide](docs/blog-editor.md), `src/components/BlogCanvas.tsx`, `src/lib/blog-templates.mjs` |
 | Drafts, public versions and authorization | [Publication boundaries](docs/public-launch.en.md), `src/lib/spaces.mjs`, `src/lib/community.mjs` |
 | Catalog queries, filters and performance | [Resource discovery](docs/resource-discovery.md), [catalog measurements](docs/catalog-performance-2026-11-08.md) |
-| Unified RBP frontend and viewport entry | [Visual specification](DESIGN.md), [integration and upstream mapping](docs/portfolio-frontend.md), `src/app/rbp-system.css`, `src/lib/rbp-motion.mjs`, `src/components/rbp/` |
+| IAVSE design system and viewport entry | [Visual specification](DESIGN.md), [integration and upstream mapping](docs/portfolio-frontend.md), `src/app/iavse-system.css`, `src/lib/rbp-motion.mjs`, `src/components/rbp/` |
 | AI Skill / MCP / REST | [IAVSE Skill](integrations/iavse-post/SKILL.md), [API reference](integrations/iavse-post/references/api.md), `integrations/iavse-mcp.mjs` |
 | Isolation, tests and recovery | `test/`, [administration](docs/administration.en.md), `scripts/backup.mjs`, `scripts/restore.mjs` |
 

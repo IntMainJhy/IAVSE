@@ -1,22 +1,22 @@
-/** Platform design documentation. RBP is the only active platform standard. */
+/** Current IAVSE platform rules; historical slugs remain for link compatibility. */
 export const iavseDesignGuides=[
- {slug:'iavse-rbp-design-system',title:'IAVSE 的 RBP Portfolio 设计规范',summary:'统一的黑白表面、系统字体、胶囊导航、卡片与控件。',body:`# IAVSE 的 RBP Portfolio 设计规范
+ {slug:'iavse-rbp-design-system',title:'IAVSE 的界面设计规范',summary:'清透的浅色背景、Geist 字体、统一表面、导航与控件。',body:`# IAVSE 的界面设计规范
 
-当前平台只采用 DavidHDev/rbp-portfolio 的设计语言，固定参考提交为 1581b9b8e5876f60e5eb844970747506980c4412。
+当前平台在已有 RBP 组件结构上，独立调整 IAVSE 的配色、字体、间距和卡片。Cloudlight 只作为通用设计原则的参考，不包含它的源码、着色器或素材。既有第三方许可保持不变。
 
 ## 统一基础
 
-浅色背景 #ffffff、正文 #0a0a0a、次级表面 #f5f5f5、边界 #e5e5e5。深色背景 #0a0a0a、正文 #fafafa、次级表面 #171717、边界 #262626。字体匹配示例网站实际使用的 system-ui，根字号 16px。颜色只能从共享语义变量读取。
+浅色画布 #f7f9fc、表面 #ffffff、正文 #172b3a、次级文字 #4d6171、边界 #dce5ed。深色画布 #0b141e、表面 #111e2b、正文 #edf5fc、边界 #2b4255。平台使用本地 Geist 字体（IAVSE Sans），遵守字体 OFL，根字号 16px。颜色从共享语义变量读取。
 
-首页保留 Hero、四张 Projects 卡片、Contact 的结构。公共导航沿用居中的三链接胶囊。资源、社区、账号和管理界面以相同的字体、边界、按钮和表面组织各自功能。
+首页保留 Hero、四张 Projects 卡片、Contact 的结构。目录介绍区缩短顶部空白，项目区加入细分隔，Skill 展示区使用浅蓝、浅绿、浅暖色辅助分类。公共导航沿用居中的三链接胶囊。资源、社区、账号和管理界面以相同的字体、边界、按钮和表面组织各自功能。
 
-卡片使用 24px 圆角，Contact 外框 32px，控件 12px，导航和筛选使用胶囊。主操作为前景色实心按钮，次操作为底色加细边界。页面标题与内容保持原有层级，不为统一外观删除表单、筛选或管理功能。
+展示卡片使用 20px 圆角，首屏与 Contact 外框 28px，控件 12px，导航和筛选使用胶囊。主操作为前景色实心按钮，次操作为底色加细边界。页面标题与内容保持原有层级，不为统一外观删除表单、筛选或管理功能。
 
 ## 源文件
 
-DESIGN.md 是规范入口。src/app/rbp-system.css 管理平台语义变量及应用控件；src/styles/rbp-template.input.css 保留原模板工具类；src/components/rbp 是模板组件。资源目录收录的第三方规范是学习内容，不是 IAVSE 平台皮肤。
+DESIGN.md 是规范入口。src/app/iavse-system.css 管理平台语义变量及应用控件；src/styles/rbp-template.input.css 保留原模板工具类；src/components/rbp 是模板组件。资源目录收录的第三方规范是学习内容，不是 IAVSE 平台皮肤。
 
-来源：https://github.com/DavidHDev/rbp-portfolio
+RBP 组件来源：https://github.com/DavidHDev/rbp-portfolio；本轮界面细化为 IAVSE 独立实现。
 `},
  {slug:'iavse-rbp-scroll-reveal',title:'滚动入场、上移淡入与交错动画',summary:'沿用 RBP 缓动，在首次进入视口时触发，支持减少动态和键盘访问。',body:`# 滚动入场动画
 
@@ -34,9 +34,9 @@ DESIGN.md 是规范入口。src/app/rbp-system.css 管理平台语义变量及�
 
 共享参数在 src/lib/rbp-motion.mjs，模板组件在 motion-primitives.tsx，业务页面增强在 application-reveal.tsx。
 `},
- {slug:'iavse-rbp-page-integration',title:'为页面接入统一 RBP 样式',summary:'页面布局、编辑器外壳、内容边界及验收方法。',body:`# 页面接入方式
+ {slug:'iavse-rbp-page-integration',title:'为页面接入统一 IAVSE 样式',summary:'页面布局、编辑器外壳、内容边界及验收方法。',body:`# 页面接入方式
 
-公共页面通过 PublicFrame 接入，资源筛选通过 ResourceHub 接入，管理中心通过 AdminApp 接入。业务区域使用 rbp-application，共享 RBP 的字体、颜色、卡片、控件和反馈。
+公共页面通过 PublicFrame 接入，资源筛选通过 ResourceHub 接入，管理中心通过 AdminApp 接入。业务区域使用 rbp-application，共享 IAVSE 的字体、颜色、卡片、控件和反馈。
 
 ## 页面内容
 

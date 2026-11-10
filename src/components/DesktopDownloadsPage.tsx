@@ -8,10 +8,11 @@ export function PlatformMark({platform}:{platform:'macos'|'windows'}){
 }
 
 export async function DesktopDownloadsPage(){
- const {t}=await serverI18n(),downloads=getConfig('site').desktopDownloads||{};
+ const {t,locale}=await serverI18n(),downloads=getConfig('site').desktopDownloads||{};
+ const title=t('在你的电脑上，继续创造。'),breakAt=locale==='zh'?title.indexOf('，')+1:0;
  return <div className="platform-page product-download-page">
   <section className="product-downloads" id="downloads" aria-labelledby="downloads-heading">
-   <header className="product-section-heading"><div><h1 id="downloads-heading">{t('在你的电脑上，继续创造。')}</h1></div><Link href="/community" className="space-link">{t('使用网页版')}</Link></header>
+   <header className="product-section-heading"><div><h1 id="downloads-heading">{breakAt>0?<><span className="download-heading-phrase">{title.slice(0,breakAt)}</span><wbr/><span className="download-heading-phrase">{title.slice(breakAt)}</span></>:title}</h1></div><Link href="/community" className="space-link">{t('使用网页版')}</Link></header>
    <div className="product-download-options">{(['macos','windows'] as const).map(platform=>{
     const item=downloads[platform]||{},label=platform==='macos'?'macOS':'Windows';
     return <article className="product-download-option" key={platform} aria-labelledby={'download-'+platform}>

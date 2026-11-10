@@ -22,7 +22,7 @@ The blog editor uses `@xyflow/react` (MIT) for viewport gestures, node selection
 
 ### Three.js
 
-The retained earlier homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT); it is not the current RBP homepage backdrop. The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The reading-page point backdrop uses Three.js camera/math modules and its linear-to-sRGB transfer formula with two native WebGL draw passes. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
+The retained earlier homepage glass renderer uses Three.js, GLTFLoader and the procedural RoomEnvironment (MIT); it is not the current IAVSE homepage backdrop. The [complete license](docs/licenses/Three.js-MIT.txt) is retained. The reading-page point backdrop uses Three.js camera/math modules and its linear-to-sRGB transfer formula with two native WebGL draw passes. The glass GLB is an original extrusion of IAVSE's existing folded-plane symbol; no Ego Lite model or environment image is included.
 
 ### npm dependencies
 
@@ -56,7 +56,7 @@ macOS and Windows client source code, installers and proprietary assets are not 
 
 ### Three.js
 
-保留的旧版首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment（当前 RBP 首页不挂载该背景），保留[完整许可](docs/licenses/Three.js-MIT.txt)。阅读页点阵背景使用 Three.js 相机、数学模块及线性颜色到 sRGB 的转换公式，通过原生 WebGL 绘制两个图层。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
+保留的旧版首页玻璃背景使用 MIT 许可的 Three.js、GLTFLoader 与程序化 RoomEnvironment（当前 IAVSE 首页不挂载该背景），保留[完整许可](docs/licenses/Three.js-MIT.txt)。阅读页点阵背景使用 Three.js 相机、数学模块及线性颜色到 sRGB 的转换公式，通过原生 WebGL 绘制两个图层。玻璃 GLB 基于 IAVSE 现有折叠形标志原创建模，未引入 Ego Lite 的模型或环境图片。
 
 ### npm 依赖
 
@@ -82,15 +82,15 @@ content, not real users or endorsements. No DiceBear request occurs at runtime.
 
 ### React Bits / React Bits 动效
 
-`src/components/react-bits/SpotlightCard`, `StarBorder`, and `AnimatedContent` are sourced from [React Bits](https://reactbits.dev/) by David Haz, copyright 2026, using the official `TS-CSS` registries. Source and styles are included as part of the IAVSE application, with the complete [MIT + Commons Clause license](docs/licenses/React-Bits.txt). IAVSE disables pointer-only spotlight work on touch/reduced-motion devices and leaves AnimatedContent visible during SSR. These retained components are no longer mounted by the administration overview; it now uses the shared RBP controls and viewport-entry enhancement. Retained source is not a component redistribution service. Third-party portions retain their upstream terms.
+`src/components/react-bits/SpotlightCard`, `StarBorder`, and `AnimatedContent` are sourced from [React Bits](https://reactbits.dev/) by David Haz, copyright 2026, using the official `TS-CSS` registries. Source and styles are included as part of the IAVSE application, with the complete [MIT + Commons Clause license](docs/licenses/React-Bits.txt). IAVSE disables pointer-only spotlight work on touch/reduced-motion devices and leaves AnimatedContent visible during SSR. These retained components are no longer mounted by the administration overview; it now uses the shared IAVSE controls and viewport-entry enhancement. Retained source is not a component redistribution service. Third-party portions retain their upstream terms.
 
-上述 React Bits 源码与许可仍保留，但管理总览已改用统一 RBP 控件和滚动入场，不再挂载这三个组件。本项目的原创部分许可不覆盖这些第三方部分。
+上述 React Bits 源码与许可仍保留，但管理总览已改用统一 IAVSE 控件和滚动入场，不再挂载这三个组件。本项目的原创部分许可不覆盖这些第三方部分。
 
-### RBP Portfolio content port
+### RBP Portfolio application adaptation
 
-IAVSE adapts selected components from [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio), revision `1581b9b8e5876f60e5eb844970747506980c4412`: the OGL flow shader and portrait morph, navigation, Hero/Projects/About/Contact structures, motion primitives, global styling and Lenis setup. Attribution and the upstream README permission are preserved in [docs/licenses/RBP-Portfolio.txt](docs/licenses/RBP-Portfolio.txt). The upstream README permits use in personal and commercial projects and prohibits resale or redistribution of the template itself; it does not declare the template MIT-licensed. These components are integrated into the IAVSE application with its own content and functional routes; the standalone portfolio template is not repackaged. The template-backed pages retain the upstream composition and interaction parameters, with IAVSE content, routes, cookie themes, authored-content boundaries, reduced-motion/fallback behavior and lifecycle cleanup. RBP also supplies the sole platform typography, palette and control language for operating pages. IAVSE adds first-viewport entry and bounded staggering through its shared motion policy; operating layouts remain application-specific.
+IAVSE adapts selected components from [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio), revision `1581b9b8e5876f60e5eb844970747506980c4412`: the OGL flow shader and portrait morph, navigation, Hero/Projects/About/Contact structures, motion primitives, global styling and Lenis setup. Attribution and the upstream README permission are preserved in [docs/licenses/RBP-Portfolio.txt](docs/licenses/RBP-Portfolio.txt). The upstream README permits use in personal and commercial projects and prohibits resale or redistribution of the template itself; it does not declare the template MIT-licensed. These components are integrated into the IAVSE application with its own content and functional routes; the standalone portfolio template is not repackaged. The existing public composition, portrait morph, navigation, About interactions, motion primitives and Lenis behavior remain the component baseline. IAVSE independently refines typography, spacing, palette, controls and card surfaces within that application. The retained OGL flow shader is no longer mounted by the page backdrop or Contact; the current atmosphere is independently authored CSS radial color fields with an optional scroll timeline. IAVSE also adds first-viewport entry and bounded staggering; operating layouts remain application-specific. These changes do not alter the rights in the retained upstream portions.
 
-当前平台前端以这个公开仓库为基础，保留原作者、版本与许可；IAVSE 原创部分和第三方部分分别遵循各自许可。未包含付费 Gradient Bars 源码。
+当前平台以前述公开仓库为组件基线，独立调整字体、留白、色彩、卡片与 CSS 氛围背景，保留原作者、固定版本及原许可。页面和 Contact 已不挂载保留的流场着色器。Cloudlight 只作为通用设计原则参考，未引入其代码、着色器、资产或许可证文件；已取消的直接模板迁移没有恢复。独立细化不改变或扩大第三方权利。未包含付费 Gradient Bars 源码。
 
 ### Lenis / 平滑滚动
 
@@ -106,7 +106,13 @@ The About page's draggable technology stack uses Matter.js 0.20.0. Its MIT licen
 
 Tailwind CSS and its CLI 4.1.18 compile the retained Portfolio utility classes. The generated stylesheet is scoped to the template surface; native editors and authored themes remain outside its reset boundary. The installed Tailwind CSS MIT license, copyright Tailwind Labs, Inc., is preserved unchanged in [docs/licenses/Tailwind-CSS-MIT.txt](docs/licenses/Tailwind-CSS-MIT.txt).
 
-Tailwind CSS 4.1.18 用于编译原始工具类；完整 MIT 原文来自实际安装包。全平台 UI 使用系统字体回退，保留的 Geist 与 Cormorant 仍按其各自字体许可处理。
+Tailwind CSS 4.1.18 用于编译保留的工具类；完整 MIT 原文来自实际安装包。
+
+### Geist / 平台字体
+
+The platform self-hosts the existing `public/fonts/design-artifacts/voltagent/geist-variable.woff2` under the CSS alias **IAVSE Sans**. Geist is copyright 2024 The Geist Project Authors and retains its unchanged [SIL Open Font License 1.1 notice](public/fonts/design-artifacts/voltagent/geist-OFL.txt). The alias names the application font role; it does not claim IAVSE authored the typeface. System and CJK font fallbacks remain available. Cormorant wordmarks and other retained font families keep their respective notices.
+
+平台字体使用仓库已有的 Geist 可变字体，CSS 别名为 IAVSE Sans，不表示 IAVSE 原创字体。Geist 的原作者、OFL 声明和其他字体的既有许可均保留。
 
 ### Portfolio screenshot content / Portfolio 页面截图
 

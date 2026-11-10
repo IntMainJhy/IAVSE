@@ -1,13 +1,13 @@
 /* Host isolation only. Template geometry and motion live in rbp-template.input.css. */
-/* Match the published reference's computed fonts, including its serif-class fallback. */
-.rbp-surface{--font-sans:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-serif:var(--font-sans);font-family:var(--font-sans);line-height:1.5;color:var(--foreground);font-synthesis:none}
-html:root[data-frontend=portfolio]:has([data-rbp-route]){font-size:16px;scrollbar-width:auto;scrollbar-color:auto}
+/* IAVSE typography refines the existing template without resetting authored content. */
+.rbp-surface{--font-sans:var(--iavse-font);--font-serif:var(--font-sans);font-family:var(--font-sans);line-height:1.5;color:var(--foreground);font-synthesis:none}
+html:root[data-frontend=portfolio]:has([data-rbp-route]){font-size:16px;scrollbar-width:auto;scrollbar-color:var(--iavse-border) var(--iavse-canvas)}
 html[data-frontend=portfolio]:has([data-rbp-route])::-webkit-scrollbar{width:15px;height:15px}
-html[data-frontend=portfolio]:has([data-rbp-route])::-webkit-scrollbar-thumb{background:#c1c1c1;border:3px solid #fff;border-radius:8px}
-html[data-frontend=portfolio]:has([data-rbp-route])::-webkit-scrollbar-track{background:#fff}
+html[data-frontend=portfolio]:has([data-rbp-route])::-webkit-scrollbar-thumb{background:var(--iavse-border);border:3px solid var(--iavse-canvas);border-radius:8px}
+html[data-frontend=portfolio]:has([data-rbp-route])::-webkit-scrollbar-track{background:var(--iavse-canvas)}
 .rbp-surface nav{white-space:nowrap}
 @scope (.rbp-surface) to (.rbp-native){.space-y-6>:not(:last-child){margin-block-end:calc(var(--spacing)*6)}}
-html[data-color-mode=dark] .rbp-surface{--background:#0a0a0a;--foreground:#fafafa;--muted:#171717;--muted-foreground:#a3a3a3;--border:#262626;--ring:#3b82f6;--frame:#0a0a0a}
+html[data-color-mode=dark] .rbp-surface{--background:var(--iavse-background);--foreground:var(--iavse-foreground);--muted:var(--iavse-muted);--muted-foreground:var(--iavse-subtle);--border:var(--iavse-border);--ring:var(--iavse-focus);--frame:var(--iavse-canvas)}
 html[data-frontend=portfolio] body{position:relative;isolation:isolate}
 .rbp-native-content{padding-top:128px;min-height:100vh}
 .rbp-native-content.resource-page-frame{padding-top:128px!important}

@@ -1,284 +1,418 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T01:19:02.762632+00:00",
-  "title": "Design System: IAVSE · RBP Portfolio",
+  "generatedAt": "2026-11-10T02:38:36.103612+00:00",
+  "title": "Design System: IAVSE",
   "extensions": {
     "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "tonalRamp": [
+          "oklch(15% 0.0045 258.32)",
+          "oklch(26.43% 0.0045 258.32)",
+          "oklch(37.86% 0.0045 258.32)",
+          "oklch(49.29% 0.0045 258.32)",
+          "oklch(60.71% 0.0045 258.32)",
+          "oklch(72.14% 0.0045 258.32)",
+          "oklch(83.57% 0.0045 258.32)",
+          "oklch(95% 0.0045 258.32)"
+        ]
+      },
       "background": {
         "role": "neutral",
         "displayName": "Background",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0000 0.00)",
+          "oklch(26.43% 0.0000 0.00)",
+          "oklch(37.86% 0.0000 0.00)",
+          "oklch(49.29% 0.0000 0.00)",
+          "oklch(60.71% 0.0000 0.00)",
+          "oklch(72.14% 0.0000 0.00)",
+          "oklch(83.57% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
         ]
       },
       "foreground": {
         "role": "primary",
         "displayName": "Foreground",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0381 242.27)",
+          "oklch(26.43% 0.0381 242.27)",
+          "oklch(37.86% 0.0381 242.27)",
+          "oklch(49.29% 0.0381 242.27)",
+          "oklch(60.71% 0.0381 242.27)",
+          "oklch(72.14% 0.0381 242.27)",
+          "oklch(83.57% 0.0381 242.27)",
+          "oklch(95% 0.0381 242.27)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Secondary",
+        "tonalRamp": [
+          "oklch(15% 0.0355 242.62)",
+          "oklch(26.43% 0.0355 242.62)",
+          "oklch(37.86% 0.0355 242.62)",
+          "oklch(49.29% 0.0355 242.62)",
+          "oklch(60.71% 0.0355 242.62)",
+          "oklch(72.14% 0.0355 242.62)",
+          "oklch(83.57% 0.0355 242.62)",
+          "oklch(95% 0.0355 242.62)"
+        ]
+      },
+      "subtle": {
+        "role": "neutral",
+        "displayName": "Subtle",
+        "tonalRamp": [
+          "oklch(15% 0.0311 245.04)",
+          "oklch(26.43% 0.0311 245.04)",
+          "oklch(37.86% 0.0311 245.04)",
+          "oklch(49.29% 0.0311 245.04)",
+          "oklch(60.71% 0.0311 245.04)",
+          "oklch(72.14% 0.0311 245.04)",
+          "oklch(83.57% 0.0311 245.04)",
+          "oklch(95% 0.0311 245.04)"
         ]
       },
       "muted": {
         "role": "neutral",
         "displayName": "Muted",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
-        ]
-      },
-      "muted-foreground": {
-        "role": "neutral",
-        "displayName": "Muted Foreground",
-        "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0076 241.66)",
+          "oklch(26.43% 0.0076 241.66)",
+          "oklch(37.86% 0.0076 241.66)",
+          "oklch(49.29% 0.0076 241.66)",
+          "oklch(60.71% 0.0076 241.66)",
+          "oklch(72.14% 0.0076 241.66)",
+          "oklch(83.57% 0.0076 241.66)",
+          "oklch(95% 0.0076 241.66)"
         ]
       },
       "border": {
         "role": "neutral",
         "displayName": "Border",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0146 244.73)",
+          "oklch(26.43% 0.0146 244.73)",
+          "oklch(37.86% 0.0146 244.73)",
+          "oklch(49.29% 0.0146 244.73)",
+          "oklch(60.71% 0.0146 244.73)",
+          "oklch(72.14% 0.0146 244.73)",
+          "oklch(83.57% 0.0146 244.73)",
+          "oklch(95% 0.0146 244.73)"
         ]
       },
-      "ring": {
+      "focus": {
         "role": "primary",
-        "displayName": "Ring",
+        "displayName": "Focus",
         "tonalRamp": [
-          "oklch(15% 0.16 260)",
-          "oklch(26% 0.16 260)",
-          "oklch(38% 0.16 260)",
-          "oklch(49% 0.16 260)",
-          "oklch(61% 0.16 260)",
-          "oklch(72% 0.16 260)",
-          "oklch(84% 0.16 260)",
-          "oklch(95% 0.16 260)"
+          "oklch(15% 0.1236 247.29)",
+          "oklch(26.43% 0.1236 247.29)",
+          "oklch(37.86% 0.1236 247.29)",
+          "oklch(49.29% 0.1236 247.29)",
+          "oklch(60.71% 0.1236 247.29)",
+          "oklch(72.14% 0.1236 247.29)",
+          "oklch(83.57% 0.1236 247.29)",
+          "oklch(95% 0.1236 247.29)"
+        ]
+      },
+      "sky": {
+        "role": "secondary",
+        "displayName": "Sky",
+        "tonalRamp": [
+          "oklch(15% 0.0184 237.77)",
+          "oklch(26.43% 0.0184 237.77)",
+          "oklch(37.86% 0.0184 237.77)",
+          "oklch(49.29% 0.0184 237.77)",
+          "oklch(60.71% 0.0184 237.77)",
+          "oklch(72.14% 0.0184 237.77)",
+          "oklch(83.57% 0.0184 237.77)",
+          "oklch(95% 0.0184 237.77)"
+        ]
+      },
+      "sage": {
+        "role": "secondary",
+        "displayName": "Sage",
+        "tonalRamp": [
+          "oklch(15% 0.0125 164.80)",
+          "oklch(26.43% 0.0125 164.80)",
+          "oklch(37.86% 0.0125 164.80)",
+          "oklch(49.29% 0.0125 164.80)",
+          "oklch(60.71% 0.0125 164.80)",
+          "oklch(72.14% 0.0125 164.80)",
+          "oklch(83.57% 0.0125 164.80)",
+          "oklch(95% 0.0125 164.80)"
+        ]
+      },
+      "warm": {
+        "role": "secondary",
+        "displayName": "Warm",
+        "tonalRamp": [
+          "oklch(15% 0.0203 62.87)",
+          "oklch(26.43% 0.0203 62.87)",
+          "oklch(37.86% 0.0203 62.87)",
+          "oklch(49.29% 0.0203 62.87)",
+          "oklch(60.71% 0.0203 62.87)",
+          "oklch(72.14% 0.0203 62.87)",
+          "oklch(83.57% 0.0203 62.87)",
+          "oklch(95% 0.0203 62.87)"
+        ]
+      },
+      "selection": {
+        "role": "neutral",
+        "displayName": "Selection",
+        "tonalRamp": [
+          "oklch(15% 0.0315 243.71)",
+          "oklch(26.43% 0.0315 243.71)",
+          "oklch(37.86% 0.0315 243.71)",
+          "oklch(49.29% 0.0315 243.71)",
+          "oklch(60.71% 0.0315 243.71)",
+          "oklch(72.14% 0.0315 243.71)",
+          "oklch(83.57% 0.0315 243.71)",
+          "oklch(95% 0.0315 243.71)"
+        ]
+      },
+      "dark-canvas": {
+        "role": "neutral",
+        "displayName": "Dark Canvas",
+        "tonalRamp": [
+          "oklch(15% 0.0246 251.74)",
+          "oklch(26.43% 0.0246 251.74)",
+          "oklch(37.86% 0.0246 251.74)",
+          "oklch(49.29% 0.0246 251.74)",
+          "oklch(60.71% 0.0246 251.74)",
+          "oklch(72.14% 0.0246 251.74)",
+          "oklch(83.57% 0.0246 251.74)",
+          "oklch(95% 0.0246 251.74)"
         ]
       },
       "dark-background": {
         "role": "neutral",
         "displayName": "Dark Background",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0313 249.33)",
+          "oklch(26.43% 0.0313 249.33)",
+          "oklch(37.86% 0.0313 249.33)",
+          "oklch(49.29% 0.0313 249.33)",
+          "oklch(60.71% 0.0313 249.33)",
+          "oklch(72.14% 0.0313 249.33)",
+          "oklch(83.57% 0.0313 249.33)",
+          "oklch(95% 0.0313 249.33)"
         ]
       },
       "dark-foreground": {
         "role": "primary",
         "displayName": "Dark Foreground",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0127 244.25)",
+          "oklch(26.43% 0.0127 244.25)",
+          "oklch(37.86% 0.0127 244.25)",
+          "oklch(49.29% 0.0127 244.25)",
+          "oklch(60.71% 0.0127 244.25)",
+          "oklch(72.14% 0.0127 244.25)",
+          "oklch(83.57% 0.0127 244.25)",
+          "oklch(95% 0.0127 244.25)"
+        ]
+      },
+      "dark-secondary": {
+        "role": "neutral",
+        "displayName": "Dark Secondary",
+        "tonalRamp": [
+          "oklch(15% 0.0239 246.09)",
+          "oklch(26.43% 0.0239 246.09)",
+          "oklch(37.86% 0.0239 246.09)",
+          "oklch(49.29% 0.0239 246.09)",
+          "oklch(60.71% 0.0239 246.09)",
+          "oklch(72.14% 0.0239 246.09)",
+          "oklch(83.57% 0.0239 246.09)",
+          "oklch(95% 0.0239 246.09)"
+        ]
+      },
+      "dark-subtle": {
+        "role": "neutral",
+        "displayName": "Dark Subtle",
+        "tonalRamp": [
+          "oklch(15% 0.0314 243.56)",
+          "oklch(26.43% 0.0314 243.56)",
+          "oklch(37.86% 0.0314 243.56)",
+          "oklch(49.29% 0.0314 243.56)",
+          "oklch(60.71% 0.0314 243.56)",
+          "oklch(72.14% 0.0314 243.56)",
+          "oklch(83.57% 0.0314 243.56)",
+          "oklch(95% 0.0314 243.56)"
         ]
       },
       "dark-muted": {
         "role": "neutral",
         "displayName": "Dark Muted",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
-        ]
-      },
-      "dark-muted-foreground": {
-        "role": "neutral",
-        "displayName": "Dark Muted Foreground",
-        "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0387 245.19)",
+          "oklch(26.43% 0.0387 245.19)",
+          "oklch(37.86% 0.0387 245.19)",
+          "oklch(49.29% 0.0387 245.19)",
+          "oklch(60.71% 0.0387 245.19)",
+          "oklch(72.14% 0.0387 245.19)",
+          "oklch(83.57% 0.0387 245.19)",
+          "oklch(95% 0.0387 245.19)"
         ]
       },
       "dark-border": {
         "role": "neutral",
         "displayName": "Dark Border",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0437 244.29)",
+          "oklch(26.43% 0.0437 244.29)",
+          "oklch(37.86% 0.0437 244.29)",
+          "oklch(49.29% 0.0437 244.29)",
+          "oklch(60.71% 0.0437 244.29)",
+          "oklch(72.14% 0.0437 244.29)",
+          "oklch(83.57% 0.0437 244.29)",
+          "oklch(95% 0.0437 244.29)"
         ]
       },
-      "dark-ring": {
+      "dark-focus": {
         "role": "primary",
-        "displayName": "Dark Ring",
+        "displayName": "Dark Focus",
         "tonalRamp": [
-          "oklch(15% 0.16 260)",
-          "oklch(26% 0.16 260)",
-          "oklch(38% 0.16 260)",
-          "oklch(49% 0.16 260)",
-          "oklch(61% 0.16 260)",
-          "oklch(72% 0.16 260)",
-          "oklch(84% 0.16 260)",
-          "oklch(95% 0.16 260)"
+          "oklch(15% 0.0866 234.21)",
+          "oklch(26.43% 0.0866 234.21)",
+          "oklch(37.86% 0.0866 234.21)",
+          "oklch(49.29% 0.0866 234.21)",
+          "oklch(60.71% 0.0866 234.21)",
+          "oklch(72.14% 0.0866 234.21)",
+          "oklch(83.57% 0.0866 234.21)",
+          "oklch(95% 0.0866 234.21)"
         ]
       },
-      "secondary": {
-        "role": "neutral",
-        "displayName": "Supporting text",
+      "dark-sky": {
+        "role": "secondary",
+        "displayName": "Dark Sky",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0508 240.30)",
+          "oklch(26.43% 0.0508 240.30)",
+          "oklch(37.86% 0.0508 240.30)",
+          "oklch(49.29% 0.0508 240.30)",
+          "oklch(60.71% 0.0508 240.30)",
+          "oklch(72.14% 0.0508 240.30)",
+          "oklch(83.57% 0.0508 240.30)",
+          "oklch(95% 0.0508 240.30)"
         ]
       },
-      "dark-secondary": {
-        "role": "neutral",
-        "displayName": "Dark supporting text",
+      "dark-sage": {
+        "role": "secondary",
+        "displayName": "Dark Sage",
         "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0381 174.21)",
+          "oklch(26.43% 0.0381 174.21)",
+          "oklch(37.86% 0.0381 174.21)",
+          "oklch(49.29% 0.0381 174.21)",
+          "oklch(60.71% 0.0381 174.21)",
+          "oklch(72.14% 0.0381 174.21)",
+          "oklch(83.57% 0.0381 174.21)",
+          "oklch(95% 0.0381 174.21)"
+        ]
+      },
+      "dark-warm": {
+        "role": "secondary",
+        "displayName": "Dark Warm",
+        "tonalRamp": [
+          "oklch(15% 0.0201 54.29)",
+          "oklch(26.43% 0.0201 54.29)",
+          "oklch(37.86% 0.0201 54.29)",
+          "oklch(49.29% 0.0201 54.29)",
+          "oklch(60.71% 0.0201 54.29)",
+          "oklch(72.14% 0.0201 54.29)",
+          "oklch(83.57% 0.0201 54.29)",
+          "oklch(95% 0.0201 54.29)"
+        ]
+      },
+      "dark-selection": {
+        "role": "neutral",
+        "displayName": "Dark Selection",
+        "tonalRamp": [
+          "oklch(15% 0.0605 239.41)",
+          "oklch(26.43% 0.0605 239.41)",
+          "oklch(37.86% 0.0605 239.41)",
+          "oklch(49.29% 0.0605 239.41)",
+          "oklch(60.71% 0.0605 239.41)",
+          "oklch(72.14% 0.0605 239.41)",
+          "oklch(83.57% 0.0605 239.41)",
+          "oklch(95% 0.0605 239.41)"
         ]
       },
       "success": {
         "role": "primary",
         "displayName": "Success",
         "tonalRamp": [
-          "oklch(15% 0.1 150)",
-          "oklch(26% 0.1 150)",
-          "oklch(38% 0.1 150)",
-          "oklch(49% 0.1 150)",
-          "oklch(61% 0.1 150)",
-          "oklch(72% 0.1 150)",
-          "oklch(84% 0.1 150)",
-          "oklch(95% 0.1 150)"
+          "oklch(15% 0.0884 155.30)",
+          "oklch(26.43% 0.0884 155.30)",
+          "oklch(37.86% 0.0884 155.30)",
+          "oklch(49.29% 0.0884 155.30)",
+          "oklch(60.71% 0.0884 155.30)",
+          "oklch(72.14% 0.0884 155.30)",
+          "oklch(83.57% 0.0884 155.30)",
+          "oklch(95% 0.0884 155.30)"
         ]
       },
       "error": {
         "role": "primary",
         "displayName": "Error",
         "tonalRamp": [
-          "oklch(15% 0.1 30)",
-          "oklch(26% 0.1 30)",
-          "oklch(38% 0.1 30)",
-          "oklch(49% 0.1 30)",
-          "oklch(61% 0.1 30)",
-          "oklch(72% 0.1 30)",
-          "oklch(84% 0.1 30)",
-          "oklch(95% 0.1 30)"
+          "oklch(15% 0.1821 29.51)",
+          "oklch(26.43% 0.1821 29.51)",
+          "oklch(37.86% 0.1821 29.51)",
+          "oklch(49.29% 0.1821 29.51)",
+          "oklch(60.71% 0.1821 29.51)",
+          "oklch(72.14% 0.1821 29.51)",
+          "oklch(83.57% 0.1821 29.51)",
+          "oklch(95% 0.1821 29.51)"
         ]
       },
       "dark-success": {
         "role": "primary",
-        "displayName": "Dark success",
+        "displayName": "Dark Success",
         "tonalRamp": [
-          "oklch(15% 0.1 150)",
-          "oklch(26% 0.1 150)",
-          "oklch(38% 0.1 150)",
-          "oklch(49% 0.1 150)",
-          "oklch(61% 0.1 150)",
-          "oklch(72% 0.1 150)",
-          "oklch(84% 0.1 150)",
-          "oklch(95% 0.1 150)"
+          "oklch(15% 0.1082 155.46)",
+          "oklch(26.43% 0.1082 155.46)",
+          "oklch(37.86% 0.1082 155.46)",
+          "oklch(49.29% 0.1082 155.46)",
+          "oklch(60.71% 0.1082 155.46)",
+          "oklch(72.14% 0.1082 155.46)",
+          "oklch(83.57% 0.1082 155.46)",
+          "oklch(95% 0.1082 155.46)"
         ]
       },
       "dark-error": {
         "role": "primary",
-        "displayName": "Dark error",
+        "displayName": "Dark Error",
         "tonalRamp": [
-          "oklch(15% 0.1 30)",
-          "oklch(26% 0.1 30)",
-          "oklch(38% 0.1 30)",
-          "oklch(49% 0.1 30)",
-          "oklch(61% 0.1 30)",
-          "oklch(72% 0.1 30)",
-          "oklch(84% 0.1 30)",
-          "oklch(95% 0.1 30)"
-        ]
-      },
-      "dark-selection": {
-        "role": "neutral",
-        "displayName": "Dark text selection",
-        "tonalRamp": [
-          "oklch(15% 0 0)",
-          "oklch(26% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(49% 0 0)",
-          "oklch(61% 0 0)",
-          "oklch(72% 0 0)",
-          "oklch(84% 0 0)",
-          "oklch(95% 0 0)"
+          "oklch(15% 0.0891 26.76)",
+          "oklch(26.43% 0.0891 26.76)",
+          "oklch(37.86% 0.0891 26.76)",
+          "oklch(49.29% 0.0891 26.76)",
+          "oklch(60.71% 0.0891 26.76)",
+          "oklch(72.14% 0.0891 26.76)",
+          "oklch(83.57% 0.0891 26.76)",
+          "oklch(95% 0.0891 26.76)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Desktop hero",
-        "purpose": "Reference system-ui output; shared font stack across all platform UI."
+        "displayName": "Hero display",
+        "purpose": "Self-hosted Geist under the IAVSE Sans CSS alias; system and CJK fallbacks remain available."
       },
-      "headline": {
-        "displayName": "Projects heading",
-        "purpose": "The serif utility resolves to the same system-ui stack."
+      "directory-heading": {
+        "displayName": "Directory heading",
+        "purpose": "Centered resource and blog-overview introductions."
+      },
+      "contact-heading": {
+        "displayName": "Contact heading",
+        "purpose": "Public closing panel with balanced introduction copy."
+      },
+      "introduction": {
+        "displayName": "Public introduction",
+        "purpose": "Readable Hero, directory and Contact supporting copy."
       },
       "application-body": {
         "displayName": "Operating body",
@@ -286,41 +420,46 @@
       },
       "application-heading": {
         "displayName": "Operating heading",
-        "purpose": "Shared responsive title treatment within existing functional layouts."
+        "purpose": "Responsive titles within existing functional layouts."
       }
     },
     "shadows": [
       {
-        "name": "project-rest",
-        "value": "0 1px 2px rgb(0 0 0 / 0.04)",
-        "purpose": "Original project card at rest."
+        "name": "card-rest",
+        "value": "0 3px 12px -9px #173c5f36",
+        "purpose": "Shared IAVSE project and operating card rest state."
       },
       {
         "name": "project-hover",
         "value": "0 10px 20px -8px rgb(0 0 0 / 0.12), 0 4px 8px -4px rgb(0 0 0 / 0.08)",
-        "purpose": "Original hover elevation."
-      },
-      {
-        "name": "project-dark-rest",
-        "value": "0 1px 2px rgb(0 0 0 / 0.4)",
-        "purpose": "Original dark card at rest."
+        "purpose": "Retained hover elevation."
       },
       {
         "name": "project-dark-hover",
         "value": "0 10px 24px -8px rgb(0 0 0 / 0.6), 0 4px 8px -4px rgb(0 0 0 / 0.4)",
-        "purpose": "Original dark hover elevation."
+        "purpose": "Retained dark hover elevation."
       },
       {
-        "name": "application-rest",
-        "value": "0 1px 3px #0000000d",
-        "purpose": "Subtle shared elevation for operating cards; navigation panels stay flat."
+        "name": "preview-frame",
+        "value": "0 18px 48px -35px #193f5b99",
+        "purpose": "Hero preview frame."
+      },
+      {
+        "name": "preview-frame",
+        "value": "0 18px 48px -35px #193f5b99",
+        "purpose": "Hero preview frame."
+      },
+      {
+        "name": "dialog",
+        "value": "0 16px 48px -24px #0005",
+        "purpose": "Operating dialogs and search panels."
       }
     ],
     "motion": [
       {
         "name": "ease",
         "value": "cubic-bezier(0.22, 1, 0.36, 1)",
-        "purpose": "Original common transition curve."
+        "purpose": "Retained common transition curve."
       },
       {
         "name": "fade-in",
@@ -370,12 +509,12 @@
       {
         "name": "project-hover",
         "value": "translateY(-4px) 400ms; image scale(1.06) 700ms",
-        "purpose": "Original Projects interaction."
+        "purpose": "Retained Projects interaction."
       },
       {
         "name": "polaroid-entry",
         "value": "y -120px; blur 18px; duration 0.9s; delay 0.05s + index × 0.08s",
-        "purpose": "Six original dotted frames."
+        "purpose": "Six retained dotted frames."
       },
       {
         "name": "polaroid-pointer",
@@ -401,6 +540,21 @@
         "name": "physics-stack",
         "value": "gravity 1; restitution 0.35; friction 0.5; air friction 0.025; density 0.0018",
         "purpose": "Original Matter.js behavior; static wrapped chips under reduced motion."
+      },
+      {
+        "name": "atmosphere-scroll",
+        "value": "scroll range 0px 900px; translateY 0 → -60px; opacity 1 → 0.25",
+        "purpose": "Optional CSS scroll timeline; static fields when unsupported or under reduced motion."
+      },
+      {
+        "name": "atmosphere-scroll",
+        "value": "scroll range 0px 900px; translateY 0 → -60px; opacity 1 → 0.25",
+        "purpose": "Optional CSS scroll timeline; static fields when unsupported or under reduced motion."
+      },
+      {
+        "name": "atmosphere-scroll",
+        "value": "scroll range 0px 900px; translateY 0 → -60px; opacity 1 → 0.25",
+        "purpose": "Optional CSS scroll timeline; static fields when unsupported or under reduced motion."
       }
     ],
     "breakpoints": [
@@ -427,111 +581,131 @@
       "name": "Source copy button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Original 44px primary control; the live component expands on hover/focus and copies the repository URL.",
-      "html": "<button class=\"ds-source\">Get the source</button>",
-      "css": ".ds-source{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 20px;border:0;border-radius:12px;background:var(--foreground,#0a0a0a);color:var(--background,#fff);font:500 14px/20px ui-sans-serif,system-ui,sans-serif;cursor:pointer}.ds-source:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
+      "description": "The actual source action copies the repository URL; this preview shows its expanding label and focus treatment.",
+      "html": "<button type=\"button\" class=\"ds-source\" aria-label=\"复制 IAVSE 项目来源\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\"/><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"/></svg><span class=\"ds-source-short\">获取源码</span><span class=\"ds-source-long\">github.com/IntMainJhy/IAVSE</span></button>",
+      "css": ".ds-source{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border:0;border-radius:12px;background:var(--iavse-foreground,#172b3a);color:var(--iavse-background,#fff);font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);cursor:pointer;transition:filter 180ms,transform 180ms}.ds-source svg{width:16px;height:16px;flex:none}.ds-source-long{display:none;white-space:nowrap}.ds-source:is(:hover,:focus-visible) .ds-source-short{display:none}.ds-source:is(:hover,:focus-visible) .ds-source-long{display:inline}.ds-source:hover{filter:brightness(1.1)}.ds-source:active{transform:translateY(1px)}.ds-source:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Explore resources",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Original secondary action and its arrow hover state.",
-      "html": "<a class=\"ds-explore\" href=\"/resources\">Explore resources<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
-      "css": ".ds-explore{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 5%,transparent);border-radius:12px;background:var(--background,#fff);color:var(--foreground,#0a0a0a);font:500 14px/20px ui-sans-serif,system-ui,sans-serif;text-decoration:none;transition:background-color .15s}.ds-explore:hover{background:color-mix(in srgb,var(--foreground,#0a0a0a) 4%,var(--background,#fff))}.ds-explore svg{width:16px;height:16px;transition:transform .3s}.ds-explore:hover svg{transform:translateX(2px)}.ds-explore:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
+      "description": "Bordered public action for the resource directory.",
+      "html": "<a class=\"ds-explore\" href=\"/resources\">探索资源<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
+      "css": ".ds-explore{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border:1px solid var(--iavse-border,#dce5ed);border-radius:12px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);text-decoration:none;transition:background-color 180ms}.ds-explore svg{width:16px;height:16px;transition:transform 300ms}.ds-explore:hover{background:var(--iavse-muted,#eef3f7)}.ds-explore:hover svg{transform:translateX(2px)}.ds-explore:active{background:var(--iavse-sky,#e5f2fb)}.ds-explore:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Three-link capsule",
       "kind": "nav",
       "refersTo": "navigation",
-      "description": "Compact public navigation; the mounted version is fixed at top center and animates its measured active pill.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Main\"><a aria-current=\"page\" href=\"/\">Home</a><a href=\"/resources\">Resources</a><a href=\"/about\">About</a><button aria-label=\"Toggle theme\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z\"/></svg></button></nav>",
-      "css": ".ds-nav{display:inline-flex;align-items:center;gap:4px;padding:6px;white-space:nowrap;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:9999px;background:var(--background,#fff);color:var(--foreground,#0a0a0a);box-shadow:0 1px 3px rgb(0 0 0 / .1),0 1px 2px -1px rgb(0 0 0 / .1);font:500 14px/20px ui-sans-serif,system-ui,sans-serif}.ds-nav a{padding:6px 16px;color:color-mix(in srgb,var(--foreground,#0a0a0a) 60%,transparent);border-radius:9999px;text-decoration:none;transition:color .3s}.ds-nav a:hover{color:var(--foreground,#0a0a0a)}.ds-nav [aria-current]{color:var(--foreground,#0a0a0a);background:color-mix(in srgb,var(--foreground,#0a0a0a) 5%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent)}.ds-nav button{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:9999px;background:var(--background,#fff);color:inherit;box-shadow:0 0 0 1px color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);cursor:pointer}.ds-nav svg{width:16px;height:16px}.ds-nav a:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}.ds-nav button:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
-    },
-    {
-      "name": "Project card",
-      "kind": "card",
-      "refersTo": "project-card",
-      "description": "A content-only preview of the original project card geometry and hover; live cards carry genuine sourced images.",
-      "html": "<a class=\"ds-project\" href=\"/resources?type=skills\"><span class=\"ds-project-label\">AI Skills</span><div class=\"ds-project-media\" aria-hidden=\"true\"><div></div></div><h3>Turn a method into steps that give your tools another capability.</h3><p>Read what a Skill does, when to use it, and where it comes from.</p><small>Skill directory · original sources</small></a>",
-      "css": ".ds-project{display:flex;flex-direction:column;gap:16px;padding:14px;max-width:420px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:24px;background:var(--background,#fff);color:var(--foreground,#0a0a0a);font-family:ui-sans-serif,system-ui,sans-serif;text-decoration:none;box-shadow:0 1px 2px rgb(0 0 0 / .04);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s cubic-bezier(.22,1,.36,1),border-color .4s cubic-bezier(.22,1,.36,1)}.ds-project:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--foreground,#0a0a0a) 14%,transparent);box-shadow:0 10px 20px -8px rgb(0 0 0 / .12),0 4px 8px -4px rgb(0 0 0 / .08)}.ds-project-label{padding:8px 4px 0;font-size:14px;font-weight:500}.ds-project-media{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:16px;background:color-mix(in srgb,var(--foreground,#0a0a0a) 5%,transparent)}.ds-project-media div{position:absolute;inset:0;transition:transform .7s cubic-bezier(.22,1,.36,1)}.ds-project:hover .ds-project-media div{transform:scale(1.06)}.ds-project h3{margin:0;padding:0 4px;font-size:22px;font-weight:500;line-height:1.2;letter-spacing:-.025em}.ds-project p{margin:0;padding:0 4px;color:color-mix(in srgb,var(--foreground,#0a0a0a) 65%,transparent);font-size:15px;line-height:1.5;letter-spacing:-.025em}.ds-project small{padding:0 4px 8px;font-size:12px;color:color-mix(in srgb,var(--foreground,#0a0a0a) 50%,transparent)}.ds-project:focus-visible{outline:2px solid var(--ring,#0066ff);outline-offset:2px}"
+      "description": "Public navigation retains the three-link capsule and separate theme control.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"主导航\"><a href=\"/\" aria-current=\"page\">首页</a><a href=\"/resources\">资源</a><a href=\"/about\">关于</a><button type=\"button\" aria-label=\"切换外观\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z\"/></svg></button></nav>",
+      "css": ".ds-nav{display:inline-flex;align-items:center;gap:4px;padding:6px;border:1px solid var(--iavse-border,#dce5ed);border-radius:9999px;background:var(--iavse-background,#fff);box-shadow:0 1px 2px #0000000d;font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);white-space:nowrap}.ds-nav a{padding:6px 16px;border-radius:9999px;color:var(--iavse-secondary,#4d6171);text-decoration:none;transition:color 300ms,background-color 300ms}.ds-nav a[aria-current]{color:var(--iavse-foreground,#172b3a);background:color-mix(in srgb,var(--iavse-foreground,#172b3a) 5%,var(--iavse-background,#fff));box-shadow:0 0 0 1px color-mix(in srgb,var(--iavse-foreground,#172b3a) 8%,transparent)}.ds-nav a:hover{color:var(--iavse-foreground,#172b3a)}.ds-nav button{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;padding:0;border:1px solid var(--iavse-border,#dce5ed);border-radius:9999px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);cursor:pointer}.ds-nav button svg{width:16px;height:16px}.ds-nav button:hover,.ds-nav a:active{background:var(--iavse-muted,#eef3f7)}.ds-nav a:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}.ds-nav button:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Feature chip",
       "kind": "chip",
       "refersTo": "feature-chip",
-      "description": "Static capability label in About; it is not a filter control.",
-      "html": "<span class=\"ds-feature\">Visual editing</span>",
-      "css": ".ds-feature{display:inline-block;padding:8px 16px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:9999px;background:var(--background,#fff);color:color-mix(in srgb,var(--foreground,#0a0a0a) 85%,transparent);font:400 15px/1.5 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}"
+      "description": "Compact capability labels in the retained About layout.",
+      "html": "<span class=\"ds-feature\">可视化画布</span>",
+      "css": ".ds-feature{display:inline-flex;align-items:center;padding:8px 16px;border:1px solid var(--iavse-border,#dce5ed);border-radius:9999px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);box-shadow:0 1px 2px #0000000d}"
     },
     {
-      "name": "Framed panel",
+      "name": "Contact panel",
       "kind": "custom",
-      "refersTo": "framed-panel",
-      "description": "Original outer and inner frame geometry used around portrait and Contact; shaders are implemented by the live components.",
-      "html": "<div class=\"ds-frame\"><div class=\"ds-frame-inner\"><p>Let’s connect</p></div></div>",
-      "css": ".ds-frame{padding:6px;border:1px solid color-mix(in srgb,var(--foreground,#0a0a0a) 8%,transparent);border-radius:32px;overflow:hidden;background:var(--background,#fff);color:var(--foreground,#0a0a0a);box-shadow:0 1px 3px rgb(0 0 0 / .1),0 1px 2px -1px rgb(0 0 0 / .1)}.ds-frame-inner{padding:24px;overflow:hidden;border-radius:1.6rem}.ds-frame p{margin:0;font:500 36px/1.05 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}"
+      "refersTo": "contact-panel",
+      "description": "Sky outer frame, readable introduction and a separate surface for contact destinations.",
+      "html": "<section class=\"ds-contact\"><div class=\"ds-contact-copy\"><h2>Let’s connect</h2><p>发现值得留下的内容，也分享自己的实践。从一份资源、一篇文章或一个个人空间开始。</p></div><div class=\"ds-contact-details\"><a href=\"/community\">前往社区</a><a href=\"/workspace/account\">管理账号</a></div></section>",
+      "css": ".ds-contact{display:grid;gap:24px;padding:30px;border:1px solid var(--iavse-border,#dce5ed);border-radius:28px;background:var(--iavse-sky,#e5f2fb);color:var(--iavse-foreground,#172b3a);font-family:var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif)}.ds-contact-copy h2{margin:0 0 20px;font-size:clamp(32px,3.5vw,44px);font-weight:500;line-height:1.18;letter-spacing:-.025em}.ds-contact-copy p{max-width:38ch;margin:0;font-size:19px;line-height:1.6;color:var(--iavse-secondary,#4d6171);text-wrap:balance}.ds-contact-details{display:flex;flex-wrap:wrap;gap:16px;padding:24px;border:1px solid var(--iavse-border,#dce5ed);border-radius:20px;background:var(--iavse-background,#fff)}.ds-contact-details a{color:var(--iavse-secondary,#4d6171);font-size:14px;text-decoration:none}.ds-contact-details a:hover{color:var(--iavse-foreground,#172b3a);text-decoration:underline}.ds-contact-details a:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Application field",
       "kind": "input",
       "refersTo": "application-input",
-      "description": "Shared RBP field for operating screens; labels and validation remain functional.",
-      "html": "<label class=\"ds-field-label\">Title <input class=\"ds-field-input\" type=\"text\" value=\"IAVSE\" /></label>",
-      "css": ".ds-field-label{display:grid;gap:8px;font:400 15px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);color:var(--rbp-secondary,#666)}.ds-field-input{min-height:44px;padding:10px 14px;border:1px solid var(--rbp-border,#e5e5e5);border-radius:12px;background:var(--rbp-background,#fff);color:var(--rbp-foreground,#0a0a0a);font:400 14px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em;transition:color 180ms,background-color 180ms,border-color 180ms,box-shadow 180ms}.ds-field-input:hover{border-color:var(--rbp-border,#e5e5e5)}.ds-field-input:focus-visible{outline:2px solid var(--rbp-focus,#0066ff);outline-offset:4px}.ds-field-input:disabled{opacity:.5;cursor:not-allowed}"
+      "description": "Shared field surface and native focus behavior; validation remains owned by the form.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-resource-search\">搜索资源</label><input class=\"ds-field\" id=\"ds-resource-search\" name=\"resource-search\" type=\"search\" placeholder=\"输入名称或关键词\">",
+      "css": ".ds-field-label{display:block;margin-bottom:8px;color:var(--iavse-secondary,#4d6171);font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif)}.ds-field{display:block;width:min(calc(100% - 30px),320px);min-height:44px;padding:10px 14px;border:1px solid var(--iavse-border,#dce5ed);border-radius:12px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);font:400 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em;caret-color:var(--iavse-foreground,#172b3a);transition:border-color 180ms}.ds-field::placeholder{color:var(--iavse-subtle,#607180);opacity:1}.ds-field:hover{border-color:color-mix(in srgb,var(--iavse-foreground,#172b3a) 30%,var(--iavse-border,#dce5ed))}.ds-field:disabled{opacity:.5;cursor:not-allowed}.ds-field:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Application primary action",
       "kind": "button",
       "refersTo": "application-button",
-      "description": "Monochrome primary control shared across catalog, account, administration and editor shells.",
-      "html": "<button class=\"ds-app-action\">Save changes</button>",
-      "css": ".ds-app-action{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:12px;background:var(--rbp-foreground,#0a0a0a);color:var(--rbp-background,#fff);font:500 14px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em;cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms,box-shadow 180ms}.ds-app-action:hover{background:var(--rbp-foreground,#0a0a0a)}.ds-app-action:focus-visible{outline:2px solid var(--rbp-focus,#0066ff);outline-offset:4px}.ds-app-action:disabled{opacity:.5;cursor:not-allowed}"
+      "description": "Foreground-filled action within existing operating flows.",
+      "html": "<button class=\"ds-app-button\" type=\"button\">保存草稿</button>",
+      "css": ".ds-app-button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:12px;background:var(--iavse-foreground,#172b3a);color:var(--iavse-background,#fff);font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em;cursor:pointer;transition:filter 180ms,transform 180ms}.ds-app-button:hover{filter:brightness(1.1)}.ds-app-button:active{transform:translateY(1px)}.ds-app-button:disabled{opacity:.5;cursor:not-allowed}.ds-app-button:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Selected filter pill",
       "kind": "chip",
       "refersTo": "filter-pill",
-      "description": "Shared capsule filter; selected state inverts foreground and background.",
-      "html": "<div class=\"ds-filter-group\" aria-label=\"Category\"><button class=\"ds-filter\" aria-pressed=\"true\">All resources</button><button class=\"ds-filter\" aria-pressed=\"false\">AI Skills</button></div>",
-      "css": ".ds-filter-group{display:flex;flex-wrap:wrap;gap:8px}.ds-filter{min-height:37px;padding:7px 13px;border:1px solid var(--rbp-border,#e5e5e5);border-radius:999px;background:var(--rbp-muted,#f5f5f5);color:var(--rbp-secondary,#666);font:400 13px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms}.ds-filter:hover{border-color:var(--rbp-border,#e5e5e5)}.ds-filter[aria-pressed=true]{background:var(--rbp-foreground,#0a0a0a);color:var(--rbp-background,#fff)}.ds-filter:focus-visible{outline:2px solid var(--rbp-focus,#0066ff);outline-offset:4px}"
+      "description": "Selected catalog filters invert the shared foreground and surface; category tabs use their separate sky state.",
+      "html": "<div class=\"ds-filter-row\" role=\"group\" aria-label=\"资源筛选\"><button class=\"ds-filter\" type=\"button\" aria-pressed=\"true\">全部</button><button class=\"ds-filter\" type=\"button\" aria-pressed=\"false\">已收藏</button></div>",
+      "css": ".ds-filter-row{display:flex;flex-wrap:wrap;gap:8px}.ds-filter{padding:8px 16px;border:1px solid var(--iavse-border,#dce5ed);border-radius:9999px;background:var(--iavse-muted,#eef3f7);color:var(--iavse-secondary,#4d6171);font:500 14px/20px var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms}.ds-filter:hover{border-color:var(--iavse-foreground,#172b3a)}.ds-filter[aria-pressed=true]{background:var(--iavse-foreground,#172b3a);color:var(--iavse-background,#fff)}.ds-filter:active{filter:brightness(.95)}.ds-filter:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     },
     {
       "name": "Operating card",
       "kind": "card",
       "refersTo": "application-card",
-      "description": "Neutral rounded surface for a functional panel, independent of authored content.",
-      "html": "<section class=\"ds-app-card\"><h3>Saved resources</h3><p>Find the material you bookmarked from the directory.</p></section>",
-      "css": ".ds-app-card{padding:28px;border:1px solid var(--rbp-border,#e5e5e5);border-radius:24px;background:var(--rbp-background,#fff);color:var(--rbp-foreground,#0a0a0a);box-shadow:var(--rbp-shadow,0 1px 3px #0000000d);font:400 15px/1.6 var(--rbp-font,ui-sans-serif,system-ui,sans-serif)}.ds-app-card h3{margin:0 0 12px;font:500 20px/1.2 var(--rbp-font,ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em}.ds-app-card p{margin:0;color:var(--rbp-secondary,#666)}"
+      "description": "Shared functional panel with card corners, a fine border and restrained resting shadow.",
+      "html": "<section class=\"ds-app-card\"><h3>收藏的资源</h3><p>在这里继续查找你从目录中收藏的资料。</p><a href=\"/workspace/bookmarks\">查看收藏</a></section>",
+      "css": ".ds-app-card{padding:28px;border:1px solid var(--iavse-border,#dce5ed);border-radius:20px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);box-shadow:var(--iavse-shadow,0 3px 12px -9px #173c5f36);font:400 15px/1.6 var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif)}.ds-app-card h3{margin:0 0 12px;font:500 20px/1.2 var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);letter-spacing:-.025em}.ds-app-card p{margin:0 0 16px;color:var(--iavse-secondary,#4d6171)}.ds-app-card a{color:var(--iavse-foreground,#172b3a);font-size:14px;text-underline-offset:4px}.ds-app-card a:hover{color:var(--iavse-focus,#1266a4)}.ds-app-card a:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
+    },
+    {
+      "name": "Language trigger",
+      "kind": "button",
+      "refersTo": "language-trigger",
+      "description": "Bordered language control used within the existing application shell.",
+      "html": "<button class=\"ds-language\" type=\"button\" aria-haspopup=\"menu\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M2 12h20M12 2a17 17 0 0 1 0 20 17 17 0 0 1 0-20\"/></svg><span>简体中文</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></button>",
+      "css": ".ds-language{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:8px 12px;border:1px solid var(--iavse-border,#dce5ed);border-radius:12px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);font:500 13px/1.4 var(--iavse-font,\"IAVSE Sans\",ui-sans-serif,system-ui,sans-serif);cursor:pointer;transition:background-color 180ms}.ds-language svg{width:14px;height:14px}.ds-language:hover{background:var(--iavse-muted,#eef3f7)}.ds-language:active{background:var(--iavse-sky,#e5f2fb)}.ds-language:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}"
     }
   ],
   "narrative": {
-    "northStar": "One Portfolio language across IAVSE",
-    "overview": "RBP Portfolio is the sole visual authority for the IAVSE platform. The pinned source is [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) at `1581b9b8e5876f60e5eb844970747506980c4412`, checked against its rendered demo. Public pages preserve the original Hero, Projects, About and Contact composition, responsive spacing, flow shader, portrait morph and interaction parameters. Platform operating pages carry the same system-ui type, grayscale surfaces, rounded cards, pills and controls into their existing functional layouts.\n\nCommunity, filtered catalogs, account forms, administration and the editor shell share this visual system. Their hierarchy, data, validation and permissions stay functional; the upstream repository supplies no equivalent operating screens, so visual consistency does not imply pixel identity. User-authored canvas documents, published blog themes, uploaded images and third-party previews are content boundaries and retain their own appearance.\n\nThis file is the single platform visual specification. [Platform tokens and controls](src/app/rbp-system.css) implement it; [RBP components](src/components/rbp/), [template CSS input](src/styles/rbp-template.input.css) and its [compiled scoped output](src/app/rbp-template.css) retain the template implementation. The [host bridge](src/app/rbp-bridge.css) owns integration only. [Implementation notes](docs/portfolio-frontend.md) document source mapping, route boundaries and entry motion. Earlier platform skins and competing design guides have been removed; third-party catalog studies are reference content.",
+    "northStar": "Clarity for creative work",
+    "overview": "IAVSE pairs a cool, quiet canvas with white surfaces, readable blue-gray type and pale sky, sage and warm grouping colors. Clear spacing and restrained hierarchy let resources, community activity and publishing tasks remain the focus. A self-hosted Geist face, soft card edges and a light CSS atmosphere give the existing application a coherent IAVSE character.\n\nThe public composition and interaction baseline comes from [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The current design independently refines its typography, spacing, colors, frames and backdrop. General principles of spacing, type hierarchy, pale surfaces and grouping informed this refinement; the cancelled Cloudlight template migration remains cancelled. No Cloudlight code, shader or assets are included.\n\nThis file is the single current platform visual specification. [IAVSE tokens and controls](src/app/iavse-system.css), the [scoped template input](src/styles/rbp-template.input.css) and the [host bridge](src/app/rbp-bridge.css) implement it. [Implementation notes](docs/portfolio-frontend.md) distinguish retained components from independent changes. Community, catalogs, accounts, administration and the editor shell share these primitives within their functional layouts. User-authored canvases, published blog themes, uploaded images and third-party previews retain their own appearance and rights.",
     "keyCharacteristics": [
-      "Original public-page composition and interaction parameters, with real IAVSE content and destinations.",
-      "One system-ui font and light/dark grayscale palette across all platform surfaces.",
-      "Shared rounded cards, monochrome actions, capsule filters and accessible fields.",
-      "First viewport entry with a short upward fade and capped group staggering.",
-      "Functional operating layouts and independent authored content, with source attribution and fallbacks."
+      "Cool light and dark canvases with clear text roles and restrained tinted groups.",
+      "Self-hosted Geist under the CSS alias IAVSE Sans, with system and CJK fallbacks.",
+      "Existing split Hero, four Projects, Contact and capsule navigation as the public baseline.",
+      "Independently refined type, spacing, card surfaces and CSS atmosphere.",
+      "First-viewport upward fades, bounded staggering and accessible motion fallbacks.",
+      "Functional application layouts, truthful content and preserved third-party attribution."
     ],
-    "rules": [],
+    "rules": [
+      {
+        "name": "The Role Continuity Rule",
+        "body": "Use the same semantic role across public and operating pages; an older feature alias must resolve to the IAVSE palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Source Identity Rule",
+        "body": "Keep source screenshots, member content and authored themes recognizable and attributed. Examples must remain labeled.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Hierarchy Rule",
+        "body": "Preserve the distinction between public introduction copy, application body copy and compact labels. Verify Chinese, English and Japanese wrapping at the actual available width.",
+        "section": "typography"
+      },
+      {
+        "name": "The Existing Workflow Rule",
+        "body": "Refine hierarchy and surfaces within the existing public composition and functional layouts. Keep search, publishing, account, moderation and editor controls in their working flows.",
+        "section": "layout"
+      }
+    ],
     "dos": [
-      "Do preserve the pinned template's public composition, responsive geometry and interaction parameters.",
-      "Do use the shared RBP tokens and controls on every platform operating page.",
-      "Do trigger content entry once in the viewport and cap group delays at 210ms.",
-      "Do put real IAVSE content and working destinations into the original component slots.",
-      "Do match the reference's system-ui rendering, including the serif-class fallback.",
-      "Do keep source attribution, labeled examples, real empty states and native operating behavior.",
-      "Do preserve existing reduced-motion fallbacks and route/unmount cleanup."
+      "Do use the shared IAVSE semantic tokens and font role across platform UI.",
+      "Do preserve the existing public composition and working application flows while applying the documented refinements.",
+      "Do use pale tints to group content and preserve source images inside previews.",
+      "Do verify heading and introduction wrapping in Chinese, English and Japanese on desktop and mobile.",
+      "Do trigger viewport entry once, cap group delays at 210ms and reveal keyboard-focused content immediately.",
+      "Do retain labeled examples, actual empty states, attribution and accessible motion fallbacks."
     ],
     "donts": [
-      "Don't reintroduce a full-width brand header, homepage workbench or three-column blog directory.",
-      "Don't reintroduce a competing platform skin, font stack or design specification.",
-      "Don't change the template's public geometry or interaction timing beyond the documented viewport-entry enhancement.",
-      "Don't hide keyboard-focused content or animate authored canvas documents.",
+      "Don't import Cloudlight code, shaders or assets, or revive the cancelled direct template migration.",
+      "Don't claim the refined type, spacing and surfaces are an exact reproduction of RBP's original geometry.",
+      "Don't apply the platform skin or entry animation inside authored canvas documents or third-party previews.",
       "Don't stop the visible portrait's normal frame loop after its hover blend settles.",
-      "Don't claim upstream pixel identity for administration, editing or other pages absent from the template.",
-      "Don't present the RBP template as MIT-licensed or extend its permissions to unrelated material."
+      "Don't invent users, posts, endorsements or engagement totals to fill a layout.",
+      "Don't present the RBP template as MIT-licensed, claim authorship of Geist or expand third-party permissions."
     ]
   }
 }

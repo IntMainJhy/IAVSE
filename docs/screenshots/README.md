@@ -1,23 +1,25 @@
 # Current interface captures / 当前界面截图
 
-Captured in Ego Browser on **2026-11-10**, using the Simplified Chinese interface and the actual rendered `main` website. The homepage, project cards, resource overview, community, blog directory and social preview show the signed-out production build with the original RBP composition and IAVSE content. Their source base and file hashes are recorded under `portfolioSource` in `captures.json`. The unchanged built-in authored homepage retains source commit **`427cdc9`**. These are product screenshots, not design mockups. Chinese and English READMEs share the images.
+Captured in Ego Browser on **2026-11-10**, using the Simplified Chinese interface and an actual local production build. The homepage, project cards, resource overview, community, blog directory and social preview show the independent IAVSE refinement: Geist typography, pale surfaces, blue-gray text and CSS atmosphere within the existing application composition. They are product screenshots. Chinese and English READMEs share the images; English and Japanese are also supported by the product.
 
-截图于 **2026-11-10** 从 `main` 的实际页面拍摄。首页、项目卡片、资源总览、社区、博客目录与分享预览均已更新为未登录的 Portfolio 前端生产构建，来源基线和文件哈希见 `captures.json` 的 `portfolioSource`。未改变的内置作者主页截图保留 `427cdc9` 来源。未添加帖子或统计数据。英文和日文同样受产品支持。
+截图于 **2026-11-10** 从实际本地生产构建拍摄，使用简体中文。首页、项目卡片、资源总览、社区、博客目录与分享预览展示当前 IAVSE 的独立设计细化：字体、浅色分组、蓝灰文字和 CSS 氛围背景，以及保留的现有页面组合。没有补造帖子、用户或统计数据。
+
+Source provenance is recorded in the adjacent [captures.json](captures.json). Its `portfolioSource` entry identifies the source base, capture-time working-tree state and file hashes; a source-base commit is not a claim that the refined screenshots came from that unchanged commit. The unchanged authored-homepage capture retains its own source revision in the same file. Refreshed images also have adjacent provenance sidecars.
+
+来源基线、拍摄时工作区状态与文件哈希见相邻 `captures.json` 的 `portfolioSource`。基线提交不是本次设计细化的最终提交标识；未改变的内置作者主页截图保留独立来源版本。各更新图片旁也保留来源侧车记录。
 
 | Image / 图片 | View / 页面 | Size |
 | --- | --- | --- |
-| [Homepage / 首页](home-current.webp) | `/` · monochrome flow, split hero and actual template preview / 黑白流动背景、分栏首屏与真实模板预览 | 1440 × 1000 |
-| [Project cards / 内容入口卡片](product-current.webp) | `/` · four original Projects cards with IAVSE content / 四张原始 Projects 排版的内容入口卡片 | 1440 × 1000 |
-| [Blog directory / 博客空间](blog-spaces-current.webp) | `/blogs` · public spaces and clearly labeled built-in examples / 公开空间与明确标识的内置示例 | 1440 × 1000 |
+| [Homepage / 首页](home-current.webp) | `/` · CSS atmosphere, split hero and actual template preview / CSS 氛围背景、分栏首屏与真实模板预览 | 1440 × 1000 |
+| [Project cards / 内容入口卡片](product-current.webp) | `/` · four entry cards with refined IAVSE surfaces / 四张使用 IAVSE 表面的内容入口卡片 | 1440 × 1000 |
+| [Blog directory / 博客空间](blog-spaces-current.webp) | `/blogs` · public spaces and labeled built-in examples / 公开空间与标识清楚的内置示例 | 1440 × 1000 |
 | [Community / 社区](community-current.webp) | `/community` · signed-out view and actual empty state / 未登录与实际空状态 | 1440 × 1000 |
 | [Built-in homepage / 示例主页](blog-home-current.webp) | `/blogs/showcase/lin-studio?template=builtin` · fictional example / 虚构人物模板 | 1440 × 1000 |
-| [Resource overview / 资源总览](resources-current.webp) | `/resources` · original ProjectsPage heading and cards / 原始 ProjectsPage 标题与卡片 | 1440 × 1000 |
+| [Resource overview / 资源总览](resources-current.webp) | `/resources` · refined introduction and two-column cards / 细化后的介绍区与双列卡片 | 1440 × 1000 |
 | [Social preview / 分享预览](social-preview.png) | `/` · repository link preview / 仓库链接预览 | 1280 × 640 |
 
-The blog gallery can include genuine discoverable public homepages alongside clearly identified bundled examples. Bundled examples do not create accounts or change real member counts. The community image shows the actual empty feed, without generated posts. No private drafts, account settings, administration panels or credentials were captured.
+The blog gallery can include genuine discoverable public homepages alongside clearly identified bundled examples. Examples do not create accounts or change real member counts. The community image shows the actual empty feed. Public documentation captures contain no private drafts, account settings, administration panels or credentials.
 
-博客展廊包含真实可发现的公开主页与内置示例；示例不计入真实成员数量。社区保留实际空状态，不使用虚构帖子填充。截图不包含私有草稿、账号设置、后台或凭据。
+博客展廊可以展示真实可发现的公开主页及明确标记的内置示例；示例不计入真实成员数量。社区保留实际空状态。账号、编辑器、管理与文件的内部 QA 截图位于公开文档之外。较早的 `creator-voices-current.webp` 是 2026-11-04 历史素材，不作为当前首页栏目展示。
 
-Current machine-readable capture provenance is in [captures.json](captures.json); refreshed WebP files also have source sidecars and embedded origin descriptions. PNG is used for the social preview. Private account, admin and editor QA captures remain outside the published documentation. The earlier `creator-voices-current.webp` remains as a historical 2026-11-04 asset and is not shown as a current homepage section.
-
-素材权利范围仍按 [NOTICE](../../NOTICE)、[第三方声明](../../THIRD_PARTY_NOTICES.md) 和各内容自身许可处理。Artistic README wordmarks and their font attribution are described in [brand assets](../brand.md).
+素材权利范围按 [NOTICE](../../NOTICE)、[第三方声明](../../THIRD_PARTY_NOTICES.md) 和各内容自身许可处理。Artistic README wordmarks and their font attribution are described in [brand assets](../brand.md).

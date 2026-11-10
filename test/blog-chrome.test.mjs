@@ -17,7 +17,7 @@ test('authored-blog chrome has one full-width surface and a separately bounded c
 });
 
 test('platform design stops at authored documents and keeps shared chrome separate',()=>{
- const css=read('rbp-system.css');assert.match(css,/@scope \(\.rbp-application\) to \([^)]*\.space-root/);
+ const css=read('iavse-system.css');assert.match(css,/@scope \(\.rbp-application\) to \([^)]*\.space-root/);
  for(const group of ['blog','workspace','admin','fallback']){
   const route=read('route-styles/'+group+'.css');assert.ok(route.includes("@import '../blog-shell.css';"));assert.doesNotMatch(route,/glass-platform|iavse-quantum|liquid-controls/);
  }

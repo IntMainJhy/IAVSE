@@ -1,5 +1,5 @@
 // From DavidHDev/rbp-portfolio @ 1581b9b8e5876f60e5eb844970747506980c4412.
-// Original layout and motion retained; IAVSE content only. See docs/licenses/RBP-Portfolio.txt.
+// Existing composition and motion with IAVSE content and independently refined visual roles. See docs/licenses/RBP-Portfolio.txt.
 import {
   ArrowRight,
   Compass,
@@ -45,7 +45,7 @@ export function Projects({
   const items = viewMoreVisible ? all.slice(0,4) : all;
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full" data-iavse-projects>
       <div className="mx-auto w-full max-w-275 px-6 sm:px-10">
         {withHeadline ? (
           <FadeIn className="flex flex-col items-center gap-5 pt-12 pb-10 text-center sm:pt-20 sm:pb-14">
@@ -96,7 +96,7 @@ function ProjectCard({
       delay={Math.min(index * 0.06, 0.3)}
       className="mb-6 break-inside-avoid md:mb-7"
     >
-      <Link href={project.href} className="project-card flex cursor-pointer flex-col gap-4 rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
+      <Link href={project.href} data-iavse-project={project.id} className="project-card flex cursor-pointer flex-col gap-4 rounded-3xl border border-foreground/8 bg-background p-3 sm:p-3.5">
         <header className="flex items-center gap-2.5 px-1 pt-2">
           <span className="border-foreground/10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border bg-background">
             <Icon className="h-3.5 w-3.5 text-foreground" aria-hidden="true" />

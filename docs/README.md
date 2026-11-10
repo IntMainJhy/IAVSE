@@ -56,8 +56,8 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 ## 当前实现 / Current implementation
 
-- [唯一平台视觉规范 / Platform design system](../DESIGN.md): the RBP Portfolio font, light/dark palette, cards, controls and entry motion across all platform pages.
-- [RBP 前端接入与源码映射 / Frontend integration](portfolio-frontend.md): original template composition, shared operating controls, Scroll Reveal / Fade In Up / Staggered Reveal, OGL, Lenis and authored-content boundaries.
+- [唯一平台视觉规范 / Platform design system](../DESIGN.md): the independently refined IAVSE font role, light/dark palette, tinted groups, cards, controls and entry motion.
+- [IAVSE 前端接入与源码映射 / Frontend integration](portfolio-frontend.md): retained RBP components, independently refined type and spacing, CSS atmosphere, shared operating controls, Scroll Reveal / Fade In Up / Staggered Reveal, portrait OGL, Lenis and authored-content boundaries.
 - [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
 - [模板与展廊修复](blog-gallery-template-repair-2026-11-08.md).
 - [2026-11-06 名称与清理](cleanup-2026-11-06.md).

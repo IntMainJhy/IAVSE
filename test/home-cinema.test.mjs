@@ -73,6 +73,6 @@ test('connected cinema cleanup keeps normal revert for dependency changes and St
 
 
 test('the product stage has one entrance owner instead of a competing timed CSS animation',()=>{
- const css=fs.readFileSync(new URL('../src/app/rbp-system.css',import.meta.url),'utf8');assert.doesNotMatch(css,/v2-stage-arrive/);
+ const css=fs.readFileSync(new URL('../src/app/iavse-system.css',import.meta.url),'utf8');assert.doesNotMatch(css,/v2-stage-arrive/);
  const f=mount();assert.equal(f.calls.length,1);assert.equal(f.calls[0].target,f.stage);assert.equal(f.calls[0].to.scrollTrigger.once,true);f.cleanup();
 });

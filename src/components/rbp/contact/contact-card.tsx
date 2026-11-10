@@ -1,5 +1,5 @@
 // From DavidHDev/rbp-portfolio @ 1581b9b8e5876f60e5eb844970747506980c4412.
-// Original layout and motion retained; IAVSE content only. See docs/licenses/RBP-Portfolio.txt.
+// Existing composition and motion with IAVSE content and independently refined visual roles. See docs/licenses/RBP-Portfolio.txt.
 import { Github, UserRound, MessageCircle } from "lucide-react";
 import {portfolioCopy} from "@/lib/portfolio-content";
 import {SiteTools} from "@/components/SiteTools";
@@ -9,42 +9,26 @@ import type { ReactNode } from "react";
 
 import { ContactCardCtas } from "./contact-card-ctas";
 import { FadeIn } from "@/components/rbp/ui/motion-primitives";
-import { ShaderFlow } from "../../portfolio/ShaderFlow";
-
-const CARD_FADE_MASK =
-  "radial-gradient(ellipse 90% 110% at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0.15) 100%)";
-
 export function ContactCard({locale="zh"}:{locale?:string}): ReactNode {
  const c=portfolioCopy(locale);
   return (
     <section className="mx-auto my-12 w-full max-w-275 px-6 sm:my-20 sm:px-10">
       <FadeIn>
-        <div className="relative w-full overflow-hidden rounded-4xl border border-foreground/8 bg-background p-1.5 shadow-sm">
+        <div data-iavse-contact className="relative w-full overflow-hidden rounded-4xl border border-foreground/8 bg-background p-1.5 shadow-sm">
           <div className="relative w-full overflow-hidden rounded-[1.6rem]">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 opacity-45 dark:opacity-25"
-              style={{
-                WebkitMaskImage: CARD_FADE_MASK,
-                maskImage: CARD_FADE_MASK,
-              }}
-            >
-              <ShaderFlow scale={3} brightness={3}/>
-            </div>
-
             <div className="relative grid gap-8 p-6 sm:gap-10 sm:p-7 md:grid-cols-[1.2fr_1fr] md:items-stretch md:gap-6 md:p-6">
               <div className="flex flex-col gap-5">
                 <h2 className="font-serif text-[2.25rem] font-medium leading-[1.05] tracking-tight text-foreground sm:text-[2.75rem] lg:text-[3.25rem]">
                   {c.connect}
                 </h2>
-                <p className="max-w-[29ch] text-[18px] leading-[1.4] tracking-tight text-foreground/65 sm:text-[22px] mb-6">
+                <p className="iavse-contact-copy max-w-[29ch] text-[18px] leading-[1.4] tracking-tight text-foreground/65 sm:text-[22px] mb-6">
                   {c.connectBody}
                 </p>
                 <ContactCardCtas locale={locale} />
               </div>
 
-              <div className="border-foreground/8 flex flex-col items-center justify-center gap-6 rounded-[1.1rem] border bg-background p-6 sm:p-8">
-                <div className="flex items-center gap-3 opacity-75">
+              <div className="iavse-contact-details border-foreground/8 flex flex-col items-center justify-center gap-6 rounded-[1.1rem] border bg-background p-6 sm:p-8">
+                <div className="flex items-center gap-3">
                   <SocialIcon
                     href="/workspace/account"
                     label={c.account}
