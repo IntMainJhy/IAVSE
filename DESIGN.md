@@ -39,12 +39,25 @@ colors:
   home-dark-soft: '#2b2931'
   home-dark-selection: '#4b435a'
   header-dark-muted: '#c2bbca'
-  header-dark-glass-high: rgb(43 38 49 / .9)
-  header-dark-glass-low: rgb(34 30 41 / .75)
-  header-dark-edge: rgb(255 255 255 / .13)
+  header-dark-glass-high: rgb(32 32 38 / .5)
+  header-dark-glass-low: rgb(24 24 30 / .3)
+  header-dark-edge: rgb(255 255 255 / .18)
   header-dark-panel: rgb(37 32 45 / .97)
   header-dark-soft: '#38313f'
   header-dark-on-action: '#201b25'
+  glass-dark-track-high: rgb(255 255 255 / .055)
+  glass-dark-track-low: rgb(255 255 255 / .02)
+  glass-dark-edge: rgb(255 255 255 / .12)
+  glass-dark-lens-high: rgb(255 255 255 / .19)
+  glass-dark-lens-low: rgb(255 255 255 / .055)
+  glass-dark-lens-edge: rgb(255 255 255 / .28)
+  glass-dark-highlight: rgb(255 255 255 / .38)
+  glass-dark-inactive: '#c7c3cd'
+  glass-dark-hover: rgb(255 255 255 / .065)
+  glass-dark-selected: rgb(255 255 255 / .13)
+  glass-dark-focus: '#e9e5ee'
+  glass-dark-track-fallback: '#27272d'
+  glass-dark-lens-fallback: '#414147'
   dark-canvas: '#17141c'
   dark-background: '#242029'
   dark-foreground: '#f5f2f8'
@@ -258,14 +271,14 @@ The light platform uses neutral ink and white surfaces. Purple is reserved for t
 ### Secondary
 
 - **Mist Left / Right / Soft:** static background-fallback colors and the decorative purple world. The WebGL shader mixes its own colors; control tokens do not recolor it automatically.
-- **Glass High / Low:** the white alpha stops used by the central navigation capsule and lens. Their complete gradients, blur and shadows live in the sidecar because those properties do not fit frontmatter component tokens.
+- **Glass High / Low:** the light capsule and lens use white alpha stops. In dark appearance, the header track uses neutral `rgb(32 32 38 / .5)` → `rgb(24 24 30 / .3)` stops; other switch tracks use white alpha (.055 → .02). Their separate brighter lens uses white alpha (.19 → .055), edge (.28) and inset highlight (.38), keeping the backdrop visible through the frosted layers. Complete gradients, blur and shadows live in the sidecar because those properties do not fit frontmatter component tokens.
 
 ### Neutral
 
 - **Background / Muted / Border:** white card grounds, quiet neutral insets and fine separators.
 - **Secondary / Subtle:** readable supporting copy and metadata.
 - **Glass Track / Inactive / Selected:** a neutral translucent switch track, muted labels and black selected labels.
-- **Dark roles:** functional pages, homepage cards and filters, and the shared header invert their neutral roles without introducing a purple functional accent. The `home-dark-*` and `header-dark-*` frontmatter entries describe only the scoped roles in the landing and glass-control stylesheets; they do not replace the application palette. Homepage actions use its dark foreground over its dark surface; the header reuses the application dark foreground with its own translucent glass and panel roles.
+- **Dark roles:** functional pages, homepage cards and filters, and the shared header invert their neutral roles without introducing a purple functional accent. The `home-dark-*`, `header-dark-*` and `glass-dark-*` frontmatter entries describe only scoped landing and glass-control roles; they do not replace the application palette. Homepage actions use its dark foreground over its dark surface; the header reuses the application dark foreground with its own translucent glass and panel roles. Dark switches use inactive labels (`#c7c3cd`), selected labels (`#f5f2f8`), hover white alpha (.065) and focus (`#e9e5ee`). Before a lens is ready, white alpha (.13) keeps the selected control visible.
 
 **The Neutral Function Rule.** Use black neutral UI for primary actions, selected labels, links and icons in the light appearance; keep purple in decorative backgrounds and retain semantic feedback colors.
 
@@ -301,7 +314,7 @@ The mist uses independently phased left/right `mist` fields, soft side anchors, 
 
 White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms); hero actions lift (2px) over (180ms).
 
-The always-visible central navigation capsule combines its scoped alpha gradient, blur (24px), saturation (1.12), fine edge and edge shadows in either appearance. The transparent outer header has no shared surface or shadow. The travelling lens uses blur (7px), saturation (1.1), a bright edge and a smaller shadow. GlassSwitch clips an inert duplicate-label layer, counter-translates its full track, then scales it locally around the moving lens center. Cubic ease-out travel accumulates approximately (390–540ms) of active animation-frame time, based on measured distance, starting at the first delivered frame and limiting each following interval to (50ms). Busy route work may extend wall-clock completion while preserving the visible journey. Magnification rises during travel to at most (1.15), then settles at (1). Observer or font notifications with unchanged destination geometry preserve the active journey; real geometry changes retarget it from the current visual position. This is native DOM magnification with glass styling, not physical optical refraction. The original controls retain their labels, hit areas and focus.
+The always-visible central navigation capsule combines its scoped alpha gradient, blur (24px), saturation (1.12), fine edge and edge shadows in either appearance. The transparent outer header has no shared surface or shadow. Dark header backdrop brightness is bounded at (0.36) before its translucent fill and lens are composed, preserving neutral-label contrast when bright covers pass beneath the fixed capsule. Dark header theme, language and account control plates share that brightness guard with (18px) blur; their unsupported-blur fallback uses the header panel role. Other dark switch tracks use blur (16px), saturation (1.12) and a white alpha (.12) edge. The travelling lens uses blur (7px) in light appearance and (10px) in dark, saturation (1.1), a bright edge and a smaller shadow. Dark capsule depth is (`0 12px 36px -12px rgb(0 0 0 / .6), 0 1px 2px rgb(0 0 0 / .18), inset 0 1px 0 rgb(255 255 255 / .18)`); the independent dark lens uses (`0 5px 15px -4px rgb(0 0 0 / .4), inset 0 1px 1px rgb(255 255 255 / .38), inset 0 -1px 2px rgb(0 0 0 / .26)`). A selected control awaiting its lens uses (`0 2px 8px rgb(0 0 0 / .24)`). Both standard and WebKit backdrop-filter paths retain these layers; when neither is supported, dark switch tracks use (`#27272d`), header navigation uses its existing panel role and lenses use (`#414147`). GlassSwitch clips an inert duplicate-label layer, counter-translates its full track, then scales it locally around the moving lens center. Cubic ease-out travel accumulates approximately (390–540ms) of active animation-frame time, based on measured distance, starting at the first delivered frame and limiting each following interval to (50ms). Busy route work may extend wall-clock completion while preserving the visible journey. Magnification rises during travel to at most (1.15), then settles at (1). Observer or font notifications with unchanged destination geometry preserve the active journey; real geometry changes retarget it from the current visual position. This is native DOM magnification with glass styling, not physical optical refraction. The original controls retain their labels, hit areas and focus.
 
 Homepage reveal, including its empty-state card, remains opacity (0 → 1), travel (24px → 0), duration (650ms), threshold (0.1), easing (`cubic-bezier(.22,1,.36,1)`) and (70ms) observer-batch staggering capped at (210ms). Existing functional reveal uses (12px), (550ms), threshold (0.12), root margin (`0px 0px -6% 0px`) and the same bounded stagger; delay restarts for each semantic group within an observer batch. The blog product story explicitly opts (25) short readable chunks into this existing reveal through scope/group/item markers; the header, gallery, static diagram and whole tall sections remain outside it. Authored content keeps its own motion. Retained template FadeIn uses (800ms) with controlled scroll entry; explicit mount FadeIn and ScaleUnblur keep their mount behavior. Homepage, functional and scroll FadeIn entries replay after the element fully leaves the physical viewport and re-enters in either scroll direction. Crossing an entry threshold or inset while still visible does not hide content or restart it. Keyboard focus reveals pending content immediately and keeps it readable while focus remains inside. Reduced motion cancels travel, zoom pulses, reveals and hover transforms and shows reveal content; unavailable observation or animation APIs keep content readable. The background is static under reduced motion. Hidden/offscreen backgrounds pause, and the switch settles geometry on visibility changes. WebGL failure/context loss leaves CSS mist; unsupported backdrop blur leaves an opaque readable glass fallback. Cleanup releases frames, observers, listeners and GPU resources.
 

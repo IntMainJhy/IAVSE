@@ -690,6 +690,188 @@
           "oklch(95.00% 0.0394 300.55)"
         ]
       },
+      "glass-dark-track-high": {
+        "role": "neutral",
+        "displayName": "Glass Dark Track High",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .055)",
+          "oklch(26.43% 0.0000 89.88 / .055)",
+          "oklch(37.86% 0.0000 89.88 / .055)",
+          "oklch(49.29% 0.0000 89.88 / .055)",
+          "oklch(60.71% 0.0000 89.88 / .055)",
+          "oklch(72.14% 0.0000 89.88 / .055)",
+          "oklch(83.57% 0.0000 89.88 / .055)",
+          "oklch(95.00% 0.0000 89.88 / .055)"
+        ]
+      },
+      "glass-dark-track-low": {
+        "role": "neutral",
+        "displayName": "Glass Dark Track Low",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .02)",
+          "oklch(26.43% 0.0000 89.88 / .02)",
+          "oklch(37.86% 0.0000 89.88 / .02)",
+          "oklch(49.29% 0.0000 89.88 / .02)",
+          "oklch(60.71% 0.0000 89.88 / .02)",
+          "oklch(72.14% 0.0000 89.88 / .02)",
+          "oklch(83.57% 0.0000 89.88 / .02)",
+          "oklch(95.00% 0.0000 89.88 / .02)"
+        ]
+      },
+      "glass-dark-edge": {
+        "role": "neutral",
+        "displayName": "Glass Dark Edge",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .12)",
+          "oklch(26.43% 0.0000 89.88 / .12)",
+          "oklch(37.86% 0.0000 89.88 / .12)",
+          "oklch(49.29% 0.0000 89.88 / .12)",
+          "oklch(60.71% 0.0000 89.88 / .12)",
+          "oklch(72.14% 0.0000 89.88 / .12)",
+          "oklch(83.57% 0.0000 89.88 / .12)",
+          "oklch(95.00% 0.0000 89.88 / .12)"
+        ]
+      },
+      "glass-dark-lens-high": {
+        "role": "neutral",
+        "displayName": "Glass Dark Lens High",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .19)",
+          "oklch(26.43% 0.0000 89.88 / .19)",
+          "oklch(37.86% 0.0000 89.88 / .19)",
+          "oklch(49.29% 0.0000 89.88 / .19)",
+          "oklch(60.71% 0.0000 89.88 / .19)",
+          "oklch(72.14% 0.0000 89.88 / .19)",
+          "oklch(83.57% 0.0000 89.88 / .19)",
+          "oklch(95.00% 0.0000 89.88 / .19)"
+        ]
+      },
+      "glass-dark-lens-low": {
+        "role": "neutral",
+        "displayName": "Glass Dark Lens Low",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .055)",
+          "oklch(26.43% 0.0000 89.88 / .055)",
+          "oklch(37.86% 0.0000 89.88 / .055)",
+          "oklch(49.29% 0.0000 89.88 / .055)",
+          "oklch(60.71% 0.0000 89.88 / .055)",
+          "oklch(72.14% 0.0000 89.88 / .055)",
+          "oklch(83.57% 0.0000 89.88 / .055)",
+          "oklch(95.00% 0.0000 89.88 / .055)"
+        ]
+      },
+      "glass-dark-lens-edge": {
+        "role": "neutral",
+        "displayName": "Glass Dark Lens Edge",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .28)",
+          "oklch(26.43% 0.0000 89.88 / .28)",
+          "oklch(37.86% 0.0000 89.88 / .28)",
+          "oklch(49.29% 0.0000 89.88 / .28)",
+          "oklch(60.71% 0.0000 89.88 / .28)",
+          "oklch(72.14% 0.0000 89.88 / .28)",
+          "oklch(83.57% 0.0000 89.88 / .28)",
+          "oklch(95.00% 0.0000 89.88 / .28)"
+        ]
+      },
+      "glass-dark-highlight": {
+        "role": "neutral",
+        "displayName": "Glass Dark Highlight",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .38)",
+          "oklch(26.43% 0.0000 89.88 / .38)",
+          "oklch(37.86% 0.0000 89.88 / .38)",
+          "oklch(49.29% 0.0000 89.88 / .38)",
+          "oklch(60.71% 0.0000 89.88 / .38)",
+          "oklch(72.14% 0.0000 89.88 / .38)",
+          "oklch(83.57% 0.0000 89.88 / .38)",
+          "oklch(95.00% 0.0000 89.88 / .38)"
+        ]
+      },
+      "glass-dark-inactive": {
+        "role": "neutral",
+        "displayName": "Glass Dark Inactive",
+        "tonalRamp": [
+          "oklch(15.00% 0.0145 304.09)",
+          "oklch(26.43% 0.0145 304.09)",
+          "oklch(37.86% 0.0145 304.09)",
+          "oklch(49.29% 0.0145 304.09)",
+          "oklch(60.71% 0.0145 304.09)",
+          "oklch(72.14% 0.0145 304.09)",
+          "oklch(83.57% 0.0145 304.09)",
+          "oklch(95.00% 0.0145 304.09)"
+        ]
+      },
+      "glass-dark-hover": {
+        "role": "neutral",
+        "displayName": "Glass Dark Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .065)",
+          "oklch(26.43% 0.0000 89.88 / .065)",
+          "oklch(37.86% 0.0000 89.88 / .065)",
+          "oklch(49.29% 0.0000 89.88 / .065)",
+          "oklch(60.71% 0.0000 89.88 / .065)",
+          "oklch(72.14% 0.0000 89.88 / .065)",
+          "oklch(83.57% 0.0000 89.88 / .065)",
+          "oklch(95.00% 0.0000 89.88 / .065)"
+        ]
+      },
+      "glass-dark-selected": {
+        "role": "neutral",
+        "displayName": "Glass Dark Selected",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .13)",
+          "oklch(26.43% 0.0000 89.88 / .13)",
+          "oklch(37.86% 0.0000 89.88 / .13)",
+          "oklch(49.29% 0.0000 89.88 / .13)",
+          "oklch(60.71% 0.0000 89.88 / .13)",
+          "oklch(72.14% 0.0000 89.88 / .13)",
+          "oklch(83.57% 0.0000 89.88 / .13)",
+          "oklch(95.00% 0.0000 89.88 / .13)"
+        ]
+      },
+      "glass-dark-focus": {
+        "role": "neutral",
+        "displayName": "Glass Dark Focus",
+        "tonalRamp": [
+          "oklch(15.00% 0.0128 306.02)",
+          "oklch(26.43% 0.0128 306.02)",
+          "oklch(37.86% 0.0128 306.02)",
+          "oklch(49.29% 0.0128 306.02)",
+          "oklch(60.71% 0.0128 306.02)",
+          "oklch(72.14% 0.0128 306.02)",
+          "oklch(83.57% 0.0128 306.02)",
+          "oklch(95.00% 0.0128 306.02)"
+        ]
+      },
+      "glass-dark-track-fallback": {
+        "role": "neutral",
+        "displayName": "Glass Dark Track Fallback",
+        "tonalRamp": [
+          "oklch(15.00% 0.0110 285.66)",
+          "oklch(26.43% 0.0110 285.66)",
+          "oklch(37.86% 0.0110 285.66)",
+          "oklch(49.29% 0.0110 285.66)",
+          "oklch(60.71% 0.0110 285.66)",
+          "oklch(72.14% 0.0110 285.66)",
+          "oklch(83.57% 0.0110 285.66)",
+          "oklch(95.00% 0.0110 285.66)"
+        ]
+      },
+      "glass-dark-lens-fallback": {
+        "role": "neutral",
+        "displayName": "Glass Dark Lens Fallback",
+        "tonalRamp": [
+          "oklch(15.00% 0.0101 285.90)",
+          "oklch(26.43% 0.0101 285.90)",
+          "oklch(37.86% 0.0101 285.90)",
+          "oklch(49.29% 0.0101 285.90)",
+          "oklch(60.71% 0.0101 285.90)",
+          "oklch(72.14% 0.0101 285.90)",
+          "oklch(83.57% 0.0101 285.90)",
+          "oklch(95.00% 0.0101 285.90)"
+        ]
+      },
       "header-dark-muted": {
         "role": "neutral",
         "displayName": "Header Dark Muted",
@@ -708,42 +890,42 @@
         "role": "neutral",
         "displayName": "Header Dark Glass High",
         "tonalRamp": [
-          "oklch(15.00% 0.0211 305.66 / .9)",
-          "oklch(26.43% 0.0211 305.66 / .9)",
-          "oklch(37.86% 0.0211 305.66 / .9)",
-          "oklch(49.29% 0.0211 305.66 / .9)",
-          "oklch(60.71% 0.0211 305.66 / .9)",
-          "oklch(72.14% 0.0211 305.66 / .9)",
-          "oklch(83.57% 0.0211 305.66 / .9)",
-          "oklch(95.00% 0.0211 305.66 / .9)"
+          "oklch(15.00% 0.0113 285.54 / .5)",
+          "oklch(26.43% 0.0113 285.54 / .5)",
+          "oklch(37.86% 0.0113 285.54 / .5)",
+          "oklch(49.29% 0.0113 285.54 / .5)",
+          "oklch(60.71% 0.0113 285.54 / .5)",
+          "oklch(72.14% 0.0113 285.54 / .5)",
+          "oklch(83.57% 0.0113 285.54 / .5)",
+          "oklch(95.00% 0.0113 285.54 / .5)"
         ]
       },
       "header-dark-glass-low": {
         "role": "neutral",
         "displayName": "Header Dark Glass Low",
         "tonalRamp": [
-          "oklch(15.00% 0.0214 301.45 / .75)",
-          "oklch(26.43% 0.0214 301.45 / .75)",
-          "oklch(37.86% 0.0214 301.45 / .75)",
-          "oklch(49.29% 0.0214 301.45 / .75)",
-          "oklch(60.71% 0.0214 301.45 / .75)",
-          "oklch(72.14% 0.0214 301.45 / .75)",
-          "oklch(83.57% 0.0214 301.45 / .75)",
-          "oklch(95.00% 0.0214 301.45 / .75)"
+          "oklch(15.00% 0.0117 285.35 / .3)",
+          "oklch(26.43% 0.0117 285.35 / .3)",
+          "oklch(37.86% 0.0117 285.35 / .3)",
+          "oklch(49.29% 0.0117 285.35 / .3)",
+          "oklch(60.71% 0.0117 285.35 / .3)",
+          "oklch(72.14% 0.0117 285.35 / .3)",
+          "oklch(83.57% 0.0117 285.35 / .3)",
+          "oklch(95.00% 0.0117 285.35 / .3)"
         ]
       },
       "header-dark-edge": {
         "role": "neutral",
         "displayName": "Header Dark Edge",
         "tonalRamp": [
-          "oklch(15.00% 0.0000 89.88 / .13)",
-          "oklch(26.43% 0.0000 89.88 / .13)",
-          "oklch(37.86% 0.0000 89.88 / .13)",
-          "oklch(49.29% 0.0000 89.88 / .13)",
-          "oklch(60.71% 0.0000 89.88 / .13)",
-          "oklch(72.14% 0.0000 89.88 / .13)",
-          "oklch(83.57% 0.0000 89.88 / .13)",
-          "oklch(95.00% 0.0000 89.88 / .13)"
+          "oklch(15.00% 0.0000 89.88 / .18)",
+          "oklch(26.43% 0.0000 89.88 / .18)",
+          "oklch(37.86% 0.0000 89.88 / .18)",
+          "oklch(49.29% 0.0000 89.88 / .18)",
+          "oklch(60.71% 0.0000 89.88 / .18)",
+          "oklch(72.14% 0.0000 89.88 / .18)",
+          "oklch(83.57% 0.0000 89.88 / .18)",
+          "oklch(95.00% 0.0000 89.88 / .18)"
         ]
       },
       "header-dark-panel": {
@@ -808,6 +990,21 @@
       }
     },
     "shadows": [
+      {
+        "name": "dark-header",
+        "value": "0 12px 36px -12px rgb(0 0 0 / .6),0 1px 2px rgb(0 0 0 / .18),inset 0 1px 0 rgb(255 255 255 / .18)",
+        "purpose": "Dark navigation capsule: translucent neutral track with a white inset edge; outer header remains transparent."
+      },
+      {
+        "name": "dark-lens",
+        "value": "0 5px 15px -4px rgb(0 0 0 / .4),inset 0 1px 1px rgb(255 255 255 / .38),inset 0 -1px 2px rgb(0 0 0 / .26)",
+        "purpose": "Independent bright dark-appearance lens with top highlight and lower inner shade."
+      },
+      {
+        "name": "dark-switch-selected-fallback",
+        "value": "0 2px 8px rgb(0 0 0 / .24)",
+        "purpose": "Readable selected control before the dark switch lens is ready."
+      },
       {
         "name": "home-card-rest",
         "value": "0 14px 38px -10px rgb(32 32 35 / .10)",
@@ -902,13 +1099,18 @@
       },
       {
         "name": "header-glass",
-        "value": "blur(24px) saturate(1.12)",
-        "purpose": "Always-visible navigation capsule at every viewport; scoped light/dark gradient and edge, transparent outer frame, current-appearance opaque fallback when blur is unsupported."
+        "value": "light blur(24px) saturate(1.12); dark adds brightness(.36)",
+        "purpose": "Always-visible navigation capsule at every viewport; scoped light/dark gradient and edge, transparent outer frame, current-appearance opaque fallback when blur is unsupported. Dark backdrop brightness is bounded before translucent layers compose to protect label contrast over bright covers. Dark theme, language and account plates share that guard with 18px blur and an opaque panel fallback."
+      },
+      {
+        "name": "dark-switch-glass",
+        "value": "blur(16px) saturate(1.12); white alpha .055→.02; edge .12",
+        "purpose": "Non-header dark switch tracks retain the scene beneath the frosted material. Header navigation keeps its own 24px blur; standard and WebKit paths share opaque fallbacks when unsupported."
       },
       {
         "name": "lens-glass",
-        "value": "blur(7px) saturate(1.1)",
-        "purpose": "Smaller lens with white edge and local text copies."
+        "value": "light blur(7px); dark blur(10px); saturate(1.1)",
+        "purpose": "Independent lens with local text copies; dark appearance uses brighter white alpha stops, a rim and inner highlights over the translucent track."
       },
       {
         "name": "home-reveal",
@@ -918,7 +1120,7 @@
       {
         "name": "application-reveal",
         "value": "opacity 0→1; y12px→0; 550ms; threshold .12; root margin 0px 0px -6% 0px",
-        "purpose": "Existing operating-page entry repeats only after a complete physical viewport exit; threshold or inset crossings while visible keep content stable. Focus and reduced-motion/API fallbacks stay readable; authored/editable content exclusions remain."
+        "purpose": "Shared catalog cards, short reading headings, download/legal/community/account chunks repeat only after a complete physical viewport exit, using the same parameters on desktop and mobile. Threshold or inset crossings keep visible content stable; focus, reduced-motion/API fallbacks and authored/editable exclusions remain."
       },
       {
         "name": "template-fade",
@@ -1039,7 +1241,7 @@
       "refersTo": "header-frame",
       "description": "Static preview of the persistent header: original brand, five always-visible route links with theme beside the capsule, and guest/account state followed by language. At 1100px and below, navigation/theme use a second row; at 650px and below, short visible labels retain full accessible names. Runtime supplies the travelling lens and actual preference/menu behavior.",
       "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><div class=\"ds-navigation\"><nav class=\"ds-nav\" aria-label=\"主要导航\"><a href=\"/\" aria-label=\"首页\"><span class=\"ds-full\">首页</span><span class=\"ds-compact\" aria-hidden=\"true\">首页</span></a><a href=\"/community\" aria-label=\"社区\"><span class=\"ds-full\">社区</span><span class=\"ds-compact\" aria-hidden=\"true\">社区</span></a><a href=\"/resources\" aria-label=\"资源\" aria-current=\"page\"><span class=\"ds-full\">资源</span><span class=\"ds-compact\" aria-hidden=\"true\">资源</span></a><a href=\"/blogs\" aria-label=\"博客空间\"><span class=\"ds-full\">博客空间</span><span class=\"ds-compact\" aria-hidden=\"true\">博客</span></a><a href=\"/about\" aria-label=\"关于\"><span class=\"ds-full\">关于</span><span class=\"ds-compact\" aria-hidden=\"true\">关于</span></a></nav><button class=\"ds-theme\" type=\"button\" aria-label=\"切换深色外观\" title=\"切换深色外观\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z\"/></svg></button></div><div class=\"ds-identity\"><a class=\"ds-login\" href=\"/login\">登录</a><a class=\"ds-avatar\" href=\"/login\" aria-label=\"登录或管理账号\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M5 21v-2a7 7 0 0 1 14 0v2\"/></svg></a><button class=\"ds-language\" type=\"button\" aria-label=\"切换语言\" aria-expanded=\"false\">简中<svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></button></div></header>",
-      "css": ".ds-header{--ds-ink:#242424;--ds-muted:#67676d;--ds-line:rgb(45 45 50 / .1);--ds-glass-high:rgb(255 255 255 / .86);--ds-glass-low:rgb(255 255 255 / .65);--ds-edge:rgb(255 255 255 / .94);--ds-panel:rgb(255 255 255 / .96);--ds-action:#242424;--ds-on-action:#fff;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:20px;width:100%;min-width:0;min-height:72px;padding:8px 0;border:0;background:transparent;box-shadow:none;color:var(--ds-ink);font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header,.ds-header :is(a,button){box-sizing:border-box}.ds-header a{color:inherit;text-decoration:none}.ds-brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-brand>svg{width:27px;height:27px;flex:none}.ds-navigation{grid-column:2;grid-row:1;justify-self:center;display:flex;align-items:center;gap:10px;min-width:0;max-width:100%}.ds-nav{display:flex;gap:2px;min-width:0;max-width:100%;padding:6px;border:1px solid var(--ds-edge);border-radius:999px;background:linear-gradient(120deg,var(--ds-glass-high),var(--ds-glass-low));box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 var(--ds-edge);backdrop-filter:blur(24px) saturate(1.12);font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-nav a{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-width:0;min-height:42px;padding:9px 16px;border-radius:999px;color:var(--ds-muted);white-space:nowrap}.ds-compact{display:none}.ds-nav a[aria-current]{background:var(--ds-glass-high);color:var(--ds-ink);box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover{background:var(--ds-glass-low);color:var(--ds-ink)}.ds-theme,.ds-avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--ds-line);border-radius:50%;background:var(--ds-glass-low);color:var(--ds-ink);cursor:pointer}.ds-theme{box-shadow:0 5px 18px -10px rgb(30 30 40 / .18);backdrop-filter:blur(18px)}.ds-identity{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:9px;min-width:0}.ds-login{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 19px;border:0;border-radius:999px;background:var(--ds-action);color:var(--ds-on-action)!important;font-weight:500;line-height:1.4;white-space:nowrap;transition:opacity .16s}.ds-login:hover{opacity:.8}.ds-avatar{color:var(--ds-muted)!important}.ds-language{display:inline-flex;flex:none;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:8px 10px;border:1px solid var(--ds-line);border-radius:999px;background:var(--ds-glass-low);color:var(--ds-ink);font:400 13px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);white-space:nowrap;cursor:pointer}.ds-header :is(a,button):focus-visible{outline:2px solid var(--ds-ink);outline-offset:4px}.ds-nav a:focus-visible{outline-offset:-3px}:host-context(html[data-color-mode=dark]) .ds-header{--ds-ink:#f5f2f8;--ds-muted:#c2bbca;--ds-line:rgb(255 255 255 / .13);--ds-glass-high:rgb(43 38 49 / .9);--ds-glass-low:rgb(34 30 41 / .75);--ds-edge:rgb(255 255 255 / .13);--ds-panel:rgb(37 32 45 / .97);--ds-action:#f5f2f8;--ds-on-action:#201b25;color-scheme:dark}@media(max-width:1100px){.ds-header{grid-template-columns:1fr auto;row-gap:10px;column-gap:14px;min-height:122px;padding:6px 0}.ds-identity{grid-column:2}.ds-navigation{grid-column:1/-1;grid-row:2;max-width:100%}}@media(max-width:650px){.ds-header{min-height:110px;row-gap:8px;column-gap:10px;padding:4px 0}.ds-brand{gap:7px}.ds-brand span{font-size:29px}.ds-brand>svg{width:23px;height:23px}.ds-identity{gap:7px}.ds-login{min-height:42px;padding:9px 13px;font-size:13px}.ds-avatar{width:38px;height:42px}.ds-language{min-height:42px;padding-inline:8px;font-size:12px}.ds-navigation{width:max-content;max-width:100%;gap:8px}.ds-nav{padding:4px;font-size:12px}.ds-nav a{padding:9px 8px}.ds-full{display:none}.ds-compact{display:inline}.ds-theme{width:40px;height:42px}}@media(max-width:360px){.ds-header{column-gap:7px}.ds-brand{gap:5px}.ds-brand span{font-size:26px}.ds-brand>svg{width:20px;height:20px}.ds-identity{gap:5px}.ds-login{padding-inline:9px;font-size:12px}.ds-avatar{width:34px}.ds-language{padding-inline:6px;gap:3px}.ds-language>svg{width:11px}.ds-nav{font-size:11.5px}.ds-nav a{padding:9px 6px}}@supports not(backdrop-filter:blur(1px)){.ds-nav{background:var(--ds-panel)}}@media(prefers-reduced-motion:reduce){.ds-login{transition:none}}"
+      "css": ".ds-header{--ds-ink:#242424;--ds-muted:#67676d;--ds-line:rgb(45 45 50 / .1);--ds-glass-high:rgb(255 255 255 / .86);--ds-glass-low:rgb(255 255 255 / .65);--ds-edge:rgb(255 255 255 / .94);--ds-panel:rgb(255 255 255 / .96);--ds-action:#242424;--ds-on-action:#fff;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:20px;width:100%;min-width:0;min-height:72px;padding:8px 0;border:0;background:transparent;box-shadow:none;color:var(--ds-ink);font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header,.ds-header :is(a,button){box-sizing:border-box}.ds-header a{color:inherit;text-decoration:none}.ds-brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-brand>svg{width:27px;height:27px;flex:none}.ds-navigation{grid-column:2;grid-row:1;justify-self:center;display:flex;align-items:center;gap:10px;min-width:0;max-width:100%}.ds-nav{display:flex;gap:2px;min-width:0;max-width:100%;padding:6px;border:1px solid var(--ds-edge);border-radius:999px;background:linear-gradient(120deg,var(--ds-glass-high),var(--ds-glass-low));box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 var(--ds-edge);backdrop-filter:blur(24px) saturate(1.12);-webkit-backdrop-filter:blur(24px) saturate(1.12);font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-nav a{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-width:0;min-height:42px;padding:9px 16px;border-radius:999px;color:var(--ds-muted);white-space:nowrap}.ds-compact{display:none}.ds-nav a[aria-current]{background:var(--ds-glass-high);color:var(--ds-ink);box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover{background:var(--ds-glass-low);color:var(--ds-ink)}.ds-theme,.ds-avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--ds-line);border-radius:50%;background:var(--ds-glass-low);color:var(--ds-ink);cursor:pointer}.ds-theme{box-shadow:0 5px 18px -10px rgb(30 30 40 / .18);backdrop-filter:blur(18px)}.ds-identity{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:9px;min-width:0}.ds-login{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 19px;border:0;border-radius:999px;background:var(--ds-action);color:var(--ds-on-action)!important;font-weight:500;line-height:1.4;white-space:nowrap;transition:opacity .16s}.ds-login:hover{opacity:.8}.ds-avatar{color:var(--ds-muted)!important}.ds-language{display:inline-flex;flex:none;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:8px 10px;border:1px solid var(--ds-line);border-radius:999px;background:var(--ds-glass-low);color:var(--ds-ink);font:400 13px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);white-space:nowrap;cursor:pointer}.ds-header :is(a,button):focus-visible{outline:2px solid var(--ds-ink);outline-offset:4px}.ds-nav a:focus-visible{outline-offset:-3px}:host-context(html[data-color-mode=dark]) .ds-header{--ds-ink:#f5f2f8;--ds-muted:#c2bbca;--ds-line:rgb(255 255 255 / .13);--ds-glass-high:rgb(32 32 38 / .5);--ds-glass-low:rgb(24 24 30 / .3);--ds-edge:rgb(255 255 255 / .18);--ds-panel:rgb(37 32 45 / .97);--ds-action:#f5f2f8;--ds-on-action:#201b25;color-scheme:dark}:host-context(html[data-color-mode=dark]) .ds-nav{backdrop-filter:blur(24px) saturate(1.12) brightness(.36);-webkit-backdrop-filter:blur(24px) saturate(1.12) brightness(.36);box-shadow:0 12px 36px -12px rgb(0 0 0 / .6),0 1px 2px rgb(0 0 0 / .18),inset 0 1px 0 rgb(255 255 255 / .18)}:host-context(html[data-color-mode=dark]) .ds-nav a{color:#c7c3cd}:host-context(html[data-color-mode=dark]) .ds-nav a[aria-current]{background:rgb(255 255 255 / .13);color:#f5f2f8;box-shadow:0 2px 8px rgb(0 0 0 / .24)}:host-context(html[data-color-mode=dark]) .ds-nav a:hover{background:rgb(255 255 255 / .065);color:#f5f2f8}:host-context(html[data-color-mode=dark]) .ds-nav a:focus-visible{outline-color:#e9e5ee}@media(max-width:1100px){.ds-header{grid-template-columns:1fr auto;row-gap:10px;column-gap:14px;min-height:122px;padding:6px 0}.ds-identity{grid-column:2}.ds-navigation{grid-column:1/-1;grid-row:2;max-width:100%}}@media(max-width:650px){.ds-header{min-height:110px;row-gap:8px;column-gap:10px;padding:4px 0}.ds-brand{gap:7px}.ds-brand span{font-size:29px}.ds-brand>svg{width:23px;height:23px}.ds-identity{gap:7px}.ds-login{min-height:42px;padding:9px 13px;font-size:13px}.ds-avatar{width:38px;height:42px}.ds-language{min-height:42px;padding-inline:8px;font-size:12px}.ds-navigation{width:max-content;max-width:100%;gap:8px}.ds-nav{padding:4px;font-size:12px}.ds-nav a{padding:9px 8px}.ds-full{display:none}.ds-compact{display:inline}.ds-theme{width:40px;height:42px}}@media(max-width:360px){.ds-header{column-gap:7px}.ds-brand{gap:5px}.ds-brand span{font-size:26px}.ds-brand>svg{width:20px;height:20px}.ds-identity{gap:5px}.ds-login{padding-inline:9px;font-size:12px}.ds-avatar{width:34px}.ds-language{padding-inline:6px;gap:3px}.ds-language>svg{width:11px}.ds-nav{font-size:11.5px}.ds-nav a{padding:9px 6px}}@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.ds-nav{background:var(--ds-panel)}}@media(prefers-reduced-motion:reduce){.ds-login{transition:none}}:host-context(html[data-color-mode=dark]) :is(.ds-theme,.ds-language,.ds-avatar){backdrop-filter:blur(18px) saturate(1.12) brightness(.36);-webkit-backdrop-filter:blur(18px) saturate(1.12) brightness(.36)}@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){:host-context(html[data-color-mode=dark]) :is(.ds-theme,.ds-language,.ds-avatar){background:var(--ds-panel)}}"
     },
     {
       "name": "Sliding glass switch layers",
@@ -1047,7 +1249,7 @@
       "refersTo": "glass-switch",
       "description": "Static rendering of the inert lens layers; runtime preserves unchanged-geometry travel, retargets actual layout changes and clears stale link intent after real value commits.",
       "html": "<div class=\"ds-switch\" role=\"group\" aria-label=\"社区内容类型\"><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"true\">发现</button><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"false\">作品</button><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"false\">讨论</button><div class=\"ds-lens\" aria-hidden=\"true\" inert><div class=\"ds-countertrack\"><div class=\"ds-magnification\"><span class=\"ds-copy ds-copy-1\">发现</span><span class=\"ds-copy ds-copy-2\">作品</span><span class=\"ds-copy ds-copy-3\">讨论</span></div></div></div></div>",
-      "css": ".ds-switch{--ds-lens-x:4px;--ds-lens-y:4px;--ds-lens-width:60px;--ds-lens-height:42px;--ds-lens-zoom:1;position:relative;isolation:isolate;display:inline-flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27);color:#242424;font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-switch-item,.ds-copy{display:flex;align-items:center;justify-content:center;min-width:0;width:60px;min-height:42px;padding:9px 16px;border:0;border-radius:999px;font:inherit;white-space:nowrap;box-sizing:border-box}.ds-switch-item{position:relative;z-index:1;background:transparent;color:#5b5b60;cursor:pointer;transition:color .16s,background-color .16s}.ds-switch-item[aria-pressed=true]{color:#202022}.ds-switch-item:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-switch-item:focus-visible{z-index:3;outline:2px solid #303034;outline-offset:-3px}.ds-switch-item:disabled{opacity:.4;cursor:default}.ds-lens{position:absolute;z-index:2;top:0;left:0;width:var(--ds-lens-width);height:var(--ds-lens-height);overflow:clip;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(135deg,rgb(255 255 255 / .76),rgb(255 255 255 / .47));box-shadow:0 3px 11px rgb(24 24 30 / .1),inset 0 1px 1px rgb(255 255 255 / .96),inset 0 -1px 2px rgb(40 40 48 / .05);backdrop-filter:blur(7px) saturate(1.1);transform:translate3d(var(--ds-lens-x),var(--ds-lens-y),0);pointer-events:none;user-select:none}.ds-countertrack{position:absolute;top:-1px;left:-1px;width:192px;height:50px;transform:translate3d(calc(-1 * var(--ds-lens-x)),calc(-1 * var(--ds-lens-y)),0)}.ds-magnification{position:absolute;inset:0;transform:scale(var(--ds-lens-zoom));transform-origin:calc(var(--ds-lens-x) + var(--ds-lens-width)/2) calc(var(--ds-lens-y) + var(--ds-lens-height)/2)}.ds-copy{position:absolute;top:4px;color:#202022;pointer-events:none}.ds-copy-1{left:4px}.ds-copy-2{left:66px}.ds-copy-3{left:128px}@media(prefers-reduced-motion:reduce){.ds-switch-item{transition:none}.ds-magnification{transform:none}}@supports not(backdrop-filter:blur(1px)){.ds-lens{background:#fff}}"
+      "css": ".ds-switch{--ds-lens-x:4px;--ds-lens-y:4px;--ds-lens-width:60px;--ds-lens-height:42px;--ds-lens-zoom:1;position:relative;isolation:isolate;display:inline-flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27);color:#242424;font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-switch-item,.ds-copy{display:flex;align-items:center;justify-content:center;min-width:0;width:60px;min-height:42px;padding:9px 16px;border:0;border-radius:999px;font:inherit;white-space:nowrap;box-sizing:border-box}.ds-switch-item{position:relative;z-index:1;background:transparent;color:#5b5b60;cursor:pointer;transition:color .16s,background-color .16s}.ds-switch-item[aria-pressed=true]{color:#202022}.ds-switch-item:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-switch-item:focus-visible{z-index:3;outline:2px solid #303034;outline-offset:-3px}.ds-switch-item:disabled{opacity:.4;cursor:default}.ds-lens{position:absolute;z-index:2;top:0;left:0;width:var(--ds-lens-width);height:var(--ds-lens-height);overflow:clip;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(135deg,rgb(255 255 255 / .76),rgb(255 255 255 / .47));box-shadow:0 3px 11px rgb(24 24 30 / .1),inset 0 1px 1px rgb(255 255 255 / .96),inset 0 -1px 2px rgb(40 40 48 / .05);backdrop-filter:blur(7px) saturate(1.1);-webkit-backdrop-filter:blur(7px) saturate(1.1);transform:translate3d(var(--ds-lens-x),var(--ds-lens-y),0);pointer-events:none;user-select:none}.ds-countertrack{position:absolute;top:-1px;left:-1px;width:192px;height:50px;transform:translate3d(calc(-1 * var(--ds-lens-x)),calc(-1 * var(--ds-lens-y)),0)}.ds-magnification{position:absolute;inset:0;transform:scale(var(--ds-lens-zoom));transform-origin:calc(var(--ds-lens-x) + var(--ds-lens-width)/2) calc(var(--ds-lens-y) + var(--ds-lens-height)/2)}.ds-copy{position:absolute;top:4px;color:#202022;pointer-events:none}.ds-copy-1{left:4px}.ds-copy-2{left:66px}.ds-copy-3{left:128px}:host-context(html[data-color-mode=dark]) .ds-switch{background:linear-gradient(135deg,rgb(255 255 255 / .055),rgb(255 255 255 / .02));border-color:rgb(255 255 255 / .12);color:#f5f2f8;backdrop-filter:blur(16px) saturate(1.12);-webkit-backdrop-filter:blur(16px) saturate(1.12)}:host-context(html[data-color-mode=dark]) .ds-switch-item{color:#c7c3cd}:host-context(html[data-color-mode=dark]) :is(.ds-switch-item[aria-pressed=true],.ds-switch-item:hover,.ds-copy){color:#f5f2f8}:host-context(html[data-color-mode=dark]) .ds-switch-item:hover{background:rgb(255 255 255 / .065)}:host-context(html[data-color-mode=dark]) .ds-switch-item:focus-visible{outline-color:#e9e5ee}:host-context(html[data-color-mode=dark]) .ds-lens{background:linear-gradient(135deg,rgb(255 255 255 / .19),rgb(255 255 255 / .055));border-color:rgb(255 255 255 / .28);box-shadow:0 5px 15px -4px rgb(0 0 0 / .4),inset 0 1px 1px rgb(255 255 255 / .38),inset 0 -1px 2px rgb(0 0 0 / .26);backdrop-filter:blur(10px) saturate(1.1);-webkit-backdrop-filter:blur(10px) saturate(1.1)}@media(prefers-reduced-motion:reduce){.ds-switch-item{transition:none}.ds-magnification{transform:none}}@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.ds-lens{background:#fff}:host-context(html[data-color-mode=dark]) .ds-switch{background:#27272d}:host-context(html[data-color-mode=dark]) .ds-lens{background:#414147}}"
     },
     {
       "name": "Functional field",

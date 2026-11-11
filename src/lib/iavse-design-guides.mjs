@@ -18,21 +18,21 @@ DESIGN.md 是规范入口。src/app/iavse-system.css 管理平台语义变量及
 
 RBP 组件来源：https://github.com/DavidHDev/rbp-portfolio；本轮界面细化为 IAVSE 独立实现。
 `},
- {slug:'iavse-rbp-scroll-reveal',title:'滚动入场、上移淡入与交错动画',summary:'沿用 RBP 缓动，在首次进入视口时触发，支持减少动态和键盘访问。',body:`# 滚动入场动画
+ {slug:'iavse-rbp-scroll-reveal',title:'滚动入场、上移淡入与交错动画',summary:'沿用 RBP 缓动，内容完整离开视口后再次进入时重播，支持减少动态和键盘访问。',body:`# 滚动入场动画
 
-滚动入场（Scroll Reveal）在内容进入可视区域时开始，而不是页面加载时提前播放。首次入场后不再反复隐藏内容。
+滚动入场（Scroll Reveal）在内容进入可视区域时开始。首页、功能页面与模板的滚动 FadeIn 都在元素完整离开物理视口后，向上或向下再次进入时重播。内容仍有部分可见时，跨过触发阈值或观察区域边距不会重新隐藏或启动，避免边缘闪动。
 
 ## 三种效果
 
-淡入（Fade In）把透明度从 0 变为 1。上移淡入（Fade In Up）同时从下方 12px 回到原位置。同组卡片采用交错入场（Staggered Reveal），相邻元素间隔 70ms，总延迟最多 210ms。
+淡入（Fade In）把透明度从 0 变为 1。上移淡入（Fade In Up）同时从下方回到原位置：功能页面与模板为 12px，首页为 24px。同组卡片采用交错入场（Staggered Reveal），相邻元素间隔 70ms，总延迟最多 210ms。
 
-沿用模板的 cubic-bezier(.22,1,.36,1) 缓动。模板内容入场为 800ms；功能页面为 550ms。首屏标题、图片保留原模板入场，导航弹簧、主题圆形展开和图片悬停变形各自保持独立。
+沿用模板的 cubic-bezier(.22,1,.36,1) 缓动。模板滚动 FadeIn 为 800ms，功能页面为 550ms，首页为 650ms。显式挂载模式的 FadeIn 与 ScaleUnblur 保留原有挂载入场；导航弹簧、主题圆形展开和图片悬停变形各自保持独立。
 
 ## 可用性
 
-减少动态偏好下直接显示内容。聚焦到隐藏区域时立即显示，避免键盘用户等待。路由切换取消未完成动画，释放观察器。没有 JavaScript 时正文仍然可见；滚动动画不接管表单或画布手势。
+减少动态偏好下取消未完成的入场动画并直接显示内容。聚焦到隐藏区域时立即显示，焦点停留期间保持可读，避免键盘用户等待。路由切换取消未完成动画，释放观察器与事件监听。缺少相关观察或动画 API、没有 JavaScript 时，正文仍然可读；滚动动画不接管表单或画布手势。
 
-共享参数在 src/lib/rbp-motion.mjs，模板组件在 motion-primitives.tsx，业务页面增强在 application-reveal.tsx。
+共享参数在 src/lib/rbp-motion.mjs，模板组件在 motion-primitives.tsx，业务页面增强在 application-reveal.tsx，首页入场在 IavseLanding.tsx。
 `},
  {slug:'iavse-rbp-page-integration',title:'为页面接入统一 IAVSE 样式',summary:'页面布局、编辑器外壳、内容边界及验收方法。',body:`# 页面接入方式
 

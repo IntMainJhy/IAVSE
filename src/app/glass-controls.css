@@ -70,8 +70,19 @@
 .iavse-theme-toggle[data-dark=true] .iavse-theme-toggle__moon{opacity:0;transform:rotate(60deg) scale(.6)}
 .iavse-header :is(a,button,summary):focus-visible{outline:2px solid var(--header-ink);outline-offset:4px}
 .iavse-header .glass-switch__item:focus-visible{outline-offset:-3px}
-html[data-color-mode=dark] .iavse-header{--header-ink:#f5f2f8;--header-muted:#c2bbca;--header-line:rgb(255 255 255 / .13);--header-glass-high:rgb(43 38 49 / .9);--header-glass-low:rgb(34 30 41 / .75);--header-edge:rgb(255 255 255 / .13);--header-panel:rgb(37 32 45 / .97);--header-soft:#38313f;--header-action:#f5f2f8;--header-on-action:#201b25;color-scheme:dark}
-@supports not (backdrop-filter:blur(1px)){.iavse-header__nav>.glass-switch{background:var(--header-panel)}}
+html[data-color-mode=dark] .iavse-header{--header-ink:#f5f2f8;--header-muted:#c2bbca;--header-line:rgb(255 255 255 / .13);--header-glass-high:rgb(32 32 38 / .5);--header-glass-low:rgb(24 24 30 / .3);--header-edge:rgb(255 255 255 / .18);--header-panel:rgb(37 32 45 / .97);--header-soft:#38313f;--header-action:#f5f2f8;--header-on-action:#201b25;color-scheme:dark}
+/* Dark glass keeps the scene visible through the track; a separate, brighter
+   lens supplies the rim light and depth instead of another opaque dark fill. */
+html[data-color-mode=dark] .glass-switch{--glass-dark-track:linear-gradient(135deg,rgb(255 255 255 / .055),rgb(255 255 255 / .02));--glass-dark-edge:rgb(255 255 255 / .12);--glass-dark-lens-high:rgb(255 255 255 / .19);--glass-dark-lens-low:rgb(255 255 255 / .055);--glass-dark-lens-edge:rgb(255 255 255 / .28);--glass-dark-highlight:rgb(255 255 255 / .38);background:var(--glass-dark-track);border-color:var(--glass-dark-edge);color:#f5f2f8;backdrop-filter:blur(16px) saturate(1.12);-webkit-backdrop-filter:blur(16px) saturate(1.12)}
+html[data-color-mode=dark] .glass-switch .glass-switch__item{color:#c7c3cd}
+html[data-color-mode=dark] .glass-switch :is(.glass-switch__item[data-selected=true],.glass-switch__item:hover,.glass-switch__copy-item){color:#f5f2f8}
+html[data-color-mode=dark] .glass-switch .glass-switch__item:hover{background:rgb(255 255 255 / .065)}
+html[data-color-mode=dark] .glass-switch .glass-switch__item:focus-visible{outline-color:#e9e5ee}
+html[data-color-mode=dark] .glass-switch:not([data-lens-ready=true]) .glass-switch__item[data-selected=true]{background:rgb(255 255 255 / .13);box-shadow:0 2px 8px rgb(0 0 0 / .24)}
+html[data-color-mode=dark] :is(.glass-switch,.iv-filter-switch)>.glass-switch__lens{background:linear-gradient(135deg,var(--glass-dark-lens-high),var(--glass-dark-lens-low));border-color:var(--glass-dark-lens-edge);box-shadow:0 5px 15px -4px rgb(0 0 0 / .4),inset 0 1px 1px var(--glass-dark-highlight),inset 0 -1px 2px rgb(0 0 0 / .26);backdrop-filter:blur(10px) saturate(1.1);-webkit-backdrop-filter:blur(10px) saturate(1.1)}
+html[data-color-mode=dark] .iavse-header__nav>.glass-switch{background:linear-gradient(120deg,var(--header-glass-high),var(--header-glass-low));border-color:var(--header-edge);box-shadow:0 12px 36px -12px rgb(0 0 0 / .6),0 1px 2px rgb(0 0 0 / .18),inset 0 1px 0 rgb(255 255 255 / .18);backdrop-filter:blur(24px) saturate(1.12) brightness(.36);-webkit-backdrop-filter:blur(24px) saturate(1.12) brightness(.36)}
+html[data-color-mode=dark] .iavse-header :is(.iavse-theme-toggle,.language-trigger,.iavse-header__guest,.site-account-menu>summary){backdrop-filter:blur(18px) saturate(1.12) brightness(.36);-webkit-backdrop-filter:blur(18px) saturate(1.12) brightness(.36)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){html[data-color-mode=dark] .glass-switch{background:#27272d}html[data-color-mode=dark] .iavse-header :is(.iavse-theme-toggle,.language-trigger,.iavse-header__guest,.site-account-menu>summary){background:var(--header-panel)}.iavse-header__nav>.glass-switch,html[data-color-mode=dark] .iavse-header__nav>.glass-switch{background:var(--header-panel)}html[data-color-mode=dark] :is(.glass-switch,.iv-filter-switch)>.glass-switch__lens{background:#414147}}
 @media(min-width:1500px){.iavse-header--floating{width:min(1240px,calc(100% - 100px))}}
 @media(max-width:1100px){
  :root{--iavse-header-reserved:122px;--iavse-header-extra:52px}

@@ -1,12 +1,12 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';import ts from 'typescript';
 import {RBP_MOTION,revealDelay} from '../src/lib/rbp-motion.mjs';
 const source=fs.readFileSync(new URL('../src/components/rbp/ui/application-reveal.tsx',import.meta.url),'utf8');
-function setup({reduced=false,io=true}={}){
+function setup({reduced=false,io=true,width=1200,height=800}={}){
  let effect,changes,cleanup,path='/community',query='';const events={},windowEvents={},mediaEvents={},animations=[],nodes=[],observers=[],frames=new Map();let frameId=0;
  const media={matches:reduced,addEventListener:(n,f)=>mediaEvents[n]=f,removeEventListener:n=>delete mediaEvents[n]};
  class Element{
-  constructor({parent=null,scope=false,group=false,item=false,automatic=false,excluded=false,width=200,height=100,top=100,left=0,animate=true}={}){Object.assign(this,{parentElement:parent,scope,group,item,automatic,excluded,width,height,top,left});this.dataset={};this.children=[];parent?.children.push(this);if(!animate)this.animate=undefined;}
-  matches(selector){if(selector==='[data-rbp-reveal-scope]')return this.scope;if(selector==='[data-rbp-reveal-group]')return this.group;if(selector==='[data-rbp-reveal-item]')return this.item;if(selector==='[data-rbp-reveal]')return !!this.dataset.rbpReveal;if(selector.startsWith('.space-root'))return this.excluded;return this.automatic;}
+  constructor({parent=null,scope=false,group=false,item=false,automatic=false,match='',excluded=false,width=200,height=100,top=100,left=0,animate=true}={}){Object.assign(this,{parentElement:parent,scope,group,item,automatic,match,excluded,width,height,top,left});this.dataset={};this.children=[];parent?.children.push(this);if(!animate)this.animate=undefined;}
+  matches(selector){if(selector==='[data-rbp-reveal-scope]')return this.scope;if(selector==='[data-rbp-reveal-group]')return this.group;if(selector==='[data-rbp-reveal-item]')return this.item;if(selector==='[data-rbp-reveal]')return !!this.dataset.rbpReveal;if(selector.startsWith('.space-root'))return this.excluded;return this.automatic||!!this.match&&selector.split(',').includes(this.match);}
   closest(selector){for(let node=this;node;node=node.parentElement)if(node.matches(selector))return node;return null;}
   querySelectorAll(selector){return this.children.flatMap(child=>[...(child.matches(selector)?[child]:[]),...child.querySelectorAll(selector)]);}
   contains(node){return !!node&&(node===this||this.children.some(child=>child.contains(node)));}
@@ -19,7 +19,7 @@ function setup({reduced=false,io=true}={}){
  const exports={};const modules={react:{useEffect:f=>effect=f},'next/navigation':{usePathname:()=>path,useSearchParams:()=>new URLSearchParams(query)},'@/lib/rbp-motion.mjs':{RBP_MOTION,revealDelay}};
  class IO{constructor(callback,options){Object.assign(this,{callback,options,observed:new Set});observers.push(this);}observe(n){this.observed.add(n)}unobserve(n){this.observed.delete(n)}disconnect(){this.observed.clear();this.disconnected=true;}}
  let mutationsDisconnected=false;
- const context={document,exports,require:k=>modules[k],matchMedia:()=>media,window:{...(io?{IntersectionObserver:IO}:{}),innerHeight:800,innerWidth:1200,addEventListener:(n,f)=>windowEvents[n]=f,removeEventListener:n=>delete windowEvents[n]},IntersectionObserver:IO,getComputedStyle:node=>({transform:`matrix(1, 0, 0, 1, 0, ${animations.findLast(a=>a.node===node&&!a.cancelled)?.translationY||0})`}),DOMMatrixReadOnly:class{constructor(transform){const values=transform.match(/matrix\((.*)\)/)[1].split(',').map(Number);this.m41=values[4];this.m42=values[5];}},MutationObserver:class{constructor(cb){changes=cb}observe(){}disconnect(){mutationsDisconnected=true}},requestAnimationFrame:f=>{const id=++frameId;frames.set(id,f);return id},cancelAnimationFrame:id=>frames.delete(id)};
+ const context={document,exports,require:k=>modules[k],matchMedia:()=>media,window:{...(io?{IntersectionObserver:IO}:{}),innerHeight:height,innerWidth:width,addEventListener:(n,f)=>windowEvents[n]=f,removeEventListener:n=>delete windowEvents[n]},IntersectionObserver:IO,getComputedStyle:node=>({transform:`matrix(1, 0, 0, 1, 0, ${animations.findLast(a=>a.node===node&&!a.cancelled)?.translationY||0})`}),DOMMatrixReadOnly:class{constructor(transform){const values=transform.match(/matrix\((.*)\)/)[1].split(',').map(Number);this.m41=values[4];this.m42=values[5];}},MutationObserver:class{constructor(cb){changes=cb}observe(){}disconnect(){mutationsDisconnected=true}},requestAnimationFrame:f=>{const id=++frameId;frames.set(id,f);return id},cancelAnimationFrame:id=>frames.delete(id)};
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,context);
  const node=options=>new Element(options),add=(options={})=>{const n=node({parent:application,automatic:true,...options});nodes.push(n);return n;};
  const mount=()=>{exports.ApplicationReveal();cleanup=effect();};
@@ -30,6 +30,21 @@ function setup({reduced=false,io=true}={}){
  return{add,node,body,document,application,nodes,animations,media,mediaEvents,events,windowEvents,observers,mount,mutate,flush,scroll(){windowEvents.scroll?.()},resize(){windowEvents.resize?.()},get queuedFrames(){return frames.size},get observer(){return entryObserver()},get viewport(){return viewportObserver()},get mutationsDisconnected(){return mutationsDisconnected},unmount(){cleanup?.()},route(to){cleanup?.();const url=new URL(to,'https://iavse.test');path=url.pathname;query=url.search.slice(1);mount();},move(list,position){for(const n of list)Object.assign(n,position)},enter(list=nodes,observer=entryObserver()){deliver(observer,list,true,1)},leave(list=nodes,observer=entryObserver()){deliver(observer,list,false,0)},viewportChange(list=nodes,isIntersecting=false,observer=viewportObserver()){deliver(observer,list,isIntersecting,isIntersecting?1:0)},focus(target){document.activeElement=target;events.focusin({target})},blur(target,relatedTarget=null){document.activeElement=relatedTarget;events.focusout({target,relatedTarget});if(relatedTarget)events.focusin({target:relatedTarget})},preference(reduce){media.matches=reduce;mediaEvents.change();}};
 }
 const settled=()=>new Promise(resolve=>setImmediate(resolve));
+
+for(const viewport of [{width:1440,height:1000},{width:390,height:844}])test(`public catalog, reading and account chunks share repeat entry at ${viewport.width}px`,async()=>{
+ const s=setup(viewport),selectors=['.shared-card','.product-download-option','.learning-section-heading','.document-prose h2','.skill-detail-body>section>h2','.community-policy-text>h2','.legal-contact','.community-member-card','.workspace-post-row','.workspace-notification'];
+ const chunks=selectors.map(match=>s.node({parent:s.application,match}));
+ const nestedTitle=s.node({parent:chunks[0],match:'h1'}),document=s.node({parent:s.application,match:'.document-prose',height:5000}),preview=s.node({parent:s.application,match:'.template-preview-section'}),authored=s.node({parent:s.application,excluded:true}),authoredCard=s.node({parent:authored,match:'.shared-card'});
+ s.mount();assert.deepEqual([...s.observer.observed],chunks,'platform short blocks are enrolled without hiding a full document, preview, authored card or nested heading');
+ for(let cycle=0;cycle<3;cycle++){
+  s.enter(chunks);const active=s.animations.slice(cycle*chunks.length);assert.equal(active.length,chunks.length);assert.ok(active.every(a=>a.options.duration===550&&a.frames[0].transform==='translateY(12px)'));
+  for(const animation of active)animation.finish();await settled();s.enter(chunks);assert.equal(s.animations.length,(cycle+1)*chunks.length,'still-visible content does not restart');
+  if(cycle<2){s.move(chunks,{top:cycle===0?-101:viewport.height});s.viewportChange(chunks);assert.ok(chunks.every(node=>node.dataset.rbpReveal==='pending'));s.move(chunks,{top:100});}
+ }
+ assert.ok([nestedTitle,document,preview,authoredCard].every(node=>!node.dataset.rbpReveal));
+ const streamed=s.node({parent:s.application,match:'.shared-card'});s.mutate();s.enter([streamed]);s.mutate();s.enter([streamed]);assert.equal(s.animations.filter(animation=>animation.node===streamed).length,1,'streamed catalog cards join the same owner only once');
+ s.unmount();assert.ok([...chunks,streamed].every(node=>!node.dataset.rbpReveal));
+});
 
 test('reveal repeats after each full viewport exit, keeps a bounded stagger and ignores duplicate entry deliveries',async()=>{
  const s=setup();for(let i=0;i<8;i++)s.add({left:i*100});s.mount();

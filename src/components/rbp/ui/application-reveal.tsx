@@ -4,7 +4,15 @@ import {usePathname,useSearchParams} from 'next/navigation';
 import {RBP_MOTION,revealDelay} from '@/lib/rbp-motion.mjs';
 
 // Enhance existing operation layouts without wrapping or moving form controls.
-const TARGETS='h1,.page-head,.catalog-page-heading,.resource-card,.skill-directory-card,.skill-grid-card,.design-card,.feed-post,.feed-empty,.feed-suggestions,.admin-focus-recent,.admin-focus-review,.admin-focus-statistics,.account-section,.space-panel,.learning-card';
+const TARGETS=[
+ 'h1,.page-head,.catalog-page-heading,.resource-card,.skill-directory-card,.skill-grid-card,.design-card,.feed-post,.feed-empty,.feed-suggestions,.admin-focus-recent,.admin-focus-review,.admin-focus-statistics,.account-section,.space-panel,.learning-card',
+ // Public catalogs and their supporting product copy share the same cycles.
+ '.shared-card,.catalog-empty,.learning-heading,.learning-section-heading,.skill-platform-heading,.skill-feature-copy,.skill-setup,.skill-workflow>h2,.skill-workflow>ol>li,.learning-related-links',
+ '.product-section-heading,.product-download-option,.legal-profile-copy,.legal-practice,.legal-contact,.legal-platform',
+ // Reading pages reveal short headings, never the whole long document.
+ '.document-prose h2,.document-prose h3,.skill-detail-body>section>h2,.shared-reading-layout>article>section>h2,.community-policy-text>h2,.design-detail-heading,.design-section-heading,.design-source-note',
+ '.community-member-card,.community-intro-card,.community-empty,.workspace-post-row,.workspace-notification,.organic-article-row,.organic-resource-piece,.organic-project-piece,.organic-empty,.organic-detail-heading',
+].join(',');
 const CONTENT='.space-root,.bd-block,.anx-portfolio,.personal-homepage,.react-flow__viewport,[contenteditable=true],[data-rbp-entry]';
 const SCOPE='[data-rbp-reveal-scope]',ITEM='[data-rbp-reveal-item]',GROUP='[data-rbp-reveal-group]';
 export function ApplicationReveal(){
