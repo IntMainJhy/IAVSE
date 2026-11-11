@@ -60,7 +60,7 @@ try{
   const response=await fetch(base+'/blogs/showcase/'+handle+'?embed=gallery',{headers:{Cookie:'site-locale='+locale}});
   assert.equal(response.status,200);const html=await response.text(),nodes=elements(parseDocument(html)),embed=nodes.find(node=>hasClass(node,'blog-gallery-embed'));
   assert.ok(embed,'preview has its own minimal shell');
-  assert.ok(elements(embed).some(node=>hasClass(node,'bd-page-shell')),'real template is visible without a streaming reveal');
+  assert.ok(elements(embed).some(node=>hasClass(node,'showcase-portfolio')),'original homepage is visible without a streaming reveal');
   assert.ok(!elements(embed).some(node=>Object.hasOwn(node.attribs||{},'hidden')),'theme cannot sit in a hidden Suspense segment');
   assert.ok(!elements(embed).some(node=>node.name==='p'&&node.attribs.role==='status'),'no Lazy loading placeholder in the static document');
   assert.equal(response.headers.get('x-frame-options'),'SAMEORIGIN');

@@ -12,9 +12,10 @@ function runtime(){
  const quiet={get matches(){return reduced;},addEventListener:(_,fn)=>reducedListeners.add(fn),removeEventListener:(_,fn)=>reducedListeners.delete(fn)};
  class Element{}
  vm.runInNewContext(source,{exports,Element,performance:{now:()=>now},matchMedia:q=>q.includes('max-width')?media:quiet,ResizeObserver:class{constructor(fn){this.fn=fn;}observe(element){element.resize=this.fn;}disconnect(){currentNav.disconnected=true;}},require:name=>{if(name==='react')return{useRef:()=>({current:currentNav}),useLayoutEffect:fn=>setup=fn};throw Error(name);}});
- function mount(active='feed'){
-  const listeners=new Map(),nav={dataset:{},width:400,left:12,disconnected:false,getBoundingClientRect(){return {width:this.width,left:this.left};},addEventListener:(type,fn)=>listeners.set(type,fn),removeEventListener:type=>listeners.delete(type)};
-  const makeTab=(key,index)=>Object.assign(new Element(),{dataset:{navKey:key},parentElement:nav,selected:false,getBoundingClientRect:()=>({left:nav.left+index*80,width:80}),matches:q=>key==='me'&&q==='.feed-mobile-account>summary',closest(){return this;},toggleAttribute(_,value){this.selected=value;},removeAttribute(){this.selected=false;}});
+ function mount(active='feed',{width=400,guest=false}={}){
+  const listeners=new Map(),nav={dataset:{},width,left:12,disconnected:false,getBoundingClientRect(){return {width:this.width,left:this.left};},addEventListener:(type,fn)=>listeners.set(type,fn),removeEventListener:type=>listeners.delete(type)};
+  const visible=guest?['feed','members','me']:['feed','members','bookmarks','notifications','me'];
+  const makeTab=key=>Object.assign(new Element(),{dataset:{navKey:key},parentElement:nav,selected:false,getBoundingClientRect:()=>({left:nav.left+Math.max(0,visible.indexOf(key))*nav.width/visible.length,width:visible.includes(key)?nav.width/visible.length:0}),matches:q=>key==='me'&&q==='.feed-mobile-account>summary',closest(){return this;},toggleAttribute(_,value){this.selected=value;},removeAttribute(){this.selected=false;}});
   const tabs=['feed','members','bookmarks','notifications','me'].map(makeTab),account={open:false};tabs[4].parentElement=account;
   const lens={style:{},animation:null,animations:[],getBoundingClientRect(){const x=this.animation?.position??Number(this.style.transform?.match(/translate3d\(([-.\d]+)/)?.[1]||0);return{left:nav.left+x,width:76};},animate(frames,options){const value={position:Number(frames[0].transform.match(/translate3d\(([-.\d]+)/)[1]),frames,options,cancel:()=>{value.cancelled=true;this.animation=null;}};this.animation=value;this.animations.push(value);return value;}};
   nav.querySelector=selector=>selector==='.feed-liquid-lens'?lens:selector==='.feed-mobile-account'?account:selector==='.feed-mobile-account>summary'?tabs[4]:tabs.find(tab=>selector.includes('"'+tab.dataset.navKey+'"'));
@@ -41,4 +42,23 @@ test('reduced motion and desktop transitions cancel animation and cleanup remove
  const r=runtime(),s=r.mount();s.click(3);const tween=s.lens.animation;r.reduce(true);assert.equal(tween.cancelled,true);assert.equal(s.lens.animation,null);
  r.mobile(false);assert.equal(s.nav.dataset.liquidReady,undefined);assert.equal(s.tabs.some(tab=>tab.selected),false);s.cleanup();
  assert.equal(r.mediaListeners.size,0);assert.equal(r.reducedListeners.size,0);assert.equal(s.listeners.size,0);assert.equal(s.nav.disconnected,true);
+});
+
+test('guest and signed-in docks measure their actual destinations at narrow widths and following stays on the feed',()=>{
+ for(const width of [320,390]){
+  const r=runtime(),s=r.mount('following',{width,guest:true});
+  assert.equal(s.tabs[0].selected,true,'following is a feed view');
+  assert.equal(Number(s.lens.style.width.slice(0,-2)),width/3-4);
+  s.account(true);assert.equal(s.tabs[4].selected,true);
+  assert.equal(s.lens.style.transform,'translate3d('+(width*2/3+2)+'px,0,0)');
+  assert.equal(s.tabs[2].selected,false);assert.equal(s.tabs[3].selected,false);
+  s.account(false);assert.equal(s.tabs[0].selected,true);s.cleanup();
+  const hidden=r.mount('bookmarks',{width,guest:true});
+  assert.equal(hidden.tabs[4].selected,true,'an unavailable dock destination falls back to the account menu');
+  assert.ok(Number(hidden.lens.style.width.slice(0,-2))>0);hidden.cleanup();
+  const member=r.mount('notifications',{width});
+  assert.equal(member.tabs[3].selected,true);
+  assert.equal(Number(member.lens.style.width.slice(0,-2)),width/5-4);
+  assert.equal(member.lens.style.transform,'translate3d('+(width*3/5+2)+'px,0,0)');member.cleanup();
+ }
 });

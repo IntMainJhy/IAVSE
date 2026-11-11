@@ -8,11 +8,13 @@ const root=new URL('../src/app/',import.meta.url),read=path=>fs.readFileSync(new
 const files=name=>[...read('route-styles/'+name+'.css').matchAll(/@import '\.\.\/(.+\.css)'/g)].map(match=>match[1]);
 test('server route CSS preserves the established cascade and excludes unrelated feature families',()=>{
  const baseline=files('fallback');
+ const routeOwned={'iavse-landing.css':['home'],'blog-gallery.css':['blogs'],'community-timeline.css':['community','workspace']};
  for(const name of ['home','blogs','blog','catalog','community','workspace','admin','account']){
   const selected=files(name);assert.equal(new Set(selected).size,selected.length,name);
-  const shared=selected.filter(file=>file!=='iavse-landing.css');
+  const shared=selected.filter(file=>!Object.hasOwn(routeOwned,file));
   assert.deepEqual(shared,baseline.filter(file=>shared.includes(file)),name+' keeps the shared cascade');
   if(name!=='home')assert.ok(!selected.includes('iavse-landing.css'),name+' excludes the homepage redesign');
+  for(const[file,owners]of Object.entries(routeOwned))assert.equal(selected.includes(file),owners.includes(name),file+' remains owned by '+owners.join('/'));
   for(const file of selected)assert.ok(fs.existsSync(new URL(file,root)),file);
  }
  assert.ok(!files('home').includes('anx-portfolio.css'));

@@ -1,11 +1,10 @@
 'use client';
 import {useLocale} from './LocaleProvider';
 import {SiteOwnerBadge} from './SiteOwnerBadge';
-import {useState} from 'react';
+import {useId,useState} from 'react';
 import {GlassSwitch} from './ui/GlassSwitch';
 import Link from 'next/link';
 import Form from 'next/form';
-import {CatalogSearch} from '@/components/CatalogSearch';
 import {post} from '@/lib/client';
 import {platformDestination,caseTargetIds,communityProfileDestination} from '@/lib/navigation.mjs';
 import {Icon} from './Icons';
@@ -35,8 +34,12 @@ function Login({join,config,next,access={}}:{join:boolean,config:Doc,next:string
  <div className="community-auth-links">{access.registration!==false&&<Link href={join?loginHref:joinHref}>{join?tr('已有账号，前往登录'):tr('没有账号？邮箱注册')}</Link>}<Link href="/community">{tr('先看看社区')}</Link></div>
  </section></div>;
 }
-function CommunitySearch({config,query,discovery=false}:{config:Doc;query:Doc;discovery?:boolean}){const {t:tr}=useLocale();
- return <Form action="/community" className={'community-search feed-search page-search-toolbar '+(discovery?'feed-discovery-search':'feed-timeline-search')} role="search" aria-label={discovery?tr("搜索社区分享"):tr("筛选社区分享")}>{query.feed==='following'&&<input type="hidden" name="feed" value="following"/>}<CatalogSearch className="page-search-control" value={String(query.q||'')} label={tr("搜索社区资源")} placeholder={tr(discovery?"搜索分享":"搜索分享、工具或关键词")} submit={discovery}/>{discovery?<input type="hidden" name="category" value={query.category||''}/>:<><label className="community-sr" htmlFor="community-filter">{tr("社区分类")}</label><select id="community-filter" name="category" defaultValue={query.category||''} key={'category:'+String(query.category||'')}><option value="">{tr("全部分类")}</option>{config.taxonomy.categories.map((c:string)=><option key={c} value={c}>{tr(c)}</option>)}</select></>}{!discovery&&<button className={secondary}>{tr("筛选")}</button>}</Form>;
+function CommunitySearch({config,query,discovery=false}:{config:Doc;query:Doc;discovery?:boolean}){const {t:tr}=useLocale(),id=useId();
+ return <Form action="/community" className={'community-search feed-search community-inline-search '+(discovery?'feed-discovery-search':'community-timeline-search')} role="search" aria-label={tr("搜索社区分享")}>
+  {query.feed==='following'&&<input type="hidden" name="feed" value="following"/>}
+  <div className="community-search-row"><label className="community-sr" htmlFor={id+'-query'}>{tr("搜索社区资源")}</label><Icon name="search"/><input id={id+'-query'} type="search" name="q" defaultValue={String(query.q||'')} key={String(query.q||'')} placeholder={tr(discovery?"搜索分享":"搜索分享、工具或关键词")} maxLength={120} autoComplete="off"/><button className={primary+' community-search-submit'} type="submit" aria-label={tr("搜索社区分享")}><Icon name="arrow"/></button></div>
+  {discovery?<input type="hidden" name="category" value={query.category||''}/>:<label className="community-filter-control"><span className="community-sr">{tr("社区分类")}</span><select name="category" defaultValue={query.category||''} key={'category:'+String(query.category||'')} onChange={event=>event.currentTarget.form?.requestSubmit()}><option value="">{tr("全部分类")}</option>{config.taxonomy.categories.map((c:string)=><option key={c} value={c}>{tr(c)}</option>)}</select></label>}
+ </Form>;
 }
 function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;user:Doc|null;query:Doc;membersOnly?:boolean}){const {t:tr}=useLocale();
  const members=useResource('/api/community/members?q=&page=1');useSocialRefresh(members.refresh);
@@ -50,10 +53,10 @@ function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;us
 function CommunityListing({config,user,query}:{config:Doc,user:Doc|null,query:Doc}){const {t:tr}=useLocale();
  const search=new URLSearchParams(Object.fromEntries(Object.entries(query).map(([k,v])=>[k,String(v||'')]))).toString(),r=useResource('/api/community/posts?'+search);
  const writeHref=user?'/workspace/submissions/new':'/login?next=/workspace/submissions/new';
- return <div className="feed-layout"><section className="feed-main" aria-label={tr("社区资源")} aria-busy={r.refreshing}><h1 className="feed-title">{query.feed==='following'?tr("关注动态"):tr("社区动态")}</h1><nav className="community-glass-tabs" aria-label={tr("动态范围")}><GlassSwitch items={[{id:'all',label:tr("全部动态"),href:'/community',scroll:false},{id:'following',label:tr("正在关注"),href:user?'/community?feed=following':'/login?next=%2Fcommunity%3Ffeed%3Dfollowing',scroll:false}]} value={query.feed==='following'?'following':'all'} ariaLabel={tr("动态范围")}/></nav>
+ return <div className="feed-layout"><section className="feed-main community-timeline" aria-label={tr("社区资源")} aria-busy={r.refreshing}><header className="community-timeline-header"><h1 className="feed-title">{query.feed==='following'?tr("关注动态"):tr("社区动态")}</h1><nav className="community-glass-tabs" aria-label={tr("动态范围")}><GlassSwitch items={[{id:'all',label:tr("全部动态"),href:'/community',scroll:false},{id:'following',label:tr("正在关注"),href:user?'/community?feed=following':'/login?next=%2Fcommunity%3Ffeed%3Dfollowing',scroll:false}]} value={query.feed==='following'?'following':'all'} ariaLabel={tr("动态范围")}/></nav></header>
 
  <CommunitySearch config={config} query={query}/>
- {r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:<><div className={'feed-results'+(query.q||query.category?' is-filtered':'')}><div><h2>{tr(query.category||"全部分享")}</h2><p>{r.data.total} {tr(" 份分享 · 最近更新")}</p></div>{(query.q||query.category)&&<Link href={query.feed==='following'?'/community?feed=following':'/community'}>{tr("清空筛选")}</Link>}</div>{r.data.items.length?r.data.items.map((item:Doc)=><FeedPost key={item.id} item={item} user={user}/>):<Empty title={query.q||query.category?tr("暂时没有找到这份分享"):tr("等你分享第一个好发现")}>{query.q||query.category?<><span>{tr("换一个关键词，或清空筛选再看看。")}</span><br/><Link href={query.feed==='following'?'/community?feed=following':'/community'}>{tr("查看全部分享")}</Link></>:<><span>{tr("分享你的开发经验，或推荐一份实用资源。")}<br/>{tr("通过审核后，就会在这里展示。")}</span><br/><Link href={writeHref}>{tr("整理第一份分享")} </Link></>}</Empty>}{r.data.pages>1&&<nav className="organic-pagination" aria-label={tr("社区分页")}>{r.data.page>1&&<Link className={secondary} href={'?'+new URLSearchParams({...query,page:String(r.data.page-1)})}>{tr("上一页")}</Link>}<span>{r.data.page} / {r.data.pages}</span>{r.data.page<r.data.pages&&<Link className={secondary} href={'?'+new URLSearchParams({...query,page:String(r.data.page+1)})}>{tr("下一页")}</Link>}</nav>}</>}
+ {r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:<><div className={'feed-results'+(query.q||query.category?' is-filtered':'')}><p><strong>{tr(query.category||"全部分享")}</strong><span>{r.data.total} {tr(" 份分享 · 最近更新")}</span></p>{(query.q||query.category)&&<Link href={query.feed==='following'?'/community?feed=following':'/community'}>{tr("清空筛选")}</Link>}</div>{r.data.items.length?r.data.items.map((item:Doc)=><FeedPost key={item.id} item={item} user={user}/>):<section className="community-feed-empty"><Empty title={query.q||query.category?tr("暂时没有找到这份分享"):tr("等你分享第一个好发现")}>{query.q||query.category?<><p>{tr("换一个关键词，或清空筛选再看看。")}</p><Link className={secondary} href={query.feed==='following'?'/community?feed=following':'/community'}>{tr("查看全部分享")}</Link></>:<><p>{tr("分享你的开发经验，或推荐一份实用资源。")}<br/>{tr("通过审核后，就会在这里展示。")}</p><Link className={primary} href={writeHref}>{tr("整理第一份分享")}</Link></>}</Empty></section>}{r.data.pages>1&&<nav className="organic-pagination" aria-label={tr("社区分页")}>{r.data.page>1&&<Link className={secondary} href={'?'+new URLSearchParams({...query,page:String(r.data.page-1)})}>{tr("上一页")}</Link>}<span>{r.data.page} / {r.data.pages}</span>{r.data.page<r.data.pages&&<Link className={secondary} href={'?'+new URLSearchParams({...query,page:String(r.data.page+1)})}>{tr("下一页")}</Link>}</nav>}</>}
  </section></div>;
 }
 function CommunityDetail({id,user,config}:{id:string;user:Doc|null;config:Doc}){const {t:tr,locale}=useLocale();

@@ -37,7 +37,7 @@ test('bundled avatar sources allow exact local art only and cannot become arbitr
  for(const value of ['https://example.test/face.svg','//example.test/a.svg','/images/showcase/../private.svg','/images/showcase/lin.svg?key=private','/images/showcase/lin.svg#x','/images/showcase/%6cin.svg','/media/a','/images/showcase/unused.svg','javascript:alert(1)',null,{},42])assert.equal(showcaseAvatarSrc(value),'');
 });
 
-test('gallery examples and their full links use real editor templates while original studies stay available',async()=>{
+test('gallery original-home previews match full homepages while explicit editor-template previews remain available',async()=>{
  const source=fs.readFileSync(new URL('../src/app/blogs/showcase/[handle]/page.tsx',import.meta.url),'utf8'),compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,exports={};
  const jsx=(type,props)=>({type,props});
  vm.runInNewContext(compiled,{exports,require:name=>{
@@ -59,9 +59,12 @@ test('gallery examples and their full links use real editor templates while orig
   assert.equal(preview.props.className,'blog-public-shell blog-gallery-embed','the loader can recognize every actual example document');
   const frameTheme=preview.props.children,fullTheme=walk(full).find(node=>node.type==='BlogTheme');
   assert.equal(frameTheme.type,'BlogTheme');assert.equal(frameTheme.props.preview,true);assert.equal(frameTheme.props.staticPreview,true);assert.equal(frameTheme.props.embedded,true);
-  assert.deepEqual(frameTheme.props.data,showcasePageData(item.handle,'zh'));assert.deepEqual(legacy.props.children.props.data,frameTheme.props.data);assert.deepEqual(fullTheme.props.data,frameTheme.props.data);
+  assert.deepEqual(frameTheme.props.data,showcasePageData(item.handle,'zh'));assert.deepEqual(fullTheme.props.data,frameTheme.props.data);
   assert.equal(fullTheme.props.staticPreview,false,'the full example keeps native responsive layout');
   assert.equal(study.type,'ShowcasePortfolio','original reference studies are retained');assert.equal(study.props.data.projects.length,2);
+  assert.equal(legacy.props.className,'blog-public-shell blog-gallery-embed');
+  assert.equal(legacy.props.children.type,'ShowcasePortfolio');assert.equal(legacy.props.children.props.embedded,true);
+  assert.deepEqual(legacy.props.children.props.data,study.props.data,'default gallery and opened homepage present the same work');
   assert.equal(walk(full).some(node=>node.type==='SpaceVisit'),false);
  }
  assert.equal(exports.metadata.robots.index,false);assert.equal(exports.metadata.robots.follow,false);

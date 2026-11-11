@@ -310,6 +310,12 @@ The homepage server DTO includes up to four qualified public posts and three pub
 
 Shared styling stops before authored bodies, blog themes, saved canvas blocks, artboards, rich text, React Flow viewports and third-party/template previews. Platform bars, toolbars and controls may migrate; member content and color swatches retain their values. Search, follow, publishing, moderation, account and permission behavior remain intact. Private Pro code, assets, prompts and credentials remain outside the public repository and build. The read-only reference analysis does not import its code/models or enlarge any license.
 
+### Blog spaces and original homepage examples
+
+The public `/blogs` opening restores the existing shared-camera CSS 3D gallery from the public implementation, with floating extruded page planes, drag-to-look and click-to-approach behavior. It sits over the current purple-white atmosphere and retains the frosted global header. Functional controls, author selection, links and focus use neutral roles. Route-owned `blog-gallery.css` restores the live gallery structure from public commit `894bf4b`; the existing camera geometry, bounded preview loader and visibility lifecycle remain in use. The plane's (8px) corners and inner radius of (8px minus its 1px border) belong to its preserved material geometry.
+
+Only `publicSpaces(req)` supplies real members; their authored appearance and `/blog/:handle` destination retain authority. The stage is bounded to (12) spaces, while a native expandable list exposes all public members and clearly labeled **“原创主页示例 · 虚构人物”** examples. Query-free `/blogs/showcase/:handle` and `?embed=gallery` render the same original homepage example. Explicit `?template=builtin` remains the separate editor-template entry point. Preserve keyboard selection and Escape return, mobile touch scrolling, reduced motion, two outstanding preview admissions, hidden/offscreen pauses, truthful empty states and the existing lower product evidence. No fictional example represents member activity or a real résumé.
+
 ## Do's and Don'ts
 
 - Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.
@@ -325,3 +331,7 @@ Shared styling stops before authored bodies, blog themes, saved canvas blocks, a
 - Don't expose duplicate interactive labels, invent activity or simulate real account state.
 - Don't call DOM label magnification physical refraction, copy reference code/models, or call MIT plus Commons Clause plain MIT.
 - Don't import private Pro materials, revive the cancelled Cloudlight migration, expand a license or claim authorship of licensed fonts.
+
+### Community timeline and mobile dock
+
+The community uses a compact white timeline with divided post rows, a persistent search field and the existing glass feed switch. Its own content density differs from the homepage's floating discovery cards. The mobile dock divides its actual visible destinations into three guest slots or five signed-in slots; its decorative lens is out of flow. A single safe-area calculation reserves space for the dock, compose button and bottom content. See [the current platform implementation](docs/platform-ui.zh-CN.md#社区信息流与手机底栏) and [community styles](src/app/community-timeline.css).

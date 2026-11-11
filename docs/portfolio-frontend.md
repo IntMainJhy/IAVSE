@@ -2,7 +2,7 @@
 
 [DESIGN.md](../DESIGN.md) 是当前平台唯一视觉规范。现有应用以 [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) 的公开实现为组件基线，固定来源版本为 `1581b9b8e5876f60e5eb844970747506980c4412`。当前 IAVSE 在该应用上独立调整字体、色彩、留白、卡片和背景。Cloudlight 仅作为清晰间距、文字层级、浅色表面与内容分组等通用原则的参考；此前直接迁移模板的方案已取消，未引入其代码、着色器、资产或许可证文件。
 
-首页仍为 **Hero → 四张 Projects 卡片 → Contact**，保留分栏首屏和固定三链接胶囊。关于页保留六张点阵拍立得、介绍、展开列表、使用说明、能力标签、物理技术栈与 Contact。资源总览和博客目录保留居中介绍、单列/双列 Projects 与 Contact 的顺序。社区、目录、账号、管理和编辑器外壳共用 IAVSE 字体、颜色与控件，保留搜索、筛选、表格、表单、审核及编辑流程。
+下文保留 Portfolio 接入与独立细化的历史记录；首页、共享壳层等后续变化以 [平台共享视觉迁移](platform-ui.zh-CN.md) 和 DESIGN.md 为准。关于页保留六张点阵拍立得、介绍、展开列表、使用说明、能力标签、物理技术栈与 Contact。资源总览保留居中介绍、单列/双列 Projects 与 Contact 的顺序；博客目录现已恢复原有 3D 空间开场、完整列表和产品功能展示。社区、目录、账号、管理和编辑器外壳共用 IAVSE 字体、颜色与控件，保留搜索、筛选、表格、表单、审核及编辑流程。
 
 ## 来源组件与当前实现
 
@@ -43,7 +43,7 @@
 - [`PlatformHome.tsx`](../src/components/PlatformHome.tsx) 组合 Hero、Projects、Contact；四张卡片连接 UI 设计、AI Skills、社区和博客空间。Hero 与目录顶部留白均为手机 144px、small 断点起 192px。
 - Hero 标题使用 `clamp(34px, 4.1vw, 54px)`，正文为 19px / 1.6。方形预览外框 28px、内框 20px；项目卡片 20px、图片 14px。
 - [`ResourceIntroduction.tsx`](../src/components/ResourceIntroduction.tsx) 在 `/resources` 使用细化后的 ProjectsPage；带 `type` 的资源路由保留分类、筛选、搜索、来源与许可功能。
-- [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 展示符合发现条件的公开成员与明确标记的内置示例，沿用单列/双列 CSS columns。
+- [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 重新挂载既有 [`BlogSpaceGallery.tsx`](../src/components/BlogSpaceGallery.tsx)，恢复可环顾、走近和返回的 3D 空间。真实成员保留 `publicSpaces(req)` 过滤与 `/blog/:handle`，原创主页示例明确标记虚构人物，并使用 `/blogs/showcase/:handle` 及同渲染器的 `?embed=gallery` 预览。原生展开列表列出全部入口，不受舞台 12 个空间的上限影响；下方保留现有产品展示与真实公开成员目录。[`blog-gallery.css`](../src/app/blog-gallery.css) 恢复公开历史 `894bf4b` 中的空间结构，并仅将平台控件与材质接入当前中性角色；不改真实成员的已保存博客外观。显式 `?template=builtin` 继续提供原有编辑器模板示例。
 - Contact 外框为 28px、详情面板为 20px；介绍文字为 19px / 1.6，最大 38ch 并使用均衡换行。目录介绍同为 19px / 1.6。
 - [`DesktopDownloadsPage.tsx`](../src/components/DesktopDownloadsPage.tsx) 的手机标题占用完整宽度；现有中文标题按逗号分成两个不拆分的语义短语，保留原文字，英文和日文标题保持原样。
 - [`rbp/AboutPage.tsx`](../src/components/rbp/AboutPage.tsx) 的介绍面板为白色表面、24px 圆角。Experience/Education 名称只表示组件来源，不表示虚构的个人任职或学历。十个可拖动技术标签对应现有技术栈。
