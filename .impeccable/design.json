@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T05:15:56.570358+00:00",
+  "generatedAt": "2026-11-11T06:11:52.770542+00:00",
   "title": "Design System: IAVSE",
   "extensions": {
     "colorMeta": {
@@ -631,7 +631,7 @@
       {
         "name": "header",
         "value": "0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff",
-        "purpose": "Frosted shared header edge."
+        "purpose": "Central desktop navigation capsule only; the outer header is transparent and has no shadow."
       },
       {
         "name": "lens",
@@ -662,13 +662,18 @@
         "name": "dark-control",
         "value": "0 5px 14px -7px rgb(0 0 0 / .5)",
         "purpose": "Dark functional controls."
+      },
+      {
+        "name": "mobile-menu-trigger",
+        "value": "0 9px 26px -12px rgb(30 30 40 / .2),inset 0 1px 0 #fff",
+        "purpose": "Compact central glass menu trigger; brand/account remain outside it."
       }
     ],
     "motion": [
       {
         "name": "lens-travel",
         "value": "min(540,390 + distance × .45)ms; ease-out 1-(1-progress)^3",
-        "purpose": "Measured x/y/width/height animation; direct under reduced motion."
+        "purpose": "Measured x/y/width/height animation; unchanged geometry notifications preserve active travel, while changed geometry retargets from the current visual position. Direct under reduced motion."
       },
       {
         "name": "lens-magnification",
@@ -678,12 +683,12 @@
       {
         "name": "lens-intent",
         "value": "1400ms maximum local link intent",
-        "purpose": "Immediate visual response while aria-current keeps actual route truth."
+        "purpose": "Immediate visual response while aria-current keeps actual route truth; real value commits and current-item clicks clear intent and its timer before browser Back can reuse it."
       },
       {
         "name": "header-glass",
         "value": "blur(24px) saturate(1.12)",
-        "purpose": "White alpha gradient; readable opaque fallback when blur unsupported."
+        "purpose": "Central desktop navigation capsule and compact mobile trigger only; outer frame stays transparent. Readable opaque capsule fallback when blur is unsupported."
       },
       {
         "name": "lens-glass",
@@ -729,6 +734,11 @@
         "name": "background-lifecycle",
         "value": "pause offscreen/hidden; static reduced motion; min(DPR,1.5) × .65",
         "purpose": "Low-power WebGL; two-sided static CSS fallback on failure/context loss."
+      },
+      {
+        "name": "lens-layout",
+        "value": "destination x/y/width/height tolerance <0.5px",
+        "purpose": "ResizeObserver and font notifications do not cancel an unchanged journey; real layout changes retarget ongoing travel. Visibility/reduced-motion changes explicitly settle."
       }
     ],
     "breakpoints": [
@@ -792,18 +802,18 @@
       "css": ".ds-home-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:11px 23px;border:0;border-radius:12px;background:var(--iv-action,#202023);color:#fff;box-shadow:0 9px 24px -10px rgb(32 32 35 / .22);font:500 15px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s}.ds-home-primary:hover{background:var(--iv-action-hover,#38383d);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(32 32 35 / .25)}.ds-home-primary:active{transform:scale(.98)}.ds-home-primary:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-home-primary{transition:none}.ds-home-primary:hover,.ds-home-primary:active{transform:none}}"
     },
     {
-      "name": "Frosted shared header",
+      "name": "Shared header with centered glass navigation",
       "kind": "nav",
-      "refersTo": "navigation",
-      "description": "Shared white glass header and real guest destinations; no simulated member.",
-      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><nav class=\"ds-nav\" aria-label=\"主要导航\"><a href=\"/community\">社区</a><a href=\"/resources\" aria-current=\"page\">资源</a><a href=\"/blogs\">博客空间</a></nav><a class=\"ds-login\" href=\"/login\">登录</a></header>",
-      "css": ".ds-header{display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:70px;padding:8px 12px 8px 24px;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));color:#242424;box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header a{color:inherit;text-decoration:none}.ds-brand{display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-nav{display:flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27)}.ds-nav a{min-height:42px;padding:9px 16px;border-radius:999px;color:#5b5b60;font-weight:500}.ds-nav a[aria-current]{background:rgb(255 255 255 / .84);color:#202022;box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-login{min-height:44px;padding:10px 21px;border:1px solid #242424;border-radius:999px;background:#242424;color:#fff!important;font-weight:500}.ds-login:hover{background:#424245}.ds-header a:focus-visible{outline:2px solid #303034;outline-offset:4px}@supports not(backdrop-filter:blur(1px)){.ds-header{background:rgb(255 255 255 / .96)}}"
+      "refersTo": "header-frame",
+      "description": "Transparent equal-side-column frame with brand and real guest destination outside a separately centered desktop capsule or compact mobile menu.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><nav class=\"ds-nav\" aria-label=\"主要导航\"><a href=\"/community\">社区</a><a href=\"/resources\" aria-current=\"page\">资源</a><a href=\"/blogs\">博客空间</a></nav><details class=\"ds-mobile\"><summary aria-label=\"展开导航\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\"/></svg></summary><nav class=\"ds-menu-panel\" aria-label=\"主要导航\"><div class=\"ds-menu-track\"><a href=\"/community\">社区</a><a href=\"/resources\" aria-current=\"page\">资源</a><a href=\"/blogs\">博客空间</a></div></nav></details><div class=\"ds-identity\"><a class=\"ds-login\" href=\"/login\">登录</a></div></header>",
+      "css": ".ds-header{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:22px;min-width:0;min-height:70px;padding:8px 0;border:0;border-radius:0;background:transparent;box-shadow:none;color:#242424;font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header a{color:inherit;text-decoration:none}.ds-brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-brand>svg{width:27px;height:27px;flex:none}.ds-nav{grid-column:2;grid-row:1;justify-self:center;display:flex;gap:2px;width:max-content;max-width:100%;min-width:0;padding:6px;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-nav a{display:flex;align-items:center;justify-content:center;min-height:42px;padding:9px 16px;border-radius:999px;color:#5b5b60;white-space:nowrap;box-sizing:border-box}.ds-nav a[aria-current],.ds-menu-track a[aria-current]{background:rgb(255 255 255 / .84);color:#202022;box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover,.ds-menu-track a:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-identity{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:9px}.ds-login{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 21px;border:1px solid #242424;border-radius:999px;background:#242424;color:#fff!important;font-weight:500;line-height:1.4;box-sizing:border-box}.ds-login:hover{background:#424245;border-color:#424245}.ds-mobile{grid-column:2;grid-row:1;justify-self:center;display:none}.ds-mobile>summary{display:grid;place-items:center;width:42px;min-height:44px;padding:0;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));box-shadow:0 9px 26px -12px rgb(30 30 40 / .2),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);list-style:none;cursor:pointer;box-sizing:border-box}.ds-mobile>summary::-webkit-details-marker{display:none}.ds-menu-panel{position:absolute;top:calc(100% + 10px);left:0;right:0;padding:8px;border:1px solid rgb(255 255 255 / .94);border-radius:26px;background:rgb(255 255 255 / .9);box-shadow:0 14px 34px -8px rgb(25 25 35 / .16);backdrop-filter:blur(24px)}.ds-menu-track{display:flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27);font:500 13px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-menu-track a{display:flex;align-items:center;justify-content:center;flex:1 1 0;min-width:0;min-height:46px;padding:10px 9px;border-radius:999px;text-align:center;text-wrap:balance;box-sizing:border-box}.ds-header :is(a,summary):focus-visible{outline:2px solid #303034;outline-offset:4px}.ds-nav a:focus-visible,.ds-menu-track a:focus-visible{outline-offset:-3px}@media(max-width:900px){.ds-header{gap:14px}.ds-nav a{padding:9px 12px}}@media(max-width:820px){.ds-nav{display:none}.ds-mobile{display:block}}@media(max-width:650px){.ds-header{gap:9px;min-height:62px;padding:7px 0}.ds-brand{gap:7px}.ds-brand span{font-size:29px}.ds-brand>svg{width:23px;height:23px}.ds-identity{gap:7px}.ds-login{min-height:42px;padding:9px 17px;font-size:13px}.ds-mobile>summary{width:40px;min-height:42px}}@media(max-width:360px){.ds-header{gap:6px}.ds-brand span{font-size:26px}.ds-identity{gap:5px}.ds-login{padding-inline:13px}.ds-mobile>summary{width:36px}}@supports not(backdrop-filter:blur(1px)){.ds-nav,.ds-mobile>summary{background:rgb(255 255 255 / .96)}.ds-menu-panel{background:#fff}}"
     },
     {
       "name": "Sliding glass switch layers",
       "kind": "custom",
       "refersTo": "glass-switch",
-      "description": "Static rendering of the actual inert lens layers; runtime measures geometry and moves the lens with up to 1.15 local zoom.",
+      "description": "Static rendering of the inert lens layers; runtime preserves unchanged-geometry travel, retargets actual layout changes and clears stale link intent after real value commits.",
       "html": "<div class=\"ds-switch\" role=\"group\" aria-label=\"社区内容类型\"><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"true\">发现</button><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"false\">作品</button><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"false\">讨论</button><div class=\"ds-lens\" aria-hidden=\"true\" inert><div class=\"ds-countertrack\"><div class=\"ds-magnification\"><span class=\"ds-copy ds-copy-1\">发现</span><span class=\"ds-copy ds-copy-2\">作品</span><span class=\"ds-copy ds-copy-3\">讨论</span></div></div></div></div>",
       "css": ".ds-switch{--ds-lens-x:4px;--ds-lens-y:4px;--ds-lens-width:60px;--ds-lens-height:42px;--ds-lens-zoom:1;position:relative;isolation:isolate;display:inline-flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27);color:#242424;font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-switch-item,.ds-copy{display:flex;align-items:center;justify-content:center;min-width:0;width:60px;min-height:42px;padding:9px 16px;border:0;border-radius:999px;font:inherit;white-space:nowrap;box-sizing:border-box}.ds-switch-item{position:relative;z-index:1;background:transparent;color:#5b5b60;cursor:pointer;transition:color .16s,background-color .16s}.ds-switch-item[aria-pressed=true]{color:#202022}.ds-switch-item:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-switch-item:focus-visible{z-index:3;outline:2px solid #303034;outline-offset:-3px}.ds-switch-item:disabled{opacity:.4;cursor:default}.ds-lens{position:absolute;z-index:2;top:0;left:0;width:var(--ds-lens-width);height:var(--ds-lens-height);overflow:clip;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(135deg,rgb(255 255 255 / .76),rgb(255 255 255 / .47));box-shadow:0 3px 11px rgb(24 24 30 / .1),inset 0 1px 1px rgb(255 255 255 / .96),inset 0 -1px 2px rgb(40 40 48 / .05);backdrop-filter:blur(7px) saturate(1.1);transform:translate3d(var(--ds-lens-x),var(--ds-lens-y),0);pointer-events:none;user-select:none}.ds-countertrack{position:absolute;top:-1px;left:-1px;width:192px;height:50px;transform:translate3d(calc(-1 * var(--ds-lens-x)),calc(-1 * var(--ds-lens-y)),0)}.ds-magnification{position:absolute;inset:0;transform:scale(var(--ds-lens-zoom));transform-origin:calc(var(--ds-lens-x) + var(--ds-lens-width)/2) calc(var(--ds-lens-y) + var(--ds-lens-height)/2)}.ds-copy{position:absolute;top:4px;color:#202022;pointer-events:none}.ds-copy-1{left:4px}.ds-copy-2{left:66px}.ds-copy-3{left:128px}@media(prefers-reduced-motion:reduce){.ds-switch-item{transition:none}.ds-magnification{transform:none}}@supports not(backdrop-filter:blur(1px)){.ds-lens{background:#fff}}"
     },
@@ -842,11 +852,11 @@
   ],
   "narrative": {
     "northStar": "White space, black controls, purple mist",
-    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The user extended the approved homepage world to platform frontend surfaces, replaced the earlier plain transparent header with frosted glass, and requested a travelling lens that briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
+    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The shared header has a transparent three-column frame: brand at left, a separately centered frosted navigation capsule, and real account state at right, outside the capsule. A travelling lens briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
     "keyCharacteristics": [
       "White space, black functional controls and soft purple mist at both sides, with a white center.",
       "Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.",
-      "A frosted header with the original brand at left and real account state at right.",
+      "A centered frosted navigation capsule, with the original brand left and real account state right outside it.",
       "Sliding glass selection with local text magnification and one accessible interactive label layer.",
       "Floating white cards, fine-pointer hover and bounded viewport entry within existing workflows.",
       "Explicit route, authored-content, accessibility and source/license boundaries."
@@ -858,8 +868,8 @@
         "section": "colors"
       },
       {
-        "name": "The Frosted Header Rule",
-        "body": "Use the shared white translucent glass header with blur and a bright fine edge. The user's newer glass direction supersedes the earlier plain transparent header requirement.",
+        "name": "The Frosted Navigation Rule",
+        "body": "Apply white translucent glass, blur and the bright fine edge to the central navigation capsule or mobile menu trigger. Keep the full header frame transparent, borderless and without a shadow; brand and account controls remain outside the capsule.",
         "section": "colors"
       },
       {
@@ -875,7 +885,7 @@
     ],
     "dos": [
       "Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.",
-      "Do use the current frosted header and measured sliding lens while preserving real brand and account state.",
+      "Do keep the central navigation capsule frosted and independently centered, with real brand and account controls outside it.",
       "Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.",
       "Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.",
       "Do verify Chinese, English and Japanese, mobile wrapping, focus, reduced motion and static fallbacks.",
@@ -883,7 +893,7 @@
     ],
     "donts": [
       "Don't describe shared visual migration as a rewrite or full visual acceptance of every page.",
-      "Don't restore purple action/selection/icon/link accents or the superseded plain transparent header as current requirements.",
+      "Don't restore purple action/selection/icon/link accents or extend the navigation capsule's glass surface across the brand and account areas.",
       "Don't turn soft mist into mandatory high-contrast ribbons or one-sided color.",
       "Don't style authored bodies, artboards, color swatches or third-party previews as platform UI.",
       "Don't expose duplicate interactive labels, invent activity or simulate real account state.",
