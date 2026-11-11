@@ -7,7 +7,7 @@ import {ArrowRight, ArrowUpRight, BookOpen, MessageCircle, PanelsTopLeft, Shapes
 import {GlassSwitch} from '@/components/ui/GlassSwitch';
 import {BrandMark} from '@/components/BrandMark';
 import {FeedAvatar} from '@/components/FeedAvatar';
-import {LanguageSwitcher, useLocale} from '@/components/LocaleProvider';
+import {useLocale} from '@/components/LocaleProvider';
 import {landingCopy} from '@/lib/landing-copy';
 import IavseFlowBackdrop from './IavseFlowBackdrop';
 
@@ -75,18 +75,18 @@ function ResourceRail() {
     {id: 'docs', label: c.docs, description: c.docsBody, icon: BookOpen},
     {id: 'resources', label: c.tools, description: c.toolsBody, icon: Shapes},
   ];
-  return <aside className="iv-resource-rail" data-landing-reveal aria-label={c.resources}><div className="iv-card iv-resources" data-landing-card>
-    <h3>{c.resourceTitle}</h3><p>{c.resourceIntro}</p><div className="iv-resource-links">{resources.map(({id, label, description, icon: Icon}) => <Link key={id} href={'/resources?type=' + id}><Icon size={21} strokeWidth={1.5} aria-hidden="true"/><span>{label}<small>{description}</small></span><ArrowUpRight size={14} aria-hidden="true"/></Link>)}</div><p className="iv-resource-note">{c.resourceNote}</p>
-  </div></aside>;
+  return <aside className="iv-resource-rail" aria-label={c.resources}>
+    <div className="iv-resource-heading" data-landing-reveal><h2>{c.resourceTitle}</h2><p>{c.resourceIntro}</p></div>
+    <div className="iv-resource-directory" data-landing-reveal><div className="iv-resource-links">{resources.map(({id, label, description, icon: Icon}) => <Link key={id} href={'/resources?type=' + id}><Icon size={23} strokeWidth={1.5} aria-hidden="true"/><span>{label}<small>{description}</small></span><ArrowUpRight size={17} aria-hidden="true"/></Link>)}</div><p className="iv-resource-note">{c.resourceNote}</p></div>
+  </aside>;
 }
 
 function SpaceCard({space}: {space: LandingContent['space']}) {
   const {locale} = useLocale();
   const c = landingCopy(locale);
   return <div data-landing-reveal><article className="iv-card iv-space" data-landing-card>
-    <div className="iv-space-cover">{space ? space.coverId ? <img src={media(space.coverId)} alt="" width={400} height={240} loading="lazy"/> : <FeedAvatar name={space.name || space.handle} avatarId={space.avatarId}/> : <img src="/media/home-product/space-editorial.webp" alt={c.example} width={400} height={240} loading="lazy"/>}<span>{space ? c.publicSpace : c.example}</span></div>
-    <div className="iv-space-copy"><h2>{space?.name || c.spaceTitle}</h2><p>{space?.intro || c.spaceBody}</p></div>
-    <Link href={space?.href || '/blogs'} className="iv-text-link">{space ? c.visitSpace : c.exploreSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+    <div className={'iv-space-cover' + (space && !space.coverId ? ' is-avatar' : '')}>{space ? space.coverId ? <img src={media(space.coverId)} alt="" width={800} height={480} loading="lazy"/> : <FeedAvatar name={space.name || space.handle} avatarId={space.avatarId}/> : <img src="/media/home-product/space-editorial.webp" alt={c.example} width={800} height={480} loading="lazy"/>}<span>{space ? c.publicSpace : c.example}</span></div>
+    <div className="iv-space-copy"><h3>{space ? space.name || space.handle : c.previewTitle}</h3><p>{space ? space.intro || c.publicSpaceBody : c.previewBody}</p><Link href={space?.href || '/blogs'} className="iv-text-link">{space ? c.visitSpace : c.exploreSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link></div>
   </article></div>;
 }
 
@@ -95,6 +95,7 @@ export function IavseLanding({content}: {content: LandingContent}) {
   const c = landingCopy(locale);
   const [filter, setFilter] = useState<Filter>('all');
   const root = useRef<HTMLDivElement>(null);
+  const revealed = useRef(new WeakSet<Element>());
   const featuredWork = filter === 'all' ? content.works[0] : null;
   const featuredPost = filter === 'all' && !featuredWork ? content.posts[0] : null;
   const discussionItems = filter === 'discussion' ? content.posts : filter === 'all' ? content.posts.slice(featuredPost ? 1 : 0, featuredPost ? 2 : 1) : [];
@@ -108,15 +109,16 @@ export function IavseLanding({content}: {content: LandingContent}) {
     const observer = new IntersectionObserver(entries => {
       entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
         observer.unobserve(entry.target);
+        revealed.current.add(entry.target);
         if (preference.matches || !(entry.target instanceof HTMLElement) || !entry.target.animate) return;
         const animation = entry.target.animate([{opacity: 0, transform: 'translateY(24px)'}, {opacity: 1, transform: 'translateY(0)'}], {duration: 650, delay: Math.min(index * 70, 210), easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards'});
         animations.add(animation);
         animation.finished.catch(() => {}).finally(() => { animations.delete(animation); animation.cancel(); });
       });
     }, {threshold: .1});
-    element.querySelectorAll('[data-landing-reveal]').forEach(node => observer.observe(node));
+    element.querySelectorAll('[data-landing-reveal]').forEach(node => { if (!revealed.current.has(node)) observer.observe(node); });
     const reduce = () => { if (preference.matches) for (const animation of animations) animation.cancel(); };
-    const focus = (event: FocusEvent) => { const node = (event.target as Element).closest<HTMLElement>('[data-landing-reveal]'); if (node) { observer.unobserve(node); node.getAnimations().forEach(animation => animation.cancel()); } };
+    const focus = (event: FocusEvent) => { const node = (event.target as Element).closest<HTMLElement>('[data-landing-reveal]'); if (node) { revealed.current.add(node); observer.unobserve(node); node.getAnimations().forEach(animation => animation.cancel()); } };
     preference.addEventListener('change', reduce);
     element.addEventListener('focusin', focus);
     return () => { observer.disconnect(); preference.removeEventListener('change', reduce); element.removeEventListener('focusin', focus); for (const animation of animations) animation.cancel(); };
@@ -145,18 +147,26 @@ export function IavseLanding({content}: {content: LandingContent}) {
     <div className="iv-backdrop-wrap"><IavseFlowBackdrop/></div>
     <div className="iv-container">
       <div className="iv-header-space" aria-hidden="true"/>
-      <section className="iv-hero"><h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1><p>{c.intro}</p><div className="iv-actions"><Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link></div></section>
-      <section className="iv-community" aria-labelledby="iv-community-title"><div className="iv-section-heading"><h2 id="iv-community-title">{c.communityTitle}</h2><GlassSwitch className="iv-filter-switch" items={[{id: 'all', label: c.all}, {id: 'work', label: c.works}, {id: 'discussion', label: c.discussions}]} value={filter} onValueChange={value => setFilter(value as Filter)} ariaLabel={c.filters} size="compact"/></div>
-        <div className="iv-board"><div className="iv-feed" aria-live="polite">
+      <section className="iv-hero"><div className="iv-hero-copy" data-landing-reveal><h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1><p>{c.intro}</p><div className="iv-actions"><Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link></div></div>
+        <nav className="iv-start-points" aria-label={c.productEntries} data-landing-reveal>
+          <Link href="/community"><span><strong>{c.exchange}</strong><small>{c.exchangeBody}</small></span><ArrowUpRight size={18} aria-hidden="true"/></Link>
+          <Link href="/resources"><span><strong>{c.findResources}</strong><small>{c.findResourcesBody}</small></span><ArrowUpRight size={18} aria-hidden="true"/></Link>
+          <Link href="/workspace/blog"><span><strong>{c.buildSpace}</strong><small>{c.buildSpaceBody}</small></span><ArrowUpRight size={18} aria-hidden="true"/></Link>
+        </nav>
+      </section>
+      <section className="iv-community" aria-labelledby="iv-community-title">
+        <div className="iv-community-intro" data-landing-reveal><h2 id="iv-community-title">{c.communityTitle}</h2><p>{c.communityIntro}</p><Link href="/community" className="iv-text-link">{c.communityMore}<ArrowUpRight size={16} aria-hidden="true"/></Link><p className="iv-source-note">{c.communityNote}</p></div>
+        <div className="iv-community-preview"><div className="iv-section-heading"><GlassSwitch className="iv-filter-switch" items={[{id: 'all', label: c.all}, {id: 'work', label: c.works}, {id: 'discussion', label: c.discussions}]} value={filter} onValueChange={value => setFilter(value as Filter)} ariaLabel={c.filters} size="compact"/></div><div className="iv-feed" aria-live="polite">
           {filter === 'work' ? content.works.map(work => <FeatureCard key={work.id} item={work} kind="work"/>) : null}
           {featuredWork ? <FeatureCard key={featuredWork.id} item={featuredWork} kind="work"/> : null}
           {featuredPost ? <FeatureCard key={featuredPost.id} item={featuredPost} kind="discussion"/> : null}
           {discussionItems.map(post => <DiscussionCard key={post.id} post={post}/>)}
           {!hasContent ? <EmptyContent filter={filter} unavailable={content.communityUnavailable}/> : null}
-        </div><ResourceRail/></div>
+        </div></div>
       </section>
-      <section className="iv-spaces" aria-label={c.blogs}><SpaceCard space={content.space}/></section>
-      <footer className="iv-footer"><Link href="/" className="iv-footer-brand">IAVSE</Link><span>{c.footer}</span><nav aria-label={c.about}><Link href="/about">{c.about}</Link><a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noreferrer">{c.source}</a><Link href="/legal/privacy">{c.privacy}</Link><Link href="/workspace/account">{c.account}</Link></nav><LanguageSwitcher/></footer>
+      <ResourceRail/>
+      <section className="iv-spaces" aria-label={c.blogs}><div className="iv-space-story" data-landing-reveal><h2>{c.spaceTitle}</h2><p>{c.spaceBody}</p><p>{c.spaceEditor}</p><div className="iv-space-actions"><Link href="/workspace/blog" className="iv-button">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/blogs" className="iv-text-link">{c.exploreSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link></div><p className="iv-publish-note">{c.spacePublishing}</p></div><SpaceCard space={content.space}/></section>
+      <footer className="iv-footer"><div className="iv-footer-identity"><Link href="/" className="iv-footer-brand">IAVSE</Link><span>{c.footer}</span></div><nav aria-label={c.about}><Link href="/about">{c.about}</Link><a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noreferrer">{c.source}</a><Link href="/legal/privacy">{c.privacy}</Link><Link href="/workspace/account">{c.account}</Link></nav><p>{c.mission}</p></footer>
     </div>
   </div>;
 }

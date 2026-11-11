@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-11T07:40:30.796967+00:00",
+  "generatedAt": "2026-11-11T09:09:57.186004+00:00",
   "title": "Design System: IAVSE",
   "extensions": {
     "colorMeta": {
@@ -246,14 +246,14 @@
         "role": "primary",
         "displayName": "Header Focus",
         "tonalRamp": [
-          "oklch(15.00% 0.0071 285.98)",
-          "oklch(26.43% 0.0071 285.98)",
-          "oklch(37.86% 0.0071 285.98)",
-          "oklch(49.29% 0.0071 285.98)",
-          "oklch(60.71% 0.0071 285.98)",
-          "oklch(72.14% 0.0071 285.98)",
-          "oklch(83.57% 0.0071 285.98)",
-          "oklch(95.00% 0.0071 285.98)"
+          "oklch(15.00% 0.0000 0.00)",
+          "oklch(26.43% 0.0000 0.00)",
+          "oklch(37.86% 0.0000 0.00)",
+          "oklch(49.29% 0.0000 0.00)",
+          "oklch(60.71% 0.0000 0.00)",
+          "oklch(72.14% 0.0000 0.00)",
+          "oklch(83.57% 0.0000 0.00)",
+          "oklch(95.00% 0.0000 0.00)"
         ]
       },
       "glass-header-high": {
@@ -577,6 +577,216 @@
           "oklch(83.57% 0.0891 26.76)",
           "oklch(95.00% 0.0891 26.76)"
         ]
+      },
+      "home-dark-canvas": {
+        "role": "neutral",
+        "displayName": "Home Dark Canvas",
+        "tonalRamp": [
+          "oklch(15.00% 0.0101 294.62)",
+          "oklch(26.43% 0.0101 294.62)",
+          "oklch(37.86% 0.0101 294.62)",
+          "oklch(49.29% 0.0101 294.62)",
+          "oklch(60.71% 0.0101 294.62)",
+          "oklch(72.14% 0.0101 294.62)",
+          "oklch(83.57% 0.0101 294.62)",
+          "oklch(95.00% 0.0101 294.62)"
+        ]
+      },
+      "home-dark-surface": {
+        "role": "neutral",
+        "displayName": "Home Dark Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0114 293.18)",
+          "oklch(26.43% 0.0114 293.18)",
+          "oklch(37.86% 0.0114 293.18)",
+          "oklch(49.29% 0.0114 293.18)",
+          "oklch(60.71% 0.0114 293.18)",
+          "oklch(72.14% 0.0114 293.18)",
+          "oklch(83.57% 0.0114 293.18)",
+          "oklch(95.00% 0.0114 293.18)"
+        ]
+      },
+      "home-dark-foreground": {
+        "role": "neutral",
+        "displayName": "Home Dark Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.0086 308.36)",
+          "oklch(26.43% 0.0086 308.36)",
+          "oklch(37.86% 0.0086 308.36)",
+          "oklch(49.29% 0.0086 308.36)",
+          "oklch(60.71% 0.0086 308.36)",
+          "oklch(72.14% 0.0086 308.36)",
+          "oklch(83.57% 0.0086 308.36)",
+          "oklch(95.00% 0.0086 308.36)"
+        ]
+      },
+      "home-dark-body": {
+        "role": "neutral",
+        "displayName": "Home Dark Body",
+        "tonalRamp": [
+          "oklch(15.00% 0.0207 305.18)",
+          "oklch(26.43% 0.0207 305.18)",
+          "oklch(37.86% 0.0207 305.18)",
+          "oklch(49.29% 0.0207 305.18)",
+          "oklch(60.71% 0.0207 305.18)",
+          "oklch(72.14% 0.0207 305.18)",
+          "oklch(83.57% 0.0207 305.18)",
+          "oklch(95.00% 0.0207 305.18)"
+        ]
+      },
+      "home-dark-action-hover": {
+        "role": "neutral",
+        "displayName": "Home Dark Action Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0171 304.77)",
+          "oklch(26.43% 0.0171 304.77)",
+          "oklch(37.86% 0.0171 304.77)",
+          "oklch(49.29% 0.0171 304.77)",
+          "oklch(60.71% 0.0171 304.77)",
+          "oklch(72.14% 0.0171 304.77)",
+          "oklch(83.57% 0.0171 304.77)",
+          "oklch(95.00% 0.0171 304.77)"
+        ]
+      },
+      "home-dark-border": {
+        "role": "neutral",
+        "displayName": "Home Dark Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0178 299.14)",
+          "oklch(26.43% 0.0178 299.14)",
+          "oklch(37.86% 0.0178 299.14)",
+          "oklch(49.29% 0.0178 299.14)",
+          "oklch(60.71% 0.0178 299.14)",
+          "oklch(72.14% 0.0178 299.14)",
+          "oklch(83.57% 0.0178 299.14)",
+          "oklch(95.00% 0.0178 299.14)"
+        ]
+      },
+      "home-dark-soft": {
+        "role": "neutral",
+        "displayName": "Home Dark Soft",
+        "tonalRamp": [
+          "oklch(15.00% 0.0147 296.91)",
+          "oklch(26.43% 0.0147 296.91)",
+          "oklch(37.86% 0.0147 296.91)",
+          "oklch(49.29% 0.0147 296.91)",
+          "oklch(60.71% 0.0147 296.91)",
+          "oklch(72.14% 0.0147 296.91)",
+          "oklch(83.57% 0.0147 296.91)",
+          "oklch(95.00% 0.0147 296.91)"
+        ]
+      },
+      "home-dark-selection": {
+        "role": "neutral",
+        "displayName": "Home Dark Selection",
+        "tonalRamp": [
+          "oklch(15.00% 0.0394 300.55)",
+          "oklch(26.43% 0.0394 300.55)",
+          "oklch(37.86% 0.0394 300.55)",
+          "oklch(49.29% 0.0394 300.55)",
+          "oklch(60.71% 0.0394 300.55)",
+          "oklch(72.14% 0.0394 300.55)",
+          "oklch(83.57% 0.0394 300.55)",
+          "oklch(95.00% 0.0394 300.55)"
+        ]
+      },
+      "header-dark-muted": {
+        "role": "neutral",
+        "displayName": "Header Dark Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.0222 306.77)",
+          "oklch(26.43% 0.0222 306.77)",
+          "oklch(37.86% 0.0222 306.77)",
+          "oklch(49.29% 0.0222 306.77)",
+          "oklch(60.71% 0.0222 306.77)",
+          "oklch(72.14% 0.0222 306.77)",
+          "oklch(83.57% 0.0222 306.77)",
+          "oklch(95.00% 0.0222 306.77)"
+        ]
+      },
+      "header-dark-glass-high": {
+        "role": "neutral",
+        "displayName": "Header Dark Glass High",
+        "tonalRamp": [
+          "oklch(15.00% 0.0211 305.66 / .9)",
+          "oklch(26.43% 0.0211 305.66 / .9)",
+          "oklch(37.86% 0.0211 305.66 / .9)",
+          "oklch(49.29% 0.0211 305.66 / .9)",
+          "oklch(60.71% 0.0211 305.66 / .9)",
+          "oklch(72.14% 0.0211 305.66 / .9)",
+          "oklch(83.57% 0.0211 305.66 / .9)",
+          "oklch(95.00% 0.0211 305.66 / .9)"
+        ]
+      },
+      "header-dark-glass-low": {
+        "role": "neutral",
+        "displayName": "Header Dark Glass Low",
+        "tonalRamp": [
+          "oklch(15.00% 0.0214 301.45 / .75)",
+          "oklch(26.43% 0.0214 301.45 / .75)",
+          "oklch(37.86% 0.0214 301.45 / .75)",
+          "oklch(49.29% 0.0214 301.45 / .75)",
+          "oklch(60.71% 0.0214 301.45 / .75)",
+          "oklch(72.14% 0.0214 301.45 / .75)",
+          "oklch(83.57% 0.0214 301.45 / .75)",
+          "oklch(95.00% 0.0214 301.45 / .75)"
+        ]
+      },
+      "header-dark-edge": {
+        "role": "neutral",
+        "displayName": "Header Dark Edge",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88 / .13)",
+          "oklch(26.43% 0.0000 89.88 / .13)",
+          "oklch(37.86% 0.0000 89.88 / .13)",
+          "oklch(49.29% 0.0000 89.88 / .13)",
+          "oklch(60.71% 0.0000 89.88 / .13)",
+          "oklch(72.14% 0.0000 89.88 / .13)",
+          "oklch(83.57% 0.0000 89.88 / .13)",
+          "oklch(95.00% 0.0000 89.88 / .13)"
+        ]
+      },
+      "header-dark-panel": {
+        "role": "neutral",
+        "displayName": "Header Dark Panel",
+        "tonalRamp": [
+          "oklch(15.00% 0.0251 302.23 / .97)",
+          "oklch(26.43% 0.0251 302.23 / .97)",
+          "oklch(37.86% 0.0251 302.23 / .97)",
+          "oklch(49.29% 0.0251 302.23 / .97)",
+          "oklch(60.71% 0.0251 302.23 / .97)",
+          "oklch(72.14% 0.0251 302.23 / .97)",
+          "oklch(83.57% 0.0251 302.23 / .97)",
+          "oklch(95.00% 0.0251 302.23 / .97)"
+        ]
+      },
+      "header-dark-soft": {
+        "role": "neutral",
+        "displayName": "Header Dark Soft",
+        "tonalRamp": [
+          "oklch(15.00% 0.0261 307.57)",
+          "oklch(26.43% 0.0261 307.57)",
+          "oklch(37.86% 0.0261 307.57)",
+          "oklch(49.29% 0.0261 307.57)",
+          "oklch(60.71% 0.0261 307.57)",
+          "oklch(72.14% 0.0261 307.57)",
+          "oklch(83.57% 0.0261 307.57)",
+          "oklch(95.00% 0.0261 307.57)"
+        ]
+      },
+      "header-dark-on-action": {
+        "role": "neutral",
+        "displayName": "Header Dark On Action",
+        "tonalRamp": [
+          "oklch(15.00% 0.0203 307.49)",
+          "oklch(26.43% 0.0203 307.49)",
+          "oklch(37.86% 0.0203 307.49)",
+          "oklch(49.29% 0.0203 307.49)",
+          "oklch(60.71% 0.0203 307.49)",
+          "oklch(72.14% 0.0203 307.49)",
+          "oklch(83.57% 0.0203 307.49)",
+          "oklch(95.00% 0.0203 307.49)"
+        ]
       }
     },
     "typographyMeta": {
@@ -630,8 +840,8 @@
       },
       {
         "name": "header",
-        "value": "0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff",
-        "purpose": "Central desktop navigation capsule only; the outer header is transparent and has no shadow."
+        "value": "0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 rgb(255 255 255 / .94)",
+        "purpose": "Always-visible light navigation capsule; the outer header stays transparent without shadow. The inset edge follows its scoped appearance role."
       },
       {
         "name": "lens",
@@ -642,11 +852,6 @@
         "name": "account-panel",
         "value": "0 16px 44px rgb(25 25 35 / .16)",
         "purpose": "Frosted actual account menu."
-      },
-      {
-        "name": "mobile-menu",
-        "value": "0 14px 34px -8px rgb(25 25 35 / .16)",
-        "purpose": "Shared mobile navigation."
       },
       {
         "name": "dark-card-rest",
@@ -664,9 +869,19 @@
         "purpose": "Dark functional controls."
       },
       {
-        "name": "mobile-menu-trigger",
-        "value": "0 9px 26px -12px rgb(30 30 40 / .2),inset 0 1px 0 #fff",
-        "purpose": "Compact central glass menu trigger; brand/account remain outside it."
+        "name": "home-dark-card-rest",
+        "value": "0 14px 38px -10px rgb(0 0 0 / .26)",
+        "purpose": "Scoped dark homepage card."
+      },
+      {
+        "name": "home-dark-card-hover",
+        "value": "0 27px 55px -12px rgb(0 0 0 / .42)",
+        "purpose": "Scoped fine-pointer dark homepage card hover."
+      },
+      {
+        "name": "header-theme-control",
+        "value": "0 5px 18px -10px rgb(30 30 40 / .18)",
+        "purpose": "Circular appearance control beside the navigation capsule."
       }
     ],
     "motion": [
@@ -688,7 +903,7 @@
       {
         "name": "header-glass",
         "value": "blur(24px) saturate(1.12)",
-        "purpose": "Central desktop navigation capsule and compact mobile trigger only; outer frame stays transparent. Readable opaque capsule fallback when blur is unsupported."
+        "purpose": "Always-visible navigation capsule at every viewport; scoped light/dark gradient and edge, transparent outer frame, current-appearance opaque fallback when blur is unsupported."
       },
       {
         "name": "lens-glass",
@@ -739,6 +954,11 @@
         "name": "lens-layout",
         "value": "destination x/y/width/height tolerance <0.5px",
         "purpose": "ResizeObserver and font notifications do not cancel an unchanged journey; real layout changes retarget ongoing travel. Visibility/reduced-motion changes explicitly settle."
+      },
+      {
+        "name": "theme-reveal",
+        "value": "700ms cubic-bezier(.22,1,.36,1); circular clip from the theme control",
+        "purpose": "Existing public Portfolio View Transition contract, with retained attribution; direct mode update under reduced motion or without the API. Latest intent/generation wins before a transition commits."
       }
     ],
     "breakpoints": [
@@ -747,24 +967,36 @@
         "value": "360px"
       },
       {
+        "name": "home-narrow-max",
+        "value": "380px"
+      },
+      {
         "name": "small-max",
         "value": "480px"
       },
       {
-        "name": "home-mobile-max",
+        "name": "header-compact-label-max",
         "value": "650px"
+      },
+      {
+        "name": "home-mobile-max",
+        "value": "740px"
       },
       {
         "name": "application-mobile-max",
         "value": "767px"
       },
       {
-        "name": "header-mobile-max",
-        "value": "940px"
-      },
-      {
         "name": "intermediate-max",
         "value": "900px"
+      },
+      {
+        "name": "home-intermediate-max",
+        "value": "1000px"
+      },
+      {
+        "name": "header-two-row-max",
+        "value": "1100px"
       },
       {
         "name": "reader-admin-intermediate-max",
@@ -802,12 +1034,12 @@
       "css": ".ds-home-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:11px 23px;border:0;border-radius:12px;background:var(--iv-action,#202023);color:#fff;box-shadow:0 9px 24px -10px rgb(32 32 35 / .22);font:500 15px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s}.ds-home-primary:hover{background:var(--iv-action-hover,#38383d);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(32 32 35 / .25)}.ds-home-primary:active{transform:scale(.98)}.ds-home-primary:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-home-primary{transition:none}.ds-home-primary:hover,.ds-home-primary:active{transform:none}}"
     },
     {
-      "name": "Shared header with centered glass navigation",
+      "name": "Shared header with always-visible glass navigation",
       "kind": "nav",
       "refersTo": "header-frame",
-      "description": "Transparent equal-side-column frame with Home, Community, Resources, Blog spaces and About in the centered capsule. Existing Home/About pages and real guest destination remain linked; the mobile menu is a two-column, three-row grid with About spanning the last row.",
-      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><nav class=\"ds-nav\" aria-label=\"主要导航\"><a href=\"/\">首页</a><a href=\"/community\">社区</a><a href=\"/resources\" aria-current=\"page\">资源</a><a href=\"/blogs\">博客空间</a><a href=\"/about\">关于</a></nav><details class=\"ds-mobile\"><summary aria-label=\"展开导航\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\"/></svg></summary><nav class=\"ds-menu-panel\" aria-label=\"主要导航\"><div class=\"ds-menu-track\"><a href=\"/\">首页</a><a href=\"/community\">社区</a><a href=\"/resources\" aria-current=\"page\">资源</a><a href=\"/blogs\">博客空间</a><a href=\"/about\">关于</a></div></nav></details><div class=\"ds-identity\"><a class=\"ds-login\" href=\"/login\">登录</a></div></header>",
-      "css": ".ds-header{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:22px;min-width:0;min-height:70px;padding:8px 0;border:0;border-radius:0;background:transparent;box-shadow:none;color:#242424;font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header a{color:inherit;text-decoration:none}.ds-brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-brand>svg{width:27px;height:27px;flex:none}.ds-nav{grid-column:2;grid-row:1;justify-self:center;display:flex;gap:2px;width:max-content;max-width:100%;min-width:0;padding:6px;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-nav a{display:flex;align-items:center;justify-content:center;min-height:42px;padding:9px 16px;border-radius:999px;color:#5b5b60;white-space:nowrap;box-sizing:border-box}.ds-nav a[aria-current],.ds-menu-track a[aria-current]{background:rgb(255 255 255 / .84);color:#202022;box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover,.ds-menu-track a:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-identity{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:9px}.ds-login{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 21px;border:1px solid #242424;border-radius:999px;background:#242424;color:#fff!important;font-weight:500;line-height:1.4;box-sizing:border-box}.ds-login:hover{background:#424245;border-color:#424245}.ds-mobile{grid-column:2;grid-row:1;justify-self:center;display:none}.ds-mobile>summary{display:grid;place-items:center;width:42px;min-height:44px;padding:0;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));box-shadow:0 9px 26px -12px rgb(30 30 40 / .2),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);list-style:none;cursor:pointer;box-sizing:border-box}.ds-mobile>summary::-webkit-details-marker{display:none}.ds-menu-panel{position:absolute;top:calc(100% + 10px);left:0;right:0;padding:8px;border:1px solid rgb(255 255 255 / .94);border-radius:26px;background:rgb(255 255 255 / .9);box-shadow:0 14px 34px -8px rgb(25 25 35 / .16);backdrop-filter:blur(24px)}.ds-menu-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:20px;background:rgb(230 230 235 / .27);font:500 13px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-menu-track a{display:flex;align-items:center;justify-content:center;flex:1 1 0;min-width:0;min-height:46px;padding:10px 9px;border-radius:999px;text-align:center;text-wrap:balance;box-sizing:border-box}.ds-menu-track a:last-of-type{grid-column:1/-1}.ds-header :is(a,summary):focus-visible{outline:2px solid #303034;outline-offset:4px}.ds-nav a:focus-visible,.ds-menu-track a:focus-visible{outline-offset:-3px}@media(max-width:900px){.ds-header{gap:14px}.ds-nav a{padding:9px 12px}}@media(max-width:940px){.ds-nav{display:none}.ds-mobile{display:block;margin:0}}@media(max-width:650px){.ds-header{gap:9px;min-height:62px;padding:7px 0}.ds-brand{gap:7px}.ds-brand span{font-size:29px}.ds-brand>svg{width:23px;height:23px}.ds-identity{gap:7px}.ds-login{min-height:42px;padding:9px 17px;font-size:13px}.ds-mobile>summary{width:40px;min-height:42px}}@media(max-width:360px){.ds-header{gap:6px}.ds-brand span{font-size:26px}.ds-identity{gap:5px}.ds-login{padding-inline:13px}.ds-mobile>summary{width:36px}}@supports not(backdrop-filter:blur(1px)){.ds-nav,.ds-mobile>summary{background:rgb(255 255 255 / .96)}.ds-menu-panel{background:#fff}}"
+      "description": "Static preview of the persistent header: original brand, five always-visible route links with theme beside the capsule, and guest/account state followed by language. At 1100px and below, navigation/theme use a second row; at 650px and below, short visible labels retain full accessible names. Runtime supplies the travelling lens and actual preference/menu behavior.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><div class=\"ds-navigation\"><nav class=\"ds-nav\" aria-label=\"主要导航\"><a href=\"/\" aria-label=\"首页\"><span class=\"ds-full\">首页</span><span class=\"ds-compact\" aria-hidden=\"true\">首页</span></a><a href=\"/community\" aria-label=\"社区\"><span class=\"ds-full\">社区</span><span class=\"ds-compact\" aria-hidden=\"true\">社区</span></a><a href=\"/resources\" aria-label=\"资源\" aria-current=\"page\"><span class=\"ds-full\">资源</span><span class=\"ds-compact\" aria-hidden=\"true\">资源</span></a><a href=\"/blogs\" aria-label=\"博客空间\"><span class=\"ds-full\">博客空间</span><span class=\"ds-compact\" aria-hidden=\"true\">博客</span></a><a href=\"/about\" aria-label=\"关于\"><span class=\"ds-full\">关于</span><span class=\"ds-compact\" aria-hidden=\"true\">关于</span></a></nav><button class=\"ds-theme\" type=\"button\" aria-label=\"切换深色外观\" title=\"切换深色外观\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z\"/></svg></button></div><div class=\"ds-identity\"><a class=\"ds-login\" href=\"/login\">登录</a><a class=\"ds-avatar\" href=\"/login\" aria-label=\"登录或管理账号\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M5 21v-2a7 7 0 0 1 14 0v2\"/></svg></a><button class=\"ds-language\" type=\"button\" aria-label=\"切换语言\" aria-expanded=\"false\">简中<svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></button></div></header>",
+      "css": ".ds-header{--ds-ink:#242424;--ds-muted:#67676d;--ds-line:rgb(45 45 50 / .1);--ds-glass-high:rgb(255 255 255 / .86);--ds-glass-low:rgb(255 255 255 / .65);--ds-edge:rgb(255 255 255 / .94);--ds-panel:rgb(255 255 255 / .96);--ds-action:#242424;--ds-on-action:#fff;position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:20px;width:100%;min-width:0;min-height:72px;padding:8px 0;border:0;background:transparent;box-shadow:none;color:var(--ds-ink);font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header,.ds-header :is(a,button){box-sizing:border-box}.ds-header a{color:inherit;text-decoration:none}.ds-brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-brand>svg{width:27px;height:27px;flex:none}.ds-navigation{grid-column:2;grid-row:1;justify-self:center;display:flex;align-items:center;gap:10px;min-width:0;max-width:100%}.ds-nav{display:flex;gap:2px;min-width:0;max-width:100%;padding:6px;border:1px solid var(--ds-edge);border-radius:999px;background:linear-gradient(120deg,var(--ds-glass-high),var(--ds-glass-low));box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 var(--ds-edge);backdrop-filter:blur(24px) saturate(1.12);font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-nav a{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-width:0;min-height:42px;padding:9px 16px;border-radius:999px;color:var(--ds-muted);white-space:nowrap}.ds-compact{display:none}.ds-nav a[aria-current]{background:var(--ds-glass-high);color:var(--ds-ink);box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover{background:var(--ds-glass-low);color:var(--ds-ink)}.ds-theme,.ds-avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--ds-line);border-radius:50%;background:var(--ds-glass-low);color:var(--ds-ink);cursor:pointer}.ds-theme{box-shadow:0 5px 18px -10px rgb(30 30 40 / .18);backdrop-filter:blur(18px)}.ds-identity{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:9px;min-width:0}.ds-login{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 19px;border:0;border-radius:999px;background:var(--ds-action);color:var(--ds-on-action)!important;font-weight:500;line-height:1.4;white-space:nowrap;transition:opacity .16s}.ds-login:hover{opacity:.8}.ds-avatar{color:var(--ds-muted)!important}.ds-language{display:inline-flex;flex:none;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:8px 10px;border:1px solid var(--ds-line);border-radius:999px;background:var(--ds-glass-low);color:var(--ds-ink);font:400 13px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);white-space:nowrap;cursor:pointer}.ds-header :is(a,button):focus-visible{outline:2px solid var(--ds-ink);outline-offset:4px}.ds-nav a:focus-visible{outline-offset:-3px}:host-context(html[data-color-mode=dark]) .ds-header{--ds-ink:#f5f2f8;--ds-muted:#c2bbca;--ds-line:rgb(255 255 255 / .13);--ds-glass-high:rgb(43 38 49 / .9);--ds-glass-low:rgb(34 30 41 / .75);--ds-edge:rgb(255 255 255 / .13);--ds-panel:rgb(37 32 45 / .97);--ds-action:#f5f2f8;--ds-on-action:#201b25;color-scheme:dark}@media(max-width:1100px){.ds-header{grid-template-columns:1fr auto;row-gap:10px;column-gap:14px;min-height:122px;padding:6px 0}.ds-identity{grid-column:2}.ds-navigation{grid-column:1/-1;grid-row:2;max-width:100%}}@media(max-width:650px){.ds-header{min-height:110px;row-gap:8px;column-gap:10px;padding:4px 0}.ds-brand{gap:7px}.ds-brand span{font-size:29px}.ds-brand>svg{width:23px;height:23px}.ds-identity{gap:7px}.ds-login{min-height:42px;padding:9px 13px;font-size:13px}.ds-avatar{width:38px;height:42px}.ds-language{min-height:42px;padding-inline:8px;font-size:12px}.ds-navigation{width:max-content;max-width:100%;gap:8px}.ds-nav{padding:4px;font-size:12px}.ds-nav a{padding:9px 8px}.ds-full{display:none}.ds-compact{display:inline}.ds-theme{width:40px;height:42px}}@media(max-width:360px){.ds-header{column-gap:7px}.ds-brand{gap:5px}.ds-brand span{font-size:26px}.ds-brand>svg{width:20px;height:20px}.ds-identity{gap:5px}.ds-login{padding-inline:9px;font-size:12px}.ds-avatar{width:34px}.ds-language{padding-inline:6px;gap:3px}.ds-language>svg{width:11px}.ds-nav{font-size:11.5px}.ds-nav a{padding:9px 6px}}@supports not(backdrop-filter:blur(1px)){.ds-nav{background:var(--ds-panel)}}@media(prefers-reduced-motion:reduce){.ds-login{transition:none}}"
     },
     {
       "name": "Sliding glass switch layers",
@@ -837,9 +1069,9 @@
       "name": "Homepage truthful empty state",
       "kind": "card",
       "refersTo": "community-card",
-      "description": "Real empty-state copy with a working destination; no fabricated activity.",
+      "description": "Real empty-state copy in the bounded homepage feed; unavailable states add a working refresh action at runtime, with no fabricated activity.",
       "html": "<article class=\"ds-empty\"><h3>第一份经验，也许就来自你。</h3><p>一个解决过的问题，一次工具的使用体验，都可以成为分享的起点。</p><a href=\"/community\">进入社区 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></article>",
-      "css": ".ds-empty{min-height:320px;padding:45px 35px;border-radius:16px;background:#fff;color:var(--iv-ink,#202023);box-shadow:0 14px 38px -10px rgb(32 32 35 / .10);font:400 15px/1.9 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}.ds-empty h3{margin:0;font-size:25px;font-weight:500}.ds-empty p{max-width:35ch;margin:14px 0 0;color:var(--iv-body,#636369)}.ds-empty a{display:inline-flex;align-items:center;gap:7px;min-height:40px;margin-top:18px;color:var(--iv-action-hover,#38383d);text-decoration:none;font-size:14px}.ds-empty a:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(hover:hover) and (pointer:fine){.ds-empty:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(32 32 35 / .16)}}@media(prefers-reduced-motion:reduce){.ds-empty{transition:none}.ds-empty:hover{transform:none}}"
+      "css": ".ds-empty{min-height:300px;padding:36px;border-radius:16px;background:#fff;color:var(--iv-ink,#202023);box-shadow:0 14px 38px -10px rgb(32 32 35 / .10);font:400 15px/1.9 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}.ds-empty h3{margin:0;font-size:25px;font-weight:500}.ds-empty p{max-width:40ch;margin:12px 0 0;color:var(--iv-body,#636369)}.ds-empty a{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin-top:16px;color:var(--iv-action-hover,#38383d);text-decoration:none;font-size:14px}.ds-empty a:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(hover:hover) and (pointer:fine){.ds-empty:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(32 32 35 / .16)}}@media(prefers-reduced-motion:reduce){.ds-empty{transition:none}.ds-empty:hover{transform:none}}"
     },
     {
       "name": "Neutral selected label",
@@ -852,11 +1084,11 @@
   ],
   "narrative": {
     "northStar": "White space, black controls, purple mist",
-    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The shared header has a transparent three-column frame: brand at left, a separately centered frosted navigation capsule, and real account state at right, outside the capsule. A travelling lens briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
+    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
     "keyCharacteristics": [
       "White space, black functional controls and soft purple mist at both sides, with a white center.",
       "Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.",
-      "A centered frosted navigation capsule, with the original brand left and real account state right outside it.",
+      "An always-visible frosted navigation capsule and adjacent theme control, with the original brand and real account/language controls outside it.",
       "Sliding glass selection with local text magnification and one accessible interactive label layer.",
       "Floating white cards, fine-pointer hover and bounded viewport entry within existing workflows.",
       "Explicit route, authored-content, accessibility and source/license boundaries."
@@ -869,7 +1101,7 @@
       },
       {
         "name": "The Frosted Navigation Rule",
-        "body": "Apply white translucent glass, blur and the bright fine edge to the central navigation capsule or mobile menu trigger. Keep the full header frame transparent, borderless and without a shadow; brand and account controls remain outside the capsule.",
+        "body": "Apply translucent glass, blur and a fine edge to the always-visible central navigation capsule, using its scoped light or dark roles. Keep the full header frame transparent, borderless and without a shadow; brand, account and language controls remain outside the capsule, with theme beside it.",
         "section": "colors"
       },
       {
@@ -885,10 +1117,10 @@
     ],
     "dos": [
       "Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.",
-      "Do keep the central navigation capsule frosted and independently centered, with real brand and account controls outside it.",
+      "Do keep the navigation capsule visible and frosted at every width, with theme beside it and real brand, account and language controls outside it.",
       "Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.",
       "Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.",
-      "Do verify Chinese, English and Japanese, mobile wrapping, focus, reduced motion and static fallbacks.",
+      "Do verify Chinese, English and Japanese, compact labels and full accessible names, focus, both appearances, reduced motion and static fallbacks.",
       "Do retain actual public content, useful empty states, labeled fictional examples and original source/license details."
     ],
     "donts": [

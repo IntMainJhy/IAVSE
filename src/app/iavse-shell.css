@@ -5,10 +5,13 @@
 html:has([data-iavse-platform]) body{background:var(--iavse-background,#fff)}
 html:has([data-iavse-platform]) :is(.site-frame,.site-corner){display:none}
 html:has([data-iavse-landing]) :is(.site-frame,.site-corner){display:none}
-.iavse-not-found{max-width:680px;margin:8svh auto;padding:clamp(28px,5vw,56px);border-radius:16px;background:var(--iavse-background,#fff);box-shadow:var(--iavse-shadow);text-align:center}
+.iavse-not-found{max-width:680px;margin:calc(8svh + var(--iavse-header-extra,0px)) auto;padding:clamp(28px,5vw,56px);border-radius:16px;background:var(--iavse-background,#fff);box-shadow:var(--iavse-shadow);text-align:center}
 .iavse-not-found p{max-width:48ch;margin:18px auto 28px;line-height:1.9}
 html[data-color-mode=dark] .iavse-shell-atmosphere{opacity:.12;mix-blend-mode:screen}
 @media(min-width:1500px){.iavse-shell-header{width:min(1240px,calc(100% - 100px))}}
 @media(max-width:900px){.iavse-shell-header{width:calc(100% - 48px)}}
 @media(max-width:650px){.iavse-shell-header{top:12px;width:calc(100% - 32px)}.iavse-shell-atmosphere{height:1120px}}
 @media print{.iavse-shell-atmosphere,.iavse-shell-header{display:none}}
+
+/* Preserve route content clearance when the shared navigation occupies two rows. */
+html:has([data-iavse-platform=public]) [data-rbp-route]:not([data-rbp-route=home]){padding-top:var(--iavse-header-extra,0px)}

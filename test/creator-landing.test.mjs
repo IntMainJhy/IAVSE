@@ -163,7 +163,7 @@ test('five navigation destinations expose only the current route, including home
    const nav=find(document,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav)[0];
    const links=find(nav,n=>n.name==='a');
    assert.deepEqual(links.map(n=>n.attribs.href),['/','/community','/resources','/blogs','/about']);
-   assert.equal(text(links[0]),c.navHome);assert.equal(text(links[4]),c.navAbout);
+   assert.equal(links[0].attribs['aria-label'],c.navHome);assert.equal(links[4].attribs['aria-label'],c.navAbout);
    assert.deepEqual(links.filter(n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href),active?[active]:[]);
   }
  }
@@ -183,5 +183,26 @@ test('the root owns one shared header on home without a second backdrop or a pag
   const loaded=components('zh',{pathname});
   const html=renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime));
   assert.equal(html,'',pathname+' keeps its authored or workbench chrome');
+ }
+});
+
+
+test('the persistent header exposes the same capsule and keeps language after identity and theme beside navigation',async()=>{
+ for(const user of [null,{name:'Signed-in member',avatarId:'account-avatar'}]){
+  const{document,copy}=await render('zh',{user}),c=copy.landingCopy('zh');
+  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
+  const nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav);
+  assert.equal(nav.length,1,'one live capsule serves every viewport');
+  assert.equal(find(header,n=>(n.attribs.class||'').includes('iavse-header__mobile')).length,0,'the header has no separate collapsed mobile menu');
+  const navigation=nav[0].parent,theme=find(navigation,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle');
+  assert.equal(theme.length,1);assert.equal(theme[0].attribs.type,'button');
+  const identity=find(header,n=>n.attribs.class==='iavse-header__identity')[0],children=(identity.children||[]).filter(n=>n.type==='tag');
+  assert.ok(Object.hasOwn(children.at(-1).attribs,'data-language-switcher'),'language is the last account-side control');
+  const footer=find(document,n=>n.name==='footer')[0];assert.equal(find(footer,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,0);
+  for(const link of find(nav[0],n=>n.name==='a')){
+   assert.ok(link.attribs['aria-label']);
+   const compact=find(link,n=>(n.attribs.class||'').includes('glass-switch__compact-label'))[0];
+   assert.equal(compact.attribs['aria-hidden'],'true','short visible labels do not replace full accessible destination names');
+  }
  }
 });

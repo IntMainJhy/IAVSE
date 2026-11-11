@@ -8,6 +8,8 @@ import '@/app/glass-controls.css';
 export type GlassSwitchItem = {
   id: string;
   label: string;
+  /** Short visual label on small screens; the full label remains accessible. */
+  compactLabel?: string;
   href?: string;
   prefetch?: boolean;
   scroll?: boolean;
@@ -46,7 +48,7 @@ export function GlassSwitch({items, value, ariaLabel, onValueChange, className =
   const intentTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [intent, setIntent] = useState<{value: string; from: string | null} | null>(null);
   const target = intent?.from === value ? intent.value : value;
-  const layoutKey = JSON.stringify(items.map(item => [item.id, item.label, item.disabled]));
+  const layoutKey = JSON.stringify(items.map(item => [item.id, item.label, item.compactLabel, item.disabled]));
 
   useLayoutEffect(() => {
     const element = root.current;
@@ -217,17 +219,22 @@ export function GlassSwitch({items, value, ariaLabel, onValueChange, className =
       const selected = value === item.id;
       const shared = {
         className: 'glass-switch__item',
+        'aria-label': item.compactLabel ? item.label : undefined,
         'data-selected': selected,
         onClick: (event: MouseEvent<HTMLElement>) => activate(item, event),
       };
-      const label = <span className="glass-switch__label">{item.label}</span>;
+      const label = switchLabel(item);
       return item.href ? <Link {...shared} key={item.id} href={item.href} prefetch={item.prefetch} scroll={item.scroll} aria-current={selected ? 'page' : undefined} aria-disabled={item.disabled || undefined} tabIndex={item.disabled ? -1 : undefined} ref={node => { if (node) controls.current.set(item.id, node); else controls.current.delete(item.id); }}>{label}</Link>
         : <button {...shared} key={item.id} type="button" disabled={item.disabled} aria-pressed={selected} ref={node => { if (node) controls.current.set(item.id, node); else controls.current.delete(item.id); }}>{label}</button>;
     })}
     <div className="glass-switch__lens" aria-hidden="true" inert>
       <div className="glass-switch__countertrack"><div className="glass-switch__magnification">
-        {items.map(item => <span key={item.id} className="glass-switch__copy-item" ref={node => { if (node) copies.current.set(item.id, node); else copies.current.delete(item.id); }}><span className="glass-switch__label">{item.label}</span></span>)}
+        {items.map(item => <span key={item.id} className="glass-switch__copy-item" ref={node => { if (node) copies.current.set(item.id, node); else copies.current.delete(item.id); }}>{switchLabel(item)}</span>)}
       </div></div>
     </div>
   </div>;
+}
+
+function switchLabel(item: GlassSwitchItem) {
+  return <span className="glass-switch__label">{item.compactLabel ? <><span className="glass-switch__full-label">{item.label}</span><span className="glass-switch__compact-label" aria-hidden="true">{item.compactLabel}</span></> : item.label}</span>;
 }
