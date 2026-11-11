@@ -57,16 +57,17 @@ The current editor provides six layouts, eight visual themes, inline editing and
 ## 当前实现 / Current implementation
 
 - [双 UI 开发计划](dual-ui-development-plan.zh-CN.md)与[阶段任务表](dual-ui-task-board.md)：Pro 私有 UI、原创公开 UI、共享业务与数据。来源与私有准备见[来源盘点与候选](ui-source-audit-2026-11-10.md)；当前已实现用户批准的独立紫白首页，完整双 UI 仍未完成，现行许可不变。
-- [当前视觉规范 / Current design system](../DESIGN.md)：已实现的紫白首页、艺术字、透明无色导航、浮起卡片和入场动效；其他功能页保留已有基础，等待逐步迁移。The new homepage is implemented; other functional pages retain their existing foundation.
+- [当前视觉规范 / Current design system](../DESIGN.md)：白色空间、黑色功能控件、毛玻璃顶栏、滑动镜片、艺术字、浮起卡片和紫色柔雾。The shared visual world follows the approved homepage across platform-owned surfaces.
+- [平台共享视觉迁移 / Platform UI](platform-ui.zh-CN.md)：实际路由覆盖、滑动镜片的 DOM 文字放大机制、既有工作流、成员创作与预览边界；共享视觉迁移不代表每个页面重写或逐页验收。
 - [紫白首页背景机制与边界](purple-landing-background.zh-CN.md)：用户选定的两侧柔雾与中央留白、独立 WebGL 域扭曲、指针扰动、减少动态效果、离屏暂停和静态降级；它不是物理流体求解器。
-- [既有前端接入与源码映射 / Existing frontend integration](portfolio-frontend.md)：记录保留的 RBP 组件、既有功能页样式、portrait OGL、Lenis 与作者内容边界；其中旧首页构图已由当前紫白首页取代，以当前视觉规范和源码为准。
+- [既有前端接入与源码映射 / Existing frontend integration](portfolio-frontend.md)：记录保留的 RBP 组件和历史接入；旧首页构图、导航与运行时描述已由当前规范及共享平台实现取代，来源署名和成员创作边界仍保留。
 - [目录分批查询与性能](catalog-performance-2026-11-08.md): bounded batches, source/license separation and measurement scope.
 - [模板与展廊修复](blog-gallery-template-repair-2026-11-08.md).
 - [2026-11-06 名称与清理](cleanup-2026-11-06.md).
 - [2026-11-04 仓库维护记录](release-2026-11-04.md).
 - [2026-11-02 检查记录](release-2026-11-02.md).
 
-首页现在采用“居中开场 → 社区筛选与内容／资源侧栏 → 公开空间横卡 → 页脚”，使用真实公开内容和空态；没有可发现空间时的模板截图明确标为虚构示例。新首页不代表全站 UI 已替换。历史实现可从 Git 历史追溯，资源目录里的第三方设计规范仍作为学习内容保留。带日期的功能、性能和验证记录只描述当时范围，不替代当前代码或运行结果。Latest repository changes are summarized in [CHANGELOG.md](../CHANGELOG.md).
+首页保留“居中开场 → 社区筛选与内容／资源侧栏 → 公开空间横卡 → 页脚”，使用真实公开内容和空态；没有可发现空间时的模板截图明确标为虚构示例。其他平台页面通过共享颜色、卡片、控件与壳层沿用这一视觉世界，保留各自工作流及作者内容。历史实现可从 Git 历史追溯，资源目录里的第三方设计规范仍作为学习内容保留。带日期的功能、性能和验证记录只描述当时范围，不替代当前代码或运行结果。Latest repository changes are summarized in [CHANGELOG.md](../CHANGELOG.md).
 
 ## 仓库入口 / Repositories
 

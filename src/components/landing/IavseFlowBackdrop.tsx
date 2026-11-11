@@ -55,7 +55,7 @@ void main() {
   vec2 uv = vec2(vUv.x, 1.0 - vUv.y);
   float aspect = uSize.x / max(uSize.y, 1.0);
   vec2 p = (uv - vec2(0.5, 0.52)) * vec2(aspect, 1.0);
-  float time = uTime * 0.065;
+  float time = uTime * 0.12;
 
   // The cursor gently bends the existing mist instead of adding a glow on top.
   vec2 cursor = (uPointer - vec2(0.5, 0.52)) * vec2(aspect, 1.0);

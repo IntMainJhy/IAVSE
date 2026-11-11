@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T15:56:53.472743+00:00",
+  "generatedAt": "2026-11-11T05:15:56.570358+00:00",
   "title": "Design System: IAVSE",
   "extensions": {
     "colorMeta": {
@@ -19,124 +19,204 @@
         ]
       },
       "foreground": {
-        "role": "neutral",
+        "role": "primary",
         "displayName": "Foreground",
         "tonalRamp": [
-          "oklch(15.00% 0.0473 297.60)",
-          "oklch(26.43% 0.0473 297.60)",
-          "oklch(37.86% 0.0473 297.60)",
-          "oklch(49.29% 0.0473 297.60)",
-          "oklch(60.71% 0.0473 297.60)",
-          "oklch(72.14% 0.0473 297.60)",
-          "oklch(83.57% 0.0473 297.60)",
-          "oklch(95.00% 0.0473 297.60)"
+          "oklch(15.00% 0.0102 303.65)",
+          "oklch(26.43% 0.0102 303.65)",
+          "oklch(37.86% 0.0102 303.65)",
+          "oklch(49.29% 0.0102 303.65)",
+          "oklch(60.71% 0.0102 303.65)",
+          "oklch(72.14% 0.0102 303.65)",
+          "oklch(83.57% 0.0102 303.65)",
+          "oklch(95.00% 0.0102 303.65)"
         ]
       },
-      "body": {
+      "secondary": {
         "role": "neutral",
-        "displayName": "Body",
+        "displayName": "Secondary",
         "tonalRamp": [
-          "oklch(15.00% 0.0407 301.37)",
-          "oklch(26.43% 0.0407 301.37)",
-          "oklch(37.86% 0.0407 301.37)",
-          "oklch(49.29% 0.0407 301.37)",
-          "oklch(60.71% 0.0407 301.37)",
-          "oklch(72.14% 0.0407 301.37)",
-          "oklch(83.57% 0.0407 301.37)",
-          "oklch(95.00% 0.0407 301.37)"
+          "oklch(15.00% 0.0200 304.46)",
+          "oklch(26.43% 0.0200 304.46)",
+          "oklch(37.86% 0.0200 304.46)",
+          "oklch(49.29% 0.0200 304.46)",
+          "oklch(60.71% 0.0200 304.46)",
+          "oklch(72.14% 0.0200 304.46)",
+          "oklch(83.57% 0.0200 304.46)",
+          "oklch(95.00% 0.0200 304.46)"
         ]
       },
-      "purple": {
-        "role": "primary",
-        "displayName": "Purple",
+      "subtle": {
+        "role": "neutral",
+        "displayName": "Subtle",
         "tonalRamp": [
-          "oklch(15.00% 0.2117 291.95)",
-          "oklch(26.43% 0.2117 291.95)",
-          "oklch(37.86% 0.2117 291.95)",
-          "oklch(49.29% 0.2117 291.95)",
-          "oklch(60.71% 0.2117 291.95)",
-          "oklch(72.14% 0.2117 291.95)",
-          "oklch(83.57% 0.2117 291.95)",
-          "oklch(95.00% 0.2117 291.95)"
+          "oklch(15.00% 0.0212 306.41)",
+          "oklch(26.43% 0.0212 306.41)",
+          "oklch(37.86% 0.0212 306.41)",
+          "oklch(49.29% 0.0212 306.41)",
+          "oklch(60.71% 0.0212 306.41)",
+          "oklch(72.14% 0.0212 306.41)",
+          "oklch(83.57% 0.0212 306.41)",
+          "oklch(95.00% 0.0212 306.41)"
         ]
       },
-      "purple-deep": {
-        "role": "primary",
-        "displayName": "Purple Deep",
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
         "tonalRamp": [
-          "oklch(15.00% 0.2123 291.23)",
-          "oklch(26.43% 0.2123 291.23)",
-          "oklch(37.86% 0.2123 291.23)",
-          "oklch(49.29% 0.2123 291.23)",
-          "oklch(60.71% 0.2123 291.23)",
-          "oklch(72.14% 0.2123 291.23)",
-          "oklch(83.57% 0.2123 291.23)",
-          "oklch(95.00% 0.2123 291.23)"
+          "oklch(15.00% 0.0028 308.43)",
+          "oklch(26.43% 0.0028 308.43)",
+          "oklch(37.86% 0.0028 308.43)",
+          "oklch(49.29% 0.0028 308.43)",
+          "oklch(60.71% 0.0028 308.43)",
+          "oklch(72.14% 0.0028 308.43)",
+          "oklch(83.57% 0.0028 308.43)",
+          "oklch(95.00% 0.0028 308.43)"
         ]
       },
       "border": {
         "role": "neutral",
         "displayName": "Border",
         "tonalRamp": [
-          "oklch(15.00% 0.0231 308.18)",
-          "oklch(26.43% 0.0231 308.18)",
-          "oklch(37.86% 0.0231 308.18)",
-          "oklch(49.29% 0.0231 308.18)",
-          "oklch(60.71% 0.0231 308.18)",
-          "oklch(72.14% 0.0231 308.18)",
-          "oklch(83.57% 0.0231 308.18)",
-          "oklch(95.00% 0.0231 308.18)"
+          "oklch(15.00% 0.0086 308.36)",
+          "oklch(26.43% 0.0086 308.36)",
+          "oklch(37.86% 0.0086 308.36)",
+          "oklch(49.29% 0.0086 308.36)",
+          "oklch(60.71% 0.0086 308.36)",
+          "oklch(72.14% 0.0086 308.36)",
+          "oklch(83.57% 0.0086 308.36)",
+          "oklch(95.00% 0.0086 308.36)"
         ]
       },
-      "soft": {
-        "role": "secondary",
-        "displayName": "Soft",
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus",
         "tonalRamp": [
-          "oklch(15.00% 0.0222 302.94)",
-          "oklch(26.43% 0.0222 302.94)",
-          "oklch(37.86% 0.0222 302.94)",
-          "oklch(49.29% 0.0222 302.94)",
-          "oklch(60.71% 0.0222 302.94)",
-          "oklch(72.14% 0.0222 302.94)",
-          "oklch(83.57% 0.0222 302.94)",
-          "oklch(95.00% 0.0222 302.94)"
+          "oklch(15.00% 0.0172 310.16)",
+          "oklch(26.43% 0.0172 310.16)",
+          "oklch(37.86% 0.0172 310.16)",
+          "oklch(49.29% 0.0172 310.16)",
+          "oklch(60.71% 0.0172 310.16)",
+          "oklch(72.14% 0.0172 310.16)",
+          "oklch(83.57% 0.0172 310.16)",
+          "oklch(95.00% 0.0172 310.16)"
         ]
       },
       "selection": {
         "role": "neutral",
         "displayName": "Selection",
         "tonalRamp": [
-          "oklch(15.00% 0.0646 300.97)",
-          "oklch(26.43% 0.0646 300.97)",
-          "oklch(37.86% 0.0646 300.97)",
-          "oklch(49.29% 0.0646 300.97)",
-          "oklch(60.71% 0.0646 300.97)",
-          "oklch(72.14% 0.0646 300.97)",
-          "oklch(83.57% 0.0646 300.97)",
-          "oklch(95.00% 0.0646 300.97)"
+          "oklch(15.00% 0.0083 301.35)",
+          "oklch(26.43% 0.0083 301.35)",
+          "oklch(37.86% 0.0083 301.35)",
+          "oklch(49.29% 0.0083 301.35)",
+          "oklch(60.71% 0.0083 301.35)",
+          "oklch(72.14% 0.0083 301.35)",
+          "oklch(83.57% 0.0083 301.35)",
+          "oklch(95.00% 0.0083 301.35)"
         ]
       },
-      "selection-foreground": {
-        "role": "neutral",
-        "displayName": "Selection Foreground",
+      "home-foreground": {
+        "role": "primary",
+        "displayName": "Home Foreground",
         "tonalRamp": [
-          "oklch(15.00% 0.0928 298.98)",
-          "oklch(26.43% 0.0928 298.98)",
-          "oklch(37.86% 0.0928 298.98)",
-          "oklch(49.29% 0.0928 298.98)",
-          "oklch(60.71% 0.0928 298.98)",
-          "oklch(72.14% 0.0928 298.98)",
-          "oklch(83.57% 0.0928 298.98)",
-          "oklch(95.00% 0.0928 298.98)"
+          "oklch(15.00% 0.0056 285.98)",
+          "oklch(26.43% 0.0056 285.98)",
+          "oklch(37.86% 0.0056 285.98)",
+          "oklch(49.29% 0.0056 285.98)",
+          "oklch(60.71% 0.0056 285.98)",
+          "oklch(72.14% 0.0056 285.98)",
+          "oklch(83.57% 0.0056 285.98)",
+          "oklch(95.00% 0.0056 285.98)"
         ]
       },
-      "navigation": {
+      "home-body": {
         "role": "neutral",
-        "displayName": "Navigation"
+        "displayName": "Home Body",
+        "tonalRamp": [
+          "oklch(15.00% 0.0094 286.06)",
+          "oklch(26.43% 0.0094 286.06)",
+          "oklch(37.86% 0.0094 286.06)",
+          "oklch(49.29% 0.0094 286.06)",
+          "oklch(60.71% 0.0094 286.06)",
+          "oklch(72.14% 0.0094 286.06)",
+          "oklch(83.57% 0.0094 286.06)",
+          "oklch(95.00% 0.0094 286.06)"
+        ]
       },
-      "navigation-foreground": {
+      "home-action-hover": {
         "role": "neutral",
-        "displayName": "Navigation Foreground",
+        "displayName": "Home Action Hover",
+        "tonalRamp": [
+          "oklch(15.00% 0.0086 285.93)",
+          "oklch(26.43% 0.0086 285.93)",
+          "oklch(37.86% 0.0086 285.93)",
+          "oklch(49.29% 0.0086 285.93)",
+          "oklch(60.71% 0.0086 285.93)",
+          "oklch(72.14% 0.0086 285.93)",
+          "oklch(83.57% 0.0086 285.93)",
+          "oklch(95.00% 0.0086 285.93)"
+        ]
+      },
+      "home-border": {
+        "role": "neutral",
+        "displayName": "Home Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0054 286.30)",
+          "oklch(26.43% 0.0054 286.30)",
+          "oklch(37.86% 0.0054 286.30)",
+          "oklch(49.29% 0.0054 286.30)",
+          "oklch(60.71% 0.0054 286.30)",
+          "oklch(72.14% 0.0054 286.30)",
+          "oklch(83.57% 0.0054 286.30)",
+          "oklch(95.00% 0.0054 286.30)"
+        ]
+      },
+      "home-soft": {
+        "role": "neutral",
+        "displayName": "Home Soft",
+        "tonalRamp": [
+          "oklch(15.00% 0.0027 286.35)",
+          "oklch(26.43% 0.0027 286.35)",
+          "oklch(37.86% 0.0027 286.35)",
+          "oklch(49.29% 0.0027 286.35)",
+          "oklch(60.71% 0.0027 286.35)",
+          "oklch(72.14% 0.0027 286.35)",
+          "oklch(83.57% 0.0027 286.35)",
+          "oklch(95.00% 0.0027 286.35)"
+        ]
+      },
+      "home-selection": {
+        "role": "neutral",
+        "displayName": "Home Selection",
+        "tonalRamp": [
+          "oklch(15.00% 0.0040 286.32)",
+          "oklch(26.43% 0.0040 286.32)",
+          "oklch(37.86% 0.0040 286.32)",
+          "oklch(49.29% 0.0040 286.32)",
+          "oklch(60.71% 0.0040 286.32)",
+          "oklch(72.14% 0.0040 286.32)",
+          "oklch(83.57% 0.0040 286.32)",
+          "oklch(95.00% 0.0040 286.32)"
+        ]
+      },
+      "home-selection-foreground": {
+        "role": "neutral",
+        "displayName": "Home Selection Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.0079 285.69)",
+          "oklch(26.43% 0.0079 285.69)",
+          "oklch(37.86% 0.0079 285.69)",
+          "oklch(49.29% 0.0079 285.69)",
+          "oklch(60.71% 0.0079 285.69)",
+          "oklch(72.14% 0.0079 285.69)",
+          "oklch(83.57% 0.0079 285.69)",
+          "oklch(95.00% 0.0079 285.69)"
+        ]
+      },
+      "header-foreground": {
+        "role": "neutral",
+        "displayName": "Header Foreground",
         "tonalRamp": [
           "oklch(15.00% 0.0000 0.00)",
           "oklch(26.43% 0.0000 0.00)",
@@ -148,345 +228,303 @@
           "oklch(95.00% 0.0000 0.00)"
         ]
       },
-      "legacy-canvas": {
+      "header-muted": {
         "role": "neutral",
-        "displayName": "Legacy Canvas",
+        "displayName": "Header Muted",
         "tonalRamp": [
-          "oklch(15.00% 0.0045 258.32)",
-          "oklch(26.43% 0.0045 258.32)",
-          "oklch(37.86% 0.0045 258.32)",
-          "oklch(49.29% 0.0045 258.32)",
-          "oklch(60.71% 0.0045 258.32)",
-          "oklch(72.14% 0.0045 258.32)",
-          "oklch(83.57% 0.0045 258.32)",
-          "oklch(95.00% 0.0045 258.32)"
+          "oklch(15.00% 0.0093 286.07)",
+          "oklch(26.43% 0.0093 286.07)",
+          "oklch(37.86% 0.0093 286.07)",
+          "oklch(49.29% 0.0093 286.07)",
+          "oklch(60.71% 0.0093 286.07)",
+          "oklch(72.14% 0.0093 286.07)",
+          "oklch(83.57% 0.0093 286.07)",
+          "oklch(95.00% 0.0093 286.07)"
         ]
       },
-      "legacy-background": {
-        "role": "neutral",
-        "displayName": "Legacy Background",
-        "tonalRamp": [
-          "oklch(15.00% 0.0000 0.00)",
-          "oklch(26.43% 0.0000 0.00)",
-          "oklch(37.86% 0.0000 0.00)",
-          "oklch(49.29% 0.0000 0.00)",
-          "oklch(60.71% 0.0000 0.00)",
-          "oklch(72.14% 0.0000 0.00)",
-          "oklch(83.57% 0.0000 0.00)",
-          "oklch(95.00% 0.0000 0.00)"
-        ]
-      },
-      "legacy-foreground": {
-        "role": "neutral",
-        "displayName": "Legacy Foreground",
-        "tonalRamp": [
-          "oklch(15.00% 0.0381 242.27)",
-          "oklch(26.43% 0.0381 242.27)",
-          "oklch(37.86% 0.0381 242.27)",
-          "oklch(49.29% 0.0381 242.27)",
-          "oklch(60.71% 0.0381 242.27)",
-          "oklch(72.14% 0.0381 242.27)",
-          "oklch(83.57% 0.0381 242.27)",
-          "oklch(95.00% 0.0381 242.27)"
-        ]
-      },
-      "legacy-secondary": {
-        "role": "neutral",
-        "displayName": "Legacy Secondary",
-        "tonalRamp": [
-          "oklch(15.00% 0.0355 242.62)",
-          "oklch(26.43% 0.0355 242.62)",
-          "oklch(37.86% 0.0355 242.62)",
-          "oklch(49.29% 0.0355 242.62)",
-          "oklch(60.71% 0.0355 242.62)",
-          "oklch(72.14% 0.0355 242.62)",
-          "oklch(83.57% 0.0355 242.62)",
-          "oklch(95.00% 0.0355 242.62)"
-        ]
-      },
-      "legacy-subtle": {
-        "role": "neutral",
-        "displayName": "Legacy Subtle",
-        "tonalRamp": [
-          "oklch(15.00% 0.0311 245.04)",
-          "oklch(26.43% 0.0311 245.04)",
-          "oklch(37.86% 0.0311 245.04)",
-          "oklch(49.29% 0.0311 245.04)",
-          "oklch(60.71% 0.0311 245.04)",
-          "oklch(72.14% 0.0311 245.04)",
-          "oklch(83.57% 0.0311 245.04)",
-          "oklch(95.00% 0.0311 245.04)"
-        ]
-      },
-      "legacy-muted": {
-        "role": "neutral",
-        "displayName": "Legacy Muted",
-        "tonalRamp": [
-          "oklch(15.00% 0.0076 241.66)",
-          "oklch(26.43% 0.0076 241.66)",
-          "oklch(37.86% 0.0076 241.66)",
-          "oklch(49.29% 0.0076 241.66)",
-          "oklch(60.71% 0.0076 241.66)",
-          "oklch(72.14% 0.0076 241.66)",
-          "oklch(83.57% 0.0076 241.66)",
-          "oklch(95.00% 0.0076 241.66)"
-        ]
-      },
-      "legacy-border": {
-        "role": "neutral",
-        "displayName": "Legacy Border",
-        "tonalRamp": [
-          "oklch(15.00% 0.0146 244.73)",
-          "oklch(26.43% 0.0146 244.73)",
-          "oklch(37.86% 0.0146 244.73)",
-          "oklch(49.29% 0.0146 244.73)",
-          "oklch(60.71% 0.0146 244.73)",
-          "oklch(72.14% 0.0146 244.73)",
-          "oklch(83.57% 0.0146 244.73)",
-          "oklch(95.00% 0.0146 244.73)"
-        ]
-      },
-      "legacy-focus": {
+      "header-focus": {
         "role": "primary",
-        "displayName": "Legacy Focus",
+        "displayName": "Header Focus",
         "tonalRamp": [
-          "oklch(15.00% 0.1236 247.29)",
-          "oklch(26.43% 0.1236 247.29)",
-          "oklch(37.86% 0.1236 247.29)",
-          "oklch(49.29% 0.1236 247.29)",
-          "oklch(60.71% 0.1236 247.29)",
-          "oklch(72.14% 0.1236 247.29)",
-          "oklch(83.57% 0.1236 247.29)",
-          "oklch(95.00% 0.1236 247.29)"
+          "oklch(15.00% 0.0071 285.98)",
+          "oklch(26.43% 0.0071 285.98)",
+          "oklch(37.86% 0.0071 285.98)",
+          "oklch(49.29% 0.0071 285.98)",
+          "oklch(60.71% 0.0071 285.98)",
+          "oklch(72.14% 0.0071 285.98)",
+          "oklch(83.57% 0.0071 285.98)",
+          "oklch(95.00% 0.0071 285.98)"
         ]
       },
-      "legacy-sky": {
-        "role": "secondary",
-        "displayName": "Legacy Sky",
-        "tonalRamp": [
-          "oklch(15.00% 0.0184 237.77)",
-          "oklch(26.43% 0.0184 237.77)",
-          "oklch(37.86% 0.0184 237.77)",
-          "oklch(49.29% 0.0184 237.77)",
-          "oklch(60.71% 0.0184 237.77)",
-          "oklch(72.14% 0.0184 237.77)",
-          "oklch(83.57% 0.0184 237.77)",
-          "oklch(95.00% 0.0184 237.77)"
-        ]
-      },
-      "legacy-sage": {
-        "role": "secondary",
-        "displayName": "Legacy Sage",
-        "tonalRamp": [
-          "oklch(15.00% 0.0125 164.80)",
-          "oklch(26.43% 0.0125 164.80)",
-          "oklch(37.86% 0.0125 164.80)",
-          "oklch(49.29% 0.0125 164.80)",
-          "oklch(60.71% 0.0125 164.80)",
-          "oklch(72.14% 0.0125 164.80)",
-          "oklch(83.57% 0.0125 164.80)",
-          "oklch(95.00% 0.0125 164.80)"
-        ]
-      },
-      "legacy-warm": {
-        "role": "secondary",
-        "displayName": "Legacy Warm",
-        "tonalRamp": [
-          "oklch(15.00% 0.0203 62.87)",
-          "oklch(26.43% 0.0203 62.87)",
-          "oklch(37.86% 0.0203 62.87)",
-          "oklch(49.29% 0.0203 62.87)",
-          "oklch(60.71% 0.0203 62.87)",
-          "oklch(72.14% 0.0203 62.87)",
-          "oklch(83.57% 0.0203 62.87)",
-          "oklch(95.00% 0.0203 62.87)"
-        ]
-      },
-      "legacy-selection": {
+      "glass-header-high": {
         "role": "neutral",
-        "displayName": "Legacy Selection",
+        "displayName": "Glass Header High",
         "tonalRamp": [
-          "oklch(15.00% 0.0315 243.71)",
-          "oklch(26.43% 0.0315 243.71)",
-          "oklch(37.86% 0.0315 243.71)",
-          "oklch(49.29% 0.0315 243.71)",
-          "oklch(60.71% 0.0315 243.71)",
-          "oklch(72.14% 0.0315 243.71)",
-          "oklch(83.57% 0.0315 243.71)",
-          "oklch(95.00% 0.0315 243.71)"
+          "oklch(15.00% 0.0000 0.00 / .86)",
+          "oklch(26.43% 0.0000 0.00 / .86)",
+          "oklch(37.86% 0.0000 0.00 / .86)",
+          "oklch(49.29% 0.0000 0.00 / .86)",
+          "oklch(60.71% 0.0000 0.00 / .86)",
+          "oklch(72.14% 0.0000 0.00 / .86)",
+          "oklch(83.57% 0.0000 0.00 / .86)",
+          "oklch(95.00% 0.0000 0.00 / .86)"
         ]
       },
-      "legacy-dark-canvas": {
+      "glass-header-low": {
         "role": "neutral",
-        "displayName": "Legacy Dark Canvas",
+        "displayName": "Glass Header Low",
         "tonalRamp": [
-          "oklch(15.00% 0.0246 251.74)",
-          "oklch(26.43% 0.0246 251.74)",
-          "oklch(37.86% 0.0246 251.74)",
-          "oklch(49.29% 0.0246 251.74)",
-          "oklch(60.71% 0.0246 251.74)",
-          "oklch(72.14% 0.0246 251.74)",
-          "oklch(83.57% 0.0246 251.74)",
-          "oklch(95.00% 0.0246 251.74)"
+          "oklch(15.00% 0.0000 0.00 / .65)",
+          "oklch(26.43% 0.0000 0.00 / .65)",
+          "oklch(37.86% 0.0000 0.00 / .65)",
+          "oklch(49.29% 0.0000 0.00 / .65)",
+          "oklch(60.71% 0.0000 0.00 / .65)",
+          "oklch(72.14% 0.0000 0.00 / .65)",
+          "oklch(83.57% 0.0000 0.00 / .65)",
+          "oklch(95.00% 0.0000 0.00 / .65)"
         ]
       },
-      "legacy-dark-background": {
+      "glass-track": {
         "role": "neutral",
-        "displayName": "Legacy Dark Background",
+        "displayName": "Glass Track",
         "tonalRamp": [
-          "oklch(15.00% 0.0313 249.33)",
-          "oklch(26.43% 0.0313 249.33)",
-          "oklch(37.86% 0.0313 249.33)",
-          "oklch(49.29% 0.0313 249.33)",
-          "oklch(60.71% 0.0313 249.33)",
-          "oklch(72.14% 0.0313 249.33)",
-          "oklch(83.57% 0.0313 249.33)",
-          "oklch(95.00% 0.0313 249.33)"
+          "oklch(15.00% 0.0067 286.27 / .27)",
+          "oklch(26.43% 0.0067 286.27 / .27)",
+          "oklch(37.86% 0.0067 286.27 / .27)",
+          "oklch(49.29% 0.0067 286.27 / .27)",
+          "oklch(60.71% 0.0067 286.27 / .27)",
+          "oklch(72.14% 0.0067 286.27 / .27)",
+          "oklch(83.57% 0.0067 286.27 / .27)",
+          "oklch(95.00% 0.0067 286.27 / .27)"
         ]
       },
-      "legacy-dark-foreground": {
+      "glass-inactive": {
         "role": "neutral",
-        "displayName": "Legacy Dark Foreground",
+        "displayName": "Glass Inactive",
         "tonalRamp": [
-          "oklch(15.00% 0.0127 244.25)",
-          "oklch(26.43% 0.0127 244.25)",
-          "oklch(37.86% 0.0127 244.25)",
-          "oklch(49.29% 0.0127 244.25)",
-          "oklch(60.71% 0.0127 244.25)",
-          "oklch(72.14% 0.0127 244.25)",
-          "oklch(83.57% 0.0127 244.25)",
-          "oklch(95.00% 0.0127 244.25)"
+          "oklch(15.00% 0.0080 286.09)",
+          "oklch(26.43% 0.0080 286.09)",
+          "oklch(37.86% 0.0080 286.09)",
+          "oklch(49.29% 0.0080 286.09)",
+          "oklch(60.71% 0.0080 286.09)",
+          "oklch(72.14% 0.0080 286.09)",
+          "oklch(83.57% 0.0080 286.09)",
+          "oklch(95.00% 0.0080 286.09)"
         ]
       },
-      "legacy-dark-secondary": {
-        "role": "neutral",
-        "displayName": "Legacy Dark Secondary",
-        "tonalRamp": [
-          "oklch(15.00% 0.0239 246.09)",
-          "oklch(26.43% 0.0239 246.09)",
-          "oklch(37.86% 0.0239 246.09)",
-          "oklch(49.29% 0.0239 246.09)",
-          "oklch(60.71% 0.0239 246.09)",
-          "oklch(72.14% 0.0239 246.09)",
-          "oklch(83.57% 0.0239 246.09)",
-          "oklch(95.00% 0.0239 246.09)"
-        ]
-      },
-      "legacy-dark-subtle": {
-        "role": "neutral",
-        "displayName": "Legacy Dark Subtle",
-        "tonalRamp": [
-          "oklch(15.00% 0.0314 243.56)",
-          "oklch(26.43% 0.0314 243.56)",
-          "oklch(37.86% 0.0314 243.56)",
-          "oklch(49.29% 0.0314 243.56)",
-          "oklch(60.71% 0.0314 243.56)",
-          "oklch(72.14% 0.0314 243.56)",
-          "oklch(83.57% 0.0314 243.56)",
-          "oklch(95.00% 0.0314 243.56)"
-        ]
-      },
-      "legacy-dark-muted": {
-        "role": "neutral",
-        "displayName": "Legacy Dark Muted",
-        "tonalRamp": [
-          "oklch(15.00% 0.0387 245.19)",
-          "oklch(26.43% 0.0387 245.19)",
-          "oklch(37.86% 0.0387 245.19)",
-          "oklch(49.29% 0.0387 245.19)",
-          "oklch(60.71% 0.0387 245.19)",
-          "oklch(72.14% 0.0387 245.19)",
-          "oklch(83.57% 0.0387 245.19)",
-          "oklch(95.00% 0.0387 245.19)"
-        ]
-      },
-      "legacy-dark-border": {
-        "role": "neutral",
-        "displayName": "Legacy Dark Border",
-        "tonalRamp": [
-          "oklch(15.00% 0.0437 244.29)",
-          "oklch(26.43% 0.0437 244.29)",
-          "oklch(37.86% 0.0437 244.29)",
-          "oklch(49.29% 0.0437 244.29)",
-          "oklch(60.71% 0.0437 244.29)",
-          "oklch(72.14% 0.0437 244.29)",
-          "oklch(83.57% 0.0437 244.29)",
-          "oklch(95.00% 0.0437 244.29)"
-        ]
-      },
-      "legacy-dark-focus": {
+      "glass-selected": {
         "role": "primary",
-        "displayName": "Legacy Dark Focus",
+        "displayName": "Glass Selected",
         "tonalRamp": [
-          "oklch(15.00% 0.0866 234.21)",
-          "oklch(26.43% 0.0866 234.21)",
-          "oklch(37.86% 0.0866 234.21)",
-          "oklch(49.29% 0.0866 234.21)",
-          "oklch(60.71% 0.0866 234.21)",
-          "oklch(72.14% 0.0866 234.21)",
-          "oklch(83.57% 0.0866 234.21)",
-          "oklch(95.00% 0.0866 234.21)"
+          "oklch(15.00% 0.0038 286.12)",
+          "oklch(26.43% 0.0038 286.12)",
+          "oklch(37.86% 0.0038 286.12)",
+          "oklch(49.29% 0.0038 286.12)",
+          "oklch(60.71% 0.0038 286.12)",
+          "oklch(72.14% 0.0038 286.12)",
+          "oklch(83.57% 0.0038 286.12)",
+          "oklch(95.00% 0.0038 286.12)"
         ]
       },
-      "legacy-dark-sky": {
-        "role": "secondary",
-        "displayName": "Legacy Dark Sky",
-        "tonalRamp": [
-          "oklch(15.00% 0.0508 240.30)",
-          "oklch(26.43% 0.0508 240.30)",
-          "oklch(37.86% 0.0508 240.30)",
-          "oklch(49.29% 0.0508 240.30)",
-          "oklch(60.71% 0.0508 240.30)",
-          "oklch(72.14% 0.0508 240.30)",
-          "oklch(83.57% 0.0508 240.30)",
-          "oklch(95.00% 0.0508 240.30)"
-        ]
-      },
-      "legacy-dark-sage": {
-        "role": "secondary",
-        "displayName": "Legacy Dark Sage",
-        "tonalRamp": [
-          "oklch(15.00% 0.0381 174.21)",
-          "oklch(26.43% 0.0381 174.21)",
-          "oklch(37.86% 0.0381 174.21)",
-          "oklch(49.29% 0.0381 174.21)",
-          "oklch(60.71% 0.0381 174.21)",
-          "oklch(72.14% 0.0381 174.21)",
-          "oklch(83.57% 0.0381 174.21)",
-          "oklch(95.00% 0.0381 174.21)"
-        ]
-      },
-      "legacy-dark-warm": {
-        "role": "secondary",
-        "displayName": "Legacy Dark Warm",
-        "tonalRamp": [
-          "oklch(15.00% 0.0201 54.29)",
-          "oklch(26.43% 0.0201 54.29)",
-          "oklch(37.86% 0.0201 54.29)",
-          "oklch(49.29% 0.0201 54.29)",
-          "oklch(60.71% 0.0201 54.29)",
-          "oklch(72.14% 0.0201 54.29)",
-          "oklch(83.57% 0.0201 54.29)",
-          "oklch(95.00% 0.0201 54.29)"
-        ]
-      },
-      "legacy-dark-selection": {
+      "glass-lens-high": {
         "role": "neutral",
-        "displayName": "Legacy Dark Selection",
+        "displayName": "Glass Lens High",
         "tonalRamp": [
-          "oklch(15.00% 0.0605 239.41)",
-          "oklch(26.43% 0.0605 239.41)",
-          "oklch(37.86% 0.0605 239.41)",
-          "oklch(49.29% 0.0605 239.41)",
-          "oklch(60.71% 0.0605 239.41)",
-          "oklch(72.14% 0.0605 239.41)",
-          "oklch(83.57% 0.0605 239.41)",
-          "oklch(95.00% 0.0605 239.41)"
+          "oklch(15.00% 0.0000 0.00 / .76)",
+          "oklch(26.43% 0.0000 0.00 / .76)",
+          "oklch(37.86% 0.0000 0.00 / .76)",
+          "oklch(49.29% 0.0000 0.00 / .76)",
+          "oklch(60.71% 0.0000 0.00 / .76)",
+          "oklch(72.14% 0.0000 0.00 / .76)",
+          "oklch(83.57% 0.0000 0.00 / .76)",
+          "oklch(95.00% 0.0000 0.00 / .76)"
         ]
       },
-      "legacy-success": {
+      "glass-lens-low": {
+        "role": "neutral",
+        "displayName": "Glass Lens Low",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 0.00 / .47)",
+          "oklch(26.43% 0.0000 0.00 / .47)",
+          "oklch(37.86% 0.0000 0.00 / .47)",
+          "oklch(49.29% 0.0000 0.00 / .47)",
+          "oklch(60.71% 0.0000 0.00 / .47)",
+          "oklch(72.14% 0.0000 0.00 / .47)",
+          "oklch(83.57% 0.0000 0.00 / .47)",
+          "oklch(95.00% 0.0000 0.00 / .47)"
+        ]
+      },
+      "mist-left": {
+        "role": "secondary",
+        "displayName": "Mist Left",
+        "tonalRamp": [
+          "oklch(15.00% 0.0657 301.87)",
+          "oklch(26.43% 0.0657 301.87)",
+          "oklch(37.86% 0.0657 301.87)",
+          "oklch(49.29% 0.0657 301.87)",
+          "oklch(60.71% 0.0657 301.87)",
+          "oklch(72.14% 0.0657 301.87)",
+          "oklch(83.57% 0.0657 301.87)",
+          "oklch(95.00% 0.0657 301.87)"
+        ]
+      },
+      "mist-right": {
+        "role": "secondary",
+        "displayName": "Mist Right",
+        "tonalRamp": [
+          "oklch(15.00% 0.0586 304.03)",
+          "oklch(26.43% 0.0586 304.03)",
+          "oklch(37.86% 0.0586 304.03)",
+          "oklch(49.29% 0.0586 304.03)",
+          "oklch(60.71% 0.0586 304.03)",
+          "oklch(72.14% 0.0586 304.03)",
+          "oklch(83.57% 0.0586 304.03)",
+          "oklch(95.00% 0.0586 304.03)"
+        ]
+      },
+      "mist-soft": {
+        "role": "secondary",
+        "displayName": "Mist Soft",
+        "tonalRamp": [
+          "oklch(15.00% 0.0277 301.75)",
+          "oklch(26.43% 0.0277 301.75)",
+          "oklch(37.86% 0.0277 301.75)",
+          "oklch(49.29% 0.0277 301.75)",
+          "oklch(60.71% 0.0277 301.75)",
+          "oklch(72.14% 0.0277 301.75)",
+          "oklch(83.57% 0.0277 301.75)",
+          "oklch(95.00% 0.0277 301.75)"
+        ]
+      },
+      "dark-canvas": {
+        "role": "neutral",
+        "displayName": "Dark Canvas",
+        "tonalRamp": [
+          "oklch(15.00% 0.0164 302.04)",
+          "oklch(26.43% 0.0164 302.04)",
+          "oklch(37.86% 0.0164 302.04)",
+          "oklch(49.29% 0.0164 302.04)",
+          "oklch(60.71% 0.0164 302.04)",
+          "oklch(72.14% 0.0164 302.04)",
+          "oklch(83.57% 0.0164 302.04)",
+          "oklch(95.00% 0.0164 302.04)"
+        ]
+      },
+      "dark-background": {
+        "role": "neutral",
+        "displayName": "Dark Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.0177 305.29)",
+          "oklch(26.43% 0.0177 305.29)",
+          "oklch(37.86% 0.0177 305.29)",
+          "oklch(49.29% 0.0177 305.29)",
+          "oklch(60.71% 0.0177 305.29)",
+          "oklch(72.14% 0.0177 305.29)",
+          "oklch(83.57% 0.0177 305.29)",
+          "oklch(95.00% 0.0177 305.29)"
+        ]
+      },
+      "dark-foreground": {
+        "role": "neutral",
+        "displayName": "Dark Foreground",
+        "tonalRamp": [
+          "oklch(15.00% 0.0085 308.36)",
+          "oklch(26.43% 0.0085 308.36)",
+          "oklch(37.86% 0.0085 308.36)",
+          "oklch(49.29% 0.0085 308.36)",
+          "oklch(60.71% 0.0085 308.36)",
+          "oklch(72.14% 0.0085 308.36)",
+          "oklch(83.57% 0.0085 308.36)",
+          "oklch(95.00% 0.0085 308.36)"
+        ]
+      },
+      "dark-secondary": {
+        "role": "neutral",
+        "displayName": "Dark Secondary",
+        "tonalRamp": [
+          "oklch(15.00% 0.0207 308.19)",
+          "oklch(26.43% 0.0207 308.19)",
+          "oklch(37.86% 0.0207 308.19)",
+          "oklch(49.29% 0.0207 308.19)",
+          "oklch(60.71% 0.0207 308.19)",
+          "oklch(72.14% 0.0207 308.19)",
+          "oklch(83.57% 0.0207 308.19)",
+          "oklch(95.00% 0.0207 308.19)"
+        ]
+      },
+      "dark-subtle": {
+        "role": "neutral",
+        "displayName": "Dark Subtle",
+        "tonalRamp": [
+          "oklch(15.00% 0.0289 306.92)",
+          "oklch(26.43% 0.0289 306.92)",
+          "oklch(37.86% 0.0289 306.92)",
+          "oklch(49.29% 0.0289 306.92)",
+          "oklch(60.71% 0.0289 306.92)",
+          "oklch(72.14% 0.0289 306.92)",
+          "oklch(83.57% 0.0289 306.92)",
+          "oklch(95.00% 0.0289 306.92)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.0207 305.74)",
+          "oklch(26.43% 0.0207 305.74)",
+          "oklch(37.86% 0.0207 305.74)",
+          "oklch(49.29% 0.0207 305.74)",
+          "oklch(60.71% 0.0207 305.74)",
+          "oklch(72.14% 0.0207 305.74)",
+          "oklch(83.57% 0.0207 305.74)",
+          "oklch(95.00% 0.0207 305.74)"
+        ]
+      },
+      "dark-border": {
+        "role": "neutral",
+        "displayName": "Dark Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0325 307.48)",
+          "oklch(26.43% 0.0325 307.48)",
+          "oklch(37.86% 0.0325 307.48)",
+          "oklch(49.29% 0.0325 307.48)",
+          "oklch(60.71% 0.0325 307.48)",
+          "oklch(72.14% 0.0325 307.48)",
+          "oklch(83.57% 0.0325 307.48)",
+          "oklch(95.00% 0.0325 307.48)"
+        ]
+      },
+      "dark-focus": {
+        "role": "neutral",
+        "displayName": "Dark Focus",
+        "tonalRamp": [
+          "oklch(15.00% 0.0216 306.82)",
+          "oklch(26.43% 0.0216 306.82)",
+          "oklch(37.86% 0.0216 306.82)",
+          "oklch(49.29% 0.0216 306.82)",
+          "oklch(60.71% 0.0216 306.82)",
+          "oklch(72.14% 0.0216 306.82)",
+          "oklch(83.57% 0.0216 306.82)",
+          "oklch(95.00% 0.0216 306.82)"
+        ]
+      },
+      "dark-selection": {
+        "role": "neutral",
+        "displayName": "Dark Selection",
+        "tonalRamp": [
+          "oklch(15.00% 0.0396 304.53)",
+          "oklch(26.43% 0.0396 304.53)",
+          "oklch(37.86% 0.0396 304.53)",
+          "oklch(49.29% 0.0396 304.53)",
+          "oklch(60.71% 0.0396 304.53)",
+          "oklch(72.14% 0.0396 304.53)",
+          "oklch(83.57% 0.0396 304.53)",
+          "oklch(95.00% 0.0396 304.53)"
+        ]
+      },
+      "success": {
         "role": "primary",
-        "displayName": "Legacy Success",
+        "displayName": "Success",
         "tonalRamp": [
           "oklch(15.00% 0.0884 155.30)",
           "oklch(26.43% 0.0884 155.30)",
@@ -498,9 +536,9 @@
           "oklch(95.00% 0.0884 155.30)"
         ]
       },
-      "legacy-error": {
+      "error": {
         "role": "primary",
-        "displayName": "Legacy Error",
+        "displayName": "Error",
         "tonalRamp": [
           "oklch(15.00% 0.1821 29.51)",
           "oklch(26.43% 0.1821 29.51)",
@@ -512,9 +550,9 @@
           "oklch(95.00% 0.1821 29.51)"
         ]
       },
-      "legacy-dark-success": {
+      "dark-success": {
         "role": "primary",
-        "displayName": "Legacy Dark Success",
+        "displayName": "Dark Success",
         "tonalRamp": [
           "oklch(15.00% 0.1082 155.46)",
           "oklch(26.43% 0.1082 155.46)",
@@ -526,9 +564,9 @@
           "oklch(95.00% 0.1082 155.46)"
         ]
       },
-      "legacy-dark-error": {
+      "dark-error": {
         "role": "primary",
-        "displayName": "Legacy Dark Error",
+        "displayName": "Dark Error",
         "tonalRamp": [
           "oklch(15.00% 0.0891 26.76)",
           "oklch(26.43% 0.0891 26.76)",
@@ -543,258 +581,314 @@
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Artistic Chinese display",
-        "purpose": "Licensed ZCOOL XiaoWei for homepage headings."
+        "displayName": "Artistic display",
+        "purpose": "Licensed ZCOOL XiaoWei homepage titles."
       },
       "wordmark": {
         "displayName": "IAVSE wordmark",
-        "purpose": "Licensed Cormorant Garamond for the brand and English hero."
+        "purpose": "Licensed Cormorant Garamond brand and English hero."
       },
       "body": {
-        "displayName": "Readable body",
-        "purpose": "Licensed Geist body with system and CJK fallback."
+        "displayName": "Functional body",
+        "purpose": "Readable Geist and system/CJK fallback in existing workflows."
       },
-      "legacy-application-body": {
-        "displayName": "Existing application body",
-        "purpose": "Functional-page scope pending migration."
+      "glass-label": {
+        "displayName": "Measured switch label",
+        "purpose": "The actual label boxes drive the inert clipped text layer."
       }
     },
     "shadows": [
       {
-        "name": "homepage-card-rest",
-        "value": "0 14px 38px -10px rgb(77 43 125 / .14)",
-        "purpose": "Homepage floating white cards."
+        "name": "home-card-rest",
+        "value": "0 14px 38px -10px rgb(32 32 35 / .10)",
+        "purpose": "Homepage floating white card."
       },
       {
-        "name": "homepage-card-hover",
-        "value": "0 27px 55px -12px rgb(77 43 125 / .23)",
+        "name": "home-card-hover",
+        "value": "0 27px 55px -12px rgb(32 32 35 / .16)",
         "purpose": "Fine-pointer homepage card hover."
       },
       {
-        "name": "homepage-primary-rest",
-        "value": "0 9px 24px -10px rgb(116 70 217 / .6)",
-        "purpose": "Purple hero action."
+        "name": "application-card-rest",
+        "value": "0 14px 38px -16px rgb(65 43 92 / .16)",
+        "purpose": "Shared functional cards."
       },
       {
-        "name": "homepage-primary-hover",
-        "value": "0 13px 28px -10px rgb(116 70 217 / .65)",
-        "purpose": "Purple action hover."
+        "name": "application-card-hover",
+        "value": "0 23px 48px -19px rgb(65 43 92 / .24)",
+        "purpose": "Shared resource/design/Skill hover."
       },
       {
-        "name": "homepage-secondary-rest",
-        "value": "0 6px 20px -9px rgb(77 43 125 / .22)",
-        "purpose": "White hero action."
+        "name": "application-control",
+        "value": "0 5px 14px -7px rgb(29 22 40 / .2)",
+        "purpose": "Functional controls and selected surfaces."
       },
       {
-        "name": "homepage-secondary-hover",
-        "value": "0 10px 25px -10px rgb(77 43 125 / .26)",
-        "purpose": "White action hover."
+        "name": "application-primary",
+        "value": "0 7px 17px -10px rgb(30 22 41 / .48)",
+        "purpose": "Black functional primary action."
       },
       {
-        "name": "homepage-navigation",
-        "value": "0 7px 25px -12px rgb(0 0 0 / .12), inset 0 1px 0 rgb(255 255 255 / .6)",
-        "purpose": "Fine header edge; background stays transparent and unblurred."
+        "name": "header",
+        "value": "0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff",
+        "purpose": "Frosted shared header edge."
       },
       {
-        "name": "homepage-selected-filter",
-        "value": "0 4px 15px -6px rgb(77 43 125 / .2)",
-        "purpose": "Selected community filter."
+        "name": "lens",
+        "value": "0 3px 11px rgb(24 24 30 / .1),inset 0 1px 1px rgb(255 255 255 / .96),inset 0 -1px 2px rgb(40 40 48 / .05)",
+        "purpose": "Travelling lens."
       },
       {
-        "name": "homepage-account-panel",
-        "value": "0 14px 40px rgb(40 30 55 / .15)",
-        "purpose": "Separate white account dropdown."
+        "name": "account-panel",
+        "value": "0 16px 44px rgb(25 25 35 / .16)",
+        "purpose": "Frosted actual account menu."
       },
       {
-        "name": "legacy-card-rest",
-        "value": "0 3px 12px -9px #173c5f36",
-        "purpose": "Existing functional-page scope."
+        "name": "mobile-menu",
+        "value": "0 14px 34px -8px rgb(25 25 35 / .16)",
+        "purpose": "Shared mobile navigation."
       },
       {
-        "name": "legacy-dialog",
-        "value": "0 16px 48px -24px #0005",
-        "purpose": "Existing functional dialogs and search panels."
+        "name": "dark-card-rest",
+        "value": "0 14px 38px -16px rgb(0 0 0 / .48)",
+        "purpose": "Dark functional cards."
+      },
+      {
+        "name": "dark-card-hover",
+        "value": "0 23px 48px -19px rgb(0 0 0 / .6)",
+        "purpose": "Dark functional card hover."
+      },
+      {
+        "name": "dark-control",
+        "value": "0 5px 14px -7px rgb(0 0 0 / .5)",
+        "purpose": "Dark functional controls."
       }
     ],
     "motion": [
       {
-        "name": "homepage-reveal",
-        "value": "opacity 0 → 1; translateY 24px → 0; 650ms; cubic-bezier(.22,1,.36,1)",
-        "purpose": "Once on first intersection; content has no permanent hidden state."
+        "name": "lens-travel",
+        "value": "min(540,390 + distance × .45)ms; ease-out 1-(1-progress)^3",
+        "purpose": "Measured x/y/width/height animation; direct under reduced motion."
       },
       {
-        "name": "homepage-reveal-threshold",
-        "value": "0.1",
-        "purpose": "Viewport intersection threshold."
+        "name": "lens-magnification",
+        "value": "zoom ≤1.15 during travel; settles at 1",
+        "purpose": "Clipped inert DOM label copies with counter-translation; not physical refraction."
       },
       {
-        "name": "homepage-stagger",
+        "name": "lens-intent",
+        "value": "1400ms maximum local link intent",
+        "purpose": "Immediate visual response while aria-current keeps actual route truth."
+      },
+      {
+        "name": "header-glass",
+        "value": "blur(24px) saturate(1.12)",
+        "purpose": "White alpha gradient; readable opaque fallback when blur unsupported."
+      },
+      {
+        "name": "lens-glass",
+        "value": "blur(7px) saturate(1.1)",
+        "purpose": "Smaller lens with white edge and local text copies."
+      },
+      {
+        "name": "home-reveal",
+        "value": "opacity 0→1; y24px→0; 650ms; threshold .1; cubic-bezier(.22,1,.36,1)",
+        "purpose": "Once on first intersection; keyboard focus reveals immediately."
+      },
+      {
+        "name": "application-reveal",
+        "value": "opacity 0→1; y12px→0; 550ms; threshold .12; root margin 0px 0px -6% 0px",
+        "purpose": "Existing operating-page entry with authored/editable content exclusions."
+      },
+      {
+        "name": "template-fade",
+        "value": "y12px→0; 800ms",
+        "purpose": "Retained template FadeIn within existing layout."
+      },
+      {
+        "name": "reveal-stagger",
         "value": "70ms per observer-batch index; cap 210ms",
-        "purpose": "Bounded homepage entry; focus cancels pending reveal."
+        "purpose": "Bounded reveal for homepage and operating content."
       },
       {
-        "name": "homepage-card-hover",
+        "name": "home-hover",
         "value": "translateY(-6px); 260ms; cubic-bezier(.2,.8,.2,1)",
-        "purpose": "Fine-hover pointers; disabled with reduced motion."
+        "purpose": "Fine-pointer cards; reduced motion disables transforms."
       },
       {
-        "name": "homepage-cover-hover",
-        "value": "scale(1.025); 350ms",
-        "purpose": "Feature image hover; transform disabled with reduced motion."
+        "name": "application-hover",
+        "value": "translateY(-4px); 240ms ease",
+        "purpose": "Resource/design/Skill card elevation."
       },
       {
-        "name": "homepage-action",
-        "value": "180ms; hover translateY(-2px); active scale(.98)",
-        "purpose": "Primary and secondary hero links; transforms disabled with reduced motion."
+        "name": "mist",
+        "value": "uTime × .12; independently anchored left/right soft fields",
+        "purpose": "White center/top clearance; not a physical fluid simulation."
       },
       {
-        "name": "homepage-pointer-highlight",
-        "value": "230px radial field; rgb(177 139 241 / .11); transparent 72%; opacity 250ms",
-        "purpose": "Card-local fine-pointer tracking, skipped under reduced motion."
-      },
-      {
-        "name": "homepage-mist",
-        "value": "uTime × 0.065; both sides soft; white center and top clearance",
-        "purpose": "User-selected slow mist; no physical fluid simulation. Final spatial implementation is recorded in the background note."
-      },
-      {
-        "name": "homepage-background-lifecycle",
-        "value": "pause offscreen/hidden; static reduced motion; DPR min(devicePixelRatio,1.5) × .65",
-        "purpose": "Low-power WebGL; static CSS fallback on failure/context loss; resources released on unmount."
+        "name": "background-lifecycle",
+        "value": "pause offscreen/hidden; static reduced motion; min(DPR,1.5) × .65",
+        "purpose": "Low-power WebGL; two-sided static CSS fallback on failure/context loss."
       }
     ],
     "breakpoints": [
       {
-        "name": "homepage-narrow-max",
+        "name": "narrow-max",
         "value": "360px"
       },
       {
-        "name": "homepage-mobile-max",
+        "name": "small-max",
+        "value": "480px"
+      },
+      {
+        "name": "home-mobile-max",
         "value": "650px"
       },
       {
-        "name": "homepage-intermediate-max",
+        "name": "application-mobile-max",
+        "value": "767px"
+      },
+      {
+        "name": "header-mobile-max",
+        "value": "820px"
+      },
+      {
+        "name": "intermediate-max",
         "value": "900px"
       },
       {
-        "name": "homepage-wide-min",
-        "value": "1500px"
+        "name": "reader-admin-intermediate-max",
+        "value": "1100px"
       },
       {
-        "name": "legacy-medium",
-        "value": "768px"
+        "name": "wide-min",
+        "value": "1500px"
       }
     ]
   },
   "components": [
     {
-      "name": "Homepage primary action",
+      "name": "Functional primary action",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The implemented hero action opens the community.",
-      "html": "<a class=\"ds-primary\" href=\"/community\">进入社区<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
-      "css": ".ds-primary{font:500 15px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:11px 23px;border:0;border-radius:12px;text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s;background:var(--iv-purple,#7446d9);color:#fff;box-shadow:0 9px 24px -10px rgb(116 70 217 / .6)}.ds-primary:hover{background:var(--iv-purple-deep,#6433c7);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(116 70 217 / .65)}.ds-primary:active{transform:scale(.98)}.ds-primary:focus-visible{outline:3px solid var(--iv-purple,#7446d9);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}.ds-primary:hover,.ds-primary:active{transform:none}}"
+      "description": "Shared light-theme black action; dark pages invert the neutral roles.",
+      "html": "<button class=\"ds-primary\" type=\"button\">保存</button>",
+      "css": ".ds-primary{min-height:44px;padding:10px 16px;border:1px solid var(--iavse-border,#e8e5eb);border-radius:12px;font:500 14px/1.45 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);text-decoration:none;cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms,box-shadow 180ms;background:var(--iavse-foreground,#19171c);color:var(--iavse-background,#fff);border-color:transparent;box-shadow:0 7px 17px -10px rgb(30 22 41 / .48)}.ds-primary:hover:not(:disabled){background:color-mix(in srgb,var(--iavse-foreground,#19171c) 85%,var(--iavse-background,#fff));box-shadow:0 9px 22px -11px rgb(37 26 49 / .27)}.ds-primary:focus-visible{outline:2px solid var(--iavse-focus,#353039);outline-offset:4px}.ds-primary:disabled{opacity:.48;box-shadow:none}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
     },
     {
-      "name": "Homepage secondary action",
+      "name": "Functional secondary action",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "The white hero action opens the resource directory.",
-      "html": "<a class=\"ds-secondary\" href=\"/resources\">发现资源</a>",
-      "css": ".ds-secondary{font:500 15px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:11px 23px;border:0;border-radius:12px;text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s;background:#fff;color:var(--iv-ink,#241c35);box-shadow:0 6px 20px -9px rgb(77 43 125 / .22)}.ds-secondary:hover{color:var(--iv-purple-deep,#6433c7);transform:translateY(-2px);box-shadow:0 10px 25px -10px rgb(77 43 125 / .26)}.ds-secondary:active{transform:scale(.98)}.ds-secondary:focus-visible{outline:3px solid var(--iv-purple,#7446d9);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}.ds-secondary:hover,.ds-secondary:active{transform:none}}"
+      "description": "White action with neutral text, fine edge and control shadow.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">取消</button>",
+      "css": ".ds-secondary{min-height:44px;padding:10px 16px;border:1px solid var(--iavse-border,#e8e5eb);border-radius:12px;font:500 14px/1.45 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);text-decoration:none;cursor:pointer;transition:color 180ms,background-color 180ms,border-color 180ms,box-shadow 180ms;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#19171c);box-shadow:0 5px 14px -7px rgb(29 22 40 / .2)}.ds-secondary:hover:not(:disabled){border-color:color-mix(in srgb,var(--iavse-foreground,#19171c) 24%,var(--iavse-border,#e8e5eb));box-shadow:0 9px 22px -11px rgb(37 26 49 / .27)}.ds-secondary:focus-visible{outline:2px solid var(--iavse-focus,#353039);outline-offset:4px}.ds-secondary:disabled{opacity:.48;box-shadow:none}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
     },
     {
-      "name": "Transparent homepage navigation",
+      "name": "Homepage primary action",
+      "kind": "button",
+      "refersTo": "home-button-primary",
+      "description": "The black hero action opens the real community route.",
+      "html": "<a class=\"ds-home-primary\" href=\"/community\">进入社区<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
+      "css": ".ds-home-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:11px 23px;border:0;border-radius:12px;background:var(--iv-action,#202023);color:#fff;box-shadow:0 9px 24px -10px rgb(32 32 35 / .22);font:500 15px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s}.ds-home-primary:hover{background:var(--iv-action-hover,#38383d);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(32 32 35 / .25)}.ds-home-primary:active{transform:scale(.98)}.ds-home-primary:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-home-primary{transition:none}.ds-home-primary:hover,.ds-home-primary:active{transform:none}}"
+    },
+    {
+      "name": "Frosted shared header",
       "kind": "nav",
       "refersTo": "navigation",
-      "description": "Uncolored transparent header; the guest destination shown here does not simulate a signed-in member.",
-      "html": "<header class=\"ds-nav\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><nav class=\"ds-links\" aria-label=\"主要导航\"><a href=\"/community\">社区</a><a href=\"/resources\">资源</a><a href=\"/blogs\">博客空间</a></nav><a class=\"ds-login\" href=\"/login\">登录</a></header>",
-      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:68px;padding:9px 13px 9px 24px;border:1px solid rgb(120 120 120 / .13);border-radius:999px;background:transparent;backdrop-filter:none;color:#242424;box-shadow:0 7px 25px -12px rgb(0 0 0 / .12),inset 0 1px 0 rgb(255 255 255 / .6);font:400 14px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-nav a{color:inherit;text-decoration:none}.ds-brand{display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-links{display:flex;gap:4px}.ds-links a{padding:8px 16px;border-radius:999px;transition:background .18s}.ds-links a:hover{background:rgb(0 0 0 / .035)}.ds-login{display:inline-flex;align-items:center;min-height:42px;padding:9px 20px;border-radius:999px;background:#242424;color:#fff!important}.ds-nav a:focus-visible{outline:3px solid var(--iv-purple,#7446d9);outline-offset:5px}@media(max-width:650px){.ds-nav{gap:9px;padding:8px 10px 8px 15px;min-height:60px}.ds-brand span{font-size:28px}.ds-links{flex-wrap:wrap}.ds-links a{padding:8px;font-size:12px}}@media(prefers-reduced-motion:reduce){.ds-links a{transition:none}}"
+      "description": "Shared white glass header and real guest destinations; no simulated member.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"/\" aria-label=\"IAVSE 首页\"><svg width=\"27\" height=\"27\" viewBox=\"0 0 28 28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m5 6 6 16h6l6-16M8 6l6 16M20 6l-6 16\"/></svg><span>IAVSE</span></a><nav class=\"ds-nav\" aria-label=\"主要导航\"><a href=\"/community\">社区</a><a href=\"/resources\" aria-current=\"page\">资源</a><a href=\"/blogs\">博客空间</a></nav><a class=\"ds-login\" href=\"/login\">登录</a></header>",
+      "css": ".ds-header{display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:70px;padding:8px 12px 8px 24px;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));color:#242424;box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-header a{color:inherit;text-decoration:none}.ds-brand{display:flex;align-items:center;gap:10px}.ds-brand span{font:600 33px/1 \"IAVSE Wordmark\",Georgia,serif;letter-spacing:-.025em}.ds-nav{display:flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27)}.ds-nav a{min-height:42px;padding:9px 16px;border-radius:999px;color:#5b5b60;font-weight:500}.ds-nav a[aria-current]{background:rgb(255 255 255 / .84);color:#202022;box-shadow:0 2px 8px rgb(25 25 30 / .07)}.ds-nav a:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-login{min-height:44px;padding:10px 21px;border:1px solid #242424;border-radius:999px;background:#242424;color:#fff!important;font-weight:500}.ds-login:hover{background:#424245}.ds-header a:focus-visible{outline:2px solid #303034;outline-offset:4px}@supports not(backdrop-filter:blur(1px)){.ds-header{background:rgb(255 255 255 / .96)}}"
     },
     {
-      "name": "Selected community filter",
-      "kind": "chip",
-      "refersTo": "filter-pill-selected",
-      "description": "The selected state of the real aria-pressed content filter.",
-      "html": "<button class=\"ds-filter\" type=\"button\" aria-pressed=\"true\">发现</button>",
-      "css": ".ds-filter{border:0;min-height:40px;padding:8px 14px;border-radius:999px;background:#fff;color:var(--iv-purple-deep,#6433c7);box-shadow:0 4px 15px -6px rgb(77 43 125 / .2);font:400 14px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:background .18s,color .18s;cursor:pointer}.ds-filter:focus-visible{outline:3px solid var(--iv-purple,#7446d9);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-filter{transition:none}}"
+      "name": "Sliding glass switch layers",
+      "kind": "custom",
+      "refersTo": "glass-switch",
+      "description": "Static rendering of the actual inert lens layers; runtime measures geometry and moves the lens with up to 1.15 local zoom.",
+      "html": "<div class=\"ds-switch\" role=\"group\" aria-label=\"社区内容类型\"><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"true\">发现</button><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"false\">作品</button><button class=\"ds-switch-item\" type=\"button\" aria-pressed=\"false\">讨论</button><div class=\"ds-lens\" aria-hidden=\"true\" inert><div class=\"ds-countertrack\"><div class=\"ds-magnification\"><span class=\"ds-copy ds-copy-1\">发现</span><span class=\"ds-copy ds-copy-2\">作品</span><span class=\"ds-copy ds-copy-3\">讨论</span></div></div></div></div>",
+      "css": ".ds-switch{--ds-lens-x:4px;--ds-lens-y:4px;--ds-lens-width:60px;--ds-lens-height:42px;--ds-lens-zoom:1;position:relative;isolation:isolate;display:inline-flex;gap:2px;padding:4px;border:1px solid rgb(50 50 55 / .06);border-radius:999px;background:rgb(230 230 235 / .27);color:#242424;font:500 14px/1.4 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);overflow:clip}.ds-switch-item,.ds-copy{display:flex;align-items:center;justify-content:center;min-width:0;width:60px;min-height:42px;padding:9px 16px;border:0;border-radius:999px;font:inherit;white-space:nowrap;box-sizing:border-box}.ds-switch-item{position:relative;z-index:1;background:transparent;color:#5b5b60;cursor:pointer;transition:color .16s,background-color .16s}.ds-switch-item[aria-pressed=true]{color:#202022}.ds-switch-item:hover{background:rgb(255 255 255 / .32);color:#202022}.ds-switch-item:focus-visible{z-index:3;outline:2px solid #303034;outline-offset:-3px}.ds-switch-item:disabled{opacity:.4;cursor:default}.ds-lens{position:absolute;z-index:2;top:0;left:0;width:var(--ds-lens-width);height:var(--ds-lens-height);overflow:clip;border:1px solid rgb(255 255 255 / .94);border-radius:999px;background:linear-gradient(135deg,rgb(255 255 255 / .76),rgb(255 255 255 / .47));box-shadow:0 3px 11px rgb(24 24 30 / .1),inset 0 1px 1px rgb(255 255 255 / .96),inset 0 -1px 2px rgb(40 40 48 / .05);backdrop-filter:blur(7px) saturate(1.1);transform:translate3d(var(--ds-lens-x),var(--ds-lens-y),0);pointer-events:none;user-select:none}.ds-countertrack{position:absolute;top:-1px;left:-1px;width:192px;height:50px;transform:translate3d(calc(-1 * var(--ds-lens-x)),calc(-1 * var(--ds-lens-y)),0)}.ds-magnification{position:absolute;inset:0;transform:scale(var(--ds-lens-zoom));transform-origin:calc(var(--ds-lens-x) + var(--ds-lens-width)/2) calc(var(--ds-lens-y) + var(--ds-lens-height)/2)}.ds-copy{position:absolute;top:4px;color:#202022;pointer-events:none}.ds-copy-1{left:4px}.ds-copy-2{left:66px}.ds-copy-3{left:128px}@media(prefers-reduced-motion:reduce){.ds-switch-item{transition:none}.ds-magnification{transform:none}}@supports not(backdrop-filter:blur(1px)){.ds-lens{background:#fff}}"
+    },
+    {
+      "name": "Functional field",
+      "kind": "input",
+      "refersTo": "application-input",
+      "description": "Existing platform field with neutral focus; does not style authored content or color swatches.",
+      "html": "<label class=\"ds-field-label\">名称<input class=\"ds-field\" type=\"text\" placeholder=\"输入名称\"/></label>",
+      "css": ".ds-field-label{display:grid;gap:8px;color:var(--iavse-secondary,#5e5965);font:400 14px/1.7 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-field{min-height:44px;padding:10px 14px;border:1px solid var(--iavse-border,#e8e5eb);border-radius:12px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#19171c);box-shadow:inset 0 1px 2px rgb(25 15 42 / .025);font:400 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-field::placeholder{color:var(--iavse-subtle,#716b78)}.ds-field:focus{border-color:var(--iavse-foreground,#19171c);outline:2px solid color-mix(in srgb,var(--iavse-foreground,#19171c) 16%,transparent);outline-offset:2px}.ds-field:focus-visible{outline:2px solid var(--iavse-focus,#353039);outline-offset:4px}"
+    },
+    {
+      "name": "Floating resource card",
+      "kind": "card",
+      "refersTo": "application-card",
+      "description": "Site-owned white resource-card surface; previews and source/license content retain authority.",
+      "html": "<article class=\"ds-resource-card\"><h3>创作时用得上的</h3><p>打开详情，查看原始来源和使用许可。</p><a href=\"/resources\">发现资源 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></article>",
+      "css": ".ds-resource-card{padding:22px;border:0;border-radius:16px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#19171c);box-shadow:0 14px 38px -16px rgb(65 43 92 / .16);font:400 14px/1.8 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform 240ms ease,box-shadow 240ms ease}.ds-resource-card h3{margin:0;font-size:20px;font-weight:550;line-height:1.5}.ds-resource-card p{color:var(--iavse-secondary,#5e5965)}.ds-resource-card a{display:inline-flex;align-items:center;gap:7px;color:var(--iavse-foreground,#19171c);text-underline-offset:5px}.ds-resource-card a:focus-visible{outline:2px solid var(--iavse-focus,#353039);outline-offset:4px}@media(hover:hover) and (pointer:fine){.ds-resource-card:hover{transform:translateY(-4px);box-shadow:0 23px 48px -19px rgb(65 43 92 / .24)}}@media(prefers-reduced-motion:reduce){.ds-resource-card{transition:none}.ds-resource-card:hover{transform:none}}"
     },
     {
       "name": "Homepage truthful empty state",
       "kind": "card",
       "refersTo": "community-card",
-      "description": "The implemented empty state preserves useful destinations without invented posts or members.",
-      "html": "<article class=\"ds-card\"><svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" aria-hidden=\"true\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/></svg><h3>第一份经验，也许就来自你。</h3><p>一个解决过的问题，一次工具的使用体验，都可以成为分享的起点。</p><a href=\"/community\">进入社区 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></article>",
-      "css": ".ds-card{position:relative;isolation:isolate;overflow:hidden;min-height:320px;padding:45px 35px;border-radius:16px;background:#fff;color:var(--iv-ink,#241c35);box-shadow:0 14px 38px -10px rgb(77 43 125 / .14);font:400 15px/1.9 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}.ds-card>svg{color:#8d6abc;margin-bottom:22px}.ds-card h3{margin:0;font-size:25px;font-weight:500}.ds-card p{max-width:35ch;margin:14px 0 0;color:var(--iv-body,#665d76)}.ds-card a{display:inline-flex;align-items:center;gap:7px;min-height:40px;margin-top:18px;color:var(--iv-purple-deep,#6433c7);text-decoration:none;font-size:14px}.ds-card a:focus-visible{outline:3px solid var(--iv-purple,#7446d9);outline-offset:5px}@media(hover:hover) and (pointer:fine){.ds-card:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(77 43 125 / .23)}}@media(prefers-reduced-motion:reduce){.ds-card{transition:none}.ds-card:hover{transform:none}}"
+      "description": "Real empty-state copy with a working destination; no fabricated activity.",
+      "html": "<article class=\"ds-empty\"><h3>第一份经验，也许就来自你。</h3><p>一个解决过的问题，一次工具的使用体验，都可以成为分享的起点。</p><a href=\"/community\">进入社区 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></article>",
+      "css": ".ds-empty{min-height:320px;padding:45px 35px;border-radius:16px;background:#fff;color:var(--iv-ink,#202023);box-shadow:0 14px 38px -10px rgb(32 32 35 / .10);font:400 15px/1.9 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}.ds-empty h3{margin:0;font-size:25px;font-weight:500}.ds-empty p{max-width:35ch;margin:14px 0 0;color:var(--iv-body,#636369)}.ds-empty a{display:inline-flex;align-items:center;gap:7px;min-height:40px;margin-top:18px;color:var(--iv-action-hover,#38383d);text-decoration:none;font-size:14px}.ds-empty a:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(hover:hover) and (pointer:fine){.ds-empty:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(32 32 35 / .16)}}@media(prefers-reduced-motion:reduce){.ds-empty{transition:none}.ds-empty:hover{transform:none}}"
     },
     {
-      "name": "Homepage resource rail",
-      "kind": "custom",
-      "refersTo": "community-card",
-      "description": "Existing resource-category destinations and source/license reminder in a floating white card.",
-      "html": "<aside class=\"ds-rail\"><h3>创作时用得上的</h3><p>让资源就在手边。</p><nav aria-label=\"资源\"><a href=\"/resources?type=designs\">UI 设计<small>界面与交互参考</small></a><a href=\"/resources?type=skills\">AI Skill<small>可复用的工作方法</small></a><a href=\"/resources?type=docs\">文档<small>知识与使用说明</small></a><a href=\"/resources?type=resources\">网站与工具<small>解决手头的小问题</small></a></nav><p class=\"ds-note\">打开详情，查看原始来源和使用许可。</p></aside>",
-      "css": ".ds-rail{padding:28px 25px 23px;border-radius:16px;background:#fff;color:var(--iv-ink,#241c35);box-shadow:0 14px 38px -10px rgb(77 43 125 / .14);font:400 13px/1.8 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-rail h3{margin:0;font-size:20px;font-weight:600}.ds-rail p{margin:7px 0 0;color:var(--iv-body,#665d76)}.ds-rail nav{margin-top:20px}.ds-rail a{display:block;min-height:77px;padding:16px 0;border-top:1px solid #f1ebf8;color:var(--iv-ink,#241c35);text-decoration:none;font-size:14px}.ds-rail small{display:block;margin-top:4px;font-size:12px;line-height:1.5;color:var(--iv-body,#665d76)}.ds-rail a:hover{color:var(--iv-purple-deep,#6433c7)}.ds-rail a:focus-visible{outline:3px solid var(--iv-purple,#7446d9);outline-offset:5px}.ds-rail .ds-note{font-size:11px;margin-top:16px;max-width:27ch}"
-    },
-    {
-      "name": "Existing functional-page field",
-      "kind": "input",
-      "refersTo": "legacy-application-input",
-      "description": "Legacy functional-page scope only; no new homepage input has been introduced.",
-      "html": "<label class=\"ds-field-label\">名称<input class=\"ds-field\" type=\"text\" placeholder=\"输入名称\"/></label>",
-      "css": ".ds-field-label{display:grid;gap:8px;color:var(--iavse-secondary,#4d6171);font:400 14px/1.6 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif)}.ds-field{min-height:44px;padding:10px 14px;border:1px solid var(--iavse-border,#dce5ed);border-radius:12px;background:var(--iavse-background,#fff);color:var(--iavse-foreground,#172b3a);font:400 14px/1.6 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:border-color 180ms,background-color 180ms}.ds-field::placeholder{color:var(--iavse-subtle,#607180)}.ds-field:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-field{transition:none}}"
-    },
-    {
-      "name": "Existing functional-page action",
-      "kind": "button",
-      "refersTo": "legacy-application-button",
-      "description": "The retained functional-page primary action, separate from homepage purple actions.",
-      "html": "<button class=\"ds-legacy-action\" type=\"button\">保存</button>",
-      "css": ".ds-legacy-action{min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:12px;background:var(--iavse-foreground,#172b3a);color:var(--iavse-background,#fff);font:500 14px/1.6 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:color 180ms,background-color 180ms;cursor:pointer}.ds-legacy-action:focus-visible{outline:2px solid var(--iavse-focus,#1266a4);outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-legacy-action{transition:none}}"
+      "name": "Neutral selected label",
+      "kind": "chip",
+      "refersTo": "filter-selected",
+      "description": "The shared selected-label color and neutral functional selection surface.",
+      "html": "<button class=\"ds-selected\" type=\"button\" aria-pressed=\"true\">全部</button>",
+      "css": ".ds-selected{min-height:38px;padding:7px 14px;border:1px solid var(--iavse-border,#e8e5eb);border-radius:999px;background:var(--iavse-muted,#f5f4f6);color:var(--iavse-foreground,#19171c);box-shadow:0 5px 14px -7px rgb(29 22 40 / .2);font:550 14px/1.5 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);cursor:pointer}.ds-selected:focus-visible{outline:2px solid var(--iavse-focus,#353039);outline-offset:4px}"
     }
   ],
   "narrative": {
-    "northStar": "Light, expressive purple-white",
-    "overview": "The user approved a new purple-white visual world and its centered opening with a community board on 2026-11-10, then instructed that it be applied. White space, artistic display type, gentle purple gradients and floating white cards give discovery and sharing an expressive, readable home. After trying the background, the user explicitly selected the original soft mist rather than the stronger ribbon variation, then clarified that the mist should flow on both sides with a white center.\n\nThis is the current visual specification, with an explicit implementation boundary: the new world is implemented on the homepage; other functional pages retain their existing IAVSE foundation until they are migrated deliberately. Homepage tokens are implemented by [the landing stylesheet](src/app/iavse-landing.css) and [landing components](src/components/landing/IavseLanding.tsx). Tokens prefixed `legacy-` document the existing functional-page foundation in [iavse-system.css](src/app/iavse-system.css), [the scoped template input](src/styles/rbp-template.input.css) and [the host bridge](src/app/rbp-bridge.css). They are scoped implementation facts, not a second homepage direction. The [homepage brief](.impeccable/surfaces/src-components-homeproductshowcase-tsx.md) owns its composition.\n\nThe earlier application baseline retains its [RBP Portfolio source attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The new homepage and its analytic background are independently authored public website code; they do not revive the cancelled Cloudlight migration or incorporate private Pro materials. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored blog themes, canvas documents, uploaded images and third-party previews keep their own appearance and rights.",
+    "northStar": "White space, black controls, purple mist",
+    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The user extended the approved homepage world to platform frontend surfaces, replaced the earlier plain transparent header with frosted glass, and requested a travelling lens that briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
     "keyCharacteristics": [
-      "A white homepage with purple actions, deep plum text, soft mist on both sides and a white center.",
-      "Artistic licensed display and wordmark faces paired with readable Geist body text.",
-      "Transparent, uncolored navigation with the original brand at left and real account state at right.",
-      "White floating content cards, fine-pointer response and bounded viewport entry.",
-      "Explicit legacy scope for functional pages pending gradual migration.",
-      "Truthful public content, labeled examples and accessible motion fallbacks."
+      "White space, black functional controls and soft purple mist at both sides, with a white center.",
+      "Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.",
+      "A frosted header with the original brand at left and real account state at right.",
+      "Sliding glass selection with local text magnification and one accessible interactive label layer.",
+      "Floating white cards, fine-pointer hover and bounded viewport entry within existing workflows.",
+      "Explicit route, authored-content, accessibility and source/license boundaries."
     ],
     "rules": [
       {
-        "name": "The Transparent Header Rule",
-        "body": "Keep the homepage header uncolored and transparent, without a frosted layer; its white appearance comes from the page below it.",
+        "name": "The Neutral Function Rule",
+        "body": "Use black neutral UI for primary actions, selected labels, links and icons in the light appearance; keep purple in decorative backgrounds and retain semantic feedback colors.",
+        "section": "colors"
+      },
+      {
+        "name": "The Frosted Header Rule",
+        "body": "Use the shared white translucent glass header with blur and a bright fine edge. The user's newer glass direction supersedes the earlier plain transparent header requirement.",
         "section": "colors"
       },
       {
         "name": "The Source Identity Rule",
-        "body": "Keep source previews and authored work recognizable and attributed. A template fallback must remain visibly labeled as a fictional example.",
+        "body": "Keep authored work and source previews recognizable and attributed. Fictional template fallbacks must remain labeled.",
         "section": "colors"
       },
       {
         "name": "The Readable Hierarchy Rule",
-        "body": "Verify Chinese, English and Japanese wrapping at the actual viewport width; keep body copy and compact metadata distinct from artistic headings.",
+        "body": "Verify Chinese, English and Japanese at the real viewport width; local magnification must not replace readable base text or create duplicate accessible names.",
         "section": "typography"
       }
     ],
     "dos": [
-      "Do use the purple-white homepage tokens within the new homepage and keep legacy functional-page scope explicit.",
-      "Do keep the homepage header transparent, uncolored and free of backdrop blur.",
-      "Do preserve the user-selected soft mist on both sides, white center, top clearance and gentle pointer response.",
-      "Do verify Chinese, English and Japanese hierarchy and wrapping on desktop and mobile.",
-      "Do reveal content once over 650ms with 24px travel and cap 70ms staggering at 210ms; reveal keyboard-focused content immediately.",
-      "Do retain real public content, meaningful empty states, labeled fictional examples and motion fallbacks."
+      "Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.",
+      "Do use the current frosted header and measured sliding lens while preserving real brand and account state.",
+      "Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.",
+      "Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.",
+      "Do verify Chinese, English and Japanese, mobile wrapping, focus, reduced motion and static fallbacks.",
+      "Do retain actual public content, useful empty states, labeled fictional examples and original source/license details."
     ],
     "donts": [
-      "Don't describe the whole site or either complete dual-UI version as already migrated.",
-      "Don't replace the accepted mist with a mandatory high-contrast ribbon or rolling-band standard.",
-      "Don't apply the platform skin or entry animation inside authored work or third-party previews.",
-      "Don't invent users, posts, endorsements or engagement totals to fill a layout.",
-      "Don't import private Pro materials, revive the cancelled direct Cloudlight migration or expand any license.",
-      "Don't claim authorship of Geist, Cormorant Garamond or ZCOOL XiaoWei; retain attribution and their existing licenses."
+      "Don't describe shared visual migration as a rewrite or full visual acceptance of every page.",
+      "Don't restore purple action/selection/icon/link accents or the superseded plain transparent header as current requirements.",
+      "Don't turn soft mist into mandatory high-contrast ribbons or one-sided color.",
+      "Don't style authored bodies, artboards, color swatches or third-party previews as platform UI.",
+      "Don't expose duplicate interactive labels, invent activity or simulate real account state.",
+      "Don't call DOM label magnification physical refraction, copy reference code/models, or call MIT plus Commons Clause plain MIT.",
+      "Don't import private Pro materials, revive the cancelled Cloudlight migration, expand a license or claim authorship of licensed fonts."
     ]
   }
 }

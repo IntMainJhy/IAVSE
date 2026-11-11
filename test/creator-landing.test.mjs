@@ -23,7 +23,7 @@ function components(locale='zh',{content=emptyContent,user=null}={}){
   react:React,'react/jsx-runtime':runtime,
   'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},
   'next/image':{default:image},
-  'next/navigation':{useRouter:()=>({refresh:()=>{}})},
+  'next/navigation':{usePathname:()=>'/',useRouter:()=>({refresh:()=>{}})},
   'lucide-react':new Proxy({},{get:()=>()=>null}),
   'motion/react':{useReducedMotion:()=>true,motion:new Proxy({},{get:(_,tag)=>motionTag(tag)}),LayoutGroup:({children})=>children,AnimatePresence:({children})=>children},
   '@/lib/home-experience.mjs':experience,
@@ -141,6 +141,15 @@ test('legacy spatial helpers remain stable and the current homepage is usable wi
  assert.equal(spatial.spatialChapterAt(99999,100,1000,3),2);
  assert.equal(spatial.spatialChapterAt(NaN,100,1000,3),0);
  assert.equal(spatial.spatialChapterAt(300,100,0,3),0);
- const {html}=await render();assert.ok(!html.includes('class="hs-journey"'));
- assert.ok(!html.includes('inert=""'),'server content stays usable before enhancement');
+ const {html,document}=await render();assert.ok(!html.includes('class="hs-journey"'));
+ const decorative=find(document,node=>Object.hasOwn(node.attribs,'inert'));
+ assert.ok(decorative.length>0,'the optical copy is separate from real controls');
+ for(const node of decorative){
+  assert.equal(node.attribs['aria-hidden'],'true');
+  assert.equal(find(node,child=>['a','button','input'].includes(child.name)).length,0,'decorative copies cannot duplicate controls');
+ }
+ for(const node of find(document,node=>['a','button'].includes(node.name))){
+  let parent=node.parent;
+  while(parent){assert.ok(!Object.hasOwn(parent.attribs||{},'inert'),'real server controls stay usable before enhancement');parent=parent.parent;}
+ }
 });

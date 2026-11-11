@@ -25,7 +25,7 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
 .rbp-application::before,.rbp-application::after,.rbp-application .home-flow-background{display:none!important}
 /* A feature's hierarchy remains intact; visual primitives all share IAVSE roles. */
 @layer rbp {
-@scope (.rbp-application) to (.space-root,.bd-block,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport){
+@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
  :scope :is(h1,h2,h3,h4,button,input,textarea,select,summary){font-family:var(--iavse-font)!important;letter-spacing:-.025em!important}
  :scope :is(h1,h2,h3,h4){color:var(--iavse-foreground)!important;font-weight:500!important;line-height:1.2!important}
  :scope h1{font-size:clamp(32px,3.2vw,44px)!important;margin-bottom:16px!important}

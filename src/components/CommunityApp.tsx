@@ -2,6 +2,7 @@
 import {useLocale} from './LocaleProvider';
 import {SiteOwnerBadge} from './SiteOwnerBadge';
 import {useState} from 'react';
+import {GlassSwitch} from './ui/GlassSwitch';
 import Link from 'next/link';
 import Form from 'next/form';
 import {CatalogSearch} from '@/components/CatalogSearch';
@@ -49,7 +50,7 @@ function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;us
 function CommunityListing({config,user,query}:{config:Doc,user:Doc|null,query:Doc}){const {t:tr}=useLocale();
  const search=new URLSearchParams(Object.fromEntries(Object.entries(query).map(([k,v])=>[k,String(v||'')]))).toString(),r=useResource('/api/community/posts?'+search);
  const writeHref=user?'/workspace/submissions/new':'/login?next=/workspace/submissions/new';
- return <div className="feed-layout"><section className="feed-main" aria-label={tr("社区资源")} aria-busy={r.refreshing}><h1 className="feed-title">{query.feed==='following'?tr("关注动态"):tr("社区动态")}</h1><nav className="feed-tabs" aria-label={tr("动态范围")}><Link href="/community" aria-current={query.feed!=='following'?'page':undefined}>{tr("全部动态")}</Link><Link href={user?'/community?feed=following':'/login?next=%2Fcommunity%3Ffeed%3Dfollowing'} aria-current={query.feed==='following'?'page':undefined}>{tr("正在关注")}</Link></nav>
+ return <div className="feed-layout"><section className="feed-main" aria-label={tr("社区资源")} aria-busy={r.refreshing}><h1 className="feed-title">{query.feed==='following'?tr("关注动态"):tr("社区动态")}</h1><nav className="community-glass-tabs" aria-label={tr("动态范围")}><GlassSwitch items={[{id:'all',label:tr("全部动态"),href:'/community',scroll:false},{id:'following',label:tr("正在关注"),href:user?'/community?feed=following':'/login?next=%2Fcommunity%3Ffeed%3Dfollowing',scroll:false}]} value={query.feed==='following'?'following':'all'} ariaLabel={tr("动态范围")}/></nav>
 
  <CommunitySearch config={config} query={query}/>
  {r.loading?<Loading/>:r.error?<Retry error={r.error} refresh={r.refresh}/>:<><div className={'feed-results'+(query.q||query.category?' is-filtered':'')}><div><h2>{tr(query.category||"全部分享")}</h2><p>{r.data.total} {tr(" 份分享 · 最近更新")}</p></div>{(query.q||query.category)&&<Link href={query.feed==='following'?'/community?feed=following':'/community'}>{tr("清空筛选")}</Link>}</div>{r.data.items.length?r.data.items.map((item:Doc)=><FeedPost key={item.id} item={item} user={user}/>):<Empty title={query.q||query.category?tr("暂时没有找到这份分享"):tr("等你分享第一个好发现")}>{query.q||query.category?<><span>{tr("换一个关键词，或清空筛选再看看。")}</span><br/><Link href={query.feed==='following'?'/community?feed=following':'/community'}>{tr("查看全部分享")}</Link></>:<><span>{tr("分享你的开发经验，或推荐一份实用资源。")}<br/>{tr("通过审核后，就会在这里展示。")}</span><br/><Link href={writeHref}>{tr("整理第一份分享")} </Link></>}</Empty>}{r.data.pages>1&&<nav className="organic-pagination" aria-label={tr("社区分页")}>{r.data.page>1&&<Link className={secondary} href={'?'+new URLSearchParams({...query,page:String(r.data.page-1)})}>{tr("上一页")}</Link>}<span>{r.data.page} / {r.data.pages}</span>{r.data.page<r.data.pages&&<Link className={secondary} href={'?'+new URLSearchParams({...query,page:String(r.data.page+1)})}>{tr("下一页")}</Link>}</nav>}</>}

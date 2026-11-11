@@ -1,295 +1,327 @@
 ---
-name: "IAVSE"
-description: "An expressive purple-white home for discovering resources, sharing practice and publishing work."
+name: IAVSE
+description: White space, black functional controls, frosted navigation and soft purple mist across IAVSE platform surfaces.
 colors:
-  background: "#ffffff"
-  foreground: "#241c35"
-  body: "#665d76"
-  purple: "#7446d9"
-  purple-deep: "#6433c7"
-  border: "#e8e0f0"
-  soft: "#f3edfd"
-  selection: "#e1d1ff"
-  selection-foreground: "#352055"
-  navigation: "transparent"
-  navigation-foreground: "#242424"
-  legacy-canvas: "#f7f9fc"
-  legacy-background: "#ffffff"
-  legacy-foreground: "#172b3a"
-  legacy-secondary: "#4d6171"
-  legacy-subtle: "#607180"
-  legacy-muted: "#eef3f7"
-  legacy-border: "#dce5ed"
-  legacy-focus: "#1266a4"
-  legacy-sky: "#e5f2fb"
-  legacy-sage: "#e9f3ee"
-  legacy-warm: "#fff2e7"
-  legacy-selection: "#d6eafb"
-  legacy-dark-canvas: "#0b141e"
-  legacy-dark-background: "#111e2b"
-  legacy-dark-foreground: "#edf5fc"
-  legacy-dark-secondary: "#b8c6d3"
-  legacy-dark-subtle: "#9cafbf"
-  legacy-dark-muted: "#182b3b"
-  legacy-dark-border: "#2b4255"
-  legacy-dark-focus: "#86c9ef"
-  legacy-dark-sky: "#163448"
-  legacy-dark-sage: "#203d35"
-  legacy-dark-warm: "#3b3029"
-  legacy-dark-selection: "#284e67"
-  legacy-success: "#21613d"
-  legacy-error: "#b42318"
-  legacy-dark-success: "#83d4a1"
-  legacy-dark-error: "#ffb4ab"
+  background: '#ffffff'
+  foreground: '#19171c'
+  secondary: '#5e5965'
+  subtle: '#716b78'
+  muted: '#f5f4f6'
+  border: '#e8e5eb'
+  focus: '#353039'
+  selection: '#e8e6ec'
+  home-foreground: '#202023'
+  home-body: '#636369'
+  home-action-hover: '#38383d'
+  home-border: '#e9e9ed'
+  home-soft: '#f4f4f6'
+  home-selection: '#e6e6e9'
+  home-selection-foreground: '#17171b'
+  header-foreground: '#242424'
+  header-muted: '#67676d'
+  header-focus: '#303034'
+  glass-header-high: rgb(255 255 255 / .86)
+  glass-header-low: rgb(255 255 255 / .65)
+  glass-track: rgb(230 230 235 / .27)
+  glass-inactive: '#5b5b60'
+  glass-selected: '#202022'
+  glass-lens-high: rgb(255 255 255 / .76)
+  glass-lens-low: rgb(255 255 255 / .47)
+  mist-left: '#d4c3f1'
+  mist-right: '#ddccf5'
+  mist-soft: '#eee7fb'
+  dark-canvas: '#17141c'
+  dark-background: '#242029'
+  dark-foreground: '#f5f2f8'
+  dark-secondary: '#ccc5d3'
+  dark-subtle: '#aaa1b4'
+  dark-muted: '#302b36'
+  dark-border: '#443b4d'
+  dark-focus: '#e0d9e8'
+  dark-selection: '#51475e'
+  success: '#21613d'
+  error: '#b42318'
+  dark-success: '#83d4a1'
+  dark-error: '#ffb4ab'
 typography:
   display:
     fontFamily: '"IAVSE Display", "Songti SC", serif'
-    fontSize: "clamp(44px, 4.5vw, 60px)"
+    fontSize: clamp(44px, 4.5vw, 60px)
     fontWeight: 400
     lineHeight: 1.35
-    letterSpacing: "-0.02em"
+    letterSpacing: -0.02em
   wordmark:
     fontFamily: '"IAVSE Wordmark", Georgia, serif'
-    fontSize: "33px"
+    fontSize: 33px
     fontWeight: 600
     lineHeight: 1
-    letterSpacing: "-0.025em"
+    letterSpacing: -0.025em
   section-heading:
     fontFamily: '"IAVSE Display", "Songti SC", serif'
-    fontSize: "32px"
+    fontSize: 32px
     fontWeight: 400
     lineHeight: 1.45
-    letterSpacing: "-0.01em"
+    letterSpacing: -0.01em
   body:
-    fontFamily: '"IAVSE Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "PingFang SC", "Microsoft YaHei", sans-serif'
-    fontSize: "16px"
+    fontFamily: '"IAVSE Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
+      "PingFang SC", "Microsoft YaHei", sans-serif'
+    fontSize: 15px
     fontWeight: 400
-    lineHeight: 1.65
+    lineHeight: 1.7
   introduction:
-    fontSize: "17px"
+    fontSize: 17px
     fontWeight: 400
     lineHeight: 1.8
   card-title:
-    fontSize: "21px"
+    fontSize: 21px
     fontWeight: 600
     lineHeight: 1.55
   card-body:
-    fontSize: "14px"
+    fontSize: 14px
     fontWeight: 400
     lineHeight: 1.8
   action:
-    fontSize: "15px"
+    fontSize: 15px
     fontWeight: 500
   label:
-    fontSize: "14px"
+    fontSize: 14px
     fontWeight: 400
   metadata:
-    fontSize: "12px"
+    fontSize: 12px
     fontWeight: 400
     lineHeight: 1.5
-  legacy-application-body:
-    fontSize: "15px"
+  home-body:
+    fontFamily: '"IAVSE Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
+      "PingFang SC", "Microsoft YaHei", sans-serif'
+    fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.6
-  legacy-application-heading:
-    fontSize: "clamp(32px, 3.2vw, 44px)"
+    lineHeight: 1.65
+  application-heading:
+    fontSize: 36px
     fontWeight: 500
-    lineHeight: 1.2
-    letterSpacing: "-0.025em"
+    lineHeight: 1.45
+    letterSpacing: -0.02em
+  application-display:
+    fontFamily: '"IAVSE Display", "Songti SC", serif'
+    fontSize: 40px
+    fontWeight: 400
+    lineHeight: 1.4
+  glass-label:
+    fontSize: 14px
+    fontWeight: 500
+    lineHeight: 1.4
 rounded:
-  preview: "10px"
-  control: "12px"
-  menu: "14px"
-  card: "16px"
-  legacy-card: "20px"
-  pill: "999px"
+  tool: 8px
+  preview: 10px
+  control: 12px
+  card: 16px
+  account-menu: 18px
+  mobile-menu: 26px
+  pill: 999px
 spacing:
-  action-gap: "12px"
-  gutter-mobile: "16px"
-  feed-gap: "20px"
-  card-inset-mobile: "21px"
-  card-inset-block: "23px"
-  card-inset-inline: "26px"
-  board-gap: "26px"
-  space-inset: "28px"
-  gutter: "40px"
+  glass-inset: 4px
+  action-gap: 12px
+  gutter-small: 16px
+  feed-gap: 20px
+  card-inset-mobile: 21px
+  application-card-inset: 22px
+  card-inset-block: 23px
+  application-gap: 24px
+  card-inset-inline: 26px
+  board-gap: 26px
+  space-inset: 28px
+  gutter: 40px
 components:
   button-primary:
-    backgroundColor: "{colors.purple}"
-    textColor: "{colors.background}"
-    typography: "{typography.action}"
-    rounded: "{rounded.control}"
-    padding: "11px 23px"
-    height: "48px"
-  button-primary-hover:
-    backgroundColor: "{colors.purple-deep}"
+    backgroundColor: '{colors.foreground}'
+    textColor: '{colors.background}'
+    rounded: '{rounded.control}'
+    padding: 10px 16px
+    height: 44px
   button-secondary:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.action}"
-    rounded: "{rounded.control}"
-    padding: "11px 23px"
-    height: "48px"
+    backgroundColor: '{colors.background}'
+    textColor: '{colors.foreground}'
+    rounded: '{rounded.control}'
+    padding: 10px 16px
+    height: 44px
+  home-button-primary:
+    backgroundColor: '{colors.home-foreground}'
+    textColor: '{colors.background}'
+    typography: '{typography.action}'
+    rounded: '{rounded.control}'
+    padding: 11px 23px
+    height: 48px
+  home-button-primary-hover:
+    backgroundColor: '{colors.home-action-hover}'
+  home-button-secondary:
+    backgroundColor: '{colors.background}'
+    textColor: '{colors.home-foreground}'
+    typography: '{typography.action}'
+    rounded: '{rounded.control}'
+    padding: 11px 23px
+    height: 48px
   navigation:
-    backgroundColor: "{colors.navigation}"
-    textColor: "{colors.navigation-foreground}"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "9px 13px 9px 24px"
-    height: "68px"
+    textColor: '{colors.header-foreground}'
+    typography: '{typography.label}'
+    rounded: '{rounded.pill}'
+    padding: 8px 12px 8px 24px
+    height: 70px
+  glass-switch:
+    backgroundColor: '{colors.glass-track}'
+    textColor: '{colors.glass-inactive}'
+    typography: '{typography.glass-label}'
+    rounded: '{rounded.pill}'
+    padding: 4px
+  glass-switch-item:
+    textColor: '{colors.glass-inactive}'
+    rounded: '{rounded.pill}'
+    padding: 9px 16px
+    height: 42px
+  glass-switch-selected:
+    textColor: '{colors.glass-selected}'
+  application-card:
+    backgroundColor: '{colors.background}'
+    textColor: '{colors.foreground}'
+    rounded: '{rounded.card}'
   community-card:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.card}"
-    padding: "23px 26px"
-  filter-pill:
-    backgroundColor: "{colors.navigation}"
-    textColor: "{colors.body}"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "8px 14px"
-    height: "40px"
-  filter-pill-selected:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.purple-deep}"
+    backgroundColor: '{colors.background}'
+    textColor: '{colors.home-foreground}'
+    rounded: '{rounded.card}'
+    padding: 23px 26px
   space-card:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    rounded: "{rounded.card}"
-    padding: "28px"
-  legacy-application-input:
-    backgroundColor: "{colors.legacy-background}"
-    textColor: "{colors.legacy-foreground}"
-    rounded: "{rounded.control}"
-    padding: "10px 14px"
-    height: "44px"
-  legacy-application-button:
-    backgroundColor: "{colors.legacy-foreground}"
-    textColor: "{colors.legacy-background}"
-    rounded: "{rounded.control}"
-    padding: "10px 16px"
-    height: "42px"
-  legacy-application-card:
-    backgroundColor: "{colors.legacy-background}"
-    textColor: "{colors.legacy-foreground}"
-    rounded: "{rounded.legacy-card}"
+    backgroundColor: '{colors.background}'
+    textColor: '{colors.home-foreground}'
+    rounded: '{rounded.card}'
+    padding: 28px
+  application-input:
+    backgroundColor: '{colors.background}'
+    textColor: '{colors.foreground}'
+    rounded: '{rounded.control}'
+    padding: 10px 14px
+    height: 44px
+  filter-selected:
+    backgroundColor: '{colors.muted}'
+    textColor: '{colors.foreground}'
+    rounded: '{rounded.pill}'
 ---
 
 # Design System: IAVSE
 
 ## Overview
 
-**Creative North Star: "Light, expressive purple-white"**
+**Creative North Star: "White space, black controls, purple mist"**
 
-The user approved a new purple-white visual world and its centered opening with a community board on 2026-11-10, then instructed that it be applied. White space, artistic display type, gentle purple gradients and floating white cards give discovery and sharing an expressive, readable home. After trying the background, the user explicitly selected the original soft mist rather than the stronger ribbon variation, then clarified that the mist should flow on both sides with a white center.
+IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The user extended the approved homepage world to platform frontend surfaces, replaced the earlier plain transparent header with frosted glass, and requested a travelling lens that briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.
 
-This is the current visual specification, with an explicit implementation boundary: the new world is implemented on the homepage; other functional pages retain their existing IAVSE foundation until they are migrated deliberately. Homepage tokens are implemented by [the landing stylesheet](src/app/iavse-landing.css) and [landing components](src/components/landing/IavseLanding.tsx). Tokens prefixed `legacy-` document the existing functional-page foundation in [iavse-system.css](src/app/iavse-system.css), [the scoped template input](src/styles/rbp-template.input.css) and [the host bridge](src/app/rbp-bridge.css). They are scoped implementation facts, not a second homepage direction. The [homepage brief](.impeccable/surfaces/src-components-homeproductshowcase-tsx.md) owns its composition.
+This specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.
 
-The earlier application baseline retains its [RBP Portfolio source attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The new homepage and its analytic background are independently authored public website code; they do not revive the cancelled Cloudlight migration or incorporate private Pro materials. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored blog themes, canvas documents, uploaded images and third-party previews keep their own appearance and rights.
+The earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.
 
 **Key Characteristics:**
 
-- A white homepage with purple actions, deep plum text, soft mist on both sides and a white center.
-- Artistic licensed display and wordmark faces paired with readable Geist body text.
-- Transparent, uncolored navigation with the original brand at left and real account state at right.
-- White floating content cards, fine-pointer response and bounded viewport entry.
-- Explicit legacy scope for functional pages pending gradual migration.
-- Truthful public content, labeled examples and accessible motion fallbacks.
+- White space, black functional controls and soft purple mist at both sides, with a white center.
+- Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.
+- A frosted header with the original brand at left and real account state at right.
+- Sliding glass selection with local text magnification and one accessible interactive label layer.
+- Floating white cards, fine-pointer hover and bounded viewport entry within existing workflows.
+- Explicit route, authored-content, accessibility and source/license boundaries.
 
 ## Colors
 
-The homepage palette uses purple for actions and focus while keeping the page predominantly white. The frontmatter owns the actual token values.
+The light platform uses neutral ink and white surfaces. Purple is reserved for the atmosphere and decorative background grounds; it is not a functional accent. The frontmatter owns the extracted values, including the small homepage/header variants used in the current CSS.
 
 ### Primary
 
-- **Purple / Deep Purple:** filled actions, focus outlines, selected filter text and destination links. The deeper role is the primary action's hover fill.
-- **Legacy Focus Blue / Success / Error:** existing functional-page focus and feedback roles, with their recorded dark variants. They do not recolor the new homepage.
+- **Neutral Ink:** light-theme primary action fill, selected text, links and functional icons. Homepage and shared header ink variants reflect their actual scoped styles.
+- **Neutral Focus:** visible keyboard focus for application, homepage and header contexts.
+- **Success / Error:** existing semantic feedback roles, including dark variants. Destructive and feedback colors remain distinct from ordinary actions.
 
 ### Secondary
 
-- **Soft Purple:** small icon grounds and supporting surfaces. The decorative WebGL and CSS gradients have their own mixed purple colors; changing an action token does not automatically recolor them.
-- **Legacy Sky / Sage / Warm:** retained grouping colors on existing functional and Portfolio-based pages.
+- **Mist Left / Right / Soft:** static background-fallback colors and the decorative purple world. The WebGL shader mixes its own colors; control tokens do not recolor it automatically.
+- **Glass High / Low:** the white alpha stops used by the frosted header and lens. Their complete gradients, blur and shadows live in the sidecar because those properties do not fit frontmatter component tokens.
 
 ### Neutral
 
-- **White / Plum Foreground / Muted Body:** page and card grounds, headings and supporting text.
-- **Border / Selection:** quiet separators and a readable purple selection pair.
-- **Transparent Navigation / Neutral Navigation Foreground:** the header has no background fill and no backdrop blur; its neutral text and fine border remain readable above the top white clearance.
-- **Legacy roles:** existing blue-gray light and dark foundations remain limited to pages that still use them. The homepage explicitly uses a light color scheme.
+- **Background / Muted / Border:** white card grounds, quiet neutral insets and fine separators.
+- **Secondary / Subtle:** readable supporting copy and metadata.
+- **Glass Track / Inactive / Selected:** a neutral translucent switch track, muted labels and black selected labels.
+- **Dark roles:** implemented functional-page counterparts invert neutral roles without introducing a purple functional accent. The current homepage and shared header keep their explicit light appearance.
 
-**The Transparent Header Rule.** Keep the homepage header uncolored and transparent, without a frosted layer; its white appearance comes from the page below it.
+**The Neutral Function Rule.** Use black neutral UI for primary actions, selected labels, links and icons in the light appearance; keep purple in decorative backgrounds and retain semantic feedback colors.
 
-**The Source Identity Rule.** Keep source previews and authored work recognizable and attributed. A template fallback must remain visibly labeled as a fictional example.
+**The Frosted Header Rule.** Use the shared white translucent glass header with blur and a bright fine edge. The user's newer glass direction supersedes the earlier plain transparent header requirement.
+
+**The Source Identity Rule.** Keep authored work and source previews recognizable and attributed. Fictional template fallbacks must remain labeled.
 
 ## Typography
 
-**Display Font:** self-hosted ZCOOL XiaoWei (站酷小薇), declared as `IAVSE Display`, with Songti and serif fallbacks. **Wordmark Font:** self-hosted Cormorant Garamond, declared as `IAVSE Wordmark`, with Georgia and serif fallbacks. **Body Font:** self-hosted Geist, declared as `IAVSE Sans`, with system and CJK fallbacks. These are application aliases, not claims of original font authorship. Preserve their [ZCOOL XiaoWei](public/fonts/zcoolxiaowei-OFL.txt), [Cormorant Garamond](public/fonts/CormorantGaramond-OFL.txt) and [Geist](public/fonts/design-artifacts/voltagent/geist-OFL.txt) SIL OFL notices.
+**Display Font:** self-hosted ZCOOL XiaoWei (站酷小薇), declared as `IAVSE Display`, with Songti and serif fallbacks. **Wordmark Font:** self-hosted Cormorant Garamond, declared as `IAVSE Wordmark`, with Georgia and serif fallbacks. **Body Font:** self-hosted Geist, declared as `IAVSE Sans`, with system and CJK fallbacks. These aliases do not claim typeface authorship. Preserve the [ZCOOL XiaoWei](public/fonts/zcoolxiaowei-OFL.txt), [Cormorant Garamond](public/fonts/CormorantGaramond-OFL.txt) and [Geist](public/fonts/design-artifacts/voltagent/geist-OFL.txt) SIL OFL notices.
 
-The display face gives Chinese headings a literary character; the Cormorant wordmark supports the existing outlined V without changing its geometry. English hero text uses Cormorant at weight (500), with a clamp of (44px, 4.7vw, 62px); Japanese uses the available Songti / Yu Mincho serif stack with a clamp of (36px, 3.7vw, 50px). The default display grows to (66px) at the wide breakpoint. Mobile uses (40px / 1.4), English (42px) and Japanese (32px); the narrowest default title becomes (35px). Section headings become (28px) on mobile. The wordmark becomes (28px), then (25px) at the narrowest breakpoint.
+Homepage display, introduction and card roles retain the centered opening's hierarchy. English hero text uses Cormorant at weight (500), with a clamp of (44px, 4.7vw, 62px); Japanese uses Songti / Yu Mincho with a clamp of (36px, 3.7vw, 50px). The default display reaches (66px) on wide screens. Mobile defaults to (40px / 1.4), English (42px) and Japanese (32px); the narrowest default title is (35px). Shared header wordmarks become (29px), then (26px) at the narrowest breakpoint.
 
-Feature titles use the card-title role; discussion titles use (18px), becoming (17px) on mobile. Feature titles become (19px) on mobile. Supporting card copy is clamped to two lines; author names truncate within the available width. Hero introduction becomes (14px) with a (27ch) maximum on mobile. Existing functional pages retain their application hierarchy and input labels.
+Functional pages use the body and application heading roles. Catalog/workspace introductions use artistic headings (40px / 1.4), becoming (32px / 1.45) on mobile; operating section/card headings remain more compact. Directory introductions use (48px / 1.4), becoming (36px). Document reading text keeps its authored structure; the site-owned reader title uses (38px), becoming (31px), and its working measure is (72ch). Glass labels use (14px / 1.4), or compact (13px); mobile header labels may wrap to two balanced lines. The lens measures actual localized label boxes after resize and font loading.
 
-**The Readable Hierarchy Rule.** Verify Chinese, English and Japanese wrapping at the actual viewport width; keep body copy and compact metadata distinct from artistic headings.
+**The Readable Hierarchy Rule.** Verify Chinese, English and Japanese at the real viewport width; local magnification must not replace readable base text or create duplicate accessible names.
 
 ## Layout
 
-The homepage follows **centered hero → community filters and content with a resource sidebar → public-space horizontal card → footer**. This sequence belongs to the homepage brief, not every future page. The header is sticky, with brand at left, community/resources/blog-space links in the center and real account controls at right. It sits (20px) from the top, or (12px) on mobile. The root rem base remains (16px); the homepage uses native scrolling rather than the retained Portfolio Lenis enhancement.
+The homepage retains **centered hero → community filters/content with a resource sidebar → public-space horizontal card → footer**. This is its surface composition, not a requirement to turn operating pages into landing pages. The homepage owns its header/backdrop; eligible other routes receive the shared fixed shell. Brand, community/resources/blog-space navigation and real account state keep their working destinations.
 
-The main container is at most (1120px), with (40px) side gutters; at a minimum width of (1500px), it grows to (1240px) with (50px) gutters. At or below (900px), gutters become (24px); at or below (650px), they become (16px). The desktop board uses a (2:1) content/sidebar grid, with a sidebar minimum of (280px) and a (26px) gap. The intermediate grid uses (1.7:1), a (240px) sidebar minimum and a (20px) gap. Mobile stacks the sidebar after content, with a (22px) gap, and lays out its four resource links in two columns.
+The homepage/shared header width is at most (1120px) with (40px) gutters, growing to (1240px) with (50px) gutters from (1500px). At or below (900px), gutters become (24px), then (16px) below (650px). Header top offset is (20px), then (12px). Header desktop navigation switches to a native details menu at (820px); opening and closing remain keyboard-operable, with outside-pointer, route/locale and Escape handling. Escape returns focus to the menu trigger. The homepage grid keeps its desktop (2:1) board/sidebar and stacks below (650px).
 
-The hero has (62px) top and (50px) bottom padding, expands to (76px / 62px) on wide screens and uses (43px / 35px) on mobile. The public-space card has a (190px) preview column, flexible copy and a destination link; it reduces to two columns at the intermediate breakpoint and one on mobile. Mobile navigation uses a native details menu, closes on outside pointer input or Escape, and returns focus to its trigger on Escape.
+Functional page layouts stay task-oriented: the shared organic container uses (1240px) maximum width and (40px) insets, with route-specific catalog limits retained where present; mobile insets become (20px), then (16px) below (480px). Account settings use two columns and then one. Real login/registration forms use (480px / 560px) maximum widths and (34px) card padding, becoming (28px 22px) on mobile. The reader uses library/content/outline columns, hides the outline below (1100px), and stacks on mobile. Administration keeps its sidebar and (1440px) main maximum. Community keeps its mobile rail, search and compose workflow. Editor workspaces keep their toolbars and canvas controls. The 404 page uses the platform PublicFrame and a raised return-home card.
 
-Existing functional layouts retain their working structure: resource containers use the current (1180px) maximum, administration uses its sidebar and (1440px) maximum, community keeps mobile navigation, and editors keep their working toolbars. The retained Portfolio capsule and page atmosphere belong to eligible non-home routes. Migration must preserve search, publishing, accounts, moderation and editor behavior.
+Route guards preserve authored blog pages, built-in showcase previews and resource-design preview pages. Administration receives the atmosphere and migrated site controls without a second public header. The blog editor workspace keeps its own working chrome and does not receive the public header or atmosphere. Only the narrow IAVSE return bar/footer on authored pages is platform chrome. The [coverage table](docs/platform-ui.zh-CN.md) defines these boundaries. Shared runtime no longer mounts the old Portfolio capsule, PageBackdrop or Lenis enhancer.
 
 ## Elevation & Depth
 
-The homepage combines a softly varying purple field with floating white cards and subtle pointer highlights. The user explicitly selected the original soft mist, then requested it on both sides with a white center. Its original analytic WebGL shader evaluates `mist` separately from each side, with different phases and vertical domains. Each uses domain-warped `sheetA` / `sheetB` and `opening`; soft side anchors preserve the two-sided composition on desktop and mobile. The time multiplier remains (0.065), with gentle pointer deformation. It is an approximation of flowing color, not a physical fluid solver. Preserve broad soft color regions, gentle boundaries and central white space; stronger, high-contrast rolling ribbons are not an acceptance requirement. The [background implementation note](docs/purple-landing-background.zh-CN.md) records its mechanism and limits.
+The mist uses independently phased left/right `mist` fields, soft side anchors, domain-warped `sheetA` / `sheetB` and `opening`, with time multiplier (0.12). Both sides change shape naturally while the center stays white; top clearance begins with approximately (100px) of white and fades into color through (320px). It is an analytic approximation of flowing color, not a physical fluid solver. The homepage backdrop is (1000px), other platform shells (1100px), and mobile (1120px). Static fallback also uses separate left/right purple fields and a white center. [The background note](docs/purple-landing-background.zh-CN.md) records lifecycle and limits.
 
-The decorative backdrop is (1000px) tall, or (1120px) on mobile. Its first approximately (100px) remain white, colors appear gradually through (320px), and the bottom fades into white. The header has a fine neutral border and its observed shadow (`0 7px 25px -12px rgb(0 0 0 / .12), inset 0 1px 0 rgb(255 255 255 / .6)`), while its background stays transparent. Card rest uses (`0 14px 38px -10px rgb(77 43 125 / .14)`). Fine-pointer hover lifts cards by (6px), with (`0 27px 55px -12px rgb(77 43 125 / .23)`) over (260ms); the local radial highlight follows the pointer. Feature images scale to (1.025) over (350ms). Primary actions lift by (2px), with their purple shadow deepening over (180ms). Exact action, filter and menu shadows are in the sidecar.
+White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms); hero actions lift (2px) over (180ms).
 
-Homepage Scroll Reveal runs once on first viewport entry: opacity (0 → 1), upward travel (24px → 0), duration (650ms), easing (`cubic-bezier(.22,1,.36,1)`), threshold (0.1), and observer-batch stagger (70ms), capped at (210ms). Keyboard focus cancels a pending reveal. Content remains present without the observer, animation API or JavaScript; no persistent hidden state is required. Reduced motion cancels reveals, transitions, hover transforms and pointer tracking. The background draws a static frame, fixes time and clears pointer motion; a hidden tab or offscreen background pauses frame work. WebGL failure or context loss leaves the static purple-white CSS gradient. Touch input retains automatic atmosphere and native scrolling.
+The frosted header combines a white alpha gradient, blur (24px), saturation (1.12), fine white border and layered edge shadows. Its travelling lens uses blur (7px), saturation (1.1), a bright edge and a smaller shadow. GlassSwitch clips an inert duplicate-label layer, counter-translates its full track, then scales it locally around the moving lens center. Cubic ease-out travel lasts (390–540ms), based on measured distance; magnification rises during travel to at most (1.15), then settles at (1). This is native DOM magnification with glass styling, not physical optical refraction. The original controls retain their labels, hit areas and focus.
 
-The legacy foundation retains its existing card rest shadow (`0 3px 12px -9px #173c5f36`), functional dialogs, light/dark roles and route-specific animation. Those details do not override homepage values.
+Homepage reveal remains opacity (0 → 1), travel (24px → 0), duration (650ms), threshold (0.1), easing (`cubic-bezier(.22,1,.36,1)`) and (70ms) observer-batch staggering capped at (210ms). Existing functional reveal uses (12px), (550ms), threshold (0.12), root margin (`0px 0px -6% 0px`) and the same bounded stagger; retained template FadeIn uses (800ms). Keyboard focus reveals pending content immediately. Reduced motion cancels travel, zoom pulses, reveals and hover transforms; the background is static. Hidden/offscreen backgrounds pause, and the switch settles geometry on visibility changes. WebGL failure/context loss leaves CSS mist; unsupported backdrop blur leaves an opaque readable glass fallback. Cleanup releases frames, observers, listeners and GPU resources.
 
 ## Shapes
 
-The homepage uses content-card corners (16px), compact action corners (12px), preview corners (10px), menu corners (14px) and fully rounded filters/header (999px). Card-content padding is (23px 26px), becoming (21px) on mobile; the public-space card uses (28px), becoming (23px). Circles are reserved for avatars and compact discussion marks. Functional pages keep their current (20px) cards and (12px) controls until migrated.
+Shared floating cards use (16px) corners, actions and inputs (12px), preview grounds (10px) and compact editor tools (8px). The header and switch remain fully rounded (999px); account dropdowns use (18px), and mobile navigation panels (26px). Homepage card-content padding stays (23px 26px), or (21px) on mobile. Functional card insets commonly use (22px / 24px / 28px) according to density; these differences preserve content and operating context. Avatars stay circular. Authored artboards, saved blocks and third-party preview clipping retain their own shapes.
 
 ## Components
 
-### Navigation and account identity
+### Shared header and real account identity
 
-Keep the original outlined V with the licensed IAVSE wordmark. Desktop links lead to real community, resource and blog-space routes. `AuthNav` supplies actual account state; signed-in users receive the existing account menu/avatar, and guests retain working login/account destinations. The header itself is transparent with no blur. Account and mobile dropdown panels are separate white surfaces. Language selection remains in the footer. Homepage keyboard focus uses a (3px) purple outline with a (5px) offset.
+Use `IavseHeader` with the original outlined V and licensed IAVSE wordmark. Homepage placement is sticky; eligible other pages use the fixed shell. `AuthNav` supplies actual guest/signed-in state; the account menu and real avatar are preserved. The header minimum height is (70px), becoming (62px) on mobile. Login actions are black with white text. Account and mobile panels use their own frosted white surfaces. Header focus uses a (2px) neutral outline with (4px) offset; switch focus remains inset. Homepage content focus uses (3px / 5px), while functional controls use (2px / 4px).
 
-### Actions and filters
+### Sliding switch
 
-The primary hero link opens the community; the white secondary link opens resources. Their minimum height is (48px), becoming (45px) on mobile. Pressed actions scale to (0.98) unless reduced motion is requested. The three community filters use real buttons and `aria-pressed`; the selected white pill receives a small shadow and deep-purple text. Filtered content announces updates politely. No homepage input component has been added: the input token and sidecar example describe only the existing functional-page field, with its (1px) border, (44px) minimum height, (14px) type and legacy focus treatment.
+`GlassSwitch` is implemented in the shared header, homepage Discover/Work/Discussions filters, resource-type navigation and community All/Following navigation. Links keep real `href`, `aria-current`, modifier-key behavior and route truth; buttons keep `aria-pressed` and native disabled behavior. A brief link-intent lens response does not change `aria-current` before the route changes. Label copies are `aria-hidden`, inert and pointer-transparent. Measured positions account for localized text, flex compression, wrapped mobile labels, resize and font loading. Without a ready lens, the selected control keeps a visible white fallback; reduced motion places the lens directly with no zoom pulse.
 
-### Community board and resource rail
+### Actions, inputs and cards
 
-The server passes a bounded DTO, not raw source records. It includes up to four qualified public posts and up to three public projects from at most four discoverable public spaces. Discover mode shows the first work (or first post) with the available discussion entry; the Work and Discussions filters expose their respective bounded lists. Author identity and comment counts come from real content. Missing covers use a decorative branded ground; missing or unavailable content uses the actual empty/unavailable state and working destinations, including retry where offered. Never fabricate activity to fill a card.
+Light-theme functional primary actions use black fill and white text; secondary actions use white fill and black text. Dark functional pages use the corresponding neutral role inversion. Destructive actions retain semantic red. Standard actions and inputs have a (44px) minimum height, with (12px) corners; homepage hero actions use (48px), becoming (45px) on mobile. Functional fields retain their labels, validation, focus and disabled states. White floating cards preserve the actual content, source imagery, metadata and destinations; hover and reveal decorate rather than rearrange the workflow.
 
-The resource sidebar links to the existing UI design, AI Skill, documentation and website/tool categories. Its note directs readers to original source and license details. The layout does not imply universal reuse rights or endorsement.
+### Truthful homepage content and resource discovery
 
-### Public-space card and footer
+The homepage server DTO includes up to four qualified public posts and three public projects from at most four discoverable public spaces. Discover shows the first work or post with available discussion content; Work and Discussions expose their bounded lists. Use actual authors and counts, real empty/unavailable states and working retry/destinations. A missing cover uses a decorative ground. With no discoverable space, the built-in template screenshot remains labeled **“内置模板预览 · 虚构人物”**, localized as appropriate, and links to the directory. Resource links retain original source/license detail; neither styling nor examples imply endorsement or unrestricted reuse.
 
-The first qualified discoverable space supplies the horizontal card, public label and real `/blog/:handle` destination. When no space exists, the existing built-in template screenshot is visibly labeled **“内置模板预览 · 虚构人物”** (localized in English/Japanese) and links to the blog directory. It is not a member record. Footer links preserve About, repository, privacy, account and locale destinations.
+### Content, editor and source boundaries
 
-### Existing functional controls and authored content
-
-Existing inputs, account flows, publishing permissions, administration controls and editor tools retain their behavior and legacy styling scope. Shared styling stops at authored blog roots, saved canvas blocks, personal homepages, authored themes and React Flow viewports. The platform return bar may use platform styling; authored work and third-party previews keep their own appearance. Private Pro code, assets, prompts and credentials remain outside the public repository and public build.
+Shared styling stops before authored bodies, blog themes, saved canvas blocks, artboards, rich text, React Flow viewports and third-party/template previews. Platform bars, toolbars and controls may migrate; member content and color swatches retain their values. Search, follow, publishing, moderation, account and permission behavior remain intact. Private Pro code, assets, prompts and credentials remain outside the public repository and build. The read-only reference analysis does not import its code/models or enlarge any license.
 
 ## Do's and Don'ts
 
-- Do use the purple-white homepage tokens within the new homepage and keep legacy functional-page scope explicit.
-- Do keep the homepage header transparent, uncolored and free of backdrop blur.
-- Do preserve the user-selected soft mist on both sides, white center, top clearance and gentle pointer response.
-- Do verify Chinese, English and Japanese hierarchy and wrapping on desktop and mobile.
-- Do reveal content once over 650ms with 24px travel and cap 70ms staggering at 210ms; reveal keyboard-focused content immediately.
-- Do retain real public content, meaningful empty states, labeled fictional examples and motion fallbacks.
-- Don't describe the whole site or either complete dual-UI version as already migrated.
-- Don't replace the accepted mist with a mandatory high-contrast ribbon or rolling-band standard.
-- Don't apply the platform skin or entry animation inside authored work or third-party previews.
-- Don't invent users, posts, endorsements or engagement totals to fill a layout.
-- Don't import private Pro materials, revive the cancelled direct Cloudlight migration or expand any license.
-- Don't claim authorship of Geist, Cormorant Garamond or ZCOOL XiaoWei; retain attribution and their existing licenses.
+- Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.
+- Do use the current frosted header and measured sliding lens while preserving real brand and account state.
+- Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.
+- Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.
+- Do verify Chinese, English and Japanese, mobile wrapping, focus, reduced motion and static fallbacks.
+- Do retain actual public content, useful empty states, labeled fictional examples and original source/license details.
+- Don't describe shared visual migration as a rewrite or full visual acceptance of every page.
+- Don't restore purple action/selection/icon/link accents or the superseded plain transparent header as current requirements.
+- Don't turn soft mist into mandatory high-contrast ribbons or one-sided color.
+- Don't style authored bodies, artboards, color swatches or third-party previews as platform UI.
+- Don't expose duplicate interactive labels, invent activity or simulate real account state.
+- Don't call DOM label magnification physical refraction, copy reference code/models, or call MIT plus Commons Clause plain MIT.
+- Don't import private Pro materials, revive the cancelled Cloudlight migration, expand a license or claim authorship of licensed fonts.

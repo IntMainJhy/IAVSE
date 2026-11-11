@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect, useRef, useState} from 'react';
-import {ArrowRight, ArrowUpRight, BookOpen, Menu, MessageCircle, PanelsTopLeft, Shapes, Sparkles, UserRound} from 'lucide-react';
-import {AuthNav} from '@/components/AuthNav';
+import {ArrowRight, ArrowUpRight, BookOpen, MessageCircle, PanelsTopLeft, Shapes, Sparkles} from 'lucide-react';
+import {IavseHeader} from '@/components/IavseHeader';
+import {GlassSwitch} from '@/components/ui/GlassSwitch';
 import {BrandMark} from '@/components/BrandMark';
 import {FeedAvatar} from '@/components/FeedAvatar';
 import {LanguageSwitcher, useLocale} from '@/components/LocaleProvider';
@@ -25,29 +26,6 @@ export type LandingContent = {
 };
 type Filter = 'all' | 'work' | 'discussion';
 const media = (id: string) => '/media/' + encodeURIComponent(id);
-
-function LandingHeader() {
-  const {locale} = useLocale();
-  const c = landingCopy(locale);
-  const menu = useRef<HTMLDetailsElement>(null);
-  useEffect(() => {
-    const close = (event: PointerEvent) => { if (menu.current && !menu.current.contains(event.target as Node)) menu.current.open = false; };
-    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape' && menu.current?.open) { menu.current.open = false; menu.current.querySelector('summary')?.focus(); } };
-    document.addEventListener('pointerdown', close);
-    document.addEventListener('keydown', escape);
-    return () => { document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', escape); };
-  }, []);
-  const links = [{href: '/community', label: c.community}, {href: '/resources', label: c.resources}, {href: '/blogs', label: c.blogs}];
-  return <header className="iv-nav">
-    <Link className="iv-brand" href="/" aria-label={c.home}><BrandMark/><span>IAVSE</span></Link>
-    <nav className="iv-nav-links" aria-label={c.nav}>{links.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}</nav>
-    <details className="iv-mobile-nav" ref={menu}>
-      <summary aria-label={c.openNav}><Menu size={19} aria-hidden="true"/></summary>
-      <nav aria-label={c.nav}>{links.map(link => <Link key={link.href} href={link.href} onClick={() => { if (menu.current) menu.current.open = false; }}>{link.label}</Link>)}</nav>
-    </details>
-    <div className="iv-identity"><AuthNav/><Link href="/login" className="iv-guest-avatar" aria-label={c.account}><UserRound size={18} aria-hidden="true"/></Link></div>
-  </header>;
-}
 
 function Author({name, avatarId}: {name: string; avatarId: string}) {
   return name ? <span className="iv-author"><FeedAvatar name={name} avatarId={avatarId}/><span>{name}</span></span> : null;
@@ -167,9 +145,9 @@ export function IavseLanding({content}: {content: LandingContent}) {
   return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale}>
     <div className="iv-backdrop-wrap"><IavseFlowBackdrop/></div>
     <div className="iv-container">
-      <LandingHeader/>
+      <IavseHeader/>
       <section className="iv-hero"><h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1><p>{c.intro}</p><div className="iv-actions"><Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link></div></section>
-      <section className="iv-community" aria-labelledby="iv-community-title"><div className="iv-section-heading"><h2 id="iv-community-title">{c.communityTitle}</h2><div className="iv-filters" role="group" aria-label={c.filters}>{([{id: 'all', label: c.all}, {id: 'work', label: c.works}, {id: 'discussion', label: c.discussions}] as const).map(item => <button key={item.id} type="button" aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}</div></div>
+      <section className="iv-community" aria-labelledby="iv-community-title"><div className="iv-section-heading"><h2 id="iv-community-title">{c.communityTitle}</h2><GlassSwitch className="iv-filter-switch" items={[{id: 'all', label: c.all}, {id: 'work', label: c.works}, {id: 'discussion', label: c.discussions}]} value={filter} onValueChange={value => setFilter(value as Filter)} ariaLabel={c.filters} size="compact"/></div>
         <div className="iv-board"><div className="iv-feed" aria-live="polite">
           {filter === 'work' ? content.works.map(work => <FeatureCard key={work.id} item={work} kind="work"/>) : null}
           {featuredWork ? <FeatureCard key={featuredWork.id} item={featuredWork} kind="work"/> : null}
