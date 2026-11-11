@@ -38,12 +38,14 @@ test('shared platform chrome preserves authored blogs, previews and the full-scr
  const exports={};
  const source=fs.readFileSync(new URL('../src/lib/platform-chrome.ts',import.meta.url),'utf8');
  vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{exports});
- for(const path of ['/blog/alex','/blog/alex/projects/a','/blogs/showcase/editorial','/resources/designs/sample/preview','/workspace/blog','/workspace/blog/preview','/']){
+ for(const path of ['/blog/alex','/blog/alex/projects/a','/blogs/showcase/editorial','/resources/designs/sample/preview','/workspace/blog','/workspace/blog/preview']){
   const chrome=exports.platformChrome(path);assert.equal(chrome.header,false,path);assert.equal(chrome.atmosphere,false,path);
  }
  for(const path of ['/resources','/skills/testing','/docs/setup','/community','/workspace/account','/login','/join','/legal/privacy','/about','/blogs','/missing']){
   const chrome=exports.platformChrome(path);assert.equal(chrome.header,true,path);assert.equal(chrome.atmosphere,true,path);
  }
+ assert.equal(exports.platformChrome('/').header,true,'home keeps the same root header as functional pages');
+ assert.equal(exports.platformChrome('/').atmosphere,false,'home retains its own atmosphere');
  assert.equal(exports.platformChrome('/admin/review').header,false,'administration retains its own navigation');
  assert.equal(exports.platformChrome('/admin/review').atmosphere,true);
 });

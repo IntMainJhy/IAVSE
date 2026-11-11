@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect, useRef, useState} from 'react';
 import {ArrowRight, ArrowUpRight, BookOpen, MessageCircle, PanelsTopLeft, Shapes, Sparkles} from 'lucide-react';
-import {IavseHeader} from '@/components/IavseHeader';
 import {GlassSwitch} from '@/components/ui/GlassSwitch';
 import {BrandMark} from '@/components/BrandMark';
 import {FeedAvatar} from '@/components/FeedAvatar';
@@ -61,7 +60,7 @@ function EmptyContent({filter, unavailable}: {filter: Filter; unavailable: boole
   const failed = unavailable && filter !== 'work';
   const title = failed ? c.unavailable : filter === 'work' ? c.emptyWorks : filter === 'discussion' ? c.emptyPosts : c.emptyTitle;
   const body = failed ? c.unavailableBody : filter === 'work' ? c.emptyWorksBody : filter === 'discussion' ? c.emptyPostsBody : c.emptyBody;
-  return <div className="iv-card iv-empty" data-landing-card data-landing-empty>
+  return <div className="iv-card iv-empty" data-landing-card data-landing-empty data-landing-reveal>
     <MessageCircle size={28} strokeWidth={1.3} aria-hidden="true"/><h3>{title}</h3><p>{body}</p>
     <div className="iv-empty-actions"><Link href={filter === 'work' ? '/blogs' : '/community'} className="iv-text-link">{filter === 'work' ? c.exploreSpace : c.enter}<ArrowRight size={15} aria-hidden="true"/></Link>{failed ? <button type="button" className="iv-text-link" onClick={() => router.refresh()}>{c.retry}</button> : null}</div>
   </div>;
@@ -145,7 +144,7 @@ export function IavseLanding({content}: {content: LandingContent}) {
   return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale}>
     <div className="iv-backdrop-wrap"><IavseFlowBackdrop/></div>
     <div className="iv-container">
-      <IavseHeader/>
+      <div className="iv-header-space" aria-hidden="true"/>
       <section className="iv-hero"><h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1><p>{c.intro}</p><div className="iv-actions"><Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link><Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link></div></section>
       <section className="iv-community" aria-labelledby="iv-community-title"><div className="iv-section-heading"><h2 id="iv-community-title">{c.communityTitle}</h2><GlassSwitch className="iv-filter-switch" items={[{id: 'all', label: c.all}, {id: 'work', label: c.works}, {id: 'discussion', label: c.discussions}]} value={filter} onValueChange={value => setFilter(value as Filter)} ariaLabel={c.filters} size="compact"/></div>
         <div className="iv-board"><div className="iv-feed" aria-live="polite">

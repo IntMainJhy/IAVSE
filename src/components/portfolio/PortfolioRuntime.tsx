@@ -18,9 +18,9 @@ export function PortfolioRuntime(){
     observer.observe(document.documentElement,{attributes:true,attributeFilter:['data-color-mode']});
     return()=>observer.disconnect();
   },[path]);
-  if(!chrome.atmosphere)return null;
-  return <div className="iavse-platform-shell" data-iavse-platform={chrome.header?'public':'tools'}>
-    <div className="iavse-shell-atmosphere"><IavseFlowBackdrop/></div>
+  if(!chrome.atmosphere&&!chrome.header)return null;
+  return <div className="iavse-platform-shell" data-iavse-platform={path==='/'?'home':chrome.header?'public':'tools'}>
+    {chrome.atmosphere&&<div className="iavse-shell-atmosphere"><IavseFlowBackdrop/></div>}
     {chrome.header&&<div className="iavse-shell-header"><IavseHeader/></div>}
   </div>;
 }

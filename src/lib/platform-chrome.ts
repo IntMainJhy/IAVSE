@@ -4,5 +4,5 @@ export function platformChrome(path:string){
   const preview=/^\/resources\/designs\/[^/]+\/preview\/?$/.test(path);
   const studio=/^\/workspace\/blog(?:\/|$)/.test(path);
   const atmosphere=path!=='/'&&!authored&&!preview&&!studio;
-  return {atmosphere,header:atmosphere&&!/^\/admin(?:\/|$)/.test(path)};
+  return {atmosphere,header:(path==='/'||atmosphere)&&!/^\/admin(?:\/|$)/.test(path)};
 }

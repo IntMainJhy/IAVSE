@@ -144,24 +144,24 @@ function CanvasIllustration({c}:{c:ProductCopy}) {
 /** Independently authored product introduction. Member discovery stays in the gallery. */
 export function BlogProductShowcase({locale}:{locale:string}) {
  const c=locale==='en'?copy.en:locale==='ja'?copy.ja:copy.zh;
- return <div className="blog-space-product" data-blog-space-product data-product-locale={locale}>
+ return <div className="blog-space-product" data-blog-space-product data-product-locale={locale} data-rbp-reveal-scope>
   <section className="bsp-intro" id="blog-space-product" aria-labelledby="blog-product-title">
-   <div className="bsp-intro-heading"><h2 id="blog-product-title">{c.title}</h2><div><p>{c.intro}</p><div className="bsp-actions"><Link className="bsp-primary" href="/workspace/blog">{c.create}<Icon name="plus"/></Link><Link className="bsp-text-link" href="/docs/showcase">{c.guide}</Link></div></div></div>
-   <div className="bsp-content-map">
-    <div className="bsp-home-role"><Icon name="home"/><h3>{c.homeTitle}</h3><p>{c.homeBody}</p><span><Icon name="link"/>{c.homeAddress}</span></div>
-    <dl className="bsp-content-roles">{c.roles.map(role=><div key={role.title}><dt>{role.title}</dt><dd>{role.body}</dd></div>)}</dl>
+   <div className="bsp-intro-heading" data-rbp-reveal-group><h2 id="blog-product-title" data-rbp-reveal-item>{c.title}</h2><div><p data-rbp-reveal-item>{c.intro}</p><div className="bsp-actions" data-rbp-reveal-item><Link className="bsp-primary" href="/workspace/blog">{c.create}<Icon name="plus"/></Link><Link className="bsp-text-link" href="/docs/showcase">{c.guide}</Link></div></div></div>
+   <div className="bsp-content-map" data-rbp-reveal-group>
+    <div className="bsp-home-role" data-rbp-reveal-item><Icon name="home"/><h3>{c.homeTitle}</h3><p>{c.homeBody}</p><span><Icon name="link"/>{c.homeAddress}</span></div>
+    <dl className="bsp-content-roles">{c.roles.map(role=><div key={role.title} data-rbp-reveal-item><dt>{role.title}</dt><dd>{role.body}</dd></div>)}</dl>
    </div>
   </section>
 
   <section className="bsp-editor" aria-labelledby="blog-space-editor-title">
    <CanvasIllustration c={c}/>
-   <div className="bsp-editor-copy"><h2 id="blog-space-editor-title">{c.editorTitle}</h2><p>{c.editorBody}</p><dl className="bsp-editor-features">{c.editorFeatures.map(feature=><div key={feature.title}><dt>{feature.title}</dt><dd>{feature.body}</dd></div>)}</dl></div>
+   <div className="bsp-editor-copy" data-rbp-reveal-group><h2 id="blog-space-editor-title" data-rbp-reveal-item>{c.editorTitle}</h2><p data-rbp-reveal-item>{c.editorBody}</p><dl className="bsp-editor-features" data-rbp-reveal-group>{c.editorFeatures.map(feature=><div key={feature.title} data-rbp-reveal-item><dt>{feature.title}</dt><dd>{feature.body}</dd></div>)}</dl></div>
   </section>
 
   <section className="bsp-publishing" aria-labelledby="blog-space-publish-title">
-   <div className="bsp-publishing-heading"><h2 id="blog-space-publish-title">{c.publishTitle}</h2><p>{c.publishBody}</p></div>
+   <div className="bsp-publishing-heading" data-rbp-reveal-group><h2 id="blog-space-publish-title" data-rbp-reveal-item>{c.publishTitle}</h2><p data-rbp-reveal-item>{c.publishBody}</p></div>
    <div className="bsp-publishing-content">
-    <ol className="bsp-publish-steps">{c.steps.map((step,index)=><li key={step.title}><span className="bsp-step-number" aria-hidden="true">{index+1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
+    <ol className="bsp-publish-steps" data-rbp-reveal-group>{c.steps.map((step,index)=><li key={step.title} data-rbp-reveal-item><span className="bsp-step-number" aria-hidden="true">{index+1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
     <div className="bsp-version-diagram" role="img" aria-label={`${c.privateLabel}，${c.publishLabel}，${c.publicLabel}。${c.reviewNote}`}>
      <div className="bsp-version-draft"><span><Icon name="lock"/>{c.privateLabel}</span><div className="bsp-version-lines"><i/><i/><i/></div><small>{c.privateNote}</small></div>
      <div className="bsp-version-bridge"><Icon name="arrow"/><span>{c.publishLabel}</span></div>
@@ -169,11 +169,11 @@ export function BlogProductShowcase({locale}:{locale:string}) {
      <p>{c.reviewNote}</p>
     </div>
    </div>
-   <aside className="bsp-visibility"><Icon name="settings"/><div><h3>{c.visibilityTitle}</h3><p>{c.visibilityBody}</p></div></aside>
+   <aside className="bsp-visibility" data-rbp-reveal-item><Icon name="settings"/><div><h3>{c.visibilityTitle}</h3><p>{c.visibilityBody}</p></div></aside>
   </section>
 
-  <section className="bsp-faq" aria-labelledby="blog-space-faq-title"><h2 id="blog-space-faq-title">{c.faqTitle}</h2><div>{c.faqs.map(faq=><details key={faq.q}><summary>{faq.q}<Icon name="plus"/></summary><p>{faq.a}</p></details>)}</div></section>
+  <section className="bsp-faq" aria-labelledby="blog-space-faq-title" data-rbp-reveal-group><h2 id="blog-space-faq-title" data-rbp-reveal-item>{c.faqTitle}</h2><div>{c.faqs.map(faq=><details key={faq.q} data-rbp-reveal-item><summary>{faq.q}<Icon name="plus"/></summary><p>{faq.a}</p></details>)}</div></section>
 
-  <section className="bsp-close" aria-labelledby="blog-space-start-title"><h2 id="blog-space-start-title">{c.closeTitle}</h2><p>{c.closeBody}</p><div className="bsp-actions"><Link className="bsp-primary" href="/workspace/blog">{c.create}<Icon name="plus"/></Link><Link className="bsp-text-link" href="/docs/showcase">{c.guide}</Link></div></section>
+  <section className="bsp-close" aria-labelledby="blog-space-start-title" data-rbp-reveal-group><h2 id="blog-space-start-title" data-rbp-reveal-item>{c.closeTitle}</h2><p data-rbp-reveal-item>{c.closeBody}</p><div className="bsp-actions" data-rbp-reveal-item><Link className="bsp-primary" href="/workspace/blog">{c.create}<Icon name="plus"/></Link><Link className="bsp-text-link" href="/docs/showcase">{c.guide}</Link></div></section>
  </div>;
 }

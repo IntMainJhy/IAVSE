@@ -58,7 +58,7 @@
 
 共享策略在 [`rbp-motion.mjs`](../src/lib/rbp-motion.mjs)：缓动 `[0.22, 1, 0.36, 1]`，视口阈值 0.12、底部边距 -6%。[`motion-primitives.tsx`](../src/components/rbp/ui/motion-primitives.tsx) 的 FadeIn 默认使用 `whileInView`、`once: true`，持续 800ms；Hero 显式保留 mount 入场，ScaleUnblur 为 `scale: 0.7`、`blur(20px)`、1 秒。Projects 每卡索引延迟为 60ms，由 FadeIn 限制在 210ms 以内。
 
-[`application-reveal.tsx`](../src/components/rbp/ui/application-reveal.tsx) 通过 IntersectionObserver 和 Web Animations API 增强现有标题、卡片、列表及面板，不增加包裹层或移动表单控件。每个元素只入场一次，持续 550ms；同一个观察器批次按位置排序，间隔 70ms，最大 210ms。MutationObserver 继续发现新增结果；模板已有动效、可编辑内容和作者画布不重复处理。键盘焦点进入隐藏区域时立即显示。开启减少动态会取消未完成动画并显示内容；缺少相关 API 或 JavaScript 时直接保持可读。路由与查询变化会清理动画、事件和观察器。
+[`application-reveal.tsx`](../src/components/rbp/ui/application-reveal.tsx) 通过 IntersectionObserver 和 Web Animations API 增强现有标题、卡片、列表及面板，不增加包裹层或移动表单控件。每个元素只入场一次，持续 550ms；同一个观察器批次按位置排序，各语义分组分别从首项计算 70ms 交错延迟，最大 210ms。博客产品介绍通过 `data-rbp-reveal-scope`、`data-rbp-reveal-group` 和 `data-rbp-reveal-item` 明确接入 25 个短小可读内容块，不将顶栏、画廊、静态示意图或完整的长章节设为入场对象。MutationObserver 继续发现新增结果；模板已有动效、可编辑内容和作者画布不重复处理，作者博客与预览边界保留。键盘焦点进入隐藏区域时立即显示。开启减少动态会取消未完成动画并显示内容；缺少相关 API 或 JavaScript 时直接保持可读。路由与查询变化会清理动画、事件和观察器。
 
 胶囊活动指示器保留 `stiffness: 380, damping: 32`，主题圆形揭示为 700ms。CTA 布局变化为 0.55 秒、文字变化 0.35 秒、复制状态图标变化 0.2 秒。Projects 悬停抬升 4px / 400ms，图片放大至 1.06 / 700ms。拍立得入场为 0.9 秒，延迟 `0.05 + index × 0.08` 秒，指针弹簧为 220 / 18 / 0.6；展开列表保留 0.5 秒高度变化。Matter.js 保留重力 1、恢复系数 0.35、摩擦 0.5、空气摩擦 0.025 和密度 0.0018，支持拖动和重置。
 

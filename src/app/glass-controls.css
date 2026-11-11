@@ -26,7 +26,7 @@
 .iavse-header__brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:10px;color:#242424;text-decoration:none}
 .iavse-header__brand>span{font:600 33px/1 "IAVSE Wordmark",Georgia,serif;letter-spacing:-.025em}
 .iavse-header__brand>.site-brand-mark{width:27px;height:27px;flex:0 0 27px}
-html[data-color-mode=dark] [data-iavse-platform] .iavse-header__brand{color:var(--iavse-foreground,#f5f2f8)}
+html[data-color-mode=dark] [data-iavse-platform=public] .iavse-header__brand{color:var(--iavse-foreground,#f5f2f8)}
 .iavse-header__desktop{grid-column:2;grid-row:1;justify-self:center;display:flex;justify-content:center;min-width:0}
 .iavse-header__desktop>.glass-switch{padding:6px;border:1px solid rgb(255 255 255 / .94);background:linear-gradient(120deg,rgb(255 255 255 / .86),rgb(255 255 255 / .65));box-shadow:0 9px 32px -15px rgb(30 30 40 / .22),0 1px 2px rgb(30 30 40 / .04),inset 0 1px 0 #fff;backdrop-filter:blur(24px) saturate(1.12);-webkit-backdrop-filter:blur(24px) saturate(1.12)}
 .iavse-header__identity{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:9px;flex:0 0 auto;min-width:0}

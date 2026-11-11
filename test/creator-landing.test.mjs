@@ -52,10 +52,10 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}
   }});
   return exports;
  }
- return {page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads};
+ return {page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),runtime:load(path.join(sourceRoot,'components/portfolio/PortfolioRuntime.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads};
 }
 async function render(locale='zh',options={}){
- const loaded=components(locale,options),req=new Request('http://example.test/'),html=renderToStaticMarkup(await loaded.page.PlatformHome({req}));
+ const loaded=components(locale,options),req=new Request('http://example.test/'),html=renderToStaticMarkup(React.createElement(React.Fragment,null,React.createElement(loaded.runtime.PortfolioRuntime),await loaded.page.PlatformHome({req})));
  assert.equal(loaded.reads.length,1);assert.equal(loaded.reads[0].req,req);assert.equal(loaded.reads[0].locale,locale);
  return {...loaded,html,document:parseDocument(html)};
 }
@@ -166,5 +166,22 @@ test('five navigation destinations expose only the current route, including home
    assert.equal(text(links[0]),c.navHome);assert.equal(text(links[4]),c.navAbout);
    assert.deepEqual(links.filter(n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href),active?[active]:[]);
   }
+ }
+});
+
+
+test('the root owns one shared header on home without a second backdrop or a page-owned replacement',async()=>{
+ const{document}=await render();
+ const landing=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-landing'))[0];
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,1);
+ assert.equal(find(landing,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,0,'home content cannot replace the moving root header');
+ assert.equal(find(document,n=>n.attribs['data-iavse-platform']==='home').length,1);
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-flow-backdrop-stub')).length,1,'home retains its original local mist');
+ const empty=find(document,n=>Object.hasOwn(n.attribs,'data-landing-empty'))[0];
+ assert.ok(Object.hasOwn(empty.attribs,'data-landing-reveal'),'the initial community empty card joins scroll entry just like populated cards');
+ for(const pathname of ['/blog/public-member','/blogs/showcase/editorial','/workspace/blog','/resources/designs/item/preview']){
+  const loaded=components('zh',{pathname});
+  const html=renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime));
+  assert.equal(html,'',pathname+' keeps its authored or workbench chrome');
  }
 });

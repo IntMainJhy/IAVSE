@@ -10,6 +10,9 @@
 .iavse-landing button{font:inherit}
 .iavse-landing .iv-backdrop-wrap{position:absolute;z-index:-1;inset:0 0 auto;height:1000px;pointer-events:none}
 .iavse-landing .iv-container{width:min(1120px,100% - 80px);margin-inline:auto;padding-top:20px}
+.iavse-landing .iv-header-space{height:72px}
+@media(max-width:940px){.iavse-landing .iv-header-space{height:70px}}
+@media(max-width:650px){.iavse-landing .iv-header-space{height:62px}}
 
 .iavse-landing .iv-hero{text-align:center;padding:62px 10px 50px}
 .iavse-landing .iv-title{font:400 clamp(44px,4.5vw,60px)/1.35 "IAVSE Display","Songti SC",serif;letter-spacing:-.02em;text-wrap:balance;color:var(--iv-ink)}

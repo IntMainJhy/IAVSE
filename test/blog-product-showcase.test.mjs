@@ -58,3 +58,24 @@ test('all three supported locales retain the complete product story and real cre
  }
  assert.equal(text(render('unknown').document),text(render('zh').document),'unknown locale safely uses the complete Chinese copy');
 });
+
+test('progressive entry opts in readable chunks while server output, diagrams and tall section containers remain at rest',()=>{
+ for(const locale of ['zh','en','ja']){
+  const{document}=render(locale),has=(node,key)=>Object.hasOwn(node.attribs||{},key),items=find(document,node=>has(node,'data-rbp-reveal-item'));
+  assert.equal(find(document,node=>has(node,'data-rbp-reveal-scope')).length,1);
+  assert.ok(items.length>=20,'the story reveals paragraphs and list rows instead of waiting for a tall mobile section');
+  for(const item of items){
+   assert.notEqual(item.name,'section');assert.ok(text(item).trim());
+   for(let ancestor=item.parent;ancestor;ancestor=ancestor.parent)assert.ok(!has(ancestor,'data-rbp-reveal-item'),'a readable chunk cannot inherit another chunk entrance');
+  }
+  for(const diagram of find(document,node=>node.name==='figure'||node.attribs.role==='img')){
+   assert.ok(!has(diagram,'data-rbp-reveal-item'));
+   assert.equal(find(diagram,node=>has(node,'data-rbp-reveal-item')).length,0,'miniature diagram contents stay out of the reveal owner');
+  }
+  for(const node of find(document,node=>true)){
+   assert.ok(!has(node,'data-rbp-reveal'),'SSR has no hidden pending state');
+   assert.ok(!node.attribs.style?.includes('opacity'),'content remains visible before enhancement or with JavaScript disabled');
+  }
+  assert.ok(find(document,node=>node.name==='details').every(node=>has(node,'data-rbp-reveal-item')),'FAQ controls share the focus-recoverable chunk');
+ }
+});
