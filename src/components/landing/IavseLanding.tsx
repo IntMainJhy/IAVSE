@@ -95,7 +95,7 @@ export function IavseLanding({content}: {content: LandingContent}) {
   const c = landingCopy(locale);
   const [filter, setFilter] = useState<Filter>('all');
   const root = useRef<HTMLDivElement>(null);
-  const revealed = useRef(new WeakSet<Element>());
+  const cycles = useRef(new WeakMap<HTMLElement, {armed: boolean}>());
   const featuredWork = filter === 'all' ? content.works[0] : null;
   const featuredPost = filter === 'all' && !featuredWork ? content.posts[0] : null;
   const discussionItems = filter === 'discussion' ? content.posts : filter === 'all' ? content.posts.slice(featuredPost ? 1 : 0, featuredPost ? 2 : 1) : [];
@@ -105,23 +105,89 @@ export function IavseLanding({content}: {content: LandingContent}) {
     const element = root.current;
     if (!element || !('IntersectionObserver' in window)) return;
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
-    const animations = new Set<Animation>();
+    const nodes = Array.from(element.querySelectorAll<HTMLElement>('[data-landing-reveal]'));
+    const animations = new Map<HTMLElement, Animation>();
+    let disposed = false, exitFrame = 0;
+    const state = (node: HTMLElement) => {
+      let value = cycles.current.get(node);
+      if (!value) { value = {armed: true}; cycles.current.set(node, value); }
+      return value;
+    };
+    const cancel = (node: HTMLElement) => {
+      const animation = animations.get(node);
+      animations.delete(node);
+      animation?.cancel();
+    };
+    const outside = (node: HTMLElement) => {
+      const box = node.getBoundingClientRect();
+      // The entrance itself moves the visual box; it cannot count as scrolling out.
+      const transform = animations.has(node) ? getComputedStyle(node).transform : 'none';
+      const y = transform !== 'none' && typeof DOMMatrixReadOnly === 'function' ? new DOMMatrixReadOnly(transform).m42 : 0;
+      return box.bottom - y <= 0 || box.top - y >= window.innerHeight;
+    };
     const observer = new IntersectionObserver(entries => {
-      entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
-        observer.unobserve(entry.target);
-        revealed.current.add(entry.target);
-        if (preference.matches || !(entry.target instanceof HTMLElement) || !entry.target.animate) return;
-        const animation = entry.target.animate([{opacity: 0, transform: 'translateY(24px)'}, {opacity: 1, transform: 'translateY(0)'}], {duration: 650, delay: Math.min(index * 70, 210), easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards'});
-        animations.add(animation);
-        animation.finished.catch(() => {}).finally(() => { animations.delete(animation); animation.cancel(); });
+      if (disposed) return;
+      const latest = new Map(entries.map(entry => [entry.target, entry]));
+      const incoming: HTMLElement[] = [];
+      for (const entry of latest.values()) {
+        const node = entry.target as HTMLElement, cycle = state(node);
+        if (outside(node)) { cancel(node); cycle.armed = !node.contains(document.activeElement); continue; }
+        if (entry.isIntersecting && entry.intersectionRatio >= .1 && cycle.armed) incoming.push(node);
+      }
+      incoming.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top).forEach((node, index) => {
+        const cycle = state(node);
+        cycle.armed = false;
+        if (preference.matches || !node.animate || node.contains(document.activeElement)) return;
+        const animation = node.animate([{opacity: 0, transform: 'translateY(24px)'}, {opacity: 1, transform: 'translateY(0)'}], {duration: 650, delay: Math.min(index * 70, 210), easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards'});
+        animations.set(node, animation);
+        animation.finished.catch(() => {}).finally(() => {
+          if (disposed || animations.get(node) !== animation) return;
+          cancel(node);
+          if (outside(node) && !node.contains(document.activeElement)) cycle.armed = true;
+        });
       });
-    }, {threshold: .1});
-    element.querySelectorAll('[data-landing-reveal]').forEach(node => { if (!revealed.current.has(node)) observer.observe(node); });
-    const reduce = () => { if (preference.matches) for (const animation of animations) animation.cancel(); };
-    const focus = (event: FocusEvent) => { const node = (event.target as Element).closest<HTMLElement>('[data-landing-reveal]'); if (node) { revealed.current.add(node); observer.unobserve(node); node.getAnimations().forEach(animation => animation.cancel()); } };
+    }, {threshold: [0, .1]});
+    nodes.forEach(node => { state(node); observer.observe(node); });
+    const reduce = () => {
+      if (!preference.matches) return;
+      for (const node of nodes) { cancel(node); state(node).armed = outside(node) && !node.contains(document.activeElement); }
+    };
+    const focus = (event: FocusEvent) => {
+      const node = (event.target as Element).closest<HTMLElement>('[data-landing-reveal]');
+      if (node) { cancel(node); state(node).armed = false; }
+    };
+    const blur = (event: FocusEvent) => {
+      const node = (event.target as Element).closest<HTMLElement>('[data-landing-reveal]');
+      if (node && !node.contains(event.relatedTarget as Node) && outside(node)) state(node).armed = true;
+    };
+    // An animated box can already be outside the observer root. A real scroll
+    // during that interval still has to reset its current cycle.
+    const scroll = () => {
+      if (!animations.size || exitFrame) return;
+      exitFrame = requestAnimationFrame(() => {
+        exitFrame = 0;
+        for (const node of animations.keys()) if (outside(node)) {
+          cancel(node);
+          state(node).armed = !node.contains(document.activeElement);
+        }
+      });
+    };
     preference.addEventListener('change', reduce);
     element.addEventListener('focusin', focus);
-    return () => { observer.disconnect(); preference.removeEventListener('change', reduce); element.removeEventListener('focusin', focus); for (const animation of animations) animation.cancel(); };
+    element.addEventListener('focusout', blur);
+    window.addEventListener('scroll', scroll, {passive: true});
+    window.addEventListener('resize', scroll);
+    return () => {
+      disposed = true;
+      cancelAnimationFrame(exitFrame);
+      observer.disconnect();
+      preference.removeEventListener('change', reduce);
+      element.removeEventListener('focusin', focus);
+      element.removeEventListener('focusout', blur);
+      window.removeEventListener('scroll', scroll);
+      window.removeEventListener('resize', scroll);
+      for (const node of animations.keys()) cancel(node);
+    };
   }, [filter, content]);
 
   useEffect(() => {

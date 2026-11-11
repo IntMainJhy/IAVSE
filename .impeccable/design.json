@@ -913,17 +913,17 @@
       {
         "name": "home-reveal",
         "value": "opacity 0→1; y24px→0; 650ms; threshold .1; cubic-bezier(.22,1,.36,1)",
-        "purpose": "Once on first intersection; keyboard focus reveals immediately."
+        "purpose": "Replays after a complete physical viewport exit and re-entry in either scroll direction; threshold crossings while visible do not restart it. Keyboard focus keeps content immediately readable; reduced motion or missing APIs keep it visible."
       },
       {
         "name": "application-reveal",
         "value": "opacity 0→1; y12px→0; 550ms; threshold .12; root margin 0px 0px -6% 0px",
-        "purpose": "Existing operating-page entry with authored/editable content exclusions."
+        "purpose": "Existing operating-page entry repeats only after a complete physical viewport exit; threshold or inset crossings while visible keep content stable. Focus and reduced-motion/API fallbacks stay readable; authored/editable content exclusions remain."
       },
       {
         "name": "template-fade",
         "value": "y12px→0; 800ms",
-        "purpose": "Retained template FadeIn within existing layout."
+        "purpose": "Controlled scroll FadeIn repeats after a complete physical viewport exit and re-entry, keeping visible content stable and focused content readable. Reduced motion or missing observation APIs show content directly; explicit mount FadeIn and ScaleUnblur retain mount entry."
       },
       {
         "name": "reveal-stagger",
