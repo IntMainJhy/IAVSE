@@ -28,9 +28,11 @@ test('spatial directory preserves member destinations, matches example preview l
    if(name.endsWith('/Icons'))return{Icon:'Icon'};
    throw Error('Unexpected dependency '+name);
   }});
-  const tree=await exports.BlogSpacesPage({req}),nodes=walk(tree),gallery=nodes.find(n=>n.type==='BlogSpaceGallery'),fallback=nodes.find(n=>n.type==='details'&&Object.hasOwn(n.props,'data-blog-spaces-list'));
+  const tree=await exports.BlogSpacesPage({req}),nodes=walk(tree),gallery=nodes.find(n=>n.type==='BlogSpaceGallery'),fallback=gallery?.props.directory;
   assert.deepEqual(reads,[req],'uses the request-qualified discovery service once');
   assert.ok(gallery);assert.ok(fallback,'native details remains usable without scene JavaScript');
+  assert.equal(fallback.type,'details');assert.ok(Object.hasOwn(fallback.props,'data-blog-spaces-list'));
+  assert.equal(nodes.filter(n=>n.type==='details').length,0,'the full list lives in the gallery toolbar, not below the scene');
   assert.equal(gallery.props.spaces.length,members.length+blogShowcases.length);
   assert.deepEqual(Array.from(gallery.props.spaces.slice(0,2),s=>({href:s.href,mode:s.mode})),[{href:'/blog/my-space',mode:'theme'},{href:'/blog/public-guest',mode:'static'}]);
   const expected=[...members.map(s=>'/blog/'+s.handle),...blogShowcases.map(s=>'/blogs/showcase/'+s.handle)];
@@ -38,7 +40,11 @@ test('spatial directory preserves member destinations, matches example preview l
   assert.deepEqual(Array.from(gallery.props.spaces,s=>s.href),expected,'preview and opened original home use the same route');
   assert.ok(gallery.props.spaces.slice(2).every(s=>s.showcase&&s.role&&s.href.indexOf('?')<0));
   const evidence=nodes.find(n=>n.type==='BlogProductShowcase');
-  assert.deepEqual(Array.from(evidence.props.spaces,s=>s.handle),members.map(s=>s.handle),'public-member directory does not invent accounts from examples');
+  assert.deepEqual(Object.keys(evidence.props),['locale'],'the lower product story has no duplicate creator directory or legacy demo props');
+  assert.equal(evidence.props.locale,locale);
+  const entries=walk(fallback).filter(n=>n.type==='li');
+  assert.equal(entries.filter(n=>n.props['data-space-kind']==='member').length,members.length);
+  assert.equal(entries.filter(n=>n.props['data-space-kind']==='example').length,blogShowcases.length);
  }
 });
 

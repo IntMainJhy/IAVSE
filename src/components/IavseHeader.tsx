@@ -24,11 +24,13 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
   const menuId = useId();
   const [open, setOpen] = useState(false);
   const items = [
+    {id: 'home', href: '/', label: copy.navHome},
     {id: 'community', href: '/community', label: copy.community},
     {id: 'resources', href: '/resources', label: copy.resources},
     {id: 'blogs', href: '/blogs', label: copy.blogs},
+    {id: 'about', href: '/about', label: copy.navAbout},
   ];
-  const active = /^\/community(?:\/|$)/.test(path) ? 'community'
+  const active = path === '/' ? 'home' : path === '/about' ? 'about' : /^\/community(?:\/|$)/.test(path) ? 'community'
     : /^\/(?:resources|docs|skills)(?:\/|$)/.test(path) ? 'resources'
       : /^\/blogs?(?:\/|$)/.test(path) ? 'blogs' : null;
   const close = () => { if (menu.current) menu.current.open = false; };
@@ -47,7 +49,7 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
         menu.current.querySelector('summary')?.focus();
       }
     };
-    const desktop = matchMedia('(min-width: 821px)');
+    const desktop = matchMedia('(min-width: 941px)');
     const resize = () => { if (desktop.matches && menu.current) menu.current.open = false; };
     document.addEventListener('pointerdown', outside);
     document.addEventListener('keydown', escape);

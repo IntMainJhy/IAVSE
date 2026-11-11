@@ -3,7 +3,7 @@ import type {Locale} from '@/components/LocaleProvider';
 const zh = {
   title: ['发现有用的，', '分享你做过的。'],
   intro: '发现资源，交流实践，让你的作品被看见。',
-  community: '社区', resources: '资源', blogs: '博客空间',
+  navHome: '首页', navAbout: '关于', community: '社区', resources: '资源', blogs: '博客空间',
   enter: '进入社区', discover: '发现资源', home: 'IAVSE 首页',
   nav: '主要导航', openNav: '展开导航', closeNav: '收起导航', account: '登录或管理账号',
   communityTitle: '从社区开始', filters: '社区内容类型', all: '发现', works: '作品', discussions: '讨论',
@@ -26,7 +26,7 @@ const zh = {
 const en: typeof zh = {
   title: ['Find something useful.', 'Share what you made.'],
   intro: 'Discover resources, exchange ideas, and give your work a place to be seen.',
-  community: 'Community', resources: 'Resources', blogs: 'Blog spaces',
+  navHome: 'Home', navAbout: 'About', community: 'Community', resources: 'Resources', blogs: 'Blog spaces',
   enter: 'Enter the community', discover: 'Discover resources', home: 'IAVSE home',
   nav: 'Main navigation', openNav: 'Open navigation', closeNav: 'Close navigation', account: 'Sign in or manage your account',
   communityTitle: 'Start with the community', filters: 'Community content', all: 'Discover', works: 'Work', discussions: 'Discussions',
@@ -48,7 +48,7 @@ const en: typeof zh = {
 const ja: typeof zh = {
   title: ['役立つものを見つけよう。', 'つくったものを共有しよう。'],
   intro: 'リソースを見つけ、経験を交わし、自分の作品を届ける場所。',
-  community: 'コミュニティ', resources: 'リソース', blogs: 'ブログスペース',
+  navHome: 'ホーム', navAbout: '紹介', community: 'コミュニティ', resources: 'リソース', blogs: 'ブログスペース',
   enter: 'コミュニティへ', discover: 'リソースを探す', home: 'IAVSE ホーム',
   nav: 'メインナビゲーション', openNav: 'ナビゲーションを開く', closeNav: 'ナビゲーションを閉じる', account: 'ログイン・アカウント',
   communityTitle: 'コミュニティから始めよう', filters: 'コンテンツの種類', all: '見つける', works: '作品', discussions: 'ディスカッション',

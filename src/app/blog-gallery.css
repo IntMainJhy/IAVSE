@@ -78,21 +78,21 @@
 .gallery-card-edge.edge-left{left:-7px}.gallery-card-edge.edge-right{right:-7px}
 .gallery-card-edge:is(.edge-top,.edge-bottom){height:14px;left:6px;right:6px;transform:rotateX(90deg) translateY(-7px);background:linear-gradient(var(--iavse-background),var(--creator-line))}
 .gallery-card-edge.edge-top{top:-7px}.gallery-card-edge.edge-bottom{bottom:-7px;background:color-mix(in srgb,var(--creator-line) 78%,var(--creator-muted))}
-.gallery-view-tools{position:absolute;inset:0 16px auto auto;z-index:2}
+.gallery-view-tools{position:absolute;inset:0 16px auto auto;z-index:5;display:flex;align-items:flex-start;gap:4px}
 .gallery-view-tools>button{min-height:44px;padding:8px 12px;border:0;background:transparent;color:var(--creator-muted);font:400 12px/1.5 var(--site-font);cursor:pointer;white-space:nowrap}.gallery-view-tools>button:hover{color:var(--creator-ink)}.gallery-view-tools>button:disabled{visibility:hidden}
 .blog-gallery[data-gallery-dragging] .blog-gallery-exhibits,.blog-gallery[data-gallery-dragging] .blog-gallery-select{cursor:grabbing}
 .blog-gallery[data-gallery-dragging]{user-select:none}
 .blog-gallery[data-mode=spatial] .blog-gallery-select{border-radius:8px}
 .blog-gallery[data-mode=spatial] .gallery-authors{max-width:1000px;margin-inline:auto;gap:4px 12px}
 @media(max-width:767px){.blog-gallery[data-mode=spatial] .gallery-authors{max-width:360px;gap:8px}.gallery-view-tools{right:0}.blog-gallery-signature .gallery-avatar,.blog-gallery-signature .feed-avatar{width:24px;height:24px;flex-basis:24px}}
-@media(prefers-reduced-motion:reduce){.blog-gallery[data-mode=spatial] .blog-gallery-exhibits{cursor:default}.gallery-view-tools{display:none}}
-.blog-gallery[data-gallery-reduced] .gallery-view-tools{display:none}
+@media(prefers-reduced-motion:reduce){.blog-gallery[data-mode=spatial] .blog-gallery-exhibits{cursor:default}.gallery-view-tools>button{display:none}}
+.blog-gallery[data-gallery-reduced] .gallery-view-tools>button{display:none}
 
-/* Every public destination is available in ordinary server-rendered flow. */
-.blog-spaces-list{max-width:1000px;margin:16px auto 64px;border-block:1px solid var(--creator-line);scroll-margin-top:112px}
-.blog-spaces-list>summary{min-height:60px;padding:17px 4px;cursor:pointer;color:var(--creator-ink);font-size:14px;line-height:1.8}
-.blog-spaces-list>summary>span{margin-inline-start:12px;color:var(--creator-muted);font-size:12px;font-variant-numeric:tabular-nums}
-.blog-spaces-list>ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px;list-style:none;padding:0 4px 24px;margin:0}
+/* The native list keeps every destination accessible without another section. */
+.blog-spaces-list{margin:0;color:var(--creator-ink)}
+.blog-spaces-list>summary{min-height:44px;padding:10px 14px;cursor:pointer;border-radius:999px;background:var(--iavse-background);border:1px solid var(--creator-line);font-size:12px;line-height:1.8;white-space:nowrap}
+.blog-spaces-list>summary>span{margin-inline-start:8px;color:var(--creator-muted);font-size:12px;font-variant-numeric:tabular-nums}
+.blog-spaces-list>ul{position:absolute;right:0;top:calc(100% + 8px);width:min(640px,calc(100vw - 64px));max-height:min(60svh,480px);overflow:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;list-style:none;padding:8px 20px;margin:0;border-radius:16px;background:var(--iavse-background);box-shadow:0 18px 48px rgb(25 19 42 / .14)}
 .blog-spaces-list li{min-width:0}
 .blog-spaces-list li>a{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:76px;padding:16px 0;border-top:1px solid var(--creator-line);color:var(--creator-ink);text-decoration:none;white-space:normal}
 .blog-spaces-list-name{font-size:16px;line-height:1.5;overflow-wrap:anywhere}
@@ -100,11 +100,7 @@
 .blog-spaces-list li>a>.icon{width:16px;height:16px;flex:none}
 .blog-spaces-list li>a:hover .blog-spaces-list-name{text-decoration:underline;text-underline-offset:4px}
 
-/* Feature evidence follows the restored opening, with neutral platform controls. */
-html:root[data-ui][data-color-mode] body .blog-spaces-page[data-spaces-surface=spatial] .product-showroom{--ps-paper:var(--iavse-background);--ps-soft:var(--iavse-muted);--ps-ink:var(--creator-ink);--ps-body:var(--creator-muted);--ps-line:var(--creator-line);--ps-blue:var(--creator-ink);--ps-blue-soft:var(--iavse-muted);background:transparent}
-html:root[data-ui][data-color-mode] body .blog-spaces-page[data-spaces-surface=spatial] .product-showroom .ps-cta{border-radius:12px;background:var(--creator-ink);color:var(--iavse-background)}
-html:root[data-ui][data-color-mode] body .blog-spaces-page[data-spaces-surface=spatial] .product-showroom .ps-cta:hover{background:var(--site-action-hover)}
-.blog-spaces-page[data-spaces-surface=spatial] :is(#blog-spaces-directory,#film-canvas-title){scroll-margin-top:112px}
+.blog-spaces-page[data-spaces-surface=spatial] #blog-space-product{scroll-margin-top:112px}
 .blog-gallery-placeholder>:is(.feed-avatar,.gallery-avatar){width:72px;height:72px;flex-basis:72px;margin-top:36px}
 .blog-gallery[data-mode=spatial] .blog-gallery-exhibits{height:clamp(560px,64vh,740px)}
 .gallery-current{max-width:900px}
@@ -125,14 +121,14 @@ html:root[data-ui][data-color-mode] body .blog-spaces-page[data-spaces-surface=s
  .blog-gallery-placeholder>:is(.feed-avatar,.gallery-avatar){width:48px;height:48px;flex-basis:48px;margin-top:4px}
  .blog-gallery-placeholder>strong{font-size:21px}
  .blog-gallery-placeholder>p{font-size:12px;-webkit-line-clamp:2}
- .blog-spaces-list{margin-bottom:32px}
  .blog-spaces-list>ul{grid-template-columns:minmax(0,1fr)}
 }
 @media(prefers-reduced-motion:reduce){.blog-spaces-create{transition:none}}
 @media print{
  .blog-spaces-page[data-spaces-surface=spatial]{width:100%;padding:24px 0;background:#fff}
- .blog-gallery,.blog-spaces-create,.blog-spaces-gallery-note{display:none}
- .blog-spaces-list{margin-bottom:24px}
+ .blog-gallery .blog-gallery-exhibits,.blog-gallery .gallery-current,.blog-gallery .gallery-authors,.blog-gallery .blog-gallery-scroll,.blog-spaces-create,.blog-spaces-gallery-note,.gallery-view-tools>button{display:none}
+ .gallery-view-tools,.blog-spaces-list>ul{position:static}
+ .blog-spaces-list>ul{width:100%;max-height:none;box-shadow:none}
  .blog-spaces-list:not([open])>ul{display:grid}
  .blog-spaces-list li{break-inside:avoid}
 }

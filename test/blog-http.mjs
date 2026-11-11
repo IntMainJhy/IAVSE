@@ -29,7 +29,7 @@ try{
   assert.ok(nodes.some(node=>node.name==='a'&&node.attribs.href==='/workspace/blog'),'The entry keeps a real create/edit destination');
   assert.doesNotMatch(html,/data-blog-context="(?:featured|mine)"/,'The directory cannot render a personalized author page');
   assert.equal(elements(directory).filter(node=>node.name==='iframe').length,0,'The directory does not execute embedded member sites');
-  const cards=elements(directory).filter(node=>node.name==='article'&&(hasClass(node,'creator-feature')||hasClass(node,'creator-entry'))).map(node=>({node,link:elements(node).find(item=>item.name==='a'&&hasClass(item,'creator-enter'))}));
+  const cards=elements(directory).filter(node=>node.name==='li'&&node.attribs?.['data-space-kind']==='member').map(node=>({node,link:elements(node).find(item=>item.name==='a')}));
   assert.ok(cards.every(card=>card.link),'Each creator retains an accessible entry link');
   assert.equal(new Set(cards.map(card=>card.link.attribs.href)).size,cards.length,'Each published space is listed once');
   const publicLinks=new Map(cards.map(card=>[card.link.attribs.href,text(card.node)]));

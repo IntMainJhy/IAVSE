@@ -32,7 +32,7 @@
 
 [`build-portfolio-styles.mjs`](../scripts/build-portfolio-styles.mjs) 编译模板工具类，输出 `@scope (.rbp-surface) to (.rbp-native)`；`npm run portfolio:styles` 可重建，`predev` 和 `prebuild` 自动运行。修改输入与组件，不手工维护生成文件。[`rbp-bridge.css`](../src/app/rbp-bridge.css) 处理宿主隔离、16px 根字号、导航不折行和主题映射。历史 `rbp-*` 文件名用于来源映射，当前视觉规则以 IAVSE tokens 和 DESIGN.md 为准。
 
-根 [`layout.tsx`](../src/app/layout.tsx) 挂载 PortfolioRuntime 与 ApplicationReveal，公共导航跨符合条件的路由持续存在。胶囊只有首页、资源、关于和外观按钮；账号与语言入口位于 Contact。管理中心和博客编辑器保留各自导航，编辑器、作者博客与内置博客预览不挂载公共胶囊。
+根 [`layout.tsx`](../src/app/layout.tsx) 挂载 PortfolioRuntime 与 ApplicationReveal，公共导航跨符合条件的路由持续存在。历史 Portfolio 胶囊包含首页、资源、关于和外观按钮；当前运行时使用独立实现的 [`IavseHeader`](../src/components/IavseHeader.tsx)，中央胶囊依次连接首页、社区、资源、博客空间、关于，原品牌与真实账号分居两侧。首页和关于沿用现有页面；940px 及以下切换为两列三行的手机菜单，关于占整行，滑动镜片继续使用原有局部文字放大机制。管理中心和博客编辑器保留各自导航，编辑器、作者博客与内置博客预览不挂载公共胶囊。
 
 [`PublicSite.tsx`](../src/components/PublicSite.tsx) 的 PublicFrame 将操作区域标为 `.rbp-native.rbp-application`；[`ResourceHub.tsx`](../src/components/ResourceHub.tsx)、[`AdminApp.tsx`](../src/components/AdminApp.tsx) 和 [`CommunityAdmin.tsx`](../src/components/CommunityAdmin.tsx) 也明确接入该区域。模板工具类重置在原生操作边界停止，IAVSE 应用样式则在作者博客根、保存的画布块、独立个人主页、博客主题和 React Flow 视口等内容边界停止。平台返回栏属于平台 UI；作者作品、第三方预览、上传图片和内置博客主题保留自己的外观。
 
@@ -43,7 +43,8 @@
 - [`PlatformHome.tsx`](../src/components/PlatformHome.tsx) 组合 Hero、Projects、Contact；四张卡片连接 UI 设计、AI Skills、社区和博客空间。Hero 与目录顶部留白均为手机 144px、small 断点起 192px。
 - Hero 标题使用 `clamp(34px, 4.1vw, 54px)`，正文为 19px / 1.6。方形预览外框 28px、内框 20px；项目卡片 20px、图片 14px。
 - [`ResourceIntroduction.tsx`](../src/components/ResourceIntroduction.tsx) 在 `/resources` 使用细化后的 ProjectsPage；带 `type` 的资源路由保留分类、筛选、搜索、来源与许可功能。
-- [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 重新挂载既有 [`BlogSpaceGallery.tsx`](../src/components/BlogSpaceGallery.tsx)，恢复可环顾、走近和返回的 3D 空间。真实成员保留 `publicSpaces(req)` 过滤与 `/blog/:handle`，原创主页示例明确标记虚构人物，并使用 `/blogs/showcase/:handle` 及同渲染器的 `?embed=gallery` 预览。原生展开列表列出全部入口，不受舞台 12 个空间的上限影响；下方保留现有产品展示与真实公开成员目录。[`blog-gallery.css`](../src/app/blog-gallery.css) 恢复公开历史 `894bf4b` 中的空间结构，并仅将平台控件与材质接入当前中性角色；不改真实成员的已保存博客外观。显式 `?template=builtin` 继续提供原有编辑器模板示例。
+- [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 挂载既有 [`BlogSpaceGallery.tsx`](../src/components/BlogSpaceGallery.tsx)，保留可环顾、走近和返回的 3D 空间及原有相机／预览逻辑。真实成员保留 `publicSpaces(req)` 过滤与 `/blog/:handle`，原创主页示例明确标记虚构人物，并使用 `/blogs/showcase/:handle` 及同渲染器的 `?embed=gallery` 预览。重置视角旁的原生展开列表列出全部入口，不受舞台 12 个空间的上限影响；减少动态时保留，Escape 关闭并返回摘要焦点。[`blog-gallery.css`](../src/app/blog-gallery.css) 恢复公开历史 `894bf4b` 中的空间结构，并仅将平台控件与材质接入当前中性角色；不改真实成员的已保存博客外观。显式 `?template=builtin` 继续提供原有编辑器模板示例。
+- 画廊下方现由 [`BlogProductShowcase.tsx`](../src/components/BlogProductShowcase.tsx) 和 [`blog-space-product.css`](../src/app/blog-space-product.css) 呈现原创产品介绍，说明个人主页、作品、长文、资源、在线履历、编辑、草稿／发布与可发现性，并提供两项 FAQ 及真实编辑器／指南入口。静态画布结构图明确标注不可交互；旧下方外观切换、嵌入式画布演示、大幅预览和重复成员目录已移出当前渲染组合，相关历史及来源保留。
 - Contact 外框为 28px、详情面板为 20px；介绍文字为 19px / 1.6，最大 38ch 并使用均衡换行。目录介绍同为 19px / 1.6。
 - [`DesktopDownloadsPage.tsx`](../src/components/DesktopDownloadsPage.tsx) 的手机标题占用完整宽度；现有中文标题按逗号分成两个不拆分的语义短语，保留原文字，英文和日文标题保持原样。
 - [`rbp/AboutPage.tsx`](../src/components/rbp/AboutPage.tsx) 的介绍面板为白色表面、24px 圆角。Experience/Education 名称只表示组件来源，不表示虚构的个人任职或学历。十个可拖动技术标签对应现有技术栈。

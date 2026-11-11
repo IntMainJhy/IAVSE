@@ -23,6 +23,10 @@ export async function BlogSpacesPage({req}:{req:Request}){
   return profile?[{...profile,href:'/blogs/showcase/'+encodeURIComponent(item.handle),role:exampleLabel+' · '+profile.role}]:[];
  });
  const allSpaces=[...spaces,...examples];
+ const directory=<details className="blog-spaces-list" data-blog-spaces-list data-blog-directory>
+   <summary>{say('列表浏览','List view','一覧表示')}<span>{new Intl.NumberFormat(locale).format(allSpaces.length)}</span></summary>
+   <ul>{allSpaces.map(space=><li key={(space.showcase?'example:':'member:')+space.handle} data-space-kind={space.showcase?'example':'member'}><Link href={space.href}><span className="blog-spaces-list-name">{space.name}<small>{space.showcase?exampleLabel:publicLabel+' · @'+space.handle}</small></span><Icon name="arrow"/></Link></li>)}</ul>
+  </details>;
  return <div className="blog-spaces-page" data-blog-spaces data-spaces-surface="spatial">
   <header className="creator-directory-intro">
    <h1>{t('博客空间')}</h1>
@@ -30,11 +34,7 @@ export async function BlogSpacesPage({req}:{req:Request}){
    <Link className="blog-spaces-create" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link>
   </header>
   <p className="blog-spaces-gallery-note">{say('公开空间与原创主页示例在这里相遇。示例中的人物和作品均为虚构。','Explore public spaces alongside original homepage examples. People and work in the examples are fictional.','公開スペースとオリジナルホームページの例を探索できます。サンプルの人物と作品は架空です。')}</p>
-  <BlogSpaceGallery spaces={allSpaces} labels={{loading:say('正在准备博客空间…','Preparing blog spaces…','ブログスペースを準備中…'),open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索功能','Scroll to explore the features','スクロールして機能を見る'),directory:t('发现博客空间'),previous:say('上一个空间','Previous space','前のスペース'),next:say('下一个空间','Next space','次のスペース'),select:say('走近这个空间','Explore this space','このスペースに近づく'),close:say('返回空间','Back to the spaces','スペースに戻る'),reset:say('重置视角','Reset view','視点をリセット'),overview:say('拖动环顾，点击走近一个空间','Drag to look around. Choose a space to step inside.','ドラッグで見渡して、スペースを選んで近づく')}}/>
-  <details className="blog-spaces-list" data-blog-spaces-list>
-   <summary>{say('以列表查看全部空间','View all spaces as a list','すべてのスペースをリストで見る')}<span>{new Intl.NumberFormat(locale).format(allSpaces.length)}</span></summary>
-   <ul>{allSpaces.map(space=><li key={(space.showcase?'example:':'member:')+space.handle}><Link href={space.href}><span className="blog-spaces-list-name">{space.name}<small>{space.showcase?exampleLabel:publicLabel+' · @'+space.handle}</small></span><Icon name="arrow"/></Link></li>)}</ul>
-  </details>
-  <BlogProductShowcase locale={locale} spaces={spaces} labels={{open:t('进入博客空间'),empty:t('暂时没有公开博客空间。'),emptyBody:t('作品、经历与想法，在这里相遇。')}}/>
+  <BlogSpaceGallery spaces={allSpaces} directory={directory} labels={{loading:say('正在准备博客空间…','Preparing blog spaces…','ブログスペースを準備中…'),open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索功能','Scroll to explore the features','スクロールして機能を見る'),directory:t('发现博客空间'),previous:say('上一个空间','Previous space','前のスペース'),next:say('下一个空间','Next space','次のスペース'),select:say('走近这个空间','Explore this space','このスペースに近づく'),close:say('返回空间','Back to the spaces','スペースに戻る'),reset:say('重置视角','Reset view','視点をリセット'),overview:say('拖动环顾，点击走近一个空间','Drag to look around. Choose a space to step inside.','ドラッグで見渡して、スペースを選んで近づく')}}/>
+  <BlogProductShowcase locale={locale}/>
  </div>;
 }

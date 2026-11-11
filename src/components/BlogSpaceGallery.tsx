@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {memo,useCallback,useEffect,useMemo,useRef,useState,type KeyboardEvent,type CSSProperties} from 'react';
+import {memo,useCallback,useEffect,useMemo,useRef,useState,type KeyboardEvent,type CSSProperties,type ReactNode} from 'react';
 import {gsap} from 'gsap';
 import {Icon} from './Icons';
 import {FeedAvatar} from './FeedAvatar';
@@ -40,11 +40,12 @@ const GalleryPanel=memo(function GalleryPanel({space,labels,selected,mounted,ind
  </article>;
 });
 
-export function BlogSpaceGallery(props:{spaces:GallerySpace[];labels:Labels}){
+type GalleryProps={spaces:GallerySpace[];labels:Labels;directory?:ReactNode};
+export function BlogSpaceGallery(props:GalleryProps){
  const {locale}=useLocale();return <GalleryScene key={locale} {...props}/>;
 }
 
-function GalleryScene({spaces,labels}:{spaces:GallerySpace[];labels:Labels}){
+function GalleryScene({spaces,labels,directory}:GalleryProps){
  const exhibits=useMemo(()=>spaces.slice(0,galleryLimit),[spaces]),host=useRef<HTMLElement>(null),select=useRef<(index:number)=>void>(()=>{}),resetView=useRef<()=>void>(()=>{}),selectedHandle=useRef<string|null>(null),suppressClick=useRef(false),settled=useRef(new Set<string>());
  const [selected,setSelected]=useState(-1),[workReady,setWorkReady]=useState(false),[mounted,setMounted]=useState<string[]>([]),[settledVersion,setSettledVersion]=useState(0),[revealed,setRevealed]=useState(false),[floating,setFloating]=useState(false);
  const prepared=useRef(revealed),workAllowed=useRef(false);prepared.current=revealed;
@@ -119,16 +120,16 @@ function GalleryScene({spaces,labels}:{spaces:GallerySpace[];labels:Labels}){
  },[exhibits]);
  const current=exhibits[selected];
  const close=()=>{const handle=selectedHandle.current;select.current(-1);if(handle)host.current?.querySelector<HTMLButtonElement>(`[data-gallery-trigger="${CSS.escape(handle)}"]`)?.focus({preventScroll:true});};
- const key=(event:KeyboardEvent<HTMLElement>)=>{if(event.altKey||event.metaKey||event.ctrlKey)return;if(event.key==='Escape'&&selected>=0){event.preventDefault();close();return;}const buttons=Array.from(host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')||[]),author=(event.target as Element).closest<HTMLButtonElement>('.gallery-authors>button'),origin=author?buttons.indexOf(author):selected;let index:number|undefined;if(event.key==='ArrowRight')index=(origin+1)%exhibits.length;else if(event.key==='ArrowLeft')index=origin<0?exhibits.length-1:(origin-1+exhibits.length)%exhibits.length;else if(event.key==='Home')index=0;else if(event.key==='End')index=exhibits.length-1;if(index!==undefined){event.preventDefault();select.current(index);host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')[index]?.focus({preventScroll:true});}};
+ const key=(event:KeyboardEvent<HTMLElement>)=>{if(event.altKey||event.metaKey||event.ctrlKey)return;const list=host.current?.querySelector<HTMLDetailsElement>('.blog-spaces-list[open]');if(event.key==='Escape'&&list){event.preventDefault();list.open=false;list.querySelector('summary')?.focus();return;}if((event.target as Element).closest('.blog-spaces-list'))return;if(event.key==='Escape'&&selected>=0){event.preventDefault();close();return;}const buttons=Array.from(host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')||[]),author=(event.target as Element).closest<HTMLButtonElement>('.gallery-authors>button'),origin=author?buttons.indexOf(author):selected;let index:number|undefined;if(event.key==='ArrowRight')index=(origin+1)%exhibits.length;else if(event.key==='ArrowLeft')index=origin<0?exhibits.length-1:(origin-1+exhibits.length)%exhibits.length;else if(event.key==='Home')index=0;else if(event.key==='End')index=exhibits.length-1;if(index!==undefined){event.preventDefault();select.current(index);host.current?.querySelectorAll<HTMLButtonElement>('.gallery-authors>button')[index]?.focus({preventScroll:true});}};
  if(!exhibits.length)return null;
  return <section ref={host} className="blog-gallery" data-mode="spatial" data-focused={selected>=0} data-gallery-prepared={revealed} data-gallery-floating={floating} aria-label={labels.directory} data-count={exhibits.length} onKeyDown={key}>
-  <div className="gallery-view-tools"><button type="button" onClick={()=>resetView.current()} disabled={selected>=0}>{labels.reset}</button></div>
+  <div className="gallery-view-tools">{directory}<button type="button" onClick={()=>resetView.current()} disabled={selected>=0}>{labels.reset}</button></div>
   <div className="blog-gallery-exhibits" onAnimationEnd={event=>{if(event.target===event.currentTarget&&event.animationName==='gallery-arrive')setFloating(true);}} onClickCapture={event=>{if(suppressClick.current){event.preventDefault();event.stopPropagation();suppressClick.current=false;}}} onClick={event=>{if(event.target===event.currentTarget)close();}}>
    {!revealed&&<div className="blog-gallery-loading" role="status"><span>{labels.loading}</span><span className="blog-gallery-progress" aria-hidden="true"><i style={{transform:`scaleX(${settled.current.size/Math.max(1,exhibits.length)})`}}/></span></div>}
    <div className="blog-gallery-world" inert={!revealed} aria-hidden={!revealed}>{exhibits.map((space,index)=><GalleryPanel key={space.handle} space={space} labels={labels} index={index} selected={selected===index} mounted={mounted.includes(space.handle)} onSelect={choose} onReady={onReady}/>)}</div>
   </div>
   <div className="gallery-current" aria-live="polite" aria-atomic="true">{current?<><button type="button" className="gallery-return" onClick={close}><Icon name="close"/>{labels.close}</button><div><span>{current.name}</span><small>{current.role||'@'+current.handle}</small></div><Link href={current.href}>{labels.open}<Icon name="arrow"/></Link></>:<p className="gallery-overview-hint">{labels.overview}</p>}</div>
   <div className="gallery-authors" aria-label={labels.select}>{exhibits.map((space,index)=><button type="button" key={space.handle} aria-label={space.name} aria-pressed={selected===index} onClick={()=>select.current(selected===index?-1:index)}><GalleryAvatar space={space}/><span className="gallery-author-name">{space.name}</span></button>)}</div>
-  <a className="blog-gallery-scroll" href="#blog-spaces-directory"><span>{labels.browse}</span><Icon name="chevron-down"/></a>
+  <a className="blog-gallery-scroll" href="#blog-space-product"><span>{labels.browse}</span><Icon name="chevron-down"/></a>
  </section>;
 }

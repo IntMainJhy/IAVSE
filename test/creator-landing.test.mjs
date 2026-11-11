@@ -16,14 +16,14 @@ const sourceRoot=fileURLToPath(new URL('../src/',import.meta.url));
 const motionTag=tag=>({initial,animate,exit,transition,layout,whileInView,viewport,onHoverStart,onHoverEnd,children,...props})=>React.createElement(tag,props,children);
 const image=({fill,priority,unoptimized,...props})=>React.createElement('img',props);
 const emptyContent={posts:[],works:[],space:null,communityUnavailable:false};
-function components(locale='zh',{content=emptyContent,user=null}={}){
+function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}){
  const reads=[];
  const avatar=({name,avatarId})=>React.createElement('span',{'data-avatar-name':name},avatarId?React.createElement('img',{src:'/media/'+encodeURIComponent(avatarId),alt:''}):null);
  const modules={
   react:React,'react/jsx-runtime':runtime,
   'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},
   'next/image':{default:image},
-  'next/navigation':{usePathname:()=>'/',useRouter:()=>({refresh:()=>{}})},
+  'next/navigation':{usePathname:()=>pathname,useRouter:()=>({refresh:()=>{}})},
   'lucide-react':new Proxy({},{get:()=>()=>null}),
   'motion/react':{useReducedMotion:()=>true,motion:new Proxy({},{get:(_,tag)=>motionTag(tag)}),LayoutGroup:({children})=>children,AnimatePresence:({children})=>children},
   '@/lib/home-experience.mjs':experience,
@@ -78,7 +78,7 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  const order=[hero[0],filters[0],empty[0],resources[0],spaces[0],footer[0]].map(node=>all.indexOf(node));
  assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'semantic content stays in its intended reading order');
  const primary=find(document,node=>node.name==='nav'&&node.attribs['aria-label']===c.nav);
- assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/community','/resources','/blogs']);
+ assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/','/community','/resources','/blogs','/about']);
  assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length,1);
  assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-flow-backdrop-stub')).length,1,'the optional background is isolated from server content');
  const preview=find(spaces[0],node=>node.name==='img');assert.equal(preview.length,1);
@@ -151,5 +151,20 @@ test('legacy spatial helpers remain stable and the current homepage is usable wi
  for(const node of find(document,node=>['a','button'].includes(node.name))){
   let parent=node.parent;
   while(parent){assert.ok(!Object.hasOwn(parent.attribs||{},'inert'),'real server controls stay usable before enhancement');parent=parent.parent;}
+ }
+});
+
+
+test('five navigation destinations expose only the current route, including home and about in all locales',async()=>{
+ const routes=[['/','/'],['/about','/about'],['/community/discussion','/community'],['/resources/designs','/resources'],['/docs/showcase','/resources'],['/skills/example','/resources'],['/blogs','/blogs'],['/login',null]];
+ for(const locale of ['zh','en','ja']){
+  for(const[pathname,active]of routes){
+   const{document,copy}=await render(locale,{pathname}),c=copy.landingCopy(locale);
+   const nav=find(document,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav)[0];
+   const links=find(nav,n=>n.name==='a');
+   assert.deepEqual(links.map(n=>n.attribs.href),['/','/community','/resources','/blogs','/about']);
+   assert.equal(text(links[0]),c.navHome);assert.equal(text(links[4]),c.navAbout);
+   assert.deepEqual(links.filter(n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href),active?[active]:[]);
+  }
  }
 });

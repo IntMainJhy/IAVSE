@@ -5,69 +5,56 @@ import vm from 'node:vm';
 import React from 'react';
 import * as runtime from 'react/jsx-runtime';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {parseDocument} from 'htmlparser2';
+import {parseDocument,DomUtils} from 'htmlparser2';
 import ts from 'typescript';
-import {blogProductCopy} from '../src/lib/blog-product-copy.mjs';
-import * as showroomData from '../src/lib/product-showcase.mjs';
-import {blogTemplates} from '../src/lib/blog-templates.mjs';
-import {blogAppearances} from '../src/lib/blog-appearances.mjs';
-import {blogShowcases} from '../src/lib/blog-showcase.mjs';
 
-const looksSource=ts.transpileModule(readFileSync(new URL('../src/components/BlogProductLooks.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
 const source=ts.transpileModule(readFileSync(new URL('../src/components/BlogProductShowcase.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
-const element=React.createElement,walk=node=>[node,...(node.children||[]).flatMap(walk)],text=node=>node.type==='text'?node.data:(node.children||[]).map(text).join('');
-const fixtures=[{handle:'alpha',name:'Alpha <script>alert(1)</script>',intro:'A public introduction',avatarId:'',href:'/blog/alpha',mode:'theme'},{handle:'beta',name:'Beta',intro:'Another published space',avatarId:'',href:'/blog/beta',mode:'static'}];
-function render(locale='zh',spaces=fixtures){
- let lookProps;
+const element=React.createElement;
+const find=(node,predicate)=>DomUtils.findAll(n=>n.type==='tag'&&predicate(n),node.children||[]);
+const text=node=>DomUtils.textContent(node);
+function render(locale='zh'){
  const modules={
-  './ProductCinema':{ProductCinema:()=>null},
-  'react':React,'react/jsx-runtime':runtime,'@/lib/product-showcase.mjs':showroomData,'@/app/product-showroom.css':{},
+  'react/jsx-runtime':runtime,
   'next/link':{default:({href,children,prefetch,...props})=>element('a',{href,...props},children)},
-  './BlogProductMotion':{BlogProductMotion:({children})=>element('div',{'data-product-motion':''},children)},
-  './HomeBlogCanvasDemo':{HomeBlogCanvasDemo:({locale})=>element('div',{'data-local-demo':locale})},
-  './FeedAvatar':{FeedAvatar:()=>null},'./Icons':{Icon:()=>null},'@/lib/blog-product-copy.mjs':{blogProductCopy},'@/app/blog-product-film.css':{}
- };
- const previewExports={};vm.runInNewContext(ts.transpileModule(readFileSync(new URL('../src/components/ShowcasePreview.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports:previewExports,require:name=>modules[name]});modules['./ShowcasePreview']=previewExports;
- const looksExports={};vm.runInNewContext(looksSource,{exports:looksExports,require:name=>{if(!Object.hasOwn(modules,name))throw Error('Unexpected dependency '+name);return modules[name];}});
- modules['./BlogProductLooks']={BlogProductLooks:props=>{lookProps=props;return element(looksExports.BlogProductLooks,props);}};
- const exports={};vm.runInNewContext(source,{exports,require:name=>{if(!Object.hasOwn(modules,name))throw Error('Unexpected dependency '+name);return modules[name];}});
- const html=renderToStaticMarkup(element(exports.BlogProductShowcase,{locale,spaces,labels:{open:'Enter space',empty:'No public spaces yet.',emptyBody:'Work and ideas meet here.'}}));
- return{html,nodes:walk(parseDocument(html)),lookProps};
+  './Icons':{Icon:()=>null},'@/app/blog-space-product.css':{}
+ },exports={};
+ vm.runInNewContext(source,{exports,require:name=>{assert.ok(Object.hasOwn(modules,name),'Unexpected dependency '+name);return modules[name];}});
+ const html=renderToStaticMarkup(element(exports.BlogProductShowcase,{locale}));
+ return{html,document:parseDocument(html)};
 }
 
-test('the product story retains its gallery anchor, three real feature scenes and complete server-rendered creator directory',()=>{
- const{html,nodes,lookProps}=render(),copy=blogProductCopy('zh');
- assert.ok(nodes.some(node=>node.attribs?.id==='blog-spaces-directory'));
- assert.ok(nodes.some(node=>node.attribs?.['data-product-showroom']==='blogs'));
- for(const id of ['blog-product-title','film-canvas-title','film-publish-title'])assert.ok(nodes.some(node=>node.attribs?.id===id));
- const directory=nodes.find(node=>Object.hasOwn(node.attribs||{},'data-blog-directory'));assert.ok(directory);assert.equal(directory.name,'section','public creators remain directly discoverable');
- const links=walk(directory).filter(node=>node.name==='a').map(node=>node.attribs.href);assert.deepEqual(links,fixtures.map(space=>space.href));
- assert.equal(nodes.filter(node=>node.name==='iframe').length,0,'the product story must not execute additional embedded member sites');
- assert.equal(nodes.filter(node=>node.name==='script').length,0);assert.ok(nodes.some(node=>node.type==='text'&&node.data===fixtures[0].name),'public author names remain escaped text');
- assert.ok(nodes.some(node=>node.name==='a'&&node.attribs.href==='/workspace/blog'));
- const examples=nodes.filter(node=>node.name==='a'&&node.attribs.href?.startsWith('/blogs/showcase/'));assert.equal(examples.length,2,'the selected look and publish scene each retain a real example destination');
- for(const look of lookProps.looks)assert.ok(blogShowcases.some(item=>item.handle===look.handle),'every selectable look must retain a real bundled destination');
- for(const link of examples)assert.ok(blogShowcases.some(item=>link.attribs.href==='/blogs/showcase/'+item.handle),'example links must point at existing bundled showcases');
- assert.equal(nodes.filter(node=>node.attribs?.role==='tab').length,3);
- assert.ok(nodes.some(node=>node.name==='a'&&node.attribs.href==='#film-canvas-title'&&text(node)===copy.tryCanvas));
- assert.ok(html.includes(copy.canvasHint),'the local-only demo boundary must be visible');assert.ok(nodes.some(node=>node.attribs?.['data-local-demo']==='zh'));
+test('the replacement introduction explains real capabilities without mounting old demos or another creator directory',()=>{
+ const{document,html}=render();
+ assert.equal(find(document,n=>n.attribs.id==='blog-space-product').length,1,'the gallery scroll target remains a real section');
+ for(const label of ['个人主页','作品集','长文与随笔','资源分享','在线履历','允许在平台中发现我的博客'])assert.ok(text(document).includes(label),label);
+ const actions=find(document,n=>n.name==='a').map(n=>n.attribs.href);
+ assert.deepEqual(actions,['/workspace/blog','/docs/showcase','/workspace/blog','/docs/showcase']);
+ assert.equal(find(document,n=>['iframe','script','img','button'].includes(n.name)).length,0,'static feature storytelling adds no downloads, editor widgets or embedded member pages');
+ for(const removed of ['data-blog-directory','data-product-showroom','data-local-demo','film-canvas-title','role="tab"'])assert.ok(!html.includes(removed),removed);
+ assert.ok(text(document).includes('非交互编辑器'),'the drawn canvas cannot be mistaken for a working editor');
+ const ids=find(document,n=>n.attribs.id).map(n=>n.attribs.id);
+ for(const section of find(document,n=>n.name==='section'))assert.ok(ids.includes(section.attribs['aria-labelledby']),'sections retain visible accessible headings');
 });
 
-test('product visuals reserve geometry and an empty public directory keeps a real creation path',()=>{
- const{nodes}=render('en',[]),images=nodes.filter(node=>node.name==='img');assert.equal(images.length,4);
- for(const image of images){assert.match(image.attribs.src,/^\/media\/blog-product\/[a-z-]+\.webp$/);const mobile=image.attribs.src.endsWith('/portfolio-mobile.webp');assert.equal(image.attribs.width,mobile?'390':'900');assert.equal(image.attribs.height,mobile?'844':'1015');assert.equal(image.attribs.loading,'lazy');assert.equal(image.attribs.decoding,'async');assert.ok(image.attribs.alt);}
- const selected=nodes.filter(node=>node.attribs?.role==='tabpanel'&&node.attribs['aria-hidden']==='false');assert.equal(selected.length,1);assert.equal(walk(selected[0]).find(node=>node.name==='img').attribs.src,'/media/blog-product/portfolio.webp');
- assert.equal(images.filter(image=>image.attribs.src.endsWith('/portfolio-mobile.webp')).length,0,'the second device image loads only when selected');
- const directory=nodes.find(node=>Object.hasOwn(node.attribs||{},'data-blog-directory'));assert.ok(text(directory).includes('No public spaces yet.'));
- assert.deepEqual(walk(directory).filter(node=>node.name==='a').map(node=>node.attribs.href),['/workspace/blog']);
+test('publishing copy distinguishes a saved draft, manual homepage publishing and reviewed article snapshots',()=>{
+ const{document}=render(),content=text(document);
+ for(const detail of ['不会替换已经公开的页面','主页、作品与资源由作者手动发布后公开','文章会固定提交的版本，审核通过后公开','保留公开链接而不进入平台目录'])assert.ok(content.includes(detail),detail);
+ const steps=find(document,n=>n.name==='ol')[0];assert.equal(find(steps,n=>n.name==='li').length,3);
+ const faqs=find(document,n=>n.name==='details');assert.equal(faqs.length,2);
+ for(const faq of faqs){assert.equal(find(faq,n=>n.name==='summary').length,1);assert.equal(find(faq,n=>n.name==='p').length,1);assert.ok(!Object.hasOwn(faq.attribs,'open'));}
+ assert.ok(content.includes('以内置模板库为准'),'standalone showcase examples do not claim to be installable editor templates');
 });
 
-test('every supported language covers the product story and states the actual layout and appearance capabilities',()=>{
- const keys=Object.keys(blogProductCopy('zh')).sort();
- for(const locale of ['zh','en','ja']){const copy=blogProductCopy(locale);assert.deepEqual(Object.keys(copy).sort(),keys);for(const value of Object.values(copy))assert.ok(Array.isArray(value)?value.length===3&&value.every(item=>item.trim()):value.trim());const{nodes}=render(locale);assert.ok(nodes.some(node=>node.type==='text'&&node.data===copy.canvasHint));}
- const numberWords={6:'six',8:'eight'},numberChinese={6:'六',8:'八'};
- assert.match(blogProductCopy('en').looksBody,new RegExp(numberWords[blogTemplates.length]+' layouts','i'));
- assert.match(blogProductCopy('en').looksBody,new RegExp(numberWords[blogAppearances.length]+' visual styles','i'));
- assert.ok(blogProductCopy('zh').looksBody.includes(numberChinese[blogTemplates.length]+'种布局'));assert.ok(blogProductCopy('zh').looksBody.includes(numberChinese[blogAppearances.length]+'种外观'));
- assert.ok(blogProductCopy('ja').looksBody.includes(blogTemplates.length+' 種類のレイアウト'));assert.ok(blogProductCopy('ja').looksBody.includes(blogAppearances.length+' 種類のスタイル'));
+test('all three supported locales retain the complete product story and real creation/help destinations',()=>{
+ for(const locale of ['zh','en','ja']){
+  const{html,document}=render(locale),content=text(document);
+  assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-blog-space-product'))[0].attribs['data-product-locale'],locale);
+  assert.ok(find(document,n=>n.name==='h2').length>=5);
+  assert.equal(find(document,n=>n.name==='details').length,2);
+  assert.ok(find(document,n=>n.name==='h2'&&n.attribs.id==='blog-product-title').length);
+  for(const href of ['/workspace/blog','/docs/showcase'])assert.equal(find(document,n=>n.name==='a'&&n.attribs.href===href).length,2);
+  for(const marker of ['undefined','NaN','hello@example.com'])assert.ok(!html.includes(marker));
+  assert.ok(content.length>600,locale+' includes full explanations');
+ }
+ assert.equal(text(render('unknown').document),text(render('zh').document),'unknown locale safely uses the complete Chinese copy');
 });
