@@ -3,12 +3,14 @@
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect, useRef, useState} from 'react';
-import {ArrowRight, ArrowUpRight, BookOpen, MessageCircle, PanelsTopLeft, Shapes, Sparkles} from 'lucide-react';
+import {ArrowRight, ArrowUpRight, MessageCircle, PencilLine} from 'lucide-react';
 import {GlassSwitch} from '@/components/ui/GlassSwitch';
 import {BrandMark} from '@/components/BrandMark';
 import {FeedAvatar} from '@/components/FeedAvatar';
 import {useLocale} from '@/components/LocaleProvider';
 import {landingCopy} from '@/lib/landing-copy';
+import {LandingResourceShowcase, type ResourceShowcaseGroup} from './LandingResourceShowcase';
+import {LandingSpaceShowcase} from './LandingSpaceShowcase';
 import IavseFlowBackdrop from './IavseFlowBackdrop';
 
 export type LandingPost = {
@@ -59,54 +61,25 @@ function EmptyContent({filter, unavailable}: {filter: Filter; unavailable: boole
   const router = useRouter();
   const failed = unavailable && filter !== 'work';
   const title = failed ? c.unavailable : filter === 'work' ? c.emptyWorks : filter === 'discussion' ? c.emptyPosts : c.emptyTitle;
-  return <div className="iv-card iv-empty" data-landing-card data-landing-empty data-landing-reveal>
-    <MessageCircle size={22} strokeWidth={1.4} aria-hidden="true"/><h3>{title}</h3>
-    <div className="iv-empty-actions"><Link href={filter === 'work' ? '/blogs' : '/community'} className="iv-text-link">{filter === 'work' ? c.exploreSpace : c.enter}<ArrowRight size={15} aria-hidden="true"/></Link>{failed ? <button type="button" className="iv-text-link" onClick={() => router.refresh()}>{c.retry}</button> : null}</div>
+  if (failed) return <div className="iv-card iv-empty" data-landing-empty data-landing-reveal>
+    <h3>{title}</h3>
+    <button type="button" className="iv-text-link" onClick={() => router.refresh()}>{c.retry}<ArrowRight size={15} aria-hidden="true"/></button>
+  </div>;
+
+  const isWork = filter === 'work';
+  return <div className="iv-prompt-board" data-landing-empty data-landing-reveal>
+    <div className="iv-prompt-paper">
+      <div className="iv-prompt-byline"><PencilLine size={16} aria-hidden="true"/>{c.promptLabel}</div>
+      <h3>{c.prompts[filter]}</h3>
+      <Link className="iv-text-link" href={isWork ? '/workspace/blog' : '/workspace/submissions/new'}>
+        {isWork ? c.addWork : c.writePost}<ArrowUpRight size={16} aria-hidden="true"/>
+      </Link>
+    </div>
+    <p className="iv-prompt-status">{title}</p>
   </div>;
 }
 
-function ResourceRail() {
-  const {locale} = useLocale();
-  const c = landingCopy(locale);
-  const resources = [
-    {id: 'designs', label: c.design, icon: PanelsTopLeft},
-    {id: 'skills', label: c.skill, icon: Sparkles},
-    {id: 'docs', label: c.docs, icon: BookOpen},
-    {id: 'resources', label: c.tools, icon: Shapes},
-  ];
-  return <aside className="iv-resource-rail" aria-label={c.resources}>
-    <div className="iv-resource-heading" data-landing-reveal>
-      <h2>{c.resourceTitle}</h2>
-    </div>
-    <div className="iv-resource-directory" data-landing-reveal>
-      <div className="iv-resource-links">
-        {resources.map(({id, label, icon: Icon}) => (
-          <Link key={id} href={'/resources?type=' + id}>
-            <Icon size={23} strokeWidth={1.5} aria-hidden="true"/>
-            <span>{label}</span>
-            <ArrowUpRight size={17} aria-hidden="true"/>
-          </Link>
-        ))}
-      </div>
-      <p className="iv-resource-note">{c.resourceNote}</p>
-    </div>
-  </aside>;
-}
-
-function SpaceCard({space}: {space: LandingContent['space']}) {
-  const {locale} = useLocale();
-  const c = landingCopy(locale);
-  return <div data-landing-reveal><article className="iv-card iv-space" data-landing-card>
-    <div className={'iv-space-cover' + (space && !space.coverId ? ' is-avatar' : '')}>{space ? space.coverId ? <img src={media(space.coverId)} alt="" width={800} height={480} loading="lazy"/> : <FeedAvatar name={space.name || space.handle} avatarId={space.avatarId}/> : <img src="/media/home-product/space-editorial.webp" alt={c.example} width={800} height={480} loading="lazy"/>}<span>{space ? c.publicSpace : c.example}</span></div>
-    <div className="iv-space-copy">
-      {space && <h3>{space.name || space.handle}</h3>}
-      {space?.intro && <p>{space.intro}</p>}
-      <Link href={space?.href || '/blogs'} className="iv-text-link">{space ? c.visitSpace : c.exploreSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-    </div>
-  </article></div>;
-}
-
-export function IavseLanding({content}: {content: LandingContent}) {
+export function IavseLanding({content, resources}: {content: LandingContent; resources: ResourceShowcaseGroup[]}) {
   const {locale} = useLocale();
   const c = landingCopy(locale);
   const [filter, setFilter] = useState<Filter>('all');
@@ -243,7 +216,8 @@ export function IavseLanding({content}: {content: LandingContent}) {
       <section className="iv-community" aria-labelledby="iv-community-title">
         <div className="iv-community-intro" data-landing-reveal>
           <h2 id="iv-community-title">{c.communityTitle}</h2>
-          {hasContent && <Link href="/community" className="iv-text-link">{c.communityMore}<ArrowUpRight size={16} aria-hidden="true"/></Link>}
+          <p>{c.communityIntro}</p>
+          <Link href="/community" className="iv-text-link">{c.communityMore}<ArrowUpRight size={16} aria-hidden="true"/></Link>
         </div>
         <div className="iv-community-preview"><div className="iv-section-heading"><GlassSwitch className="iv-filter-switch" items={[{id: 'all', label: c.all}, {id: 'work', label: c.works}, {id: 'discussion', label: c.discussions}]} value={filter} onValueChange={value => setFilter(value as Filter)} ariaLabel={c.filters} size="compact"/></div><div className="iv-feed" aria-live="polite">
           {filter === 'work' ? content.works.map(work => <FeatureCard key={work.id} item={work} kind="work"/>) : null}
@@ -253,19 +227,8 @@ export function IavseLanding({content}: {content: LandingContent}) {
           {!hasContent ? <EmptyContent filter={filter} unavailable={content.communityUnavailable}/> : null}
         </div></div>
       </section>
-      <ResourceRail/>
-      <section className="iv-spaces" aria-label={c.blogs}>
-        <div className="iv-space-story" data-landing-reveal>
-          <h2>{c.spaceTitle}</h2>
-          <p>{c.spaceBody}</p>
-          <div className="iv-space-actions">
-            <Link href="/workspace/blog" className="iv-button">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-            {content.space && <Link href="/blogs" className="iv-text-link">{c.exploreSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>}
-          </div>
-          <p className="iv-publish-note">{c.spacePublishing}</p>
-        </div>
-        <SpaceCard space={content.space}/>
-      </section>
+      <LandingResourceShowcase groups={resources}/>
+      <LandingSpaceShowcase space={content.space}/>
       <footer className="iv-footer">
         <Link href="/" className="iv-footer-brand">IAVSE</Link>
         <nav aria-label={c.about}>

@@ -1,0 +1,106 @@
+.iv-space-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, .8fr);
+  grid-template-areas: "board intro" "board details";
+  gap: 22px clamp(30px, 5vw, 72px);
+  margin-top: clamp(40px, 6vw, 76px);
+  padding: clamp(36px, 5vw, 64px) 8px 0;
+  border-top: 1px solid var(--iv-border);
+}
+.iv-space-intro { grid-area: intro; align-self: end }
+.iv-space-intro h2 {
+  font: 400 clamp(28px, 3vw, 40px)/1.2 "IAVSE Display","Songti SC",serif;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+[data-landing-locale=en] .iv-space-intro h2 { font-family: "IAVSE Wordmark",Georgia,serif; font-weight: 500 }
+[data-landing-locale=ja] .iv-space-intro h2 { font-family: "Yu Mincho","Songti SC",serif }
+.iavse-landing .iv-space-intro p { max-width: 36ch; margin-top: 12px; color: var(--iv-body); line-height: 1.75 }
+.iv-space-details { grid-area: details; align-self: start; min-width: 0 }
+.iv-space-destinations { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px }
+.iavse-landing .iv-space-publishing { margin-top: 12px; font-size: 12px; line-height: 1.65; color: var(--iv-body) }
+.iv-member-space {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  max-width: 360px;
+  margin-top: 26px;
+  padding: 14px 2px 0;
+  border-top: 1px solid var(--iv-border);
+  color: var(--iv-ink);
+  text-decoration: none;
+}
+.iv-member-space .feed-avatar { width: 42px; height: 42px; flex: none; border-radius: 50%; overflow: hidden }
+.iv-member-cover { width: 72px; height: 54px; object-fit: cover; border-radius: 6px }
+.iv-member-space-copy { display: grid; min-width: 0; gap: 2px; overflow-wrap: anywhere }
+.iv-member-space-copy > span { color: var(--iv-body); font-size: 12px }
+.iv-member-space-copy strong { font-size: 15px; font-weight: 550 }
+.iv-member-bio { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden }
+.iv-member-space:hover strong { text-decoration: underline; text-underline-offset: 3px }
+
+.iv-space-board {
+  grid-area: board;
+  align-self: center;
+  min-width: 0;
+  margin: 0;
+  overflow: clip;
+  background: var(--iv-surface);
+  border: 1px solid var(--iv-border);
+  border-radius: 18px;
+  box-shadow: var(--iv-shadow);
+}
+.iv-space-mat {
+  display: grid;
+  place-items: center;
+  padding: clamp(15px, 2.4vw, 32px);
+  background: linear-gradient(125deg, #dcece6, #e9f1ed 48%, #e1edf1);
+}
+.iv-space-mat[data-template=resume] { background: linear-gradient(125deg,#d3dfe4,#e2eaee 58%,#d4e5e3) }
+html[data-color-mode=dark] .iv-space-mat { background: linear-gradient(125deg,#253a35,#273638 68%,#23353a) }
+.iv-space-mat img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 860;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgb(20 38 36 / .12), 0 14px 26px -16px rgb(15 36 37 / .45);
+}
+.iv-space-board figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 10px 14px;
+}
+.iv-space-picker { display: inline-flex; gap: 4px; align-items: center; flex-wrap: wrap }
+.iavse-landing .iv-space-picker button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--iv-body);
+  font-size: 13px;
+}
+.iv-space-picker button[aria-pressed=true] { border-color: var(--iv-border); background: var(--iv-soft); color: var(--iv-ink) }
+.iv-space-picker button:hover { color: var(--iv-ink); text-decoration: underline; text-underline-offset: 3px }
+.iv-space-swatch { width: 14px; height: 17px; border: 1px solid rgb(0 0 0 / .2); border-radius: 3px }
+.iv-space-swatch--editorial { background: linear-gradient(90deg,#e3dac9 27%,#f3eee7 27%) }
+.iv-space-swatch--resume { background: linear-gradient(90deg,#45464a 27%,#171719 27%); border-color: #63646b }
+.iv-space-sample-note { color: var(--iv-body); font-size: 11px; line-height: 1.5 }
+@media (prefers-reduced-motion:no-preference) {
+  .iv-space-mat img { animation: iv-show-template .24s ease-out }
+  @keyframes iv-show-template { from { opacity: .55; transform: translateY(3px) } }
+}
+@media (max-width:740px) {
+  .iv-space-showcase { grid-template-columns: minmax(0,1fr); grid-template-areas: "intro" "board" "details"; gap: 18px; padding-inline: 0 }
+  .iv-space-board figcaption { padding: 8px 10px; gap: 4px 10px }
+  .iv-space-sample-note { padding-inline: 8px }
+  .iv-member-space { margin-top: 18px }
+}
