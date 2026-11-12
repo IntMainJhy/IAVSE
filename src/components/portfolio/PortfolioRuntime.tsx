@@ -3,6 +3,8 @@
 import {useEffect} from 'react';
 import {usePathname} from 'next/navigation';
 import {IavseHeader} from '../IavseHeader';
+import {IavseMobileDock} from '../IavseMobileDock';
+import {PlatformAccountProvider} from '../PlatformAccount';
 import IavseFlowBackdrop from '../landing/IavseFlowBackdrop';
 import {platformChrome} from '@/lib/platform-chrome';
 import '@/app/iavse-shell.css';
@@ -21,6 +23,9 @@ export function PortfolioRuntime(){
   if(!chrome.atmosphere&&!chrome.header)return null;
   return <div className="iavse-platform-shell" data-iavse-platform={path==='/'?'home':chrome.header?'public':'tools'}>
     {chrome.atmosphere&&<div className="iavse-shell-atmosphere"><IavseFlowBackdrop/></div>}
-    {chrome.header&&<div className="iavse-shell-header"><IavseHeader/></div>}
+    {chrome.header&&<PlatformAccountProvider>
+      <div className="iavse-shell-header"><IavseHeader/></div>
+      <IavseMobileDock path={path}/>
+    </PlatformAccountProvider>}
   </div>;
 }

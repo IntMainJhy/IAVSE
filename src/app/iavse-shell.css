@@ -18,7 +18,7 @@ html:has([data-iavse-landing]) :is(.site-frame,.site-corner){display:none}
 html[data-color-mode=dark] .iavse-shell-atmosphere{opacity:.24}
 @media(min-width:1500px){.iavse-shell-header{width:min(1240px,calc(100% - 100px))}}
 @media(max-width:900px){.iavse-shell-header{width:calc(100% - 48px)}}
-@media(max-width:650px){.iavse-shell-header{top:12px;width:calc(100% - 32px)}}
+@media(max-width:767px){.iavse-shell-header{top:0;left:0;width:100%;transform:none}}
 @media print{.iavse-shell-atmosphere,.iavse-shell-header{display:none}}
 
 /* Preserve route content clearance when the shared navigation occupies two rows. */

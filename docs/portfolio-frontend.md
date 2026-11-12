@@ -8,7 +8,7 @@
 
 当前 `/` 由 [`IavseLanding.tsx`](../src/components/landing/IavseLanding.tsx) 呈现：首屏居中的标题、简介及下方的「社区／资源」液态玻璃胶囊 → 社区动态与投稿提示 → 可展开的四类精选资源 → 指定作者的真实公开博客预览与主页入口 → 页脚。旧资源侧栏组合和下文的 Portfolio Hero／Projects／Contact 首页属于历史实现；当前首页保留原有公开内容权限、空态／错误／重试、浮起卡片和入场机制，没有新增媒体或成员数据。
 
-根运行时在首页与合格公共路由保留同一 [`IavseHeader`](../src/components/IavseHeader.tsx) 和单个 `GlassSwitch`。导航胶囊各视口始终可见，主题按钮放在胶囊旁，原语言切换器放在真实账号／头像之后。1100px 以上为一行；1100px 及以下为品牌和账号／语言上排、胶囊和主题下排，650px 及以下使用精简可见标签并保留完整本地化可访问名称。高度与首页占位分别为 72px／122px／110px，非首页 `PublicFrame` 在紧凑断点追加 52px／48px 避让。当前首页和顶栏均使用局部深色角色；主题控件复用现有文档偏好、cookie 和圆形过渡契约，来源归属保留。精确布局、字号、颜色和路由边界见 DESIGN.md 与[平台说明](platform-ui.zh-CN.md)。
+根运行时在首页与合格公共路由保留同一 [`IavseHeader`](../src/components/IavseHeader.tsx) 和单个 `GlassSwitch`。1100px 以上为单行桌面导航，768–1100px 将胶囊与主题置于第二行。767px 及以下，顶部为品牌与「更多」设置，底部为首页、社区、资源、博客和「我的」五项导航。三档顶栏占位分别为 72px、122px 和 56px 加顶部安全区。当前首页和顶栏均使用局部深色角色；主题控件复用现有文档偏好、cookie 和圆形过渡契约，来源归属保留。精确布局、字号、颜色和路由边界见 DESIGN.md 与[平台说明](platform-ui.zh-CN.md)。
 
 ## 来源组件与保留实现
 
@@ -38,7 +38,7 @@
 
 [`build-portfolio-styles.mjs`](../scripts/build-portfolio-styles.mjs) 编译模板工具类，输出 `@scope (.rbp-surface) to (.rbp-native)`；`npm run portfolio:styles` 可重建，`predev` 和 `prebuild` 自动运行。修改输入与组件，不手工维护生成文件。[`rbp-bridge.css`](../src/app/rbp-bridge.css) 处理宿主隔离、16px 根字号、导航不折行和主题映射。历史 `rbp-*` 文件名用于来源映射，当前视觉规则以 IAVSE tokens 和 DESIGN.md 为准。
 
-根 [`layout.tsx`](../src/app/layout.tsx) 挂载 PortfolioRuntime 与 ApplicationReveal。历史 Portfolio 胶囊包含首页、资源、关于和外观按钮；当前运行时使用上节的常驻 `IavseHeader`，首页与关于沿用已有页面。此前 940px 汉堡／两列三行导航方案已被常驻胶囊替代。新 [`ThemeToggle`](../src/components/ThemeToggle.tsx) 沿用实际文档模式、持久 cookie 与原公开圆形主题揭示，保留来源注释，并处理减少动态、API 降级及过渡提交前的连续点击。管理中心和博客编辑器保留各自导航，作者博客与内置博客预览不挂公共胶囊。
+根 [`layout.tsx`](../src/app/layout.tsx) 挂载 PortfolioRuntime 与 ApplicationReveal。历史 Portfolio 胶囊包含首页、资源、关于和外观按钮；当前运行时使用上节的常驻 `IavseHeader`，首页与关于沿用已有页面。桌面和平板沿用导航胶囊，手机使用底部导航。新 [`ThemeToggle`](../src/components/ThemeToggle.tsx) 沿用实际文档模式、持久 cookie 与原公开圆形主题揭示，保留来源注释，并处理减少动态、API 降级及过渡提交前的连续点击。管理中心和博客编辑器保留各自导航，作者博客与内置博客预览不挂公共胶囊。
 
 [`PublicSite.tsx`](../src/components/PublicSite.tsx) 的 PublicFrame 将操作区域标为 `.rbp-native.rbp-application`；[`ResourceHub.tsx`](../src/components/ResourceHub.tsx)、[`AdminApp.tsx`](../src/components/AdminApp.tsx) 和 [`CommunityAdmin.tsx`](../src/components/CommunityAdmin.tsx) 也明确接入该区域。模板工具类重置在原生操作边界停止，IAVSE 应用样式则在作者博客根、保存的画布块、独立个人主页、博客主题和 React Flow 视口等内容边界停止。平台返回栏属于平台 UI；作者作品、第三方预览、上传图片和内置博客主题保留自己的外观。
 

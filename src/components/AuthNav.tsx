@@ -1,13 +1,13 @@
 'use client';
 import {useEffect,useRef} from 'react';
 import {useLocale} from './LocaleProvider';
-import {useResource} from './PageResources';
+import {usePlatformAccount} from './PlatformAccount';
 import {Logout} from './CommunityUI';
 import Link from 'next/link';
 import {FeedAvatar} from './FeedAvatar';
 import {Icon} from './Icons';
 export function AuthNav({mobile=false}:{mobile?:boolean}){const {t:tr}=useLocale();
- const auth=useResource('/api/auth/me'),user=auth.data?.user,menu=useRef<HTMLDetailsElement>(null);
+ const {user}=usePlatformAccount(),menu=useRef<HTMLDetailsElement>(null);
  useEffect(()=>{const close=(event:PointerEvent)=>{if(menu.current&&!menu.current.contains(event.target as Node))menu.current.open=false;};const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'&&menu.current?.open){menu.current.open=false;menu.current.querySelector('summary')?.focus();}};document.addEventListener('pointerdown',close);document.addEventListener('keydown',escape);return()=>{document.removeEventListener('pointerdown',close);document.removeEventListener('keydown',escape);};},[]);
  if(!user)return <Link className={mobile?'':'organic-login-nav'} href="/login">{tr('登录')}</Link>;
  const close=()=>{if(menu.current)menu.current.open=false;};

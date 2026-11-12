@@ -1,0 +1,37 @@
+@layer rbp {
+ .rbp-application .community-search-toggle {display:none}
+
+ @media(max-width:767px){
+  .rbp-application .community-timeline .community-timeline-header {padding:4px 14px 0}
+  .rbp-application .community-title-row {display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .rbp-application .community-title-row .feed-title {margin:0!important;font-size:20px!important}
+  .rbp-application .community-title-row .community-search-toggle {
+   display:inline-flex;flex:none;align-items:center;justify-content:center;gap:5px;
+   min-height:44px;padding:0 8px;border:0;border-radius:9px;
+   background:transparent;color:var(--iavse-foreground);box-shadow:none;font:inherit;font-size:13px;cursor:pointer;
+  }
+  .rbp-application .community-search-toggle:is(:hover,[aria-expanded=true]) {background:var(--iavse-muted)}
+  .rbp-application .community-search-toggle:focus-visible {outline:2px solid var(--iavse-focus);outline-offset:-2px}
+  .rbp-application .community-search-toggle>.icon {width:17px;height:17px}
+  .rbp-application .community-timeline-tools[data-open=false] {display:none}
+  .rbp-application .community-timeline-tools[data-open=true] {padding-top:10px}
+  .rbp-application .community-timeline .community-glass-tabs {margin:0!important;padding:0!important;border:0!important}
+  .rbp-application .community-timeline .community-glass-tabs .glass-switch {
+   display:grid;grid-template-columns:1fr 1fr;gap:0;--glass-item-height:44px;
+   border:0!important;border-radius:0!important;background:transparent!important;
+   box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0!important;
+  }
+  .rbp-application .community-timeline .community-glass-tabs .glass-switch__lens {display:none}
+  .rbp-application .community-timeline .community-glass-tabs .glass-switch__item {
+   border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--iavse-secondary)!important;
+  }
+  .rbp-application .community-timeline .community-glass-tabs .glass-switch__item[aria-current=page] {color:var(--iavse-foreground)!important;font-weight:650}
+  .rbp-application .community-timeline .community-glass-tabs .glass-switch__item[aria-current=page]::after {
+   content:"";position:absolute;bottom:0;left:50%;width:26px;height:3px;transform:translateX(-50%);
+   border-radius:999px;background:currentColor;
+  }
+  .rbp-application .community-timeline .feed-results:not(.is-filtered),
+  .rbp-application .community-timeline .community-feed-empty .community-empty-detail>a {display:none!important}
+  .rbp-application .community-timeline .community-feed-empty .community-empty-detail>p {margin-bottom:0!important}
+ }
+}

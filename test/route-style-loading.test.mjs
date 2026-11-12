@@ -8,7 +8,7 @@ const root=new URL('../src/app/',import.meta.url),read=path=>fs.readFileSync(new
 const files=name=>[...read('route-styles/'+name+'.css').matchAll(/@import '\.\.\/(.+\.css)'/g)].map(match=>match[1]);
 test('server route CSS preserves the established cascade and excludes unrelated feature families',()=>{
  const baseline=files('fallback');
- const routeOwned={'iavse-landing.css':['home'],'blog-gallery.css':['blogs'],'community-timeline.css':['community','workspace']};
+ const routeOwned={'iavse-landing.css':['home'],'blog-gallery.css':['blogs'],'community-timeline.css':['community','workspace'],'community-mobile-feed.css':['community']};
  for(const name of ['home','blogs','blog','catalog','community','workspace','admin','account']){
   const selected=files(name);assert.equal(new Set(selected).size,selected.length,name);
   const shared=selected.filter(file=>!Object.hasOwn(routeOwned,file));

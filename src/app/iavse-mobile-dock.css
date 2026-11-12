@@ -1,0 +1,106 @@
+.iavse-mobile-dock { display: none }
+
+@media screen and (max-width: 767px) {
+  html:has(.iavse-mobile-dock) {
+    --iavse-dock-height: 64px;
+    --iavse-dock-clearance: calc(var(--iavse-dock-height) + env(safe-area-inset-bottom,0px));
+    scroll-padding-block-end: var(--iavse-dock-clearance);
+  }
+  html:has(.iavse-mobile-dock) body { padding-block-end: var(--iavse-dock-clearance) }
+  .iavse-mobile-dock {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 80;
+    display: block;
+    padding: 0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);
+    color: var(--iavse-foreground);
+    background: var(--iavse-background);
+    box-shadow: 0 -1px var(--iavse-border);
+  }
+  .iavse-mobile-dock__items {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    height: var(--iavse-dock-height);
+  }
+  .iavse-mobile-dock__tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 100%;
+    min-width: 0;
+    padding: 3px 1px;
+    border: 0;
+    background: none;
+    color: var(--iavse-secondary);
+    font: 500 11px/1.25 var(--iavse-font), sans-serif;
+    text-decoration: none;
+  }
+  .iavse-mobile-dock__tab svg { stroke-width: 1.75 }
+  .iavse-mobile-dock__tab[aria-current=page] { color: var(--iavse-foreground); font-weight: 650 }
+  .iavse-mobile-dock__tab[aria-current=page] svg { stroke-width: 2.35 }
+  .iavse-mobile-dock__tab:focus-visible { outline: 2px solid var(--iavse-focus); outline-offset: -4px; border-radius: 9px }
+  .iavse-mobile-dock__indicator {
+    position: absolute;
+    top: 0;
+    left: calc(10% + var(--dock-index) * 20%);
+    width: 20px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: currentColor;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .iavse-mobile-dock__indicator { transition: left .22s cubic-bezier(.22,.8,.25,1) }
+    .iavse-mobile-dock__tab svg { transition: transform .14s }
+    .iavse-mobile-dock__tab:active svg { transform: scale(.9) }
+  }
+
+  html:has(.iavse-account-sheet[open]) { overflow: hidden }
+  .iavse-account-sheet {
+    position: fixed;
+    inset: auto 0 0;
+    width: 100%;
+    max-width: 32rem;
+    max-height: calc(100% - 24px);
+    max-height: calc(100dvh - max(24px,env(safe-area-inset-top)));
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid var(--iavse-border);
+    border-bottom: 0;
+    border-radius: 22px 22px 0 0;
+    background: var(--iavse-background);
+    color: var(--iavse-foreground);
+    overscroll-behavior: contain;
+  }
+  .iavse-account-sheet::backdrop { background: rgb(13 17 20 / .4) }
+  .iavse-account-sheet__body { padding: 14px max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left)) }
+  .iavse-account-sheet header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px }
+  .iavse-account-sheet header .feed-avatar { display: grid; place-items: center; flex: none; width: 36px; height: 36px; overflow: hidden; border-radius: 50%; background: var(--iavse-muted); color: var(--iavse-foreground) }
+  .iavse-account-sheet header .feed-avatar img { width: 100%; height: 100%; object-fit: cover }
+  .iavse-account-sheet h2 { margin: 0; overflow-wrap: anywhere; font-size: 19px; font-weight: 650; line-height: 1.4 }
+  .iavse-account-sheet header button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-inline-start: auto;
+    flex: none;
+    border: 0;
+    border-radius: 50%;
+    background: var(--iavse-muted);
+    color: inherit;
+  }
+  .iavse-account-sheet__links { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px }
+  .iavse-account-sheet__links a { display: flex; align-items: center; gap: 9px; min-height: 46px; padding: 7px 4px; border-radius: 8px; color: inherit; font-size: 14px; line-height: 1.35; text-decoration: none }
+  .iavse-account-sheet__links svg { width: 19px; height: 19px; flex: none; stroke-width: 1.7 }
+  .iavse-account-sheet__unread { display: inline-grid; place-items: center; flex: none; min-width: 19px; height: 19px; padding-inline: 4px; border-radius: 10px; background: var(--iavse-foreground); color: var(--iavse-background); font-size: 10px; font-weight: 650 }
+  .iavse-account-sheet__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap }
+  .iavse-account-sheet__links a:active { background: var(--iavse-muted) }
+  .iavse-account-sheet__account { margin-top: 12px; padding-top: 4px; border-top: 1px solid var(--iavse-border) }
+  .iavse-account-sheet__account :is(a,button) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; border: 0; background: none; color: inherit; font-size: 14px; font-weight: 600 }
+  .iavse-account-sheet :is(a,button):focus-visible { outline: 2px solid var(--iavse-focus); outline-offset: -2px }
+}

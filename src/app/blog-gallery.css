@@ -111,7 +111,7 @@
 .gallery-return:hover{background:var(--iavse-muted)}
 .blog-gallery[data-mode=spatial] .blog-gallery-scroll{font-size:12px}
 @media(max-width:767px){
- .blog-spaces-page[data-spaces-surface=spatial]{width:calc(100% - 40px);padding:124px 0 48px}
+ .blog-spaces-page[data-spaces-surface=spatial]{width:calc(100% - 40px);padding:calc(var(--iavse-header-reserved,56px) + 24px) 0 48px}
  .blog-spaces-page[data-spaces-surface=spatial] .creator-directory-intro{gap:16px;margin-bottom:28px}
  .blog-spaces-page[data-spaces-surface=spatial] .creator-directory-intro h1{font-size:40px}
  .blog-spaces-page[data-spaces-surface=spatial] .creator-directory-intro p{font-size:16px;max-width:26ch}

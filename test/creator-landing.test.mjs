@@ -30,6 +30,8 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}
   '@/lib/landing-content.mjs':{loadLandingContent:async(req,requestedLocale)=>{reads.push({req,locale:requestedLocale});return content;}},
   '@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},
   '@/components/LocaleProvider':{useLocale:()=>({locale,t:value=>value}),LanguageSwitcher:()=>React.createElement('button',{'aria-label':'Language','data-language-switcher':true})},
+  '@/components/PageResources':{useResource:path=>{assert.equal(path,'/api/auth/me');return {loading:false,data:{user:user?{nickname:user.name,...user}:null}};}},
+  '@/components/CommunityUI':{Logout:()=>React.createElement('button',{'data-logout':true},'Sign out')},
   '@/components/AuthNav':{AuthNav:()=>user?React.createElement('a',{href:'/workspace/account','data-auth-account':true},avatar(user),user.name):React.createElement('a',{href:'/login','data-auth-login':true},'Sign in')},
   '@/components/FeedAvatar':{FeedAvatar:avatar},
   '@/components/SiteTools':{SiteTools:()=>React.createElement('button',{'aria-label':'Language'})},
@@ -97,7 +99,7 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  assert.equal(find(spaces[0],node=>['img','button'].includes(node.name)).length,0);
  assert.deepEqual(find(spaces[0],node=>node.name==='a').map(node=>node.attribs.href).sort(),['/blogs','/workspace/blog']);
  assert.equal(find(document,node=>['iframe','video'].includes(node.name)).length,0);
- assert.equal(find(document,node=>node.name==='a'&&/^\/(?:community\/|blog\/|blogs\/showcase\/)/.test(node.attribs.href||'')).length,0,'empty content does not fabricate public posts, projects or creators');
+ assert.equal(find(document,node=>node.name==='a'&&node.attribs.href!=='/community/members'&&/^\/(?:community\/|blog\/|blogs\/showcase\/)/.test(node.attribs.href||'')).length,0,'empty content does not fabricate public posts, projects or creators');
  for(const name of ['Lin Chen','Maya Zhou','Leo Park','Josh Mercer','jianghaoyu2006'])assert.ok(!text(document).includes(name),name);
 
  const failed=await render('zh',{content:{...emptyContent,communityUnavailable:true}}),failedEmpty=find(failed.document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));
@@ -235,13 +237,18 @@ test('the root owns one shared header on home without a second backdrop or a pag
 });
 
 
-test('the persistent header exposes the same capsule and keeps language after identity and theme beside navigation',async()=>{
+test('the persistent header shares appearance and language controls with the mobile settings disclosure',async()=>{
  for(const user of [null,{name:'Signed-in member',avatarId:'account-avatar'}]){
   const{document,copy}=await render('zh',{user}),c=copy.landingCopy('zh');
   const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
   const nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav);
-  assert.equal(nav.length,1,'one live capsule serves every viewport');
-  assert.equal(find(header,n=>(n.attribs.class||'').includes('iavse-header__mobile')).length,0,'the header has no separate collapsed mobile menu');
+  assert.equal(nav.length,1,'the desktop navigation has one live capsule');
+  const more=find(header,n=>n.name==='button'&&n.attribs.class==='iavse-header__more')[0];
+  assert.equal(more.attribs['aria-expanded'],'false');
+  const panel=find(header,n=>n.attribs.id===more.attribs['aria-controls'])[0];
+  assert.equal(panel.attribs['data-open'],'false');
+  assert.equal(find(panel,n=>n.attribs.class==='iavse-header__about')[0].attribs.href,'/about');
+  assert.equal(find(panel,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,1);
   const navigation=nav[0].parent,theme=find(navigation,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle');
   assert.equal(theme.length,1);assert.equal(theme[0].attribs.type,'button');
   const identity=find(header,n=>n.attribs.class==='iavse-header__identity')[0],children=(identity.children||[]).filter(n=>n.type==='tag');
@@ -252,5 +259,37 @@ test('the persistent header exposes the same capsule and keeps language after id
    const compact=find(link,n=>(n.attribs.class||'').includes('glass-switch__compact-label'))[0];
    assert.equal(compact.attribs['aria-hidden'],'true','short visible labels do not replace full accessible destination names');
   }
+ }
+});
+
+
+test('mobile navigation follows the actual route and keeps community and account actions accessible',()=>{
+ const cases=[['/','/'],['/community/members','/community'],['/resources/designs/a','/resources'],['/docs/guide','/resources'],['/skills/example','/resources'],['/blogs','/blogs'],['/workspace/notifications','account'],['/about',undefined]];
+ for (const [pathname,expected] of cases) {
+  const loaded=components('zh',{pathname});
+  const doc=parseDocument(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime)));
+  const dock=find(doc,n=>n.name==='nav'&&n.attribs.class==='iavse-mobile-dock')[0];
+  const bar=find(dock,n=>n.attribs.class==='iavse-mobile-dock__items')[0];
+  assert.deepEqual(find(bar,n=>n.name==='a').map(n=>n.attribs.href),['/','/community','/resources','/blogs']);
+  const trigger=find(bar,n=>n.name==='button')[0];
+  const panel=find(dock,n=>n.name==='dialog')[0];
+  assert.equal(trigger.attribs['aria-controls'],panel.attribs.id);
+  const active=find(bar,n=>n.attribs['aria-current']==='page');
+  assert.deepEqual(active.map(n=>n.attribs.href??'account'),expected?[expected]:[]);
+  const links=find(panel,n=>n.name==='a').map(n=>n.attribs.href);
+  for(const href of ['/workspace/bookmarks','/workspace/notifications','/community?feed=following','/workspace/blog'])
+   assert.ok(links.includes('/login?next='+encodeURIComponent(href)),href);
+  assert.ok(links.includes('/community/members'));
+  assert.ok(!links.some(h=>h.startsWith('/admin')));
+ }
+ for (const [role,adminHref] of [['member',null],['reviewer','/admin/community'],['owner','/admin']]) {
+  const loaded=components('zh',{user:{id:'u1',name:'Test member',status:'active',role,canPublish:true},pathname:'/community'});
+  const doc=parseDocument(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime)));
+  const panel=find(doc,n=>n.name==='dialog'&&n.attribs.class==='iavse-account-sheet')[0];
+  const links=find(panel,n=>n.name==='a').map(n=>n.attribs.href);
+  assert.ok(links.includes('/workspace/account')&&links.includes('/community/members/u1'));
+  assert.ok(links.includes('/workspace/bookmarks')&&links.includes('/workspace/notifications'));
+  assert.deepEqual(links.filter(h=>h.startsWith('/admin')),adminHref?[adminHref]:[]);
+  assert.equal(find(panel,n=>Object.hasOwn(n.attribs,'data-logout')).length,1);
  }
 });
