@@ -16,15 +16,15 @@ test('landing DTOs whitelist public fields, construct internal links and bound e
  const spaces=Array.from({length:6},(_,i)=>space('member '+i));
  const posts=Array.from({length:6},(_,i)=>post('post '+i,{coverId:'cover-'+i,authorAvatarId:'avatar-'+i,commentCount:i,likeCount:i+1,url:'https://untrusted.example',href:'PRIVATE_LINK'}));
  const works=Array.from({length:6},(_,i)=>work('work '+i,'member '+(i%4),{coverId:'work-cover-'+i,authorAvatarId:'avatar-'+i,href:'PRIVATE_LINK'}));
- const result=projectLandingContent({posts,spaces,works});
+ const result=projectLandingContent({posts,spaces,works,siteOwnerSpace:{...spaces[0],siteOwner:true}});
  assert.equal(result.posts.length,4);assert.equal(result.works.length,3);
  assert.deepEqual(keys(result),['communityUnavailable','posts','space','works']);
  assert.deepEqual(keys(result.posts[0]),['authorAvatarId','authorName','category','commentCount','coverId','href','id','license','likeCount','source','summary','title'].sort());
  assert.deepEqual(keys(result.works[0]),['authorAvatarId','authorName','coverId','href','id','summary','title','type'].sort());
- assert.deepEqual(keys(result.space),['avatarId','count','coverId','handle','href','intro','name'].sort());
+ assert.deepEqual(keys(result.space),['avatarId','count','coverId','handle','href','intro','name','previewHref'].sort());
  assert.equal(result.posts[0].href,'/community/post%200');
  assert.equal(result.works[0].href,'/blog/member%200/projects/work%200');
- assert.equal(result.works[0].type,'work');assert.equal(result.space.href,'/blog/member%200');
+ assert.equal(result.works[0].type,'work');assert.equal(result.space.href,'/blog/member%200');assert.equal(result.space.previewHref,'/blog/member%200/preview');
  assert.equal(result.posts[0].source,'Original source');assert.equal(result.posts[0].license,'Author license');
  assert.doesNotMatch(JSON.stringify(result),/PRIVATE_|untrusted/);
 });
@@ -37,12 +37,12 @@ test('posts and projects use stable newest-first ordering without modifying publ
  assert.deepEqual(result.works.map(item=>item.id),['new','middle','old']);
  assert.deepEqual(posts.map(item=>item.id),['old','new-a','new-b','undated']);
  assert.deepEqual(works.map(item=>item.id),['old','new','middle']);
- assert.equal(result.space.handle,'a','directory order chooses the first eligible public space');
+ assert.equal(result.space,null,'unrelated directory members never replace the owner preview');
 });
 
 test('localized public text never replaces canonical IDs, media, author or URLs',()=>{
  const translations={en:{title:'English title',summary:'English summary',coverId:'PRIVATE_COVER',id:'PRIVATE_ID',href:'PRIVATE_LINK'}};
- const result=projectLandingContent({locale:'en',posts:[post('p',{translations,coverId:'published-cover'})],spaces:[space('a',{profile:{name:'原名',intro:'原简介',avatarId:'published-avatar',translations:{en:{name:'English author',intro:'English introduction',avatarId:'PRIVATE_AVATAR'}}}})],works:[work('w','a',{translations})]});
+ const result=projectLandingContent({locale:'en',posts:[post('p',{translations,coverId:'published-cover'})],spaces:[space('a')],siteOwnerSpace:space('a',{siteOwner:true,profile:{name:'原名',intro:'原简介',avatarId:'published-avatar',translations:{en:{name:'English author',intro:'English introduction',avatarId:'PRIVATE_AVATAR'}}}}),works:[work('w','a',{translations})]});
  assert.equal(result.posts[0].title,'English title');assert.equal(result.posts[0].summary,'English summary');
  assert.equal(result.posts[0].id,'p');assert.equal(result.posts[0].coverId,'published-cover');
  assert.equal(result.works[0].title,'English title');assert.equal(result.works[0].href,'/blog/a/projects/w');
@@ -51,7 +51,7 @@ test('localized public text never replaces canonical IDs, media, author or URLs'
 });
 
 test('missing covers and optional fields stay empty and malformed activity does not invent counts',()=>{
- const result=projectLandingContent({posts:[post('p',{summary:undefined,sourceName:null,authorName:undefined,commentCount:-2,likeCount:Infinity}),null,{},post('')],spaces:[space('a',{profile:null,count:-5})],works:[work('w','a',{coverId:null,authorName:undefined,authorAvatarId:undefined}),work('article','a',{type:'articles'}),work('outside','missing')]});
+ const result=projectLandingContent({posts:[post('p',{summary:undefined,sourceName:null,authorName:undefined,commentCount:-2,likeCount:Infinity}),null,{},post('')],spaces:[space('a')],siteOwnerSpace:space('a',{siteOwner:true,profile:null,count:-5}),works:[work('w','a',{coverId:null,authorName:undefined,authorAvatarId:undefined}),work('article','a',{type:'articles'}),work('outside','missing')]});
  assert.equal(result.posts.length,1);assert.equal(result.works.length,1);
  assert.equal(result.posts[0].coverId,'');assert.equal(result.posts[0].summary,'');assert.equal(result.posts[0].source,'');
  assert.equal(result.posts[0].authorName,'');assert.equal(result.posts[0].authorAvatarId,'');
@@ -71,12 +71,12 @@ test('only the first four discoverable spaces can supply work and empty states s
 
 // Stub module boundaries without opening a database, reading private data or using HTTP.
 const loaderCode=ts.transpileModule(readFileSync(new URL('../src/lib/landing-content.mjs',import.meta.url),'utf8'),{compilerOptions:{allowJs:true,module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
-function loader({handle=async()=>Response.json({items:[]}),publicSpaces=()=>[],publicSpace=()=>({profile:{},content:[]})}={}){
+function loader({handle=async()=>Response.json({items:[]}),publicSpaces=()=>[],publicSpace=()=>({profile:{},content:[]}),publicSiteOwnerSummary=()=>null}={}){
  const exports={};
  vm.runInNewContext(loaderCode,{exports,Request,URL,require:name=>{
   if(name==='./content-locales.mjs')return locales;
   if(name==='./api.mjs')return{handle};
-  if(name==='./spaces.mjs')return{publicSpaces,publicSpace};
+  if(name==='./spaces.mjs')return{publicSpaces,publicSpace,publicSiteOwnerSummary};
   throw Error('Unexpected module '+name);
  }});
  return exports.loadLandingContent;
@@ -98,6 +98,19 @@ test('loader calls the in-process GET with original headers and reads at most fo
  assert.equal(result.posts[0].commentCount,3);assert.equal(result.posts[0].likeCount,5);
  assert.equal(result.works.length,3);assert.equal(result.works[0].authorName,'Translated author');assert.equal(result.works[0].authorAvatarId,'public-avatar');
  assert.equal(result.communityUnavailable,false);assert.doesNotMatch(JSON.stringify(result),/PRIVATE_|private-session|private=query/);
+});
+
+test('homepage selects the published site owner independently of discovery order and preview mode',async()=>{
+ const request=new Request('http://localhost/');
+ const others=Array.from({length:60},(_,i)=>space('member-'+i));
+ const owner=space('official-blog',{siteOwner:true,mode:'static',href:'https://untrusted.example'});
+ const result=await loader({publicSpaces:()=>others,publicSiteOwnerSummary:req=>{assert.equal(req,request);return owner;}})(request);
+ assert.equal(result.space.href,'/blog/official-blog');
+ assert.equal(result.space.previewHref,'/blog/official-blog?embed=gallery');
+ const directoryResult=await loader({publicSpaces:()=>[...others.slice(0,5),{...owner,mode:'theme'}],publicSiteOwnerSummary:()=>{throw Error('owner already in directory');}})(request);
+ assert.equal(directoryResult.space.previewHref,'/blog/official-blog/preview');
+ const hidden=await loader({publicSpaces:()=>others})(request);
+ assert.equal(hidden.space,null);
 });
 
 test('unavailable or malformed community responses keep errors private and do not synthesize posts',async()=>{

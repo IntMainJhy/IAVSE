@@ -92,10 +92,10 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/','/community','/resources','/blogs','/about']);
  assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length,1);
  assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-flow-backdrop-stub')).length,1,'the optional background is isolated from server content');
- const preview=find(spaces[0],node=>node.name==='img');assert.equal(preview.length,1);
- assert.equal(preview[0].attribs.src,'/media/home-product/space-editorial.webp');
- assert.ok(preview[0].attribs.alt.trim()&&preview[0].attribs.alt!==c.example,'the picture describes the template and its caption identifies the fictional example');
- assert.ok(text(spaces[0]).includes(c.example));
+ assert.equal(spaces[0].attribs.id,'home-blog');
+ assert.ok(text(spaces[0]).includes(c.spaceUnavailable));
+ assert.equal(find(spaces[0],node=>['img','button'].includes(node.name)).length,0);
+ assert.deepEqual(find(spaces[0],node=>node.name==='a').map(node=>node.attribs.href).sort(),['/blogs','/workspace/blog']);
  assert.equal(find(document,node=>['iframe','video'].includes(node.name)).length,0);
  assert.equal(find(document,node=>node.name==='a'&&/^\/(?:community\/|blog\/|blogs\/showcase\/)/.test(node.attribs.href||'')).length,0,'empty content does not fabricate public posts, projects or creators');
  for(const name of ['Lin Chen','Maya Zhou','Leo Park','Josh Mercer','jianghaoyu2006'])assert.ok(!text(document).includes(name),name);
@@ -106,11 +106,11 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  assert.ok(!text(failedEmpty[0]).includes(c.prompts.all),'a failed request cannot masquerade as an empty feed');
 });
 
-test('three locales preserve real destinations, labeled template fallback and supplied public author avatars',async()=>{
+test('three locales preserve real destinations, the published homepage preview and supplied public author avatars',async()=>{
  for(const locale of ['zh','en','ja']){
   const empty=await render(locale),c=empty.copy.landingCopy(locale),content=text(empty.document);
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-iavse-landing'))[0].attribs['data-landing-locale'],locale);
-  for(const value of [...c.title,c.intro,c.communityTitle,c.communityIntro,c.emptyTitle,c.prompts.all,c.writePost,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.example,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
+  for(const value of [...c.title,c.intro,c.communityTitle,c.communityIntro,c.emptyTitle,c.prompts.all,c.writePost,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.spaceUnavailable,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
   const entrances=find(empty.document,node=>node.name==='nav'&&node.attribs['aria-label']===c.productEntries);
   assert.equal(entrances.length,1);
   const entryLinks=find(entrances[0],node=>node.name==='a');
@@ -120,7 +120,7 @@ test('three locales preserve real destinations, labeled template fallback and su
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-language-switcher')).length,1);
   for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!content.includes(marker),marker);
 
-  const supplied={posts:[{id:'published-post',title:'Reviewed discussion',summary:'Published excerpt',category:'Practice',source:'Author',license:'Author license',coverId:'',authorName:'Discussion author',authorAvatarId:'discussion-avatar',commentCount:0,likeCount:0,href:'/community/published-post'}],works:[{id:'published-work',title:'Published project',summary:'Published project excerpt',coverId:'',authorName:'Project author',authorAvatarId:'project-avatar',href:'/blog/public-member/projects/project-one',type:'work'}],space:{handle:'public-member',name:'Public member',intro:'Published member introduction',avatarId:'space-avatar',coverId:'',href:'/blog/public-member',count:1},communityUnavailable:false};
+  const supplied={posts:[{id:'published-post',title:'Reviewed discussion',summary:'Published excerpt',category:'Practice',source:'Author',license:'Author license',coverId:'',authorName:'Discussion author',authorAvatarId:'discussion-avatar',commentCount:0,likeCount:0,href:'/community/published-post'}],works:[{id:'published-work',title:'Published project',summary:'Published project excerpt',coverId:'',authorName:'Project author',authorAvatarId:'project-avatar',href:'/blog/public-member/projects/project-one',type:'work'}],space:{handle:'public-member',name:'Public member',intro:'Published member introduction',avatarId:'space-avatar',coverId:'',href:'/blog/public-member',previewHref:'/blog/public-member/preview',count:1},communityUnavailable:false};
   const published=await render(locale,{content:supplied,user:{name:'Signed-in member',avatarId:'signed-in-avatar'}}),publishedText=text(published.document);
   assert.equal(find(published.document,node=>Object.hasOwn(node.attribs,'data-landing-empty')).length,0);
   assert.equal(find(published.document,node=>Object.hasOwn(node.attribs,'data-auth-account')).length,1);
@@ -131,25 +131,37 @@ test('three locales preserve real destinations, labeled template fallback and su
   assert.ok(publishedText.includes('0 '+c.comments),'zero is the actual published comment count');
   const blogSection=find(published.document,node=>node.name==='section'&&node.attribs['aria-label']===c.blogs)[0];
   const figure=find(blogSection,node=>node.name==='figure')[0];
-  assert.ok(text(figure).includes(c.example));
-  assert.equal(find(figure,node=>node.name==='img'&&node.attribs.src==='/media/home-product/space-editorial.webp').length,1);
-  assert.ok(!text(figure).includes('Public member'),'a template is separate from the public creator');
-  const choices=find(blogSection,node=>Object.hasOwn(node.attribs,'data-space-templates'))[0];
-  const templateButtons=find(choices,node=>node.name==='button');
-  assert.deepEqual(templateButtons.map(node=>node.attribs['aria-pressed']),['true','false']);
-  assert.ok(templateButtons.every(node=>node.attribs['aria-label']||text(node).trim()),'each template choice has an accessible name');
-  const targetId=templateButtons[0].attribs['aria-controls'];
-  assert.ok(targetId&&templateButtons.every(node=>node.attribs['aria-controls']===targetId));
-  const target=find(figure,node=>node.attribs.id===targetId)[0];
-  assert.ok(target&&find(target,node=>node.name==='img').length===1);
-  const member=find(blogSection,node=>node.name==='a'&&node.attribs.href==='/blog/public-member')[0];
-  assert.ok(text(member).includes('Public member')&&text(member).includes('Published member introduction'));
+  const frames=find(figure,node=>node.name==='iframe');
+  assert.equal(frames.length,1);
+  const {src,loading,tabindex,'aria-hidden':hidden}=frames[0].attribs;
+  assert.deepEqual([src,loading,tabindex,hidden],[supplied.space.previewHref,'lazy','-1','true']);
+  assert.ok(!text(blogSection).includes(c.spaceUnavailable));
+  assert.equal(find(blogSection,node=>node.name==='button'||(node.name==='img'&&node.attribs.src?.startsWith('/media/home-product/'))).length,0);
+  const links=find(figure,node=>node.name==='a');
+  assert.equal(links.length,1);
+  const member=links[0];
+  assert.equal(member.attribs.href,supplied.space.href);
+  assert.ok(text(member).includes(supplied.space.name)&&text(member).includes(c.visitSpace));
   assert.ok(find(member,node=>node.name==='img'&&node.attribs.src==='/media/space-avatar').length);
   assert.ok(find(blogSection,node=>node.name==='a'&&node.attribs.href==='/workspace/blog').length);
   assert.ok(find(blogSection,node=>node.name==='a'&&node.attribs.href==='/blogs').length);
-  assert.equal(find(published.document,node=>['iframe','video'].includes(node.name)).length,0);
+  assert.equal(find(published.document,node=>['iframe','video'].includes(node.name)).length,1);
  }
  const fallback=components().copy;assert.equal(fallback.landingCopy('unknown'),fallback.landingCopy('zh'));
+});
+
+test('a signed-out visitor sees the linked public homepage with its supplied embed and cover',async()=>{
+ const space={handle:'site-author',name:'Site author',intro:'',avatarId:'',coverId:'published-cover',href:'/blog/site-author',previewHref:'/blog/site-author?embed=gallery',count:0};
+ const {document,copy}=await render('en',{content:{...emptyContent,space}});
+ const section=find(document,node=>node.attribs.id==='home-blog')[0];
+ const figure=find(section,node=>node.name==='figure')[0];
+ const frame=find(figure,node=>node.name==='iframe')[0];
+ assert.equal(frame.attribs.src,space.previewHref);
+ assert.ok(find(figure,node=>node.name==='img'&&node.attribs.src==='/media/published-cover').length);
+ const link=find(figure,node=>node.name==='a')[0];
+ assert.equal(link.attribs.href,space.href);
+ assert.ok(text(link).includes(space.name)&&text(link).includes(copy.landingCopy('en').visitSpace));
+ assert.ok(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length);
 });
 
 test('public feed projection remains bounded and strips private fields without inventing unavailable activity',()=>{

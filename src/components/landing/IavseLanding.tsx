@@ -22,7 +22,7 @@ export type LandingWork = {
 };
 export type LandingContent = {
   posts: LandingPost[]; works: LandingWork[];
-  space: {handle: string; name: string; intro: string; avatarId: string; coverId: string; href: string; count: number} | null;
+  space: {handle: string; name: string; intro: string; avatarId: string; coverId: string; href: string; previewHref: string; count: number} | null;
   communityUnavailable: boolean;
 };
 type Filter = 'all' | 'work' | 'discussion';

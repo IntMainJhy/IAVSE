@@ -53,6 +53,23 @@ test('freezes, takedowns and author restrictions take effect on the next directo
  d.prepare("UPDATE community_users SET status='active' WHERE id=?").run(fixture.owner);assert.equal(S.publicSpaces(req)[0].handle,fixture.handle);
 });
 
+test('owner lookup reaches a published space beyond the directory cap and respects both discoverability flags',()=>{
+ const bind=owner=>d.prepare("INSERT OR REPLACE INTO config(key,value) VALUES('siteOwnerAccount',?)").run(JSON.stringify({id:owner}));
+ try{
+  const official=fixtures[150];
+  bind(official.owner);
+  assert.ok(!S.publicSpaces(req).some(item=>item.handle===official.handle));
+  const summary=S.publicSiteOwnerSummary(req);
+  assert.equal(summary.siteOwner,true);
+  assert.equal(summary.handle,official.handle);
+  assert.equal(summary.profile.name,'Published 150');
+  for(const index of [35,55,10]){
+   bind(fixtures[index].owner);
+   assert.equal(S.publicSiteOwnerSummary(req),null);
+  }
+ }finally{d.prepare("DELETE FROM config WHERE key='siteOwnerAccount'").run();}
+});
+
 test('directory and content lookups use their ordered and complaint lookup indexes',()=>{
  const plan=(sql,...args)=>d.prepare('EXPLAIN QUERY PLAN '+sql).all(...args).map(row=>row.detail).join('\n');
  assert.match(plan("SELECT * FROM spaces WHERE visibility='public' AND discoverable<>0 ORDER BY updated DESC"),/space_discovery/);

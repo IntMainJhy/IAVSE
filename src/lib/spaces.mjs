@@ -37,6 +37,22 @@ export function defaultBlogSpace(req){const selected=db().prepare("SELECT value 
 // Personalize only the entry page; never expose an unreviewed draft or create a space on a read.
 export function blogEntry(req){const user=currentUser(req),own=user?.status==='active'&&!user.experience?rowByOwner(user.id):null;if(isPublic(own,req))return{space:publicDto(own),example:false};const space=defaultBlogSpace(req);return{space,example:space.owner!==user?.id}}
 export function publicSpaceDocument(req,handle,type,slug){const row=rowByHandle(handle);requireValue(isPublic(row,req),'主页不存在或暂未公开',404);requireValue(kinds.includes(type),'内容不存在或暂未公开',404);const own=db().prepare("SELECT * FROM space_content WHERE space=? AND type=? AND slug=? AND visibility='public' AND published IS NOT NULL").get(row.id,type,slug);const item=own&&!held(row.id,own.id)?contentView(own):row.legacy?publicBySlug(type,slug):null;requireValue(item,'内容不存在或暂未公开',404);return item}
+function directorySummary(req,row,siteOwner){
+ if(!row||!row.discoverable||row.visibility!=='public')return null;
+ const release=approved(row);
+ if(!isPublic(row,req,release)||release.discoverable===false)return null;
+ const profile=row.legacy?getConfig('profile'):release.profile,layout=release.layout;
+ // A directory needs covers and counts, never article bodies or private drafts.
+ const documents=db().prepare("SELECT json_extract(sc.published,'$.coverId') coverId FROM space_content sc WHERE sc.space=? AND sc.visibility='public' AND sc.published IS NOT NULL AND NOT EXISTS(SELECT 1 FROM space_case_targets t JOIN community_cases c ON c.id=t.case_id WHERE t.space=sc.space AND c.frozen=1 AND (t.content IS NULL OR t.content=sc.id)) ORDER BY sc.updated DESC").all(row.id);
+ const all=row.legacy?[...kinds.flatMap(type=>publicContent(type)),...documents]:documents;
+ return {handle:row.handle,url:pathFor(row),siteOwner:!!siteOwner&&siteOwner===row.owner,profile:{...Object.fromEntries(['name','alias','intro','avatarId'].map(key=>[key,profile[key]])),translations:Object.fromEntries(Object.entries(profile.translations||{}).map(([locale,value])=>[locale,{name:value.name,alias:value.alias,intro:value.intro}]))},coverId:layout.coverId||all.find(item=>item.coverId)?.coverId||'',theme:layout.theme,mode:row.legacy?'theme':layout.blog?.mode==='static'?'static':'theme',count:all.length};
+}
+
+// The homepage follows the bound account even when its board falls outside the directory window.
+export function publicSiteOwnerSummary(req){
+ const id=siteOwnerAccountId();
+ return id?directorySummary(req,rowByOwner(id),id):null;
+}
 export function publicSpaces(req){
  ownerSpace();
  const owner=ownerAccountId(),replaceLegacy=owner&&isPublic(rowByOwner(owner),req),siteOwner=siteOwnerAccountId(),items=[];
@@ -44,12 +60,9 @@ export function publicSpaces(req){
  const rows=db().prepare("SELECT * FROM spaces WHERE visibility='public' AND discoverable<>0 ORDER BY updated DESC").iterate();
  for(const row of rows){
   if(row.owner==='owner'&&replaceLegacy)continue;
-  const release=approved(row);if(!isPublic(row,req,release)||release.discoverable===false)continue;
-  const profile=row.legacy?getConfig('profile'):release.profile,layout=release.layout;
-  // A directory needs covers and counts, never article bodies or private drafts.
-  const documents=db().prepare("SELECT json_extract(sc.published,'$.coverId') coverId FROM space_content sc WHERE sc.space=? AND sc.visibility='public' AND sc.published IS NOT NULL AND NOT EXISTS(SELECT 1 FROM space_case_targets t JOIN community_cases c ON c.id=t.case_id WHERE t.space=sc.space AND c.frozen=1 AND (t.content IS NULL OR t.content=sc.id)) ORDER BY sc.updated DESC").all(row.id);
-  const all=row.legacy?[...kinds.flatMap(type=>publicContent(type)),...documents]:documents;
-  items.push({handle:row.handle,url:pathFor(row),siteOwner:!!siteOwner&&siteOwner===row.owner,profile:{...Object.fromEntries(['name','alias','intro','avatarId'].map(key=>[key,profile[key]])),translations:Object.fromEntries(Object.entries(profile.translations||{}).map(([locale,value])=>[locale,{name:value.name,alias:value.alias,intro:value.intro}]))},coverId:layout.coverId||all.find(item=>item.coverId)?.coverId||'',theme:layout.theme,mode:row.legacy?'theme':layout.blog?.mode==='static'?'static':'theme',count:all.length});
+  const summary=directorySummary(req,row,siteOwner);
+  if(!summary)continue;
+  items.push(summary);
   if(items.length===60)break;
  }
  return items;

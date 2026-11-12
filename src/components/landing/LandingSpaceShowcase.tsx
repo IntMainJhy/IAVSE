@@ -2,60 +2,76 @@
 
 import Link from 'next/link';
 import {ArrowRight, ArrowUpRight} from 'lucide-react';
-import {useId, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {FeedAvatar} from '@/components/FeedAvatar';
 import {useLocale} from '@/components/LocaleProvider';
+import {observeGalleryFrame} from '@/lib/gallery-frame-ready';
 import {landingCopy} from '@/lib/landing-copy';
 import type {LandingContent} from './IavseLanding';
 import '@/app/landing-space-showcase.css';
 
-const templateLabels = {
-  zh: {
-    choose: '选择模板预览', editorial: '图文手记', resume: '个人简历',
-    editorialAlt: '浅色纸面上的衬线标题与人物插画，下方分节列出个人介绍与专长。',
-    resumeAlt: '黑色背景上的粗体姓名与方形头像，下方依次展示简介、技能标签和项目经历。',
-  },
-  en: {
-    choose: 'Choose a template preview', editorial: 'Editorial', resume: 'Résumé',
-    editorialAlt: 'A serif name and illustrated portrait on warm paper, with a bio and specialties below.',
-    resumeAlt: 'A bold name and square portrait on a black page, followed by a bio, skill tags and project experience.',
-  },
-  ja: {
-    choose: 'テンプレートのプレビューを選択', editorial: '読みもの', resume: '履歴書',
-    editorialAlt: '淡い紙色に明朝体の名前と人物イラストを配し、その下に自己紹介と専門分野が続きます。',
-    resumeAlt: '黒地に太字の名前と四角い人物イラストを並べ、下に自己紹介、スキルタグ、プロジェクト経験を掲載しています。',
-  },
-};
+type PublishedSpace = NonNullable<LandingContent['space']>;
+const previewWidth = 1200;
 
-const templates = ['editorial', 'resume'] as const;
+function PublishedSpaceBoard({space}: {space: PublishedSpace}) {
+  const {locale} = useLocale();
+  const c = landingCopy(locale);
+  const name = space.name || space.handle;
+  const viewport = useRef<HTMLDivElement>(null);
+  const stopObserving = useRef<(() => void) | undefined>(undefined);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const element = viewport.current;
+    if (!element) return;
+    const fit = () => element.style.setProperty('--iv-preview-scale', String(element.clientWidth / previewWidth));
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      stopObserving.current?.();
+    };
+  }, []);
+
+  return <figure className="iv-space-board" data-landing-reveal>
+    <div className="iv-space-mat" aria-hidden="true" inert>
+      <div className="iv-blog-viewport" ref={viewport} data-ready={ready}>
+        <div className="iv-blog-placeholder">
+          {space.coverId ? <img src={'/media/' + encodeURIComponent(space.coverId)} alt="" loading="lazy"/> :
+            <><FeedAvatar name={name} avatarId={space.avatarId}/><strong>{name}</strong></>}
+        </div>
+        <iframe src={space.previewHref} title={c.publicSpace + ' · ' + name} width={previewWidth} height={820}
+          aria-hidden="true" tabIndex={-1} scrolling="no" loading="lazy" referrerPolicy="same-origin"
+          sandbox={space.previewHref.endsWith('?embed=gallery') ? 'allow-scripts allow-same-origin' : 'allow-same-origin'}
+          onLoad={event => {
+            stopObserving.current?.();
+            stopObserving.current = observeGalleryFrame(event.currentTarget, () => setReady(true));
+          }}/>
+      </div>
+    </div>
+    <figcaption>
+      <Link href={space.href} className="iv-space-open">
+        <FeedAvatar name={name} avatarId={space.avatarId}/>
+        <span className="iv-blog-identity"><strong>{name}</strong><small>@{space.handle}</small></span>
+        <span className="iv-blog-visit">{c.visitSpace}<ArrowUpRight size={16} aria-hidden="true"/></span>
+      </Link>
+    </figcaption>
+  </figure>;
+}
 
 export function LandingSpaceShowcase({space}: {space: LandingContent['space']}) {
   const {locale} = useLocale();
   const c = landingCopy(locale);
-  const labels = templateLabels[locale];
-  const [template, setTemplate] = useState<typeof templates[number]>('editorial');
-  const previewId = useId();
 
-  return <section className="iv-space-showcase" aria-label={c.blogs}>
+  return <section className="iv-space-showcase" id="home-blog" aria-label={c.blogs}>
     <div className="iv-space-intro" data-landing-reveal>
       <h2>{c.spaceTitle}</h2>
       <p>{c.spaceBody}</p>
     </div>
 
-    <figure className="iv-space-board" data-landing-reveal>
-      <div className="iv-space-mat" id={previewId} data-template={template}>
-        <img key={template} src={'/media/home-product/space-' + template + '.webp'} alt={template === 'editorial' ? labels.editorialAlt : labels.resumeAlt} width={1280} height={860} loading="lazy"/>
-      </div>
-      <figcaption>
-        <div className="iv-space-picker" role="group" aria-label={labels.choose} data-space-templates>
-          {templates.map(id => <button key={id} type="button" aria-pressed={template === id} aria-controls={previewId} onClick={() => setTemplate(id)}>
-            <span className={'iv-space-swatch iv-space-swatch--' + id} aria-hidden="true"/>
-            {labels[id]}
-          </button>)}
-        </div>
-        <span className="iv-space-sample-note">{c.example}</span>
-      </figcaption>
-    </figure>
+    {space ? <PublishedSpaceBoard key={locale + space.previewHref} space={space}/> :
+      <p className="iv-space-unavailable" data-landing-reveal>{c.spaceUnavailable}</p>}
 
     <div className="iv-space-details" data-landing-reveal>
       <div className="iv-space-destinations">
@@ -63,17 +79,6 @@ export function LandingSpaceShowcase({space}: {space: LandingContent['space']}) 
         <Link href="/blogs" className="iv-text-link">{c.exploreSpace}<ArrowRight size={15} aria-hidden="true"/></Link>
       </div>
       <p className="iv-space-publishing">{c.spacePublishing}</p>
-      {space && <Link href={space.href} className="iv-member-space">
-        {space.coverId
-          ? <img className="iv-member-cover" src={'/media/' + encodeURIComponent(space.coverId)} alt="" width={72} height={54} loading="lazy"/>
-          : <FeedAvatar name={space.name || space.handle} avatarId={space.avatarId}/>}
-        <span className="iv-member-space-copy">
-          <span>{c.publicSpace}</span>
-          <strong>{space.name || space.handle}</strong>
-          {space.intro && <span className="iv-member-bio">{space.intro}</span>}
-        </span>
-        <ArrowUpRight size={16} aria-hidden="true"/>
-      </Link>}
     </div>
   </section>;
 }

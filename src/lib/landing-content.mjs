@@ -8,14 +8,16 @@ const time=value=>typeof value==='string'&&Number.isFinite(Date.parse(value))?Da
 const newest=items=>items.map((item,index)=>({item,index,time:time(item.activityAt)||time(item.updated)})).sort((a,b)=>b.time-a.time||a.index-b.index).map(({item})=>item);
 
 /** A small, explicit DTO: public-source objects and translations never reach the client. */
-export function projectLandingContent({posts=[],spaces=[],works=[],locale='zh',communityUnavailable=false}={}){
+export function projectLandingContent({posts=[],spaces=[],works=[],siteOwnerSpace=null,locale='zh',communityUnavailable=false}={}){
  const directory=list(spaces).map(record).filter(item=>text(item.handle,100)).slice(0,4);
  const handles=new Set(directory.map(item=>text(item.handle,100)));
- const first=directory[0],profile=first?localizeProfile(record(first.profile),locale):null;
- const space=first?{
-  handle:text(first.handle,100),name:text(profile.name,120),intro:text(profile.intro),
-  avatarId:text(profile.avatarId,80),coverId:text(first.coverId,80),
-  href:'/blog/'+encodeURIComponent(text(first.handle,100)),count:count(first.count)
+ const owner=record(siteOwnerSpace),handle=text(owner.handle,100);
+ const href='/blog/'+encodeURIComponent(handle);
+ const profile=localizeProfile(record(owner.profile),locale);
+ const space=owner.siteOwner===true&&handle?{
+  handle,name:text(profile.name,120),intro:text(profile.intro),
+  avatarId:text(profile.avatarId,80),coverId:text(owner.coverId,80),
+  href,previewHref:owner.mode==='static'?href+'?embed=gallery':href+'/preview',count:count(owner.count)
  }:null;
  const publicPosts=communityUnavailable?[]:newest(list(posts).map(record)).map(item=>{
   const localized=localizeContent(item,locale),id=text(item.id,100),title=text(localized.title,200);
@@ -42,7 +44,7 @@ export function projectLandingContent({posts=[],spaces=[],works=[],locale='zh',c
 
 /** Use the same in-process, permission-checked GET path as pageResources. */
 export async function loadLandingContent(req,locale='zh'){
- let posts=[],spaces=[],works=[],communityUnavailable=false;
+ let posts=[],spaces=[],works=[],siteOwnerSpace=null,communityUnavailable=false;
  try{
   const {handle}=await import('./api.mjs');
   const response=await handle(new Request(new URL('/api/community/posts',req.url),{method:'GET',headers:req.headers}));
@@ -54,8 +56,10 @@ export async function loadLandingContent(req,locale='zh'){
   }
  }catch{communityUnavailable=true;}
  try{
-  const {publicSpaces,publicSpace}=await import('./spaces.mjs');
-  spaces=list(publicSpaces(req)).map(record).filter(item=>text(item.handle,100)).slice(0,4);
+  const {publicSpaces,publicSpace,publicSiteOwnerSummary}=await import('./spaces.mjs');
+  const directory=list(publicSpaces(req)).map(record).filter(item=>text(item.handle,100));
+  spaces=directory.slice(0,4);
+  siteOwnerSpace=directory.find(item=>item.siteOwner===true)??publicSiteOwnerSummary(req);
   for(const entry of spaces){
    try{
     const board=publicSpace(req,entry.handle),profile=localizeProfile(record(board?.profile),locale);
@@ -65,5 +69,5 @@ export async function loadLandingContent(req,locale='zh'){
    }catch{}
   }
  }catch{}
- return projectLandingContent({posts,spaces,works,locale,communityUnavailable});
+ return projectLandingContent({posts,spaces,works,siteOwnerSpace,locale,communityUnavailable});
 }
