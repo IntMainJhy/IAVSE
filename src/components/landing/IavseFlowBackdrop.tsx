@@ -70,12 +70,15 @@ void main() {
   // as a desktop. Different phases and vertical domains avoid a mirrored seam.
   vec2 left = mist(vec2(stirred.x / 0.34, (stirred.y - 0.53) * 1.65), time, 0.8);
   vec2 right = mist(vec2((1.0 - stirred.x) / 0.37, (stirred.y - 0.59) * 1.50 + 0.17), time, 3.25);
-  float leftAnchor = 1.0 - smoothstep(0.03, 0.42, uv.x);
-  float rightAnchor = smoothstep(0.58, 0.97, uv.x);
+  // Sample both pigments through one drifting overlap. Backtrace the horizontal
+  // motion so a rightward gesture carries mint into the blue.
+  float drift = (left.y - right.y) * 0.14 + 0.065 * sin(uv.y * 5.7 + time * 0.72);
+  float mixPosition = uv.x + drift - clamp(uMotion.x, -0.18, 0.18) * influence;
+  float leftAnchor = 1.0 - smoothstep(0.02, 0.84, mixPosition);
+  float rightAnchor = smoothstep(0.16, 0.98, mixPosition);
   float leftHeight = 1.0 - smoothstep(0.24, 0.62, abs(uv.y - 0.56));
   float rightHeight = 1.0 - smoothstep(0.24, 0.62, abs(uv.y - 0.60));
-  // A soft density floor belongs to each edge, so neither can disappear at
-  // a particular phase. Only the irregular internal diffusion is animated.
+  // A low density floor keeps both edges visible as the overlap drifts.
   float leftDensity = leftAnchor * leftHeight * (0.32 + 0.68 * left.x);
   float rightDensity = rightAnchor * rightHeight * (0.32 + 0.68 * right.x);
 
@@ -86,10 +89,14 @@ void main() {
 
   vec3 mint = mix(vec3(0.78, 0.93, 0.86), vec3(0.61, 0.86, 0.77), left.y);
   vec3 sky = mix(vec3(0.83, 0.92, 0.99), vec3(0.64, 0.82, 0.97), right.y);
-  // The two edge fields have disjoint anchors. Premultiplied alpha lets the
-  // page supply its own center and the seamless ground beneath the lower fade.
-  vec3 pigment = mint * leftDensity + sky * rightDensity;
-  gl_FragColor = vec4(pigment * coverage, (leftDensity + rightDensity) * coverage);
+  float totalDensity = leftDensity + rightDensity;
+  float blueShare = rightDensity / max(totalDensity, 0.001);
+  float stirring = uMotion.z * influence;
+  float tint = mix(0.06 + 0.88 * blueShare, 0.5, 0.58 * stirring);
+  vec3 pigment = mix(mint, sky, tint);
+  float overlap = 4.0 * blueShare * (1.0 - blueShare);
+  float alpha = clamp(totalDensity + 0.13 * overlap * stirring, 0.0, 1.0) * coverage;
+  gl_FragColor = vec4(pigment * alpha, alpha);
 }
 `;
 
@@ -178,6 +185,7 @@ export default function IavseFlowBackdrop() {
     let width = 1;
     let height = 1;
     let inView = false;
+    let touchId: number | null = null;
     let pendingPointer: { x: number; y: number } | null = null;
     const pointer = { x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5, vx: 0, vy: 0, energy: 0 };
 
@@ -268,13 +276,36 @@ export default function IavseFlowBackdrop() {
       syncPlayback();
     };
 
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.pointerType !== "touch" || !event.isPrimary || motionPreference.matches || !canDraw()) return;
+      const bounds = root.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / width;
+      const y = (event.clientY - bounds.top) / height;
+      if (x < 0 || x > 1 || y < 0 || y > 1) return;
+      touchId = event.pointerId;
+      pendingPointer = null;
+      pointer.x = pointer.targetX = x;
+      pointer.y = pointer.targetY = y;
+      pointer.vx = pointer.vy = 0;
+      pointer.energy = 0.72;
+    };
+
+    const onPointerEnd = (event: PointerEvent) => {
+      if (event.pointerId === touchId) {
+        touchId = null;
+        pendingPointer = null;
+      }
+    };
+
     const onPointerMove = (event: PointerEvent) => {
-      if (finePointer.matches && !motionPreference.matches && canDraw() && event.pointerType === "mouse") {
+      const canStir = event.pointerId === touchId || (finePointer.matches && event.pointerType === "mouse");
+      if (canStir && !motionPreference.matches && canDraw()) {
         pendingPointer = { x: event.clientX, y: event.clientY };
       }
     };
 
     const resetPointer = () => {
+      touchId = null;
       pendingPointer = null;
       pointer.vx = 0;
       pointer.vy = 0;
@@ -314,6 +345,9 @@ export default function IavseFlowBackdrop() {
     resizeObserver?.observe(root);
     window.addEventListener("resize", resize, { passive: true });
     if (!observer) window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointerup", onPointerEnd, { passive: true });
+    window.addEventListener("pointercancel", onPointerEnd, { passive: true });
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("blur", resetPointer);
     document.addEventListener("visibilitychange", onVisibilityChange);
@@ -331,6 +365,9 @@ export default function IavseFlowBackdrop() {
       resizeObserver?.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointerup", onPointerEnd);
+      window.removeEventListener("pointercancel", onPointerEnd);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("blur", resetPointer);
       document.removeEventListener("visibilitychange", onVisibilityChange);
@@ -354,7 +391,10 @@ export default function IavseFlowBackdrop() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse 34% 43% at 0% 56%, #ace1ca, #e5f4ec 48%, transparent), radial-gradient(ellipse 37% 42% at 100% 60%, #b6d9f5, #e8f2fc 48%, transparent)",
+          background: [
+            "radial-gradient(ellipse 76% 54% at 1% 52%, #ace1ca, rgb(183 229 211 / .62) 42%, rgb(214 239 229 / .20) 73%, transparent)",
+            "radial-gradient(ellipse 79% 58% at 99% 62%, #b6d9f5, rgb(188 224 241 / .65) 44%, rgb(217 239 248 / .22) 76%, transparent)",
+          ].join(", "),
           maskImage: "linear-gradient(180deg, transparent 100px, black 320px, black 79%, transparent)",
         }}
       />

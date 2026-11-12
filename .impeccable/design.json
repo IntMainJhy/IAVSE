@@ -386,28 +386,28 @@
         "role": "secondary",
         "displayName": "Mist Soft",
         "tonalRamp": [
-          "oklch(15.00% 0.0190 162.93)",
-          "oklch(26.43% 0.0190 162.93)",
-          "oklch(37.86% 0.0190 162.93)",
-          "oklch(49.29% 0.0190 162.93)",
-          "oklch(60.71% 0.0190 162.93)",
-          "oklch(72.14% 0.0190 162.93)",
-          "oklch(83.57% 0.0190 162.93)",
-          "oklch(95.00% 0.0190 162.93)"
+          "oklch(15.00% 0.0295 169.69 / .20)",
+          "oklch(26.43% 0.0295 169.69 / .20)",
+          "oklch(37.86% 0.0295 169.69 / .20)",
+          "oklch(49.29% 0.0295 169.69 / .20)",
+          "oklch(60.71% 0.0295 169.69 / .20)",
+          "oklch(72.14% 0.0295 169.69 / .20)",
+          "oklch(83.57% 0.0295 169.69 / .20)",
+          "oklch(95.00% 0.0295 169.69 / .20)"
         ]
       },
       "mist-right-soft": {
         "role": "secondary",
         "displayName": "Mist Right Soft",
         "tonalRamp": [
-          "oklch(15.00% 0.0172 248.01)",
-          "oklch(26.43% 0.0172 248.01)",
-          "oklch(37.86% 0.0172 248.01)",
-          "oklch(49.29% 0.0172 248.01)",
-          "oklch(60.71% 0.0172 248.01)",
-          "oklch(72.14% 0.0172 248.01)",
-          "oklch(83.57% 0.0172 248.01)",
-          "oklch(95.00% 0.0172 248.01)"
+          "oklch(15.00% 0.0262 224.23 / .22)",
+          "oklch(26.43% 0.0262 224.23 / .22)",
+          "oklch(37.86% 0.0262 224.23 / .22)",
+          "oklch(49.29% 0.0262 224.23 / .22)",
+          "oklch(60.71% 0.0262 224.23 / .22)",
+          "oklch(72.14% 0.0262 224.23 / .22)",
+          "oklch(83.57% 0.0262 224.23 / .22)",
+          "oklch(95.00% 0.0262 224.23 / .22)"
         ]
       },
       "dark-canvas": {
@@ -1158,8 +1158,8 @@
       },
       {
         "name": "mist",
-        "value": "uTime × .12; independently anchored left/right soft fields",
-        "purpose": "White center/top clearance; not a physical fluid simulation."
+        "value": "uTime × .12, overlapping fields with a drifting mix position",
+        "purpose": "Teal and blue mingle behind the content, with top clearance and local mouse or touch mixing."
       },
       {
         "name": "background-lifecycle",
@@ -1302,7 +1302,7 @@
     "northStar": "White space, black controls, teal and blue mist",
     "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and drifting teal mist on the left and pale blue mist on the right. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Teal and blue color the background. Primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
     "keyCharacteristics": [
-      "White space, black functional controls and soft teal and blue mist framing a white center.",
+      "White space, black functional controls and a diffuse overlap between teal and blue mist.",
       "Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.",
       "An always-visible frosted navigation capsule and adjacent theme control, with the original brand and real account/language controls outside it.",
       "Sliding glass selection with local text magnification and one accessible interactive label layer.",
@@ -1334,7 +1334,7 @@
     "dos": [
       "Do use white space, neutral black controls and teal and blue mist across platform-owned surfaces.",
       "Do keep the navigation capsule visible and frosted at every width, with theme beside it and real brand, account and language controls outside it.",
-      "Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.",
+      "Do let the two sides blend behind the content, with top clearance and gentle mouse or touch response.",
       "Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.",
       "Do verify Chinese, English and Japanese, compact labels and full accessible names, focus, both appearances, reduced motion and static fallbacks.",
       "Do retain actual public content, useful empty states, labeled fictional examples and original source/license details."

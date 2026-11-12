@@ -29,8 +29,8 @@ colors:
   glass-lens-low: rgb(255 255 255 / .47)
   mist-left: '#ace1ca'
   mist-right: '#b6d9f5'
-  mist-soft: '#e5f4ec'
-  mist-right-soft: '#e8f2fc'
+  mist-soft: rgb(214 239 229 / .20)
+  mist-right-soft: rgb(217 239 248 / .22)
   home-dark-canvas: '#15191b'
   home-dark-surface: '#201f25'
   home-dark-foreground: '#f2eff5'
@@ -244,7 +244,7 @@ components:
 
 **Creative North Star: "White space, black controls, teal and blue mist"**
 
-IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and drifting teal mist on the left and pale blue mist on the right. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Teal and blue color the background. Primary actions, selected labels, icons and links use neutral ink.
+IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and drifting teal and pale blue mist. Teal is strongest at the left and blue at the right. Their translucent edges mix behind the central text. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Teal and blue color the background. Primary actions, selected labels, icons and links use neutral ink.
 
 This specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.
 
@@ -252,7 +252,7 @@ The earlier application baseline retains its [RBP Portfolio attribution](docs/po
 
 **Key Characteristics:**
 
-- White space, black functional controls and soft teal and blue mist framing a white center.
+- White space, black functional controls and a diffuse overlap between teal and blue mist.
 - Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.
 - An always-visible frosted navigation capsule and adjacent theme control, with the original brand and real account/language controls outside it.
 - Sliding glass selection with local text magnification and one accessible interactive label layer.
@@ -271,7 +271,7 @@ The light platform uses neutral ink and white surfaces. Teal and blue are the de
 
 ### Secondary
 
-- **Mist Left / Right:** the static teal and blue cores. Mist Soft and Mist Right Soft supply the pale outer stops on the left and right respectively. The WebGL shader mixes its own colors; control tokens do not recolor it automatically.
+- **Mist Left / Right:** the static teal and blue cores. Mist Soft and Mist Right Soft are the translucent outer color stops of the two overlapping gradients. The WebGL shader mixes its own colors; control tokens do not recolor it automatically.
 - **Glass High / Low:** the light capsule and lens use white alpha stops. In dark appearance, the header track uses neutral `rgb(32 32 38 / .5)` → `rgb(24 24 30 / .3)` stops; other switch tracks use white alpha (.055 → .02). Their separate brighter lens uses white alpha (.19 → .055), edge (.28) and inset highlight (.38), keeping the backdrop visible through the frosted layers. Complete gradients, blur and shadows live in the sidecar because those properties do not fit frontmatter component tokens.
 
 ### Neutral
@@ -311,7 +311,7 @@ Route guards preserve authored blog pages, built-in showcase previews and resour
 
 ## Elevation & Depth
 
-The mist uses independently phased left/right `mist` fields, soft side anchors, domain-warped `sheetA` / `sheetB` and `opening`, with time multiplier (0.12). The two sides change shape independently. The center and the first (100px) at the top reveal the page canvas, with mist gradually appearing through (320px). It is an analytic approximation of flowing color, not a physical fluid solver. The homepage backdrop is (1100px); other platform shells use (1100px), becoming (1120px) on mobile. The mist fades to transparent over the page canvas. In dark mode its opacity is 0.30 on the homepage and 0.24 on other platform pages. The static fallback uses teal on the left, pale blue on the right and the same transparent center. [The background note](docs/purple-landing-background.zh-CN.md) records lifecycle and limits.
+The two mist fields have different phases and overlap across a broad, slowly shifting area. Their relative densities set the local color. A horizontal gesture shifts the balance toward the incoming pigment, and pointer energy briefly draws the two colors closer to an even mix. The first 100px at the top expose the page canvas, with pigment gradually appearing through 320px and fading out at the bottom. Time advances at `uTime * 0.12`. Dark-mode opacity is 0.30 on Home and 0.24 on other platform pages. The CSS fallback layers two broad radial gradients with translucent outer stops. [Background behavior and parameters](docs/purple-landing-background.zh-CN.md).
 
 White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms). Hero actions lift (2px) over (180ms).
 
@@ -361,7 +361,7 @@ The original canvas structure illustration is static, `aria-hidden`, and accompa
 
 - Do use white space, neutral black controls and teal and blue mist across platform-owned surfaces.
 - Do keep the navigation capsule visible and frosted at every width, with theme beside it and real brand, account and language controls outside it.
-- Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.
+- Do let the two sides blend behind the content, with top clearance and gentle mouse or touch response.
 - Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.
 - Do verify Chinese, English and Japanese, compact labels and full accessible names, focus, both appearances, reduced motion and static fallbacks.
 - Do retain actual public content, useful empty states, labeled fictional examples and original source/license details.
