@@ -35,7 +35,7 @@ export function Experience({ locale = "zh" }: { locale?: string }): ReactNode {
 
   return (
     <div className="flex flex-col gap-3">
-      <h3 className="text-foreground text-[15px] font-semibold tracking-tight">
+      <h3 className="text-foreground text-[15px] font-semibold tracking-tight max-md:text-center">
         {labels.experience}
       </h3>
       <div

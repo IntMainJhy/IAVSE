@@ -188,21 +188,21 @@ html[data-color-mode=dark] .iv-actions > .iv-entry-switch{
  .iavse-landing .iv-cover{height:190px}
  .iavse-landing .iv-footer>nav{margin-left:0}
 }
-@media(max-width:740px){
+@media(max-width:767px){
  .iavse-landing .iv-container{width:calc(100% - 40px)}
  .iavse-landing .iv-title{font-size:clamp(28px,5.7vw,36px);line-height:1.4}
  .iavse-landing .iv-actions{margin-top:18px}
  .iavse-landing .iv-hero-copy>p{font-size:14px;line-height:1.8;max-width:39ch;margin-top:14px}
  .iavse-landing .iv-community{grid-template-columns:1fr;gap:18px;padding:32px 0 0}
- .iavse-landing .iv-community-intro{padding-top:0}
- .iavse-landing .iv-community-intro>h2{font-size:25px;max-width:17ch;text-wrap:pretty}
- .iavse-landing .iv-community-intro>p{font-size:14px;line-height:1.9;max-width:48ch;margin-top:14px}
+ .iavse-landing .iv-community-intro{padding-top:0;text-align:center}
+ .iavse-landing .iv-community-intro>h2{font-size:25px;max-width:17ch;margin-inline:auto;text-wrap:balance}
+ .iavse-landing .iv-community-intro>p{font-size:14px;line-height:1.9;max-width:48ch;margin:14px auto 0;text-wrap:balance}
  .iavse-landing .iv-community-intro>.iv-text-link{margin-top:12px}
- .iavse-landing .iv-section-heading{margin-bottom:12px}
- .iavse-landing .iv-empty{padding:18px 20px;min-height:146px}
+ .iavse-landing .iv-section-heading{justify-content:center;margin-bottom:12px}
+ .iavse-landing .iv-empty{padding:18px 20px;min-height:146px;align-items:center;text-align:center}
  .iavse-landing .iv-empty h3{font-size:18px}
- .iavse-landing .iv-footer{margin-top:60px;padding:27px 0 30px;gap:15px}
- .iavse-landing .iv-footer>nav{gap:0 20px;width:100%}
+ .iavse-landing .iv-footer{margin-top:60px;padding:27px 0 30px;gap:15px;justify-content:center;text-align:center}
+ .iavse-landing .iv-footer>nav{gap:0 20px;width:100%;justify-content:center}
  .iavse-landing .iv-footer>p{font-size:12px;max-width:43ch}
  .iavse-landing[data-landing-locale=en] .iv-title{font-size:clamp(33px,6.4vw,44px)}
  .iavse-landing[data-landing-locale=en] .iv-community-intro>h2{font-size:29px;max-width:20ch}

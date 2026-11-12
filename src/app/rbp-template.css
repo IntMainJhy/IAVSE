@@ -946,6 +946,18 @@ html[data-frontend=portfolio][data-theme-anim="1"]::view-transition-new(root) {
         color: var(--foreground);
       }
     }
+  }.max-md\:items-center {
+    @media (width < 48rem) {
+      align-items: center;
+    }
+  }.max-md\:justify-center {
+    @media (width < 48rem) {
+      justify-content: center;
+    }
+  }.max-md\:text-center {
+    @media (width < 48rem) {
+      text-align: center;
+    }
   }.sm\:my-20 {
     @media (width >= 40rem) {
       margin-block: calc(var(--spacing) * 20);

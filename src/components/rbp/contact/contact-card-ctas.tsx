@@ -19,7 +19,7 @@ export function ContactCardCtas({locale="zh"}:{locale?:string}): ReactNode {
       <motion.div
         layout
         transition={{ layout: { duration: 0.55, ease: EASE } }}
-        className="mt-2 flex flex-wrap items-center gap-3"
+        className="mt-2 flex flex-wrap items-center gap-3 max-md:justify-center"
       >
         <ContactButton locale={locale} />
 

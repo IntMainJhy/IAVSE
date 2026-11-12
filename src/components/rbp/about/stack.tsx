@@ -214,7 +214,7 @@ export function Stack({ locale = "zh" }: { locale?: string }): ReactNode {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 max-md:justify-center">
         <h3 className="text-foreground text-[15px] font-semibold tracking-tight">
           {labels.stack}
         </h3>

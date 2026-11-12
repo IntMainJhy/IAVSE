@@ -40,3 +40,9 @@ html[data-ui][data-color-mode] .v2-site .legal-consultation .legal-profile a.leg
 @media(max-width:640px){.legal-profile{grid-template-columns:minmax(0,1fr)}.legal-portrait{height:390px;min-height:0}.legal-portrait img{object-position:50% 24%}.legal-profile-copy{padding:28px}html[data-ui][data-color-mode] .v2-site .legal-profile h1{margin-bottom:22px}html[data-ui][data-color-mode] .v2-site .legal-profile h2{font-size:44px}.legal-introduction{max-width:none}.legal-information{grid-template-columns:minmax(0,1fr);gap:40px;margin-top:20px;padding:28px 24px}.legal-contact-copy>div{flex-direction:row;align-items:center}.legal-platform{align-items:flex-start;flex-direction:column;margin-top:22px;gap:20px}.legal-credentials>div{gap:10px;grid-template-columns:5em minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.legal-consultation *{scroll-behavior:auto}}
 @media print{.legal-profile{background:#fff;color:#173957;box-shadow:none}html[data-ui][data-color-mode] .v2-site .legal-profile :is(h1,h2,p,dt,dd),.legal-profile h2>span{color:#173957}.legal-information{background:#fff;box-shadow:none}.legal-back,.legal-primary,.legal-contact-copy button{display:none}}
+
+@media(max-width:640px){
+ .legal-profile-copy > :is(h1,.legal-firm){text-align:center}
+ .legal-profile-copy > h2{justify-content:center;flex-wrap:wrap}
+ .legal-profile-copy > .legal-primary{display:flex;width:fit-content;max-width:100%;margin-inline:auto}
+}

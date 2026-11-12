@@ -96,7 +96,10 @@ html[data-color-mode=dark] .iv-space-mat { background: linear-gradient(125deg,#2
   border-radius: 12px;
   color: var(--iv-body);
 }
-@media (max-width:740px) {
+@media (max-width:767px) {
   .iv-space-showcase { grid-template-columns: minmax(0,1fr); grid-template-areas: "intro" "board" "details"; gap: 18px; padding-inline: 0 }
+  .iv-space-intro, .iv-space-details, .iv-space-unavailable { text-align: center }
+  .iavse-landing .iv-space-intro p { margin-inline: auto; text-wrap: balance }
+  .iv-space-destinations { justify-content: center }
   .iv-space-open { gap: 8px; padding: 10px }
 }

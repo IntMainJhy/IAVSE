@@ -153,9 +153,11 @@
   }
 }
 
-@media (max-width:740px) {
+@media (max-width:767px) {
   .iv-catalog { grid-template-columns: 1fr; gap: 22px; padding-inline: 0; }
-  .iavse-landing .iv-catalog-intro > p { max-width: 44ch; margin-top: 8px; }
+  .iv-catalog-intro, .iv-catalog-note { text-align: center; }
+  .iavse-landing .iv-catalog-intro > p { max-width: 44ch; margin: 8px auto 0; text-wrap: balance; }
+  .iv-catalog-more { display: flex; width: fit-content; max-width: 100%; margin-inline: auto; }
 }
 
 @media (max-width:480px) {

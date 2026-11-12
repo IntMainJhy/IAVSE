@@ -17,7 +17,7 @@ export function ContactCard({locale="zh"}:{locale?:string}): ReactNode {
         <div data-iavse-contact className="relative w-full overflow-hidden rounded-4xl border border-foreground/8 bg-background p-1.5 shadow-sm">
           <div className="relative w-full overflow-hidden rounded-[1.6rem]">
             <div className="relative grid gap-8 p-6 sm:gap-10 sm:p-7 md:grid-cols-[1.2fr_1fr] md:items-stretch md:gap-6 md:p-6">
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 max-md:items-center max-md:text-center">
                 <h2 className="font-serif text-[2.25rem] font-medium leading-[1.05] tracking-tight text-foreground sm:text-[2.75rem] lg:text-[3.25rem]">
                   {c.connect}
                 </h2>

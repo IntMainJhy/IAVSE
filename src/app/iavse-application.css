@@ -230,6 +230,11 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
 }
 @media(max-width:767px){
  :scope .organic-container{padding-inline:20px!important}
+ :scope .product-download-page .product-section-heading,
+ :scope .community-report>.community-heading>div,
+ :scope .community-policy-document>h1 {text-align:center}
+ :scope .community-report>.community-heading>div {width:100%}
+ :scope .community-report>.community-heading>div>p {margin-inline:auto}
  :scope:is(.resource-hub){padding-inline:20px!important}
  :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading) h1{font-size:32px!important;line-height:1.45!important}
  :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading){padding-block:12px 22px!important;margin-bottom:22px!important}

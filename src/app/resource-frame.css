@@ -60,9 +60,29 @@ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-si
 html:root[data-ui][data-color-mode=dark] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-copy-feedback.is-error{color:#ff9ba8}
 
 @media(max-width:767px){
+ .resource-glass-tabs>.glass-switch {margin-inline:auto}
  html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-page-frame,.page-content:has(>.resource-hub-tabs)) .resource-hub-tabs{width:100%;margin-bottom:20px}
  html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-page-frame,.page-content:has(>.resource-hub-tabs)) .resource-hub-tabs>a{padding-inline:14px}
  html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-platform>a{max-width:100%;white-space:normal;text-align:left}
+}
+@layer rbp {
+ @media(max-width:767px) {
+  /* The catalog on /resources and the standalone /docs and /skills lists share these headings. */
+  .rbp-application.public-content-site :is(.catalog-page-heading,.design-library-heading) {
+   display:grid!important;
+   grid-template-columns:minmax(0,1fr);
+   justify-items:center;
+   gap:12px!important;
+   text-align:center!important;
+  }
+  .rbp-application.public-content-site :is(.catalog-page-heading,.design-library-heading)>div {width:100%;min-width:0}
+  .rbp-application.public-content-site :is(.catalog-page-heading,.design-library-heading) p {
+   margin-inline:auto!important;
+   text-wrap:balance;
+  }
+  .rbp-application.public-content-site .catalog-page-heading h1 {padding-inline:0!important}
+  .rbp-application.public-content-site .catalog-page-heading>.space-btn {margin:0!important}
+ }
 }
 @media(prefers-reduced-motion:reduce){
  html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site :is(.resource-page-frame,.page-content:has(>.resource-hub-tabs)) .resource-hub-tabs>a{transition:none}

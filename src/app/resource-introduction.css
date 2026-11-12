@@ -92,9 +92,16 @@ html[lang^=ja] .resource-shelf-heading h1 { font-family: "Yu Mincho", serif; }
   .resource-shelf-card:hover { transform: translateY(-3px); }
   .resource-shelf-card:hover img { transform: rotate(-2deg); }
 }
-@media (max-width:740px) {
+@media (max-width:767px) {
   .resource-shelf { width: calc(100% - 36px); padding-top: calc(var(--iavse-header-reserved, 110px) + 34px); }
-  .resource-shelf-heading { display: grid; padding-bottom: 13px; }
+  .resource-shelf-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    padding-bottom: 13px;
+    text-align: center;
+    text-wrap: balance;
+  }
   .resource-shelf-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 15px; }
   .resource-shelf-card { min-height: 104px; grid-template-columns: clamp(68px, 23vw, 108px) minmax(0, 1fr) 17px; gap: 13px; padding: 7px 13px 7px 7px; border-radius: 14px; }
   .resource-shelf-art { padding: 5px; border-radius: 8px; }

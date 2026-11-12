@@ -170,5 +170,11 @@
   html:root[data-ui][data-color-mode] body .blog-space-product[data-product-locale=ja] .bsp-intro h2{font-size:30px!important}
  }
 }
+@media(max-width:767px){
+ .bsp-intro-heading,.bsp-editor-copy>h2,.bsp-publishing-heading,.bsp-faq>h2{text-align:center}
+ .bsp-intro-heading>div>p{margin-inline:auto;text-wrap:balance}
+ .bsp-actions{justify-content:center}
+ .bsp-publishing-heading{grid-template-columns:minmax(0,1fr)}
+}
 @media(prefers-reduced-motion:reduce){.blog-space-product :is(a,summary>.icon){transition:none!important}}
 @media print{.bsp-intro{padding-top:24px}.bsp-content-map,.bsp-canvas-illustration,.bsp-close{box-shadow:none}.bsp-editor,.bsp-publishing,.bsp-faq{break-inside:avoid}.bsp-close{padding:24px}.bsp-actions{display:none}.bsp-faq details>p{display:block}}

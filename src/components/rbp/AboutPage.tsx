@@ -24,7 +24,7 @@ export function AboutPage({ locale = 'zh' }: { locale?: string }): ReactNode {
 
       <section className="mx-auto w-full max-w-160 px-6 pt-20 pb-16 sm:px-10 sm:pt-28 sm:pb-24">
         <FadeIn delay={0.5}>
-          <div data-iavse-about-intro className="rounded-4xl border border-foreground/5 bg-foreground/1.5 p-8 sm:p-12 dark:bg-foreground/3">
+          <div data-iavse-about-intro className="rounded-4xl border border-foreground/5 bg-foreground/1.5 p-8 max-md:text-center sm:p-12 dark:bg-foreground/3">
             <h1 className="font-serif text-[1.75rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
               {c.greeting}<span className="border-b border-foreground/30 pb-0.5">IAVSE</span>{locale === 'ja' && ' について'}
             </h1>
