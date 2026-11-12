@@ -78,35 +78,39 @@ void main() {
   // a particular phase. Only the irregular internal diffusion is animated.
   float leftDensity = leftAnchor * leftHeight * (0.32 + 0.68 * left.x);
   float rightDensity = rightAnchor * rightHeight * (0.32 + 0.68 * right.x);
-  float pigment = clamp(leftDensity + rightDensity, 0.0, 1.0);
-  float tint = leftDensity * left.y + rightDensity * right.y;
 
-  // Pixel-based top clearance keeps the navigation area white at every size.
+  // Pixel-based clearance keeps the top of the page free of pigment at every size.
   float clearance = smoothstep(100.0, 320.0, uv.y * uSize.y);
   float lowerFade = 1.0 - smoothstep(0.79, 1.0, uv.y);
   float coverage = clearance * lowerFade;
 
-  vec3 colour = mix(vec3(1.0), vec3(0.76, 0.67, 0.98), pigment * 0.71 * coverage);
-  colour = mix(colour, vec3(0.53, 0.35, 0.86), tint * 0.07 * coverage);
-  gl_FragColor = vec4(colour, 1.0);
+  vec3 mint = mix(vec3(0.78, 0.93, 0.86), vec3(0.61, 0.86, 0.77), left.y);
+  vec3 sky = mix(vec3(0.83, 0.92, 0.99), vec3(0.64, 0.82, 0.97), right.y);
+  // The two edge fields have disjoint anchors. Premultiplied alpha lets the
+  // page supply its own center and the seamless ground beneath the lower fade.
+  vec3 pigment = mint * leftDensity + sky * rightDensity;
+  gl_FragColor = vec4(pigment * coverage, (leftDensity + rightDensity) * coverage);
 }
 `;
 
 export default function IavseFlowBackdrop() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const fallbackRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
     const canvas = canvasRef.current;
-    if (!root || !canvas) return;
+    const fallback = fallbackRef.current;
+    if (!root || !canvas || !fallback) return;
 
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     const gl = (() => {
       try {
         return canvas.getContext("webgl", {
-          alpha: false,
+          alpha: true,
+          premultipliedAlpha: true,
           antialias: false,
           depth: false,
           stencil: false,
@@ -192,7 +196,10 @@ export default function IavseFlowBackdrop() {
       gl.uniform2f(uniforms.pointer, pointer.x, pointer.y);
       gl.uniform3f(uniforms.motion, pointer.vx, pointer.vy, pointer.energy);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      canvas.style.opacity = "1";
+      if (!fallback.hidden) {
+        fallback.hidden = true;
+        canvas.style.opacity = "1";
+      }
     };
 
     const updatePointer = (delta: number) => {
@@ -287,6 +294,7 @@ export default function IavseFlowBackdrop() {
     const onContextLost = (event: Event) => {
       event.preventDefault();
       contextLost = true;
+      fallback.hidden = false;
       canvas.style.opacity = "0";
       stop();
     };
@@ -316,6 +324,8 @@ export default function IavseFlowBackdrop() {
 
     return () => {
       disposed = true;
+      fallback.hidden = false;
+      canvas.style.opacity = "0";
       stop();
       observer?.disconnect();
       resizeObserver?.disconnect();
@@ -337,13 +347,15 @@ export default function IavseFlowBackdrop() {
       ref={rootRef}
       className="iavse-flow-backdrop"
       aria-hidden="true"
-      style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", background: "#fff" }}
+      style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}
     >
       <div
+        ref={fallbackRef}
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(180deg, #fff 100px, transparent 330px, transparent 72%, #fff), radial-gradient(ellipse 34% 43% at 0% 56%, #d4c3f1 0%, #eee7fb 48%, transparent 100%), radial-gradient(ellipse 37% 42% at 100% 60%, #ddccf5 0%, #f0e9fb 48%, transparent 100%), #fff",
+          background: "radial-gradient(ellipse 34% 43% at 0% 56%, #ace1ca, #e5f4ec 48%, transparent), radial-gradient(ellipse 37% 42% at 100% 60%, #b6d9f5, #e8f2fc 48%, transparent)",
+          maskImage: "linear-gradient(180deg, transparent 100px, black 320px, black 79%, transparent)",
         }}
       />
       <canvas

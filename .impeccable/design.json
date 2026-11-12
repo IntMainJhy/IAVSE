@@ -358,70 +358,84 @@
         "role": "secondary",
         "displayName": "Mist Left",
         "tonalRamp": [
-          "oklch(15.00% 0.0657 301.87)",
-          "oklch(26.43% 0.0657 301.87)",
-          "oklch(37.86% 0.0657 301.87)",
-          "oklch(49.29% 0.0657 301.87)",
-          "oklch(60.71% 0.0657 301.87)",
-          "oklch(72.14% 0.0657 301.87)",
-          "oklch(83.57% 0.0657 301.87)",
-          "oklch(95.00% 0.0657 301.87)"
+          "oklch(15.00% 0.0632 166.46)",
+          "oklch(26.43% 0.0632 166.46)",
+          "oklch(37.86% 0.0632 166.46)",
+          "oklch(49.29% 0.0632 166.46)",
+          "oklch(60.71% 0.0632 166.46)",
+          "oklch(72.14% 0.0632 166.46)",
+          "oklch(83.57% 0.0632 166.46)",
+          "oklch(95.00% 0.0632 166.46)"
         ]
       },
       "mist-right": {
         "role": "secondary",
         "displayName": "Mist Right",
         "tonalRamp": [
-          "oklch(15.00% 0.0586 304.03)",
-          "oklch(26.43% 0.0586 304.03)",
-          "oklch(37.86% 0.0586 304.03)",
-          "oklch(49.29% 0.0586 304.03)",
-          "oklch(60.71% 0.0586 304.03)",
-          "oklch(72.14% 0.0586 304.03)",
-          "oklch(83.57% 0.0586 304.03)",
-          "oklch(95.00% 0.0586 304.03)"
+          "oklch(15.00% 0.0538 242.43)",
+          "oklch(26.43% 0.0538 242.43)",
+          "oklch(37.86% 0.0538 242.43)",
+          "oklch(49.29% 0.0538 242.43)",
+          "oklch(60.71% 0.0538 242.43)",
+          "oklch(72.14% 0.0538 242.43)",
+          "oklch(83.57% 0.0538 242.43)",
+          "oklch(95.00% 0.0538 242.43)"
         ]
       },
       "mist-soft": {
         "role": "secondary",
         "displayName": "Mist Soft",
         "tonalRamp": [
-          "oklch(15.00% 0.0277 301.75)",
-          "oklch(26.43% 0.0277 301.75)",
-          "oklch(37.86% 0.0277 301.75)",
-          "oklch(49.29% 0.0277 301.75)",
-          "oklch(60.71% 0.0277 301.75)",
-          "oklch(72.14% 0.0277 301.75)",
-          "oklch(83.57% 0.0277 301.75)",
-          "oklch(95.00% 0.0277 301.75)"
+          "oklch(15.00% 0.0190 162.93)",
+          "oklch(26.43% 0.0190 162.93)",
+          "oklch(37.86% 0.0190 162.93)",
+          "oklch(49.29% 0.0190 162.93)",
+          "oklch(60.71% 0.0190 162.93)",
+          "oklch(72.14% 0.0190 162.93)",
+          "oklch(83.57% 0.0190 162.93)",
+          "oklch(95.00% 0.0190 162.93)"
+        ]
+      },
+      "mist-right-soft": {
+        "role": "secondary",
+        "displayName": "Mist Right Soft",
+        "tonalRamp": [
+          "oklch(15.00% 0.0172 248.01)",
+          "oklch(26.43% 0.0172 248.01)",
+          "oklch(37.86% 0.0172 248.01)",
+          "oklch(49.29% 0.0172 248.01)",
+          "oklch(60.71% 0.0172 248.01)",
+          "oklch(72.14% 0.0172 248.01)",
+          "oklch(83.57% 0.0172 248.01)",
+          "oklch(95.00% 0.0172 248.01)"
         ]
       },
       "dark-canvas": {
         "role": "neutral",
         "displayName": "Dark Canvas",
         "tonalRamp": [
-          "oklch(15.00% 0.0164 302.04)",
-          "oklch(26.43% 0.0164 302.04)",
-          "oklch(37.86% 0.0164 302.04)",
-          "oklch(49.29% 0.0164 302.04)",
-          "oklch(60.71% 0.0164 302.04)",
-          "oklch(72.14% 0.0164 302.04)",
-          "oklch(83.57% 0.0164 302.04)",
-          "oklch(95.00% 0.0164 302.04)"
+          "oklch(15.00% 0.0072 229.22)",
+          "oklch(26.43% 0.0072 229.22)",
+          "oklch(37.86% 0.0072 229.22)",
+          "oklch(49.29% 0.0072 229.22)",
+          "oklch(60.71% 0.0072 229.22)",
+          "oklch(72.14% 0.0072 229.22)",
+          "oklch(83.57% 0.0072 229.22)",
+          "oklch(95.00% 0.0072 229.22)"
         ]
       },
       "dark-background": {
         "role": "neutral",
         "displayName": "Dark Background",
         "tonalRamp": [
-          "oklch(15.00% 0.0177 305.29)",
-          "oklch(26.43% 0.0177 305.29)",
-          "oklch(37.86% 0.0177 305.29)",
-          "oklch(49.29% 0.0177 305.29)",
-          "oklch(60.71% 0.0177 305.29)",
-          "oklch(72.14% 0.0177 305.29)",
-          "oklch(83.57% 0.0177 305.29)",
-          "oklch(95.00% 0.0177 305.29)"
+          "oklch(15.00% 0.0103 229.32)",
+          "oklch(26.43% 0.0103 229.32)",
+          "oklch(37.86% 0.0103 229.32)",
+          "oklch(49.29% 0.0103 229.32)",
+          "oklch(60.71% 0.0103 229.32)",
+          "oklch(72.14% 0.0103 229.32)",
+          "oklch(83.57% 0.0103 229.32)",
+          "oklch(95.00% 0.0103 229.32)"
         ]
       },
       "dark-foreground": {
@@ -582,14 +596,14 @@
         "role": "neutral",
         "displayName": "Home Dark Canvas",
         "tonalRamp": [
-          "oklch(15.00% 0.0101 294.62)",
-          "oklch(26.43% 0.0101 294.62)",
-          "oklch(37.86% 0.0101 294.62)",
-          "oklch(49.29% 0.0101 294.62)",
-          "oklch(60.71% 0.0101 294.62)",
-          "oklch(72.14% 0.0101 294.62)",
-          "oklch(83.57% 0.0101 294.62)",
-          "oklch(95.00% 0.0101 294.62)"
+          "oklch(15.00% 0.0073 229.25)",
+          "oklch(26.43% 0.0073 229.25)",
+          "oklch(37.86% 0.0073 229.25)",
+          "oklch(49.29% 0.0073 229.25)",
+          "oklch(60.71% 0.0073 229.25)",
+          "oklch(72.14% 0.0073 229.25)",
+          "oklch(83.57% 0.0073 229.25)",
+          "oklch(95.00% 0.0073 229.25)"
         ]
       },
       "home-dark-surface": {
@@ -1272,8 +1286,8 @@
       "kind": "card",
       "refersTo": "community-card",
       "description": "Real empty-state copy in the bounded homepage feed; unavailable states add a working refresh action at runtime, with no fabricated activity.",
-      "html": "<article class=\"ds-empty\"><h3>第一份经验，也许就来自你。</h3><p>一个解决过的问题，一次工具的使用体验，都可以成为分享的起点。</p><a href=\"/community\">进入社区 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></article>",
-      "css": ".ds-empty{min-height:300px;padding:36px;border-radius:16px;background:#fff;color:var(--iv-ink,#202023);box-shadow:0 14px 38px -10px rgb(32 32 35 / .10);font:400 15px/1.9 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}.ds-empty h3{margin:0;font-size:25px;font-weight:500}.ds-empty p{max-width:40ch;margin:12px 0 0;color:var(--iv-body,#636369)}.ds-empty a{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin-top:16px;color:var(--iv-action-hover,#38383d);text-decoration:none;font-size:14px}.ds-empty a:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(hover:hover) and (pointer:fine){.ds-empty:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(32 32 35 / .16)}}@media(prefers-reduced-motion:reduce){.ds-empty{transition:none}.ds-empty:hover{transform:none}}"
+      "html": "<article class=\"ds-empty\"><h3>暂无公开动态</h3><a href=\"/community\">进入社区 <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></article>",
+      "css": ".ds-empty{min-height:212px;padding:36px;border-radius:16px;background:#fff;color:var(--iv-ink,#202023);box-shadow:0 14px 38px -10px rgb(32 32 35 / .10);font:400 15px/1.9 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);transition:transform .26s cubic-bezier(.2,.8,.2,1),box-shadow .26s}.ds-empty h3{margin:0;font-size:25px;font-weight:500}.ds-empty a{display:inline-flex;align-items:center;gap:7px;min-height:44px;margin-top:16px;color:var(--iv-action-hover,#38383d);text-decoration:none;font-size:14px}.ds-empty a:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(hover:hover) and (pointer:fine){.ds-empty:hover{transform:translateY(-6px);box-shadow:0 27px 55px -12px rgb(32 32 35 / .16)}}@media(prefers-reduced-motion:reduce){.ds-empty{transition:none}.ds-empty:hover{transform:none}}"
     },
     {
       "name": "Neutral selected label",
@@ -1285,10 +1299,10 @@
     }
   ],
   "narrative": {
-    "northStar": "White space, black controls, purple mist",
-    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
+    "northStar": "White space, black controls, teal and blue mist",
+    "overview": "IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and drifting teal mist on the left and pale blue mist on the right. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Teal and blue color the background. Primary actions, selected labels, icons and links use neutral ink.\n\nThis specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.\n\nThe earlier application baseline retains its [RBP Portfolio attribution](docs/portfolio-frontend.md), pinned at `1581b9b8e5876f60e5eb844970747506980c4412`. The shared glass controls and analytic mist are independently authored public website code. The user-provided fluid-glass reference was read only; its MIT license includes Commons Clause restrictions and must not be called plain MIT. No reference source or model is included in this implementation. [PRODUCT.md](PRODUCT.md) owns business, permission and license boundaries. Authored bodies, blog themes, canvas content and third-party previews retain their appearance and rights.",
     "keyCharacteristics": [
-      "White space, black functional controls and soft purple mist at both sides, with a white center.",
+      "White space, black functional controls and soft teal and blue mist framing a white center.",
       "Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.",
       "An always-visible frosted navigation capsule and adjacent theme control, with the original brand and real account/language controls outside it.",
       "Sliding glass selection with local text magnification and one accessible interactive label layer.",
@@ -1298,7 +1312,7 @@
     "rules": [
       {
         "name": "The Neutral Function Rule",
-        "body": "Use black neutral UI for primary actions, selected labels, links and icons in the light appearance; keep purple in decorative backgrounds and retain semantic feedback colors.",
+        "body": "Use neutral ink for light-theme actions, selections, links and icons. Reserve teal and blue for decorative surfaces and use semantic colors for feedback.",
         "section": "colors"
       },
       {
@@ -1318,7 +1332,7 @@
       }
     ],
     "dos": [
-      "Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.",
+      "Do use white space, neutral black controls and teal and blue mist across platform-owned surfaces.",
       "Do keep the navigation capsule visible and frosted at every width, with theme beside it and real brand, account and language controls outside it.",
       "Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.",
       "Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.",
@@ -1327,7 +1341,7 @@
     ],
     "donts": [
       "Don't describe shared visual migration as a rewrite or full visual acceptance of every page.",
-      "Don't restore purple action/selection/icon/link accents or extend the navigation capsule's glass surface across the brand and account areas.",
+      "Keep functional controls neutral and confine the frosted navigation surface to the capsule.",
       "Don't turn soft mist into mandatory high-contrast ribbons or one-sided color.",
       "Don't style authored bodies, artboards, color swatches or third-party previews as platform UI.",
       "Don't expose duplicate interactive labels, invent activity or simulate real account state.",

@@ -6,7 +6,7 @@
 
 ## 当前首页与共享顶栏
 
-当前 `/` 由 [`IavseLanding.tsx`](../src/components/landing/IavseLanding.tsx) 呈现：居中两行产品介绍与三个真实文字入口 → 社区说明与真实筛选内容 → 独立四类资源索引 → 个人主页／编辑器说明与真实成员或明确标记的内置模板预览 → 页脚。旧资源侧栏组合和下文的 Portfolio Hero／Projects／Contact 首页属于历史实现；当前首页保留原有公开内容权限、空态／错误／重试、浮起卡片和入场机制，没有新增媒体或成员数据。
+当前 `/` 由 [`IavseLanding.tsx`](../src/components/landing/IavseLanding.tsx) 呈现：居中标题、一句简介与三个入口 → 社区动态与筛选 → 独立四类资源索引 → 个人主页／编辑器说明与真实成员或明确标记的内置模板预览 → 页脚。旧资源侧栏组合和下文的 Portfolio Hero／Projects／Contact 首页属于历史实现；当前首页保留原有公开内容权限、空态／错误／重试、浮起卡片和入场机制，没有新增媒体或成员数据。
 
 根运行时在首页与合格公共路由保留同一 [`IavseHeader`](../src/components/IavseHeader.tsx) 和单个 `GlassSwitch`。导航胶囊各视口始终可见，主题按钮放在胶囊旁，原语言切换器放在真实账号／头像之后。1100px 以上为一行；1100px 及以下为品牌和账号／语言上排、胶囊和主题下排，650px 及以下使用精简可见标签并保留完整本地化可访问名称。高度与首页占位分别为 72px／122px／110px，非首页 `PublicFrame` 在紧凑断点追加 52px／48px 避让。当前首页和顶栏均使用局部深色角色；主题控件复用现有文档偏好、cookie 和圆形过渡契约，来源归属保留。精确布局、字号、颜色和路由边界见 DESIGN.md 与[平台说明](platform-ui.zh-CN.md)。
 
@@ -64,7 +64,7 @@
 
 共享策略在 [`rbp-motion.mjs`](../src/lib/rbp-motion.mjs)：缓动 `[0.22, 1, 0.36, 1]`，视口阈值 0.12、底部边距 -6%。[`motion-primitives.tsx`](../src/components/rbp/ui/motion-primitives.tsx) 的 FadeIn 默认使用受控滚动入场，持续 800ms，完整离开物理视口后才准备下一次入场；Hero 显式保留 mount 入场，ScaleUnblur 也保留挂载语义，为 `scale: 0.7`、`blur(20px)`、1 秒。Projects 每卡索引延迟为 60ms，由 FadeIn 限制在 210ms 以内。
 
-[`application-reveal.tsx`](../src/components/rbp/ui/application-reveal.tsx) 通过 IntersectionObserver 和 Web Animations API 增强现有标题、卡片、列表及面板，不增加包裹层或移动表单控件。每轮入场持续 550ms，仅在完整离开物理视口后准备重播；同一个观察器批次按位置排序，各语义分组分别从首项计算 70ms 交错延迟，最大 210ms。博客产品介绍通过 `data-rbp-reveal-scope`、`data-rbp-reveal-group` 和 `data-rbp-reveal-item` 明确接入 25 个短小可读内容块，不将顶栏、画廊、静态示意图或完整的长章节设为入场对象。MutationObserver 继续发现新增结果；模板已有动效、可编辑内容和作者画布不重复处理，作者博客与预览边界保留。键盘焦点进入隐藏区域时立即显示，焦点停留期间保持可读。开启减少动态会取消未完成动画并显示内容；缺少相关 API 或 JavaScript 时直接保持可读。路由与查询变化会清理动画、事件和观察器。
+[`application-reveal.tsx`](../src/components/rbp/ui/application-reveal.tsx) 通过 IntersectionObserver 和 Web Animations API 增强现有标题、卡片、列表及面板，不增加包裹层或移动表单控件。每轮入场持续 550ms，仅在完整离开物理视口后准备重播；同一个观察器批次按位置排序，各语义分组分别从首项计算 70ms 交错延迟，最大 210ms。博客产品介绍通过 `data-rbp-reveal-scope`、`data-rbp-reveal-group` 和 `data-rbp-reveal-item` 明确接入 21 个短小可读内容块，不将顶栏、画廊、静态示意图或完整的长章节设为入场对象。MutationObserver 继续发现新增结果；模板已有动效、可编辑内容和作者画布不重复处理，作者博客与预览边界保留。键盘焦点进入隐藏区域时立即显示，焦点停留期间保持可读。开启减少动态会取消未完成动画并显示内容；缺少相关 API 或 JavaScript 时直接保持可读。路由与查询变化会清理动画、事件和观察器。
 
 历史 Portfolio 胶囊的活动指示器参数为 `stiffness: 380, damping: 32`；当前共享导航改用 GlassSwitch 的测量、滑动镜片与局部文字放大。新主题按钮继续沿用 700ms 圆形揭示契约。CTA 布局变化为 0.55 秒、文字变化 0.35 秒、复制状态图标变化 0.2 秒。Projects 悬停抬升 4px / 400ms，图片放大至 1.06 / 700ms。拍立得入场为 0.9 秒，延迟 `0.05 + index × 0.08` 秒，指针弹簧为 220 / 18 / 0.6；展开列表保留 0.5 秒高度变化。Matter.js 保留重力 1、恢复系数 0.35、摩擦 0.5、空气摩擦 0.025 和密度 0.0018，支持拖动和重置。
 

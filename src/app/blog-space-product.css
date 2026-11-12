@@ -67,8 +67,8 @@
 .bsp-selection-cursor{position:absolute;right:-13px;bottom:9px;transform:rotate(-12deg)}
 .bsp-selection-cursor>.icon{width:20px;height:20px;fill:var(--bsp-ink);stroke:var(--bsp-paper);stroke-width:1}
 .bsp-paper-work{display:grid;grid-template-columns:1fr 1fr;gap:7px;height:57px;margin-bottom:10px}
-.bsp-paper-work>span{position:relative;overflow:hidden;background:#eee7fb;border:1px solid #e0d6f0}
-.bsp-paper-work>span:before{position:absolute;content:"";width:42px;height:42px;border:1px solid #bfb0d5;border-radius:50%;left:calc(50% - 21px);top:17px}
+.bsp-paper-work>span{position:relative;overflow:hidden;background:#e5f4ec;border:1px solid #cce2d8}
+.bsp-paper-work>span:before{position:absolute;content:"";width:42px;height:42px;border:1px solid #a7c6ba;border-radius:50%;left:calc(50% - 21px);top:17px}
 .bsp-paper-work>span:last-child{background:var(--bsp-soft);border-color:var(--bsp-line)}
 .bsp-paper-work>span:last-child:before{width:37px;height:37px;top:10px;left:calc(50% - 18px);border-color:var(--bsp-body);border-radius:1px;transform:rotate(35deg)}
 .bsp-selected-section>i:last-of-type{width:64%}
@@ -98,7 +98,7 @@
 .bsp-publish-steps>li{display:flex;align-items:flex-start;gap:17px}
 .bsp-step-number{flex:none;display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--bsp-line);border-radius:50%;font-size:12px;color:var(--bsp-body);font-variant-numeric:tabular-nums}
 .bsp-publish-steps p{margin-top:6px;max-width:45ch;font-size:13px;line-height:1.8}
-.bsp-version-diagram{display:grid;grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr);align-items:center;gap:8px;padding:38px 25px 24px;background:radial-gradient(ellipse at 50% 30%,#eee7fb70,transparent 75%);border:1px solid var(--bsp-line);border-radius:16px}
+.bsp-version-diagram{display:grid;grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr);align-items:center;gap:8px;padding:38px 25px 24px;background:radial-gradient(ellipse at 50% 30%,#b6d9f528,transparent 75%);border:1px solid var(--bsp-line);border-radius:16px}
 .bsp-version-draft,.bsp-version-public{min-width:0;padding:18px 13px 16px;border:1px solid var(--bsp-line);border-radius:8px;background:var(--bsp-paper);box-shadow:0 11px 24px -17px rgb(65 43 92 / .26)}
 .bsp-version-draft{transform:rotate(-3deg)}
 .bsp-version-public{border-color:color-mix(in srgb,var(--bsp-ink) 40%,var(--bsp-line));transform:rotate(3deg)}
@@ -125,7 +125,7 @@
 .bsp-faq summary>.icon{width:16px;height:16px;transition:transform .2s}
 .bsp-faq details[open] summary>.icon{transform:rotate(45deg)}
 .bsp-faq details>p{max-width:65ch;padding:0 36px 24px 0;font-size:13px;line-height:1.85}
-.bsp-close{padding:56px 24px 68px;text-align:center;border-radius:16px;background:linear-gradient(110deg,#eee7fb60,transparent 40%,transparent 60%,#eee7fb60),var(--bsp-paper);border:1px solid color-mix(in srgb,var(--bsp-line) 70%,transparent)}
+.bsp-close{padding:56px 24px 68px;text-align:center;border-radius:16px;background:linear-gradient(110deg,#ace1ca24,transparent 40%,transparent 60%,#b6d9f524),var(--bsp-paper);border:1px solid color-mix(in srgb,var(--bsp-line) 70%,transparent)}
 .bsp-close>p{margin:20px auto 0;max-width:50ch}
 .bsp-close>.bsp-actions{justify-content:center;margin-top:24px}
 

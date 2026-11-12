@@ -30,10 +30,9 @@ export async function BlogSpacesPage({req}:{req:Request}){
  return <div className="blog-spaces-page" data-blog-spaces data-spaces-surface="spatial">
   <header className="creator-directory-intro">
    <h1>{t('博客空间')}</h1>
-   <p>{say('每一个主页，都是一个独立的世界。','Every homepage, a world of its own.','一つひとつのホームページに、その人の世界。')}</p>
    <Link className="blog-spaces-create" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link>
   </header>
-  <p className="blog-spaces-gallery-note">{say('公开空间与原创主页示例在这里相遇。示例中的人物和作品均为虚构。','Explore public spaces alongside original homepage examples. People and work in the examples are fictional.','公開スペースとオリジナルホームページの例を探索できます。サンプルの人物と作品は架空です。')}</p>
+  <p className="blog-spaces-gallery-note">{say('画廊收录公开博客与原创示例。示例人物和作品均为虚构。','Public blogs and original examples. People and work in the examples are fictional.','公開ブログとオリジナルの作例。作例の人物と作品は架空です。')}</p>
   <BlogSpaceGallery spaces={allSpaces} directory={directory} labels={{loading:say('正在准备博客空间…','Preparing blog spaces…','ブログスペースを準備中…'),open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索功能','Scroll to explore the features','スクロールして機能を見る'),directory:t('发现博客空间'),previous:say('上一个空间','Previous space','前のスペース'),next:say('下一个空间','Next space','次のスペース'),select:say('走近这个空间','Explore this space','このスペースに近づく'),close:say('返回空间','Back to the spaces','スペースに戻る'),reset:say('重置视角','Reset view','視点をリセット'),overview:say('拖动环顾，点击走近一个空间','Drag to look around. Choose a space to step inside.','ドラッグで見渡して、スペースを選んで近づく')}}/>
   <BlogProductShowcase locale={locale}/>
  </div>;

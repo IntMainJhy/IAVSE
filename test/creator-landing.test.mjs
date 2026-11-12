@@ -69,7 +69,7 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  const buttons=find(filters[0],node=>node.name==='button');
  assert.deepEqual(buttons.map(text),[c.all,c.works,c.discussions]);assert.deepEqual(buttons.map(node=>node.attribs['aria-pressed']),['true','false','false']);
  const empty=find(document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));assert.equal(empty.length,1);
- assert.ok(text(empty[0]).includes(c.emptyTitle));assert.ok(text(empty[0]).includes(c.emptyBody));
+ assert.ok(text(empty[0]).includes(c.emptyTitle));
  assert.deepEqual(find(empty[0],node=>node.name==='a').map(node=>node.attribs.href),['/community']);
  const resources=find(document,node=>node.name==='aside'&&node.attribs['aria-label']===c.resources);assert.equal(resources.length,1);
  assert.deepEqual(find(resources[0],node=>node.name==='a').map(node=>node.attribs.href),['/resources?type=designs','/resources?type=skills','/resources?type=docs','/resources?type=resources']);
@@ -88,7 +88,7 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  for(const name of ['Lin Chen','Maya Zhou','Leo Park','Josh Mercer','jianghaoyu2006'])assert.ok(!text(document).includes(name),name);
 
  const failed=await render('zh',{content:{...emptyContent,communityUnavailable:true}}),failedEmpty=find(failed.document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));
- assert.equal(failedEmpty.length,1);assert.ok(text(failedEmpty[0]).includes(c.unavailable));assert.ok(text(failedEmpty[0]).includes(c.unavailableBody));
+ assert.equal(failedEmpty.length,1);assert.ok(text(failedEmpty[0]).includes(c.unavailable));
  assert.deepEqual(find(failedEmpty[0],node=>node.name==='button').map(text),[c.retry]);
 });
 
@@ -96,7 +96,10 @@ test('three locales preserve real destinations, labeled template fallback and su
  for(const locale of ['zh','en','ja']){
   const empty=await render(locale),c=empty.copy.landingCopy(locale),content=text(empty.document);
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-iavse-landing'))[0].attribs['data-landing-locale'],locale);
-  for(const value of [...c.title,c.intro,c.communityTitle,c.emptyTitle,c.emptyBody,c.resourceTitle,c.resourceIntro,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.example,c.source,c.privacy,c.footer])assert.ok(content.includes(value),`${locale}: ${value}`);
+  for(const value of [...c.title,c.intro,c.communityTitle,c.emptyTitle,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.example,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
+  const entrances=find(empty.document,node=>node.name==='nav'&&node.attribs['aria-label']===c.productEntries);
+  assert.equal(entrances.length,1);
+  assert.deepEqual(find(entrances[0],node=>node.name==='a').map(node=>node.attribs.href),['/community','/resources','/workspace/blog']);
   for(const href of ['/','/login','/resources','/community','/blogs','/workspace/account','/about','/legal/privacy','https://github.com/IntMainJhy/IAVSE'])assert.ok(find(empty.document,node=>node.name==='a'&&node.attribs.href===href).length,`${locale}: ${href}`);
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-language-switcher')).length,1);
   for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!content.includes(marker),marker);

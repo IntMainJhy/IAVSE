@@ -16,12 +16,12 @@ import { FadeIn } from "@/components/rbp/ui/motion-primitives";
 import {portfolioCopy,resourceImage} from '@/lib/portfolio-content';
 import {homeResourceSelections,homeExperienceCopy} from '@/lib/home-experience.mjs';
 
-export type Project={id:string;icon:ComponentType<{className?:string}>;iconLabel:string;title:string;description:string;meta:string;imageRatio:number;image:string;imageAlt:string;href:string};
+export type Project={id:string;icon:ComponentType<{className?:string}>;iconLabel:string;title:string;description:string;meta?:string;imageRatio:number;image:string;imageAlt:string;href:string};
 export function productProjects(locale='zh'):Project[]{
  const c=homeExperienceCopy(locale),zh=locale==='zh',ja=locale==='ja';
  return [
-  {id:'designs',icon:Sparkles,iconLabel:zh?'UI 设计':ja?'UI デザイン':'UI design',title:zh?'从有来源的设计里，找到下一次创作的起点。':ja?'出典のあるデザインから、次の制作へ。':'Find the starting point for your next project in designs with a clear source.',description:zh?'浏览完整项目和品牌规范，打开预览，查看源码与各自的使用许可。':ja?'プロジェクトとブランド規範を見て、プレビュー、ソース、ライセンスを確認。':'Browse projects and brand guidelines, explore previews, and find the source and its license.',meta:zh?'资源目录 · 来源与许可':ja?'リソース · 出典とライセンス':'Resource directory · source and license',imageRatio:752/497,image:resourceImage(homeResourceSelections[0].items[0]),imageAlt:homeResourceSelections[0].items[0].title,href:'/resources?type=designs'},
-  {id:'skills',icon:Wand2,iconLabel:'AI Skills',title:zh?'把方法整理成步骤，让工具多一种能力。':ja?'方法を手順にして、ツールの力に。':'Turn a method into steps that give your tools another capability.',description:zh?'查看 Skill 的能力、使用场景和原始来源，再带入自己的工作流程。':ja?'Skill の機能、用途、出典を確かめて、自分の作業へ。':'Read what a Skill does, when to use it, and where it comes from before adding it to your workflow.',meta:zh?'Skill 目录 · 原始来源':ja?'Skill · 原典':'Skill directory · original sources',imageRatio:1024/768,image:'/media/portfolio/skills.webp',imageAlt:'IAVSE Skill directory',href:'/resources?type=skills'},
+  {id:'designs',icon:Sparkles,iconLabel:zh?'UI 设计':ja?'UI デザイン':'UI design',title:zh?'界面模板与品牌规范':ja?'UI テンプレートとブランドガイド':'Templates and brand guidelines',description:zh?'预览设计，查看源码与许可。':ja?'プレビュー、ソースコード、ライセンスを確認。':'Preview designs and check their source code and licenses.',imageRatio:752/497,image:resourceImage(homeResourceSelections[0].items[0]),imageAlt:homeResourceSelections[0].items[0].title,href:'/resources?type=designs'},
+  {id:'skills',icon:Wand2,iconLabel:'AI Skills',title:zh?'可复用的工作流程':ja?'繰り返し使えるワークフロー':'Reusable workflows',description:zh?'按任务查看 Skill 的用法与来源。':ja?'作業に合わせて Skill の使い方と出典を確認。':'Find a skill for your task and see how to use it.',imageRatio:1024/768,image:'/media/portfolio/skills.webp',imageAlt:'IAVSE Skill directory',href:'/resources?type=skills'},
   {id:'community',icon:Compass,iconLabel:c.community,title:c.communityTitle.join(''),description:c.communityBody,meta:zh?'社区 · 分享、讨论与收藏':ja?'コミュニティ · 投稿と対話':'Community · posts, discussions and bookmarks',imageRatio:1024/768,image:'/media/portfolio/community.webp',imageAlt:'IAVSE community',href:'/community'},
   {id:'blogs',icon:Layers,iconLabel:c.spaceAction,title:c.spaceTitle.join(''),description:c.spaceBody,meta:c.templateNote,imageRatio:1024/768,image:'/media/home-product/space-editorial.webp',imageAlt:c.templateNote,href:'/blogs'},
  ];
@@ -132,9 +132,7 @@ function ProjectCard({
           </p>
         </div>
 
-        <p className="px-1 pb-2 text-[12px] tracking-tight text-foreground/50">
-          {project.meta}
-        </p>
+        {project.meta && <p className="px-1 pb-2 text-[12px] tracking-tight text-foreground/50">{project.meta}</p>}
       </Link>
     </FadeIn>
   );

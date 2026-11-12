@@ -1,5 +1,5 @@
 /* Independently authored public IAVSE application surfaces.
-   Purple belongs to the shared mist. Controls use neutral ink, paper and glass.
+   Mint and sky blue belong to the shared mist. Controls use neutral ink, paper and glass.
    Loaded by feature bundles, never the homepage bundle. */
 @font-face{font-family:"IAVSE Display";src:url('/fonts/ZCOOLXiaoWei-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
 html:root[data-frontend=portfolio][data-ui][data-color-mode]:has([data-rbp-route]:not([data-rbp-route=home]),.organic-admin){
@@ -13,7 +13,7 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode]:has([data-rbp-route
  --iavse-card-radius:16px;
 }
 html:root[data-frontend=portfolio][data-ui][data-color-mode=dark]:has([data-rbp-route]:not([data-rbp-route=home]),.organic-admin){
- --iavse-canvas:#17141c;--iavse-background:#242029;--iavse-foreground:#f5f2f8;
+ --iavse-canvas:#171b1d;--iavse-background:#202629;--iavse-foreground:#f5f2f8;
  --iavse-secondary:#ccc5d3;--iavse-subtle:#aaa1b4;--iavse-muted:#302b36;
  --iavse-border:#443b4d;--iavse-focus:#e0d9e8;--iavse-sky:#302b36;
  --iavse-sage:#2c2931;--iavse-warm:#302a31;--iavse-selection:#51475e;

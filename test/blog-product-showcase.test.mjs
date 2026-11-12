@@ -31,14 +31,14 @@ test('the replacement introduction explains real capabilities without mounting o
  assert.deepEqual(actions,['/workspace/blog','/docs/showcase','/workspace/blog','/docs/showcase']);
  assert.equal(find(document,n=>['iframe','script','img','button'].includes(n.name)).length,0,'static feature storytelling adds no downloads, editor widgets or embedded member pages');
  for(const removed of ['data-blog-directory','data-product-showroom','data-local-demo','film-canvas-title','role="tab"'])assert.ok(!html.includes(removed),removed);
- assert.ok(text(document).includes('非交互编辑器'),'the drawn canvas cannot be mistaken for a working editor');
+ assert.ok(text(document).includes('静态画布示意图'),'the drawn canvas cannot be mistaken for a working editor');
  const ids=find(document,n=>n.attribs.id).map(n=>n.attribs.id);
  for(const section of find(document,n=>n.name==='section'))assert.ok(ids.includes(section.attribs['aria-labelledby']),'sections retain visible accessible headings');
 });
 
 test('publishing copy distinguishes a saved draft, manual homepage publishing and reviewed article snapshots',()=>{
  const{document}=render(),content=text(document);
- for(const detail of ['不会替换已经公开的页面','主页、作品与资源由作者手动发布后公开','文章会固定提交的版本，审核通过后公开','保留公开链接而不进入平台目录'])assert.ok(content.includes(detail),detail);
+ for(const detail of ['不会替换已经公开的页面','主页、作品与资源由作者手动发布后公开','文章以提交时的版本送审，审核通过后公开','保留公开链接而不进入平台目录'])assert.ok(content.includes(detail),detail);
  const steps=find(document,n=>n.name==='ol')[0];assert.equal(find(steps,n=>n.name==='li').length,3);
  const faqs=find(document,n=>n.name==='details');assert.equal(faqs.length,2);
  for(const faq of faqs){assert.equal(find(faq,n=>n.name==='summary').length,1);assert.equal(find(faq,n=>n.name==='p').length,1);assert.ok(!Object.hasOwn(faq.attribs,'open'));}
@@ -47,14 +47,14 @@ test('publishing copy distinguishes a saved draft, manual homepage publishing an
 
 test('all three supported locales retain the complete product story and real creation/help destinations',()=>{
  for(const locale of ['zh','en','ja']){
-  const{html,document}=render(locale),content=text(document);
+  const{html,document}=render(locale);
   assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-blog-space-product'))[0].attribs['data-product-locale'],locale);
-  assert.ok(find(document,n=>n.name==='h2').length>=5);
+  assert.equal(find(document,n=>n.name==='h2').length,find(document,n=>n.name==='section').length,'each product section has its own heading');
   assert.equal(find(document,n=>n.name==='details').length,2);
   assert.ok(find(document,n=>n.name==='h2'&&n.attribs.id==='blog-product-title').length);
   for(const href of ['/workspace/blog','/docs/showcase'])assert.equal(find(document,n=>n.name==='a'&&n.attribs.href===href).length,2);
   for(const marker of ['undefined','NaN','hello@example.com'])assert.ok(!html.includes(marker));
-  assert.ok(content.length>600,locale+' includes full explanations');
+  for(const node of find(document,n=>n.name==='dd'||n.name==='summary'||n.name==='figcaption'))assert.ok(text(node).trim(),locale+' has readable feature, question and illustration labels');
  }
  assert.equal(text(render('unknown').document),text(render('zh').document),'unknown locale safely uses the complete Chinese copy');
 });

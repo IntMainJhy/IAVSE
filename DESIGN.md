@@ -1,6 +1,6 @@
 ---
 name: IAVSE
-description: White space, black functional controls, frosted navigation and soft purple mist across IAVSE platform surfaces.
+description: White space, black functional controls, frosted navigation and soft teal and blue mist across IAVSE platform surfaces.
 colors:
   background: '#ffffff'
   foreground: '#19171c'
@@ -27,10 +27,11 @@ colors:
   glass-selected: '#202022'
   glass-lens-high: rgb(255 255 255 / .76)
   glass-lens-low: rgb(255 255 255 / .47)
-  mist-left: '#d4c3f1'
-  mist-right: '#ddccf5'
-  mist-soft: '#eee7fb'
-  home-dark-canvas: '#151419'
+  mist-left: '#ace1ca'
+  mist-right: '#b6d9f5'
+  mist-soft: '#e5f4ec'
+  mist-right-soft: '#e8f2fc'
+  home-dark-canvas: '#15191b'
   home-dark-surface: '#201f25'
   home-dark-foreground: '#f2eff5'
   home-dark-body: '#b7b1bf'
@@ -58,8 +59,8 @@ colors:
   glass-dark-focus: '#e9e5ee'
   glass-dark-track-fallback: '#27272d'
   glass-dark-lens-fallback: '#414147'
-  dark-canvas: '#17141c'
-  dark-background: '#242029'
+  dark-canvas: '#171b1d'
+  dark-background: '#202629'
   dark-foreground: '#f5f2f8'
   dark-secondary: '#ccc5d3'
   dark-subtle: '#aaa1b4'
@@ -241,9 +242,9 @@ components:
 
 ## Overview
 
-**Creative North Star: "White space, black controls, purple mist"**
+**Creative North Star: "White space, black controls, teal and blue mist"**
 
-IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and naturally moving purple mist at both sides. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Purple belongs to decorative backgrounds; primary actions, selected labels, icons and links use neutral ink.
+IAVSE pairs a white, spacious platform with black functional controls, licensed artistic headings, floating cards and drifting teal mist on the left and pale blue mist on the right. The center stays quiet and white. The shared header has a transparent frame: brand at left, a centered frosted navigation capsule with a theme control beside it, and real account state followed by language at right. The same capsule remains visible on every viewport; compact layouts place navigation and theme on a second row. A travelling lens briefly enlarges the text beneath it. Teal and blue color the background. Primary actions, selected labels, icons and links use neutral ink.
 
 This specification records the implemented **shared visual migration**, not a claim that every page was rewritten. [The landing stylesheet](src/app/iavse-landing.css) owns homepage variants; [application styles](src/app/iavse-application.css), [glass controls](src/app/glass-controls.css) and [platform shell placement](src/app/iavse-shell.css) carry the shared world through existing functional layouts. The older [base integration](src/app/iavse-system.css) and [host bridge](src/app/rbp-bridge.css) remain implementation support; their superseded blue-gray palette is not a second current design direction. [Platform coverage and mechanisms](docs/platform-ui.zh-CN.md) record the actual route and content boundaries. The retained local homepage brief holds its task-specific composition decisions.
 
@@ -251,7 +252,7 @@ The earlier application baseline retains its [RBP Portfolio attribution](docs/po
 
 **Key Characteristics:**
 
-- White space, black functional controls and soft purple mist at both sides, with a white center.
+- White space, black functional controls and soft teal and blue mist framing a white center.
 - Licensed ZCOOL XiaoWei headings, Cormorant wordmark and readable Geist body text.
 - An always-visible frosted navigation capsule and adjacent theme control, with the original brand and real account/language controls outside it.
 - Sliding glass selection with local text magnification and one accessible interactive label layer.
@@ -260,7 +261,7 @@ The earlier application baseline retains its [RBP Portfolio attribution](docs/po
 
 ## Colors
 
-The light platform uses neutral ink and white surfaces. Purple is reserved for the atmosphere and decorative background grounds; it is not a functional accent. The frontmatter owns the extracted values, including the small homepage/header variants used in the current CSS.
+The light platform uses neutral ink and white surfaces. Teal and blue are the decorative background colors. The frontmatter owns the extracted values, including the small homepage/header variants used in the current CSS.
 
 ### Primary
 
@@ -270,7 +271,7 @@ The light platform uses neutral ink and white surfaces. Purple is reserved for t
 
 ### Secondary
 
-- **Mist Left / Right / Soft:** static background-fallback colors and the decorative purple world. The WebGL shader mixes its own colors; control tokens do not recolor it automatically.
+- **Mist Left / Right:** the static teal and blue cores. Mist Soft and Mist Right Soft supply the pale outer stops on the left and right respectively. The WebGL shader mixes its own colors; control tokens do not recolor it automatically.
 - **Glass High / Low:** the light capsule and lens use white alpha stops. In dark appearance, the header track uses neutral `rgb(32 32 38 / .5)` → `rgb(24 24 30 / .3)` stops; other switch tracks use white alpha (.055 → .02). Their separate brighter lens uses white alpha (.19 → .055), edge (.28) and inset highlight (.38), keeping the backdrop visible through the frosted layers. Complete gradients, blur and shadows live in the sidecar because those properties do not fit frontmatter component tokens.
 
 ### Neutral
@@ -278,9 +279,9 @@ The light platform uses neutral ink and white surfaces. Purple is reserved for t
 - **Background / Muted / Border:** white card grounds, quiet neutral insets and fine separators.
 - **Secondary / Subtle:** readable supporting copy and metadata.
 - **Glass Track / Inactive / Selected:** a neutral translucent switch track, muted labels and black selected labels.
-- **Dark roles:** functional pages, homepage cards and filters, and the shared header invert their neutral roles without introducing a purple functional accent. The `home-dark-*`, `header-dark-*` and `glass-dark-*` frontmatter entries describe only scoped landing and glass-control roles; they do not replace the application palette. Homepage actions use its dark foreground over its dark surface; the header reuses the application dark foreground with its own translucent glass and panel roles. Dark switches use inactive labels (`#c7c3cd`), selected labels (`#f5f2f8`), hover white alpha (.065) and focus (`#e9e5ee`). Before a lens is ready, white alpha (.13) keeps the selected control visible.
+- **Dark roles:** functional pages, homepage cards and filters, and the shared header invert their neutral foreground and surface roles. The `home-dark-*`, `header-dark-*` and `glass-dark-*` frontmatter entries describe only scoped landing and glass-control roles; they do not replace the application palette. Homepage actions use its dark foreground over its dark surface; the header reuses the application dark foreground with its own translucent glass and panel roles. Dark switches use inactive labels (`#c7c3cd`), selected labels (`#f5f2f8`), hover white alpha (.065) and focus (`#e9e5ee`). Before a lens is ready, white alpha (.13) keeps the selected control visible.
 
-**The Neutral Function Rule.** Use black neutral UI for primary actions, selected labels, links and icons in the light appearance; keep purple in decorative backgrounds and retain semantic feedback colors.
+**The Neutral Function Rule.** Use neutral ink for light-theme actions, selections, links and icons. Reserve teal and blue for decorative surfaces and use semantic colors for feedback.
 
 **The Frosted Navigation Rule.** Apply translucent glass, blur and a fine edge to the always-visible central navigation capsule, using its scoped light or dark roles. Keep the full header frame transparent, borderless and without a shadow; brand, account and language controls remain outside the capsule, with theme beside it.
 
@@ -290,7 +291,7 @@ The light platform uses neutral ink and white surfaces. Purple is reserved for t
 
 **Display Font:** self-hosted ZCOOL XiaoWei (站酷小薇), declared as `IAVSE Display`, with Songti and serif fallbacks. **Wordmark Font:** self-hosted Cormorant Garamond, declared as `IAVSE Wordmark`, with Georgia and serif fallbacks. **Body Font:** self-hosted Geist, declared as `IAVSE Sans`, with system and CJK fallbacks. These aliases do not claim typeface authorship. Preserve the [ZCOOL XiaoWei](public/fonts/zcoolxiaowei-OFL.txt), [Cormorant Garamond](public/fonts/CormorantGaramond-OFL.txt) and [Geist](public/fonts/design-artifacts/voltagent/geist-OFL.txt) SIL OFL notices.
 
-Homepage display and introduction retain a centered two-line product opening. The default title uses the frontmatter display role and reaches (62px) from (1500px). English uses Cormorant at weight (500), with a clamp of (46px, 4.6vw, 64px) and line-height (1.18); Japanese uses Songti / Yu Mincho with a clamp of (36px, 3.7vw, 50px). At or below (740px), the default becomes (clamp(32px, 6.3vw, 44px) / 1.4), English (clamp(39px, 7.4vw, 53px)) and Japanese (clamp(29px, 5.8vw, 40px)). Chinese story headings retain explicit semantic line breaks; the introduction uses balanced wrapping. These are homepage variants, not a global heading scale. Shared header wordmarks become (29px) at or below (650px), then (26px) at or below (360px).
+Homepage display and introduction retain a centered two-line product opening. The default title uses the frontmatter display role and reaches (62px) from (1500px). English uses Cormorant at weight (500), with a clamp of (46px, 4.6vw, 64px) and line-height (1.18); Japanese uses Songti / Yu Mincho with a clamp of (36px, 3.7vw, 50px). At or below (740px), the default becomes (clamp(32px, 6.3vw, 44px) / 1.4), English (clamp(39px, 7.4vw, 53px)) and Japanese (clamp(29px, 5.8vw, 40px)). The hero retains its two-line heading. The introduction uses balanced wrapping. These are homepage variants, not a global heading scale. Shared header wordmarks become (29px) at or below (650px), then (26px) at or below (360px).
 
 Functional pages use the body and application heading roles. Catalog/workspace introductions use artistic headings (40px / 1.4), becoming (32px / 1.45) on mobile; operating section/card headings remain more compact. Directory introductions use (48px / 1.4), becoming (36px). Document reading text keeps its authored structure; the site-owned reader title uses (38px), becoming (31px), and its working measure is (72ch). Glass labels use (14px / 1.4), or compact (13px). The header uses short visible labels at or below (650px) with (12px) type, then (11.5px) at or below (360px); the full localized names remain in `aria-label`. The lens measures the actual visible label boxes after resize and font loading.
 
@@ -298,7 +299,7 @@ Functional pages use the body and application heading roles. Catalog/workspace i
 
 ## Layout
 
-The homepage now follows **centered two-line product introduction and three real entry links → asymmetric community story beside a bounded filtered feed → standalone four-category resource index → personal-homepage/editor story beside one public-member card or labeled template preview → footer and mission**. The earlier resource-sidebar/horizontal-space-card composition is historical. This is a homepage composition, not a requirement to turn operating pages into landing pages. At or below (740px), the entry links become stacked text rows and the main story/feed and story/preview combinations become single-column. The resource index retains its two-column link grid.
+The homepage now follows **centered headline, one introductory sentence and three destination links → community heading and filtered feed → four resource categories → personal homepage and member or template preview → footer and mission**. The earlier resource-sidebar/horizontal-space-card composition is historical. This is a homepage composition, not a requirement to turn operating pages into landing pages. The three hero links wrap when space is tight. At or below (740px), the community feed and the personal homepage preview each stack beneath their heading. The resource index retains its two-column link grid.
 
 The root runtime owns one persistent fixed header and one `GlassSwitch` across Home and eligible public routes, preserving the header and travelling lens during navigation. Home keeps its local backdrop and reserves the actual header height: (72px) above (1100px), (122px) at or below (1100px), and (110px) at or below (650px). On non-home routes only, `PublicFrame` receives additional clearance of (52px) or (48px) at those compact breakpoints. The shared capsule links to Home (`/`), Community, Resources, Blog spaces and About (`/about`); brand and account destinations remain real.
 
@@ -310,13 +311,13 @@ Route guards preserve authored blog pages, built-in showcase previews and resour
 
 ## Elevation & Depth
 
-The mist uses independently phased left/right `mist` fields, soft side anchors, domain-warped `sheetA` / `sheetB` and `opening`, with time multiplier (0.12). Both sides change shape naturally while the center stays white; top clearance begins with approximately (100px) of white and fades into color through (320px). It is an analytic approximation of flowing color, not a physical fluid solver. The homepage backdrop is (1100px); other platform shells use (1100px), becoming (1120px) on mobile. Dark home appearance dims and filters its local mist; dark platform shells retain their own lower-intensity treatment. Static fallback also uses separate left/right purple fields and a white center. [The background note](docs/purple-landing-background.zh-CN.md) records lifecycle and limits.
+The mist uses independently phased left/right `mist` fields, soft side anchors, domain-warped `sheetA` / `sheetB` and `opening`, with time multiplier (0.12). The two sides change shape independently. The center and the first (100px) at the top reveal the page canvas, with mist gradually appearing through (320px). It is an analytic approximation of flowing color, not a physical fluid solver. The homepage backdrop is (1100px); other platform shells use (1100px), becoming (1120px) on mobile. The mist fades to transparent over the page canvas. In dark mode its opacity is 0.30 on the homepage and 0.24 on other platform pages. The static fallback uses teal on the left, pale blue on the right and the same transparent center. [The background note](docs/purple-landing-background.zh-CN.md) records lifecycle and limits.
 
-White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms); hero actions lift (2px) over (180ms).
+White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms). Hero actions lift (2px) over (180ms).
 
 The always-visible central navigation capsule combines its scoped alpha gradient, blur (24px), saturation (1.12), fine edge and edge shadows in either appearance. The transparent outer header has no shared surface or shadow. Dark header backdrop brightness is bounded at (0.36) before its translucent fill and lens are composed, preserving neutral-label contrast when bright covers pass beneath the fixed capsule. Dark header theme, language and account control plates share that brightness guard with (18px) blur; their unsupported-blur fallback uses the header panel role. Other dark switch tracks use blur (16px), saturation (1.12) and a white alpha (.12) edge. The travelling lens uses blur (7px) in light appearance and (10px) in dark, saturation (1.1), a bright edge and a smaller shadow. Dark capsule depth is (`0 12px 36px -12px rgb(0 0 0 / .6), 0 1px 2px rgb(0 0 0 / .18), inset 0 1px 0 rgb(255 255 255 / .18)`); the independent dark lens uses (`0 5px 15px -4px rgb(0 0 0 / .4), inset 0 1px 1px rgb(255 255 255 / .38), inset 0 -1px 2px rgb(0 0 0 / .26)`). A selected control awaiting its lens uses (`0 2px 8px rgb(0 0 0 / .24)`). Both standard and WebKit backdrop-filter paths retain these layers; when neither is supported, dark switch tracks use (`#27272d`), header navigation uses its existing panel role and lenses use (`#414147`). GlassSwitch clips an inert duplicate-label layer, counter-translates its full track, then scales it locally around the moving lens center. Cubic ease-out travel accumulates approximately (390–540ms) of active animation-frame time, based on measured distance, starting at the first delivered frame and limiting each following interval to (50ms). Busy route work may extend wall-clock completion while preserving the visible journey. Magnification rises during travel to at most (1.15), then settles at (1). Observer or font notifications with unchanged destination geometry preserve the active journey; real geometry changes retarget it from the current visual position. This is native DOM magnification with glass styling, not physical optical refraction. The original controls retain their labels, hit areas and focus.
 
-Homepage reveal, including its empty-state card, remains opacity (0 → 1), travel (24px → 0), duration (650ms), threshold (0.1), easing (`cubic-bezier(.22,1,.36,1)`) and (70ms) observer-batch staggering capped at (210ms). Existing functional reveal uses (12px), (550ms), threshold (0.12), root margin (`0px 0px -6% 0px`) and the same bounded stagger; delay restarts for each semantic group within an observer batch. The blog product story explicitly opts (25) short readable chunks into this existing reveal through scope/group/item markers; the header, gallery, static diagram and whole tall sections remain outside it. Authored content keeps its own motion. Retained template FadeIn uses (800ms) with controlled scroll entry; explicit mount FadeIn and ScaleUnblur keep their mount behavior. Homepage, functional and scroll FadeIn entries replay after the element fully leaves the physical viewport and re-enters in either scroll direction. Crossing an entry threshold or inset while still visible does not hide content or restart it. Keyboard focus reveals pending content immediately and keeps it readable while focus remains inside. Reduced motion cancels travel, zoom pulses, reveals and hover transforms and shows reveal content; unavailable observation or animation APIs keep content readable. The background is static under reduced motion. Hidden/offscreen backgrounds pause, and the switch settles geometry on visibility changes. WebGL failure/context loss leaves CSS mist; unsupported backdrop blur leaves an opaque readable glass fallback. Cleanup releases frames, observers, listeners and GPU resources.
+Homepage reveal, including its empty-state card, remains opacity (0 → 1), travel (24px → 0), duration (650ms), threshold (0.1), easing (`cubic-bezier(.22,1,.36,1)`) and (70ms) observer-batch staggering capped at (210ms). Existing functional reveal uses (12px), (550ms), threshold (0.12), root margin (`0px 0px -6% 0px`) and the same bounded stagger; delay restarts for each semantic group within an observer batch. The blog product story explicitly opts (21) short readable chunks into this existing reveal through scope/group/item markers; the header, gallery, static diagram and whole tall sections remain outside it. Authored content keeps its own motion. Retained template FadeIn uses (800ms) with controlled scroll entry; explicit mount FadeIn and ScaleUnblur keep their mount behavior. Homepage, functional and scroll FadeIn entries replay after the element fully leaves the physical viewport and re-enters in either scroll direction. Crossing an entry threshold or inset while still visible does not hide content or restart it. Keyboard focus reveals pending content immediately and keeps it readable while focus remains inside. Reduced motion cancels travel, zoom pulses, reveals and hover transforms and shows reveal content; unavailable observation or animation APIs keep content readable. The background is static under reduced motion. Hidden/offscreen backgrounds pause, and the switch settles geometry on visibility changes. WebGL failure/context loss leaves CSS mist; unsupported backdrop blur leaves an opaque readable glass fallback. Cleanup releases frames, observers, listeners and GPU resources.
 
 ## Shapes
 
@@ -336,11 +337,11 @@ Use `IavseHeader` as the transparent persistent frame described in Layout. The o
 
 ### Actions, inputs and cards
 
-Light-theme functional primary actions use black fill and white text; secondary actions use white fill and black text. Dark functional pages use the corresponding neutral role inversion. Destructive actions retain semantic red. Standard actions and inputs have a (44px) minimum height, with (12px) corners; homepage hero actions use (48px). Functional fields retain their labels, validation, focus and disabled states. White floating cards preserve the actual content, source imagery, metadata and destinations; hover and reveal decorate rather than rearrange the workflow.
+Light-theme functional primary actions use black fill and white text; secondary actions use white fill and black text. Dark functional pages use the corresponding neutral role inversion. Destructive actions retain semantic red. Standard actions and inputs have a (44px) minimum height and (12px) corners. Filled hero actions are (48px) tall. Functional fields retain their labels, validation, focus and disabled states. White floating cards preserve the actual content, source imagery, metadata and destinations; hover and reveal decorate rather than rearrange the workflow.
 
 ### Truthful homepage content and resource discovery
 
-The homepage server DTO includes up to four qualified public posts and three public projects from at most four discoverable public spaces. Discover shows the first work or post with available discussion content; Work and Discussions expose their bounded lists. Use actual authors and counts, real empty/unavailable states and working retry/destinations. A missing cover uses a decorative ground. With no discoverable space, the built-in template screenshot remains labeled **“内置模板预览 · 虚构人物”**, localized as appropriate, and links to the directory. The standalone resource index has four real `/resources?type=` destinations (designs, skills, docs and resources), descriptions and a source/license hint. The personal-homepage story links to the real `/workspace/blog` editor and `/blogs` directory and explains the existing manual publishing/article-review contract. A public space uses its real cover or circular avatar. Resource links retain original source/license detail; neither styling nor examples imply endorsement or unrestricted reuse.
+The homepage server DTO includes up to four qualified public posts and three public projects from at most four discoverable public spaces. Discover shows the first work or post with available discussion content; Work and Discussions expose their bounded lists. Use actual authors and counts, real empty/unavailable states and working retry/destinations. A missing cover uses a decorative ground. With no discoverable space, the built-in template screenshot remains labeled **“内置模板预览 · 虚构人物”**, localized as appropriate, and links to the directory. The standalone resource index has four real `/resources?type=` destinations (designs, skills, docs and resources) and a source/license hint. The personal-homepage story links to the real `/workspace/blog` editor and `/blogs` directory and explains the existing manual publishing/article-review contract. A public space uses its real cover or circular avatar. Resource links retain original source/license detail; neither styling nor examples imply endorsement or unrestricted reuse.
 
 ### Content, editor and source boundaries
 
@@ -348,7 +349,7 @@ Shared styling stops before authored bodies, blog themes, saved canvas blocks, a
 
 ### Blog spaces and original homepage examples
 
-The public `/blogs` opening restores the existing shared-camera CSS 3D gallery from the public implementation, with floating extruded page planes, drag-to-look and click-to-approach behavior. It sits over the current purple-white atmosphere and retains the shared header with its centered frosted navigation capsule and external brand/account controls. Functional controls, author selection, links and focus use neutral roles. Route-owned `blog-gallery.css` restores the live gallery structure from public commit `894bf4b`; the existing camera geometry, bounded preview loader and visibility lifecycle remain in use. The plane's (8px) corners and inner radius of (8px minus its 1px border) belong to its preserved material geometry.
+The public `/blogs` opening restores the existing shared-camera CSS 3D gallery from the public implementation, with floating extruded page planes, drag-to-look and click-to-approach behavior. It sits over the shared teal and blue mist and retains the shared header with its centered frosted navigation capsule and external brand/account controls. Functional controls, author selection, links and focus use neutral roles. Route-owned `blog-gallery.css` restores the live gallery structure from public commit `894bf4b`; the existing camera geometry, bounded preview loader and visibility lifecycle remain in use. The plane's (8px) corners and inner radius of (8px minus its 1px border) belong to its preserved material geometry.
 
 Only `publicSpaces(req)` supplies real members; their authored appearance and `/blog/:handle` destination retain authority. The stage is bounded to (12) spaces, while a native expandable list beside Reset view exposes all public members and clearly labeled **“原创主页示例 · 虚构人物”** examples. Its scrollable panel is anchored to the whole toolbar, uses two columns on desktop and one on mobile, and stays available under reduced motion. Escape closes the list and returns focus to its summary; list arrow keys retain native behavior rather than moving the camera. Query-free `/blogs/showcase/:handle` and `?embed=gallery` render the same original homepage example. Explicit `?template=builtin` remains the separate editor-template entry point. Preserve gallery keyboard selection and Escape return, mobile touch scrolling, two outstanding preview admissions, hidden/offscreen pauses and truthful empty states. No fictional example represents member activity or a real résumé.
 
@@ -358,14 +359,14 @@ The original canvas structure illustration is static, `aria-hidden`, and accompa
 
 ## Do's and Don'ts
 
-- Do use white space, black neutral functional UI and purple decorative atmosphere across platform-owned surfaces.
+- Do use white space, neutral black controls and teal and blue mist across platform-owned surfaces.
 - Do keep the navigation capsule visible and frosted at every width, with theme beside it and real brand, account and language controls outside it.
 - Do keep natural soft mist on both sides, a white center, top clearance and gentle pointer response.
 - Do preserve each route's working layout and avoid duplicate public headers in administration or the blog editor.
 - Do verify Chinese, English and Japanese, compact labels and full accessible names, focus, both appearances, reduced motion and static fallbacks.
 - Do retain actual public content, useful empty states, labeled fictional examples and original source/license details.
 - Don't describe shared visual migration as a rewrite or full visual acceptance of every page.
-- Don't restore purple action/selection/icon/link accents or extend the navigation capsule's glass surface across the brand and account areas.
+- Keep functional controls neutral and confine the frosted navigation surface to the capsule.
 - Don't turn soft mist into mandatory high-contrast ribbons or one-sided color.
 - Don't style authored bodies, artboards, color swatches or third-party previews as platform UI.
 - Don't expose duplicate interactive labels, invent activity or simulate real account state.
