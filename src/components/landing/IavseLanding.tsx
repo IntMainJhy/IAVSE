@@ -226,19 +226,19 @@ export function IavseLanding({content}: {content: LandingContent}) {
   }, []);
 
   return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale}>
-    <div className="iv-backdrop-wrap"><IavseFlowBackdrop/></div>
+    <section className="iv-hero">
+      <div className="iavse-shell-atmosphere"><IavseFlowBackdrop/></div>
+      <div className="iv-container iv-hero-copy" data-landing-reveal>
+        <h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1>
+        <p>{c.intro}</p>
+        <nav className="iv-actions" aria-label={c.productEntries}>
+          <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+          <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
+          <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+        </nav>
+      </div>
+    </section>
     <div className="iv-container">
-      <section className="iv-hero">
-        <div className="iv-hero-copy" data-landing-reveal>
-          <h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1>
-          <p>{c.intro}</p>
-          <nav className="iv-actions" aria-label={c.productEntries}>
-            <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-            <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
-            <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-          </nav>
-        </div>
-      </section>
       <section className="iv-community" aria-labelledby="iv-community-title">
         <div className="iv-community-intro" data-landing-reveal>
           <h2 id="iv-community-title">{c.communityTitle}</h2>

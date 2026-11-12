@@ -15,18 +15,13 @@ html[data-color-mode=dark] .iavse-landing{
 .iavse-landing :is(a,button){-webkit-tap-highlight-color:transparent}
 .iavse-landing :is(a,button,summary):focus-visible{outline:3px solid var(--iv-action);outline-offset:5px}
 .iavse-landing button{font:inherit;cursor:pointer}
-.iavse-landing .iv-backdrop-wrap{
- position:fixed;
- inset:0;
- z-index:-1;
- pointer-events:none;
- background:linear-gradient(110deg,rgb(172 225 202 / .52),rgb(218 240 235 / .36) 50%,rgb(182 217 245 / .52));
-}
-html[data-color-mode=dark] .iavse-landing .iv-backdrop-wrap{opacity:.30}
+.iavse-landing .iv-hero > .iavse-shell-atmosphere{max-height:100%}
 .iavse-landing .iv-container{width:min(1000px,100% - 80px);margin-inline:auto}
 
 /* Equal flexible rows center the copy; the first row also clears the fixed header on short screens. */
 .iavse-landing .iv-hero{
+ position:relative;
+ isolation:isolate;
  display:grid;
  grid-template-rows:minmax(calc(var(--iavse-header-reserved,72px) + 28px),1fr) auto minmax(24px,1fr);
  min-height:100vh;
