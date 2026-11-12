@@ -28,4 +28,19 @@ test('malformed operation names and invalid credential duration are rejected',as
  }
  assert.throws(()=>C.manageKeys(req(users[1].token,'POST',true),{action:'create',name:'Invalid duration',current:password,scopes:['library'],days:0}),error=>error.status===400);
 });
+test('scoped community submissions share policy checks, screening and idempotent publication with the web form',async()=>{
+ const token=key(users[1],['community','submit']);
+ const run=(operation,input,requestId)=>C.connectApi(req(token),{operation,input,requestId});
+ const policy=await run('policy',{});
+ const draft=await run('community.save',{data:{title:'Keyboard testing',body:'I tested the controls using a keyboard.'}},'save-keyboard-note');
+ const input={id:draft.id,version:draft.version,policyHash:policy.policyHash,policyVersion:policy.policyVersion,confirmed:true};
+ await assert.rejects(()=>run('community.submit',{...input,confirmed:false},'decline-confirmation'),e=>e.status===403);
+ await assert.rejects(()=>run('community.submit',{...input,policyHash:'stale'},'outdated-policy'),e=>e.status===409);
+ await assert.rejects(()=>run('community.submit',input,'missing-account-consent'),e=>e.status===409);
+ Community.communityApi(req(users[1].token,'POST',true),['community','accept-policies'],{accepted:true,policyVersion:policy.policyVersion,policyHash:policy.policyHash,policyRead:['community','disclaimer']},new URL(process.env.PUBLIC_URL));
+ const sent=await run('community.submit',input,'publish-keyboard-note');
+ assert.equal(sent.latestStatus,'approved');
+ assert.equal((await run('community.submit',input,'publish-keyboard-note')).public_revision,sent.public_revision);
+ assert.equal(d.prepare('SELECT COUNT(*) n FROM community_revisions WHERE post=?').get(draft.id).n,1);
+});
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(dir,{recursive:true,force:true})});

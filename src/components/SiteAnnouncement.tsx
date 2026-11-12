@@ -43,8 +43,8 @@ export function SiteAnnouncement(){
  const closeLabel=locale==='zh'?'关闭公告':locale==='ja'?'お知らせを閉じる':'Dismiss announcement';
  const title=(text:string)=>text==='网站更新与公告将在这里发布。'?(locale==='en'?'Website news and updates will appear here.':locale==='ja'?'サイトの更新やお知らせをここでお届けします。':text):text;
  const close=(event:MouseEvent<HTMLButtonElement>)=>{
-  const owner=event.currentTarget.closest('[data-site-chrome]')||event.currentTarget.closest('.blog-canvas-editor,.organic-admin');
-  const next=owner&&Array.from(owner.querySelectorAll<HTMLElement>('[data-site-brand],.bc-editor-back,.admin-topline-inner button,.admin-login-toolbar a')).find(node=>node.getClientRects().length&&!node.closest('[inert]')&&!node.matches(':disabled'));
+  const owner=event.currentTarget.closest('[data-site-chrome], [data-announcement-host]');
+  const next=owner&&Array.from(owner.querySelectorAll<HTMLElement>('[data-site-brand],.iavse-header__brand')).find(node=>node.getClientRects().length&&!node.closest('[inert]')&&!node.matches(':disabled'));
   dismiss();
   next?.focus({preventScroll:true});
  };

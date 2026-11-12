@@ -13,9 +13,9 @@ export const guides=[
  ]},
  {slug:'community',title:'在社区分享内容',summary:'写清来源与使用范围，让分享更容易被理解。',sections:[
   {title:'先看看社区',text:'浏览已公开的分享，按分类查找内容，也可以从成员主页了解作者。',href:'/community',action:'进入社区'},
-  {title:'写一份有用的分享',text:'填写标题、摘要和正文，补齐来源、目标链接与许可依据。先保存草稿，检查后再提交。',href:'/workspace/submissions/new',action:'写一份分享'},
-  {title:'确认规则并提交',text:'提交前阅读当前规则，确认来源和分享权限。提交后进入审核，未通过的内容可根据反馈修改。',href:'/legal/community',action:'阅读社区规则'},
-  {title:'查看处理进度',text:'在“我的投稿”查看草稿、待审与公开版本。修改已公开内容时，新的版本仍需审核。',href:'/workspace/submissions',action:'查看我的投稿'}
+  {title:'写一份有用的分享',text:'写下标题、摘要和正文。介绍第三方内容时，请注明来源和许可。',href:'/workspace/submissions/new',action:'写一份分享'},
+  {title:'确认规则并提交',text:'阅读当前社区规则，确认有权分享。自动模式下，普通原创文字帖通过检查即可公开；需要复核时会告知你。',href:'/legal/community',action:'阅读社区规则'},
+  {title:'查看处理进度',text:'在“我的投稿”查看状态。修改公开帖子后，新版本将重新检查；复核期间仍展示原公开版本，除非它已被暂停或下架。',href:'/workspace/submissions',action:'查看我的投稿'}
  ]},
  {slug:'desktop',title:'使用桌面客户端',summary:'了解安装入口、服务连接与账号登录。',sections:[
   {title:'获取对应系统的客户端',text:'在下载页查看 macOS 与 Windows 的可用版本。尚未提供安装包时，可以继续使用网页版。',href:'/downloads',action:'查看客户端下载'},
@@ -26,7 +26,7 @@ export const guides=[
 ];
 
 guides.push({slug:'moderation',title:'审核与公开发布',summary:'了解自动筛查、人工复核与正式上线前的准备。',sections:[
- {title:'先检查，再公开',text:'文档和社区文章审核后公开；主页、作品、Skill、资源、评论和回复直接发布。共享栏目同步生成一份社区分享，草稿和待审文章不会提前公开。'},
+ {title:'先检查，再公开',text:'普通原创文字帖可在自动检查后公开。外链、封面和风险提示转人工复核。文档及其修订继续单独审核。'},
  {title:'保留人工判断与申诉',text:'规则命中表示需要复核，不等于违法认定。管理员可以退回、下架和处理投诉，作者可以修改后重新提交或提出申诉。平台仍需持续巡查。',href:'/report',action:'举报与投诉'},
  {title:'账号与发布资格',text:'注册和登录无需邮箱验证码。注册前必须阅读并确认规则；这不代表邮箱或身份已核验。验证邮箱用于密码恢复，依法需要的身份核验仍须按实际运营要求办理。'},
  {title:'核对现行规定',text:'审核机制参考网信办《互联网跟帖评论服务管理规定》和《网络信息内容生态治理规定》。新闻信息的跟帖评论适用先审后发；实际运营需结合服务范围核对全部适用要求。',href:'https://www.cac.gov.cn/2022-11/16/c_1670253725725039.htm',action:'阅读网信办规定'}

@@ -91,12 +91,12 @@ test('a changed announcement save reopens dismissed news; an identical save does
 });
 
 test('dismissal hands focus to surviving navigation, skipping hidden and disabled controls without scrolling',()=>{
- for(const surface of ['chrome','editor']){
+ for(const host of ['[data-site-chrome]','[data-announcement-host]']){
   const f=mount(),focused=[];
   const candidate=(id,{hidden=false,inert=false,disabled=false}={})=>({getClientRects:()=>hidden?[]:[{}],closest:()=>inert?{}:null,matches:()=>disabled,focus:options=>focused.push({id,options})});
   const owner={querySelectorAll:()=>[candidate('hidden',{hidden:true}),candidate('disabled',{disabled:true}),candidate('inert',{inert:true}),candidate('navigation')]};
   const button=f.banner().props.children[1];assert.equal(button.props.type,'button');
-  button.props.onClick({currentTarget:{closest:selector=>surface==='chrome'?(selector==='[data-site-chrome]'?owner:null):(selector==='[data-site-chrome]'?null:owner)}});f.render();
+  button.props.onClick({currentTarget:{closest:selector=>selector.split(', ').includes(host)?owner:null}});f.render();
   assert.equal(f.visible,false);assert.equal(focused.length,1);assert.equal(focused[0].id,'navigation');assert.equal(focused[0].options.preventScroll,true);f.cleanup();
  }
 });

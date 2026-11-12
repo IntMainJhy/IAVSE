@@ -23,22 +23,26 @@ const save=(user,value=text,row)=>call('community/submissions',{id:row?.id,versi
 const submit=(user,row)=>call('community/submissions/'+row.id,{...accepted,action:'submit',version:row.version},user.token);
 const approve=row=>call('admin/community/reviews/'+row.id,{action:'approve',version:row.version,revision:row.pending_revision,checked:true,reason:'Checked authored text and evidence.',rule:'来源与许可'});
 
-test('manual original text needs no external source, retains private drafts and publishes only after an independent review',()=>{
+test('clean original text and edits publish immediately, with private drafts, immutable revisions and auditable decisions',()=>{
  const author=member();let row=save(author,{...text,note:'PRIVATE_REVIEW_NOTE'});
  assert.equal(row.origin,'manual');assert.equal(row.catalogId,'');assert.throws(()=>C.publicPost(row.id),e=>e.status===404);
- row=submit(author,row);assert.equal(row.visibility,'private');assert.ok(row.pending_revision);assert.equal(row.latestStatus,'pending');assert.throws(()=>C.publicPost(row.id),e=>e.status===404);row=approve(row);assert.equal(row.visibility,'public');assert.equal(row.pending_revision,null);assert.equal(row.latestStatus,'approved');
+ const before=row;
+ row=submit(author,row);assert.equal(row.visibility,'public');
+ assert.equal(row.revisions[0].reviewer,'system:local-rules-v1');
+ assert.ok(D.db().prepare("SELECT 1 FROM community_audit WHERE action='auto_publish' AND target=?").get(row.public_revision));
+ assert.throws(()=>submit(author,before),e=>e.status===409);assert.equal(row.pending_revision,null);assert.equal(row.latestStatus,'approved');
  const visible=C.publicPost(row.id);assert.equal(visible.body,text.body);assert.equal(visible.basis,'original');assert.equal(visible.summary,text.body);assert.equal(visible.sourceUrl,'');assert.equal(visible.url,'');assert.equal(visible.sourceName,author.nickname);assert.equal(visible.license,'本人原创，保留所有权利。');assert.equal(visible.category,'技术笔记');assert.equal(visible.note,undefined);
  const oldVersion=row.version;row=save(author,{...text,title:'下一次组件重构'},row);assert.equal(C.publicPost(row.id).title,text.title);assert.throws(()=>call('community/submissions/'+row.id,{...accepted,action:'submit',version:oldVersion},author.token),e=>e.status===409);
- row=submit(author,row);assert.equal(C.publicPost(row.id).title,text.title);row=approve(row);assert.equal(C.publicPost(row.id).title,'下一次组件重构');assert.equal(row.revisions.length,2);
+ row=submit(author,row);assert.equal(row.revisions[1].data.title,text.title);assert.equal(C.publicPost(row.id).title,'下一次组件重构');assert.equal(row.revisions.length,2);
  row=call('community/submissions/'+row.id,{action:'offline',version:row.version},author.token);assert.throws(()=>C.publicPost(row.id),e=>e.status===404);assert.ok(row.draft);
  row=approve(submit(author,row));assert.equal(row.visibility,'public');assert.equal(C.publicPosts().items.filter(x=>x.id===row.id).length,1);
 });
 
 test('flagged revisions keep the previous public version; withdrawals defeat stale reviewer decisions',()=>{
- const author=member();let row=approve(submit(author,save(author)));const stableVersion=row.public_revision;
+ const author=member();let row=submit(author,save(author));const stableVersion=row.public_revision;
  row=save(author,{...text,title:'需要复核的内容',body:'这是一段包含赌博风险信号的文字，发布前需要管理员人工核对其含义、上下文及是否合法。'},row);row=submit(author,row);assert.equal(row.latestStatus,'pending');assert.ok(row.pending_revision);assert.equal(C.publicPost(row.id).revision,stableVersion);
  const stale=row;row=call('community/submissions/'+row.id,{action:'withdraw',version:row.version},author.token);assert.equal(row.latestStatus,'withdrawn');assert.throws(()=>approve(stale),e=>e.status===409);
- row=save(author,{...text,title:'整理后的正常经验'},row);row=approve(submit(author,row));assert.equal(C.publicPost(row.id).title,'整理后的正常经验');
+ row=save(author,{...text,title:'整理后的正常经验'},row);row=submit(author,row);assert.equal(C.publicPost(row.id).title,'整理后的正常经验');
 });
 
 test('manual mode, original image posts, external links and non-original sources retain human review',async()=>{
@@ -48,19 +52,65 @@ test('manual mode, original image posts, external links and non-original sources
  const cover=await V.uploadCover(new Request(base+'/api/community/covers',{method:'PUT',headers:{origin:base,host:new URL(base).host,cookie:'site_admin='+author.token,'content-type':'image/png'},body:png}));
  row=submit(author,save(author,{...text,coverId:cover.id,coverAlt:'程序生成的测试色块'}));assert.equal(row.latestStatus,'pending');assert.match(row.revisions[0].reason,/图片/);
  row=submit(author,save(author,{...text,body:text.body+' 参考文档：https://example.com/docs'}));assert.equal(row.latestStatus,'pending');assert.match(row.revisions[0].reason,/链接/);
- const foreign=save(author,{...text,basis:'official',summary:text.body,sourceName:'Official source',license:'Link to the official project only.'});assert.throws(()=>submit(author,foreign),e=>e.status===400);
+ const linked=submit(author,save(author,{...text,basis:'official',summary:text.body,category:'技术笔记',sourceName:'Official source',license:'Link only',sourceUrl:'https://example.com/guide',url:'https://example.com/guide'}));
+ assert.equal(linked.latestStatus,'pending');
+ const foreign=save(author,{...text,basis:'official',summary:text.body,category:'技术笔记',sourceName:'Official source',license:'Link to the official project only.'});assert.throws(()=>submit(author,foreign),e=>e.status===400);
+});
+
+test('risk holds, human rejection and manual backlog cannot be cleared by author edits or a mode change',()=>{
+ const author=member();let row=submit(author,save(author));
+ const complaint=call('community/cases',{kind:'report',post:row.id,category:'其他',description:'人工核查这份测试分享的展示与权利。'},'');
+ let ticket=get('admin/community/cases',owner).items.find(item=>item.id===complaint.id);
+ const act=action=>call('admin/community/cases/'+complaint.id,{action,version:ticket.version,reason:'人工核查后的处理记录。',checked:true});
+ ticket=act('freeze');
+ row=save(author,{...text,title:'修改后的分享'},get('community/submissions/'+row.id,author.token));
+ assert.throws(()=>submit(author,row),e=>e.status===409);
+ ticket=act('release');
+ row=submit(author,row);assert.equal(row.visibility,'paused');assert.equal(row.latestStatus,'pending');assert.throws(()=>C.publicPost(row.id),e=>e.status===404);
+ row=call('admin/community/reviews/'+row.id,{action:'reject',version:row.version,revision:row.pending_revision,reason:'需要补充原创内容的依据。',rule:'来源与许可'});
+ row=submit(author,row);assert.equal(row.latestStatus,'pending');assert.throws(()=>C.publicPost(row.id),e=>e.status===404);
+ const other=member();D.setConfig('moderation',{mode:'manual'});
+ let prior=submit(other,save(other));D.setConfig('moderation',{mode:'automatic'});
+ assert.equal(get('community/submissions/'+prior.id,other.token).latestStatus,'pending');
+ assert.throws(()=>C.publicPost(prior.id),e=>e.status===404);
+ prior=call('admin/community/reviews/'+prior.id,{action:'reject',version:prior.version,revision:prior.pending_revision,reason:'需要补充原创内容的依据。',rule:'来源与许可'});
+ assert.equal(submit(other,prior).latestStatus,'pending');
+});
+
+test('automatic publications require the current agreement and count towards the daily limit',()=>{
+ const author=member(),row=save(author);
+ for(const overrides of [{accepted:false},{policyHash:'outdated'}]){
+  assert.throws(()=>call('community/submissions/'+row.id,{...accepted,...overrides,action:'submit',version:row.version},author.token),e=>e.status===409);
+ }
+ assert.throws(()=>C.publicPost(row.id),e=>e.status===404);
+ assert.equal(submit(author,row).latestStatus,'approved');
+ for(let i=1;i<5;i++)assert.equal(submit(author,save(author)).latestStatus,'approved');
+ assert.throws(()=>submit(author,save(author)),e=>e.status===429);
+});
+
+test('current account consent supports one-click publishing and outdated consent must be renewed',()=>{
+ const author=member(),row=save(author);
+ const publish=()=>call('community/submissions/'+row.id,{action:'submit',version:row.version,policyVersion:accepted.policyVersion,policyHash:accepted.policyHash},author.token);
+ assert.equal(get('community/workspace',author.token).user.needsPolicyAcceptance,true);
+ assert.throws(publish,e=>e.status===409);
+ D.db().prepare('INSERT INTO community_acceptances VALUES(?,?,?,?,?,?)').run(randomUUID(),author.id,accepted.policyVersion,'previous-hash','registration',D.now());
+ assert.throws(()=>submit(author,row),e=>e.status===409);
+ assert.throws(()=>call('community/accept-policies',{...accepted},author.token),e=>e.status===409);
+ const confirmed=call('community/accept-policies',{...accepted,policyRead:['community','disclaimer']},author.token);
+ assert.equal(confirmed.user.needsPolicyAcceptance,false);
+ assert.equal(publish().latestStatus,'approved');
 });
 
 test('fenced HTML is stored as literal code while embedded HTML and unsafe prose URLs remain rejected',()=>{
  const author=member(),body='下面是一个只作为文字展示的按钮示例，便于记录标签结构与交互名称。\n```html\n<button onclick="alert(1)">保存</button>\n```';
- const row=approve(submit(author,save(author,{...text,body})));assert.equal(C.publicPost(row.id).body,body);
+ const row=submit(author,save(author,{...text,body}));assert.equal(C.publicPost(row.id).body,body);
  assert.throws(()=>save(author,{...text,body:'<button onclick="alert(1)">运行</button>'+text.body}),/正文只接收文字/);
  assert.throws(()=>save(author,{...text,body:text.body+' javascript:alert(1)'}),/完整 HTTPS/);
  assert.throws(()=>save(author,{...text,body:text.body+' https://127.0.0.1/private'}));
 });
 
 test('revoked qualification hides posts, comments, bookmarks and following feeds; inactive follows can still be removed',()=>{
- const author=member(),reader=member();const authored=approve(submit(author,save(author))),readerPost=approve(submit(reader,save(reader,{...text,title:'读者自己的经验记录'})));
+ const author=member(),reader=member();const authored=submit(author,save(author)),readerPost=submit(reader,save(reader,{...text,title:'读者自己的经验记录'}));
  call('community/reactions/'+authored.id,{kind:'bookmark',active:true},reader.token);
  call('community/follows/'+author.id,{active:true},reader.token);
  const comment=call('community/comments',{...accepted,post:readerPost.id,body:'谢谢这份实际经验，我也准备按这个流程检查自己的表单。'},author.token);assert.equal(comment.status,'approved');

@@ -88,6 +88,7 @@ export function IavseMobileDock({path}: {path: string}) {
             <Icon/>{t(label)}
             {href === '/workspace/notifications' && open && user && <UnreadCount key={user.id}/>}
           </Link>)}
+          {user && <Link href="/legal/community" onClick={close}><BookOpen/>{t('社区规则')}</Link>}
           {user && ['owner','reviewer'].includes(user.role) && <Link href={user.role === 'owner' ? '/admin' : '/admin/community'} onClick={close}><Shield/>{t('管理中心')}</Link>}
         </div>
         <div className="iavse-account-sheet__account">

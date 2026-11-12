@@ -39,6 +39,7 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}
  const cache=new Map();
  function load(file){
   file=path.resolve(file);if(cache.has(file))return cache.get(file);
+  if(file.endsWith('/components/LocaleProvider.tsx'))return modules['@/components/LocaleProvider'];
   if(file.endsWith('/landing/IavseFlowBackdrop.tsx'))return{default:()=>React.createElement('div',{'data-flow-backdrop-stub':true,'aria-hidden':'true'})};
   if(file.endsWith('/portfolio/PortraitMorph.tsx'))return{PortraitMorph:({srcA,alt})=>React.createElement('img',{src:srcA,alt,'data-portfolio-portrait':true})};
   if(file.endsWith('/portfolio/ShaderFlow.tsx'))return{ShaderFlow:()=>null};
@@ -54,7 +55,7 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}
   }});
   return exports;
  }
- return {page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),runtime:load(path.join(sourceRoot,'components/portfolio/PortfolioRuntime.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads};
+ return {notices:load(path.join(sourceRoot,'components/SiteAnnouncement.tsx')),page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),runtime:load(path.join(sourceRoot,'components/portfolio/PortfolioRuntime.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads};
 }
 async function render(locale='zh',options={}){
  const loaded=components(locale,options),req=new Request('http://example.test/'),html=renderToStaticMarkup(React.createElement(React.Fragment,null,React.createElement(loaded.runtime.PortfolioRuntime),await loaded.page.PlatformHome({req})));
@@ -291,5 +292,14 @@ test('mobile navigation follows the actual route and keeps community and account
   assert.ok(links.includes('/workspace/bookmarks')&&links.includes('/workspace/notifications'));
   assert.deepEqual(links.filter(h=>h.startsWith('/admin')),adminHref?[adminHref]:[]);
   assert.equal(find(panel,n=>Object.hasOwn(n.attribs,'data-logout')).length,1);
+ }
+});
+
+
+test('configured site updates appear once on visitor routes and stay outside management and authoring screens',()=>{
+ for(const [pathname,expected] of [['/',1],['/community',1],['/resources',1],['/blogs',1],['/admin',0],['/admin/settings',0],['/workspace/blog',0],['/login',0]]){
+  const {notices,runtime}=components('en',{pathname});
+  const html=renderToStaticMarkup(React.createElement(notices.SiteAnnouncementsProvider,{initial:{enabled:true,items:[{title:'Public notice',url:'/about'}]}},React.createElement(runtime.PortfolioRuntime)));
+  assert.equal(find(parseDocument(html),node=>node.name==='aside'&&node.attribs.class==='site-announcement').length,expected,pathname);
  }
 });

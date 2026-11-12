@@ -28,6 +28,24 @@ function own(user,id){const row=getPost(id);requireValue(row&&row.author===user.
 function checkVersion(row,input){requireValue(Number(input.version)===row.version,'此页面已发生变化，请刷新后重试；当前填写的内容仍保留',409)}
 function noFreeze(id){requireValue(!db().prepare('SELECT id FROM community_cases WHERE post=? AND frozen=1 LIMIT 1').get(id),'该内容仍有投诉或风险限制，请先处理全部关联工单',409)}
 function acceptance(user,kind){const policy=policyBundle(policyRequest());db().prepare('INSERT INTO community_acceptances VALUES(?,?,?,?,?,?)').run(randomUUID(),user,policy.version,policy.hash,kind,stamp())}
+function accountConsent(userId){
+ // A submission also carries explicit consent in older clients. Blog and comment receipts are for those separate actions.
+ return db().prepare("SELECT version,document_hash FROM community_acceptances WHERE user_id=? AND kind IN ('registration','registration-renewal','submission') ORDER BY created DESC,rowid DESC LIMIT 1").get(userId);
+}
+function currentConsent(receipt,policy){return receipt?.version===policy.version&&receipt.document_hash===policy.hash}
+export function accountWithPolicy(req,user){
+ if(!user)return null;
+ const policy=policyBundle(req);
+ return{...user,needsPolicyAcceptance:!currentConsent(accountConsent(user.id),policy)};
+}
+function confirmPostPolicy(user,input){
+ const policy=policyBundle(policyRequest());
+ requireValue(policy.ready,'运营规则尚未配置完成，暂不能注册或提交',503);
+ requireValue(input.policyVersion===policy.version&&input.policyHash===policy.hash,'请阅读并确认当前版本的协议、规则和隐私告知',409);
+ const receipt=accountConsent(user.id);
+ if(receipt)requireValue(currentConsent(receipt,policy)&&(input.accepted===undefined||input.accepted===true),'请在账号页阅读并确认当前版本的社区规则',409);
+ else requireValue(input.accepted===true,'请阅读并确认当前版本的协议、规则和隐私告知',409);
+}
 function confirmPolicy(input){const policy=policyBundle(policyRequest());requireValue(policy.ready,'运营规则尚未配置完成，暂不能注册或提交',503);requireValue(input.accepted===true&&input.policyVersion===policy.version&&input.policyHash===policy.hash,'请阅读并确认当前版本的协议、规则和隐私告知',409)}
 function confirmRegistrationPolicy(input){confirmPolicy(input);requireValue(Array.isArray(input.policyRead)&&['community','disclaimer'].every(key=>input.policyRead.includes(key)),'请展开并阅读社区规则和免责声明，再确认同意',409)}
 function unpaused(){requireValue(!getConfig('community').paused,'社区已暂停新投稿，已有内容和投诉仍可处理',409)}
@@ -191,19 +209,60 @@ function registrationAttempt(req,input){unpaused();confirmRegistrationPolicy(inp
 }
 function registrationNameAvailable(username){requireValue(username!==db().prepare('SELECT username FROM admins WHERE id=1').get().username.toLowerCase()&&!db().prepare('SELECT 1 FROM community_users WHERE username=?').get(username),'此账号不可使用',409);}
 function completeRegistration(req,input,{id,email,username,nickname},stored){
- transaction(d=>{unpaused();confirmRegistrationPolicy(input);registrationNameAvailable(username);const invite=input.invite?d.prepare('SELECT * FROM community_invites WHERE token=?').get(hash(String(input.invite))):null;if(input.invite)requireValue(invite&&!invite.used_by&&!invite.revoked&&invite.expires>Date.now(),'邀请码无效、已使用或已过期');requireValue(!emailClaim(email),'此邮箱不可用于注册',409);d.prepare("INSERT INTO community_users(id,username,password,nickname,created,updated,email,verification) VALUES(?,?,?,?,?,?,?,'accepted')").run(id,username,stored,nickname,stamp(),stamp(),email);if(invite)d.prepare('UPDATE community_invites SET used_by=? WHERE id=?').run(id,invite.id);acceptance(id,'registration');audit({id},'register',id,{mode:localRequest(req)?'local':'production',policyRead:['community','disclaimer'],emailVerified:false})});return{ok:true,message:'账号已创建，可以登录。个人主页和评论直接发布，文章提交后审核。'};
+ transaction(d=>{unpaused();confirmRegistrationPolicy(input);registrationNameAvailable(username);const invite=input.invite?d.prepare('SELECT * FROM community_invites WHERE token=?').get(hash(String(input.invite))):null;if(input.invite)requireValue(invite&&!invite.used_by&&!invite.revoked&&invite.expires>Date.now(),'邀请码无效、已使用或已过期');requireValue(!emailClaim(email),'此邮箱不可用于注册',409);d.prepare("INSERT INTO community_users(id,username,password,nickname,created,updated,email,verification) VALUES(?,?,?,?,?,?,?,'accepted')").run(id,username,stored,nickname,stamp(),stamp(),email);if(invite)d.prepare('UPDATE community_invites SET used_by=? WHERE id=?').run(id,invite.id);acceptance(id,'registration');audit({id},'register',id,{mode:localRequest(req)?'local':'production',policyRead:['community','disclaimer'],emailVerified:false})});return{ok:true,message:'账号已创建，可以登录。'};
 }
 function register(req,input){const attempt=registrationAttempt(req,input);return completeRegistration(req,input,attempt,passwordHash(attempt.password));}
 async function registerAsync(req,input){const attempt=registrationAttempt(req,input),stored=await passwordHashAsync(attempt.password);requireValue(registrationEnabled(),'注册暂未开放',403);requireValue(serviceRequest(req),'社区服务暂未开放，请稍后再试',503);return completeRegistration(req,input,attempt,stored);}
 
 function savePost(user,input){return transaction(d=>{requireValue(!input.id||!d.prepare('SELECT 1 FROM catalog_entries WHERE community_post=?').get(input.id),'请在共享内容发布页修改原文',409);let row=input.id?own(user,input.id):null;if(row){checkVersion(row,input);requireValue(!row.pending_revision,'请先撤回待审版本，再继续编辑',409)}const value=data(input.data,false,user.id),id=row?.id||randomUUID();
  if(row)d.prepare('UPDATE community_posts SET draft=?,updated=?,version=version+1 WHERE id=?').run(JSON.stringify(value),stamp(),id);else{const count=d.prepare('SELECT COUNT(*) n FROM community_posts WHERE author=?').get(user.id).n;requireValue(count<500,'每个账号最多保留 500 条投稿');d.prepare('INSERT INTO community_posts(id,author,draft,created,updated) VALUES(?,?,?,?,?)').run(id,user.id,JSON.stringify(value),stamp(),stamp())}return decorate(getPost(id),true)})}
+function publishPostRevision(d,post,revision,reviewer,reason){
+ const publishedAt=stamp();
+ d.prepare("UPDATE community_revisions SET status='approved',reason=?,reviewer=?,decided=? WHERE id=?")
+  .run(reason,reviewer,publishedAt,revision);
+ d.prepare("UPDATE community_posts SET public_revision=?,pending_revision=NULL,draft=NULL,visibility='public',version=version+1,updated=? WHERE id=?")
+  .run(revision,publishedAt,post);
+}
+function submitPost(d,user,row,input){
+ const id=row.id;
+ unpaused();
+ requireValue(publishingQualified(user,policyRequest()),'账号尚未取得发布资格',403);
+ confirmPostPolicy(user,input);
+ noFreeze(id);
+ requireValue(!row.pending_revision&&row.draft,'请先保存草稿，且不能重复提交待审版本',409);
+ const value=data(parse(row.draft),true,user.id);
+ const start=new Date(Date.now()+8*3600000).toISOString().slice(0,10);
+ const today=d.prepare("SELECT COUNT(*) n FROM community_revisions r JOIN community_posts p ON p.id=r.post WHERE p.author=? AND substr(datetime(r.created,'+8 hours'),1,10)=?").get(user.id,start).n;
+ const pending=d.prepare("SELECT COUNT(*) n FROM community_revisions r JOIN community_posts p ON p.id=r.post WHERE p.author=? AND r.status IN ('pending','reviewing')").get(user.id).n;
+ requireValue(pending<3&&today<5,'同时待审最多 3 项，每天最多提交 5 个版本',429);
+ const screening=screenContent(
+  [value.title,value.summary,value.body,value.category,value.sourceName,value.license,value.coverAlt,value.note,...value.tags].join('\n'),
+  {media:!!value.coverId,external:!!(value.sourceUrl||value.url)||value.basis!=='original'}
+ );
+ const lastDecision=d.prepare("SELECT status FROM community_revisions WHERE post=? AND status IN ('approved','returned','rejected') ORDER BY number DESC LIMIT 1").get(id);
+ let followup='';
+ if(['paused','offline'].includes(row.visibility))followup='曾暂停展示或下架，重新公开需要人工复核';
+ else if(lastDecision&&lastDecision.status!=='approved')followup='上次审核要求修改或拒绝发布，本次修订需要人工复核';
+ const needsReview=screening.decision!=='approved'||!!followup;
+ const reason=[screening.decision==='pending'?screening.reason:'',followup].filter(Boolean).join('；')||screening.reason;
+ const revision=randomUUID(),number=d.prepare('SELECT COALESCE(MAX(number),0)+1 n FROM community_revisions WHERE post=?').get(id).n;
+ d.prepare('INSERT INTO community_revisions(id,post,number,data,status,reason,reviewer,created,decided) VALUES(?,?,?,?,?,?,?,?,?)')
+  .run(revision,id,number,JSON.stringify(value),'pending',reason,null,stamp(),null);
+ acceptance(user.id,'submission');
+ audit(user,'submit',revision,{post:id,number,screening,followup});
+ if(needsReview){
+  d.prepare('UPDATE community_posts SET pending_revision=?,draft=NULL,version=version+1,updated=? WHERE id=?').run(revision,stamp(),id);
+  notify(user.id,'投稿已提交',reason+'；人工复核后才会公开。','/workspace/submissions/'+id);
+ }else{
+  const reviewer='system:'+screening.engine;
+  publishPostRevision(d,id,revision,reviewer,reason);
+  audit({id:reviewer},'auto_publish',revision,{post:id,number,policy:input.policyVersion,engine:screening.engine});
+  notify(user.id,'投稿已发布','你的分享已通过自动检查，可在社区查看。','/community/'+id);
+ }
+}
 function postAction(user,id,input){return transaction(d=>{const row=own(user,id);checkVersion(row,input);const action=input.action;
  requireValue(!d.prepare('SELECT 1 FROM catalog_entries WHERE community_post=?').get(id)||action==='offline','请在共享内容发布页管理原文',409);
- if(action==='submit'){unpaused();requireValue(publishingQualified(user,policyRequest()),'账号尚未取得发布资格',403);confirmPolicy(input);noFreeze(id);requireValue(!row.pending_revision&&row.draft,'请先保存草稿，且不能重复提交待审版本',409);const value=data(parse(row.draft),true,user.id);const start=new Date(Date.now()+8*3600000).toISOString().slice(0,10);const pending=d.prepare("SELECT COUNT(*) n FROM community_revisions r JOIN community_posts p ON p.id=r.post WHERE p.author=? AND r.status IN ('pending','reviewing')").get(user.id).n;const today=d.prepare("SELECT COUNT(*) n FROM community_revisions r JOIN community_posts p ON p.id=r.post WHERE p.author=? AND substr(datetime(r.created,'+8 hours'),1,10)=?").get(user.id,start).n;requireValue(pending<3&&today<5,'同时待审最多 3 项，每天最多提交 5 个版本',429);const revision=randomUUID(),number=d.prepare('SELECT COALESCE(MAX(number),0)+1 n FROM community_revisions WHERE post=?').get(id).n;const screening=screenContent([value.title,value.summary,value.body,value.sourceName,value.license,...value.tags].join('\n'),{media:!!value.coverId,external:!!(value.sourceUrl||value.url)||value.basis!=='original'});
- d.prepare('INSERT INTO community_revisions(id,post,number,data,status,reason,reviewer,created,decided) VALUES(?,?,?,?,?,?,?,?,?)').run(revision,id,number,JSON.stringify(value),'pending',screening.reason,null,stamp(),null);
- d.prepare('UPDATE community_posts SET pending_revision=?,draft=NULL,version=version+1,updated=? WHERE id=?').run(revision,stamp(),id);
- acceptance(user.id,'submission');notify(user.id,'投稿已提交',screening.reason+'；人工复核后才会公开。','/workspace/submissions/'+id);audit(user,'submit',revision,{post:id,number,screening})
+ if(action==='submit'){submitPost(d,user,row,input)
  }else if(action==='withdraw'){requireValue(row.pending_revision,'没有可撤回的待审版本',409);const rev=getRevision(row.pending_revision);requireValue(['pending','reviewing'].includes(rev.status),'审核状态已变化',409);d.prepare("UPDATE community_revisions SET status='withdrawn',decided=? WHERE id=?").run(stamp(),rev.id);d.prepare('UPDATE community_posts SET draft=?,pending_revision=NULL,version=version+1,updated=? WHERE id=?').run(rev.data,stamp(),id);audit(user,'withdraw',id,{revision:rev.id})
  }else if(action==='offline'){if(row.pending_revision){const rev=getRevision(row.pending_revision);d.prepare("UPDATE community_revisions SET status='withdrawn',decided=? WHERE id=?").run(stamp(),rev.id)}d.prepare("UPDATE community_posts SET visibility='offline',draft=COALESCE(draft,(SELECT data FROM community_revisions WHERE id=community_posts.pending_revision),(SELECT data FROM community_revisions WHERE id=community_posts.public_revision)),pending_revision=NULL,version=version+1,updated=? WHERE id=?").run(stamp(),id);const catalog=d.prepare('SELECT * FROM catalog_entries WHERE community_post=?').get(id);if(catalog){d.prepare("UPDATE catalog_revisions SET status='withdrawn',decided=? WHERE entry=? AND status='pending'").run(stamp(),catalog.id);d.prepare("UPDATE catalog_entries SET draft=COALESCE(draft,pending,published),pending=NULL,status='offline',visibility='offline',version=version+1,updated=? WHERE id=?").run(stamp(),catalog.id)}audit(user,'author_offline',id,{})
  }else if(action==='revise'){requireValue(!row.pending_revision,'请先撤回待审版本',409);const rev=d.prepare('SELECT * FROM community_revisions WHERE post=? ORDER BY number DESC LIMIT 1').get(id);requireValue(rev,'尚无可修订的历史版本');requireValue(!row.draft,'已有草稿，请继续编辑',409);d.prepare('UPDATE community_posts SET draft=?,version=version+1,updated=? WHERE id=?').run(rev.data,stamp(),id)
@@ -212,7 +271,7 @@ function postAction(user,id,input){return transaction(d=>{const row=own(user,id)
 function review(user,id,input){return transaction(d=>{const row=getPost(id);requireValue(row,'投稿不存在',404);checkVersion(row,input);const rev=getRevision(input.revision);requireValue(rev&&rev.post===id&&row.pending_revision===rev.id&&['pending','reviewing'].includes(rev.status),'待审版本已变化或已撤回',409);requireValue(row.author!==user.id,'不能审核自己的投稿',403);const reason=cleanText(input.reason,3000),rule=cleanText(input.rule,120);requireValue(rule,'请选择适用规则');const action=input.action;
  if(action==='claim'){requireValue(!rev.reviewer||rev.reviewer===user.id,'该任务已由其他审核员领取',409);d.prepare("UPDATE community_revisions SET status='reviewing',reviewer=? WHERE id=?").run(user.id,rev.id);d.prepare('UPDATE community_posts SET version=version+1 WHERE id=?').run(id);audit(user,'claim',rev.id,{post:id});return decorate(getPost(id),true)}
  requireValue(!rev.reviewer||rev.reviewer===user.id||user.role==='owner','请由领取任务的审核员处理',409);
- if(action==='approve'){requireValue(input.checked===true&&reason.length>=2,'请填写核查记录，并确认已检查来源、许可和全部链接');unpaused();noFreeze(id);const author=d.prepare('SELECT * FROM community_users WHERE id=?').get(row.author);requireValue(publishingQualified(author&&{...author,role:row.author==='owner'?'owner':author.role},policyRequest()),'作者账号不具备发布资格',409);data(parse(rev.data),true,row.author);d.prepare("UPDATE community_revisions SET status='approved',reason=?,reviewer=?,decided=? WHERE id=?").run(reason,user.id,stamp(),rev.id);d.prepare("UPDATE community_posts SET public_revision=?,pending_revision=NULL,visibility='public',version=version+1,updated=? WHERE id=?").run(rev.id,stamp(),id)
+ if(action==='approve'){requireValue(input.checked===true&&reason.length>=2,'请填写核查记录，并确认已检查来源、许可和全部链接');unpaused();noFreeze(id);const author=d.prepare('SELECT * FROM community_users WHERE id=?').get(row.author);requireValue(publishingQualified(author&&{...author,role:row.author==='owner'?'owner':author.role},policyRequest()),'作者账号不具备发布资格',409);data(parse(rev.data),true,row.author);publishPostRevision(d,id,rev.id,user.id,reason)
  }else{requireValue(['return','reject'].includes(action)&&reason.length>=5,'请填写至少 5 字的具体修改或拒绝理由');d.prepare('UPDATE community_revisions SET status=?,reason=?,reviewer=?,decided=? WHERE id=?').run(action==='return'?'returned':'rejected',reason,user.id,stamp(),rev.id);d.prepare('UPDATE community_posts SET pending_revision=NULL,draft=?,version=version+1,updated=? WHERE id=?').run(rev.data,stamp(),id)}
  audit(user,action,rev.id,{post:id,reason,rule,policy:POLICY_VERSION});notify(row.author,action==='approve'?'投稿审核通过':action==='return'?'投稿需要补充':'投稿未通过审核',reason+'；依据：'+rule+'。如有异议，可从投稿页申请复核。','/workspace/submissions/'+id);return decorate(getPost(id),true)})}
 
@@ -276,13 +335,13 @@ export function communityApi(req,p,input,url){communityInput(input);const method
  if(!adminPath&&parts[0]==='counter-notice'&&method==='POST'){const user=member(req);return transaction(d=>{const row=d.prepare("SELECT * FROM community_cases WHERE id=? AND author=? AND kind='rights'").get(input.id,user.id);requireValue(row,'权利工单不存在',404);checkVersion(row,input);const statement=cleanText(input.statement,6000);requireValue(statement.length>=20&&input.truthful===true,'请提供真实身份、联系渠道及不侵权的初步证据，并确认真实性');d.prepare("UPDATE community_cases SET counter_notice=?,status='processing',version=version+1,updated=? WHERE id=?").run(statement,stamp(),row.id);audit(user,'counter_notice',row.id,{});return{ok:true}})}
  const user=adminPath?staff(req):member(req);
  if(!adminPath){
-  if(parts[0]==='accept-policies'&&method==='POST'){requireValue(user.status==='active','账号已受限，不能恢复发布权限',403);confirmRegistrationPolicy(input);requireValue(!limited('policy-renewal:'+user.id,10,86400000),'规则确认操作过于频繁，请稍后再试',429);transaction(d=>{acceptance(user.id,'registration-renewal');if(user.verification==='pending')d.prepare("UPDATE community_users SET verification='accepted',updated=? WHERE id=?").run(stamp(),user.id);audit(user,'policy_acceptance',user.id,{policyRead:['community','disclaimer']})});return{ok:true,user:currentUser(req)}}
+  if(parts[0]==='accept-policies'&&method==='POST'){requireValue(user.status==='active','账号已受限，不能恢复发布权限',403);confirmRegistrationPolicy(input);requireValue(!limited('policy-renewal:'+user.id,10,86400000),'规则确认操作过于频繁，请稍后再试',429);transaction(d=>{acceptance(user.id,'registration-renewal');if(user.verification==='pending')d.prepare("UPDATE community_users SET verification='accepted',updated=? WHERE id=?").run(stamp(),user.id);audit(user,'policy_acceptance',user.id,{policyRead:['community','disclaimer']})});return{ok:true,user:accountWithPolicy(req,currentUser(req))}}
   if(parts[0]==='reactions'&&parts.length===2&&method==='POST')return react(user,parts[1],input);
   if(parts[0]==='bookmarks'&&parts.length===1&&method==='GET')return bookmarks(user,url.searchParams.get('page'));
   if(parts[0]==='follows'&&parts.length===2&&method==='POST')return follow(user,parts[1],input);
   if(parts[0]==='comments'&&parts.length<=2&&method==='POST')return writeComment(user,parts[1],input);
   if(parts[0]==='notification-count'&&method==='GET')return{unread:db().prepare('SELECT COUNT(*) n FROM community_notifications WHERE user_id=? AND read_at IS NULL').get(user.id).n};
-  if(parts[0]==='workspace'&&method==='GET')return{user,posts:db().prepare('SELECT * FROM community_posts WHERE author=? ORDER BY updated DESC LIMIT 500').all(user.id).map(r=>decorate(r)),notifications:db().prepare('SELECT * FROM community_notifications WHERE user_id=? ORDER BY created DESC LIMIT 50').all(user.id),cases:db().prepare('SELECT * FROM community_cases WHERE author=? OR reporter=? ORDER BY updated DESC LIMIT 100').all(user.id,user.id).map(casePublic)};
+  if(parts[0]==='workspace'&&method==='GET')return{user:accountWithPolicy(req,user),posts:db().prepare('SELECT * FROM community_posts WHERE author=? ORDER BY updated DESC LIMIT 500').all(user.id).map(r=>decorate(r)),notifications:db().prepare('SELECT * FROM community_notifications WHERE user_id=? ORDER BY created DESC LIMIT 50').all(user.id),cases:db().prepare('SELECT * FROM community_cases WHERE author=? OR reporter=? ORDER BY updated DESC LIMIT 100').all(user.id,user.id).map(casePublic)};
   if(parts[0]==='submissions'&&method==='GET')return decorate(own(user,parts[1]),true);
   if(parts[0]==='submissions'&&method==='POST'){if(!parts[1]){if(localRequest(req))member(req,true);else requireValue(user.status==='active','此账号暂不能编辑内容',403);unpaused();return savePost(user,input)}return postAction(user,parts[1],input)}
   if(parts[0]==='notifications'&&parts.length===1&&method==='GET'){

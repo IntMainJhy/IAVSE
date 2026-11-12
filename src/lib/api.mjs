@@ -14,7 +14,7 @@ import {spaceUploads} from './spaces-uploads.mjs';
 import {emailStatus,requestEmail,bindEmailAsync,resetEmailPasswordAsync} from './email-auth.mjs';
 import {db,getConfig,hash,adminRow,fileInfo,DATA,FILES,transaction,recordAudit} from './db.mjs';
 import {admin,origin,session,currentUser,loginAsync,sessionCookie,changePasswordAsync,COOKIE,cookie} from './auth.mjs';
-import {communityApiAsync} from './community.mjs';
+import {communityApiAsync,accountWithPolicy} from './community.mjs';
 import {changeAvatar} from './avatars.mjs';
 import {uploadCover} from './covers.mjs';
 import {HttpError,requireValue,listContent,writeContent,saveConfiguration,contentData} from './content.mjs';
@@ -29,7 +29,7 @@ export async function handle(req){try{const url=new URL(req.url),p=url.pathname.
  if(p.length===1&&p[0]==='announcements'){requireValue(method==='GET','接口不存在',404);return json(readSiteAnnouncements({publicOnly:true}))}
  if(p[0]==='auth'&&p[1]==='login'&&method==='POST'){const token=await loginAsync(req,await body(req,4096));return json({ok:true},200,{'Set-Cookie':sessionCookie(token)})}
  if(p[0]==='auth'&&p[1]==='email'&&p.length===3){if(p[2]==='status'&&method==='GET')return json(emailStatus(req));const input=await body(req,8192);if(p[2]==='request'&&method==='POST')return json(await requestEmail(req,input));if(p[2]==='bind'&&method==='POST')return json(await bindEmailAsync(req,input));if(p[2]==='reset'&&method==='POST')return json(await resetEmailPasswordAsync(req,input),200,{'Set-Cookie':sessionCookie('',true)});throw new HttpError(404,'接口不存在')}
- if(p[0]==='auth'&&p[1]==='me'&&method==='GET')return json({user:currentUser(req),access:accessConfig()});
+ if(p[0]==='auth'&&p[1]==='me'&&method==='GET')return json({user:accountWithPolicy(req,principal),access:accessConfig()});
  if(p[0]==='auth'&&p[1]==='logout'&&method==='POST'){db().prepare('DELETE FROM sessions WHERE token=? AND COALESCE((SELECT realm FROM session_realms WHERE session_realms.token=sessions.token),\'combined\')=?').run(hash(cookie(req,COOKIE)),appSurface());return json({ok:true},200,{'Set-Cookie':sessionCookie('',true)})}
  if(p.length===2&&p[0]==='community'&&p[1]==='avatar'&&['PUT','DELETE'].includes(method))return json(await changeAvatar(req));
  if(p.length===2&&p[0]==='community'&&p[1]==='covers'&&method==='PUT')return json(await uploadCover(req));

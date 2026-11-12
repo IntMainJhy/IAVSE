@@ -33,7 +33,7 @@ function AccountIdentity({user}:{user:Doc|null}){const {t:tr}=useLocale();
    <FeedAvatar name={name} avatarId={user?.avatarId} guest={!user} className="feed-account-avatar"/><span className="feed-account-copy"><strong>{name}<SiteOwnerBadge siteOwner={user?.siteOwner} compact/></strong><small>{user?(handle?'@'+handle:role):tr("整理自己的分享")}</small></span>
   </Link>
   {user&&<details className="feed-account-menu" ref={menu}><summary aria-label={tr('{0}的账号选项',[name])} title={tr("账号选项")}><svg className="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></summary>
-   <div className="feed-account-popover" role="group" aria-label={tr("账号菜单")}><p>{name}<small>{tr(role)}</small></p><Link href={profile}><Icon name="user"/>{tr(profile.startsWith('/community/')?'社区名片':'个人账号')}</Link><Link href={settings}><Icon name="eye"/>{tr("修改头像与资料")}</Link><Link href="/workspace/account"><Icon name="settings"/>{tr("账号与安全")}</Link><Logout/></div>
+   <div className="feed-account-popover" role="group" aria-label={tr("账号菜单")}><p>{name}<small>{tr(role)}</small></p><Link href={profile}><Icon name="user"/>{tr(profile.startsWith('/community/')?'社区名片':'个人账号')}</Link><Link href={settings}><Icon name="eye"/>{tr("修改头像与资料")}</Link><Link href="/workspace/account"><Icon name="settings"/>{tr("账号与安全")}</Link><Link href="/legal/community"><Icon name="shield"/>{tr("社区规则")}</Link><Logout/></div>
   </details>}
  </div>;
 }

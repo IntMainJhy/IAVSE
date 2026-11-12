@@ -4,6 +4,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {createInterface} from 'node:readline';
+import {parseDocument,DomUtils} from 'htmlparser2';
 import {startServer,stopServer,loginServer} from './server.mjs';
 import {catalogEditorUrl} from '../src/lib/catalog-presentation.mjs';
 import {translate} from '../src/lib/i18n.mjs';
@@ -18,13 +19,23 @@ try{
  assert.equal((await call('/api/community/register',{...accepted,adult:true,email,policyRead:['community','disclaimer'],username:'catalog_member',password,nickname:'Catalog tester'})).status,200);
  const member=(await call('/api/auth/login',{email,password})).cookie,user=(await get('/api/auth/me',member)).data.user;
  assert.equal(user.verification,'accepted');assert.equal(user.emailVerifiedAt,null);assert.equal(user.canPublish,true);
- for(const locale of ['zh','en','ja'])for(const [kind,title,history] of [['docs','发布文档','我的文档'],['skills','分享 Skill','我的 Skill'],['resources','分享资源','我的资源']]){
-  const headers={Cookie:member+'; site-locale='+locale},list=await(await fetch(base+'/'+kind,{headers})).text(),editor=await(await fetch(base+catalogEditorUrl(kind),{headers})).text();
-  assert.ok(list.includes('href="'+catalogEditorUrl(kind)+'"'),'catalog has its own publish action');
-  assert.ok(!list.includes(translate(locale,'我的发布')),'global publications entry is removed');
-  assert.ok(editor.includes('<h1>'+translate(locale,title)+'</h1>')&&editor.includes('<h2>'+translate(locale,history)+'</h2>'),'contextual editor and history');
-  assert.ok(editor.includes('noindex, nofollow'),'private composer is not indexable');
-  assert.ok(!editor.includes('<label>'+translate(locale,'发布到')+'<select'),'content kind is fixed by its catalog');
+ const links=html=>DomUtils.getElementsByTagName('a',parseDocument(html));
+ for(const locale of ['zh','en','ja']){
+  const headers={Cookie:member+'; site-locale='+locale};
+  const library=links(await(await fetch(base+'/resources',{headers})).text());
+  for(const [kind,title,history] of [['docs','发布文档','我的文档'],['skills','分享 Skill','我的 Skill'],['resources','分享资源','我的资源']]){
+   const category=library.find(link=>link.attribs.href==='/resources?type='+kind);
+   assert.ok(category&&DomUtils.textContent(category).trim(),locale+' has a named '+kind+' catalog entry');
+   const list=await(await fetch(base+category.attribs.href,{headers})).text();
+   const publish=links(list).find(link=>link.attribs.href===catalogEditorUrl(kind)&&DomUtils.textContent(link).trim()===translate(locale,title));
+   assert.ok(publish,locale+' '+kind+' catalog has a named publish action');
+   assert.ok(!list.includes(translate(locale,'我的发布')),'global publications entry is removed');
+   const editorResponse=await fetch(base+publish.attribs.href,{headers});assert.equal(editorResponse.status,200);
+   const editor=await editorResponse.text();
+   assert.ok(editor.includes('<h1>'+translate(locale,title)+'</h1>')&&editor.includes('<h2>'+translate(locale,history)+'</h2>'),'contextual editor and history');
+   assert.ok(editor.includes('noindex, nofollow'),'private composer is not indexable');
+   assert.ok(!editor.includes('<label>'+translate(locale,'发布到')+'<select'),'content kind is fixed by its catalog');
+  }
  }
  for(const kind of ['docs','skills','resources']){
   const legacy=await fetch(base+'/publish?kind='+kind,{redirect:'manual'});assert.equal(legacy.status,307);assert.equal(legacy.headers.get('location'),catalogEditorUrl(kind));

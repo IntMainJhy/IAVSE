@@ -47,7 +47,7 @@ This repository contains the website frontend, backend, tests, AI integrations a
 | Blog spaces | A public blog directory, personal homepages and built-in examples; six editor layouts and eight visual themes |
 | Visual canvas | Inline editing, layers, properties, drag-and-drop, width and position controls, undo/redo, desktop and mobile preview |
 | Résumé import | Local text extraction from PDF / DOCX / TXT / Markdown; review a private profile draft before choosing what becomes public |
-| Publishing | Private drafts, fixed public snapshots, revisions and takedowns; community articles and documents require review |
+| Publishing | Private drafts, fixed public snapshots, revisions and takedowns; original text posts can publish automatically, flagged posts and documents go to review |
 | Documents | Rich text, heading outline, code, tables, images, imports and private document autosave |
 | AI integration | IAVSE Skill, REST API and local stdio MCP bridge; scoped credentials for saving drafts and submitting content |
 | Administration | Reviews, reports, account restrictions, files, audit history and measured PV / UV |
@@ -139,7 +139,7 @@ The recommended deployment shares one codebase and data store between separate p
 
 Use private persistent storage, actual HTTPS URLs and the correct proxy/cookie settings. Production accounts and community features are explicitly enabled by deployment configuration. Databases, user uploads, mail, keys, initial credentials and backups stay outside Git.
 
-Saving and publishing are separate actions. Community articles, shared documents and their revisions require review. Homepages, projects, Skills, resources, comments and replies publish under the existing account, sanitization, rate-limit, reporting and takedown rules. The site owner's homepage has specific save behavior documented in the [editor guide](docs/blog-editor.md).
+Saving and publishing are separate actions. Original text posts can publish automatically. Flagged posts, shared documents and document revisions go to review. Homepages, projects, Skills, resources, comments and replies publish under the existing account, sanitization, rate-limit, reporting and takedown rules. The site owner's homepage has specific save behavior documented in the [editor guide](docs/blog-editor.md).
 
 Static hosting accepts constrained HTML / ZIP packages with relative assets, without arbitrary server execution; see [hosting limits](docs/blog-hosting.md). AI credentials are scope-limited, and saving is separate from submitting. The legacy `/workspace/connect` route redirects to the editor; use the [API credential instructions](integrations/iavse-post/references/api.md#credential-setup-local-accounts).
 

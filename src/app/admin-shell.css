@@ -1,0 +1,110 @@
+/* The control center and the stand-alone moderation console share the same rail and reading width. */
+@layer rbp {
+ .rbp-application.organic-admin:has(.admin-shell[data-workspace-shell]) {
+  background:color-mix(in srgb,var(--iavse-background) 96%,var(--iavse-secondary))!important;
+  min-height:100dvh;
+ }
+
+ .rbp-application .admin-shell[data-workspace-shell] {
+  --console-gutter:clamp(16px,2vw,32px);
+  display:grid!important;
+  grid-template-columns:clamp(224px,18vw,260px) minmax(0,1fr)!important;
+  gap:var(--console-gutter)!important;
+  width:100%!important;
+  max-width:1680px!important;
+  min-height:100dvh;
+  margin:0 auto!important;
+  padding:var(--console-gutter)!important;
+  box-sizing:border-box;
+
+  & > .admin-main {
+   width:100%!important; min-width:0; max-width:none!important;
+   margin:0!important; padding:0 0 32px!important;
+  }
+  & > .admin-side {
+   position:sticky!important; top:var(--console-gutter)!important;
+   height:calc(100dvh - 2 * var(--console-gutter))!important;
+   min-width:0; display:flex!important; flex-direction:column!important; gap:18px!important;
+   margin:0!important; padding:18px 12px 12px!important;
+   border:1px solid var(--iavse-border)!important; border-radius:16px!important;
+   background:var(--iavse-background)!important; box-shadow:none!important;
+  }
+  & .admin-side > .brand { flex:none; min-height:48px; padding:0 8px!important; gap:10px!important }
+  & .admin-side > .brand > span { line-height:1.2 }
+  & .admin-side > .brand small { display:block; margin-top:4px; line-height:1.35 }
+  & .admin-nav {
+   display:flex!important; flex:1 1 auto; flex-flow:column nowrap!important;
+   align-items:stretch!important; gap:3px!important; min-height:0; min-width:0;
+   padding:2px 4px 6px!important; overflow:auto!important;
+   scrollbar-width:thin; scrollbar-color:var(--iavse-border) transparent;
+  }
+  & .admin-nav :is(a,.admin-folder-toggle) {
+   display:flex!important; flex:none!important; align-items:center; gap:10px;
+   height:auto!important; min-height:40px!important; width:100%; padding:9px 10px!important;
+   box-sizing:border-box; text-align:start; white-space:normal!important; overflow-wrap:anywhere;
+   line-height:1.45!important; border-radius:9px!important; box-shadow:none!important;
+  }
+  & .admin-nav .icon { flex:none; width:17px; height:17px }
+  & .admin-nav .admin-subnav[hidden] { display:none!important }
+  & .admin-nav .admin-subnav a { min-height:36px!important; padding-block:7px!important }
+  & .admin-nav a[aria-current=page] {
+   background:var(--iavse-muted)!important; color:var(--iavse-foreground)!important;
+   box-shadow:inset 3px 0 currentColor!important; font-weight:650;
+  }
+  & .admin-nav :is(a,button):focus-visible,
+  & .admin-topline :is(a,button,summary):focus-visible {
+   outline:2px solid var(--iavse-foreground)!important; outline-offset:-2px;
+  }
+  & .admin-side .admin-bottom { flex:none; min-width:0; margin:0; border-top:1px solid var(--iavse-border); padding:10px 6px 0!important }
+  & .admin-identity > span { min-width:0 }
+  & .admin-identity strong { line-height:1.4 }
+  & .admin-identity small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+  & .admin-topline {
+   position:sticky!important; top:0!important; z-index:12; display:flex!important;
+   flex-direction:row!important; justify-content:space-between!important; align-items:center!important;
+   gap:12px; min-height:54px!important; margin:0 0 20px!important; padding:6px 14px!important;
+   border:1px solid var(--iavse-border)!important; border-radius:12px!important;
+   background:var(--iavse-background)!important; box-shadow:none!important;
+  }
+  & .admin-breadcrumb { display:flex; align-items:center; gap:8px; min-width:0 }
+  & .admin-breadcrumb > span { min-width:0; font-size:13px; line-height:1.4; overflow-wrap:anywhere }
+  & .admin-topline .actions { width:auto!important; flex:none; align-items:center!important; flex-wrap:nowrap!important; gap:10px!important; margin:0!important }
+  &[data-workspace-shell="review"] .admin-bottom { display:grid; justify-items:start; gap:6px }
+  & .admin-review-menu { display:none }
+  & .admin-drawer[open] { display:flex; flex-direction:column; gap:14px; padding-bottom:max(18px,env(safe-area-inset-bottom))!important }
+ }
+
+ @media (max-width:960px) {
+  .rbp-application .admin-shell[data-workspace-shell] {
+   display:block!important; padding:12px max(14px,env(safe-area-inset-right)) 0 max(14px,env(safe-area-inset-left))!important;
+   & > .admin-side { display:none!important }
+   & .admin-topline { margin-bottom:16px!important; padding:4px 8px!important }
+   & .admin-menu-trigger, & .admin-review-menu > summary {
+    display:grid!important; place-items:center; flex:none; min-width:44px; width:44px!important; height:44px; padding:0;
+    color:var(--iavse-foreground); background:transparent; border:0; border-radius:8px; cursor:pointer;
+   }
+   & .admin-review-menu { display:block }
+   & .admin-review-menu > summary::-webkit-details-marker { display:none }
+   & .admin-review-menu-panel {
+    position:absolute; top:calc(100% + 5px); inset-inline-start:0; z-index:1;
+    width:min(288px,100%); max-height:calc(100dvh - 96px); overflow:auto;
+    padding:10px; border:1px solid var(--iavse-border); border-radius:12px;
+    background:var(--iavse-background); color:var(--iavse-foreground); box-shadow:var(--iavse-shadow);
+   }
+   & .admin-review-menu-panel .admin-bottom { padding:10px; border-top:1px solid var(--iavse-border) }
+   & .admin-review-menu-panel .admin-bottom :is(a,button) { display:inline-flex; align-items:center; min-height:44px }
+   & .admin-drawer .admin-nav :is(a,button) { min-height:44px!important }
+  }
+ }
+
+ @media (max-width:640px) {
+  .rbp-application .admin-shell[data-workspace-shell] {
+   & .admin-breadcrumb { gap:0 }
+   & .admin-topline .actions { gap:4px!important }
+   & .admin-topline .actions > :is(a,button) { display:inline-flex; align-items:center; justify-content:center; min-width:36px; min-height:44px }
+   & .admin-topline .actions > a > span { display:none }
+   & .admin-breadcrumb > span { font-size:0 }
+   & .admin-breadcrumb strong { display:block; font-size:13px }
+  }
+ }
+}

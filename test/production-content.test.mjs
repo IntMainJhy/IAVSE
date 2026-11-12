@@ -27,7 +27,7 @@ test('unverified accounts keep private drafts while public posting and cross-acc
  const response=await API.handle(new Request(base+'/api/community/posts',{headers:{host:'attacker.example'}}));assert.equal(response.status,503);
  assert.throws(()=>call('owner','admin/community/accounts',{id:'pending',action:'verify_identity',reason:'An isolated verification record',method:'approved provider',reference:'check-123',nicknameChecked:true}),e=>e.status===400);
  call('owner','admin/community/accounts',{id:'pending',action:'verify_identity',reason:'An isolated completed check, no personal documents',method:'approved provider',reference:'check-123',nicknameChecked:true,identityChecked:true});assert.equal(d.prepare('SELECT verification FROM community_users WHERE id=?').get('pending').verification,'verified');
- const sent=call('pending','community/submissions/'+draft.id,{action:'submit',version:draft.version,...agreement()});assert.equal(sent.visibility,'private');assert.ok(sent.pending_revision);assert.equal(call('','community/posts',{},'GET').items.length,0);const reviewed=call('owner','admin/community/reviews/'+sent.id,{action:'approve',version:sent.version,revision:sent.pending_revision,checked:true,reason:'Reviewed original article for publication',rule:'来源与许可'});assert.equal(reviewed.visibility,'public');
+ const sent=call('pending','community/submissions/'+draft.id,{action:'submit',version:draft.version,...agreement()});assert.equal(sent.visibility,'public');assert.equal(sent.pending_revision,null);assert.equal(call('','community/posts',{},'GET').items[0].id,sent.id);
 });
 
 test('manual posts, comments and catalog shares keep moderation and exactly-one synchronization on HTTPS',()=>{

@@ -78,8 +78,9 @@ test('legacy theme embeds redirect to their isolated renderer while static sites
  assert.equal(walk(normal).some(node=>node.type==='SpaceVisit'),true);
  assert.equal(walk(normal).some(node=>node.props?.className==='blog-platform-bar'),true);
  const chrome=walk(normal).find(node=>node.props?.className==='blog-platform-bar');
- assert.equal(chrome.props.children[1].props.className,'blog-platform-bar-inner','a full-width header owns a bounded inner row');
- assert.equal(chrome.props.children[0].type,'SiteAnnouncement','platform announcements occupy their own row outside author content');
+ assert.equal(chrome.props.children.props.className,'blog-platform-bar-inner','a full-width header owns a bounded inner row');
+ const rootChildren=normal.props.children;
+ assert.equal(rootChildren[rootChildren.indexOf(chrome)-1]?.type,'SiteAnnouncement','the notice scrolls away before the sticky platform header');
  const actions=walk(chrome).find(node=>node.props?.className==='blog-platform-actions');assert.equal(actions.type,'nav');
  assert.equal(walk(actions).some(node=>node.type==='BlogShare'),true,'share remains inside the visible header stacking context');
  const normalTheme=walk(normal).find(node=>node.type==='PublicBlogTheme');assert.equal(normalTheme.props.data.layout.blog.design,data.layout.blog.design,'chrome changes do not rewrite the author canvas');

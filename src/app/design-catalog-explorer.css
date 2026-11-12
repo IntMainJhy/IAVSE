@@ -89,3 +89,53 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer :is(.
 .design-directory.design-explorer .design-preview-trigger>span{position:absolute;bottom:56px;right:10px;color:var(--ds-text)}
 
 @media(max-width:540px){html:root[data-ui][data-color-mode] body .design-directory.design-explorer .explorer-reset{min-width:44px;padding:8px;font-size:0;gap:0}.design-directory.design-explorer .explorer-reset .icon{width:16px;height:16px}}
+
+
+/* Keep the collection, its commands and the first row within the same reading frame. */
+@layer rbp {
+ .rbp-application.resource-page-frame[data-resource-kind=designs] {
+  max-width:1720px;
+  padding-inline:clamp(16px,3vw,48px)!important;
+  padding-top:108px!important;
+ }
+ .rbp-application.resource-page-frame[data-resource-kind=designs] > .resource-hub-tabs { margin-bottom:14px!important }
+ .resource-page-frame[data-resource-kind=designs] #design-directory {
+  padding-top:0;
+  & .design-library-heading { margin:0 0 8px!important; padding:8px 0 12px!important; gap:8px!important }
+  & .design-library-heading h1 { margin:0 0 3px!important; font-size:clamp(28px,2.6vw,38px)!important; line-height:1.24!important }
+  & .design-library-heading p { margin:0!important; font-size:14px!important; line-height:1.5!important }
+  & .design-grid { grid-template-columns:repeat(auto-fill,minmax(min(100%,355px),1fr))!important; gap:clamp(16px,1.4vw,24px)!important }
+  & .design-directory-meta { margin:0!important; padding:10px 0!important; gap:8px }
+ }
+ @media(max-width:767px) {
+  .rbp-application.resource-page-frame[data-resource-kind=designs] { padding-inline:16px!important; padding-top:76px!important }
+  .rbp-application.resource-page-frame[data-resource-kind=designs] > .resource-hub-tabs { margin-bottom:8px!important }
+  .resource-page-frame[data-resource-kind=designs] #design-directory .design-library-heading { justify-content:center!important; text-align:center }
+ }
+}
+
+#design-directory .explorer-command-row {
+ display:flex; flex-wrap:wrap; align-items:flex-start; gap:8px;
+ padding:10px 0; border-bottom:1px solid var(--ds-line);
+}
+#design-directory .explorer-search-row { flex:0 1 auto; min-width:0; max-width:100%; padding:0; gap:0 }
+#design-directory .explorer-search-row[data-expanded=true] { flex-basis:min(410px,100%) }
+#design-directory .explorer-search-row > p { display:none }
+#design-directory .explorer-template-controls { display:flex; flex:1 1 auto; gap:8px; padding:0; margin:0; border:0 }
+#design-directory .explorer-template-controls label { margin-inline-start:auto }
+#design-directory .explorer-filter-disclosure {
+ display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:44px;
+ padding:8px 14px; background:var(--ds-panel); color:var(--ds-text);
+ border:1px solid var(--ds-line); border-radius:999px; font:inherit; font-size:13px;
+}
+#design-directory .explorer-filter-disclosure .icon { width:14px; height:14px }
+#design-directory .explorer-filter-disclosure[aria-expanded=true] .icon { transform:rotate(180deg) }
+#design-directory .explorer-filter-panel:not([hidden]) { padding:12px 0; border-bottom:1px solid var(--ds-line) }
+#design-directory .explorer-filter-panel[hidden] { display:none }
+@media(max-width:767px) {
+ #design-directory .explorer-collections { gap:16px }
+ #design-directory .explorer-command-row { gap:6px }
+ #design-directory .explorer-search-row[data-expanded=true] { flex-basis:100% }
+ #design-directory .explorer-template-controls { gap:6px }
+ #design-directory .explorer-template-controls > label { flex-wrap:wrap; gap:4px }
+}

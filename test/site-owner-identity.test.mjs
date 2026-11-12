@@ -39,8 +39,7 @@ test('default blog, discovery and community authors expose one consistent identi
  const policy=community('community/config'),ack={accepted:true,policyVersion:policy.policyVersion,policyHash:policy.policyHash};
  let post=community('community/submissions',{data:{title:'Original identity verification',body:'This original engineering note verifies the account-bound author marker and independent post permissions.'}},official.token,'POST');
  officialPost=community('community/submissions/'+post.id,{...ack,action:'submit',version:post.version},official.token,'POST');
- assert.ok(officialPost.pending_revision);assert.throws(()=>C.publicPost(officialPost.id),e=>e.status===404);
- officialPost=community('admin/community/reviews/'+post.id,{action:'approve',version:officialPost.version,revision:officialPost.pending_revision,checked:true,reason:'Independent review of the original author identity note.',rule:'来源与许可'},owner,'POST');
+ assert.equal(officialPost.latestStatus,'approved');assert.equal(officialPost.pending_revision,null);
  assert.equal(C.publicPost(officialPost.id).authorSiteOwner,true);assert.equal(C.publicPosts().items.find(row=>row.id===officialPost.id).authorSiteOwner,true);
  const comment=community('community/comments',{...ack,post:officialPost.id,body:'A comment from the verified site owner.'},official.token,'POST');assert.equal(comment.author.siteOwner,true);
  assert.equal(community('community/members/'+official.id).siteOwner,true);assert.equal(community('community/members/'+other.id).siteOwner,false);

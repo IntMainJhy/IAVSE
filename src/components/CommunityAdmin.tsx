@@ -77,4 +77,52 @@ export function CommunityAdmin({path=[],embedded=false}:{path?:string[];embedded
   <div className="community-mode-note">{tr(config.data.mode==='local'?"本地体验 · 真实身份核验与对外开放尚未启用":"公开服务 · 发布资格核验、内容审核与投诉处置")}</div>
   <div className="admin-community-content" key={section}>{content}</div>
  </section>;
- return <div className="rbp-application organic-site organic-admin community-surface public-content-site"><a className="skip" href="#main">{tr("跳到主要内容")}</a><div className="admin-shell"><aside className="admin-side"><Link href="/admin/community" className="brand"><span>{tr("社区治理")}<small>{tr("审核、回应与照看")}</small></span></Link><nav className="admin-nav" aria-label={tr("社区管理导航")}>{visibleNav.map(([key,icon,label])=><Link key={key} className={section===key?'active':''} href={'/admin/community'+(key?'/'+key:'')} aria-current={section===key?'page':undefined}><Icon name={icon}/>{tr(label)}</Link>)}</nav><div className="admin-bottom"><Link className="text-link" href={user.role==='owner'?'/admin':'/workspace'}>{user.role==='owner'?tr("返回内容后台"):tr("我的工作台")}</Link><br/><Link className="text-link" href="/community"><Icon name="eye"/>{tr("查看社区")}</Link><br/><Logout/><p>{user.nickname} · {user.role==='owner'?tr("站长"):tr("审核员")}</p></div></aside><main className="admin-main" id="main"><div className="admin-topline"><span>{tr("社区治理 / ")}{tr(nav.find(n=>n[0]===section)?.[2]||"页面")}</span><div className="actions"><SiteTools/><Link href="/community">{tr("切换到展示页 ")}</Link></div></div><div className="community-mode-note">{tr(config.data.mode==='local'?"本地体验 · 真实身份核验与对外开放尚未启用":"公开服务 · 发布资格核验、内容审核与投诉处置")}</div><PageMotion>{content}</PageMotion></main></div></div>}
+ const navigation=(
+  <nav className="admin-nav" aria-label={tr("社区管理导航")}>
+   {visibleNav.map(([key,icon,label])=>(
+    <Link key={key} className={section===key?'active':''} href={'/admin/community'+(key?'/'+key:'')} aria-current={section===key?'page':undefined}>
+     <Icon name={icon}/><span>{tr(label)}</span>
+    </Link>
+   ))}
+  </nav>
+ );
+ const account=(
+  <div className="admin-bottom">
+   <Link className="text-link" href={user.role==='owner'?'/admin':'/workspace'}>{user.role==='owner'?tr("返回内容后台"):tr("我的工作台")}</Link>
+   <Link className="text-link" href="/community"><Icon name="eye"/>{tr("查看社区")}</Link>
+   <Logout/><p>{user.nickname} · {user.role==='owner'?tr("站长"):tr("审核员")}</p>
+  </div>
+ );
+ return (
+  <div className="rbp-application organic-site organic-admin community-surface public-content-site">
+   <a className="skip" href="#main">{tr("跳到主要内容")}</a>
+   <div className="admin-shell" data-workspace-shell="review">
+    <aside className="admin-side">
+     <Link href="/admin/community" className="brand"><span>{tr("社区治理")}<small>{tr("审核、回应与照看")}</small></span></Link>
+     {navigation}{account}
+    </aside>
+    <main className="admin-main" id="main">
+     <header className="admin-topline">
+      <div className="admin-breadcrumb">
+       <details key={section} className="admin-review-menu" onKeyDown={event=>{
+        if(event.key==='Escape' && event.currentTarget.open){
+         event.currentTarget.open=false;
+         event.currentTarget.querySelector('summary')?.focus();
+        }
+       }} onBlur={event=>{
+        if(event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open=false;
+       }}>
+        <summary aria-label={tr('打开后台导航')}><Icon name="menu"/></summary>
+        <div className="admin-review-menu-panel">{navigation}{account}</div>
+       </details>
+       <span>{tr("社区治理 / ")}<strong>{tr(nav.find(n=>n[0]===section)?.[2]||"页面")}</strong></span>
+      </div>
+      <div className="actions"><SiteTools/><Link href="/community">{tr("切换到展示页 ")}</Link></div>
+     </header>
+     <div className="community-mode-note">{tr(config.data.mode==='local'?"本地体验 · 真实身份核验与对外开放尚未启用":"公开服务 · 发布资格核验、内容审核与投诉处置")}</div>
+     <PageMotion>{content}</PageMotion>
+    </main>
+   </div>
+  </div>
+ );
+}

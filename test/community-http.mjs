@@ -2,10 +2,17 @@ import assert from 'node:assert/strict';
 import {mkdtemp,rm,readdir,readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
+import {DomUtils,parseDocument} from 'htmlparser2';
 import {startServer,stopServer,loginServer} from './server.mjs';
 const directory=await mkdtemp(path.join(tmpdir(),'site-community-http-'));let server;
 try{
  server=await startServer(path.join(directory,'data'),3118);const base=server.base,owner=await loginServer(base);
+ for(const route of ['/admin','/login','/join']){
+  const page=parseDocument(await (await fetch(base+route)).text());
+  const forms=DomUtils.findAll(node=>node.name==='form'&&DomUtils.findOne(child=>child.name==='input'&&child.attribs.type==='password',node.children),page.children);
+  assert.ok(forms.length,route+' exposes its sign-in or registration form before hydration');
+  for(const form of forms)assert.equal(form.attribs.method?.toLowerCase(),'post',route+' keeps credentials out of navigation URLs before hydration');
+ }
  async function call(url,input,token='',method='POST',headers={}){const r=await fetch(base+url,{method,headers:{Origin:base,Cookie:token,'Content-Type':'application/json',...headers},...(input===undefined?{}:{body:JSON.stringify(input)})});return{status:r.status,data:await r.json(),cookie:r.headers.get('set-cookie')?.split(';')[0]}}
  const get=(url,token='')=>call(url,undefined,token,'GET');
  const conf=(await get('/api/community/config')).data,ack={accepted:true,policyVersion:conf.policyVersion,policyHash:conf.policyHash,policyRead:['community','disclaimer']};
@@ -23,6 +30,8 @@ try{
  assert.equal((await get('/api/community/posts/'+row.id)).status,404);assert.equal((await get('/api/community/submissions/'+row.id)).status,401);
  r=await call('/api/community/submissions/'+row.id,{...ack,action:'submit',version:row.version},member);assert.equal(r.status,200);row=r.data;
  assert.equal((await get('/api/community/posts')).data.total,0);
+ const reviewEditor=await(await fetch(base+'/workspace/submissions/'+row.id,{headers:{Cookie:member+'; site-locale=en'}})).text();
+ assert.ok(reviewEditor.includes('This version is awaiting review.')&&reviewEditor.includes('External sources and links require review.'));
  r=await call('/api/admin/community/reviews/'+row.id,{action:'approve',version:row.version,revision:row.pending_revision,checked:true,reason:'已核查来源页面、许可和所有链接',rule:'来源与许可'},owner);assert.equal(r.status,200);row=r.data;
  const publicHtml=await(await fetch(base+'/community')).text();assert.ok(publicHtml.includes('class="feed-post"'));assert.ok(publicHtml.includes(doc.title));assert.ok(!publicHtml.includes('class="skeleton"'));
  const memberHtml=await(await fetch(base+'/workspace',{headers:{Cookie:member}})).text();assert.ok(memberHtml.includes('<h1>My posts</h1>'));assert.ok(!memberHtml.includes('class="skeleton"'));
@@ -34,18 +43,20 @@ try{
  for(const [locale,heading] of [['en','Space canvas'],['zh','空间画布']]){
   const headers={Cookie:member+'; site-locale='+locale};
   const directory=await(await fetch(base+'/blogs',{headers})).text();
-  const activeHomepage=html=>[...html.matchAll(/<a\b[^>]*>/g)].map(match=>match[0]).find(tag=>tag.includes('href="/blogs"')&&tag.includes('class="is-active"'))||'';
-  assert.ok(activeHomepage(directory).includes('aria-current="page"'));
-  assert.ok(directory.includes('href="/workspace/blog"'));
+  const directoryLinks=DomUtils.getElementsByTagName('a',parseDocument(directory));
+  assert.ok(directoryLinks.some(link=>link.attribs.href==='/blogs'&&link.attribs['aria-current']==='page'));
+  assert.ok(directoryLinks.some(link=>link.attribs.href==='/workspace/blog'));
   for(const route of ['/workspace/blog','/workspace/profile','/workspace/library','/workspace/files']){
    const page=await(await fetch(base+route,{headers})).text();
    assert.ok(page.includes('blog-editor blog-canvas-editor'),route);
    assert.ok(!page.includes('class="feed-navigation"'),route);
    assert.ok(page.includes('<h1>'+heading+'</h1>'),route);
-   assert.ok(activeHomepage(page).includes('aria-current="location"'),route);
+   const links=DomUtils.getElementsByTagName('a',parseDocument(page));
+   const backLabel=locale==='en'?'Back to site':'返回网站';
+   assert.ok(links.some(link=>link.attribs.href==='/'&&link.attribs['aria-label']===backLabel&&DomUtils.textContent(link).includes(backLabel)),route+' has a named return to the public site');
   }
  }
- const ownerHtml=await(await fetch(base+'/admin',{headers:{Cookie:owner}})).text();assert.match(ownerHtml,/<h1 id="admin-overview-title">Management center<\/h1>/);assert.ok(ownerHtml.includes('class="admin-task-cards"'));assert.ok(!ownerHtml.includes('class="admin-summary-grid"'));const adminNav=ownerHtml.match(/<nav class="admin-nav"[\s\S]*?<\/nav>/)?.[0];assert.ok(adminNav);for(const removed of ['/admin/blog','/admin/profile','/admin/catalog'])assert.ok(!adminNav.includes('href="'+removed+'"'));for(const child of ['/admin/articles','/admin/projects','/admin/resources','/admin/community/catalog'])assert.ok(adminNav.includes('href="'+child+'"'));assert.ok(adminNav.includes('admin-nav-folder'));assert.ok(!ownerHtml.includes('class="skeleton"'));
+ const ownerHtml=await(await fetch(base+'/admin',{headers:{Cookie:owner}})).text();assert.match(ownerHtml,/<h1 id="admin-overview-title">Management center<\/h1>/);assert.ok(ownerHtml.includes('aria-labelledby="admin-tools-title"'));assert.ok(ownerHtml.includes('aria-labelledby="admin-recent-title"'));const adminNav=ownerHtml.match(/<nav class="admin-nav"[\s\S]*?<\/nav>/)?.[0];assert.ok(adminNav);for(const removed of ['/admin/blog','/admin/profile','/admin/catalog'])assert.ok(!adminNav.includes('href="'+removed+'"'));for(const child of ['/admin/articles','/admin/projects','/admin/resources','/admin/community/catalog'])assert.ok(adminNav.includes('href="'+child+'"'));assert.ok(adminNav.includes('admin-nav-folder'));assert.ok(!ownerHtml.includes('class="skeleton"'));
  const unauthorizedHtml=await(await fetch(base+'/admin')).text();assert.ok(unauthorizedHtml.includes('Sign in to dashboard'));assert.ok(!unauthorizedHtml.includes('class="stats-grid"'));
  for(const [language,lang,heading] of [['zh','zh-CN','我的投稿'],['ja','ja','自分の投稿']]){const localized=await(await fetch(base+'/workspace',{headers:{Cookie:member+'; site-locale='+language}})).text();assert.ok(localized.includes('lang="'+lang+'"'));assert.ok(localized.includes('<h1>'+heading+'</h1>'));assert.ok(localized.includes(doc.title));}
  assert.ok(memberHtml.includes('lang="en"'));
@@ -92,11 +103,13 @@ try{
  assert.equal((await call('/api/admin/catalog/settings',{mode:'automatic'},owner)).status,200);
  const authored={title:'直接撰写的技术经验',body:'这是一份直接在社区撰写的原创记录，说明如何整理组件并检查界面交互。\n```html\n<button>保存</button>\n```'};
  let direct=await call('/api/community/submissions',{data:authored},member);assert.equal(direct.status,200);assert.equal(direct.data.origin,'manual');
- direct=await call('/api/community/submissions/'+direct.data.id,{...ack,action:'submit',version:direct.data.version},member);assert.equal(direct.status,200);assert.equal(direct.data.latestStatus,'pending');assert.ok(direct.data.pending_revision);
- direct=await call('/api/admin/community/reviews/'+direct.data.id,{action:'approve',version:direct.data.version,revision:direct.data.pending_revision,checked:true,reason:'已核查原创正文与公开内容',rule:'原创内容'},owner);assert.equal(direct.status,200);
+ direct=await call('/api/community/submissions/'+direct.data.id,{policyVersion:ack.policyVersion,policyHash:ack.policyHash,action:'submit',version:direct.data.version},member);assert.equal(direct.status,200);assert.equal(direct.data.latestStatus,'approved');assert.equal(direct.data.pending_revision,null);
  const directId=direct.data.id,original=(await get('/api/community/posts/'+directId)).data;assert.equal(original.sourceUrl,'');assert.equal(original.url,'');assert.equal(original.catalogId,'');assert.equal(original.origin,'manual');assert.equal(original.body,authored.body);
+ const publishedEditor=await(await fetch(base+'/workspace/submissions/'+directId,{headers:{Cookie:member+'; site-locale=zh'}})).text();
+ assert.ok(publishedEditor.includes('已发布到社区。')&&publishedEditor.includes('href="/community/'+directId+'"'));
+ assert.ok(!publishedEditor.includes('本次分享已进入人工复核。'));
  const authoredPage=await(await fetch(base+'/community/'+directId)).text();assert.ok(authoredPage.includes(authored.title));assert.ok(authoredPage.includes('&lt;button&gt;保存&lt;/button&gt;'));assert.ok(!authoredPage.includes('<button>保存</button>'));
  assert.equal((await call('/api/community/submissions/'+directId,{action:'offline',version:direct.data.version},member)).status,200);assert.equal((await get('/api/community/posts/'+directId)).status,404);
  assert.equal((await call('/api/auth/logout',{},member)).status,200);assert.equal((await get('/api/community/workspace',member)).status,401);
- console.log('PASS：社区真实 HTTP 邀请注册、统一登录、资格与越权、草稿保密、先审后发、修改隔离、匿名举报与凭证、冻结、进程重启持久化、点赞收藏转发关注、评论直接发布、版本冲突与管理员移除、通知及页面入口。');
+ console.log('PASS：社区真实 HTTP 邀请注册、统一登录、资格与越权、草稿保密、原创文字直接发布、外链人工复核、发布回执与修改隔离、匿名举报与凭证、冻结、进程重启持久化、点赞收藏转发关注、评论直接发布、版本冲突与管理员移除、通知及页面入口。');
 }catch(error){console.error(server?.log()||'');throw error}finally{if(server)await stopServer(server);await rm(directory,{recursive:true,force:true})}

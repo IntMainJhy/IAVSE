@@ -8,7 +8,7 @@
 
 New accounts have `verification=accepted` and `email_verified_at=NULL`: policy acceptance enables the product's publishing workflow but does not pretend that a mailbox or real identity was verified. Personal homepages, projects, resources, Skills, comments and replies publish directly. Community articles, documents and article revisions require manual review. Private drafts, account ownership, safe markup/URLs, rate limits, reports, restrictions and takedowns remain enforced. Legacy `pending` users can accept current policies in account settings; restricted accounts cannot use that action to restore permissions.
 
-新账号记录为 `accepted`，邮箱核验时间为空。规则确认不冒充邮箱或实名认证。个人主页、作品、资源、Skill、评论和回复直接发布；社区文章、文档及文章修订人工审核后公开。私有草稿、归属隔离、安全格式校验、频率限制、举报、账号限制与下架继续生效。历史待确认账号可在账号设置补充阅读并确认；受限账号不能借此恢复权限。
+新账号记录为 `accepted`，邮箱核验时间为空。规则确认不冒充邮箱或实名认证。个人主页、作品、资源、Skill、评论和回复直接发布；自动模式下，普通原创文字帖通过检查后立即公开；含外部链接、第三方来源、封面、命中风险规则或需跟进的修订转入人工复核。人工模式下，社区帖子逐篇复核。文档及其修订仍需人工审核。私有草稿、归属隔离、安全格式校验、频率限制、举报、账号限制与下架继续生效。历史待确认账号可在账号设置补充阅读并确认；受限账号不能借此恢复权限。
 
 ## Configuration / 配置
 
