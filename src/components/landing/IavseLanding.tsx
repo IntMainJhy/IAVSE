@@ -60,7 +60,7 @@ function EmptyContent({filter, unavailable}: {filter: Filter; unavailable: boole
   const failed = unavailable && filter !== 'work';
   const title = failed ? c.unavailable : filter === 'work' ? c.emptyWorks : filter === 'discussion' ? c.emptyPosts : c.emptyTitle;
   return <div className="iv-card iv-empty" data-landing-card data-landing-empty data-landing-reveal>
-    <MessageCircle size={28} strokeWidth={1.3} aria-hidden="true"/><h3>{title}</h3>
+    <MessageCircle size={22} strokeWidth={1.4} aria-hidden="true"/><h3>{title}</h3>
     <div className="iv-empty-actions"><Link href={filter === 'work' ? '/blogs' : '/community'} className="iv-text-link">{filter === 'work' ? c.exploreSpace : c.enter}<ArrowRight size={15} aria-hidden="true"/></Link>{failed ? <button type="button" className="iv-text-link" onClick={() => router.refresh()}>{c.retry}</button> : null}</div>
   </div>;
 }
@@ -228,18 +228,17 @@ export function IavseLanding({content}: {content: LandingContent}) {
   return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale}>
     <div className="iv-backdrop-wrap"><IavseFlowBackdrop/></div>
     <div className="iv-container">
-      <div className="iv-header-space" aria-hidden="true"/>
       <section className="iv-hero">
         <div className="iv-hero-copy" data-landing-reveal>
           <h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1>
           <p>{c.intro}</p>
-          <nav className="iv-actions" aria-label={c.productEntries}>
-            <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-            <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
-            <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-          </nav>
         </div>
       </section>
+      <nav className="iv-actions" aria-label={c.productEntries} data-landing-reveal>
+        <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+        <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
+        <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+      </nav>
       <section className="iv-community" aria-labelledby="iv-community-title">
         <div className="iv-community-intro" data-landing-reveal>
           <h2 id="iv-community-title">{c.communityTitle}</h2>

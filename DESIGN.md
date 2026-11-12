@@ -75,7 +75,7 @@ colors:
 typography:
   display:
     fontFamily: '"IAVSE Display", "Songti SC", serif'
-    fontSize: clamp(42px, 4.15vw, 58px)
+    fontSize: clamp(35px, 3.5vw, 48px)
     fontWeight: 400
     lineHeight: 1.32
     letterSpacing: -0.02em
@@ -87,7 +87,7 @@ typography:
     letterSpacing: -0.025em
   section-heading:
     fontFamily: '"IAVSE Display", "Songti SC", serif'
-    fontSize: clamp(30px, 2.8vw, 38px)
+    fontSize: clamp(25px, 2.3vw, 30px)
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: -0.015em
@@ -98,11 +98,11 @@ typography:
     fontWeight: 400
     lineHeight: 1.7
   introduction:
-    fontSize: 16px
+    fontSize: 15px
     fontWeight: 400
-    lineHeight: 1.9
+    lineHeight: 1.8
   card-title:
-    fontSize: 21px
+    fontSize: 18px
     fontWeight: 600
     lineHeight: 1.55
   card-body:
@@ -110,7 +110,7 @@ typography:
     fontWeight: 400
     lineHeight: 1.8
   action:
-    fontSize: 15px
+    fontSize: 14px
     fontWeight: 500
   label:
     fontSize: 14px
@@ -122,7 +122,7 @@ typography:
   home-body:
     fontFamily: '"IAVSE Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
       "PingFang SC", "Microsoft YaHei", sans-serif'
-    fontSize: 16px
+    fontSize: 15px
     fontWeight: 400
     lineHeight: 1.65
   application-heading:
@@ -148,15 +148,15 @@ rounded:
   pill: 999px
 spacing:
   glass-inset: 4px
-  action-gap: 12px
+  action-gap: 10px
   gutter-small: 16px
   feed-gap: 20px
-  card-inset-mobile: 21px
+  card-inset-mobile: 16px 18px
   application-card-inset: 22px
-  card-inset-block: 23px
+  card-inset-block: 18px
   application-gap: 24px
-  card-inset-inline: 26px
-  board-gap: 26px
+  card-inset-inline: 22px
+  board-gap: 18px
   space-inset: 28px
   gutter: 40px
 components:
@@ -177,8 +177,8 @@ components:
     textColor: '{colors.background}'
     typography: '{typography.action}'
     rounded: '{rounded.control}'
-    padding: 11px 23px
-    height: 48px
+    padding: 9px 18px
+    height: 44px
   home-button-primary-hover:
     backgroundColor: '{colors.home-action-hover}'
   home-button-secondary:
@@ -186,8 +186,8 @@ components:
     textColor: '{colors.home-foreground}'
     typography: '{typography.action}'
     rounded: '{rounded.control}'
-    padding: 11px 23px
-    height: 48px
+    padding: 9px 18px
+    height: 44px
   navigation:
     textColor: '{colors.header-foreground}'
     typography: '{typography.glass-label}'
@@ -220,12 +220,12 @@ components:
     backgroundColor: '{colors.background}'
     textColor: '{colors.home-foreground}'
     rounded: '{rounded.card}'
-    padding: 23px 26px
+    padding: 18px 22px
   space-card:
     backgroundColor: '{colors.background}'
     textColor: '{colors.home-foreground}'
     rounded: '{rounded.card}'
-    padding: 25px 27px 24px
+    padding: 20px 22px
   application-input:
     backgroundColor: '{colors.background}'
     textColor: '{colors.foreground}'
@@ -291,7 +291,7 @@ The light platform uses neutral ink and white surfaces. Teal and blue are the de
 
 **Display Font:** self-hosted ZCOOL XiaoWei (站酷小薇), declared as `IAVSE Display`, with Songti and serif fallbacks. **Wordmark Font:** self-hosted Cormorant Garamond, declared as `IAVSE Wordmark`, with Georgia and serif fallbacks. **Body Font:** self-hosted Geist, declared as `IAVSE Sans`, with system and CJK fallbacks. These aliases do not claim typeface authorship. Preserve the [ZCOOL XiaoWei](public/fonts/zcoolxiaowei-OFL.txt), [Cormorant Garamond](public/fonts/CormorantGaramond-OFL.txt) and [Geist](public/fonts/design-artifacts/voltagent/geist-OFL.txt) SIL OFL notices.
 
-Homepage display and introduction retain a centered two-line product opening. The default title uses the frontmatter display role and reaches (62px) from (1500px). English uses Cormorant at weight (500), with a clamp of (46px, 4.6vw, 64px) and line-height (1.18); Japanese uses Songti / Yu Mincho with a clamp of (36px, 3.7vw, 50px). At or below (740px), the default becomes (clamp(32px, 6.3vw, 44px) / 1.4), English (clamp(39px, 7.4vw, 53px)) and Japanese (clamp(29px, 5.8vw, 40px)). The hero retains its two-line heading. The introduction uses balanced wrapping. These are homepage variants, not a global heading scale. Shared header wordmarks become (29px) at or below (650px), then (26px) at or below (360px).
+The homepage opens with a two-line title and balanced introductory text. The Chinese title scales from 35 to 48px, the English Cormorant title from 40 to 54px, and the Japanese serif title from 32 to 43px. At 740px and below, the respective ranges are 28–36px, 33–44px and 27–35px. The introduction uses 15px type on desktop and 14px on phones. Shared header wordmarks become (29px) at or below (650px), then (26px) at or below (360px).
 
 Functional pages use the body and application heading roles. Catalog/workspace introductions use artistic headings (40px / 1.4), becoming (32px / 1.45) on mobile; operating section/card headings remain more compact. Directory introductions use (48px / 1.4), becoming (36px). Document reading text keeps its authored structure; the site-owned reader title uses (38px), becoming (31px), and its working measure is (72ch). Glass labels use (14px / 1.4), or compact (13px). The header uses short visible labels at or below (650px) with (12px) type, then (11.5px) at or below (360px); the full localized names remain in `aria-label`. The lens measures the actual visible label boxes after resize and font loading.
 
@@ -299,11 +299,11 @@ Functional pages use the body and application heading roles. Catalog/workspace i
 
 ## Layout
 
-The homepage now follows **centered headline, one introductory sentence and three destination links → community heading and filtered feed → four resource categories → personal homepage and member or template preview → footer and mission**. The earlier resource-sidebar/horizontal-space-card composition is historical. This is a homepage composition, not a requirement to turn operating pages into landing pages. The three hero links wrap when space is tight. At or below (740px), the community feed and the personal homepage preview each stack beneath their heading. The resource index retains its two-column link grid.
+The opening section is at least one dynamic viewport high. Flexible space above and below centers the headline and introductory sentence, with enough clearance for the fixed header on short screens. Below it, the homepage follows **three destination links → community heading and filtered feed → four resource categories → personal homepage and member or template preview → footer and mission**. The earlier resource-sidebar/horizontal-space-card composition is historical. This is a homepage composition, not a requirement to turn operating pages into landing pages. The three destination links wrap when space is tight. At or below (740px), the community feed and the personal homepage preview each stack beneath their heading. The resource index retains its two-column link grid.
 
 The root runtime owns one persistent fixed header and one `GlassSwitch` across Home and eligible public routes, preserving the header and travelling lens during navigation. Home keeps its local backdrop and reserves the actual header height: (72px) above (1100px), (122px) at or below (1100px), and (110px) at or below (650px). On non-home routes only, `PublicFrame` receives additional clearance of (52px) or (48px) at those compact breakpoints. The shared capsule links to Home (`/`), Community, Resources, Blog spaces and About (`/about`); brand and account destinations remain real.
 
-The homepage width is at most (1120px) with (40px) gutters, growing to (1200px) with (50px) gutters from (1500px). Its gutters become (24px) at or below (1000px), (20px) at or below (740px), and (16px) at or below (380px). The fixed header instead grows from (1120px) to (1240px) at (1500px); its gutters become (24px) at or below (900px) and (16px) at or below (650px). Header top offset is (20px), then (12px) at or below (650px). Above (1100px), equal flexible side columns around an automatic center column (`minmax(0,1fr) auto minmax(0,1fr)`) center the navigation/theme group independently of brand/account widths. At or below (1100px), brand remains upper left, real account/avatar and language upper right, with the same visible navigation capsule and theme control centered below. There is no hamburger or disclosure navigation.
+The homepage content width is capped at (1000px) with (40px) gutters, growing to (1080px) with (50px) gutters from (1500px). Its gutters become (24px) at or below (1000px), (20px) at or below (740px), and (16px) at or below (380px). The fixed header instead grows from (1120px) to (1240px) at (1500px); its gutters become (24px) at or below (900px) and (16px) at or below (650px). Header top offset is (20px), then (12px) at or below (650px). Above (1100px), equal flexible side columns around an automatic center column (`minmax(0,1fr) auto minmax(0,1fr)`) center the navigation/theme group independently of brand/account widths. At or below (1100px), brand remains upper left, real account/avatar and language upper right, with the same visible navigation capsule and theme control centered below. There is no hamburger or disclosure navigation.
 
 Functional page layouts stay task-oriented: the shared organic container uses (1240px) maximum width and (40px) insets, with route-specific catalog limits retained where present; mobile insets become (20px), then (16px) below (480px). Account settings use two columns and then one. Real login/registration forms use (480px / 560px) maximum widths and (34px) card padding, becoming (28px 22px) on mobile. The reader uses library/content/outline columns, hides the outline below (1100px), and stacks on mobile. Administration keeps its sidebar and (1440px) main maximum. Community keeps its mobile rail, search and compose workflow. Editor workspaces keep their toolbars and canvas controls. The 404 page uses the platform PublicFrame and a raised return-home card.
 
@@ -313,7 +313,7 @@ Route guards preserve authored blog pages, built-in showcase previews and resour
 
 The two mist fields have different phases and overlap across a broad, slowly shifting area. Their relative densities set the local color. A horizontal gesture shifts the balance toward the incoming pigment, and pointer energy briefly draws the two colors closer to an even mix. The first 100px at the top expose the page canvas, with pigment gradually appearing through 320px and fading out at the bottom. Time advances at `uTime * 0.12`. Dark-mode opacity is 0.30 on Home and 0.24 on other platform pages. The CSS fallback layers two broad radial gradients with translucent outer stops. [Background behavior and parameters](docs/purple-landing-background.zh-CN.md).
 
-White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms). Hero actions lift (2px) over (180ms).
+White cards float on ambient shadows. Homepage rest uses (`0 14px 38px -10px rgb(32 32 35 / .10)`); fine-pointer hover lifts by (6px) over (260ms). Functional card rest uses (`0 14px 38px -16px rgb(65 43 92 / .16)`); resource/design/Skill cards lift by (4px) over (240ms), with their stronger hover shadow. Exact hover, control and dark shadows are in the sidecar. Homepage feature images scale to (1.025) over (350ms). Filled homepage actions lift (2px) over (180ms).
 
 The always-visible central navigation capsule combines its scoped alpha gradient, blur (24px), saturation (1.12), fine edge and edge shadows in either appearance. The transparent outer header has no shared surface or shadow. Dark header backdrop brightness is bounded at (0.36) before its translucent fill and lens are composed, preserving neutral-label contrast when bright covers pass beneath the fixed capsule. Dark header theme, language and account control plates share that brightness guard with (18px) blur; their unsupported-blur fallback uses the header panel role. Other dark switch tracks use blur (16px), saturation (1.12) and a white alpha (.12) edge. The travelling lens uses blur (7px) in light appearance and (10px) in dark, saturation (1.1), a bright edge and a smaller shadow. Dark capsule depth is (`0 12px 36px -12px rgb(0 0 0 / .6), 0 1px 2px rgb(0 0 0 / .18), inset 0 1px 0 rgb(255 255 255 / .18)`); the independent dark lens uses (`0 5px 15px -4px rgb(0 0 0 / .4), inset 0 1px 1px rgb(255 255 255 / .38), inset 0 -1px 2px rgb(0 0 0 / .26)`). A selected control awaiting its lens uses (`0 2px 8px rgb(0 0 0 / .24)`). Both standard and WebKit backdrop-filter paths retain these layers; when neither is supported, dark switch tracks use (`#27272d`), header navigation uses its existing panel role and lenses use (`#414147`). GlassSwitch clips an inert duplicate-label layer, counter-translates its full track, then scales it locally around the moving lens center. Cubic ease-out travel accumulates approximately (390–540ms) of active animation-frame time, based on measured distance, starting at the first delivered frame and limiting each following interval to (50ms). Busy route work may extend wall-clock completion while preserving the visible journey. Magnification rises during travel to at most (1.15), then settles at (1). Observer or font notifications with unchanged destination geometry preserve the active journey; real geometry changes retarget it from the current visual position. This is native DOM magnification with glass styling, not physical optical refraction. The original controls retain their labels, hit areas and focus.
 
@@ -321,7 +321,7 @@ Homepage reveal, including its empty-state card, remains opacity (0 → 1), trav
 
 ## Shapes
 
-Shared floating cards use (16px) corners, actions and inputs (12px), preview grounds (10px) and compact editor tools (8px). The central navigation capsule and switch remain fully rounded (999px); the outer header frame has square, unpainted bounds. Account dropdowns use (18px), and language panels (14px). Homepage card-content padding stays (23px 26px), or (21px) on mobile. Functional card insets commonly use (22px / 24px / 28px) according to density; these differences preserve content and operating context. Avatars stay circular. Authored artboards, saved blocks and third-party preview clipping retain their own shapes.
+Shared floating cards use (16px) corners, actions and inputs (12px), preview grounds (10px) and compact editor tools (8px). The central navigation capsule and switch remain fully rounded (999px); the outer header frame has square, unpainted bounds. Account dropdowns use (18px), and language panels (14px). Homepage feed card padding is 18px 22px, reducing to 18px 20px at 1000px and 16px 18px at 380px. The community empty state has a 160px minimum height on desktop and 146px at 740px and below. Functional card insets commonly use (22px / 24px / 28px) according to density; these differences preserve content and operating context. Avatars stay circular. Authored artboards, saved blocks and third-party preview clipping retain their own shapes.
 
 ## Components
 
@@ -337,7 +337,7 @@ Use `IavseHeader` as the transparent persistent frame described in Layout. The o
 
 ### Actions, inputs and cards
 
-Light-theme functional primary actions use black fill and white text; secondary actions use white fill and black text. Dark functional pages use the corresponding neutral role inversion. Destructive actions retain semantic red. Standard actions and inputs have a (44px) minimum height and (12px) corners. Filled hero actions are (48px) tall. Functional fields retain their labels, validation, focus and disabled states. White floating cards preserve the actual content, source imagery, metadata and destinations; hover and reveal decorate rather than rearrange the workflow.
+Light-theme functional primary actions use black fill and white text; secondary actions use white fill and black text. Dark functional pages use the corresponding neutral role inversion. Destructive actions retain semantic red. Standard actions and inputs have a (44px) minimum height and (12px) corners. Filled homepage actions have a 44px minimum height. Functional fields retain their labels, validation, focus and disabled states. White floating cards preserve the actual content, source imagery, metadata and destinations; hover and reveal decorate rather than rearrange the workflow.
 
 ### Truthful homepage content and resource discovery
 
