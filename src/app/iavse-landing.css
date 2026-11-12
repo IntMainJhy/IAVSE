@@ -15,7 +15,13 @@ html[data-color-mode=dark] .iavse-landing{
 .iavse-landing :is(a,button){-webkit-tap-highlight-color:transparent}
 .iavse-landing :is(a,button,summary):focus-visible{outline:3px solid var(--iv-action);outline-offset:5px}
 .iavse-landing button{font:inherit;cursor:pointer}
-.iavse-landing .iv-backdrop-wrap{position:absolute;z-index:-1;inset:0 0 auto;height:1100px;height:max(1100px,100dvh);pointer-events:none}
+.iavse-landing .iv-backdrop-wrap{
+ position:fixed;
+ inset:0;
+ z-index:-1;
+ pointer-events:none;
+ background:linear-gradient(110deg,rgb(172 225 202 / .52),rgb(218 240 235 / .36) 50%,rgb(182 217 245 / .52));
+}
 html[data-color-mode=dark] .iavse-landing .iv-backdrop-wrap{opacity:.30}
 .iavse-landing .iv-container{width:min(1000px,100% - 80px);margin-inline:auto}
 
@@ -31,7 +37,7 @@ html[data-color-mode=dark] .iavse-landing .iv-backdrop-wrap{opacity:.30}
 .iavse-landing .iv-title{font:400 clamp(35px,3.5vw,48px)/1.32 "IAVSE Display","Songti SC",serif;letter-spacing:-.02em;text-wrap:balance;color:var(--iv-ink)}
 .iavse-landing .iv-title span{display:block}
 .iavse-landing .iv-hero-copy>p{max-width:580px;font-size:15px;line-height:1.8;color:var(--iv-body);margin:16px auto 0;text-wrap:balance}
-.iavse-landing .iv-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding-top:24px}
+.iavse-landing .iv-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:22px}
 .iavse-landing .iv-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:9px 18px;background:var(--iv-action);color:var(--iv-on-action);border:0;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 9px 24px -10px rgb(32 32 35 / .22);transition:transform .18s,box-shadow .18s,background .18s}
 .iavse-landing .iv-button:hover{background:var(--iv-action-hover);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(32 32 35 / .25)}
 .iavse-landing .iv-button:active{transform:scale(.98)}
@@ -138,6 +144,8 @@ html[data-color-mode=dark] .iavse-landing .iv-backdrop-wrap{opacity:.30}
 @media(max-width:740px){
  .iavse-landing .iv-container{width:calc(100% - 40px)}
  .iavse-landing .iv-title{font-size:clamp(28px,5.7vw,36px);line-height:1.4}
+ .iavse-landing .iv-actions{gap:4px 8px;margin-top:18px}
+ .iavse-landing .iv-actions>.iv-button{padding-inline:12px}
  .iavse-landing .iv-hero-copy>p{font-size:14px;line-height:1.8;max-width:39ch;margin-top:14px}
  .iavse-landing .iv-community{grid-template-columns:1fr;gap:18px;padding:32px 0 0}
  .iavse-landing .iv-community-intro{padding-top:0}

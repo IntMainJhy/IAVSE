@@ -1245,7 +1245,7 @@
       "name": "Homepage primary action",
       "kind": "button",
       "refersTo": "home-button-primary",
-      "description": "The primary link below the opening viewport opens the community.",
+      "description": "The primary link beneath the introduction opens the community.",
       "html": "<a class=\"ds-home-primary\" href=\"/community\">进入社区<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
       "css": ".ds-home-primary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:9px 18px;border:0;border-radius:12px;background:var(--iv-action,#202023);color:#fff;box-shadow:0 9px 24px -10px rgb(32 32 35 / .22);font:500 14px/1.65 var(--iavse-font,\"IAVSE Sans\",system-ui,sans-serif);text-decoration:none;transition:transform .18s,box-shadow .18s,background .18s}.ds-home-primary:hover{background:var(--iv-action-hover,#38383d);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(32 32 35 / .25)}.ds-home-primary:active{transform:scale(.98)}.ds-home-primary:focus-visible{outline:3px solid var(--iv-action,#202023);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-home-primary{transition:none}.ds-home-primary:hover,.ds-home-primary:active{transform:none}}"
     },

@@ -232,13 +232,13 @@ export function IavseLanding({content}: {content: LandingContent}) {
         <div className="iv-hero-copy" data-landing-reveal>
           <h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1>
           <p>{c.intro}</p>
+          <nav className="iv-actions" aria-label={c.productEntries}>
+            <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+            <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
+            <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+          </nav>
         </div>
       </section>
-      <nav className="iv-actions" aria-label={c.productEntries} data-landing-reveal>
-        <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-        <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
-        <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-      </nav>
       <section className="iv-community" aria-labelledby="iv-community-title">
         <div className="iv-community-intro" data-landing-reveal>
           <h2 id="iv-community-title">{c.communityTitle}</h2>
