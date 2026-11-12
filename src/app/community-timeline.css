@@ -16,24 +16,46 @@
   border:0;border-radius:0;background:transparent!important;box-shadow:none!important;
  }
  .rbp-application .community-timeline .community-inline-search {flex-wrap:wrap;padding:0 20px 10px!important;}
- .rbp-application .community-inline-search .community-search-row {position:relative;display:flex;align-items:center;flex:1 1 240px;min-width:0;}
- .rbp-application .community-inline-search .community-search-row>.icon {position:absolute;left:13px;z-index:1;width:18px;height:18px;color:var(--iavse-secondary);pointer-events:none;}
+ .rbp-application .community-inline-search .community-search-row {
+  display:grid;grid-template-columns:18px minmax(0,1fr) 44px;align-items:center;gap:6px;flex:1 1 240px;
+  min-width:0;min-height:48px;padding-inline:14px 1px;border:1px solid var(--iavse-border);border-radius:999px;
+  background:var(--iavse-muted);box-sizing:border-box;
+ }
+ .rbp-application .community-inline-search .community-search-row>.icon {width:18px;height:18px;color:var(--iavse-secondary);pointer-events:none;}
  .rbp-application .community-inline-search .community-search-row>input {
-  width:100%;min-width:0;min-height:46px!important;padding:10px 54px 10px 39px!important;
-  border:1px solid var(--iavse-border)!important;border-radius:999px!important;background:var(--iavse-muted)!important;
+  width:100%;min-width:0;min-height:44px!important;padding:8px 0!important;
+  border:0!important;border-radius:0!important;background:transparent!important;color:var(--iavse-foreground);
   font-size:14px!important;box-shadow:none!important;
  }
+ .rbp-application .community-inline-search .community-search-row:focus-within {outline:2px solid var(--iavse-focus);outline-offset:2px;}
+ .rbp-application .community-inline-search .community-search-row>input:focus {outline:0!important;}
  .rbp-application .community-inline-search .community-search-submit {
-  position:absolute!important;right:1px;display:grid!important;place-items:center;min-width:44px!important;width:44px!important;
-  min-height:44px!important;height:44px!important;padding:11px!important;border:0!important;border-radius:50%!important;box-shadow:none!important;
+  display:grid;place-items:center;width:44px;height:44px;min-width:0;min-height:0;padding:0;box-sizing:border-box;
+  border:4px solid transparent;border-radius:50%;background:var(--iavse-foreground) padding-box;color:var(--iavse-background)!important;
+  box-shadow:none;cursor:pointer;
  }
- .rbp-application .community-inline-search .community-search-submit>.icon {display:block;width:19px!important;height:19px!important;}
- .rbp-application .community-inline-search .community-filter-control {display:block;flex:0 1 142px;min-width:0;}
+ .rbp-application .community-inline-search .community-search-submit:focus-visible {outline-offset:-2px!important;}
+ .rbp-application .community-inline-search .community-search-submit>.icon {display:block;width:18px;height:18px;stroke:var(--iavse-background);}
+ .rbp-application .community-inline-search .community-filter-control {position:relative;display:block;flex:0 1 auto;min-width:0;max-width:100%;}
  .rbp-application .community-inline-search .community-filter-control>select {
-  width:100%;min-width:0;max-width:100%;min-height:44px!important;height:44px;padding:9px 28px 9px 12px!important;
+  width:auto!important;min-width:0;max-width:100%;min-height:48px!important;height:48px;padding:9px 34px 9px 15px!important;
   border:1px solid var(--iavse-border)!important;border-radius:999px!important;background:var(--iavse-background)!important;
-  font-size:14px!important;box-shadow:none!important;cursor:pointer;
+  color:var(--iavse-foreground);font-size:14px!important;box-shadow:none!important;cursor:pointer;appearance:none;
  }
+ .rbp-application .community-inline-search .community-filter-control>.icon {position:absolute;right:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--iavse-secondary);pointer-events:none;}
+ .rbp-application .feed-discover .community-inline-search {margin-bottom:12px!important;}
+
+ .rbp-application .feed-discover .community-category-links {display:grid!important;gap:3px;margin-inline:-10px;}
+ .rbp-application .feed-discover .community-category-links>a {
+  display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;min-height:44px;
+  padding:8px 10px!important;border-radius:10px!important;line-height:1.4;color:var(--iavse-foreground);
+ }
+ .rbp-application .feed-discover .community-category-links>a>span {min-width:0;overflow-wrap:anywhere;}
+ .rbp-application .feed-discover .community-category-links>a>.icon {flex:none;width:16px;height:16px;}
+ .rbp-application .feed-discover .community-category-links>a:is(:hover,[aria-current=page]) {
+  background:var(--iavse-muted)!important;color:var(--iavse-foreground)!important;box-shadow:none!important;
+ }
+ .rbp-application .feed-discover .community-category-links>a[aria-current=page] {font-weight:600;}
  .rbp-application .community-timeline .feed-results {display:flex!important;align-items:center;justify-content:space-between;gap:12px;padding:0 20px 10px!important;}
  .rbp-application .community-timeline .feed-results>p {display:flex!important;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0;font-size:12px!important;line-height:1.5;}
  .rbp-application .community-timeline .feed-results strong {color:var(--iavse-foreground);font-size:12px;font-weight:550;}
@@ -68,6 +90,46 @@
  .rbp-application .community-navigation-shell .feed-liquid-optics {position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;}
  .rbp-application .community-navigation-shell .feed-liquid-lens {position:absolute;display:none;pointer-events:none;}
 
+ @media(min-width:768px) {
+  .rbp-application .community-navigation-shell .feed-nav-links {
+   position:relative;
+   isolation:isolate;
+   --rail-surface:color-mix(in srgb,var(--iavse-background) 87%,transparent);
+   --rail-shadow:inset 0 0 0 1px color-mix(in srgb,var(--iavse-foreground) 7%,transparent),0 4px 12px -8px rgb(15 29 31 / .28);
+  }
+  .rbp-application .community-navigation-shell .feed-nav-links > a[data-nav-key] {
+   position:relative;
+   z-index:1;
+   border-radius:14px!important;
+   color:var(--iavse-foreground)!important;
+  }
+  .rbp-application .community-navigation-shell .feed-nav-links > a[aria-current=page] {
+   background:var(--rail-surface)!important;
+   box-shadow:var(--rail-shadow)!important;
+  }
+  .rbp-application .community-navigation-shell .feed-nav-links[data-rail-ready] > a[data-nav-key]:is([aria-current=page],:hover,:focus-visible,:active) {
+   background:transparent!important;
+   box-shadow:none!important;
+  }
+  .rbp-application .community-navigation-shell .feed-nav-links[data-rail-ready] > .feed-active-indicator {
+   opacity:1!important;
+   border-radius:14px!important;
+   background:var(--rail-surface)!important;
+   box-shadow:var(--rail-shadow);
+  }
+  .rbp-application .community-navigation-shell .feed-nav-links > a[data-nav-key]:focus-visible {
+   outline:2px solid var(--iavse-focus)!important;
+   outline-offset:-3px!important;
+  }
+ }
+ @media(min-width:1000px) {
+  .rbp-application .community-navigation-shell .feed-nav-links > a[data-nav-key] {width:calc(100% - 8px)!important}
+ }
+ @media(min-width:768px) and (prefers-reduced-motion:no-preference) {
+  .rbp-application .community-navigation-shell .feed-nav-links > a[data-nav-key] > .icon {transition:transform .18s ease-out}
+  .rbp-application .community-navigation-shell .feed-nav-links > a[data-nav-key]:active > .icon {transform:scale(.9)}
+ }
+
  @media(max-width:767px) {
   .rbp-application .community-navigation-shell {
    --community-safe-bottom:env(safe-area-inset-bottom,0px);--community-dock-height:71px;
@@ -83,7 +145,6 @@
   .rbp-application .community-timeline .community-inline-search {gap:6px;padding:0 14px 4px!important;}
   .rbp-application .community-inline-search .community-search-row {flex-basis:100%;}
   .rbp-application .community-inline-search .community-search-row>input {font-size:16px!important;}
-  .rbp-application .community-inline-search .community-filter-control {flex:0 1 156px;}
   .rbp-application .community-inline-search .community-filter-control>select {font-size:16px!important;}
   .rbp-application .community-timeline .feed-results {padding:0 14px 10px!important;}
   .rbp-application .community-timeline .feed-results>p {gap:3px 8px;}

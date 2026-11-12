@@ -107,6 +107,8 @@
 
 社区保留“全部动态／正在关注”的真实视图，参考 [X 的时间线分区](https://help.x.com/en/using-x/x-timeline)收紧信息层级。时间线采用白色内容纸面和细分隔行；首页、目录等页面继续使用浮起卡片。空状态在时间线内提供真实投稿入口。
 
-搜索改为常驻输入框和明确提交按钮，通过 GET 保留 `q`、`category`、`feed`；原生分类选择可直接提交。当前输入不会生成推荐或模拟结果。实现见 [CommunityApp](../src/components/CommunityApp.tsx) 和[社区专属样式](../src/app/community-timeline.css)。
+时间线与右栏的搜索框将输入和圆形提交按钮放在同一胶囊内，通过 GET 保留 `q`、`category`、`feed`。原生分类选择可直接提交。右栏分类整行可点击，以内边距、底色和对勾标示当前分类。实现见 [CommunityApp](../src/components/CommunityApp.tsx) 和[社区专属样式](../src/app/community-timeline.css)。
+
+桌面左侧导航的高亮随指针或键盘焦点移动，离开后回到当前页面。减少动态模式下直接定位高亮。移动端沿用底部导航。
 
 手机底栏按当前可见目的地分成访客三项、已登录五项。装饰透镜采用绝对定位，不再参与排列；[导航定位逻辑](../src/components/useLiquidCommunityNav.ts)只测量可见目标，并把“关注动态”映射到社区入口。底栏自身高度与安全区、浮动投稿按钮、弹层和正文底部留白共用一组变量。相同修正同时加载在社区及成员工作区，原生焦点、真实链接和减少动态偏好保留。

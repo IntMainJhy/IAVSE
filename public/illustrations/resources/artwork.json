@@ -1,0 +1,11 @@
+{
+  "generator": "OpenAI ImageGen",
+  "prompt": "Editorial illustration-story asset for a curated designer/developer resource library, one SQUARE transparent sprite sheet of four separate equal-scale hand drawn spot illustrations in a precise invisible 2x2 grid. Fully transparent background. Keep every motif visibly detached from every other, generous transparent gutters through the exact horizontal and vertical center, no frames or divider lines. Each entire motif fits inside the middle 74% of its quadrant. Style across all four: a French graphic-design studio field notebook, confident slightly wobbly graphite & charcoal brush pen outlines with a few bolder brush strokes, sparse colored pencil hatching and flat hand-painted pale mint, sky blue and warm ivory fill inside the objects. Deliberate loose asymmetry, tangible stationery; generous negative space, distinct compact silhouettes recognizable as tiny illustrations. Clean and polished, not a cartoon character. TOP LEFT: a gently tilted paper UI layout wireframe sheet with a few abstract boxes and a blue pencil crossing the lower corner. TOP RIGHT: a tiny folded instruction-card stack with a branching diagram of three nodes in ink on its front and a bright mint paper tab. BOTTOM LEFT: an open pocket reference book with ivory curved pages, simple handwritten abstract lines and a blue ribbon bookmark. BOTTOM RIGHT: a miniature terrestrial globe on a small angled stand, with blue-green continents and a tiny hand drawn cursor arrow beside the sphere. No words, letters, labels, numerals, signatures, logos, watermarks or scenery. No background texture, no ground plane, no gradients, no enclosing borders. Give each motif its own little physical character. High quality professional print illustration.",
+  "files": [
+    "designs.webp",
+    "skills.webp",
+    "docs.webp",
+    "resources.webp"
+  ],
+  "processing": "The four ink-and-pencil motifs were cropped from a single transparent sheet, centered on 384 × 384 canvases and exported as WebP."
+}

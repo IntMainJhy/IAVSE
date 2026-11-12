@@ -1,3 +1,4 @@
+import '@/app/resource-introduction.css';
 import '@/app/resource-bento.css';
 import '@/app/resource-frame.css';
 import '@/app/resource-display.css';

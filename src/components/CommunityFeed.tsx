@@ -15,6 +15,7 @@ import {communityProfileDestination} from '@/lib/navigation.mjs';
 import {usePageSeed} from './PageResources';
 import {useCommunityRail} from './useCommunityRail';
 import {useLiquidCommunityNav} from './useLiquidCommunityNav';
+import {useCommunitySidebarMotion} from './useCommunitySidebarMotion';
 
 function AccountIdentity({user}:{user:Doc|null}){const {t:tr}=useLocale();
  const menu=useRef<HTMLDetailsElement>(null);
@@ -68,6 +69,7 @@ export function CommunityNavigation({user,active='feed',compose=true}:{user:Doc|
  }
  const items=[['feed','社区动态','home','/community'],['members','发现成员','search','/community/members'],['following','关注动态','user',login('/community?feed=following')],['bookmarks','我的收藏','bookmark',login('/workspace/bookmarks')],['posts','我的投稿','file',login('/workspace')],['notifications','消息通知','bell',login('/workspace/notifications')],['account','个人账号','user',login('/workspace/account')]];
  const rail=useCommunityRail(),liquidNav=useLiquidCommunityNav(active,user?'member':'guest');
+ useCommunitySidebarMotion(liquidNav,active);
  const mobileKeys=user?['feed','members','bookmarks','notifications']:['feed','members'];
  return <aside className="feed-navigation" ref={rail}><nav ref={liquidNav} aria-label={tr("社区导航")} className="feed-nav-links" data-mobile-count={mobileKeys.length+1}><svg className="feed-liquid-optics" width="0" height="0" aria-hidden="true"><defs><filter id={opticsId} x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href={liquidLensMap} preserveAspectRatio="none" width="100%" height="100%" result="lens-map"/><feDisplacementMap in="SourceGraphic" in2="lens-map" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg><span className="feed-active-indicator" aria-hidden="true"/><span className="feed-liquid-lens" style={{'--liquid-refraction':'url("#'+opticsId+'")'} as CSSProperties} aria-hidden="true"/>{items.map(([key,label,icon,href])=><Link key={key} href={href} scroll={false} onNavigate={event=>mobileNavigate(href,event)} data-nav-key={key} data-mobile-visible={mobileKeys.includes(key)} aria-label={tr(label)} aria-current={active===key?'page':undefined} title={tr(label)}><Icon name={icon}/><span>{tr(label)}</span><span className="feed-mobile-label">{tr(({feed:'社区',members:'发现',bookmarks:'收藏',notifications:'通知'} as Doc)[key]||label)}</span>{key==='notifications'&&unread>0&&<span className="feed-unread" aria-label={tr('{0} 条未读消息',[unread])}>{unread>99?'99+':unread}</span>}</Link>)}<MobileAccountMenu user={user} active={active}/></nav>
  <Link className={primary+' feed-write'} href={login('/workspace/submissions/new')}><Icon name={'plus'}/>{tr("写一份分享")}</Link>

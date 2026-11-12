@@ -37,8 +37,19 @@ function Login({join,config,next,access={}}:{join:boolean,config:Doc,next:string
 function CommunitySearch({config,query,discovery=false}:{config:Doc;query:Doc;discovery?:boolean}){const {t:tr}=useLocale(),id=useId();
  return <Form action="/community" className={'community-search feed-search community-inline-search '+(discovery?'feed-discovery-search':'community-timeline-search')} role="search" aria-label={tr("搜索社区分享")}>
   {query.feed==='following'&&<input type="hidden" name="feed" value="following"/>}
-  <div className="community-search-row"><label className="community-sr" htmlFor={id+'-query'}>{tr("搜索社区资源")}</label><Icon name="search"/><input id={id+'-query'} type="search" name="q" defaultValue={String(query.q||'')} key={String(query.q||'')} placeholder={tr(discovery?"搜索分享":"搜索分享、工具或关键词")} maxLength={120} autoComplete="off"/><button className={primary+' community-search-submit'} type="submit" aria-label={tr("搜索社区分享")}><Icon name="arrow"/></button></div>
-  {discovery?<input type="hidden" name="category" value={query.category||''}/>:<label className="community-filter-control"><span className="community-sr">{tr("社区分类")}</span><select name="category" defaultValue={query.category||''} key={'category:'+String(query.category||'')} onChange={event=>event.currentTarget.form?.requestSubmit()}><option value="">{tr("全部分类")}</option>{config.taxonomy.categories.map((c:string)=><option key={c} value={c}>{tr(c)}</option>)}</select></label>}
+  <div className="community-search-row">
+   <label className="community-sr" htmlFor={id+'-query'}>{tr("搜索社区资源")}</label>
+   <Icon name="search"/>
+   <input id={id+'-query'} type="search" name="q" defaultValue={String(query.q||'')} key={String(query.q||'')} placeholder={tr(discovery?"搜索分享":"搜索分享、工具或关键词")} maxLength={120} autoComplete="off"/>
+   <button className="community-search-submit" type="submit" aria-label={tr("搜索社区分享")}><Icon name="arrow"/></button>
+  </div>
+  {discovery?<input type="hidden" name="category" value={query.category||''}/>:<label className="community-filter-control">
+   <span className="community-sr">{tr("社区分类")}</span>
+   <select name="category" defaultValue={query.category||''} key={'category:'+String(query.category||'')} onChange={event=>event.currentTarget.form?.requestSubmit()}>
+    <option value="">{tr("全部分类")}</option>{config.taxonomy.categories.map((c:string)=><option key={c} value={c}>{tr(c)}</option>)}
+   </select>
+   <Icon name="chevron-down"/>
+  </label>}
  </Form>;
 }
 function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;user:Doc|null;query:Doc;membersOnly?:boolean}){const {t:tr}=useLocale();
@@ -47,7 +58,14 @@ function CommunityDiscovery({config,user,query,membersOnly=false}:{config:Doc;us
  return <aside className="feed-discover" aria-label={tr("发现与社区信息")}>
   {!membersOnly&&<CommunitySearch config={config} query={query} discovery/>}
   {members.data?.items?.some((person:Doc)=>person.id!==user?.id)&&<section className="feed-suggestions"><h2>{tr("值得认识的人")}</h2>{members.data.items.filter((person:Doc)=>person.id!==user?.id).slice(0,3).map((person:Doc)=><div className="feed-suggestion" key={person.id}><Link href={'/community/members/'+person.id}><FeedAvatar name={person.name} avatarId={person.avatarId}/><span><strong>{person.name}<SiteOwnerBadge siteOwner={person.siteOwner} compact/></strong><small>{tr(person.postCount===1?"1 份分享":"{0} 份分享",[person.postCount])}</small></span></Link><FollowButton person={person} user={user}/></div>)}<Link className="organic-text-link" href="/community/members">{tr("发现更多成员")}</Link></section>}
-  {!membersOnly&&<section><h2>{tr("分类")}</h2><nav aria-label={tr("资源分类")}>{['',...config.taxonomy.categories].map((category:string)=><Link href={categoryLink(category)} key={category} aria-current={String(query.category||'')===category?'page':undefined}><span>{tr(category||"全部分享")}</span></Link>)}</nav></section>}
+  {!membersOnly&&<section><h2>{tr("分类")}</h2><nav className="community-category-links" aria-label={tr("资源分类")}>
+   {['',...config.taxonomy.categories].map((category:string)=>{
+    const selected=String(query.category||'')===category;
+    return <Link href={categoryLink(category)} scroll={false} key={category} aria-current={selected?'page':undefined}>
+     <span>{tr(category||"全部分享")}</span>{selected&&<Icon name="check"/>}
+    </Link>;
+   })}
+  </nav></section>}
  </aside>;
 }
 function CommunityListing({config,user,query}:{config:Doc,user:Doc|null,query:Doc}){const {t:tr}=useLocale();

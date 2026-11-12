@@ -2,7 +2,7 @@
 
 [DESIGN.md](../DESIGN.md) 是当前平台唯一视觉规范。现有应用以 [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) 的公开实现为组件基线，固定来源版本为 `1581b9b8e5876f60e5eb844970747506980c4412`。当前 IAVSE 在该应用上独立调整字体、色彩、留白、卡片和背景。Cloudlight 仅作为清晰间距、文字层级、浅色表面与内容分组等通用原则的参考；此前直接迁移模板的方案已取消，未引入其代码、着色器、资产或许可证文件。
 
-下文保留 Portfolio 接入与独立细化的历史记录；首页、共享壳层等后续变化以 [平台共享视觉迁移](platform-ui.zh-CN.md) 和 DESIGN.md 为准。关于页保留六张点阵拍立得、介绍、展开列表、使用说明、能力标签、物理技术栈与 Contact。资源总览保留居中介绍、单列/双列 Projects 与 Contact 的顺序；博客目录现已恢复原有 3D 空间开场、完整列表和产品功能展示。社区、目录、账号、管理和编辑器外壳共用 IAVSE 字体、颜色与控件，保留搜索、筛选、表格、表单、审核及编辑流程。
+下文保留 Portfolio 接入与独立细化的历史记录；首页、共享壳层等后续变化以 [平台共享视觉迁移](platform-ui.zh-CN.md) 和 DESIGN.md 为准。关于页保留六张点阵拍立得、介绍、展开列表、使用说明、能力标签、物理技术栈与 Contact。资源总览在标题下展示四张手绘分类卡，桌面双列、手机单列，卡片下方保留 Contact。博客目录现已恢复原有 3D 空间开场、完整列表和产品功能展示。社区、目录、账号、管理和编辑器外壳共用 IAVSE 字体、颜色与控件，保留搜索、筛选、表格、表单、审核及编辑流程。
 
 ## 当前首页与共享顶栏
 
@@ -48,7 +48,7 @@
 
 - **历史首页：** [`PlatformHome.tsx`](../src/components/PlatformHome.tsx) 组合 Hero、Projects、Contact；四张卡片连接 UI 设计、AI Skills、社区和博客空间。Hero 与目录顶部留白均为手机 144px、small 断点起 192px。
 - **历史首页：** Hero 标题使用 `clamp(34px, 4.1vw, 54px)`，正文为 19px / 1.6。方形预览外框 28px、内框 20px；项目卡片 20px、图片 14px。
-- [`ResourceIntroduction.tsx`](../src/components/ResourceIntroduction.tsx) 在 `/resources` 使用细化后的 ProjectsPage；带 `type` 的资源路由保留分类、筛选、搜索、来源与许可功能。
+- [`ResourceIntroduction.tsx`](../src/components/ResourceIntroduction.tsx) 在 `/resources` 以四张手绘分类卡进入 UI 设计、AI Skills、文档和网站与工具。各分类页用同款小插图标记目录标题，并提供筛选、搜索和来源信息。
 - [`BlogSpacesPage.tsx`](../src/components/BlogSpacesPage.tsx) 挂载既有 [`BlogSpaceGallery.tsx`](../src/components/BlogSpaceGallery.tsx)，保留可环顾、走近和返回的 3D 空间及原有相机／预览逻辑。真实成员保留 `publicSpaces(req)` 过滤与 `/blog/:handle`，原创主页示例明确标记虚构人物，并使用 `/blogs/showcase/:handle` 及同渲染器的 `?embed=gallery` 预览。重置视角旁的原生展开列表列出全部入口，不受舞台 12 个空间的上限影响；减少动态时保留，Escape 关闭并返回摘要焦点。[`blog-gallery.css`](../src/app/blog-gallery.css) 恢复公开历史 `894bf4b` 中的空间结构，并仅将平台控件与材质接入当前中性角色；不改真实成员的已保存博客外观。显式 `?template=builtin` 继续提供原有编辑器模板示例。
 - 画廊下方现由 [`BlogProductShowcase.tsx`](../src/components/BlogProductShowcase.tsx) 和 [`blog-space-product.css`](../src/app/blog-space-product.css) 呈现原创产品介绍，说明个人主页、作品、长文、资源、在线履历、编辑、草稿／发布与可发现性，并提供两项 FAQ 及真实编辑器／指南入口。静态画布结构图明确标注不可交互；旧下方外观切换、嵌入式画布演示、大幅预览和重复成员目录已移出当前渲染组合，相关历史及来源保留。
 - Contact 外框为 28px、详情面板为 20px；介绍文字为 19px / 1.6，最大 38ch 并使用均衡换行。目录介绍同为 19px / 1.6。
