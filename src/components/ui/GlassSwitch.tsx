@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import type {MouseEvent} from 'react';
+import type {FocusEvent, MouseEvent, PointerEvent} from 'react';
 import '@/app/glass-controls.css';
 
 export type GlassSwitchItem = {
@@ -21,6 +21,8 @@ export type GlassSwitchProps = {
   value: string | null;
   ariaLabel: string;
   onValueChange?: (value: string) => void;
+  /** Let links preview the lens before navigation without marking them current. */
+  previewLinks?: boolean;
   className?: string;
   size?: 'regular' | 'compact';
 };
@@ -37,7 +39,7 @@ const sameBox = (left: Lens | null, right: Lens) => left &&
  * lens clips a second, inert text layer and enlarges it briefly while travelling.
  * This is a DOM magnification treatment, not a physical refraction simulation.
  */
-export function GlassSwitch({items, value, ariaLabel, onValueChange, className = '', size = 'regular'}: GlassSwitchProps) {
+export function GlassSwitch({items, value, ariaLabel, onValueChange, previewLinks = false, className = '', size = 'regular'}: GlassSwitchProps) {
   const root = useRef<HTMLDivElement>(null);
   const controls = useRef(new Map<string, HTMLElement>());
   const copies = useRef(new Map<string, HTMLSpanElement>());
@@ -47,7 +49,11 @@ export function GlassSwitch({items, value, ariaLabel, onValueChange, className =
   const measure = useRef<(reason: Measurement) => void>(() => {});
   const intentTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [intent, setIntent] = useState<{value: string; from: string | null} | null>(null);
-  const target = intent?.from === value ? intent.value : value;
+  const [pointerItem, setPointerItem] = useState<string | null>(null);
+  const [focusItem, setFocusItem] = useState<string | null>(null);
+  const [pressedItem, setPressedItem] = useState<string | null>(null);
+  const preview = previewLinks ? focusItem ?? pointerItem : null;
+  const target = intent?.from === value ? intent.value : preview ?? value;
   const layoutKey = JSON.stringify(items.map(item => [item.id, item.label, item.compactLabel, item.disabled]));
 
   useLayoutEffect(() => {
@@ -214,13 +220,37 @@ export function GlassSwitch({items, value, ariaLabel, onValueChange, className =
     onValueChange?.(item.id);
   };
 
-  return <div ref={root} role="group" aria-label={ariaLabel} className={`glass-switch glass-switch--${size} ${className}`.trim()}>
+  return <div ref={root} role="group" aria-label={ariaLabel} className={`glass-switch glass-switch--${size} ${className}`.trim()}
+    onPointerLeave={previewLinks ? () => setPointerItem(null) : undefined}>
     {items.map(item => {
       const selected = value === item.id;
       const shared = {
         className: 'glass-switch__item',
         'aria-label': item.compactLabel ? item.label : undefined,
         'data-selected': selected,
+        ...(previewLinks && item.href && !item.disabled && {
+          'data-pressed': pressedItem === item.id || undefined,
+          onPointerEnter: (event: PointerEvent<HTMLElement>) => {
+            if (event.pointerType !== 'touch') setPointerItem(item.id);
+          },
+          onPointerDown: (event: PointerEvent<HTMLElement>) => {
+            if (event.isPrimary && event.button === 0) {
+              setFocusItem(null);
+              setPointerItem(item.id);
+              setPressedItem(item.id);
+            }
+          },
+          onPointerUp: () => setPressedItem(null),
+          onPointerLeave: () => setPressedItem(null),
+          onPointerCancel: () => {
+            setPressedItem(null);
+            setPointerItem(null);
+          },
+          onFocus: (event: FocusEvent<HTMLElement>) => {
+            if (event.currentTarget.matches(':focus-visible')) setFocusItem(item.id);
+          },
+          onBlur: () => setFocusItem(null),
+        }),
         onClick: (event: MouseEvent<HTMLElement>) => activate(item, event),
       };
       const label = switchLabel(item);

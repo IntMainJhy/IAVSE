@@ -137,6 +137,11 @@ function runtime(initialValue = 'resources', initialItems = items) {
     zoom: () => Number(root.style['--glass-lens-zoom']),
     nodes: controlNodes,
     render(nextProps) { props = {...props, ...nextProps}; flush(); },
+    interact(id, handler, event = {}) {
+      const node = id === null ? tree : controlNodes().find(node => node.key === id);
+      node.props[handler]?.(event);
+      if (rerender) flush();
+    },
     click(id, overrides = {}) {
       const event = {button: 0, defaultPrevented: false, preventDefault() { this.defaultPrevented = true; }, ...overrides};
       controlNodes().find(node => node.key === id).props.onClick(event);
@@ -337,5 +342,37 @@ test('missing routes, modified clicks, disabled controls and button aria state r
   assert.equal(r.nodes().find(node => node.key === 'filter').props['aria-pressed'], false);
   r.render({value: 'filter'}); r.advance(1000);
   assert.equal(r.nodes().find(node => node.key === 'filter').props['aria-pressed'], true);
+  r.unmount();
+});
+
+test('entry links preview on hover and keyboard focus without changing the current route', () => {
+  const r = runtime(null);
+  r.interact('resources', 'onPointerEnter', {pointerType: 'mouse'});
+  assert.equal(r.root.dataset.lensReady, undefined, 'other switches keep their existing behavior');
+  r.render({previewLinks: true});
+  r.interact('resources', 'onPointerEnter', {pointerType: 'touch'});
+  assert.equal(r.root.dataset.lensReady, undefined, 'touch does not latch a hover preview');
+  r.interact('resources', 'onPointerDown', {pointerType: 'touch', isPrimary: true, button: 0});
+  assert.equal(r.root.dataset.lensReady, 'true', 'a primary touch shows feedback before release');
+  assert.equal(r.nodes().find(node => node.key === 'resources').props['data-pressed'], true);
+  r.interact('resources', 'onPointerCancel');
+  assert.equal(r.nodes().find(node => node.key === 'resources').props['data-pressed'], undefined);
+  assert.equal(r.root.dataset.lensReady, undefined, 'scrolling can cancel the press before navigation');
+  r.interact('resources', 'onPointerEnter', {pointerType: 'mouse'});
+  assert.equal(r.root.dataset.lensReady, 'true');
+  assert.equal(r.x(), r.boxes.get('resources').x);
+  r.interact('community', 'onPointerEnter', {pointerType: 'mouse'});
+  r.advance(80);
+  assert.ok(r.x() > r.boxes.get('resources').x && r.x() < r.boxes.get('community').x);
+  assert.ok(r.zoom() > 1);
+  r.interact(null, 'onPointerLeave', {pointerType: 'mouse'});
+  assert.equal(r.root.dataset.lensReady, undefined);
+  r.interact('community', 'onFocus', {currentTarget: {matches: selector => selector === ':focus-visible'}});
+  assert.equal(r.root.dataset.lensReady, 'true');
+  assert.equal(r.x(), r.boxes.get('community').x);
+  assert.ok(r.nodes().every(node => node.props['aria-current'] === undefined));
+  assert.equal(r.timers.size, 0, 'a preview never starts navigation');
+  r.interact('community', 'onBlur');
+  assert.equal(r.root.dataset.lensReady, undefined);
   r.unmount();
 });

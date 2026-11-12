@@ -99,7 +99,9 @@ test('three locales preserve real destinations, labeled template fallback and su
   for(const value of [...c.title,c.intro,c.communityTitle,c.emptyTitle,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.example,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
   const entrances=find(empty.document,node=>node.name==='nav'&&node.attribs['aria-label']===c.productEntries);
   assert.equal(entrances.length,1);
-  assert.deepEqual(find(entrances[0],node=>node.name==='a').map(node=>node.attribs.href),['/community','/resources','/workspace/blog']);
+  const entryLinks=find(entrances[0],node=>node.name==='a');
+  assert.deepEqual(entryLinks.map(node=>[text(node),node.attribs.href]),[[c.community,'/community'],[c.resources,'/resources']]);
+  assert.ok(entryLinks.every(node=>!Object.hasOwn(node.attribs,'aria-current')),'neither destination is the homepage');
   for(const href of ['/','/login','/resources','/community','/blogs','/workspace/account','/about','/legal/privacy','https://github.com/IntMainJhy/IAVSE'])assert.ok(find(empty.document,node=>node.name==='a'&&node.attribs.href===href).length,`${locale}: ${href}`);
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-language-switcher')).length,1);
   for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!content.includes(marker),marker);

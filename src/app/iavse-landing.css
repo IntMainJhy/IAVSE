@@ -32,12 +32,50 @@ html[data-color-mode=dark] .iavse-landing{
 .iavse-landing .iv-title{font:400 clamp(35px,3.5vw,48px)/1.32 "IAVSE Display","Songti SC",serif;letter-spacing:-.02em;text-wrap:balance;color:var(--iv-ink)}
 .iavse-landing .iv-title span{display:block}
 .iavse-landing .iv-hero-copy>p{max-width:580px;font-size:15px;line-height:1.8;color:var(--iv-body);margin:16px auto 0;text-wrap:balance}
-.iavse-landing .iv-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:22px}
+.iavse-landing .iv-actions{display:flex;justify-content:center;margin-top:22px}
+.iv-actions > .iv-entry-switch{
+ --glass-item-height:44px;
+ --glass-item-padding:9px 20px;
+ display:inline-grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ min-inline-size:min(12rem,100%);
+ border-color:rgb(255 255 255 / .8);
+ background:linear-gradient(145deg,rgb(255 255 255 / .66),rgb(255 255 255 / .24));
+ box-shadow:inset 0 1px 1px rgb(255 255 255 / .86),inset 0 -1px 1px rgb(28 55 58 / .08),0 5px 18px -8px rgb(24 50 53 / .23);
+ -webkit-backdrop-filter:blur(16px) saturate(1.12);
+ backdrop-filter:blur(16px) saturate(1.12);
+}
+.iv-entry-switch::before{
+ content:"";
+ position:absolute;
+ top:30%;
+ bottom:30%;
+ left:50%;
+ width:1px;
+ background:currentColor;
+ opacity:.13;
+ pointer-events:none;
+}
+.iv-entry-switch .glass-switch__item{color:var(--iv-ink)}
+.iavse-landing .iv-entry-switch .glass-switch__item:focus-visible{outline:2px solid var(--iv-ink);outline-offset:-3px}
+.iv-entry-switch .glass-switch__lens{transition:opacity .14s ease,scale .14s ease}
+.iv-entry-switch .glass-switch__item:is(:active,[data-pressed]){background:color-mix(in srgb,var(--iv-ink) 12%,transparent)}
+.iv-entry-switch:has(.glass-switch__item:is(:active,[data-pressed])) .glass-switch__lens{scale:.96;filter:brightness(.94)}
+html[data-color-mode=dark] .iv-actions > .iv-entry-switch{
+ border-color:rgb(255 255 255 / .18);
+ background:linear-gradient(145deg,rgb(255 255 255 / .12),rgb(255 255 255 / .035));
+ box-shadow:inset 0 1px 1px rgb(255 255 255 / .16),0 5px 18px -8px rgb(0 0 0 / .5);
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .iv-actions > .iv-entry-switch,html[data-color-mode=dark] .iv-actions > .iv-entry-switch{background:var(--iv-surface)}
+}
+@media(prefers-reduced-motion:reduce){
+ .iv-entry-switch .glass-switch__lens{transition:none}
+ .iv-entry-switch:has(.glass-switch__item:is(:active,[data-pressed])) .glass-switch__lens{scale:1}
+}
 .iavse-landing .iv-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:9px 18px;background:var(--iv-action);color:var(--iv-on-action);border:0;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 9px 24px -10px rgb(32 32 35 / .22);transition:transform .18s,box-shadow .18s,background .18s}
 .iavse-landing .iv-button:hover{background:var(--iv-action-hover);transform:translateY(-2px);box-shadow:0 13px 28px -10px rgb(32 32 35 / .25)}
 .iavse-landing .iv-button:active{transform:scale(.98)}
-.iavse-landing .iv-button-secondary{background:var(--iv-surface);color:var(--iv-ink);box-shadow:var(--iv-shadow)}
-.iavse-landing .iv-button-secondary:hover{background:var(--iv-soft);color:var(--iv-ink);box-shadow:var(--iv-shadow)}
 .iavse-landing[data-landing-locale=en] .iv-title{font-family:"IAVSE Wordmark",Georgia,serif;font-weight:500;font-size:clamp(40px,3.9vw,54px);line-height:1.18}
 .iavse-landing[data-landing-locale=ja] .iv-title{font-family:"Songti SC","Yu Mincho",serif;font-size:clamp(32px,3.2vw,43px)}
 
@@ -139,8 +177,7 @@ html[data-color-mode=dark] .iavse-landing{
 @media(max-width:740px){
  .iavse-landing .iv-container{width:calc(100% - 40px)}
  .iavse-landing .iv-title{font-size:clamp(28px,5.7vw,36px);line-height:1.4}
- .iavse-landing .iv-actions{gap:4px 8px;margin-top:18px}
- .iavse-landing .iv-actions>.iv-button{padding-inline:12px}
+ .iavse-landing .iv-actions{margin-top:18px}
  .iavse-landing .iv-hero-copy>p{font-size:14px;line-height:1.8;max-width:39ch;margin-top:14px}
  .iavse-landing .iv-community{grid-template-columns:1fr;gap:18px;padding:32px 0 0}
  .iavse-landing .iv-community-intro{padding-top:0}

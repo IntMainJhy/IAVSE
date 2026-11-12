@@ -232,9 +232,10 @@ export function IavseLanding({content}: {content: LandingContent}) {
         <h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1>
         <p>{c.intro}</p>
         <nav className="iv-actions" aria-label={c.productEntries}>
-          <Link href="/community" className="iv-button">{c.enter}<ArrowUpRight size={16} aria-hidden="true"/></Link>
-          <Link href="/resources" className="iv-button iv-button-secondary">{c.discover}</Link>
-          <Link href="/workspace/blog" className="iv-text-link">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
+          <GlassSwitch className="iv-entry-switch" previewLinks value={null} ariaLabel={c.productEntries} items={[
+            {id: 'community', label: c.community, href: '/community'},
+            {id: 'resources', label: c.resources, href: '/resources'},
+          ]}/>
         </nav>
       </div>
     </section>
