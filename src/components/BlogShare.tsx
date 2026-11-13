@@ -11,7 +11,7 @@ export function BlogShare({path,available=true}:{path:string;available?:boolean}
  function close(){if(menu.current){menu.current.open=false;menu.current.querySelector('summary')?.focus()}}
  async function copy(){try{await navigator.clipboard.writeText(new URL(path,location.origin).href);setCopied(true);setError('')}catch{setError('复制未成功，请选中下方链接手动复制')}}
  async function share(){if(!navigator.share){await copy();return}setSharing(true);try{await navigator.share({title:'IAVSE',url:new URL(path,location.origin).href});setError('')}catch(e:unknown){if(!(e instanceof Error)||e.name!=='AbortError')setError('系统分享不可用，请复制链接')}finally{setSharing(false)}}
- if(!available)return <button type="button" className="space-btn blog-share-trigger" disabled title={t('通过审核并公开后即可分享')}><Icon name="share"/>{t('分享主页')}</button>;
+ if(!available)return <button type="button" className="space-btn blog-share-trigger" disabled title={t('主页公开后即可分享')}><Icon name="share"/>{t('分享主页')}</button>;
  return <details className="space-share-menu" ref={menu} onToggle={()=>{setCopied(false);setError('')}} onKeyDown={e=>{if(e.key==='Escape'){e.preventDefault();close()}}}>
   <summary className="space-btn blog-share-trigger"><Icon name="share"/>{t('分享主页')}</summary>
   <div className="space-share-popover" aria-label={t('分享个人主页')}>

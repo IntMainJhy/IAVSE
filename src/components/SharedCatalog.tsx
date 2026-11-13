@@ -16,13 +16,20 @@ import {resourceWebsites} from '@/lib/resource-websites.mjs';
 import {legalConsultationResource} from '@/lib/legal-consultation.mjs';
 import {SkillCopyBlock} from './SkillInstallation';
 import {Icon} from './Icons';
+import {DirectoryFacet} from './DirectoryFacet';
 import {CatalogSearch} from './CatalogSearch';
 export type CatalogQuery=Record<string,string|string[]|undefined>;
 export const catalogNames:Record<string,string>={docs:'文档',skills:'Skill',resources:'其他资源'};
 export async function CatalogFilter({kind,q,category,categories}:{kind:'docs'|'resources';q:string;category:string;categories:string[]}){
  const {t}=await serverI18n(),base='/'+kind;
  const href=(value:string)=>{const params=new URLSearchParams();if(kind==='resources')params.set('type','resources');if(q)params.set('q',q);if(value)params.set('category',value);return base+(params.size?'?'+params:'')};
- return <div className="catalog-filter catalog-display-toolbar"><div className="catalog-filter-group"><span>{t('分类')}</span><nav className="catalog-filter-options" aria-label={t('分类')}><Link prefetch={false} href={href('')} scroll={false} aria-current={!category?'page':undefined}>{t('全部分类')}</Link>{categories.map(value=><Link key={value} href={href(value)} scroll={false} aria-current={category===value?'page':undefined}>{t(catalogCategoryLabel(value))}</Link>)}</nav></div><Form className="catalog-search catalog-compact-form" action={base} scroll={false} role="search">{kind==='resources'&&<input type="hidden" name="type" value="resources"/>}{category&&<input type="hidden" name="category" value={category}/>}<CatalogSearch value={q} label={t(kind==='docs'?'搜索文档':'搜索资源')}/></Form></div>;
+ return <div className="directory-toolbar">
+  <Form className="catalog-search catalog-compact-form" action={base} scroll={false} role="search">{kind==='resources'&&<input type="hidden" name="type" value="resources"/>}{category&&<input type="hidden" name="category" value={category}/>}<CatalogSearch value={q} label={t(kind==='docs'?'搜索文档':'搜索资源')}/></Form>
+  <DirectoryFacet label={t('分类')} value={t(category?catalogCategoryLabel(category):'全部分类')}><nav className="catalog-filter-options" aria-label={t('分类')}>
+   <Link prefetch={false} href={href('')} scroll={false} aria-current={!category?'page':undefined}>{t('全部分类')}</Link>
+   {categories.map(value=><Link prefetch={false} key={value} href={href(value)} scroll={false} aria-current={category===value?'page':undefined}>{t(catalogCategoryLabel(value))}</Link>)}
+  </nav></DirectoryFacet>
+ </div>;
 }
 export async function CatalogCards({items,kind='docs'}:{items:any[];kind?:string}){
  const {t}=await serverI18n();

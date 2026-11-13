@@ -61,10 +61,10 @@ for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
  catalogPages++;
 }
 const overview=await(await fetch(base+'/resources',{headers:{cookie:'site-locale=zh'}})).text();
-assert.ok(overview.includes('data-resource-kind="all"'),'resource hub opens with all resource types');
+assert.ok(overview.includes('aria-labelledby="resource-shelf-title"'),'resource hub opens with all resource types');
 const connectSearch=await(await fetch(base+'/resources?type=docs&q=Connect',{headers:{cookie:'site-locale=zh'}})).text();
 assert.ok(connectSearch.includes('href="/docs/connect"'),'documents tab search includes Connect guide');
-assert.ok(overview.includes('href="/skills"'),'overview links to the Skill directory');
+assert.ok(overview.includes('href="/resources?type=skills"'),'overview links to the Skill directory');
 const allSearch=await(await fetch(base+'/resources?type=skills&q=UI',{headers:{cookie:'site-locale=zh'}})).text();
 assert.ok(allSearch.includes('href="/resources?type=skills&amp;q=UI"'),'resource tabs preserve the search term');
 assert.ok(allSearch.includes('href="/skills/ui-ux-pro-max?q=UI"'),'resource Skill search finds curated skills');

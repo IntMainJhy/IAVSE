@@ -1,3 +1,4 @@
+import {FilingLink} from './FilingLink';
 import {cookies} from 'next/headers';
 import {localeDate} from '@/lib/locale-format.mjs';
 import {serverI18n} from '@/lib/server-i18n';
@@ -189,5 +190,6 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
  return <div className={'rbp-surface'+(dark?' dark':'')} data-rbp-route={section||'home'}>
    <SiteFrame/><a className="skip-to-content" href="#main">{tr('跳到主要内容')}</a><Tracker/>
    {native?<div className={'rbp-native rbp-application organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading" data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined}><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}
+   {section&&section!=='admin'&&!(section==='workspace'&&path[1]==='blog')&&<footer className="iavse-filing-footer"><FilingLink/></footer>}
  </div>;
 }

@@ -24,3 +24,8 @@ html[data-color-mode=dark] .iavse-shell-atmosphere{opacity:.24}
 
 /* Preserve route content clearance when the shared navigation occupies two rows. */
 html:has([data-iavse-platform=public]) [data-rbp-route]:not([data-rbp-route=home]){padding-top:var(--iavse-header-extra,0px)}
+
+.iavse-filing-footer{padding:18px 20px max(22px,env(safe-area-inset-bottom));text-align:center;background:var(--iavse-background);color:var(--iavse-muted-foreground)}
+.iavse-filing-link{font-size:12px;line-height:1.6;color:inherit;text-decoration:none}
+.iavse-filing-link:hover{text-decoration:underline}
+@media(max-width:767px){.iavse-filing-footer{padding-bottom:calc(80px + env(safe-area-inset-bottom))}}

@@ -108,3 +108,12 @@
   }
  }
 }
+
+.gallery-curation{display:grid;gap:14px;margin-bottom:20px}
+.gallery-curation header p{margin:5px 0 0;font-size:14px}
+.gallery-curation form,.gallery-picked,.gallery-options{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.gallery-curation form input{min-width:0;width:min(100%,22rem);min-height:44px}
+.gallery-curation .gallery-options{max-height:16rem;overflow-y:auto;align-items:stretch}
+.gallery-options label{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--iavse-border);border-radius:8px}
+.gallery-options label input{width:16px;height:16px}
+.gallery-picked{padding:0;list-style:none}.gallery-picked li{font-size:13px}.gallery-picked button{min-height:36px;min-width:32px}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {publicSpaces} from '@/lib/spaces.mjs';
+import {publicGallery} from '@/lib/spaces.mjs';
 import {localizeProfile} from '@/lib/content-locales.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 import {blogShowcases,showcaseProfile} from '@/lib/blog-showcase.mjs';
@@ -13,10 +13,12 @@ export async function BlogSpacesPage({req}:{req:Request}){
  const say=(zh:string,en:string,ja:string)=>locale==='en'?en:locale==='ja'?ja:zh;
  const publicLabel=say('公开博客空间','Public blog space','公開ブログ');
  const exampleLabel=say('原创主页示例 · 虚构人物','Original homepage example · fictional person','オリジナルホームページの例 · 架空の人物');
- const spaces:GallerySpace[]=publicSpaces(req).map((space:any)=>{
+ const source=publicGallery(req);
+ const gallerySpace=(space:any):GallerySpace=>{
   const profile=localizeProfile(space.profile,locale);
   return {handle:space.handle,name:profile.name||space.handle,intro:profile.intro||'',avatarId:profile.avatarId||'',href:'/blog/'+encodeURIComponent(space.handle),mode:space.mode};
- });
+ };
+ const spaces:GallerySpace[]=source.directory.map(gallerySpace);
  // Standalone examples keep their own appearance; template-library URLs remain available elsewhere.
  const examples:GallerySpace[]=blogShowcases.flatMap(item=>{
   const profile=showcaseProfile(item.handle,locale);
@@ -33,7 +35,7 @@ export async function BlogSpacesPage({req}:{req:Request}){
    <Link className="blog-spaces-create" href="/workspace/blog">{t('创建我的空间')}<Icon name="plus"/></Link>
   </header>
   <p className="blog-spaces-gallery-note">{say('画廊收录公开博客与原创示例。示例人物和作品均为虚构。','Public blogs and original examples. People and work in the examples are fictional.','公開ブログとオリジナルの作例。作例の人物と作品は架空です。')}</p>
-  <BlogSpaceGallery spaces={allSpaces} directory={directory} labels={{loading:say('正在准备博客空间…','Preparing blog spaces…','ブログスペースを準備中…'),open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索功能','Scroll to explore the features','スクロールして機能を見る'),directory:t('发现博客空间'),previous:say('上一个空间','Previous space','前のスペース'),next:say('下一个空间','Next space','次のスペース'),select:say('走近这个空间','Explore this space','このスペースに近づく'),close:say('返回空间','Back to the spaces','スペースに戻る'),reset:say('重置视角','Reset view','視点をリセット'),overview:say('拖动环顾，点击走近一个空间','Drag to look around. Choose a space to step inside.','ドラッグで見渡して、スペースを選んで近づく')}}/>
+  <BlogSpaceGallery spaces={source.featured.length?source.featured.map(gallerySpace):allSpaces} directory={directory} labels={{loading:say('正在准备博客空间…','Preparing blog spaces…','ブログスペースを準備中…'),open:t('进入博客空间'),preview:t('博客空间界面预览'),browse:say('向下探索功能','Scroll to explore the features','スクロールして機能を見る'),directory:t('发现博客空间'),previous:say('上一个空间','Previous space','前のスペース'),next:say('下一个空间','Next space','次のスペース'),select:say('走近这个空间','Explore this space','このスペースに近づく'),close:say('返回空间','Back to the spaces','スペースに戻る'),reset:say('重置视角','Reset view','視点をリセット'),overview:say('拖动环顾，点击走近一个空间','Drag to look around. Choose a space to step inside.','ドラッグで見渡して、スペースを選んで近づく')}}/>
   <BlogProductShowcase locale={locale}/>
  </div>;
 }

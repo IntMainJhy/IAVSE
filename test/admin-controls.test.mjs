@@ -15,6 +15,7 @@ const field=({name,label,value})=>element('label',null,label,element('input',{na
 function load(name,extra={},globals={}){
  const source=ts.transpileModule(readFileSync(new URL('../src/components/'+name+'.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
  const modules={
+  './GallerySettings':{GallerySettings:empty},
   react:React,'react/jsx-runtime':jsxRuntime,'next/link':{default:({href,children,...props})=>element('a',{href,...props},children)},
   './LocaleProvider':{useLocale:()=>({t:translate,locale:'zh'})},
   './AdminApp':{Field:field,useUnsaved(){}},

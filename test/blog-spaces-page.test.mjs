@@ -20,7 +20,7 @@ test('spatial directory preserves member destinations, matches example preview l
    if(name==='react/jsx-runtime')return{jsx,jsxs:jsx};
    if(name==='next/link')return{default:'Link'};
    if(name.includes('server-i18n'))return{serverI18n:async()=>({locale,t:s=>s})};
-   if(name.includes('spaces.mjs'))return{publicSpaces:r=>{reads.push(r);return members;}};
+   if(name.includes('spaces.mjs'))return{publicGallery:r=>{reads.push(r);return {directory:members,featured:[]};}};
    if(name.includes('content-locales'))return{localizeProfile};
    if(name.includes('blog-showcase.mjs'))return{blogShowcases,showcaseProfile};
    if(name.endsWith('BlogSpaceGallery'))return{BlogSpaceGallery:'BlogSpaceGallery'};
@@ -52,7 +52,7 @@ test('gallery warming uses the same original-home previews, keeps static sites i
  const exports={},reads=[],req=new Request('http://example.test/api/blog-gallery'),members=[{handle:'my space',mode:'theme'},{handle:'static-member',mode:'static'}];
  const route=fs.readFileSync(new URL('../src/app/api/blog-gallery/route.ts',import.meta.url),'utf8');
  vm.runInNewContext(ts.transpileModule(route,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{exports,Response,encodeURIComponent,require:name=>{
-  if(name.includes('spaces.mjs'))return{publicSpaces:r=>{reads.push(r);return members;}};
+  if(name.includes('spaces.mjs'))return{publicGallery:r=>{reads.push(r);return {directory:members,featured:[]};}};
   if(name.includes('blog-showcase.mjs'))return{blogShowcases};
   if(name.includes('blog-gallery-space'))return{galleryLimit:12};
   throw Error('Unexpected dependency '+name);

@@ -64,6 +64,10 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
       }
     }}>
     <Link className="iavse-header__brand" href="/" aria-label={copy.home} onClick={() => setOpen(false)}><BrandMark/><span>IAVSE</span></Link>
+    <div className="iavse-repository-links iavse-repositories-mobile">
+          <a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · GitHub" title="GitHub"><img src="/brand/github.svg" alt="" width="19" height="19"/></a>
+          <a href="https://atomgit.com/InMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · AtomGit" title="AtomGit"><img src="/brand/atomgit.png" alt="" width="20" height="20"/></a>
+        </div>
     <button type="button" className="iavse-header__more" ref={trigger} aria-label={t('更多选项')}
       aria-expanded={open} aria-controls={panelId} onClick={() => setOpen(!open)}>
       {open ? <X size={21} aria-hidden="true"/> : <Ellipsis size={23} aria-hidden="true"/>}
@@ -77,6 +81,11 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
         <ThemeToggle/>
       </div>
       <div className="iavse-header__identity">
+
+        <div className="iavse-repository-links iavse-repositories-wide">
+          <a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · GitHub" title="GitHub"><img src="/brand/github.svg" alt="" width="19" height="19"/></a>
+          <a href="https://atomgit.com/InMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · AtomGit" title="AtomGit"><img src="/brand/atomgit.png" alt="" width="20" height="20"/></a>
+        </div>
         <AuthNav/><Link href="/login" className="iavse-header__guest" aria-label={copy.account}><UserRound size={18} aria-hidden="true"/></Link>
         <span className="iavse-header__setting-label">{t('界面语言')}</span><LanguageSwitcher/>
       </div>

@@ -18,7 +18,7 @@ const queues = [
   {key: 'catalog', label: '共享内容审核', path: 'catalog', icon: 'file'},
   {key: 'posts', label: '投稿审核', path: 'reviews', icon: 'edit'},
   {key: 'comments', label: '评论审核', path: 'comments', icon: 'comment'},
-  {key: 'spaces', label: '博客主页审核', path: 'spaces', icon: 'grid'},
+  {key: 'spaces', label: '博客内容待复核', path: 'spaces', icon: 'grid'},
   {key: 'reports', label: '举报与投诉', path: 'reports', icon: 'folder'},
 ];
 const types: Record<string,string> = {projects: '项目', articles: '文章', resources: '资源'};

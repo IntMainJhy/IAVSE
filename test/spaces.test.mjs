@@ -31,3 +31,32 @@ test('projects publish directly without bypassing article review or author owner
  assert.throws(()=>call(users[1],'submit',{target:changed.id,revision:changed.revision,accepted:true}),/不存在/);
 });
 test.after(async()=>{d.close();delete globalThis.__personalSiteDb;await rm(directory,{recursive:true,force:true})});
+
+test('owner curates only published discoverable homepages, retains order and detects concurrent edits',()=>{
+ const fresh=['galleryalpha','gallerybravo','galleryprivate'].map(name=>{
+  const id=randomUUID(),token=randomUUID();
+  d.prepare('INSERT INTO community_users(id,username,password,nickname,verification,created,updated) VALUES(?,?,?,?,?,?,?)').run(id,name,'unused',name,'local_test',D.now(),D.now());
+  d.prepare('INSERT INTO sessions VALUES(?,?,?)').run(D.hash(token),Date.now()+600000,id);
+  return{id,token,name};
+ });
+ const [alpha,bravo,privateUser]=fresh;
+ const boards=fresh.map(user=>S.mine(req(user)));
+ for(let i=0;i<2;i++)call(fresh[i],'submit',{revision:boards[i].revision,accepted:true});
+ const gallery=(user,method,input={})=>S.spacesApi(req(user,method),['admin','spaces','gallery'],input,new URL('http://localhost:3118'));
+ assert.deepEqual(gallery(ownerToken,'GET').selected,[]);
+ assert.throws(()=>gallery(alpha,'POST',{handles:[boards[0].handle],previous:[]}),/权限/);
+ assert.throws(()=>gallery(ownerToken,'POST',{handles:[boards[2].handle],previous:[]}),/不可展示/);
+ assert.throws(()=>gallery(ownerToken,'POST',{handles:[boards[0].handle,boards[0].handle],previous:[]}),/不重复/);
+ const order=[boards[1].handle,boards[0].handle];
+ assert.deepEqual(gallery(ownerToken,'POST',{handles:order,previous:[]}).selected,order);
+ assert.deepEqual(S.publicGallery(req()).featured.map(space=>space.handle),order);
+ assert.throws(()=>gallery(ownerToken,'POST',{handles:[],previous:[]}),/已变更/);
+ const row=d.prepare('SELECT id FROM spaces WHERE owner=?').get(alpha.id);
+ d.prepare("UPDATE spaces SET visibility='offline' WHERE id=?").run(row.id);
+ assert.deepEqual(S.publicGallery(req()).featured.map(space=>space.handle),[boards[1].handle]);
+ d.prepare("UPDATE community_users SET status='suspended' WHERE id=?").run(bravo.id);
+ assert.deepEqual(S.publicGallery(req()).featured,[]);
+ assert.deepEqual(gallery(ownerToken,'POST',{handles:[],previous:order}).selected,[]);
+ assert.equal(d.prepare("SELECT COUNT(*) n FROM community_audit WHERE action='space_gallery_selection'").get().n,2);
+ assert.equal(S.publicGallery(req()).directory.some(space=>space.handle===boards[2].handle),false);
+});

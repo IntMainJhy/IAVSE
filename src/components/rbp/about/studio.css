@@ -1,0 +1,9 @@
+.iavse-studio-sketch{width:100%;height:100%;border-radius:7px;background-image:url('/illustrations/about/studio-studies.webp');background-size:300% 200%;background-repeat:no-repeat}
+[data-iavse-about-intro] .about-lead,.about-story-body p{font-size:16px;line-height:1.8;margin:12px 0;color:var(--iavse-foreground)}
+.about-story{margin-top:12px;text-align:start}
+.about-story summary{display:block;cursor:pointer;list-style:none}
+.about-story summary::-webkit-details-marker{display:none}
+.about-excerpt{display:block;overflow:hidden;max-height:2.6em;line-height:1.65;color:var(--iavse-muted-foreground);mask-image:linear-gradient(#000 12%,rgb(0 0 0 / .55) 58%,transparent)}
+.about-more,.about-less{display:inline-block;font-size:13px;font-weight:600;margin-top:8px;padding-block:6px}
+.about-less,.about-story[open] :is(.about-more,.about-excerpt){display:none}.about-story[open] .about-less{display:inline-block}
+.about-story summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}

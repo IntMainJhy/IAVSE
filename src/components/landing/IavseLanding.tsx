@@ -1,5 +1,6 @@
 'use client';
 
+import {FilingLink} from '../FilingLink';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect, useRef, useState} from 'react';
@@ -238,6 +239,7 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
           <Link href="/workspace/account">{c.account}</Link>
         </nav>
         <p>{c.mission}</p>
+        <FilingLink/>
       </footer>
     </div>
   </div>;

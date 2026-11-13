@@ -4,6 +4,7 @@ import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';
+import {translate} from '../src/lib/i18n.mjs';
 import {defaultBlogDesign,applyBlogTemplate} from '../src/lib/blog-design.mjs';
 import {blogAppearances,applyBlogAppearance} from '../src/lib/blog-appearances.mjs';
 import {blogTemplates,resumePresentations} from '../src/lib/blog-templates.mjs';
@@ -25,7 +26,7 @@ try{
  let mine=await(await call('/api/spaces/mine',undefined,alex)).json();const draft={...mine,profile:{...mine.profile,name:'Alex Rivera',alias:'Independent developer',skills:['TypeScript','Interface design'],intro:'I build thoughtful tools for everyday work.',github:'https://github.com/example',email:'alex@example.org',resume:{metrics:[{label:'Released projects',value:'12',note:'Synthetic test data'}],sections:[{id:'work',title:'Selected work',items:[{title:'A useful project',description:'An accessible interface, built with care.'}]}],certificates:[{imageId:image,caption:'Synthetic certificate fixture'}],gallery:[{imageId:image,caption:'Synthetic community workshop'}]}},layout:{...mine.layout,blog:{mode:'theme',theme:'anx',sections:[]}}};
  assert.equal((await call('/api/spaces/save',{...draft,profile:{...draft.profile,resume:{certificates:[{imageId:foreign}]}}},alex)).status,403);
  const saved=await call('/api/spaces/save',draft,alex);assert.equal(saved.status,200,await saved.clone().text());mine=await saved.json();assert.equal((await call('/api/spaces/save',draft,alex)).status,409);assert.equal((await fetch(base+'/media/'+image)).status,404);
- for(const language of ['zh','en']){const response=await fetch(base+'/workspace/blog',{headers:{Cookie:alex+'; site-locale='+language}});assert.equal(response.status,200);const html=await response.text();assert.match(html,/class="blog-editor blog-canvas-editor"/);assert.doesNotMatch(html,/class="blog-editor be-loading"/);assert.ok(html.includes('<title>'+(language==='zh'?'博客空间管理':'Manage blog home')+' · IAVSE</title>'));assertSiteBack(html);}
+ for(const language of ['zh','en']){const response=await fetch(base+'/workspace/blog',{headers:{Cookie:alex+'; site-locale='+language}});assert.equal(response.status,200);const html=await response.text();assert.match(html,/class="blog-editor blog-canvas-editor"/);assert.doesNotMatch(html,/class="blog-editor be-loading"/);assert.ok(html.includes('<title>'+translate(language,'博客空间管理')+' · IAVSE</title>'));assertSiteBack(html);}
  for(const route of ['/workspace/blog','/admin/blog','/admin/profile']){const response=await fetch(base+route,{headers:{Cookie:owner+'; site-locale=en'}});assert.equal(response.status,200);assertSiteBack(await response.text());}
  const guestEditor=await(await fetch(base+'/workspace/blog')).text();assert.doesNotMatch(guestEditor,/class="blog-editor blog-canvas-editor"/);
  assert.equal((await fetch(base+'/api/spaces/save',{method:'POST',headers:{Origin:'https://foreign.invalid',Cookie:alex,'Content-Type':'application/json'},body:JSON.stringify(mine)})).status,403);

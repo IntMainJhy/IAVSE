@@ -53,7 +53,6 @@ export function ContactCard({locale="zh"}:{locale?:string}): ReactNode {
                     <Link href="/about">{c.about}</Link> · <Link href="/legal/privacy">{c.privacy}</Link>
                   </p>
                   <SiteTools/>
-                  <a className="text-[12px] text-foreground/45" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026018870号-2</a>
                 </div>
               </div>
             </div>

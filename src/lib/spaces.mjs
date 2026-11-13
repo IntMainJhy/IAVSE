@@ -1,3 +1,4 @@
+import {galleryLimit} from './blog-gallery-space.mjs';
 import {designAssetIds,publicBlogDesign} from './blog-design.mjs';
 import {randomUUID} from 'node:crypto';
 import {db,getConfig,publicContent,publicBySlug,transaction,now,hash,fileInfo,fileRefs,limited,isSiteOwnerAccount,ownerAccountId,siteOwnerAccountId} from './db.mjs';
@@ -52,6 +53,49 @@ function directorySummary(req,row,siteOwner){
 export function publicSiteOwnerSummary(req){
  const id=siteOwnerAccountId();
  return id?directorySummary(req,rowByOwner(id),id):null;
+}
+function galleryHandles(){
+ const row=db().prepare("SELECT value FROM config WHERE key='blogGallery'").get();
+ if(!row)return [];
+ try{const handles=parse(row.value);return Array.isArray(handles)?handles.filter(handle=>typeof handle==='string').slice(0,galleryLimit):[]}catch{return []}
+
+}
+function galleryCandidate(req,handle){
+ const row=rowByHandle(handle);
+ const owner=ownerAccountId();
+ if(row?.owner==='owner'&&owner&&isPublic(rowByOwner(owner),req))return null;
+ return directorySummary(req,row,siteOwnerAccountId());
+}
+export function publicGallery(req){
+ const directory=publicSpaces(req),known=new Map(directory.map(space=>[space.handle,space]));
+ const featured=galleryHandles().flatMap(handle=>{const space=known.get(handle)||galleryCandidate(req,handle);return space?[space]:[]});
+ return {directory,featured};
+}
+function gallerySettings(req,input,url){
+ const user=staff(req);
+ requireValue(user.role==='owner','只有站长可以更换画廊展示',403);
+ if(req.method==='GET'){
+  const selected=galleryHandles(),options=publicSpaces(req);
+  const extra=[...selected];
+  const lookup=url.searchParams.get('handle')?.trim();
+  if(lookup&&lookup.length<=32)extra.push(lookup);
+  for(const handle of extra){
+   if(options.some(space=>space.handle===handle))continue;
+   const space=galleryCandidate(req,handle);
+   if(space&&!options.some(item=>item.handle===space.handle))options.push(space);
+  }
+  return {selected,options:options.map(space=>({handle:space.handle,name:space.profile.name||space.handle})),limit:galleryLimit};
+ }
+ requireValue(req.method==='POST','请求方式不支持',405);
+ const {handles,previous}=input;
+ requireValue(Array.isArray(handles)&&handles.length<=galleryLimit&&handles.every(handle=>typeof handle==='string'&&handle.length<=32)&&new Set(handles).size===handles.length,'请选择有效且不重复的公开主页');
+ return transaction(d=>{
+  requireValue(JSON.stringify(previous)===JSON.stringify(galleryHandles()),'画廊已变更，请刷新后重试',409);
+  requireValue(handles.every(handle=>galleryCandidate(req,handle)?.handle===handle),'选择中有主页已不可展示，请刷新后重试',409);
+  d.prepare("INSERT INTO config(key,value) VALUES('blogGallery',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").run(JSON.stringify(handles));
+  audit(user,'gallery_selection','gallery',{handles});
+  return {selected:handles};
+ });
 }
 export function publicSpaces(req){
  ownerSpace();
@@ -124,4 +168,4 @@ function analytics(req){const row=myRow(req),since=new Date(Date.now()-30*864000
 function visit(req,input){const row=rowByHandle(String(input.handle||''));requireValue(isPublic(row,req),'主页不存在',404);if(currentUser(req)?.id===row.owner)return{ok:true};const path=cleanText(input.path,500);requireValue([pathFor(row),'/blog/'+row.handle].some(base=>path===base||path.startsWith(base+'/')),'访问路径无效');requireValue(/^[a-f0-9-]{36}$/.test(input.visitor||''),'访客标识无效');requireValue(!limited('space-visit:'+hash(clientIp(req)),120,60000),'访问过于频繁',429);db().prepare('INSERT INTO space_events VALUES(?,?,?,?,?)').run(randomUUID(),row.id,path,hash(getConfig('secret')+input.visitor),now());return{ok:true}}
 
 function exportSpace(req){const row=myRow(req);requireValue(!limited('space-export:'+row.owner,6,60000),'导出过于频繁，请稍后再试',429);return{format:'iavse-space-v1',exportedAt:now(),handle:row.handle,profile:profileOf(row),layout:parse(row.layout),discoverable:!!row.discoverable,documents:db().prepare('SELECT * FROM space_content WHERE space=? ORDER BY created').all(row.id).map(x=>({id:x.id,type:x.type,slug:x.slug,revision:x.revision,visibility:x.visibility,draft:parse(x.draft),published:parse(x.published)})),legacyDocuments:row.legacy?kinds.flatMap(type=>publicContent(type)):[],assets:db().prepare('SELECT f.id,f.name,f.size,f.mime FROM files f JOIN space_assets a ON a.file=f.id WHERE a.space=?').all(row.id)}}
-export function spacesApi(req,p,input,url){requireValue(['id','target'].every(key=>input[key]==null||typeof input[key]==='string'),'内容标识格式无效');const method=req.method;if(p[0]==='admin')return method==='GET'?reviewList(req):reviewDecision(req,input);const action=p[1]||'';if(action==='public'&&method==='GET')return p[2]?url.searchParams.has('slug')?publicSpaceDocument(req,p[2],url.searchParams.get('type'),url.searchParams.get('slug')):publicSpace(req,p[2]):publicSpaces(req);if(action==='visit'&&method==='POST')return visit(req,input);if(action==='mine'&&method==='GET')return mine(req);if(action==='export'&&method==='GET')return exportSpace(req);if(action==='analytics'&&method==='GET')return analytics(req);if(action==='save'&&method==='POST')return saveBoard(req,input);if(action==='content'&&p[2]&&method==='GET'){const row=myRow(req),item=db().prepare('SELECT * FROM space_content WHERE id=? AND space=?').get(p[2],row.id);requireValue(item,'内容不存在',404);return contentView(item,true)}if(action==='content'&&method==='POST')return writeDocument(req,input);if(action==='submit'&&method==='POST')return submit(req,input);if(action==='withdraw'&&method==='POST')return withdraw(req,input);if(action==='handle'&&method==='POST')return renameHandle(req,input);if(action==='offline'&&method==='POST')return offline(req,input);if(action==='restore'&&method==='POST'){const row=myRow(req),version=db().prepare('SELECT data FROM space_versions WHERE id=? AND space=?').get(input.id,row.id);requireValue(version,'历史版本不存在',404);return saveBoard(req,{...parse(version.data),revision:input.revision})}throw new HttpError(404,'接口不存在')}
+export function spacesApi(req,p,input,url){requireValue(['id','target'].every(key=>input[key]==null||typeof input[key]==='string'),'内容标识格式无效');const method=req.method;if(p[0]==='admin'&&p[1]==='spaces'&&p[2]==='gallery'&&p.length===3)return gallerySettings(req,input,url);if(p[0]==='admin')return method==='GET'?reviewList(req):reviewDecision(req,input);const action=p[1]||'';if(action==='public'&&method==='GET')return p[2]?url.searchParams.has('slug')?publicSpaceDocument(req,p[2],url.searchParams.get('type'),url.searchParams.get('slug')):publicSpace(req,p[2]):publicSpaces(req);if(action==='visit'&&method==='POST')return visit(req,input);if(action==='mine'&&method==='GET')return mine(req);if(action==='export'&&method==='GET')return exportSpace(req);if(action==='analytics'&&method==='GET')return analytics(req);if(action==='save'&&method==='POST')return saveBoard(req,input);if(action==='content'&&p[2]&&method==='GET'){const row=myRow(req),item=db().prepare('SELECT * FROM space_content WHERE id=? AND space=?').get(p[2],row.id);requireValue(item,'内容不存在',404);return contentView(item,true)}if(action==='content'&&method==='POST')return writeDocument(req,input);if(action==='submit'&&method==='POST')return submit(req,input);if(action==='withdraw'&&method==='POST')return withdraw(req,input);if(action==='handle'&&method==='POST')return renameHandle(req,input);if(action==='offline'&&method==='POST')return offline(req,input);if(action==='restore'&&method==='POST'){const row=myRow(req),version=db().prepare('SELECT data FROM space_versions WHERE id=? AND space=?').get(input.id,row.id);requireValue(version,'历史版本不存在',404);return saveBoard(req,{...parse(version.data),revision:input.revision})}throw new HttpError(404,'接口不存在')}
