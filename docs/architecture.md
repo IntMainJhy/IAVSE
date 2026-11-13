@@ -2,9 +2,9 @@
 
 [返回文档中心 / Documentation](README.md)
 
-IAVSE uses Next.js App Router for pages and same-origin APIs, React for interactive components, TypeScript for the UI and JavaScript modules for much of the server logic. Node.js SQLite and a private filesystem hold site data. This guide describes the current public website implementation; dated design records describe earlier iterations.
+IAVSE uses Next.js App Router for pages and same-origin APIs, React for interactive components, TypeScript for the UI and JavaScript modules for much of the server logic. Node.js SQLite and a private filesystem hold site data. The maintained public baseline is `main`, including the integrated design work. This guide describes the current public website implementation; dated design records describe earlier iterations.
 
-IAVSE 以 Next.js App Router 组织页面与同源接口，React 承载交互，TypeScript 用于界面，大部分服务端逻辑使用 JavaScript 模块。数据保存在 Node.js SQLite 与私有文件目录。本页对应当前公开网站实现；历史设计记录保留原验证范围。
+IAVSE 以 Next.js App Router 组织页面与同源接口，React 承载交互，TypeScript 用于界面，大部分服务端逻辑使用 JavaScript 模块。数据保存在 Node.js SQLite 与私有文件目录。本页对应已合入 `main` 的当前公开网站实现；历史设计记录保留原验证范围。
 
 ```text
 Browser / 浏览器

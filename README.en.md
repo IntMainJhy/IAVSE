@@ -38,6 +38,8 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 > Original website material uses **[PolyForm Noncommercial 1.0.0](LICENSE)**. Noncommercial study, use, deployment, modification and redistribution are permitted within its terms. Commercial use needs separate permission. Retain the original-author and source notices in [NOTICE](NOTICE). Third-party licenses remain unchanged. Private macOS / Windows client source, installers and live site data are outside this repository.
 
+The maintained branch is **`main`**, including the public UI and functional updates from `desgin`, which is retained as history. The [integration handoff](docs/main-integration-2026-11-13.md) records scope, validation and recovery. A source merge is not a production deployment.
+
 ## Features
 
 | Area | Implemented capabilities |

@@ -2,6 +2,10 @@
 
 [中文首页](../README.md) · [English README](../README.en.md) · [故障排查 / Troubleshooting](troubleshooting.md)
 
+当前公开网站维护以 `main` 为基线，`desgin` 是已合入并留存的设计分支。克隆后以 `git branch --show-current` 核对；继续已有工作前先检查未提交改动。主线交接见[整合记录](main-integration-2026-11-13.md)。
+
+Current maintenance uses `main`. The merged `desgin` branch is retained. Check the branch and working tree before updating an existing checkout.
+
 ## 环境 / Requirements
 
 - Node.js **24.15+**，包含应用使用的内置 SQLite / includes the SQLite APIs used by the application.

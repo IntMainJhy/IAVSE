@@ -46,3 +46,6 @@ Documentation uses `README.md` as the Chinese default, `README.en.md` for the co
 纯文档修改检查链接、事实与渲染；运行代码修改补充相关测试、构建与类型检查。中文默认首页和兼容入口保持相同，产品事实变动同步英文。截图说明日期、来源与示例身份。
 
 Use the issue and PR templates. The [participation guide](CODE_OF_CONDUCT.md), [support routes](SUPPORT.md) and [security reporting policy](SECURITY.md) describe how to ask questions and handle concerns.
+
+
+Current public development is maintained on `main` after the design integration. `desgin` is retained for history. GitHub is the writable upstream; the existing AtomGit repository is a read-only mirror. See the [integration and verification handoff](docs/main-integration-2026-11-13.md). / 当前公开维护以 `main` 为基线，设计分支留存；镜像状态须与 GitHub 分别核对。

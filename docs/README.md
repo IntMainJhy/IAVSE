@@ -56,6 +56,8 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 ## 当前实现 / Current implementation
 
+当前维护分支为 `main`，已合入 `desgin` 的公开 UI 与功能改动；设计分支留存。见[主线整合与同步](main-integration-2026-11-13.md)。Current public maintenance continues on `main`; the design branch is retained as history.
+
 以 [2026-11-13 开发进度](development-status.zh-CN.md)和[收尾验收](acceptance-2026-11-13.md)为当前状态入口。历史报告只说明其日期内的验证范围。
 
 - [双 UI 开发计划](dual-ui-development-plan.zh-CN.md)与[阶段任务表](dual-ui-task-board.md)：Pro 私有 UI、原创公开 UI、共享业务与数据。来源与私有准备见[来源盘点与候选](ui-source-audit-2026-11-10.md)；当前已实现用户批准的独立公开首页与共享平台外壳，完整双 UI 仍未完成，现行许可不变。

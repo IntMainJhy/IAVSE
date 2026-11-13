@@ -4,6 +4,13 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ## Unreleased / 待发布
 
+### 2026-11-13 · Main-branch integration / 主线整合
+
+- Integrate all 24 design and functional commits through `3b943f3` into `main` without rewriting history; retain `desgin`.
+- Update current branch, handoff, setup, architecture and dual-UI status across the active documentation. Keep dated captures and acceptance evidence unchanged in scope.
+- Preserve pre-existing local archive changes outside the commit. GitHub remains the writable source; AtomGit is a read-only downstream mirror and must be verified independently.
+- This is a source handoff, not a production deployment, client release or change to the existing noncommercial license.
+
 ### 2026-11-13 · Product explanation and development closeout
 
 - Expanded the homepage with three illustrated capability cards and a native getting-started FAQ, with matching Chinese, English and Japanese copy, dark surfaces and repeat reveals.
