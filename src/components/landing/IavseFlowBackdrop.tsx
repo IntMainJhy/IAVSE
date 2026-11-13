@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-// An original, domain-warped colour field. This approximates slowly flowing mist;
-// it does not implement a physical fluid solver or use simulation textures.
+// An original, layered colour field: distant light, soft body and nearer mist.
+// This is procedural atmosphere, not a physical fluid or volumetric simulation.
 const VERTEX_SHADER = `
 attribute vec2 aPosition;
 varying vec2 vUv;
@@ -14,88 +14,90 @@ void main() {
 `;
 
 const FRAGMENT_SHADER = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
 precision mediump float;
+#endif
 varying vec2 vUv;
 uniform vec2 uSize;
 uniform float uTime;
 uniform vec2 uPointer;
 uniform vec3 uMotion;
 
-// Two intersecting stream waves create a slowly turning, divergence-free warp.
-vec2 current(vec2 p, float phase) {
-  float wave = cos(p.x * 1.35 - p.y * 1.7 + phase);
-  return vec2(
-    -1.7 * wave + 0.68 * cos(p.y * 2.2 - phase * 0.73),
-    -1.35 * wave + 0.72 * sin(p.x * 1.8 + phase * 0.61)
-  );
+float hash(vec2 p) {
+  vec3 q = fract(vec3(p.xyx) * 0.1031);
+  q += dot(q, q.yzx + 33.33);
+  return fract((q.x + q.y) * q.z);
 }
 
-// Each edge has its own diffuse field and phase. A field can change shape
-// without a shared gate moving all visible colour to the opposite edge.
-vec2 mist(vec2 p, float time, float phase) {
-  vec2 q = p;
-  q += current(q * 1.15, time * 0.83 + phase) * 0.20;
-  q += current(q * 2.30, -time * 0.57 + 1.4 + phase * 0.73) * 0.105;
-  q += vec2(
-    sin(q.y * 3.8 + time * 0.39 + phase),
-    cos(q.x * 3.1 - time * 0.31 + phase * 0.61)
-  ) * 0.075;
+float noise(vec2 p) {
+  vec2 i = floor(p), f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0)), f.x), f.y);
+}
 
-  float first = q.x + sin(q.y * 2.45 - time * 0.31 + phase * 0.41) * 0.58 - 0.34;
-  float second = q.y * 0.86 + sin(q.x * 2.3 + time * 0.27 + phase) * 0.47 - 0.16;
-  float sheetA = 1.0 - smoothstep(0.18, 0.94, abs(first));
-  float sheetB = 1.0 - smoothstep(0.07, 0.59, abs(second));
-  float opening = 0.34 + 0.66 * smoothstep(-0.55, 0.65, sin(q.x * 2.15 - q.y * 1.8 + time * 0.22 + phase));
-  float density = clamp((sheetA * 0.78 + sheetB * 0.48) * opening, 0.0, 1.0);
-  float tint = 0.5 + 0.5 * sin(q.x * 1.9 + q.y * 2.6 + phase + time * 0.21);
-  return vec2(density, tint);
+float cloud(vec2 p) {
+  mat2 turn = mat2(0.80, -0.60, 0.60, 0.80);
+  float n = noise(p) * 0.57;
+  p = turn * p * 2.03 + 4.7;
+  n += noise(p) * 0.29;
+  p = turn * p * 2.01 + 8.2;
+  return n + noise(p) * 0.14;
+}
+
+// Two depths share the same billow, but drift at different speeds. Smooth
+// density keeps the shape soft; there are no thresholded outlines or ribbons.
+vec2 plume(vec2 p, float time, float phase) {
+  vec2 drift = vec2(time * 0.16, -time * 0.11);
+  vec2 bend = vec2(cloud(p * 1.35 + drift + phase),
+                   cloud(p * 1.15 - drift * 0.7 + phase + 9.3)) - 0.5;
+  vec2 far = p + bend * 0.32;
+  vec2 near = p + bend * 0.85 + vec2(0.10 * sin(time * 0.6 + phase), 0.08 * cos(time * 0.5 + phase));
+  float body = exp(-dot(far * vec2(0.90, 0.78), far * vec2(0.90, 0.78)));
+  float detail = cloud(near * vec2(1.65, 1.30) - drift * 1.3 + phase);
+  vec2 fold = (near - vec2(0.36, 0.10)) * vec2(1.65, 1.05);
+  float front = exp(-dot(fold, fold));
+  return vec2(body * (0.58 + detail * 0.55), front * (0.15 + smoothstep(0.12, 0.88, detail) * 1.3));
 }
 
 void main() {
   vec2 uv = vec2(vUv.x, 1.0 - vUv.y);
-  float aspect = uSize.x / max(uSize.y, 1.0);
-  vec2 p = (uv - vec2(0.5, 0.52)) * vec2(aspect, 1.0);
-  float time = uTime * 0.12;
+  float time = uTime * 0.17;
+  float aspect = clamp(uSize.x / max(uSize.y, 1.0), 0.45, 2.0);
+  vec2 delta = (uv - uPointer) * vec2(aspect, 1.0);
+  float influence = exp(-dot(delta, delta) * 9.0);
+  vec2 stir = vec2(-delta.y, delta.x) * uMotion.z * influence * 0.16
+            + uMotion.xy * influence * 0.24;
+  // A very small depth offset follows the pointer; the center never follows it.
+  vec2 parallax = (uPointer - 0.5) * 0.025;
+  vec2 nearUV = uv + stir + parallax;
+  vec2 farUV = uv + parallax * 0.22;
 
-  // The cursor gently bends the existing mist instead of adding a glow on top.
-  vec2 cursor = (uPointer - vec2(0.5, 0.52)) * vec2(aspect, 1.0);
-  vec2 offset = p - cursor;
-  float influence = exp(-dot(offset, offset) * 7.0);
-  float turn = uMotion.z * influence * (0.58 + uMotion.x - uMotion.y);
-  p += vec2(-offset.y, offset.x) * turn;
-  p += uMotion.xy * influence * 0.95;
+  // Positions are normalized from each edge so both plumes remain on a phone.
+  vec2 left = plume(vec2((nearUV.x + 0.055) / 0.31, (nearUV.y - 0.57) / 0.31), time, 1.4);
+  vec2 right = plume(vec2((1.055 - nearUV.x) / 0.34, (nearUV.y - 0.63) / 0.34), time, 6.8);
+  float leftVeil = exp(-dot((farUV - vec2(0.02, 0.37)) / vec2(0.52, 0.30), (farUV - vec2(0.02, 0.37)) / vec2(0.52, 0.30)));
+  float rightVeil = exp(-dot((farUV - vec2(0.98, 0.43)) / vec2(0.50, 0.31), (farUV - vec2(0.98, 0.43)) / vec2(0.50, 0.31)));
+  float leftDensity = leftVeil * 0.24 + left.x * 0.46 + left.y * 0.90;
+  float rightDensity = rightVeil * 0.24 + right.x * 0.44 + right.y * 0.92;
 
-  vec2 stirred = p / vec2(aspect, 1.0) + vec2(0.5, 0.52);
-  // Normalising from each edge gives a phone the same two-sided composition
-  // as a desktop. Different phases and vertical domains avoid a mirrored seam.
-  vec2 left = mist(vec2(stirred.x / 0.34, (stirred.y - 0.53) * 1.65), time, 0.8);
-  vec2 right = mist(vec2((1.0 - stirred.x) / 0.37, (stirred.y - 0.59) * 1.50 + 0.17), time, 3.25);
-  // Sample both pigments through one drifting overlap. Backtrace the horizontal
-  // motion so a rightward gesture carries mint into the blue.
-  float drift = (left.y - right.y) * 0.14 + 0.065 * sin(uv.y * 5.7 + time * 0.72);
-  float mixPosition = uv.x + drift - clamp(uMotion.x, -0.18, 0.18) * influence;
-  float leftAnchor = 1.0 - smoothstep(0.02, 0.84, mixPosition);
-  float rightAnchor = smoothstep(0.16, 0.98, mixPosition);
-  float leftHeight = 1.0 - smoothstep(0.24, 0.62, abs(uv.y - 0.56));
-  float rightHeight = 1.0 - smoothstep(0.24, 0.62, abs(uv.y - 0.60));
-  // A low density floor keeps both edges visible as the overlap drifts.
-  float leftDensity = leftAnchor * leftHeight * (0.32 + 0.68 * left.x);
-  float rightDensity = rightAnchor * rightHeight * (0.32 + 0.68 * right.x);
-
-  // Pixel-based clearance keeps the top of the page free of pigment at every size.
-  float clearance = smoothstep(100.0, 320.0, uv.y * uSize.y);
-  float lowerFade = 1.0 - smoothstep(0.79, 1.0, uv.y);
-  float coverage = clearance * lowerFade;
-
-  vec3 mint = mix(vec3(0.78, 0.93, 0.86), vec3(0.61, 0.86, 0.77), left.y);
-  vec3 sky = mix(vec3(0.83, 0.92, 0.99), vec3(0.64, 0.82, 0.97), right.y);
+  // Atmospheric perspective: the far veil is pale, nearer folds hold color.
+  vec3 mint = mix(vec3(0.87, 0.95, 0.92), vec3(0.48, 0.75, 0.64), clamp(left.y * 0.82, 0.0, 0.85));
+  vec3 sky = mix(vec3(0.89, 0.94, 0.99), vec3(0.45, 0.65, 0.89), clamp(right.y * 0.82, 0.0, 0.85));
   float totalDensity = leftDensity + rightDensity;
   float blueShare = rightDensity / max(totalDensity, 0.001);
-  float stirring = uMotion.z * influence;
-  float tint = mix(0.06 + 0.88 * blueShare, 0.5, 0.58 * stirring);
-  vec3 pigment = mix(mint, sky, tint);
-  float overlap = 4.0 * blueShare * (1.0 - blueShare);
-  float alpha = clamp(totalDensity + 0.13 * overlap * stirring, 0.0, 1.0) * coverage;
+  vec3 pigment = mix(mint, sky, blueShare);
+  // A diffuse light opening separates the edges without drawing a visible seam.
+  float centerLight = exp(-pow((uv.x - 0.5) / 0.255, 2.0));
+  float breathingRoom = 1.0 - centerLight * 0.94;
+  float clearance = smoothstep(100.0, 300.0, uv.y * uSize.y);
+  float lowerFade = 1.0 - smoothstep(0.70, 1.0, uv.y);
+  float coverage = clearance * lowerFade;
+  float alpha = (1.0 - exp(-totalDensity * 1.55)) * breathingRoom * coverage;
+  // Sub-pixel dithering prevents visible contour bands in the pale gradients.
+  alpha = clamp(alpha + (hash(gl_FragCoord.xy) - 0.5) * coverage / 255.0, 0.0, 1.0);
   gl_FragColor = vec4(pigment * alpha, alpha);
 }
 `;
@@ -392,10 +394,12 @@ export default function IavseFlowBackdrop() {
           position: "absolute",
           inset: 0,
           background: [
-            "radial-gradient(ellipse 76% 54% at 1% 52%, #ace1ca, rgb(183 229 211 / .62) 42%, rgb(214 239 229 / .20) 73%, transparent)",
-            "radial-gradient(ellipse 79% 58% at 99% 62%, #b6d9f5, rgb(188 224 241 / .65) 44%, rgb(217 239 248 / .22) 76%, transparent)",
+            "radial-gradient(ellipse 33% 38% at -3% 57%, rgb(143 203 178 / .68), rgb(176 222 202 / .32) 48%, transparent)",
+            "radial-gradient(ellipse 36% 40% at 104% 63%, rgb(140 181 225 / .67), rgb(184 210 240 / .30) 48%, transparent)",
+            "radial-gradient(ellipse 52% 40% at 2% 37%, rgb(220 243 234 / .64), transparent 90%)",
+            "radial-gradient(ellipse 50% 42% at 98% 43%, rgb(224 237 251 / .68), transparent 90%)",
           ].join(", "),
-          maskImage: "linear-gradient(180deg, transparent 100px, black 320px, black 79%, transparent)",
+          maskImage: "linear-gradient(180deg, transparent 100px, black 300px, black 70%, transparent)",
         }}
       />
       <canvas

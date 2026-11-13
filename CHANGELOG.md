@@ -4,6 +4,12 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ## Unreleased / 待发布
 
+### 2026-11-13 · Spatial mist study (`background` branch)
+
+- Replace the broad two-color wash with distant light, a soft middle body and denser, slowly deforming edge mist. Keep a stable central clearing and the existing white/neutral UI.
+- Add subtle depth-dependent pointer movement and gradient dithering; retain mobile two-sided composition, reduced motion, offscreen pausing and a matching four-layer static fallback. No new dependencies or private assets.
+- Keep this study on `background`; the completed `main` baseline is unchanged.
+
 ### 2026-11-13 · Main-branch integration / 主线整合
 
 - Integrate all 24 design and functional commits through `3b943f3` into `main` without rewriting history; retain `desgin`.
