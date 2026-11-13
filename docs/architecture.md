@@ -2,9 +2,9 @@
 
 [返回文档中心 / Documentation](README.md)
 
-IAVSE uses Next.js App Router for pages and same-origin APIs, React for interactive components, TypeScript for the UI and JavaScript modules for much of the server logic. Node.js SQLite and a private filesystem hold site data. This guide describes the current `main` layout; dated design records describe earlier iterations.
+IAVSE uses Next.js App Router for pages and same-origin APIs, React for interactive components, TypeScript for the UI and JavaScript modules for much of the server logic. Node.js SQLite and a private filesystem hold site data. This guide describes the current public website implementation; dated design records describe earlier iterations.
 
-IAVSE 以 Next.js App Router 组织页面与同源接口，React 承载交互，TypeScript 用于界面，大部分服务端逻辑使用 JavaScript 模块。数据保存在 Node.js SQLite 与私有文件目录。本页对应当前主线；历史设计记录保留原验证范围。
+IAVSE 以 Next.js App Router 组织页面与同源接口，React 承载交互，TypeScript 用于界面，大部分服务端逻辑使用 JavaScript 模块。数据保存在 Node.js SQLite 与私有文件目录。本页对应当前公开网站实现；历史设计记录保留原验证范围。
 
 ```text
 Browser / 浏览器
@@ -27,9 +27,9 @@ Authorized AI tool / 授权的 AI 工具
 | Layer | Entry point | What to inspect / 阅读重点 |
 | --- | --- | --- |
 | Page composition | [AppPage.tsx](../src/components/AppPage.tsx) | Route, authentication and page assembly / 页面分发与鉴权上下文 |
-| Shared public shell | [PublicSite.tsx](../src/components/PublicSite.tsx) | Navigation, active route and public frame / 导航与公共框架 |
-| Homepage | [PlatformHome.tsx](../src/components/PlatformHome.tsx), [HomeProductShowcase.tsx](../src/components/HomeProductShowcase.tsx) | Server content and the three product chapters / 服务端内容与三个产品章节 |
-| Spatial interaction | [HomeSpatialShowcase.tsx](../src/components/HomeSpatialShowcase.tsx), [home-glass.ts](../src/lib/home-glass.ts) | Native scroll, viewport conditions, reduced motion and cleanup / 原生滚动、减少动态与清理 |
+| Shared public shell | [PortfolioRuntime.tsx](../src/components/portfolio/PortfolioRuntime.tsx), [IavseHeader.tsx](../src/components/IavseHeader.tsx), [IavseMobileDock.tsx](../src/components/IavseMobileDock.tsx) | Persistent navigation, mobile dock and route boundaries / 持续顶栏、手机底部导航与路由边界 |
+| Homepage | [PlatformHome.tsx](../src/components/PlatformHome.tsx), [IavseLanding.tsx](../src/components/landing/IavseLanding.tsx) | Public content, product overview and getting-started FAQ / 公开内容、产品说明与使用问答 |
+| Spatial interaction | [BlogSpaceGallery.tsx](../src/components/BlogSpaceGallery.tsx) | CSS perspective gallery, bounded iframe loading and accessible list / 透视画廊、有界预览与普通列表 |
 | Blog editing | [BlogEditor.tsx](../src/components/BlogEditor.tsx), [BlogCanvas.tsx](../src/components/BlogCanvas.tsx) | Saved data, canvas state, preview and publication / 保存数据、画布状态、预览与发布 |
 | Community | [CommunityApp.tsx](../src/components/CommunityApp.tsx), [community.mjs](../src/lib/community.mjs) | Feed, account context, moderation and public data / 动态、账号、审核与公开数据 |
 | Storage | [db.mjs](../src/lib/db.mjs), [spaces.mjs](../src/lib/spaces.mjs) | SQLite, account ownership, revisions and file references / 数据库、归属、版本与文件引用 |
@@ -46,6 +46,10 @@ Authorized AI tool / 授权的 AI 工具
 
 ## 从测试验证理解 / Learn through tests
 
-Use the relevant `test/*.test.mjs` beside the module you are reading. HTTP suites start independent processes and use temporary data. Existing tests exercise authentication, origin checks, publication snapshots, file ownership, recovery, catalogs and UI interactions. A historical test count is not a guarantee for the current tree; run the checks.
+Use the relevant `test/*.test.mjs` beside the module you are reading. Write-oriented HTTP suites start independent processes and use temporary data. Read-only catalog suites require an explicitly selected disposable server; see the setup guide. Existing tests exercise authentication, origin checks, publication snapshots, file ownership, recovery, catalogs and UI interactions. A historical test count is not a guarantee for the current tree; run the checks.
 
 先读一个模块及对应测试，修改一个明确行为，再运行相关检查。HTTP 测试使用独立进程与临时目录，不用真实账号和站点数据练习。运行命令见[本地指南](getting-started.md)。
+
+## 当前实现补充 / Current implementation notes
+
+`HomeProductShowcase`、`HomeSpatialShowcase` 和 `home-glass.ts` 保留历史源码，当前首页不挂载它们。画廊的后台选择由 `GallerySettings`、`/api/admin/spaces/gallery` 和 `publicGallery` 共同处理；列表仍只暴露合格公开主页。目录共用 `DirectorySearch` 与 `DirectoryFacet`。完整发布类型表、尚未接入的身份核验服务及上线边界见[开发进度](development-status.zh-CN.md)。

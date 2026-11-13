@@ -2,11 +2,11 @@
 
 [DESIGN.md](../DESIGN.md) 是当前平台唯一视觉规范。现有应用以 [DavidHDev/rbp-portfolio](https://github.com/DavidHDev/rbp-portfolio) 的公开实现为组件基线，固定来源版本为 `1581b9b8e5876f60e5eb844970747506980c4412`。当前 IAVSE 在该应用上独立调整字体、色彩、留白、卡片和背景。Cloudlight 仅作为清晰间距、文字层级、浅色表面与内容分组等通用原则的参考；此前直接迁移模板的方案已取消，未引入其代码、着色器、资产或许可证文件。
 
-下文保留 Portfolio 接入与独立细化的历史记录；首页、共享壳层等后续变化以 [平台共享视觉迁移](platform-ui.zh-CN.md) 和 DESIGN.md 为准。关于页保留六张点阵拍立得、介绍、展开列表、使用说明、能力标签、物理技术栈与 Contact。资源总览在标题下展示四张手绘分类卡，桌面双列、手机单列，卡片下方保留 Contact。博客目录现已恢复原有 3D 空间开场、完整列表和产品功能展示。社区、目录、账号、管理和编辑器外壳共用 IAVSE 字体、颜色与控件，保留搜索、筛选、表格、表单、审核及编辑流程。
+下文保留 Portfolio 接入与独立细化的历史记录；首页、共享壳层等后续变化以 [平台共享视觉迁移](platform-ui.zh-CN.md) 和 DESIGN.md 为准。关于页六张拍立得已放入原创石墨插画，保留、介绍、展开列表、使用说明、能力标签、物理技术栈与 Contact。资源总览在标题下展示四张手绘分类卡，桌面双列、手机单列，卡片下方保留 Contact。博客目录现已恢复原有 3D 空间开场、完整列表和产品功能展示。社区、目录、账号、管理和编辑器外壳共用 IAVSE 字体、颜色与控件，保留搜索、筛选、表格、表单、审核及编辑流程。
 
 ## 当前首页与共享顶栏
 
-当前 `/` 由 [`IavseLanding.tsx`](../src/components/landing/IavseLanding.tsx) 呈现：首屏居中的标题、简介及下方的「社区／资源」液态玻璃胶囊 → 社区动态与投稿提示 → 可展开的四类精选资源 → 指定作者的真实公开博客预览与主页入口 → 页脚。旧资源侧栏组合和下文的 Portfolio Hero／Projects／Contact 首页属于历史实现；当前首页保留原有公开内容权限、空态／错误／重试、浮起卡片和入场机制，没有新增媒体或成员数据。
+当前 `/` 由 [`IavseLanding.tsx`](../src/components/landing/IavseLanding.tsx) 呈现：首屏居中的标题、简介及下方的「社区／资源」液态玻璃胶囊 → 三组产品能力说明 → 社区动态与投稿提示 → 可展开的四类精选资源 → 指定作者的真实公开博客预览与主页入口 → 使用问答 → 页脚。旧资源侧栏组合和下文的 Portfolio Hero／Projects／Contact 首页属于历史实现；当前首页保留原有公开内容权限、空态／错误／重试、浮起卡片和入场机制，复用已有手绘分类图，没有新增成员数据。
 
 根运行时在首页与合格公共路由保留同一 [`IavseHeader`](../src/components/IavseHeader.tsx) 和单个 `GlassSwitch`。1100px 以上为单行桌面导航，768–1100px 将胶囊与主题置于第二行。767px 及以下，顶部为品牌与「更多」设置，底部为首页、社区、资源、博客和「我的」五项导航。三档顶栏占位分别为 72px、122px 和 56px 加顶部安全区。当前首页和顶栏均使用局部深色角色；主题控件复用现有文档偏好、cookie 和圆形过渡契约，来源归属保留。精确布局、字号、颜色和路由边界见 DESIGN.md 与[平台说明](platform-ui.zh-CN.md)。
 
@@ -87,3 +87,5 @@ PortraitMorph 仍使用 OGL，DPR 上限 2，进入/离开刚度 2.4 / 2.0。可
 保留[上游 README 声明](licenses/RBP-Portfolio.txt)：模板允许个人和商业项目使用，禁止转售或再分发模板本身。**这不是 MIT 许可声明。** 本实现保留作者与固定来源版本，接入 IAVSE 应用，不作为独立模板重新包装。独立设计细化不改变已有第三方权利，也不扩大任何模板授权。
 
 Lenis、Matter.js 与 Tailwind CSS 的许可分别保留于 [Lenis.txt](licenses/Lenis.txt)、[Matter.js-MIT.txt](licenses/Matter.js-MIT.txt)、[Tailwind-CSS-MIT.txt](licenses/Tailwind-CSS-MIT.txt)。字体、图标与其他依赖见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。未包含付费 Gradient Bars 源码。IAVSE 原创部分继续遵循 [PolyForm Noncommercial 1.0.0](../LICENSE) 与 [NOTICE](../NOTICE)。
+
+当前开发进度、验收证据和未完成事项统一见[收尾记录](acceptance-2026-11-13.md)及[开发进度](development-status.zh-CN.md)。本文后续基线描述是来源记录，不是现行页面结构。

@@ -13,11 +13,11 @@ const read=async path=>{
 };
 
 const manifest=await fetch(new URL('/api/blog-gallery',base)).then(response=>{assert.equal(response.status,200);return response.json();});
-const expectedPreviews=new Set(blogShowcases.map(entry=>showcaseProfile(entry.handle).href+'&embed=gallery'));
+const expectedPreviews=new Set(blogShowcases.map(entry=>'/blogs/showcase/'+entry.handle+'?embed=gallery'));
 assert.ok(manifest.previews.length<=12,'the warm manifest keeps its gallery cap');
 for(const path of manifest.previews.filter(path=>path?.startsWith('/blogs/showcase/')))assert.ok(expectedPreviews.has(path),'warm manifest agrees with the gallery links: '+path);
 for(const entry of blogShowcases){
- const href=showcaseProfile(entry.handle).href,path=href+'&embed=gallery';
+ const href='/blogs/showcase/'+entry.handle,path=href+'?embed=gallery';
  const {response,html,nodes}=await read(path);
  assert.ok(html.length<=350000,'fits the gallery document budget: '+entry.handle);
  assert.equal(response.headers.get('x-frame-options'),'SAMEORIGIN');
@@ -25,15 +25,15 @@ for(const entry of blogShowcases){
  const embed=nodes.find(node=>hasClass(node,'blog-gallery-embed'));
  assert.ok(embed,'readiness marker exists in real server HTML: '+entry.handle);
  const content=walk(embed);
- assert.ok(content.some(node=>hasClass(node,'bd-page-shell')),'real designed page is present, not only a loading shell');
- assert.ok(content.some(node=>node.attribs?.['data-page-template']===entry.template),'editor layout matches '+entry.template);
- assert.ok(content.some(node=>node.attribs?.['data-appearance']===entry.appearance),'editor appearance matches '+entry.appearance);
+ assert.ok(content.some(node=>hasClass(node,'showcase-portfolio')),'real designed page is present, not only a loading shell');
+ assert.ok(content.some(node=>node.attribs?.['data-creator']===entry.handle),'original creator matches '+entry.handle);
+ assert.ok(content.some(node=>node.attribs?.['data-art']),'original illustration style is available');
  const full=await read(href);
- assert.ok(full.nodes.some(node=>node.attribs?.['data-page-template']===entry.template),'full link uses the same layout');
- assert.ok(full.nodes.some(node=>node.attribs?.['data-appearance']===entry.appearance),'full link uses the same appearance');
+ assert.ok(full.nodes.some(node=>node.attribs?.['data-creator']===entry.handle),'full link uses the same creator');
+ assert.ok(full.nodes.some(node=>node.attribs?.['data-art']),'full link preserves its artwork');
 }
 const legacy=await read('/blogs/showcase/maya-lab?embed=gallery');
 assert.ok(legacy.nodes.some(node=>hasClass(node,'blog-gallery-embed')),'legacy embed links also signal readiness');
 const study=await read('/blogs/showcase/maya-lab');
 assert.ok(study.nodes.some(node=>hasClass(node,'showcase-portfolio')),'original study remains available');
-console.log('Gallery HTTP: all 11 built-in examples render matching templates and appearances, publish readiness markers, and fit the cache budget.');
+console.log('Gallery HTTP: all 11 original examples render matching full and embedded pages, publish readiness markers, and fit the cache budget.');

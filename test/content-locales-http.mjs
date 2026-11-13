@@ -22,7 +22,7 @@ try{
   const translations={en:{title:titles[type].en,summary:'A small collection of ideas, experiments, and practical tools.',bodyHtml:'<h2>Room for ideas</h2><p>A publishing workflow that keeps the focus on useful content.</p><img src="/media/'+image.id+'" alt="A quiet desk">',role:'Product design and development',contribution:'Designed the publishing workflow and built the editor.',outcome:'A simpler way to share work.'},zh:{title:titles[type].zh,summary:'整理想法、实践经验，以及日常使用的工具。',bodyHtml:'<h2>给想法留一点空间</h2><p>用顺手的发布流程，把时间留给内容本身。</p>'},ja:{title:titles[type].ja,summary:'アイデア、実践の記録、便利なツールをまとめています。',bodyHtml:'<h2>アイデアのための余白</h2><p>役立つコンテンツに集中できる、シンプルな公開フローです。</p>'}};
   let record=await call('/api/admin/content',{type,slug:'language-'+type,action:'publish',data:{title:titles[type].original,summary:'原文摘要',bodyHtml:'<h2>原文内容</h2><p>原文说明，缺少翻译时使用。</p>',role:'产品设计与开发',contribution:'原文贡献说明',outcome:'原文成果',tags:['工具'],category:'开发资源',kind:'website',url:'https://developer.mozilla.org/',featured:true,career:true,coverId:image.id,translations}});
   for(const locale of ['en','zh','ja']){
-   const html=await page('/'+type+'/'+record.slug,locale);assert.ok(html.includes('<h1>'+titles[type][locale]+'</h1>'));assert.ok(html.includes('<title>'+titles[type][locale]+' · '));assert.ok(html.includes(base+'/'+type+'/'+record.slug));assert.ok((await page('/'+type,locale)).includes(titles[type][locale]));
+   const html=await page('/'+type+'/'+record.slug,locale);assert.ok(html.includes('<h1>'+titles[type][locale]+'</h1>'));assert.ok(html.includes('<title>'+titles[type][locale]+' · '));assert.ok(html.includes(base+'/'+type+'/'+record.slug));assert.ok((await page('/'+type+(type==='resources'?'?type=resources':''),locale)).includes(titles[type][locale]));
   }
   record=await call('/api/admin/content',{id:record.id,revision:record.revision,action:'save',data:{...record.published,translations:{...record.published.translations,en:{...record.published.translations.en,title:'Private translation not released'}}}});
   assert.ok(!(await page('/'+type+'/'+record.slug)).includes('Private translation not released'));
@@ -31,10 +31,10 @@ try{
  }
  const fallback=await call('/api/admin/content',{type:'articles',slug:'original-fallback',action:'publish',data:{title:'未经翻译的阅读笔记',summary:'没有对应翻译时，继续显示这段原文。',bodyHtml:'<p>这是完整保留的原文。</p>',translations:{en:{title:'Reading notes',summary:'',bodyHtml:'<p><br></p>'}}}});
  for(const locale of ['en','zh','ja']){const html=await page('/articles/'+fallback.slug,locale);assert.ok(html.includes(locale==='en'?'<h1>Reading notes</h1>':'<h1>未经翻译的阅读笔记</h1>'));assert.ok(html.includes('没有对应翻译时，继续显示这段原文。'));assert.ok(html.includes('<p>这是完整保留的原文。</p>'));}
- assert.ok((await page('/articles?q=effortless')).includes(titles.articles.en));assert.ok((await page('/resources?q=ブックマーク','ja')).includes(titles.resources.ja));
+ assert.ok((await page('/articles?q=effortless')).includes(titles.articles.en));assert.ok((await page('/resources?type=resources&q=ブックマーク','ja')).includes(titles.resources.ja));
  const owner=(await call('/api/admin/blog/mine',undefined,'GET')).handle;
  for(const locale of ['en','zh','ja'])for(const theme of ['natural-organic','monochrome','editorial','x-social']){
-  const translated=profile.translations[locale];assert.ok((await page('/',locale,theme)).includes('class="v2-home"'));for(const route of ['/','/about','/career','/blog/'+owner])assert.ok((await page(route,locale,theme)).includes(translated.intro));
+  const translated=profile.translations[locale];assert.ok((await page('/',locale,theme)).includes('data-iavse-landing'));assert.ok((await page('/about',locale,theme)).includes('data-iavse-about-intro'));for(const route of ['/career','/blog/'+owner])assert.ok((await page(route,locale,theme)).includes(translated.intro));
  }
  for(const type of Object.keys(records)){const response=await fetch(base+'/admin/'+type+'/edit/'+records[type].id,{headers:{Cookie:cookie+'; site-locale=en'}}),html=await response.text();assert.equal(response.status,200);for(const label of ['Content language','Original','English','中文','日本語'])assert.ok(html.includes(label));}
  assert.equal((await fetch(base+'/media/'+image.id)).status,200);

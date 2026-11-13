@@ -26,11 +26,12 @@ try{
  }
  const owner=await login('official@example.com');assert.equal(owner.response.status,200);
  const me=await(await read('/api/auth/me',owner.cookie)).json();assert.equal(me.user.id,official);assert.equal(me.user.role,'owner');assert.equal(me.user.ownerAccount,true);
- const account=await read('/workspace/account',owner.cookie);assert.equal(account.status,200);const accountHtml=await account.text();assert.ok(accountHtml.includes('账号与安全'));assert.match(accountHtml,/<a[^>]+href="\/admin"/);assert.ok(accountHtml.includes('site-account-menu'));
- for(const route of ['/admin','/admin/community','/admin/blog','/workspace/blog'])assert.equal((await read(route,owner.cookie)).status,200,'same login reaches '+route);
+ const account=await read('/workspace/account',owner.cookie);assert.equal(account.status,200);const accountHtml=await account.text();assert.ok(accountHtml.includes('账号与安全'));assert.match(accountHtml,/<a[^>]+href="\/admin"/);assert.ok(accountHtml.includes('iavse-header__identity'));
+ for(const route of ['/admin','/admin/community','/workspace/blog'])assert.equal((await read(route,owner.cookie)).status,200,'same login reaches '+route);
+ const legacyBlog=await read('/admin/blog',owner.cookie);assert.equal(legacyBlog.status,307);assert.equal(new URL(legacyBlog.headers.get('location'),base).pathname,'/workspace/blog');
  const mine=await(await read('/api/admin/blog/mine',owner.cookie)).json();assert.equal(mine.owner,official);assert.equal(mine.legacy,false);assert.equal(mine.canManage,true);
  const saved=await fetch(base+'/api/admin/blog/save',{method:'POST',headers:{Origin:base,Cookie:owner.cookie,'Content-Type':'application/json'},body:JSON.stringify({...mine,publish:true,profile:{...mine.profile,name:'Unified owner HTTP blog'}})});assert.equal(saved.status,200);const value=await saved.json();assert.equal(value.owner,official);assert.equal(value.visibility,'public');
  const published=await read('/blog/'+mine.handle);assert.equal(published.status,200);assert.ok((await published.text()).includes('Unified owner HTTP blog'));
- const home=await(await read('/',owner.cookie)).text();assert.ok(home.includes('site-account-menu'));assert.match(home,/<a[^>]+href="\/workspace\/account"/);assert.match(home,/<a[^>]+href="\/admin"/);
+ const home=await(await read('/',owner.cookie)).text();assert.ok(home.includes('iavse-header__identity'));assert.match(home,/<a[^>]+href="\/workspace\/account"/);assert.equal((await(await read('/api/auth/me',owner.cookie)).json()).user.role,'owner');
  console.log('PASS: one verified account signs into account, admin and own blog with one session; legacy admin, members and reviewers cannot access management; personal publication and account navigation remain unified.');
 }finally{if(server)await stopServer(server);await rm(directory,{recursive:true,force:true});}

@@ -96,3 +96,6 @@ Style → Fonts → Text colors & effects adds independent body, heading and tex
 Local text formatting: click canvas text, select a fragment and use the Text format toolbar for font, size, color, bold, italic and underline. Controls apply only to a nonempty selection; Clear formatting affects only that selection. Page defaults and local formatting are separate. Language versions store formatting independently as validated structured segments while canonical text remains plain. Stale segments never style changed text. The toolbar wraps at the bottom on mobile. Preview, save/reopen and undo retain formatting; Done exits editing.
 
 Selection stability: the toolbar retains the last valid selection across font menus, color pickers and HEX entry. Equivalent normalized content does not rebuild the document; external updates preserve bounded selection positions. Local undo/redo separates format operations and identical color commits create no extra step. HEX follows the selection without remounting its input. Header actions, layers, properties and canvas tools share consistent control states.
+
+
+2026-11-13: Current delivery scope and regression evidence / 当前交付与回归范围见 [development status](development-status.zh-CN.md) 与 [acceptance](acceptance-2026-11-13.md)。作者主动发布主页，无须先审核；文章和文档仍按固定版本审核。画廊选人不授予编辑他人主页的权限。

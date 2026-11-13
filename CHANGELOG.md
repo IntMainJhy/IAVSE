@@ -4,6 +4,15 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ## Unreleased / 待发布
 
+### 2026-11-13 · Product explanation and development closeout
+
+- Expanded the homepage with three illustrated capability cards and a native getting-started FAQ, with matching Chinese, English and Japanese copy, dark surfaces and repeat reveals.
+- Fixed announcement pause/resume action labels in all three languages and verified both state transitions.
+- Aligned legacy HTTP assertions with current navigation, publication rules, author binding and showcase routes while retaining permission, visibility and draft isolation checks.
+- Reconciled active architecture, administration, catalog, design and setup guides; added current development scope and a dated acceptance matrix. Historical captures remain explicitly dated.
+- Local regression covers 724 unit tests and 23 HTTP suites. Upload regression used 64 MiB including a restart, not a fresh 10 GB capacity test. Production, SMTP and identity-verification integration remain separate work.
+
+
 ### 2026-11-09 · Repository presentation / 仓库展示
 
 - Add theme-aware SVG IAVSE wordmarks, a Chinese default README and a full English README.

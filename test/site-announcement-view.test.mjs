@@ -25,6 +25,19 @@ function markup(value,locale='en'){
  return renderToStaticMarkup(React.createElement(SiteAnnouncementsProvider,{initial:value},React.createElement(React.Fragment,null,React.createElement(SiteAnnouncement),React.createElement(SiteAnnouncementOffset))));
 }
 
+test('the marquee control names the next pause or resume action in every supported language',()=>{
+ for(const [locale,pause,resume]of [['zh','暂停滚动','继续滚动'],['en','Pause scrolling','Resume scrolling'],['ja','スクロールを一時停止','スクロールを再開']]){
+  let paused=false;
+  const api=load({locale,react:{...React,useContext:()=>({visible:true,value:seed()}),useState:()=>[paused,next=>{paused=next}]}});
+  const control=tree=>tree.props.children.find(node=>node?.props?.className==='notice-motion');
+  let tree=api.SiteAnnouncement(),button=control(tree);
+  assert.equal(button.props['aria-label'],pause);assert.equal(tree.props['data-paused'],false);assert.equal(button.props.children.props.name,'pause');
+  button.props.onClick();tree=api.SiteAnnouncement();button=control(tree);
+  assert.equal(tree.props['data-paused'],true);assert.equal(button.props['aria-label'],resume);assert.equal(button.props.children.props.name,'play');
+  button.props.onClick();tree=api.SiteAnnouncement();assert.equal(tree.props['data-paused'],false);assert.equal(control(tree).props['aria-label'],pause);
+ }
+});
+
 test('server-seeded notices and offsets agree immediately; a lone text-only notice remains keyboard reachable',()=>{
  const text='A long announcement without a link. '.repeat(3),html=markup(seed(text)),nodes=descendants(parseDocument(html));
  assert.ok(html.includes(text));assert.equal(nodes.filter(node=>node.name==='aside').length,1);

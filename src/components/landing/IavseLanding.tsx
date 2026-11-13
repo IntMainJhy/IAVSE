@@ -214,6 +214,13 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
       </div>
     </section>
     <div className="iv-container">
+      <section className="iv-product-overview" aria-labelledby="iv-product-title">
+        <header data-landing-reveal><h2 id="iv-product-title">{c.overviewTitle}</h2><p>{c.overviewBody}</p></header>
+        <div className="iv-product-paths">{c.overviewCards.map((item,index)=><Link key={item.href} href={item.href} className="iv-product-path" data-landing-reveal data-landing-card>
+          <img src={'/illustrations/resources/'+['designs','skills','docs'][index]+'.webp'} alt="" width={144} height={144} loading="lazy"/>
+          <h3>{item.title}</h3><p>{item.body}</p><span>{item.action}<ArrowUpRight size={17} aria-hidden="true"/></span>
+        </Link>)}</div>
+      </section>
       <section className="iv-community" aria-labelledby="iv-community-title">
         <div className="iv-community-intro" data-landing-reveal>
           <h2 id="iv-community-title">{c.communityTitle}</h2>
@@ -230,6 +237,10 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
       </section>
       <LandingResourceShowcase groups={resources}/>
       <LandingSpaceShowcase space={content.space}/>
+      <section className="iv-start-guide" aria-labelledby="iv-guide-title">
+        <div data-landing-reveal><h2 id="iv-guide-title">{c.guideTitle}</h2><p>{c.guideBody}</p><Link className="iv-button" href="/workspace/submissions/new">{c.guideAction}<PencilLine size={17} aria-hidden="true"/></Link></div>
+        <div className="iv-guide-questions" data-landing-reveal>{c.guideRows.map(row=><details key={row.question} name="iv-getting-started"><summary>{row.question}<span aria-hidden="true">+</span></summary><p>{row.answer}</p></details>)}</div>
+      </section>
       <footer className="iv-footer">
         <Link href="/" className="iv-footer-brand">IAVSE</Link>
         <nav aria-label={c.about}>

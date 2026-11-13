@@ -1,0 +1,48 @@
+{
+  "capturedAt": "2026-11-13",
+  "source": "Signed-out local production build using a disposable application database; no real account, credential or private draft captured. Screenshots show the actual UI, not mockups. The announcement action-label fix is verified separately after the final build.",
+  "baseCommit": "b7b8b25bb2ec5dd52357e2b4ad9d604c69e43ea9",
+  "sourceFiles": {
+    "src/components/landing/IavseLanding.tsx": "7730d021666da558a977c43629ddca8d1d17a80b5b9bc5e30ff25a91bd44c07a",
+    "src/lib/landing-copy.ts": "b389f3022f925ffa4f3d3de2cc2ae21962f9ee9825368aea6a8c5862758082a2",
+    "src/app/iavse-landing.css": "a2439f78135e01528c86203eaad72dcc8186902cd7d7faddaaf89d50cfbfcb1f",
+    "src/components/SiteAnnouncement.tsx": "f069668f090086cbe2805cd7833f64c545fa454ec88ada342460ba44ca585403"
+  },
+  "entries": [
+    {
+      "file": "home-hero-desktop.webp",
+      "route": "/",
+      "width": 1440,
+      "height": 960,
+      "theme": "light"
+    },
+    {
+      "file": "home-overview-desktop.webp",
+      "route": "/ (product overview)",
+      "width": 1440,
+      "height": 960,
+      "theme": "light"
+    },
+    {
+      "file": "home-overview-dark.webp",
+      "route": "/ (product overview)",
+      "width": 1440,
+      "height": 960,
+      "theme": "dark"
+    },
+    {
+      "file": "home-faq-mobile.webp",
+      "route": "/ (FAQ)",
+      "width": 390,
+      "height": 844,
+      "theme": "light"
+    },
+    {
+      "file": "filters-mobile.webp",
+      "route": "/resources?type=skills (tool menu)",
+      "width": 390,
+      "height": 844,
+      "theme": "light"
+    }
+  ]
+}

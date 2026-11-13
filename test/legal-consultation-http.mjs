@@ -28,7 +28,8 @@ try{
   assert.ok(page.html.includes(translate(locale,'复制律师微信号')));
   for(const area of legalConsultation.areas)assert.ok(page.html.includes(translate(locale,area)),locale+': '+area);
   assert.ok(!page.html.includes('成功代理数百起')&&!page.html.includes('劳动仲裁'),'unsupported examples are not published as claims');
-  for(const route of ['/resources','/resources?type=resources','/resources?q='+encodeURIComponent(resource.title),'/resources?type=resources&category='+encodeURIComponent('法律咨询')]){
+  assert.ok((await read('/resources',locale)).html.includes('href="/resources?type=resources"'),'overview links to the catalog containing the legal resource');
+  for(const route of ['/resources?type=resources','/resources?type=resources&q='+encodeURIComponent(resource.title),'/resources?type=resources&category='+encodeURIComponent('法律咨询')]){
    const listing=await read(route,locale);
    assert.equal(listing.status,200);
    assert.ok(listing.html.includes('<h3>'+resource.title+'</h3>'),locale+route+': legal card remains discoverable');

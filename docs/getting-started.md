@@ -60,7 +60,35 @@ npm start
 
 `npm start` 需要先构建，默认端口与开发模式相同。使用同一目录做生产构建前，先停止开发进程，避免共用 `.next` 产物互相影响。
 
-HTTP suites such as `npm run test:homepage:http`, `npm run test:gallery:http` and `npm run test:registration:http` create temporary data. Check their ports and run them against disposable fixtures.
+### HTTP 回归与数据隔离
+
+先完成生产构建。以下脚本自行启动临时服务并清理夹具，可顺序运行；不要并行运行使用同一固定端口的脚本：
+
+```sh
+node test/integration.mjs
+node test/blog-editor-http.mjs
+node test/blog-http.mjs
+node test/catalog-http.mjs
+node test/community-http.mjs
+node test/content-locales-http.mjs
+node test/email-registration-http.mjs
+node test/learning-http.mjs
+node test/legal-consultation-http.mjs
+node test/management-tools-http.mjs
+node test/owner-account-http.mjs
+node test/promotions-http.mjs
+node test/resume-http.mjs
+node test/security-http.mjs
+node test/spaces-http.mjs
+node test/split-login-http.mjs
+LARGE_TEST_BYTES=67108864 node test/large-upload.mjs
+```
+
+最后一项为 64 MiB 回归。直接运行上传脚本默认会执行更大的容量测试，先确认磁盘和运行时间；成功提示以实际 `LARGE_TEST_BYTES` 为准。
+
+`blog-gallery-http`、`design-catalog-query-http`、`skills-http`、`template-catalog-http` 使用 `TEST_BASE_URL`；多语言使用 `LOCALE_TEST_URL`，主题使用 `THEME_TEST_URL`。它们只读取指定站点，不自行建立数据库。请将这些变量指向自己的临时生产服务，`TEST_PUBLIC_URL` 与该服务 `PUBLIC_URL` 一致，勿用真实站点做测试夹具。每组测试使用独立临时目录／进程，或遵守请求窗口间隔，避免连续目录测试触发正常限流；不得为测试关闭限流。
+
+Write-oriented suites create disposable servers. Read-only suites need explicit base URL variables and a disposable server. The 64 MiB run is regression coverage, not a production capacity or throughput claim. See [the acceptance record](acceptance-2026-11-13.md) for actual outcomes and [current scope](development-status.zh-CN.md) for open work.
 
 ## 接下来 / Next
 

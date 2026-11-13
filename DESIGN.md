@@ -378,3 +378,14 @@ The original canvas structure illustration is static, `aria-hidden`, and accompa
 ### Community timeline and mobile dock
 
 The community uses a compact timeline with divided post rows. Desktop retains the glass feed switch and persistent search. Phones use underlined feed tabs and a search disclosure for keywords and categories. At widths up to 767px, Home, Community, Resources, Blogs and Me share one fixed bottom bar across the public platform. The dock reserves 64px plus the bottom safe area. Me opens an account sheet with sign-in return paths for visitors and role-appropriate account actions for members. See [the current platform implementation](docs/platform-ui.zh-CN.md#社区信息流与手机底栏) and [community styles](src/app/community-timeline.css).
+
+
+## Product explanation and directory controls — 2026-11-13
+
+Homepage flow: full-height centered opening → three product-capability cards → community → four resource categories → the bound site's publicly discoverable author homepage → native getting-started FAQ → footer. Use existing hand-drawn category images, real destinations and matching Chinese/English/Japanese copy. Keep descriptions short within each card; expanded product depth comes from separate sections, not one wall of text. Cards use the theme surface token in both appearances and share repeat reveals and reduced-motion behavior.
+
+`DirectoryFacet` is the shared compact filter for catalogs. Keep dimensions independent and the results close to the controls. Menu rows have 4px gaps and 7px corners; only the selected item has a fill. Long labels wrap. Outside click and Escape close the menu, short viewport space flips it above, and mobile positioning clears the bottom dock. Rules live in `directory-toolbar.css` under `@layer rbp` to respect existing important-rule layer order. Do not apply navigation lens or full-pill styling to menu rows.
+
+The public announcement strip is opaque black, with a monochrome sketch accent, marquee, pause, close and reduced-motion fallback. It has no blur or glass gradient and does not render in administration. The header retains the GitHub/AtomGit repository links. About's six graphite illustrations live with their provenance in `public/illustrations/about`; its expanded introduction uses a soft fade at the collapsed boundary. Footer registration information comes from the shared site implementation, not invented example text.
+
+Current behavior and outstanding delivery boundaries: [development status](docs/development-status.zh-CN.md). Dated captures are evidence of their capture date, not an automatic statement of the current tree.

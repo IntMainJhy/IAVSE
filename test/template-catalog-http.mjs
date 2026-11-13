@@ -15,7 +15,7 @@ for(const [query,slugs]of [
 ]){
  const html=await(await get('/resources?type=designs&'+query)).text();
  assert.deepEqual([...html.matchAll(/data-template-slug="([^"]+)"/g)].map(match=>match[1]),slugs,query);
- assert.match(html,/aria-label="按参考行业筛选"/);assert.match(html,/aria-label="按视觉风格筛选"/);
+ assert.match(html,/>参考行业<\/span>/);assert.match(html,/>视觉风格<\/span>/);
 }
 const sourceAudit=await(await get('/catalog-audits/vibeui-112.json')).json();
 assert.equal(sourceAudit.entries.length,112);assert.equal(sourceAudit.summary.included,54);assert.equal(sourceAudit.summary.excluded,58);

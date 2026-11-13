@@ -29,7 +29,7 @@ try {
  // Desktop releases share the authenticated settings save, but need no installer to exist in the fixture.
  const home=async locale=>(await fetch(server.base+'/',{headers:{Cookie:'site-locale='+locale}})).text();
  const downloads=async locale=>{const response=await fetch(server.base+'/downloads',{headers:{Cookie:'site-locale='+locale}});assert.equal(response.status,200);return response.text()};
- assert.ok(single.includes('href="/downloads"'));
+ assert.ok((await downloads('zh')).includes('id="downloads"')|| (await downloads('zh')).includes('macOS'),'the dedicated download route is available');
  assert.ok(!single.includes('id="downloads"'));assert.ok(!single.includes('class="product-download-options"'));
  assert.ok(!single.includes('href="#downloads"'));assert.ok(!single.includes('href="/#downloads"'));
  assert.ok(!single.includes('macOS 桌面版即将推出'));assert.ok(!single.includes('Windows 桌面版即将推出'));

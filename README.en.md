@@ -26,7 +26,7 @@ Arrange your work, experience and writing in a visual canvas.
 
 </div>
 
-![IAVSE split homepage with independently refined type, surfaces and CSS atmosphere](docs/screenshots/home-current.webp)
+![IAVSE centered homepage, capsule navigation and teal-blue mist](docs/screenshots/2026-11-13/home-hero-desktop.webp)
 
 ## About IAVSE
 
@@ -34,7 +34,7 @@ Arrange your work, experience and writing in a visual canvas.
 
 IAVSE is a self-hostable creator community and blog platform. Discover design templates and tools, publish documents and experience, or import a résumé and arrange a personal homepage. Profiles, private drafts, uploads and public versions belong to the signed-in account.
 
-This repository contains the website frontend, backend, tests, AI integrations and deployment examples. Explore how a Next.js application implements a visual editor, Three.js interaction, content publishing and account isolation. Development continues; production deployment, email delivery and public community access require validation in the target environment.
+This repository contains the website frontend, backend, tests, AI integrations and deployment examples. Explore how a Next.js application implements a visual editor, Three.js interaction, content publishing and account isolation. This iteration has completed local functional regression; production deployment, email delivery and public community access require validation in the target environment. See the [current scope](docs/development-status.zh-CN.md) and [2026-11-13 acceptance record](docs/acceptance-2026-11-13.md).
 
 > Original website material uses **[PolyForm Noncommercial 1.0.0](LICENSE)**. Noncommercial study, use, deployment, modification and redistribution are permitted within its terms. Commercial use needs separate permission. Retain the original-author and source notices in [NOTICE](NOTICE). Third-party licenses remain unchanged. Private macOS / Windows client source, installers and live site data are outside this repository.
 
@@ -56,13 +56,15 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 ## Preview
 
-Captured from the actual local production build on **2026-11-10**, showing the independent IAVSE design refinement. Working-tree source hashes and the source base are recorded in the adjacent [captures.json](docs/screenshots/captures.json). Bundled showcase profiles are labeled examples; community captures retain the actual empty state. See [capture details](docs/screenshots/README.md).
+The opening and product overview were captured from the actual local production build on **2026-11-13**, signed out and backed by disposable storage. No posts or user activity were fabricated. [Capture provenance and source hashes](docs/screenshots/2026-11-13/captures.json) identify this iteration. Older images retain their historical dates.
 
 ### Homepage and content entry points
 
-The current **IAVSE design system** independently refines the existing application with self-hosted Geist (the IAVSE Sans CSS alias), cool light and deep-blue canvases, blue-gray type, pale content groups and shared controls. [RBP Portfolio](https://github.com/DavidHDev/rbp-portfolio) remains the component and interaction baseline: Hero → four Projects cards → Contact, with the three-link public capsule. Type, spacing, card surfaces and the CSS atmosphere are IAVSE refinements. Cloudlight informed general design principles; the cancelled direct template migration remains cancelled, with no Cloudlight code, shader or assets included. Community, catalogs, accounts, administration and the editor retain their functional layouts with IAVSE controls and first-viewport entry motion. Authored canvases, published themes and third-party previews keep their own appearance. See [DESIGN.md](DESIGN.md) and the [frontend notes](docs/portfolio-frontend.md) for current rules, source mapping and license boundaries.
+The current platform uses white space, black actions, teal and pale-blue mist, and neutral frosted navigation. Home contains a centered opening, three capability cards, real community content, four resource categories, the bound author's actual public homepage and a getting-started FAQ. Mobile has five bottom destinations; directories share compact search and filters. Reveals replay after full viewport exit. About uses graphite illustrations and an expandable introduction, while public announcements use an opaque black marquee. Authored pages retain their own appearances. See [DESIGN.md](DESIGN.md) and the [frontend source notes](docs/portfolio-frontend.md).
 
-![Four homepage entry cards with IAVSE surfaces and the retained two-column composition](docs/screenshots/product-current.webp)
+![Three product capabilities: resources, community and a personal homepage](docs/screenshots/2026-11-13/home-overview-desktop.webp)
+
+Mobile, dark-theme and filter captures are linked in the acceptance record. The following blog and catalog images were captured on November 10 and document the earlier composition.
 
 ### Blog discovery and personal homepages
 

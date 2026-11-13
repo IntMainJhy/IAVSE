@@ -6,6 +6,10 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const files=[
  'README.md','README.en.md','README.zh-CN.md','CONTRIBUTING.md','SECURITY.md','SUPPORT.md','CODE_OF_CONDUCT.md','CHANGELOG.md',
  'docs/README.md','docs/getting-started.md','docs/architecture.md','docs/troubleshooting.md','docs/brand.md','docs/screenshots/README.md',
+ 'PRODUCT.md','DESIGN.md','docs/development-status.zh-CN.md','docs/acceptance-2026-11-13.md',
+ 'docs/platform-ui.zh-CN.md','docs/portfolio-frontend.md','docs/skill-directory-layout.md',
+ 'docs/管理中心说明.md','docs/administration.en.md','docs/blog-editor.md','docs/blog-editor.zh-CN.md',
+ 'docs/dual-ui-task-board.md','docs/dual-ui-development-plan.zh-CN.md','docs/resource-discovery.md',
  '.github/pull_request_template.md'
 ];
 const errors=[];let checked=0;

@@ -50,7 +50,7 @@ export function SiteAnnouncement(){
   dismiss();
   next?.focus({preventScroll:true});
  };
- const pauseLabel=locale==='zh'?'暂停滚动':locale==='ja'?'スクロールを一時停止':'Pause scrolling';
+ const pauseLabel=locale==='zh'?(paused?'继续滚动':'暂停滚动'):locale==='ja'?(paused?'スクロールを再開':'スクロールを一時停止'):(paused?'Resume scrolling':'Pause scrolling');
  const group=(copy:boolean)=><ul className="notice-edition" aria-hidden={copy||undefined}>{value.items.map((item,index)=><li key={index}>
   <span className="notice-star" aria-hidden="true">✳</span>
   {item.url?(item.url.startsWith('/')?<Link prefetch={false} href={item.url} tabIndex={copy?-1:undefined}>{title(item.title)}<Icon name="arrow"/></Link>:<a href={item.url} target="_blank" rel="noopener noreferrer" tabIndex={copy?-1:undefined}>{title(item.title)}<Icon name="arrow"/></a>):<span>{title(item.title)}</span>}
@@ -59,7 +59,7 @@ export function SiteAnnouncement(){
   <div className="site-announcement-viewport" role="region" aria-label={label} tabIndex={0}><div className="notice-track">{group(false)}{group(true)}</div></div>
   <button type="button" className="site-announcement-close" onClick={close} aria-label={closeLabel}><Icon name="close"/></button>
   <span className="site-announcement-label"><Icon name="megaphone"/><span>{label}</span></span>
-  <button type="button" className="notice-motion" onClick={()=>setPaused(!paused)} aria-label={pauseLabel} aria-pressed={paused}><Icon name={paused?'play':'pause'}/></button>
+  <button type="button" className="notice-motion" onClick={()=>setPaused(!paused)} aria-label={pauseLabel}><Icon name={paused?'play':'pause'}/></button>
  </aside>;
 }
 export function SiteAnnouncementOffset(){const {visible}=useContext(Context);return visible?<div className="site-announcement-offset" aria-hidden="true"/>:null;}

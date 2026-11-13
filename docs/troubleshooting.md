@@ -4,9 +4,9 @@
 
 ## 页面打不开或端口被占用 / Connection refused or port in use
 
-`main` defaults to `127.0.0.1:3008`. Read the terminal URL, confirm the process is still running and stop the previous process before starting another instance. `npm start` needs `npm run build` first. Do not run build and development against the same `.next` directory at the same time.
+The website defaults to `127.0.0.1:3008`. Read the terminal URL, confirm the process is still running and stop the previous process before starting another instance. `npm start` needs `npm run build` first. Do not run build and development against the same `.next` directory at the same time.
 
-主分支默认 `127.0.0.1:3008`。以终端输出为准，确认进程仍在运行；先停止旧实例。生产模式先构建，不要与开发进程共用正在写入的 `.next`。
+网站默认 `127.0.0.1:3008`。以终端输出为准，确认进程仍在运行；先停止旧实例。生产模式先构建，不要与开发进程共用正在写入的 `.next`。
 
 ## 资料或头像像是丢失了 / Profiles or avatars appear missing
 
@@ -38,7 +38,17 @@ Saving a draft does not publish it. Check visibility, publication status, accoun
 
 ## 3D 很慢或未加载 / 3D is slow or unavailable
 
-Try a current browser with WebGL support, a smaller window or the operating system's reduced-motion setting. Mobile, short viewports and reduced motion use readable document flow for the home product chapters. Report the browser, OS, viewport and any console error without including private content.
+The blog directory uses CSS perspective and bounded iframe previews. Use its complete ordinary list when motion or previews are unsuitable. The mist background has a WebGL implementation and a static fallback; WebGL failure should not prevent reading or navigation. Homepage product cards use ordinary document flow and repeat reveals after fully leaving the viewport. Reduced-motion mode shows content directly.
+
+博客画廊的透视、普通目录与柔雾背景是不同模块。先检查普通列表是否可用，再提供浏览器、视口和无隐私内容的错误信息。后台指定主页下线、关闭发现或账号受限后，应从画廊移除；无选择时回到自动展示，不伪造真实成员。
+
+## 筛选菜单挤在一起或被底栏遮住 / Filter layout
+
+当前目录共用 `DirectoryFacet` 与 `directory-toolbar.css`，菜单条目有独立间距，只有当前项填充。其规则位于 `@layer rbp`，以正确处理旧样式的层叠顺序。检查新构建及缓存，不追加全局胶囊规则覆盖菜单；手机弹层应避开底部导航，并在空间不足时向上展开。
+
+## 公告不滚动或动画不重播 / Motion preferences
+
+纯黑公告条支持暂停和关闭；系统减少动态时不强制跑马灯。滚动入场需元素完整离开视口后再次进入才重播，不是在轻微滚动时持续闪烁。深色导航保留背景模糊、透出及镜片高光；不支持 backdrop-filter 时使用可读的实色降级。
 
 ## 构建或原生依赖失败 / Build or native dependency errors
 
