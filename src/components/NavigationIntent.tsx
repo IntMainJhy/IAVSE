@@ -5,15 +5,15 @@ import {useRouter} from 'next/navigation';
 import {useLocale} from './LocaleProvider';
 import {warmGalleryPreviews} from '@/lib/gallery-preview';
 
-const destinations=new Set(['/','/community','/blogs','/resources']);
-const mainNavigation='.organic-header .organic-desktop-nav>a,.organic-header .organic-mobile-menu>nav>a';
+const destinations=new Set(['/','/community','/blogs','/resources','/about']);
+const mainNavigation='.organic-header .organic-desktop-nav>a,.organic-header .organic-mobile-menu>nav>a,[data-iavse-header] .iavse-header__nav a[href],[data-iavse-header] a.iavse-header__brand,.iavse-mobile-dock a.iavse-mobile-dock__tab';
 type Connection={saveData?:boolean;effectiveType?:string};
 
 /** Warm only a chosen public destination, leaving clicks and draft guards alone. */
 export function NavigationIntent(){
  const router=useRouter(),{locale}=useLocale();
  useEffect(()=>{
-  // Four possible keys bound this map; a later visit may refresh stale data.
+  // Five possible keys bound this map; a later visit may refresh stale data.
   const warmed=new Map<string,number>();
   let timer:ReturnType<typeof setTimeout>|undefined,hovered:HTMLAnchorElement|null=null;
   const cancel=()=>{clearTimeout(timer);timer=undefined;hovered=null;};

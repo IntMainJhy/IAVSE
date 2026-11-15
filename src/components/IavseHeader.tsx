@@ -71,7 +71,7 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
         trigger.current?.focus();
       }
     }}>
-    <Link className="iavse-header__brand" href="/" aria-label={copy.home} onClick={() => setOpen(false)}><BrandMark/><span>IAVSE</span></Link>
+    <Link className="iavse-header__brand" href="/" prefetch={false} aria-label={copy.home} onClick={() => setOpen(false)}><BrandMark/><span>IAVSE</span></Link>
     <div className="iavse-repository-links iavse-repositories-mobile">
           <a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · GitHub" title="GitHub"><img src="/brand/github.svg" alt="" width="19" height="19"/></a>
           <a href="https://atomgit.com/InMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · AtomGit" title="AtomGit"><img src="/brand/atomgit.png" alt="" width="20" height="20"/></a>
@@ -83,7 +83,7 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
     <div className="iavse-header__controls" id={panelId} data-open={open}>
       <div className="iavse-header__navigation">
         <nav className="iavse-header__nav" aria-label={copy.nav}>
-          <GlassSwitch items={items} value={active} ariaLabel={copy.nav}/>
+          <GlassSwitch items={items.map(item => ({...item, prefetch: false}))} value={active} ariaLabel={copy.nav}/>
         </nav>
         <span className="iavse-header__setting-label">{t('外观')}</span>
         <ThemeToggle/>

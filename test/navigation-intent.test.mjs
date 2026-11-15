@@ -8,9 +8,9 @@ const source=ts.transpileModule(fs.readFileSync(new URL('../src/components/Navig
 function mount(){
  const listeners=new Map(),windowListeners=new Map(),timers=new Map(),calls=[],previews=[],connection={},exports={},location=new URL('https://site.example/workspace/blog');let effect,time=1000,fail=false,id=0;
  class Element{
-  constructor(href,options={}){this.href=new URL(href,location.href).href;this.target='';this.main=true;this.download=false;Object.assign(this,options);}
+  constructor(href,options={}){this.href=new URL(href,location.href).href;this.target='';this.main=true;this.kind='legacyDesktop';this.download=false;Object.assign(this,options);}
   closest(){return this;}
-  matches(){return this.main;}
+  matches(selector){const owned={legacyDesktop:'.organic-header .organic-desktop-nav>a',legacyMobile:'.organic-header .organic-mobile-menu>nav>a',desktop:'[data-iavse-header] .iavse-header__nav a[href]',brand:'[data-iavse-header] a.iavse-header__brand',dock:'.iavse-mobile-dock a.iavse-mobile-dock__tab'};return this.main&&selector.split(',').includes(owned[this.kind]);}
   hasAttribute(name){return name==='download'&&this.download;}
  }
  const document={addEventListener:(name,handler)=>listeners.set(name,handler),removeEventListener:name=>listeners.delete(name)};
@@ -35,9 +35,9 @@ test('public main navigation warms on pointer, keyboard and touch intent without
  assert.deepEqual(f.previews,['en'],'blog intent also prepares actual preview documents');
 });
 
-test('repeated intent is deduplicated for thirty seconds and remains limited to four destinations',()=>{
- const f=mount();for(let i=0;i<40;i++)for(const href of ['/','/community','/blogs','/resources'])f.intent(i%2?'focusin':'pointerover',href);
- assert.equal(f.calls.length,4);f.advance(29999);f.intent('touchstart','/resources');assert.equal(f.calls.length,4);f.advance(1);f.intent('pointerover','/resources');f.advance(120);assert.equal(f.calls.length,5);f.cleanup();
+test('repeated intent is deduplicated for thirty seconds and remains limited to five destinations',()=>{
+ const f=mount();for(let i=0;i<40;i++)for(const href of ['/','/community','/blogs','/resources','/about'])f.intent(i%2?'focusin':'pointerover',href);
+ assert.equal(f.calls.length,5);f.advance(29999);f.intent('touchstart','/resources');assert.equal(f.calls.length,5);f.advance(1);f.intent('pointerover','/resources');f.advance(120);assert.equal(f.calls.length,6);f.cleanup();
 });
 
 test('footer, account, preview, modified, download and hash links never trigger intent prefetch',()=>{
@@ -69,4 +69,15 @@ test('click initiation, navigation and cleanup discard queued hover work without
   if(release==='pointerdown')f.listeners.get('pointerdown')();else if(release==='navigation')f.windowListeners.get('iavse-navigation-pending')({detail:{pending:true}});else f.cleanup();
   f.advance(200);assert.deepEqual(f.calls,[]);assert.equal(f.timers.size,0);if(release!=='cleanup')f.cleanup();assert.equal(f.windowListeners.size,0);
  }
+});
+
+
+test('the current desktop header, logo and mobile dock warm their actual destinations',()=>{
+ for(const kind of ['desktop','brand','dock','legacyDesktop','legacyMobile']){
+  const f=mount();f.intent('pointerover','/resources',{kind});f.advance(120);f.intent('focusin','/about',{kind});
+  assert.deepEqual(f.calls,['/resources','/about'],kind+' must match the navigation that is rendered');f.cleanup();
+ }
+ const header=fs.readFileSync(new URL('../src/components/IavseHeader.tsx',import.meta.url),'utf8'),dock=fs.readFileSync(new URL('../src/components/IavseMobileDock.tsx',import.meta.url),'utf8');
+ assert.match(header,/prefetch: false/,'main links load on intent instead of prefetching every visible destination');
+ assert.match(dock,/key=\{href\} href=\{href\} prefetch=\{false\}/);
 });

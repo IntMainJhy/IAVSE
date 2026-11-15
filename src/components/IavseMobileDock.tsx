@@ -62,7 +62,7 @@ export function IavseMobileDock({path}: {path: string}) {
   return <nav className="iavse-mobile-dock" aria-label={locale === 'zh' ? '底部导航' : locale === 'ja' ? '下部ナビゲーション' : 'Bottom navigation'}>
     <div className="iavse-mobile-dock__items" style={{'--dock-index': activeIndex} as CSSProperties}>
       {destinations.map(({href,label,short,icon: Icon,active}) =>
-        <Link className="iavse-mobile-dock__tab" key={href} href={href} aria-label={label} aria-current={active ? 'page' : undefined}>
+        <Link className="iavse-mobile-dock__tab" key={href} href={href} prefetch={false} aria-label={label} aria-current={active ? 'page' : undefined}>
           <Icon size={22} aria-hidden="true"/><span>{short}</span>
         </Link>
       )}
