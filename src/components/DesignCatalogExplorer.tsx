@@ -23,7 +23,6 @@ const requestKey=(filters:Filters,favorites:string[])=>catalogQuery(filters).toS
 
 export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
  const {t}=useLocale(),params=useSearchParams(),[filters,setFilters]=useState<Filters>(()=>initial.filters),[favorites,setFavorites]=useState<string[]>([]),[storageMessage,setStorageMessage]=useState(''),[favoritesReady,setFavoritesReady]=useState(false),[preview,setPreview]=useState<CatalogDesign|null>(null),previewTrigger=useRef<HTMLButtonElement|null>(null),sentinel=useRef<HTMLDivElement>(null);
- const [filtersOpen,setFiltersOpen]=useState(Boolean(initial.filters.scenario||initial.filters.industry||initial.filters.visual));
  const key=requestKey(filters,favorites),favoriteSignature=JSON.stringify(favorites),queryString=params.toString();
  const [page,setPage]=useState(()=>({...initial,key:requestKey(initial.filters,[])})),[busy,setBusy]=useState<'idle'|'first'|'more'>('idle'),[error,setError]=useState(''),[manualLoad,setManualLoad]=useState(false);
  const criteria=useRef({filters,favorites,key}),request=useRef<AbortController|null>(null),sequence=useRef(0),first=useRef(true),failedCursor=useRef<string|null>(null);criteria.current={filters,favorites,key};
@@ -74,18 +73,17 @@ export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
   <header className="design-library-heading"><div><h1>{t('UI 设计目录')}</h1><p>{t('按网站用途、参考行业和视觉风格，发现有来源与许可的设计。')}</p></div><a href="#design-source-guide">{t('收录说明')} <Icon name="arrow"/></a></header>
   <div className="directory-toolbar">
    <DirectorySearch action="/resources" fields={{type:'designs',collection:filters.collection,scenario:filters.scenario,industry:filters.industry,visual:filters.visual,favorites:filters.favorites,sort:filters.sort}} value={filters.q} label={t('搜索 UI 设计资源')} placeholder={t('名称、行业、风格或技术栈')} onSearch={q=>update({q})}/>
-   <DirectoryFacet label={t('内容类型')} value={t(groups.find(([id])=>id===filters.collection)?.[1]||'全部资源')}>
+   <DirectoryFacet label={t('内容类型')}>
     {groups.map(([id,label])=><button key={id} type="button" onClick={()=>update({collection:id,...(id==='project'?{industry:''}:{}),...(id==='design-system'?{scenario:''}:{})})} aria-pressed={filters.collection===id}>{t(label)} <span>{counts[id]}</span></button>)}
    </DirectoryFacet>
-   <button className="dir-action" type="button" aria-expanded={filtersOpen} aria-controls="design-directory-filters" onClick={()=>setFiltersOpen(open=>!open)}>{t('筛选')}{selectedFacetCount>0&&<small>{selectedFacetCount}</small>}<Icon name="chevron-down"/></button>
    <button type="button" className="dir-action dir-favorites" aria-pressed={filters.favorites==='1'} onClick={()=>update({favorites:filters.favorites?'':'1'})}><Icon name="heart"/>{t('收藏')} <small>{favoriteCount}</small></button>
-   <DirectoryFacet label={t('排序')} value={t(filters.sort==='name'?'名称 A–Z':'推荐顺序')}>{[['recommended','推荐顺序'],['name','名称 A–Z']].map(([id,label])=><button key={id} type="button" aria-pressed={filters.sort===id} onClick={()=>update({sort:id})}>{t(label)}</button>)}</DirectoryFacet>
    {active&&<button className="dir-action dir-reset" type="button" onClick={()=>update({...empty,collection:filters.collection})}>{t('清除筛选')}</button>}
-   <div className="directory-more" id="design-directory-filters" hidden={!filtersOpen}>
-    {filters.collection!=='design-system'&&<DirectoryFacet label={t('网站用途')} value={t(SCENARIOS.find(x=>x.id===filters.scenario)?.label||'全部')}>{[{id:'',label:'全部'},...availableScenarios].map(({id,label})=><button key={id} type="button" aria-pressed={filters.scenario===id} onClick={()=>update({scenario:id,...(id?{industry:''}:{})})}>{t(label)}</button>)}</DirectoryFacet>}
-    {filters.collection!=='project'&&<DirectoryFacet label={t('参考行业')} value={t(REFERENCE_INDUSTRIES.find(x=>x.id===filters.industry)?.label||'全部参考行业')}>{[{id:'',label:'全部参考行业'},...industryChoices].map(({id,label})=><button key={id} type="button" aria-pressed={filters.industry===id} onClick={()=>update({industry:id,...(id?{scenario:''}:{})})}>{t(label)}</button>)}</DirectoryFacet>}
-    <DirectoryFacet label={t('视觉风格')} value={t(VISUAL_STYLES.find(x=>x.id===filters.visual)?.label||'全部视觉风格')}>{[{id:'',label:'全部视觉风格'},...visualChoices].map(({id,label})=><button key={id} type="button" aria-pressed={filters.visual===id} onClick={()=>update({visual:id})}>{t(label)}</button>)}</DirectoryFacet>
+   <div className="directory-more" id="design-directory-filters">
+    {filters.collection!=='design-system'&&<DirectoryFacet label={t('网站用途')}>{[{id:'',label:'全部'},...availableScenarios].map(({id,label})=><button key={id} type="button" aria-pressed={filters.scenario===id} onClick={()=>update({scenario:id,...(id?{industry:''}:{})})}>{t(label)}</button>)}</DirectoryFacet>}
+    {filters.collection!=='project'&&<DirectoryFacet label={t('参考行业')}>{[{id:'',label:'全部参考行业'},...industryChoices].map(({id,label})=><button key={id} type="button" aria-pressed={filters.industry===id} onClick={()=>update({industry:id,...(id?{scenario:''}:{})})}>{t(label)}</button>)}</DirectoryFacet>}
+    <DirectoryFacet label={t('视觉风格')}>{[{id:'',label:'全部视觉风格'},...visualChoices].map(({id,label})=><button key={id} type="button" aria-pressed={filters.visual===id} onClick={()=>update({visual:id})}>{t(label)}</button>)}</DirectoryFacet>
    </div>
+   <DirectoryFacet label={t('排序')}>{[['recommended','推荐顺序'],['name','名称 A–Z']].map(([id,label])=><button key={id} type="button" aria-pressed={filters.sort===id} onClick={()=>update({sort:id})}>{t(label)}</button>)}</DirectoryFacet>
   </div>
   <div className="design-directory-meta"><p className="design-result" role="status">{waitingForFavorites?t('正在读取收藏…'):loading&&!items.length?t('加载中…'):<>{page.total} {t('项资源')}{hasMore&&<> · {t('已显示')} {items.length}</>}</>}</p><span>{t(filters.collection==='design-system'?'配色、字体与组件规范 · 与完整项目分开收录':'原始实现、项目来源与许可分别列明')}</span></div>
   {storageMessage&&<p className="explorer-storage" role="status">{storageMessage}</p>}

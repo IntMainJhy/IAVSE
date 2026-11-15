@@ -24,10 +24,10 @@ export async function SkillCatalog({query={},children}:{query?:Record<string,str
  return <section className="skill-directory skill-explorer design-studio design-directory design-explorer" aria-label={t('GitHub Skill 目录')}>
   <div className="directory-toolbar">
    <SkillDirectorySearch value={q} category={category} tool={tool} collection={collection}/>
-   <DirectoryFacet label={t('按 AI 工具筛选')} value={t(toolOptions.find(option=>option.id===tool)?.label||'全部 AI 工具')}>
+   <DirectoryFacet label={t('按 AI 工具筛选')}>
     <CatalogNavigation active={tool} className="skill-filter-options" label={t('按 AI 工具筛选')}>{toolOptions.map(option=><Link prefetch={false} key={option.id} href={href(category,option.id)} scroll={false} aria-current={tool===option.id?'page':undefined}>{t(option.label)}<span>{option.count}</span></Link>)}</CatalogNavigation>
    </DirectoryFacet>
-   <DirectoryFacet label={t('Skill 类型')} value={t(skillCategories.find(option=>option.id===category)?.label||'全部类型')}>
+   <DirectoryFacet label={t('Skill 类型')}>
     <CatalogNavigation active={category} className="skill-filter-options" label={t('Skill 类型')}><Link prefetch={false} href={href('all')} scroll={false} aria-current={category==='all'?'page':undefined}>{t('全部类型')}<span>{categoryScope.length}</span></Link>
     {skillCategories.map(type=><Link prefetch={false} key={type.id} href={href(type.id)} scroll={false} aria-current={category===type.id?'page':undefined}>{t(type.label)}<span>{categoryScope.filter(item=>item.category===type.id).length}</span></Link>)}</CatalogNavigation>
    </DirectoryFacet>

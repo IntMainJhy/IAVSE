@@ -25,7 +25,7 @@ export async function CatalogFilter({kind,q,category,categories}:{kind:'docs'|'r
  const href=(value:string)=>{const params=new URLSearchParams();if(kind==='resources')params.set('type','resources');if(q)params.set('q',q);if(value)params.set('category',value);return base+(params.size?'?'+params:'')};
  return <div className="directory-toolbar">
   <Form className="catalog-search catalog-compact-form" action={base} scroll={false} role="search">{kind==='resources'&&<input type="hidden" name="type" value="resources"/>}{category&&<input type="hidden" name="category" value={category}/>}<CatalogSearch value={q} label={t(kind==='docs'?'搜索文档':'搜索资源')}/></Form>
-  <DirectoryFacet label={t('分类')} value={t(category?catalogCategoryLabel(category):'全部分类')}><nav className="catalog-filter-options" aria-label={t('分类')}>
+  <DirectoryFacet label={t('分类')}><nav className="catalog-filter-options" aria-label={t('分类')}>
    <Link prefetch={false} href={href('')} scroll={false} aria-current={!category?'page':undefined}>{t('全部分类')}</Link>
    {categories.map(value=><Link prefetch={false} key={value} href={href(value)} scroll={false} aria-current={category===value?'page':undefined}>{t(catalogCategoryLabel(value))}</Link>)}
   </nav></DirectoryFacet>

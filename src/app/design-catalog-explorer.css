@@ -266,11 +266,8 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer :is(.
  }
  /* Scope this finish to the design directory, across its four site appearances. */
  html[data-site-style] body:has(.resource-page-frame[data-resource-kind=designs]) .iavse-header,
- .resource-page-frame[data-resource-kind=designs]>.resource-hub-tabs,
- .resource-page-frame[data-resource-kind=designs] .resource-hub-tabs :is(.glass-switch,.glass-switch__lens,.glass-switch__item[data-selected=true]),
  #design-directory .directory-toolbar,
- #design-directory .directory-toolbar :is(.explorer-search-toggle,.dir-action,.directory-facet>summary,.explorer-search),
- #design-directory .directory-facet-options {
+ #design-directory .directory-toolbar :is(.explorer-search-toggle,.dir-action,.explorer-search) {
   background:transparent!important;
   background-image:none!important;
   backdrop-filter:blur(20px) saturate(1.1)!important;
