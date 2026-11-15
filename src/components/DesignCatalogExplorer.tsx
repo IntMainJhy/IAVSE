@@ -7,6 +7,7 @@ import {DirectoryFacet} from './DirectoryFacet';
 import {DirectorySearch} from './DirectorySearch';
 import {useLocale} from './LocaleProvider';
 import {DesignPreviewCard,DesignPreviewDialog,type DesignPreviewItem} from './DesignQuickPreview';
+import {DesignMasonry} from './DesignMasonry';
 import {SCENARIOS,REFERENCE_INDUSTRIES,VISUAL_STYLES} from '@/lib/design-taxonomy.mjs';
 import {CATALOG_FILTER_DEFAULTS,readCatalogFilters,catalogQuery,parseCatalogFavorites} from '@/lib/design-catalog-state.mjs';
 import '@/app/design-catalog-explorer.css';
@@ -16,7 +17,6 @@ type Filters={collection:string;q:string;scenario:string;industry:string;visual:
 const empty:Filters=CATALOG_FILTER_DEFAULTS;
 const groups=[['all','全部资源'],['project','完整网站模板'],['design-system','品牌设计规范']];
 const favoriteKey='iavse-design-favorites-v1';
-const kindLabel=(kind?:string)=>kind==='project'?'完整开源项目':kind==='design-system'?'设计规范预览':'页面模板';
 
 type CatalogPage={filters:Filters;revision:string;items:CatalogDesign[];total:number;favoriteCount:number;validFavorites:string[];nextCursor:string|null;facets:{counts:Record<string,number>;scenarios:Record<string,number>;industries:Record<string,number>;visualStyles:Record<string,number>}};
 const requestKey=(filters:Filters,favorites:string[])=>catalogQuery(filters).toString()+(filters.favorites==='1'?'|'+JSON.stringify([...favorites].sort()):'');
@@ -89,14 +89,14 @@ export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
   </div>
   <div className="design-directory-meta"><p className="design-result" role="status">{waitingForFavorites?t('正在读取收藏…'):loading&&!items.length?t('加载中…'):<>{page.total} {t('项资源')}{hasMore&&<> · {t('已显示')} {items.length}</>}</>}</p><span>{t(filters.collection==='design-system'?'配色、字体与组件规范 · 与完整项目分开收录':'原始实现、项目来源与许可分别列明')}</span></div>
   {storageMessage&&<p className="explorer-storage" role="status">{storageMessage}</p>}
-  <div className="design-grid" aria-busy={busy!=='idle'}>{items.map(entry=>{const origin=entry.creator||entry.source;return <article className="design-card design-gallery-card" key={entry.slug} data-template-slug={entry.slug}>
+  <DesignMasonry layoutKey={items.map(entry=>entry.slug).join('|')} busy={busy!=='idle'}>{items.map(entry=>{const origin=entry.creator||entry.source;return <article className="design-card design-gallery-card" key={entry.slug} data-template-slug={entry.slug}>
    <a className="explorer-repository-link" href={entry.template?.kind==='design-system'?entry.source.url:entry.template?.repository||entry.source.url} target="_blank" rel="noopener noreferrer" aria-label={'GitHub · '+entry.title} title={t('原作者')+' · '+origin.name}>GitHub<Icon name="arrow"/></a>
    <DesignPreviewCard entry={entry} onPreview={element=>{previewTrigger.current=element;setPreview(entry)}}/>
    <div className="design-gallery-caption">
-    <div className="explorer-card-title"><h2><Link prefetch={false} href={'/resources/designs/'+entry.slug}>{entry.title}</Link></h2><button type="button" onClick={()=>favorite(entry.slug)} aria-pressed={favorites.includes(entry.slug)} aria-label={(favorites.includes(entry.slug)?t('取消收藏'):t('收藏'))+' · '+entry.title}><Icon name="heart"/></button></div>
-    <div className="design-card-meta"><span>{t(kindLabel(entry.template?.kind))}</span>{entry.license&&<a href={entry.license.url} target="_blank" rel="noopener noreferrer" aria-label={entry.license.name+' · '+t('使用许可')}>{entry.license.name} ↗</a>}</div>
+    <h2><Link prefetch={false} href={'/resources/designs/'+entry.slug}>{entry.title}</Link></h2>
    </div>
-  </article>})}</div>
+   <button className="design-gallery-favorite" type="button" onClick={()=>favorite(entry.slug)} aria-pressed={favorites.includes(entry.slug)} aria-label={(favorites.includes(entry.slug)?t('取消收藏'):t('收藏'))+' · '+entry.title}><Icon name="heart"/></button>
+  </article>})}</DesignMasonry>
   {!waitingForFavorites&&!loading&&!error&&!items.length&&<div className="design-empty"><Icon name="search"/><h2>{t(filters.favorites==='1'&&!favorites.length?'还没有收藏的模板':'没有匹配这些条件的模板')}</h2><p>{t('试试减少筛选条件，或从全部模板开始浏览。')}</p><button type="button" onClick={()=>update(empty)}>{t('浏览全部资源')}</button></div>}
   {items.length>0&&<div className="explorer-scroll-status" ref={sentinel} role="status" aria-live="polite">{busy==='more'?t('加载中…'):hasMore?t('继续向下浏览，更多模板会自动出现。'):t('已显示全部匹配模板。')}{manualLoad&&hasMore&&!error&&<button type="button" disabled={busy!=='idle'} onClick={()=>void run(page.nextCursor,true)}>{t('继续加载')}</button>}</div>}
   {error&&<div className="explorer-storage" role="alert">{error} <button type="button" className="explorer-reset" onClick={()=>void run(failedCursor.current,!!failedCursor.current)}>{t('重新加载')}</button></div>}

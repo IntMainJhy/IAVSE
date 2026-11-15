@@ -139,103 +139,112 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer :is(.
  #design-directory .explorer-template-controls > label { flex-wrap:wrap; gap:4px }
 }
 
-/* Image-led directory: keep the interface large and move full descriptions to details. */
+/* Staggered image gallery. Full source and license information remains in details. */
 @layer rbp {
-#design-directory.design-explorer .design-grid {
- grid-template-columns:repeat(3,minmax(0,1fr))!important;
- grid-auto-rows:auto!important;
- align-items:start!important;
- gap:32px 24px!important;
+ #design-directory.design-explorer .design-grid {
+  --design-gallery-gap:24px;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:auto!important;
+  align-items:start!important;
+  gap:var(--design-gallery-gap)!important;
+ }
+ #design-directory.design-explorer .design-grid[data-masonry-ready=true] {
+  grid-auto-rows:1px!important;
+  row-gap:0!important;
+ }
+ #design-directory .design-gallery-card {
+  min-width:0;
+  border:0!important;
+  border-radius:8px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  transform:none!important;
+  content-visibility:visible!important;
+  contain-intrinsic-size:none!important;
+ }
+ #design-directory .design-gallery-card:hover { box-shadow:none!important }
+ #design-directory .design-gallery-caption h2 {
+  margin:0!important;
+  color:#fff!important;
+  font-size:18px!important;
+  line-height:1.4!important;
+  font-weight:600!important;
+  overflow-wrap:anywhere;
+ }
+ #design-directory .design-gallery-caption h2 a { color:#fff!important }
+ @media(max-width:1199px) {
+  #design-directory.design-explorer .design-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important }
+ }
+ @media(max-width:680px) {
+  #design-directory.design-explorer .design-grid { --design-gallery-gap:20px;grid-template-columns:1fr!important }
+  #design-directory .design-gallery-caption h2 { font-size:16px!important }
+ }
 }
 #design-directory .design-gallery-card {
- min-width:0;
- border:0!important;
- border-radius:0!important;
- background:transparent!important;
- box-shadow:none!important;
- overflow:visible!important;
- transform:none!important;
- contain-intrinsic-size:auto 420px!important;
+ position:relative;
+ grid-row-end:span var(--gallery-span,1);
 }
-#design-directory .design-gallery-card:hover { box-shadow:none!important }
-}
+#design-directory .design-gallery-card:nth-child(6n+1) { --gallery-ratio:4/5 }
+#design-directory .design-gallery-card:nth-child(6n+2) { --gallery-ratio:1 }
+#design-directory .design-gallery-card:nth-child(6n+3) { --gallery-ratio:4/3 }
+#design-directory .design-gallery-card:nth-child(6n+4) { --gallery-ratio:5/4 }
+#design-directory .design-gallery-card:nth-child(6n+5) { --gallery-ratio:4/5 }
+#design-directory .design-gallery-card:nth-child(6n) { --gallery-ratio:1 }
 #design-directory .design-gallery-card .design-card-preview {
- aspect-ratio:4/3;
+ aspect-ratio:var(--gallery-ratio,1);
  overflow:hidden;
  border:1px solid var(--ds-line);
  border-radius:8px;
  background:var(--ds-panel);
 }
 #design-directory .design-gallery-card .design-media { height:100% }
-#design-directory .design-gallery-card .design-media>img {
- transition:transform .3s ease;
+#design-directory .design-gallery-card .design-media>img { transition:transform .3s ease }
+#design-directory .design-gallery-card .design-card-preview::after {
+ content:"";position:absolute;inset:auto 0 0;height:140px;z-index:1;
+ background:linear-gradient(180deg,transparent,rgb(7 12 20 / .72));
+ pointer-events:none;
+}
+#design-directory .design-gallery-card .explorer-repository-link,
+#design-directory.design-explorer .design-gallery-favorite,
+#design-directory .design-gallery-card .design-preview-trigger>span {
+ background:rgb(255 255 255 / .96);
+ color:#20252b;
+ box-shadow:0 2px 10px rgb(0 0 0 / .08);
+ backdrop-filter:none;
 }
 #design-directory .design-gallery-card .explorer-repository-link {
- top:12px;
- left:12px;
- min-height:36px;
- padding:7px 11px;
- background:rgb(255 255 255 / .95);
- color:#20252b;
- box-shadow:0 2px 10px rgb(0 0 0 / .08);
- backdrop-filter:none;
+ top:12px;left:12px;min-height:36px;padding:7px 11px;
 }
+#design-directory.design-explorer .design-gallery-favorite {
+ position:absolute;top:12px;right:12px;z-index:5;
+ display:grid;place-items:center;
+ width:44px;height:44px;min-height:44px;
+ padding:12px;border:0;border-radius:50%;
+}
+#design-directory .design-gallery-favorite .icon { width:20px;height:20px }
+#design-directory .design-gallery-favorite[aria-pressed=true] .icon { fill:currentColor }
 #design-directory .design-gallery-card .design-preview-trigger>span {
- right:12px;
- bottom:12px;
- min-height:36px;
- padding:8px 12px;
- font-size:12px;
- background:rgb(255 255 255 / .95);
- color:#20252b;
- box-shadow:0 2px 10px rgb(0 0 0 / .08);
- backdrop-filter:none;
+ right:12px;bottom:12px;min-height:44px;padding:8px 12px;font-size:12px;
 }
-#design-directory .design-gallery-caption { padding:10px 0 0;min-width:0 }
-#design-directory .design-gallery-caption .explorer-card-title { align-items:center;gap:8px }
-@layer rbp {
-#design-directory .design-gallery-caption h2 {
- margin:0!important;
- font-size:17px!important;
- line-height:1.4!important;
- font-weight:550!important;
- overflow-wrap:anywhere;
+#design-directory .design-gallery-caption {
+ position:absolute;inset:auto 0 0;z-index:3;
+ display:flex;align-items:flex-end;min-height:108px;
+ padding:44px 132px 12px 16px;
+ border-radius:0 0 8px 8px;
+ pointer-events:none;
 }
+#design-directory .design-gallery-caption h2 a {
+ display:flex;align-items:center;min-height:44px;
+ padding-block:6px;pointer-events:auto;text-shadow:0 1px 4px rgb(0 0 0 / .4);
 }
-#design-directory .design-gallery-caption h2 a { display:block;padding-block:8px }
-#design-directory .design-gallery-caption .explorer-card-title>button {
- width:44px;
- min-width:44px;
- height:44px;
- min-height:44px;
- margin:0 -8px 0 0;
- padding:12px;
- border-radius:50%;
-}
-#design-directory .design-gallery-caption .design-card-meta {
- display:flex;
- justify-content:space-between;
- gap:12px;
- margin-top:0;
- font-size:12px!important;
- line-height:1.6;
- color:var(--ds-muted);
-}
-#design-directory .design-gallery-caption .design-card-meta>a { flex:none }
+#design-directory .design-gallery-caption h2 a:hover { text-decoration:underline;text-underline-offset:4px }
 @media(hover:hover) and (prefers-reduced-motion:no-preference) {
  #design-directory .design-gallery-card .design-card-preview:hover .design-media>img { transform:scale(1.025) }
 }
-@layer rbp {
-@media(max-width:1199px) {
- #design-directory.design-explorer .design-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important }
-}
 @media(max-width:680px) {
- #design-directory.design-explorer .design-grid { grid-template-columns:1fr!important;gap:28px!important }
-}
-}
-@media(max-width:680px) {
- #design-directory .design-gallery-card .explorer-repository-link,
- #design-directory .design-gallery-card .design-preview-trigger>span { min-height:44px }
+ #design-directory .design-gallery-card .explorer-repository-link { min-height:44px }
+ #design-directory .design-gallery-caption { padding-left:14px;padding-right:124px }
 }
 @media(prefers-reduced-motion:reduce) {
  #design-directory .design-gallery-card .design-media>img { transition:none }
