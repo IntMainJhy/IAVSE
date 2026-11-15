@@ -16,7 +16,7 @@ const sourceRoot=fileURLToPath(new URL('../src/',import.meta.url));
 const motionTag=tag=>({initial,animate,exit,transition,layout,whileInView,viewport,onHoverStart,onHoverEnd,children,...props})=>React.createElement(tag,props,children);
 const image=({fill,priority,unoptimized,...props})=>React.createElement('img',props);
 const emptyContent={posts:[],works:[],space:null,communityUnavailable:false};
-function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}){
+function components(locale='zh',{content=emptyContent,user=null,pathname='/',style='anime'}={}){
  const reads=[];
  const avatar=({name,avatarId})=>React.createElement('span',{'data-avatar-name':name},avatarId?React.createElement('img',{src:'/media/'+encodeURIComponent(avatarId),alt:''}):null);
  const modules={
@@ -27,6 +27,7 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/'}={}
   'lucide-react':new Proxy({},{get:()=>()=>null}),
   'motion/react':{useReducedMotion:()=>true,motion:new Proxy({},{get:(_,tag)=>motionTag(tag)}),LayoutGroup:({children})=>children,AnimatePresence:({children})=>children},
   '@/lib/home-experience.mjs':experience,
+  './HomeStyleProvider':{useHomeStyle:()=>({style,select:()=>{},saved:true})},
   '@/lib/landing-content.mjs':{loadLandingContent:async(req,requestedLocale)=>{reads.push({req,locale:requestedLocale});return content;}},
   '@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},
   '@/components/LocaleProvider':{useLocale:()=>({locale,t:value=>value}),LanguageSwitcher:()=>React.createElement('button',{'aria-label':'Language','data-language-switcher':true})},
@@ -67,7 +68,7 @@ const text=node=>DomUtils.textContent(node);
 
 test('homepage server markup keeps the hero, community empty state, resource links, blog space and footer in reading order',async()=>{
  const {document,copy}=await render(),c=copy.landingCopy('zh'),all=find(document,()=>true);
- const hero=find(document,node=>node.name==='h1');assert.equal(hero.length,1);assert.equal(text(hero[0]),c.title.join(''));
+ const hero=find(document,node=>node.name==='h1');assert.equal(hero.length,1);assert.equal(text(hero[0]),'把热爱，写成自己的故事。');
  const filters=find(document,node=>node.attribs.role==='group'&&node.attribs['aria-label']===c.filters);assert.equal(filters.length,1);
  const buttons=find(filters[0],node=>node.name==='button');
  assert.deepEqual(buttons.map(text),[c.all,c.works,c.discussions]);assert.deepEqual(buttons.map(node=>node.attribs['aria-pressed']),['true','false','false']);
@@ -94,7 +95,7 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  const primary=find(document,node=>node.name==='nav'&&node.attribs['aria-label']===c.nav);
  assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/','/community','/resources','/blogs','/about']);
  assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length,1);
- assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-flow-backdrop-stub')).length,1,'the optional background is isolated from server content');
+ assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-home-hero')).length,1,'one selected scene accompanies server content');
  assert.equal(spaces[0].attribs.id,'home-blog');
  assert.ok(text(spaces[0]).includes(c.spaceUnavailable));
  assert.equal(find(spaces[0],node=>['img','button'].includes(node.name)).length,0);
@@ -113,12 +114,9 @@ test('three locales preserve real destinations, the published homepage preview a
  for(const locale of ['zh','en','ja']){
   const empty=await render(locale),c=empty.copy.landingCopy(locale),content=text(empty.document);
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-iavse-landing'))[0].attribs['data-landing-locale'],locale);
-  for(const value of [...c.title,c.intro,c.communityTitle,c.communityIntro,c.emptyTitle,c.prompts.all,c.writePost,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.spaceUnavailable,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
-  const entrances=find(empty.document,node=>node.name==='nav'&&node.attribs['aria-label']===c.productEntries);
-  assert.equal(entrances.length,1);
-  const entryLinks=find(entrances[0],node=>node.name==='a');
-  assert.deepEqual(entryLinks.map(node=>[text(node),node.attribs.href]),[[c.community,'/community'],[c.resources,'/resources']]);
-  assert.ok(entryLinks.every(node=>!Object.hasOwn(node.attribs,'aria-current')),'neither destination is the homepage');
+  for(const value of [c.communityTitle,c.communityIntro,c.emptyTitle,c.prompts.all,c.writePost,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.spaceUnavailable,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
+  const entryLinks=find(empty.document,node=>node.name==='a'&&node.attribs.class==='hs-cta');
+  assert.equal(entryLinks.length,1);assert.equal(entryLinks[0].attribs.href,'/resources');
   for(const href of ['/','/login','/resources','/community','/blogs','/workspace/account','/about','/legal/privacy','https://github.com/IntMainJhy/IAVSE'])assert.ok(find(empty.document,node=>node.name==='a'&&node.attribs.href===href).length,`${locale}: ${href}`);
   assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-language-switcher')).length,1);
   for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!content.includes(marker),marker);
@@ -227,7 +225,8 @@ test('the root owns one shared header on home without a second backdrop or a pag
  assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,1);
  assert.equal(find(landing,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,0,'home content cannot replace the moving root header');
  assert.equal(find(document,n=>n.attribs['data-iavse-platform']==='home').length,1);
- assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-flow-backdrop-stub')).length,1,'home retains its original local mist');
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-home-hero')).length,1,'home owns exactly one selected scene');
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-flow-backdrop-stub')).length,0,'the previous mist is not rendered behind a selected scene');
  const empty=find(document,n=>Object.hasOwn(n.attribs,'data-landing-empty'))[0];
  assert.ok(Object.hasOwn(empty.attribs,'data-landing-reveal'),'the initial community empty card joins scroll entry just like populated cards');
  for(const pathname of ['/blog/public-member','/blogs/showcase/editorial','/workspace/blog','/resources/designs/item/preview']){
@@ -301,5 +300,23 @@ test('configured site updates appear once on visitor routes and stay outside man
   const {notices,runtime}=components('en',{pathname});
   const html=renderToStaticMarkup(React.createElement(notices.SiteAnnouncementsProvider,{initial:{enabled:true,items:[{title:'Public notice',url:'/about'}]}},React.createElement(runtime.PortfolioRuntime)));
   assert.equal(find(parseDocument(html),node=>node.name==='aside'&&node.attribs.class==='site-announcement').length,expected,pathname);
+ }
+});
+
+
+test('all selected visual worlds retain live resource destinations and one top-right style selector',async()=>{
+ for(const style of ['fly','brand','anime']){
+  const {document}=await render('zh',{style});
+  assert.equal(find(document,n=>n.attribs['data-home-hero']===style).length,1);
+  assert.equal(find(document,n=>n.name==='canvas').length,1,'one active scene only');
+  assert.equal(find(document,n=>n.name==='iframe').length,0,'homepage styles are native components');
+  const hero=find(document,n=>n.attribs['data-home-hero']===style)[0];
+  assert.equal(find(hero,n=>n.name==='h1').length,1);
+  assert.equal(find(hero,n=>n.attribs.class==='hs-cta')[0].attribs.href,'/resources');
+  const trigger=find(document,n=>n.name==='button'&&n.attribs.class==='home-style-trigger');
+  assert.equal(trigger.length,1);assert.equal(trigger[0].attribs['aria-expanded'],'false');
+  const options=find(document,n=>n.attribs.role==='option'&&n.attribs['data-style-option']);
+  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime']);
+  assert.deepEqual(options.filter(n=>n.attribs['aria-selected']==='true').map(n=>n.attribs['data-style-option']),[style]);
  }
 });

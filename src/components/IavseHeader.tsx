@@ -7,6 +7,7 @@ import {ArrowUpRight, Ellipsis, UserRound, X} from 'lucide-react';
 import {AuthNav} from '@/components/AuthNav';
 import {BrandMark} from '@/components/BrandMark';
 import {LanguageSwitcher, useLocale} from '@/components/LocaleProvider';
+import {HomeStyleSwitcher} from './landing/HomeStyleSwitcher';
 import {ThemeToggle} from '@/components/ThemeToggle';
 import {GlassSwitch} from '@/components/ui/GlassSwitch';
 import {landingCopy} from '@/lib/landing-copy';
@@ -22,10 +23,17 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
   const {locale, t} = useLocale();
   const copy = landingCopy(locale);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const panelId = useId();
   const root = useRef<HTMLElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   useEffect(() => { setOpen(false); }, [path]);
+  useEffect(() => {
+    let previous = false;
+    const update = () => {const next = window.scrollY > 80; if (previous !== next) {previous = next; setScrolled(next);}};
+    update(); window.addEventListener('scroll', update, {passive: true});
+    return () => window.removeEventListener('scroll', update);
+  }, []);
   useEffect(() => {
     if (!open) return;
     const outside = (event: PointerEvent) => {
@@ -52,7 +60,7 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
   const active = path === '/' ? 'home' : path === '/about' ? 'about' : /^\/community(?:\/|$)/.test(path) ? 'community'
     : /^\/(?:resources|docs|skills)(?:\/|$)/.test(path) ? 'resources'
       : /^\/blogs?(?:\/|$)/.test(path) ? 'blogs' : null;
-  return <header className={`iavse-header${floating ? ' iavse-header--floating' : ''} ${className}`.trim()} data-iavse-header ref={root}
+  return <header className={`iavse-header${floating ? ' iavse-header--floating' : ''} ${className}`.trim()} data-iavse-header data-home-header={path === '/' ? true : undefined} data-home-scrolled={scrolled} ref={root}
     onBlur={event => {
       if (open && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false);
     }}
@@ -93,5 +101,6 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
         {copy.about}<ArrowUpRight size={16} aria-hidden="true"/>
       </Link>
     </div>
+    {path === '/' && <HomeStyleSwitcher/>}
   </header>;
 }

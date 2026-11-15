@@ -12,7 +12,8 @@ import {useLocale} from '@/components/LocaleProvider';
 import {landingCopy} from '@/lib/landing-copy';
 import {LandingResourceShowcase, type ResourceShowcaseGroup} from './LandingResourceShowcase';
 import {LandingSpaceShowcase} from './LandingSpaceShowcase';
-import IavseFlowBackdrop from './IavseFlowBackdrop';
+import {LandingHero} from './LandingHero';
+import {useHomeStyle} from './HomeStyleProvider';
 
 export type LandingPost = {
   id: string; title: string; summary: string; category: string; source: string; license: string;
@@ -83,6 +84,7 @@ function EmptyContent({filter, unavailable}: {filter: Filter; unavailable: boole
 export function IavseLanding({content, resources}: {content: LandingContent; resources: ResourceShowcaseGroup[]}) {
   const {locale} = useLocale();
   const c = landingCopy(locale);
+  const {style} = useHomeStyle();
   const [filter, setFilter] = useState<Filter>('all');
   const root = useRef<HTMLDivElement>(null);
   const cycles = useRef(new WeakMap<HTMLElement, {armed: boolean}>());
@@ -199,20 +201,8 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
     return () => { element.removeEventListener('pointermove', move); cancelAnimationFrame(frame); };
   }, []);
 
-  return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale}>
-    <section className="iv-hero">
-      <div className="iavse-shell-atmosphere"><IavseFlowBackdrop/></div>
-      <div className="iv-container iv-hero-copy" data-landing-reveal>
-        <h1 className="iv-title">{c.title.map(line => <span key={line}>{line}</span>)}</h1>
-        <p>{c.intro}</p>
-        <nav className="iv-actions" aria-label={c.productEntries}>
-          <GlassSwitch className="iv-entry-switch" previewLinks value={null} ariaLabel={c.productEntries} items={[
-            {id: 'community', label: c.community, href: '/community'},
-            {id: 'resources', label: c.resources, href: '/resources'},
-          ]}/>
-        </nav>
-      </div>
-    </section>
+  return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale} data-home-style={style}>
+    <LandingHero/>
     <div className="iv-container">
       <section className="iv-product-overview" aria-labelledby="iv-product-title">
         <header data-landing-reveal><h2 id="iv-product-title">{c.overviewTitle}</h2><p>{c.overviewBody}</p></header>
