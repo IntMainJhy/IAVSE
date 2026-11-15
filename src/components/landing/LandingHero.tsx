@@ -31,7 +31,6 @@ export function LandingHero() {
       {style !== 'brand' && <><p className="hs-description">{description}</p><Link href="/resources" className="hs-cta">{cta}</Link></>}
     </div>
     {style === 'brand' && <><div className="hs-brand-object"><LandingScene key={style} style={style} paused={paused} opened={opened} dusk={false}/><button type="button" className="hs-v-control" aria-label={zh ? '展开立体字标' : ja ? '立体ロゴを開く' : 'Open the sculpted wordmark'} aria-pressed={opened} onClick={() => setOpened(!opened)}/></div><div className="hs-brand-action"><Link href="/resources" className="hs-cta" onPointerEnter={() => setOpened(true)} onPointerLeave={() => setOpened(false)}>{cta}</Link><p className="hs-description">{description}</p></div></>}
-    {style === 'anime' && <div className="hs-vertical" aria-hidden="true">{zh ? '风起时，灵感也有了方向。' : ja ? '風が吹けば、ひらめきも動き出す。' : 'FOLLOW THE BREEZE, FIND YOUR IDEA.'}</div>}
 
   </section>;
 }

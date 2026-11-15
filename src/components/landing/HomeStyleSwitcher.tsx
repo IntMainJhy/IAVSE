@@ -13,7 +13,7 @@ export function HomeStyleSwitcher({className = '', onOpen}: {className?: string;
   const root = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null), id = useId();
   const [open, setOpen] = useState(false), [focus, setFocus] = useState(0);
   const names = locale === 'en' ? ['Character tide', 'Open IAVSE', 'Sea breeze', 'Original IAVSE'] : locale === 'ja' ? ['文字の潮流', 'IAVSE を開く', '海風の便り', 'オリジナル'] : ['字符潮汐', '打开 IAVSE', '海风来信', '经典原版'];
-  const descriptions = locale === 'en' ? ['Flowing characters', 'Sculpted wordmark', 'An illustrated sunset', 'Original layout and flowing mist'] : locale === 'ja' ? ['流れる文字の波', '立体ブランドロゴ', '夕暮れのイラスト', '元のレイアウトと霧の光'] : ['流动的字符波面', '立体品牌与光影', '夕阳与动漫插画', '原版布局与流动雾光'];
+  const descriptions = locale === 'en' ? ['Flowing characters', 'Sculpted wordmark', 'Daylight by the sea', 'Original layout and flowing mist'] : locale === 'ja' ? ['流れる文字の波', '立体ブランドロゴ', '朝の光と海辺のイラスト', '元のレイアウトと霧の光'] : ['流动的字符波面', '立体品牌与光影', '晨光与海边创作', '原版布局与流动雾光'];
   const styles: HomeStyle[] = ['fly', 'brand', 'anime', 'classic'];
   const label = locale === 'en' ? 'Switch UI' : locale === 'ja' ? 'UI を切り替え' : '切换 UI';
   const previousPath = useRef(path);

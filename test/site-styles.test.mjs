@@ -31,7 +31,7 @@ test('style direction changes more than color while using the shared semantic ro
 
 
 test('the original UI retains its light and dark palette independently of the three fixed scenes',()=>{
- assert.equal(homeStyleColorMode('classic'),'light');assert.equal(homeStyleColorMode('classic','dark'),'dark');assert.equal(homeStyleColorMode('brand','dark'),'light');assert.equal(homeStyleColorMode('anime','light'),'dark');
+ assert.equal(homeStyleColorMode('classic'),'light');assert.equal(homeStyleColorMode('classic','dark'),'dark');assert.equal(homeStyleColorMode('brand','dark'),'light');assert.equal(homeStyleColorMode('anime','light'),'light');assert.equal(homeStyleColorMode('anime','dark'),'light');assert.equal(homeStyleColorMode('fly','light'),'dark');
  const dark=roles('classic','dark');for(const bg of ['--iavse-background','--iavse-canvas','--iavse-muted'])for(const text of ['--iavse-foreground','--iavse-secondary','--iavse-subtle'])assert.ok(contrast(dark[bg],dark[text])>=4.5);
 });
 

@@ -29,7 +29,7 @@
 
 </div>
 
-![IAVSE 默认首页：海风来信，夕阳、海岸与动漫插画](docs/screenshots/2026-11-15/home-hero-desktop.webp)
+![IAVSE 默认首页：海风来信，晨光、海岸与长发创作者插画](docs/screenshots/2026-11-15-daylight/home-hero-desktop.webp)
 
 ## 关于 IAVSE
 
@@ -63,22 +63,22 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 ## 界面预览
 
-以下均为 **2026-11-15** 本地生产构建的实际截图，使用独立临时数据库、简体中文和未登录状态。没有复制现网站数据或填造社区动态；站长资料来自仓库内置的公开默认资料，展廊示例在页面明确标注为虚构。来源、尺寸及源码哈希见[截图记录](docs/screenshots/2026-11-15/captures.json)，[历史截图](docs/screenshots/README.md)保留原日期。
+以下均为 **2026-11-15** 本地生产构建的实际截图，使用独立临时数据库、简体中文和未登录状态。没有复制现网站数据或填造社区动态；站长资料来自仓库内置的公开默认资料，展廊示例在页面明确标注为虚构。来源、尺寸及源码哈希见[截图记录](docs/screenshots/2026-11-15-daylight/captures.json)，[历史截图](docs/screenshots/README.md)保留原日期。
 
 ### 四套外观，同一个网站
 
-首次访问默认展示「海风来信」，顶部公告条默认关闭。右上角切换后，资源、社区、博客目录、账号与创作工具同步变化，刷新和切页继续保留选择。功能页使用静态背景，首页保留动态场景；成员自己的作品和模板保持作者设计。[切换说明](docs/home-style-switch.zh-CN.md) · [设计规范](DESIGN.md)。
+首次访问默认展示浅色「海风来信」：纸白、海盐蓝与晨光里的长发创作者。顶部公告条默认关闭。右上角切换后，资源、社区、博客目录、账号与创作工具同步变化，刷新和切页继续保留选择。功能页使用静态背景，首页保留动态场景；成员自己的作品和模板保持作者设计。[切换说明](docs/home-style-switch.zh-CN.md) · [设计规范](DESIGN.md)。
 
 | 海风来信 · 默认 | 字符潮汐 |
 | --- | --- |
-| ![海风来信](docs/screenshots/2026-11-15/home-hero-desktop.webp) | ![字符潮汐的流动字符波面](docs/screenshots/2026-11-15/home-fly-desktop.webp) |
+| ![海风来信](docs/screenshots/2026-11-15-daylight/home-hero-desktop.webp) | ![字符潮汐的流动字符波面](docs/screenshots/2026-11-15/home-fly-desktop.webp) |
 | **打开 IAVSE** | **经典原版** |
 | ![打开 IAVSE 的立体品牌字标](docs/screenshots/2026-11-15/home-brand-desktop.webp) | ![经典原版的居中开场与柔雾](docs/screenshots/2026-11-15/home-classic-desktop.webp) |
 
 <details>
 <summary>查看四项切换菜单</summary>
 
-![右上角的四套 UI 选择](docs/screenshots/2026-11-15/home-style-menu.webp)
+![右上角的四套 UI 选择](docs/screenshots/2026-11-15-daylight/home-style-menu.webp)
 
 </details>
 
@@ -86,20 +86,22 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 手机保留五项底部导航和直接可用的 UI 切换入口。首页通过资源、经验分享与个人主页三组能力连接后续功能。
 
-<img src="docs/screenshots/2026-11-15/home-hero-mobile.webp" alt="390px 手机端的海风来信与底部导航" width="260">
+<img src="docs/screenshots/2026-11-15-daylight/home-hero-mobile.webp" alt="390px 手机端的海风来信与底部导航" width="260">
 
-![首页三组产品能力：资源、社区与个人主页](docs/screenshots/2026-11-15/home-overview-desktop.webp)
+![首页三组产品能力：资源、社区与个人主页](docs/screenshots/2026-11-15-daylight/home-overview-desktop.webp)
 
 ### 功能页面
 
-![博客空间：公开站长主页与标注清楚的内置示例](docs/screenshots/2026-11-15/blogs-desktop.webp)
+![博客空间：公开站长主页与标注清楚的内置示例](docs/screenshots/2026-11-15-daylight/blogs-desktop.webp)
 
 <details>
 <summary>查看资源中心与社区</summary>
 
-![资源中心：UI 设计、AI Skills、文档、网站与工具](docs/screenshots/2026-11-15/resources-desktop.webp)
+![资源中心：UI 设计、AI Skills、文档、网站与工具](docs/screenshots/2026-11-15-daylight/resources-desktop.webp)
 
-![社区：未登录导航、分类与实际空状态](docs/screenshots/2026-11-15/community-desktop.webp)
+![UI 模板以原比例大图瀑布流展示](docs/screenshots/2026-11-15-daylight/design-gallery-desktop.webp)
+
+![社区：未登录导航、分类与实际空状态](docs/screenshots/2026-11-15-daylight/community-desktop.webp)
 
 </details>
 

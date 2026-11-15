@@ -1,6 +1,20 @@
 # Interface captures / 界面截图
 
-## 2026-11-15 当前四套 UI
+## 2026-11-15 浅色海风来信 / Daylight Sea breeze
+
+当前默认外观使用新生成的长发创作者插画、纸白和海盐蓝。以下是独立临时数据、未登录状态、中文的本地生产构建截图；压缩只转 WebP，未更改页面内容。[来源、尺寸和源码哈希](2026-11-15-daylight/captures.json)。其他三套主题沿用下方记录，旧截图保留历史日期。
+
+| 页面 / View | 图片 / Image |
+| --- | --- |
+| 默认首页 / Homepage | [桌面](2026-11-15-daylight/home-hero-desktop.webp) · [手机](2026-11-15-daylight/home-hero-mobile.webp) |
+| 四套 UI 菜单 / Appearance menu | [截图](2026-11-15-daylight/home-style-menu.webp) |
+| 首页产品能力 / Product overview | [截图](2026-11-15-daylight/home-overview-desktop.webp) |
+| 原比例大图画廊 / Design gallery | [桌面](2026-11-15-daylight/design-gallery-desktop.webp) · [手机](2026-11-15-daylight/design-gallery-mobile.webp) |
+| 资源 / Resources | [截图](2026-11-15-daylight/resources-desktop.webp) |
+| 社区 / Community | [截图](2026-11-15-daylight/community-desktop.webp) |
+| 博客空间 / Blog spaces | [截图](2026-11-15-daylight/blogs-desktop.webp) |
+
+## 2026-11-15 四套 UI 首次收尾（历史）
 
 以下均为实际生产构建截图，使用独立临时数据和未登录状态。默认外观为海风来信，顶部公告条关闭。没有复制真实数据库或填造社区动态；站长资料来自仓库中的公开默认资料，展廊中的人物示例明确标记为虚构。[拍摄来源与源码哈希](2026-11-15/captures.json)。
 

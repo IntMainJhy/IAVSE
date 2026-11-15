@@ -7,9 +7,9 @@ for(const style of ['fly','brand','anime','classic'])for(const route of routes){
  assert.equal(response.status,200,route);
  const html=await response.text(),root=html.match(/<html\b[^>]*>/)?.[0]||'';
  assert.ok(root.includes(`data-site-style="${style}"`),route+' restores the requested world in its first response');
- assert.ok(root.includes(`data-color-mode="${['brand','classic'].includes(style)?'light':'dark'}"`),route+' uses matching legacy appearance');
+ assert.ok(root.includes(`data-color-mode="${style!=='fly'?'light':'dark'}"`),route+' uses matching legacy appearance');
  assert.ok(html.includes('class="home-style-trigger"'),route+' offers the shared selector');
- if(html.includes('data-rbp-route='))assert.ok(html.includes(`class="rbp-surface${['brand','classic'].includes(style)?'':' dark'}"`),route+' server surface matches its root before hydration');
+ if(html.includes('data-rbp-route='))assert.ok(html.includes(`class="rbp-surface${style!=='fly'?'':' dark'}"`),route+' server surface matches its root before hydration');
 }
 for(const invalid of ['','monochrome','constructor']){
  const response=await fetch(base+'/resources',{headers:{cookie:`iavse-home-style=${invalid}; site-ui=monochrome`}}),html=await response.text();

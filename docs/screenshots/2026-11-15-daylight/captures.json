@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-15",
+  "sourceBaseCommit": "af8f86b01f4c5fab987791b6bfd41842718c4c9c",
+  "capture": "Local production build, Chromium/Ego browser, 100% layout scale, device pixel ratio 1, signed out, Simplified Chinese.",
+  "data": "Disposable isolated storage; no live site database or private data copied. Public owner defaults and explicitly labeled fictional gallery samples are shipped in the repository.",
+  "processing": "WebP compression only, complete viewport composition retained.",
+  "art": "Original AI-generated artwork; long-hair edit requested by the user. See public/media/home-styles/sea-breeze-daylight.source.json.",
+  "sourceHashes": {
+    "src/app/home-styles.css": "8de9752181a8ad65c937746deb9d5602106592473481b5099c3a32f1ae1f9887",
+    "src/app/site-styles.css": "2c0ab2b6aed0dcc8b976ca530c233692ffd250ff5cef31a8450a921ac90a47d0",
+    "src/app/home-style-controls.css": "541810b3f6b7b6605ceca581d35df7a63a99fcf2e7e22f3b3698c264b175ab83",
+    "src/components/landing/LandingHero.tsx": "7ef136c88fda147c670e4cf47f827069aa15a6758e3bfb5d8475d3f818c00133",
+    "src/components/landing/LandingScene.tsx": "605e2461f85fc6bde1257b450816684c6602ee5d99879f67a8c8b888bffc6213",
+    "src/components/landing/SiteStyleAtmosphere.tsx": "2bb239702cde6a23cf07761ef4359907b0c35c4aef1ebaca8bc2547b84a726fc",
+    "src/lib/home-style.mjs": "dbc87d6e2de08e2d19be439b01f95d58f09200b3befb73ceb112797039d26483",
+    "public/media/home-styles/sea-breeze-daylight.webp": "eecff90d82c3ef7bd78e9a91a656f9532691a9baacb751a75ce92ec516ee531a"
+  },
+  "captures": [
+    {
+      "file": "home-hero-desktop.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/"
+    },
+    {
+      "file": "home-hero-mobile.webp",
+      "width": 390,
+      "height": 844,
+      "style": "anime",
+      "mode": "light",
+      "route": "/"
+    },
+    {
+      "file": "home-style-menu.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/"
+    },
+    {
+      "file": "design-gallery-desktop.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/resources?type=designs"
+    },
+    {
+      "file": "design-gallery-mobile.webp",
+      "width": 390,
+      "height": 844,
+      "style": "anime",
+      "mode": "light",
+      "route": "/resources?type=designs"
+    },
+    {
+      "file": "resources-desktop.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/resources"
+    },
+    {
+      "file": "community-desktop.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/community"
+    },
+    {
+      "file": "blogs-desktop.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/blogs"
+    },
+    {
+      "file": "home-overview-desktop.webp",
+      "width": 1440,
+      "height": 960,
+      "style": "anime",
+      "mode": "light",
+      "route": "/ (product overview)"
+    }
+  ]
+}

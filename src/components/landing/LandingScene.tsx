@@ -63,7 +63,7 @@ export function LandingScene({style, paused, opened, dusk}: {style: Exclude<Home
                 const r = .6 + i%4*.42, phase = i*1.71, posX = (i*73.37%100)/100*width+Math.sin(t*.22+phase)*18-px*r*7;
                 const posY = (((i*37.71%100)/100*height-t*(2+i%5))%(height+80)+height+80)%(height+80)-40;
                 const alpha = (.13+Math.sin(t*.8+phase)*.09)*Math.max(0, Math.min(1, posY/180));
-                context!.beginPath(); context!.fillStyle = `rgba(255,224,176,${alpha})`; context!.arc(posX, posY, r, 0, Math.PI*2); context!.fill();
+                context!.beginPath(); context!.fillStyle = `rgba(95,156,181,${alpha})`; context!.arc(posX, posY, r, 0, Math.PI*2); context!.fill();
               }
             },
             dispose() {context.clearRect(0, 0, width, height);},
@@ -94,7 +94,7 @@ export function LandingScene({style, paused, opened, dusk}: {style: Exclude<Home
     };
   }, [style]);
   return <div ref={stage} className={'hs-scene hs-scene--'+style} data-renderer={renderer} data-dusk={dusk} aria-hidden="true">
-    {style === 'anime' ? <><div className="hs-anime-art" ref={art}><img src="/media/home-styles/sea-breeze.webp" alt="" width={1536} height={1024} fetchPriority="high"/></div><div className="hs-anime-shade"/><div className="hs-sunlight"/><div className="hs-dusk"/></> : <picture className="hs-static"><source media="(max-width:600px)" srcSet={'/media/home-styles/'+(style === 'fly' ? 'fly' : 'git')+'-fallback-mobile.webp'}/><img src={'/media/home-styles/'+(style === 'fly' ? 'fly' : 'git')+'-fallback-desktop.webp'} alt=""/></picture>}
+    {style === 'anime' ? <><div className="hs-anime-art" ref={art}><picture><source media="(max-width:600px)" srcSet="/media/home-styles/sea-breeze-daylight-960.webp"/><img src="/media/home-styles/sea-breeze-daylight.webp" alt="" width={1536} height={1024} fetchPriority="high"/></picture></div><div className="hs-anime-shade"/><div className="hs-sunlight"/><div className="hs-dusk"/></> : <picture className="hs-static"><source media="(max-width:600px)" srcSet={'/media/home-styles/'+(style === 'fly' ? 'fly' : 'git')+'-fallback-mobile.webp'}/><img src={'/media/home-styles/'+(style === 'fly' ? 'fly' : 'git')+'-fallback-desktop.webp'} alt=""/></picture>}
     <canvas ref={canvas}/>
   </div>;
 }

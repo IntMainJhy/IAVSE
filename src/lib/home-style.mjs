@@ -8,5 +8,5 @@ export function normalizeHomeStyle(value) {
 
 export const CLASSIC_COLOR_COOKIE = 'iavse-classic-color-mode';
 export function homeStyleColorMode(style, classicMode = 'light') {
-  return style === 'classic' ? (classicMode === 'dark' ? 'dark' : 'light') : style === 'brand' ? 'light' : 'dark';
+  return style === 'classic' ? (classicMode === 'dark' ? 'dark' : 'light') : style === 'fly' ? 'dark' : 'light';
 }
