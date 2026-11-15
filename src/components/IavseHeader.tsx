@@ -60,7 +60,7 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
   const active = path === '/' ? 'home' : path === '/about' ? 'about' : /^\/community(?:\/|$)/.test(path) ? 'community'
     : /^\/(?:resources|docs|skills)(?:\/|$)/.test(path) ? 'resources'
       : /^\/blogs?(?:\/|$)/.test(path) ? 'blogs' : null;
-  return <header className={`iavse-header${floating ? ' iavse-header--floating' : ''} ${className}`.trim()} data-iavse-header data-home-header={path === '/' ? true : undefined} data-home-scrolled={scrolled} ref={root}
+  return <header className={`iavse-header${floating ? ' iavse-header--floating' : ''} ${className}`.trim()} data-iavse-header data-site-style-header data-home-header={path === '/' ? true : undefined} data-home-scrolled={scrolled} ref={root}
     onBlur={event => {
       if (open && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false);
     }}
@@ -101,6 +101,6 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
         {copy.about}<ArrowUpRight size={16} aria-hidden="true"/>
       </Link>
     </div>
-    {path === '/' && <HomeStyleSwitcher/>}
+    <HomeStyleSwitcher onOpen={() => setOpen(false)}/>
   </header>;
 }

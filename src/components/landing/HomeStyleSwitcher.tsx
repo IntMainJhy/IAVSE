@@ -1,11 +1,13 @@
 'use client';
 
 import {useEffect, useId, useRef, useState} from 'react';
+import {usePathname} from 'next/navigation';
 import {Check, ChevronDown, PanelsTopLeft} from 'lucide-react';
 import {useLocale} from '../LocaleProvider';
 import {useHomeStyle, type HomeStyle} from './HomeStyleProvider';
 
-export function HomeStyleSwitcher() {
+export function HomeStyleSwitcher({className = '', onOpen}: {className?: string; onOpen?: () => void}) {
+  const path = usePathname();
   const {locale} = useLocale();
   const {style, select, saved} = useHomeStyle();
   const root = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null), id = useId();
@@ -14,6 +16,8 @@ export function HomeStyleSwitcher() {
   const descriptions = locale === 'en' ? ['Flowing characters', 'Sculpted wordmark', 'An illustrated sunset'] : locale === 'ja' ? ['流れる文字の波', '立体ブランドロゴ', '夕暮れのイラスト'] : ['流动的字符波面', '立体品牌与光影', '夕阳与动漫插画'];
   const styles: HomeStyle[] = ['fly', 'brand', 'anime'];
   const label = locale === 'en' ? 'Switch UI' : locale === 'ja' ? 'UI を切り替え' : '切换 UI';
+  const previousPath = useRef(path);
+  useEffect(() => {if (previousPath.current !== path) {previousPath.current = path; setOpen(false);}}, [path]);
   const close = (restore = false) => {setOpen(false); if (restore) trigger.current?.focus();};
   useEffect(() => {if (open) root.current?.querySelectorAll<HTMLButtonElement>('[role=option]')[focus]?.focus();}, [open, focus]);
   useEffect(() => {
@@ -21,9 +25,10 @@ export function HomeStyleSwitcher() {
     document.addEventListener('pointerdown', outside);
     return () => document.removeEventListener('pointerdown', outside);
   }, []);
-  return <div className="home-style-switch" ref={root} onBlur={event => {if (!event.currentTarget.contains(event.relatedTarget as Node)) close();}}>
-    <button ref={trigger} type="button" className="home-style-trigger" id={id+'-trigger'} aria-label={label} aria-haspopup="listbox" aria-expanded={open} aria-controls={open ? id : undefined} onClick={() => {setFocus(styles.indexOf(style)); setOpen(!open);}} onKeyDown={event => {
-      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {event.preventDefault(); setFocus(styles.indexOf(style)); setOpen(true);}
+  return <div className={'home-style-switch'+(className ? ' '+className : '')} ref={root} onBlur={event => {if (!event.currentTarget.contains(event.relatedTarget as Node)) close();}}>
+    <button ref={trigger} type="button" className="home-style-trigger" id={id+'-trigger'} aria-label={label} aria-haspopup="listbox" aria-expanded={open} aria-controls={open ? id : undefined} onClick={() => {if (!open) onOpen?.(); setFocus(styles.indexOf(style)); setOpen(!open);}} onKeyDown={event => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {event.preventDefault(); onOpen?.(); setFocus(styles.indexOf(style)); setOpen(true);}
+      if (event.key === 'Escape') {event.preventDefault(); event.stopPropagation(); close(true);}
     }}><PanelsTopLeft size={16} aria-hidden="true"/><span>{label}</span><ChevronDown size={13} aria-hidden="true"/></button>
     <div className="home-style-menu" id={id} role="listbox" aria-labelledby={id+'-trigger'} hidden={!open} onKeyDown={event => {
       if (event.key === 'Escape') {event.preventDefault(); event.stopPropagation(); close(true);}

@@ -320,3 +320,17 @@ test('all selected visual worlds retain live resource destinations and one top-r
   assert.deepEqual(options.filter(n=>n.attribs['aria-selected']==='true').map(n=>n.attribs['data-style-option']),[style]);
  }
 });
+
+
+test('every shared platform header keeps the same UI selector away from home',async()=>{
+ for(const pathname of ['/resources','/docs','/skills','/community','/blogs','/workspace/account','/about','/login','/legal/privacy','/downloads']){
+  const {document}=await render('zh',{pathname,style:'brand'});
+  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
+  assert.equal(header.attribs['data-site-style-header'],'true',pathname);
+  const trigger=find(header,n=>n.name==='button'&&n.attribs.class==='home-style-trigger');
+  assert.equal(trigger.length,1,pathname+' has one style entry');
+  const options=find(header,n=>n.attribs.role==='option'&&n.attribs['data-style-option']);
+  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime']);
+  assert.equal(options.find(n=>n.attribs['aria-selected']==='true').attribs['data-style-option'],'brand');
+ }
+});

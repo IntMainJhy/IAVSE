@@ -1,3 +1,4 @@
+import {HOME_STYLE_COOKIE,normalizeHomeStyle} from '@/lib/home-style.mjs';
 import {FilingLink} from './FilingLink';
 import {cookies} from 'next/headers';
 import {localeDate} from '@/lib/locale-format.mjs';
@@ -186,7 +187,7 @@ export async function PublicFrame({path=[],children}:{path?:string[],children:Re
  const native=!(path.length===0||['about','blogs','resources'].includes(section)&&path.length===1);
  const communitySurface=section==='community'||section==='workspace'&&path[1]!=='blog';
  const quantumPage=['community','blogs','resources','docs','skills'].includes(section);
- const dark=(await cookies()).get('site-color-mode')?.value==='dark';
+ const dark=normalizeHomeStyle((await cookies()).get(HOME_STYLE_COOKIE)?.value)!=='brand';
  return <div className={'rbp-surface'+(dark?' dark':'')} data-rbp-route={section||'home'}>
    <SiteFrame/><a className="skip-to-content" href="#main">{tr('跳到主要内容')}</a><Tracker/>
    {native?<div className={'rbp-native rbp-application organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading" data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined}><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}

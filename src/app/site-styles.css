@@ -1,0 +1,111 @@
+/* Public site roles: one choice, shared by every route and its native controls.
+   Saved member artwork, previews and canvas content keep their authored colors. */
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=fly][data-site-style]:is(:has(body)){
+ --iavse-canvas:#111315;--iavse-background:#1c2025;--iavse-foreground:#f0f2f5;--iavse-secondary:#b8c0cb;--iavse-subtle:#a0aab8;--iavse-muted:#282e36;--iavse-border:#3e4652;--iavse-focus:#b4d4ff;--iavse-sky:#252e3b;--iavse-sage:#293537;--iavse-warm:#362f35;--iavse-selection:#344a65;
+ --iavse-shadow:0 15px 36px -22px #000b;--iavse-shadow-hover:0 20px 48px -22px #000d;--iavse-control-shadow:inset 0 1px 0 #ffffff0a;
+ --site-card-radius:10px;--site-control-radius:7px;--site-heading-font:var(--iavse-font);--site-heading-weight:650;--site-label-font:Menlo,Consolas,"IAVSE Sans",monospace;--site-accent:#bfd5f0;--site-accent-soft:#2c3d53;--green:#8ed8b6;--red:#ffb7b0;color-scheme:dark;
+}
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=brand][data-site-style]:is(:has(body)){
+ --iavse-canvas:#f7f8fa;--iavse-background:#fff;--iavse-foreground:#22272d;--iavse-secondary:#566171;--iavse-subtle:#5f6b7b;--iavse-muted:#eef0f4;--iavse-border:#dce1e8;--iavse-focus:#285cce;--iavse-sky:#eaf0fd;--iavse-sage:#eaf0ef;--iavse-warm:#f4efe9;--iavse-selection:#dbe6ff;
+ --iavse-shadow:0 13px 35px -22px #273b5b38;--iavse-shadow-hover:0 20px 48px -22px #273b5b50;--iavse-control-shadow:0 3px 8px -5px #28395435;
+ --site-card-radius:20px;--site-control-radius:12px;--site-heading-font:var(--iavse-font);--site-heading-weight:650;--site-label-font:var(--iavse-font);--site-accent:#315de3;--site-accent-soft:#e6edff;--green:#21613d;--red:#b42318;color-scheme:light;
+}
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=anime][data-site-style]:is(:has(body)){
+ --iavse-canvas:#263147;--iavse-background:#303d54;--iavse-foreground:#fff4ee;--iavse-secondary:#d4d7e2;--iavse-subtle:#bbc3d4;--iavse-muted:#3d4961;--iavse-border:#536079;--iavse-focus:#ffd1b8;--iavse-sky:#3a4c69;--iavse-sage:#354e55;--iavse-warm:#594855;--iavse-selection:#725d74;
+ --iavse-shadow:0 15px 38px -22px #101b34aa;--iavse-shadow-hover:0 22px 50px -22px #101b34cc;--iavse-control-shadow:inset 0 1px 0 #fff1;
+ --site-card-radius:17px;--site-control-radius:9px;--site-heading-font:"IAVSE Display","Songti SC","Yu Mincho",Georgia,serif;--site-heading-weight:400;--site-label-font:var(--iavse-font);--site-accent:#f3b89c;--site-accent-soft:#624c58;--green:#9edfc7;--red:#ffc0b9;color-scheme:dark;
+}
+@font-face{font-family:"IAVSE Display";src:url('/fonts/ZCOOLXiaoWei-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+html[data-home-style] .rbp-surface{--background:var(--iavse-background);--foreground:var(--iavse-foreground);--muted:var(--iavse-muted);--muted-foreground:var(--iavse-subtle);--border:var(--iavse-border);--ring:var(--iavse-focus);--frame:var(--iavse-canvas)}
+html[data-home-style] .rbp-surface[data-rbp-route]:not([data-rbp-route=blog]){background:transparent}
+html[data-home-style] :is(.iavse-filing-footer,.blog-platform-footer){background:var(--iavse-canvas);color:var(--iavse-subtle)}
+.site-style-atmosphere{position:absolute;inset:0 0 auto;height:650px;z-index:-1;pointer-events:none;overflow:hidden;mask-image:linear-gradient(#000 20%,#000a 60%,transparent);isolation:isolate}
+.site-style-atmosphere .hs-scene{z-index:-1}
+.site-style-atmosphere .hs-scene--anime .hs-anime-art{inset:-8% -2% -8% 0}
+.site-style-atmosphere .hs-scene--anime .hs-anime-art img{object-position:right 40%}
+.site-style-wordmark{position:absolute;width:min(900px,65%);height:auto;right:-80px;top:35px;opacity:.2;mix-blend-mode:multiply}
+.site-style-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--iavse-canvas) 0%,color-mix(in srgb,var(--iavse-canvas) 76%,transparent) 50%,color-mix(in srgb,var(--iavse-canvas) 70%,transparent));}
+.site-style-atmosphere--fly .site-style-veil{background:linear-gradient(180deg,#1113159e,#111315dd 60%,#111315)}
+.site-style-atmosphere--brand{height:500px}.site-style-atmosphere--brand .site-style-veil{background:linear-gradient(90deg,#f7f8fa,#f7f8fa55 60%,#f7f8fa11)}
+.site-style-atmosphere--anime .site-style-veil{background:linear-gradient(90deg,#263147f2,#263147d9 48%,#26314799),linear-gradient(0deg,#263147 0%,transparent 70%)}
+/* The hero uses these primitives too; keep its existing scene geometry intact. */
+.hs-scene{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-2}.hs-scene canvas,.hs-static,.hs-static img{display:block;position:absolute;width:100%;height:100%;inset:0;object-fit:cover}.hs-scene canvas{opacity:0;transition:opacity .45s}.hs-scene[data-renderer=webgl] canvas,.hs-scene[data-renderer=canvas] canvas{opacity:1}.hs-static{transition:opacity .4s}.hs-scene[data-renderer=webgl] .hs-static{opacity:0}.hs-scene--brand .hs-static img{object-fit:contain}
+.hs-anime-art{position:absolute;inset:-2%;will-change:transform}.hs-anime-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:66% 50%}.hs-anime-shade,.hs-sunlight,.hs-dusk{position:absolute;inset:0;pointer-events:none}.hs-anime-shade{background:linear-gradient(90deg,#121e3b85 0%,#18244150 37%,transparent 75%),linear-gradient(0deg,#17233d77 0%,transparent 32%,transparent 80%,#17233d44 100%)}.hs-sunlight{background:radial-gradient(ellipse at 6% 58%,#ffb45e68,transparent 57%);mix-blend-mode:soft-light;opacity:.7}.hs-dusk{background:linear-gradient(110deg,#273c69aa,#26385e99 65%,#22274188);mix-blend-mode:multiply;opacity:0;transition:opacity 1.2s}.hs-scene[data-dusk=true] .hs-dusk{opacity:.83}
+/* Header, mobile navigation and account sheets follow the same surface roles. */
+html[data-home-style] .iavse-mobile-dock{--dock-paper:var(--iavse-background);--dock-ink:var(--iavse-foreground);--dock-muted:var(--iavse-secondary);--dock-line:var(--iavse-border);--dock-soft:var(--iavse-muted);--dock-panel:var(--iavse-background)}
+html[data-home-style] .iavse-account-sheet{background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
+html[data-home-style] .iavse-account-sheet__body{background:var(--iavse-background);color:var(--iavse-foreground)}
+html[data-home-style] .iavse-mobile-dock__tab{color:var(--iavse-secondary)}
+html[data-home-style] .iavse-mobile-dock__tab[aria-current]{color:var(--iavse-foreground)}
+html[data-home-style] .iavse-mobile-dock__indicator{background:var(--iavse-muted)}
+/* Existing bridges use important declarations in the rbp layer. Match that
+   integration layer, within explicit application-owned boundaries. */
+@layer rbp{
+@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
+ :scope.rbp-application :is(.panel,.card,.resource-card,.account-section,.space-panel,.feed-post,.feed-empty,.feed-suggestions,.skill-directory-card,.skill-grid-card,.design-card,.admin-focus-review,.admin-focus-statistics,.admin-focus-recent,.admin-bento-card,.login-card,.skill-entry,.community-empty,.feed-discover>section,.admin-governance-card,.resource-hub-tabs){border-radius:var(--site-card-radius)!important;box-shadow:var(--iavse-shadow)!important;border-color:var(--iavse-border)!important}
+ :scope.rbp-application :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading,.page-head) h1{font-family:var(--site-heading-font)!important;font-weight:var(--site-heading-weight)!important;color:var(--iavse-foreground)!important}
+ :scope.rbp-application :is(.btn,.space-btn,.sp-button,.organic-button,.organic-btn,.feed-compose-link,.community-primary,.community-compose,.community-nav-compose,.document-new,.design-copy-trigger,.design-secondary,.member-avatar-pick-button,input:not([type=checkbox],[type=radio],[type=range],[type=color]),textarea,select){border-radius:var(--site-control-radius)!important}
+ :scope.rbp-application :is(.tag,.chip,.skill-type-chip,.feed-category,.shared-card-category,.reader-label,.item-type){font-family:var(--site-label-font)!important}
+ :scope.rbp-application :is(.catalog-search-control,.skill-filter-deck,.document-toolbar,.community-search){border-color:var(--iavse-border)!important}
+ :scope.rbp-application :is(.organic-prose,.document-prose,.community-prose){color:var(--iavse-foreground)}
+ :scope.rbp-application :is(.organic-prose,.document-prose,.community-prose) :is(p,li){color:var(--iavse-secondary)}
+ :scope.rbp-application :is(.prose,.organic-prose,.document-prose,.community-prose) pre{background:var(--iavse-muted)!important;color:var(--iavse-foreground)!important;border:1px solid var(--iavse-border)}
+ :scope.rbp-application .resource-introduction{color:var(--iavse-foreground)!important}
+ :scope.rbp-application .resource-introduction :is(h1,h2,h3){font-family:var(--site-heading-font)!important;font-weight:var(--site-heading-weight)!important}
+ :scope.rbp-application :is(.be-heading,.bd-toolbar,.admin-topline){border-color:var(--iavse-border)!important}
+}
+}
+/* Native non-application shells (resource introduction, gallery and about). */
+html[data-home-style] .resource-introduction{background:transparent;color:var(--iavse-foreground)}
+html[data-home-style] .resource-introduction :is(h1,h2,h3){color:var(--iavse-foreground);font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
+html[data-home-style] .resource-introduction p{color:var(--iavse-secondary)}
+html[data-home-style] .resource-introduction-list>li{border-color:var(--iavse-border);background:var(--iavse-background);border-radius:var(--site-card-radius);box-shadow:var(--iavse-shadow)}
+html[data-home-style] .resource-introduction-list>li>a{color:var(--iavse-foreground)}
+html[data-home-style] .blog-spaces-page{--creator-ink:var(--iavse-foreground);--creator-muted:var(--iavse-secondary);--creator-line:var(--iavse-border);--creator-accent:var(--site-accent);--blog-space-ink:var(--iavse-foreground);--blog-space-body:var(--iavse-secondary)}
+html[data-home-style] .blog-spaces-page .creator-directory-intro h1{font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
+html[data-home-style] :is(.blog-spaces-list,.blog-spaces-product,.blog-feature-panel){background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
+html[data-home-style] .blog-spaces-list :is(summary,a){color:var(--iavse-foreground)}
+html[data-home-style] .blog-spaces-list small{color:var(--iavse-subtle)}
+html[data-home-style] .blog-spaces-create{background:var(--iavse-foreground);color:var(--iavse-background);border-color:var(--iavse-border)}
+html[data-home-style] .blog-spaces-gallery-note{color:var(--iavse-subtle)}
+html[data-home-style] .blog-public-shell:not(.blog-gallery-embed){--blog-chrome-paper:var(--iavse-background);--blog-chrome-ink:var(--iavse-foreground);--blog-chrome-muted:var(--iavse-secondary);--blog-chrome-line:var(--iavse-border)}
+html[data-home-style] .iavse-not-found{background:var(--iavse-background);color:var(--iavse-foreground)}
+@media(max-width:767px){.site-style-atmosphere{height:510px}.site-style-wordmark{width:100%;right:-60px;top:64px;opacity:.14}}
+@media(prefers-reduced-motion:reduce){.site-style-atmosphere .hs-anime-art{will-change:auto}.site-style-atmosphere .hs-scene canvas{transition:none}}
+/* Route bundles may arrive after the root sheet. These scoped role bindings
+   intentionally outrank their legacy hardcoded canvas defaults. */
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style]:has(body),html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style] body{background:var(--iavse-canvas)!important;color:var(--iavse-foreground)}
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style] [data-rbp-route] .rbp-application.organic-site{background:transparent!important;--resource-frame-canvas:transparent!important;--resource-frame-ink:var(--iavse-foreground)!important;--resource-frame-muted:var(--iavse-secondary)!important;--resource-frame-surface:var(--iavse-background)!important;--resource-frame-soft:var(--iavse-muted)!important;--resource-frame-line:var(--iavse-border)!important}
+html[data-home-style] .home-style-menu{--iavse-background:#fafbfc;--iavse-foreground:#263147;--iavse-secondary:#657085;--iavse-subtle:#657085;--iavse-muted:#e9edf3;--iavse-focus:#285cce;--site-text:#263147;--site-body:#657085;--site-muted:#657085;--site-surface:#fafbfc}
+html[data-home-style] .resource-shelf-heading h1{font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
+html[data-home-style] .resource-shelf-card{border-radius:var(--site-card-radius);box-shadow:var(--iavse-shadow)}
+html[data-home-style] [data-iavse-contact]{border-radius:var(--site-card-radius);background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
+html[data-home-style] .rbp-application{--iavse-card-radius:var(--site-card-radius)}
+.site-style-example-toolbar{position:relative;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 4%;background:var(--iavse-background);color:var(--iavse-foreground);border-bottom:1px solid var(--iavse-border)}.site-style-example-toolbar>a{font:600 24px Georgia,serif;letter-spacing:-.03em}.site-style-example-toolbar .home-style-switch{margin-left:auto}
+.community-admin-denied>.home-style-switch{position:relative;z-index:90;margin:0 0 24px auto;width:max-content}
+@layer rbp{
+html[data-site-style] .rbp-application .feed-discover .community-category-links>a{color:var(--iavse-secondary)!important}
+html[data-site-style] .rbp-application .feed-discover .community-category-links>a:is(:hover,[aria-current=page]){color:var(--iavse-foreground)!important;background:var(--iavse-muted)!important}
+}
+html[data-site-style] .rbp-application :is(.community-surface,.community-navigation-shell){--feed-text:var(--iavse-foreground);--feed-muted:var(--iavse-secondary);--feed-border:var(--iavse-border)}
+
+html[data-site-style] .rbp-application{--feed-ink:var(--iavse-foreground)!important;--feed-text:var(--iavse-foreground)!important;--feed-muted:var(--iavse-secondary)!important}
+@layer rbp{html[data-site-style] .rbp-application .feed-identity strong{color:var(--iavse-foreground)!important}}
+@layer rbp{@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){:scope.rbp-application h1{font-family:var(--site-heading-font)!important;font-weight:var(--site-heading-weight)!important}}}
+@layer rbp{
+html[data-site-style] .home-style-switch .home-style-menu strong{color:#263147!important}
+html[data-site-style] .home-style-switch .home-style-menu small{color:#657085!important}
+html[data-site-style] .home-style-switch .home-style-menu>button{color:#263147!important}
+html[data-site-style] .rbp-application .community-route-bar{background:var(--iavse-muted)!important;color:var(--iavse-foreground)!important;border-color:var(--iavse-border)!important}
+html[data-site-style] .rbp-application .community-route-bar>a{color:var(--iavse-foreground)!important}
+}
+html[data-site-style] .blog-canvas-editor>.be-heading{position:relative;z-index:80}
+html[data-site-style] .blog-space-product h2{font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
+/* Template content stays inside its viewport; the surrounding preview tools
+   belong to IAVSE and retain the active theme after the iframe has loaded. */
+html:root[data-ui][data-color-mode][data-home-style][data-site-style] body .design-studio .design-zoom-dialog{--ds-bg:var(--iavse-background);--ds-panel:var(--iavse-muted);--ds-text:var(--iavse-foreground);--ds-muted:var(--iavse-secondary);--ds-line:var(--iavse-border)}
+@layer rbp{
+html[data-site-style] .rbp-application .design-zoom-dialog>:is(header,footer,.design-preview-tools,.design-preview-variants){background:var(--iavse-background)!important;color:var(--iavse-foreground)!important;border-color:var(--iavse-border)!important}
+html[data-site-style] .rbp-application .design-zoom-dialog>:is(header,footer,.design-preview-tools,.design-preview-variants) :is(a,button,h2,span,output){color:var(--iavse-foreground)!important}
+html[data-site-style] .rbp-application .design-zoom-dialog .design-preview-viewports>button[aria-pressed=true]{background:var(--iavse-muted)!important;border-color:var(--iavse-border)!important}
+}

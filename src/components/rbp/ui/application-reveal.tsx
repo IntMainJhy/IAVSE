@@ -15,6 +15,7 @@ const TARGETS=[
 ].join(',');
 const CONTENT='.space-root,.bd-block,.anx-portfolio,.personal-homepage,.react-flow__viewport,[contenteditable=true],[data-rbp-entry]';
 const SCOPE='[data-rbp-reveal-scope]',ITEM='[data-rbp-reveal-item]',GROUP='[data-rbp-reveal-group]';
+type RevealNode = HTMLElement & {__iavseReveal?: 'pending' | 'running'};
 export function ApplicationReveal(){
  const path=usePathname(),query=useSearchParams().toString();
  useEffect(()=>{
@@ -22,7 +23,7 @@ export function ApplicationReveal(){
   if(!('IntersectionObserver' in window))return;
   const registered=new Set<HTMLElement>(),pending=new Set<HTMLElement>(),focused=new Set<HTMLElement>(),animations=new Map<HTMLElement,Animation>();
   let disposed=false;
-  const clear=(node:HTMLElement)=>{node.removeAttribute('data-rbp-reveal');pending.delete(node);};
+  const clear=(node:HTMLElement)=>{delete (node as RevealNode).__iavseReveal;pending.delete(node);};
   const release=(node:HTMLElement)=>{const animation=animations.get(node);animations.delete(node);animation?.cancel();clear(node);};
   const outside=(node:HTMLElement)=>{
    const rect=node.getBoundingClientRect();let x=0,y=0;
@@ -39,13 +40,13 @@ export function ApplicationReveal(){
    if(disposed||!registered.has(node)||!outside(node))return;
    release(node);
    if(media.matches||!node.animate||focused.has(node))return;
-   node.dataset.rbpReveal='pending';pending.add(node);
+   (node as RevealNode).__iavseReveal='pending';pending.add(node);
   };
   const show=(node:HTMLElement,index=0)=>{
    if(disposed||!pending.has(node)||outside(node))return;
    pending.delete(node);
    if(media.matches||!node.animate){clear(node);return;}
-   node.dataset.rbpReveal='running';
+   (node as RevealNode).__iavseReveal='running';
    const animation=node.animate([{opacity:0,transform:`translateY(${RBP_MOTION.distance}px)`},{opacity:1,transform:'translateY(0)'}],{duration:RBP_MOTION.applicationDuration,delay:revealDelay(index),easing:RBP_MOTION.cssEase,fill:'both'});
    animations.set(node,animation);
    animation.finished.catch(()=>{}).finally(()=>{if(!disposed&&animations.get(node)===animation){release(node);rearm(node);}});
@@ -67,13 +68,15 @@ export function ApplicationReveal(){
   // scrolling moves its layout out. Check active animations on that scroll too.
   let exitFrame=0;
   const activeExit=()=>{if(!exitFrame&&animations.size)exitFrame=requestAnimationFrame(()=>{exitFrame=0;if(!disposed)for(const node of animations.keys())rearm(node);});};
+  // Keep enhancement state off DOM attributes: streamed React children may not
+  // have hydrated yet. WAAPI owns visual frames without changing their markup.
   const prepare=(node:HTMLElement)=>{
-    if(registered.has(node)||owner(node.parentElement)||node.closest(CONTENT)||node.closest('[data-rbp-reveal]')||node.parentElement?.closest(ITEM))return;
+    if(registered.has(node)||owner(node.parentElement)||node.closest(CONTENT)||node.parentElement?.closest(ITEM))return;
     const rect=node.getBoundingClientRect();if(!rect.width||!rect.height)return;
     registered.add(node);observer.observe(node);viewport.observe(node);
     if(node.contains(document.activeElement))focused.add(node);
     if(media.matches||!node.animate||focused.has(node))return;
-    node.dataset.rbpReveal='pending';pending.add(node);
+    (node as RevealNode).__iavseReveal='pending';pending.add(node);
   };
   const scan=()=>{
    if(disposed)return;

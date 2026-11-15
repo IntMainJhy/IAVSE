@@ -21,12 +21,13 @@ import './navigation-transition.css';
 import './iavse-system.css';
 import './rbp-template.css';
 import './rbp-bridge.css';
+import './site-styles.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'IAVSE',title:'IAVSE',description:'Projects, experience, and shared resources.'};
 export default async function RootLayout({children}:{children:React.ReactNode}){
   const jar=await cookies(),locale=normalizeLocale(jar.get('site-locale')?.value);
   const homeStyle=normalizeHomeStyle(jar.get(HOME_STYLE_COOKIE)?.value) as HomeStyle;
-  const colorMode=jar.get('site-color-mode')?.value==='dark'?'dark':'light';
+  const colorMode=homeStyle==='brand'?'light':'dark';
   let announcements:SiteAnnouncements={enabled:false,items:[]};try{announcements=readSiteAnnouncements({publicOnly:true})}catch{}
-  return <html data-home-style={homeStyle} data-frontend="portfolio" data-site-announcements={announcements.enabled&&announcements.items.length?'enabled':'disabled'} lang={htmlLocale(locale)} data-ui="x-social" data-color-mode={colorMode} data-color-preference={colorMode}><body><noscript><style>{'[data-rbp-entry],[data-rbp-reveal]{opacity:1!important;transform:none!important;filter:none!important}'}</style></noscript><LocaleProvider initialLocale={locale}><HomeStyleProvider initialStyle={homeStyle}><SiteAnnouncementsProvider initial={announcements}><PortfolioRuntime/><Suspense fallback={null}><ApplicationReveal/></Suspense>{children}<NavigationIntent/><NavigationTransition/></SiteAnnouncementsProvider></HomeStyleProvider></LocaleProvider></body></html>
+  return <html data-site-style={homeStyle} data-home-style={homeStyle} data-frontend="portfolio" data-site-announcements={announcements.enabled&&announcements.items.length?'enabled':'disabled'} lang={htmlLocale(locale)} data-ui="x-social" data-color-mode={colorMode} data-color-preference={colorMode}><body><noscript><style>{'[data-rbp-entry],[data-rbp-reveal]{opacity:1!important;transform:none!important;filter:none!important}'}</style></noscript><LocaleProvider initialLocale={locale}><HomeStyleProvider initialStyle={homeStyle}><SiteAnnouncementsProvider initial={announcements}><PortfolioRuntime/><Suspense fallback={null}><ApplicationReveal/></Suspense>{children}<NavigationIntent/><NavigationTransition/></SiteAnnouncementsProvider></HomeStyleProvider></LocaleProvider></body></html>
 }
