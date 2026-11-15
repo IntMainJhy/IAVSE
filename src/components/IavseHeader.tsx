@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link, {useLinkStatus} from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useEffect, useId, useRef, useState} from 'react';
 import {ArrowUpRight, Ellipsis, UserRound, X} from 'lucide-react';
@@ -9,7 +9,7 @@ import {BrandMark} from '@/components/BrandMark';
 import {LanguageSwitcher, useLocale} from '@/components/LocaleProvider';
 import {HomeStyleSwitcher} from './landing/HomeStyleSwitcher';
 import {ThemeToggle} from '@/components/ThemeToggle';
-import {GlassSwitch} from '@/components/ui/GlassSwitch';
+import '@/app/glass-controls.css';
 import {landingCopy} from '@/lib/landing-copy';
 
 export type IavseHeaderProps = {
@@ -83,7 +83,9 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
     <div className="iavse-header__controls" id={panelId} data-open={open}>
       <div className="iavse-header__navigation">
         <nav className="iavse-header__nav" aria-label={copy.nav}>
-          <GlassSwitch items={items.map(item => ({...item, prefetch: false}))} value={active} ariaLabel={copy.nav}/>
+          <div className="glass-switch glass-switch--regular iavse-header__links" role="group" aria-label={copy.nav}>
+            {items.map(item => <Link key={item.id} href={item.href} prefetch={false} className="glass-switch__item" data-selected={active === item.id} aria-current={active === item.id ? 'page' : undefined} aria-label={item.label}><HeaderLinkLabel label={item.label} compactLabel={item.compactLabel}/></Link>)}
+          </div>
         </nav>
         <span className="iavse-header__setting-label">{t('外观')}</span>
         <ThemeToggle/>
@@ -103,4 +105,10 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
     </div>
     <HomeStyleSwitcher onOpen={() => setOpen(false)}/>
   </header>;
+}
+
+/** Native Next link status gives immediate feedback without measuring a hidden lens. */
+function HeaderLinkLabel({label, compactLabel}: {label: string; compactLabel: string}) {
+  const {pending} = useLinkStatus();
+  return <span className="glass-switch__label iavse-header__link-label" data-nav-pending={pending || undefined} aria-busy={pending || undefined}><span className="glass-switch__full-label">{label}</span><span className="glass-switch__compact-label" aria-hidden="true">{compactLabel}</span></span>;
 }

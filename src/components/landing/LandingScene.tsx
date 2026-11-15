@@ -48,6 +48,7 @@ export function LandingScene({style, paused, opened, dusk}: {style: HomeStyle; p
     window.addEventListener('pointermove', move, {passive: true}); document.addEventListener('pointerleave', leave);
     document.addEventListener('visibilitychange', update); target.addEventListener('webglcontextlost', lost);
     async function load() {
+      if (disposed) return;
       try {
         if (style === 'anime') {
           const context = target!.getContext('2d');
@@ -78,9 +79,14 @@ export function LandingScene({style, paused, opened, dusk}: {style: HomeStyle; p
         start();
       } catch {fail();}
     }
-    void load();
+    // A route can mount effects before its first paint. Keep the static scene
+    // visible and let the destination paint before allocating a GPU context.
+    let startupTimer: ReturnType<typeof setTimeout> | undefined;
+    const startupFrame = requestAnimationFrame(() => {
+      startupTimer = setTimeout(() => {void load();}, 0);
+    });
     return () => {
-      disposed = true; stop(); sync.current = () => {};
+      disposed = true; cancelAnimationFrame(startupFrame); clearTimeout(startupTimer); stop(); sync.current = () => {};
       observer.disconnect(); intersection.disconnect();
       window.removeEventListener('pointermove', move); document.removeEventListener('pointerleave', leave);
       document.removeEventListener('visibilitychange', update); target.removeEventListener('webglcontextlost', lost);

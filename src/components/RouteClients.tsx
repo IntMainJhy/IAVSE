@@ -12,7 +12,8 @@ function RouteLoading(){const {t}=useLocale();return <p role="status" className=
 const LazyBlogEditor=lazy(()=>import('./BlogEditor').then(module=>({default:module.BlogEditor})));
 const LazyPublisher=lazy(()=>import('./CatalogPublisher').then(module=>({default:module.CatalogPublisher})));
 const LazyAdmin=lazy(()=>import('./AdminApp').then(module=>({default:module.AdminApp})));
-const LazyCommunity=lazy(()=>import('./CommunityApp').then(module=>({default:module.CommunityApp})));
+export const preloadCommunity = () => import('./CommunityApp').then(module=>({default:module.CommunityApp}));
+const LazyCommunity=lazy(preloadCommunity);
 export function BlogEditor(props:ComponentProps<typeof import('./BlogEditor').BlogEditor>){return <Suspense fallback={<RouteLoading/>}><LazyBlogEditor {...props}/></Suspense>;}
 export function CatalogPublisher(props:ComponentProps<typeof import('./CatalogPublisher').CatalogPublisher>){return <Suspense fallback={<RouteLoading/>}><LazyPublisher {...props}/></Suspense>;}
 export function AdminApp(props:ComponentProps<typeof import('./AdminApp').AdminApp>){return <Suspense fallback={<RouteLoading/>}><LazyAdmin {...props}/></Suspense>;}

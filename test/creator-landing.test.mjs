@@ -21,7 +21,7 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/',sty
  const avatar=({name,avatarId})=>React.createElement('span',{'data-avatar-name':name},avatarId?React.createElement('img',{src:'/media/'+encodeURIComponent(avatarId),alt:''}):null);
  const modules={
   react:React,'react/jsx-runtime':runtime,
-  'next/link':{default:({prefetch,children,...props})=>React.createElement('a',props,children)},
+  'next/link':{useLinkStatus:()=>({pending:false}),default:({prefetch,children,...props})=>React.createElement('a',props,children)},
   'next/image':{default:image},
   'next/navigation':{usePathname:()=>pathname,useRouter:()=>({refresh:()=>{}})},
   'lucide-react':new Proxy({},{get:()=>()=>null}),
@@ -243,6 +243,7 @@ test('the persistent header shares appearance and language controls with the mob
   const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
   const nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav);
   assert.equal(nav.length,1,'the desktop navigation has one live capsule');
+  assert.equal(find(header,n=>(n.attribs.class||'').split(' ').includes('glass-switch__lens')).length,0,'the plain header does not allocate a hidden animated lens');
   const more=find(header,n=>n.name==='button'&&n.attribs.class==='iavse-header__more')[0];
   assert.equal(more.attribs['aria-expanded'],'false');
   const panel=find(header,n=>n.attribs.id===more.attribs['aria-controls'])[0];
