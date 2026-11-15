@@ -1,4 +1,4 @@
-/* Template discovery stays lightweight: static covers, one on-demand modal, continuous rows. */
+/* Template discovery stays lightweight: static covers and one on-demand modal. */
 html:root[data-ui][data-color-mode] body .design-directory.design-explorer{padding-top:8px;--explorer-selected:var(--ds-accent);--explorer-on-selected:var(--ds-panel)}
 html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-page-frame[data-resource-kind=designs]>.resource-hub-tabs{margin-bottom:20px!important}
 .design-directory.design-explorer .design-library-heading{margin-bottom:20px;align-items:center}.design-directory.design-explorer .design-library-heading>a{display:flex;align-items:center;gap:9px}.design-directory.design-explorer .design-library-heading .icon{width:16px;height:16px}.design-directory.design-explorer .design-library-heading h1{font-size:38px;font-weight:550;margin-bottom:10px}.design-directory.design-explorer .design-library-heading p{max-width:65ch}
@@ -104,7 +104,6 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer :is(.
   & .design-library-heading { margin:0 0 8px!important; padding:8px 0 12px!important; gap:8px!important }
   & .design-library-heading h1 { margin:0 0 3px!important; font-size:clamp(28px,2.6vw,38px)!important; line-height:1.24!important }
   & .design-library-heading p { margin:0!important; font-size:14px!important; line-height:1.5!important }
-  & .design-grid { grid-template-columns:repeat(auto-fill,minmax(min(100%,355px),1fr))!important; gap:clamp(16px,1.4vw,24px)!important }
   & .design-directory-meta { margin:0!important; padding:10px 0!important; gap:8px }
  }
  @media(max-width:767px) {
@@ -138,4 +137,106 @@ html:root[data-ui][data-color-mode] body .design-directory.design-explorer :is(.
  #design-directory .explorer-search-row[data-expanded=true] { flex-basis:100% }
  #design-directory .explorer-template-controls { gap:6px }
  #design-directory .explorer-template-controls > label { flex-wrap:wrap; gap:4px }
+}
+
+/* Image-led directory: keep the interface large and move full descriptions to details. */
+@layer rbp {
+#design-directory.design-explorer .design-grid {
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-auto-rows:auto!important;
+ align-items:start!important;
+ gap:32px 24px!important;
+}
+#design-directory .design-gallery-card {
+ min-width:0;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ overflow:visible!important;
+ transform:none!important;
+ contain-intrinsic-size:auto 420px!important;
+}
+#design-directory .design-gallery-card:hover { box-shadow:none!important }
+}
+#design-directory .design-gallery-card .design-card-preview {
+ aspect-ratio:4/3;
+ overflow:hidden;
+ border:1px solid var(--ds-line);
+ border-radius:8px;
+ background:var(--ds-panel);
+}
+#design-directory .design-gallery-card .design-media { height:100% }
+#design-directory .design-gallery-card .design-media>img {
+ transition:transform .3s ease;
+}
+#design-directory .design-gallery-card .explorer-repository-link {
+ top:12px;
+ left:12px;
+ min-height:36px;
+ padding:7px 11px;
+ background:rgb(255 255 255 / .95);
+ color:#20252b;
+ box-shadow:0 2px 10px rgb(0 0 0 / .08);
+ backdrop-filter:none;
+}
+#design-directory .design-gallery-card .design-preview-trigger>span {
+ right:12px;
+ bottom:12px;
+ min-height:36px;
+ padding:8px 12px;
+ font-size:12px;
+ background:rgb(255 255 255 / .95);
+ color:#20252b;
+ box-shadow:0 2px 10px rgb(0 0 0 / .08);
+ backdrop-filter:none;
+}
+#design-directory .design-gallery-caption { padding:10px 0 0;min-width:0 }
+#design-directory .design-gallery-caption .explorer-card-title { align-items:center;gap:8px }
+@layer rbp {
+#design-directory .design-gallery-caption h2 {
+ margin:0!important;
+ font-size:17px!important;
+ line-height:1.4!important;
+ font-weight:550!important;
+ overflow-wrap:anywhere;
+}
+}
+#design-directory .design-gallery-caption h2 a { display:block;padding-block:8px }
+#design-directory .design-gallery-caption .explorer-card-title>button {
+ width:44px;
+ min-width:44px;
+ height:44px;
+ min-height:44px;
+ margin:0 -8px 0 0;
+ padding:12px;
+ border-radius:50%;
+}
+#design-directory .design-gallery-caption .design-card-meta {
+ display:flex;
+ justify-content:space-between;
+ gap:12px;
+ margin-top:0;
+ font-size:12px!important;
+ line-height:1.6;
+ color:var(--ds-muted);
+}
+#design-directory .design-gallery-caption .design-card-meta>a { flex:none }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+ #design-directory .design-gallery-card .design-card-preview:hover .design-media>img { transform:scale(1.025) }
+}
+@layer rbp {
+@media(max-width:1199px) {
+ #design-directory.design-explorer .design-grid { grid-template-columns:repeat(2,minmax(0,1fr))!important }
+}
+@media(max-width:680px) {
+ #design-directory.design-explorer .design-grid { grid-template-columns:1fr!important;gap:28px!important }
+}
+}
+@media(max-width:680px) {
+ #design-directory .design-gallery-card .explorer-repository-link,
+ #design-directory .design-gallery-card .design-preview-trigger>span { min-height:44px }
+}
+@media(prefers-reduced-motion:reduce) {
+ #design-directory .design-gallery-card .design-media>img { transition:none }
 }
