@@ -22,6 +22,7 @@ function setup({reduced=false,io=true}={}){
  const window={innerHeight:1000,...(io?{IntersectionObserver:Observer}:{}),addEventListener:(name,fn)=>events[name]=fn,removeEventListener:name=>delete events[name]};
  const jsx=(type,props)=>({type,props}),React={useRef:value=>refs[cursor++]??=( {current:value}),useState:value=>[value,()=>{}],useEffect:fn=>effects.push(fn)};
  const copy=new Proxy({title:['Title'],overviewCards:[],guideRows:[]},{get:(object,key)=>object[key]??''}),modules={react:React,'react/jsx-runtime':{jsx,jsxs:jsx},'next/link':{default:'a'},'next/navigation':{useRouter:()=>({refresh(){}})},'lucide-react':new Proxy({},{get:()=>()=>null}),'@/components/ui/GlassSwitch':{GlassSwitch:()=>null},'@/components/BrandMark':{BrandMark:()=>null},'@/components/FeedAvatar':{FeedAvatar:()=>null},'@/components/LocaleProvider':{useLocale:()=>({locale:'zh'})},'@/lib/landing-copy':{landingCopy:()=>copy},'./IavseFlowBackdrop':{default:()=>null}};
+ modules['./ClassicLandingHero']={ClassicLandingHero:()=>null};
  modules['./LandingHero']={LandingHero:()=>null};
  modules['./HomeStyleProvider']={useHomeStyle:()=>({style:'anime'})};
  modules['../FilingLink']={FilingLink:()=>null};

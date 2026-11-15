@@ -13,6 +13,7 @@ import {landingCopy} from '@/lib/landing-copy';
 import {LandingResourceShowcase, type ResourceShowcaseGroup} from './LandingResourceShowcase';
 import {LandingSpaceShowcase} from './LandingSpaceShowcase';
 import {LandingHero} from './LandingHero';
+import {ClassicLandingHero} from './ClassicLandingHero';
 import {useHomeStyle} from './HomeStyleProvider';
 
 export type LandingPost = {
@@ -180,7 +181,7 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
       window.removeEventListener('resize', scroll);
       for (const node of animations.keys()) cancel(node);
     };
-  }, [filter, content]);
+  }, [filter, content, style]);
 
   useEffect(() => {
     const element = root.current;
@@ -202,7 +203,7 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
   }, []);
 
   return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale} data-home-style={style}>
-    <LandingHero/>
+    {style === 'classic' ? <ClassicLandingHero/> : <LandingHero/>}
     <div className="iv-container">
       <section className="iv-product-overview" aria-labelledby="iv-product-title">
         <header data-landing-reveal><h2 id="iv-product-title">{c.overviewTitle}</h2><p>{c.overviewBody}</p></header>

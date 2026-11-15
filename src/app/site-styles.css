@@ -1,5 +1,13 @@
 /* Public site roles: one choice, shared by every route and its native controls.
    Saved member artwork, previews and canvas content keep their authored colors. */
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=classic][data-site-style]:is(:has(body)){
+ --iavse-canvas:#f7f9fc;--iavse-background:#fff;--iavse-foreground:#172b3a;--iavse-secondary:#4d6171;--iavse-subtle:#607180;--iavse-muted:#eef3f7;--iavse-border:#dce5ed;--iavse-focus:#1266a4;--iavse-sky:#e5f2fb;--iavse-sage:#e9f3ee;--iavse-warm:#fff2e7;--iavse-selection:#d6eafb;
+ --iavse-shadow:0 3px 12px -9px #173c5f36;--iavse-shadow-hover:0 8px 24px -16px #0003;--iavse-control-shadow:none;
+ --site-card-radius:20px;--site-control-radius:12px;--site-heading-font:var(--iavse-font);--site-heading-weight:500;--site-label-font:var(--iavse-font);--site-accent:#1266a4;--site-accent-soft:#e5f2fb;--green:#21613d;--red:#b42318;color-scheme:light;
+}
+html:root[data-frontend=portfolio][data-ui][data-color-mode=dark][data-home-style=classic][data-site-style]:is(:has(body)){
+ --iavse-canvas:#0b141e;--iavse-background:#111e2b;--iavse-foreground:#edf5fc;--iavse-muted:#182b3b;--iavse-secondary:#b8c6d3;--iavse-subtle:#9cafbf;--iavse-border:#2b4255;--iavse-focus:#86c9ef;--iavse-sky:#163448;--iavse-sage:#203d35;--iavse-warm:#3b3029;--site-accent:#86c9ef;--site-accent-soft:#163448;--green:#83d4a1;--red:#ffb4ab;color-scheme:dark;
+}
 html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=fly][data-site-style]:is(:has(body)){
  --iavse-canvas:#111315;--iavse-background:#1c2025;--iavse-foreground:#f0f2f5;--iavse-secondary:#b8c0cb;--iavse-subtle:#a0aab8;--iavse-muted:#282e36;--iavse-border:#3e4652;--iavse-focus:#b4d4ff;--iavse-sky:#252e3b;--iavse-sage:#293537;--iavse-warm:#362f35;--iavse-selection:#344a65;
  --iavse-shadow:0 15px 36px -22px #000b;--iavse-shadow-hover:0 20px 48px -22px #000d;--iavse-control-shadow:inset 0 1px 0 #ffffff0a;
@@ -20,17 +28,9 @@ html[data-home-style] .rbp-surface{--background:var(--iavse-background);--foregr
 html[data-home-style] .rbp-surface[data-rbp-route]:not([data-rbp-route=blog]){background:transparent}
 html[data-home-style] :is(.iavse-filing-footer,.blog-platform-footer){background:var(--iavse-canvas);color:var(--iavse-subtle)}
 .site-style-atmosphere{position:absolute;inset:0 0 auto;height:650px;z-index:-1;pointer-events:none;overflow:hidden;mask-image:linear-gradient(#000 20%,#000a 60%,transparent);isolation:isolate}
-.site-style-atmosphere .hs-scene{z-index:-1}
-.site-style-atmosphere .hs-scene--anime .hs-anime-art{inset:-8% -2% -8% 0}
-.site-style-atmosphere .hs-scene--anime .hs-anime-art img{object-position:right 40%}
-.site-style-wordmark{position:absolute;width:min(900px,65%);height:auto;right:-80px;top:35px;opacity:.2;mix-blend-mode:multiply}
 .site-style-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--iavse-canvas) 0%,color-mix(in srgb,var(--iavse-canvas) 76%,transparent) 50%,color-mix(in srgb,var(--iavse-canvas) 70%,transparent));}
 .site-style-atmosphere--fly .site-style-veil{background:linear-gradient(180deg,#1113159e,#111315dd 60%,#111315)}
-.site-style-atmosphere--brand{height:500px}.site-style-atmosphere--brand .site-style-veil{background:linear-gradient(90deg,#f7f8fa,#f7f8fa55 60%,#f7f8fa11)}
 .site-style-atmosphere--anime .site-style-veil{background:linear-gradient(90deg,#263147f2,#263147d9 48%,#26314799),linear-gradient(0deg,#263147 0%,transparent 70%)}
-/* The hero uses these primitives too; keep its existing scene geometry intact. */
-.hs-scene{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:-2}.hs-scene canvas,.hs-static,.hs-static img{display:block;position:absolute;width:100%;height:100%;inset:0;object-fit:cover}.hs-scene canvas{opacity:0;transition:opacity .45s}.hs-scene[data-renderer=webgl] canvas,.hs-scene[data-renderer=canvas] canvas{opacity:1}.hs-static{transition:opacity .4s}.hs-scene[data-renderer=webgl] .hs-static{opacity:0}.hs-scene--brand .hs-static img{object-fit:contain}
-.hs-anime-art{position:absolute;inset:-2%;will-change:transform}.hs-anime-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:66% 50%}.hs-anime-shade,.hs-sunlight,.hs-dusk{position:absolute;inset:0;pointer-events:none}.hs-anime-shade{background:linear-gradient(90deg,#121e3b85 0%,#18244150 37%,transparent 75%),linear-gradient(0deg,#17233d77 0%,transparent 32%,transparent 80%,#17233d44 100%)}.hs-sunlight{background:radial-gradient(ellipse at 6% 58%,#ffb45e68,transparent 57%);mix-blend-mode:soft-light;opacity:.7}.hs-dusk{background:linear-gradient(110deg,#273c69aa,#26385e99 65%,#22274188);mix-blend-mode:multiply;opacity:0;transition:opacity 1.2s}.hs-scene[data-dusk=true] .hs-dusk{opacity:.83}
 /* Header, mobile navigation and account sheets follow the same surface roles. */
 html[data-home-style] .iavse-mobile-dock{--dock-paper:var(--iavse-background);--dock-ink:var(--iavse-foreground);--dock-muted:var(--iavse-secondary);--dock-line:var(--iavse-border);--dock-soft:var(--iavse-muted);--dock-panel:var(--iavse-background)}
 html[data-home-style] .iavse-account-sheet{background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
@@ -70,7 +70,7 @@ html[data-home-style] .blog-spaces-create{background:var(--iavse-foreground);col
 html[data-home-style] .blog-spaces-gallery-note{color:var(--iavse-subtle)}
 html[data-home-style] .blog-public-shell:not(.blog-gallery-embed){--blog-chrome-paper:var(--iavse-background);--blog-chrome-ink:var(--iavse-foreground);--blog-chrome-muted:var(--iavse-secondary);--blog-chrome-line:var(--iavse-border)}
 html[data-home-style] .iavse-not-found{background:var(--iavse-background);color:var(--iavse-foreground)}
-@media(max-width:767px){.site-style-atmosphere{height:510px}.site-style-wordmark{width:100%;right:-60px;top:64px;opacity:.14}}
+@media(max-width:767px){.site-style-atmosphere{height:510px}}
 @media(prefers-reduced-motion:reduce){.site-style-atmosphere .hs-anime-art{will-change:auto}.site-style-atmosphere .hs-scene canvas{transition:none}}
 /* Route bundles may arrive after the root sheet. These scoped role bindings
    intentionally outrank their legacy hardcoded canvas defaults. */
@@ -109,3 +109,8 @@ html[data-site-style] .rbp-application .design-zoom-dialog>:is(header,footer,.de
 html[data-site-style] .rbp-application .design-zoom-dialog>:is(header,footer,.design-preview-tools,.design-preview-variants) :is(a,button,h2,span,output){color:var(--iavse-foreground)!important}
 html[data-site-style] .rbp-application .design-zoom-dialog .design-preview-viewports>button[aria-pressed=true]{background:var(--iavse-muted)!important;border-color:var(--iavse-border)!important}
 }
+
+.site-style-art,.site-style-art>img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.site-style-atmosphere--anime .site-style-art>img{object-position:right 40%}
+.classic-flow-static{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 45%,#cbe9e4a0,transparent 50%),radial-gradient(ellipse at 78% 32%,#dbd9f5c0,transparent 60%),var(--iavse-canvas)}
+html[data-home-style=classic][data-color-mode=dark] .classic-flow-static{background:radial-gradient(ellipse at 20% 45%,#173b4080,transparent 50%),radial-gradient(ellipse at 78% 32%,#34345780,transparent 60%),var(--iavse-canvas)}

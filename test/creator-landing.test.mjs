@@ -40,6 +40,7 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/',sty
  const cache=new Map();
  function load(file){
   file=path.resolve(file);if(cache.has(file))return cache.get(file);
+  if(file.endsWith('/landing/HomeStyleProvider.tsx'))return modules['./HomeStyleProvider'];
   if(file.endsWith('/components/LocaleProvider.tsx'))return modules['@/components/LocaleProvider'];
   if(file.endsWith('/landing/IavseFlowBackdrop.tsx'))return{default:()=>React.createElement('div',{'data-flow-backdrop-stub':true,'aria-hidden':'true'})};
   if(file.endsWith('/portfolio/PortraitMorph.tsx'))return{PortraitMorph:({srcA,alt})=>React.createElement('img',{src:srcA,alt,'data-portfolio-portrait':true})};
@@ -251,7 +252,7 @@ test('the persistent header shares appearance and language controls with the mob
   assert.equal(find(panel,n=>n.attribs.class==='iavse-header__about')[0].attribs.href,'/about');
   assert.equal(find(panel,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,1);
   const navigation=nav[0].parent,theme=find(navigation,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle');
-  assert.equal(theme.length,1);assert.equal(theme[0].attribs.type,'button');
+  assert.equal(theme.length,0,'scene appearances do not mount a competing color toggle');
   const identity=find(header,n=>n.attribs.class==='iavse-header__identity')[0],children=(identity.children||[]).filter(n=>n.type==='tag');
   assert.ok(Object.hasOwn(children.at(-1).attribs,'data-language-switcher'),'language is the last account-side control');
   const footer=find(document,n=>n.name==='footer')[0];assert.equal(find(footer,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,0);
@@ -306,18 +307,18 @@ test('configured site updates appear once on visitor routes and stay outside man
 
 
 test('all selected visual worlds retain live resource destinations and one top-right style selector',async()=>{
- for(const style of ['fly','brand','anime']){
+ for(const style of ['fly','brand','anime','classic']){
   const {document}=await render('zh',{style});
   assert.equal(find(document,n=>n.attribs['data-home-hero']===style).length,1);
-  assert.equal(find(document,n=>n.name==='canvas').length,1,'one active scene only');
+  assert.equal(find(document,n=>n.name==='canvas').length,style==='classic'?0:1,'classic starts with an async shader fallback; other heroes have one canvas');
   assert.equal(find(document,n=>n.name==='iframe').length,0,'homepage styles are native components');
   const hero=find(document,n=>n.attribs['data-home-hero']===style)[0];
   assert.equal(find(hero,n=>n.name==='h1').length,1);
-  assert.equal(find(hero,n=>n.attribs.class==='hs-cta')[0].attribs.href,'/resources');
+  assert.ok(find(hero,n=>n.name==='a'&&n.attribs.href==='/resources').length,'every UI retains a real resource destination');
   const trigger=find(document,n=>n.name==='button'&&n.attribs.class==='home-style-trigger');
   assert.equal(trigger.length,1);assert.equal(trigger[0].attribs['aria-expanded'],'false');
   const options=find(document,n=>n.attribs.role==='option'&&n.attribs['data-style-option']);
-  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime']);
+  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime','classic']);
   assert.deepEqual(options.filter(n=>n.attribs['aria-selected']==='true').map(n=>n.attribs['data-style-option']),[style]);
  }
 });
@@ -331,7 +332,15 @@ test('every shared platform header keeps the same UI selector away from home',as
   const trigger=find(header,n=>n.name==='button'&&n.attribs.class==='home-style-trigger');
   assert.equal(trigger.length,1,pathname+' has one style entry');
   const options=find(header,n=>n.attribs.role==='option'&&n.attribs['data-style-option']);
-  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime']);
+  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime','classic']);
   assert.equal(options.find(n=>n.attribs['aria-selected']==='true').attribs['data-style-option'],'brand');
  }
+});
+
+
+test('the restored original UI keeps its original headline, two entries and color toggle',async()=>{
+ const {document,copy}=await render('zh',{style:'classic'}),hero=find(document,n=>n.attribs['data-home-hero']==='classic')[0];
+ assert.equal(text(find(hero,n=>n.name==='h1')[0]),copy.landingCopy('zh').title.join(''));
+ assert.deepEqual(find(hero,n=>n.name==='a').map(n=>n.attribs.href),['/community','/resources']);
+ assert.equal(find(document,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle').length,1);
 });

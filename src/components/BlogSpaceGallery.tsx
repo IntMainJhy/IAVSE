@@ -51,7 +51,7 @@ function GalleryScene({spaces,labels,directory}:GalleryProps){
  const prepared=useRef(revealed),workAllowed=useRef(false);prepared.current=revealed;
  const choose=useCallback((index:number)=>select.current(selectedHandle.current===exhibits[index]?.handle?-1:index),[exhibits]);
  const onReady=useCallback((handle:string)=>{if(!settled.current.has(handle)){settled.current.add(handle);setSettledVersion(value=>value+1);}},[]);
- useEffect(()=>{if(!revealed&&workReady&&exhibits.every(space=>settled.current.has(space.handle)))return scheduleGalleryWork(()=>{if(workAllowed.current)setRevealed(true);});},[exhibits,settledVersion,workReady,revealed]);
+ useEffect(()=>{if(!revealed&&workReady&&exhibits.filter(space=>settled.current.has(space.handle)).length>=Math.min(2,exhibits.length))return scheduleGalleryWork(()=>{if(workAllowed.current)setRevealed(true);});},[exhibits,settledVersion,workReady,revealed]);
  // One unavailable author cannot hide the entire discoverable directory.
  useEffect(()=>{if(!workReady||revealed)return;const timer=setTimeout(()=>setRevealed(true),8000);return()=>clearTimeout(timer);},[workReady,revealed]);
  useEffect(()=>{

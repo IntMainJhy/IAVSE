@@ -83,9 +83,9 @@ test('visibility, offscreen exit, navigation and unmount cancel queued admission
  const s=fixture();s.intersect(true);s.paint();s.unmount();s.tasks();assert.deepEqual(s.mounted(),[]);assert.ok(s.contexts.every(context=>context.reverted));assert.ok(s.resizes.every(observer=>observer.disconnected));
 });
 
-test('ready previews reveal together after a paint, keep stable callbacks and retain spatial transforms',()=>{
+test('the first two ready previews reveal after paint while the remaining pages keep loading',()=>{
  const s=fixture({count:3});s.intersect(true);const choose=s.panelProps()[0].onSelect,onReady=s.panelProps()[0].onReady;
- s.step();s.ready(s.mounted()[0]);s.step();s.ready(s.mounted()[1]);s.step();s.ready(s.mounted()[2]);
+ s.step();s.ready(s.mounted()[0]);s.step();s.ready(s.mounted()[1]);
  assert.equal(s.tree.props['data-gallery-prepared'],false);s.step();assert.equal(s.tree.props['data-gallery-prepared'],true);
  const world=walk(s.tree).find(node=>node.props?.className==='blog-gallery-world');assert.equal(world.props.inert,false);assert.equal(world.props['aria-hidden'],false);
  for(const props of s.panelProps()){assert.equal(props.onSelect,choose);assert.equal(props.onReady,onReady);}

@@ -20,8 +20,7 @@ html[data-home-style=brand] .iavse-header[data-site-style-header]{--header-ink:#
 .iavse-header[data-site-style-header][data-home-scrolled=true]{padding-inline:20px;border-radius:18px;background:var(--header-panel);box-shadow:0 6px 25px #10182714}
 @media(max-width:767px){.iavse-header[data-site-style-header][data-home-scrolled=true]{padding-inline:22px;border-radius:0}}
 
-/* A selected visual world owns appearance; the previous two-state toggle stays
-   in the DOM for existing integrations but is no longer a competing control. */
+/* Fixed-palette styles own appearance; only classic exposes its theme toggle. */
 .iavse-header[data-site-style-header] .iavse-header__navigation>.iavse-header__setting-label{display:none}
 .iavse-header[data-site-style-header]:not([data-home-header]){padding-inline:20px;border-radius:18px;background:var(--header-panel);box-shadow:0 6px 25px #10182714;backdrop-filter:blur(20px)}
 html[data-home-style=fly] .iavse-header[data-site-style-header]{--header-ink:#f2f3f5;--header-muted:#c4c8cf;--header-line:#ffffff30;--header-glass-high:#1b1e22cc;--header-glass-low:#1b1e2299;--header-edge:#ffffff24;--header-panel:#1b1e22;--header-soft:#30343b;--header-action:#f2f3f5;--header-on-action:#151719}
@@ -59,3 +58,8 @@ html[data-home-style][data-color-mode] .iavse-header[data-site-style-header] .ia
 .iavse-header__link-label[data-nav-pending=true]::after{content:'';position:absolute;inset:auto 0 0;height:1px;background:currentColor;transform-origin:left;animation:iavse-nav-pending .75s ease-in-out infinite alternate}
 @keyframes iavse-nav-pending{from{transform:scaleX(.2);opacity:.45}to{transform:scaleX(1);opacity:1}}
 @media(prefers-reduced-motion:reduce){.iavse-header__link-label[data-nav-pending=true]::after{animation:none}}
+
+.home-style-thumb--classic{font:600 12px Georgia,serif;color:#25383e;background:linear-gradient(135deg,#e9f8f3,#e9e8f9 70%,#f8faff)}
+html[data-home-style=classic] .iavse-header__identity>.iavse-theme-toggle{display:inline-flex}
+html[data-home-style]:not([data-home-style=classic]) .iavse-header .iavse-theme-toggle{display:none}
+html[data-home-style=classic] .admin-topline .admin-theme-toggle{display:inline-flex!important}

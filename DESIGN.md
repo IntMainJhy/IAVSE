@@ -240,6 +240,12 @@ components:
 
 # Design System: IAVSE
 
+## Four shared appearances · 2026-11-15
+
+The active public UI offers Character tide (`fly`), Open IAVSE (`brand`), Sea breeze (`anime`) and Original IAVSE (`classic`). The original main-branch centered hero, two entry links, flowing mist and light/dark colors remain available as `classic`, the fallback for an absent or invalid preference. Existing saved choices remain valid. Shared site roles and `HomeStyleProvider` control all platform routes; authored documents, member canvases and template previews retain their own colors. See [all-site style behavior](docs/home-style-switch.zh-CN.md).
+
+This integration supersedes the earlier separate-background-branch and animated-header-lens notes below. Shared header navigation now uses native Next links with pending feedback and bounded intent/idle prefetch. Functional pages use static art or CSS mist; `brand` has no decorative background wordmark. Homepage scenes retain motion and per-style cleanup. Only `classic` exposes the independent light/dark control, restoring its preference after a round trip through another style. The blog gallery reveals after two prepared previews while the remaining work continues through its bounded queue. See [performance validation](docs/navigation-performance-check.zh-CN.md).
+
 ## Overview
 
 **Creative North Star: "White space, black controls, teal and blue mist"**

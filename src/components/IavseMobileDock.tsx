@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import {NavigationLinkFeedback} from './NavigationLinkFeedback';
 import {useEffect, useId, useRef, useState, type CSSProperties} from 'react';
 import {Bell, BookOpen, Bookmark, FileText, House, Layers, MessagesSquare, PenLine, Settings, Shield, UserRound, UsersRound, X} from 'lucide-react';
 import {useLocale} from '@/components/LocaleProvider';
@@ -63,7 +64,7 @@ export function IavseMobileDock({path}: {path: string}) {
     <div className="iavse-mobile-dock__items" style={{'--dock-index': activeIndex} as CSSProperties}>
       {destinations.map(({href,label,short,icon: Icon,active}) =>
         <Link className="iavse-mobile-dock__tab" key={href} href={href} prefetch={false} aria-label={label} aria-current={active ? 'page' : undefined}>
-          <Icon size={22} aria-hidden="true"/><span>{short}</span>
+          <Icon size={22} aria-hidden="true"/><span>{short}</span><NavigationLinkFeedback/>
         </Link>
       )}
       <button className="iavse-mobile-dock__tab" type="button" aria-label={t('我的账号与更多功能')} aria-controls={panelId}

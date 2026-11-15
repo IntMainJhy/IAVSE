@@ -6,7 +6,7 @@ import type {HomeStyle} from './HomeStyleProvider';
 type Scene = {render: (time: number, x: number, y: number, open?: boolean) => void; resize: (width: number, height: number) => void; dispose: () => void};
 
 /** One live scene at a time. Switching styles releases the previous GPU resources. */
-export function LandingScene({style, paused, opened, dusk}: {style: HomeStyle; paused: boolean; opened: boolean; dusk: boolean}) {
+export function LandingScene({style, paused, opened, dusk}: {style: Exclude<HomeStyle, 'classic'>; paused: boolean; opened: boolean; dusk: boolean}) {
   const canvas = useRef<HTMLCanvasElement>(null), stage = useRef<HTMLDivElement>(null), art = useRef<HTMLDivElement>(null);
   const state = useRef({paused, opened});
   state.current = {paused, opened};

@@ -15,6 +15,7 @@ export function LandingHero() {
     preference.addEventListener('change', sync); return () => preference.removeEventListener('change', sync);
   }, []);
   useEffect(() => {setOpened(false);}, [style]);
+  if (style === 'classic') return null;
   const zh = locale === 'zh', ja = locale === 'ja';
   const title = style === 'anime' ? zh ? ['把热爱，', '写成自己的故事。'] : ja ? ['好きなことを、', '自分だけの物語に。'] : ['Turn what you love', 'into your own story.']
     : style === 'fly' ? zh ? ['灵感汇聚，', '创作发生。'] : ja ? ['アイデアが集まり、', '創作がはじまる。'] : ['Ideas come together.', 'Creation happens.']

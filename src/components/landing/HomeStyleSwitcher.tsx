@@ -12,9 +12,9 @@ export function HomeStyleSwitcher({className = '', onOpen}: {className?: string;
   const {style, select, saved} = useHomeStyle();
   const root = useRef<HTMLDivElement>(null), trigger = useRef<HTMLButtonElement>(null), id = useId();
   const [open, setOpen] = useState(false), [focus, setFocus] = useState(0);
-  const names = locale === 'en' ? ['Character tide', 'Open IAVSE', 'Sea breeze'] : locale === 'ja' ? ['文字の潮流', 'IAVSE を開く', '海風の便り'] : ['字符潮汐', '打开 IAVSE', '海风来信'];
-  const descriptions = locale === 'en' ? ['Flowing characters', 'Sculpted wordmark', 'An illustrated sunset'] : locale === 'ja' ? ['流れる文字の波', '立体ブランドロゴ', '夕暮れのイラスト'] : ['流动的字符波面', '立体品牌与光影', '夕阳与动漫插画'];
-  const styles: HomeStyle[] = ['fly', 'brand', 'anime'];
+  const names = locale === 'en' ? ['Character tide', 'Open IAVSE', 'Sea breeze', 'Original IAVSE'] : locale === 'ja' ? ['文字の潮流', 'IAVSE を開く', '海風の便り', 'オリジナル'] : ['字符潮汐', '打开 IAVSE', '海风来信', '经典原版'];
+  const descriptions = locale === 'en' ? ['Flowing characters', 'Sculpted wordmark', 'An illustrated sunset', 'Original layout and flowing mist'] : locale === 'ja' ? ['流れる文字の波', '立体ブランドロゴ', '夕暮れのイラスト', '元のレイアウトと霧の光'] : ['流动的字符波面', '立体品牌与光影', '夕阳与动漫插画', '原版布局与流动雾光'];
+  const styles: HomeStyle[] = ['fly', 'brand', 'anime', 'classic'];
   const label = locale === 'en' ? 'Switch UI' : locale === 'ja' ? 'UI を切り替え' : '切换 UI';
   const previousPath = useRef(path);
   useEffect(() => {if (previousPath.current !== path) {previousPath.current = path; setOpen(false);}}, [path]);
@@ -32,10 +32,10 @@ export function HomeStyleSwitcher({className = '', onOpen}: {className?: string;
     }}><PanelsTopLeft size={16} aria-hidden="true"/><span>{label}</span><ChevronDown size={13} aria-hidden="true"/></button>
     <div className="home-style-menu" id={id} role="listbox" aria-labelledby={id+'-trigger'} hidden={!open} onKeyDown={event => {
       if (event.key === 'Escape') {event.preventDefault(); event.stopPropagation(); close(true);}
-      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {event.preventDefault(); setFocus(value => (value + (event.key === 'ArrowDown' ? 1 : 2)) % 3);}
-      if (event.key === 'Home' || event.key === 'End') {event.preventDefault(); setFocus(event.key === 'Home' ? 0 : 2);}
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {event.preventDefault(); setFocus(value => (value + (event.key === 'ArrowDown' ? 1 : styles.length - 1)) % styles.length);}
+      if (event.key === 'Home' || event.key === 'End') {event.preventDefault(); setFocus(event.key === 'Home' ? 0 : styles.length - 1);}
     }}>{styles.map((value, index) => <button key={value} type="button" role="option" aria-selected={style === value} tabIndex={focus === index ? 0 : -1} data-style-option={value} onClick={() => {select(value); close(true);}}>
-      <span className={'home-style-thumb home-style-thumb--'+value} aria-hidden="true">{value === 'fly' ? '01 / + 0' : value === 'brand' ? 'IAVSE' : ''}</span><span><strong>{names[index]}</strong><small>{descriptions[index]}</small></span>{style === value && <Check size={16} aria-hidden="true"/>}
+      <span className={'home-style-thumb home-style-thumb--'+value} aria-hidden="true">{value === 'fly' ? '01 / + 0' : value === 'brand' || value === 'classic' ? 'IAVSE' : ''}</span><span><strong>{names[index]}</strong><small>{descriptions[index]}</small></span>{style === value && <Check size={16} aria-hidden="true"/>}
     </button>)}</div>
     <span className="community-sr" role="status">{!saved ? locale === 'en' ? 'UI changed. Your browser did not allow saving this preference.' : locale === 'ja' ? 'UI を変更しました。ブラウザが設定の保存を許可していません。' : 'UI 已切换，浏览器未允许保存偏好。' : ''}</span>
   </div>;
