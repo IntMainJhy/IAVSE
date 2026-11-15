@@ -60,6 +60,8 @@ html[data-home-style][data-color-mode] .iavse-header[data-site-style-header] .ia
 @media(prefers-reduced-motion:reduce){.iavse-header__link-label[data-nav-pending=true]::after{animation:none}}
 
 .home-style-thumb--classic{font:600 12px Georgia,serif;color:#25383e;background:linear-gradient(135deg,#e9f8f3,#e9e8f9 70%,#f8faff)}
+/* Keep all four choices reachable in landscape and short browser windows. */
+.home-style-menu{max-height:calc(100dvh - 160px);overflow-y:auto;overscroll-behavior:contain}
 html[data-home-style=classic] .iavse-header__identity>.iavse-theme-toggle{display:inline-flex}
 html[data-home-style]:not([data-home-style=classic]) .iavse-header .iavse-theme-toggle{display:none}
 html[data-home-style=classic] .admin-topline .admin-theme-toggle{display:inline-flex!important}

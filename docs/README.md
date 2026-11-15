@@ -14,6 +14,8 @@ IAVSE connects resource discovery, community practice and editable blog homepage
 | 了解代码 / Read the implementation | [架构与学习导览 / Architecture](architecture.md) |
 | 解决运行问题 / Diagnose a problem | [故障排查 / Troubleshooting](troubleshooting.md) |
 | 查看当前页面 / View the current UI | [真实截图与范围 / Captures](screenshots/README.md) |
+| 切换全站外观 / Switch site appearance | [四套 UI 与偏好 / Four shared styles](home-style-switch.zh-CN.md) · [导航性能 / Navigation checks](navigation-performance-check.zh-CN.md) |
+| 查看本轮检查 / Review current verification | [四套 UI 收尾验收 / Four-style acceptance](four-ui-acceptance-2026-11-15.md) |
 | 反馈和参与 / Ask or contribute | [Support](../SUPPORT.md) · [Contributing](../CONTRIBUTING.md) |
 
 ## 阅读与创作 / Read and create

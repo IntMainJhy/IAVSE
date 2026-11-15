@@ -198,6 +198,15 @@ html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-ed
  html:root[data-ui][data-color-mode] body .blog-editor.blog-canvas-editor[data-editor-layout=canvas]{--studio-glass:var(--studio-paper);--studio-panel-glass:var(--studio-paper);--studio-reflection:none;--studio-glass-blur:0px;--studio-field:var(--studio-paper)}
 }
 
+/* Keep the UI selector inside the narrowest phone toolbar. The save action
+   retains its accessible name and tooltip when its label becomes an icon. */
+@media(max-width:359px){
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions{gap:4px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bc-save-compact{display:none}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .be-primary-actions .bc-save-action{width:40px;min-width:40px;padding:10px}
+ :root[data-ui][data-color-mode] .blog-editor.blog-canvas-editor[data-editor-layout=canvas] .bd-tool-dock .bd-floating-tools{flex-wrap:wrap}
+}
+
 /* Site-wide click particles never cover or repaint the operating canvas. */
 body:has(.blog-canvas-editor) :is(.iavse-quantum-pointer,.iavse-quantum-wave){visibility:hidden}
 

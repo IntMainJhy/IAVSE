@@ -38,7 +38,7 @@ This repository contains the website frontend, backend, tests, AI integrations a
 
 > Original website material uses **[PolyForm Noncommercial 1.0.0](LICENSE)**. Noncommercial study, use, deployment, modification and redistribution are permitted within its terms. Commercial use needs separate permission. Retain the original-author and source notices in [NOTICE](NOTICE). Third-party licenses remain unchanged. Private macOS / Windows client source, installers and live site data are outside this repository.
 
-The maintained branch is **`main`**, including the public UI and functional updates from `desgin`, which is retained as history. The [integration handoff](docs/main-integration-2026-11-13.md) records scope, validation and recovery. A source merge is not a production deployment.
+The maintained branch is **`main`**, including the public UI and functional updates from `desgin` and `background`, both retained as history. [Four site appearances](docs/home-style-switch.zh-CN.md) share business logic and data; the [earlier integration handoff](docs/main-integration-2026-11-13.md) retains its dated scope. A source merge is not a production deployment.
 
 ## Features
 
@@ -55,6 +55,7 @@ The maintained branch is **`main`**, including the public UI and functional upda
 | Administration | Reviews, reports, account restrictions, files, audit history and measured PV / UV |
 | Operations | SQLite, private file storage, backup/restore, cleanup scripts, Nginx / systemd and separate platform/admin examples |
 | Languages | Simplified Chinese, English and Japanese; desktop, tablet, mobile and reduced-motion support |
+| Site appearance | Character tide, Open IAVSE, Sea breeze and Original IAVSE; persistent cross-route selection, with light/dark modes for the original UI |
 
 ## Preview
 
@@ -62,7 +63,7 @@ The opening and product overview were captured from the actual local production 
 
 ### Homepage and content entry points
 
-The current platform uses white space, black actions, teal and pale-blue mist, and neutral frosted navigation. Home contains a centered opening, three capability cards, real community content, four resource categories, the bound author's actual public homepage and a getting-started FAQ. Mobile has five bottom destinations; directories share compact search and filters. Reveals replay after full viewport exit. About uses graphite illustrations and an expandable introduction, while public announcements use an opaque black marquee. Authored pages retain their own appearances. See [DESIGN.md](DESIGN.md) and the [frontend source notes](docs/portfolio-frontend.md).
+These screenshots show Original IAVSE's white space, black actions and teal/blue mist. The shared header also offers Character tide, Open IAVSE and Sea breeze. Functional pages share each palette with static backgrounds; homepage scenes retain motion. Home includes three capability cards, real community content, four resource categories, the bound author's public homepage and a getting-started FAQ. Mobile has five bottom destinations; directories retain compact search and filters. Community, accounts, administration and the editor retain their workflows, and authored pages keep their own appearances. See [DESIGN.md](DESIGN.md) and the [frontend source notes](docs/portfolio-frontend.md).
 
 ![Three product capabilities: resources, community and a personal homepage](docs/screenshots/2026-11-13/home-overview-desktop.webp)
 

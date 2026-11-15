@@ -6,6 +6,7 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ### 2026-11-15 · Four site styles and navigation / 四套全站 UI 与导航优化
 
+- Keep all four choices reachable in short landscape viewports, and retain the editor switcher within a 320px phone toolbar. Update the original-home preview regression to cover the shared selector without changing embedded author content.
 - Preserve the original main-branch layout, flowing mist and light/dark appearance as “经典原版”, alongside the three selected styles in the shared switcher. Keep all styles across routes and refreshes.
 - Remove the brand wordmark from functional pages and replace their animated backgrounds with static art or CSS. Keep homepage motion and authored member content.
 - Use native navigation links with bounded prefetch and shared pending-work gates; reveal the blog gallery after the first two prepared previews while loading the rest progressively.

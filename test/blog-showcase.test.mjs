@@ -51,6 +51,7 @@ test('gallery original-home previews match full homepages while explicit editor-
   if(name.includes('blog-appearances'))return{blogAppearance:id=>blogAppearances.find(item=>item.id===id)};
   if(name.includes('/BlogTheme'))return{BlogTheme:'BlogTheme'};
   if(name.includes('ShowcasePortfolio'))return{ShowcasePortfolio:'ShowcasePortfolio'};
+  if(name.includes('HomeStyleSwitcher'))return{HomeStyleSwitcher:'HomeStyleSwitcher'};
   throw Error('Unexpected dependency '+name);
  }});
  const request=(handle,query={})=>({params:Promise.resolve({handle}),searchParams:Promise.resolve(query)}),walk=node=>node&&typeof node==='object'?[node,...[node.props?.children].flat().flatMap(walk)]:[];
@@ -61,10 +62,14 @@ test('gallery original-home previews match full homepages while explicit editor-
   assert.equal(frameTheme.type,'BlogTheme');assert.equal(frameTheme.props.preview,true);assert.equal(frameTheme.props.staticPreview,true);assert.equal(frameTheme.props.embedded,true);
   assert.deepEqual(frameTheme.props.data,showcasePageData(item.handle,'zh'));assert.deepEqual(fullTheme.props.data,frameTheme.props.data);
   assert.equal(fullTheme.props.staticPreview,false,'the full example keeps native responsive layout');
-  assert.equal(study.type,'ShowcasePortfolio','original reference studies are retained');assert.equal(study.props.data.projects.length,2);
+  const studyPortfolio=walk(study).find(node=>node.type==='ShowcasePortfolio');
+  assert.ok(studyPortfolio,'original reference studies are retained');assert.equal(studyPortfolio.props.data.projects.length,2);
+  assert.equal(walk(study).filter(node=>node.type==='HomeStyleSwitcher').length,1,'the full original example exposes the shared UI selector');
+  assert.equal(walk(full).filter(node=>node.type==='HomeStyleSwitcher').length,1,'the full editor-template example exposes the shared UI selector');
+  assert.equal(walk(legacy).some(node=>node.type==='HomeStyleSwitcher'),false,'embedded author previews keep their own appearance and no platform controls');
   assert.equal(legacy.props.className,'blog-public-shell blog-gallery-embed');
   assert.equal(legacy.props.children.type,'ShowcasePortfolio');assert.equal(legacy.props.children.props.embedded,true);
-  assert.deepEqual(legacy.props.children.props.data,study.props.data,'default gallery and opened homepage present the same work');
+  assert.deepEqual(legacy.props.children.props.data,studyPortfolio.props.data,'default gallery and opened homepage present the same work');
   assert.equal(walk(full).some(node=>node.type==='SpaceVisit'),false);
  }
  assert.equal(exports.metadata.robots.index,false);assert.equal(exports.metadata.robots.follow,false);
