@@ -6,8 +6,8 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ### 2026-11-15 · Image-led template gallery / 模板大图画廊
 
-- Place titles inside images and remove all external card captions. Stagger portrait, square and landscape covers with grid masonry that retains DOM order and existing positions when more entries arrive.
-- Present the UI design directory as three large image columns on desktop, two on tablet and one on phones, with varied cover ratios and inset titles.
+- Place titles inside images and remove all external card captions. Preserve original image proportions without cropping, stretching or hover zoom; stagger column starts with grid masonry that retains DOM order and existing positions when more entries arrive.
+- Expand the directory across the available width, with three image columns on wide screens, two on standard desktops and one at 900px or below. Use transparent frosted controls and design-page navigation surfaces without white fills; remove repository arrows.
 - Move long descriptions and classifications out of directory cards while retaining details, source links, bookmarks, filtering and the existing on-demand preview.
 - Preserve static lazy-loaded covers, bounded catalog batches and the four shared site appearances.
 

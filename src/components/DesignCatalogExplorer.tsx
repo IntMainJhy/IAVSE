@@ -90,7 +90,7 @@ export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
   <div className="design-directory-meta"><p className="design-result" role="status">{waitingForFavorites?t('正在读取收藏…'):loading&&!items.length?t('加载中…'):<>{page.total} {t('项资源')}{hasMore&&<> · {t('已显示')} {items.length}</>}</>}</p><span>{t(filters.collection==='design-system'?'配色、字体与组件规范 · 与完整项目分开收录':'原始实现、项目来源与许可分别列明')}</span></div>
   {storageMessage&&<p className="explorer-storage" role="status">{storageMessage}</p>}
   <DesignMasonry layoutKey={items.map(entry=>entry.slug).join('|')} busy={busy!=='idle'}>{items.map(entry=>{const origin=entry.creator||entry.source;return <article className="design-card design-gallery-card" key={entry.slug} data-template-slug={entry.slug}>
-   <a className="explorer-repository-link" href={entry.template?.kind==='design-system'?entry.source.url:entry.template?.repository||entry.source.url} target="_blank" rel="noopener noreferrer" aria-label={'GitHub · '+entry.title} title={t('原作者')+' · '+origin.name}>GitHub<Icon name="arrow"/></a>
+   <a className="explorer-repository-link" href={entry.template?.kind==='design-system'?entry.source.url:entry.template?.repository||entry.source.url} target="_blank" rel="noopener noreferrer" aria-label={'GitHub · '+entry.title} title={t('原作者')+' · '+origin.name}><span>GitHub</span></a>
    <DesignPreviewCard entry={entry} onPreview={element=>{previewTrigger.current=element;setPreview(entry)}}/>
    <div className="design-gallery-caption">
     <h2><Link prefetch={false} href={'/resources/designs/'+entry.slug}>{entry.title}</Link></h2>
