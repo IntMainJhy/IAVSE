@@ -29,7 +29,7 @@ Four site-wide appearances, with Sea breeze as the default.
 
 </div>
 
-![IAVSE default homepage: Sea breeze, daylight coast and a long-haired anime creator](docs/screenshots/2026-11-15-daylight/home-hero-desktop.webp)
+![IAVSE default homepage: Sea breeze, daylight coast and a long-haired anime creator](docs/screenshots/2026-11-15-product-story/home-hero-desktop.webp)
 
 ## About IAVSE
 
@@ -62,7 +62,7 @@ The maintained branch is **`main`**, including the public UI and functional upda
 
 ## Preview
 
-All images below were captured from the actual local production build on **2026-11-15**, signed out, in Simplified Chinese, with disposable storage. No live site database was copied and no community activity was fabricated. The owner profile comes from the public defaults shipped in the repository; gallery examples are explicitly labeled fictional. See [capture provenance, dimensions and source hashes](docs/screenshots/2026-11-15-daylight/captures.json). [Historical images](docs/screenshots/README.md) retain their dates.
+All images below were captured from the actual local production build on **2026-11-15**, signed out, in Simplified Chinese, with disposable storage. No live site database was copied and no community activity was fabricated. The owner profile comes from the public defaults shipped in the repository; gallery examples are explicitly labeled fictional. See [current homepage, product story and directory capture provenance](docs/screenshots/2026-11-15-product-story/captures.json); retained views use the [daylight capture record](docs/screenshots/2026-11-15-daylight/captures.json). [Historical images](docs/screenshots/README.md) retain their dates.
 
 ### Four appearances, one site
 
@@ -70,7 +70,7 @@ New visitors see Sea breeze. The announcement strip is disabled by default. Swit
 
 | Sea breeze · Default | Character tide |
 | --- | --- |
-| ![Sea breeze](docs/screenshots/2026-11-15-daylight/home-hero-desktop.webp) | ![Character tide and its flowing glyph surface](docs/screenshots/2026-11-15/home-fly-desktop.webp) |
+| ![Sea breeze](docs/screenshots/2026-11-15-product-story/home-hero-desktop.webp) | ![Character tide and its flowing glyph surface](docs/screenshots/2026-11-15/home-fly-desktop.webp) |
 | **Open IAVSE** | **Original IAVSE** |
 | ![Open IAVSE dimensional wordmark](docs/screenshots/2026-11-15/home-brand-desktop.webp) | ![Original IAVSE centered hero and mist](docs/screenshots/2026-11-15/home-classic-desktop.webp) |
 
@@ -83,20 +83,22 @@ New visitors see Sea breeze. The announcement strip is disabled by default. Swit
 
 ### Mobile and content entry points
 
-Phones retain five bottom destinations and a direct appearance switcher. Three homepage capabilities connect resources, shared experience and personal homepages.
+Phones retain five bottom destinations and a direct appearance switcher. An illustrated homepage story connects useful resources, shared experience and a personal home for creative work.
 
-<img src="docs/screenshots/2026-11-15-daylight/home-hero-mobile.webp" alt="Sea breeze and bottom navigation on a 390px phone viewport" width="260">
+<img src="docs/screenshots/2026-11-15-product-story/home-hero-mobile.webp" alt="Sea breeze and bottom navigation on a 390px phone viewport" width="260">
 
-![Three product capabilities: resources, community and a personal homepage](docs/screenshots/2026-11-15-daylight/home-overview-desktop.webp)
+![Homepage story: direct resource categories and real template selections](docs/screenshots/2026-11-15-product-story/home-overview-desktop.webp)
 
 ### Functional pages
 
 ![Blog spaces: public owner homepage and clearly labeled built-in examples](docs/screenshots/2026-11-15-daylight/blogs-desktop.webp)
 
+![Blog spaces product story: the real canvas editor](docs/screenshots/2026-11-15-product-story/blogs-product-desktop.webp)
+
 <details>
 <summary>View resources and community</summary>
 
-![Resource center: UI designs, AI Skills, documents, websites and tools](docs/screenshots/2026-11-15-daylight/resources-desktop.webp)
+![UI design directory: visible filters and original-ratio image gallery](docs/screenshots/2026-11-15-product-story/resources-desktop.webp)
 
 ![UI templates in an original-ratio masonry gallery](docs/screenshots/2026-11-15-daylight/design-gallery-desktop.webp)
 

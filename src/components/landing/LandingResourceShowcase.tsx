@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {ArrowRight, ArrowUpRight, BookOpen, ChevronDown, Compass, PanelsTopLeft, Sparkles} from 'lucide-react';
+import {ArrowUpRight, BookOpen, Compass, PanelsTopLeft, Sparkles} from 'lucide-react';
 import {useLocale} from '@/components/LocaleProvider';
 import {landingCopy} from '@/lib/landing-copy';
 import '@/app/landing-resources.css';
@@ -36,42 +36,28 @@ export function LandingResourceShowcase({groups}: {groups: ResourceShowcaseGroup
     {id: 'resources', label: c.tools, icon: Compass},
   ];
 
+  const designs = groups.find(group => group.id === 'designs');
   return <aside className="iv-catalog" aria-label={c.resources}>
-    <div className="iv-catalog-intro" data-landing-reveal>
-      <h2>{c.resourceTitle}</h2>
-      <p>{labels.intro}</p>
+    <div className="iv-catalog-intro" data-story-reveal>
+      <div><h2>{c.resourceTitle}</h2><p>{labels.intro}</p></div>
+      <Link className="iv-text-link" href="/resources">{c.resources}<ArrowUpRight size={17} aria-hidden="true"/></Link>
     </div>
-    <div className="iv-catalog-index" data-landing-reveal>
+    <nav className="iv-catalog-index" aria-label={c.resources} data-story-reveal>
       {categories.map(({id, label, icon: Icon}) => {
         const group = groups.find(group => group.id === id);
-        if (!group) return null;
-        return <details key={id} name="iv-resource-groups" className="iv-catalog-group" open={id === 'designs'}>
-          <summary>
-            <Icon size={19} strokeWidth={1.6} aria-hidden="true"/>
-            <span>{label}</span>
-            <ChevronDown size={16} className="iv-catalog-chevron" aria-hidden="true"/>
-          </summary>
-          <ul className={id === 'designs' ? 'iv-catalog-covers' : 'iv-catalog-list'}>
-            {group.items.map(item => {
-              const title = locale === 'zh' ? item.title : templateTitles[item.id]?.[locale] ?? t(item.title);
-              const external = /^https?:\/\//.test(item.href);
-              return <li key={item.id}>
-                <Link href={item.href} prefetch={false} className="iv-catalog-item"
-                  target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
-                  {item.image && <img src={item.image} alt="" width={384} height={240} loading="lazy" decoding="async"/>}
-                  <span className="iv-catalog-item-title">{title}</span>
-                  <span className="iv-catalog-origin">{item.source}</span>
-                  {!item.image && <ArrowUpRight size={15} aria-hidden="true"/>}
-                </Link>
-              </li>;
-            })}
-          </ul>
-          <Link className="iv-catalog-more" href={group.href} aria-label={`${labels.browse} · ${label}`}>
-            {labels.browse}<ArrowRight size={15} aria-hidden="true"/>
-          </Link>
-        </details>;
+        return group ? <Link key={id} href={group.href} className="iv-catalog-category"><Icon size={23} strokeWidth={1.4} aria-hidden="true"/><span>{label}</span><ArrowUpRight size={16} aria-hidden="true"/></Link> : null;
       })}
-      <p className="iv-catalog-note">{c.resourceNote}</p>
-    </div>
+    </nav>
+    <ul className="iv-catalog-covers" data-story-reveal>
+      {designs?.items.map(item => {
+        const title = locale === 'zh' ? item.title : templateTitles[item.id]?.[locale] ?? t(item.title);
+        const external = /^https?:\/\//.test(item.href);
+        return <li key={item.id}><Link href={item.href} prefetch={false} className="iv-catalog-item" target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+          {item.image && <img src={item.image} alt="" width={384} height={240} loading="lazy" decoding="async"/>}
+          <span className="iv-catalog-item-title">{title}</span><span className="iv-catalog-origin">{item.source}</span>
+        </Link></li>;
+      })}
+    </ul>
+    <p className="iv-catalog-note">{c.resourceNote}</p>
   </aside>;
 }

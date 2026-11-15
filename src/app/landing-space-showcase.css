@@ -103,3 +103,15 @@ html[data-color-mode=dark] .iv-space-mat { background: linear-gradient(125deg,#2
   .iv-space-destinations { justify-content: center }
   .iv-space-open { gap: 8px; padding: 10px }
 }
+/* The published page is the visual proof; its iframe preserves the author's styles. */
+.iavse-landing .iv-product-story .iv-space-showcase{padding:80px 0 0;margin-top:0;border:0;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px 64px}
+.iavse-landing .iv-product-story .iv-space-intro h2{font-size:clamp(32px,3vw,42px);line-height:1.45;white-space:pre-line}
+.iavse-landing .iv-product-story .iv-space-intro p{font-size:16px;line-height:1.9;max-width:36ch;margin-top:20px}
+.iavse-landing .iv-product-story .iv-space-board{border-radius:5px;box-shadow:none}
+.iavse-landing .iv-product-story .iv-space-mat{background:var(--iv-soft);padding:20px}
+.iavse-landing .iv-product-story .iv-space-publishing{margin-top:20px;font-size:13px;line-height:1.9}
+@media(max-width:900px){.iavse-landing .iv-product-story .iv-space-showcase{grid-template-columns:1fr;grid-template-areas:"intro" "board" "details";padding-top:48px;gap:26px}.iavse-landing .iv-product-story .iv-space-intro,.iavse-landing .iv-product-story .iv-space-details{text-align:left}.iavse-landing .iv-product-story .iv-space-intro p{margin-inline:0;max-width:50ch}.iavse-landing .iv-product-story .iv-space-destinations{justify-content:flex-start}.iavse-landing .iv-product-story .iv-space-intro h2{font-size:31px}.iavse-landing .iv-product-story .iv-space-mat{padding:10px}}
+.iavse-landing .iv-product-story .iv-space-showcase.is-empty{grid-template-columns:1.35fr 1fr;grid-template-areas:"intro details" "board board";align-items:center}
+.iavse-landing .iv-product-story .iv-space-showcase.is-empty .iv-space-intro,.iavse-landing .iv-product-story .iv-space-showcase.is-empty .iv-space-details{align-self:center}
+.iavse-landing .iv-product-story .iv-space-showcase.is-empty .iv-space-unavailable{margin:8px 0 0;padding:16px 20px;border:0;border-radius:4px;background:var(--iv-soft);font-size:14px}
+@media(max-width:900px){.iavse-landing .iv-product-story .iv-space-showcase.is-empty{grid-template-columns:1fr;grid-template-areas:"intro" "details" "board";gap:20px}}

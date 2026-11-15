@@ -15,6 +15,8 @@ import {LandingSpaceShowcase} from './LandingSpaceShowcase';
 import {LandingHero} from './LandingHero';
 import {ClassicLandingHero} from './ClassicLandingHero';
 import {useHomeStyle} from './HomeStyleProvider';
+import {ProductStoryMotion} from '../ProductStoryMotion';
+import '@/app/product-story.css';
 
 export type LandingPost = {
   id: string; title: string; summary: string; category: string; source: string; license: string;
@@ -204,16 +206,15 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
 
   return <div className="iavse-landing" ref={root} data-iavse-landing data-landing-locale={locale} data-home-style={style}>
     {style === 'classic' ? <ClassicLandingHero/> : <LandingHero/>}
-    <div className="iv-container">
+    <div className="iv-container iv-product-story">
+      <ProductStoryMotion scope=".iv-product-story" revision={locale}/>
       <section className="iv-product-overview" aria-labelledby="iv-product-title">
-        <header data-landing-reveal><h2 id="iv-product-title">{c.overviewTitle}</h2><p>{c.overviewBody}</p></header>
-        <div className="iv-product-paths">{c.overviewCards.map((item,index)=><Link key={item.href} href={item.href} className="iv-product-path" data-landing-reveal data-landing-card>
-          <img src={'/illustrations/resources/'+['designs','skills','docs'][index]+'.webp'} alt="" width={144} height={144} loading="lazy"/>
-          <h3>{item.title}</h3><p>{item.body}</p><span>{item.action}<ArrowUpRight size={17} aria-hidden="true"/></span>
-        </Link>)}</div>
+        <header data-story-reveal><span className="iv-story-label">IAVSE · {c.resources} / {c.community} / {c.blogs}</span><h2 id="iv-product-title">{c.overviewTitle}</h2><p>{c.overviewBody}</p></header>
       </section>
+      <LandingResourceShowcase groups={resources}/>
       <section className="iv-community" aria-labelledby="iv-community-title">
-        <div className="iv-community-intro" data-landing-reveal>
+        <div className="iv-community-art" data-story-art><img src="/media/product-story/studio.webp" srcSet="/media/product-story/studio-960.webp 960w, /media/product-story/studio.webp 1536w" sizes="(max-width: 900px) 100vw, 56vw" alt="" width={1536} height={1024} loading="lazy" decoding="async"/></div>
+        <div className="iv-community-intro" data-story-reveal>
           <h2 id="iv-community-title">{c.communityTitle}</h2>
           <p>{c.communityIntro}</p>
           <Link href="/community" className="iv-text-link">{c.communityMore}<ArrowUpRight size={16} aria-hidden="true"/></Link>
@@ -226,11 +227,10 @@ export function IavseLanding({content, resources}: {content: LandingContent; res
           {!hasContent ? <EmptyContent filter={filter} unavailable={content.communityUnavailable}/> : null}
         </div></div>
       </section>
-      <LandingResourceShowcase groups={resources}/>
       <LandingSpaceShowcase space={content.space}/>
       <section className="iv-start-guide" aria-labelledby="iv-guide-title">
-        <div data-landing-reveal><h2 id="iv-guide-title">{c.guideTitle}</h2><p>{c.guideBody}</p><Link className="iv-button" href="/workspace/submissions/new">{c.guideAction}<PencilLine size={17} aria-hidden="true"/></Link></div>
-        <div className="iv-guide-questions" data-landing-reveal>{c.guideRows.map(row=><details key={row.question} name="iv-getting-started"><summary>{row.question}<span aria-hidden="true">+</span></summary><p>{row.answer}</p></details>)}</div>
+        <div data-story-reveal><h2 id="iv-guide-title">{c.guideTitle}</h2><p>{c.guideBody}</p><Link className="iv-button" href="/workspace/submissions/new">{c.guideAction}<PencilLine size={17} aria-hidden="true"/></Link></div>
+        <div className="iv-guide-questions" data-story-reveal>{c.guideRows.map(row=><details key={row.question} name="iv-getting-started"><summary>{row.question}<span aria-hidden="true">+</span></summary><p>{row.answer}</p></details>)}</div>
       </section>
       <footer className="iv-footer">
         <Link href="/" className="iv-footer-brand">IAVSE</Link>

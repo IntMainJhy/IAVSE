@@ -1,0 +1,22 @@
+{
+  "createdAt": "2026-11-15",
+  "tool": "OpenAI imagegen",
+  "model": "Not provided by service",
+  "cost": "Not provided by service",
+  "reference": "/media/home-styles/sea-breeze-daylight.webp",
+  "purpose": "Original companion coastal studio illustrations, matching the approved homepage character and daylight palette.",
+  "files": [
+    {
+      "path": "studio.webp",
+      "responsive": "studio-960.webp",
+      "prompt": "Create a new wide editorial illustration for the IAVSE creative community website. The attached image is a style, setting and character reference only: retain its delicate hand-painted anime watercolor / gouache linework, bright low-contrast ivory paper, pale powder-blue sea, sage leaves, warm apricot sunlight, and the same adult woman with very long flowing blue-black hair, ivory and pale apricot blouse. Make a DIFFERENT scene and composition: an intimate overhead three-quarter view of her sunlit coastal studio worktable, the woman seated at the LEFT third sorting physical loose sketches and a small open notebook, pencil in one hand, two or three carefully arranged pages and art books, ceramic cup, white jasmine, sunlight and soft leaf shadows across the paper; a glimpse of the luminous sea through an open window behind. A thoughtful, lived-in creative workspace, calm and generous, beautifully detailed but clean. The table and her creative hands are the focal point, character face naturally drawn. Landscape 3:2 composition, full bleed, real spatial depth. Original illustration, no visible text, no words, no logos, no fake software screens, no floating cards, no UI mockups, no watermark. Preserve light and subtle color; avoid excessive bloom or vague white haze.",
+      "processing": "Proportional resize and WebP compression only."
+    },
+    {
+      "path": "writing.webp",
+      "responsive": "writing-960.webp",
+      "prompt": "Create a second NEW wide editorial illustration for IAVSE, as a companion scene to the attached reference. Use the attached image only as a style, setting and character reference: same adult woman with very long flowing blue-black hair and ivory/apricot blouse, delicate richly finished hand-painted anime watercolor and gouache, bright powder-blue / warm ivory / sage / soft apricot palette. A DIFFERENT viewpoint inside the same airy seaside writing studio: camera looks along a long whitewashed desk toward an open arch window and pale blue sea; the woman sits in the RIGHT third in profile calmly writing in an open notebook with a pen, a closed sketchbook, small stack of papers and a ceramic vase of white flowers nearby. Long loose hair catches a gentle breeze, sheer linen curtain, subtle morning leaf shadows. Wider environmental storytelling, plenty of quiet airy space in the LEFT half, distinct architecture and composition from the reference terrace. Professional luminous illustration with readable hands and graceful anatomy. Landscape 3:2, full bleed. No text, lettering, logos, software screenshots, UI cards, fake product interfaces, watermarks or graphic overlays. No sunset, no dark blue color grading, no white fog covering details.",
+      "processing": "Proportional resize and WebP compression only."
+    }
+  ]
+}

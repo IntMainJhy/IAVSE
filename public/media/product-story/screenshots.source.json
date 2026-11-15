@@ -1,0 +1,29 @@
+{
+  "capturedAt": "2026-11-15",
+  "tool": "Ego Browser, Sharp WebP conversion",
+  "data": "Fresh disposable storage seeded with the repository public default owner profile. No live database, real private draft, or real account credentials were copied. The editor and public homepage show the same public default content.",
+  "files": [
+    {
+      "path": "editor.webp",
+      "route": "/workspace/blog",
+      "view": "Real canvas editor with layers panel open; Fit width view, no content changes.",
+      "width": 2035,
+      "height": 964
+    },
+    {
+      "path": "published.webp",
+      "route": "/u/intmainjhy",
+      "view": "Public default homepage from the same disposable installation.",
+      "width": 2035,
+      "height": 964
+    },
+    {
+      "path": "editor-compact.webp",
+      "route": "/workspace/blog",
+      "view": "Real editor in a 640 × 620 narrow viewport with the layers panel open; same fresh public default profile, no edits or publish actions.",
+      "width": 640,
+      "height": 620
+    }
+  ],
+  "processing": "WebP compression only; complete viewport retained. Existing template attribution and rights remain unchanged."
+}

@@ -69,7 +69,7 @@ const text=node=>DomUtils.textContent(node);
 
 test('homepage server markup keeps the hero, community empty state, resource links, blog space and footer in reading order',async()=>{
  const {document,copy}=await render(),c=copy.landingCopy('zh'),all=find(document,()=>true);
- const hero=find(document,node=>node.name==='h1');assert.equal(hero.length,1);assert.equal(text(hero[0]),'把热爱，写成自己的故事。');
+ const hero=find(document,node=>node.name==='h1');assert.equal(hero.length,1);assert.equal(text(hero[0]),'Insight through AI.Vigilance for Opportunity.Seize to Evolve.');
  const filters=find(document,node=>node.attribs.role==='group'&&node.attribs['aria-label']===c.filters);assert.equal(filters.length,1);
  const buttons=find(filters[0],node=>node.name==='button');
  assert.deepEqual(buttons.map(text),[c.all,c.works,c.discussions]);assert.deepEqual(buttons.map(node=>node.attribs['aria-pressed']),['true','false','false']);
@@ -80,18 +80,14 @@ test('homepage server markup keeps the hero, community empty state, resource lin
  const community=find(document,node=>node.name==='section'&&node.attribs['aria-labelledby']==='iv-community-title')[0];
  assert.ok(find(community,node=>node.name==='a'&&node.attribs.href==='/community').length);
  const resources=find(document,node=>node.name==='aside'&&node.attribs['aria-label']===c.resources);assert.equal(resources.length,1);
- const groups=find(resources[0],node=>node.name==='details');
- assert.equal(groups.length,4);
- assert.ok(groups.every(group=>group.attribs.name&&group.attribs.name===groups[0].attribs.name),'all four native disclosures share one group');
- assert.deepEqual(groups.map(group=>Object.hasOwn(group.attribs,'open')),[true,false,false,false]);
- for(const [index,group] of groups.entries()){
-  const category=experience.homeResourceSelections[index];
-  const hrefs=find(group,node=>node.name==='a').map(node=>node.attribs.href);
-  assert.deepEqual(hrefs.toSorted(),[category.href,...category.items.map(item=>item.href)].toSorted(),'each category keeps its public selections and full catalog destination');
- }
+ assert.equal(find(resources[0],node=>node.name==='details'||node.name==='button').length,0,'all category entries remain directly available');
+ const index=find(resources[0],node=>node.name==='nav')[0];
+ assert.deepEqual(find(index,node=>node.name==='a').map(node=>node.attribs.href),experience.homeResourceSelections.map(group=>group.href));
+ const covers=find(resources[0],node=>node.name==='ul')[0];
+ assert.deepEqual(find(covers,node=>node.name==='a').map(node=>node.attribs.href),experience.homeResourceSelections[0].items.map(item=>item.href),'the visual excerpts keep actual template destinations');
  const spaces=find(document,node=>node.name==='section'&&node.attribs['aria-label']===c.blogs);assert.equal(spaces.length,1);
  const footer=find(document,node=>node.name==='footer');assert.equal(footer.length,1);
- const order=[hero[0],filters[0],empty[0],resources[0],spaces[0],footer[0]].map(node=>all.indexOf(node));
+ const order=[hero[0],resources[0],filters[0],empty[0],spaces[0],footer[0]].map(node=>all.indexOf(node));
  assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'semantic content stays in its intended reading order');
  const primary=find(document,node=>node.name==='nav'&&node.attribs['aria-label']===c.nav);
  assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/','/community','/resources','/blogs','/about']);

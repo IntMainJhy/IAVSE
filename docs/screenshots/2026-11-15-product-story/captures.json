@@ -1,0 +1,69 @@
+{
+  "capturedAt": "2026-11-15",
+  "tool": "Ego Browser, Sharp WebP compression",
+  "data": "Fresh disposable storage, repository public defaults, signed out. No live database or private draft copied; no invented community activity. Absence of a discoverable homepage is shown as an actual empty state.",
+  "appearance": "anime / Sea breeze",
+  "locale": "zh",
+  "motion": "Reduced-motion preference for settled still captures. No page styling or content changed for capture.",
+  "sourceBase": "fe1c7d7a0fff1794fddb912cb47f3e3a76374b43",
+  "sourceHashes": {
+    "src/components/landing/IavseLanding.tsx": "430d7e113db973b1e3d1d3675fd8d9b25c0cca928bb248c988713f6d34676e3a",
+    "src/components/landing/LandingHero.tsx": "46939c7def33f9ad296fcbbb4cf3143180115b90ae685e1d88243198d150fd1d",
+    "src/components/BlogProductShowcase.tsx": "4fabc8ebebc72d93b3e3ef4bff4b0014747571fa1c10cb3316dc77706272ea60",
+    "src/app/product-story.css": "7c54564030ee72743c5ded4a762405d1a69289d07725a8b12b983c619c92aaf1",
+    "src/app/blog-space-product.css": "bf268ff300a84184d1a9155d8ca84b2364790119d9d09461a41826ef55ffbd54"
+  },
+  "processing": "WebP compression only; original screenshot dimensions retained.",
+  "files": [
+    {
+      "path": "home-hero-desktop.webp",
+      "route": "/",
+      "width": 1440,
+      "height": 960,
+      "sha256": "017b2827829665f7b608e8ad1deea36d14d96aa020d78d7aaa69710eb328d436"
+    },
+    {
+      "path": "home-hero-mobile.webp",
+      "route": "/",
+      "width": 390,
+      "height": 844,
+      "sha256": "c958b0676279348e586a4a5d4dc9e2bcb395b0cc76f076f88757df3aa02b1d20"
+    },
+    {
+      "path": "home-overview-desktop.webp",
+      "route": "/",
+      "width": 1440,
+      "height": 960,
+      "sha256": "4de77c2dada7c6af5a0679aef441c3f48bf9eff498567178a0f5ef7fac3313d1"
+    },
+    {
+      "path": "blogs-product-desktop.webp",
+      "route": "/blogs",
+      "width": 1440,
+      "height": 960,
+      "sha256": "71dacbe6501b092c861a157209cb75d5e795a1d556ccf36fa0e2531e58a203e4"
+    },
+    {
+      "path": "home-full.webp",
+      "route": "/",
+      "width": 1425,
+      "height": 3808,
+      "sha256": "4e91e66fc06a586a2a20796c5cca9fc700f3330f93b336906262c8d14bd8f78d"
+    },
+    {
+      "path": "blogs-full.webp",
+      "route": "/blogs",
+      "width": 1425,
+      "height": 5912,
+      "sha256": "fb347c13b8f7d8d60e7d12a104f85eb27db0d7ab0f81a4327013c43510dc7272"
+    },
+    {
+      "path": "resources-desktop.webp",
+      "route": "/resources?type=designs",
+      "width": 1440,
+      "height": 960,
+      "sha256": "99ad9dca5710ed5ce247045afc02c3709cd9e586fd82c04cd39eede8bc12d0f9"
+    }
+  ],
+  "sourceState": "Task working-tree changes on sourceBase; final runtime file hashes recorded below."
+}

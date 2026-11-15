@@ -1,6 +1,17 @@
 # Interface captures / 界面截图
 
-## 2026-11-15 浅色海风来信 / Daylight Sea breeze
+## 2026-11-15 晨光工作室产品介绍 / Coastal studio product story
+
+当前首页恢复 IAVSE 命名原句和黑色首屏按钮；首页与博客画廊下方的宣传区改为晨光插画、真实产品截图与直接资源入口。四个资源目录移除搜索控件。使用全新临时数据、中文、未登录状态拍摄，减弱动态以稳定取图。只压缩 WebP，不改动页面内容。[来源与源码哈希](2026-11-15-product-story/captures.json)。
+
+| 页面 / View | 图片 / Image |
+| --- | --- |
+| 默认首页 / Homepage | [桌面](2026-11-15-product-story/home-hero-desktop.webp) · [手机](2026-11-15-product-story/home-hero-mobile.webp) |
+| 首页产品介绍 / Homepage story | [截图](2026-11-15-product-story/home-overview-desktop.webp) · [完整页](2026-11-15-product-story/home-full.webp) |
+| 博客产品介绍 / Blog product story | [真实画布](2026-11-15-product-story/blogs-product-desktop.webp) · [完整页](2026-11-15-product-story/blogs-full.webp) |
+| UI 目录筛选 / Design filters | [截图](2026-11-15-product-story/resources-desktop.webp) |
+
+## 2026-11-15 浅色海风来信（此前记录） / Earlier daylight Sea breeze
 
 当前默认外观使用新生成的长发创作者插画、纸白和海盐蓝。以下是独立临时数据、未登录状态、中文的本地生产构建截图；压缩只转 WebP，未更改页面内容。[来源、尺寸和源码哈希](2026-11-15-daylight/captures.json)。其他三套主题沿用下方记录，旧截图保留历史日期。
 

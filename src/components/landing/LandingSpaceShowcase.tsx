@@ -34,7 +34,7 @@ function PublishedSpaceBoard({space}: {space: PublishedSpace}) {
     };
   }, []);
 
-  return <figure className="iv-space-board" data-landing-reveal>
+  return <figure className="iv-space-board">
     <div className="iv-space-mat" aria-hidden="true" inert>
       <div className="iv-blog-viewport" ref={viewport} data-ready={ready}>
         <div className="iv-blog-placeholder">
@@ -64,16 +64,16 @@ export function LandingSpaceShowcase({space}: {space: LandingContent['space']}) 
   const {locale} = useLocale();
   const c = landingCopy(locale);
 
-  return <section className="iv-space-showcase" id="home-blog" aria-label={c.blogs}>
-    <div className="iv-space-intro" data-landing-reveal>
+  return <section className={"iv-space-showcase" + (space ? "" : " is-empty")} id="home-blog" aria-label={c.blogs}>
+    <div className="iv-space-intro" data-story-reveal>
       <h2>{c.spaceTitle}</h2>
       <p>{c.spaceBody}</p>
     </div>
 
     {space ? <PublishedSpaceBoard key={locale + space.previewHref} space={space}/> :
-      <p className="iv-space-unavailable" data-landing-reveal>{c.spaceUnavailable}</p>}
+      <p className="iv-space-unavailable" data-story-reveal>{c.spaceUnavailable}</p>}
 
-    <div className="iv-space-details" data-landing-reveal>
+    <div className="iv-space-details" data-story-reveal>
       <div className="iv-space-destinations">
         <Link href="/workspace/blog" className="iv-button">{c.createSpace}<ArrowUpRight size={16} aria-hidden="true"/></Link>
         <Link href="/blogs" className="iv-text-link">{c.exploreSpace}<ArrowRight size={15} aria-hidden="true"/></Link>

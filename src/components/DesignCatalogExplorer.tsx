@@ -4,7 +4,6 @@ import {useCallback,useEffect,useRef,useState} from 'react';
 import {useSearchParams} from 'next/navigation';
 import {Icon} from './Icons';
 import {DirectoryFacet} from './DirectoryFacet';
-import {DirectorySearch} from './DirectorySearch';
 import {useLocale} from './LocaleProvider';
 import {DesignPreviewCard,DesignPreviewDialog,type DesignPreviewItem} from './DesignQuickPreview';
 import {DesignMasonry} from './DesignMasonry';
@@ -72,7 +71,6 @@ export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
  return <section className="design-studio design-directory design-explorer" id="design-directory">
   <header className="design-library-heading"><div><h1>{t('UI 设计目录')}</h1><p>{t('按网站用途、参考行业和视觉风格，发现有来源与许可的设计。')}</p></div><a href="#design-source-guide">{t('收录说明')} <Icon name="arrow"/></a></header>
   <div className="directory-toolbar">
-   <DirectorySearch action="/resources" fields={{type:'designs',collection:filters.collection,scenario:filters.scenario,industry:filters.industry,visual:filters.visual,favorites:filters.favorites,sort:filters.sort}} value={filters.q} label={t('搜索 UI 设计资源')} placeholder={t('名称、行业、风格或技术栈')} onSearch={q=>update({q})}/>
    <DirectoryFacet label={t('内容类型')}>
     {groups.map(([id,label])=><button key={id} type="button" onClick={()=>update({collection:id,...(id==='project'?{industry:''}:{}),...(id==='design-system'?{scenario:''}:{})})} aria-pressed={filters.collection===id}>{t(label)} <span>{counts[id]}</span></button>)}
    </DirectoryFacet>

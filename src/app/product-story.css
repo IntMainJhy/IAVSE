@@ -1,0 +1,28 @@
+/* The platform story sits outside author content and template color boundaries. */
+.iavse-landing .iv-container.iv-product-story{width:min(1280px,100% - 96px)}
+.iavse-landing .iv-product-story .iv-product-overview{padding:94px 0 86px;text-align:center}
+.iavse-landing .iv-product-story .iv-product-overview>header{max-width:820px;margin:0 auto}
+.iv-story-label{display:block;font-size:12px;line-height:1.7;letter-spacing:.12em;color:var(--iv-body);margin-bottom:24px}
+.iavse-landing .iv-product-story .iv-product-overview h2{font:400 clamp(38px,4vw,56px)/1.4 "IAVSE Display","Songti SC",serif;letter-spacing:-.02em;white-space:pre-line}
+.iavse-landing .iv-product-story .iv-product-overview p{max-width:57ch;margin:22px auto 0;font-size:17px;line-height:1.95;white-space:pre-line}
+.iavse-landing .iv-product-story .iv-community{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-areas:"art intro" "art feed";gap:32px 64px;padding:80px 0;border-block:1px solid var(--iv-border)}
+.iv-community-art{grid-area:art;align-self:start;overflow:clip;border-radius:4px}
+.iv-community-art img{display:block;width:100%;height:auto}
+.iavse-landing .iv-product-story .iv-community-intro{grid-area:intro;padding:0}
+.iavse-landing .iv-product-story .iv-community-intro>h2{font-size:clamp(32px,3vw,42px);line-height:1.45}
+.iavse-landing .iv-product-story .iv-community-intro>p{font-size:16px;line-height:1.9;margin-top:20px}
+.iavse-landing .iv-product-story .iv-community-preview{grid-area:feed}
+.iavse-landing .iv-product-story .iv-feed{gap:14px}
+.iavse-landing .iv-product-story .iv-prompt-board{padding:18px;background:var(--iv-soft);border:0;border-radius:4px}
+.iavse-landing .iv-product-story .iv-prompt-paper{box-shadow:none;transform:none;background:var(--iv-surface);border:1px solid var(--iv-border)}
+.iavse-landing .iv-product-story .iv-prompt-paper h3{font-size:21px;line-height:1.65}
+.iavse-landing .iv-product-story .iv-start-guide{padding:64px 0 0;margin-top:72px;gap:80px}
+.iavse-landing .iv-product-story .iv-start-guide h2{font-size:36px}
+.iavse-landing .iv-product-story .iv-start-guide>div>p{font-size:16px}
+.iavse-landing .iv-product-story .iv-button{min-height:48px;padding:12px 22px;border-radius:8px;box-shadow:none}
+.iavse-landing .iv-product-story .iv-footer{padding-inline:0;margin-top:70px}
+.iavse-landing[data-landing-locale=en] .iv-product-story :is(.iv-product-overview,.iv-community-intro,.iv-start-guide) h2{font-family:"IAVSE Wordmark",Georgia,serif;font-weight:500;line-height:1.2}
+.iavse-landing[data-landing-locale=ja] .iv-product-story :is(.iv-product-overview,.iv-community-intro,.iv-start-guide) h2{font-family:"Yu Mincho","Songti SC",serif}
+@media(max-width:1100px){.iavse-landing .iv-product-story .iv-community{gap:28px 36px}}
+@media(max-width:900px){.iavse-landing .iv-container.iv-product-story{width:calc(100% - 48px)}.iavse-landing .iv-product-story .iv-community{grid-template-columns:1fr;grid-template-areas:"intro" "art" "feed";padding:48px 0;gap:28px}.iv-community-art{max-width:700px;width:100%;margin:auto}.iavse-landing .iv-product-story .iv-community-intro{text-align:left}.iavse-landing .iv-product-story .iv-community-intro>h2{max-width:none;margin:0}.iavse-landing .iv-product-story .iv-community-intro>p{margin:18px 0 0;text-wrap:pretty}.iavse-landing .iv-product-story .iv-start-guide{gap:32px}}
+@media(max-width:600px){.iavse-landing .iv-container.iv-product-story{width:calc(100% - 40px)}.iavse-landing .iv-product-story .iv-product-overview{padding:48px 0 52px}.iavse-landing .iv-product-story .iv-product-overview h2{font-size:33px;line-height:1.5}.iavse-landing .iv-product-story .iv-product-overview p{font-size:15px;line-height:1.9;margin-top:20px}.iv-story-label{font-size:11px;letter-spacing:.04em;margin-bottom:18px}.iavse-landing .iv-product-story .iv-community-intro>h2{font-size:31px}.iavse-landing .iv-product-story .iv-community-intro>p{font-size:15px}.iavse-landing .iv-product-story .iv-start-guide{grid-template-columns:1fr;padding-top:40px;margin-top:42px}.iavse-landing .iv-product-story .iv-start-guide h2{font-size:30px}.iavse-landing .iv-product-story .iv-start-guide>div>p{font-size:15px}.iavse-landing .iv-product-story .iv-footer{margin-top:48px}}

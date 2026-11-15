@@ -17,7 +17,7 @@ export function LandingHero() {
   useEffect(() => {setOpened(false);}, [style]);
   if (style === 'classic') return null;
   const zh = locale === 'zh', ja = locale === 'ja';
-  const title = style === 'anime' ? zh ? ['把热爱，', '写成自己的故事。'] : ja ? ['好きなことを、', '自分だけの物語に。'] : ['Turn what you love', 'into your own story.']
+  const title = style === 'anime' ? ['Insight through AI.', 'Vigilance for Opportunity.', 'Seize to Evolve.']
     : style === 'fly' ? zh ? ['灵感汇聚，', '创作发生。'] : ja ? ['アイデアが集まり、', '創作がはじまる。'] : ['Ideas come together.', 'Creation happens.']
       : zh ? ['每一次创作，都有来处。'] : ja ? ['すべての創作に、きっかけがある。'] : ['Every creation starts somewhere.'];
   const description = style === 'anime' ? zh ? <>发现好用的资源、教程与 Skill，<br/>也把你的创作，分享给同路的人。</> : ja ? <>リソースやガイド、Skill に出会い、<br/>自分の創作を仲間に届けよう。</> : <>Discover resources, guides and Skills.<br/>Share what you make with kindred minds.</>
@@ -27,7 +27,7 @@ export function LandingHero() {
     {style !== 'brand' && <LandingScene key={style} style={style} paused={paused} opened={opened} dusk={false}/>}
     <div className="hs-copy">
       <p className="hs-eyebrow">{style === 'anime' ? zh ? '写给每一个正在创作的你' : ja ? '創作を続けるあなたへ' : 'FOR EVERYONE WHO CREATES' : zh ? '灵感 · 工具 · 创作' : ja ? '発見 · ツール · 創作' : 'IDEAS · TOOLS · CREATION'}</p>
-      <h1>{title.map(line => <span key={line}>{line}</span>)}</h1>
+      <h1 className={style === 'anime' ? 'hs-brand-motto' : undefined}>{title.map(line => <span key={line}>{line}</span>)}</h1>
       {style !== 'brand' && <><p className="hs-description">{description}</p><Link href="/resources" className="hs-cta">{cta}</Link></>}
     </div>
     {style === 'brand' && <><div className="hs-brand-object"><LandingScene key={style} style={style} paused={paused} opened={opened} dusk={false}/><button type="button" className="hs-v-control" aria-label={zh ? '展开立体字标' : ja ? '立体ロゴを開く' : 'Open the sculpted wordmark'} aria-pressed={opened} onClick={() => setOpened(!opened)}/></div><div className="hs-brand-action"><Link href="/resources" className="hs-cta" onPointerEnter={() => setOpened(true)} onPointerLeave={() => setOpened(false)}>{cta}</Link><p className="hs-description">{description}</p></div></>}

@@ -16,7 +16,7 @@ function render(locale='zh'){
  const modules={
   'react/jsx-runtime':runtime,
   'next/link':{default:({href,children,prefetch,...props})=>element('a',{href,...props},children)},
-  './Icons':{Icon:()=>null},'@/app/blog-space-product.css':{}
+  './ProductStoryMotion':{ProductStoryMotion:()=>null},'./Icons':{Icon:()=>null},'@/app/blog-space-product.css':{}
  },exports={};
  vm.runInNewContext(source,{exports,require:name=>{assert.ok(Object.hasOwn(modules,name),'Unexpected dependency '+name);return modules[name];}});
  const html=renderToStaticMarkup(element(exports.BlogProductShowcase,{locale}));
@@ -29,9 +29,11 @@ test('the replacement introduction explains real capabilities without mounting o
  for(const label of ['个人主页','作品集','长文与随笔','资源分享','在线履历','允许在平台中发现我的博客'])assert.ok(text(document).includes(label),label);
  const actions=find(document,n=>n.name==='a').map(n=>n.attribs.href);
  assert.deepEqual(actions,['/workspace/blog','/docs/showcase','/workspace/blog','/docs/showcase']);
- assert.equal(find(document,n=>['iframe','script','img','button'].includes(n.name)).length,0,'static feature storytelling adds no downloads, editor widgets or embedded member pages');
+ assert.equal(find(document,n=>['iframe','script','button'].includes(n.name)).length,0,'the story adds no editor widgets or embedded member pages');
  for(const removed of ['data-blog-directory','data-product-showroom','data-local-demo','film-canvas-title','role="tab"'])assert.ok(!html.includes(removed),removed);
- assert.ok(text(document).includes('静态画布示意图'),'the drawn canvas cannot be mistaken for a working editor');
+ const images=find(document,n=>n.name==='img'); assert.equal(images.length,3);
+ for(const img of images){assert.equal(img.attribs.loading,'lazy');assert.equal(img.attribs.decoding,'async');assert.ok(Number(img.attribs.width)>0&&Number(img.attribs.height)>0);}
+ assert.ok(text(document).includes('画布编辑器 · 图层与版面')&&text(document).includes('发布后的个人主页'),'real product captures have descriptive captions');
  const ids=find(document,n=>n.attribs.id).map(n=>n.attribs.id);
  for(const section of find(document,n=>n.name==='section'))assert.ok(ids.includes(section.attribs['aria-labelledby']),'sections retain visible accessible headings');
 });

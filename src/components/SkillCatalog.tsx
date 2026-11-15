@@ -6,7 +6,6 @@ import {filterPublicSkills} from '@/lib/catalog-public-skills.mjs';
 import {skillCollectionFilter,skillPage} from '@/lib/skill-import-directory.mjs';
 import {serverI18n} from '@/lib/server-i18n';
 import {Icon} from './Icons';
-import {SkillDirectorySearch} from './SkillDirectorySearch';
 import {DirectoryFacet} from './DirectoryFacet';
 import {CatalogNavigation} from './CatalogNavigation';
 import '@/app/skill-directory-grid.css';
@@ -23,7 +22,6 @@ export async function SkillCatalog({query={},children}:{query?:Record<string,str
  const toolOptions=[{id:'all',label:'全部 AI 工具',count:toolScope.length},...skillAiTools.map(item=>({...item,count:toolScope.filter(skill=>skill.tools.some(supported=>supported.id===item.id)).length}))];
  return <section className="skill-directory skill-explorer design-studio design-directory design-explorer" aria-label={t('GitHub Skill 目录')}>
   <div className="directory-toolbar">
-   <SkillDirectorySearch value={q} category={category} tool={tool} collection={collection}/>
    <DirectoryFacet label={t('按 AI 工具筛选')}>
     <CatalogNavigation active={tool} className="skill-filter-options" label={t('按 AI 工具筛选')}>{toolOptions.map(option=><Link prefetch={false} key={option.id} href={href(category,option.id)} scroll={false} aria-current={tool===option.id?'page':undefined}>{t(option.label)}<span>{option.count}</span></Link>)}</CatalogNavigation>
    </DirectoryFacet>
