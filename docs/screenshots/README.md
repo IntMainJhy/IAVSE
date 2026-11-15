@@ -1,6 +1,28 @@
 # Interface captures / 界面截图
 
-## 2026-11-13 当前收尾
+## 2026-11-15 当前四套 UI
+
+以下均为实际生产构建截图，使用独立临时数据和未登录状态。默认外观为海风来信，顶部公告条关闭。没有复制真实数据库或填造社区动态；站长资料来自仓库中的公开默认资料，展廊中的人物示例明确标记为虚构。[拍摄来源与源码哈希](2026-11-15/captures.json)。
+
+These are actual signed-out production UI captures with disposable storage, not mockups. Sea breeze is the default, with no announcement strip. Public owner defaults and labeled fictional gallery examples are shipped in the repository. No live database, private draft or account setting was captured.
+
+| 页面 / View | 图片 / Image | 尺寸 / Size |
+| --- | --- | --- |
+| 海风来信 · 默认 / Sea breeze · Default | [桌面 / Desktop](2026-11-15/home-hero-desktop.webp) | 1440 × 960 |
+| 海风来信 / Sea breeze | [手机 / Mobile](2026-11-15/home-hero-mobile.webp) | 390 × 844 |
+| 字符潮汐 / Character tide | [桌面 / Desktop](2026-11-15/home-fly-desktop.webp) | 1440 × 960 |
+| 打开 IAVSE / Open IAVSE | [桌面 / Desktop](2026-11-15/home-brand-desktop.webp) | 1440 × 960 |
+| 经典原版 / Original IAVSE | [桌面 / Desktop](2026-11-15/home-classic-desktop.webp) | 1440 × 960 |
+| 四套 UI 菜单 / Appearance menu | [截图 / Capture](2026-11-15/home-style-menu.webp) | 1440 × 960 |
+| 产品能力 / Product capabilities | [截图 / Capture](2026-11-15/home-overview-desktop.webp) | 1440 × 960 |
+| 资源中心 / Resource center | [截图 / Capture](2026-11-15/resources-desktop.webp) | 1440 × 960 |
+| 社区实际空状态 / Community empty state | [截图 / Capture](2026-11-15/community-desktop.webp) | 1440 × 960 |
+| 博客展廊 / Blog gallery | [截图 / Capture](2026-11-15/blogs-desktop.webp) | 1440 × 960 |
+| GitHub 分享预览 / GitHub social preview | [JPEG](2026-11-15/social-preview.jpg) | 1280 × 640 |
+
+压缩仅转换为 WebP / JPEG，没有更改页面内容。中英文 README 共用这些真实页面截图，功能页使用海风来信样式。两个代码仓库通过直接推送同步，不启用镜像。
+
+## 2026-11-13 历史收尾
 
 [来源与源码哈希](2026-11-13/captures.json) · [验收记录](../acceptance-2026-11-13.md)。以下为独立临时数据、本地生产构建的实际未登录页面，不含私有账号、草稿或后台截图。
 

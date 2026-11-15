@@ -11,6 +11,7 @@
 发现实用的设计、文档与 AI Skill，分享你的实践，
 用可视化画布整理自己的作品、经历与文字。
 
+四套全站 UI 自由切换，默认「海风来信」。
 
 [![CI](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/IntMainJhy/IAVSE?style=flat-square&color=e3b341)](https://github.com/IntMainJhy/IAVSE/stargazers)
@@ -22,11 +23,13 @@
 
 **简体中文** · [English](README.en.md)
 
+[GitHub](https://github.com/IntMainJhy/IAVSE) · [GitCode / AtomGit](https://gitcode.com/InMainJhy/IAVSE)
+
 [功能概览](#功能概览) · [界面预览](#界面预览) · [快速开始](#快速开始) · [学习路线](#学习路线) · [文档中心](docs/README.md) · [问题反馈](https://github.com/IntMainJhy/IAVSE/issues)
 
 </div>
 
-![IAVSE 首页：居中开场、胶囊导航与青绿浅蓝柔雾](docs/screenshots/2026-11-13/home-hero-desktop.webp)
+![IAVSE 默认首页：海风来信，夕阳、海岸与动漫插画](docs/screenshots/2026-11-15/home-hero-desktop.webp)
 
 ## 关于 IAVSE
 
@@ -56,31 +59,47 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 | 管理中心 | 内容审核、举报处理、账号限制、文件管理、操作记录及实际 PV / UV 统计 |
 | 部署维护 | SQLite、私有文件目录、备份恢复、清理脚本、Nginx / systemd 和平台 / 管理端分入口示例 |
 | 多语言 | 简体中文、English、日本語；适配桌面、平板和手机，支持减少动态设置 |
-| 全站外观 | 字符潮汐、打开 IAVSE、海风来信、经典原版；跨页和刷新保留选择，原版支持浅／深色 |
+| 全站外观 | 默认海风来信，另有字符潮汐、打开 IAVSE、经典原版；跨页和刷新保留选择，原版兼容已有浅／深色偏好 |
 
 ## 界面预览
 
-首屏与下方产品介绍为 **2026-11-13** 本地实际生产构建截图，使用独立临时数据库且未登录，没有填造帖子或用户数据。来源和源码哈希见[本轮截图记录](docs/screenshots/2026-11-13/captures.json)。较早界面截图保留日期，供历史参考。
-### 首页与内容入口
+以下均为 **2026-11-15** 本地生产构建的实际截图，使用独立临时数据库、简体中文和未登录状态。没有复制现网站数据或填造社区动态；站长资料来自仓库内置的公开默认资料，展廊示例在页面明确标注为虚构。来源、尺寸及源码哈希见[截图记录](docs/screenshots/2026-11-15/captures.json)，[历史截图](docs/screenshots/README.md)保留原日期。
 
-以上截图记录经典原版的白色留白、黑色功能控件与青绿浅蓝柔雾。当前右上角还可切换字符潮汐、打开 IAVSE与海风来信，功能页同步配色并使用静态背景。首页保留动态场景、三组产品能力、真实社区内容、四类资源、站长公开主页与使用问答。手机使用底部五项导航；目录保留统一搜索和筛选。社区、账号、后台和编辑器保留各自工作流，作者页面保持自己的外观。[DESIGN.md](DESIGN.md) 记录现行规范，[前端接入说明](docs/portfolio-frontend.md) 保留组件来源和许可边界。
+### 四套外观，同一个网站
 
-![首页三组产品能力：资源、社区与个人主页](docs/screenshots/2026-11-13/home-overview-desktop.webp)
+首次访问默认展示「海风来信」，顶部公告条默认关闭。右上角切换后，资源、社区、博客目录、账号与创作工具同步变化，刷新和切页继续保留选择。功能页使用静态背景，首页保留动态场景；成员自己的作品和模板保持作者设计。[切换说明](docs/home-style-switch.zh-CN.md) · [设计规范](DESIGN.md)。
 
-手机、深色与筛选截图见[本轮验收](docs/acceptance-2026-11-13.md)。以下博客与目录截图摄于 2026-11-10，记录早期构图，不能作为本轮新版的逐像素参照。
-
-### 博客空间与个人主页
-
-![公开博客目录与内置示例](docs/screenshots/blog-spaces-current.webp)
+| 海风来信 · 默认 | 字符潮汐 |
+| --- | --- |
+| ![海风来信](docs/screenshots/2026-11-15/home-hero-desktop.webp) | ![字符潮汐的流动字符波面](docs/screenshots/2026-11-15/home-fly-desktop.webp) |
+| **打开 IAVSE** | **经典原版** |
+| ![打开 IAVSE 的立体品牌字标](docs/screenshots/2026-11-15/home-brand-desktop.webp) | ![经典原版的居中开场与柔雾](docs/screenshots/2026-11-15/home-classic-desktop.webp) |
 
 <details>
-<summary>查看更多界面：资源目录、社区和内置主页示例</summary>
+<summary>查看四项切换菜单</summary>
 
-![资源总览：细化后的标题留白和双列卡片](docs/screenshots/resources-current.webp)
+![右上角的四套 UI 选择](docs/screenshots/2026-11-15/home-style-menu.webp)
 
-![社区导航、分类与实际空状态](docs/screenshots/community-current.webp)
+</details>
 
-![内置示例主页，非真实注册用户](docs/screenshots/blog-home-current.webp)
+### 手机与内容入口
+
+手机保留五项底部导航和直接可用的 UI 切换入口。首页通过资源、经验分享与个人主页三组能力连接后续功能。
+
+<img src="docs/screenshots/2026-11-15/home-hero-mobile.webp" alt="390px 手机端的海风来信与底部导航" width="260">
+
+![首页三组产品能力：资源、社区与个人主页](docs/screenshots/2026-11-15/home-overview-desktop.webp)
+
+### 功能页面
+
+![博客空间：公开站长主页与标注清楚的内置示例](docs/screenshots/2026-11-15/blogs-desktop.webp)
+
+<details>
+<summary>查看资源中心与社区</summary>
+
+![资源中心：UI 设计、AI Skills、文档、网站与工具](docs/screenshots/2026-11-15/resources-desktop.webp)
+
+![社区：未登录导航、分类与实际空状态](docs/screenshots/2026-11-15/community-desktop.webp)
 
 </details>
 
@@ -178,4 +197,6 @@ IAVSE/
 
 再分发须保留协议及 [NOTICE](NOTICE) 中的两条 `Required Notice`。可以署名自己的原创修改，不得把既有项目冒称为自己原创。第三方代码、字体、图标、模板与素材保留各自条款，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本页艺术字由已随仓库提供的 Cormorant Garamond 转为矢量轮廓，字体沿用 SIL OFL，说明见[品牌资源](docs/brand.md)。
 
-[GitHub 主仓库](https://github.com/IntMainJhy/IAVSE) · [AtomGit 镜像](https://atomgit.com/InMainJhy/IAVSE) · [原作者 IntMainJhy](https://github.com/IntMainJhy)
+[GitHub 仓库](https://github.com/IntMainJhy/IAVSE) · [GitCode / AtomGit 仓库](https://gitcode.com/InMainJhy/IAVSE) · [原作者 IntMainJhy](https://github.com/IntMainJhy)
+
+两个仓库直接接收相同的 `main` 提交，不启用仓库镜像。

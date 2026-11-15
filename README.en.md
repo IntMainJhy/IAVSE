@@ -11,6 +11,7 @@
 Find useful designs, guides and AI Skills. Share what you have learned.
 Arrange your work, experience and writing in a visual canvas.
 
+Four site-wide appearances, with Sea breeze as the default.
 
 [![CI](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/IntMainJhy/IAVSE?style=flat-square&color=e3b341)](https://github.com/IntMainJhy/IAVSE/stargazers)
@@ -22,11 +23,13 @@ Arrange your work, experience and writing in a visual canvas.
 
 [简体中文](README.md) · **English**
 
+[GitHub](https://github.com/IntMainJhy/IAVSE) · [GitCode / AtomGit](https://gitcode.com/InMainJhy/IAVSE)
+
 [Features](#features) · [Preview](#preview) · [Quick start](#quick-start) · [Learn from the code](#learn-from-the-code) · [Documentation](docs/README.md) · [Report an issue](https://github.com/IntMainJhy/IAVSE/issues)
 
 </div>
 
-![IAVSE centered homepage, capsule navigation and teal-blue mist](docs/screenshots/2026-11-13/home-hero-desktop.webp)
+![IAVSE default homepage: Sea breeze, coastal sunset and anime illustration](docs/screenshots/2026-11-15/home-hero-desktop.webp)
 
 ## About IAVSE
 
@@ -55,32 +58,47 @@ The maintained branch is **`main`**, including the public UI and functional upda
 | Administration | Reviews, reports, account restrictions, files, audit history and measured PV / UV |
 | Operations | SQLite, private file storage, backup/restore, cleanup scripts, Nginx / systemd and separate platform/admin examples |
 | Languages | Simplified Chinese, English and Japanese; desktop, tablet, mobile and reduced-motion support |
-| Site appearance | Character tide, Open IAVSE, Sea breeze and Original IAVSE; persistent cross-route selection, with light/dark modes for the original UI |
+| Site appearance | Sea breeze by default, plus Character tide, Open IAVSE and Original IAVSE; persistent cross-route selection and compatibility with existing original-UI light/dark preferences |
 
 ## Preview
 
-The opening and product overview were captured from the actual local production build on **2026-11-13**, signed out and backed by disposable storage. No posts or user activity were fabricated. [Capture provenance and source hashes](docs/screenshots/2026-11-13/captures.json) identify this iteration. Older images retain their historical dates.
+All images below were captured from the actual local production build on **2026-11-15**, signed out, in Simplified Chinese, with disposable storage. No live site database was copied and no community activity was fabricated. The owner profile comes from the public defaults shipped in the repository; gallery examples are explicitly labeled fictional. See [capture provenance, dimensions and source hashes](docs/screenshots/2026-11-15/captures.json). [Historical images](docs/screenshots/README.md) retain their dates.
 
-### Homepage and content entry points
+### Four appearances, one site
 
-These screenshots show Original IAVSE's white space, black actions and teal/blue mist. The shared header also offers Character tide, Open IAVSE and Sea breeze. Functional pages share each palette with static backgrounds; homepage scenes retain motion. Home includes three capability cards, real community content, four resource categories, the bound author's public homepage and a getting-started FAQ. Mobile has five bottom destinations; directories retain compact search and filters. Community, accounts, administration and the editor retain their workflows, and authored pages keep their own appearances. See [DESIGN.md](DESIGN.md) and the [frontend source notes](docs/portfolio-frontend.md).
+New visitors see Sea breeze. The announcement strip is disabled by default. Switching in the upper right updates resources, community, blog discovery, accounts and creative tools, and persists across navigation and refreshes. Functional pages use static backgrounds; home retains animated scenes. Member-authored work and templates keep their own design. [Appearance behavior](docs/home-style-switch.zh-CN.md) · [Design specification](DESIGN.md).
 
-![Three product capabilities: resources, community and a personal homepage](docs/screenshots/2026-11-13/home-overview-desktop.webp)
-
-Mobile, dark-theme and filter captures are linked in the acceptance record. The following blog and catalog images were captured on November 10 and document the earlier composition.
-
-### Blog discovery and personal homepages
-
-![Public blog directory and built-in examples](docs/screenshots/blog-spaces-current.webp)
+| Sea breeze · Default | Character tide |
+| --- | --- |
+| ![Sea breeze](docs/screenshots/2026-11-15/home-hero-desktop.webp) | ![Character tide and its flowing glyph surface](docs/screenshots/2026-11-15/home-fly-desktop.webp) |
+| **Open IAVSE** | **Original IAVSE** |
+| ![Open IAVSE dimensional wordmark](docs/screenshots/2026-11-15/home-brand-desktop.webp) | ![Original IAVSE centered hero and mist](docs/screenshots/2026-11-15/home-classic-desktop.webp) |
 
 <details>
-<summary>More views: resource catalog, community and a built-in homepage</summary>
+<summary>View the four-option appearance menu</summary>
 
-![Resource overview with refined title spacing and two-column cards](docs/screenshots/resources-current.webp)
+![Four appearances in the upper-right menu](docs/screenshots/2026-11-15/home-style-menu.webp)
 
-![Community navigation, categories and actual empty state](docs/screenshots/community-current.webp)
+</details>
 
-![Built-in example homepage, not a registered member](docs/screenshots/blog-home-current.webp)
+### Mobile and content entry points
+
+Phones retain five bottom destinations and a direct appearance switcher. Three homepage capabilities connect resources, shared experience and personal homepages.
+
+<img src="docs/screenshots/2026-11-15/home-hero-mobile.webp" alt="Sea breeze and bottom navigation on a 390px phone viewport" width="260">
+
+![Three product capabilities: resources, community and a personal homepage](docs/screenshots/2026-11-15/home-overview-desktop.webp)
+
+### Functional pages
+
+![Blog spaces: public owner homepage and clearly labeled built-in examples](docs/screenshots/2026-11-15/blogs-desktop.webp)
+
+<details>
+<summary>View resources and community</summary>
+
+![Resource center: UI designs, AI Skills, documents, websites and tools](docs/screenshots/2026-11-15/resources-desktop.webp)
+
+![Community: signed-out navigation, categories and actual empty state](docs/screenshots/2026-11-15/community-desktop.webp)
 
 </details>
 
@@ -178,4 +196,6 @@ Original website code and material use [PolyForm Noncommercial 1.0.0](LICENSE). 
 
 Redistribution must preserve the license and both `Required Notice` lines in [NOTICE](NOTICE). Credit your original changes without claiming the existing project as your own. Third-party code, fonts, icons, templates and media retain their terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The README wordmark uses vector outlines of the bundled Cormorant Garamond typeface under SIL OFL; see [brand assets](docs/brand.md).
 
-[GitHub](https://github.com/IntMainJhy/IAVSE) · [AtomGit mirror](https://atomgit.com/InMainJhy/IAVSE) · [Original author: IntMainJhy](https://github.com/IntMainJhy)
+[GitHub repository](https://github.com/IntMainJhy/IAVSE) · [GitCode / AtomGit repository](https://gitcode.com/InMainJhy/IAVSE) · [Original author: IntMainJhy](https://github.com/IntMainJhy)
+
+Both repositories receive the same `main` commits through direct pushes. Repository mirroring is disabled.

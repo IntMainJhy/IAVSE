@@ -20,7 +20,8 @@ const save=(value,token=owner,origin=base)=>call('/api/admin/config',{method:'PO
 test('announcement defaults are read-only and public output is schema-owned',async()=>{
  const before=D.db().prepare("SELECT value FROM config WHERE key='announcements'").get();assert.equal(before,undefined);
  const response=await call('/api/announcements');assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
- assert.deepEqual(await response.json(),N.defaultSiteAnnouncements);
+ assert.equal(N.defaultSiteAnnouncements.enabled,false,'new installations do not display the promotional strip');
+ assert.deepEqual(await response.json(),{enabled:false,items:[]},'disabled default copy stays out of the public response');
  assert.equal(D.db().prepare("SELECT value FROM config WHERE key='announcements'").get(),undefined,'reading a default does not mutate configuration');
  store({enabled:true,items:[{title:'Public notice',url:'/docs',privateToken:'not-public'}],secret:'not-public',operatorEmail:'owner@example.invalid'});
  assert.deepEqual(await(await call('/api/announcements')).json(),{enabled:true,items:[{title:'Public notice',url:'/docs'}]});

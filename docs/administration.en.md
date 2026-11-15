@@ -32,7 +32,7 @@ The unified `/admin/logs` view uses `community_audit`, filtering by site/workspa
 
 When private `ownerAccount` binding is enabled, only that verified account can enter administration; other owner/reviewer roles no longer grant access. The public `siteOwnerAccount` badge is a separate presentation setting and grants no privileges. Existing accounts and file ownership are retained.
 
-Announcements render on public platform pages as a solid black marquee with sketch accents, pause and dismiss controls, and a reduced-motion fallback. They do not render inside administration. The current announcement settings differ from the retired promotional-bar compatibility API.
+Announcements are disabled by default. If the owner explicitly enables them, they render on public platform pages as a solid black marquee with sketch accents, pause and dismiss controls, and a reduced-motion fallback. Disabled announcements leave no top spacer. They do not render inside administration. The current announcement settings differ from the retired promotional-bar compatibility API.
 
 At `/admin/community/spaces`, the owner can select and order up to 12 eligible published, discoverable homepages. Saving compares the previous selection, rejects unavailable accounts/pages and records an audit entry. Clearing the selection restores automatic members plus explicitly fictional examples. Other eligible authors remain in the complete directory. The `/api/admin/spaces/gallery` endpoint enforces owner access.
 

@@ -4,6 +4,14 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ## Unreleased / 待发布
 
+### 2026-11-15 · Default appearance and repository presentation / 默认界面与仓库展示
+
+- Make Sea breeze the default for new or invalid appearance preferences; retain all four saved UI choices across routes.
+- Disable the announcement strip by default and close it on the current local site without leaving a spacer. Keep the owner's explicit announcement configuration available.
+- Show one signed-out login entry in the shared header after its account controls load.
+- Refresh Chinese and English READMEs, repository descriptions, four-style comparisons, mobile and functional-page screenshots, and the GitHub social preview with actual signed-out production captures.
+- Record screenshot provenance and source hashes. Push the same website commits directly to GitHub and GitCode / AtomGit; do not enable repository mirroring.
+
 ### 2026-11-15 · Four site styles and navigation / 四套全站 UI 与导航优化
 
 - Restore GitHub and AtomGit links at the upper right across all four shared headers, including phone layouts; remove the separate public light/dark button.

@@ -11,7 +11,7 @@ const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)
 
 test('public style preferences accept the four selected worlds and reject arbitrary cookie values',()=>{
  for(const style of HOME_STYLES)assert.equal(normalizeHomeStyle(style),style);
- for(const value of [undefined,null,'','dark','find','constructor','<style>'])assert.equal(normalizeHomeStyle(value),'classic');
+ for(const value of [undefined,null,'','dark','find','constructor','<style>'])assert.equal(normalizeHomeStyle(value),'anime');
 });
 
 test('all four site palettes keep normal, secondary and subtle text readable on reading surfaces',()=>{

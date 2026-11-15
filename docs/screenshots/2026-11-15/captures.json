@@ -1,0 +1,125 @@
+{
+  "capturedAt": "2026-11-15",
+  "browser": "Ego Browser",
+  "source": "Actual local production build, signed out, Simplified Chinese. Disposable storage, with repository-shipped public owner defaults and clearly labeled fictional gallery examples. No live database, private drafts, account settings or credentials captured. PNG captures encoded as WebP/JPEG without altering page content.",
+  "baseCommit": "8a6531e30d846f6b896a111560b27f87a1c7033e",
+  "workingTree": "Default appearance, announcement default and anonymous-header fix are uncommitted capture-time changes; source hashes identify this state rather than claiming the unchanged base commit.",
+  "defaultStyle": "anime",
+  "announcementsEnabled": false,
+  "sourceFiles": {
+    "src/lib/home-style.mjs": "3a8abebef09f3cbac05b029be0d3f162da1a28012afa7f0f36ad507cdfde15b8",
+    "src/lib/site-announcements.mjs": "f3610659a1dc4ae9371074116ed5cf0ad8925ca38f19751cba68509177e5b48a",
+    "src/components/IavseHeader.tsx": "75ff3a7c936e72d0a6b501fe862774fd3473a422ef205cd019b7073d6e62267f",
+    "src/components/landing/LandingScene.tsx": "41ef2c9a881682386785b651622c0842ad568eaebd332e514ba237f7f45a8eb1",
+    "src/components/landing/IavseLanding.tsx": "919bd9afcceaefe45cd302ade96ac58180bf0425da343970fe18939b5586cee5",
+    "src/app/glass-controls.css": "4e9cab33228d2cd9346aae25b731c8da8ab3f63d8e387cc84710722b7e9eb2df",
+    "src/app/site-styles.css": "dec75fb24ac25fc1850585bb60ed9324ee5fe543c2fd8df0ef5fa66d8c5b7dda",
+    "src/app/iavse-landing.css": "a2439f78135e01528c86203eaad72dcc8186902cd7d7faddaaf89d50cfbfcb1f",
+    "src/components/landing/LandingHero.tsx": "124cb1bc02cddde46405c7a3e42529fd71ace3e03b4e2a41bb38256a07461694",
+    "src/components/landing/ClassicLandingHero.tsx": "b5cbf66dc9b3cf77064b1cd559d89b53a18e775e67814726e6ece43a0d1d8274",
+    "src/components/landing/HomeStyleSwitcher.tsx": "b4d5d1eeafd3f4140353ad3a8a77b2cb4a2748c07bae8f2449e702abc9a3022e",
+    "src/app/home-styles.css": "eb4034d4030e350fb2ad9ca940a219151f94d6acdecac1726e5b62ce443b41df",
+    "public/media/home-styles/sea-breeze.webp": "3e5cd0fdbf775efeeaf66fd6d61a4cf7c9ce487ff336f7c35046c63c2c0d3017"
+  },
+  "entries": [
+    {
+      "file": "blogs-desktop.webp",
+      "route": "/blogs",
+      "style": "anime",
+      "view": "public blog gallery",
+      "width": 1440,
+      "height": 960,
+      "sha256": "aa0fd8925a8c5a9af4c1132b25f1614ea9601eea8715400952ba5a3d32251ecd"
+    },
+    {
+      "file": "community-desktop.webp",
+      "route": "/community",
+      "style": "anime",
+      "view": "signed-out community empty state",
+      "width": 1440,
+      "height": 960,
+      "sha256": "6294804aa844f2c1ac04bf8ac76d64fc4e20362e3731272bcb340bb74b758755"
+    },
+    {
+      "file": "home-brand-desktop.webp",
+      "route": "/",
+      "style": "brand",
+      "view": "hero",
+      "width": 1440,
+      "height": 960,
+      "sha256": "36903ffeca5f9cf5e0df4051c3c0e1e0805ad1a964ffdb0d449702c5629813a5"
+    },
+    {
+      "file": "home-classic-desktop.webp",
+      "route": "/",
+      "style": "classic",
+      "view": "hero",
+      "width": 1440,
+      "height": 960,
+      "sha256": "c02c4843c690fce3db64d670875ec190f7c5097a1c1ed6085ba243a5885fd566"
+    },
+    {
+      "file": "home-fly-desktop.webp",
+      "route": "/",
+      "style": "fly",
+      "view": "hero",
+      "width": 1440,
+      "height": 960,
+      "sha256": "05e25ac9701c7bddabe8879b2641a5ecb2fe1eea8208d01c96a50d1646a43087"
+    },
+    {
+      "file": "home-hero-desktop.webp",
+      "route": "/",
+      "style": "anime",
+      "view": "hero",
+      "width": 1440,
+      "height": 960,
+      "sha256": "2f2ccba5f5311b50b688fcb4264dd3241124e19733cba98fa62413ea2fa01f3b"
+    },
+    {
+      "file": "home-hero-mobile.webp",
+      "route": "/",
+      "style": "anime",
+      "view": "hero",
+      "width": 390,
+      "height": 844,
+      "sha256": "ddc38d6c57acdb369096cd4e7f0ec21548cdfbdfd6075db5d5bf4a98eb0779f6"
+    },
+    {
+      "file": "home-overview-desktop.webp",
+      "route": "/",
+      "style": "anime",
+      "view": "product overview",
+      "width": 1440,
+      "height": 960,
+      "sha256": "3735512cf81468c693213bc58862841ce047f6db8534024fb8c15be8dea8d796"
+    },
+    {
+      "file": "home-style-menu.webp",
+      "route": "/",
+      "style": "anime",
+      "view": "appearance menu open",
+      "width": 1440,
+      "height": 960,
+      "sha256": "e25d3e06e96979acbcb1f95a899034085987fc07c89a3f166ebfce7e24558626"
+    },
+    {
+      "file": "resources-desktop.webp",
+      "route": "/resources",
+      "style": "anime",
+      "view": "resource overview",
+      "width": 1440,
+      "height": 960,
+      "sha256": "13837181f62127aa86262df6862b0460fdf1bbab9e8acaee09442014666a0875"
+    },
+    {
+      "file": "social-preview.jpg",
+      "route": "/",
+      "style": "anime",
+      "view": "hero",
+      "width": 1280,
+      "height": 640,
+      "sha256": "086a156afd0cfa4a2ff9f2bb1c711ad36abd5f34cf9c944e293716429f9aebcf"
+    }
+  ]
+}

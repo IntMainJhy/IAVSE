@@ -1,7 +1,7 @@
 import {db} from './db.mjs';
 import {siteAnnouncementsData} from './content.mjs';
 
-export const defaultSiteAnnouncements={enabled:true,items:[{title:'从资源目录开始，发现设计、工具与创作指南。',url:'/resources'}]};
+export const defaultSiteAnnouncements={enabled:false,items:[{title:'从资源目录开始，发现设计、工具与创作指南。',url:'/resources'}]};
 
 /** Only schema-owned strings reach the public endpoint; drafts stay owner-only. */
 export function readSiteAnnouncements({publicOnly=false}={}){

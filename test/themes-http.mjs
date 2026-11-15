@@ -13,7 +13,7 @@ for(const style of ['fly','brand','anime','classic'])for(const route of routes){
 }
 for(const invalid of ['','monochrome','constructor']){
  const response=await fetch(base+'/resources',{headers:{cookie:`iavse-home-style=${invalid}; site-ui=monochrome`}}),html=await response.text();
- assert.ok(html.match(/<html\b[^>]*>/)?.[0].includes('data-site-style="classic"'),'unsupported preferences fall back to the original UI');
+ assert.ok(html.match(/<html\b[^>]*>/)?.[0].includes('data-site-style="anime"'),'unsupported preferences fall back to the selected anime UI');
 }
 const protectedResponse=await fetch(base+'/api/admin/community/accounts',{headers:{cookie:'iavse-home-style=brand; site-ui=monochrome'}});
 assert.ok([401,403].includes(protectedResponse.status),'An appearance preference cannot grant authentication');
