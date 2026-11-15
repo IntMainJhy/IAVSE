@@ -8,9 +8,7 @@ import {AuthNav} from '@/components/AuthNav';
 import {BrandMark} from '@/components/BrandMark';
 import {LanguageSwitcher, useLocale} from '@/components/LocaleProvider';
 import {HomeStyleSwitcher} from './landing/HomeStyleSwitcher';
-import {useHomeStyle} from './landing/HomeStyleProvider';
 import {useNavigationPending} from './NavigationLinkFeedback';
-import {ThemeToggle} from '@/components/ThemeToggle';
 import '@/app/glass-controls.css';
 import {landingCopy} from '@/lib/landing-copy';
 
@@ -22,7 +20,6 @@ export type IavseHeaderProps = {
 
 export function IavseHeader({className = '', floating = false}: IavseHeaderProps) {
   const path = usePathname();
-  const {style} = useHomeStyle();
   const {locale, t} = useLocale();
   const copy = landingCopy(locale);
   const [open, setOpen] = useState(false);
@@ -98,7 +95,6 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
           <a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · GitHub" title="GitHub"><img src="/brand/github.svg" alt="" width="19" height="19"/></a>
           <a href="https://atomgit.com/InMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · AtomGit" title="AtomGit"><img src="/brand/atomgit.png" alt="" width="20" height="20"/></a>
         </div>
-        {style === 'classic' && <ThemeToggle/>}
         <AuthNav/><Link href="/login" className="iavse-header__guest" aria-label={copy.account}><UserRound size={18} aria-hidden="true"/></Link>
         <span className="iavse-header__setting-label">{t('界面语言')}</span><LanguageSwitcher/>
       </div>

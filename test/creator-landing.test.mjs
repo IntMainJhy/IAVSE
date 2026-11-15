@@ -309,6 +309,13 @@ test('configured site updates appear once on visitor routes and stay outside man
 test('all selected visual worlds retain live resource destinations and one top-right style selector',async()=>{
  for(const style of ['fly','brand','anime','classic']){
   const {document}=await render('zh',{style});
+  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
+  assert.equal(find(header,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle').length,0,'the shared header has no separate color toggle in any UI');
+  for(const group of find(header,n=>(n.attribs.class||'').split(' ').includes('iavse-repository-links'))){
+   const links=find(group,n=>n.name==='a');
+   assert.deepEqual(links.map(n=>n.attribs.href),['https://github.com/IntMainJhy/IAVSE','https://atomgit.com/InMainJhy/IAVSE']);
+   for(const link of links){assert.equal(link.attribs.target,'_blank');assert.ok(link.attribs['aria-label']);assert.match(link.attribs.rel,/noopener/);}
+  }
   assert.equal(find(document,n=>n.attribs['data-home-hero']===style).length,1);
   assert.equal(find(document,n=>n.name==='canvas').length,style==='classic'?0:1,'classic starts with an async shader fallback; other heroes have one canvas');
   assert.equal(find(document,n=>n.name==='iframe').length,0,'homepage styles are native components');
@@ -338,9 +345,9 @@ test('every shared platform header keeps the same UI selector away from home',as
 });
 
 
-test('the restored original UI keeps its original headline, two entries and color toggle',async()=>{
+test('the restored original UI keeps its original headline and two entries without a header color toggle',async()=>{
  const {document,copy}=await render('zh',{style:'classic'}),hero=find(document,n=>n.attribs['data-home-hero']==='classic')[0];
  assert.equal(text(find(hero,n=>n.name==='h1')[0]),copy.landingCopy('zh').title.join(''));
  assert.deepEqual(find(hero,n=>n.name==='a').map(n=>n.attribs.href),['/community','/resources']);
- assert.equal(find(document,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle').length,1);
+ assert.equal(find(document,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle').length,0);
 });
