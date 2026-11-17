@@ -130,7 +130,7 @@ The current library contains eighteen independently maintained GitHub projects a
 - Fonts in `public/fonts/design-artifacts/` retain their OFL notices and upstream records. Real interface screenshots in `public/template-covers/` retain source and capture records. Fuwari and AstroWind screenshots omit sample raster imagery that lacks separately confirmed reuse permission; the AstroWind screenshot is rendered from the original repository while its online demo is unavailable. Material Symbols retain Apache-2.0, Tabler/Lucide icons retain their MIT/ISC notices, and the Start Bootstrap examples retain Font Awesome attribution and the corresponding icon/font/code licenses. Additional font notices for Montserrat, Muli/Mulish, Saira Extra Condensed, Open Sans and Lora are in the project cover license directory.
 - The factual taxonomy in `src/lib/design-taxonomy-seed.json` derives from StyleKit under MIT; only explicit project scenarios participate in the directory.
 
-Third-party portions retain their original rights; IAVSE's PolyForm Noncommercial license does not override MIT, ISC, Apache-2.0 or OFL permissions. Brand names identify references; their trademark rights remain separate.
+Third-party portions retain their original rights; IAVSE's MIT license does not replace or override their individual license terms. Brand names identify references; their trademark rights remain separate.
 
 ## Imported Skill directory references (2026-11-08)
 

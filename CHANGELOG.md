@@ -4,6 +4,11 @@ This is a curated record of repository and product changes, not a claim that eve
 
 ## Unreleased / 待发布
 
+### 2026-11-17 · MIT open-source license / MIT 开源许可
+
+- Change the original public website material from PolyForm Noncommercial 1.0.0 to the standard MIT License at the maintainer’s request; permit commercial use and retain copyright attribution. Update package metadata and bilingual documentation.
+- 网站原创部分按维护者要求改为 MIT，允许商用并保留版权与许可声明；同步包元数据、中英文说明及贡献指南。第三方许可、私有 Pro / 客户端边界和历史记录继续保留。
+
 ### 2026-11-15 · Image-led template gallery / 模板大图画廊
 
 - Place titles inside images and remove all external card captions. Preserve original image proportions without cropping, stretching or hover zoom; stagger column starts with grid masonry that retains DOM order and existing positions when more entries arrive.

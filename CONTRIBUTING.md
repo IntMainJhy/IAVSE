@@ -1,12 +1,12 @@
 # Maintaining IAVSE / 参与维护
 
-IAVSE welcomes bug reports, documentation improvements, translations, accessibility fixes and performance contributions. The original website material uses **PolyForm Noncommercial 1.0.0**, a source-available noncommercial license. It permits the noncommercial uses defined in [LICENSE](LICENSE), including study, deployment, modification and maintenance. Commercial use requires separate permission.
+IAVSE welcomes bug reports, documentation improvements, translations, accessibility fixes and performance contributions. The original website material uses the **MIT open-source license** in [LICENSE](LICENSE), permitting commercial and noncommercial use, deployment, modification and redistribution subject to its notice requirement.
 
 ## Attribution and contributions
 
-- Redistributed copies must retain LICENSE (or its official URL) and **both Required Notice lines** from [NOTICE](NOTICE), including IntMainJhy's copyright and the original IAVSE project source.
+- Redistributed copies or substantial portions must retain the MIT copyright and permission notice in LICENSE. Keeping [NOTICE](NOTICE) and the original project URL is appreciated; NOTICE adds no conditions to MIT.
 - Do not present the original project or IntMainJhy's pre-existing material as your own original work. You may identify and credit your own original changes. Contributing does not transfer ownership of pre-existing material to you or assign your own copyright to the maintainer.
-- Submit only material you have the right to contribute. Offer your own website contributions under the project's existing PolyForm Noncommercial terms. Identify third-party sources and licenses separately; their original rights remain in force.
+- Submit only material you have the right to contribute. Offer your own website contributions under the project's MIT terms. Identify third-party sources and licenses separately; their original rights remain in force.
 - User content and the private macOS/Windows clients are outside this website license. Do not include client code, installers, personal data, uploads, credentials or real environment files in a contribution.
 
 ## Making a change
@@ -15,11 +15,11 @@ Start from main, describe the problem and resulting behavior, and submit a focus
 
 ## 中文说明
 
-欢迎提交问题反馈、文档、翻译、无障碍、性能和功能维护贡献。IAVSE 网站原创部分采用 **PolyForm Noncommercial 1.0.0**，允许协议定义的非商业学习、部署、修改、维护及再分发，商业用途须另行授权。这属于「源码公开、非商业许可」，不称为 OSI 意义的开源许可。
+欢迎提交问题反馈、文档、翻译、无障碍、性能和功能维护贡献。IAVSE 网站原创部分采用 **MIT 开源许可**，允许商用和非商业使用、部署、修改及再分发，按协议保留版权和许可声明。
 
-再分发时须保留 LICENSE（或官方协议地址）及 NOTICE 中的**两条 Required Notice**，明确原作者 IntMainJhy 和原项目 IAVSE 的来源。不得把既有代码或原项目冒称为自己原创；可以署名自己的原创修改。贡献不会把既有作品的版权转给维护者，也不要求贡献者转让自己新增内容的版权。
+再分发软件副本或实质性部分时须保留 MIT 版权与许可声明。建议一并保留 NOTICE 中的作者与项目来源，其说明不增加 MIT 之外的许可条件；可以署名自己的原创修改。贡献不会把既有作品的版权转给维护者，也不要求贡献者转让自己新增内容的版权。
 
-请只提交有权贡献的内容，自有的网站贡献按现有 PolyForm Noncommercial 条款提供；第三方内容注明来源并保留原许可。不要提交私有客户端、安装包、个人资料、数据库、用户上传、密钥或真实环境文件。
+请只提交有权贡献的内容，自有的网站贡献按 MIT 条款提供；第三方内容注明来源并保留原许可。不要提交私有客户端、安装包、个人资料、数据库、用户上传、密钥或真实环境文件。
 
 从 main 开始修改，清楚说明修复了什么及如何验证，再提交范围明确的 PR。运行时代码通常执行单元测试、类型检查与构建，纯文档修改检查链接、表述及范围即可。测试使用临时数据，不修改真实站点数据库。
 
@@ -48,4 +48,4 @@ Documentation uses `README.md` as the Chinese default, `README.en.md` for the co
 Use the issue and PR templates. The [participation guide](CODE_OF_CONDUCT.md), [support routes](SUPPORT.md) and [security reporting policy](SECURITY.md) describe how to ask questions and handle concerns.
 
 
-Current public development is maintained on `main` after the design integration. `desgin` is retained for history. GitHub is the writable upstream; the existing AtomGit repository is a read-only mirror. See the [integration and verification handoff](docs/main-integration-2026-11-13.md). / 当前公开维护以 `main` 为基线，设计分支留存；镜像状态须与 GitHub 分别核对。
+Current public development is maintained on `main` after the design integration. `desgin` is retained for history. GitHub and AtomGit receive the same main commits through direct pushes; repository mirroring is disabled. See the [integration and verification handoff](docs/main-integration-2026-11-13.md). / 当前公开维护以 `main` 为基线，设计分支留存；GitHub 与 AtomGit 直接推送相同提交并分别核对，不启用镜像。

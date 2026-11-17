@@ -86,6 +86,6 @@ PortraitMorph 仍使用 OGL，DPR 上限 2，进入/离开刚度 2.4 / 2.0。可
 
 保留[上游 README 声明](licenses/RBP-Portfolio.txt)：模板允许个人和商业项目使用，禁止转售或再分发模板本身。**这不是 MIT 许可声明。** 本实现保留作者与固定来源版本，接入 IAVSE 应用，不作为独立模板重新包装。独立设计细化不改变已有第三方权利，也不扩大任何模板授权。
 
-Lenis、Matter.js 与 Tailwind CSS 的许可分别保留于 [Lenis.txt](licenses/Lenis.txt)、[Matter.js-MIT.txt](licenses/Matter.js-MIT.txt)、[Tailwind-CSS-MIT.txt](licenses/Tailwind-CSS-MIT.txt)。字体、图标与其他依赖见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。未包含付费 Gradient Bars 源码。IAVSE 原创部分继续遵循 [PolyForm Noncommercial 1.0.0](../LICENSE) 与 [NOTICE](../NOTICE)。
+Lenis、Matter.js 与 Tailwind CSS 的许可分别保留于 [Lenis.txt](licenses/Lenis.txt)、[Matter.js-MIT.txt](licenses/Matter.js-MIT.txt)、[Tailwind-CSS-MIT.txt](licenses/Tailwind-CSS-MIT.txt)。字体、图标与其他依赖见 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)。未包含付费 Gradient Bars 源码。IAVSE 原创部分继续遵循 [MIT](../LICENSE) 与 [NOTICE](../NOTICE)。
 
 当前开发进度、验收证据和未完成事项统一见[收尾记录](acceptance-2026-11-13.md)及[开发进度](development-status.zh-CN.md)。本文后续基线描述是来源记录，不是现行页面结构。

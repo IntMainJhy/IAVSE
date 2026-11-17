@@ -76,7 +76,7 @@
   "overrides": {
     "postcss": "8.5.30"
   },
-  "license": "PolyForm-Noncommercial-1.0.0",
+  "license": "MIT",
   "description": "Self-hosted creator community and blog platform with resources, AI Skills, a visual homepage editor, a 3D blog gallery and four site-wide UI styles. Sea breeze is the default appearance.",
   "repository": {
     "type": "git",
@@ -100,6 +100,6 @@
     "agent-skills",
     "mcp",
     "self-hosted",
-    "source-available"
+    "open-source"
   ]
 }

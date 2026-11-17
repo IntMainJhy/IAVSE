@@ -15,7 +15,7 @@
 
 [![CI](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/IntMainJhy/IAVSE?style=flat-square&color=e3b341)](https://github.com/IntMainJhy/IAVSE/stargazers)
-[![License](https://img.shields.io/badge/License-PolyForm_Noncommercial_1.0.0-64748b?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-64748b?style=flat-square)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5-111111?style=flat-square&logo=nextdotjs)](package.json)
 [![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react)](package.json)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -40,7 +40,7 @@ IAVSE 是一个可自行部署的创作者社区与博客平台。它将资源�
 
 本仓库包含网站前端、后端、测试、AI 接入与部署示例，适合学习 Next.js 全栈应用、可视化编辑器、Three.js 交互、内容发布及账号隔离的实现。当前网站已完成本轮本地功能回归，仍需在实际环境中单独验收生产部署、邮件投递与社区开放。当前范围见[开发进度](docs/development-status.zh-CN.md)与[2026-11-13 验收记录](docs/acceptance-2026-11-13.md)。
 
-> 网站原创部分采用 **[PolyForm Noncommercial 1.0.0](LICENSE)**，允许协议范围内的非商业学习、使用、部署、修改与再分发。商业使用须另行授权。再分发保留 [NOTICE](NOTICE) 中的原作者与项目来源声明，第三方材料保留各自许可。macOS / Windows 客户端源码、安装包和真实站点数据不在本仓库。
+> 网站原创部分采用 **[MIT 开源许可](LICENSE)**，允许商用、使用、修改、分发、再许可和销售，须保留版权与许可声明。作者和范围见 [NOTICE](NOTICE)，第三方材料保留各自许可。macOS / Windows 客户端源码、安装包和真实站点数据不在本仓库。
 
 当前维护分支为 **`main`**，已合入 `desgin` 和 `background` 的公开 UI 与功能更新，设计分支保留。[四套全站 UI](docs/home-style-switch.zh-CN.md)共用业务与数据；[主线交接](docs/main-integration-2026-11-13.md)保留此前的整合记录。合并代码不等于正式上线。
 
@@ -197,9 +197,9 @@ IAVSE/
 
 ## 许可与署名
 
-网站原创代码和材料采用 [PolyForm Noncommercial 1.0.0](LICENSE)。这是带非商业限制的源码公开许可，不属于 OSI 定义的开源许可；商业使用需另行授权。
+网站原创代码和材料采用 [MIT 开源许可](LICENSE)，允许商用及修改、分发、再许可和销售，按协议保留版权与许可声明。
 
-再分发须保留协议及 [NOTICE](NOTICE) 中的两条 `Required Notice`。可以署名自己的原创修改，不得把既有项目冒称为自己原创。第三方代码、字体、图标、模板与素材保留各自条款，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本页艺术字由已随仓库提供的 Cormorant Garamond 转为矢量轮廓，字体沿用 SIL OFL，说明见[品牌资源](docs/brand.md)。
+再分发须保留 MIT 的版权与许可声明，建议一并保留 [NOTICE](NOTICE) 中的作者与项目来源。贡献者可署名自己的原创修改。第三方代码、字体、图标、模板与素材保留各自条款，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本页艺术字由已随仓库提供的 Cormorant Garamond 转为矢量轮廓，字体沿用 SIL OFL，说明见[品牌资源](docs/brand.md)。
 
 [GitHub 仓库](https://github.com/IntMainJhy/IAVSE) · [GitCode / AtomGit 仓库](https://gitcode.com/InMainJhy/IAVSE) · [原作者 IntMainJhy](https://github.com/IntMainJhy)
 

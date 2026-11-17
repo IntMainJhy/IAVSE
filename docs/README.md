@@ -2,9 +2,9 @@
 
 [中文项目首页](../README.md) · [English README](../README.en.md) · [更新记录 / Changelog](../CHANGELOG.md)
 
-IAVSE 将资源发现、实践交流和可编辑博客主页连接在一起。网站原创部分采用 [PolyForm Noncommercial 1.0.0](../LICENSE)，署名和范围见 [NOTICE](../NOTICE)。
+IAVSE 将资源发现、实践交流和可编辑博客主页连接在一起。网站原创部分采用 [MIT 开源许可](../LICENSE)，署名和范围见 [NOTICE](../NOTICE)。
 
-IAVSE connects resource discovery, community practice and editable blog homepages. Original website material is source-available under the noncommercial license linked above.
+IAVSE connects resource discovery, community practice and editable blog homepages. Original website material uses the MIT open-source license linked above; third-party materials retain their own terms.
 
 ## 开始使用 / Start here
 
@@ -82,8 +82,8 @@ The current editor provides six layouts, eight visual themes, inline editing and
 
 Current description:
 
-> A creator platform for resources, community and editable blog homepages. Visual canvas, public blog directory, docs, AI Skills and scoped MCP/REST integration. PolyForm Noncommercial 1.0.0.
+> A creator platform for resources, community and editable blog homepages. Visual canvas, public blog directory, docs, AI Skills and scoped MCP/REST integration. MIT license.
 
 Chinese introduction:
 
-> IAVSE 是面向开发者与创作者的社区和博客平台，连接资源发现、实践分享与可编辑个人主页，提供可视化画布、公开博客目录、文档、AI Skill 和按范围授权的 MCP / REST 接入。网站源码采用 PolyForm Noncommercial 1.0.0，欢迎保留署名的非商业学习与维护。
+> IAVSE 是面向开发者与创作者的社区和博客平台，连接资源发现、实践分享与可编辑个人主页，提供可视化画布、公开博客目录、文档、AI Skill 和按范围授权的 MCP / REST 接入。网站原创源码采用 MIT 开源许可，允许商用，按协议保留版权与许可声明。

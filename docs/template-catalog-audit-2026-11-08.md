@@ -1,5 +1,7 @@
 # 模板目录：当前范围与来源
 
+> 历史记录 / Historical record：本页许可表述反映记录当日状态。公开网站原创部分已于 2026-11-17 改为 [MIT](../LICENSE)，当前范围见 [NOTICE](../NOTICE)。
+
 核查及更新日期：2026-11-08。根据用户最新要求，移除 37 个 StyleKit 自制模板和同一维护者的 AnxForever 个人站。原 TSX、适配代码、独立模板路由、43 个字体文件和 37 张封面均退出网站源码与发布目录。早期来源研究保留在 Git 历史和 [机器可读来源记录](template-source-audit.json)，不再作为正在收录的内容。
 
 当前注册表共 **66 项**：12 个独立 GitHub 项目、54 个 VoltAgent MIT 设计规范预览。新增 8 项的固定版本、许可、实际演示及内嵌核查见 [GitHub 扩充记录](github-template-expansion-2026-11-08.json)。

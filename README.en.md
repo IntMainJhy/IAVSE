@@ -15,7 +15,7 @@ Four site-wide appearances, with Sea breeze as the default.
 
 [![CI](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/IntMainJhy/IAVSE/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/IntMainJhy/IAVSE?style=flat-square&color=e3b341)](https://github.com/IntMainJhy/IAVSE/stargazers)
-[![License](https://img.shields.io/badge/License-PolyForm_Noncommercial_1.0.0-64748b?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-64748b?style=flat-square)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5-111111?style=flat-square&logo=nextdotjs)](package.json)
 [![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react)](package.json)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](tsconfig.json)
@@ -39,7 +39,7 @@ IAVSE is a self-hostable creator community and blog platform. Discover design te
 
 This repository contains the website frontend, backend, tests, AI integrations and deployment examples. Explore how a Next.js application implements a visual editor, Three.js interaction, content publishing and account isolation. This iteration has completed local functional regression; production deployment, email delivery and public community access require validation in the target environment. See the [current scope](docs/development-status.zh-CN.md) and [2026-11-13 acceptance record](docs/acceptance-2026-11-13.md).
 
-> Original website material uses **[PolyForm Noncommercial 1.0.0](LICENSE)**. Noncommercial study, use, deployment, modification and redistribution are permitted within its terms. Commercial use needs separate permission. Retain the original-author and source notices in [NOTICE](NOTICE). Third-party licenses remain unchanged. Private macOS / Windows client source, installers and live site data are outside this repository.
+> Original website material uses the **[MIT License](LICENSE)**, permitting commercial use, modification, distribution, sublicensing and sale while retaining the copyright and permission notice. See [NOTICE](NOTICE) for authorship and scope. Third-party licenses remain unchanged. Private macOS / Windows client source, installers and live site data are outside this repository.
 
 The maintained branch is **`main`**, including the public UI and functional updates from `desgin` and `background`, both retained as history. [Four site appearances](docs/home-style-switch.zh-CN.md) share business logic and data; the [earlier integration handoff](docs/main-integration-2026-11-13.md) retains its dated scope. A source merge is not a production deployment.
 
@@ -196,9 +196,9 @@ If this repository helped you understand an implementation or informed something
 
 ## License and attribution
 
-Original website code and material use [PolyForm Noncommercial 1.0.0](LICENSE). Its noncommercial restriction makes this a source-available project, rather than OSI-defined open source. Commercial use needs separate permission.
+Original website code and material use the [MIT open-source license](LICENSE), permitting commercial use, modification, distribution, sublicensing and sale subject to its notice requirement.
 
-Redistribution must preserve the license and both `Required Notice` lines in [NOTICE](NOTICE). Credit your original changes without claiming the existing project as your own. Third-party code, fonts, icons, templates and media retain their terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The README wordmark uses vector outlines of the bundled Cormorant Garamond typeface under SIL OFL; see [brand assets](docs/brand.md).
+Redistribution must retain the MIT copyright and permission notice. Keeping the author and project-source information in [NOTICE](NOTICE) is appreciated. Contributors may credit their original changes. Third-party code, fonts, icons, templates and media retain their terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The README wordmark uses vector outlines of the bundled Cormorant Garamond typeface under SIL OFL; see [brand assets](docs/brand.md).
 
 [GitHub repository](https://github.com/IntMainJhy/IAVSE) · [GitCode / AtomGit repository](https://gitcode.com/InMainJhy/IAVSE) · [Original author: IntMainJhy](https://github.com/IntMainJhy)
 

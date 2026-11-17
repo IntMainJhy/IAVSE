@@ -1,53 +1,35 @@
-# IAVSE licensing notice
+# IAVSE attribution and licensing notice
 
-Required Notice: Copyright (c) 2026 IntMainJhy (https://github.com/IntMainJhy)
-Required Notice: Original project: IAVSE by IntMainJhy (https://github.com/IntMainJhy/IAVSE)
+Copyright (c) 2026 IntMainJhy (https://github.com/IntMainJhy)
+Original project: IAVSE (https://github.com/IntMainJhy/IAVSE)
 
-IAVSE website material authored by IntMainJhy and not separately licensed is
-provided under the unmodified PolyForm Noncommercial License 1.0.0 in LICENSE.
-The permission includes use, modification, noncommercial deployment and
-redistribution for the permitted purposes defined by that license. Commercial
-use is not granted by this license. Contact the copyright holder for separate
-permission if your intended purpose is outside its grants.
+Effective 2026-11-17, original website code, documentation and assets in this
+repository, where IntMainJhy holds the relevant rights and no separate license
+is stated, are provided under the MIT License in LICENSE. MIT permits commercial
+and noncommercial use, modification, distribution, sublicensing and sale,
+subject to preserving its copyright and permission notice. The software is
+provided without warranty as stated in LICENSE.
 
-Noncommercial study, deployment, modification and maintenance are welcome under
-LICENSE. Redistributed copies must retain the license and Required Notice lines.
-Do not present IntMainJhy's pre-existing material as your own original work.
-Contributors may credit their own original changes; this does not replace the
-original project's attribution or transfer ownership of pre-existing material.
+This NOTICE records project attribution and scope; it adds no conditions to MIT.
+Keeping the original project URL with redistributed copies is appreciated.
+Contributors retain copyright in their own original contributions.
 
-Scope and third-party material
-
-- This notice applies to the website source, documentation and original assets
-  in this repository only where IntMainJhy holds the relevant rights.
-- Third-party code, dependencies, fonts and adapted material retain their own
-  licenses. See THIRD_PARTY_NOTICES.md and docs/licenses/. Those grants are not
-  restricted or replaced by the project's PolyForm license.
-- macOS and Windows client source, installers and proprietary assets are outside
-  this website repository and outside this license grant.
-- User content, personal information, brand names and trademarks do not acquire
-  additional permissions merely because they appear in the website or examples.
-
-This is source-available software, not OSI-defined open source: its license
-restricts commercial purposes. The complete English LICENSE controls; the
-Chinese explanation below summarizes scope and does not replace its terms.
-See docs/licensing.md for the redistribution and attribution guide.
+Third-party code, dependencies, fonts, templates and separately licensed assets
+retain their original licenses. See THIRD_PARTY_NOTICES.md and docs/licenses/.
+The MIT grant does not relicense those materials, grant trademark rights, or
+license user content and personal information. Private Pro materials and macOS /
+Windows client source, installers and proprietary assets outside this website
+repository are not included in this grant.
 
 中文说明
 
-本仓库中由 IntMainJhy 享有相应权利、且未单独注明其他许可的网站原创部分，
-采用 PolyForm Noncommercial 1.0.0。可以在许可定义的非商业目的范围内使用、
-修改、部署和再分发；再分发时须保留许可和 Required Notice。商业用途不在
-该许可授权内，需另行取得著作权人许可。
+自 2026-11-17 起，本仓库中由 IntMainJhy 享有相应权利、且未单独注明其他
+许可的网站原创代码、文档和素材采用 LICENSE 中的 MIT 开源许可。允许商用、
+使用、修改、分发、再许可和销售，按 MIT 要求保留版权和许可声明，软件按
+协议约定不提供担保。
 
-许可覆盖其定义的个人用途与非商业组织使用，具体范围以 LICENSE 英文
-原文为准。非商业部署与维护在许可范围内，并非严格限制为只读学习。由于
-限制商业目的，不称为 OSI 意义的开源软件，而称为「源码公开，非商业许可」。
-
-欢迎按 LICENSE 进行非商业学习、部署、修改与维护。再分发时须保留许可及
-上述全部 Required Notice 行，包括原作者 IntMainJhy 与 IAVSE 项目来源。
-不得把原作者既有代码或整个原项目冒称为自己原创。维护者可以署名自己的
-原创修改，但维护贡献不会改变既有作品的作者归属。维护流程见 CONTRIBUTING.md。
-
-第三方原许可、客户端排除范围、用户内容与品牌等权利边界按上述说明保留。
-再分发与署名说明见 docs/licensing.md。
+NOTICE 记录原作者、项目来源与适用范围，不增加 MIT 之外的许可条件。
+欢迎分发时一并保留原项目链接；贡献者保留自己原创贡献的版权。
+第三方代码、依赖、字体、模板与单独许可素材继续遵守各自许可。用户内容、
+个人信息、商标，以及本仓库之外的私有 Pro 材料和 macOS / Windows 客户端
+源码、安装包及专有资源，不因本次变更而获得新的授权。
