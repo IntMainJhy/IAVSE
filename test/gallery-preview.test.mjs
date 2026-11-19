@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import {parseDocument,DomUtils} from 'htmlparser2';
 import * as geometry from '../src/lib/blog-gallery-space.mjs';
 const source=ts.transpileModule(fs.readFileSync(new URL('../src/lib/gallery-preview.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const schedulerSource=ts.transpileModule(fs.readFileSync(new URL('../src/lib/gallery-scheduler.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
@@ -13,7 +14,21 @@ function fixture(){
  const window=events(),document={...events(),hidden:false,documentElement:{hasAttribute:()=>marker}};
  const timing={requestAnimationFrame:callback=>{frames.set(++serial,callback);return serial;},cancelAnimationFrame:id=>frames.delete(id),setTimeout:callback=>{timers.set(++serial,callback);return serial;},clearTimeout:id=>timers.delete(id)};
  const scheduler={};vm.runInNewContext(schedulerSource,{exports:scheduler,...timing});
- class DOMParser{parseFromString(html){parsed.push(html);if(html==='throw')throw Error('Parse failed');return{querySelector:selector=>selector==='.blog-gallery-embed'?(html==='missing'?null:{}):null,querySelectorAll:selector=>selector.startsWith('script')?[{remove(){scriptsRemoved++;}}]:[{getAttribute:()=> '/_next/static/shared.css'}],documentElement:{outerHTML:'<html><body><div class="blog-gallery-embed">'+html+'</div></body></html>'}};}}
+ // Real HTML parsing/serialization, with the small browser DOM surface used by
+ // the inert-document processor. Moving nodes detaches their original parents.
+ class DOMParser{parseFromString(html){
+  parsed.push(html);if(html==='throw')throw Error('Parse failed');
+  const root=parseDocument(html.startsWith('<!doctype')?html:'<html><head><link rel="stylesheet" href="/_next/static/shared.css"></head><body><script></script>'+(html==='missing'?'':`<div class="blog-gallery-embed">${html}</div>`)+'</body></html>');
+  const matches=(node,selector)=>selector.split(',').some(part=>{
+   if(part.startsWith('.'))return node.attribs?.class?.split(' ').includes(part.slice(1));
+   const tag=part.match(/^\w+/)?.[0];if(node.name!==tag)return false;
+   return [...part.matchAll(/\[([^=\]]+)(?:="([^"]*)")?\]/g)].every(([,key,value])=>node.attribs?.[key]!==undefined&&(value===undefined||node.attribs[key]===value));
+  });
+  const find=selector=>DomUtils.findAll(node=>matches(node,selector),root.children);
+  const wrap=node=>({node,getAttribute:key=>node.attribs[key],remove(){if(node.name==='script')scriptsRemoved++;DomUtils.removeElement(node);}});
+  const head=find('head')[0],body=find('body')[0];
+  return{querySelector:selector=>{const node=find(selector)[0];return node?wrap(node):null;},querySelectorAll:selector=>find(selector).map(wrap),head:{append(item){DomUtils.removeElement(item.node);DomUtils.appendChild(head,item.node);}},body:{replaceChildren(...items){for(const child of [...body.children])DomUtils.removeElement(child);for(const item of items){DomUtils.removeElement(item.node);DomUtils.appendChild(body,item.node);}}},documentElement:{get outerHTML(){return DomUtils.getOuterHTML(find('html')[0],{encodeEntities:'utf8'});}}};
+ }}
  const fetch=(href,options)=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b;});const doc=href!=='/_next/static/shared.css'&&!href.endsWith('shared.css')&&href!=='/api/blog-gallery';if(doc){active++;maxActive=Math.max(active,maxActive);}requests.push({href,options,respond(body='theme',status=200,type='text/html'){if(doc)active--;resolve({ok:status===200,headers:{get:()=>type},text:async()=>body,json:async()=>body});},reject(){if(doc)active--;reject(Error('network'));}});return promise;};
  vm.runInNewContext(source,{exports,fetch,DOMParser,AbortSignal,URL,window,document,location:new URL('https://site.example/'),Date:{now:()=>time},require:name=>{if(name.includes('blog-gallery-space'))return geometry;if(name.includes('gallery-scheduler'))return scheduler;throw Error(name);}});
  const flush=async()=>{for(let i=0;i<15;i++)await Promise.resolve();};
@@ -35,6 +50,16 @@ test('failed, oversized and non-preview responses leave no stale HTML and do not
   const s=fixture(),failed=s.loadGalleryPreview(url(0),'en');s.requests[0].respond(body,status,type);await s.flushWork();assert.equal(await failed,null);assert.equal(s.cachedGalleryPreview(url(0),'en'),undefined);assert.equal(s.listenerCount,0);const retry=s.loadGalleryPreview(url(0),'en');assert.equal(s.requests.length,2);s.requests[1].respond();await s.flushWork();assert.ok(await retry);
  }
  const s=fixture();for(const path of ['/blog/static?embed=gallery','https://evil.example/blog/a/preview','//evil.example/blog/a/preview','/api/auth/me','/blog/a/preview?draft=1'])assert.equal(await s.loadGalleryPreview(path,'en'),null);assert.equal(s.requests.length,0);
+});
+
+test('completed streamed themes replace route skeletons without scripts, while late theme styles survive',async()=>{
+ const s=fixture(),promise=s.loadGalleryPreview(url(0),'en');
+ s.requests[0].respond('<!doctype html><html lang="en"><head><link rel="stylesheet" href="/_next/static/shared.css"></head><body><main class="route-loading">Loading…</main><div hidden id="S:0"><link rel="stylesheet" href="/_next/static/theme.css"><style>.theme{color:green}</style><div class="blog-gallery-embed"><main class="theme">Actual portfolio</main></div></div><script>$RC("B:0","S:0")</script><link rel="modulepreload" href="/runtime.js"></body></html>');
+ await s.flushWork();const html=await promise,doc=parseDocument(html),body=DomUtils.getElementsByTagName('body',doc.children)[0],head=DomUtils.getElementsByTagName('head',doc.children)[0];
+ assert.match(DomUtils.getOuterHTML(body),/^<body><div class="blog-gallery-embed"><main class="theme">Actual portfolio<\/main><\/div><\/body>$/);
+ assert.doesNotMatch(html,/route-loading|Loading…|<script|modulepreload|hidden|S:0/);
+ assert.match(DomUtils.getOuterHTML(head),/theme\.css/);assert.match(DomUtils.getOuterHTML(head),/\.theme\{color:green\}/);
+ assert.match(html,/<html lang="en">/);
 });
 
 test('built-in template examples use the same bounded preview cache without admitting arbitrary queries',async()=>{

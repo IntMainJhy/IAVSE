@@ -26,9 +26,15 @@ function finish(job:Job,html:string|null){
 
 function processDocument(html:string){
  const doc=new DOMParser().parseFromString(html,'text/html');
- if(!doc.querySelector('.blog-gallery-embed')||doc.querySelector('.hosted-site'))return null;
+ const embed=doc.querySelector('.blog-gallery-embed');
+ if(!embed||doc.querySelector('.hosted-site'))return null;
  // No hydration or script preload traffic is needed inside a read-only preview.
  doc.querySelectorAll('script,link[as="script"],link[rel="modulepreload"]').forEach(node=>node.remove());
+ // Next may stream the completed page inside a hidden Suspense segment after
+ // its route skeleton. Without hydration that segment never replaces it.
+ // Keep the completed theme and all its styles, outside the streaming shell.
+ doc.querySelectorAll('style,link[rel="stylesheet"]').forEach(node=>doc.head.append(node));
+ doc.body.replaceChildren(embed);
  for(const link of doc.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][href]')){
   const url=new URL(link.getAttribute('href')!,location.href);
   if(url.origin===location.origin&&url.pathname.startsWith('/_next/static/')&&url.pathname.endsWith('.css')&&!styles.has(url.href)){

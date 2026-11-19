@@ -8,7 +8,7 @@ export function observeGalleryFrame(frame:HTMLIFrameElement,ready:()=>void){
  if(!document?.documentElement)return stop;
  const check=()=>{
   if(closed)return;
-  const embed=document.querySelector('.blog-gallery-embed');if(!embed)return;
+  const embed=document.querySelector('.blog-gallery-embed');if(!embed||embed.closest('[hidden],[aria-hidden="true"]'))return;
   const hosted=embed.querySelector('.hosted-site');
   const present=hosted?!!hosted.querySelector('iframe')&&!hosted.querySelector('.hosted-loading'):Array.from(embed.children).some(element=>element.matches('div,main,article,section')&&!element.hasAttribute('hidden')&&element.getAttribute('aria-hidden')!=='true');
   if(present&&!waiting){
@@ -18,6 +18,6 @@ export function observeGalleryFrame(frame:HTMLIFrameElement,ready:()=>void){
    if(document.fonts)void document.fonts.ready.then(reveal,reveal);else reveal();
   }
  };
- observer=new MutationObserver(check);observer.observe(document.documentElement,{childList:true,subtree:true});
+ observer=new MutationObserver(check);observer.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','aria-hidden']});
  timer=setTimeout(stop,15000);check();return stop;
 }
