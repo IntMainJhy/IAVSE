@@ -4,6 +4,7 @@ import type {ReactNode} from 'react';
 // The megaphone is a matching, locally authored glyph.
 // Existing names stay stable so every control retains its meaning and accessible label.
 const glyphs:Record<string,ReactNode>={
+ terminal:<><path d="m4 7 6 5-6 5"/><path d="M12 19h8"/></>,
  refresh:<><path d="M3 12a9 9 0 0 1 15.36-6.36L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.36 6.36L3 16"/><path d="M3 21v-5h5"/></>,
  arrow:<><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></>,
  edit:<><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></>,

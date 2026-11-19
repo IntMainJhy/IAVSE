@@ -1,0 +1,35 @@
+.header-contact{display:flex;align-items:center;flex:none}
+.header-contact-wide{display:flex;align-items:center;gap:2px}
+.iavse-header.iavse-header--plain[data-iavse-header] .header-contact button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:8px;border:0;border-radius:8px;background:transparent;color:var(--header-ink);font:500 12px/1.5 var(--platform-font);white-space:nowrap;cursor:pointer;transition:background-color 160ms ease}
+.iavse-header.iavse-header--plain[data-iavse-header] .header-contact button:hover,.iavse-header.iavse-header--plain[data-iavse-header] .header-contact button[aria-expanded=true]{background:var(--platform-lime)}
+.header-contact .icon{width:18px;height:18px;flex:none}
+.iavse-header.iavse-header--plain[data-iavse-header] .header-vibe-ssh{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:8px 10px;border-radius:8px;background:var(--header-soft);color:var(--header-ink);font:500 12px/1.5 var(--platform-font);text-decoration:none;white-space:nowrap;transition:background-color 160ms ease}
+.iavse-header.iavse-header--plain[data-iavse-header] .header-vibe-ssh:hover{background:var(--platform-lime)}.header-vibe-ssh .icon{width:18px;height:18px;flex:none}
+.iavse-header.iavse-header--plain[data-iavse-header] .header-contact .header-contact-compact{display:none}
+.contact-popover{position:fixed;inset:auto;box-sizing:border-box;width:min(320px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:0;padding:18px;overflow:auto;overscroll-behavior:contain;border:0;border-radius:18px;background:var(--platform-paper);color:var(--platform-ink);box-shadow:0 12px 48px rgb(25 25 25 / .18);font:400 13px/1.7 var(--platform-font);scrollbar-width:thin;scrollbar-color:var(--platform-line) transparent}
+.contact-popover:popover-open{display:flex;flex-direction:column;gap:16px;animation:contact-popover-arrive 180ms cubic-bezier(.16,1,.3,1)}
+@keyframes contact-popover-arrive{from{opacity:.7;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.contact-popover header{display:flex;align-items:center;gap:10px;margin:0;padding:0;border:0}
+.contact-popover h2{margin:0;color:var(--platform-ink);font:600 18px/1.5 var(--platform-font);letter-spacing:-.02em}
+.contact-popover .icon{display:block;width:17px;height:17px;flex:none}
+.contact-popover-mark{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:10px;background:var(--platform-lime)}
+.contact-popover-close{display:grid;place-items:center;flex:none;margin-left:auto;width:34px;height:34px;border:0;border-radius:50%;background:var(--platform-soft);color:var(--platform-muted);cursor:pointer}
+.contact-popover-close:hover{background:var(--platform-lime);color:var(--platform-ink)}
+.contact-popover-tabs{display:flex;gap:4px;padding:3px;border-radius:10px;background:var(--platform-soft)}
+.contact-popover-tabs>button{flex:1;min-width:0;min-height:34px;padding:5px;border:0;border-radius:7px;background:transparent;color:var(--platform-muted);font:500 12px/1.5 var(--platform-font);cursor:pointer}
+.contact-popover-tabs>button[aria-selected=true]{background:var(--platform-paper);color:var(--platform-ink);box-shadow:0 2px 4px rgb(25 25 25 / .06)}
+.contact-popover-content{min-width:0}.contact-popover-content>p{margin:0 0 10px;color:var(--platform-muted);font:400 12px/1.7 var(--platform-font)}
+.contact-popover-content>img{display:block;width:100%;height:auto;max-height:min(390px,calc(100dvh - 240px));object-fit:contain;background:#fff;border-radius:8px;animation:contact-code-arrive 160ms ease-out}
+@keyframes contact-code-arrive{from{opacity:.6}to{opacity:1}}
+.contact-popover footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0;padding:12px 0 0;border-top:1px solid var(--platform-line)}
+.contact-popover footer>a{display:inline-flex;align-items:center;gap:6px;min-height:32px;color:var(--platform-ink);font:500 12px/1.6 var(--platform-font);text-decoration:none;text-underline-offset:4px}.contact-popover footer>a:hover{text-decoration:underline}
+.contact-popover footer .icon{width:14px;height:14px}
+.contact-popover :is(button,a):focus-visible{outline:2px solid var(--platform-ink);outline-offset:3px}.contact-popover:focus{outline:none}
+.contact-popover ::selection{background:var(--platform-lime);color:var(--platform-ink)}
+@media(min-width:1101px) and (max-width:1439px){.header-contact-wide button>span{display:none}}
+@media(max-width:1439px){.iavse-header.iavse-header--plain[data-iavse-header] .header-vibe-ssh{width:34px;padding:8px}.header-vibe-ssh>span{display:none}}
+@media(min-width:768px) and (max-width:900px){.iavse-header.iavse-header--plain[data-iavse-header] .iavse-header__brand>span{display:none}}
+@media(max-width:1100px){.header-contact-wide{display:none}.iavse-header.iavse-header--plain[data-iavse-header] .header-contact .header-contact-compact{display:inline-flex;width:36px;min-height:40px;padding:8px}}
+@media(max-width:767px){.iavse-header.iavse-header--plain[data-iavse-header] .header-contact .header-contact-compact{width:36px;min-height:44px}.contact-popover-tabs>button{min-height:40px}}
+@media(max-width:420px){.iavse-header.iavse-header--plain[data-iavse-header] .iavse-header__brand>span{display:none}.iavse-header.iavse-header--plain[data-iavse-header] .header-vibe-ssh{min-height:44px}}
+@media(prefers-reduced-motion:reduce){.contact-popover:popover-open,.contact-popover *{animation:none!important;transition:none!important}}

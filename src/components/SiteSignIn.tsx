@@ -5,6 +5,7 @@ import {createPortal} from 'react-dom';
 import {usePathname,useRouter} from 'next/navigation';
 import {platformDestination} from '@/lib/navigation.mjs';
 import {signInRequest} from '@/lib/sign-in-navigation.mjs';
+import {observeDialogHeight} from '@/lib/dialog-height.mjs';
 import {usePlatformAccount} from './PlatformAccount';
 import {useLocale} from './LocaleProvider';
 import {BrandMark} from './BrandMark';
@@ -17,7 +18,7 @@ type Mode='login'|'join';
 type Request={next:string;mode:Mode;trigger:HTMLElement};
 
 function SignInDialog({request,close,complete}:{request:Request;close:()=>void;complete:()=>void}){
- const {t}=useLocale(),{access}=usePlatformAccount(),router=useRouter(),id=useId(),dialog=useRef<HTMLDialogElement>(null);
+ const {t}=useLocale(),{access}=usePlatformAccount(),router=useRouter(),id=useId(),dialog=useRef<HTMLDialogElement>(null),body=useRef<HTMLDivElement>(null);
  const [selected,setSelected]=useState<Mode>(request.mode),[switched,setSwitched]=useState(false),[email,setEmail]=useState(''),[registered,setRegistered]=useState(false);
  const registration=access?.registration===true,mode=registration?selected:'login';
  const switchMode=(value:Mode)=>{setSelected(value);setSwitched(true);dialog.current?.scrollTo({top:0});};
@@ -30,6 +31,7 @@ function SignInDialog({request,close,complete}:{request:Request;close:()=>void;c
    queueMicrotask(()=>targets.find(target=>target.isConnected&&target.getClientRects().length)?.focus({preventScroll:true}));
   };
  },[request]);
+ useEffect(()=>observeDialogHeight(dialog.current,body.current),[request]);
  const current=/^\/(?:login|join)(?:\/|$)/.test(location.pathname)?'/':location.pathname+location.search+location.hash;
  const done=()=>{
   window.dispatchEvent(new Event('auth-session-changed'));
@@ -42,7 +44,7 @@ function SignInDialog({request,close,complete}:{request:Request;close:()=>void;c
   if(event.target!==event.currentTarget)return;const rect=event.currentTarget.getBoundingClientRect();
   if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)close();
  }}>
-  <div className="sign-in-dialog-body"><button className="sign-in-close" type="button" aria-label={t('关闭账号窗口')} onClick={close}><Icon name="close"/></button>
+  <div className="sign-in-dialog-body" ref={body}><button className="sign-in-close" type="button" aria-label={t('关闭账号窗口')} onClick={close}><Icon name="close"/></button>
    <div className="sign-in-art" aria-hidden="true">
     <span className="sign-in-art-disc"/>
     <span className="sign-in-art-page"><img src="/illustrations/resources/designs.webp" width="384" height="384" alt=""/></span>

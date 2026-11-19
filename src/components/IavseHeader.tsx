@@ -4,6 +4,8 @@ import Link, {useLinkStatus} from 'next/link';
 import {usePathname} from 'next/navigation';
 import {AuthNav} from '@/components/AuthNav';
 import {BrandMark} from '@/components/BrandMark';
+import {HeaderContact} from '@/components/HeaderContact';
+import {Icon} from '@/components/Icons';
 import {LanguageSwitcher, useLocale} from '@/components/LocaleProvider';
 import {useNavigationPending} from './NavigationLinkFeedback';
 import {landingCopy} from '@/lib/landing-copy';
@@ -41,6 +43,8 @@ export function IavseHeader({className = '', floating = false}: IavseHeaderProps
       </Link>)}
     </nav>
     <div className="iavse-header__identity">
+      <HeaderContact/>
+      <a className="header-vibe-ssh" href="https://vibe-ssh.intmainjhy.cn/" target="_blank" rel="noopener noreferrer" aria-label="Vibe SSH" title="Vibe SSH"><Icon name="terminal"/><span>Vibe SSH</span></a>
       <div className="iavse-repository-links">
         <a href="https://github.com/IntMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · GitHub" title="GitHub"><img src="/brand/github.svg" alt="" width="19" height="19"/></a>
         <a href="https://atomgit.com/InMainJhy/IAVSE" target="_blank" rel="noopener noreferrer" aria-label="IAVSE · AtomGit" title="AtomGit"><img src="/brand/atomgit.png" alt="" width="20" height="20"/></a>
