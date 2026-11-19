@@ -10,7 +10,7 @@ function mount({header=false}={}){
  class Element{
   constructor(href,options={}){this.href=new URL(href,location.href).href;this.target='';this.main=true;this.kind='legacyDesktop';this.download=false;Object.assign(this,options);}
   closest(){return this;}
-  matches(selector){const owned={legacyDesktop:'.organic-header .organic-desktop-nav>a',legacyMobile:'.organic-header .organic-mobile-menu>nav>a',desktop:'[data-iavse-header] .iavse-header__nav a[href]',brand:'[data-iavse-header] a.iavse-header__brand',dock:'.iavse-mobile-dock a.iavse-mobile-dock__tab',catalog:'.resource-hub-tabs .resource-tab-link[href]'};return this.main&&selector.split(',').includes(owned[this.kind]);}
+  matches(selector){const owned={legacyDesktop:'.organic-header .organic-desktop-nav>a',legacyMobile:'.organic-header .organic-mobile-menu>nav>a',desktop:'[data-iavse-header] .iavse-header__nav a[href]',brand:'[data-iavse-header] a.iavse-header__brand',dock:'.iavse-mobile-dock a.iavse-mobile-dock__tab',catalog:'.resource-hub-tabs .resource-tab-link[href]',skill:'.skill-card-title a[href]',pick:'.creator-pick[href]',document:'.catalog-resource-card>a[href]'};return this.main&&selector.split(',').includes(owned[this.kind]);}
   hasAttribute(name){return name==='download'&&this.download;}
  }
  const document={hidden:false,readyState:'complete',querySelector:()=>header?{}:null,addEventListener:(name,handler)=>listeners.set(name,handler),removeEventListener:name=>listeners.delete(name)};
@@ -85,7 +85,7 @@ test('the current desktop header, logo and mobile dock warm their actual destina
 
 test('an idle page prepares public destinations in spaced jobs and releases every queued callback',()=>{
  const f=mount({header:true});assert.deepEqual(f.calls,[]);f.advance(899);assert.equal(f.idleCallbacks.size,0);f.advance(1);assert.equal(f.idleCallbacks.size,1);f.idle();assert.deepEqual(f.calls,['/resources?type=skills']);
- f.advance(1199);assert.equal(f.idleCallbacks.size,0);f.advance(1);f.idle();assert.deepEqual(f.calls,['/resources?type=skills','/community']);assert.deepEqual(f.previews,['community']);
+ f.advance(1199);assert.equal(f.idleCallbacks.size,0);f.advance(1);f.idle();assert.deepEqual(f.calls,['/resources?type=skills','/resources?type=docs']);assert.deepEqual(f.previews,[]);
  f.advance(1200);assert.equal(f.idleCallbacks.size,1);f.cleanup();assert.equal(f.idleCallbacks.size,0);assert.equal(f.timers.size,0);
 });
 
@@ -108,4 +108,13 @@ test('pressing a real destination begins warming immediately without interceptin
  assert.deepEqual(f.calls,['/resources?type=skills']);assert.equal(event.defaultPrevented,false);
  f.intent('pointerdown','/workspace/account',{kind:'catalog'});
  assert.equal(f.calls.length,1);f.cleanup();
+});
+
+test('public Skill and document cards warm only their eligible detail routes on intent',()=>{
+ const f=mount();
+ for(const [href,kind] of [['/skills/hallmark?type=design','skill'],['/skills/stageshow','pick'],['/docs/getting-started','document'],['/docs/shared/public-id','document'],['/resources/designs/astropaper','document']])f.intent('focusin',href,{kind});
+ assert.equal(f.calls.length,5);
+ for(const href of ['/workspace/account','/admin','/login','/api/auth/me','/skills/hallmark?edit=private','/docs/connect?compose=1','/docs/connect#credentials','https://outside.example/docs/connect'])f.intent('focusin',href,{kind:'document'});
+ f.intent('focusin','/skills/stageshow',{kind:'pick',download:true});
+ assert.equal(f.calls.length,5);f.cleanup();
 });

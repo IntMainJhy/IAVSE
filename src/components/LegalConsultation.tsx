@@ -32,7 +32,7 @@ export async function LegalConsultation(){
    </section>
    <section id="consultation-contact" className="legal-contact" aria-labelledby="legal-contact-title">
     <h2 id="legal-contact-title">{t('咨询与联系')}</h2>
-    <div className="legal-price"><span>{t('咨询费用')}</span><p><strong>{lawyer.hourlyRate}</strong><span>{t('元 / 小时')}</span></p><small>{t('具体收费及服务安排，请联系律师确认。')}</small></div>
+    <div className="legal-price"><span>{t('咨询费用')}</span><p className="legal-standard-price"><strong>{lawyer.hourlyRate}</strong><span>{t('元 / 小时')}</span></p><div className="legal-partner-price"><span>{t('网站合作价')}</span><p><strong>{lawyer.partnerHourlyRate}</strong><span>{t('元 / 小时')}</span></p></div><small>{t('具体收费及服务安排，请联系律师确认。')}</small></div>
     <LegalContact wechat={lawyer.wechat}/>
    </section>
   </div>

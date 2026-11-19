@@ -35,6 +35,8 @@ export function filterPublicSkills(entries,{category='all',q='',tool='all',colle
   if(category!=='all'&&skill.category!==category)return false;
   if(tool!=='all'&&!skill.tools.some(item=>item.id===tool))return false;
   if(collection!=='all'&&!skillCollectionIds(skill).includes(collection))return false;
+  // Facet counts and an unfiltered directory need no translated search index.
+  if(!terms.length)return true;
   const categoryLabel=skillCategories.find(item=>item.id===skill.category)?.label||'';
   const haystack=[skill.name,skill.slug,skill.repo,skill.upstreamSkillName,skill.summary,translate(skill.summary),skill.recommendation,translate(skill.recommendation||''),categoryLabel,translate(categoryLabel),...(skill.tags||[]),...skill.tools.map(item=>item.label),...skillCollections(skill).map(source=>source.name)].join(' ').normalize('NFKC').toLocaleLowerCase();
   return terms.every(term=>haystack.includes(term));

@@ -6,6 +6,7 @@ import {useEffect, useRef, useState} from 'react';
 import {FeedAvatar} from '@/components/FeedAvatar';
 import {useLocale} from '@/components/LocaleProvider';
 import {observeGalleryFrame} from '@/lib/gallery-frame-ready';
+import {cachedGalleryPreview,loadGalleryPreview} from '@/lib/gallery-preview';
 import {landingCopy} from '@/lib/landing-copy';
 import type {LandingContent} from './IavseLanding';
 import '@/app/landing-space-showcase.css';
@@ -20,6 +21,20 @@ function PublishedSpaceBoard({space}: {space: PublishedSpace}) {
   const viewport = useRef<HTMLDivElement>(null);
   const stopObserving = useRef<(() => void) | undefined>(undefined);
   const [ready, setReady] = useState(false);
+  const hosted=space.previewHref.endsWith('?embed=gallery');
+  const [html,setHtml]=useState<string|null|undefined>(()=>hosted?null:cachedGalleryPreview(space.previewHref,locale));
+
+  useEffect(()=>{
+    const element=viewport.current;if(!element||hosted)return;
+    let live=true,started=false;
+    const observer=new IntersectionObserver(entries=>{
+      if(started||!entries.some(entry=>entry.isIntersecting))return;
+      started=true;observer.disconnect();
+      void loadGalleryPreview(space.previewHref,locale,true).then(value=>{if(live)setHtml(value);});
+    },{rootMargin:'200px'});
+    observer.observe(element);
+    return()=>{live=false;observer.disconnect();};
+  },[hosted,space.previewHref,locale]);
 
   useEffect(() => {
     const element = viewport.current;
@@ -41,13 +56,13 @@ function PublishedSpaceBoard({space}: {space: PublishedSpace}) {
           {space.coverId ? <img src={'/media/' + encodeURIComponent(space.coverId)} alt="" loading="lazy"/> :
             <><FeedAvatar name={name} avatarId={space.avatarId}/><strong>{name}</strong></>}
         </div>
-        <iframe src={space.previewHref} title={c.publicSpace + ' · ' + name} width={previewWidth} height={820}
+        {html!==undefined&&<iframe src={html===null?space.previewHref:undefined} srcDoc={html??undefined} title={c.publicSpace + ' · ' + name} width={previewWidth} height={820}
           aria-hidden="true" tabIndex={-1} scrolling="no" loading="lazy" referrerPolicy="same-origin"
-          sandbox={space.previewHref.endsWith('?embed=gallery') ? 'allow-scripts allow-same-origin' : 'allow-same-origin'}
+          sandbox={hosted ? 'allow-scripts allow-same-origin' : 'allow-same-origin'}
           onLoad={event => {
             stopObserving.current?.();
             stopObserving.current = observeGalleryFrame(event.currentTarget, () => setReady(true));
-          }}/>
+          }}/>}
       </div>
     </div>
     <figcaption>

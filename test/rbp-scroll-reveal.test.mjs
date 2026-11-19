@@ -37,7 +37,7 @@ for(const viewport of [{width:1440,height:1000},{width:390,height:844}])test(`pu
  const nestedTitle=s.node({parent:chunks[0],match:'h1'}),document=s.node({parent:s.application,match:'.document-prose',height:5000}),preview=s.node({parent:s.application,match:'.template-preview-section'}),authored=s.node({parent:s.application,excluded:true}),authoredCard=s.node({parent:authored,match:'.shared-card'});
  s.mount();assert.deepEqual([...s.observer.observed],chunks,'platform short blocks are enrolled without hiding a full document, preview, authored card or nested heading');
  for(let cycle=0;cycle<3;cycle++){
-  s.enter(chunks);const active=s.animations.slice(cycle*chunks.length);assert.equal(active.length,chunks.length);assert.ok(active.every(a=>a.options.duration===550&&a.frames[0].transform==='translateY(12px)'));
+  s.enter(chunks);const active=s.animations.slice(cycle*chunks.length);assert.equal(active.length,chunks.length);assert.ok(active.every(a=>a.options.duration===260&&a.frames[0].opacity>=.9&&a.frames[0].transform==='translateY(12px)'));
   for(const animation of active)animation.finish();await settled();s.enter(chunks);assert.equal(s.animations.length,(cycle+1)*chunks.length,'still-visible content does not restart');
   if(cycle<2){s.move(chunks,{top:cycle===0?-101:viewport.height});s.viewportChange(chunks);assert.ok(chunks.every(node=>node.__iavseReveal==='pending'));s.move(chunks,{top:100});}
  }
@@ -46,14 +46,14 @@ for(const viewport of [{width:1440,height:1000},{width:390,height:844}])test(`pu
  s.unmount();assert.ok([...chunks,streamed].every(node=>!node.__iavseReveal));
 });
 
-test('reveal repeats after each full viewport exit, keeps a bounded stagger and ignores duplicate entry deliveries',async()=>{
+test('functional entries stay readable, replay after full viewport exits and ignore duplicate entry deliveries',async()=>{
  const s=setup();for(let i=0;i<8;i++)s.add({left:i*100});s.mount();
  assert.equal(s.animations.length,0);assert.ok(s.nodes.every(n=>n.__iavseReveal==='pending'));
  assert.equal(s.observer.options.threshold,RBP_MOTION.threshold);assert.equal(s.observer.options.rootMargin,RBP_MOTION.margin);
  assert.equal(s.viewport.options.threshold,0);assert.equal(s.viewport.options.rootMargin,'0px');
  for(let cycle=0;cycle<3;cycle++){
   s.enter();const current=s.animations.slice(cycle*8);assert.equal(current.length,8);
-  assert.deepEqual(current.map(a=>a.options.delay),[0,70,140,210,210,210,210,210]);assert.ok(current.every(a=>a.options.duration===550));
+  assert.deepEqual(current.map(a=>a.options.delay),[0,0,0,0,0,0,0,0]);assert.ok(current.every(a=>a.options.duration===260&&a.frames[0].opacity>=.9),'functional content remains readable without waiting for staggered fades');
   s.enter();s.mutate();s.enter();assert.equal(s.animations.length,(cycle+1)*8,'duplicate entries and scans do not restart a running cycle');
   for(const a of current)a.finish();await settled();assert.ok(s.nodes.every(n=>!n.__iavseReveal));assert.ok(current.every(a=>a.cancelled));
   s.enter();assert.equal(s.animations.length,(cycle+1)*8,'visible completed chunks stay exposed');

@@ -39,6 +39,19 @@ html[data-ui][data-color-mode] .v2-site .legal-consultation .legal-profile a.leg
 @media(max-width:900px){.legal-profile-copy{padding:32px}html[data-ui][data-color-mode] .v2-site .legal-profile h1{margin-bottom:28px}.legal-portrait{min-height:540px}.legal-information{gap:36px}.legal-contact-copy>div{align-items:flex-start;flex-direction:column}}
 @media(max-width:640px){.legal-profile{grid-template-columns:minmax(0,1fr)}.legal-portrait{height:390px;min-height:0}.legal-portrait img{object-position:50% 24%}.legal-profile-copy{padding:28px}html[data-ui][data-color-mode] .v2-site .legal-profile h1{margin-bottom:22px}html[data-ui][data-color-mode] .v2-site .legal-profile h2{font-size:44px}.legal-introduction{max-width:none}.legal-information{grid-template-columns:minmax(0,1fr);gap:40px;margin-top:20px;padding:28px 24px}.legal-contact-copy>div{flex-direction:row;align-items:center}.legal-platform{align-items:flex-start;flex-direction:column;margin-top:22px;gap:20px}.legal-credentials>div{gap:10px;grid-template-columns:5em minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.legal-consultation *{scroll-behavior:auto}}
+.legal-price .legal-standard-price{margin:10px 0 14px;color:var(--platform-muted);font-size:13px}
+.legal-price .legal-standard-price strong{font:500 24px/1.4 var(--platform-font);letter-spacing:0}
+.legal-partner-price{padding:18px 20px;margin:0 0 14px;border:1px solid var(--platform-lime-line);border-radius:12px;background:var(--platform-lime-soft);color:var(--platform-ink)}
+.legal-partner-price>span{font:500 13px/1.5 var(--platform-font)}
+.legal-partner-price>p{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin:5px 0 0}
+.legal-partner-price strong{font:600 42px/1.2 var(--platform-font);letter-spacing:-.03em;color:var(--platform-ink)}
+@layer rbp{
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-profile{background:var(--platform-paper)!important;color:var(--platform-ink)!important;border:1px solid var(--platform-line);box-shadow:none}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-profile-copy :is(h1,h2,dd){color:var(--platform-ink)!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-profile-copy :is(p,dt,h2>span){color:var(--platform-muted)!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-profile-copy a.legal-primary{background:var(--platform-ink)!important;color:var(--platform-paper)!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .resource-legal-frame .legal-partner-price strong{color:var(--platform-ink)!important}
+}
 @media print{.legal-profile{background:#fff;color:#173957;box-shadow:none}html[data-ui][data-color-mode] .v2-site .legal-profile :is(h1,h2,p,dt,dd),.legal-profile h2>span{color:#173957}.legal-information{background:#fff;box-shadow:none}.legal-back,.legal-primary,.legal-contact-copy button{display:none}}
 
 @media(max-width:640px){

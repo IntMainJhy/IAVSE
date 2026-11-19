@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {curatedSkills,skillAiTools,filterSkills} from '../src/lib/skill-catalog.mjs';
 import {getSkillDetail} from '../src/lib/skill-details.mjs';
 import {translate} from '../src/lib/i18n.mjs';
+import {parseDocument,DomUtils} from 'htmlparser2';
 
 const base=(process.env.TEST_PUBLIC_URL||'http://localhost:3008').replace(/\/$/,'');
 let pages=0;
@@ -27,16 +28,17 @@ let toolLists=0;
 for(const locale of ['zh','en','ja'])for(const tool of skillAiTools){
  const response=await fetch(base+'/skills?tool='+tool.id,{headers:{cookie:'site-locale='+locale}}),html=await response.text();
  assert.equal(response.status,200);
- const entries=[...html.matchAll(/<li class="[^"]*\bskill-entry\b[^"]*">([\s\S]*?)<div class="[^"]*\bskill-entry-links\b[^"]*">/g)];
+ const entries=DomUtils.getElementsByTagName('li',parseDocument(html)).filter(node=>(node.attribs.class||'').split(' ').includes('skill-tool-card'));
  assert.equal(entries.length,filterSkills({tool:tool.id}).length,locale+': '+tool.id);
- for(const [,entry] of entries){
-  assert.match(entry,/<h2><a [^>]*href="\/skills\//,'each result retains its real detail destination');
-  assert.ok(entry.includes('class="skill-upstream"'),'source attribution stays visible');
-  assert.ok(!entry.includes('/api/covers?'),'text-first directory does not request decorative cover images');
+ for(const entry of entries){
+  const heading=DomUtils.getElementsByTagName('h2',entry)[0],links=DomUtils.getElementsByTagName('a',entry);
+  assert.ok(heading&&DomUtils.getElementsByTagName('a',heading).some(link=>link.attribs.href.startsWith('/skills/')),'each result retains its real detail destination');
+  assert.ok(links.some(link=>link.attribs.href.startsWith('https://github.com/')&&DomUtils.textContent(link).includes('/')),'source attribution stays visible');
+  assert.ok(!DomUtils.getOuterHTML(entry).includes('/api/covers?'),'text-first directory does not request decorative cover images');
  }
- for(const [,entry] of entries)assert.ok(entry.includes('data-selected="true">'+tool.label+'</li>'),tool.id+': selected badge');
+ for(const entry of entries)assert.ok(DomUtils.getElementsByTagName('span',entry).some(node=>node.attribs['data-selected']==='true'&&DomUtils.textContent(node)===tool.label),tool.id+': selected badge');
  assert.ok(html.includes(translate(locale,'按 AI 工具筛选')));
- assert.ok(html.includes('name="tool"'));
+ assert.ok(html.includes('href="/skills?tool='+tool.id+'"'));
  assert.ok(!/<select[^>]*name="tool"/.test(html),'AI tools are visible links, not a collapsed select');
  const toolNav=[...html.matchAll(/<nav class="([^"]*)" aria-label="([^"]+)">([\s\S]*?)<\/nav>/g)].find(match=>match[1].includes('skill-filter-options')&&match[2]===translate(locale,'按 AI 工具筛选'))?.[3];
  assert.ok(toolNav,'visible AI tool choices');
@@ -56,12 +58,13 @@ for(const locale of ['zh','en','ja'])for(const kind of ['docs','resources']){
  const choice=links.find(url=>url.searchParams.has('category'));
  if(choice){
   const selected=await(await fetch(choice,{headers:{cookie:'site-locale='+locale}})).text();
-  assert.ok(selected.includes('type="hidden" name="category"'),'search retains the chosen category');
+  const selectedLinks=DomUtils.getElementsByTagName('a',parseDocument(selected)).filter(link=>link.attribs['aria-current']==='page'&&link.attribs.href?.includes('category='));
+  assert.ok(selectedLinks.some(link=>{const url=new URL(link.attribs.href,base);return url.searchParams.get('category')===choice.searchParams.get('category')&&url.searchParams.get('q')==='IAVSE';}),locale+' '+kind+': selected category and query remain in the visible filter link: '+selectedLinks.map(link=>link.attribs.href).join(', '));
  }
  catalogPages++;
 }
 const overview=await(await fetch(base+'/resources',{headers:{cookie:'site-locale=zh'}})).text();
-assert.ok(overview.includes('aria-labelledby="resource-shelf-title"'),'resource hub opens with all resource types');
+assert.ok(overview.includes('id="design-directory"'),'resource hub opens with the shared design directory');
 const connectSearch=await(await fetch(base+'/resources?type=docs&q=Connect',{headers:{cookie:'site-locale=zh'}})).text();
 assert.ok(connectSearch.includes('href="/docs/connect"'),'documents tab search includes Connect guide');
 assert.ok(overview.includes('href="/resources?type=skills"'),'overview links to the Skill directory');

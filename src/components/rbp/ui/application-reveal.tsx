@@ -47,7 +47,10 @@ export function ApplicationReveal(){
    pending.delete(node);
    if(media.matches||!node.animate){clear(node);return;}
    (node as RevealNode).__iavseReveal='running';
-   const animation=node.animate([{opacity:0,transform:`translateY(${RBP_MOTION.distance}px)`},{opacity:1,transform:'translateY(0)'}],{duration:RBP_MOTION.applicationDuration,delay:revealDelay(index),easing:RBP_MOTION.cssEase,fill:'both'});
+   // Functional pages are readable throughout their handoff. Full fades belong
+   // to explicitly authored product stories, not loaded forms or price panels.
+   const functional=!node.closest(SCOPE);
+   const animation=node.animate([{opacity:functional?.94:0,transform:`translateY(${RBP_MOTION.distance}px)`},{opacity:1,transform:'translateY(0)'}],{duration:functional?RBP_MOTION.functionalDuration:RBP_MOTION.applicationDuration,delay:functional?0:revealDelay(index),easing:RBP_MOTION.cssEase,fill:'both'});
    animations.set(node,animation);
    animation.finished.catch(()=>{}).finally(()=>{if(!disposed&&animations.get(node)===animation){release(node);rearm(node);}});
   };

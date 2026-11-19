@@ -28,3 +28,14 @@ test('runtime searches include recommendation, category, multilingual tags and n
  assert.equal(filterPublicSkills(result,{q:'not-present'}).length,0);
  assert.deepEqual(normalizePublicSkillTools(['codex-cli','codex-app','claude','Gemini CLI','unknown']).map(tool=>tool.id),['codex','claude-code','gemini-cli']);
 });
+
+test('empty searches skip translation work while retaining tool, category and collection filters',()=>{
+ const result=mergePublicSkills(curatedSkills,[custom()]);
+ const noTranslation=()=>{throw Error('A facet-only request must not build translated search text');};
+ assert.equal(filterPublicSkills(result,{q:'  ',category:'design',tool:'codex'},noTranslation).length,filterPublicSkills(result,{category:'design',tool:'codex'}).length);
+ assert.equal(filterPublicSkills(result,{category:'testing',tool:'cursor'},noTranslation).every(item=>item.category==='testing'&&item.tools.some(tool=>tool.id==='cursor')),true);
+ assert.equal(filterPublicSkills(result,{collection:'not-a-collection'},noTranslation).length,0);
+ let translated=0;
+ assert.ok(filterPublicSkills(result,{q:'localized-only'},text=>{translated++;return text==='Audits responsive layout and visual hierarchy.'?'localized-only':text;}).some(item=>item.id==='runtime-1'));
+ assert.ok(translated>0);
+});

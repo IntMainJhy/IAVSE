@@ -15,5 +15,6 @@ export function useNavigationPending(pending:boolean){
  },[pending]);
 }
 export function NavigationLinkFeedback(){
- const {pending}=useLinkStatus();useNavigationPending(pending);return null;
+ const {pending}=useLinkStatus();useNavigationPending(pending);
+ return <span className="navigation-link-state" aria-hidden="true" data-pending={pending||undefined}/>;
 }

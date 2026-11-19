@@ -8,6 +8,7 @@ import {preloadCommunity} from './RouteClients';
 const destinations=new Set(['/','/community','/blogs','/resources','/about']);
 const mainNavigation='.organic-header .organic-desktop-nav>a,.organic-header .organic-mobile-menu>nav>a,[data-iavse-header] .iavse-header__nav a[href],[data-iavse-header] a.iavse-header__brand,.iavse-mobile-dock a.iavse-mobile-dock__tab';
 const catalogNavigation='.resource-hub-tabs .resource-tab-link[href]';
+const detailNavigation='.skill-card-title a[href],.creator-pick[href],.catalog-resource-card>a[href]';
 const catalogTypes=new Set(['designs','docs','skills','resources']);
 type Connection={saveData?:boolean;effectiveType?:string};
 
@@ -16,7 +17,7 @@ export function NavigationIntent(){
  const router=useRouter(),{locale}=useLocale();
  useEffect(()=>{
   const warmed=new Map<string,number>();
-  const idleQueue=['/resources?type=skills','/community','/blogs','/about','/resources?type=docs','/resources?type=resources','/'].filter(href=>href!==location.pathname+location.search);
+  const idleQueue=['/resources?type=skills','/resources?type=docs','/resources?type=resources','/community','/blogs','/about','/'].filter(href=>href!==location.pathname+location.search);
   let timer:ReturnType<typeof setTimeout>|undefined,idleTimer:ReturnType<typeof setTimeout>|undefined,idle:number|undefined;
   let hovered:HTMLAnchorElement|null=null,disposed=false,navigationPending=false;
   const allowed=()=>{const connection=(navigator as Navigator&{connection?:Connection}).connection;return !connection?.saveData&&!['slow-2g','2g','3g'].includes(connection?.effectiveType||'');};
@@ -28,6 +29,10 @@ export function NavigationIntent(){
    if(url.origin!==location.origin||url.hash)return null;
    const href=url.pathname+url.search;if(href===location.pathname+location.search)return null;
    if(link.matches(mainNavigation)&&destinations.has(url.pathname)&&!url.search)return href;
+   if(link.matches(detailNavigation)){
+    if(url.search.length>1024||[...url.searchParams.keys()].some(key=>!['type','category','q','tool','collection','page'].includes(key)))return null;
+    if(/^\/skills\/[a-z0-9-]+$/.test(url.pathname)||/^\/docs\/(?:[a-z0-9-]+|(?:articles|shared)\/[^/?#]+)$/.test(url.pathname)||/^\/resources\/(?:designs|shared)\/[^/?#]+$/.test(url.pathname))return href;
+   }
    if(!link.matches(catalogNavigation))return null;
    if(url.pathname==='/resources/legal-consultation'&&!url.search)return href;
    if(url.pathname!=='/resources'||[...url.searchParams.keys()].some(key=>!['type','q'].includes(key)))return null;

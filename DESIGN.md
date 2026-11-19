@@ -256,7 +256,15 @@ The owner requested emoji accents, a search orbit and distinctive featured recom
 
 Hallmark, Stageshow, Dimensional Drawing and Brand Identity are the four explicitly selected installed skills. Give them independently written, localized instructions, examples, prompts and complete pinned download packages with original notices. Their collection aliases and the original source identities remain stable. Package details are recorded in [creator Skill notices](docs/licenses/creator-skills.md). Ordinary directory entries still link upstream.
 
-Use shared streaming loading boundaries for destination feedback and bounded intent prefetch. Prioritize the AI Skills tab during idle time, warm an eligible destination on press, preserve slow-network/data-saving exclusions, and never preload private account routes. Validate performance using a production build because development performs route compilation on first visit.
+Keep the outgoing content readable and show destination feedback on native navigation links, with bounded intent prefetch. Avoid a global loading boundary around public documents: it turns late not-found responses into successful HTTP shells and requires script-based replacement inside inert previews. Prioritize the AI Skills tab during idle time, warm an eligible destination on press, preserve slow-network/data-saving exclusions, and never preload private account routes. Validate performance using a production build because development performs route compilation on first visit.
+
+### Catalog refinement · 2026-11-19
+
+Skills use compact task diagrams, a clear name and summary, compatible-tool chips, then the real repository and installation/license links. Avoid the repeated category cover; keep the full descriptions and all supported tools on detail pages. Documents form a grouped reading index with small page marks. Website/tool cards show a local typographic identity, purpose and actual hostname without remote favicon requests. These server-rendered lists add no client animation runtime; hover/focus responses use CSS and reduced-motion fallbacks. Reuse white/ink/lime with the existing small blue, mint and peach accents.
+
+The sign-in entry uses an ink pill, lime person mark and a short directional response. Legal consultation retains the supplied regular CNY 100/hour rate and adds the owner-requested website partner rate of CNY 88/hour. Both remain distinct and localized. Public catalog cards may prefetch their detail route on deliberate intent, bounded by the shared network/privacy guards. Every script-free blog preview extracts the completed theme from the streamed document before removing the streaming shell.
+
+Functional-page entry feedback lasts 260ms, starts at readable opacity and has no stagger. Completed forms, contact details and prices must never disappear while an entry animation waits. Explicit product-story chunks retain their own full reveals and stagger.
 
 # Design System: IAVSE
 

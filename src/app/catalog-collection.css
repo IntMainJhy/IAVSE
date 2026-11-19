@@ -1,0 +1,72 @@
+/* Task diagrams, reading rows and source identities in IAVSE's lime directory. */
+:root{--collection-mint:#e9f4e5;--collection-blue:#e9f1fb;--collection-peach:#fff0e1;--collection-lilac:#efedf8;--collection-shadow:0 8px 24px rgb(25 25 25 / .045)}
+@layer rbp{
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:start!important;gap:20px!important;margin:0 0 28px!important;padding:8px 0 0!important;border:0;background:none;box-shadow:none;text-align:left}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading h1{margin:0 0 10px;font:600 34px/1.2 var(--platform-font)!important;letter-spacing:-.03em;color:var(--platform-ink)}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading p{margin:0!important;font:400 14px/1.75 var(--platform-font)!important;color:var(--platform-muted)}
+html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading>.space-btn{position:static!important;align-self:start;min-height:42px!important;margin:0;padding:10px 16px!important;font-size:12px;white-space:nowrap}
+}
+html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0}
+html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card{display:flex;flex-direction:column;gap:0;min-width:0;padding:22px 24px 12px;border:1px solid var(--platform-line);border-radius:18px;background:var(--platform-paper);color:var(--platform-ink);box-shadow:none;transition:border-color var(--motion-short) ease,box-shadow var(--motion-short) ease}
+.skill-tool-card[data-skill-category=design]{--skill-card-tint:var(--platform-lime-soft)}.skill-tool-card[data-skill-category=knowledge]{--skill-card-tint:var(--collection-peach)}.skill-tool-card[data-skill-category=testing]{--skill-card-tint:var(--collection-mint)}.skill-tool-card[data-skill-category=motion]{--skill-card-tint:var(--collection-lilac)}
+html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card:is(:hover,:focus-within){border-color:var(--platform-lime-line);box-shadow:var(--collection-shadow)}
+.skill-card-top{display:flex;align-items:center;gap:10px;min-height:44px;margin-bottom:18px;font:400 12px/1.5 var(--platform-font);color:var(--platform-muted)}
+.skill-card-mark{display:grid;place-items:center;width:48px;height:48px;flex:none;border-radius:14px;background:var(--skill-card-tint,var(--collection-blue));color:var(--platform-ink)}
+.skill-card-mark>svg{width:36px;height:36px;overflow:visible}.skill-mark-accent{transform-origin:24px 24px;transition:transform 320ms var(--motion-ease)}
+.skill-tool-card:is(:hover,:focus-within) .skill-mark-accent{transform:rotate(-12deg) scale(1.08)}
+.skill-card-featured{display:inline-flex;align-items:center;gap:4px;margin-left:auto;padding:3px 7px;border-radius:6px;background:var(--platform-lime-soft);color:var(--platform-ink);font-size:11px;white-space:nowrap}
+html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card h2.skill-card-title{display:block;margin:0 0 10px;overflow:visible;font:600 19px/1.4 var(--platform-font);letter-spacing:-.02em;overflow-wrap:anywhere;color:var(--platform-ink)}
+html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card .skill-card-title>a{color:inherit!important;text-decoration:none}
+html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card p.skill-card-summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;min-height:66px;max-height:none;margin:0 0 18px;color:var(--platform-muted);font:400 13px/1.7 var(--platform-font)}
+.skill-card-tags{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:auto 0 16px;min-height:24px}
+.skill-card-tags>span{display:inline-flex;align-items:center;min-height:23px;padding:2px 7px;border:1px solid var(--platform-line);border-radius:5px;color:var(--platform-muted);font:400 10px/1.5 var(--platform-font)}
+.skill-card-tags>span[data-selected=true]{background:var(--platform-lime-soft);color:var(--platform-ink);border-color:var(--platform-lime-line)}
+.skill-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid var(--platform-line)}
+.skill-card-bottom>a:first-child{display:flex;align-items:center;gap:6px;min-width:0;min-height:36px;color:var(--platform-muted)!important;font:400 11px/1.5 var(--platform-font);text-decoration:none}
+.skill-card-bottom>a:first-child>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.skill-card-bottom .icon{width:13px;height:13px;flex:none}
+.skill-card-open{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;background:var(--platform-soft);color:var(--platform-ink)!important;transition:background-color var(--motion-short) ease}
+.skill-card-open .icon{width:16px;height:16px;transition:transform var(--motion-short) var(--motion-ease)}
+.skill-tool-card:is(:hover,:focus-within) .skill-card-open{background:var(--platform-lime)}.skill-tool-card:is(:hover,:focus-within) .skill-card-open .icon{transform:translateX(2px)}
+.skill-card-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--platform-muted);font:400 11px/1.5 var(--platform-font)}
+.skill-card-actions>a{display:inline-flex;align-items:center;min-height:36px;color:var(--platform-muted)!important;text-decoration:none}.skill-card-actions>:last-child{max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.skill-tool-card a:hover{text-decoration:underline!important;text-underline-offset:4px}.skill-tool-card a:focus-visible{outline:2px solid var(--platform-ink);outline-offset:4px}
+.catalog-shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;min-width:0}
+.catalog-resource-card{min-width:0;padding:0;margin:0;border:1px solid var(--platform-line);border-radius:16px;background:var(--platform-paper);color:var(--platform-ink);transition:border-color var(--motion-short) ease,box-shadow var(--motion-short) ease}
+.catalog-resource-card>a{position:relative;display:flex;align-items:flex-start;gap:16px;height:100%;min-height:190px;padding:24px;text-decoration:none;color:inherit!important}
+.library-card-mark{display:grid;place-items:center;width:46px;height:50px;flex:none;border:1px solid var(--platform-line);border-radius:12px;background:var(--collection-blue);color:var(--platform-ink);font:600 16px/1 var(--platform-wordmark);letter-spacing:-.03em;transform:rotate(-5deg);transition:transform 280ms var(--motion-ease);overflow:hidden}
+.catalog-resource-card:nth-child(3n+2) .library-card-mark{background:var(--collection-mint)}.catalog-resource-card:nth-child(3n) .library-card-mark{background:var(--collection-peach)}
+.library-card-mark>img{display:block;width:100%;height:100%;object-fit:cover}.library-card-mark>.icon{width:24px;height:24px;stroke-width:1.3}
+.library-card-body{min-width:0;flex:1}.library-card-category{display:block;margin-bottom:8px;color:var(--platform-muted);font:400 11px/1.5 var(--platform-font)}
+html:root[data-ui][data-color-mode] body .catalog-resource-card h3{margin:0 20px 8px 0;min-width:0;overflow-wrap:anywhere;color:var(--platform-ink);font:600 18px/1.45 var(--platform-font);letter-spacing:-.02em}
+html:root[data-ui][data-color-mode] body .catalog-resource-card p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin:0 0 14px;color:var(--platform-muted);font:400 13px/1.75 var(--platform-font)}
+.library-card-source{display:flex;align-items:center;gap:6px;min-width:0;color:var(--platform-muted);font:400 11px/1.6 var(--platform-font)}.library-card-source>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.library-card-open{position:absolute;right:20px;top:24px;display:grid;place-items:center;width:20px;height:20px;color:var(--platform-muted)}.library-card-open>.icon{width:16px;height:16px;transition:transform var(--motion-short) ease}
+.catalog-resource-card:has(a:is(:hover,:focus-visible)){border-color:var(--platform-lime-line);box-shadow:var(--collection-shadow)}
+.catalog-resource-card a:is(:hover,:focus-visible) .library-card-mark{transform:rotate(3deg)}.catalog-resource-card a:is(:hover,:focus-visible) .library-card-open>.icon{transform:translate(2px,-2px)}
+.catalog-resource-card a:focus-visible{outline:2px solid var(--platform-ink);outline-offset:4px;border-radius:inherit}
+.catalog-shelf--docs{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.catalog-shelf--docs .catalog-resource-card{border:0;border-bottom:1px solid var(--platform-line);border-radius:0;box-shadow:none;background:transparent}
+.catalog-shelf--docs .catalog-resource-card>a{min-height:150px;padding:22px 0;gap:18px}
+.catalog-shelf--docs .library-card-mark{width:38px;height:48px;border-radius:5px 10px 5px 5px;background:var(--platform-lime-soft);margin-top:4px}
+.catalog-shelf--docs .library-card-open{right:0;top:24px}.catalog-shelf--docs .library-card-source{font-size:10px}
+.catalog-shelf--docs .catalog-resource-card p{-webkit-line-clamp:2;margin-bottom:9px}
+html:root[data-ui][data-color-mode] body .catalog-page .catalog-board{display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;margin:0 0 36px;padding-top:12px}
+html:root[data-ui][data-color-mode] body .catalog-page .catalog-board>.learning-section-heading{display:flex;justify-content:flex-start;align-items:center;align-self:start;gap:10px;padding-top:20px;margin:0}
+html:root[data-ui][data-color-mode] body .catalog-page .catalog-board>.learning-section-heading h2{font:600 17px/1.5 var(--platform-font);margin:0;color:var(--platform-ink)}
+.catalog-board>.learning-section-heading>span{display:grid;place-items:center;min-width:24px;height:24px;padding:0 5px;border-radius:6px;background:var(--platform-soft);color:var(--platform-muted);font:400 11px/1 var(--platform-font)}
+@supports(content-visibility:auto){.skill-tool-card{content-visibility:auto;contain-intrinsic-size:auto 320px}.catalog-resource-card{content-visibility:auto;contain-intrinsic-size:auto 190px}}
+@media(max-width:1100px){html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-grid,.catalog-shelf{grid-template-columns:repeat(2,minmax(0,1fr))}html:root[data-ui][data-color-mode] body .catalog-page .catalog-board{grid-template-columns:140px minmax(0,1fr);gap:20px}.catalog-shelf--docs{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:767px){html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-grid{gap:12px}html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card{padding:18px 18px 10px}.skill-card-top{margin-bottom:14px}.skill-card-mark{width:40px;height:40px}.skill-card-mark>svg{width:32px;height:32px}.catalog-shelf{gap:12px}.catalog-resource-card>a{padding:20px;gap:14px}.library-card-open{right:15px;top:20px}html:root[data-ui][data-color-mode] body .catalog-page .catalog-board{display:block;padding-top:8px;margin-bottom:24px}html:root[data-ui][data-color-mode] body .catalog-page .catalog-board>.learning-section-heading{padding:0 0 4px}.catalog-shelf--docs{gap:0}.catalog-shelf--docs .catalog-resource-card>a{min-height:130px}}
+@media(max-width:560px){html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-grid,.catalog-shelf{grid-template-columns:minmax(0,1fr)}html:root[data-ui][data-color-mode] body .skill-explorer .skill-tool-card p.skill-card-summary{min-height:0;-webkit-line-clamp:3}.skill-card-tags{margin-top:0}.skill-card-featured{font-size:11px}.catalog-resource-card>a{min-height:160px}}
+@media(max-width:767px){
+ @layer rbp{
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading{gap:12px!important;margin-bottom:20px!important;padding-top:0!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading h1{padding:0;font-size:28px!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading p{font-size:13px!important}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page>.library-page-heading>.space-btn{padding:8px 11px!important;font-size:11px;min-height:38px!important}
+ }
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page .directory-toolbar{padding:12px 14px;margin-bottom:20px;gap:16px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page :is(.skill-filter-options,.catalog-filter-options){gap:4px}
+ html:root[data-ui][data-color-mode] body .organic-site.v2-site.public-content-site .catalog-library-page :is(.skill-filter-options,.catalog-filter-options)>a{min-height:36px;padding:6px 9px!important;font-size:12px!important}
+}
+@media(prefers-reduced-motion:reduce){.skill-tool-card,.skill-tool-card *,.catalog-resource-card,.catalog-resource-card *{transition:none!important}.skill-tool-card:is(:hover,:focus-within) .skill-mark-accent,.catalog-resource-card a:is(:hover,:focus-visible) .library-card-mark{transform:none}}

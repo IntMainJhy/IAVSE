@@ -17,6 +17,8 @@ try{
   assert.ok(page.html.includes('<title>'+resource.title+' · IAVSE</title>'));
   assert.ok(page.html.includes('href="'+server.base+LEGAL_CONSULTATION_PATH+'"'),'canonical URL');
   assert.ok(page.html.includes('id="consultation-contact"'));
+  assert.ok(page.html.includes(translate(locale,'网站合作价'))&&page.html.includes('<strong>88</strong>'));
+  assert.ok(page.html.includes('<strong>100</strong>'),'the regular rate stays available alongside the partner rate');
   assert.ok(page.html.includes(legalConsultation.license)&&page.html.includes(legalConsultation.wechat));
   assert.ok(page.html.includes(legalConsultation.portrait));
   const appLink=page.html.match(/<a\b[^>]*href="(https:\/\/appgallery\.huawei\.com\/app\/detail[^\"]*)"[^>]*>/)?.[0];

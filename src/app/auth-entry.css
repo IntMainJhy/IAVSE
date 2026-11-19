@@ -1,0 +1,7 @@
+html:root[data-ui][data-color-mode] body [data-iavse-header] .auth-entry{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:6px 14px 6px 7px;border:1px solid var(--platform-ink);border-radius:999px;background:var(--platform-ink);color:var(--platform-paper);font:500 13px/1.5 var(--platform-font);text-decoration:none;transition:background-color var(--motion-short) ease,color var(--motion-short) ease,border-color var(--motion-short) ease}
+.auth-entry-person{display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:var(--platform-lime);color:var(--platform-ink);flex:none}.auth-entry-person>.icon{width:16px;height:16px;stroke-width:1.7}
+.auth-entry>.icon{width:14px;height:14px;transition:transform var(--motion-short) var(--motion-ease)}
+html:root[data-ui][data-color-mode] body [data-iavse-header] .auth-entry:is(:hover,:focus-visible){background:var(--platform-lime);color:var(--platform-ink);border-color:var(--platform-lime)}
+.auth-entry:is(:hover,:focus-visible)>.icon{transform:translateX(3px)}
+.auth-entry:focus-visible{outline:2px solid var(--platform-ink);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){html:root[data-ui][data-color-mode] body [data-iavse-header] .auth-entry,.auth-entry>.icon{transition:none}.auth-entry:is(:hover,:focus-visible)>.icon{transform:none}}
