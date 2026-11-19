@@ -10,7 +10,7 @@ function mount({header=false}={}){
  class Element{
   constructor(href,options={}){this.href=new URL(href,location.href).href;this.target='';this.main=true;this.kind='legacyDesktop';this.download=false;Object.assign(this,options);}
   closest(){return this;}
-  matches(selector){const owned={legacyDesktop:'.organic-header .organic-desktop-nav>a',legacyMobile:'.organic-header .organic-mobile-menu>nav>a',desktop:'[data-iavse-header] .iavse-header__nav a[href]',brand:'[data-iavse-header] a.iavse-header__brand',dock:'.iavse-mobile-dock a.iavse-mobile-dock__tab',catalog:'.resource-hub-tabs .glass-switch__item[href]'};return this.main&&selector.split(',').includes(owned[this.kind]);}
+  matches(selector){const owned={legacyDesktop:'.organic-header .organic-desktop-nav>a',legacyMobile:'.organic-header .organic-mobile-menu>nav>a',desktop:'[data-iavse-header] .iavse-header__nav a[href]',brand:'[data-iavse-header] a.iavse-header__brand',dock:'.iavse-mobile-dock a.iavse-mobile-dock__tab',catalog:'.resource-hub-tabs .resource-tab-link[href]'};return this.main&&selector.split(',').includes(owned[this.kind]);}
   hasAttribute(name){return name==='download'&&this.download;}
  }
  const document={hidden:false,readyState:'complete',querySelector:()=>header?{}:null,addEventListener:(name,handler)=>listeners.set(name,handler),removeEventListener:name=>listeners.delete(name)};

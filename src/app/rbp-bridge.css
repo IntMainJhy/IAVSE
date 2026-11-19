@@ -9,10 +9,10 @@ html[data-frontend=portfolio]:has([data-rbp-route])::-webkit-scrollbar-track{bac
 @scope (.rbp-surface) to (.rbp-native){.space-y-6>:not(:last-child){margin-block-end:calc(var(--spacing)*6)}}
 html[data-color-mode=dark] .rbp-surface{--background:var(--iavse-background);--foreground:var(--iavse-foreground);--muted:var(--iavse-muted);--muted-foreground:var(--iavse-subtle);--border:var(--iavse-border);--ring:var(--iavse-focus);--frame:var(--iavse-canvas)}
 html[data-frontend=portfolio] body{position:relative;isolation:isolate}
-.rbp-native-content{padding-top:128px;min-height:100vh}
-.rbp-native-content.resource-page-frame{padding-top:128px!important}
+.rbp-native-content{padding-top:28px;min-height:100vh}
+.rbp-native-content.resource-page-frame{padding-top:28px!important}
 .rbp-native-content .community-sidebar,.rbp-native-content .community-rightbar{top:112px}
 .rbp-surface [data-rbp-home] img{max-width:100%}
 .rbp-surface .site-tools{position:relative;color:inherit}
 .rbp-surface .site-tools button{font-size:12px;line-height:1.5}
-@media(max-width:639px){.rbp-native-content,.rbp-native-content.resource-page-frame{padding-top:112px!important}}
+@media(max-width:639px){.rbp-native-content,.rbp-native-content.resource-page-frame{padding-top:20px!important}}

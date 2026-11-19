@@ -37,7 +37,7 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
    site-owned primitives. Authored bodies, artboards, swatches and previews stop
    the scope, so their saved colors and typography retain authority. */
 @layer rbp{
-@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
+@scope (.rbp-application) to (.design-explorer,.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
  :scope{background:transparent!important;font-size:15px!important;line-height:1.7!important}
  :scope.resource-bento,:scope :is(.resource-bento,.page-content:has(>.resource-hub-tabs)){
   --bento-canvas:transparent!important;--bento-surface:var(--iavse-background)!important;--bento-soft:var(--iavse-muted)!important;
@@ -53,11 +53,11 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
  :scope h1{font-size:36px!important;font-weight:500!important;margin-bottom:16px!important}
  :scope h2{font-size:25px!important;font-weight:500!important}
  :scope h3{font-size:19px!important;font-weight:550!important}
- :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading) h1{
-  font-family:"IAVSE Display","Songti SC",serif!important;font-size:40px!important;font-weight:400!important;line-height:1.4!important;
+ :scope :is(.catalog-page-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading) h1{
+  font-family:var(--iavse-font)!important;font-size:32px!important;font-weight:600!important;line-height:1.35!important;
  }
- :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro) :is(p,.learning-muted){max-width:68ch;font-size:15px!important;line-height:1.8!important}
- :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading){margin-bottom:28px!important;padding-block:18px 28px!important}
+ :scope :is(.catalog-page-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro) :is(p,.learning-muted){max-width:68ch;font-size:15px!important;line-height:1.8!important}
+ :scope :is(.catalog-page-heading,.organic-page-heading,.learning-heading){margin-bottom:28px!important;padding-block:18px 28px!important}
  :scope :is(.organic-container,.organic-main){min-width:0!important}
  :scope .organic-container{width:100%!important;max-width:1240px!important;margin-inline:auto!important;padding-inline:40px!important}
  :scope :is(.page-head,.community-account-heading,.community-workspace-top){gap:20px!important}
@@ -101,8 +101,7 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
   background:var(--iavse-muted)!important;color:var(--iavse-foreground)!important;border-color:var(--iavse-border)!important;box-shadow:var(--iavse-control-shadow)!important;font-weight:550!important;
  }
  :scope :is(.catalog-filter-options a,.skill-filter-options a,.skill-filter-options button,.design-use-tabs button,.explorer-scenarios>button){color:var(--iavse-secondary)!important;min-height:38px!important;line-height:1.5!important}
- :scope :is(.resource-hub-tabs,.catalog-tabs){background:color-mix(in srgb,var(--iavse-background) 88%,transparent)!important;border:1px solid var(--iavse-border)!important;box-shadow:var(--iavse-control-shadow)!important}
- :scope .resource-hub-tabs>a[aria-current]{color:var(--iavse-foreground)!important;background:var(--iavse-muted)!important}
+ :scope .catalog-tabs{background:color-mix(in srgb,var(--iavse-background) 88%,transparent)!important;border:1px solid var(--iavse-border)!important;box-shadow:var(--iavse-control-shadow)!important}
  :scope :is(.feed-tabs,.community-tabs) a::after{background:var(--iavse-foreground)!important}
 
  /* Community: let the timeline breathe without breaking its fixed mobile rail. */
@@ -218,7 +217,7 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
  :scope [data-iavse-contact] .iavse-contact-details{background:var(--iavse-muted)!important;border:0!important;border-radius:12px!important}
 }
 
-@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
+@scope (.rbp-application) to (.design-explorer,.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
 @media(hover:hover) and (pointer:fine){
  :scope :is(.resource-card,.shared-card,.skill-entry,.skill-directory-card,.skill-grid-card,.design-card):hover{transform:translateY(-4px)!important;box-shadow:var(--iavse-shadow-hover)!important}
 }
@@ -235,9 +234,8 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
  :scope .community-policy-document>h1 {text-align:center}
  :scope .community-report>.community-heading>div {width:100%}
  :scope .community-report>.community-heading>div>p {margin-inline:auto}
- :scope:is(.resource-hub){padding-inline:20px!important}
- :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading) h1{font-size:32px!important;line-height:1.45!important}
- :scope :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading){padding-block:12px 22px!important;margin-bottom:22px!important}
+ :scope :is(.catalog-page-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading) h1{font-size:32px!important;line-height:1.45!important}
+ :scope :is(.catalog-page-heading,.organic-page-heading,.learning-heading){padding-block:12px 22px!important;margin-bottom:22px!important}
  :scope :is(.shared-card-grid,.skill-list,.skill-results-grid,.design-grid,.organic-resource-grid){gap:18px!important}
  :scope :is(.shared-card-copy,.design-card-copy,.skill-entry-copy){padding:20px!important}
  :scope :is(.feed-post,.community-member-card,.community-profile-header,.community-form-section,.community-receipt,.community-report,.community-policy-document,.simple-publisher,.publisher-layout,.community-editor-main,.product-download-option,.legal-information){padding:22px!important}
@@ -256,7 +254,7 @@ html:root[data-frontend=portfolio][data-ui][data-color-mode] body .rbp-applicati
  :scope :is(.admin-inline-facts>div,.admin-task-card,.admin-governance-card){padding:18px!important}
 }
 @media(max-width:480px){
- :scope .organic-container,:scope:is(.resource-hub){padding-inline:16px!important}
+ :scope .organic-container{padding-inline:16px!important}
  :scope :is(.catalog-filter,.organic-filters,.skill-filter-deck,.skill-directory-toolbar,.design-filter,.explorer-classification-controls,.explorer-template-controls){padding:14px!important}
  :scope .document-reader{padding:20px 16px!important}
  :scope .login-card{padding:24px!important}

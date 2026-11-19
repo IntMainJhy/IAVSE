@@ -3629,7 +3629,7 @@
   "选择风格标签": "Choose style tags",
   "行业": "Industry",
   "全部行业": "All industries",
-  "推荐顺序": "Recommended order",
+  "推荐顺序": "Recommended",
   "名称 A–Z": "Name A–Z",
   "正在读取收藏…": "Loading favorites…",
   "浏览器未允许保存，收藏仅在本次访问中保留。": "Storage is unavailable. Favorites will last for this visit only.",
@@ -3758,5 +3758,10 @@
   "请选择有效且不重复的公开主页": "Select valid public homepages without duplicates",
   "画廊已变更，请刷新后重试": "The gallery has changed. Refresh and try again.",
   "选择中有主页已不可展示，请刷新后重试": "A selected homepage is no longer available. Refresh and try again.",
-  "主页公开后即可分享": "Publish your homepage to share it"
+  "主页公开后即可分享": "Publish your homepage to share it",
+  "资源与创作者社区": "Resources and creator community",
+  "浏览设计资源、AI Skills 与文档，参与社区交流，发现创作者的博客空间。": "Explore design resources, AI Skills and documentation, join the community and discover creator blogs.",
+  "网站模板、设计规范与源码。": "Website templates, design systems and source code.",
+  "搜索设计资源": "Search design resources",
+  "搜索模板、设计规范、风格或关键词": "Search templates, design systems, styles or keywords"
 }

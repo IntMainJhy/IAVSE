@@ -77,7 +77,7 @@
     "postcss": "8.5.30"
   },
   "license": "MIT",
-  "description": "Self-hosted creator community and blog platform with resources, AI Skills, a visual homepage editor, a 3D blog gallery and four site-wide UI styles. Sea breeze is the default appearance.",
+  "description": "Self-hosted creator community and blog platform with a searchable resource directory, AI Skills, documentation and a visual blog editor.",
   "repository": {
     "type": "git",
     "url": "https://github.com/IntMainJhy/IAVSE.git"

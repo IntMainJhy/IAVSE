@@ -6,7 +6,6 @@ import {Icon} from './Icons';
 import {DirectoryFacet} from './DirectoryFacet';
 import {useLocale} from './LocaleProvider';
 import {DesignPreviewCard,DesignPreviewDialog,type DesignPreviewItem} from './DesignQuickPreview';
-import {DesignMasonry} from './DesignMasonry';
 import {SCENARIOS,REFERENCE_INDUSTRIES,VISUAL_STYLES} from '@/lib/design-taxonomy.mjs';
 import {CATALOG_FILTER_DEFAULTS,readCatalogFilters,catalogQuery,parseCatalogFavorites} from '@/lib/design-catalog-state.mjs';
 import '@/app/design-catalog-explorer.css';
@@ -21,11 +20,12 @@ type CatalogPage={filters:Filters;revision:string;items:CatalogDesign[];total:nu
 const requestKey=(filters:Filters,favorites:string[])=>catalogQuery(filters).toString()+(filters.favorites==='1'?'|'+JSON.stringify([...favorites].sort()):'');
 
 export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
- const {t}=useLocale(),params=useSearchParams(),[filters,setFilters]=useState<Filters>(()=>initial.filters),[favorites,setFavorites]=useState<string[]>([]),[storageMessage,setStorageMessage]=useState(''),[favoritesReady,setFavoritesReady]=useState(false),[preview,setPreview]=useState<CatalogDesign|null>(null),previewTrigger=useRef<HTMLButtonElement|null>(null),sentinel=useRef<HTMLDivElement>(null);
+ const {t}=useLocale(),params=useSearchParams(),[filters,setFilters]=useState<Filters>(()=>initial.filters),[searchQuery,setSearchQuery]=useState(initial.filters.q),[filtersOpen,setFiltersOpen]=useState(false),[favorites,setFavorites]=useState<string[]>([]),[storageMessage,setStorageMessage]=useState(''),[favoritesReady,setFavoritesReady]=useState(false),[preview,setPreview]=useState<CatalogDesign|null>(null),previewTrigger=useRef<HTMLButtonElement|null>(null),sentinel=useRef<HTMLDivElement>(null);
  const key=requestKey(filters,favorites),favoriteSignature=JSON.stringify(favorites),queryString=params.toString();
  const [page,setPage]=useState(()=>({...initial,key:requestKey(initial.filters,[])})),[busy,setBusy]=useState<'idle'|'first'|'more'>('idle'),[error,setError]=useState(''),[manualLoad,setManualLoad]=useState(false);
  const criteria=useRef({filters,favorites,key}),request=useRef<AbortController|null>(null),sequence=useRef(0),first=useRef(true),failedCursor=useRef<string|null>(null);criteria.current={filters,favorites,key};
  useEffect(()=>{setFilters(readCatalogFilters(new URLSearchParams(queryString)))},[queryString]);
+ useEffect(()=>{setSearchQuery(filters.q)},[filters.q]);
  useEffect(()=>{
   try{setFavorites(parseCatalogFavorites(localStorage.getItem(favoriteKey)||'[]'))}catch{setStorageMessage(t('浏览器未允许保存，收藏仅在本次访问中保留。'))}setFavoritesReady(true);
   const sync=(event:StorageEvent)=>{if(event.key===favoriteKey||event.key===null)setFavorites(parseCatalogFavorites(event.newValue||'[]'))};window.addEventListener('storage',sync);return()=>window.removeEventListener('storage',sync);
@@ -68,35 +68,38 @@ export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
  const favorite=(slug:string)=>{if(!favorites.includes(slug)&&favorites.length>=1000){setStorageMessage(t('收藏已达 1000 项，请先移除部分收藏。'));return;}const next=favorites.includes(slug)?favorites.filter(item=>item!==slug):[...favorites,slug];setFavorites(next);try{localStorage.setItem(favoriteKey,JSON.stringify(next));setStorageMessage('')}catch{setStorageMessage(t('浏览器未允许保存，收藏仅在本次访问中保留。'))}};
  const selectedFacetCount=[filters.scenario,filters.industry,filters.visual].filter(Boolean).length;
  const active=filters.q||selectedFacetCount||filters.favorites;
+ const directoryQuery=catalogQuery(filters).toString(),detailHref=(slug:string)=>'/resources/designs/'+slug+'?'+new URLSearchParams({directory:directoryQuery});
  return <section className="design-studio design-directory design-explorer" id="design-directory">
-  <header className="design-library-heading"><div><h1>{t('UI 设计目录')}</h1><p>{t('按网站用途、参考行业和视觉风格，发现有来源与许可的设计。')}</p></div><a href="#design-source-guide">{t('收录说明')} <Icon name="arrow"/></a></header>
+  <header className="design-library-heading"><div><h1>{t('UI 设计')}</h1><p>{t('网站模板、设计规范与源码。')}</p></div><form className="directory-search" role="search" onSubmit={event=>{event.preventDefault();update({q:searchQuery.trim()})}}><Icon name="search"/><label className="community-sr" htmlFor="design-directory-query">{t('搜索设计资源')}</label><input id="design-directory-query" type="search" name="q" maxLength={120} value={searchQuery} onChange={event=>setSearchQuery(event.target.value)} placeholder={t('搜索模板、设计规范、风格或关键词')} autoComplete="off"/>{searchQuery&&<button className="directory-search-clear" type="button" aria-label={t('清空搜索')} onClick={()=>{setSearchQuery('');update({q:''})}}><Icon name="close"/></button>}<button type="submit" className="directory-search-submit">{t('搜索')}</button></form></header>
   <div className="directory-toolbar">
    <DirectoryFacet label={t('内容类型')}>
     {groups.map(([id,label])=><button key={id} type="button" onClick={()=>update({collection:id,...(id==='project'?{industry:''}:{}),...(id==='design-system'?{scenario:''}:{})})} aria-pressed={filters.collection===id}>{t(label)} <span>{counts[id]}</span></button>)}
    </DirectoryFacet>
    <button type="button" className="dir-action dir-favorites" aria-pressed={filters.favorites==='1'} onClick={()=>update({favorites:filters.favorites?'':'1'})}><Icon name="heart"/>{t('收藏')} <small>{favoriteCount}</small></button>
+   <label className="directory-sort">{t('排序')}<select value={filters.sort} onChange={event=>update({sort:event.target.value})}><option value="recommended">{t('推荐顺序')}</option><option value="name">{t('名称 A–Z')}</option></select></label>
+   <button type="button" className="dir-action directory-filter-toggle" aria-expanded={filtersOpen} aria-controls="design-directory-filters" onClick={()=>setFiltersOpen(value=>!value)}>{t('筛选')}{selectedFacetCount>0&&<span>{selectedFacetCount}</span>}</button>
    {active&&<button className="dir-action dir-reset" type="button" onClick={()=>update({...empty,collection:filters.collection})}>{t('清除筛选')}</button>}
-   <div className="directory-more" id="design-directory-filters">
+  </div>
+   <div className="directory-more" id="design-directory-filters" hidden={!filtersOpen}>
     {filters.collection!=='design-system'&&<DirectoryFacet label={t('网站用途')}>{[{id:'',label:'全部'},...availableScenarios].map(({id,label})=><button key={id} type="button" aria-pressed={filters.scenario===id} onClick={()=>update({scenario:id,...(id?{industry:''}:{})})}>{t(label)}</button>)}</DirectoryFacet>}
     {filters.collection!=='project'&&<DirectoryFacet label={t('参考行业')}>{[{id:'',label:'全部参考行业'},...industryChoices].map(({id,label})=><button key={id} type="button" aria-pressed={filters.industry===id} onClick={()=>update({industry:id,...(id?{scenario:''}:{})})}>{t(label)}</button>)}</DirectoryFacet>}
     <DirectoryFacet label={t('视觉风格')}>{[{id:'',label:'全部视觉风格'},...visualChoices].map(({id,label})=><button key={id} type="button" aria-pressed={filters.visual===id} onClick={()=>update({visual:id})}>{t(label)}</button>)}</DirectoryFacet>
    </div>
-   <DirectoryFacet label={t('排序')}>{[['recommended','推荐顺序'],['name','名称 A–Z']].map(([id,label])=><button key={id} type="button" aria-pressed={filters.sort===id} onClick={()=>update({sort:id})}>{t(label)}</button>)}</DirectoryFacet>
-  </div>
+  <div className="directory-quick-filters" role="group" aria-label={t('视觉风格')}><button type="button" aria-pressed={!filters.visual} onClick={()=>update({visual:''})}>{t('全部风格')}</button>{visualChoices.slice(0,6).map(({id,label})=><button type="button" key={id} aria-pressed={filters.visual===id} onClick={()=>update({visual:id})}>{t(label)}</button>)}</div>
   <div className="design-directory-meta"><p className="design-result" role="status">{waitingForFavorites?t('正在读取收藏…'):loading&&!items.length?t('加载中…'):<>{page.total} {t('项资源')}{hasMore&&<> · {t('已显示')} {items.length}</>}</>}</p><span>{t(filters.collection==='design-system'?'配色、字体与组件规范 · 与完整项目分开收录':'原始实现、项目来源与许可分别列明')}</span></div>
   {storageMessage&&<p className="explorer-storage" role="status">{storageMessage}</p>}
-  <DesignMasonry layoutKey={items.map(entry=>entry.slug).join('|')} busy={busy!=='idle'}>{items.map(entry=>{const origin=entry.creator||entry.source;return <article className="design-card design-gallery-card" key={entry.slug} data-template-slug={entry.slug}>
-   <a className="explorer-repository-link" href={entry.template?.kind==='design-system'?entry.source.url:entry.template?.repository||entry.source.url} target="_blank" rel="noopener noreferrer" aria-label={'GitHub · '+entry.title} title={t('原作者')+' · '+origin.name}><span>GitHub</span></a>
+  <div className="design-grid" aria-busy={busy!=='idle'}>{items.map(entry=>{const origin=entry.creator||entry.source;return <article className="design-card design-gallery-card" key={entry.slug} data-template-slug={entry.slug}>
    <DesignPreviewCard entry={entry} onPreview={element=>{previewTrigger.current=element;setPreview(entry)}}/>
    <div className="design-gallery-caption">
-    <h2><Link prefetch={false} href={'/resources/designs/'+entry.slug}>{entry.title}</Link></h2>
+    <div className="design-card-identity"><h2><Link prefetch={false} href={detailHref(entry.slug)}>{entry.title}</Link></h2><p>{t(entry.template?.kind==='design-system'?'设计规范预览':'网站模板')}{entry.license?.name&&<> · {entry.license.name}</>}</p></div>
+    <button className="design-gallery-favorite" type="button" onClick={()=>favorite(entry.slug)} aria-pressed={favorites.includes(entry.slug)} aria-label={(favorites.includes(entry.slug)?t('取消收藏'):t('收藏'))+' · '+entry.title}><Icon name="heart"/></button>
    </div>
-   <button className="design-gallery-favorite" type="button" onClick={()=>favorite(entry.slug)} aria-pressed={favorites.includes(entry.slug)} aria-label={(favorites.includes(entry.slug)?t('取消收藏'):t('收藏'))+' · '+entry.title}><Icon name="heart"/></button>
-  </article>})}</DesignMasonry>
+   <a className="design-card-source" href={entry.template?.kind==='design-system'?entry.source.url:entry.template?.repository||entry.source.url} target="_blank" rel="noopener noreferrer" aria-label={'GitHub · '+entry.title} title={t('原作者')+' · '+origin.name}>{origin.name} <span>↗</span></a>
+  </article>})}</div>
   {!waitingForFavorites&&!loading&&!error&&!items.length&&<div className="design-empty"><Icon name="search"/><h2>{t(filters.favorites==='1'&&!favorites.length?'还没有收藏的模板':'没有匹配这些条件的模板')}</h2><p>{t('试试减少筛选条件，或从全部模板开始浏览。')}</p><button type="button" onClick={()=>update(empty)}>{t('浏览全部资源')}</button></div>}
   {items.length>0&&<div className="explorer-scroll-status" ref={sentinel} role="status" aria-live="polite">{busy==='more'?t('加载中…'):hasMore?t('继续向下浏览，更多模板会自动出现。'):t('已显示全部匹配模板。')}{manualLoad&&hasMore&&!error&&<button type="button" disabled={busy!=='idle'} onClick={()=>void run(page.nextCursor,true)}>{t('继续加载')}</button>}</div>}
   {error&&<div className="explorer-storage" role="alert">{error} <button type="button" className="explorer-reset" onClick={()=>void run(failedCursor.current,!!failedCursor.current)}>{t('重新加载')}</button></div>}
   <details className="design-origin-guide" id="design-source-guide"><summary>{t('这些资源如何收录？')}</summary><div className="explorer-source-columns"><div><h3>{t('完整开源项目')}</h3><p>{t('从原作者 GitHub 仓库收录不同风格的完整项目，包含仪表盘、文档、博客、作品集和品牌网站。每项保留原作者、原仓库、实际演示和对应许可；早期项目发现线索来自 StyleKit。')}</p><a href="https://www.stylekit.top/zh/templates" target="_blank" rel="noopener noreferrer">{t('查看收录线索')} ↗</a></div><div><h3>{t('设计规范预览')}</h3><p>{t('54 项 VoltAgent MIT 示例作为设计规范预览单独收录，保留原项目与许可。这些示例呈现设计规则和组件，不标为完整应用；58 项未确认开放许可的示例不在本目录收录。')}</p><a href="https://github.com/VoltAgent/awesome-design-md/tree/f6f44a9159d09e13fa0b5d3d9f15c20a9fbb3be1/design-md" target="_blank" rel="noopener noreferrer">{t('查看原项目')} ↗</a></div></div><p>{t('VibeUI 的 112 项均已追溯上游：54 项依据 MIT 收录，58 项尚未找到明确许可，暂不导入。')} <a href="/catalog-audits/vibeui-112.json" target="_blank" rel="noopener noreferrer">{t('查看逐项来源与许可清单')} ↗</a></p><p>{t('收录依据实际文件与许可；图片、字体和商标的使用条件请同时查看项目说明。')}</p></details>
-  {preview&&<DesignPreviewDialog key={preview.slug} entry={preview} returnFocus={previewTrigger.current} onClose={()=>setPreview(null)}/>}
+  {preview&&<DesignPreviewDialog key={preview.slug} entry={preview} directoryQuery={directoryQuery} returnFocus={previewTrigger.current} onClose={()=>setPreview(null)}/>}
  </section>;
 }

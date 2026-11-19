@@ -131,7 +131,7 @@
  }
 
  @media(max-width:767px) {
-  .rbp-application.public-content-site>.organic-main:has(.community-navigation-shell) {padding-top:calc(var(--iavse-header-reserved) + 12px)!important;}
+  .rbp-application.public-content-site>.organic-main:has(.community-navigation-shell) {padding-top:16px!important;}
   .rbp-application .community-surface:has(>.community-navigation-shell) {padding-top:0!important;}
   .rbp-application .community-navigation-shell {
    --community-compose-size:48px;

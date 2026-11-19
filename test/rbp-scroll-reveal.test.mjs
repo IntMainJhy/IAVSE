@@ -6,7 +6,7 @@ function setup({reduced=false,io=true,width=1200,height=800}={}){
  const media={matches:reduced,addEventListener:(n,f)=>mediaEvents[n]=f,removeEventListener:n=>delete mediaEvents[n]};
  class Element{
   constructor({parent=null,scope=false,group=false,item=false,automatic=false,match='',excluded=false,width=200,height=100,top=100,left=0,animate=true}={}){Object.assign(this,{parentElement:parent,scope,group,item,automatic,match,excluded,width,height,top,left});this.dataset={};this.children=[];parent?.children.push(this);if(!animate)this.animate=undefined;}
-  matches(selector){if(selector==='[data-rbp-reveal-scope]')return this.scope;if(selector==='[data-rbp-reveal-group]')return this.group;if(selector==='[data-rbp-reveal-item]')return this.item;if(selector==='[data-rbp-reveal]')return !!this.__iavseReveal;if(selector.startsWith('.space-root'))return this.excluded;return this.automatic||!!this.match&&selector.split(',').includes(this.match);}
+  matches(selector){if(selector==='[data-rbp-reveal-scope]')return this.scope;if(selector==='[data-rbp-reveal-group]')return this.group;if(selector==='[data-rbp-reveal-item]')return this.item;if(selector==='[data-rbp-reveal]')return !!this.__iavseReveal;if(selector.includes('.space-root'))return this.excluded||!!this.match&&selector.split(',').includes(this.match);return this.automatic||!!this.match&&selector.split(',').includes(this.match);}
   closest(selector){for(let node=this;node;node=node.parentElement)if(node.matches(selector))return node;return null;}
   querySelectorAll(selector){return this.children.flatMap(child=>[...(child.matches(selector)?[child]:[]),...child.querySelectorAll(selector)]);}
   contains(node){return !!node&&(node===this||this.children.some(child=>child.contains(node)));}
@@ -150,4 +150,8 @@ test('scroll enhancement does not add React hydration-sensitive attributes to st
  s.mount();s.enter([node]);
  assert.deepEqual(node.dataset,{},'visual enhancement uses private state and WAAPI, not DOM attributes');
  s.unmount();assert.equal(node.__iavseReveal,undefined);
+});
+
+test('functional resource and blog directories stay visible without automatic entrance effects',()=>{
+ for(const match of ['.content-resource-hub','.blog-directory-page']){const s=setup(),directory=s.node({parent:s.application,match}),heading=s.node({parent:directory,automatic:true});s.mount();assert.equal(s.observer.observed.has(heading),false);assert.equal(heading.__iavseReveal,undefined);s.unmount();}
 });

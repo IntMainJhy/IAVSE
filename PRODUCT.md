@@ -2,6 +2,10 @@
 
 <!-- impeccable:product-schema 1 -->
 
+## Current Product Direction · 2026-11-19
+
+The homepage is the resource application: searchable UI designs, AI Skills, documentation, websites and tools. The primary navigation is Resources, Community, Blog spaces and About. Community and blog discovery expose actual public content and their existing account workflows. Promotional introductions are deferred to About; no hero, product story, FAQ or conversion section belongs on the homepage. The shared platform uses opaque white and gray surfaces with black controls. Liquid glass, decorative backgrounds and the appearance picker are retired. Authored blogs, documents, canvases and third-party previews preserve their own design. Earlier visual decisions below are historical where they conflict with this direction.
+
 ## Platform
 
 web

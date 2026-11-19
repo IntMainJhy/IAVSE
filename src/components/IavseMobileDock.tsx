@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import {NavigationLinkFeedback} from './NavigationLinkFeedback';
 import {useEffect, useId, useRef, useState, type CSSProperties} from 'react';
-import {Bell, BookOpen, Bookmark, FileText, House, Layers, MessagesSquare, PenLine, Settings, Shield, UserRound, UsersRound, X} from 'lucide-react';
+import {Bell, BookOpen, Bookmark, FileText, Info, Layers, MessagesSquare, PenLine, Settings, Shield, UserRound, UsersRound, X} from 'lucide-react';
 import {useLocale} from '@/components/LocaleProvider';
 import {usePlatformAccount} from '@/components/PlatformAccount';
 import {useResource} from '@/components/PageResources';
@@ -43,10 +43,10 @@ export function IavseMobileDock({path}: {path: string}) {
   const myPage = /^\/(?:workspace|login|join)(?:\/|$)/.test(path);
   const profile = user ? communityProfileDestination(user) : null;
   const destinations = [
-    {href: '/',         label: copy.navHome,   short: copy.navHome,                                      icon: House,          active: path === '/'},
+    {href: '/',         label: copy.resources, short: copy.resources,                                   icon: Layers,         active: path === '/' || /^\/(?:resources|docs|skills)(?:\/|$)/.test(path)},
     {href: '/community',label: copy.community, short: locale === 'en' ? 'Feed' : locale === 'ja' ? '交流' : '社区', icon: MessagesSquare, active: /^\/community(?:\/|$)/.test(path)},
-    {href: '/resources',label: copy.resources, short: copy.resources,                                    icon: Layers,         active: /^\/(?:resources|docs|skills)(?:\/|$)/.test(path)},
-    {href: '/blogs',    label: copy.blogs,     short: locale === 'en' ? 'Blogs' : locale === 'ja' ? 'ブログ' : '博客',icon: BookOpen,     active: path === '/blogs' || path === '/blogs/'},
+    {href: '/blogs',    label: locale === 'en' ? 'Blog spaces' : locale === 'ja' ? 'ブログ空間' : '博客空间', short: locale === 'en' ? 'Blogs' : locale === 'ja' ? 'ブログ' : '博客', icon: BookOpen, active: /^\/blogs?(?:\/|$)/.test(path)},
+    {href: '/about',    label: copy.navAbout,  short: copy.navAbout,                                     icon: Info,           active: /^\/about(?:\/|$)/.test(path)},
   ];
   const activeIndex = myPage ? destinations.length : destinations.findIndex(item => item.active);
   const protectedHref = (href: string) => user || loading ? href : '/login?next=' + encodeURIComponent(href);

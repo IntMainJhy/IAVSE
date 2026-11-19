@@ -5,10 +5,10 @@ import vm from 'node:vm';
 import ts from 'typescript';
 
 const root=new URL('../src/app/',import.meta.url),read=path=>fs.readFileSync(new URL(path,root),'utf8');
-const files=name=>[...read('route-styles/'+name+'.css').matchAll(/@import '\.\.\/(.+\.css)'/g)].map(match=>match[1]);
+const files=name=>[...read('route-styles/'+name+'.css').matchAll(/@import '([^']+\.css)'/g)].flatMap(([,path])=>path.startsWith('../')?[path.slice(3)]:files(path.replace(/^\.\//,'').replace(/\.css$/,'')));
 test('server route CSS preserves the established cascade and excludes unrelated feature families',()=>{
  const baseline=files('fallback');
- const routeOwned={'home-styles.css':['home'],'iavse-landing.css':['home'],'blog-gallery.css':['blogs'],'community-timeline.css':['community','workspace'],'community-mobile-feed.css':['community']};
+ const routeOwned={'blog-gallery.css':['blogs'],'community-timeline.css':['community','workspace'],'community-mobile-feed.css':['community']};
  for(const name of ['home','blogs','blog','catalog','community','workspace','admin','account']){
   const selected=files(name);assert.equal(new Set(selected).size,selected.length,name);
   const shared=selected.filter(file=>!Object.hasOwn(routeOwned,file));
@@ -18,8 +18,10 @@ test('server route CSS preserves the established cascade and excludes unrelated 
   for(const file of selected)assert.ok(fs.existsSync(new URL(file,root)),file);
  }
  assert.ok(!files('home').includes('anx-portfolio.css'));
- assert.ok(!files('home').includes('community-feed.css'));
- assert.equal(files('home').at(-1),'home-styles.css','the homepage owns its scoped visual override');
+ assert.deepEqual(files('home'),files('catalog'),'home shares the resource application CSS');
+ assert.ok(!files('home').includes('iavse-landing.css'));
+ assert.ok(!files('home').includes('home-styles.css'));
+
  assert.ok(!files('blogs').includes('iavse-home.css'));
  assert.ok(!files('community').includes('blog-appearances.css'));
  for(const feature of ['blog-appearances.css','anx-portfolio.css','blog-reading-finish.css'])assert.ok(files('workspace').includes(feature),'editor needs preview templates');

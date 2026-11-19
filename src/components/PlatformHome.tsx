@@ -1,9 +1,8 @@
-import {serverI18n} from '@/lib/server-i18n';
-import {homeResourceSelections} from '@/lib/home-experience.mjs';
-import {loadLandingContent} from '@/lib/landing-content.mjs';
-import {IavseLanding} from './landing/IavseLanding';
-export async function PlatformHome({req}:{req:Request}){
- const {locale}=await serverI18n();
- const content=await loadLandingContent(req,locale);
- return <IavseLanding content={content} resources={homeResourceSelections}/>;
+import {ResourceHub} from './ResourceHub';
+import {FilingLink} from './FilingLink';
+import type {CatalogQuery} from './SharedCatalog';
+
+/** The front door is the real resource directory, with the same queries and actions. */
+export async function PlatformHome({req,query={}}:{req:Request;query?:CatalogQuery}){
+ return <><ResourceHub query={query} baseUrl={new URL(process.env.PUBLIC_URL||req.url).origin}/><footer className="iavse-filing-footer"><FilingLink/></footer></>;
 }

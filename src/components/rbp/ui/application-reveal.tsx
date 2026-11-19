@@ -13,7 +13,7 @@ const TARGETS=[
  '.document-prose h2,.document-prose h3,.skill-detail-body>section>h2,.shared-reading-layout>article>section>h2,.community-policy-text>h2,.design-detail-heading,.design-section-heading,.design-source-note',
  '.community-member-card,.community-intro-card,.community-empty,.workspace-post-row,.workspace-notification,.organic-article-row,.organic-resource-piece,.organic-project-piece,.organic-empty,.organic-detail-heading',
 ].join(',');
-const CONTENT='.space-root,.bd-block,.anx-portfolio,.personal-homepage,.react-flow__viewport,[contenteditable=true],[data-rbp-entry]';
+const CONTENT='.content-resource-hub,.blog-directory-page,.space-root,.bd-block,.anx-portfolio,.personal-homepage,.react-flow__viewport,[contenteditable=true],[data-rbp-entry]';
 const SCOPE='[data-rbp-reveal-scope]',ITEM='[data-rbp-reveal-item]',GROUP='[data-rbp-reveal-group]';
 type RevealNode = HTMLElement & {__iavseReveal?: 'pending' | 'running'};
 export function ApplicationReveal(){

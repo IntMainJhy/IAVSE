@@ -20,6 +20,14 @@ try{
  const member=(await call('/api/auth/login',{email,password})).cookie,user=(await get('/api/auth/me',member)).data.user;
  assert.equal(user.verification,'accepted');assert.equal(user.emailVerifiedAt,null);assert.equal(user.canPublish,true);
  const links=html=>DomUtils.getElementsByTagName('a',parseDocument(html));
+ const directoryQuery='type=designs&q=Fuwari&collection=project&sort=name';
+ const designLink=links(await(await fetch(base+'/resources?'+directoryQuery)).text()).find(link=>link.attribs.href?.startsWith('/resources/designs/template-fuwari?'));
+ assert.ok(designLink,'filtered server catalog carries the directory context into details');
+ const detailHtml=await(await fetch(base+designLink.attribs.href)).text(),back=links(detailHtml).find(link=>(link.attribs.class||'').split(' ').includes('design-back'));
+ assert.deepEqual(Object.fromEntries(new URL(back.attribs.href,base).searchParams),Object.fromEntries(new URLSearchParams(directoryQuery)),'returning from details preserves search, collection and sort');
+ const hostile=links(await(await fetch(base+'/resources/designs/template-fuwari?'+new URLSearchParams({directory:'https://example.com/escape?redirect=outside'}))).text()).find(link=>(link.attribs.class||'').split(' ').includes('design-back'));
+ assert.equal(hostile.attribs.href,'/resources?type=designs','only known directory filters can form the local return link');
+
  for(const locale of ['zh','en','ja']){
   const headers={Cookie:member+'; site-locale='+locale};
   const library=links(await(await fetch(base+'/resources',{headers})).text());

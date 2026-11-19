@@ -1,12 +1,15 @@
-/** Only these public, independently authored homepage styles are selectable. */
-export const HOME_STYLES = ['fly', 'brand', 'anime', 'classic'];
+/** `brand` is the compatibility identifier for the plain public website. */
+export const HOME_STYLES = ['brand'];
 export const HOME_STYLE_COOKIE = 'iavse-home-style';
-export const DEFAULT_HOME_STYLE = 'anime';
-export function normalizeHomeStyle(value) {
-  return HOME_STYLES.includes(value) ? value : DEFAULT_HOME_STYLE;
+export const DEFAULT_HOME_STYLE = 'brand';
+
+/** Old and unknown preferences resolve to the same public appearance. */
+export function normalizeHomeStyle(_value) {
+  return DEFAULT_HOME_STYLE;
 }
 
+/** Retained for callers that still know the former preference cookie. */
 export const CLASSIC_COLOR_COOKIE = 'iavse-classic-color-mode';
-export function homeStyleColorMode(style, classicMode = 'light') {
-  return style === 'classic' ? (classicMode === 'dark' ? 'dark' : 'light') : style === 'fly' ? 'dark' : 'light';
+export function homeStyleColorMode(_style, _classicMode = 'light') {
+  return 'light';
 }

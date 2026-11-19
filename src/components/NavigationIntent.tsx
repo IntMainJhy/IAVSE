@@ -7,7 +7,7 @@ import {preloadCommunity} from './RouteClients';
 
 const destinations=new Set(['/','/community','/blogs','/resources','/about']);
 const mainNavigation='.organic-header .organic-desktop-nav>a,.organic-header .organic-mobile-menu>nav>a,[data-iavse-header] .iavse-header__nav a[href],[data-iavse-header] a.iavse-header__brand,.iavse-mobile-dock a.iavse-mobile-dock__tab';
-const catalogNavigation='.resource-hub-tabs .glass-switch__item[href]';
+const catalogNavigation='.resource-hub-tabs .resource-tab-link[href]';
 const catalogTypes=new Set(['designs','docs','skills','resources']);
 type Connection={saveData?:boolean;effectiveType?:string};
 

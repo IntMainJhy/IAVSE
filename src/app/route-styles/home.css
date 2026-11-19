@@ -1,15 +1,2 @@
-/* Server-loaded route styles; feature structure only; RBP tokens own visual design. */
-@import '../appearance.css';
-@import '../compact.css';
-@import '../member-avatars.css';
-@import '../motion.css';
-@import '../x-social.css';
-@import '../home.css';
-@import '../spaces.css';
-@import '../product-home.css';
-@import '../product-motion.css';
-@import '../site-owner.css';
-@import '../account-menu.css';
-@import '../iavse-landing.css';
-
-@import '../home-styles.css';
+/* Home is the resource application; marketing scenes are no longer in its bundle. */
+@import './catalog.css';

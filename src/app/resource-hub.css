@@ -1,0 +1,4 @@
+/* One content frame for the real resource categories on Home and /resources. */
+html:root[data-ui][data-color-mode] body .rbp-surface .content-resource-hub{width:min(1600px,calc(100% - 80px));max-width:none;margin:0 auto;padding:28px 0 56px!important;min-height:70svh;background:#fff!important;color:#1d1d1f;--resource-frame-canvas:#fff;--resource-frame-surface:#fff;--resource-frame-soft:#f5f5f7;--resource-frame-ink:#1d1d1f;--resource-frame-muted:#6e6e73;--resource-frame-line:#e5e5e7;--resource-frame-accent:#1d1d1f}
+.content-resource-hub>[data-resource-panel]{min-width:0}
+@media(max-width:767px){html:root[data-ui][data-color-mode] body .rbp-surface .content-resource-hub{width:calc(100% - 36px);padding:18px 0 38px!important}}

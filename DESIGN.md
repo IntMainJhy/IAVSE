@@ -1,6 +1,6 @@
 ---
 name: IAVSE
-description: White space, black functional controls, frosted navigation and soft teal and blue mist across IAVSE platform surfaces.
+description: Content-first resource, community and blog interfaces with opaque white, gray and black controls.
 colors:
   background: '#ffffff'
   foreground: '#19171c'
@@ -237,6 +237,17 @@ components:
     textColor: '{colors.foreground}'
     rounded: '{rounded.pill}'
 ---
+
+## Current direction · 2026-11-19
+
+This decision supersedes the historical appearance specifications below. Home opens the real resource directory; it shares the category navigation, query state and catalog permissions with `/resources`. No marketing hero, product story, scene canvas or FAQ appears on Home. Product introductions may be incorporated into About in a future task.
+
+Use white (#fff), soft gray (#f5f5f7), ink (#1d1d1f), secondary text (#6e6e73) and fine borders (#e5e5e7), with system sans-serif type. Platform controls are opaque; remove liquid-glass lenses, frosted navigation, appearance switches and decorative backgrounds. Brand identity, real account controls, locale selection, author styles, document bodies, canvases and third-party previews remain intact.
+
+Desktop navigation: Resources, Community, Blog spaces, About. Phone navigation adds Me in the bottom bar. The header occupies normal sticky layout height. Resource browsing uses always-visible search, collection tabs, optional detailed filters and four-column static covers on desktop, two columns on phones. Titles, original sources, licenses and bookmark controls remain readable below each cover. Only a requested preview mounts a dialog. Blog spaces use a searchable server-rendered directory of reviewed, public, discoverable members; fictional built-in examples remain separate and collapsed.
+
+Validation includes empty and loading states, search/filter history, favorites persisted after refresh, preview Escape/focus return, real category links and mobile overflow. Evidence belongs outside the public repository in the task workspace.
+
 
 # Design System: IAVSE
 

@@ -1,128 +1,369 @@
-/* Public site roles: one choice, shared by every route and its native controls.
-   Saved member artwork, previews and canvas content keep their authored colors. */
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=classic][data-site-style]:is(:has(body)){
- --iavse-canvas:#f7f9fc;--iavse-background:#fff;--iavse-foreground:#172b3a;--iavse-secondary:#4d6171;--iavse-subtle:#607180;--iavse-muted:#eef3f7;--iavse-border:#dce5ed;--iavse-focus:#1266a4;--iavse-sky:#e5f2fb;--iavse-sage:#e9f3ee;--iavse-warm:#fff2e7;--iavse-selection:#d6eafb;
- --iavse-shadow:0 3px 12px -9px #173c5f36;--iavse-shadow-hover:0 8px 24px -16px #0003;--iavse-control-shadow:none;
- --site-card-radius:20px;--site-control-radius:12px;--site-heading-font:var(--iavse-font);--site-heading-weight:500;--site-label-font:var(--iavse-font);--site-accent:#1266a4;--site-accent-soft:#e5f2fb;--green:#21613d;--red:#b42318;color-scheme:light;
-}
-html:root[data-frontend=portfolio][data-ui][data-color-mode=dark][data-home-style=classic][data-site-style]:is(:has(body)){
- --iavse-canvas:#0b141e;--iavse-background:#111e2b;--iavse-foreground:#edf5fc;--iavse-muted:#182b3b;--iavse-secondary:#b8c6d3;--iavse-subtle:#9cafbf;--iavse-border:#2b4255;--iavse-focus:#86c9ef;--iavse-sky:#163448;--iavse-sage:#203d35;--iavse-warm:#3b3029;--site-accent:#86c9ef;--site-accent-soft:#163448;--green:#83d4a1;--red:#ffb4ab;color-scheme:dark;
-}
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=fly][data-site-style]:is(:has(body)){
- --iavse-canvas:#111315;--iavse-background:#1c2025;--iavse-foreground:#f0f2f5;--iavse-secondary:#b8c0cb;--iavse-subtle:#a0aab8;--iavse-muted:#282e36;--iavse-border:#3e4652;--iavse-focus:#b4d4ff;--iavse-sky:#252e3b;--iavse-sage:#293537;--iavse-warm:#362f35;--iavse-selection:#344a65;
- --iavse-shadow:0 15px 36px -22px #000b;--iavse-shadow-hover:0 20px 48px -22px #000d;--iavse-control-shadow:inset 0 1px 0 #ffffff0a;
- --site-card-radius:10px;--site-control-radius:7px;--site-heading-font:var(--iavse-font);--site-heading-weight:650;--site-label-font:Menlo,Consolas,"IAVSE Sans",monospace;--site-accent:#bfd5f0;--site-accent-soft:#2c3d53;--green:#8ed8b6;--red:#ffb7b0;color-scheme:dark;
-}
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=brand][data-site-style]:is(:has(body)){
- --iavse-canvas:#f7f8fa;--iavse-background:#fff;--iavse-foreground:#22272d;--iavse-secondary:#566171;--iavse-subtle:#5f6b7b;--iavse-muted:#eef0f4;--iavse-border:#dce1e8;--iavse-focus:#285cce;--iavse-sky:#eaf0fd;--iavse-sage:#eaf0ef;--iavse-warm:#f4efe9;--iavse-selection:#dbe6ff;
- --iavse-shadow:0 13px 35px -22px #273b5b38;--iavse-shadow-hover:0 20px 48px -22px #273b5b50;--iavse-control-shadow:0 3px 8px -5px #28395435;
- --site-card-radius:20px;--site-control-radius:12px;--site-heading-font:var(--iavse-font);--site-heading-weight:650;--site-label-font:var(--iavse-font);--site-accent:#315de3;--site-accent-soft:#e6edff;--green:#21613d;--red:#b42318;color-scheme:light;
-}
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=anime][data-site-style]:is(:has(body)){
- --iavse-canvas:#f6fafc;--iavse-background:#fff;--iavse-foreground:#203442;--iavse-secondary:#536876;--iavse-subtle:#536876;--iavse-muted:#e3f2f6;--iavse-border:#d6e3e9;--iavse-focus:#236a89;--iavse-sky:#e3f2f6;--iavse-sage:#e9f2ec;--iavse-warm:#fcf0e6;--iavse-selection:#cde6ef;--site-control-border:#7895a5;
- --iavse-shadow:0 12px 32px -24px #294e6738;--iavse-shadow-hover:0 18px 40px -24px #294e6750;--iavse-control-shadow:0 2px 7px -5px #294e6725;
- --site-card-radius:17px;--site-control-radius:9px;--site-heading-font:"IAVSE Display","Songti SC","Yu Mincho",Georgia,serif;--site-heading-weight:400;--site-label-font:var(--iavse-font);--site-accent:#236a89;--site-accent-soft:#e3f2f6;--green:#276447;--red:#b33b35;color-scheme:light;
-}
-@font-face{font-family:"IAVSE Display";src:url('/fonts/ZCOOLXiaoWei-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
-html[data-home-style] .rbp-surface{--background:var(--iavse-background);--foreground:var(--iavse-foreground);--muted:var(--iavse-muted);--muted-foreground:var(--iavse-subtle);--border:var(--iavse-border);--ring:var(--iavse-focus);--frame:var(--iavse-canvas)}
-html[data-home-style] .rbp-surface[data-rbp-route]:not([data-rbp-route=blog]){background:transparent}
-html[data-home-style] :is(.iavse-filing-footer,.blog-platform-footer){background:var(--iavse-canvas);color:var(--iavse-subtle)}
-.site-style-atmosphere{position:absolute;inset:0 0 auto;height:650px;z-index:-1;pointer-events:none;overflow:hidden;mask-image:linear-gradient(#000 20%,#000a 60%,transparent);isolation:isolate}
-.site-style-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--iavse-canvas) 0%,color-mix(in srgb,var(--iavse-canvas) 76%,transparent) 50%,color-mix(in srgb,var(--iavse-canvas) 70%,transparent));}
-.site-style-atmosphere--fly .site-style-veil{background:linear-gradient(180deg,#1113159e,#111315dd 60%,#111315)}
-.site-style-atmosphere--anime .site-style-veil{background:linear-gradient(90deg,#f6fafcf5,#f6fafce3 48%,#f6fafcbf),linear-gradient(0deg,#f6fafc 0%,transparent 70%)}
-/* Header, mobile navigation and account sheets follow the same surface roles. */
-html[data-home-style] .iavse-mobile-dock{--dock-paper:var(--iavse-background);--dock-ink:var(--iavse-foreground);--dock-muted:var(--iavse-secondary);--dock-line:var(--iavse-border);--dock-soft:var(--iavse-muted);--dock-panel:var(--iavse-background)}
-html[data-home-style] .iavse-account-sheet{background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
-html[data-home-style] .iavse-account-sheet__body{background:var(--iavse-background);color:var(--iavse-foreground)}
-html[data-home-style] .iavse-mobile-dock__tab{color:var(--iavse-secondary)}
-html[data-home-style] .iavse-mobile-dock__tab[aria-current]{color:var(--iavse-foreground)}
-html[data-home-style] .iavse-mobile-dock__indicator{background:var(--iavse-muted)}
-/* Existing bridges use important declarations in the rbp layer. Match that
-   integration layer, within explicit application-owned boundaries. */
-@layer rbp{
-@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
- :scope.rbp-application :is(.panel,.card,.resource-card,.account-section,.space-panel,.feed-post,.feed-empty,.feed-suggestions,.skill-directory-card,.skill-grid-card,.design-card,.admin-focus-review,.admin-focus-statistics,.admin-focus-recent,.admin-bento-card,.login-card,.skill-entry,.community-empty,.feed-discover>section,.admin-governance-card,.resource-hub-tabs){border-radius:var(--site-card-radius)!important;box-shadow:var(--iavse-shadow)!important;border-color:var(--iavse-border)!important}
- :scope.rbp-application :is(.catalog-page-heading,.design-library-heading,.organic-page-heading,.learning-heading,.community-heading,.workspace-page-intro,.product-section-heading,.page-head) h1{font-family:var(--site-heading-font)!important;font-weight:var(--site-heading-weight)!important;color:var(--iavse-foreground)!important}
- :scope.rbp-application :is(.btn,.space-btn,.sp-button,.organic-button,.organic-btn,.feed-compose-link,.community-primary,.community-compose,.community-nav-compose,.document-new,.design-copy-trigger,.design-secondary,.member-avatar-pick-button,input:not([type=checkbox],[type=radio],[type=range],[type=color]),textarea,select){border-radius:var(--site-control-radius)!important}
- :scope.rbp-application :is(.tag,.chip,.skill-type-chip,.feed-category,.shared-card-category,.reader-label,.item-type){font-family:var(--site-label-font)!important}
- :scope.rbp-application :is(.catalog-search-control,.skill-filter-deck,.document-toolbar,.community-search){border-color:var(--iavse-border)!important}
- :scope.rbp-application :is(.organic-prose,.document-prose,.community-prose){color:var(--iavse-foreground)}
- :scope.rbp-application :is(.organic-prose,.document-prose,.community-prose) :is(p,li){color:var(--iavse-secondary)}
- :scope.rbp-application :is(.prose,.organic-prose,.document-prose,.community-prose) pre{background:var(--iavse-muted)!important;color:var(--iavse-foreground)!important;border:1px solid var(--iavse-border)}
- :scope.rbp-application .resource-introduction{color:var(--iavse-foreground)!important}
- :scope.rbp-application .resource-introduction :is(h1,h2,h3){font-family:var(--site-heading-font)!important;font-weight:var(--site-heading-weight)!important}
- :scope.rbp-application :is(.be-heading,.bd-toolbar,.admin-topline){border-color:var(--iavse-border)!important}
-}
-}
-/* Native non-application shells (resource introduction, gallery and about). */
-html[data-home-style] .resource-introduction{background:transparent;color:var(--iavse-foreground)}
-html[data-home-style] .resource-introduction :is(h1,h2,h3){color:var(--iavse-foreground);font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
-html[data-home-style] .resource-introduction p{color:var(--iavse-secondary)}
-html[data-home-style] .resource-introduction-list>li{border-color:var(--iavse-border);background:var(--iavse-background);border-radius:var(--site-card-radius);box-shadow:var(--iavse-shadow)}
-html[data-home-style] .resource-introduction-list>li>a{color:var(--iavse-foreground)}
-html[data-home-style] .blog-spaces-page{--creator-ink:var(--iavse-foreground);--creator-muted:var(--iavse-secondary);--creator-line:var(--iavse-border);--creator-accent:var(--site-accent);--blog-space-ink:var(--iavse-foreground);--blog-space-body:var(--iavse-secondary)}
-html[data-home-style] .blog-spaces-page .creator-directory-intro h1{font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
-html[data-home-style] :is(.blog-spaces-list,.blog-spaces-product,.blog-feature-panel){background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
-html[data-home-style] .blog-spaces-list :is(summary,a){color:var(--iavse-foreground)}
-html[data-home-style] .blog-spaces-list small{color:var(--iavse-subtle)}
-html[data-home-style] .blog-spaces-create{background:var(--iavse-foreground);color:var(--iavse-background);border-color:var(--iavse-border)}
-html[data-home-style] .blog-spaces-gallery-note{color:var(--iavse-subtle)}
-html[data-home-style] .blog-public-shell:not(.blog-gallery-embed){--blog-chrome-paper:var(--iavse-background);--blog-chrome-ink:var(--iavse-foreground);--blog-chrome-muted:var(--iavse-secondary);--blog-chrome-line:var(--iavse-border)}
-html[data-home-style] .iavse-not-found{background:var(--iavse-background);color:var(--iavse-foreground)}
-@media(max-width:767px){.site-style-atmosphere{height:510px}}
-@media(prefers-reduced-motion:reduce){.site-style-atmosphere .hs-anime-art{will-change:auto}.site-style-atmosphere .hs-scene canvas{transition:none}}
-/* Route bundles may arrive after the root sheet. These scoped role bindings
-   intentionally outrank their legacy hardcoded canvas defaults. */
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style]:has(body),html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style] body{background:var(--iavse-canvas)!important;color:var(--iavse-foreground)}
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style] [data-rbp-route] .rbp-application.organic-site{background:transparent!important;--resource-frame-canvas:transparent!important;--resource-frame-ink:var(--iavse-foreground)!important;--resource-frame-muted:var(--iavse-secondary)!important;--resource-frame-surface:var(--iavse-background)!important;--resource-frame-soft:var(--iavse-muted)!important;--resource-frame-line:var(--iavse-border)!important}
-html[data-home-style] .home-style-menu{--iavse-background:#fafbfc;--iavse-foreground:#263147;--iavse-secondary:#657085;--iavse-subtle:#657085;--iavse-muted:#e9edf3;--iavse-focus:#285cce;--site-text:#263147;--site-body:#657085;--site-muted:#657085;--site-surface:#fafbfc}
-html[data-home-style] .resource-shelf-heading h1{font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
-html[data-home-style] .resource-shelf-card{border-radius:var(--site-card-radius);box-shadow:var(--iavse-shadow)}
-html[data-home-style] [data-iavse-contact]{border-radius:var(--site-card-radius);background:var(--iavse-background);color:var(--iavse-foreground);border-color:var(--iavse-border)}
-html[data-home-style] .rbp-application{--iavse-card-radius:var(--site-card-radius)}
-.site-style-example-toolbar{position:relative;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 4%;background:var(--iavse-background);color:var(--iavse-foreground);border-bottom:1px solid var(--iavse-border)}.site-style-example-toolbar>a{font:600 24px Georgia,serif;letter-spacing:-.03em}.site-style-example-toolbar .home-style-switch{margin-left:auto}
-.community-admin-denied>.home-style-switch{position:relative;z-index:90;margin:0 0 24px auto;width:max-content}
-@layer rbp{
-html[data-site-style] .rbp-application .feed-discover .community-category-links>a{color:var(--iavse-secondary)!important}
-html[data-site-style] .rbp-application .feed-discover .community-category-links>a:is(:hover,[aria-current=page]){color:var(--iavse-foreground)!important;background:var(--iavse-muted)!important}
-}
-html[data-site-style] .rbp-application :is(.community-surface,.community-navigation-shell){--feed-text:var(--iavse-foreground);--feed-muted:var(--iavse-secondary);--feed-border:var(--iavse-border)}
-
-html[data-site-style] .rbp-application{--feed-ink:var(--iavse-foreground)!important;--feed-text:var(--iavse-foreground)!important;--feed-muted:var(--iavse-secondary)!important}
-@layer rbp{html[data-site-style] .rbp-application .feed-identity strong{color:var(--iavse-foreground)!important}}
-@layer rbp{@scope (.rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){:scope.rbp-application h1{font-family:var(--site-heading-font)!important;font-weight:var(--site-heading-weight)!important}}}
-@layer rbp{
-html[data-site-style] .home-style-switch .home-style-menu strong{color:#263147!important}
-html[data-site-style] .home-style-switch .home-style-menu small{color:#657085!important}
-html[data-site-style] .home-style-switch .home-style-menu>button{color:#263147!important}
-html[data-site-style] .rbp-application .community-route-bar{background:var(--iavse-muted)!important;color:var(--iavse-foreground)!important;border-color:var(--iavse-border)!important}
-html[data-site-style] .rbp-application .community-route-bar>a{color:var(--iavse-foreground)!important}
-}
-html[data-site-style] .blog-canvas-editor>.be-heading{position:relative;z-index:80}
-html[data-site-style] .blog-space-product h2{font-family:var(--site-heading-font);font-weight:var(--site-heading-weight)}
-/* Template content stays inside its viewport; the surrounding preview tools
-   belong to IAVSE and retain the active theme after the iframe has loaded. */
-html:root[data-ui][data-color-mode][data-home-style][data-site-style] body .design-studio .design-zoom-dialog{--ds-bg:var(--iavse-background);--ds-panel:var(--iavse-muted);--ds-text:var(--iavse-foreground);--ds-muted:var(--iavse-secondary);--ds-line:var(--iavse-border)}
-@layer rbp{
-html[data-site-style] .rbp-application .design-zoom-dialog>:is(header,footer,.design-preview-tools,.design-preview-variants){background:var(--iavse-background)!important;color:var(--iavse-foreground)!important;border-color:var(--iavse-border)!important}
-html[data-site-style] .rbp-application .design-zoom-dialog>:is(header,footer,.design-preview-tools,.design-preview-variants) :is(a,button,h2,span,output){color:var(--iavse-foreground)!important}
-html[data-site-style] .rbp-application .design-zoom-dialog .design-preview-viewports>button[aria-pressed=true]{background:var(--iavse-muted)!important;border-color:var(--iavse-border)!important}
+/* One neutral appearance for the public platform. Saved member artwork,
+   authored documents, canvas content and template previews keep their colors. */
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style][data-site-style]:has(body) {
+  --iavse-canvas: #fff;
+  --iavse-background: #fff;
+  --iavse-foreground: #1d1d1f;
+  --iavse-secondary: #6e6e73;
+  --iavse-subtle: #6e6e73;
+  --iavse-muted: #f5f5f7;
+  --iavse-border: #e5e5e7;
+  --iavse-focus: #1d1d1f;
+  --iavse-sky: #f5f5f7;
+  --iavse-sage: #f5f5f7;
+  --iavse-warm: #f5f5f7;
+  --iavse-selection: #e5e5e7;
+  --iavse-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --iavse-shadow: none;
+  --iavse-shadow-hover: none;
+  --iavse-control-shadow: none;
+  --iavse-card-radius: 10px;
+  --site-card-radius: 10px;
+  --site-control-radius: 8px;
+  --site-control-border: #e5e5e7;
+  --site-heading-font: var(--iavse-font);
+  --site-heading-weight: 600;
+  --site-label-font: var(--iavse-font);
+  --site-accent: #1d1d1f;
+  --site-accent-soft: #f5f5f7;
+  --site-action: #1d1d1f;
+  --site-action-hover: #3a3a3c;
+  --site-on-action: #fff;
+  --green: #21613d;
+  --red: #b42318;
+  color-scheme: light;
 }
 
-.site-style-art,.site-style-art>img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
-.site-style-atmosphere--anime .site-style-art>img{object-position:right 40%}
-/* The daylight world uses sea-blue actions; authored content keeps its palette. */
-html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style=anime] body .rbp-application{
- --site-action:#236a89!important;--site-on-action:#fff!important;--site-action-hover:#195570!important;--site-control-line:#7895a5!important;--admin-primary:#236a89!important;--admin-on-primary:#fff!important;
+/* Route bundles can arrive after this sheet. These role bindings match the
+   integration priority without reaching into saved content. */
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style]:has(body),
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style] body {
+  background: var(--iavse-canvas) !important;
+  color: var(--iavse-foreground);
+  font-family: var(--iavse-font);
 }
-@layer rbp{
-@scope (html[data-home-style=anime] .rbp-application) to (.space-root,.bd-block,.bd-artboard,.anx-portfolio,.personal-homepage,.blog-theme-content,.react-flow__viewport,.ProseMirror,.document-prose,.organic-prose,.community-prose,.design-card-preview,.design-media,.bt-preview,.bl-preview,.blog-template-preview){
- :scope.rbp-application :is(.btn.primary,.space-btn.primary,.is-primary,.sp-button-primary,.organic-btn.primary,.feed-compose-link,.community-primary,.community-compose,.community-nav-compose,.bc-save):not(.danger,.red){background:#236a89!important;color:#fff!important;border-color:transparent!important}
- :scope.rbp-application :is(.btn.primary,.space-btn.primary,.is-primary,.sp-button-primary,.organic-btn.primary,.feed-compose-link,.community-primary,.community-compose,.community-nav-compose,.bc-save):hover:not(:disabled){background:#195570!important}
- :scope.rbp-application :is(input:not([type=checkbox],[type=radio],[type=range],[type=color],[type=file]),textarea,select){border-color:#7895a5!important}
- :scope.rbp-application :is(input,textarea,select):focus{border-color:#236a89!important;outline-color:#236a8960!important}
+
+html[data-home-style] .rbp-surface {
+  --background: var(--iavse-background);
+  --foreground: var(--iavse-foreground);
+  --muted: var(--iavse-muted);
+  --muted-foreground: var(--iavse-subtle);
+  --border: var(--iavse-border);
+  --ring: var(--iavse-focus);
+  --frame: var(--iavse-canvas);
 }
+
+html[data-home-style] .rbp-surface[data-rbp-route]:not([data-rbp-route=blog]) {
+  background: transparent;
 }
-.classic-flow-static{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 45%,#cbe9e4a0,transparent 50%),radial-gradient(ellipse at 78% 32%,#dbd9f5c0,transparent 60%),var(--iavse-canvas)}
-html[data-home-style=classic][data-color-mode=dark] .classic-flow-static{background:radial-gradient(ellipse at 20% 45%,#173b4080,transparent 50%),radial-gradient(ellipse at 78% 32%,#34345780,transparent 60%),var(--iavse-canvas)}
+
+html:root[data-frontend=portfolio][data-ui][data-color-mode][data-home-style] [data-rbp-route] .rbp-application.organic-site {
+  background: transparent !important;
+  --resource-frame-canvas: transparent !important;
+  --resource-frame-ink: var(--iavse-foreground) !important;
+  --resource-frame-muted: var(--iavse-secondary) !important;
+  --resource-frame-surface: var(--iavse-background) !important;
+  --resource-frame-soft: var(--iavse-muted) !important;
+  --resource-frame-line: var(--iavse-border) !important;
+}
+
+html[data-home-style] .rbp-application {
+  --iavse-card-radius: var(--site-card-radius);
+  --feed-ink: var(--iavse-foreground) !important;
+  --feed-text: var(--iavse-foreground) !important;
+  --feed-muted: var(--iavse-secondary) !important;
+}
+
+html[data-home-style] .rbp-application :is(.community-surface, .community-navigation-shell) {
+  --feed-text: var(--iavse-foreground);
+  --feed-muted: var(--iavse-secondary);
+  --feed-border: var(--iavse-border);
+}
+
+/* Match the bridge's important layer inside application-owned surfaces. These
+   stops preserve saved prose, artboards, design media and source previews. */
+@layer rbp {
+  @scope (.rbp-application) to (.design-explorer,.space-root, .bd-block, .bd-artboard, .anx-portfolio, .personal-homepage, .blog-theme-content, .react-flow__viewport, .ProseMirror, .document-prose, .organic-prose, .community-prose, .design-card-preview, .design-media, .bt-preview, .bl-preview, .blog-template-preview) {
+    :scope.rbp-application :is(h1, h2, h3, h4) {
+      font-family: var(--site-heading-font) !important;
+      color: var(--iavse-foreground) !important;
+    }
+
+    :scope.rbp-application h1,
+    :scope.rbp-application :is(.catalog-page-heading, .design-library-heading, .organic-page-heading, .learning-heading, .community-heading, .workspace-page-intro, .product-section-heading, .page-head) h1 {
+      font-weight: var(--site-heading-weight) !important;
+    }
+
+    :scope.rbp-application :is(.panel, .card, .organic-card, .resource-card, .shared-card, .account-section, .space-panel, .feed-post, .feed-empty, .feed-suggestions, .skill-entry, .skill-directory-card, .skill-grid-card, .design-card, .community-empty, .community-member-card, .community-form-section, .community-review-detail, .community-queue, .community-receipt, .community-history, .community-report, .community-policy-document, .community-welcome, .community-profile-header, .login-card, .admin-focus-review, .admin-focus-statistics, .admin-focus-recent, .admin-bento-card, .admin-surface-card, .admin-task-card, .admin-governance-card, .product-download-option, .legal-information, .feed-discover>section) {
+      background: var(--iavse-background) !important;
+      border: 1px solid var(--iavse-border) !important;
+      border-radius: var(--site-card-radius) !important;
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application :is(.resource-card, .shared-card, .skill-entry, .skill-directory-card, .skill-grid-card, .design-card):hover {
+      transform: none !important;
+      border-color: var(--iavse-border) !important;
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application :is(.btn, .space-btn, .sp-button, .organic-button, .organic-btn, .feed-compose-link, .community-primary, .community-compose, .community-nav-compose, .document-new, .design-copy-trigger, .design-secondary, .member-avatar-pick-button, input:not([type=checkbox], [type=radio], [type=range], [type=color]), textarea, select) {
+      border-radius: var(--site-control-radius) !important;
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application :is(.btn, .space-btn, .organic-button, .organic-btn, .document-new, .design-secondary, .member-avatar-pick-button):not(.danger, .red):hover:not(:disabled, [aria-disabled=true]) {
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application :is(.tag, .chip, .skill-type-chip, .feed-category, .shared-card-category, .reader-label, .item-type) {
+      font-family: var(--site-label-font) !important;
+    }
+
+    :scope.rbp-application :is(.catalog-search-control, .skill-filter-deck, .document-toolbar, .community-search, .catalog-filter, .organic-filters, .skill-directory-toolbar, .design-filter, .explorer-classification-controls, .explorer-template-controls, .feed-timeline-search, .workspace-search, .community-member-search, .resource-hub-tabs) {
+      background: var(--iavse-background) !important;
+      border: 1px solid var(--iavse-border) !important;
+      border-radius: var(--site-control-radius) !important;
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application :is(.be-heading, .bd-toolbar, .admin-topline) {
+      border-color: var(--iavse-border) !important;
+    }
+
+    :scope.rbp-application :is(.site-account-panel, .language-menu, .organic-mobile-menu>nav, .be-heading, .bd-sidebar-tabs, .bd-library-panel, .bd-properties, .bc-publish-panel, .bd-stage-options, .bd-selection-actions, .bd-floating-tools, .directory-toolbar, .directory-toolbar .explorer-search-toggle, .directory-toolbar .dir-action, .directory-toolbar .explorer-search, .explorer-repository-link, .design-gallery-favorite, .design-card-copy) {
+      background: var(--iavse-background) !important;
+      color: var(--iavse-foreground) !important;
+      border-color: var(--iavse-border) !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    :scope.rbp-application .design-card-copy::before,
+    :scope.rbp-application .design-card-copy::after {
+      display: none !important;
+    }
+
+    :scope.rbp-application :is(.explorer-repository-link>span, .design-gallery-favorite>.icon) {
+      color: var(--iavse-foreground) !important;
+      text-shadow: none !important;
+      filter: none !important;
+    }
+
+    :scope.rbp-application :is(.resource-introduction, .feed-identity strong) {
+      color: var(--iavse-foreground) !important;
+    }
+
+    :scope.rbp-application .feed-discover .community-category-links>a {
+      color: var(--iavse-secondary) !important;
+    }
+
+    :scope.rbp-application .feed-discover .community-category-links>a:is(:hover, [aria-current=page]) {
+      color: var(--iavse-foreground) !important;
+      background: var(--iavse-muted) !important;
+    }
+
+    :scope.rbp-application .community-route-bar {
+      background: var(--iavse-muted) !important;
+      color: var(--iavse-foreground) !important;
+      border-color: var(--iavse-border) !important;
+    }
+
+    :scope.rbp-application .community-route-bar>a {
+      color: var(--iavse-foreground) !important;
+    }
+
+    /* Filter APIs keep one visible label and an opaque selected state. */
+    :scope.rbp-application .glass-switch {
+      background: var(--iavse-muted) !important;
+      color: var(--iavse-foreground) !important;
+      border: 1px solid var(--iavse-border) !important;
+      border-radius: var(--site-control-radius) !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    :scope.rbp-application .glass-switch :is(.glass-switch__lens, .glass-switch__countertrack, .glass-switch__magnification, .glass-switch__copy-item) {
+      display: none !important;
+    }
+
+    :scope.rbp-application .glass-switch .glass-switch__item {
+      color: var(--iavse-secondary) !important;
+      border-radius: 6px !important;
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application .glass-switch .glass-switch__item:hover,
+    :scope.rbp-application .glass-switch .glass-switch__item:is([data-selected=true], [aria-current=page], [aria-pressed=true]) {
+      background: var(--iavse-background) !important;
+      color: var(--iavse-foreground) !important;
+      box-shadow: none !important;
+    }
+
+    :scope.rbp-application .glass-switch .glass-switch__item:focus-visible {
+      outline: 2px solid var(--iavse-focus) !important;
+      outline-offset: -3px !important;
+    }
+  }
+}
+
+/* Platform chrome around native pages uses the same roles. */
+html[data-home-style] :is(.iavse-filing-footer, .blog-platform-footer) {
+  background: var(--iavse-canvas);
+  color: var(--iavse-subtle);
+}
+
+html[data-home-style] .iavse-mobile-dock {
+  --dock-paper: var(--iavse-background);
+  --dock-ink: var(--iavse-foreground);
+  --dock-muted: var(--iavse-secondary);
+  --dock-line: var(--iavse-border);
+  --dock-soft: var(--iavse-muted);
+  --dock-panel: var(--iavse-background);
+}
+
+html[data-home-style] :is(.iavse-account-sheet, .iavse-account-sheet__body) {
+  background: var(--iavse-background);
+  color: var(--iavse-foreground);
+  border-color: var(--iavse-border);
+}
+
+html[data-home-style] .resource-introduction {
+  background: transparent;
+  color: var(--iavse-foreground);
+}
+
+html[data-home-style] :is(.resource-introduction h1, .resource-introduction h2, .resource-introduction h3, .resource-shelf-heading h1, .creator-directory-intro h1, .blog-space-product h2) {
+  color: var(--iavse-foreground);
+  font-family: var(--site-heading-font);
+  font-weight: var(--site-heading-weight);
+}
+
+html[data-home-style] .resource-introduction p {
+  color: var(--iavse-secondary);
+}
+
+html[data-home-style] :is(.resource-introduction-list>li, .resource-shelf-card, [data-iavse-contact]) {
+  background: var(--iavse-background);
+  color: var(--iavse-foreground);
+  border: 1px solid var(--iavse-border);
+  border-radius: var(--site-card-radius);
+  box-shadow: none;
+}
+
+html[data-home-style] .resource-introduction-list>li>a {
+  color: var(--iavse-foreground);
+}
+
+html[data-home-style] .blog-spaces-page {
+  --creator-ink: var(--iavse-foreground);
+  --creator-muted: var(--iavse-secondary);
+  --creator-line: var(--iavse-border);
+  --creator-accent: var(--site-accent);
+  --blog-space-ink: var(--iavse-foreground);
+  --blog-space-body: var(--iavse-secondary);
+}
+
+html[data-home-style] :is(.blog-spaces-list, .blog-spaces-product, .blog-feature-panel) {
+  background: var(--iavse-background);
+  color: var(--iavse-foreground);
+  border-color: var(--iavse-border);
+}
+
+html[data-home-style] .blog-spaces-list :is(summary, a) {
+  color: var(--iavse-foreground);
+}
+
+html[data-home-style] :is(.blog-spaces-list small, .blog-spaces-gallery-note) {
+  color: var(--iavse-subtle);
+}
+
+html[data-home-style] .blog-spaces-create {
+  background: var(--iavse-foreground);
+  color: var(--iavse-background);
+  border-color: var(--iavse-border);
+}
+
+html[data-home-style] .blog-public-shell:not(.blog-gallery-embed) {
+  --blog-chrome-paper: var(--iavse-background);
+  --blog-chrome-ink: var(--iavse-foreground);
+  --blog-chrome-muted: var(--iavse-secondary);
+  --blog-chrome-line: var(--iavse-border);
+}
+
+html[data-home-style] .iavse-not-found {
+  background: var(--iavse-background);
+  color: var(--iavse-foreground);
+}
+
+.site-style-example-toolbar {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 4%;
+  background: var(--iavse-background);
+  color: var(--iavse-foreground);
+  border-bottom: 1px solid var(--iavse-border);
+}
+
+.site-style-example-toolbar>a {
+  font: 600 20px/1.4 var(--iavse-font);
+  letter-spacing: -.025em;
+}
+
+html[data-site-style] .blog-canvas-editor>.be-heading {
+  position: relative;
+  z-index: 80;
+}
+
+/* Preview controls belong to the site; the template stays in its viewport. */
+html:root[data-ui][data-color-mode][data-home-style][data-site-style] body .design-studio .design-zoom-dialog {
+  --ds-bg: var(--iavse-background);
+  --ds-panel: var(--iavse-muted);
+  --ds-text: var(--iavse-foreground);
+  --ds-muted: var(--iavse-secondary);
+  --ds-line: var(--iavse-border);
+}
+
+@layer rbp {
+  /* The directory used to apply a blurred header from its route stylesheet. */
+  html[data-site-style] body:has(.resource-page-frame[data-resource-kind=designs]) [data-iavse-header] {
+    background: var(--iavse-background) !important;
+    background-image: none !important;
+    border-bottom: 1px solid var(--iavse-border) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* The preview button is platform chrome, not part of the source screenshot. */
+  html[data-site-style] .rbp-application #design-directory .design-preview-trigger>span {
+    background: var(--iavse-background) !important;
+    color: var(--iavse-foreground) !important;
+    border: 1px solid var(--iavse-border) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html[data-site-style] .rbp-application .design-zoom-dialog>:is(header, footer, .design-preview-tools, .design-preview-variants) {
+    background: var(--iavse-background) !important;
+    color: var(--iavse-foreground) !important;
+    border-color: var(--iavse-border) !important;
+  }
+
+  html[data-site-style] .rbp-application .design-zoom-dialog>:is(header, footer, .design-preview-tools, .design-preview-variants) :is(a, button, h2, span, output) {
+    color: var(--iavse-foreground) !important;
+  }
+
+  html[data-site-style] .rbp-application .design-zoom-dialog .design-preview-viewports>button[aria-pressed=true] {
+    background: var(--iavse-muted) !important;
+    border-color: var(--iavse-border) !important;
+  }
+}

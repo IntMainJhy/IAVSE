@@ -15,23 +15,33 @@ import * as spatial from '../src/lib/home-spatial.mjs';
 const sourceRoot=fileURLToPath(new URL('../src/',import.meta.url));
 const motionTag=tag=>({initial,animate,exit,transition,layout,whileInView,viewport,onHoverStart,onHoverEnd,children,...props})=>React.createElement(tag,props,children);
 const image=({fill,priority,unoptimized,...props})=>React.createElement('img',props);
-const emptyContent={posts:[],works:[],space:null,communityUnavailable:false};
-function components(locale='zh',{content=emptyContent,user=null,pathname='/',style='anime'}={}){
- const reads=[];
+const categoryLabels=['UI 设计','AI Skills','文档','网站与工具','法律咨询'];
+const categoryHrefs=['/resources?type=designs','/resources?type=skills','/resources?type=docs','/resources?type=resources','/resources/legal-consultation'];
+function components(locale='zh',{user=null,pathname='/',style='brand',publicUrl}={}){
+ const reads=[],legacyReads=[],linkProps=[];
  const avatar=({name,avatarId})=>React.createElement('span',{'data-avatar-name':name},avatarId?React.createElement('img',{src:'/media/'+encodeURIComponent(avatarId),alt:''}):null);
+ // Keep the real home, hub and tabs; replace only the database-backed directory boundary.
+ const directory=kind=>props=>{
+  reads.push({kind,...props});
+  return React.createElement('section',{'data-resource-directory':kind},React.createElement('h1',null,{designs:'UI 设计',skills:'AI Skills',docs:'文档',resources:'网站与工具'}[kind]));
+ };
  const modules={
   react:React,'react/jsx-runtime':runtime,
-  'next/link':{useLinkStatus:()=>({pending:false}),default:({prefetch,children,...props})=>React.createElement('a',props,children)},
+  'next/link':{useLinkStatus:()=>({pending:false}),default:({prefetch,scroll,children,...props})=>{linkProps.push({href:props.href,prefetch,scroll});return React.createElement('a',props,children);}},
   'next/image':{default:image},
   'next/navigation':{usePathname:()=>pathname,useRouter:()=>({refresh:()=>{}})},
   'lucide-react':new Proxy({},{get:()=>()=>null}),
   'motion/react':{useReducedMotion:()=>true,motion:new Proxy({},{get:(_,tag)=>motionTag(tag)}),LayoutGroup:({children})=>children,AnimatePresence:({children})=>children},
   '@/lib/home-experience.mjs':experience,
   './HomeStyleProvider':{useHomeStyle:()=>({style,select:()=>{},saved:true})},
-  '@/lib/landing-content.mjs':{loadLandingContent:async(req,requestedLocale)=>{reads.push({req,locale:requestedLocale});return content;}},
+  '@/lib/landing-content.mjs':{loadLandingContent:async(...args)=>{legacyReads.push(args);return{posts:[],works:[],space:null,communityUnavailable:false};}},
+  '@/lib/legal-consultation.mjs':{LEGAL_CONSULTATION_PATH:'/resources/legal-consultation'},
   '@/lib/server-i18n':{serverI18n:async()=>({t:value=>value,locale})},
+  './DesignLibrary':{DesignLibrary:directory('designs')},
+  './LearningPages':{DocsPage:directory('docs'),SkillsPage:directory('skills')},
+  './SharedCatalog':{ResourcesPage:directory('resources')},
   '@/components/LocaleProvider':{useLocale:()=>({locale,t:value=>value}),LanguageSwitcher:()=>React.createElement('button',{'aria-label':'Language','data-language-switcher':true})},
-  '@/components/PageResources':{useResource:path=>{assert.equal(path,'/api/auth/me');return {loading:false,data:{user:user?{nickname:user.name,...user}:null}};}},
+  '@/components/PageResources':{useResource:path=>{assert.equal(path,'/api/auth/me');return{loading:false,data:{user:user?{nickname:user.name,...user}:null}};}},
   '@/components/CommunityUI':{Logout:()=>React.createElement('button',{'data-logout':true},'Sign out')},
   '@/components/AuthNav':{AuthNav:()=>user?React.createElement('a',{href:'/workspace/account','data-auth-account':true},avatar(user),user.name):React.createElement('a',{href:'/login','data-auth-login':true},'Sign in')},
   '@/components/FeedAvatar':{FeedAvatar:avatar},
@@ -42,12 +52,11 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/',sty
   file=path.resolve(file);if(cache.has(file))return cache.get(file);
   if(file.endsWith('/landing/HomeStyleProvider.tsx'))return modules['./HomeStyleProvider'];
   if(file.endsWith('/components/LocaleProvider.tsx'))return modules['@/components/LocaleProvider'];
-  if(file.endsWith('/landing/IavseFlowBackdrop.tsx'))return{default:()=>React.createElement('div',{'data-flow-backdrop-stub':true,'aria-hidden':'true'})};
   if(file.endsWith('/portfolio/PortraitMorph.tsx'))return{PortraitMorph:({srcA,alt})=>React.createElement('img',{src:srcA,alt,'data-portfolio-portrait':true})};
   if(file.endsWith('/portfolio/ShaderFlow.tsx'))return{ShaderFlow:()=>null};
   const exports={};cache.set(file,exports);
   const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022}}).outputText;
-  vm.runInNewContext(code,{exports,Set,Map,encodeURIComponent,require:key=>{
+  vm.runInNewContext(code,{exports,Set,Map,URL,URLSearchParams,encodeURIComponent,process:{env:{PUBLIC_URL:publicUrl}},require:key=>{
    if(key.endsWith('.css'))return{};
    if(Object.hasOwn(modules,key))return modules[key];
    const base=key.startsWith('@/')?path.join(sourceRoot,key.slice(2)):key.startsWith('.')?path.resolve(path.dirname(file),key):null;
@@ -57,109 +66,87 @@ function components(locale='zh',{content=emptyContent,user=null,pathname='/',sty
   }});
   return exports;
  }
- return {notices:load(path.join(sourceRoot,'components/SiteAnnouncement.tsx')),page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),runtime:load(path.join(sourceRoot,'components/portfolio/PortfolioRuntime.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads};
+ return {notices:load(path.join(sourceRoot,'components/SiteAnnouncement.tsx')),page:load(path.join(sourceRoot,'components/PlatformHome.tsx')),runtime:load(path.join(sourceRoot,'components/portfolio/PortfolioRuntime.tsx')),copy:load(path.join(sourceRoot,'lib/landing-copy.ts')),projects:load(path.join(sourceRoot,'components/rbp/projects/projects.tsx')),reads,legacyReads,linkProps};
+}
+// Resolve server components while leaving client components and their hooks to React SSR.
+async function serverTree(element){
+ if(Array.isArray(element))return Promise.all(element.map(serverTree));
+ if(!React.isValidElement(element))return element;
+ if(typeof element.type==='function'&&element.type.constructor.name==='AsyncFunction')return serverTree(await element.type(element.props));
+ if(!Object.hasOwn(element.props,'children'))return element;
+ const children=await serverTree(element.props.children);
+ return Array.isArray(children)?React.cloneElement(element,{},...children):React.cloneElement(element,{},children);
 }
 async function render(locale='zh',options={}){
- const loaded=components(locale,options),req=new Request('http://example.test/'),html=renderToStaticMarkup(React.createElement(React.Fragment,null,React.createElement(loaded.runtime.PortfolioRuntime),await loaded.page.PlatformHome({req})));
- assert.equal(loaded.reads.length,1);assert.equal(loaded.reads[0].req,req);assert.equal(loaded.reads[0].locale,locale);
- return {...loaded,html,document:parseDocument(html)};
+ const loaded=components(locale,options),req=new Request(options.reqUrl||'http://example.test/');
+ const page=await serverTree(await loaded.page.PlatformHome({req,query:options.query}));
+ const html=renderToStaticMarkup(React.createElement(React.Fragment,null,React.createElement(loaded.runtime.PortfolioRuntime),page));
+ assert.equal(loaded.reads.length,1,'the homepage resolves exactly one real directory panel');
+ assert.equal(loaded.legacyReads.length,0,'the directory homepage does not fetch retired promotional feed content');
+ return{...loaded,html,document:parseDocument(html)};
 }
 const find=(document,predicate)=>DomUtils.findAll(node=>node.type==='tag'&&predicate(node),document.children);
 const text=node=>DomUtils.textContent(node);
 
-test('homepage server markup keeps the hero, community empty state, resource links, blog space and footer in reading order',async()=>{
- const {document,copy}=await render(),c=copy.landingCopy('zh'),all=find(document,()=>true);
- const hero=find(document,node=>node.name==='h1');assert.equal(hero.length,1);assert.equal(text(hero[0]),'Insight through AI.Vigilance for Opportunity.Seize to Evolve.');
- const filters=find(document,node=>node.attribs.role==='group'&&node.attribs['aria-label']===c.filters);assert.equal(filters.length,1);
- const buttons=find(filters[0],node=>node.name==='button');
- assert.deepEqual(buttons.map(text),[c.all,c.works,c.discussions]);assert.deepEqual(buttons.map(node=>node.attribs['aria-pressed']),['true','false','false']);
- const empty=find(document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));assert.equal(empty.length,1);
- assert.ok(text(empty[0]).includes(c.emptyTitle));
- assert.ok(text(empty[0]).includes(c.prompts.all));
- assert.deepEqual(find(empty[0],node=>node.name==='a').map(node=>[text(node),node.attribs.href]),[[c.writePost,'/workspace/submissions/new']]);
- const community=find(document,node=>node.name==='section'&&node.attribs['aria-labelledby']==='iv-community-title')[0];
- assert.ok(find(community,node=>node.name==='a'&&node.attribs.href==='/community').length);
- const resources=find(document,node=>node.name==='aside'&&node.attribs['aria-label']===c.resources);assert.equal(resources.length,1);
- assert.equal(find(resources[0],node=>node.name==='details'||node.name==='button').length,0,'all category entries remain directly available');
- const index=find(resources[0],node=>node.name==='nav')[0];
- assert.deepEqual(find(index,node=>node.name==='a').map(node=>node.attribs.href),experience.homeResourceSelections.map(group=>group.href));
- const covers=find(resources[0],node=>node.name==='ul')[0];
- assert.deepEqual(find(covers,node=>node.name==='a').map(node=>node.attribs.href),experience.homeResourceSelections[0].items.map(item=>item.href),'the visual excerpts keep actual template destinations');
- const spaces=find(document,node=>node.name==='section'&&node.attribs['aria-label']===c.blogs);assert.equal(spaces.length,1);
- const footer=find(document,node=>node.name==='footer');assert.equal(footer.length,1);
- const order=[hero[0],resources[0],filters[0],empty[0],spaces[0],footer[0]].map(node=>all.indexOf(node));
- assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'semantic content stays in its intended reading order');
- const primary=find(document,node=>node.name==='nav'&&node.attribs['aria-label']===c.nav);
- assert.ok(primary.length>0);assert.deepEqual(find(primary[0],node=>node.name==='a').map(node=>node.attribs.href),['/','/community','/resources','/blogs','/about']);
- assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length,1);
- assert.equal(find(document,node=>Object.hasOwn(node.attribs,'data-home-hero')).length,1,'one selected scene accompanies server content');
- assert.equal(spaces[0].attribs.id,'home-blog');
- assert.ok(text(spaces[0]).includes(c.spaceUnavailable));
- assert.equal(find(spaces[0],node=>['img','button'].includes(node.name)).length,0);
- assert.deepEqual(find(spaces[0],node=>node.name==='a').map(node=>node.attribs.href).sort(),['/blogs','/workspace/blog']);
- assert.equal(find(document,node=>['iframe','video'].includes(node.name)).length,0);
- assert.equal(find(document,node=>node.name==='a'&&node.attribs.href!=='/community/members'&&/^\/(?:community\/|blog\/|blogs\/showcase\/)/.test(node.attribs.href||'')).length,0,'empty content does not fabricate public posts, projects or creators');
- for(const name of ['Lin Chen','Maya Zhou','Leo Park','Josh Mercer','jianghaoyu2006'])assert.ok(!text(document).includes(name),name);
-
- const failed=await render('zh',{content:{...emptyContent,communityUnavailable:true}}),failedEmpty=find(failed.document,node=>Object.hasOwn(node.attribs,'data-landing-empty'));
- assert.equal(failedEmpty.length,1);assert.ok(text(failedEmpty[0]).includes(c.unavailable));
- assert.deepEqual(find(failedEmpty[0],node=>node.name==='button').map(text),[c.retry]);
- assert.ok(!text(failedEmpty[0]).includes(c.prompts.all),'a failed request cannot masquerade as an empty feed');
+test('homepage server markup opens the UI design directory with direct categories and the filing footer in reading order',async()=>{
+ const{document,copy,reads,linkProps}=await render(),c=copy.landingCopy('zh'),all=find(document,()=>true);
+ const hub=find(document,n=>n.attribs['data-resource-kind']==='designs');assert.equal(hub.length,1);
+ const tabs=find(hub[0],n=>n.name==='nav'&&n.attribs['aria-label']==='资源类型');assert.equal(tabs.length,1);
+ const links=find(tabs[0],n=>n.name==='a');
+ assert.deepEqual(links.map(text),categoryLabels);assert.deepEqual(links.map(n=>n.attribs.href),categoryHrefs);
+ assert.deepEqual(links.filter(n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href),[categoryHrefs[0]]);
+ assert.equal(find(tabs[0],n=>n.name==='details'||n.name==='button').length,0,'category entries remain directly available');
+ const directory=find(hub[0],n=>n.attribs['data-resource-directory']==='designs')[0];
+ assert.equal(text(find(directory,n=>n.name==='h1')[0]),'UI 设计');assert.equal(reads[0].kind,'designs');
+ const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0],footer=find(document,n=>n.name==='footer');
+ assert.equal(footer.length,1);assert.deepEqual(find(footer[0],n=>n.name==='a').map(n=>n.attribs.href),['https://beian.miit.gov.cn/']);
+ const order=[header,tabs[0],directory,footer[0]].map(n=>all.indexOf(n));
+ assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'navigation, directory and filing retain their reading order');
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-auth-login')).length,1);
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-home-hero')||Object.hasOwn(n.attribs,'data-iavse-landing')).length,0);
+ assert.equal(find(document,n=>['iframe','video','canvas'].includes(n.name)).length,0,'the directory is ready without a promotional scene');
+ for(const href of categoryHrefs){const props=linkProps.find(link=>link.href===href);assert.equal(props.prefetch,false);assert.equal(props.scroll,false);}
+ for(const marker of ['hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!text(document).includes(marker),marker);
 });
 
-test('three locales preserve real destinations, the published homepage preview and supplied public author avatars',async()=>{
+test('three locales preserve resource, community, blog and account destinations with signed-in avatars',async()=>{
  for(const locale of ['zh','en','ja']){
-  const empty=await render(locale),c=empty.copy.landingCopy(locale),content=text(empty.document);
-  assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-iavse-landing'))[0].attribs['data-landing-locale'],locale);
-  for(const value of [c.communityTitle,c.communityIntro,c.emptyTitle,c.prompts.all,c.writePost,c.resourceTitle,c.design,c.skill,c.docs,c.tools,c.resourceNote,c.spaceTitle,c.spaceBody,c.spaceUnavailable,c.source,c.privacy,c.spacePublishing])assert.ok(content.includes(value),`${locale}: ${value}`);
-  const entryLinks=find(empty.document,node=>node.name==='a'&&node.attribs.class==='hs-cta');
-  assert.equal(entryLinks.length,1);assert.equal(entryLinks[0].attribs.href,'/resources');
-  for(const href of ['/','/login','/resources','/community','/blogs','/workspace/account','/about','/legal/privacy','https://github.com/IntMainJhy/IAVSE'])assert.ok(find(empty.document,node=>node.name==='a'&&node.attribs.href===href).length,`${locale}: ${href}`);
-  assert.equal(find(empty.document,node=>Object.hasOwn(node.attribs,'data-language-switcher')).length,1);
-  for(const marker of ['undefined','hello@example.com','Josh Mercer','Public post 0','private-marker'])assert.ok(!content.includes(marker),marker);
-
-  const supplied={posts:[{id:'published-post',title:'Reviewed discussion',summary:'Published excerpt',category:'Practice',source:'Author',license:'Author license',coverId:'',authorName:'Discussion author',authorAvatarId:'discussion-avatar',commentCount:0,likeCount:0,href:'/community/published-post'}],works:[{id:'published-work',title:'Published project',summary:'Published project excerpt',coverId:'',authorName:'Project author',authorAvatarId:'project-avatar',href:'/blog/public-member/projects/project-one',type:'work'}],space:{handle:'public-member',name:'Public member',intro:'Published member introduction',avatarId:'space-avatar',coverId:'',href:'/blog/public-member',previewHref:'/blog/public-member/preview',count:1},communityUnavailable:false};
-  const published=await render(locale,{content:supplied,user:{name:'Signed-in member',avatarId:'signed-in-avatar'}}),publishedText=text(published.document);
-  assert.equal(find(published.document,node=>Object.hasOwn(node.attribs,'data-landing-empty')).length,0);
-  assert.equal(find(published.document,node=>Object.hasOwn(node.attribs,'data-auth-account')).length,1);
-  for(const href of ['/community/published-post','/blog/public-member/projects/project-one','/blog/public-member'])assert.ok(find(published.document,node=>node.name==='a'&&node.attribs.href===href).length,href);
-  for(const name of ['Reviewed discussion','Published project','Project author','Discussion author','Public member','Signed-in member'])assert.ok(publishedText.includes(name),name);
-  const images=find(published.document,node=>node.name==='img');
-  for(const id of ['signed-in-avatar','project-avatar','discussion-avatar','space-avatar'])assert.ok(images.some(node=>node.attribs.src==='/media/'+id),id);
-  assert.ok(publishedText.includes('0 '+c.comments),'zero is the actual published comment count');
-  const blogSection=find(published.document,node=>node.name==='section'&&node.attribs['aria-label']===c.blogs)[0];
-  const figure=find(blogSection,node=>node.name==='figure')[0];
-  const frames=find(figure,node=>node.name==='iframe');
-  assert.equal(frames.length,1);
-  const {src,loading,tabindex,'aria-hidden':hidden}=frames[0].attribs;
-  assert.deepEqual([src,loading,tabindex,hidden],[supplied.space.previewHref,'lazy','-1','true']);
-  assert.ok(!text(blogSection).includes(c.spaceUnavailable));
-  assert.equal(find(blogSection,node=>node.name==='button'||(node.name==='img'&&node.attribs.src?.startsWith('/media/home-product/'))).length,0);
-  const links=find(figure,node=>node.name==='a');
-  assert.equal(links.length,1);
-  const member=links[0];
-  assert.equal(member.attribs.href,supplied.space.href);
-  assert.ok(text(member).includes(supplied.space.name)&&text(member).includes(c.visitSpace));
-  assert.ok(find(member,node=>node.name==='img'&&node.attribs.src==='/media/space-avatar').length);
-  assert.ok(find(blogSection,node=>node.name==='a'&&node.attribs.href==='/workspace/blog').length);
-  assert.ok(find(blogSection,node=>node.name==='a'&&node.attribs.href==='/blogs').length);
-  assert.equal(find(published.document,node=>['iframe','video'].includes(node.name)).length,1);
+  const guest=await render(locale),c=guest.copy.landingCopy(locale);
+  const header=find(guest.document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
+  const nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav)[0];
+  assert.deepEqual(find(nav,n=>n.name==='a').map(n=>n.attribs.href),['/','/community','/blogs','/about']);
+  assert.equal(find(nav,n=>n.name==='a')[0].attribs['aria-label'],c.resources);
+  assert.equal(find(guest.document,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,1);
+  for(const href of ['/login','/community','/blogs','/about',...categoryHrefs,'https://github.com/IntMainJhy/IAVSE','https://atomgit.com/InMainJhy/IAVSE'])assert.ok(find(guest.document,n=>n.name==='a'&&n.attribs.href===href).length,`${locale}: ${href}`);
+  const signedIn=await render(locale,{user:{name:'Signed-in member',avatarId:'signed-in-avatar'}});
+  assert.equal(find(signedIn.document,n=>Object.hasOwn(n.attribs,'data-auth-login')).length,0);
+  const account=find(signedIn.document,n=>Object.hasOwn(n.attribs,'data-auth-account'));assert.equal(account.length,1);
+  assert.equal(account[0].attribs.href,'/workspace/account');assert.ok(text(account[0]).includes('Signed-in member'));
+  assert.equal(find(account[0],n=>n.name==='img'&&n.attribs.src==='/media/signed-in-avatar').length,1);
  }
  const fallback=components().copy;assert.equal(fallback.landingCopy('unknown'),fallback.landingCopy('zh'));
 });
 
-test('a signed-out visitor sees the linked public homepage with its supplied embed and cover',async()=>{
- const space={handle:'site-author',name:'Site author',intro:'',avatarId:'',coverId:'published-cover',href:'/blog/site-author',previewHref:'/blog/site-author?embed=gallery',count:0};
- const {document,copy}=await render('en',{content:{...emptyContent,space}});
- const section=find(document,node=>node.attribs.id==='home-blog')[0];
- const figure=find(section,node=>node.name==='figure')[0];
- const frame=find(figure,node=>node.name==='iframe')[0];
- assert.equal(frame.attribs.src,space.previewHref);
- assert.ok(find(figure,node=>node.name==='img'&&node.attribs.src==='/media/published-cover').length);
- const link=find(figure,node=>node.name==='a')[0];
- assert.equal(link.attribs.href,space.href);
- assert.ok(text(link).includes(space.name)&&text(link).includes(copy.landingCopy('en').visitSpace));
- assert.ok(find(document,node=>Object.hasOwn(node.attribs,'data-auth-login')).length);
+test('homepage categories select their real directory and preserve query state and public origin',async()=>{
+ const cases=[
+  [{},'designs'],[{type:'designs'},'designs'],[{type:'skills',q:'agent'},'skills'],[{type:'docs',q:'guide'},'docs'],
+  [{type:'resources',category:'development'},'resources'],[{category:'development'},'resources'],[{type:'invalid'},'designs'],
+ ];
+ for(const[query,kind]of cases){
+  const{document,reads}=await render('zh',{query,reqUrl:'https://www.example.test/?type=skills'});
+  assert.equal(reads[0].kind,kind);assert.equal(reads[0].query,query,'the selected directory receives the original filters');
+  assert.equal(find(document,n=>n.attribs['data-resource-kind']===kind).length,1);
+  const tabs=find(document,n=>n.name==='nav'&&n.attribs['aria-label']==='资源类型')[0];
+  const selected=find(tabs,n=>n.attribs['aria-current']==='page');assert.equal(selected.length,1);
+  assert.equal(new URL(selected[0].attribs.href,'https://example.test').searchParams.get('type'),kind);
+  if(kind==='skills')assert.equal(reads[0].baseUrl,'https://www.example.test');
+  if(kind==='docs')assert.deepEqual(Array.from(reads[0].path),['docs']);
+ }
+ const configured=await render('en',{query:{type:'skills'},publicUrl:'https://public.example.test/subpath'});
+ assert.equal(configured.reads[0].baseUrl,'https://public.example.test');
+ const searched=await render('zh',{query:{type:'designs',q:'  中文 UI  '}});
+ const tabs=find(searched.document,n=>n.name==='nav'&&n.attribs['aria-label']==='资源类型')[0];
+ for(const link of find(tabs,n=>n.name==='a'&&n.attribs.href.includes('?'))){assert.equal(new URL(link.attribs.href,'https://example.test').searchParams.get('q'),'中文 UI');}
 });
 
 test('public feed projection remains bounded and strips private fields without inventing unavailable activity',()=>{
@@ -179,7 +166,7 @@ test('homepage excerpts remain bounded and displayed product captures have prove
  for(const name of ['editorial','resume']){const file=new URL('../public/media/home-product/space-'+name+'.webp',import.meta.url);assert.ok(fs.statSync(file).size>1000);const origin=JSON.parse(fs.readFileSync(new URL(file.href+'.json'),'utf8'));assert.match(origin.prompt,/Actual screenshot of IAVSE built-in/);}
 });
 
-test('legacy spatial helpers remain stable and the current homepage is usable without spatial enhancement',async()=>{
+test('legacy spatial helpers remain bounded while the directory stays usable without enhancement',async()=>{
  assert.equal(spatial.spatialChapterAt(100,100,1000,3),0);
  assert.equal(spatial.spatialChapterAt(600,100,1000,3),1);
  assert.equal(spatial.spatialChapterAt(1100,100,1000,3),2);
@@ -187,103 +174,75 @@ test('legacy spatial helpers remain stable and the current homepage is usable wi
  assert.equal(spatial.spatialChapterAt(99999,100,1000,3),2);
  assert.equal(spatial.spatialChapterAt(NaN,100,1000,3),0);
  assert.equal(spatial.spatialChapterAt(300,100,0,3),0);
- const {html,document}=await render();assert.ok(!html.includes('class="hs-journey"'));
- const decorative=find(document,node=>Object.hasOwn(node.attribs,'inert'));
- assert.ok(decorative.length>0,'the optical copy is separate from real controls');
- for(const node of decorative){
-  assert.equal(node.attribs['aria-hidden'],'true');
-  assert.equal(find(node,child=>['a','button','input'].includes(child.name)).length,0,'decorative copies cannot duplicate controls');
- }
- for(const node of find(document,node=>['a','button'].includes(node.name))){
+ const{html,document}=await render();assert.ok(!html.includes('class="hs-journey"'));
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'inert')).length,0,'the plain directory needs no optical copies');
+ for(const node of find(document,n=>['a','button'].includes(n.name))){
   let parent=node.parent;
-  while(parent){assert.ok(!Object.hasOwn(parent.attribs||{},'inert'),'real server controls stay usable before enhancement');parent=parent.parent;}
+  while(parent){assert.ok(!Object.hasOwn(parent.attribs||{},'inert'),'server controls remain usable before enhancement');parent=parent.parent;}
  }
 });
 
-
-test('five navigation destinations expose only the current route, including home and about in all locales',async()=>{
- const routes=[['/','/'],['/about','/about'],['/community/discussion','/community'],['/resources/designs','/resources'],['/docs/showcase','/resources'],['/skills/example','/resources'],['/blogs','/blogs'],['/login',null]];
- for(const locale of ['zh','en','ja']){
-  for(const[pathname,active]of routes){
-   const{document,copy}=await render(locale,{pathname}),c=copy.landingCopy(locale);
-   const nav=find(document,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav)[0];
-   const links=find(nav,n=>n.name==='a');
-   assert.deepEqual(links.map(n=>n.attribs.href),['/','/community','/resources','/blogs','/about']);
-   assert.equal(links[0].attribs['aria-label'],c.navHome);assert.equal(links[4].attribs['aria-label'],c.navAbout);
-   assert.deepEqual(links.filter(n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href),active?[active]:[]);
-  }
+test('four primary destinations expose only the current route across all locales',async()=>{
+ const routes=[['/','/'],['/about','/about'],['/community/discussion','/community'],['/resources/designs','/'],['/docs/showcase','/'],['/skills/example','/'],['/blogs','/blogs'],['/login',null]];
+ for(const locale of ['zh','en','ja'])for(const[pathname,active]of routes){
+  const{document,copy}=await render(locale,{pathname}),c=copy.landingCopy(locale);
+  const nav=find(document,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav)[0],links=find(nav,n=>n.name==='a');
+  assert.deepEqual(links.map(n=>n.attribs.href),['/','/community','/blogs','/about']);
+  assert.equal(links[0].attribs['aria-label'],c.resources);assert.equal(links[3].attribs['aria-label'],c.navAbout);
+  assert.deepEqual(links.filter(n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href),active?[active]:[]);
  }
 });
 
-
-test('the root owns one shared header on home without a second backdrop or a page-owned replacement',async()=>{
- const{document}=await render();
- const landing=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-landing'))[0];
+test('the root owns one shared header and authored surfaces keep their own chrome',async()=>{
+ const{document}=await render(),hub=find(document,n=>Object.hasOwn(n.attribs,'data-resource-kind'))[0];
  assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,1);
- assert.equal(find(landing,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,0,'home content cannot replace the moving root header');
+ assert.equal(find(hub,n=>Object.hasOwn(n.attribs,'data-iavse-header')).length,0,'directory content cannot duplicate the root header');
  assert.equal(find(document,n=>n.attribs['data-iavse-platform']==='home').length,1);
- assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-home-hero')).length,1,'home owns exactly one selected scene');
- assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-flow-backdrop-stub')).length,0,'the previous mist is not rendered behind a selected scene');
- const empty=find(document,n=>Object.hasOwn(n.attribs,'data-landing-empty'))[0];
- assert.ok(Object.hasOwn(empty.attribs,'data-landing-reveal'),'the initial community empty card joins scroll entry just like populated cards');
+ assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-home-hero')||n.attribs.class==='site-style-atmosphere').length,0);
  for(const pathname of ['/blog/public-member','/blogs/showcase/editorial','/workspace/blog','/resources/designs/item/preview']){
   const loaded=components('zh',{pathname});
-  const html=renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime));
-  assert.equal(html,'',pathname+' keeps its authored or workbench chrome');
+  assert.equal(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime)),'',pathname+' keeps its authored or workbench chrome');
  }
 });
 
-
-test('the persistent header shares appearance and language controls with the mobile settings disclosure',async()=>{
+test('the plain header keeps brand, account and language controls without glass or an extra settings disclosure',async()=>{
  for(const user of [null,{name:'Signed-in member',avatarId:'account-avatar'}]){
-  const{document,copy}=await render('zh',{user}),c=copy.landingCopy('zh');
-  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
-  const nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav);
-  assert.equal(nav.length,1,'the desktop navigation has one live capsule');
-  assert.equal(find(header,n=>(n.attribs.class||'').split(' ').includes('glass-switch__lens')).length,0,'the plain header does not allocate a hidden animated lens');
-  const more=find(header,n=>n.name==='button'&&n.attribs.class==='iavse-header__more')[0];
-  assert.equal(more.attribs['aria-expanded'],'false');
-  const panel=find(header,n=>n.attribs.id===more.attribs['aria-controls'])[0];
-  assert.equal(panel.attribs['data-open'],'false');
-  assert.equal(find(panel,n=>n.attribs.class==='iavse-header__about')[0].attribs.href,'/about');
-  assert.equal(find(panel,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,1);
-  const navigation=nav[0].parent,theme=find(navigation,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle');
-  assert.equal(theme.length,0,'scene appearances do not mount a competing color toggle');
+  const{document,copy,linkProps}=await render('zh',{user}),c=copy.landingCopy('zh');
+  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0],nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===c.nav);
+  assert.equal(nav.length,1,'desktop navigation has one live set of links');
+  assert.equal(find(header,n=>(n.attribs.class||'').split(' ').some(name=>name.startsWith('glass-switch')||name==='home-style-trigger'||name==='iavse-header__more')).length,0);
+  const brand=find(header,n=>n.name==='a'&&n.attribs.class==='iavse-header__brand')[0];
+  assert.equal(brand.attribs.href,'/');assert.equal(find(brand,n=>n.name==='svg'&&n.attribs.class==='site-brand-mark').length,1,'the original IAVSE mark stays visible');
   const identity=find(header,n=>n.attribs.class==='iavse-header__identity')[0],children=(identity.children||[]).filter(n=>n.type==='tag');
-  assert.ok(Object.hasOwn(children.at(-1).attribs,'data-language-switcher'),'language is the last account-side control');
-  const footer=find(document,n=>n.name==='footer')[0];assert.equal(find(footer,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,0);
+  assert.ok(Object.hasOwn(children.at(-1).attribs,'data-language-switcher'),'language stays on the account side');
+  assert.equal(find(identity,n=>Object.hasOwn(n.attribs,user?'data-auth-account':'data-auth-login')).length,1);
+  assert.equal(find(find(document,n=>n.name==='footer')[0],n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,0);
   for(const link of find(nav[0],n=>n.name==='a')){
    assert.ok(link.attribs['aria-label']);
-   const compact=find(link,n=>(n.attribs.class||'').includes('glass-switch__compact-label'))[0];
-   assert.equal(compact.attribs['aria-hidden'],'true','short visible labels do not replace full accessible destination names');
+   const compact=find(link,n=>(n.attribs.class||'').includes('iavse-header__compact-label'))[0];
+   assert.equal(compact.attribs['aria-hidden'],'true','short visible labels preserve the full accessible name');
+   assert.equal(linkProps.find(props=>props.href===link.attribs.href).prefetch,false,'route warming remains controlled by native navigation intent');
   }
  }
 });
 
-
-test('mobile navigation follows the actual route and keeps community and account actions accessible',()=>{
- const cases=[['/','/'],['/community/members','/community'],['/resources/designs/a','/resources'],['/docs/guide','/resources'],['/skills/example','/resources'],['/blogs','/blogs'],['/workspace/notifications','account'],['/about',undefined]];
- for (const [pathname,expected] of cases) {
-  const loaded=components('zh',{pathname});
-  const doc=parseDocument(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime)));
-  const dock=find(doc,n=>n.name==='nav'&&n.attribs.class==='iavse-mobile-dock')[0];
-  const bar=find(dock,n=>n.attribs.class==='iavse-mobile-dock__items')[0];
-  assert.deepEqual(find(bar,n=>n.name==='a').map(n=>n.attribs.href),['/','/community','/resources','/blogs']);
-  const trigger=find(bar,n=>n.name==='button')[0];
-  const panel=find(dock,n=>n.name==='dialog')[0];
-  assert.equal(trigger.attribs['aria-controls'],panel.attribs.id);
-  const active=find(bar,n=>n.attribs['aria-current']==='page');
-  assert.deepEqual(active.map(n=>n.attribs.href??'account'),expected?[expected]:[]);
+test('mobile navigation merges home and resources while keeping all community and account actions accessible',()=>{
+ const cases=[['/','/'],['/community/members','/community'],['/resources/designs/a','/'],['/docs/guide','/'],['/skills/example','/'],['/blogs','/blogs'],['/workspace/notifications','account'],['/login','account'],['/about','/about']];
+ for(const[pathname,expected]of cases){
+  const loaded=components('zh',{pathname}),doc=parseDocument(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime)));
+  const dock=find(doc,n=>n.name==='nav'&&n.attribs.class==='iavse-mobile-dock')[0],bar=find(dock,n=>n.attribs.class==='iavse-mobile-dock__items')[0];
+  assert.deepEqual(find(bar,n=>n.name==='a').map(n=>n.attribs.href),['/','/community','/blogs','/about']);
+  const trigger=find(bar,n=>n.name==='button')[0],panel=find(dock,n=>n.name==='dialog')[0];
+  assert.equal(find(bar,n=>n.name==='button').length,1);assert.equal(trigger.attribs['aria-controls'],panel.attribs.id);
+  assert.equal(trigger.attribs['aria-haspopup'],'dialog');assert.equal(trigger.attribs['aria-expanded'],'false');
+  assert.deepEqual(find(bar,n=>n.attribs['aria-current']==='page').map(n=>n.attribs.href??'account'),[expected]);
   const links=find(panel,n=>n.name==='a').map(n=>n.attribs.href);
-  for(const href of ['/workspace/bookmarks','/workspace/notifications','/community?feed=following','/workspace/blog'])
-   assert.ok(links.includes('/login?next='+encodeURIComponent(href)),href);
-  assert.ok(links.includes('/community/members'));
-  assert.ok(!links.some(h=>h.startsWith('/admin')));
+  for(const href of ['/workspace/bookmarks','/workspace/notifications','/community?feed=following','/workspace/blog'])assert.ok(links.includes('/login?next='+encodeURIComponent(href)),href);
+  assert.ok(links.includes('/community/members'));assert.ok(!links.some(h=>h.startsWith('/admin')));
  }
- for (const [role,adminHref] of [['member',null],['reviewer','/admin/community'],['owner','/admin']]) {
+ for(const[role,adminHref]of [['member',null],['reviewer','/admin/community'],['owner','/admin']]){
   const loaded=components('zh',{user:{id:'u1',name:'Test member',status:'active',role,canPublish:true},pathname:'/community'});
-  const doc=parseDocument(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime)));
-  const panel=find(doc,n=>n.name==='dialog'&&n.attribs.class==='iavse-account-sheet')[0];
+  const doc=parseDocument(renderToStaticMarkup(React.createElement(loaded.runtime.PortfolioRuntime))),panel=find(doc,n=>n.name==='dialog'&&n.attribs.class==='iavse-account-sheet')[0];
   const links=find(panel,n=>n.name==='a').map(n=>n.attribs.href);
   assert.ok(links.includes('/workspace/account')&&links.includes('/community/members/u1'));
   assert.ok(links.includes('/workspace/bookmarks')&&links.includes('/workspace/notifications'));
@@ -291,7 +250,6 @@ test('mobile navigation follows the actual route and keeps community and account
   assert.equal(find(panel,n=>Object.hasOwn(n.attribs,'data-logout')).length,1);
  }
 });
-
 
 test('configured site updates appear once on visitor routes and stay outside management and authoring screens',()=>{
  for(const [pathname,expected] of [['/',1],['/community',1],['/resources',1],['/blogs',1],['/admin',0],['/admin/settings',0],['/workspace/blog',0],['/login',0]]){
@@ -302,48 +260,26 @@ test('configured site updates appear once on visitor routes and stay outside man
 });
 
 
-test('all selected visual worlds retain live resource destinations and one top-right style selector',async()=>{
+test('legacy visual preferences retain one direct directory without scene or appearance controls',async()=>{
  for(const style of ['fly','brand','anime','classic']){
-  const {document}=await render('zh',{style});
-  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
-  assert.equal(find(header,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle').length,0,'the shared header has no separate color toggle in any UI');
-  for(const group of find(header,n=>(n.attribs.class||'').split(' ').includes('iavse-repository-links'))){
-   const links=find(group,n=>n.name==='a');
-   assert.deepEqual(links.map(n=>n.attribs.href),['https://github.com/IntMainJhy/IAVSE','https://atomgit.com/InMainJhy/IAVSE']);
-   for(const link of links){assert.equal(link.attribs.target,'_blank');assert.ok(link.attribs['aria-label']);assert.match(link.attribs.rel,/noopener/);}
-  }
-  assert.equal(find(document,n=>n.attribs['data-home-hero']===style).length,1);
-  assert.equal(find(document,n=>n.name==='canvas').length,style==='classic'?0:1,'classic starts with an async shader fallback; other heroes have one canvas');
-  assert.equal(find(document,n=>n.name==='iframe').length,0,'homepage styles are native components');
-  const hero=find(document,n=>n.attribs['data-home-hero']===style)[0];
-  assert.equal(find(hero,n=>n.name==='h1').length,1);
-  assert.ok(find(hero,n=>n.name==='a'&&n.attribs.href==='/resources').length,'every UI retains a real resource destination');
-  const trigger=find(document,n=>n.name==='button'&&n.attribs.class==='home-style-trigger');
-  assert.equal(trigger.length,1);assert.equal(trigger[0].attribs['aria-expanded'],'false');
-  const options=find(document,n=>n.attribs.role==='option'&&n.attribs['data-style-option']);
-  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime','classic']);
-  assert.deepEqual(options.filter(n=>n.attribs['aria-selected']==='true').map(n=>n.attribs['data-style-option']),[style]);
+  const{document}=await render('zh',{style}),header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
+  const repositories=find(header,n=>(n.attribs.class||'').split(' ').includes('iavse-repository-links'));assert.equal(repositories.length,1);
+  const links=find(repositories[0],n=>n.name==='a');
+  assert.deepEqual(links.map(n=>n.attribs.href),['https://github.com/IntMainJhy/IAVSE','https://atomgit.com/InMainJhy/IAVSE']);
+  for(const link of links){assert.equal(link.attribs.target,'_blank');assert.ok(link.attribs['aria-label']);assert.match(link.attribs.rel,/noopener/);}
+  assert.equal(find(document,n=>n.attribs['data-resource-directory']==='designs').length,1);
+  assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-home-hero')||Object.hasOwn(n.attribs,'data-style-option')||['canvas','iframe'].includes(n.name)).length,0);
+  assert.equal(find(document,n=>(n.attribs.class||'').split(' ').some(name=>name==='home-style-trigger'||name==='iavse-theme-toggle')).length,0);
  }
 });
 
-
-test('every shared platform header keeps the same UI selector away from home',async()=>{
+test('every shared platform header keeps the same functional destinations away from home',async()=>{
  for(const pathname of ['/resources','/docs','/skills','/community','/blogs','/workspace/account','/about','/login','/legal/privacy','/downloads']){
-  const {document}=await render('zh',{pathname,style:'brand'});
-  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
-  assert.equal(header.attribs['data-site-style-header'],'true',pathname);
-  const trigger=find(header,n=>n.name==='button'&&n.attribs.class==='home-style-trigger');
-  assert.equal(trigger.length,1,pathname+' has one style entry');
-  const options=find(header,n=>n.attribs.role==='option'&&n.attribs['data-style-option']);
-  assert.deepEqual(options.map(n=>n.attribs['data-style-option']),['fly','brand','anime','classic']);
-  assert.equal(options.find(n=>n.attribs['aria-selected']==='true').attribs['data-style-option'],'brand');
+  const{document,copy}=await render('zh',{pathname,style:'brand'}),header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0];
+  assert.ok(header,pathname+' has the shared header');
+  const nav=find(header,n=>n.name==='nav'&&n.attribs['aria-label']===copy.landingCopy('zh').nav)[0];
+  assert.deepEqual(find(nav,n=>n.name==='a').map(n=>n.attribs.href),['/','/community','/blogs','/about']);
+  assert.equal(find(header,n=>Object.hasOwn(n.attribs,'data-language-switcher')).length,1);
+  assert.equal(find(header,n=>Object.hasOwn(n.attribs,'data-style-option')||(n.attribs.class||'').includes('home-style')).length,0);
  }
-});
-
-
-test('the restored original UI keeps its original headline and two entries without a header color toggle',async()=>{
- const {document,copy}=await render('zh',{style:'classic'}),hero=find(document,n=>n.attribs['data-home-hero']==='classic')[0];
- assert.equal(text(find(hero,n=>n.name==='h1')[0]),copy.landingCopy('zh').title.join(''));
- assert.deepEqual(find(hero,n=>n.name==='a').map(n=>n.attribs.href),['/community','/resources']);
- assert.equal(find(document,n=>n.name==='button'&&n.attribs.class==='iavse-theme-toggle').length,0);
 });

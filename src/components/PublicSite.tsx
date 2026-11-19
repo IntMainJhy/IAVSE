@@ -185,12 +185,10 @@ export async function PublicSite({path = [], query = {}}: {path?: string[], quer
 export async function PublicFrame({path=[],children}:{path?:string[],children:React.ReactNode}){const {t:tr}=await serverI18n();
  const section=path[0]||'';
  const native=!(path.length===0||['about','blogs','resources'].includes(section)&&path.length===1);
- const communitySurface=section==='community'||section==='workspace'&&path[1]!=='blog';
- const quantumPage=['community','blogs','resources','docs','skills'].includes(section);
  const styleCookies=await cookies(),dark=homeStyleColorMode(normalizeHomeStyle(styleCookies.get(HOME_STYLE_COOKIE)?.value),styleCookies.get('site-color-mode')?.value)==='dark';
  return <div className={'rbp-surface'+(dark?' dark':'')} data-rbp-route={section||'home'}>
    <SiteFrame/><a className="skip-to-content" href="#main">{tr('跳到主要内容')}</a><Tracker/>
-   {native?<div className={'rbp-native rbp-application organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading" data-reading-scene={quantumPage?'quantum':undefined} data-reading-background={communitySurface?'paper':undefined}><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}
+   {native?<div className={'rbp-native rbp-application organic-site v2-site '+(['login','join'].includes(section)?'public-auth-site':'public-content-site')} data-surface="reading"><main id="main" className="organic-container organic-main rbp-native-content">{children}</main></div>:<main id="main">{children}</main>}
    {section&&section!=='admin'&&!(section==='workspace'&&path[1]==='blog')&&<footer className="iavse-filing-footer"><FilingLink/></footer>}
  </div>;
 }
