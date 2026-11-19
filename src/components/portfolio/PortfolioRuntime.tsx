@@ -6,6 +6,7 @@ import {IavseHeader} from '../IavseHeader';
 import {IavseMobileDock} from '../IavseMobileDock';
 import {SiteAnnouncement} from '../SiteAnnouncement';
 import {PlatformAccountProvider} from '../PlatformAccount';
+import {SiteSignIn} from '../SiteSignIn';
 import {SiteStyleAtmosphere} from '../landing/SiteStyleAtmosphere';
 import {platformChrome} from '@/lib/platform-chrome';
 import '@/app/iavse-shell.css';
@@ -29,6 +30,7 @@ export function PortfolioRuntime(){
       {publicNotice&&<SiteAnnouncement/>}
       <div className="iavse-header-anchor"><div className="iavse-shell-header"><IavseHeader/></div></div>
       <IavseMobileDock path={path}/>
+      <SiteSignIn/>
     </PlatformAccountProvider>}
   </div>;
 }

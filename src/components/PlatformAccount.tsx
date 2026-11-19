@@ -16,11 +16,12 @@ type PlatformUser = {
   verification?: string;
 };
 
-const Account = createContext<{user: PlatformUser | null; loading: boolean}>({user: null, loading: true});
+type Access={surface?:string;registration?:boolean};
+const Account = createContext<{user: PlatformUser | null; loading: boolean;access?:Access}>({user: null, loading: true});
 
 export function PlatformAccountProvider({children}: {children: ReactNode}) {
   const auth = useResource('/api/auth/me');
-  return <Account.Provider value={{user: auth.data?.user ?? null, loading: auth.loading}}>{children}</Account.Provider>;
+  return <Account.Provider value={{user: auth.data?.user ?? null, loading: auth.loading,access:auth.data?.access}}>{children}</Account.Provider>;
 }
 
 export function usePlatformAccount() {

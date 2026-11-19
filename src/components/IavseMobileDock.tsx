@@ -93,7 +93,7 @@ export function IavseMobileDock({path}: {path: string}) {
           {user && ['owner','reviewer'].includes(user.role) && <Link href={user.role === 'owner' ? '/admin' : '/admin/community'} onClick={close}><Shield/>{t('管理中心')}</Link>}
         </div>
         <div className="iavse-account-sheet__account">
-          {!loading && (user ? <Logout/> : <Link href={protectedHref('/workspace/account')} onClick={close}>{t('登录 / 注册')}</Link>)}
+          {!loading && (user ? <Logout/> : <Link href="/login" onClick={close}>{t('登录 / 注册')}</Link>)}
         </div>
       </div>
     </dialog>

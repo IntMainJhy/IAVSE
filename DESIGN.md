@@ -266,6 +266,8 @@ The sign-in entry uses an ink pill, lime person mark and a short directional res
 
 Functional-page entry feedback lasts 260ms, starts at readable opacity and has no stagger. Completed forms, contact details and prices must never disappear while an entry animation waits. Explicit product-story chunks retain their own full reveals and stagger.
 
+Sign-in links in public platform chrome and page content open one native modal dialog over the current page. Keep the URL, scroll and filters; refresh account state and server content after a successful login. An explicit protected-action return path remains local and respects the existing platform/admin boundary. Preserve native modified-click behavior and direct-link compatibility. The form loads on demand, supports password recovery, restores focus on close and respects reduced motion. Member-authored pages and admin-owned login surfaces remain outside this controller.
+
 # Design System: IAVSE
 
 ## Four shared appearances · 2026-11-15

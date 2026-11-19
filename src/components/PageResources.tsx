@@ -32,7 +32,8 @@ export function useResource(path:string|null){
  useEffect(()=>{
   if(normalized!=='/api/auth/me')return;
   window.addEventListener('session-expired',refresh);
-  return()=>window.removeEventListener('session-expired',refresh);
+  window.addEventListener('auth-session-changed',refresh);
+  return()=>{window.removeEventListener('session-expired',refresh);window.removeEventListener('auth-session-changed',refresh);};
  },[normalized,refresh]);
  return{...current,refresh};
 }

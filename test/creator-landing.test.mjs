@@ -27,6 +27,7 @@ function components(locale='zh',{user=null,pathname='/',style='brand',publicUrl}
  };
  const modules={
   react:React,'react/jsx-runtime':runtime,
+  'react-dom':{createPortal:()=>null},
   'next/link':{useLinkStatus:()=>({pending:false}),default:({prefetch,scroll,children,...props})=>{linkProps.push({href:props.href,prefetch,scroll});return React.createElement('a',props,children);}},
   'next/image':{default:image},
   'next/navigation':{usePathname:()=>pathname,useRouter:()=>({refresh:()=>{}})},
