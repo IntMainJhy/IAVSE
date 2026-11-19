@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
+import React from 'react';
+import * as jsxRuntime from 'react/jsx-runtime';
+import {renderToStaticMarkup} from 'react-dom/server';
 import {signInRequest} from '../src/lib/sign-in-navigation.mjs';
 
 const location=new URL('https://site.example/resources?type=skills&q=GSAP');
@@ -15,6 +18,16 @@ test('local sign-in links preserve an explicit safe return path without consumin
 });
 test('malicious return paths never leave the current application',()=>{
  for(const next of ['https://outside.example/','//outside.example/','/\\outside.example/','/\noutside'])assert.deepEqual(signInRequest(link('/login?'+new URLSearchParams({next})),location.href),{next:''});
+});
+test('the credential form retains POST semantics if native submission is ever used',()=>{
+ const source=fs.readFileSync(new URL('../src/components/SignInForm.tsx',import.meta.url),'utf8'),exports={};
+ vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports,require:name=>{
+  if(name==='react')return React;if(name==='react/jsx-runtime')return jsxRuntime;
+  if(name.includes('LocaleProvider'))return{useLocale:()=>({t:value=>value})};
+  if(name.includes('EmailSettings'))return{PasswordRecovery:()=>null};if(name.includes('Icons'))return{Icon:()=>null};return{};
+ }});
+ const html=renderToStaticMarkup(React.createElement(exports.default,{registration:false,next:'/',onSuccess(){},onClose(){}}));
+ assert.match(html,/<form\b[^>]*\bmethod="post"/);assert.match(html,/type="password"/);assert.doesNotMatch(html,/method="get"/);
 });
 test('the public controller opens the dialog without navigating or swallowing native modified clicks',()=>{
  const source=fs.readFileSync(new URL('../src/components/SiteSignIn.tsx',import.meta.url),'utf8'),exports={},effects=[],listeners=new Map(),states=[],events=[];

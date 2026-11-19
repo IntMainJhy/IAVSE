@@ -11,7 +11,7 @@ export default function SignInForm({onSuccess,onClose,registration,next}:{onSucc
  const {t}=useLocale(),id=useId(),request=useRef<AbortController|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState('');
  useEffect(()=>()=>request.current?.abort(),[]);
  return <>
-  <form className="sign-in-form" aria-busy={busy} onSubmit={async event=>{
+  <form method="post" className="sign-in-form" aria-busy={busy} onSubmit={async event=>{
    event.preventDefault();if(request.current)return;
    const form=new FormData(event.currentTarget),controller=new AbortController();request.current=controller;setBusy(true);setError('');
    try{
