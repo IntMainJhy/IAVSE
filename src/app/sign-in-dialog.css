@@ -1,32 +1,79 @@
-:root{--sign-in-backdrop:rgb(25 25 25 / .32);--sign-in-shadow:0 24px 80px rgb(25 25 25 / .16);--sign-in-error:#a42e26}
-.sign-in-dialog{box-sizing:border-box;width:min(420px,calc(100% - 32px));max-width:none;max-height:calc(100svh - 32px);margin:auto;padding:0;overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--platform-line);border-radius:24px;background:var(--platform-paper);color:var(--platform-ink);box-shadow:var(--sign-in-shadow);font-family:var(--platform-font);pointer-events:auto}
+:root{--sign-in-backdrop:rgb(25 25 25 / .32);--sign-in-shadow:0 24px 80px rgb(25 25 25 / .16);--sign-in-error:#a42e26;--sign-in-mint:#e9f4e5}
+.sign-in-dialog{box-sizing:border-box;width:min(440px,calc(100% - 32px));max-width:none;max-height:calc(100svh - 32px);margin:auto;padding:0;overflow-y:auto;overscroll-behavior:contain;border:0;border-radius:24px;background:var(--platform-paper);color:var(--platform-ink);box-shadow:var(--sign-in-shadow);font-family:var(--platform-font);pointer-events:auto;scrollbar-width:thin;scrollbar-color:var(--platform-line) transparent}
 .sign-in-dialog::backdrop{background:var(--sign-in-backdrop)}
-.sign-in-dialog[open]{animation:sign-in-arrive 180ms var(--motion-ease) both}
+.sign-in-dialog[open]{animation:sign-in-arrive 220ms var(--motion-ease) both}
 @keyframes sign-in-arrive{from{opacity:.7;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
-.sign-in-dialog-body{position:relative;padding:30px}
-.sign-in-close{position:absolute;top:15px;right:15px;display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:var(--platform-soft);color:var(--platform-muted);cursor:pointer}
+.sign-in-dialog-body{position:relative;padding:22px 30px 20px}
+.sign-in-close{position:absolute;z-index:1;top:12px;right:12px;display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:var(--platform-soft);color:var(--platform-muted);cursor:pointer;transition:background-color 160ms ease,color 160ms ease}
 .sign-in-close>.icon{width:17px;height:17px}.sign-in-close:hover{background:var(--platform-lime);color:var(--platform-ink)}
-.sign-in-dialog header{display:flex;align-items:center;gap:12px;margin:8px 0 28px;padding:0;border:0}
-.sign-in-brand{display:grid;place-items:center;width:44px;height:44px;flex:none;border-radius:14px;background:var(--platform-lime);color:var(--platform-ink)}.sign-in-brand .site-brand-mark{width:23px;height:23px}
-.sign-in-dialog h2{margin:0;font:600 25px/1.4 var(--platform-font);letter-spacing:-.025em;color:var(--platform-ink)}
-.sign-in-fields{display:grid;gap:18px;margin:0;padding:0;border:0;min-width:0}
-.sign-in-dialog label{display:grid;gap:8px;font:500 13px/1.5 var(--platform-font);color:var(--platform-ink)}
-.sign-in-dialog input:not([type=checkbox]){box-sizing:border-box;width:100%;min-width:0;min-height:46px;margin:0;padding:11px 13px;border:1px solid var(--platform-line);border-radius:11px;background:var(--platform-soft);color:var(--platform-ink);font:400 15px/1.5 var(--platform-font);transition:background-color var(--motion-short) ease,border-color var(--motion-short) ease}
+.sign-in-art{position:relative;width:200px;height:110px;margin:0 auto 8px;pointer-events:none}
+.sign-in-art-disc{position:absolute;inset:6px 44px 0;border-radius:50%;background:var(--sign-in-mint)}
+.sign-in-art-page,.sign-in-art-book{position:absolute;display:block;animation:sign-in-paper 650ms cubic-bezier(.16,1,.3,1)}
+.sign-in-art-page{width:100px;height:100px;top:0;left:22px}.sign-in-art-book{width:87px;height:87px;top:26px;right:17px;animation-duration:850ms}
+.sign-in-art img{display:block;width:100%;height:100%;object-fit:contain;transition:transform 420ms cubic-bezier(.16,1,.3,1)}
+.sign-in-art-page img{transform:rotate(-9deg)}.sign-in-art-book img{transform:rotate(10deg)}
+.sign-in-dialog[data-mode=join] .sign-in-art-page img{transform:translate(-5px,3px) rotate(-15deg)}.sign-in-dialog[data-mode=join] .sign-in-art-book img{transform:translate(2px,-5px) rotate(2deg)}
+.sign-in-brand{position:absolute;top:4px;right:17px;display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--platform-lime);color:var(--platform-ink);transform:rotate(10deg)}.sign-in-brand .site-brand-mark{width:20px;height:20px}
+@keyframes sign-in-paper{from{opacity:.4;transform:translateY(12px) rotate(-5deg)}to{opacity:1;transform:none}}
+.sign-in-dialog header{display:block;margin:0 0 20px;padding:0;border:0;text-align:center}
+.sign-in-dialog header h2{margin:0;font:600 26px/1.4 var(--platform-font);letter-spacing:-.025em;color:var(--platform-ink)}
+.sign-in-dialog header p{margin:7px 0 0;font:400 13px/1.7 var(--platform-font);color:var(--platform-muted);text-wrap:balance}
+.sign-in-tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:4px;margin-bottom:22px;background:var(--platform-soft);border-radius:13px}
+.sign-in-tab-indicator{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:9px;background:var(--platform-paper);box-shadow:0 2px 5px rgb(25 25 25 / .07);transition:transform 240ms cubic-bezier(.16,1,.3,1)}
+.sign-in-tabs>button{position:relative;min-height:38px;padding:6px 12px;border:0;border-radius:9px;background:none;color:var(--platform-muted);font:500 14px/1.5 var(--platform-font);cursor:pointer;transition:color 160ms ease}
+.sign-in-tabs>button[aria-selected=true]{color:var(--platform-ink)}
+.sign-in-panel{animation:sign-in-panel 180ms ease-out}
+@keyframes sign-in-panel{from{opacity:.65;transform:translateY(3px)}to{opacity:1;transform:none}}
+.sign-in-fields{display:grid;gap:17px;margin:0;padding:0;border:0;min-width:0}
+.sign-in-dialog label{display:grid;gap:8px;min-width:0;font:500 13px/1.5 var(--platform-font);color:var(--platform-ink)}
+.sign-in-dialog input:not([type=checkbox]){box-sizing:border-box;width:100%;min-width:0;min-height:46px;margin:0;padding:11px 13px;border:1px solid var(--platform-line);border-radius:11px;background:var(--platform-soft);color:var(--platform-ink);caret-color:var(--platform-ink);font:400 15px/1.5 var(--platform-font);transition:background-color 160ms ease,border-color 160ms ease}
+.sign-in-dialog input::placeholder{color:var(--platform-muted);opacity:1}
 .sign-in-dialog input:not([type=checkbox]):focus{background:var(--platform-paper);border-color:var(--platform-ink);outline:2px solid var(--platform-lime);outline-offset:2px}
-.sign-in-submit{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;min-height:46px;margin:2px 0 0;padding:10px 16px;border:1px solid var(--platform-ink);border-radius:999px;background:var(--platform-ink);color:var(--platform-paper);font:500 14px/1.5 var(--platform-font);cursor:pointer;transition:background-color var(--motion-short) ease,color var(--motion-short) ease}
-.sign-in-submit>.icon{width:16px;height:16px;transition:transform var(--motion-short) ease}.sign-in-submit:hover:not(:disabled){background:var(--platform-lime);border-color:var(--platform-lime);color:var(--platform-ink)}.sign-in-submit:hover>.icon{transform:translateX(3px)}
-.sign-in-dialog button:disabled{cursor:wait;opacity:.6}
-.sign-in-error{margin:0;padding:10px 12px;border-left:2px solid var(--sign-in-error);color:var(--sign-in-error);font:400 13px/1.7 var(--platform-font)}
-.sign-in-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:16px;margin-top:18px;border-top:1px solid var(--platform-line);font:400 12px/1.6 var(--platform-font)}
-.sign-in-footer>a,.sign-in-footer>button{display:inline-flex;align-items:center;min-height:36px;padding:0;border:0;background:none;color:var(--platform-muted);font:inherit;text-decoration:none;cursor:pointer}.sign-in-footer>button{margin-left:auto}.sign-in-footer>a:hover,.sign-in-footer>button:hover{color:var(--platform-ink);text-decoration:underline;text-underline-offset:4px}
-.sign-in-dialog .password-recovery{margin-top:18px;font:400 13px/1.7 var(--platform-font);color:var(--platform-muted)}
+.sign-in-submit{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;min-height:46px;margin:2px 0 0;padding:10px 16px;border:1px solid var(--platform-ink);border-radius:999px;background:var(--platform-ink);color:var(--platform-paper);font:500 14px/1.5 var(--platform-font);cursor:pointer;transition:background-color 160ms ease,color 160ms ease,transform 120ms ease}
+.sign-in-submit>.icon{width:16px;height:16px;transition:transform 160ms ease}.sign-in-submit:hover:not(:disabled){background:var(--platform-lime);border-color:var(--platform-lime);color:var(--platform-ink)}.sign-in-submit:hover>.icon{transform:translateX(3px)}.sign-in-submit:active:not(:disabled){transform:scale(.985)}
+.sign-in-dialog button:disabled{cursor:default;opacity:.55}.sign-in-dialog [aria-busy=true] button:disabled{cursor:wait}
+.sign-in-spinner{box-sizing:border-box;width:16px;height:16px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sign-in-spin 700ms linear infinite}
+@keyframes sign-in-spin{to{transform:rotate(360deg)}}
+.sign-in-error{margin:0;padding:10px 0;color:var(--sign-in-error);font:400 13px/1.7 var(--platform-font);overflow-wrap:anywhere}
+.sign-in-success{display:flex;align-items:center;gap:8px;margin:0 0 18px;padding:12px;border-radius:10px;background:var(--sign-in-mint);font:400 13px/1.6 var(--platform-font)}.sign-in-success>.icon{width:17px;height:17px;flex:none}
+.sign-in-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:12px;margin-top:18px;border-top:1px solid var(--platform-line);font:400 12px/1.6 var(--platform-font)}
+.sign-in-footer>button{display:inline-flex;align-items:center;min-height:36px;padding:0;border:0;background:none;color:var(--platform-muted);font:inherit;text-align:start;cursor:pointer}.sign-in-footer>button:last-child{margin-left:auto;flex:none}.sign-in-footer>button:hover{color:var(--platform-ink);text-decoration:underline;text-underline-offset:4px}
+.sign-in-dialog .password-recovery{margin-top:14px;font:400 13px/1.7 var(--platform-font);color:var(--platform-muted)}
 .sign-in-dialog .password-recovery>summary{min-height:36px;cursor:pointer;align-content:center}
 .sign-in-dialog .password-recovery form{display:grid;gap:14px;padding-top:12px}.sign-in-dialog .password-recovery .field{display:grid;gap:8px}
 .sign-in-dialog .password-recovery:not([open])>form{display:none}
 .sign-in-dialog .password-recovery :is(p,.small-text){margin:0;font-size:12px;line-height:1.7}
-.sign-in-dialog .password-recovery button{min-height:40px;padding:8px 12px;border:1px solid var(--platform-line);border-radius:9px;background:var(--platform-soft);color:var(--platform-ink);font:500 12px/1.5 var(--platform-font);cursor:pointer}
+.sign-in-dialog :is(.password-recovery,.sign-in-config-error) button{min-height:40px;padding:8px 12px;border:1px solid var(--platform-line);border-radius:9px;background:var(--platform-soft);color:var(--platform-ink);font:500 12px/1.5 var(--platform-font);cursor:pointer}
 .sign-in-dialog .password-recovery .form-error{color:var(--sign-in-error)}
 .sign-in-loading{min-height:160px;display:grid;place-items:center;margin:0;color:var(--platform-muted);font-size:13px}
-.sign-in-dialog :is(button,a,summary):focus-visible{outline:2px solid var(--platform-ink);outline-offset:3px}
-@media(max-width:560px){.sign-in-dialog-body{padding:26px 24px}.sign-in-dialog input:not([type=checkbox]){font-size:16px}.sign-in-dialog h2{font-size:23px}}
-@media(prefers-reduced-motion:reduce){.sign-in-dialog[open]{animation:none}.sign-in-dialog *{transition:none!important}.sign-in-submit:hover>.icon{transform:none}}
+.sign-up-passwords{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sign-up-identity{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px}
+.sign-in-dialog .sign-up-check{display:flex;align-items:flex-start;gap:9px;font-weight:400;font-size:12px;line-height:1.8;min-height:28px;cursor:pointer}
+.sign-up-check input{flex:none;width:16px;height:16px;margin:3px 0 0;accent-color:var(--platform-ink)}
+.sign-in-dialog .community-policy-links a{color:var(--platform-ink);text-decoration:underline;text-underline-offset:3px}
+.sign-in-dialog .registration-consent{margin:2px 0 0;padding:0;min-width:0;border:0}
+.sign-in-dialog .registration-consent legend{font:500 13px/1.5 var(--platform-font);color:var(--platform-ink)}
+.sign-in-dialog .registration-consent>p{margin:6px 0 10px;font:400 12px/1.7 var(--platform-font);color:var(--platform-muted)}
+.sign-in-dialog .registration-policy{margin:8px 0 0;border:1px solid var(--platform-line);border-radius:10px;background:var(--platform-soft);color:var(--platform-ink)}
+.sign-in-dialog .registration-policy summary{display:flex;justify-content:space-between;gap:16px;min-height:42px;box-sizing:border-box;padding:10px 12px;font:400 13px/1.6 var(--platform-font);cursor:pointer;list-style:none}
+.sign-in-dialog .registration-policy summary span:last-child{color:var(--platform-muted);font-size:12px;flex:none}
+.sign-in-dialog .registration-policy-scroll{height:180px;max-width:100%;padding:6px 12px 12px;border-color:var(--platform-line);background:var(--platform-paper);color:var(--platform-ink);overflow:auto}
+.sign-in-dialog .registration-policy-scroll .community-policy-text{font:400 12px/1.8 var(--platform-font);overflow-wrap:anywhere}
+.sign-in-dialog .registration-policy-scroll :is(h2,h3){margin:16px 0 8px;font:600 14px/1.6 var(--platform-font);color:var(--platform-ink)}
+.sign-in-dialog .registration-policy-scroll :is(p,ul,ol){margin:8px 0}.sign-in-dialog .registration-policy-scroll :is(ul,ol){padding-left:20px}
+.sign-in-dialog .registration-policy-scroll a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.sign-in-dialog .registration-policy-scroll table{border-collapse:collapse;min-width:280px}.sign-in-dialog .registration-policy-scroll :is(th,td){padding:5px;border:1px solid var(--platform-line)}
+.sign-in-dialog .registration-policy-confirm{margin:10px 12px;min-height:36px;padding:7px 12px;border:1px solid var(--platform-line);border-radius:8px;background:var(--platform-paper);color:var(--platform-ink);font:500 12px/1.6 var(--platform-font);cursor:pointer}
+.sign-in-dialog .registration-policy:focus-within{outline:1px solid var(--platform-ink);outline-offset:2px}
+.sign-in-dialog ::selection{background:var(--platform-lime);color:var(--platform-ink)}
+.sign-in-dialog :is(button,a,summary,input[type=checkbox]):focus-visible{outline:2px solid var(--platform-ink);outline-offset:3px}
+.sign-in-dialog[data-mode=join] .sign-in-art{height:66px;margin-bottom:0;transform:scale(.65);transform-origin:top center}
+.sign-in-dialog[data-mode=join] header{margin-bottom:14px}.sign-in-dialog[data-mode=join] header h2{font-size:24px}.sign-in-dialog[data-mode=join] header p{margin-top:4px;font-size:12px}
+.sign-in-dialog[data-mode=join] .sign-in-tabs{margin-bottom:16px}.sign-in-dialog[data-mode=join] .sign-in-tabs>button{min-height:36px}
+.sign-in-dialog .sign-up-form .sign-in-fields{gap:11px}.sign-in-dialog .sign-up-form label{gap:6px}
+.sign-in-dialog .sign-up-form input:not([type=checkbox]){min-height:44px;padding-block:9px}
+.sign-in-dialog .sign-up-form .registration-consent>p{margin:4px 0 6px}
+.sign-in-dialog .sign-up-form .registration-policy summary{min-height:38px;padding-block:8px}
+.sign-in-dialog[data-mode=join] .sign-in-footer{margin-top:14px}
+@media(max-width:560px){.sign-in-dialog-body{padding:20px 24px 16px}.sign-in-art{height:96px;transform:scale(.9);transform-origin:top center;margin-bottom:0}.sign-in-dialog input:not([type=checkbox]){font-size:16px}.sign-in-dialog header h2{font-size:24px}.sign-in-dialog header{margin-bottom:18px}.sign-in-fields{gap:15px}.sign-up-identity{grid-template-columns:1fr;gap:11px}}
+@media(prefers-reduced-motion:reduce){.sign-in-dialog[open],.sign-in-dialog *{animation:none!important;transition:none!important}.sign-in-submit:hover>.icon,.sign-in-submit:active:not(:disabled){transform:none}}

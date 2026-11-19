@@ -11,13 +11,14 @@ import {signInRequest} from '../src/lib/sign-in-navigation.mjs';
 const location=new URL('https://site.example/resources?type=skills&q=GSAP');
 const link=(href,options={})=>({href:new URL(href,location).href,target:'',hasAttribute:name=>name==='download'&&options.download,...options});
 test('local sign-in links preserve an explicit safe return path without consuming other destinations',()=>{
- assert.deepEqual(signInRequest(link('/login'),location.href),{next:''});
- assert.deepEqual(signInRequest(link('/login?next=%2Fworkspace%2Faccount'),location.href),{next:'/workspace/account'});
- for(const href of ['/join','/admin/login','/login?reset=private','/login#recovery','https://outside.example/login'])assert.equal(signInRequest(link(href),location.href),null);
+ assert.deepEqual(signInRequest(link('/login'),location.href),{next:'',mode:'login'});
+ assert.deepEqual(signInRequest(link('/login?next=%2Fworkspace%2Faccount'),location.href),{next:'/workspace/account',mode:'login'});
+ assert.deepEqual(signInRequest(link('/join/?next=%2Fworkspace%2Faccount'),location.href),{next:'/workspace/account',mode:'join'});
+ for(const href of ['/join/invite','/admin/login','/login?reset=private','/login#recovery','https://outside.example/login','https://outside.example/join'])assert.equal(signInRequest(link(href),location.href),null);
  for(const options of [{target:'_blank'},{download:true}])assert.equal(signInRequest(link('/login',options),location.href),null);
 });
 test('malicious return paths never leave the current application',()=>{
- for(const next of ['https://outside.example/','//outside.example/','/\\outside.example/','/\noutside'])assert.deepEqual(signInRequest(link('/login?'+new URLSearchParams({next})),location.href),{next:''});
+ for(const path of ['/login','/join'])for(const next of ['https://outside.example/','//outside.example/','/\\outside.example/','/\noutside'])assert.deepEqual(signInRequest(link(path+'?'+new URLSearchParams({next})),location.href),{next:'',mode:path==='/join'?'join':'login'});
 });
 test('the credential form retains POST semantics if native submission is ever used',()=>{
  const source=fs.readFileSync(new URL('../src/components/SignInForm.tsx',import.meta.url),'utf8'),exports={};
@@ -26,7 +27,7 @@ test('the credential form retains POST semantics if native submission is ever us
   if(name.includes('LocaleProvider'))return{useLocale:()=>({t:value=>value})};
   if(name.includes('EmailSettings'))return{PasswordRecovery:()=>null};if(name.includes('Icons'))return{Icon:()=>null};return{};
  }});
- const html=renderToStaticMarkup(React.createElement(exports.default,{registration:false,next:'/',onSuccess(){},onClose(){}}));
+ const html=renderToStaticMarkup(React.createElement(exports.default,{onSuccess(){}}));
  assert.match(html,/<form\b[^>]*\bmethod="post"/);assert.match(html,/type="password"/);assert.doesNotMatch(html,/method="get"/);
 });
 test('the public controller opens the dialog without navigating or swallowing native modified clicks',()=>{
@@ -44,5 +45,6 @@ test('the public controller opens the dialog without navigating or swallowing na
  for(const extras of [{ctrlKey:true},{metaKey:true},{shiftKey:true},{altKey:true},{button:1},{defaultPrevented:true}])click('/login',extras);
  assert.equal(states.length,0);assert.equal(click('/community').defaultPrevented,undefined);
  assert.equal(click('/login').defaultPrevented,true);assert.equal(states.length,1);assert.equal(states[0].next,'');assert.deepEqual(events,['iavse-navigation-cancel']);
+ assert.equal(click('/join?next=%2Fworkspace%2Faccount').defaultPrevented,true);assert.equal(states[1].mode,'join');assert.equal(states[1].next,'/workspace/account');
  for(const cleanup of cleanups)cleanup?.();assert.equal(listeners.size,0);
 });
