@@ -10,7 +10,7 @@ import '@/app/header-contact.css';
 const contacts=[
  {id:'group',title:'我的交流群',short:'交流群',icon:'comment',image:'/contacts/wechat-group.jpg',width:966,height:1482,description:'微信扫一扫，加入 IAVSE 交流群。'},
  {id:'wechat',title:'个人微信',short:'微信',icon:'user',image:'/contacts/personal-wechat.jpg',width:888,height:1131,description:'微信扫一扫，添加 IntMain 为好友。'},
- {id:'support',title:'赞赏',short:'赞赏',icon:'heart',image:'/contacts/appreciation.jpg',width:828,height:1124,description:'感谢你对 IAVSE 的支持。'},
+ {id:'support',title:'请我喝杯咖啡',short:'支持小站',icon:'heart',image:'/contacts/appreciation.jpg',width:828,height:1124,description:'如果这里的资源帮到了你，欢迎请我喝杯咖啡。你的支持，是我继续创作与分享的动力。'},
 ];
 
 export function HeaderContact(){
