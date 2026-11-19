@@ -23,6 +23,7 @@ import './rbp-template.css';
 import './rbp-bridge.css';
 import './site-styles.css';
 import './platform-refresh.css';
+import './discovery-motion.css';
 export const viewport:Viewport={width:'device-width',initialScale:1,viewportFit:'cover'};
 export const metadata:Metadata={applicationName:'IAVSE',title:'IAVSE',description:'Projects, experience, and shared resources.'};
 export default async function RootLayout({children}:{children:React.ReactNode}){

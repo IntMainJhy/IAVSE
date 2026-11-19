@@ -16,7 +16,7 @@ test('catalog keeps distinct, categorized upstream sources and per-skill license
   assert.ok(skill.summary&&skill.tags.length);
   for(const locale of ['en','ja'])assert.notEqual(translate(locale,skill.summary),skill.summary);
  }
- assert.equal(curatedSkills.length,24);
+ assert.equal(curatedSkills.length,28);
  assert.equal(curatedSkills.filter(item=>item.repo==='anthropics/skills').length,11);
  assert.equal(curatedSkills.filter(item=>item.repo==='greensock/gsap-skills').length,1);
  assert.ok(curatedSkills.some(item=>item.id==='vibehub'));
@@ -108,12 +108,12 @@ test('all skills have distinct practical examples and complete localized prompts
 
 test('tool filters combine with tasks and search, and reflect documented setup paths without duplicate Codex variants',()=>{
  assert.equal(skillAiTools.length,5);
- assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:24,'claude-code':24,cursor:22,'gemini-cli':18,opencode:18});
- assert.deepEqual(filterSkills({tool:'codex',category:'design',q:'UI'}).map(skill=>skill.id),['impeccable','ui-ux-pro-max','frontend-design','brand-guidelines','web-design-guidelines']);
+ assert.deepEqual(Object.fromEntries(skillAiTools.map(tool=>[tool.id,filterSkills({tool:tool.id}).length])),{codex:28,'claude-code':28,cursor:26,'gemini-cli':22,opencode:22});
+ assert.deepEqual(filterSkills({tool:'codex',category:'design',q:'UI'}).map(skill=>skill.id),['impeccable','ui-ux-pro-max','frontend-design','brand-guidelines','web-design-guidelines','hallmark']);
  assert.deepEqual(filterSkills({tool:'cursor',category:'knowledge'}).map(item=>item.id),['docx','pdf','pptx','xlsx']);
  assert.deepEqual(filterSkills({q:'Cursor'}).map(skill=>skill.id),filterSkills({tool:'cursor'}).map(skill=>skill.id));
  assert.deepEqual(filterSkills({q:'Claude.ai'}),[]);
- assert.equal(filterSkills({tool:'codex',category:'motion'}).length,1);
+ assert.equal(filterSkills({tool:'codex',category:'motion'}).length,2);
  for(const skill of curatedSkills){
   const labels=getSkillDetail(skill.id).installation.methods.map(method=>method.label.replace(/^Codex(?: App| CLI)?$/,'Codex'));
   assert.deepEqual(new Set(skill.tools.map(tool=>tool.label)),new Set(labels),skill.id);

@@ -1,0 +1,37 @@
+{
+  "verifiedAt": "2026-11-19",
+  "packages": [
+    {
+      "id": "hallmark",
+      "repo": "Nutlope/hallmark",
+      "commit": "04977e15f3dfd6ee4b74c887dac3eb52665d6c92",
+      "url": "/skills/creator/hallmark.zip",
+      "bytes": 5273064,
+      "sha256": "16089dda656b9b278094da04bdfe4d0d1c6bbcee313d97c1a5b26dc8b2a03544"
+    },
+    {
+      "id": "stageshow",
+      "repo": "benjitaylor/skills",
+      "commit": "299140fafd08df55a9c234e610c3f64af3f45531",
+      "url": "/skills/creator/stageshow.zip",
+      "bytes": 933076,
+      "sha256": "739f8534b41a0ba75e7aeaf84a077aeebe6e832ff611bc8d7add456566a042fc"
+    },
+    {
+      "id": "dimensional-drawing",
+      "repo": "enesozturk/dimensional-drawing",
+      "commit": "5c457437c8c83524308aad3b7443e81adcc13153",
+      "url": "/skills/creator/dimensional-drawing.zip",
+      "bytes": 24332,
+      "sha256": "d61bdf06dda026a379924f8d541c1b5cbe05e820a4d2ec335a5ade828997c778"
+    },
+    {
+      "id": "brand-identity",
+      "repo": "fatihaydost/brand-identity-skill",
+      "commit": "af7ba40fe067b8b4aaeb2af90ed6c8996d014791",
+      "url": "/skills/creator/brand-identity.zip",
+      "bytes": 1297656,
+      "sha256": "1d866ee5d2cc8a1a8b789262cdce6dd82c048237d1257be3cde2bd33ab70dbda"
+    }
+  ]
+}

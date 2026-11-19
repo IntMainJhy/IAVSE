@@ -37,10 +37,10 @@ test('definition identity ignores revision and SKILL.md filename but preserves i
 
 test('source filters expose all imported skills while duplicate curated definitions remain a single entry',()=>{
  const all=mergePublicSkills(curatedSkills,[],[...vibeui,...stylekit]);
- assert.equal(all.length,242);assert.equal(new Set(all.map(skillDefinitionKey)).size,all.length);
+ assert.equal(all.length,245);assert.equal(new Set(all.map(skillDefinitionKey)).size,all.length);
  assert.equal(filterPublicSkills(all,{collection:'vibeui'}).length,227);
  assert.equal(filterPublicSkills(all,{collection:'stylekit'}).length,1);
- assert.equal(filterPublicSkills(all,{collection:'iavse'}).length,24);
+ assert.equal(filterPublicSkills(all,{collection:'iavse'}).length,28);
  const mergedGuidelines=all.find(e=>e.id==='web-design-guidelines');
  assert.equal(mergedGuidelines.licenseStatus,'custom');assert.equal(mergedGuidelines.licenseScope,'readme-declaration');
  assert.match(mergedGuidelines.licenseUrl,/\/README\.md$/);assert.ok(mergedGuidelines.licenseNote);

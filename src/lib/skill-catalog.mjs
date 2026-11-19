@@ -1,5 +1,6 @@
 import {extraSkillEntries} from './skill-library-extra.mjs';
-// Editorial directory: original summaries and links only; upstream skills are not bundled.
+import {creatorSkills} from './creator-skills.mjs';
+// Editorial directory: original summaries and upstream links. Four owner-selected skills also have licensed, pinned ZIP packages.
 // Checked against each project's README, skill definition and license on this date.
 import {skillAiTools,skillSupportedTools} from './skill-installations.mjs';
 export {skillAiTools};
@@ -44,6 +45,7 @@ export const curatedSkills=[
 ];
 
 for(const item of extraSkillEntries){const {skillPath,licensePath,...metadata}=item;curatedSkills.push({...entry(item.id,item.name,item.category,item.repo,skillPath,item.summary,item.tags,item.license,licensePath),...metadata});}
+for(const item of creatorSkills){const {skillPath,licensePath,...metadata}=item;curatedSkills.push({...entry(item.id,item.name,item.category,item.repo,skillPath,item.summary,item.tags,item.license,licensePath),...metadata});}
 for(const item of curatedSkills){if(['react-best-practices','impeccable','systematic-debugging','gsap'].includes(item.id)){item.featured=true;item.recommendedFor=item.summary;}}
 
 export function skillFilters(query={}){

@@ -14,7 +14,7 @@ const recommendation=skill=>Array.isArray(skill.recommendedFor)?skill.recommende
  * @returns {PublicSkill[]}
  */
 export function mergePublicSkills(curated,published,imported=[]){
- const entries=curated.map(skill=>({...skill,slug:skill.id,origin:'curated',recommendation:recommendation(skill),featured:skill.featured===true||skill.recommended===true,verifiedAt:skillCatalogVerifiedAt}));
+ const entries=curated.map(skill=>({...skill,slug:skill.id,origin:'curated',recommendation:recommendation(skill),featured:skill.featured===true||skill.recommended===true,verifiedAt:skill.verifiedAt||skillCatalogVerifiedAt}));
  const slugs=new Set(entries.map(skill=>skill.slug)),ids=new Set(entries.map(skill=>skill.id)),repos=new Set(entries.map(skill=>skill.repo.toLowerCase()));
  for(const skill of published){
   const slug=String(skill.slug||''),repo=String(skill.repo||'').toLowerCase();
@@ -25,7 +25,7 @@ export function mergePublicSkills(curated,published,imported=[]){
  return mergeImportedSkills(entries,imported);
 }
 export function readPublicSkills(){return mergePublicSkills(curatedSkills,readPublishedSkills(),[...vibeuiSkills,...stylekitSkills].filter(skill=>skill.sourceStatus==='verified'&&['single','collection'].includes(skill.kind)))}
-export function findPublicSkill(id,entries=readPublicSkills()){return entries.find(skill=>skill.slug===id||skill.id===id)||null}
+export function findPublicSkill(id,entries=readPublicSkills()){return entries.find(skill=>skill.slug===id||skill.id===id||skill.aliases?.includes(id))||null}
 /** @param {PublicSkill[]} entries
  * @returns {PublicSkill[]}
  */

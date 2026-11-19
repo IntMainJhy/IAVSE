@@ -250,6 +250,14 @@ Blog spaces restore the existing draggable 3D gallery, camera focus, previews an
 
 Microinteraction language: 140ms press, 240ms hover/focus colour and 480ms image easing; motion uses transform/opacity. Respect reduced motion, and stop scene work when hidden, offscreen or navigating. Validate desktop and phone layouts, search, filters/history, favorites, preview dismissal and focus return, gallery keyboard/camera selection and announcement closure. Save screenshots and other local acceptance evidence outside the public repository.
 
+### Toolkit and playful motion · 2026-11-19
+
+The owner requested emoji accents, a search orbit and distinctive featured recommendations. Use small decorative emoji in the announcement strip and selected-tool cards; keep ordinary action icons recognizable. Four CSS motion-path chips orbit the central search field, pause on hover/focus or an explicit pause control, and become still under reduced motion. The featured toolkit has real Skill and website destinations, a horizontally scrollable phone layout, and tiny original previews that animate on hover or keyboard focus. Do not invent popularity, reviews or usage counts.
+
+Hallmark, Stageshow, Dimensional Drawing and Brand Identity are the four explicitly selected installed skills. Give them independently written, localized instructions, examples, prompts and complete pinned download packages with original notices. Their collection aliases and the original source identities remain stable. Package details are recorded in [creator Skill notices](docs/licenses/creator-skills.md). Ordinary directory entries still link upstream.
+
+Use shared streaming loading boundaries for destination feedback and bounded intent prefetch. Prioritize the AI Skills tab during idle time, warm an eligible destination on press, preserve slow-network/data-saving exclusions, and never preload private account routes. Validate performance using a production build because development performs route compilation on first visit.
+
 # Design System: IAVSE
 
 ## Four shared appearances · 2026-11-15

@@ -33,3 +33,13 @@ NOTICE 记录原作者、项目来源与适用范围，不增加 MIT 之外的�
 第三方代码、依赖、字体、模板与单独许可素材继续遵守各自许可。用户内容、
 个人信息、商标，以及本仓库之外的私有 Pro 材料和 macOS / Windows 客户端
 源码、安装包及专有资源，不因本次变更而获得新的授权。
+
+Creator toolkit Skill packages (added 2026-11-19)
+
+Four owner-selected third-party Skill archives are distributed under
+public/skills/creator/: Hallmark (Nutlope / Together AI), Stageshow (Benji Taylor),
+Dimensional Drawing (Enes Ozturk), and Brand Identity (Fatih Aydost). Each archive
+retains its upstream MIT license, attribution and applicable third-party notices.
+Pinned revisions and package integrity records are documented in
+docs/licenses/creator-skills.md and public/skills/creator/manifest.json.
+Their original assets, fonts and trademarks retain their individual terms.

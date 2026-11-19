@@ -52,7 +52,7 @@ export function SiteAnnouncement(){
  };
  const pauseLabel=locale==='zh'?(paused?'继续滚动':'暂停滚动'):locale==='ja'?(paused?'スクロールを再開':'スクロールを一時停止'):(paused?'Resume scrolling':'Pause scrolling');
  const group=(copy:boolean)=><ul className="notice-edition" aria-hidden={copy||undefined}>{value.items.map((item,index)=><li key={index}>
-  <span className="notice-star" aria-hidden="true"><Icon name="plus"/></span>
+  <span className="notice-star" aria-hidden="true">{['🔥','🧩','💌'][index%3]}</span>
   {item.url?(item.url.startsWith('/')?<Link prefetch={false} href={item.url} tabIndex={copy?-1:undefined}>{title(item.title)}<Icon name="arrow"/></Link>:<a href={item.url} target="_blank" rel="noopener noreferrer" tabIndex={copy?-1:undefined}>{title(item.title)}<Icon name="arrow"/></a>):<span>{title(item.title)}</span>}
  </li>)}</ul>;
  return <aside className="site-announcement" aria-label={label} data-paused={paused}>

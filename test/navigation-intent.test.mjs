@@ -84,8 +84,8 @@ test('the current desktop header, logo and mobile dock warm their actual destina
 
 
 test('an idle page prepares public destinations in spaced jobs and releases every queued callback',()=>{
- const f=mount({header:true});assert.deepEqual(f.calls,[]);f.advance(899);assert.equal(f.idleCallbacks.size,0);f.advance(1);assert.equal(f.idleCallbacks.size,1);f.idle();assert.deepEqual(f.calls,['/resources']);
- f.advance(1199);assert.equal(f.idleCallbacks.size,0);f.advance(1);f.idle();assert.deepEqual(f.calls,['/resources','/community']);assert.deepEqual(f.previews,['community']);
+ const f=mount({header:true});assert.deepEqual(f.calls,[]);f.advance(899);assert.equal(f.idleCallbacks.size,0);f.advance(1);assert.equal(f.idleCallbacks.size,1);f.idle();assert.deepEqual(f.calls,['/resources?type=skills']);
+ f.advance(1199);assert.equal(f.idleCallbacks.size,0);f.advance(1);f.idle();assert.deepEqual(f.calls,['/resources?type=skills','/community']);assert.deepEqual(f.previews,['community']);
  f.advance(1200);assert.equal(f.idleCallbacks.size,1);f.cleanup();assert.equal(f.idleCallbacks.size,0);assert.equal(f.timers.size,0);
 });
 
@@ -100,4 +100,12 @@ test('only real resource tabs may prepare bounded category URLs; account and arb
  assert.deepEqual(f.calls,['/resources?type=skills','/resources?type=docs&q=React','/resources/legal-consultation']);
  for(const href of ['/resources?compose=1','/resources?type=unknown','/workspace/account','/resources?type=skills&edit=secret'])f.intent('focusin',href,{kind:'catalog'});
  assert.equal(f.calls.length,3);f.cleanup();
+});
+
+test('pressing a real destination begins warming immediately without intercepting the native navigation',()=>{
+ const f=mount();
+ const event=f.intent('pointerdown','/resources?type=skills',{kind:'catalog'});
+ assert.deepEqual(f.calls,['/resources?type=skills']);assert.equal(event.defaultPrevented,false);
+ f.intent('pointerdown','/workspace/account',{kind:'catalog'});
+ assert.equal(f.calls.length,1);f.cleanup();
 });

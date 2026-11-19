@@ -21,7 +21,10 @@ export function mergeImportedSkills(base,imports){
    existing.collections=[...existing.collections,...skillCollections(raw).filter(source=>!existing.collections.some(known=>known.name===source.name))];
    existing.collectionEntries=[...(existing.collectionEntries||[]),...(raw.collectionEntries||[])];
    existing.collectionAudit=raw.provenance;
-   for(const field of ['sourceUrl','sourceStatus','commit','license','licenseUrl','licenseStatus','licenseScope','licenseNote','provenance'])if(raw[field]!==undefined)existing[field]=raw[field];
+   // A downloadable owner-selected package is pinned to a reviewed revision.
+   // Retain collection attribution and old URLs without replacing it with an older snapshot.
+   if(existing.packageDownload)existing.aliases=[...new Set([...(existing.aliases||[]),raw.slug,raw.id].filter(id=>id&&id!==existing.slug&&id!==existing.id))];
+   else for(const field of ['sourceUrl','sourceStatus','commit','license','licenseUrl','licenseStatus','licenseScope','licenseNote','provenance'])if(raw[field]!==undefined)existing[field]=raw[field];
    continue;
   }
   const slug=String(raw.slug||raw.id||'');if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)||ids.has(slug)||ids.has(raw.id))throw new Error('Invalid or duplicate imported Skill slug: '+slug);

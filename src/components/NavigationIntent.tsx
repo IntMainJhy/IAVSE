@@ -16,7 +16,7 @@ export function NavigationIntent(){
  const router=useRouter(),{locale}=useLocale();
  useEffect(()=>{
   const warmed=new Map<string,number>();
-  const idleQueue=['/resources','/community','/blogs','/about','/'].filter(href=>href!==location.pathname+location.search);
+  const idleQueue=['/resources?type=skills','/community','/blogs','/about','/resources?type=docs','/resources?type=resources','/'].filter(href=>href!==location.pathname+location.search);
   let timer:ReturnType<typeof setTimeout>|undefined,idleTimer:ReturnType<typeof setTimeout>|undefined,idle:number|undefined;
   let hovered:HTMLAnchorElement|null=null,disposed=false,navigationPending=false;
   const allowed=()=>{const connection=(navigator as Navigator&{connection?:Connection}).connection;return !connection?.saveData&&!['slow-2g','2g','3g'].includes(connection?.effectiveType||'');};
@@ -64,7 +64,7 @@ export function NavigationIntent(){
    cancel();hovered=link;timer=setTimeout(()=>{cancel();warm(href);},120);
   };
   const leave=(event:PointerEvent)=>{if(hovered&&!(event.relatedTarget instanceof Element&&event.relatedTarget.closest('a[href]')===hovered))cancel();};
-  const interaction=()=>{cancel();cancelIdle();scheduleIdle(1800);};
+  const interaction=(event?:Event)=>{cancel();cancelIdle();if(event)prepare(event);scheduleIdle(1800);};
   const navigation=(event:Event)=>{navigationPending=!!(event as CustomEvent<{pending:boolean}>).detail?.pending;if(navigationPending){cancel();cancelIdle();}else scheduleIdle();};
   const visibility=()=>{if(document.hidden){cancel();cancelIdle();}else scheduleIdle();};
   const loaded=()=>scheduleIdle(900);

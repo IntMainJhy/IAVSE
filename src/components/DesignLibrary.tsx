@@ -15,9 +15,9 @@ import '@/app/design-directory.css';
 import '@/app/template-library.css';
 
 const previewItem=(entry:DesignEntry):DesignPreviewItem=>({slug:entry.slug,title:entry.title,image:entry.image,external:entry.external,previewUrl:entry.previewUrl,previewVariants:entry.previewVariants,websiteUrl:entry.websiteUrl,source:entry.source,collection:entry.collection,preview:entry.preview,palette:entry.palette,creator:entry.creator,referenceSite:entry.referenceSite,production:entry.production,previewPolicy:entry.previewPolicy,template:entry.template,license:entry.license});
-export async function DesignLibrary({query={},navigation}:{query?:Record<string,string|string[]|undefined>;navigation?:React.ReactNode}){
+export async function DesignLibrary({query={},navigation,recommendations}:{query?:Record<string,string|string[]|undefined>;navigation?:React.ReactNode;recommendations?:React.ReactNode}){
  const filters=readCatalogFilters(new URLSearchParams(Object.entries(query).map(([key,value])=>[key,String(value||'')])));
- return <DesignCatalogExplorer initial={queryDesignCatalog({filters})} navigation={navigation}/>;
+ return <DesignCatalogExplorer initial={queryDesignCatalog({filters})} navigation={navigation} recommendations={recommendations}/>;
 }
 
 export async function DesignDetail({slug,directoryQuery=''}:{slug:string;directoryQuery?:string}){
