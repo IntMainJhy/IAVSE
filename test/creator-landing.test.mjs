@@ -21,9 +21,9 @@ function components(locale='zh',{user=null,pathname='/',style='brand',publicUrl}
  const reads=[],legacyReads=[],linkProps=[];
  const avatar=({name,avatarId})=>React.createElement('span',{'data-avatar-name':name},avatarId?React.createElement('img',{src:'/media/'+encodeURIComponent(avatarId),alt:''}):null);
  // Keep the real home, hub and tabs; replace only the database-backed directory boundary.
- const directory=kind=>props=>{
+ const directory=kind=>async props=>{
   reads.push({kind,...props});
-  return React.createElement('section',{'data-resource-directory':kind},React.createElement('h1',null,{designs:'UI 设计',skills:'AI Skills',docs:'文档',resources:'网站与工具'}[kind]));
+  return React.createElement('section',{'data-resource-directory':kind},React.createElement('h1',null,{designs:'UI 设计',skills:'AI Skills',docs:'文档',resources:'网站与工具'}[kind]),await serverTree(props.navigation));
  };
  const modules={
   react:React,'react/jsx-runtime':runtime,
@@ -100,8 +100,8 @@ test('homepage server markup opens the UI design directory with direct categorie
  assert.equal(text(find(directory,n=>n.name==='h1')[0]),'UI 设计');assert.equal(reads[0].kind,'designs');
  const header=find(document,n=>Object.hasOwn(n.attribs,'data-iavse-header'))[0],footer=find(document,n=>n.name==='footer');
  assert.equal(footer.length,1);assert.deepEqual(find(footer[0],n=>n.name==='a').map(n=>n.attribs.href),['https://beian.miit.gov.cn/']);
- const order=[header,tabs[0],directory,footer[0]].map(n=>all.indexOf(n));
- assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'navigation, directory and filing retain their reading order');
+ const order=[header,directory,tabs[0],footer[0]].map(n=>all.indexOf(n));
+ assert.ok(order.every((position,index)=>position>=0&&(index===0||position>order[index-1])),'the directory contains its categories after its heading and before the filing footer');
  assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-auth-login')).length,1);
  assert.equal(find(document,n=>Object.hasOwn(n.attribs,'data-home-hero')||Object.hasOwn(n.attribs,'data-iavse-landing')).length,0);
  assert.equal(find(document,n=>['iframe','video','canvas'].includes(n.name)).length,0,'the directory is ready without a promotional scene');

@@ -51,7 +51,7 @@ test('server-seeded notices and offsets agree immediately; a lone text-only noti
 });
 
 test('localized default notices and real destinations retain safe accessible semantics',()=>{
- for(const [locale,label,text,close]of [['zh','网站公告','网站更新与公告将在这里发布。','关闭公告'],['en','Site updates','Website news and updates will appear here.','Dismiss announcement'],['ja','お知らせ','サイトの更新やお知らせをここでお届けします。','お知らせを閉じる']]){
+ for(const [locale,label,text,close]of [['zh','更新动态','网站更新与公告将在这里发布。','关闭公告'],['en','Site updates','Website news and updates will appear here.','Dismiss announcement'],['ja','お知らせ','サイトの更新やお知らせをここでお届けします。','お知らせを閉じる']]){
   const html=markup(seed('网站更新与公告将在这里发布。'),locale);assert.ok(html.includes(label));assert.ok(html.includes(text));
   assert.equal(descendants(parseDocument(html)).find(node=>node.name==='button').attribs['aria-label'],close);
  }

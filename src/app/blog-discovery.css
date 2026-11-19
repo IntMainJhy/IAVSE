@@ -1,0 +1,58 @@
+/* Hallmark · redesign: full · scope: app · theme: white / ink / lime · surface: absolute · v2.0.0 */
+/* Critique: the retained 3D scene invites exploration; the searchable directory stays complete. */
+html:root[data-ui][data-color-mode] body .blog-spaces-page.blog-directory-page{width:min(1400px,calc(100% - 80px));padding-top:64px;--creator-ink:var(--platform-ink);--creator-muted:var(--platform-muted);--creator-line:var(--platform-line)}
+.blog-directory-page .blog-directory-heading{display:flex;align-items:center;justify-content:space-between;gap:32px;margin-bottom:40px}
+.blog-directory-page .blog-directory-heading h1{font:650 clamp(28px,3.2vw,44px)/1.4 var(--platform-font);letter-spacing:-.035em;overflow-wrap:break-word;min-width:0}
+.blog-directory-page .blog-directory-heading p{font-size:16px;line-height:1.8;margin-top:16px;max-width:48ch}
+html:root[data-ui][data-color-mode] body .blog-directory-page .blog-directory-create{border-radius:999px;min-height:48px;padding:12px 24px;border-color:var(--platform-ink);background:var(--platform-ink);color:var(--platform-paper);font:500 15px/1.5 var(--platform-font);transition:background-color var(--motion-short) ease,color var(--motion-short) ease,transform var(--motion-fast) ease}
+html:root[data-ui][data-color-mode] body .blog-directory-page .blog-directory-create:hover{background:var(--platform-lime);color:var(--platform-ink);border-color:var(--platform-lime)}
+.blog-discovery-gallery{position:relative;isolation:isolate;border:1px solid var(--platform-line);border-radius:24px;background:var(--platform-soft);padding:24px 20px 24px;margin-bottom:64px}
+.blog-discovery-caption{position:relative;z-index:1;display:flex;align-items:center;gap:16px;padding:0 8px;pointer-events:none}
+.blog-discovery-caption h2{margin:0;font:600 15px/1.5 var(--platform-font)}
+.blog-discovery-caption>span{font-size:13px;color:var(--platform-muted)}
+.blog-discovery-gallery .blog-gallery{margin-top:-24px;padding-bottom:0}
+.blog-discovery-gallery .blog-gallery[data-mode=spatial] .blog-gallery-exhibits{height:clamp(510px,60vh,650px)}
+.blog-discovery-gallery .gallery-current{margin-bottom:12px}
+.blog-discovery-gallery .gallery-authors>button[aria-pressed=true]{background:var(--platform-lime);border-color:var(--platform-lime-line)}
+.blog-discovery-gallery .gallery-view-tools>button{font-size:13px}
+.blog-discovery-note{max-width:90ch;margin:12px auto 0;color:var(--platform-muted);font-size:12px;line-height:1.8;text-align:center}
+.blog-directory-listing{max-width:1120px;margin:0 auto;scroll-margin-top:110px}
+.blog-directory-page .blog-directory-search{gap:12px;margin-bottom:32px}
+.blog-directory-page .blog-directory-search-field{border-radius:999px;padding-inline:20px}
+.blog-directory-page .blog-directory-search input{min-height:52px;font-size:16px}
+.blog-directory-page .blog-directory-search>button{border-radius:999px;padding-inline:28px;font-size:15px}
+.blog-directory-page .blog-directory-search>button:hover{background:var(--platform-lime);border-color:var(--platform-lime);color:var(--platform-ink)}
+.blog-directory-page .blog-directory-section-heading h2{font-size:20px}
+.blog-directory-page .blog-directory-count{border:0;border-radius:999px;background:var(--platform-soft);font-size:13px;min-width:28px;min-height:28px}
+.blog-directory-page .blog-directory-grid{gap:20px}
+.blog-directory-page .blog-directory-card{min-height:230px;padding:28px;border-radius:18px;gap:20px;transition:transform var(--motion-short) var(--motion-ease),border-color var(--motion-short) ease,box-shadow var(--motion-short) ease}
+.blog-directory-page .blog-directory-card:is(:hover,:focus-visible){transform:translateY(-3px);border-color:var(--platform-lime-line);background:var(--platform-paper);box-shadow:var(--platform-shadow)}
+.blog-directory-page .blog-directory-intro{font-size:15px}
+.blog-directory-page .blog-directory-card-footer{font-size:14px}
+.blog-directory-page .blog-directory-card-footer>.icon{transition:transform var(--motion-short) var(--motion-ease)}
+.blog-directory-page .blog-directory-card:is(:hover,:focus-visible) .blog-directory-card-footer>.icon{transform:translateX(4px)}
+.blog-directory-page .blog-directory-empty{padding:44px 24px;border-radius:18px}
+.blog-directory-page :is(a,button,summary):focus-visible{outline:2px solid var(--platform-ink);outline-offset:4px}
+@media(max-width:767px){
+ html:root[data-ui][data-color-mode] body .blog-spaces-page.blog-directory-page{width:calc(100% - 36px);padding-top:32px}
+ .blog-directory-page .blog-directory-heading{align-items:flex-start;flex-direction:column;gap:24px;margin-bottom:28px}
+ .blog-directory-page .blog-directory-heading h1{font-size:28px;max-width:none;line-height:1.5;text-wrap:balance}
+ .blog-directory-page .blog-directory-heading p{font-size:15px;margin-top:12px}
+ .blog-discovery-gallery{padding:20px 0;border-radius:18px;margin-bottom:40px}
+ .blog-discovery-caption{padding-inline:20px;gap:12px}
+ .blog-discovery-caption>span{font-size:12px}
+ .blog-discovery-gallery .blog-gallery{margin-top:16px}
+ .blog-discovery-gallery .blog-gallery[data-mode=spatial] .blog-gallery-exhibits{height:510px}
+ .blog-discovery-gallery .gallery-view-tools{top:0;right:8px}
+ .blog-discovery-gallery .gallery-view-tools>button{font-size:12px}
+ .blog-discovery-gallery .gallery-overview-hint{font-size:13px;padding:0 16px}
+ .blog-discovery-note{padding-inline:20px;text-align:left}
+ .blog-directory-page .blog-directory-grid{grid-template-columns:1fr;gap:16px}
+ .blog-directory-page .blog-directory-card{min-height:210px;padding:24px}
+ .blog-directory-page .blog-directory-search{gap:8px}
+ .blog-directory-page .blog-directory-search-field{padding-inline:16px;gap:8px}
+ .blog-directory-page .blog-directory-search>button{padding-inline:20px}
+}
+@media(prefers-reduced-motion:reduce){.blog-directory-page :is(a,button,.icon){transition:none}.blog-directory-page .blog-directory-card:is(:hover,:focus-visible),.blog-directory-page .blog-directory-card:is(:hover,:focus-visible) .blog-directory-card-footer>.icon{transform:none}}
+
+.blog-directory-page .blog-directory-title{display:flex;align-items:center;gap:12px}

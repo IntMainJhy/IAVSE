@@ -1,0 +1,97 @@
+/* Hallmark · redesign: full · scope: app · theme: user reference · white / ink / lime · surface: absolute · v2.0.0 */
+/* Critique: preserve real sources and readable content; bring hierarchy and feedback to the directory. */
+/* Hallmark · waive 7b · The user supplied a white reference with a lime announcement strip · Keep the requested white paper and original preview contrast. */
+/* Waiver: the user's Sea breeze illustration and 3D gallery retain their authored colours and geometry. */
+:root {
+ --platform-lime:#e3fa68;
+ --platform-lime-hover:#d5ed52;
+ --platform-lime-soft:#f5fbdc;
+ --platform-lime-line:#c9dc60;
+ --platform-ink:#191919;
+ --platform-paper:#fff;
+ --platform-soft:#f5f5f5;
+ --platform-muted:#686868;
+ --platform-line:#e7e7e7;
+ --platform-shadow:0 12px 32px rgb(25 25 25 / .07);
+ --platform-font:-apple-system,BlinkMacSystemFont,"IAVSE Sans","PingFang SC","Microsoft YaHei",sans-serif;
+ --platform-editorial:"IAVSE Display","Songti SC",serif;
+ --platform-wordmark:"IAVSE Wordmark",Georgia,serif;
+ --motion-fast:140ms;
+ --motion-short:240ms;
+ --motion-enter:480ms;
+ --motion-ease:cubic-bezier(.22,1,.36,1);
+}
+html,body{overflow-x:clip}
+::selection{background:var(--platform-lime);color:var(--platform-ink)}
+html:root[data-home-style] body .iavse-header.iavse-header--plain[data-iavse-header]{padding-inline:max(32px,calc((100% - 1600px)/2));gap:48px;font-family:var(--platform-font)}
+html:root[data-home-style] body .iavse-header.iavse-header--plain .iavse-header__brand>.site-brand-mark{width:34px;height:34px;flex-basis:34px;padding:8px;border-radius:11px;background:var(--platform-lime);transition:transform var(--motion-short) var(--motion-ease)}
+html:root[data-home-style] body .iavse-header.iavse-header--plain .iavse-header__brand:hover>.site-brand-mark{transform:rotate(-8deg)}
+html:root[data-home-style] body .iavse-header.iavse-header--plain :is(.iavse-header__link,.organic-login-nav){min-height:44px;border-radius:999px;padding-inline:20px;font-size:14px;transition:background-color var(--motion-short) ease,color var(--motion-short) ease,transform var(--motion-fast) ease}
+html:root[data-home-style] body .iavse-header.iavse-header--plain :is(.iavse-header__link,.organic-login-nav):active{transform:scale(.97)}
+html:root[data-home-style] body .iavse-header.iavse-header--plain .organic-login-nav:hover{background:var(--platform-lime);border-color:var(--platform-lime)}
+html:root[data-home-style] body .iavse-header.iavse-header--plain :is(.iavse-repository-links a,.language-trigger){border-radius:999px}
+html:root[data-home-style] body .iavse-header.iavse-header--plain .iavse-header__brand>span{font-family:var(--platform-wordmark);font-size:35px}
+.rbp-surface .platform-primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:48px;width:max-content;max-width:100%;padding:12px 24px;border:1px solid var(--platform-ink);border-radius:999px;background:var(--platform-ink);color:var(--platform-paper);font:500 15px/1.5 var(--platform-font);text-decoration:none;transition:background-color var(--motion-short) ease,color var(--motion-short) ease,transform var(--motion-fast) ease}
+.rbp-surface .platform-primary:hover{background:var(--platform-lime);color:var(--platform-ink);border-color:var(--platform-lime)}
+.rbp-surface .platform-primary:active{transform:translateY(1px)}
+.rbp-surface .platform-primary:focus-visible{outline:2px solid var(--platform-ink);outline-offset:4px}
+
+/* The full directory's search, tabs and source metadata keep their existing wiring. */
+html:root[data-ui][data-color-mode] body .rbp-surface .content-resource-hub{padding-top:0!important}
+html:root[data-ui][data-color-mode] body .content-resource-hub #design-directory{padding-top:0}
+html:root[data-ui][data-color-mode] body #design-directory .design-library-heading{display:flex;flex-direction:column;align-items:center;gap:28px;margin:0;padding:64px 0 56px;text-align:center}
+html:root[data-ui][data-color-mode] body #design-directory .design-library-heading h1{font:700 clamp(30px,3.5vw,50px)/1.3 var(--platform-font)!important;letter-spacing:-.04em;margin:0 0 12px;overflow-wrap:break-word;min-width:0}
+html:root[data-ui][data-color-mode] body #design-directory .design-library-heading p{font-size:15px;line-height:1.65;color:var(--platform-muted)}
+html:root[data-ui][data-color-mode] body #design-directory .directory-search{width:min(720px,100%);min-height:62px;padding:8px 8px 8px 24px;border-radius:999px;background:var(--platform-soft);border:1px solid var(--platform-line);transition:border-color var(--motion-short) ease,box-shadow var(--motion-short) ease}
+html:root[data-ui][data-color-mode] body #design-directory .directory-search input{font:400 16px/1.6 var(--platform-font)}
+html:root[data-ui][data-color-mode] body #design-directory .directory-search-submit{min-height:46px;padding-inline:24px;background:var(--platform-ink);color:var(--platform-paper);border-radius:999px;transition:background-color var(--motion-short) ease,color var(--motion-short) ease,transform var(--motion-fast) ease}
+html:root[data-ui][data-color-mode] body #design-directory .directory-search-submit:hover{background:var(--platform-lime);color:var(--platform-ink)}
+html:root[data-ui][data-color-mode] body #design-directory .directory-search-submit:active{transform:scale(.97)}
+html:root[data-ui][data-color-mode] body #design-directory .resource-hub-tabs{display:block;margin:0 0 24px;padding:0;border:0!important;border-radius:0!important;background:var(--platform-paper)!important;box-shadow:none}
+html:root[data-ui][data-color-mode] body #design-directory .resource-tab-links{display:flex;gap:32px;min-height:58px;padding:0;border-bottom:1px solid var(--platform-line);overflow-x:auto;scrollbar-width:none}
+html:root[data-ui][data-color-mode] body #design-directory .resource-tab-link{position:relative;display:inline-flex;align-items:center;flex:none;padding:12px 0 20px;min-height:58px;border:0;border-radius:0;background:transparent;color:var(--platform-muted);font:550 16px/1.5 var(--platform-font);text-decoration:none;box-shadow:none;transition:color var(--motion-short) ease}
+html:root[data-ui][data-color-mode] body #design-directory .resource-tab-link::after{content:'';position:absolute;inset:auto 0 0;height:3px;background:var(--platform-ink);transform:scaleX(0);transform-origin:left;transition:transform var(--motion-short) var(--motion-ease)}
+html:root[data-ui][data-color-mode] body #design-directory .resource-tab-link[aria-current=page]{color:var(--platform-ink)}
+html:root[data-ui][data-color-mode] body #design-directory .resource-tab-link[aria-current=page]::after{transform:scaleX(1)}
+html:root[data-ui][data-color-mode] body #design-directory .resource-tab-link:hover{color:var(--platform-ink)}
+html:root[data-ui][data-color-mode] body #design-directory .directory-toolbar{padding-bottom:16px;border-bottom:0;background:var(--platform-paper)!important}
+html:root[data-ui][data-color-mode] body #design-directory :is(.dir-action,.directory-sort select){border-radius:999px;min-height:44px}
+html:root[data-ui][data-color-mode] body #design-directory .directory-quick-filters{padding:0 0 12px;gap:12px}
+html:root[data-ui][data-color-mode] body #design-directory .directory-quick-filters button{min-height:42px;font-size:14px;border-radius:999px;transition:background-color var(--motion-short) ease,color var(--motion-short) ease}
+html:root[data-ui][data-color-mode] body #design-directory .directory-quick-filters button[aria-pressed=true]{background:var(--platform-lime);color:var(--platform-ink)}
+html:root[data-ui][data-color-mode] body #design-directory .design-card-preview{border-radius:18px;transition:box-shadow var(--motion-short) ease,border-color var(--motion-short) ease}
+html:root[data-ui][data-color-mode] body #design-directory .design-media>img{transition:transform var(--motion-enter) var(--motion-ease),opacity var(--motion-short) ease}
+html:root[data-ui][data-color-mode] body #design-directory .design-gallery-card:is(:hover,:focus-within) .design-media>img{transform:scale(1.035)}
+html:root[data-ui][data-color-mode] body #design-directory .design-gallery-card:is(:hover,:focus-within) .design-card-preview{box-shadow:var(--platform-shadow);border-color:var(--platform-line)}
+html:root[data-ui][data-color-mode] body #design-directory .design-gallery-caption{padding-top:16px}
+html:root[data-ui][data-color-mode] body #design-directory .design-card-identity h2{font-size:16px;line-height:1.55}
+html:root[data-ui][data-color-mode] body #design-directory .design-gallery-favorite{border-radius:999px;transition:background-color var(--motion-short) ease,transform var(--motion-fast) ease}
+html:root[data-ui][data-color-mode] body #design-directory .design-gallery-favorite[aria-pressed=true]{background:var(--platform-lime)!important;color:var(--platform-ink)!important}
+html:root[data-ui][data-color-mode] body #design-directory .design-gallery-favorite:active{transform:scale(.88)}
+html:root[data-ui][data-color-mode] body #design-directory :is(a,button,select):focus-visible{outline:2px solid var(--platform-ink);outline-offset:3px}
+
+/* Motion is local to the control; authored previews and document bodies are excluded. */
+@media(max-width:1100px){
+ html:root[data-home-style] body .iavse-header.iavse-header--plain[data-iavse-header]{gap:20px;padding-inline:24px}
+ html:root[data-home-style] body .iavse-header.iavse-header--plain .iavse-header__link{padding-inline:12px}
+}
+@media(max-width:767px){
+ html:root[data-home-style] body .iavse-header.iavse-header--plain[data-iavse-header]{gap:12px;padding-inline:20px}
+ html:root[data-home-style] body .iavse-header.iavse-header--plain .iavse-header__brand>span{font-size:30px}
+ html:root[data-ui][data-color-mode] body #design-directory .design-library-heading{gap:24px;padding:40px 0 32px}
+ html:root[data-ui][data-color-mode] body #design-directory .design-library-heading h1{font-size:29px!important;line-height:1.4!important}
+ html:root[data-ui][data-color-mode] body #design-directory .design-library-heading p{font-size:14px}
+ html:root[data-ui][data-color-mode] body #design-directory .directory-search{min-height:56px;padding-left:16px;gap:8px}
+ html:root[data-ui][data-color-mode] body #design-directory .directory-search input{font-size:16px}
+ html:root[data-ui][data-color-mode] body #design-directory .directory-search-submit{min-height:42px;padding-inline:16px}
+ html:root[data-ui][data-color-mode] body #design-directory .resource-tab-links{gap:24px}
+ html:root[data-ui][data-color-mode] body #design-directory .resource-tab-link{font-size:14px}
+ html:root[data-ui][data-color-mode] body #design-directory .design-card-preview{border-radius:12px}
+ html:root[data-ui][data-color-mode] body #design-directory .design-card-identity h2{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ html:root[data-home-style] body .iavse-header.iavse-header--plain :is(a,button,.site-brand-mark),
+ .rbp-surface .platform-primary,
+ html:root[data-ui][data-color-mode] body #design-directory :is(a,button,img,select,.design-card-preview,.resource-tab-link::after){transition:none;animation:none}
+ html:root[data-ui][data-color-mode] body #design-directory .design-gallery-card:is(:hover,:focus-within) .design-media>img{transform:none}
+}

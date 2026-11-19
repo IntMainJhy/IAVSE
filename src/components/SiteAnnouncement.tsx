@@ -41,9 +41,9 @@ export function SiteAnnouncement(){
  const {value,visible,dismiss}=useContext(Context),{locale}=useLocale();
  const [paused,setPaused]=useState(false);
  if(!visible)return null;
- const label=locale==='zh'?'网站公告':locale==='ja'?'お知らせ':'Site updates';
+ const label=locale==='zh'?'更新动态':locale==='ja'?'お知らせ':'Site updates';
  const closeLabel=locale==='zh'?'关闭公告':locale==='ja'?'お知らせを閉じる':'Dismiss announcement';
- const title=(text:string)=>text==='从资源目录开始，发现设计、工具与创作指南。'?(locale==='en'?'Start in the resource directory. Explore designs, tools and practical guides.':locale==='ja'?'リソース一覧でデザイン、ツール、制作ガイドを探そう。':text):text==='网站更新与公告将在这里发布。'?(locale==='en'?'Website news and updates will appear here.':locale==='ja'?'サイトの更新やお知らせをここでお届けします。':text):text;
+ const title=(text:string)=>text==='从资源目录开始，发现设计、工具与创作指南。'?(locale==='en'?'Explore designs, tools and practical guides.':locale==='ja'?'デザイン、ツール、制作ガイドを探そう。':text):text==='让作品与文字，有个自己的地方。'?(locale==='en'?'A place for your work and writing.':locale==='ja'?'作品と言葉に、自分だけの場所を。':text):text==='海风来信，重新认识 IAVSE。'?(locale==='en'?'A letter on the sea breeze. Meet IAVSE.':locale==='ja'?'海風の便り。IAVSE について。':text):text==='网站更新与公告将在这里发布。'?(locale==='en'?'Website news and updates will appear here.':locale==='ja'?'サイトの更新やお知らせをここでお届けします。':text):text;
  const close=(event:MouseEvent<HTMLButtonElement>)=>{
   const owner=event.currentTarget.closest('[data-site-chrome], [data-announcement-host]');
   const next=owner&&Array.from(owner.querySelectorAll<HTMLElement>('[data-site-brand],.iavse-header__brand')).find(node=>node.getClientRects().length&&!node.closest('[inert]')&&!node.matches(':disabled'));
@@ -52,7 +52,7 @@ export function SiteAnnouncement(){
  };
  const pauseLabel=locale==='zh'?(paused?'继续滚动':'暂停滚动'):locale==='ja'?(paused?'スクロールを再開':'スクロールを一時停止'):(paused?'Resume scrolling':'Pause scrolling');
  const group=(copy:boolean)=><ul className="notice-edition" aria-hidden={copy||undefined}>{value.items.map((item,index)=><li key={index}>
-  <span className="notice-star" aria-hidden="true">✳</span>
+  <span className="notice-star" aria-hidden="true"><Icon name="plus"/></span>
   {item.url?(item.url.startsWith('/')?<Link prefetch={false} href={item.url} tabIndex={copy?-1:undefined}>{title(item.title)}<Icon name="arrow"/></Link>:<a href={item.url} target="_blank" rel="noopener noreferrer" tabIndex={copy?-1:undefined}>{title(item.title)}<Icon name="arrow"/></a>):<span>{title(item.title)}</span>}
  </li>)}</ul>;
  return <aside className="site-announcement" aria-label={label} data-paused={paused}>

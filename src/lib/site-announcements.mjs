@@ -1,7 +1,11 @@
 import {db} from './db.mjs';
 import {siteAnnouncementsData} from './content.mjs';
 
-export const defaultSiteAnnouncements={enabled:false,items:[{title:'从资源目录开始，发现设计、工具与创作指南。',url:'/resources'}]};
+export const defaultSiteAnnouncements={enabled:true,items:[
+ {title:'从资源目录开始，发现设计、工具与创作指南。',url:'/resources'},
+ {title:'让作品与文字，有个自己的地方。',url:'/blogs'},
+ {title:'海风来信，重新认识 IAVSE。',url:'/about'}
+]};
 
 /** Only schema-owned strings reach the public endpoint; drafts stay owner-only. */
 export function readSiteAnnouncements({publicOnly=false}={}){

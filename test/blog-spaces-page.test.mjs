@@ -25,6 +25,8 @@ async function renderDirectory({locale='zh',query={},directory=members,featured=
   if(name.includes('content-locales'))return{localizeProfile};
   if(name.includes('blog-showcase.mjs'))return{blogShowcases,showcaseProfile};
   if(name.endsWith('/Icons'))return{Icon:'Icon'};
+  if(name.endsWith('/BlogSpaceGallery'))return{BlogSpaceGallery:'BlogSpaceGallery'};
+  if(name.includes('blog-gallery-space'))return{galleryLimit:12};
   if(name.endsWith('.css'))return{};
   throw Error('Unexpected dependency '+name);
  }});
@@ -47,8 +49,15 @@ test('public blogs render immediately as a semantic directory with localized aut
    assert.ok(text(cards[i]).includes(expected.intro));
    assert.ok(text(cards[i]).includes('@'+members[i].handle));
   }
-  assert.doesNotMatch(JSON.stringify(tree),/PRIVATE_DRAFT_NAME|PRIVATE_ARTICLE_BODY|FEATURED_OUTSIDE_DIRECTORY|NOT_A_DIRECTORY_MEMBER/,'cards expose only approved directory summaries');
-  assert.equal(nodes.filter(node=>['iframe','canvas','script','BlogSpaceGallery','BlogProductShowcase'].includes(node.type)).length,0,'the index has no scene, embedded sites or marketing film');
+  assert.doesNotMatch(JSON.stringify(tree),/PRIVATE_DRAFT_NAME|PRIVATE_ARTICLE_BODY/,'the scene and directory expose only approved public summary fields');
+  assert.doesNotMatch(JSON.stringify(directory),/FEATURED_OUTSIDE_DIRECTORY|NOT_A_DIRECTORY_MEMBER/,'curated gallery entries never become searchable directory members');
+  assert.equal(nodes.filter(node=>['iframe','canvas','script','BlogProductShowcase'].includes(node.type)).length,0,'scene documents are bounded client previews, not server-embedded pages');
+  const gallery=nodes.find(node=>node.type==='BlogSpaceGallery');
+  assert.ok(gallery,'the retained 3D gallery is mounted above the complete directory');
+  assert.equal(gallery.props.browseHref,'#blog-public-directory');
+  assert.equal(gallery.props.spaces.length,1);
+  assert.equal(gallery.props.spaces[0].handle,'FEATURED_OUTSIDE_DIRECTORY');
+  assert.equal(gallery.props.spaces[0].showcase,undefined);
   assert.ok(nodes.some(node=>node.type==='Link'&&node.props.href==='/workspace/blog'),'creation points to the real workspace');
   const form=nodes.find(node=>node.type==='form');
   assert.equal(form.props.action,'/blogs');assert.equal(form.props.method,'get');assert.equal(form.props.role,'search');

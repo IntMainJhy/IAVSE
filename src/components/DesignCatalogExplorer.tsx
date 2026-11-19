@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import {useCallback,useEffect,useRef,useState} from 'react';
+import {useCallback,useEffect,useRef,useState,type ReactNode} from 'react';
 import {useSearchParams} from 'next/navigation';
 import {Icon} from './Icons';
 import {DirectoryFacet} from './DirectoryFacet';
@@ -19,8 +19,8 @@ const favoriteKey='iavse-design-favorites-v1';
 type CatalogPage={filters:Filters;revision:string;items:CatalogDesign[];total:number;favoriteCount:number;validFavorites:string[];nextCursor:string|null;facets:{counts:Record<string,number>;scenarios:Record<string,number>;industries:Record<string,number>;visualStyles:Record<string,number>}};
 const requestKey=(filters:Filters,favorites:string[])=>catalogQuery(filters).toString()+(filters.favorites==='1'?'|'+JSON.stringify([...favorites].sort()):'');
 
-export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
- const {t}=useLocale(),params=useSearchParams(),[filters,setFilters]=useState<Filters>(()=>initial.filters),[searchQuery,setSearchQuery]=useState(initial.filters.q),[filtersOpen,setFiltersOpen]=useState(false),[favorites,setFavorites]=useState<string[]>([]),[storageMessage,setStorageMessage]=useState(''),[favoritesReady,setFavoritesReady]=useState(false),[preview,setPreview]=useState<CatalogDesign|null>(null),previewTrigger=useRef<HTMLButtonElement|null>(null),sentinel=useRef<HTMLDivElement>(null);
+export function DesignCatalogExplorer({initial,navigation}:{initial:CatalogPage;navigation?:ReactNode}){
+ const {t,locale}=useLocale(),params=useSearchParams(),[filters,setFilters]=useState<Filters>(()=>initial.filters),[searchQuery,setSearchQuery]=useState(initial.filters.q),[filtersOpen,setFiltersOpen]=useState(false),[favorites,setFavorites]=useState<string[]>([]),[storageMessage,setStorageMessage]=useState(''),[favoritesReady,setFavoritesReady]=useState(false),[preview,setPreview]=useState<CatalogDesign|null>(null),previewTrigger=useRef<HTMLButtonElement|null>(null),sentinel=useRef<HTMLDivElement>(null);
  const key=requestKey(filters,favorites),favoriteSignature=JSON.stringify(favorites),queryString=params.toString();
  const [page,setPage]=useState(()=>({...initial,key:requestKey(initial.filters,[])})),[busy,setBusy]=useState<'idle'|'first'|'more'>('idle'),[error,setError]=useState(''),[manualLoad,setManualLoad]=useState(false);
  const criteria=useRef({filters,favorites,key}),request=useRef<AbortController|null>(null),sequence=useRef(0),first=useRef(true),failedCursor=useRef<string|null>(null);criteria.current={filters,favorites,key};
@@ -70,7 +70,8 @@ export function DesignCatalogExplorer({initial}:{initial:CatalogPage}){
  const active=filters.q||selectedFacetCount||filters.favorites;
  const directoryQuery=catalogQuery(filters).toString(),detailHref=(slug:string)=>'/resources/designs/'+slug+'?'+new URLSearchParams({directory:directoryQuery});
  return <section className="design-studio design-directory design-explorer" id="design-directory">
-  <header className="design-library-heading"><div><h1>{t('UI 设计')}</h1><p>{t('网站模板、设计规范与源码。')}</p></div><form className="directory-search" role="search" onSubmit={event=>{event.preventDefault();update({q:searchQuery.trim()})}}><Icon name="search"/><label className="community-sr" htmlFor="design-directory-query">{t('搜索设计资源')}</label><input id="design-directory-query" type="search" name="q" maxLength={120} value={searchQuery} onChange={event=>setSearchQuery(event.target.value)} placeholder={t('搜索模板、设计规范、风格或关键词')} autoComplete="off"/>{searchQuery&&<button className="directory-search-clear" type="button" aria-label={t('清空搜索')} onClick={()=>{setSearchQuery('');update({q:''})}}><Icon name="close"/></button>}<button type="submit" className="directory-search-submit">{t('搜索')}</button></form></header>
+  <header className="design-library-heading"><div><h1>{locale==='en'?'Good design starts here.':locale==='ja'?'よいデザインは、ここから。':'好设计，从这里开始。'}</h1><p>{t('网站模板、设计规范与源码。')}</p></div><form className="directory-search" role="search" onSubmit={event=>{event.preventDefault();update({q:searchQuery.trim()})}}><Icon name="search"/><label className="community-sr" htmlFor="design-directory-query">{t('搜索设计资源')}</label><input id="design-directory-query" type="search" name="q" maxLength={120} value={searchQuery} onChange={event=>setSearchQuery(event.target.value)} placeholder={t('搜索模板、设计规范、风格或关键词')} autoComplete="off"/>{searchQuery&&<button className="directory-search-clear" type="button" aria-label={t('清空搜索')} onClick={()=>{setSearchQuery('');update({q:''})}}><Icon name="close"/></button>}<button type="submit" className="directory-search-submit">{t('搜索')}</button></form></header>
+  {navigation}
   <div className="directory-toolbar">
    <DirectoryFacet label={t('内容类型')}>
     {groups.map(([id,label])=><button key={id} type="button" onClick={()=>update({collection:id,...(id==='project'?{industry:''}:{}),...(id==='design-system'?{scenario:''}:{})})} aria-pressed={filters.collection===id}>{t(label)} <span>{counts[id]}</span></button>)}

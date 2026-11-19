@@ -238,16 +238,17 @@ components:
     rounded: '{rounded.pill}'
 ---
 
-## Current direction · 2026-11-19
+## Current direction · 2026-11-19 · Lime directory and Sea breeze About
 
-This decision supersedes the historical appearance specifications below. Home opens the real resource directory; it shares the category navigation, query state and catalog permissions with `/resources`. No marketing hero, product story, scene canvas or FAQ appears on Home. Product introductions may be incorporated into About in a future task.
+This direction follows the user's supplied screenshot and supersedes earlier appearance notes below. The public platform has one white, ink and lime appearance: `#ffffff`, `#191919`, `#686868`, `#e7e7e7`, with `#e3fa68` sampled from the reference. Lime carries the top announcement strip, selected quick filters and small interaction feedback; text on lime stays dark. Keep IAVSE's existing mark and wordmark, real accounts, locale controls and repositories. Use rounded search fields and navigation pills, readable source metadata and four-column desktop covers. The directory remains the Home route; query, favorites, pagination and preview permissions stay shared with `/resources`.
 
-Use white (#fff), soft gray (#f5f5f7), ink (#1d1d1f), secondary text (#6e6e73) and fine borders (#e5e5e7), with system sans-serif type. Platform controls are opaque; remove liquid-glass lenses, frosted navigation, appearance switches and decorative backgrounds. Brand identity, real account controls, locale selection, author styles, document bodies, canvases and third-party previews remain intact.
+Enable the default announcement strip with real links to resources, blogs and About. Respect explicitly saved administrator settings, and keep disabled drafts private. The strip can pause, stops on hover/focus, supports reduced motion and can be dismissed for the current tab without leaving an empty spacer.
 
-Desktop navigation: Resources, Community, Blog spaces, About. Phone navigation adds Me in the bottom bar. The header occupies normal sticky layout height. Resource browsing uses always-visible search, collection tabs, optional detailed filters and four-column static covers on desktop, two columns on phones. Titles, original sources, licenses and bookmark controls remain readable below each cover. Only a requested preview mounts a dialog. Blog spaces use a searchable server-rendered directory of reviewed, public, discoverable members; fictional built-in examples remain separate and collapsed.
+About combines the retained **Sea breeze / 海风来信** illustration and local canvas motion with the former Home's resource, community and personal-space introduction. The existing About story, journey, technology stack and contact destinations are integrated below it. There is no appearance chooser; old saved style values continue to resolve to the one light public appearance. Sea breeze is a section on About, never a global background.
 
-Validation includes empty and loading states, search/filter history, favorites persisted after refresh, preview Escape/focus return, real category links and mobile overflow. Evidence belongs outside the public repository in the task workspace.
+Blog spaces restore the existing draggable 3D gallery, camera focus, previews and keyboard controls. It uses the permission-checked curated selection or public directory plus clearly identified fictional template examples, bounded by the same gallery limit and loading queue as `/api/blog-gallery`. The complete searchable server-rendered directory below contains only reviewed, public and discoverable members. Built-in examples stay separate and collapsed. Member-authored pages, images, canvases and template appearances remain independent.
 
+Microinteraction language: 140ms press, 240ms hover/focus colour and 480ms image easing; motion uses transform/opacity. Respect reduced motion, and stop scene work when hidden, offscreen or navigating. Validate desktop and phone layouts, search, filters/history, favorites, preview dismissal and focus return, gallery keyboard/camera selection and announcement closure. Save screenshots and other local acceptance evidence outside the public repository.
 
 # Design System: IAVSE
 
